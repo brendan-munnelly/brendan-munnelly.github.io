@@ -1,2 +1,2 @@
-# brendanmun.github.io
-Help with your Hamlet essays
+# brendan-munnelly.github.io
+My personal space on GitHub.
