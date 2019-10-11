@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Hyperlinks | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with Hyperlinks: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link rel="stylesheet" href="assets/css/brendan-munnelly-web-design.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="index.html" title="All HTML projects">All Tutorials&nbsp;&nbsp;></a></h3>
+	<h1>Working with Hyperlinks</h1>
+</div>
+
+<a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener" class="ibat-banner-desktop"><img src="assets/img/ibat-banner.png" alt="IBAT Next Course"></a>
+
+<section id="learning-goals" class="block-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Recognise the structure of a hyperlink.</li>
+		<li>Understand the difference between absolute and relative hyperlinks.</li>
+		<li>Apply CSS rules to the four hyperlink states: link, visited, hover and active.</li>
+		<li>Use internal hyperlinks to create a web page navigation system.</li>
+		<li>Style hyperlinks as buttons with solid colour or transparent backgrounds.</li>
+		<li>Apply soft corners and rounded edges to hyperlinks styled as buttons.</li>
+		<li>Add Font Awesome icons to hyperlinks styled as buttons.</li>
+	</ul>
+
+	<p>You can view a finished version of this project by clicking the image below.</p>
+	<a href="https://ibat-web-dev.github.io/base-8.html" target="_blank" rel="noopener"><IMG src="assets/img/hyperlinks/final-screen.png" ALT="GitHub image"></a>
+
+</section>
+
+
+<section class="block-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#hyperlinks-about"><b>About hyperlinks</b></a></p>
+		<p><a href="#hyperlinks-destinations"><b>Hyperlink destinations</b></a></p>
+		<p><a href="#hyperlinks-states"><b>The four hyperlink states</b></a></p>
+		<p><a href="#work-files"><b>Your two work files: base-8.html and base-8.css</b></a></p>
+		<p><a href="#hyperlinks-internal"><b>Using internal hyperlinks for page navigation</b></a></p>
+		<p><a href="#hyperlinks-styling"><b>Styling hyperlinks</b></a></p>
+		<p><a href="#hyperlinks-buttons"><b>Hyperlinks styled as buttons</b></a></p>
+		<p><a href="#hyperlinks-solid-buttons"><b>Hyperlinks styled as solid buttons</b></a></p>
+		<p><a href="#hyperlinks-ghost-buttons"><b>Hyperlinks styled as ghost buttons</b></a></p>
+		<p><a href="#hyperlinks-shapes"><b>Styling button shapes</b></a></p>
+		<p><a href="#hyperlinks-icons"><b>Adding icons with Font Awesome</b></a></p>
+		<p><a href="#update-head"><b>Updating the &lt;head&gt; of your web page</b></a></p>
+		<p><a href="#validate-html"><b>Validating your web page</b></a></p>
+		<p><a href="#validate-css"><b>Validating your stylesheet</b></a></p>
+		<p><a href="#web-page-uploading-github"><b>Uploading your two files to GitHub</b></a></p>
+		<p><a href="#further-resources"><b>Further resources</b></a></p>
+	</div>
+</section>
+
+
+
+<section id="hyperlinks-about" class="block-content bg-white">
+
+	<h2>About hyperlinks</h2>
+
+		<p>Hyperlinks, or more simply links, enable users to click or tap their way from one section of a web page to another, from one web page to another web page, and from one website to another website.</p>
+
+		<p>Hyperlinks typically have the following format:</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-light">p</span>&gt;<span class="white">To learn more, please click</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"webpage.html"</span>&gt;<span class="white">here</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-light">p</span>&gt;
+</code></pre>
+</span>
+
+	<p>The above code would produce the following result.</p>
+
+	<IMG src="assets/img/hyperlinks/click-here.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>This is an example of a hyperlink placed around an item of text. Hyperlinks can also be placed around an image, as shown below.</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-light">p</span>&gt;<span class="white">Please click on the picture of a cat below.</span>&lt;/<span class="blue-light">p</span>&gt;
+
+ &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"webpage.html"</span>&gt;&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="orange">"cat.jpg"</span> <span class="blue-light">alt</span>=<span class="orange">"cat"</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+
+	<p>This second example would produce the following result.</p>
+
+	<IMG src="assets/img/hyperlinks/cat-hyperlink.jpg" ALT="Tutorial RWD: Media Queries">
+
+	<p>The general format of a hyperlink in HTML is as shown below.</p>
+
+	<IMG src="assets/img/hyperlinks/link-format.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>A hyperlink begins and ends with the <b>a</b> (for &#8216;anchor&#8217;) tag. After the opening <b>a</b> tag comes the <b>href</b> attribute that is followed by an equal to sign (<b>=</b>). The <b>href</b> value holds, within quotation marks, the link destination &#8211; that is, the location to where the user will be taken when they click or tap on the link.</p>
+
+</section>
+
+
+<section id="hyperlinks-destinations" class="block-content bg-white">
+
+	<h2>Hyperlink destinations</h2>
+
+	<p>One way of looking at hyperlinks is to ask: what is the destination of the link? Where will it send the user to?</p>
+
+	<h3>Different website, same web browser tab</h3>
+	<p>In the example below, the linked-to web page is on another, different web site. The new page replaces the current web page in the user&#8217;s web browser tab.</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie/courses/web-design-diploma-course.html"</span>&gt;<span class="white">IBAT Web Design Course</span>&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+
+	<IMG src="assets/img/hyperlinks/link-same-tab.png" ALT="Tutorial RWD: Media Queries">
+
+	<h3>Different website, same web browser tab</h3>
+	<p>In this second example, the linked-to web page opens in a new tab of the user&#8217;s web browser. The original page is still displayed in a web browser tab.</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie/courses/web-design-diploma-course.html"</span> <span class="blue-light">target</span>=<span class="orange">"_blank"</span> <span class="blue-light">rel</span>=<span class="orange">"noopener"</span>&gt;<span class="white">IBAT Web Design Course</span>&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+
+	<p>The <b>target="_blank"</b> attribute forces the new page to open in a new tab. The <b>rel="noopener"</b> attribute is a security feature designed to prevent exploitation by malicious websites.</p>
+
+	<IMG src="assets/img/hyperlinks/link-new-tab.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>Within the opening &lt;a&gt; hyperlink tag, you can place the three attributes in any order. All three examples below are valid.</p>
+	<IMG src="assets/img/hyperlinks/new-tab-options.png" ALT="Tutorial RWD: Media Queries">
+
+
+	<h3>Same website, different web page</h3>
+	<p>The above two examples are known as <em>absolute hyperlinks</em>. In each case, the destination contains the full web address beginning with &#8216;https://&#8217;.</p>
+
+	<p>When a hyperlink takes a user to a location of the <em>same</em> website, you do not need to include the &#8216;https://&#8217; as part of the destination. It is enough to specify only:</p>
+	
+	<ul>
+		<li>The name of the web page, such as <b>services.html</b> or <b>privacy-statement.html</b>.</li>
+		<li>If required, the name of the folder that contains the web page.
+		<span class="inside-ol">&nbsp;</span>
+		For example, <b>products/shoes.html</b> or <b>services/financial/insurance.html</b></li>
+	</ul>
+
+	<p>These are called <em>relative hyperlinks</em>.</p>
+
+	<p>For example, the relative hyperlink below will take the user to a different page within the <em>same</em> folder of the <em>same</em> website.</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-light">p</span>&gt;<span class="white">Read about our</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"about-us.html"</span>&gt;<span class="white">team members</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-light">p</span>&gt;
+</code></pre>
+</span>
+
+<p>You will commonly see relative hyperlinks used in navigation menus that provide users with access to the various pages of a website.</p>
+	<IMG src="assets/img/hyperlinks/menu-relative-links.png" ALT="Tutorial RWD: Media Queries">
+
+	<h3>Same web page, different section</h3>
+	<p>In the final case, a hyperlink can take a user to a different location within the <em>same</em> web page. This is known as an <em>internal hyperlink</em>.</p>
+
+	<p>In the sample code below, the user is taken to the section of the same web page that has an <b>id</b> of <b>#summary</b>.</p>
+
+<span class="code-sample">
+<pre><code>
+ &lt;<span class="blue-light">p</span>&gt;<span class="white">Read the report </span>&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"#summary"</span>&gt;<span class="white">summary</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-light">p</span>&gt;
+
+ <span class="white">...</span>
+
+ &lt;<span class="blue-dark">h3</span> <span class="blue-light">id</span>=<span class="orange">"summary"</span>>Summary&lt;/<span class="blue-dark">h3</span>&gt;
+
+</code></pre>
+</span>
+
+	<p>Note that there are two parts to an internal hyperlink:<p>
+
+	<ul>
+		<li><b>The hyperlink</b>: This has as its destination text beginning with a hash symbol (<b>#</b>).</li>
+		<li><b>The named anchor</b>: The destination within the linked-to web page is identified with an <b>ID</b> selector that is unique within the destination web page.</li>
+	</ul>
+
+	<p>In the example below, you can see a table of contents with hyperlinks to five sections located further down the web page.<p>
+
+	<IMG src="assets/img/hyperlinks/sample-toc.png" ALT="Tutorial RWD: Media Queries">
+
+	And below are the sections of the web page to which the internal hyperlinks take the user. Note that each has a unique <b>ID</b> as part of its opening <b>&lt;h2&gt;</b> sub-heading tag.</p>
+
+	<IMG src="assets/img/hyperlinks/sample-toc-ids.png" ALT="Tutorial RWD: Media Queries">
+
+</section>
+
+
+<section id="hyperlinks-states" class="block-content bg-white">
+
+	<h2>The four hyperlink states</h2>
+
+	<p>Hyperlinks have four possible states. They are as follows:</p>
+	
+	<ul>
+		<li><b>Unvisited</b>: The link has <em>not</em> been clicked (desktop/laptop display) or tapped (tablet/mobile display) by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display unvisited hyperlinks in the colour <span style="color:blue;text-decoration:underline">blue</span>.</li>
+		<li><b>Visited</b>: The link <em>has</em> been previously clicked/tapped by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display visited hyperlinks in the colour <span style="color:purple;text-decoration:underline">purple</a>.</li>
+		<li><b>Hover</b>: The user is hovering the mouse over the link (desktop and laptop screens only).
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display hovered-over links in <span style="color:blue;text-decoration:underline">blue</span> (in not previously visited) and <span style="color:purple;text-decoration:underline">purple</span> (if visited before by the user).</li>
+		<li><b>Active</b>: The link is currently been clicked/tapped by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers show active hyperlinks in the colour <span style="color:red;text-decoration:underline">red</span>.</li>
+	</ul>
+
+	<IMG src="assets/img/hyperlinks/link-states.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>Note that, by default, all four hyperlink states are highlighted with an underline. Web browsers achieve this effect by automatically assigning the following CSS rule: </p>
+
+<span class="code-sample">
+<pre><code>
+  <span class="orange-light">a:link</span><span class="white">,</span> <span class="orange-light">a:visited</span><span class="white">,</span> <span class="orange-light">a:hover</span><span class="white">,</span> <span class="orange-light">a:active</span> <span class="white"></span>{</span> <span class="blue-light">text-decoration: <span class="orange">underline</span> <span class="white"></span>}</span>
+</code></pre>
+</span>
+	
+<p>Except for the special cases of hyperlinks in menus and as buttons, it is good practice to underline the visited and unvisited states of hyperlinks within blocks of text.</p>
+
+	<p>You can use CSS rules to control the appearance of hyperlinks. In most cases, it is enough to style the links for just two cases:
+	<ul>
+		<li><b>Visited and unvisited links</b>. For example:
+<span class="code-sample">
+<pre><code>
+  <span class="orange-light">a:link</span><span class="white">,</span> <span class="orange-light">a:visited</span> <span class="white">{</span> <span class="blue-light">color</span>: <span class="orange">blue</span> <span class="white">}</span>
+</code></pre>
+</span></li>
+		<li><b>Hovered-over and active links</b>. For example: 
+<span class="code-sample">
+<pre><code>
+  <span class="orange-light">a:hover</span><span class="white">,</span> <span class="orange-light">a:active</span> <span class="white">{</span> <span class="blue-light">text-decoration</span>: <span class="orange">darkblue</span> <span class="white">}</span>
+</code></pre>
+</span></li>
+</ol>
+
+</section>
+
+<section id="work-files" class="block-content bg-white">
+	<h2>Your two work files: base-8.html and base-8.css</h2>
+	<p>In this Tutorial you will work with these two files:</p>
+	<ul>
+		<li>The web page named <b>base-8.html</b>. This is a copy of the <b>base-7.html</b> file from the previous <a href="colours-and-web-design.html">Tutorial</a>.</li>
+		<li>The stylesheet named <b>base-8.css</b>. This is a copy of the <b>base-7.css</b> file, also from the previous Tutorial.</li>
+	</ul>
+
+	<p>First, let&#8217;s edit the HTML file from your previous Tutorial:</p>
+	<ol>
+		<li>In your text editor, open the file named <b>base-7.html</b>.</li>
+
+		<li>In the &lt;head&gt; of the <b>base-7.html</b> file, change the title as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">title</span>&gt;<span class="white">Responsive web page with hyperlinks</span>&lt;<span class="blue-dark">/title</span>&gt;
+</code></pre>
+</span>
+		</li>
+		
+		<li>Also in the &lt;head&gt;, change the description as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"A sample responsive web page with examples of hyperlinks."</span>&gt;
+</code></pre>
+</span>
+		</li>
+		<li>Also in &lt;head&gt;, change the stylesheet link as follows: 
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>	
+  &lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"<span style="text-decoration:underline">base-8.css</span>"</span>&gt;
+</code></pre>
+</span></li>
+
+		<li>Use the <b>File | Save As</b> command to save your HTML file with the following new name: 
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-8.html</b></li>
+
+		<li>Switch to the <b>base-7.css</b> file, and use the <b>File | Save As</b> command to save the file with this new name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-8.css</b></li>
+</ol>
+
+	<p>You are now ready to work with your new web page (<b>base-8.html</b>) and stylesheet (<b>base-8.css</b>).<p>
+
+</section>
+
+
+<section id="hyperlinks-internal" class="block-content bg-white">
+
+	<h2>Using internal hyperlinks for page navigation</h2>
+
+	<p>Let&#8127;s begin by creating a 'table of contents' that will help users navigate through a single web page.</p>
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> web page.</li>
+
+		<li>Before the first &lt;h2&gt; sub-heading, add the following new text:
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-light">h1</span>&gt;Heading 1&lt;/<span class="blue-light">h1</span>&gt;
+&lt;<span class="blue-light">p</span>&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ipsum at risus feugiat facilisis at et orci.&lt;/<span class="blue-light">p</span>&gt;
+
+&lt;<span class="blue-light">h3</span>&gt;Contents&lt;/<span class="blue-light">h3</span>&gt;
+&lt;<span class="blue-light">ul</span>&gt;
+  &lt;<span class="blue-light">li</span>&gt;Section One&lt;/<span class="blue-light">li</span>&gt;
+  &lt;<span class="blue-light">li</span>&gt;Section Two&lt;/<span class="blue-light">li</span>&gt;
+  &lt;<span class="blue-light">li</span>&gt;Section Three&lt;/<span class="blue-light">li</span>&gt;
+&lt;/<span class="blue-light">ul</span>&gt;
+</code></pre>
+</span>
+		</li>
+
+		<li>Next, add internal hyperlinks as follows:
+	<IMG src="assets/img/hyperlinks/internal-step-one.png" ALT="Tutorial RWD: Media Queries">
+	Save the web page and view it in your web browser. You can see the three items in the bulleted list <em>look like</em> hyperlinks &#8211; but they are not clickable. They do not lead anywhere. 
+	<span class="inside-ol">&nbsp;</span>
+
+	That is because the three link destinations do not yet exist. Let&#8217;s add these now.</li>
+
+	<li>Add three named anchor destinations to the three &lt;h3&gt; sub-headings in the web page as shown below.
+	
+		<IMG src="assets/img/hyperlinks/internal-step-two.png" ALT="Tutorial RWD: Media Queries">
+
+	Save the web page and view it in your web browser. The three links in the 'table of contents' should now work correctly.
+	</li>
+
+	<li>You can see that, when clicked, the links 'jump' quickly to their respective destinations further down the web page. To change this to a so-called <em>smooth-scrolling effect</em>, switch to the <b>base-8.css</b> stylesheet, and add this new rule to the resets section at the top of the CSS file.
+	
+<span class="code-sample">
+<pre><code>
+  <span class="orange-light">html</span> <span class="white">{</span> <span class="blue-light">scroll-behavior</span>: <span class="orange">smooth</span> <span class="white"></span>}</span>
+</code></pre>
+</span></li>
+
+	<li>Save the stylesheet and verify that the scroll effect work correctly.</li>
+
+	<li>Let&#8217;s add one further internal hyperlink. At the very top of the web page, add the following named anchor to the opening &lt;body&gt; tag.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">body</span> <span class="blue-light">id</span>=<span class="orange">"top-of-page"</span>&gt;
+</code></pre>
+</span></li>
+	<li>At the very end of the page, just before the closing &lt;/body&gt; tag, add the following internal hyperlink.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"#top-of-page"</span>&gt;Return to top of page&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+</code></pre>
+</span></li>
+		<li>Save your web page and verify the link works correctly.
+	</li>
+</ol>
+</section>
+
+
+
+<section id="hyperlinks-styling" class="block-content bg-white">
+
+	<h2>Styling hyperlinks</h2>
+
+	<p>In this next section of the Tutorial, you will apply some CSS styles to a hyperlink that is positioned within a block of paragraph text.</p>
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> web page.</li>
+
+		<li>In the paragraph text under the first &lt;h2&gt; sub-heading, add a hyperlink as shown below.
+		
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">h2</span>&gt;Heading 2&lt;/<span class="blue-dark">h2</span>&gt;
+  &lt;<span class="blue-dark">p</span>&gt;Donec ut leo eget risus mattis mattis non vitae massa. &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Suspendisse potenti&lt;/<span class="blue-dark">a</span>&gt;. Aenean efficitur fermentum orci ac blandit. Quisque tempus tincidunt metus at interdum. Aenean elementum vehicula tellus id gravida. Aenean mollis sollicitudin elit.&lt;/<span class="blue-dark">p</span>&gt;
+</code></pre>
+</span></li>
+
+	<li>Save the web page and view the result in your web browser. Verify that the hyperlink works correctly.
+	
+	<IMG src="assets/img/hyperlinks/external-hyperlink.png" ALT="Tutorial RWD: Media Queries"></li>
+	
+	<li>Next, you will create a new class for the styled hyperlink and name it 'fancy-link.'
+	
+	In your <b>base-8.html</b> file, edit the hyperlink as follows:
+	
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span> <span class="blue-light">class</span>=<span class="orange">"fancy-link"</span>&gt;Suspendisse potenti&lt;/<span class="blue-dark">a</span>&gt;.
+</code></pre>
+</span>
+
+	Alternatvively, you could position the <b>class</b> attribute before instead of after the <b>href</b> attribute, as shown below. The order does not matter.
+
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"fancy-link"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Suspendisse potenti&lt;/<span class="blue-dark">a</span>&gt;.
+</code></pre>
+</span></li>
+
+	<li>In your text editor, switch to your <b>base-8.css</b> stylesheet. Before the /* ==== TEXT BOXES ==== */ section, add the following new CSS  class, with CSS properties and values for all four possible states of the hyperlink.
+
+<span class="code-sample">
+<pre><code>
+<span class="green-dark">/* ==== HYPERLINKS ==== */</span>
+
+<span class="orange-light">a.fancy-link:link,
+a.fancy-link:visited,
+a.fancy-link:hover,
+a.fancy-link:active</span> <span class="white">{</span> 
+    <span class="blue-light">text-decoration</span>: <span class="orange">none</span>;
+    <span class="blue-light">color</span>: <span class="orange">inherit</span>;
+    <span class="blue-light">border-bottom-style</span>: <span class="orange">solid</span>;
+    <span class="blue-light">border-bottom-width</span>: <span class="green-light">2px</span>;
+    <span class="blue-light">padding-bottom</span>: <span class="green-light">2px</span>;
+<span class="white">}</span>
+</code></pre>
+</span>
+
+Save both your stylesheet and web page, and view the result in your web browser. It should look as shown below. 
+	<IMG src="assets/img/hyperlinks/external-hyperlink-2.png" ALT="Tutorial RWD: Media Queries">
+	<p>Note the following:</p>
+	<ul>
+		<li>The <b>text-decoration: none</b> rule removes the default underline from the hyperlink.</li>
+		<li>The <b>color:inherit</b> rule replaces the default hyperlink colour(s) with the colour of the surrounding text paragraph.</li>
+		<li>In place of the default underline, the two <b>bottom-border</b> rules add a solid, 2-pixel thick border under the hyperlink.</li>
+		<li>The <b>padding-bottom</b> value adds some vertical space between the hyperlinked text and the bottom border of the button.</li>
+	</ul>
+
+</li>
+	<li>The final step is to add some colours to the hyperlink: one colour for the 'link' and 'visited' states, and a second colour for the 'hover' and 'active' states.
+
+<span class="code-sample">
+<pre><code>
+  <span class="orange-light">a.fancy-link:link,
+  a.fancy-link:visited</span> <span class="white">{</span> <span class="blue-light">border-bottom-color</span><span class="white">:</span> <span class="orange">blue</span< <span class="white">}</span>
+  <span class="orange-light">a.fancy-link:hover,
+  a.fancy-link:active</span> <span class="white">{</span> <span class="blue-light">color</span>: <span class="orange">red</span><span class="white">;</span> <span class="blue-light">border-bottom-color</span>: <span class="orange">red</span> <span class="white">}</span>
+</code></pre>
+</span>
+	<li>Save your stylesheet and view the result in your web browser. It should look as shown below.
+	<IMG src="assets/img/hyperlinks/fancy-links-three.png" ALT="Tutorial RWD: Media Queries">
+	</li>
+</ol>
+</section>
+
+
+
+<section id="hyperlinks-buttons" class="block-content bg-white">
+
+	<h2>Hyperlinks styled as buttons</h2>
+	<p>Links can be styled to look like 'click/tap me' buttons. Such links are styled differently to links within paragraphs of text.</p>
+	<ul>
+		<li>They do not have underlines.</p>
+		<li>They have padding all around them to create the button appearance.</li>
+		<li>They have bottom margins to push down whatever content follows them, and often top, left and right margins too.</li>
+		<li>They have borders and, typically, background colours too.</li>
+		<li>Their corners can be square, rounded or semi-circular.</li>
+		<li>Their CSS class names typically begin with 'btn'. For example, btn-solid, btn-rounded or btn-ghost.</li>
+	</ul>
+<ol>
+
+	<li>In your text editor, open the <b>base-8.html</b> file, and, under the 'table of contents' near the top of the page, add the following three new hyperlinks. Each hyperlink has a <b>class</b> named 'btn'.
+	
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span></li>
+
+	<li>Switch to your <b>base-8.css</b> stylesheet file. Add the following new class after the <b>a.fancy-link</b> class.
+	
+<span class="code-sample">
+<pre><code>
+ <span class="orange-light">a.btn:link, .btn:visited, a.btn:hover, a.btn:active</span> <span class="white">{</span> 
+    <span class="blue-light">text-decoration</span>: <span class="orange">none</span>;
+    <span class="blue-light">color</span>: <span class="orange">inherit</span>;
+    <span class="blue-light">border-style</span>: <span class="orange">solid</span>;
+    <span class="blue-light">border-width</span>: <span class="green-light">2px</span>;
+    <span class="blue-light">padding</span>: <span class="green-light">12px 24px</span>;
+    <span class="blue-light">display</span>: <span class="orange">inline-block</span>;
+    <span class="blue-light">margin</span>: <span class="green-light">20px 40px 20px 0</span>;
+    <span class="blue-light">text-transform</span>: <span class="orange">uppercase</span>;
+    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+    <span class="blue-light">font-family</span>: <span class="orange">sans-serif</span>;
+    <span class="blue-light">letter-spacing</span>: <span class="green-light">1px</span>
+    <span class="blue-light">line-height</span>: <span class="green-light">1</span>
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+This <b>btn</b> class creates the basic structure of the button-styled hyperlink. Save your <b>base-8.html</b> and <b>base-8.css</b> files and view the web page on your web browser. The three hyperlinks should look as shown below.
+	<IMG src="assets/img/hyperlinks/btn-hyperlinks-1.png" ALT="Tutorial RWD: Media Queries"></li>
+</ol>
+<p>In the next parts of this Tutorial, you will add some colours and shapes to these styled-as-a-button hyperlinks.</p>
+
+</section>
+
+
+<section id="hyperlinks-solid-buttons" class="block-content bg-white">
+
+	<h2>Hyperlinks styled as solid buttons</h2>
+	<p>In the following steps you will create a class in CSS for styling hyperlinks as buttons with a solid background.</p>
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> web page. Add the following new class named <b>btn-solid</b> to the three hyperlinks.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span></li>
+		<li>Switch to the <b>base-8.css</b> stylesheet and add the following rules for the new CSS <b>btn-solid</b> class.
+		<span class="code-sample">
+<pre><code>
+<span class="orange-light">a.btn-solid:link</span>, <span class="orange-light">.btn-solid:visited</span> {
+    <span class="blue-light">border-color</span>: <span class="orange">blue</span>;
+    <span class="blue-light">background-color</span>: <span class="orange">blue</span>;
+    <span class="blue-light">color</span>: <span class="orange">#fff</span>
+} 
+
+<span class="orange-light">a.btn-solid:hover</span>, <span class="orange-light">.btn-solid:active</span> {
+    <span class="blue-light">border-color</span>: <span class="orange">green</span>;
+    <span class="blue-light">background-color</span>: <span class="orange">green</span>;
+    <span class="blue-light">color</span>: <span class="orange">#fff</span>
+}
+</code></pre>
+</span>
+
+		Save your <b>base-8.html</b> and <b>base-8.css</b> files, and view the
+		<IMG src="assets/img/hyperlinks/btn-hyperlinks-2.png" ALT="Tutorial RWD: Media Queries"></li>
+</ol>
+
+</section>
+
+
+<section id="hyperlinks-ghost-buttons" class="block-content bg-white">
+
+	<h2>Styling hyperlinks as buttons with transparent backgrounds</h2>
+	<p>In the following steps you will create a class in CSS for styling hyperlinks as buttons with a transparent background. Such buttons are known as &#8216;ghost buttons&#8216;.</p>
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> web page. Copy-and-paste the three styled hyperlinks as shown below. Enter a blank paragraph to separate the top three hyperlinks from the lower three.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+
+  &lt;<span class="blue-dark">p</span>&gt;</span><span class="blue-dark">&nsbp;</span>&lt;/<span class="blue-dark">p</span>&gt;
+
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span></li>
+	
+	<li>For the second group of three hyperlinks, rename the class <b>btn-solid</b> to <b>btn-ghost</b> as shown below.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span></li>
+		<li>Switch to the <b>base-8.css</b> stylesheet and add the following rules for the new <b>btn-ghost</b> CSS class.
+		<span class="code-sample">
+<pre><code>
+<span class="orange-light">a.btn-ghost:link</span>, <span class="orange-light">.btn-ghost:visited</span> {
+    <span class="blue-light">border-color</span>: <span class="orange">blue</span>;
+    <span class="blue-light">background-color</span>: <span class="orange">transparent</span>;
+    <span class="blue-light">color</span>: <span class="orange">blue</span>
+} 
+
+<span class="orange-light">a.btn-ghost:hover</span>, <span class="orange-light">.btn-ghost:active</span> {
+    <span class="blue-light">border-color</span>: <span class="orange">green</span>;
+    <span class="blue-light">background-color</span>: <span class="orange">transparent</span>;
+    <span class="blue-light">color</span>: <span class="orange">green</span>
+}
+</code></pre>
+</span>
+Save your <b>base-8.html</b> and <b>base-8.css</b> files, and view the web page in your web browser. The three hyperlinks styled as ghost buttons should look as shown below.
+
+	<IMG src="assets/img/hyperlinks/btn-hyperlinks-3.png" ALT="Tutorial RWD: Media Queries"></li>
+	</ol>
+</section>
+
+
+<section id="hyperlinks-shapes" class="block-content bg-white">
+
+	<h2>Styling button shapes</h2>
+	<p>In the following steps you create two new classes in CSS to control the shape of hyperlinks styled as buttons.</p>
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> web page. To the second and third buttons in the top and bottom groups of three hyperlinks, add the new classes of <b>btn-soft</b> and <b>btn-round</b> as shown below.
+<span class="code-sample">
+<pre><code>
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid btn-soft"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid btn-round"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+
+  &lt;<span class="blue-dark">p</span>&gt;</span><span class="blue-dark">&nsbp;</span>&lt;/<span class="blue-dark">p</span>&gt;
+
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Join Now&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost btn-soft"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Sign Up&lt;/<span class="blue-dark">a</span>&gt;
+  &lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost btn-round"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;Special Offer&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span></li>
+
+		<li>Switch to the <b>base-8.css</b> stylesheet and add the following rules for the new <b>btn-soft</b>and <b>btn-round</b> CSS classes.
+		<span class="code-sample">
+<pre><code>
+  <span class="orange-light">a.btn-soft</span> { <span class="blue-light">border-radius</span>: <span class="green-light">5px</span> }
+  <span class="orange-light">a.btn-round</span> { <span class="blue-light">border-radius</span>: <span class="green-light">25px</span> }
+</code></pre>
+</span>
+
+Save your <b>base-8.html</b> and <b>base-8.css</b> files, and view the web page in your web browser. The hyperlinks styled with soft and round edges should look as shown below.
+	<IMG src="assets/img/hyperlinks/btn-hyperlinks-4.png" ALT="Tutorial RWD: Media Queries"></li>
+	</ol>
+</section>
+
+
+
+<section id="hyperlinks-icons" class="block-content bg-white">
+	<h2>Adding icons with Font Awesome</h2>
+	<p>In the final part of this Tutorial, you will add some icons from Font Awesome to the hyperlinks styled as buttons. You will use version 4 of Font Awesome, rather than the more recent version 5.</p>
+
+	<ol>
+		<li>In your text editor, open the <b>base-8.html</b> file and in the &lt;head&gt; section add the following new line just after the link to your <b>base-8.css</b> stylesheet.
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"base-8.css"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;
+</code></pre>
+</span>
+This new line adds the Font Awesome stylesheet (version 4.7.0) to your web page.</li>
+		<li>Use your web browser to go to this web address:
+		<span class="inside-ol">&nbsp;</span>
+		<b><a href="https://fontawesome.com/v4.7.0/" target="_blank" rel="noopener">https://fontawesome.com/v4.7.0/</a></b></li>
+		<li>Click on the menu option named <b>Icons</b>.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-1.png" ALT="Tutorial RWD: Media Queries">
+		On the next page displayed you use the <b>Search box</b> to locate icons by name from the Font Awesome range of over 600 icons.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-2.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>In the Search box, enter the word:
+		<span class="inside-ol">&nbsp;</span>
+		user
+		<span class="inside-ol">&nbsp;</span>
+		and click the first result displayed. See the sample screen below.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-3.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>On the next screen displayed, you can see the code to generate the 'user' icon. Drag across the code to select it and then copy it.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-4.png" ALT="Tutorial RWD: Media Queries"></li>
+		
+		<li>In your text editor, open your <b>base-8.html</b> file. Within the first hyperlink on the top line, paste the Font Awesome code for 'user' as shown below.
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-user"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt; <span class="white">Join Now</span>&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+Save the <b>base-8.html</b> file and view the web page in your web browser. You can see that there is only a small space between the user icon and the text 'JOIN NOW'. To increase the spacing, replace the single white space character with two non-breaking space characters as shown below.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-5.png" ALT="Tutorial RWD: Media Queries">
+		
+		Here is the final code for the 'JOIN NOW' button.
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-user"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;<span class="blue-dark">&amp;nbsp;&amp;nbsp;</span><span class="white">Join Now</span>&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+		
+		</li>
+
+
+
+		<li>Update the second and third hyperlink buttons as follows.
+		
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid btn-soft"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-sign-in"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;<span class="blue-dark">&amp;nbsp;&amp;nbsp;</span><span class="white">Sign In</span>&lt;/<span class="blue-dark">a</span>&gt;
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-solid btn-round"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-credit-card"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;<span class="blue-dark">&amp;nbsp;&amp;nbsp;</span><span class="white">Special Offer</span>&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+		
+		Save the <b>base-8.html</b> file and view the web page in your web browser. The top three hyperlink buttons should now look as shown below.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-6.png" ALT="Tutorial RWD: Media Queries"></li>
+
+		<li>Update the three hyperlink buttons in the second row as follows.
+		
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;<span class="white">Join Now</span><span class="blue-dark">&amp;nbsp;&amp;nbsp;</span>&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-arrow-right"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost btn-soft"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;<span class="white">Sign In</span><span class="blue-dark">&amp;nbsp;&amp;nbsp;</span>&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-arrow-circle-right"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+&lt;<span class="blue-dark">a</span> <span class="blue-light">class</span>=<span class="orange">"btn btn-ghost btn-round"</span> <span class="blue-light">href</span>=<span class="orange">"https://www.ibat.ie"</span>&gt;<span class="white">Special Offer</span><span class="blue-dark">&amp;nbsp;&amp;nbsp;</span>&lt;<span class="blue-dark">i</span> <span class="blue-light">class</span>=<span class="orange">"fa fa-credit-card"</span> <span class="blue-light">aria-hidden</span>=<span class="orange">"true"</span>&gt;&lt;/<span class="blue-dark">i</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+</code></pre>
+</span>
+
+		Save the <b>base-8.html</b> file and view the web page in your web browser. The bottom three hyperlink buttons should now look as shown below.
+		<IMG src="assets/img/hyperlinks/font-awesome-4-7.png" ALT="Tutorial RWD: Media Queries"></li>
+	</ol>
+</section>
+
+
+<section id="update-head" class="block-content bg-white">
+	<h2>Updating the &lt;head&gt; of your web page</h2>
+	<p>Before you validate your web page and upload it to GitHub, ensure the following details are correct within the &lt;head&gt; of your <b>base-8.html</b> file.</p>
+	<ul>
+		<li>You have replaced the name &#8216;Mary Smith&#8217; with your own name.</li>
+		<li>You have replaced the sample Google Tracking ID with your own Google Tracking ID. The instructions for viewing your website&#8217;s unique Google Tracking ID are <a href="https://munnelly.com/webdev/setting-up-google-analytics.html#google-analytics-view">here</a>.</li>
+	</ul>
+	<IMG SRC="assets/img/hyperlinks/update-head.png"  ALT="GitHub image">
+</section>
+
+
+
+<section id="validate-html" class="block-content bg-white">
+	<h2>Validating your web page</h2>
+	<p>To check the HTML in your web page is correct or <i>valid</i>, use the official W3C Markup Validation Service as follows.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://validator.w3.org" target="_blank">https://validator.w3.org</a>.</li>
+		<li>Click the <b>Validate by Direct Input</b> tab.
+		<IMG src="assets/img/hyperlinks/validate-html.png"  ALT="Tutorial RWD: Media Queries"></li>
+		<li>Select your entire HTML file (both &lt;head&gt; and &lt;body&gt;), and copy-and-paste it into the box named <b>Enter the Markup to validate</b>.
+		<IMG src="assets/img/hyperlinks/html-validate-pasted.png"  ALT="Tutorial RWD: Media Queries">
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors, return to your <b>base-8.html</b> file in your text editor, fix the errors, save the file, and copy-and-paste the entire file again.<span class="inside-ol">&nbsp;</span>
+		In the HTML Validator, click the <b>Back</b> button of your web browser to again display the <b>Validate by Direct Input</b> tab. Click once in the tab and paste in your corrected HTML file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+
+
+
+
+
+<section id="validate-css" class="block-content bg-white">
+	<h2>Validating your stylesheet</h2>
+	<p>To check your CSS is correct, use the official W3C CSS Validation Service. Follow these steps.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://jigsaw.w3.org/css-validator" target="_blank">https://jigsaw.w3.org/css-validator</a>.</li>
+		<li>Click the <b>By direct input</b> tab.
+		<IMG SRC="assets/img/hyperlinks/validate-css.png"  ALT="Tutorial RWD: Media Queries"></li>
+		<li>Copy and paste your CSS file into the box named <b>Enter the CSS you would like validated</b>.</li>
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors (other than those related to the fluid typographic equation, as shown below), return to your <b>base-8.css</b> file in your text editor, fix the errors, save the file, and copy the entire file again.
+		<IMG SRC="assets/img/hyperlinks/typo-css-errors.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>In the CSS Validator, click the <b>Back</b> button of your web browser to again display the <b>By direct input</b> tab. Click once in the tab and paste in your corrected CSS file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+
+
+<section id="web-page-uploading-github" class="block-content">
+	<h2>Uploading your two files to GitHub</h2>
+
+	<p>After validating your web page and stylesheet, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+		<li>Sign in to your account at <a href="https://www.github.com" target="_blank">GitHub.com</a>. At the left of the screen, you can see a list of your repositories.
+		<img SRC="assets/img/hyperlinks/github-signin.png"  alt="Upload to GitHub"></li>
+		<li>On your GitHub home page, click the name of the repository that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+		<span class="inside-ol">&nbsp;</span>
+		<b>username.github.io</b>
+		<span class="inside-ol">&nbsp;</span>
+		<img SRC="assets/img/hyperlinks/github-repo.png"  alt="GitHub Upload"></li>
+		
+		<li>On the next screen displayed, near the centre of the screen, click the <b>Upload files</b> button.
+		<IMG SRC="assets/img/hyperlinks/github-centre-options.png"  alt="Project Animation Google Fonts"></li>
+
+		<li>Select or drag-and-drop the two files <b>base-8.html</b> and <b>base-8.css</b> to upload them to your GitHub account.
+		<IMG SRC="assets/img/hyperlinks/github-upload-files.png"  alt="Project Animation Google Fonts" ></li>
+		<li>After uploading your files, scroll down to the bottom of the screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web page is now published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+	
+	<p><b>https://username.github.io/base-8.html</b></p>
+
+	<p>It may take a few minutes for your uploaded file to appear on GitHub.</p>
+
+
+</section>
+
+
+<section id="further-resources" class="block-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+		<p><a href="https://www.w3schools.com/html/html_links.asp" target="_blank" rel="noopener"><b>HTML links</b></a><br>
+		From <a href="https://www.w3schools.com/html/default.asp" target="_blank" rel="noopener">W3 Schools</a></p>
+
+		<p><a href="https://internetingishard.com/html-and-css/links-and-images/" target="_blank" rel="noopener"><b>Links and Images</b></a><br>
+		From <a href="https://internetingishard.com/" target="_blank" rel="noopener">Interneting is Hard</a></p>
+
+		<p><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks" target="_blank" rel="noopener"><b>Creating hyperlinks</b></a><br>
+		From the <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">Mozilla Developer Network</a></p>
+
+		<p><a href="https://html.com/anchors-links/" target="_blank" rel="noopener"><b>HTML anchors and links</b></a><br>
+		From <a href="https://html.com/" target="_blank" rel="noopener">HTML.com</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=DiSvq5SgLMI" target="_blank" rel="noopener"><b>Video: How to create links in HTML</b></a><br>
+		By <a href="https://www.youtube.com/channel/UCzyuZJ8zZ-Lhfnz41DG5qLw" target="_blank" rel="noopener">Multimedia Tutorials</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=BNXWQONM9PA" target="_blank" rel="noopener"><b>Video: Linking your web pages together</b></a><br>
+		By <a href="https://www.youtube.com/channel/UCfA4Y4FFNC2L9G-HGeFBeJA" target="_blank" rel="noopener">Gaute Michel Ferstad</a></p>
+
+	</div>
+	<p><br>Return to <a href="index.html">All Tutorials</a>.</p>
+
+</section>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+
+

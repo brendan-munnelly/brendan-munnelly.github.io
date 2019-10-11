@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Responsive Web Design and Media Queries | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Responsive Web Design and Media Queries: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link rel="stylesheet" href="assets/css/brendan-munnelly-web-design.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="index.html" title="All HTML projects">Contents&nbsp;&nbsp;></a></h3>
+	<h1>Responsive Web Design and Media Queries</h1>
+</div>
+
+<a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener" class="ibat-banner-desktop"><img src="assets/img/ibat-banner.png" alt="IBAT Next Course"></a>
+
+<section id="learning-goals" class="block-content bg-white">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<ul>
+		<li>Add media queries to a CSS file for the 768px breakpoint.</li>
+		<li>Use a media query to create responsive left and right padding on a web page.</li>
+		<li>Use media queries to create responsive inter-line and margin spacing for headings and text paragraphs.</li>
+	</ul>
+
+	<p>You can view a finished version of this project by clicking the image below.</p>
+	<a href="https://ibat-web-dev.github.io/base-2.html" target="_blank" rel="noopener"><IMG src="assets/img/rwd-media-queries/final-screen.png" ALT="GitHub image"></a>
+
+</section>
+
+
+<section class="block-content bg-white">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#rwd-about"><b>About Responsive Web Design (RWD)</b></a></p>
+		<p><a href="#rwd-work-files"><b>Your two work files: base-2.html and base-2.css</b></a></p>
+		<p><a href="#browser-resets"><b>RWD: Browser resets</b></a></p>
+		<p><a href="#rwd-breakpoint"><b>The 768px breakpoint</b></a></p>
+		<p><a href="#rwd-page-width"><b>Editing the web page width in your CSS file</b></a></p>
+		<p><a href="#rwd-headings"><b>Editing the heading styles in your CSS file</b></a></p>
+		<p><a href="#rwd-headings"><b>Editing the paragraph style in your CSS file</b></a></p>
+		<p><a href="#rwd-viewing"><b>Viewing your responsive web page at different screen sizes</b></a></p>
+		<p><a href="#update-head"><b>Updating the &lt;head&gt; of your web page</b></a></p>
+		<p><a href="#validate-html"><b>Validating your web page</b></a></p>
+		<p><a href="#validate-css"><b>Validating your stylesheet</b></a></p>
+		<p><a href="#web-page-uploading-github"><b>Uploading your two files to GitHub</b></a></p>
+		<p><a href="#further-resources"><b>Further resources</b></a></p>
+	</div>
+</section>
+
+
+
+<section id="rwd-about" class="block-content bg-white">
+	<h2>About Responsive Web Design (RWD)</h2>
+	<p>Responsive Web Design (RWD) means using so-called <i>media queries</i> in a CSS file so that the various elements of a web page are  displayed appropriately according to the size of the user&#8217;s screen.</p>
+
+	<p>Typically:</p>
+	<ul>
+		<li>Text and images change in size according to the width and height of the screen.</li>
+		<li>The spacing around text and images also changes according to screen size.</li>
+		<li>Multi-column layouts on laptop or desktop screens change to single-column layouts on mobile phone screens, or at least to fewer columns.</li>
+	</ul>
+
+	<IMG src="assets/img/rwd-media-queries/responsive-web-design-image.png" ALT="Tutorial RWD: Media Queries"></li>
+
+</section>
+
+
+<section id="rwd-work-files" class="block-content bg-white">
+	<h2>Your two work files: base-2.html and base-2.css</h2>
+	<p>To work with responsive web design in this Lesson, use your text editor to open the following two files from the previous <a href="styling-html-with-css.html">Lesson</a>:</p>
+
+	<ul>
+		<li>The web page named <b>base-1.html</b>.</li>
+		<li>The stylesheet named <b>base-1.css</b>.</li>
+	</ul>
+
+	<p>Next, follow these steps:</p>
+	<ol>
+		
+		<li>In the &lt;head&gt; of the <b>base-1.html</b> file, change the title as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">title</span>&gt;<span class="white">Web page with responsive layout</span>&lt;<span class="blue-dark">/title</span>&gt;
+</code></pre>
+</span>
+		</li>
+		
+		<li>Also in the &lt;head&gt;, change the description as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"A sample web page with a linked stylesheet for responsive layout."</span>&gt;
+</code></pre>
+</span>
+
+		</li>
+
+		<li>And finally in &lt;head&gt;, change the stylesheet link as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>	
+  &lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"base-2.css"</span>&gt;
+</code></pre>
+</span>
+		</li>
+
+		<li>Use the <b>File | Save As</b> command to save the <b>base-1.html</b> file with this new name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-2.html</b></li>
+
+		<li>Switch to the <b>base-1.css</b> file, and use the <b>File | Save As</b> command to save the file with this new name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-2.css</b></li>
+
+	</ol>
+	<p>You are now ready to work with your new web page (<b>base-2.html</b>) and stylesheet (<b>base-2.css</b>) files.<p>
+
+	<p>Note the following line in the &lt;head&gt; of your web page.</p>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"viewport"</span> <span class="blue-light">content</span>=<span class="brown">"width=device-width, initial-scale=1.0"</span>&gt;
+</code></pre>
+</span>
+
+	<p>This is required for responsive design to work correctly.</p>
+
+</section>
+
+
+
+<section id="browser-resets" class="block-content bg-white">
+	<h2>RWD: Browser resets</h2>
+	<p>Before continuing, you need to add the following new line to the browser resets section at the top of the <b>base-2.css</b> file:</p>
+
+<span class="code-sample">
+<pre><code>
+
+<span class="green-dark">/* ==== BROWSER RESETS  ==== */</span>
+<span class="blue-dark">*</span> { <span class="blue-light">padding</span>: <span class="green-light">0</span>; <span class="blue-light">margin</span>: <span class="green-light">0</span>; <span class="blue-light">border</span>: <span class="green-light">0</span>; <span class="blue-light">font-weight</span>: <span class="orange">normal</span>; <span class="blue-light">font-size</span>: <span class="green-light">16px</span> }
+
+<span class="orange-light">body</span>, <span class="orange-light">html</span> { <span class="blue-light">height</span>: <span class="green-light">100%</span> }	
+
+</code></pre>
+</span>
+
+</section>
+
+<section id="rwd-breakpoint" class="block-content bg-white">
+	<h2>The 768px breakpoint</h2>
+	<p>In responsive web design, a <i>breakpoint</i> is a viewport (screen) width at which the CSS styles rules applied to the web page change. Some complex CSS layouts contain several breakpoints. For example, one for small mobile phones, a second for larger phones, a third for tablets, a fourth for desktops and a fifth for wide-screen laptops.</p>
+
+	<p>The simplest case is to use a single breakpoint in your CSS. The common such is 768px, the width of an Apple iPad in horizontal mode. In this case:
+	
+	<ul>
+		<li>Every viewport up to a maximum width of 767px (<b>max-width: 767px</b>) is treated as a mobile device.</li>
+		<li>Every viewport with a minimum width of 768px (<b>min-width: 768px</b>) is treated as a tablet/laptop/desktop device.</li>
+	</ul>
+
+	<p>In a CSS file, these two media queries, as they are called, are written as shown below.</p>
+
+<span class="code-sample">
+<pre><code>
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+  <span class="white">...</span>
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+  <span class="white">...</span>
+}
+
+</code></pre>
+</span>
+
+	<IMG src="assets/img/rwd-media-queries/breakpoint-768.png" class="img-fluid" ALT="Tutorial RWD: Media Queries"></li>
+
+
+</section>
+
+
+<section id="rwd-page-width" class="block-content bg-white">
+	<h2>Editing the web page width in your CSS file</h2>
+	<p>In the previous <a href="styling-html-with-css.html">Lesson</a>, you added an equal amount of &#8216;white space&#8217; at the left and right edges of the web page. As a result, the content of the web page fills only 60% of the screen. </p>
+	
+	<p>This is fine for tablet and desktop screens. But it is too narrow for mobiles.</p>
+	
+	<ol>
+	<li>In the <b>base-2.css</b> file, replace the current page width style with the following.
+
+<span class="code-sample">
+<pre><code>
+<span class="green-dark">/* ==== PAGE WIDTH  ==== */</span>
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">body</span> <span class="white">{</span>
+       <span class="blue-light">padding-left</span>: <span class="green-light">5%</span>;
+       <span class="blue-light">padding-right</span>: <span class="green-light">5%</span>
+    }
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">body</span> <span class="white">{</span>
+       <span class="blue-light">padding-left</span>: <span class="green-light">20%</span>;
+       <span class="blue-light">padding-right</span>: <span class="green-light">20%</span>
+    }
+}
+
+</code></pre>
+</span>
+</li>
+
+<li>Save your CSS file.</li>
+
+<li>View the <b>base-2.html</b> web page in your web browser at different screen sizes. You should see that the page content width changes from 90% to 60% as the screen width expands from 767px to 768px.</li>
+</ol>
+
+	<IMG src="assets/img/rwd-media-queries/page-wrapper-mockup.png" ALT="Tutorial RWD: Media Queries">
+
+
+
+</section>
+
+
+<section id="rwd-headings" class="block-content bg-white">
+	<h2>Editing the heading styles in your CSS file</h2>
+	<p>For all three heading styles in the <b>base-2.css</b> file, you can see that the margins above and below are set in absolute units of pixels. Let's change those values to percentages as shown below.</p>
+
+<span class="code-sample">
+<pre><code>
+<span class="green-dark">/* ==== HEADINGS ==== */</span>
+
+<span class="orange-light">h1</span> <span class="white">{</span>
+    <span class="blue-light">font-family</span>: <span class="orange">serif</span>;
+    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+    <span class="blue-light">font-size</span>: <span class="green-light">40px</span>;
+    <span class="blue-light">letter-spacing</span>: <span class="green-light">-1px</span>;
+}
+
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">h1</span> <span class="white">{</span>
+       <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+       <span class="blue-light">margin-top</span>: <span class="green-light">12%</span>;
+       <span class="blue-light">margin-bottom</span>: <span class="green-light">6%</span>;
+   }
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">h1</span> <span class="white">{</span>
+       <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+       <span class="blue-light">margin-top</span>: <span class="green-light">12%</span>;
+       <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span>;
+   }
+}
+
+
+<span class="orange-light">h2</span> <span class="white">{</span>
+   <span class="blue-light">font-family</span>: <span class="orange">serif</span>;
+   <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+   <span class="blue-light">font-size</span>: <span class="green-light">32px</span>;
+}
+
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+   <span class="orange-light">h2</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+      <span class="blue-light">margin-top</span>: <span class="green-light">12%</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">3%</span>;
+   }
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+   <span class="orange-light">h2</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+      <span class="blue-light">margin-top</span>: <span class="green-light">12%</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">2%</span>;
+   }
+}
+
+
+<span class="orange-light">h3</span> <span class="white">{</span>
+   <span class="blue-light">font-family</span>: <span class="orange">serif</span>;
+   <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+   <span class="blue-light">font-size</span>: <span class="green-light">28px</span>;
+}
+
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+   <span class="orange-light">h3</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+      <span class="blue-light">margin-top</span>: <span class="green-light">6%</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span>;
+   }
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+   <span class="orange-light">h3</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.3</span>;
+      <span class="blue-light">margin-top</span>: <span class="green-light">5%</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span>;
+   }
+}
+
+</code></pre>
+</span>
+
+
+<p>When finished, save your CSS file.</p>
+</section>
+
+
+<section id="rwd-paragraph" class="block-content bg-white">
+	<h2>Editing the paragraph style in your CSS file</h2>
+	<p>As with the heading styles, edit the paragraph style to that the bottom margin is expressed as a percentage.</p>
+
+<span class="code-sample">
+<pre><code>
+<span class="green-dark">/* ==== PARAGRAPHS ==== */</span>
+
+<span class="orange-light">p</span> <span class="white">{</span>
+   <span class="blue-light">font-family</span>: <span class="orange">sans-serif</span>;
+   <span class="blue-light">font-weight</span>: <span class="orange">normal</span>;
+   <span class="blue-light">font-size</span>: <span class="green-light">16px</span>;
+}
+
+
+<span class="green-dark">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+   <span class="orange-light">p</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.5</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span>;
+   }
+}
+
+<span class="green-dark">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+   <span class="orange-light">p</span> <span class="white">{</span>
+      <span class="blue-light">line-height</span>: <span class="green-light">1.6</span>;
+      <span class="blue-light">margin-bottom</span>: <span class="green-light">2%</span>;
+   }
+}
+
+</code></pre>
+</span>
+
+
+<p>When finished, save your CSS file.</p>
+
+</section>
+
+<section id="rwd-viewing" class="block-content bg-white">
+	<h2>Viewing your responsive web page at different screen sizes</h2>
+	<p>To inspect how your responsive web page displays on various screen sizes, follow the steps below.</p>
+	
+	<p>When using the Firefox Developer Edition browser:</p>
+	<ol>
+		<li>From the <b>Tools</b> menu, choose the <b>Web Developer</b> command and then <b>Responsive Design Mode</b>.</li>
+		<li>Resize the screen simply by dragging the right-hand side of the window.
+		<span class="inside-ol">&nbsp;</span>
+		Alternatively, at the top of the window, enter a screen width and/or height. Or click the <b>Responsive</b> dropdown menu and select a mobile phone model.
+		<IMG src="assets/img/rwd-media-queries/rwd-firefox-screen-widths.png" ALT="Tutorial RWD: Media Queries">
+		To exit responsive design mode, click the Close (X) icon at the top-right of the window.</li>
+	</ol>
+
+	<p>When using the Google Chrome browser:</p>
+	<ol>
+		<li>Press <b>F12</b> to display the Chrome DevTools window.</li>
+		<li>Near the top-left of the DevTools window, click the <b>Toggle device</b> icon.</li>
+		<li>Resize the screen simply by dragging the right-hand side of the window.
+		<IMG src="assets/img/rwd-media-queries/rwd-chrome-screen-widths-1.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>At the top of the screen, enter a fixed width or height.
+		<span class="inside-ol">&nbsp;</span>
+		Alternatively, at the top of the window, enter a screen width and/or height. Or click the <b>Responsive</b> dropdown menu and select a mobile phone model.
+		<IMG src="assets/img/rwd-media-queries/rwd-chrome-screen-widths-2.png" ALT="Tutorial RWD: Media Queries"></li>
+	</ol>
+	<p>To exit DevTools, click the Close (<b>X</b>) icon at the top-right of the window.</p>
+
+</section>
+
+<section id="update-head" class="block-content bg-white">
+	<h2>Updating the &lt;head&gt; of your web page</h2>
+	<p>Before you validate your web page and upload it to GitHub, ensure the following details are correct within the &lt;head&gt; of your <b>base-2.html</b> file.</p>
+	<ul>
+		<li>You have replaced the name &#8216;Mary Smith&#8217; with your own name.</li>
+		<li>You have replaced the sample Google Tracking ID with your own Google Tracking ID. The instructions for viewing your website&#8217;s unique Google Tracking ID are <a href="https://munnelly.com/webdev/setting-up-google-analytics.html#google-analytics-view">here</a>.</li>
+	</ul>
+	<IMG SRC="assets/img/rwd-media-queries/update-head.png"  ALT="GitHub image">
+</section>
+
+
+<section id="validate-html" class="block-content bg-white">
+	<h2>Validating your web page</h2>
+	<p>To check the HTML in your web page is correct or <i>valid</i>, use the official W3C Markup Validation Service as follows.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://validator.w3.org" target="_blank">https://validator.w3.org</a>.</li>
+		<li>Click the <b>Validate by Direct Input</b> tab.
+		<IMG src="assets/img/css-styles/validate-html.png" class="img-fluid" ALT="Tutorial RWD: Media Queries"></li>
+		<li>Select your entire HTML file (both &lt;head&gt; and &lt;body&gt;), and copy-and-paste it into the box named <b>Enter the Markup to validate</b>.
+		<IMG src="assets/img/css-styles/html-validate-pasted.png" class="img-fluid" ALT="Tutorial RWD: Media Queries">
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors, return to your <b>base-2.html</b> file in your text editor, fix the errors, save the file, and copy-and-paste the entire file again.<span class="inside-ol">&nbsp;</span>
+		In the HTML Validator, click the <b>Back</b> button of your web browser to again display the <b>Validate by Direct Input</b> tab. Click once in the tab and paste in your corrected HTML file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+
+<section id="validate-css" class="block-content bg-white">
+	<h2>Validating your stylesheet</h2>
+	<p>To check your CSS is correct, use the official W3C CSS Validation Service. Follow these steps.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://jigsaw.w3.org/css-validator" target="_blank">https://jigsaw.w3.org/css-validator</a>.</li>
+		<li>Click the <b>By direct input</b> tab.
+		<IMG SRC="assets/img/css-styles/validate-css.png" class="img-fluid" ALT="Tutorial RWD: Media Queries"></li>
+		<li>Copy and paste your CSS file into the box named <b>Enter the CSS you would like validated</b>.</li>
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors, return to your <b>base-2.css</b> file in your text editor, fix the errors, save the file, and copy the entire file again.<span class="inside-ol">&nbsp;</span>
+		In the CSS Validator, click the <b>Back</b> button of your web browser to again display the <b>By direct input</b> tab. Click once in the tab and paste in your corrected CSS file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+<section id="web-page-uploading-github" class="block-content">
+	<h2>Uploading your two files to GitHub</h2>
+
+	<p>After validating your web page and stylesheet, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+		<li>Sign in to your account at <a href="https://www.github.com" target="_blank">GitHub.com</a>. At the left of the screen, you can see a list of your repositories.
+		<img SRC="assets/img/css-styles/github-signin.png" class="img-fluid" alt="Upload to GitHub"></li>
+		<li>On your GitHub home page, click the name of the repository that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+		<span class="inside-ol">&nbsp;</span>
+		<b>username.github.io</b>
+		<span class="inside-ol">&nbsp;</span>
+		<img SRC="assets/img/css-styles/github-repo.png" class="img-fluid" alt="GitHub Upload"></li>
+		
+		<li>On the next screen displayed, near the centre of the screen, click the <b>Upload files</b> button.
+		<IMG SRC="assets/img/css-styles/github-centre-options.png" class="img-fluid" alt="Project Animation Google Fonts"></li>
+
+		<li>Select or drag-and-drop the two files <b>base-2.html</b> and <b>base-2.css</b> to upload them to your GitHub account.
+		<IMG SRC="assets/img/rwd-media-queries/github-upload-files.png" class="img-fluid" alt="Project Animation Google Fonts"></li>
+		<li>After uploading your files, scroll down to the bottom of the screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web page is now published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+	
+	<p><b>https://username.github.io/base-2.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+	<p><br>Return to <a href="https://www.munnelly.com/webdev/index.html">All Tutorials</a>.</p>
+	<p>&nbsp;</p>
+
+</section>
+
+
+<section id="further-resources" class="block-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+
+		<p><a href="https://www.w3schools.com/css/css3_mediaqueries.asp" target="_blank" rel="noopener"><b>CSS media queries</b></a><br>
+		From <a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3 Schools</a></p>
+
+		<p><a href="https://www.tutorialrepublic.com/css-tutorial/css3-media-queries.php" target="_blank" rel="noopener"><b>Media queries and responsive web design</b></a><br>
+		From <a href="https://www.tutorialrepublic.com/" target="_blank" rel="noopener">Tutorial Republic</a.</p>
+
+		<p><a href="https://developers.google.com/web/fundamentals/design-and-ux/responsive/" target="_blank" rel="noopener"><b>Responsive web design basics</b></a><br>
+		By Pete LePage at the <a href="https://developers.google.com/web/fundamentals/" target="_blank" rel="noopener">Google Developers Blog</a></p>
+
+		<p><a href="https://www.webucator.com/tutorial/advanced-css/media-queries.cfm" target="_blank" rel="noopener"><b>Lesson: Media queries</b></a><br>
+		From <a href="https://www.webucator.com/tutorial/" target="_blank" rel="noopener">Webucator Tutorials</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=2KL-z9A56SQ" target="_blank" rel="noopener"><b>Video: How to use CSS media queries in less than five minutes</b></a><br>
+		By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank" rel="noopener">Kevin Powell</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=wFqkWczC0jA" target="_blank" rel="noopener"><b>Video: CSS media queries and viewport</b></a><br>
+		From <a href="https://www.youtube.com/channel/UCSJbGtTlrDami-tDGPUV9-w" target="_blank" rel="noopener">Academimind</a></p>
+
+	</div>
+	<p><br><br>Return to <a href="index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+
+
+
