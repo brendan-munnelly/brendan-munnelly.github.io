@@ -1,0 +1,285 @@
+/* ==== BROWSER RESETS  ==== */
+* { box-sizing: border-box; padding: 0; margin: 0 }
+body, html { height: 100% }
+body { max-width: 1600px }
+img { width: 100%; height: auto; display: block }
+html { scroll-behavior: smooth }
+
+body { background-color: #eff8f5; font-family: sans-serif }
+
+
+/* ********************************************************************************************
+=============================== MENU STYLES TO COPY AND PASTE ===============================
+*********************************************************************************************** */
+
+/* === ALL SCREEN SIZES ====== */
+
+/* on mobiles - hide desktop menu */
+@media all and (max-width:767px) { 
+    .container-menu-desktop.menu-dark,
+    .container-menu-desktop.menu-light { display: none }
+}
+
+/* on desktops - hide mobile menu bar and list of menu options */
+@media all and (min-width:768px) { 
+    .container-menu-bar-mobile.menu-dark,
+    .container-menu-bar-mobile.menu-light,
+    .container-menu-options-mobile.menu-dark,
+    .container-menu-options-mobile.menu-light { display: none }
+}
+
+/* sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed }
+
+/* Height of desktop menu and mobile menu bar */
+.container-menu-desktop, .container-menu-bar-mobile { height:72px }
+
+/* website logo fixed size in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child img,
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* website logo vertically centered in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child,
+.container-menu-bar-mobile a:first-child { display: flex; flex-direction: row; align-items: center }
+
+/* hide bullet character on listed links */
+.container-menu-desktop        ul li,
+.container-menu-options-mobile ul li { list-style-type: none }
+
+/* hide link underlines on desktop and mobile menus */
+.container-menu-desktop        ul li a,
+.container-menu-options-mobile ul li a { text-decoration: none }
+
+/* style cta button on desktop and mobile menus */
+.container-menu-desktop        ul li a.btn-cta,
+.container-menu-options-mobile ul li a.btn-cta {
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    /* soften corners */
+    /* border-radius: 4px; */
+    /* rounded corners */
+    border-radius: 100px
+}
+
+/* style icon in cta button on desktop and mobile menus */
+.container-menu-desktop        ul li a.btn-cta i,
+.container-menu-options-mobile ul li a.btn-cta i { margin-right: 8px; font-size: 90% }
+
+
+
+/* ================================= DESKTOP MENU ============================= */
+
+/* outer parent flexbox container 
+   home page link (with website logo) at left and ul links at right are its two children */
+.container-menu-desktop {
+	display: flex;
+    justify-content: space-between;
+    padding: 0 6% 0 6%;
+    width: 100%;
+    /* drop shadow along bottom of menu  */
+    box-shadow: 0px 1px 10px #888
+}
+
+/* menu links and cta button aligned horizontally */
+.container-menu-desktop ul li {
+    display: inline-block;
+    margin: 0 40px 0 0; /* spacing at right of menu links, cta button */
+}
+
+.container-menu-desktop ul li:last-child {
+    margin-right: 0 /* no spacing at right of last menu link or cta button */
+}
+
+/* vertically center menu links and cta button */
+.container-menu-desktop ul { display: flex; align-items: center }
+
+/* style text for links and cta button  */
+.container-menu-desktop ul li a {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button padding */
+.container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
+
+
+
+/* ======================== MOBILE MENU  ======================= */
+
+/* outer flexbox container for mobile menu bar 
+   home page link (with website logo) at left and hamburger icon at right are its two children */
+.container-menu-bar-mobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+    width: 100%;
+    z-index: 999;
+    padding: 0 6% 0 6%;
+   /* drop shadow along bottom of menu bar */
+    box-shadow: 0px 1px 10px #888    
+}
+
+/* three bars hozizontal in hamburger icon */
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 { width: 36px; height: 4px; margin: 7px 0; transition: 0.4s }
+
+/* hamburger icon changes shape to 'X' when fly-out list of menu options visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
+.change .bar2 { opacity: 0 }
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
+
+/* container div for list of mobile menu options */
+.container-menu-options-mobile { 
+    position: fixed; display: block; 
+    top: 72px; /* same height as menu bar */
+    width: 320px; 
+	height: 100%; 
+    padding: 30px 40px 60px 40px;
+    transition: 0.5s;
+    z-index:9;
+    overflow-x: hidden;
+    overflow-y: auto;
+/*    overscroll-behavior: contain;
+    overscroll-behavior-y: contain */
+}
+
+.container-menu-options-mobile.flyout-closed {
+    right: -320px; /* hides list of mobile menu options */
+}
+
+.container-menu-options-mobile.flyout-open {
+    right: 0; /* displays list of mobile menu options */
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain
+}
+
+/* list of links on mobile menu */
+.container-menu-options-mobile ul li { margin: 0 40px 30px 0 }
+
+/* style of links */
+.container-menu-options-mobile ul li a {
+    font-size: 18px;
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button */
+.container-menu-options-mobile a.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
+}
+
+
+
+/* ============ Light background menu - desktops and mobiles ========= */
+
+/* background colour */
+.menu-light { background-color: #fff }
+
+/* menu links */
+.menu-light ul li a:link,  .menu-light ul li a:visited { color: red }
+.menu-light ul li a:hover, .menu-light ul li a:active  { color: #222 }
+
+/* cta button */
+.menu-light ul li a.btn-cta:link, 
+.menu-light ul li a.btn-cta:visited {
+    background-color: transparent;
+    color: red;
+    border-color:red
+}
+
+.menu-light ul li a.btn-cta:hover,
+.menu-light ul li a.btn-cta:active {
+    background-color: red;
+    color: #fff;
+    border-color:red
+}
+
+/* on mobiles only - hamburger icon bar colour */
+.menu-light .item-icon .bar1, 
+.menu-light .item-icon .bar2, 
+.menu-light .item-icon .bar3 { background-color: red }	
+
+
+/* ============== Dark background menu - desktops and mobiles =========== */
+
+/* background colour */
+.menu-dark { background-color: red }
+
+/* menu links */
+.menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
+.menu-dark ul li a:hover, .menu-dark ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-dark ul li a.btn-cta:link,
+.menu-dark ul li a.btn-cta:visited { 
+    background-color: red;
+    color: #fff;
+    border-color:#fff
+}
+
+.menu-dark ul li a.btn-cta:hover,
+.menu-dark ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: red;
+    border-color:#fff
+}
+
+/* on mobiles only - hamburger icon bar colour */
+.menu-dark .item-icon .bar1, 
+.menu-dark .item-icon .bar2, 
+.menu-dark .item-icon .bar3 { background-color: #fff }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ********************************************************************************************
+=============================== END OF MENU STYLES  ===========================================
+*********************************************************************************************** */
+
+
+/* ==== PAGE CONTAINER ==== */
+
+/* no scroll */
+.no-scroll { overflow: hidden }
+
+.sidebar-only-scroll {
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain
+}
+
+/* Desktop */
+@media all and (min-width:768px) {
+    .container-page { padding: 8% 20% 5% 20% }
+}
+/* Mobiles */
+ @media all and (max-width:767px) {
+     .container-page { padding: 26% 7% 10% 7% }
+}
+/* Paragraphs in page container  */
+p {
+    font-weight: normal; line-height: 1.5; margin-bottom:14px; color: #4f5959;
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1600 - 320)));
+}
