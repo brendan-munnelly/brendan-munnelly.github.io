@@ -1,0 +1,291 @@
+/* ==== BROWSER RESETS  ==== */
+* { box-sizing: border-box; padding: 0; margin: 0 }
+body, html { height: 100% }
+body { max-width: 1600px }
+img { width: 100%; height: auto; display: block }
+html { scroll-behavior: smooth }
+
+body { background-color: #eff8f5; font-family: sans-serif }
+
+
+/* ********************************************************************************************
+=============================== MENU STYLES TO COPY AND PASTE ===============================
+*********************************************************************************************** */
+
+
+
+/* ===================== DESKTOP MENU ========================== */
+
+/* Mobiles - Hide desktop menu */
+@media all and (max-width:767px) { 
+    .container-menu-desktop.menu-light,
+	.container-menu-desktop.menu-dark { 
+        display: none
+   }
+}
+
+/* Outer parent flexbox container */
+.container-menu-desktop {
+	display: flex;
+    justify-content: space-between;
+    height:72px; /* height of desktop menu bar */    
+    padding: 0 6% 0 6%;
+    width: 100%;
+    /* box-shadow: 0px 1px 10px #888 */
+    /* margin-bottom: 60px; */
+}
+
+.container-menu-desktop ul {
+    display: flex;
+    align-items: center
+}
+
+.container-menu-desktop ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 40px 0 0;
+}
+
+.container-menu-desktop ul li:last-child {
+    margin-right: 0
+}
+
+/* Sticky desktop menu */
+.menu-sticky {
+    position: fixed;
+}
+/*
+.menu-sticky + div {
+    margin-top: 72px;
+    padding-top: 72px;
+    background-color: yellow
+}
+*/
+
+
+/*===================== MOBILE SLIDE-OUT NAVIGATION MENU  ======================= */
+
+/* Hide on desktops  */
+@media all and (min-width:768px) { 
+    .container-menu-bar-mobile.menu-light,
+    .container-menu-bar-mobile.menu-dark, 
+    .container-menu-options-mobile.menu-light,
+    .container-menu-options-mobile.menu-dark {
+		display: none;
+	}
+}
+
+.container-menu-bar-mobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+    width: 100%;
+    height: 72px; /* height of mobile menu bar */
+    padding: 0 6% 0 1%;
+    /* box-shadow: 0px 1px 10px #888 */
+    /*	margin-bottom: 40px; */
+}
+
+/* Hamburger icon */
+.container-menu-bar-mobile .item-icon {
+	text-align: right;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 {
+	width: 36px;
+	height: 4px;
+	margin: 7px 0;
+	transition: 0.4s;
+}
+
+/* Hamburger icon chnages shape */
+.change .bar1 {
+	transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 { opacity: 0 }
+.change .bar3 {
+	transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* Mobile menu options */
+.container-menu-options-mobile { 
+	position: fixed; 
+	display: block; 
+	top: 72px; /* same height as menu bar */
+	height: 100%; 
+	width: 320px;
+	right: -320px;
+	padding-top: 30px;
+	transition: 0.5s;
+}
+
+/* links on mobile menu */
+.container-menu-options-mobile ul li { 
+    margin-left: 40px;
+	margin-bottom: 40px;
+	display: block;
+}
+
+/* Logo in desktop and mobile menu bar  */
+.container-menu-desktop a:first-child img,
+.container-menu-bar-mobile a:first-child img { 
+    width: 200px;
+    height: 40px;
+}
+
+.container-menu-desktop a:first-child,
+.container-menu-bar-mobile a:first-child { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Logo on mobile menu */
+.container-menu-bar-mobile a:first-child img { 
+    margin-left: 20px
+}
+
+/* Links on desktop menus */
+.menu-light ul li a,
+.menu-dark  ul li a {
+    text-decoration: none;
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* Links on mobile menus */
+@media all and (max-width:767px) { 
+    .menu-light ul li a,
+    .menu-dark  ul li a {
+        font-size: 18px;
+        /* font-weight:bold */
+        /* text-transform: uppercase */
+    }
+}
+
+
+/* Icon in CTA button */
+.menu-light ul li a.btn-cta i,
+.menu-dark  ul li a.btn-cta i {
+    margin-right: 8px;
+    font-size: 90%
+}
+
+.menu-light ul li a.btn-cta,
+.menu-dark  ul li a.btn-cta {
+    display: inline-block;
+    padding: 6px 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100px
+}
+
+@media all and (max-width:767px) { 
+    .menu-light ul li a.btn-cta,
+    .menu-dark  ul li a.btn-cta {
+        padding: 10px 24px;
+    }
+}
+
+
+/* ============ Light background menu - desktops and mobiles ========= */
+
+/* menu links */
+.menu-light { background-color: #fff }
+.menu-light ul li a { color: red }
+
+/* cta button */
+.menu-light ul li a.btn-cta:link,
+.menu-light ul li a.btn-cta:visited {
+    background-color: transparent;
+    color: red;
+    border-color:red
+}
+
+.menu-light ul li a.btn-cta:hover,
+.menu-light ul li a.btn-cta:active {
+    background-color: red;
+    color: transparent;
+    border-color:red
+}
+
+/* hamburger icon */
+.menu-light .item-icon .bar1, 
+.menu-light .item-icon .bar2, 
+.menu-light .item-icon .bar3 { background-color: red }	
+
+/* Active links on desktop */
+.container-menu-desktop.menu-light ul li a:hover,
+.container-menu-desktop.menu-light ul li a:active { 
+    color: #222;
+}
+
+.container-menu-desktop.menu-light ul li a.btn-cta:hover,
+.container-menu-desktop.menu-light ul li a.btn-cta:active { 
+    color: #fff
+}
+
+/* ============== Dark background menu - desktops and mobiles =========== */
+
+/* menu links */
+.menu-dark { background-color: red }
+.menu-dark ul li a { color: #fff }
+
+/* cta button */
+.menu-dark ul li a.btn-cta:link,
+.menu-dark ul li a.btn-cta:visited { 
+    background-color: red;
+    color: #fff;
+    border-color:#fff
+}
+
+.menu-dark ul li a.btn-cta:hover,
+.menu-dark ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: red;
+    border-color:#fff
+}
+
+/* Active links on desktop */
+.container-menu-desktop.menu-dark ul li a:hover,
+.container-menu-desktop.menu-dark ul li a:active { 
+    color: #b8b8b8
+}
+
+.container-menu-desktop.menu-dark ul li a.btn-cta:hover,
+.container-menu-desktop.menu-dark ul li a.btn-cta:active { 
+    color: red
+}
+
+/* hamburger icon */
+.menu-dark .item-icon .bar1, 
+.menu-dark .item-icon .bar2, 
+.menu-dark .item-icon .bar3 { background-color: #fff }
+
+
+/* ********************************************************************************************
+=============================== END OF MENU STYLES  ===========================================
+*********************************************************************************************** */
+
+
+/* ==== PAGE CONTAINER ==== */
+/* Desktop */
+@media all and (min-width:768px) {
+    .container-page { padding: 8% 20% 5% 20% }
+}
+/* Mobiles */
+ @media all and (max-width:767px) {
+     .container-page { padding: 24% 7% 10% 7% }
+}
+/* Paragraphs in page container  */
+p {
+    font-weight: normal; line-height: 1.5; margin-bottom:14px;
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1600 - 320)));
+}
