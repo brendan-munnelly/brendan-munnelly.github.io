@@ -23,9 +23,9 @@
     *********************************************************************************************** -->
         
     <!-- Begin desktop menu -->
-    <div class="container-menu-desktop menu-dark menu-sticky">
+    <div class="container-menu-desktop menu-light menu-sticky">
         <!-- first child item -->
-        <a href="index.html"><img src="menus-logo.png"></a>
+        <a href="index.html"><img src="menus-logo.png" alt="website logo"></a>
         <!-- second child item -->
         <ul>
             <li><a href="#">Option 1</a></li>
@@ -38,54 +38,51 @@
 
 
     <!-- Begin mobile menu bar -->
-    <div class="container-menu-bar-mobile menu-dark menu-sticky">
-        <!-- first child -->
-        <a href="index.html"><img src="menus-logo.png"></a>
-        <!-- second child -->
-        <div class="item-icon">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
+    <div class="container-menu-bar-mobile menu-light menu-sticky">
+            <!-- first child -->
+            <a href="index.html"><img src="menus-logo.png" alt="website logo"></a>
+            <!-- second child -->
+            <div class="item-icon">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
         </div>
-    </div>
     <!-- End mobile menu bar -->
 
     <!-- Begin mobile menu slide-out options -->
-    <div class="container-menu-options-mobile menu-dark">
+    <div class="flyout-menu flyout-menu-is-closed menu-light">
         <ul>
             <li><a href="#">Option 1</a></li>
             <li><a href="#">Option 2</a></li>
             <li><a href="#">Option 3</a></li>
-            <!-- <li><a href="#">Option 4</a></li>
-            <li><a href="#">Option 5</a></li>
-            <li><a href="#">Option 6</a></li>
-            <li><a href="#">Option 7</a></li>
-            <li><a href="#">Option 9</a></li>
-            <li><a href="#">Option 9</a></li>
-            <li><a href="#">Option 10</a></li> -->
             <li><a href="#" class="btn-cta"><i class="fas fa-shopping-cart"></i> CTA Button</a></li>
         </ul>
-        
-        <hr>
 
+        <hr>
         <h4>About Me</h4>
-        <p>Hi, I'm Mary Smith. I'm a web designer and developer.</p>
-        <p>I created this website to showcase some of my digital creation skills.</p>
+        <div class="fly-out-profile-box">
+            <img src="face-webdev.jpg">
+            <p>Hi, I'm <b>Mary Smith</b>, a web and digital designer based in Dublin, Ireland.</p>
+        </div>
 
         <h4>Contact</h4>
-        <p>Email address</p>
+        <p>Have a project you'd like to discuss? Let's make something great together!</p>
+        <h5>088 123 4567</h5>
 
-        <h4>Links</h4>
-        <ul class="mobile-icons">
-            <li><a href="mailto:ibat.training@gmail.com"><i class="fas fa-envelope fa-fw"></i></a></li>
-            <li><a href="https://www.github.com/ibat-web-dev" target="_blank"><i class="fab fa-github-square fa-fw"></i></a></li>
-            <li><a href="https://ie.linkedin.com/school/ibat-college-dublin/" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a></li>
-            <li><a href="https://ie.linkedin.com/school/ibat-college-dublin/" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a></li>            
-        </ul>
-    
+        <h5><a href="mailto:marysmith@myemail.com" target="_blank" rel="noopener noreferrer">marysmith@myemail.com</a></h5>
+
+        <h4>Social Links</h4>
+        <div class="fly-out-social-icons">
+            <a href="https://www.github.com/ibat-web-dev" target="_blank"><i class="fab fa-github-square fa-fw"></i></a>
+            <a href="https://ie.linkedin.com/school/ibat-college-dublin/" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+            <a href="https://ie.linkedin.com/school/ibat-college-dublin/" target="_blank"><i class="fab fa-twitter-square"></i></a>
+            <a href="https://www.instagram.com/ibatcollegedublin/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/IBATcollege" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        </div>
+
     </div>
-    <!-- End mobile menu slide-out ptions -->
-
+    <!-- End mobile menu slide-out options -->
 
 
 	<!-- ******************************************************************************************
@@ -94,7 +91,7 @@
     
     <!-- Begin page main content -->
         
-    <div class="container-page">
+    <div class="main-content">
 
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ipsum at risus feugiat facilisis at et orci.</p>
 
@@ -124,7 +121,7 @@
 
 		<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
 
-		<p>Pellentesque non dignissim tellus. Ut convallis euismod quam non luctus potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>    
+		<p>Pellentesque non dignissim tellus. Ut convallis euismod quam non luctus potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem, eleifend pellentesque nisi.</p>    
 
 	</div>
 
@@ -134,24 +131,33 @@
 	<!-- Begin JavaScript code showing/hiding slide-out mobile menu -->
     <script>
         document.querySelector('.item-icon').addEventListener('click', toggleMobileMenu)
-    
+        let pageContainer = document.querySelector('.page-container');
+   
         function toggleMobileMenu() {
             //toggle hamburger icon
             let elemIcon = document.querySelector('.item-icon');
             elemIcon.classList.toggle("change");
-        
-            //if mobile menu currently closed, open menu.
+            let elemHTML = document.querySelector('html');
+            let elemBody = document.querySelector('body');            
+            let elemFlyOut = document.querySelector('.flyout-menu');
+
+            //if fly-out menu is currently closed, open it.
             if (elemIcon.classList.contains('change')) {
-                document.querySelector(".container-menu-options-mobile").style.right = "0";
-            }
-            //if mobile menu currently open, close menu.
+                elemFlyOut.classList.remove('flyout-menu-is-closed');
+                elemFlyOut.classList.add('flyout-menu-is-open');
+                elemHTML.classList.add('no-scroll');
+                elemBody.classList.add('no-scroll');
+            }    
+            //if fly-out menu is currently open, close it.
             else {
-                document.querySelector(".container-menu-options-mobile").style.right = "-320px";
+                elemFlyOut.classList.remove('flyout-menu-is-open');
+                elemFlyOut.classList.add('flyout-menu-is-closed');
+                elemHTML.classList.remove('no-scroll');
+                elemBody.classList.remove('no-scroll');                                
             }
         }
     </script>
     <!-- End JavaScript code showing/hiding slide-out mobile menu -->
-
 
 </body>
 </html>

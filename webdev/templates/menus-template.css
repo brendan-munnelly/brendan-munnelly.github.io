@@ -12,63 +12,106 @@ body { background-color: #eff8f5; font-family: sans-serif }
 =============================== MENU STYLES TO COPY AND PASTE ===============================
 *********************************************************************************************** */
 
+/* === ALL SCREEN SIZES ====== */
 
-
-/* ===================== DESKTOP MENU ========================== */
-
-/* Mobiles - Hide desktop menu */
+/* on mobiles - hide desktop menu */
 @media all and (max-width:767px) { 
-    .container-menu-desktop.menu-light,
-	.container-menu-desktop.menu-dark { 
-        display: none
-   }
+    .container-menu-desktop.menu-dark,
+    .container-menu-desktop.menu-light { display: none }
 }
 
-/* Outer parent flexbox container */
+/* on desktops - hide mobile menu bar and list of menu options */
+@media all and (min-width:768px) { 
+    .container-menu-bar-mobile.menu-dark,
+    .container-menu-bar-mobile.menu-light,
+    .flyout-menu.menu-dark,
+    .flyout-menu.menu-light { display: none }
+}
+
+/* sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed }
+
+/* Height of desktop menu and mobile menu bar */
+.container-menu-desktop, .container-menu-bar-mobile { height:72px }
+
+/* website logo fixed size in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child img,
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* website logo vertically centered in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child,
+.container-menu-bar-mobile a:first-child { display: flex; flex-direction: row; align-items: center }
+
+/* hide bullet character on listed links */
+.container-menu-desktop ul li,
+.flyout-menu            ul li { list-style-type: none }
+
+/* hide link underlines on desktop and mobile menus */
+.container-menu-desktop ul li a,
+.flyout-menu            ul li a { text-decoration: none }
+
+/* style cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta,
+.flyout-menu            ul li a.btn-cta {
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    /* soften corners */
+    /* border-radius: 4px; */
+    /* rounded corners */
+    border-radius: 100px
+}
+
+/* style icon in cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta i,
+.flyout-menu            ul li a.btn-cta i { margin-right: 8px; font-size: 90% }
+
+/* on mobiles, prevent scrolling outside flyout menu */
+.no-scroll { overflow: hidden }
+
+
+/* ================================= DESKTOP MENU ============================= */
+
+/* outer parent flexbox container 
+   home page link (with website logo) at left and ul links at right are its two children */
 .container-menu-desktop {
 	display: flex;
     justify-content: space-between;
-    height:72px; /* height of desktop menu bar */    
     padding: 0 6% 0 6%;
     width: 100%;
-    z-index:99;
-    /* box-shadow: 0px 1px 10px #888 */
-    /* margin-bottom: 60px; */
+    /* drop shadow along bottom of menu  */
+    box-shadow: 0px 1px 10px #888
 }
 
-.container-menu-desktop ul {
-    display: flex;
-    align-items: center
-}
-
+/* menu links and cta button aligned horizontally */
 .container-menu-desktop ul li {
     display: inline-block;
-    list-style-type: none;
-    margin: 0 40px 0 0;
+    margin: 0 40px 0 0; /* spacing at right of menu links, cta button */
 }
 
 .container-menu-desktop ul li:last-child {
-    margin-right: 0
+    margin-right: 0 /* no spacing at right of last menu link or cta button */
 }
 
-/* Sticky desktop menu */
-.menu-sticky {
-    position: fixed;
+/* vertically center menu links and cta button */
+.container-menu-desktop ul { display: flex; align-items: center }
+
+/* style text for links and cta button  */
+.container-menu-desktop ul li a {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+    /* font-weight:bold */
+    /* text-transform: uppercase */
 }
 
+/* cta button padding */
+.container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
 
-/*===================== MOBILE SLIDE-OUT NAVIGATION MENU  ======================= */
 
-/* Hide on desktops  */
-@media all and (min-width:768px) { 
-    .container-menu-bar-mobile.menu-light,
-    .container-menu-bar-mobile.menu-dark, 
-    .container-menu-options-mobile.menu-light,
-    .container-menu-options-mobile.menu-dark {
-		display: none;
-	}
-}
 
+/* ======================== MOBILE MENU  ======================= */
+
+/* outer flexbox container for mobile menu bar 
+   home page link (with website logo) at left and hamburger icon at right are its two children */
 .container-menu-bar-mobile {
 	display: flex;
 	flex-direction: row;
@@ -76,158 +119,142 @@ body { background-color: #eff8f5; font-family: sans-serif }
 	align-items: center;
     width: 100%;
     z-index: 999;
-    height: 72px; /* height of mobile menu bar */
-    padding: 0 6% 0 1%;
-    /* box-shadow: 0px 1px 10px #888 */
-    /*	margin-bottom: 40px; */
+    padding: 0 6% 0 6%;
+   /* drop shadow along bottom of menu bar */
+    box-shadow: 0px 1px 10px #888    
 }
 
-/* Hamburger icon */
-.container-menu-bar-mobile .item-icon {
-	text-align: right;
-	display: inline-block;
-	cursor: pointer;
-}
-
+/* three bars hozizontal in hamburger icon */
 .container-menu-bar-mobile .item-icon .bar1, 
 .container-menu-bar-mobile .item-icon .bar2, 
-.container-menu-bar-mobile .item-icon .bar3 {
-	width: 36px;
-	height: 4px;
-	margin: 7px 0;
-	transition: 0.4s;
-}
+.container-menu-bar-mobile .item-icon .bar3 { width: 36px; height: 4px; margin: 7px 0; transition: 0.4s }
 
-/* Hamburger icon chnages shape */
-.change .bar1 {
-	transform: rotate(-45deg) translate(-9px, 6px);
-}
-
+/* hamburger icon changes shape to 'X' when fly-out menu is visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
 .change .bar2 { opacity: 0 }
-.change .bar3 {
-	transform: rotate(45deg) translate(-8px, -8px);
-}
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
 
-/* Mobile menu options */
-.container-menu-options-mobile { 
-	position: fixed; 
-	display: block; 
-	top: 72px; /* same height as menu bar */
-	height: 100%; 
-	width: 320px;
-	right: -320px;
-    padding: 30px 40px 60px 40px;
+/* container div for flyout menu content */
+.flyout-menu { 
+    position: fixed; display: block; 
+    top: 72px; /* same height as menu bar */
+    width: 320px; 
+    max-height: 100%;
+    height: 100%;
+    padding: 30px 40px 40px 40px;
     transition: 0.5s;
     z-index:9;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* safari on mobiles */    
+}
+
+.flyout-menu.flyout-menu-is-closed {
+    right: -320px; /* hides flyout menu */
+}
+
+.flyout-menu.flyout-menu-is-open {
+    right: 0; /* displays flyout menu */
     overscroll-behavior: contain;
     overscroll-behavior-y: contain
 }
 
-/* links on mobile menu */
-.container-menu-options-mobile ul li { 
- 	margin: 0 40px 30px 0;
-	display: block;
-}
+/* list of links on flyout menu */
+.flyout-menu ul li { margin: 0 40px 30px 0 }
 
-/* Logo in desktop and mobile menu bar  */
-.container-menu-desktop a:first-child img,
-.container-menu-bar-mobile a:first-child img { 
-    width: 200px;
-    height: 40px;
-}
-
-.container-menu-desktop a:first-child,
-.container-menu-bar-mobile a:first-child { 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-/* Logo on mobile menu */
-.container-menu-bar-mobile a:first-child img { 
-    margin-left: 20px
-}
-
-/* Links on desktop menus */
-.menu-light ul li a,
-.menu-dark  ul li a {
-    text-decoration: none;
-    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+/* style flyout menu links */
+.flyout-menu ul li a {
+    font-size: 18px;
     /* font-weight:bold */
     /* text-transform: uppercase */
 }
 
-/* Links on mobile menus */
-@media all and (max-width:767px) { 
-    .menu-light ul li a,
-    .menu-dark  ul li a {
-        font-size: 18px;
-        /* font-weight:bold */
-        /* text-transform: uppercase */
-    }
+/* cta button */
+.flyout-menu a.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
 }
 
-.container-menu-options-mobile h4 {
-    font-size: 18px;
-    margin-bottom: 4px;
-    /* letter-spacing: 2px */
+.flyout-menu hr { 
+    height: 4px;
+    margin: 32px 0 0 0;
+    border-style: solid;
+    border-width: 1px 
+} 
+
+.flyout-menu h4 {
+    font-size: 20px;
+    margin: 42px 0 4px 0;
+    text-align: center;
+    /* letter-spacing: 2px; *./
     /* text-transform: uppercase */
 }
 
-.container-menu-options-mobile p {
-    font-size: 16px;
+.flyout-menu h5 {
+    font-size: 17px;
+    margin: 20px 0 20px 0;
+    text-align: center
 }
 
-
-.container-menu-options-mobile ul.mobile-icons li {
-    list-style-type: none;
-    display: inline-block;
-    margin-right: 30px;
+.flyout-menu h5 a {
+    font-size: 17px;
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px
 }
 
-.container-menu-options-mobile ul.mobile-icons li:last-child {
-    margin-right: 0
+.flyout-menu p { 
+    text-align: center; font-size: 15px; line-height: 1.4;
 }
 
-.container-menu-options-mobile ul.mobile-icons li a {
-    font-size: 24px;
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box,
+.flyout-menu.flyout-menu-is-open div.fly-out-social-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;    
 }
 
-/* Icon in CTA button */
-.menu-light ul li a.btn-cta i,
-.menu-dark  ul li a.btn-cta i {
-    margin-right: 8px;
-    font-size: 90%
-}
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img,
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box p { width: 47% }
 
-.menu-light ul li a.btn-cta,
-.menu-dark  ul li a.btn-cta {
-    display: inline-block;
-    padding: 6px 20px;
-    border-width: 2px;
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img {
+    display: block; border-radius: 100%;
+    width: 104px; height: 104px; 
     border-style: solid;
-    border-radius: 100px
+    border-width: 2px
 }
 
-@media all and (max-width:767px) { 
-    .menu-light ul li a.btn-cta,
-    .menu-dark  ul li a.btn-cta {
-        padding: 10px 24px;
-    }
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box p {
+    text-align:left 
 }
 
+.flyout-menu.flyout-menu-is-open div.fly-out-social-icons { 
+    margin-top:12px
+}
+
+.flyout-menu.flyout-menu-is-open div.fly-out-social-icons a {
+    font-size: 26px;
+    text-align: center 
+}
 
 /* ============ Light background menu - desktops and mobiles ========= */
 
-/* menu links */
+/* background colour */
 .menu-light { background-color: #fff }
-.menu-light ul li a { color: red }
+
+/* drop shadow border at left of fly-out menu */
+.flyout-menu.flyout-menu-is-open {
+    box-shadow: 0px 1px 10px #888    
+}
+
+/* menu links */
+.menu-light ul li a:link,  .menu-light ul li a:visited { color: red }
+.menu-light ul li a:hover, .menu-light ul li a:active  { color: #222 }
 
 /* cta button */
-.menu-light ul li a.btn-cta:link,
+.menu-light ul li a.btn-cta:link, 
 .menu-light ul li a.btn-cta:visited {
     background-color: transparent;
     color: red;
@@ -237,46 +264,55 @@ body { background-color: #eff8f5; font-family: sans-serif }
 .menu-light ul li a.btn-cta:hover,
 .menu-light ul li a.btn-cta:active {
     background-color: red;
-    color: transparent;
+    color: #fff;
     border-color:red
 }
 
-/* hamburger icon */
+/* on mobiles only */
+.menu-light.flyout-menu hr { background-color: red; border-color: red } 
+
+.menu-light.flyout-menu h4,
+.menu-light.flyout-menu h5,
+.menu-light.flyout-menu h5 a, 
+.menu-light.flyout-menu p { color: red } 
+
+/* colour of hamburger icon bars */
 .menu-light .item-icon .bar1, 
 .menu-light .item-icon .bar2, 
 .menu-light .item-icon .bar3 { background-color: red }	
 
-/* Active links on desktop */
-.container-menu-desktop.menu-light ul li a:hover,
-.container-menu-desktop.menu-light ul li a:active { 
-    color: #222;
+/* email link */
+
+.menu-light.flyout-menu h5 a:link, 
+.menu-light.flyout-menu h5 a:visited {
+    border-bottom-color:red;
 }
 
-.container-menu-desktop.menu-light ul li a.btn-cta:hover,
-.container-menu-desktop.menu-light ul li a.btn-cta:active { 
-    color: #fff
+.menu-light.flyout-menu h5 a:hover, 
+.menu-light.flyout-menu h5 a:active {
+    border-bottom-color: #fff;
 }
 
-.container-menu-options-mobile.menu-light h4,
-.container-menu-options-mobile.menu-light.menu-light p,
-.container-menu-options-mobile.menu-light.menu-light h4 { color: red }
-
-.container-menu-options-mobile.menu-dark h4,
-.container-menu-options-mobile.menu-dark p,
-.container-menu-options-mobile.menu-dark i { color: red }
-.container-menu-options-mobile.menu-dark hr { 
-    height: 4px;
-    margin: 20px 0 20px 0;
-    background-color: red;
-    border: solid 1px red
+/* profile image border colour */
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img {
+    border-color: red
 }
+
+/* contact icons */
+.menu-light.flyout-menu .fly-out-social-icons a {
+    color:red;
+}
+
 
 
 /* ============== Dark background menu - desktops and mobiles =========== */
 
-/* menu links */
+/* background colour */
 .menu-dark { background-color: red }
-.menu-dark ul li a { color: #fff }
+
+/* menu links */
+.menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
+.menu-dark ul li a:hover, .menu-dark ul li a:active  { color: #b8b8b8 }
 
 /* cta button */
 .menu-dark ul li a.btn-cta:link,
@@ -293,31 +329,40 @@ body { background-color: #eff8f5; font-family: sans-serif }
     border-color:#fff
 }
 
-/* Active links on desktop */
-.container-menu-desktop.menu-dark ul li a:hover,
-.container-menu-desktop.menu-dark ul li a:active { 
-    color: #b8b8b8
-}
+/* on mobiles only - various content */
+.menu-dark.flyout-menu hr { background-color: #fff; border-color:#fff } 
 
-.container-menu-desktop.menu-dark ul li a.btn-cta:hover,
-.container-menu-desktop.menu-dark ul li a.btn-cta:active { 
-    color: red
-}
+.menu-dark.flyout-menu h4,
+.menu-dark.flyout-menu h5,
+.menu-dark.flyout-menu h5 a,
+.menu-dark.flyout-menu p { color:#fff } 
 
-/* hamburger icon */
+/* colour of hamburger icon bars */
 .menu-dark .item-icon .bar1, 
 .menu-dark .item-icon .bar2, 
 .menu-dark .item-icon .bar3 { background-color: #fff }
 
-.container-menu-options-mobile.menu-dark h4,
-.container-menu-options-mobile.menu-dark p,
-.container-menu-options-mobile.menu-dark i { color: #fff }
-.container-menu-options-mobile.menu-dark hr { 
-    height: 4px;
-    margin: 20px 0 20px 0;
-    background-color: #fff;
-    border: solid 1px #fff
+/* email link */
+.menu-dark.flyout-menu h5 a:link, 
+.menu-dark.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
 }
+
+.menu-dark.flyout-menu h5 a:hover, 
+.menu-dark.flyout-menu h5 a:active {
+    border-bottom-color: red;
+}
+
+/* profile image border colour */
+.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img {
+    border-color: red
+}
+
+/* contact icons */
+.menu-dark.flyout-menu .fly-out-social-icons a {
+    color:#fff;
+}
+
 
 
 /* ********************************************************************************************
@@ -326,16 +371,17 @@ body { background-color: #eff8f5; font-family: sans-serif }
 
 
 /* ==== PAGE CONTAINER ==== */
+
 /* Desktop */
 @media all and (min-width:768px) {
-    .container-page { padding: 8% 20% 5% 20% }
+    .main-content { padding: 8% 20% 5% 20% }
 }
 /* Mobiles */
  @media all and (max-width:767px) {
-     .container-page { padding: 26% 7% 10% 7% }
+    .main-content { padding: 26% 7% 10% 7% }
 }
 /* Paragraphs in page container  */
-p {
+.main-content p {
     font-weight: normal; line-height: 1.5; margin-bottom:14px; color: #4f5959;
     font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1600 - 320)));
 }
