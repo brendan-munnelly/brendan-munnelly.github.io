@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>contact-form-template</title>
+	<meta name="description" content="Contact form template">
+	
+	<meta name="author" content="Mary Smith">
+
+	<link rel="stylesheet" href="contact-form-template.css">
+
+    <!-- Link to icons for Font Awesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
+</head>
+
+<body>
+
+<!-- ******************************************************************************************
+============================== CONTACT FORM TO COPY AND PASTE ===============================
+*********************************************************************************************** -->
+
+<!-- begin wrapper for form -->
+	
+<div class="container-form">
+    <h1>Get in touch</h1>
+
+    <!-- form starts here -->
+    <form name="contact-form" id="contact-form" class="contact-form" method="post" action="https://formspree.io/myname@gmail.com" onsubmit="return doFormValidate(this);">
+
+        <input type="text" name="_gotcha" style="display:none" />
+
+        <label for="contact_name">Name:</label>
+        <div class="flex-row">
+            <div>
+                <span class="field-icon"><i class="fas fa-fw fa-user"></i></span>
+            </div>
+            <div>
+                <input type="text" id="contact_name" name="contact_name" class="form-field" placeholder="Your name" maxlength="30">
+            </div>
+        </div>
+        <p class="form-msg" id="form-msg-text-1"><i class="fas fa-exclamation-triangle"></i> Your Name, please.</p>
+        <p class="form-msg" id="form-msg-text-2"><i class="fas fa-exclamation-triangle"></i> At least 2 characters in your Name, please.</p>
+
+        <label for="email">Email:</label>
+        <div class="flex-row">
+            <div>
+                <span class="field-icon"><i class="fas fa-fw fa-envelope"></i></span>
+            </div>
+            <div>
+                <input type="text" id="email" name="email" class="form-field" placeholder="Your email address" maxlength="40" autocapitalize="none">
+            </div>
+        </div>
+        <p class="form-msg" id="form-msg-text-3"><i class="fas fa-exclamation-triangle"></i> Your Email, please.</p>
+        <p class="form-msg" id="form-msg-text-4"><i class="fas fa-exclamation-triangle"></i> A valid Email address, please.</p>
+
+        <label class="contact_message">Message:</label>
+        <div class="flex-row">
+            <div>
+                <span class="field-icon"><i class="fas fa-fw fa-pen"></i></span>
+            </div>
+            <div>
+                <textarea name="contact_message" id="contact_message" class="form-field" placeholder="Your message" maxlength="600"></textarea>
+            </div>
+        </div>
+
+        <p class="form-msg" id="form-msg-text-5"><i class="fas fa-exclamation-triangle"></i> Your Message, please.</p>
+        <p class="form-msg" id="form-msg-text-6"><i class="fas fa-exclamation-triangle"></i> At least 2 characters in your Message, please.</p>
+
+        <input type="hidden" name="_subject" value="Email from Website Form" />
+
+        <button id="btn-submit" type="submit" class="btn-submit">Send <i class="fas fa-arrow-circle-right"></i></button> 
+
+    </form>
+    <!-- form ends here -->
+
+</div>
+<!-- end wrapper for form -->
+
+
+<!-- JavaScript code to validate form -->
+<script>
+
+    function doFormValidate() {
+        //hide all messages
+        //focus on error
+        
+            if(document.getElementById('contact_name').value === ''){
+                let formField = document.querySelector('#contact_name');
+                formField.classList.add("validate");
+                let formMsg = document.querySelector('#form-msg-text-1');
+                formMsg.classList.add("show-error-message");
+                document.getElementById("contact_name").focus(); 
+                return false;
+            }
+            else {
+                let formField = document.querySelector('#contact_name');
+                formField.classList.remove("validate");
+                let formMsg = document.querySelector('#form-msg-text-1');
+                formMsg.classList.remove("show-error-message");
+            }
+        
+            if(document.getElementById('contact_name').value.length < 2){
+                let formField = document.querySelector('#contact_name');
+                formField.classList.add("validate");
+                let formMsg = document.querySelector('#form-msg-text-2');
+                formMsg.classList.add("show-error-message");
+                document.getElementById("contact_name").focus(); 
+                return false;
+            }
+            else {
+                let formField = document.querySelector('#contact_name');
+                formField.classList.remove("validate");
+                let formMsg = document.querySelector('#form-msg-text-2');
+                formMsg.classList.remove("show-error-message");
+            }
+        
+            if(document.getElementById('email').value === ''){
+                let formField = document.querySelector('#email');
+                formField.classList.add("validate");
+                let formMsg = document.querySelector('#form-msg-text-3');
+                formMsg.classList.add("show-error-message");
+                document.getElementById("email").focus(); 
+                return false;
+            }
+        
+            else {
+                let formField = document.querySelector('#email');
+                formField.classList.remove("validate");
+                let formMsg = document.querySelector('#form-msg-text-2');
+                formMsg.classList.remove("show-error-message");
+            }
+        
+            if(document.getElementById('email').value != ''){
+                var a = document.getElementById('email').value;
+                var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                if(!filter.test(a)){
+                    let formField = document.querySelector('#email');
+                    formField.classList.add("validate");
+                    let formMsg3 = document.querySelector('#form-msg-text-3');
+                    formMsg3.classList.remove("show-error-message");
+                    let formMsg4 = document.querySelector('#form-msg-text-4');
+                    formMsg4.classList.add("show-error-message");
+                    document.getElementById("email").focus(); 
+                    return false;
+                }
+        
+                else {
+                    let formField = document.querySelector('#email');
+                    formField.classList.remove("validate");
+                    let formMsg = document.querySelector('#form-msg-text-4');
+                    formMsg.classList.remove("show-error-message");
+                }
+            }
+        
+            if(document.getElementById('contact_message').value === ''){
+                console.log("Message is empty");
+                let formField = document.querySelector('#contact_message');
+                formField.classList.add("validate");
+                let formMsg = document.querySelector('#form-msg-text-5');
+                formMsg.classList.add("show-error-message");
+                document.getElementById("contact_message").focus(); 
+                return false;
+            }
+            else {
+                let formField = document.querySelector('#contact_message');
+                formField.classList.remove("validate");
+                let formMsg = document.querySelector('#form-msg-text-5');
+                formMsg.classList.remove("show-error-message");
+            }
+        
+            if(document.getElementById('contact_message').value != ''){
+                if(document.getElementById('contact_message').value.length < 2){
+                    let formField = document.querySelector('#contact_message');
+                    formField.classList.add("validate");
+                    let formMsg = document.querySelector('#form-msg-text-6');
+                    formMsg.classList.add("show-error-message");
+                    document.getElementById("contact_message").focus(); 
+                    return false;
+                }
+                else {
+                    let formField = document.querySelector('#contact_message');
+                    formField.classList.remove("validate");
+                    let formMsg = document.querySelector('#form-msg-text-6');
+                    formMsg.classList.remove("show-error-message");
+                }
+            }
+            return true;
+        }
+        
+    </script>
+<!-- End JavaScript code to validate form -->
+
+
+</body>
+</html>
