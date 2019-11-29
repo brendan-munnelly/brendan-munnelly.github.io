@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Responsive Web Design and Fluid Typography | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Responsive Web Design and Fluid Typography: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link rel="stylesheet" href="../assets/css/brendan-munnelly-web-design.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;></a></h3>
+	<h1>Responsive Web Design and Fluid Typography</h1>
+</div>
+
+<a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener" class="ibat-banner-desktop"><img src="assets/img/ibat-banner.png" alt="IBAT Next Course"></a>
+
+<section id="learning-goals" class="block-content bg-white">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<ul>
+		<li>Understand the concept of fluid typography in web design.</li>
+		<li>Recognise that, for fluid typography to work, you must choose a minimum and a maximum viewport (screen) width.</li>
+		<li>Set a maximum viewport width in the browser resets at the beginning of a CSS file.</li>
+		<li>Apply Mike Riethmuller&#8217;s fluid typography equation to the CSS styles that control the headings, paragraphs and other text elements in a web page.</li>
+		<li>Understand that the smallest and largest font sizes are the only two values you need to change in the typographic equation.</li>
+	</ul>
+
+	<p>You can view a finished version of this project by clicking the image below.</p>
+	<a href="https://ibat-web-dev.github.io/base-3.html" target="_blank" rel="noopener"><IMG src="assets/img/rwd-typography/final-screen.png" ALT="GitHub image"></a>
+
+</section>
+
+
+<section class="block-content bg-white">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#fluid-typography-about"><b>About fluid typography</b></a></p>
+		<p><a href="#work-files"><b>Your two work files: base-3.html and base-3.css</b></a></p>
+		<p><a href="#min-max-web-page-widths"><b>Minimum (320px) and maximum (1600px) web page widths</b></a></p>
+		<p><a href="#max-width-browser-reset"><b>Fluid typography: Browser resets</b></a></p>
+		<p><a href="#fluid-typogaphy-equation"><b>The fluid typography equation</b></a></p>
+		<p><a href="#editing-css-styles"><b>Adding fluid typography to your headings and paragraph styles</b></a></p>
+		<p><a href="#update-head"><b>Updating the &lt;head&gt; of your web page</b></a></p>
+		<p><a href="#validate-html"><b>Validating your web page</b></a></p>
+		<p><a href="#validate-css"><b>Validating your stylesheet</b></a></p>
+		<p><a href="#web-page-uploading-github"><b>Uploading your two files to GitHub</b></a></p>
+		<p><a href="#further-resources"><b>Further resources</b></a></p>
+	</div>
+</section>
+
+
+<section id="fluid-typography-about" class="block-content bg-white">
+	<h2>About fluid typography</h2>
+	<p>Fluid typography means that the font sizes of text &#8211; headings, paragraphs, bulleted lists, menu items &#8211; on a web page &#8216;scale&#8217; (shrink or expand) smoothly according to the width of the user&#8217;s viewport (screen).</p>
+
+	<p>The animated gif below is taken from an article on the <a href="https://css-tricks.com/snippets/css/fluid-typography/" target="_blank">CSS Tricks</a> website that features the widely-used implementation of the fluid typography approach developed by web designer <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+
+	<img src="https://css-tricks.com/wp-content/uploads/2017/02/css-fluid-text-calc.gif" alt="fluid typography">
+</section>
+
+
+<section id="work-files" class="block-content bg-white">
+	<h2>Your two work files: base-3.html and base-3.css</h2>
+	<p>To follow this Lesson, open these two files in your text editor:</p>
+
+	<ul>
+		<li>The web page named <b>base-2.html</b>.</li>
+		<li>The stylesheet named <b>base-2.css</b>.</li>
+	</ul>
+
+	<p>Next, follow the steps below:</p>
+	<ol>
+		
+		<li>In the &lt;head&gt; of the <b>base-2.html</b> file, change the title as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">title</span>&gt;<span class="white">Web page with fluid typography</span>&lt;<span class="blue-dark">/title</span>&gt;
+</code></pre>
+</span>
+		</li>
+		
+		<li>Also in the &lt;head&gt;, change the description as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"A sample web page with responsive layout and fluid typography in a linked stylesheet."</span>&gt;
+</code></pre>
+</span>
+
+		</li>
+
+		<li>And finally in &lt;head&gt;, change the stylesheet link as follows:
+		<span class="inside-ol">&nbsp;</span>
+
+<span class="code-sample">
+<pre><code>	
+  &lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"base-3.css"</span>&gt;
+</code></pre>
+</span>
+		</li>
+
+		<li>Use the <b>File | Save As</b> command to save the <b>base-2.html</b> file with this new name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-3.html</b></li>
+
+		<li>Switch to the <b>base-2.css</b> file, and use the <b>File | Save As</b> command to save the file with this new name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>base-3.css</b></li>
+
+	</ol>
+	<p>You are now ready to work with your new web page (<b>base-3.html</b>) and stylesheet (<b>base-3.css</b>) files.<p>
+</section>
+
+<section id="min-max-web-page-widths" class="block-content bg-white">
+	<h2>Minimum (320px) and maximum (1600px) web page widths</h2>
+	<p>To use fluid typography in your web pages, you need to decide on two values:</p>
+	
+	<ul>
+		<li><b>Smallest web page width</b>: A common choice is <b>320px</b>, the width of the screen of the most widely-used small mobile phone, the Apple iPhone 5.</li>
+		<li><b>Largest web page width</b>: Popular choices include 1366px (a common width of Windows laptop screens) and 1440px (a common width of Apple laptop screens). We will use a larger value of <b>1600px</b>.</li>
+	</ul>
+
+	<p>You will use both the 320px and 1600px values in the so-called fluid typography equation when setting fluid values for the <b>font-size</b> rule in CSS.</p>
+</section>
+
+
+<section id="max-width-browser-reset" class="block-content bg-white">
+	<h2>Fluid typography: Browser resets</h2>
+	<p>Before continuing, you need to set your chosen value for the maxumum viewport (screen) width in the CSS file. Add the following line to the browser resets section at the top of your CSS file:</p>
+
+<span class="code-sample">
+<pre><code>
+
+<span class="green-dark">/* ==== BROWSER RESETS  ==== */</span>
+<span class="blue-dark">*</span> { <span class="blue-light">padding</span>: <span class="green-light">0</span>; <span class="blue-light">margin</span>: <span class="green-light">0</span>; <span class="blue-light">border</span>: <span class="green-light">0</span>; <span class="blue-light">font-weight</span>: <span class="orange">normal</span>; <span class="blue-light">font-size</span>: <span class="green-light">16px</span> }
+
+<span class="orange-light">body</span>, <span class="orange-light">html</span> { <span class="blue-light">height</span>: <span class="green-light">100%</span> } 
+
+<span class="orange-light">body</span> { <span class="blue-light">max-width</span>: <span class="green-light">1600px</span>; <span class="blue-light">margin</span>: <span class="green-light">0</span> <span class="orange-light">auto</span> }
+
+</code></pre>
+</span>
+
+</section>
+
+
+<section id="fluid-typogaphy-equation" class="block-content bg-white">
+	<h2>The fluid typography equation</h2>
+
+	<p>You are now ready to use the fluid typography equation from <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="es" dir="ltr">“Fluid Type” i̶n̶s̶p̶i̶r̶e̶d̶ stolen from <a href="https://twitter.com/MikeRiethmuller?ref_src=twsrc%5Etfw">@MikeRiethmuller</a> now live on <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> blogs. Including “Fluid Modular Scale!” <a href="https://t.co/0yJk8Iq8fR">pic.twitter.com/0yJk8Iq8fR</a></p>&mdash; Chris Coyier (@chriscoyier) <a href="https://twitter.com/chriscoyier/status/791650814880198656?ref_src=twsrc%5Etfw">October 27, 2016</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	
+	<p>&nbsp;</p>
+	<p>At first sight, the fluid typography equation looks complex. But it becomes easy to work with if you remember the following two points:</p>
+	
+	<ul>
+		<li>Except for two values, the equation is always the same.</li>
+		<li>The only two values you ever need to change are the <i>smallest</i> and <i>largest</i> font size values.</li>
+	</ul>
+
+	<p>For example, in the case of paragraph text, you might:</p>
+	<ul>
+		<li>Set a font-size of 15 pixels for the smallest mobile screen, and</li>
+		<li>Set a value of 18 pixels for the largest laptop/desktop screen.</li>
+	</ul>
+	
+	<p>Your fluid typography equation for text paragraphs would then be as shown below.</p>
+
+<span class="code-sample">
+<pre><code>
+<span class="orange-light">p</span> <span class="white">{</span> 
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">15px <span class="white">+</span> <span class="white">(</span><span class="green-light">18</span> <span class="white">-</span> <span class="green-light">15</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="green-light">1600</span> - <span class="green-light">320</span><span class="white">)));</span>
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+<p>As for the other values in the equation:</p>
+
+<ul>
+	<li><b>100vw</b>: The letters vw stand for viewport or screen, and 100 means 100% wide.</li>
+	<li><b>320</b>: This is the width you have chosen for the narrowest screen.</li>
+	<li><b>1600</b>: This is the width you have chosen for the widest screen. </li>
+</ul>
+
+</section>
+
+
+<section id="editing-css-styles" class="block-content bg-white">
+	<h2>Adding fluid typography to your headings and paragraph styles</h3>
+
+	<p>Next, apply the following fluid typography styles to your stylesheet.</p>
+
+	<p>For the <b>h1</b> selector, change the current <b>font-size</b> value to the following:</p>
+
+<span class="code-sample">
+<pre><code>
+ <span class="orange-light">h1</span> <span class="white">{</span>
+    <span class="white">...</span>
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">42px <span class="white">+</span> <span class="white">(</span><span class="green-light">64</span> <span class="white">-</span> <span class="green-light">42</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="green-light">1600</span> - <span class="green-light">320</span><span class="white">)));</span>
+   <span class="white">...</span>
+
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+	<p>For the <b>h2</b> selector, change the current <b>font-size</b> value to the following:</p>
+
+<span class="code-sample">
+<pre><code>
+ <span class="orange-light">h2</span> <span class="white">{</span>
+    <span class="white">...</span>
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">32px <span class="white">+</span> <span class="white">(</span><span class="green-light">48</span> <span class="white">-</span> <span class="green-light">32</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="green-light">1600</span> - <span class="green-light">320</span><span class="white">)));</span>
+    <span class="white">...</span>
+
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+
+	<p>For the <b>h3</b> selector, change the current <b>font-size</b> value to the following:</p>
+
+<span class="code-sample">
+<pre><code>
+ <span class="orange-light">h3</span> <span class="white">{</span>
+    <span class="white">...</span>
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">22px <span class="white">+</span> <span class="white">(</span><span class="green-light">28</span> <span class="white">-</span> <span class="green-light">22</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="green-light">1600</span> - <span class="green-light">320</span><span class="white">)));</span>
+    <span class="white">...</span>
+
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+Finally, for the <b>p</b> selector, change the current <b>font-size</b> value to the following:</p>
+
+<span class="code-sample">
+<pre><code>
+ <span class="orange-light">p</span> <span class="white">{</span> 
+    <span class="white">...</span>
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">15px <span class="white">+</span> <span class="white">(</span><span class="green-light">18</span> <span class="white">-</span> <span class="green-light">15</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="green-light">1600</span> - <span class="green-light">320</span><span class="white">)));</span>
+    <span class="white">...</span>
+
+ <span class="white">}</span>
+</code></pre>
+</span>
+
+</section>
+
+<section id="update-head" class="block-content bg-white">
+	<h2>Updating the &lt;head&gt; of your web page</h2>
+	<p>Before you validate your web page and upload it to GitHub, ensure the following details are correct within the &lt;head&gt; of your <b>base-3.html</b> file.</p>
+	<ul>
+		<li>You have replaced the name &#8216;Mary Smith&#8217; with your own name.</li>
+		<li>You have replaced the sample Google Tracking ID with your own Google Tracking ID. The instructions for viewing your website&#8217;s unique Google Tracking ID are <a href="https://munnelly.com/webdev/setting-up-google-analytics.html#google-analytics-view">here</a>.</li>
+	</ul>
+	<IMG SRC="assets/img/rwd-typography/update-head.png"  ALT="GitHub image">
+</section>
+
+
+
+<section id="validate-html" class="block-content bg-white">
+	<h2>Validating your web page</h2>
+	<p>To check the HTML in your web page is correct or <i>valid</i>, use the official W3C Markup Validation Service as follows.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://validator.w3.org" target="_blank">https://validator.w3.org</a>.</li>
+		<li>Click the <b>Validate by Direct Input</b> tab.
+		<IMG src="assets/img/rwd-typography/validate-html.png" class="img-fluid" ALT="Tutorial RWD: Media Queries"></li>
+		<li>Select your entire HTML file (both &lt;head&gt; and &lt;body&gt;), and copy-and-paste it into the box named <b>Enter the Markup to validate</b>.
+		<IMG src="assets/img/rwd-typography/html-validate-pasted.png" class="img-fluid" ALT="Tutorial RWD: Media Queries">
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors, return to your <b>base-3.html</b> file in your text editor, fix the errors, save the file, and copy-and-paste the entire file again.<span class="inside-ol">&nbsp;</span>
+		In the HTML Validator, click the <b>Back</b> button of your web browser to again display the <b>Validate by Direct Input</b> tab. Click once in the tab and paste in your corrected HTML file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+
+<section id="validate-css" class="block-content bg-white">
+	<h2>Validating your stylesheet</h2>
+	<p>To check your CSS is correct, use the official W3C CSS Validation Service. Follow these steps.</p>
+	<ol>
+		<li>Go to this web page: <a href="https://jigsaw.w3.org/css-validator" target="_blank">https://jigsaw.w3.org/css-validator</a>.</li>
+		<li>Click the <b>By direct input</b> tab.
+		<IMG SRC="assets/img/rwd-typography/validate-css.png" class="img-fluid" ALT="Tutorial RWD: Media Queries"></li>
+		<li>Copy and paste your CSS file into the box named <b>Enter the CSS you would like validated</b>.</li>
+		<li>Click the <b>Check</b> button.</li>
+		<li>If you see any errors (other than those related to the fluid typographic equation, as shown below), return to your <b>base-3.css</b> file in your text editor, fix the errors, save the file, and copy the entire file again.
+		<IMG SRC="assets/img/rwd-typography/css-fluid-error.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>In the CSS Validator, click the <b>Back</b> button of your web browser to again display the <b>By direct input</b> tab. Click once in the tab and paste in your corrected CSS file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
+	</ol>
+</section>
+
+<section id="web-page-uploading-github" class="block-content">
+	<h2>Uploading your two files to GitHub</h2>
+
+	<p>After validating your web page and stylesheet, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+		<li>Sign in to your account at <a href="https://www.github.com" target="_blank">GitHub.com</a>. At the left of the screen, you can see a list of your repositories.
+		<img SRC="assets/img/rwd-typography/github-signin.png" class="img-fluid" alt="Upload to GitHub"></li>
+		<li>On your GitHub home page, click the name of the repository that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+		<span class="inside-ol">&nbsp;</span>
+		<b>username.github.io</b>
+		<span class="inside-ol">&nbsp;</span>
+		<img SRC="assets/img/rwd-typography/github-repo.png" class="img-fluid" alt="GitHub Upload"></li>
+		
+		<li>On the next screen displayed, near the centre of the screen, click the <b>Upload files</b> button.
+		<IMG SRC="assets/img/rwd-typography/github-centre-options.png" class="img-fluid" alt="Project Animation Google Fonts"></li>
+
+		<li>Select or drag-and-drop the two files <b>base-3.html</b> and <b>base-3.css</b> to upload them to your GitHub account.
+		<IMG SRC="assets/img/rwd-typography/github-upload-files.png" class="img-fluid" alt="Project Animation Google Fonts" ></li>
+		<li>After uploading your files, scroll down to the bottom of the screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web page is now published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+	
+	<p><b>https://username.github.io/base-3.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+</section>
+
+
+<section id="further-resources" class="block-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+		<p><a href="https://css-tricks.com/snippets/css/fluid-typography/" target="_blank" rel="noopener"><b>Fluid typography</b></a><br>
+		by Geoff Graham on <a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS-Tricks</a></p>
+
+		<p><a href="https://medium.com/beamly/what-is-fluid-typography-and-should-i-be-using-it-44a1b7125205" target="_blank" rel="noopener"><b>What is fluid typography and should I be using it?</b></a></br>
+		by <a href="https://medium.com/@katemont" target="_blank" rel="noopener">Kate Montgomery</a> on Medium</p>
+
+		<p><a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener"><b>Fluid typography examples</b></a><br>
+		by Mike Riethmuller at <a href="https://www.madebymike.com.au//" target="_blank" rel="noopener">MadeByMike</a></p>
+
+		<p><a href="https://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/" target="_blank" rel="noopener"><b>Flexible typography with CSS locks</b></a><br>
+		by Tim Brown at the <a href="https://blog.typekit.com/" target="_blank" rel="noopener">Adobe Fonts Blog</a></p>
+
+		<p><a href="https://24ways.org/2016/responsive-display-text/" target="_blank" rel="noopener"><b>Get the balance right: Responsive display text</b></a><br>
+		by Richard Rutter on <a href="https://24ways.org/" target="_blank" rel="noopener">24Ways</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=mGCOsB_gF0M" target="_blank" rel="noopener"><b>Video: Fluid typography explained</b></a><br>
+		from <a href="https://www.youtube.com/channel/UCS4dCcOMiYommJTJyboAoww" target="_blank" rel="noopener">Jesse Hemminger</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=0ipdULS2uwE" target="_blank" rel="noopener"><b>Video: Fluid typography &#8211; basic CSS</b></a><br>
+		from <a href="https://www.youtube.com/channel/UCZXLo6rNWmc317Hsx25qTbA" target="_blank" rel="noopener">Tutor SC</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=mAvQUIKtW_Y" target="_blank" rel="noopener"><b>Video: Advanced fluid typography</b></a><br>
+		from <a href="https://www.youtube.com/channel/UCaitlwoIzU4HIkkRgmpDO8w" target="_blank" rel="noopener">CSSConf Australia</a></p>
+	</div>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
