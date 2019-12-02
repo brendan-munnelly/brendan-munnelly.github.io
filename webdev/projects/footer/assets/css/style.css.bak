@@ -1,0 +1,268 @@
+/* ==== BROWSER RESETS  ==== */
+* { box-sizing: border-box; padding: 0; margin: 0 }
+body, html { height: 100% }
+body { max-width: 1600px; font-family: sans-serif }
+img { width: 100%; height: auto; display: block }
+* { margin:0; padding:0; box-sizing: border-box }
+
+/* ==== FONT AND COLOUR ==== */
+body { 
+    font-family: 'Montserrat', sans-serif;
+    color: #500294;
+}
+
+/* ================================== FLEXBOX PARENT CONTAINER ============================= */
+
+.container-flexbox { 
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+/* Desktops only - inside padding  */
+@media all and (min-width:768px) {
+	.container-flexbox { padding: 2% 10% 2% 10% }
+}
+
+/* Mobiles only - inside padding */
+@media all and (max-width:767px) {
+	.container-flexbox { padding: 7% 8% 1% 8% }
+}
+
+
+
+/* ====== FLEXBOX ITEM COLUMNS: 2 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ====== */
+/* Used only for 'hero block' */
+
+/* Desktops - 2 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox.hero-block .item-2 { 
+		width: 45%;
+		padding: 1% 0 1% 0;
+    }
+    .container-flexbox.hero-block .item-2:nth-child(1) { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/* Mobiles - 1 column */
+@media all and (max-width:767px) { 
+	.container-flexbox.hero-block .item-2 {
+		text-align: center; 
+		width: 100%;
+		padding: 1% 5% 3% 5%;
+	}
+	.container-flexbox.hero-block .item-2:nth-child(1) { order: 2 }
+	.container-flexbox.hero-block .item-2:nth-child(2) { order: 1 }
+}
+
+
+/* ======== FLEXBOX CHILD COLUMN: 1 COLUMN EVERY SCREEN ( .item-1 ) ======== */
+
+/* All screen sizes, always 100% wide */
+.container-flexbox .item-1 { 
+	width: 100%;
+	padding-top: 2%;
+	padding-bottom: 2%
+}
+
+/* For mobile screens only, extra padding at bottom of column */
+@media all and (max-width:767px) {
+	.container-flexbox .item-1 { 
+		padding-bottom: 7%;
+	}
+}
+
+/* ====== FLEXBOX CHILD COLUMN: 3 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ( .item-3 ) ======= */
+
+/* Desktops - 3 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-3 { 
+		width: 30%;
+		padding: 3% 3% 3% 3%;
+		margin-bottom: 6%
+	}
+}
+
+/* Mobiles - 1 column */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-3 { 
+		width: 100%;
+		padding: 10% 10% 10% 10%;
+	}
+	.container-flexbox .item-3 { 
+		margin-bottom: 10%
+	}
+}
+
+
+/* ==== INNER FLEXBOX COLUMNS: 4 COLUMNS ON DESKTOPS, 2 COLUMNS ON MOBILES ======= */
+
+/* Desktops - 4 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-4-2 { width: 22% }
+	.container-flexbox .item-4-2 { margin-top: 4%; margin-bottom: 4% }
+}
+
+/* Mobiles - 2 columns */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-4-2 { width: 47% }
+	.container-flexbox .item-4-2 { margin-top: 4%; margin-bottom: 12% }
+}
+
+
+/* ================== STYLES FOR HEADINGS, PARAGRAPHS, IMAGES  ============== */
+
+.bg-pastel-pink { background-color: #fef1ef }
+img.image-shadow { box-shadow: 8px 10px 8px #888 }
+
+/* Hero block layout at top of pages  */
+.container-flexbox.hero-block {
+    margin-bottom: 20px
+}
+
+.container-flexbox.hero-block h1 {
+    font-weight: bold;
+	line-height:1.1;
+    font-size: calc(30px + (64 - 30) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-flexbox.hero-block h2 {
+    font-weight: 500;
+	color: #4c4f5a;
+	font-size: calc(16px + (28 - 16) * ((100vw - 320px)/(1600 - 320)));
+	line-height: 1.5;
+}
+
+.container-flexbox.hero-block hr {
+    background-color: #FF3366;
+    border: none;
+    height: 10px;
+    width: 40%;
+}
+
+/* Desktops */
+@media all and (min-width:768px) { 
+    .container-flexbox.hero-block hr {
+        margin:20px 0 60px 0
+    }
+}
+
+/* Mobiles */
+@media all and (max-width:767px) { 
+    .container-flexbox.hero-block hr {
+        text-align: center;
+        margin:20px auto 20px auto;
+    }
+}
+
+
+
+/* Single column layout */
+
+.container-flexbox .item-1 {
+    text-align: center;
+}
+
+.container-flexbox .item-1 h2 {
+    line-height: 1.1;
+    margin-bottom: 16px;
+    font-size: calc(26px + (48 - 26) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.container-flexbox .item-1 p {
+    line-height: 1.7;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-weight:500;
+    font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.container-flexbox .item-1 p a.fancy-link {
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #FF3366;
+    padding-bottom: 2px;
+}
+
+.container-flexbox .item-1 p a.fancy-link:link, 
+.container-flexbox .item-1 p a.fancy-link:visited {
+	color:#500294; 
+}
+
+.container-flexbox .item-1 p a.fancy-link:hover, 
+.container-flexbox .item-1 p a.fancy-link:active {
+	color:#FF3366;
+}
+
+
+/* Three column layout */
+.container-flexbox .item-3 {
+    text-align: center;
+}
+
+.container-flexbox .item-3 h3  { 
+	font-weight: bold; 
+    line-height: 1.1;
+	font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1600 - 320)));     
+	margin-bottom:6px;
+}
+
+.container-flexbox .item-3 p  { 
+	line-height: 1.5;
+	font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+.container-flexbox .item-3 img  { 
+    max-width: 90%;
+	margin: 0 auto 24px auto;
+}
+
+
+/* Four column layout */
+.container-flexbox .item-4-2 {
+    text-align: center;
+
+}
+
+.container-flexbox .item-4-2 h3 { 
+    margin-bottom: 12px;
+    font-size: calc(14px + (19 - 14) * ((100vw - 320px)/(1600 - 320)))	
+}
+
+.container-flexbox .item-4-2 i { 
+    font-size: calc(48px + (94 - 48) * ((100vw - 320px) / (1600 - 320))); 
+    color: #FF3366;
+    margin-bottom:5%;
+}
+
+
+/* ----------------------------------------------
+ * Generated by Animista 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+.slide-in-left {
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.container-flexbox .item-1 .no-margin-bottom { margin-bottom: 0 }
+.container-flexbox .item-3.no-padding-bottom { padding-bottom: 0 }
+.container-flexbox .item-3.bg-pastel-blue { background-color: #d7edff }
+
