@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>contact-form-template</title>
+	<meta name="description" content="Email sign up form template">
+	
+	<meta name="author" content="Mary Smith">
+
+	<link rel="stylesheet" href="email-signup-form-template.css">
+
+    <!-- Link to icons for Font Awesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
+</head>
+
+<body>
+
+<!-- *********************************************************************************
+======================= EMAL SIGN UP FORM TO COPY AND PASTE ==========================
+========= CHANGE THE EMAIL ADDRESS FROM 'myname@gmail.com' TO YOUR EMAIL =============
+************************************************************************************** -->
+
+	
+	<!-- Begin container for email signup form -->
+	<div class="container-form-email-signup">
+
+		<h3>Email Sign Up Form</h3>
+
+        <p>Reasons why you should complete and submit this form.</p>
+        <!-- Forn begins here -->
+		<form id="email-signup-form" class="email-signup-form" name="email-signup-form" method="post" action="https://formspree.io/munnellyb@gmail.com" onsubmit="return doEmailSignupFormValidate(this)">
+			<div class="form-email-flexbox-container">
+				<label for="email">Email:</label>
+				<input type="text" id="email" name="email" class="form-field" placeholder="Your email address" maxlength="80" autocapitalize="none">
+				<button id="btn-submit" type="submit" class="btn-submit">Sign Up <i class="fas fa-arrow-circle-right"></i></button>
+			</div>
+		</form>
+        <!-- Form ends here -->
+
+        <!-- For rrror messages -->
+		<p class="form-msg" id="form-msg-text-3"><i class="fas fa-exclamation-triangle"></i> Your Email, please.</p>
+		<p class="form-msg" id="form-msg-text-4"><i class="fas fa-exclamation-triangle"></i> A valid Email address, please.</p>
+
+	</div>
+	<!-- End container for email signup form -->
+
+    <!-- Begin JavaScript code to validate form -->
+    <script>
+        function doEmailSignupFormValidate() {
+            if (document.getElementById('email').value === '') {
+                let formField = document.querySelector('#email');
+                formField.classList.add("validate");
+                let formMsg3 = document.querySelector('#form-msg-text-3');
+                formMsg3.classList.add("show-error-message");
+                document.getElementById("email").focus(); 
+                return false;
+            }
+            else {
+                let formField = document.querySelector('#email');
+                formField.classList.remove("validate");
+                let formMsg3 = document.querySelector('#form-msg-text-3');
+                formMsg3.classList.remove("show-error-message");
+            }
+    
+            if (document.getElementById('email').value != '') {
+                var a = document.getElementById('email').value;
+                var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                console.log("hello");
+                if(!filter.test(a)){
+                    let formField = document.querySelector('#email');
+                    formField.classList.add("validate");
+                    let formMsg3 = document.querySelector('#form-msg-text-3');
+                    formMsg3.classList.remove("show-error-message");
+                    let formMsg4 = document.querySelector('#form-msg-text-4');
+                    formMsg4.classList.add("show-error-message");
+                    document.getElementById("email").focus(); 
+                    return false;
+                }
+                else {
+                    let formField = document.querySelector('#email');
+                    formField.classList.remove("validate");
+                    let formMsg4 = document.querySelector('#form-msg-text-4');
+                    formMsg4.classList.remove("show-error-message");
+                }
+            }
+        return true;
+        }
+    </script>
+    <!-- End JavaScript code to validate form -->
+
+
+</body>
+</html>
