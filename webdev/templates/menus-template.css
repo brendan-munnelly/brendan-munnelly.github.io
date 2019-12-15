@@ -21,6 +21,9 @@ body { background-color: #eff8f5; font-family: sans-serif }
 .container-menu-bar-mobile, 
 .flyout-menu { z-index: 999 }
 
+.container-menu-desktop,
+.container-menu-bar-mobile { width:100% }
+
 /* on mobiles - hide desktop menu */
 @media all and (max-width:767px) { 
     .container-menu-desktop.menu-transparent,
@@ -36,7 +39,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
 }
 
 /* sticks menu to top of desktop and/or mobile screen */
-.menu-sticky { position: fixed }
+.menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
 
 /* Height of desktop menu and mobile menu bar */
 .container-menu-desktop, .container-menu-bar-mobile { height:72px }
@@ -76,6 +79,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
 /* on mobiles, prevent scrolling outside flyout menu */
 .no-scroll { overflow: hidden }
 
+.menu-drop-shadow { box-shadow: 0 1px 10px #888 }
 
 /* ================================= DESKTOP MENU ============================= */
 
@@ -87,7 +91,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
     padding: 0 6% 0 6%;
     width: 100%;
     /* drop shadow along bottom of menu  */
-    box-shadow: 0px 1px 10px #888
+    /* box-shadow: 0px 1px 10px #888 */
 }
 
 /* menu links and cta button aligned horizontally */
@@ -125,8 +129,6 @@ body { background-color: #eff8f5; font-family: sans-serif }
 	align-items: center;
     width: 100%;
     padding: 0 6% 0 6%;
-   /* drop shadow along bottom of menu bar */
-    box-shadow: 0px 1px 10px #888    
 }
 
 /* three bars hozizontal in hamburger icon */
@@ -246,11 +248,14 @@ body { background-color: #eff8f5; font-family: sans-serif }
 /* ============ Light background menu - desktops and mobiles ========= */
 
 /* background colour */
-.menu-light { background-color: #fff }
+.menu-light { 
+	background-color: #fff;
+	transition: all .5s ease-in-out;
+}
 
 /* drop shadow border at left of fly-out menu */
 .flyout-menu.flyout-menu-is-open {
-    box-shadow: 0px 1px 10px #888    
+/*    box-shadow: 0px 1px 10px #888    */
 }
 
 /* menu links */
@@ -310,7 +315,10 @@ a[href^=tel] { text-decoration: none; color: red }
 /* ============== Dark background menu - desktops and mobiles =========== */
 
 /* background colour */
-.menu-dark { background-color: red }
+.menu-dark { 
+	background-color: red; 
+	transition: all .5s ease-in-out
+}
 
 /* menu links */
 .menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
@@ -367,6 +375,91 @@ a[href^=tel] { text-decoration: none; color: #fff }
 /*-- End menu syles */
 
 
+
+
+/* ============== Transparent background menu - desktops and mobiles =========== */
+
+/* background colour */
+.menu-transparent { 
+	background-color: transparent;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-transparent ul li a:link,  .menu-transparent ul li a:visited { color: #fff }
+.menu-transparent ul li a:hover, .menu-transparent ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-transparent ul li a.btn-cta:link,
+.menu-transparent ul li a.btn-cta:visited { 
+    background-color: red;
+    color: #fff;
+    border-color:red;
+}
+
+.menu-transparent ul li a.btn-cta:hover,
+.menu-transparent ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: red;
+    border-color:red
+}
+
+/* on mobiles only - various content */
+.menu-transparent.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-transparent.flyout-menu h4,
+.menu-transparent.flyout-menu h5,
+.menu-transparent.flyout-menu h5 a,
+.menu-transparent.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-transparent .item-icon .bar1, 
+.menu-transparent .item-icon .bar2, 
+.menu-transparent .item-icon .bar3 { background-color: red }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-transparent.flyout-menu h5 a:link, 
+.menu-transparent.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-transparent.flyout-menu h5 a:hover, 
+.menu-transparent.flyout-menu h5 a:active {
+    border-bottom-color: red;
+}
+
+/* profile image border colour */
+.menu-transparent.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img { border-color: red }
+
+/* contact icons */
+.menu-transparent.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/*-- End menu syles */
+
+
+
+
+.sticky-anchor {
+   position: relative;
+   border-top: 90px solid transparent;
+   margin: -90px 0 0;
+   -webkit-background-clip: padding-box;
+   -moz-background-clip: padding;
+   background-clip: padding-box;
+}
+
+.sticky-anchor:before {
+   content: "";
+   position: absolute;
+   top: -2px;
+   left: 0;
+   right: 0;
+}
+
+
 /* ********************************************************************************************
 =============================== END OF MENU STYLES  ===========================================
 *********************************************************************************************** */
@@ -380,7 +473,7 @@ a[href^=tel] { text-decoration: none; color: #fff }
 }
 /* Mobiles */
  @media all and (max-width:767px) {
-    .main-content { padding: 26% 7% 10% 7% }
+    .main-content { padding: 18% 7% 10% 7% }
 }
 /* Paragraphs in page container  */
 .main-content p {
