@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Where Am I?</title>
+    <style>
+        #btn-find-me { padding: 8px 24px }    
+    </style>
+
+</head>
+<body>
+    <h1><em>"All who wander are not lost."</em></h1>
+
+    <button id = "btn-find-me">Where Am I?</button><br/>
+
+    <p id = "positionStatus"></p>
+
+    <a id = "map-link" target="_blank"></a>
+
+    <script>
+
+        //Detect button click
+        document.querySelector('#btn-find-me').addEventListener('click', geoFindMe);
+    
+        const positionStatus = document.querySelector('#positionStatus');    
+        const mapLink        = document.querySelector('#map-link');
+        positionStatus.innerHTML, mapLink.href, mapLink.innerHTML = '';
+
+        function geoFindMe() {
+            if (navigator.geolocation) {
+                // First callback for success, second for failure
+                navigator.geolocation.getCurrentPosition(whereAmI, oopsError);
+            }
+            else {
+                // An old web browser has let you down.
+                positionStatus.innerHTML = '<p>Your web browser does not support Geolocation.</p>';
+            }
+        }
+        
+        function whereAmI(position) {
+
+            positionStatus.innerHTML = 'Finding you now…';
+            
+            // Get some coords parameters from position object
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            positionStatus.innerHTML =  '<h2>Found you!</h2>';
+            positionStatus.innerHTML += '<p>Click your coordinates below to view your location on a map.</p>';
+
+            mapLink.href      = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+lng;
+            mapLink.innerHTML = '<h2>Latitude: <b>'+lat+'°</b> | Longitude:<b> '+lng+'°</b></h2>';
+            console.log('Latitude: '+lat+' | Longitude: '+lng);
+        }
+
+        function oopsError(error) {
+            console.log('ERROR(' + error.code + '): ' + error.message);
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    positionStatus.innerHTML = "User denied the request for Geolocation."
+                break;
+                case error.POSITION_UNAVAILABLE:
+                    positionStatus.innerHTML = "Location information is unavailable."
+                break;
+                case error.TIMEOUT:
+                    positionStatus.innerHTML = "The request to get user location timed out. It took too long and the web browser gave up."
+                break;
+                case error.UNKNOWN_ERROR:
+                    positionStatus.innerHTML = "An unknown error occurred."
+                break;
+            }
+        } 
+
+    </script>
+
+</body>
+</html>
