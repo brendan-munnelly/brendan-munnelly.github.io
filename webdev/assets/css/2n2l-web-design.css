@@ -167,7 +167,7 @@ a.img-link { text-decoration: none; border-width:0 }
 	.block-content h2 { line-height: 1.2; margin: 8px 0 2px 0; font-weight: normal !important; }
 	.block-content h3 { margin-top: 38px }
 
-	.block-content p, .block-content ul li { line-height: 1.4; margin-bottom: 12px; font-weight: normal !important;sss }
+	.block-content p, .block-content ul li { line-height: 1.4; margin-bottom: 12px; font-weight: normal !important }
 	.block-content > ul { margin: 0 0 14px 17px }
 	.block-content ul > li { padding-left: 6px }
 	.block-content > img, 
@@ -348,6 +348,23 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 		color: blue;
 		font-size: calc(32px + (58 - 32) * ((100vw - 320px) / (1600 - 320))); 
 	}
+
+	.container-wide-padding { 
+		background-color: #e3faf5;
+		margin: 0 0 32px 0; 
+		width: 100%; 
+		padding: 40px 12% 20px 12%
+	}
+
+	.container-wide-padding h2 {
+		text-align: center;
+		margin: 0 auto 5% auto;
+		font-family: serif;
+		font-weight: normal;
+		letter-spacing:-1px;
+		color: rgb(49,145,131);
+		font-size: calc(32px + (58 - 32) * ((100vw - 320px) / (1600 - 320))); 
+	}
 }
 
 /* Mobiles */
@@ -362,74 +379,98 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 		letter-spacing:-1px;
 		font-size: calc(28px + (38 - 28) * ((100vw - 320px) / (1600 - 320))); 
 	}
+
+	.container-wide-padding { 
+		background-color: #e3faf5;
+		margin: 0 0 22px 0; 
+		width: 100%; 
+		padding: 40px 12% 0 12%
+	}
+	.container-wide-padding h2 {
+		text-align: center;
+		margin: 0 auto 8% auto;
+		font-family: serif;
+		font-weight: normal;
+		color: blue;
+		letter-spacing:-1px;
+		font-size: calc(28px + (38 - 28) * ((100vw - 320px) / (1600 - 320))); 
+
+	}
 }
 
 
 /* ==== FLEXBOX MULTI-COLUMN GRID ======= */
 
-.flex-grid { 
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
+.flex-grid { display: flex; justify-content: space-between; flex-wrap: wrap }
 
 /* Desktops */
-@media all and (min-width:768px) {
-	.flex-grid { flex-direction: row; text-align: left; margin-bottom: 4% }
-}
+@media all and (min-width:768px) { .flex-grid { flex-direction: row; text-align: left; margin-bottom: 4% } }
 
 /* Mobiles */
-@media all and (max-width:767px) {
-	.flex-grid { flex-direction: column; text-align: center }
-}
+@media all and (max-width:767px) { .flex-grid { flex-direction: column; text-align: center } }
+
+
+/* ==== FLEXBOX COLUMNS ======= */
 
 /* Inner child: 1 column every screen */
-.flex-grid .item-1 { 
-	width: 100%;
-    padding: 1% 6% 0 6%;
-    text-align: center; 
-}
+.flex-grid .item-1 {  width: 100%; padding: 1% 6% 0 6%; text-align: center }
 
 /* Inner child: 3 cols on desktops, 1 column on mobiles */
 @media all and (min-width:768px) { 
 	.flex-grid .item-3 { width: 30% }
+	.flex-grid .item-3 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center
+	}
+	.flex-grid .item-3 img.img-shadow { margin-top: auto }
+	.flex-grid .item-3 a.btn-solid { margin-top: auto }
+	/* .flex-grid .item-3:nth-child(0){ margin-top: auto }
+	.flex-grid .item-3:nth-child(3){ margin-top: auto } */
 }
 
 /* Mobiles - 1 column */
 @media all and (max-width:767px) { 
-	.flex-grid .item-3 { width: 100% }
-	.flex-grid .item-3 { margin-bottom: 10% }
+	.flex-grid .item-3 { width: 100%; margin-bottom: 10% }
 }
 
+
+/* ==== FLEXBOX COLUMN CONTENT ======= */
+
 /* Inner child: column content */
-.flex-grid .item-3 h3 {  
+.flex-grid .item-3 h3 a { 
 	font-family: 'Roboto Condensed', sans-serif; 
 	font-weight: 700; 
-	color: #230cea;
+	color: rgb(0,0,255);
 	line-height: 1.2;
-	font-size: calc(24px + (30 - 24) * ((100vw - 320px) / (1600 - 320))); 
+	text-decoration: none;
+	padding-bottom: 2px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+}
+
+.flex-grid .item-3 h3 a:link, .flex-grid .item-3 h3 a:visited { 
+	color: rgb(0,0,255);
+	border-bottom-color: rgba(0,0,255, .0);
+	transition: border-bottom 300ms;
+}
+
+
+.flex-grid .item-3 h3 a:hover, .flex-grid .item-3 h3 a:active { 
+	color: rgb(0,0,255);
+	border-bottom-color: rgba(0,0,255, 1);
 }
 
 .flex-grid .item-3 p { 
 	font-weight: 400;
 	color: #465E72;
 	line-height: 1.5;
-	font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1600 - 320))); 
 }
 
 .flex-grid img.img-shadow { box-shadow: 5px 10px 8px #888 }
 
-/* Desktop */
-@media all and (min-width:768px) { 
-	.flex-grid img  { margin-bottom: 42px }
-	.flex-grid h3   { margin-bottom: 12px }
-	.flex-grid p    { margin-bottom: 32px }
-}
-
-
-
 /* faux buttons  */
-.flex-grid a.btn-solid { 
+.flex-grid .item-3 a.btn-solid { 
 	text-decoration: none; 
 	text-align: center; 
 	display: inline-block;
@@ -437,37 +478,27 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: bold;
-	font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1600 - 320))); 
 	border-style: solid;
 	border-width: 2px;
 }
 
-.flex-grid a.btn-soft    { border-radius: 5px }
-.flex-grid a.btn-rounded { border-radius: 100px }
+.flex-grid .item-3 a.btn-soft    { border-radius: 5px }
+.flex-grid .item-3 a.btn-rounded { border-radius: 100px }
 
-.flex-grid a.btn-solid:link,
-.flex-grid a.btn-solid:visited {
-	background-color: blue;
-	border-color: blue;
-	color:#fff;
+.flex-grid .item-3 a.btn-solid:link,
+.flex-grid .item-3 a.btn-solid:visited {
+	background-color: rgb(0,0,255);
+	border-color: rgb(0,0,255);
+	color: #fff;
+	transition: background-color 300ms;
+	transition: border-color 300ms;
 }
 
-
-.flex-grid a.btn-solid:hover, 
-.flex-grid a.btn-solid:active {
+.flex-grid .item-3 a.btn-solid:hover, 
+.flex-grid .item-3 a.btn-solid:active {
 	background-color: #fff;
-	border-color: blue;
-	color: blue;
-}
-
-/* Desktop */
-@media all and (min-width:768px) { 
-	.flex-grid a.btn-solid { padding: 14px 32px }
-}
-
-/* Mobiles */
-@media all and (max-width:767px) { 
-	.flex-grid a.btn-solid { padding: 10px 20px; margin-bottom:20px }
+	border-color: rgb(0,0,255);
+	color: rgb(0,0,255);
 }
 
 
@@ -475,9 +506,9 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 
 @media all and (max-width:768px) {
 
-	.flex-grid img { 
+	.flex-grid .item-3 img { 
 		width: 90%; max-width: 390px; margin-left: auto; margin-right: auto;
-		margin-bottom: 32px
+		margin-bottom: 32px;
 	}
 
 	.flex-grid .item-3 h3 { 
@@ -492,8 +523,13 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 	}
 
 	.flex-grid .item-3 a.btn-solid { 
-		font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1600 - 320))); 
+		font-size: 14px;
+		padding: 12px 20px; 
+		margin-bottom:20px
 	}
+
+	.flex-grid .item-3 a.btn-solid i.fas { margin-left: 8px }
+
 }
 
 /* ==== Tablet screen sizes ==== */
@@ -506,20 +542,24 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 	.flex-grid a.btn-solid i.fas { display: none }
 
 	.flex-grid .item-3 h3 { 
-		font-size: calc(18px + (28 - 18) * ((100vw - 320px) / (1600 - 320)));
+		font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1600 - 320)));
 		margin-bottom: 2%;
 	}
 
 	.flex-grid .item-3 p { 
 		width:100%;
-		font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1600 - 320))); 
+		font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1600 - 320))); 
 		margin-bottom: 6%;
 	}
 
 	.flex-grid .item-3 a.btn-solid { 
-		padding: 12px 14px;
-		font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1600 - 320))); 
+		padding: 12px 16px;
+		font-size: 14px;
+		margin-bottom:20px;
+		max-width: 172px
 	}
+
+	.flex-grid .item-3 a.btn-solid i.fas { margin-left: 6px }
 }
 
 
@@ -527,24 +567,38 @@ span.erroneousLine { background: yellow; color: red; font-weight: bold }
 
 @media all and (min-width:1025px) {
 
-	.flex-grid img  { margin-bottom: 42px }
+	.flex-grid img  { margin-bottom: 32px }
 	.flex-grid h3   { margin-bottom: 12px }
 	.flex-grid p    { margin-bottom: 32px }
 
 	.flex-grid .item-3 h3 { 
-		font-size: calc(16px + (30 - 16) * ((100vw - 320px) / (1600 - 320)));
-		margin-bottom: 2%;
+		font-size: calc(20px + (28 - 20) * ((100vw - 320px) / (1600 - 320)));
+		margin-bottom: 3.5%;
 	}
 
 	.flex-grid .item-3 p { 
-		font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1600 - 320))); 
+		font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1600 - 320))); 
 		margin-bottom: 8%;
 	}
 
 	.flex-grid .item-3 a.btn-solid { 
-		font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1600 - 320))); 
+		font-size: 15px; 
+		padding: 14px;
+		max-width: 200px;
 	}
+
+	.flex-grid .item-3 a.btn-solid i.fas { margin-left: 6px }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 /* ==== FOR MARKING UP WITH HTML TUTORIAL  ==== */
@@ -583,6 +637,25 @@ span.fake-link {
 	}
 }
 
+
+/* =======INNER FLEXBOX COLUMNS: 3 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ===== */
+
+/* Desktops - 3 columns */
+@media all and (min-width:768px) { 
+
+}
+
+/* Mobiles - 1 column */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-3 { width: 100% }
+	.container-flexbox .item-3 { margin-bottom: 14% }
+	.container-flexbox .item-3 img { margin-left: auto; margin-right: auto }
+}
+
+/* Spacing under images in children of parent flexbox containers */
+.container-flexbox img { margin-bottom: 20px }
+
+
 /* ==== NOTE BOX  ==== */
 
 .box-toc h4 {
@@ -609,27 +682,115 @@ span.fake-link {
 /* Mobiles only - inside padding */
 @media all and (max-width:767px) {
 	.container-flexbox { padding: 7% 8% 1% 8% }
+}
 
-
-/* =======INNER FLEXBOX COLUMNS: 3 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ===== */
-
-/* Desktops - 3 columns */
+/* Desktop */
 @media all and (min-width:768px) { 
-
+	.container-wide-padding .flex-grid .item-3.margin-above { 
+		margin-top: 52px;
+	}
 }
 
-/* Mobiles - 1 column */
-@media all and (max-width:767px) { 
-	.container-flexbox .item-3 { width: 100% }
-    .container-flexbox .item-3 { margin-bottom: 14% }
-    .container-flexbox .item-3 img { 
+
+/* ============== FAUX BUTTONS =================== */
+
+a.button-solid:link, a.button-solid:visited, a.button-solid:hover, a.button-solid:active { 
+    text-decoration: none;
+    color: inherit;
+    border-style: solid;
+    border-width: 2px;
+    padding: 18px 28px;
+    display: inline-block;
+    line-height: 1;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
  
-        margin-left: auto;
-        margin-right: auto
-    }
+a.button-solid:link, .button-solid:visited {
+    border-color: rgb(80,227,194);
+    background-color: rgb(80,227,194);
+    color: #000;
+} 
+ 
+a.button-solid:hover, .button-solid:active {
+    border-color: rgb(49,145,131);
+    background-color: rgb(49,145,131);
+    color: #fff
 }
 
 
-/* Spacing under images in children of parent flexbox containers */
-.container-flexbox img { margin-bottom: 20px }
+
+
+
+@media all and (max-width:768px) {
+	.flex-grid .item-3 a.button-solid { 
+		font-size: 14px;
+		padding: 12px 20px; 
+		margin-bottom:20px
+	}
+	.flex-grid .item-3 a.button-solid i.fas { margin-left: 8px }
+}
+
+@media all and (min-width:768px) and (max-width:1024px) {
+	.flex-grid .item-3 a.button-solid { 
+		padding: 12px 16px;
+		font-size: 14px;
+		margin-bottom:20px;
+		max-width: 172px
+	}
+	.flex-grid .item-3 a.btn-solid i.fas { margin-left: 6px }
+}
+
+
+@media all and (min-width:1025px) {
+	.flex-grid .item-3 a.button-solid { 
+		font-size: 15px; 
+		padding: 14px;
+		max-width: 190px;
+	}
+
+	.flex-grid .item-3 a.button-solid i.fas { margin-left: 8px }
+}
+
+/* Inner child: 3 cols on desktops, 1 column on mobiles */
+@media all and (min-width:768px) { 
+	.flex-grid .item-3 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center
+	}
+	.flex-grid .item-3 img.img-shadow { margin-top: auto }
+	.flex-grid .item-3 a.button-solid { margin-top: auto }
+	/* .flex-grid .item-3:nth-child(0){ margin-top: auto }
+	.flex-grid .item-3:nth-child(3){ margin-top: auto } */
+}
+
+
+
+/* Inner child: column content */
+.container-wide-padding .flex-grid .item-3 h3 a { 
+	font-family: 'Roboto Condensed', sans-serif; 
+	font-weight: 700; 
+	color: rgb(49,145,131);
+	line-height: 1.2;
+	text-decoration: none;
+	padding-bottom: 2px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+}
+
+.container-wide-padding .flex-grid .item-3 h3 a:link, 
+.container-wide-padding .flex-grid .item-3 h3 a:visited { 
+	color: rgb(49,145,131);
+	border-bottom-color: rgba(49,145,131, .0);
+	transition: border-bottom 300ms;
+}
+
+
+.container-wide-padding .flex-grid .item-3 h3 a:hover,
+.container-wide-padding .flex-grid .item-3 h3 a:active { 
+	color: rgb(49,145,131);
+	border-bottom-color: rgba(49,145,131, 1);
+}
 
