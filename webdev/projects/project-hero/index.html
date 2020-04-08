@@ -51,12 +51,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<h2>Learning Goals</h2>
 	<p>At the end of this Tutorial you will be able to:</p>
 	<ul>
-		<li>Display a &lt;div&gt; element as a flexbox with vertically-centred content.</li>
-		<li>Add a solid background colour to a hero block &lt;div&gt;.</li>
-		<!-- <li>Animate a solid background colour on a hero block &lt;div&gt;.</li> -->
+		<li>Centre text horizontally and vertically within a hero block &lt;div&gt;.</li>
 		<li>Add a colour gradient as the background colour on a hero block &lt;div&gt;.</li>
 		<li>Add a background image to a hero block &lt;div&gt;, and control the image&#8217;s size and position.</li>
-		<li>Add a coloured overlay in front of a background image and behind the text headlines to make the text easier to read.</li>
+		<li>Add a coloured overlay behind the text headlines in front of a background image and  to make the text easier to read.</li>
+		<li>Animate text headlines so that they slide in from the top of the web page.</li>
 	</ul>
 </section>
 
@@ -75,7 +74,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<p><a href="#hero-block-4">Hero block: 4</a></p>
 		<p><a href="#hero-block-5">Hero block: 5</a></p>
 		<p><a href="#hero-block-6">Hero block: 6</a></p>
-		<p><a href="#hero-block-7">Hero block: 7</a></p>
+		<p><a href="#animate-text">Animating text</a></p>
 		<p><a href="#meta-tags">Update the meta tags</a></p>
 		<p><a href="#google-analytics">Update the Google Analytics ID</a></p>
 		<p><a href="#privacy-message">Update the privacy pop-up code and message</a></p>
@@ -135,11 +134,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</li>
 	</ol>
 
-	<p>When you look inside the <b>index.html</b> you can see seven 'boxes' of content:</p>
+	<p>In your web browser, the <b>index.html</b> file should look as shown below.</p>
+
+	<img src="assets/img/hero-block-begin.png" alt="file-explorer-right-click">
+
+	<p>When you look at the source code of the <b>index.html</b> you can see six 'boxes' of content:</p>
 	
 	<ul>
 		<li>Each 'box' is created with a &lt;div&gt; successively named <b>hero-block-1</b>, <b>hero-block-2</b>, <b>hero-block-3</b> and so on.</li>
-		<li>Inside each &lt;div&gt; are two items of text. The first is styled as a <b>&lt;h1&gt;</b>...<b>&lt;/h1&gt;</b> heading and the second as a <b>&lt;h2&gt;</b>...<b>&lt;/h2&gt;</b> heading.</li>
+		<li>Inside each &lt;div&gt; are two items of text. The first is styled as a <b>&lt;h1&gt;</b>...<b>&lt;/h1&gt;</b> heading and the second as a <b>&lt;h2&gt;</b>...<b>&lt;/h2&gt;</b> heading. You can see the first three 'boxes' and their content below.</li>
 	</ul>
 	
 	<IMG SRC="assets/img/hero-blocks-list.png" alt="Project Hero Blocks">
@@ -152,20 +155,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<p>So-called hero blocks (sometimes known as jumbotrons) are large and typically rectangular areas at the very top of a web page. They are the first item seen by users, and are intended to capture their attention and engage their interest in the web page.</p>
 
-	<p>All seven hero blocks in this exercise have the following common features:</p>
+	<p>All six hero blocks in this project have the following common features:</p>
 
 	<ul>
 		<li><b>Block width</b>: Like all &lt;div&gt; elements, hero blocks are 100% wide by default. In other words, whether on mobile, tablet, laptop or desktop screens, the hero block &lt;div&gt; elements will fill the full width of the screen area or &#8216;viewport.&#8217;<span class="inside-ol">&nbsp;</span>So it is not necessary to set a <b>width:100%</b> for any of the hero blocks.</li>
 		<li><b>Block height</b>: In the <b>hero.css</b> file, you will set the height of hero blocks typically to <b>360px</b> for mobiles (screens up to 767px wide) and to <b>480px</b> for tablets, laptops and desktops (screens that are at least 768px wide).<span class="inside-ol">&nbsp;</span>
 		Under the hero blocks, there will be a <b>margin-bottom</b> of <b>40px</b> for mobiles, and, for tablets/laptops/desktops, a <b>margin-bottom</b> of <b>80px</b>.<span class="inside-ol">&nbsp;</span>
 		<IMG SRC="assets/img/hero-block-heights.png" alt="Project Hero Blocks"></li>
-		<li><b>Text is vertically centered vertically (top-to-bottom)</b>: This means that, within every hero block, there is equal space above the text content and below it.
+		<li><b>Text is vertically centred vertically (top-to-bottom)</b>: This means that, within every hero block, there is equal space above the text content and below it.
 		<IMG SRC="assets/img/vertical-justification.jpg" alt="Project Hero Blocks"><span class="inside-ol">&nbsp;</span>
 		You achieve this by making each hero block a flexbox (<b>display: flex</b>), and then giving the block a <b>flex-direction</b> of <b>column</b> and a <b>justify-content</b> value of <b>center</b>. This vertical justification feature is available only to divs that are set as flexbox divs.
 		<IMG SRC="assets/img/vertical-justification-values.png" alt="Project Hero Blocks"></li>
 	</ul>
 
-	<p>A few points to note about the text content of the seven hero blocks:</p>
+	<p>A few points to note about the text content of the six hero blocks:</p>
 
 	<ul>
 		<li>The text is formatted as <b>&lt;h1&gt;</b>...<b>&lt;/h1&gt;</b> and <b>&lt;h2&gt;</b>...<b>&lt;/h2&gt;</b> headings.<span class="inside-ol">&nbsp;</span>
@@ -178,15 +181,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		You do not need to set <b>margin-top: 0</b> or <b>margin-bottom: 0</b> for any of the &lt;h1&gt; or &lt;h2&gt; headings in the hero blocks because all margins are zeroed by the browser default values at the top of the stylesheet file.
 		<IMG SRC="assets/img/headings-margins.png" alt="Project Hero Blocks"></li>
 		
-		<li><b>Fonts</b>: Four Google Fonts are used for the text within the seven hero blocks: Montserrat, Open Sans, Roboto Condensed and Merriweather.<span class="inside-ol">&nbsp;</span>
+		<li><b>Fonts</b>: Three Google Fonts are used for the text headings within the six hero blocks: Montserrat, Open Sans and Roboto Condensed.<span class="inside-ol">&nbsp;</span>
 		<IMG SRC="assets/img/fonts-five.png" alt="Project Hero Blocks">
 		You can see the Google Fonts within the <b>&lt;head&gt;</b>...<b>&lt;/head&gt;</b> section of the HTML file.
 		<IMG SRC="assets/img/google-fonts-index.png" alt="Project Hero Blocks"></li>
-		<li><b>Fluid font sizes</b>: For all seven hero blocks, the fluid typographic equation is used to responsively size fonts to fit every screen width in the range from a minimum of <b>320</b> pixels to the maximum width set in the browser defaults of <b>1600</b> pixels.
+		<li><b>Fluid font sizes</b>: For all six hero blocks, the fluid typographic equation is used to responsively size fonts to fit every screen width in the range from a minimum of <b>320</b> pixels to the maximum width set in the browser defaults of <b>1600</b> pixels.
 		<IMG SRC="assets/img/typography.png" alt="Project Hero Blocks"></li>
 	</ul>
 
-	<p>In the remainder of this project, you will build each of the seven hero blocks. Your first step will be to create the CSS declarations for the first of the seven hero blocks. These you will then copy-and-paste to use as a basis for styling the other ten hero blocks.</p>
+	<p>In the remainder of this project, you will build each of the six hero blocks. Your first step will be to create the CSS declarations for the first of the six hero blocks. These you will then copy-and-paste to use as a basis for styling the other ten hero blocks.</p>
 	
 </section>
 
@@ -269,13 +272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-2.'</p>
 
 	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-1.'
-		<IMG SRC="assets/img/vs-code.png" alt="Project Hero Blocks"></li>
-		<li>Under the comment line /*== HERO BLOCK 2 ==*/, paste the CSS styles you have just copied.
-		<IMG SRC="assets/img/sublime-paste.png" alt="Project Hero Blocks"></li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-1' to 'hero-block-2'.</li>
-		<li>Make the following changes to the copied, pasted and renamed block of CSS styles.
-
+		<li>In the <b>hero.css</b> stylesheet, copy and paste the following CSS styles under the comment line /*== HERO BLOCK 2 ==*/
 <span class="code-sample">
 <pre><code>
 <span class="comment">/* === HERO BLOCK 2 === */</span>
@@ -336,17 +333,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </section>
 
+
 <section id="hero-block-3" class="block-content bg-white">
 
 	<h2>Hero block: 3</h2>
 	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-3.'</p>
 
 	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-2.'</li>
-		<li>Under the comment line /*== HERO BLOCK 3 ==*/, paste the CSS styles you have just copied.</li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-2' to 'hero-block-3'.</li>
-		<li>Make the following changes to the pasted and renamed block of CSS styles.
-
+		<li>In the <b>hero.css</b> stylesheet, copy and paste the following CSS styles under the comment line /*== HERO BLOCK 3 ==*
 <span class="code-sample">
 <pre><code>
 <span class="comment">/* === HERO BLOCK 3 === */</span>
@@ -354,70 +348,312 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="blue-light">display</span>: <span class="orange">flex</span>;
     <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
     <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
-    <span class="blue-light">background-color</span>: <span class="orange">#f6e58d</span>;
+    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="orange">#512d6d</span>,<span class="orange">#c42f9e</span><span class="white">);</span>
 }
 
 <span class="orange-light">.hero-block-3 h1</span>, <span class="orange-light">.hero-block-3 h2</span> {
-    <span class="blue-light">font-family</span>: <span class="orange">'Merriweather', serif</span>;
-    <span class="blue-light">color</span>: <span class="orange">#273c75</span>;
+    <span class="blue-light">font-family</span>: <span class="orange">'Open Sans', sans-serif</span>;
+    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
     <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
     <span class="blue-light">text-align</span>: <span class="orange">left</span>;
-    <span class="blue-light">color</span>: <span class="orange">#273c75</span>;
     <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
     <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
-    <span class="blue-light">line-<span class="blue-light">height</span></span>: <span class="green-light">1.4</span>    
+    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>
 }
 
 <span class="orange-light">.hero-block-3 h1</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">32px</span> <span class="white">+</span> <span class="white">(</span>72 - 32) * <span class="white">(</span><span class="white">(</span>100vw - 3<span class="green-light">20px</span>)/<span class="white">(</span>1600 - 320)));
+   <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">32px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">72</span> <span class="white">-</span> <span class="green-light">32</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
 }
 
 <span class="orange-light">.hero-block-3 h2</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">18px</span> <span class="white">+</span> <span class="white">(</span>32 - 18) * <span class="white">(</span><span class="white">(</span>100vw - 3<span class="green-light">20px</span>)/<span class="white">(</span>1600 - 320)));
-    <span class="blue-light">font-weight</span>: <span class="orange">normal</span>
+   <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">18px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">32</span> <span class="white">-</span> <span class="green-light">18</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+   <span class="blue-light">font-weight</span>: <span class="orange">normal</span>
 }
 
 <span class="comment">/* Mobiles */</span>
 <span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-3</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
-    <span class="orange-light">.hero-block-3 h1</span>, <span class="orange-light">.hero-block-3 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
-    <span class="orange-light">.hero-block-3 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> } 
+    <span class="orange">.hero-block-3</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
+    <span class="orange">.hero-block-3 h1</span>, <span class="orange">.hero-block-3 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
+    <span class="orange">.hero-block-3 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> } 
 }
 
 <span class="comment">/* Desktop */</span>
 <span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-3</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
-    <span class="orange-light">.hero-block-3 h1</span>, <span class="orange-light">.hero-block-3 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
-    <span class="orange-light">.hero-block-3 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span> }
+    <span class="orange">.hero-block-3</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
+    <span class="orange">.hero-block-3 h1</span>, <span class="orange">.hero-block-3 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
+    <span class="orange">.hero-block-3 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span> }
 }
 </code></pre>
 </span>
-
 	Here is a summary of the changes:
 	<ul>
-		<li>For all screen sizes, you have changed the text colour to dark blue (<b>#273c75</b>) and background colour to light yellow (<b>#f6e58d</b>).</li>
-		<li>The text is now in the <b>Merriweather</b> font.</li>
-		<li>You need to make only one change to the font sizes. For the &lt;h1&gt; heading, reduce the maximum font size from <b>84</b> to <b>72</b>.</li>
-		<li>Within the mobile media query, make the headings slightly narrower than before by reducing the widths from <b>80%</b> to <b>70%</b>.</li>
-		<li>Also, reduce the margin below the &lt;h1&gt; heading, from <b>10%</b> to <b>5%</b> (mobiles) and from <b>4%</b> to <b>1%</b> (desktops).</li>
-	</ul>
-	<span class="inside-ol">&nbsp;</span>
-	Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-3</b> element in your <b>index.html</b> file. It should now look as shown below.
-	<IMG SRC="assets/img/final-hero-3.png" alt="Project Hero Blocks">
+		<li>For all screen sizes, you have changed the text colour to white (<b>#fff</b>), and changed the font to <b>Open Sans</b>.</li>
+		<li>For the background of the hero block, you have used the CSS style of <b>background-image</b>. As its name suggests, this is typically used to set a background image to an element on a web page.
+		<span class="inside-ol">&nbsp;</span>
+		However, it also allows you to set two colour values that will change from one to another in a smooth gradient. You have used a different shade of the same purple colour for these two values, the first shade being slightly darker (<b>#512d6d</b>) than the second (<b>#c42f9e</b>).</li>
+		<li>You do not need to make any changes to the font sizes or the styles within the two media queries.</li>
+	</ul></li>
+		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-3</b> element in your <b>index.html</b> file. It should now look as shown below.
+		<IMG SRC="assets/img/final-hero-4.png" alt="Project Hero Blocks"></li>
+	</ol>
 
-		In the final step below, you will animate the text for this hero block. To generate the CSS code required for the animation effect, you will use the Animista website created by <a href="https://twitter.com/ana108" target="_blank">Ana Travas</a>.</li>
-		<li>Go to this web page.<span class="inside-ol">&nbsp;</span>
-		<a href="http://animista.net" target="_blank">Animista</a><span class="inside-ol">&nbsp;</span>
-		and click the <b>Try me</b> button.</li>
-		<li>Across the top of the screen you can see a menu of main options (BASIC, ENTRANCES, EXITS ...). For each of these main options, you can choose from a range of sub-options displayed as white text inside black circles on a draggable sub-menu. Many of these sub-options also have sub-options of their own.
-		<IMG SRC="assets/img/animista.png" alt="Project Hero Blocks"></li>
-		<li>In the main top menu, click the <b>ENTRANCES</b> option. Next, click the red circle containing the <b>SLIDE-IN</b> sub-option. Finally, click sub-sub-option named <b>slide-in-top</b>.
-		<IMG SRC="assets/img/animista-selected-slide-in-top.png" alt="Project Hero Blocks"></li>
-		<li>At the right of the screen, click the <b>{*}</b> icon to display the CSS code that Animista has created for you.
-		<IMG SRC="assets/img/animista-code-click.png" alt="Project Hero Blocks"></li>
-		<li>With the <b>Autoprefixer</b> option selected, click the <b>Copy Class</b> button.
-		<IMG SRC="assets/img/animista-copy-class.png" alt="Project Hero Blocks"></li>
-		<li>Paste the code into your <b>hero.css</b> file at the end of the /*== HERO BLOCK 3 ==* section.
+</section>
+
+<section id="hero-block-4" class="block-content bg-white">
+	<h2>Hero block: 4</h2>
+	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-4.'</p>
+
+	<ol>
+		<li>In the <b>hero.css</b> stylesheet, copy and paste the following CSS styles under the comment line /*== HERO BLOCK 4 ==*/
+		
+<span class="code-sample">
+<pre><code>
+<span class="comment">/* === HERO BLOCK 4 === */</span>
+<span class="orange-light">.hero-block-4</span> {
+    <span class="blue-light">display</span>: <span class="orange">flex</span>;
+    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
+    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
+    <span class="blue-light">background-image</span>: <span class="yellow">url</span><span class="white">(</span><span class="orange">'../img/hotel-dark.jpg'</span>);
+    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
+    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
+    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
+}
+
+<span class="orange-light">.hero-block-4 h1</span>, <span class="orange-light">.hero-block-4 h2</span> {
+    <span class="blue-light">font-family</span>: <span class="orange">'Open Sans', sans-serif</span>;
+    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
+    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
+    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
+    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
+    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
+    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span> 
+}
+
+<span class="orange-light">.hero-block-4 h1</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">60px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">112</span> <span class="white">-</span> <span class="green-light">60</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+}
+
+<span class="orange-light">.hero-block-4 h2</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">24px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">54</span> <span class="white">-</span> <span class="green-light">24</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+}
+
+<span class="comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-4</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
+    <span class="orange-light">.hero-block-4 h1</span>, <span class="orange-light">.hero-block-4 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
+    <span class="orange-light">.hero-block-4 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> } 
+}
+
+<span class="comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-4</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
+    <span class="orange-light">.hero-block-4 h1</span>, <span class="orange-light">.hero-block-4 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
+    <span class="orange-light">.hero-block-4 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span> }
+}
+</code></pre>
+</span>
+		For all screen sizes, you have made the following changes to the background of the hero block:
+		<ul>
+			<li><b>background-image</b>: This sets the image named <b>hotel-dark.jpg</b> as the background for the 'hero-block-5' div.</li>
+			<li><b>background-size</b>: The value of <b>cover</b> ensures that the background image always fills or 'covers' the full size of the div that contains it. This means that the image will be stretched or trimmed if its aspect ratio is not exactly the same as that of the container div.</li>
+			<li><b>background-position</b>: This CSS property sets the vertical (top-bottom) and horizontal (left-right) position of the image within the block whenever the height and/or width of the image is different from the displayed height and/or width of the block that contains it. By default, a background image positioned is at the top-left corner of its container div. </li>
+			<li><b>background-repeat</b>: The value of <b>none</b> prevents the background image from being repeated vertically and/or horizontally (the default value) whenever its height and/or width is less than that of its container div.</li>
+			<li>For the &lt;h1&gt; and &lt;h2&gt; headings, you changed the alignment (<b>text-align: center</b>), increased the font sizes and added a <b>text-shadow</b> property. This last property makes the text easier to read against a background image.</li>
+		</ul>
+		<span class="inside-ol">&nbsp;</span>
+		You do not need to make any changes to the styles within the two media queries.</li>
+		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-4</b> element in your <b>index.html</b> file. It should now look as shown below.
+		<IMG SRC="assets/img/final-hero-4.png" alt="Project Hero Blocks"></li>
+
+	</ol>
+
+</section>
+
+
+<section id="hero-block-5" class="block-content bg-white">
+
+
+	<h2>Hero block: 5</h2>
+	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-5.'</p>
+
+	<ol>
+		<li>In the <b>hero.css</b> stylesheet, copy and paste the following CSS styles under the comment line /*== HERO BLOCK 5 ==*/<span class="code-sample">
+<pre><code>
+<span class="comment">/* === HERO BLOCK 5 === */</span>
+<span class="orange-light">.hero-block-5</span> {
+    <span class="blue-light">display</span>: <span class="orange">flex</span>;
+    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
+    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
+    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,0,0.3</span>),<span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,0,0.3</span>)),<span class="yellow">url</span><span class="white">(</span>'../img/bike-tours.jpg');
+    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
+    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
+    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
+}
+
+<span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> {
+    <span class="blue-light">font-family</span>: <span class="orange">'Montserrat', sans-serif</span>;
+    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
+    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
+    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
+    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
+    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
+    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span> 
+}
+
+<span class="orange-light">.hero-block-5 h1</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">60px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">112</span> <span class="white">-</span> <span class="green-light">60</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+    <span class="blue-light">line-height</span>: <span class="geen-light">1.2</span>
+}
+
+<span class="orange-light">.hero-block-5 h2</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span>24px <span class="white">+</span> <span class="white">(</span>54 - 24) * <span class="white">(</span><span class="white">(</span>100vw - 320px)/<span class="white">(</span>1600 - 320)));
+    <span class="blue-light">font-family</span>: <span class="orange">'Roboto Condensed', sans-serif</span>;
+    <span class="blue-light">text-transform</span>: <span class="orange">uppercase</span>;
+}
+
+<span class="comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-5</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
+    <span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
+    <span class="orange-light">.hero-block-5 h1</span> { <span class="blue-light">line-height</span>: <span class="green-light">1.2</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span> }
+}
+
+<span class="comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-5</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
+    <span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
+    <span class="orange-light">.hero-block-5 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> }
+}
+</code></pre>
+</span>
+		For all screen sizes, make these two changes to the background image:
+		<ul>
+			<li><b>Background image file</b>: Set a new image named <b>bike-tours.jpg</b> as the background for the hero block.</li>
+			<li><b>Background image overlay</b>: Add a semi-opaque overlay behind the text and in front of the background image. This is to make the text more readable against the image behind it. The overlay image colour is expressed in RGB (Red, Green, Blue) code, where <b>0,0,0</b> is the colour black. The level of opacity is measured on a scale of 0 to 1. The value of <b>0.3</b> means 30% opaque (or 70% transparent).</li>
+			<li>For the &lt;h1&gt; and &lt;h2&gt; headings, you changed the font to <b>Roboto Condensed</b>. Also for the &lt;h2&gt; text, the <b>text-transform: uppercase </b> value ensures its characters are always displayed in capitals.</li>
+			<li>For mobiles and desktops, the widths of the &lt;h1&gt; and &lt;h2&gt; headings are increased to <b>80%</b>.</li>
+			<li>For mobiles, the &lt;h1&gt; line-height is reduced to <b>1.2</b> and margin-bottom increased from <b>5%</b> to <b>10%</b>.</li>
+			<li>For desktops, the margin-bottom increased to from <b>1%</b> to <b>5%</b>.</li>
+		</ul></li>
+		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-5</b> element in your <b>index.html</b> file. It should now look as shown below.
+		<IMG SRC="assets/img/final-hero-5.png" alt="Project Hero Blocks"></li>
+	</ol>
+</section>
+
+
+
+<section id="hero-block-6" class="block-content bg-white">
+	<h2>Hero block: 6</h2>
+	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-6.'</p>
+	<ol>
+		<li>In the <b>hero.css</b> stylesheet, copy and paste the following CSS styles under the comment line /*== HERO BLOCK 6 ==*/
+<span class="code-sample">
+<pre><code>
+<span class="comment">/* === HERO BLOCK 6 === */</span>
+<span class="orange-light">.hero-block-6</span> {
+    <span class="blue-light">display</span>: <span class="orange">flex</span>;
+    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
+    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
+    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,255,0.5</span>),<span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,255,0.5</span>)),<span class="yellow">url</span><span class="white">(</span><span class="orange">'../img/meeting.jpg'</span>);
+    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
+    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
+    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
+}
+</code></pre>
+</span>
+		<ul>
+			<li><b>Background image file</b>: Set a new image named <b>meeting.jpg</b> as the background for the hero block.</li>
+			<li><b>Background image overlay</b>: Change the colour of the semi-opaque overlay to blue (<b>0,0,255</b>) and increase its opacity to from <b>0.3</b> to <b>0.5</b>.</li>
+		</ul>
+		</li>
+
+		<li>For the &lt;h1&gt; and &lt;h2&gt; headings, change the font to <b>Roboto Condensed</b>, apply a <b>text-transform</b> setting of <b>uppercase</b>, and adjust the <b>font-size</b> values.
+
+<span class="code-sample">
+<pre><code>
+<span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> {
+    <span class="blue-light">font-family</span>: <span class="orange">'Roboto Condensed', sans-serif</span>;
+    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
+    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
+    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
+    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
+    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
+    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
+    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span>;
+    <span class="blue-light">text-transform</span>: <span class="orange">uppercase</span>;
+}
+
+<span class="orange-light">.hero-block-6 h1</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">34px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">76</span> <span class="white">-</span> <span class="green-light">34</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+}
+
+<span class="orange-light">.hero-block-6 h2</span> {
+    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">22px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">40</span> <span class="white">-</span> <span class="green-light">22</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
+}
+
+<span class="comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
+    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
+    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">line-height</span>: <span class="green-light">1.2</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span> }
+}
+
+<span class="comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
+    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
+    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> }
+}
+</code></pre>
+</span></li>
+
+		<li>For mobile screens, reduce the width of the &lt;h1&gt; and &lt;h2&gt; headings from <b>80%</b> to <b>70%</b>.</li>
+
+		<li>For desktop screens, reduce the width of the &lt;h1&gt; and &lt;h2&gt; headings from <b>70%</b> to <b>60%</b>. Aslo, reduce the <b>margin-bottom</b> for &lt;h1&gt; from <b>5%</b> to <b>2%</b>.
+<span class="code-sample">
+<pre><code>
+<span class="comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
+    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
+    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span> } 
+}
+
+<span class="comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
+    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
+    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
+    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">2%</span> }
+}
+</code></pre>
+</span></li>
+
+		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-6</b> element in your <b>index.html</b> file. It should now look as shown below.
+		<IMG SRC="assets/img/final-hero-7.png" alt="Project Hero Blocks"></li>
+	</ol>
+</section>
+
+
+<section id="animate-text" class="block-content bg-white">
+
+	<h2>Animating text</h2>
+		<p>In the final step below, you will animate the text headlines for the 'hero-1' block so that they slide in from the top of the web page. To generate the CSS code required for the animation effect, you will use the Animista website created by <a href="https://twitter.com/ana108" target="_blank">Ana Travas</a>.</p>
+
+		<ol>
+			<li>Go to this web page.<span class="inside-ol">&nbsp;</span>
+			<a href="http://animista.net" target="_blank">Animista</a><span class="inside-ol">&nbsp;</span>
+			and click the <b>Try me</b> button.</li>
+			<li>Across the top of the screen you can see a menu of main options (BASIC, ENTRANCES, EXITS ...). For each of these main options, you can choose from a range of sub-options displayed as white text inside black circles on a draggable sub-menu. Many of these sub-options also have sub-options of their own.
+			<IMG SRC="assets/img/animista.png" alt="Project Hero Blocks"></li>
+			<li>In the main top menu, click the <b>ENTRANCES</b> option. Next, click the red circle containing the <b>SLIDE-IN</b> sub-option. Finally, click sub-sub-option named <b>slide-in-top</b>.
+			<IMG SRC="assets/img/animista-selected-slide-in-top.png" alt="Project Hero Blocks"></li>
+			<li>At the right of the screen, click the <b>{*}</b> icon to display the CSS code that Animista has created for you.
+			<IMG SRC="assets/img/animista-code-click.png" alt="Project Hero Blocks"></li>
+			<li>With the <b>Autoprefixer</b> option selected, click the <b>Copy Class</b> button.
+			<IMG SRC="assets/img/animista-copy-class.png" alt="Project Hero Blocks"></li>
+			<li>Paste the code into your <b>hero.css</b> file, at the end of the /*== HERO BLOCK 1 ==* block.
 
 <span class="code-sample">
 <pre><code>
@@ -425,6 +661,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <span class="blue-light">-webkit-animation</span>: <span class="white">slide-in-top</span> <span class="green-light">0.5s</span> <span class="yellow">cubic-bezier</span>(<span class="green-light">0.250</span>, <span class="green-light">0.460</span>, <span class="green-light">0.450</span>, <span class="green-light">0.940</span>) <span class="orange">both</span>;  
           <span class="blue-light"> animation</span>: <span class="white">slide-in-top</span> <span class="green-light">0.5s</span> <span class="yellow">cubic-bezier</span>(<span class="green-light">0.250</span>, <span class="green-light">0.460</span>, <span class="green-light">0.450</span>, <span class="green-light">0.940</span>) <span class="orange">both</span>;  
 <span class="white">}</span>
+
+
+<span class="comment">/* === HERO BLOCK 2 === */</span>
 </code></pre>
 </span></li>
 		<li>Return to the Animista screen, and click the <b>Copy Keyframes</b> button.
@@ -472,331 +711,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="blue-light">opacity</span>: <span class="green-light">1</span>;
     }
   }
+
+<span class="comment">/* === HERO BLOCK 2 === */</span>
 </code></pre>
 </span>
 		
 		</li>
-		<li>In the <b>index.html</b> file, add the class named <b>slide-in-top</b> to the 'hero-block-3' element, and save the HTML file.
+		<li>In the <b>index.html</b> file, add the class named <b>slide-in-top</b> to the &lt;h1&gt; and &lt;h2&gt; headings inside the 'hero-block-1' block, and save the HTML file.
 		
 <span class="code-sample">
 <pre><code>
-&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="orange">"hero-block-3 slide-in-top"</span>&gt;
-   &lt;<span class="blue-dark">h1</span>&gt;<span class="white">Van Gough Exhibition</span>&lt;/<span class="blue-dark">h1</span>&gt;
-   &lt;<span class="blue-dark">h2</span>&gt;<span class="white">IBAT College, Temple Bar, Dublin 2. &lt;br&gt;April/May 2019. Admission free.</span>&lt;/<span class="blue-dark">h2</span>&gt;
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="orange">"hero-block-1"</span>&gt;
+   &lt;<span class="blue-dark slide-in-top">h1</span>&gt;<span class="white">Hello, IBATCrypto</span>&lt;/<span class="blue-dark">h1</span>&gt;
+   &lt;<span class="blue-dark slide-in-top">h2</span>&gt;<span class="white">Announcing the smart and fast way to accept payments in crypto currencies.</span>&lt;/<span class="blue-dark">h2</span>&gt;
 &lt;/<span class="blue-dark">div</span>&gt;
 </code></pre>
 </span>
 		</li>
-		<li>In your web browser, view the effect on the <b>hero-block-3</b> element in your <b>index.html</b> file. You should now see the h1 and h2 headings slide in from the top of the hero block.</li>
-	</ol>
-</section>
+		<li>In your web browser, view the effect on the <b>hero-block-1</b> element in your <b>index.html</b> file. You should now see the h1 and h2 headings slide in from the top of the web page.</li>
 
-
-<section id="hero-block-4" class="block-content bg-white">
-
-	<h2>Hero block: 4</h2>
-	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-4.'</p>
-
-	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-3.'</li>
-		<li>Under the comment line /*== HERO BLOCK 4 ==*/, paste the CSS styles you have just copied.</li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-3' to 'hero-block-4'.</li>
-		<li>Make the following changes to the pasted and renamed block of CSS styles.
-
+		<li>The two headings slide down a little too quickly. In the CSS file, increase the time taken for the sliding animation from <b>0.5s</b> to <b>1s</b> shown below,
 <span class="code-sample">
 <pre><code>
-<span class="comment">/* === HERO BLOCK 4 === */</span>
-<span class="orange-light">.hero-block-4</span> {
-    <span class="blue-light">display</span>: <span class="orange">flex</span>;
-    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
-    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
-    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="orange">#512d6d</span>,<span class="orange">#c42f9e</span><span class="white">);</span>
-}
-
-<span class="orange-light">.hero-block-4 h1</span>, <span class="orange-light">.hero-block-4 h2</span> {
-    <span class="blue-light">font-family</span>: <span class="orange">'Open Sans', sans-serif</span>;
-    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
-    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
-    <span class="blue-light">text-align</span>: <span class="orange">left</span>;
-    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
-    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
-    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>
-}
-
-<span class="orange-light">.hero-block-4 h1</span> {
-   <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">32px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">72</span> <span class="white">-</span> <span class="green-light">32</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-}
-
-<span class="orange-light">.hero-block-4 h2</span> {
-   <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">18px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">32</span> <span class="white">-</span> <span class="green-light">18</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-   <span class="blue-light">font-weight</span>: <span class="orange">normal</span>
-}
-
-<span class="comment">/* Mobiles */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
-    <span class="orange">.hero-block-4</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
-    <span class="orange">.hero-block-4 h1</span>, <span class="orange">.hero-block-4 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
-    <span class="orange">.hero-block-4 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> } 
-}
-
-<span class="comment">/* Desktop */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
-    <span class="orange">.hero-block-4</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
-    <span class="orange">.hero-block-4 h1</span>, <span class="orange">.hero-block-4 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
-    <span class="orange">.hero-block-4 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span> }
-}
+<span class="orange-light">.slide-in-top</span> <span class="white">{</span>
+   <span class="blue-light">-webkit-animation</span>: <span class="white">slide-in-top</span> <span class="green-light">1s</span> <span class="yellow">cubic-bezier</span>(<span class="green-light">0.250</span>, <span class="green-light">0.460</span>, <span class="green-light">0.450</span>, <span class="green-light">0.940</span>) <span class="orange">both</span>;  
+          <span class="blue-light"> animation</span>: <span class="white">slide-in-top</span> <span class="green-light">1s</span> <span class="yellow">cubic-bezier</span>(<span class="green-light">0.250</span>, <span class="green-light">0.460</span>, <span class="green-light">0.450</span>, <span class="green-light">0.940</span>) <span class="orange">both</span>;
+<span class="white">}</span>
 </code></pre>
 </span>
-	Here is a summary of the changes:
-	<ul>
-		<li>For all screen sizes, you have changed the text colour to white (<b>#fff</b>), and changed the font to <b>Open Sans</b>.</li>
-		<li>For the background of the hero block, you have used the CSS style of <b>background-image</b>. As its name suggests, this is typically used to set a background image to an element on a web page.
-		<span class="inside-ol">&nbsp;</span>
-		However, it also allows you to set two colour values that will change from one to another in a smooth gradient. You have used a different shade of the same purple colour for these two values, the first shade being slightly darker (<b>#512d6d</b>) than the second (<b>#c42f9e</b>).</li>
-		<li>You do not need to make any changes to the font sizes or the styles within the two media queries.</li>
-	</ul></li>
-		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-4</b> element in your <b>index.html</b> file. It should now look as shown below.
-		<IMG SRC="assets/img/final-hero-4.png" alt="Project Hero Blocks"></li>
-	</ol>
-
-</section>
-
-<section id="hero-block-5" class="block-content bg-white">
-	<h2>Hero block: 5</h2>
-	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-5.'</p>
-
-	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-4.'</li>
-		<li>Under the comment line /*== HERO BLOCK 5 ==*/, paste the CSS styles you have just copied.</li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-4' to 'hero-block-5'.</li>
-		<li>Make the following changes to the pasted and renamed block of CSS styles.
-		
-<span class="code-sample">
-<pre><code>
-<span class="comment">/* === HERO BLOCK 5 === */</span>
-<span class="orange-light">.hero-block-5</span> {
-    <span class="blue-light">display</span>: <span class="orange">flex</span>;
-    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
-    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
-    <span class="blue-light">background-image</span>: <span class="yellow">url</span><span class="white">(</span><span class="orange">'../img/hotel-dark.jpg'</span>);
-    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
-    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
-    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
-}
-
-<span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> {
-    <span class="blue-light">font-family</span>: <span class="orange">'Open Sans', sans-serif</span>;
-    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
-    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
-    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
-    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
-    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
-    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
-    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span> 
-}
-
-<span class="orange-light">.hero-block-5 h1</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">60px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">112</span> <span class="white">-</span> <span class="green-light">60</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-}
-
-<span class="orange-light">.hero-block-5 h2</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">24px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">54</span> <span class="white">-</span> <span class="green-light">24</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-}
-
-<span class="comment">/* Mobiles */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-5</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
-    <span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
-    <span class="orange-light">.hero-block-5 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> } 
-}
-
-<span class="comment">/* Desktop */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-5</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
-    <span class="orange-light">.hero-block-5 h1</span>, <span class="orange-light">.hero-block-5 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
-    <span class="orange-light">.hero-block-5 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">1%</span> }
-}
-</code></pre>
-</span>
-		For all screen sizes, you have made the following changes to the background of the hero block:
-		<ul>
-			<li><b>background-image</b>: This sets the image named <b>hotel-dark.jpg</b> as the background for the 'hero-block-5' div.</li>
-			<li><b>background-size</b>: The value of <b>cover</b> ensures that the background image always fills or 'covers' the full size of the div that contains it. This means that the image will be stretched or trimmed if its aspect ratio is not exactly the same as that of the container div.</li>
-			<li><b>background-position</b>: This CSS property sets the vertical (top-bottom) and horizontal (left-right) position of the image within the block whenever the height and/or width of the image is different from the displayed height and/or width of the block that contains it. By default, a background image positioned is at the top-left corner of its container div. </li>
-			<li><b>background-repeat</b>: The value of <b>none</b> prevents the background image from being repeated vertically and/or horizontally (the default value) whenever its height and/or width is less than that of its container div.</li>
-			<li>For the &lt;h1&gt; and &lt;h2&gt; headings, you changed the alignment (<b>text-align: center</b>), increased the font sizes and added a <b>text-shadow</b> property. This last property makes the text easier to read against a background image.</li>
-		</ul>
-		<span class="inside-ol">&nbsp;</span>
-		You do not need to make any changes to the styles within the two media queries.</li>
-		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-5</b> element in your <b>index.html</b> file. It should now look as shown below.
-		<IMG SRC="assets/img/final-hero-5.png" alt="Project Hero Blocks"></li>
-
-	</ol>
-
-</section>
-
-
-<section id="hero-block-6" class="block-content bg-white">
-
-
-	<h2>Hero block: 6</h2>
-	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-6.'</p>
-
-	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-5.'</li>
-		<li>Under the comment line /*== HERO BLOCK 6 ==*/, paste the CSS styles you have just copied.</li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-5' to 'hero-block-6'.</li>
-		<li>Make the following changes to the pasted and renamed block of CSS styles.
-<span class="code-sample">
-<pre><code>
-<span class="comment">/* === HERO BLOCK 6 === */</span>
-<span class="orange-light">.hero-block-6</span> {
-    <span class="blue-light">display</span>: <span class="orange">flex</span>;
-    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
-    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
-    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,0,0.3</span>),<span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,0,0.3</span>)),<span class="yellow">url</span><span class="white">(</span>'../img/bike-tours.jpg');
-    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
-    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
-    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
-}
-
-<span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> {
-    <span class="blue-light">font-family</span>: <span class="orange">'Montserrat', sans-serif</span>;
-    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
-    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
-    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
-    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
-    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
-    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
-    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span> 
-}
-
-<span class="orange-light">.hero-block-6 h1</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">60px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">112</span> <span class="white">-</span> <span class="green-light">60</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-    <span class="blue-light">line-height</span>: <span class="geen-light">1.2</span>
-}
-
-<span class="orange-light">.hero-block-6 h2</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span>24px <span class="white">+</span> <span class="white">(</span>54 - 24) * <span class="white">(</span><span class="white">(</span>100vw - 320px)/<span class="white">(</span>1600 - 320)));
-    <span class="blue-light">font-family</span>: <span class="orange">'Roboto Condensed', sans-serif</span>;
-    <span class="blue-light">text-transform</span>: <span class="orange">uppercase</span>;
-}
-
-<span class="comment">/* Mobiles */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
-    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
-    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">line-height</span>: <span class="green-light">1.2</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span> }
-}
-
-<span class="comment">/* Desktop */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-6</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
-    <span class="orange-light">.hero-block-6 h1</span>, <span class="orange-light">.hero-block-6 h2</span> { <span class="blue-light">width</span>: <span class="green-light">80%</span> }
-    <span class="orange-light">.hero-block-6 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">5%</span> }
-}
-</code></pre>
-</span>
-		For all screen sizes, make these two changes to the background image:
-		<ul>
-			<li><b>Background image file</b>: Set a new image named <b>bike-tours.jpg</b> as the background for the hero block.</li>
-			<li><b>Background image overlay</b>: Add a semi-opaque overlay behind the text and in front of the background image. This is to make the text more readable against the image behind it. The overlay image colour is expressed in RGB (Red, Green, Blue) code, where <b>0,0,0</b> is the colour black. The level of opacity is measured on a scale of 0 to 1. The value of <b>0.3</b> means 30% opaque (or 70% transparent).</li>
-			<li>For the &lt;h1&gt; and &lt;h2&gt; headings, you changed the font to <b>Roboto Condensed</b>. Also for the &lt;h2&gt; text, the <b>text-transform: uppercase </b> value ensures its characters are always displayed in capitals.</li>
-			<li>For mobiles and desktops, the widths of the &lt;h1&gt; and &lt;h2&gt; headings are increased to <b>80%</b>.</li>
-			<li>For mobiles, the &lt;h1&gt; line-height is reduced to <b>1.2</b> and margin-bottom increased from <b>5%</b> to <b>10%</b>.</li>
-			<li>For desktops, the margin-bottom increased to from <b>1%</b> to <b>5%</b>.</li>
-		</ul></li>
-		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-6</b> element in your <b>index.html</b> file. It should now look as shown below.
-		<IMG SRC="assets/img/final-hero-6.png" alt="Project Hero Blocks"></li>
-	</ol>
-</section>
-
-
-
-<section id="hero-block-7" class="block-content bg-white">
-	<h2>Hero block: 7</h2>
-	<p>Follow these steps to create the CSS styles for the &lt;div&gt; in your <b>index.html</b> file named 'hero-block-7.'</p>
-	<ol>
-		<li>In the <b>hero.css</b> stylesheet, select and copy all the CSS styles you created for 'hero-block-6.'</li>
-		<li>Under the comment line /*== HERO BLOCK 7 ==*/, paste the CSS styles you have just copied.</li>
-		<li>In the copied-and-pasted block, rename all occurrences of the text 'hero-block-7' to 'hero-block-6'.</li>
-		<li>For all screen sizes, make these two changes to the background image:
-
-<span class="code-sample">
-<pre><code>
-<span class="comment">/* === HERO BLOCK 7 === */</span>
-<span class="orange-light">.hero-block-7</span> {
-    <span class="blue-light">display</span>: <span class="orange">flex</span>;
-    <span class="blue-light">flex-direction</span>: <span class="orange">column</span>;
-    <span class="blue-light">justify-content</span>: <span class="orange">center</span>;
-    <span class="blue-light">background-image</span>: <span class="yellow">linear-gradient</span><span class="white">(</span><span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,255,0.5</span>),<span class="yellow">rgba</span><span class="white">(</span><span class="green-light">0,0,255,0.5</span>)),<span class="yellow">url</span><span class="white">(</span><span class="orange">'../img/meeting.jpg'</span>);
-    <span class="blue-light">background-position</span>: <span class="orange">center center</span>;
-    <span class="blue-light">background-size</span>: <span class="orange">cover</span>;
-    <span class="blue-light">background-repeat</span>: <span class="orange">no-repeat</span>;
-}
-</code></pre>
-</span>
-		<ul>
-			<li><b>Background image file</b>: Set a new image named <b>meeting.jpg</b> as the background for the hero block.</li>
-			<li><b>Background image overlay</b>: Change the colour of the semi-opaque overlay to blue (<b>0,0,255</b>) and increase its opacity to from <b>0.3</b> to <b>0.5</b>.</li>
-		</ul>
 		</li>
-
-		<li>For the &lt;h1&gt; and &lt;h2&gt; headings, change the font to <b>Roboto Condensed</b>, apply a <b>text-transform</b> setting of <b>uppercase</b>, and adjust the <b>font-size</b> values.
-
-<span class="code-sample">
-<pre><code>
-<span class="orange-light">.hero-block-7 h1</span>, <span class="orange-light">.hero-block-7 h2</span> {
-    <span class="blue-light">font-family</span>: <span class="orange">'Roboto Condensed', sans-serif</span>;
-    <span class="blue-light">color</span>:<span class="orange"> #fff</span>;
-    <span class="blue-light">font-weight</span>: <span class="orange">bold</span>;
-    <span class="blue-light">text-align</span>:<span class="orange"> center</span>;
-    <span class="blue-light">margin-left</span>: <span class="orange">auto</span>;
-    <span class="blue-light">margin-right</span>: <span class="orange">auto</span>;
-    <span class="blue-light">line-height</span>: <span class="green-light">1.4</span>;
-    <span class="blue-light">text-shadow</span>: <span class="green-light">2px 2px</span> <span class="orange">#222</span>;
-    <span class="blue-light">text-transform</span>: <span class="orange">uppercase</span>;
-}
-
-<span class="orange-light">.hero-block-7 h1</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">34px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">76</span> <span class="white">-</span> <span class="green-light">34</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-}
-
-<span class="orange-light">.hero-block-7 h2</span> {
-    <span class="blue-light">font-size</span>: <span class="yellow">calc</span><span class="white">(</span><span class="green-light">22px</span> <span class="white">+</span> <span class="white">(</span><span class="green-light">40</span> <span class="white">-</span> <span class="green-light">22</span><span class="white">)</span> <span class="white">*</span> <span class="white">((</span><span class="green-light">100vw</span> - <span class="green-light">320px</span><span class="white">)/</span><span class="white">(</span><span class="white">1600</span> - <span class="white">320</span><span class="white">)));</span>
-}
-</code></pre>
-</span></li>
-
-		<li>For mobile screens, reduce the width of the &lt;h1&gt; and &lt;h2&gt; headings from <b>80%</b> to <b>70%</b>.</li>
-
-		<li>For desktop screens, reduce the width of the &lt;h1&gt; and &lt;h2&gt; headings from <b>70%</b> to <b>60%</b>. Aslo, reduce the <b>margin-bottom</b> for &lt;h1&gt; from<b>5%</b> to <b>2%</b>.
-<span class="code-sample">
-<pre><code>
-<span class="comment">/* Mobiles */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and (</span><span class="blue-light">max-width</span>:<span class="green-light">767px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-7</span> { <span class="blue-light">height</span>: <span class="green-light">360px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">40px</span> }
-    <span class="orange-light">.hero-block-7 h1</span>, <span class="orange-light">.hero-block-7 h2</span> { <span class="blue-light">width</span>: <span class="green-light">70%</span> }
-    <span class="orange-light">.hero-block-7 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">10%</span> } 
-}
-
-<span class="comment">/* Desktop */</span>
-<span class="purple">@media</span> <span class="orange">all</span> <span class="white">and <span class="white">(</span></span><span class="blue-light">min-width</span>:<span class="green-light">768px</span><span class="white">) {</span>
-    <span class="orange-light">.hero-block-7</span> { <span class="blue-light">height</span>: <span class="green-light">480px</span>; <span class="blue-light">margin-bottom</span>: <span class="green-light">80px</span> }
-    <span class="orange-light">.hero-block-7 h1</span>, <span class="orange-light">.hero-block-7 h2</span> { <span class="blue-light">width</span>: <span class="green-light">60%</span> }
-    <span class="orange-light">.hero-block-7 h1</span> { <span class="blue-light">margin-bottom</span>: <span class="green-light">2%</span> }
-}
-</code></pre>
-</span></li>
-
-		<li>Save the <b>hero.css</b> file and, in your web browser, view the effect on the <b>hero-block-7</b> element in your <b>index.html</b> file. It should now look as shown below.
-		<IMG SRC="assets/img/final-hero-7.png" alt="Project Hero Blocks"></li>
+		<li>Resave your HTML file and view the result in yur web browser.</li>
 	</ol>
 </section>
-
-
-
-
 
 <section id="meta-tags" class="block-content">
 	<h2>Update the meta tags</h2>
@@ -831,7 +777,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		Near the end of the lines of the JavaScript code, you can see the web address of the privacy page. Change the <b>ibat-web-dev.github.io</b> username to your username on GitHub.
 		<span class="inside-ol">&nbsp;</span>
 		You will create the actual <b>privacy.html</b> web page in a <a href="https://munnelly.com/webdev/project-home/index.html">later project</a>.</li>
-		<li>When finished, save your <b>index.html</b> file.</p>
+		<li>When finished, save your <b>index.html</b> file.</li>
 	</ol>
 
 	<div class="box-toc">
@@ -869,7 +815,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<IMG SRC="assets/img/validate-css.png" alt="Project Hero Blocks"></li>
 		<li>Copy and paste your CSS file into the box named <b>Enter the CSS you would like validated</b>.</li>
 		<li>Click the <b>Check</b> button.</li>
-		<li>If you see any errors (other than those related to the fluid typographic equation, as shown below), return to your <b>hero.css</b> file in your text editor, fix the errors, save the file, and copy the entire file again.
+		<li>If you see any errors (other than those related to the fluid typographic equation and the webkit browser extension for Chrome and Safari, as shown below), return to your <b>hero.css</b> file in your text editor, fix the errors, save the file, and copy the entire file again.
 		<IMG SRC="assets/img/typo-css-errors.png" alt="Tutorial RWD: Media Queries"></li>
 		<li>In the CSS Validator, click the <b>Back</b> button of your web browser to again display the <b>By direct input</b> tab. Click once in the tab and paste in your corrected CSS file. Your new, pasted-in file will replace the earlier version. Finally, click the <b>Check</b> button.</li>
 	</ol>
