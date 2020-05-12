@@ -14,33 +14,54 @@ body { background-color: #eff8f5; font-family: sans-serif }
 
 /* Begin menu styles */
 
+.unhide-content-under-menu { padding-top: 72px }
+
 /* === ALL SCREEN SIZES ====== */
 
 /* Positions all menus in front of page content */
-.container-menu-desktop,
+.container-menu-desktop, 
 .container-menu-bar-mobile, 
 .flyout-menu { z-index: 999 }
-
-.container-menu-desktop,
-.container-menu-bar-mobile { width:100% }
+.container-menu-desktop, .container-menu-bar-mobile { width:100% }
 
 /* on mobiles - hide desktop menu */
 @media all and (max-width:767px) { 
     .container-menu-desktop.menu-transparent,
-    .container-menu-desktop.menu-light { display: none }
+    .container-menu-desktop.menu-light,
+    .container-menu-desktop.menu-dark { display: none }
 }
 
 /* on desktops - hide mobile menu bar and list of menu options */
 @media all and (min-width:768px) { 
     .container-menu-bar-mobile.menu-transparent,
     .container-menu-bar-mobile.menu-light,
+    .container-menu-bar-mobile.menu-dark,
     .flyout-menu.menu-transparent,
+    .flyout-menu.menu-light,
     .flyout-menu.menu-light { display: none }
 }
 
 /* sticks menu to top of desktop and/or mobile screen */
 .menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
 
+/* prevents content from disappearing udner sticky menus */
+.sticky-anchor {
+    position: relative;
+    border-top: 90px solid transparent;
+    margin: -90px 0 0;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+ 
+ .sticky-anchor:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+ }
+ 
 /* Height of desktop menu and mobile menu bar */
 .container-menu-desktop, .container-menu-bar-mobile { height:72px }
 
@@ -60,12 +81,16 @@ body { background-color: #eff8f5; font-family: sans-serif }
 .container-menu-desktop ul li a,
 .flyout-menu            ul li a { text-decoration: none }
 
+/* make desktop menu options bold */
+.container-menu-desktop ul li a { font-weight:bold }
+
 /* style cta button on desktop and mobile menus */
 .container-menu-desktop ul li a.btn-cta,
 .flyout-menu            ul li a.btn-cta {
     display: inline-block;
     border-width: 2px;
     border-style: solid;
+    font-weight: bold;
     /* soften corners */
     /* border-radius: 4px; */
     /* rounded corners */
@@ -81,7 +106,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
 
 .menu-drop-shadow { box-shadow: 0 1px 10px #888 }
 
-/* ================================= DESKTOP MENU ============================= */
+/* ======= DESKTOP MENU ======= */
 
 /* outer parent flexbox container 
    home page link (with website logo) at left and ul links at right are its two children */
@@ -90,8 +115,6 @@ body { background-color: #eff8f5; font-family: sans-serif }
     justify-content: space-between;
     padding: 0 6% 0 6%;
     width: 100%;
-    /* drop shadow along bottom of menu  */
-    /* box-shadow: 0px 1px 10px #888 */
 }
 
 /* menu links and cta button aligned horizontally */
@@ -110,7 +133,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
 /* style text for links and cta button  */
 .container-menu-desktop ul li a {
     font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
-    /* font-weight:bold */
+     /* font-weight:bold */
     /* text-transform: uppercase */
 }
 
@@ -118,7 +141,7 @@ body { background-color: #eff8f5; font-family: sans-serif }
 .container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
 
 
-/* ======================== MOBILE MENU  ======================= */
+/* ======= MOBILE MENU  ======== */
 
 /* outer flexbox container for mobile menu bar 
    home page link (with website logo) at left and hamburger icon at right are its two children */
@@ -160,10 +183,15 @@ body { background-color: #eff8f5; font-family: sans-serif }
     right: -320px; /* hides flyout menu */
 }
 
-.flyout-menu.flyout-menu-is-open {
+.flyout-menu {
     right: 0; /* displays flyout menu */
     overscroll-behavior: contain;
     overscroll-behavior-y: contain
+}
+
+/* drop shadow border at left of fly-out menu */
+.flyout-menu {
+    box-shadow: 0px 1px 10px #888 
 }
 
 /* list of links on flyout menu */
@@ -215,47 +243,42 @@ body { background-color: #eff8f5; font-family: sans-serif }
     text-align: center; font-size: 15px; line-height: 1.4;
 }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-profile-box,
-.flyout-menu.flyout-menu-is-open div.fly-out-social-icons {
+.flyout-menu div.fly-out-profile-box,
+.flyout-menu div.fly-out-social-icons {
     display:flex;
     flex-direction: row;
     justify-content: space-between;    
 }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img,
-.flyout-menu.flyout-menu-is-open div.fly-out-profile-box p { width: 47% }
+.flyout-menu div.fly-out-profile-box img,
+.flyout-menu div.fly-out-profile-box p { width: 47% }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img {
+.flyout-menu div.fly-out-profile-box img {
     display: block; border-radius: 100%;
     width: 104px; height: 104px; 
     border-style: solid;
     border-width: 2px
 }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-profile-box p {
+.flyout-menu div.fly-out-profile-box p {
     text-align:left 
 }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-social-icons { 
+.flyout-menu div.fly-out-social-icons { 
     margin-top:12px
 }
 
-.flyout-menu.flyout-menu-is-open div.fly-out-social-icons a {
+.flyout-menu div.fly-out-social-icons a {
     font-size: 26px;
     text-align: center 
 }
 
-/* ============ Light background menu - desktops and mobiles ========= */
+/* ========= Light background menu - desktops and mobiles ========= */
 
 /* background colour */
 .menu-light { 
 	background-color: #fff;
 	transition: all .5s ease-in-out;
-}
-
-/* drop shadow border at left of fly-out menu */
-.flyout-menu.flyout-menu-is-open {
-/*    box-shadow: 0px 1px 10px #888    */
 }
 
 /* menu links */
@@ -305,14 +328,16 @@ a[href^=tel] { text-decoration: none; color: red }
 }
 
 /* profile image border colour */
-.menu-light.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img { border-color: red }
+.menu-light.flyout-menu div.fly-out-profile-box img { border-color: red }
 
 /* contact icons */
 .menu-light.flyout-menu .fly-out-social-icons a i { color:red }
 
+/* === End light background menu === */
 
 
-/* ============== Dark background menu - desktops and mobiles =========== */
+
+/* ======= Dark background menu - desktops and mobiles ======= */
 
 /* background colour */
 .menu-dark { 
@@ -367,17 +392,16 @@ a[href^=tel] { text-decoration: none; color: #fff }
 }
 
 /* profile image border colour */
-.menu-dark.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img { border-color: red }
+.menu-dark.flyout-menu div.fly-out-profile-box img { border-color: red }
 
 /* contact icons */
 .menu-dark.flyout-menu .fly-out-social-icons a i { color:#fff }
 
-/*-- End menu syles */
+/* === End dark background menu === */
 
 
 
-
-/* ============== Transparent background menu - desktops and mobiles =========== */
+/* ======== Transparent background menu - desktops and mobiles =========== */
 
 /* background colour */
 .menu-transparent { 
@@ -432,37 +456,17 @@ a[href^=tel] { text-decoration: none; color: #fff }
 }
 
 /* profile image border colour */
-.menu-transparent.flyout-menu.flyout-menu-is-open div.fly-out-profile-box img { border-color: red }
+.menu-transparent.flyout-menu div.fly-out-profile-box img { border-color: red }
 
 /* contact icons */
 .menu-transparent.flyout-menu .fly-out-social-icons a i { color:#fff }
 
-/*-- End menu syles */
+/* === End transparent background menu === */
 
 
-
-
-.sticky-anchor {
-   position: relative;
-   border-top: 90px solid transparent;
-   margin: -90px 0 0;
-   -webkit-background-clip: padding-box;
-   -moz-background-clip: padding;
-   background-clip: padding-box;
-}
-
-.sticky-anchor:before {
-   content: "";
-   position: absolute;
-   top: -2px;
-   left: 0;
-   right: 0;
-}
-
-
-/* ********************************************************************************************
-=============================== END OF MENU STYLES  ===========================================
-*********************************************************************************************** */
+/* *****************************************************************
+================END OF MENU STYLES TO COPY AND PASTE ===============
+****************************************************************** */
 
 
 /* ==== PAGE CONTAINER ==== */
