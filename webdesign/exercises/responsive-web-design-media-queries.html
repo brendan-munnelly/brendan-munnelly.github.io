@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Responsive Web Design and Media Queries | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Responsive Web Design and Media Queries: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+	
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;></a></h3>
+	<h1>Responsive Web Design and Media Queries</h1>
+</div>
+
+
+<section id="learning-goals" class="wrapper-content bg-white">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<ul>
+		<li>Add media queries to a CSS file for the 768px breakpoint.</li>
+		<li>Use a media query to create responsive left and right padding on a web page.</li>
+		<li>Use media queries to create responsive inter-line and margin spacing for headings and text paragraphs.</li>
+	</ul>
+
+</section>
+
+
+<section class="wrapper-content bg-white">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#rwd-about">About Responsive Web Design (RWD)</a></p>
+		<p><a href="#rwd-breakpoint">The 768px breakpoint</a></p>
+		<p><a href="#rwd-page-width">Editing the web page width in your CSS file</a></p>
+		<p><a href="#rwd-viewing">Viewing your responsive web page at different screen sizes</a></p>
+		<p><a href="#further-resources">Further resources</a></p>
+	</div>
+</section>
+
+
+
+<section id="rwd-about" class="wrapper-content bg-white">
+	<h2>About Responsive Web Design (RWD)</h2>
+	<p>Responsive Web Design (RWD) means using so-called <i>media queries</i> in a CSS file so that the various elements of a web page are  displayed appropriately according to the size of the user&#8217;s screen.</p>
+
+	<p>Typically:</p>
+	<ul>
+		<li>Text and images change in size according to the width and height of the screen.</li>
+		<li>The spacing around text and images also changes according to screen size.</li>
+		<li>Multi-column layouts on laptop or desktop screens change to single-column layouts on mobile phone screens, or at least to fewer columns.</li>
+	</ul>
+
+	<IMG src="assets/img/rwd-media-queries/responsive-web-design-image.png" ALT="Tutorial RWD: Media Queries">
+
+</section>
+
+
+
+
+
+
+
+<section id="rwd-breakpoint" class="wrapper-content bg-white">
+	<h2>The 768px breakpoint</h2>
+	<p>In responsive web design, a <i>breakpoint</i> is a viewport (screen) width at which the CSS styles rules applied to the web page change. Some complex CSS layouts contain several breakpoints. For example, one for small mobile phones, a second for larger phones, a third for tablets, a fourth for desktops and a fifth for wide-screen laptops.</p>
+
+	<p>The simplest case is to use a single breakpoint in your CSS. The common such is 768px, the width of an Apple iPad in horizontal mode. In this case:
+	
+	<ul>
+		<li>Every viewport up to a maximum width of 767px (<b>max-width: 767px</b>) is treated as a mobile device.</li>
+		<li>Every viewport with a minimum width of 768px (<b>min-width: 768px</b>) is treated as a tablet/laptop/desktop device.</li>
+	</ul>
+
+	<p>In a CSS file, these two media queries, as they are called, are written as shown below.</p>
+
+<pre class="language-css">
+<span class="token comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> <span class="white">and (</span><span class="token property">min-width</span>:<span class="token number">768px</span><span class="white">) {</span>
+  <span class="white">...</span>
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> <span class="white">and (</span><span class="token property">max-width</span>:<span class="token number">767px</span><span class="white">) {</span>
+  <span class="white">...</span>
+}
+</pre>
+	<IMG src="assets/img/rwd-media-queries/breakpoint-768.png" class="img-fluid" ALT="Tutorial RWD: Media Queries">
+
+</section>
+
+
+<section id="rwd-page-width" class="wrapper-content bg-white">
+	<h2>Editing the web page width in your CSS file</h2>
+	<p>In previous exercises, you added an equal amount of &#8216;white space&#8217; at the left and right edges of the web page. As a result, the content of the web page fills only 60% of the screen. </p>
+	
+	<p>This is fine for tablet and desktop screens. But it is too narrow for mobiles.</p>
+	
+	<ol>
+	<li>In your css file, replace the current page width style with the following.
+
+<pre class="language-css">
+<span class="token comment">/* ==== PAGE WIDTH  ==== */</span>
+
+<span class="token comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> <span class="white">and (</span><span class="token property">min-width</span>: <span class="token number">768px</span><span class="white">) {</span>
+    <span class="token class">body</span> <span class="white">{</span>
+       <span class="token property">padding-left</span>: <span class="token number">20%</span>;
+       <span class="token property">padding-right</span>: <span class="token number">20%</span>
+    }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> <span class="white">and (</span><span class="token property">max-width</span>: <span class="token number">767px</span><span class="white">) {</span>
+    <span class="token class">body</span> <span class="white">{</span>
+       <span class="token property">padding-left</span>: <span class="token number">5%</span>;
+       <span class="token property">padding-right</span>: <span class="token number">5%</span>
+    }
+}
+</pre>
+</li>
+
+<li>Save your CSS file.</li>
+
+<li>View the web page in your web browser at different screen sizes. You should see that the page content width changes from 90% to 60% as the screen width expands from 767px to 768px.</li>
+</ol>
+	<IMG src="assets/img/rwd-media-queries/page-wrapper-mockup.png" ALT="Tutorial RWD: Media Queries">
+</section>
+
+
+
+<section id="rwd-viewing" class="wrapper-content bg-white">
+	<h2>Viewing your responsive web page at different screen sizes</h2>
+	<p>To inspect how your responsive web page displays on various screen sizes, follow the steps below.</p>
+	
+	<p>When using the Firefox Developer Edition browser:</p>
+	<ol>
+		<li>From the <b>Tools</b> menu, choose the <b>Web Developer</b> command and then <b>Responsive Design Mode</b>.</li>
+		<li>Resize the screen simply by dragging the right-hand side of the window.
+		<span class="inside-ol">&nbsp;</span>
+		Alternatively, at the top of the window, enter a screen width and/or height. Or click the <b>Responsive</b> dropdown menu and select a mobile phone model.
+		<IMG src="assets/img/rwd-media-queries/rwd-firefox-screen-widths.png" ALT="Tutorial RWD: Media Queries">
+		To exit responsive design mode, click the Close (X) icon at the top-right of the window.</li>
+	</ol>
+
+	<p>When using the Google Chrome browser:</p>
+	<ol>
+		<li>Press <b>F12</b> to display the Chrome DevTools window.</li>
+		<li>Near the top-left of the DevTools window, click the <b>Toggle device</b> icon.</li>
+		<li>Resize the screen simply by dragging the right-hand side of the window.
+		<IMG src="assets/img/rwd-media-queries/rwd-chrome-screen-widths-1.png" ALT="Tutorial RWD: Media Queries"></li>
+		<li>At the top of the screen, enter a fixed width or height.
+		<span class="inside-ol">&nbsp;</span>
+		Alternatively, at the top of the window, enter a screen width and/or height. Or click the <b>Responsive</b> dropdown menu and select a mobile phone model.
+		<IMG src="assets/img/rwd-media-queries/rwd-chrome-screen-widths-2.png" ALT="Tutorial RWD: Media Queries"></li>
+	</ol>
+	<p>To exit DevTools, click the Close (<b>X</b>) icon at the top-right of the window.</p>
+
+</section>
+
+
+
+
+
+
+
+<section id="further-resources" class="wrapper-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+
+		<p><a href="https://www.w3schools.com/css/css3_mediaqueries.asp" target="_blank" rel="noopener" class="further-title">CSS media queries</a><br>
+		From <a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3 Schools</a></p>
+
+		<p><a href="https://www.tutorialrepublic.com/css-tutorial/css3-media-queries.php" target="_blank" rel="noopener" class="further-title">Media queries and responsive web design</a><br>
+		From <a href="https://www.tutorialrepublic.com/" target="_blank" rel="noopener">Tutorial Republic</a></p>
+
+		<p><a href="https://developers.google.com/web/fundamentals/design-and-ux/responsive/" target="_blank" rel="noopener" class="further-title">Responsive web design basics</a><br>
+		By Pete LePage at the <a href="https://developers.google.com/web/fundamentals/" target="_blank" rel="noopener">Google Developers Blog</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=2KL-z9A56SQ" target="_blank" rel="noopener" class="further-title">Video: How to use CSS media queries in less than five minutes</a><br>
+		By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank" rel="noopener">Kevin Powell</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=wFqkWczC0jA" target="_blank" rel="noopener" class="further-title">Video: CSS media queries and viewport</a><br>
+		From <a href="https://www.youtube.com/channel/UCSJbGtTlrDami-tDGPUV9-w" target="_blank" rel="noopener">Academimind</a></p>
+
+	</div>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+
+
+
