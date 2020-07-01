@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to the Box Model | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Introduction to the Box Model: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet"> 
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;></a></h3>
+	<h1>Introduction to the Box Model</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Understand the concept of the &#8216;box model &#8217; in positioning and styling elements on a web page.</li>
+		<li>Apply properties and values in CSS for three components of the box model: padding, borders and margins.</li>
+	</ul>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#box-about">About the box model</a></p>
+		<p><a href="#work-files">Downloading your sample files</a></p>
+		<p><a href="#box-resets">The box model and the div tag</a></p>
+		<p><a href="#box-text">Sibling, parent and child elements</a></p>
+		<p class="toc-indent"><a href="#box-styles">The box model and web browser resets</a></p>
+		<p><a href="#box-text">The <span>padding</span> property</a></p>
+		<p class="toc-indent"><a href="#box-styles">CSS shorthand format</a></p>
+		<p><a href="#update-head">The <span>border</span> property</a></p>
+		<p><a href="#validate-html">The <span>margin</span> property</a></p>
+		<p class="toc-indent"><a href="#validate-css">Margins can have negative values</a></p>
+		<p><a href="#validate-css">Working with classes</a></p>
+		<p><a href="#validate-css">Workng with parent-child selectors</a></p>
+		<p class="toc-indent"><a href="#validate-css">Applying multiple classes</a></p>
+		<p class="toc-indent"><a href="#web-page-uploading-github">Uploading your files to GitHub</a></p>
+
+		<p><a href="#validate-css">The box model: an overview</a></p>
+
+		<p><a href="#further-resources">Further resources</a></p>
+	</div>
+</section>
+
+<section id="box-about" class="wrapper-content bg-white">
+	<h2>About the box model</h2>
+	<p>In HTML, every element on a web page can be considered as a rectangle or more simply as a &#8216;box&#8217;. </p>
+	
+	<p>An HTML element is some content inside HTML markup tags. An element could be a heading, text paragraph, image, video or whatever.</p>
+	
+	<p>The following are all examples of elements. They have content <i>and</i> markup tags.</p>
+
+	<img src="assets/img/intro-box-model/box-model-sample-elements.png" alt="padding">
+
+	<p>The words <i>box model</i> are used when describing the layout and visual design of HTML elements in a web page.</p>
+
+	<p>You can see an example of the  <i>box model</i> in action by inspecting the home page from of <a href="https://www.aib.ie" target="_blank">AIB bank</a> website. Notice how various page elements are grouped into rectangular blocks.</p>
+	<img src="assets/img/intro-box-model/div-box-model-web-page.png"  alt="padding">
+
+	<p>The HTML tag pair most commonly by web designers to sub-divide web page content into a layout of boxes is the <b>&lt;div&gt;</b> ...<b>&lt;/div&gt;</b> tag.</p>
+
+	<p>The above AIB home page contains <b>364</b> div elements, each one of which follows the rules of the &#8216;box model&#8217;.</p>
+
+</section>
+
+
+<section id="sample-files" class="wrapper-content">
+	<h2>Downloading your sample files</h2>
+	<p>Your first step is to download the files you need for this and the next two Tutorials.</p>
+	<ol>
+		<li>Download the following compressed file to your computer:
+		<span class="inside-ol">&nbsp;</span>
+		<a href="lesson-4.zip">https://www.munnelly.com/webdesign/exercises/lesson-4.zip</a>
+
+		<li>Copy the ZIP file into your <b>websites</b> folder.</li>
+
+		<li>Uncompress the ZIP file as shown below.
+		<img src="assets/img/intro-box-model/extract-files.png" alt="file-explorer-unzip-files"></li>
+		<li>The files will unzip into a sub-folder of your <b>websites</b> folder named <b>lesson-4</b>.
+		<span class="inside-ol">&nbsp;</span>
+		You should see six files: two HTML files, two CSS files and two images of image files.
+
+		<span class="inside-ol">&nbsp;</span>
+		<b>sandbox-box-model.html</b><br>
+		<b>sandbox-box-model.css</b><br>
+		<b>page-9.html</b><br>
+		<b>style-9.css</b><br>
+		<b>student-computer-screen.jpg</b><br>
+		<b>three-staff.png</b></li>
+
+		<li>Copy all six files from the <b>lesson-4</b> sub-folder into your main <b>websites</b> folder.</li>
+
+	<p>You are now ready to work with the sample files you have downloaded.</p>
+
+
+</section>
+
+<section id="box-about" class="wrapper-content bg-white">
+	<h2>The box model and the div tag</h2>
+
+
+
+
+
+	<h3>A div has no style</h3>
+
+	<h3>A div has no height</h3>
+
+	<h3>A div is 100% wide</h3>
+
+	<h3></h3>
+
+	<h3></h3>
+
+	<h3></h3>
+
+	<h3></h3>
+
+	<h3></h3>
+
+
+</section>
+
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h2>The <span>padding</span> property</h2>
+	<p>Padding is the spacing between the content of an element and its four edges &#8211; top, bottom, left and right. You can think of padding as an element&#8217;s <i>inside</i> spacing</i>.</p>
+
+	<img src="assets/img/intro-box-model/div-margins-padding.png" alt="padding">
+	
+	<p>Padding does <i>not</i> affect the spacing between an element and any other elements around it. See the examples below.</p>
+
+	<img src="assets/img/intro-box-model/div-margins-no-padding.png" alt="padding">
+
+	<p>Padding is not just for div elements. You can also add padding around text and buttons.</p>
+
+	<img src="assets/img/intro-box-model/div-padding-more.png" alt="padding">
+
+	<p>Let&#8217;s add some padding to the four sides of your sample div element.</p>
+
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding-top</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-right</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-bottom</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-left</span>: <span class="token number">16px</span>; 
+}</pre>
+
+
+	<h3>CSS shorthand format</h3>
+	<p>Because all four padding values are the same, you can rewrite these four style rules into one CSS <i>shorthand</i> rule as follows.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding</span>: <span class="token number">16px</span>; 
+}</pre>
+
+<p>Padding values may be different on different sides of an element. Copy-and-paste the following to your CSS stylesheet.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding-top</span>: <span class="token number">12px</span>; 
+    <span class="token property">padding-right</span>: <span class="token number">32px</span>; 
+    <span class="token property">padding-bottom</span>: <span class="token number">14px</span>; 
+    <span class="token property">padding-left</span>: <span class="token number">16px</span>; 
+}</pre>
+
+<p>In CSS shorthand format, you could rewrite this on a single line as follows.</p>
+
+<pre class="language-css">
+    <span class="token property">padding</span>: <span class="token number">12px 32px 14px 16px</span>; 
+</pre>
+
+<p>A eaay way to remember the order in which these four values (top, right,bottom and left) appear is with the word &#8216;trouble&#8217;
+
+
+<p>Copy-and-paste the following to your CSS stylesheet.</p>
+
+<pre class="language-css">
+    <span class="token property">padding</span>: <span class="token number">16px</span>; 
+</pre>
+
+
+
+</section>
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h2>The <span>border</span> property</h2>
+	<p> Optionally, you can add borders to a div or other element. A border has three sub-properties as follows:
+	
+	border-style (typically, solid)
+	border-width (in pixels)
+	border-color</p>
+
+	<p>Let&#8217;s add four borderr to our sample div element. Copy-and-pste the folloiwng style reules to repeplce what is is currently in your stylesheet.
+	
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border-style</span>: <span class="token value-text">solid</span>; 
+    <span class="token property">border-color</span>: <span class="token value-text">green</span>; 
+    <span class="token property">border-top-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-right-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-bottom-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-left-width</span>: <span class="token number">4px</span>; 
+}</pre>
+
+<p>You can see that the borde has the samewidth onall four sides of the div. So you can rewrite the four border-width lines on a single line as follows.</p>
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border-style</span>: <span class="token value-text">solid</span>; 
+    <span class="token property">border-color</span>: <span class="token value-text">green</span>; 
+    <span class="token property">border-width</span>: <span class="token number">4px</span>; 
+}</pre>
+
+<p>You can further shorten the three lines of border properties and values as follows.</p>
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+
+	</p>
+
+</section>
+
+
+
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h2>The <span>margin</span> property</h2>
+
+	<p>Margin is spacing between an element and other elements around it. You can think of margin as an element&#8217;s <i>outside spacing</i>.</p>
+	
+	<img src="assets/img/intro-box-model/div-margins-highlighted-padding.png" alt="margin">
+
+	<p>The greater the margin values of an element, the further it &#8216;pushes&#8217; or &#8216;shoves&#8217; other elements away from it. If div elements on the same web page had no margins, they would be no space between them. See the example below.</p>
+
+	<img src="assets/img/intro-box-model/div-no-margins-padding.png" alt="padding">
+
+
+	<p>Let&#8217;s add some margins to our sample div element.</p>
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">margin</span>: <span class="token number">32px</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+	<p>In the above exaample, all four margins have the same value of 32px. Here is an example where allfour margins are different.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">margin-top</span>: <span class="token number">32px</span>; 
+    <span class="token property">margin-right</span>: <span class="token number">32px</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">32px</span>; 
+    <span class="token property">margin-left</span>: <span class="token number">32px</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+
+	<p>It s ore common for divs andother elements to hae only top and bottom magins than left and right ones.</p>
+
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">margin-top</span>: <span class="token number">0</span>; 
+    <span class="token property">margin-right</span>: <span class="token number">0</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">322px</span>; 
+    <span class="token property">margin-left</span>: <span class="token number">0</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+
+	<p>Bec f th reset rle in at the topof your stylesheet file, you do not need to wrie lies uch inyur cSS code:
+
+    <span class="token property">margin-top</span>: <span class="token number">0</span>; 
+    <span class="token property">margin-right</span>: <span class="token number">0</span>;
+
+
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">margin-bottom</span>: <span class="token number">32px</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+
+</section>
+
+
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h3>Margins can have negative values</h3>
+
+</section>
+
+
+<section id="further-resources" class="wrapper-content">
+	<h2>Assigning classs namesto div elements</h2>
+	<p>Modern web pages typically have many dozens of div elememts within them. Some of thsse divs will share common properties. Other divs willbe very different from each oher.</p>
+	<p>To design such web pages, you need to assign what are called <i>classes</i> to your div elements.</p>
+	
+	<p>In effect, a class is a <i>version</i> of a div or other element.</p>
+
+	<p>You assign classes to divs in a web page by giving your div elements <i>class names</i>. You can see some examples below of class names assigned to divs in a HTML file.</p>
+
+	<p>Note that:</p>
+	<ul>
+		<li>Class names are shown within a pair of doible quotes ("").</li>
+		<li>Class cannot have space withn them. You can type the hyphen (-) character to join words within a single class name.</li>
+		<li>An element canhave more than one class name. Separate the different class names with a sngle space.</li>
+		<li>If an element has more than one class name, the order of the names is not important.</li>
+	</ul>
+
+	<p>You can delete the current content of your webpage and repalce it by copying-and-pasting the following:</p>
+
+	<p>You now ave four div elements, each with its own class name. Save your web page.</p>
+
+</div>
+
+</section>
+
+<section id="further-resources" class="wrapper-content">
+	<h2>Targetting elements with CSS parent-child selectors</h2>
+	<p>Now you will apply four differen styles to your four div elemnts. This is possible only becse you have given each div lents a unique name of tis own
+	</p>
+
+
+	<p>The visual effect you want to achice is displated below. Each div elements has a diffrent backgorrn color. Two ofthe divs have text parataphs ina dark colour. And two thers have text in white.</p>
+
+	<p>In your CSS file, remove and div styles. nw, copy-and-paste the followog.</p>
+
+	<p>You nownow applied the correct background colours. Note that you must type the dot (.) character to te sleector in a cSS file when that targes a an elemts with a class name in a HTML file.</p>
+
+	<p>Next, let's apply yhe colrs to paragras and heaidngs.</p>
+
+
+	<h3>Parents, childred and decendents</h3>
+	<p></p>
+
+
+	<h3>Applting multilpe classes</h3>
+	<p></p>
+</section>
+
+<section id="further-resources" class="wrapper-content">
+	<h2>The box model: an overview</h2>
+	<p></p>
+
+
+	<h3>The four components of a web page element</h3>
+	<p>In the box model, every HTML element can be viewed as containing the following items:</p>
+
+	<ul>
+		<li><b>Content</b>: The content of the box. This could be text, images, videos, icons and so on.</li>
+
+		<li><b>Margin</b>: You can think of this as the box&#8217;s <em>outside spacing</em>. Margins separate the box from any surrounding elements on the same web page.
+		<span class="inside-ol">&nbsp;</span>
+		The greater the margin values of a box, the futher it "pushes" or "shoves" other elements away from it. See the example below.
+
+		</li>
+
+		<li><b>Border</b>: Optionally, you can add borders to any box, using your chosen colour, thickness and style.</li>
+
+		<li><b>Padding</b>: You can think of this as the box's <em>inside spacing</em>. You will typically set padding values where you want to add some spacing between the content of a box and its four edges - top, bottom, left and right. See the examples below.
+		
+		
+		
+		</li>
+
+	</ul>
+
+	<p>For padding, borders and margins, you can use the same value for all four box edges, or assign different values to each individual edge.</p>
+
+	<IMG src="assets/img/intro-box-model/boxmodel.gif" style="max-width:500px" ALT="Tutorial RWD: Media Queries">
+
+</section>
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h2>Block-level and inline-level elements</h2>
+	<p>Before continuing, you need to add the <b>box-sizing: border-box</b> rule to the browser resets section at the top of your CSS file:</p>
+
+<pre class="language-css">
+<span class="token comment">/* ==== BROWSER RESETS  ==== */</span>
+<span class="token asterisk">*</span> { <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token number">0</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span>; <span class="token property">font-weight</span>: <span class="token value-text">normal</span>; <span class="token property">font-size</span>: <span class="token number">16px</span> }  
+<span class="token class">body</span>, <span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> } 
+<span class="token class">body</span> { <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin</span>: <span class="token number">0</span> <span class="token value-text">auto</span> }
+</pre>
+
+</section>
+
+
+<section id="box-resets" class="wrapper-content bg-white">
+	<h2>Box model: web browser resets</h2>
+	<p>Before continuing, you need to add the <b>box-sizing: border-box</b> rule to the browser resets section at the top of your CSS file:</p>
+
+<pre class="language-css">
+<span class="token comment">/* ==== BROWSER RESETS  ==== */</span>
+<span class="token asterisk">*</span> { <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token number">0</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span>; <span class="token property">font-weight</span>: <span class="token value-text">normal</span>; <span class="token property">font-size</span>: <span class="token number">16px</span> }  
+<span class="token class">body</span>, <span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> } 
+<span class="token class">body</span> { <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin</span>: <span class="token number">0</span> <span class="token value-text">auto</span> }
+</pre>
+
+</section>
+
+
+<section id="further-resources" class="wrapper-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+		<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="noopener"  class="further-title">Introduction to the CSS basic box model</a>
+		<br>From the <a href="https://developer.mozilla.org/" target="_blank" style="font-weight: normal">Mozilla Developer Network</a></p>
+
+		<p><a href="https://www.internetingishard.com/html-and-css/css-box-model/" target="_blank" rel="noopener" class="further-title">CSS box model</a>
+		<br>From <a href="https://internetingishard.com" target="_blank"  style="font-weight: normal">Interneting is Hard</a></p>
+
+		<p><a href="https://dev.to/neshaz/css-101-the-box-model-jjp" target="_blank" rel="noopener" class="further-title">CSS 101: The box model</a><br>
+		by <a href="https://dev.to/neshaz" target="_blank"  style="font-weight: normal">Nesha Zoric</a> on <a href="https://dev.to/" target="_blank"  style="font-weight: normal">dev.to</a></p>
+
+		<p><a href="https://torquemag.io/2018/06/css-box-model/" target="_blank" rel="noopener" class="further-title">The CSS box model: How to use it correctly</a><br>
+		by <a href="https://torquemag.io/author/nschaferhoff1234/" target="_blank"  style="font-weight: normal">Nick Sch&#228;ferhoff</a> on <a href="https://torquemag.io/" target="_blank"  style="font-weight: normal">Torque Mag</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=rIO5326FgPE" target="_blank" rel="noopener" class="further-title">Video: Learn CSS box model in eight minutes</a>
+		<br>From <a href="https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw" target="_blank"  style="font-weight: normal">Web Dev Simplified</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=lPm8lK4C7nc" target="_blank" rel="noopener" class="further-title">Video: CSS box model tutorial</a>
+		<br>From <a href="https://www.youtube.com/channel/UCv9bWHC0DIn-Xb7ALNoOGWQ" target="_blank"  style="font-weight: normal">W3Schools</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=M6coJNLFBWI" target="_blank" rel="noopener" class="further-title">Video: The CSS box model &#8211; margin, borders and padding explained</a>
+		<br>By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank"  style="font-weight: normal">Kevin Powell</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=WlGQdgy-M6w" target="_blank" rel="noopener" style="font-weight:bold">Video: Box-sizing &#8211; border-box explained</a>
+		<br>By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank"  style="font-weight: normal">Kevin Powell</a></p>
+
+	</div>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+</body>
+</html>
+
