@@ -51,11 +51,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<h2>Learning Goals</h2>
 	<p>At the end of this Lesson you will be able to:</p>
 	<ul>
-		<li>Understand the concept of fluid typography in web design.</li>
-		<li>Recognise that, for fluid typography to work, you must choose a minimum and a maximum viewport (screen) width.</li>
-		<li>Set a maximum viewport width in the browser resets at the beginning of a CSS file.</li>
-		<li>Apply Mike Riethmuller&#8217;s fluid typography equation to the CSS styles that control the headings, paragraphs and other text elements in a web page.</li>
-		<li>Understand that the smallest and largest font sizes are the only two values you need to change in the typographic equation.</li>
+		<li>Add media queries to a CSS file for the 768px breakpoint.</li>
+		<li>Use a media query to create responsive horizontal and vertical padding on a web page.</li>
 	</ul>
 
 </section>
@@ -64,42 +61,128 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="wrapper-content bg-white">
 	<div class="box-toc">
 		<h2>Contents</h2>
-		<p><a href="#fluid-typography-about">About fluid typography</a></p>
-		<p class="toc-indent"><a href="#min-max-web-page-widths">Minimum (320px) and maximum (1600px) viewport widths</a></p>
-		<p class="toc-indent"><a href="#max-width-browser-reset">Fluid typography: browser resets</a></p>
-		<p><a href="#fluid-typogaphy-equation">The fluid typography equation</a></p>
+		<p><a href="#media-query-about">About media queries</a></p>
+		<p class="toc-indent"><a href="#media-query-format">The format of a media query</a></p>
+		<p class="toc-indent"><a href="#media-query-resets">Media queries: browser resets</a></p>
 		<p><a href="#responsive-style">Editing your three sample stylesheets</a></p>
 		<p><a href="#github-upload">Uploading your CSS files to GitHub</a></p>
 	</div>
 </section>
 
 
-<section id="fluid-typography-about" class="wrapper-content bg-white">
+<section id="media-query-about" class="wrapper-content bg-white">
 	<h2>About media queries</h2>
-	<p>Fluid typography means that the font sizes of text &#8211; headings, paragraphs, bulleted lists, menu items &#8211; on a web page &#8216;scale&#8217; (shrink or expand) smoothly according to the width of the user&#8217;s viewport (screen).</p>
+	<p>In the CSS stylesheets you have created so far, all the style rules they contain apply to <i>all</i> web pages these CSS files are linked to.</p>
+	
+	<p>This will be true for every type of device used &#8211; mobiles, tablets, laptops or desktops.</p>
+	
+	<p>So-called <i>media queries</i> enable web designers to create <i>conditional</i> style rules in CSS.</p>
+	
+	<p>That is, styles that are applied to web pages <i>only when certain conditions are met</i>.</p>
 
-	<p>The animated gif below is taken from an article on the <a href="https://css-tricks.com/snippets/css/fluid-typography/" target="_blank">CSS Tricks</a> website that features the widely-used implementation of the fluid typography approach developed by Australian web designer <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+	<p>Consider the example of a <b>&lt;h1&gt;</b> main heading. If you simply entered the following CSS rule, all main headings are displayed in the colour blue on all types of users devices.</p>
 
-	<img src="https://css-tricks.com/wp-content/uploads/2017/02/css-fluid-text-calc.gif" alt="fluid typography">
-</section>
+<pre class="language-css">
+<span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">blue</span>;
+}</pre>
 
-
-
-
-<section id="min-max-web-page-widths" class="wrapper-content bg-white">
-	<h3>Minimum (320px) and maximum (1600px) viewport widths</h3>
-	<p>To use fluid typography in your web pages, you need to decide on two values:</p>
+	<p>But, suppose:</p>
 	
 	<ul>
-		<li><b>Smallest web page width</b>: A common choice is <b>320px</b>, the width of the screen of the most widely-used small mobile phone, the Apple iPhone 5.</li>
-		<li><b>Largest web page width</b>: Popular choices include 1366px (a common width of Windows laptop screens) and 1440px (a common width of Apple laptop screens). We will use a larger value of <b>1600px</b>.</li>
+		<li>You want your main headings to display in blue on laptops and desktops, and on Apple iPad tablets in landscape orientation.
+<pre class="language-css">
+  <span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">blue</span>;
+}</pre>
+		In other words, blue headings on &#8216;big&#8217; screens.</li>
+		<li>On mobiles and iPad tablets in portrait orientation, you want your main headings to be displayed in the colour red.
+<pre class="language-css">
+  <span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">red</span>;
+}</pre>		
+		In other words, red headings on &#8216;small&#8217; screens.</li>
 	</ul>
 
-	<p>You will use both the 320px and 1600px values in the so-called fluid typography equation when setting fluid values for the <b>font-size</b> rule in CSS.</p>
+	<p>How can this be done?</p>
+
+	<p>The solution is to use two <i>media queries</i>.</p>
+
+	<p>In simple terms, you would:</p>
+	
+	<ul>
+		<li>Enter both rules in the CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;big&#8217; screens.</li>
+
+		<li>Include with each rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is less than or greater than a certain width.</li>
+	</ul>
+
+	<IMG SRC="assets/img/rwd-media-queries/media-query-1.png"  ALT="Project Animation Google Fonts">
+
+	<p>Note that all media queries have both a <i>start point</i> and an <i>end point</i>. </p>
+	
+	<p>It is not enough to &#8216;open&#8217; them. You must also &#8216;close&#8217; them.</p>
+
+	<p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines  &#8211; will be controlled by the unclosed media query.</p>
+
+	
+	<h3 id="media-query-format">The format of a media query</h3>
+
+	<p>In CSS, a media is written in the following general format:</p>
+
+
+	<IMG SRC="assets/img/rwd-media-queries/media-query-2.png"  ALT="Project Animation Google Fonts">
+
+	<p>The word &#8216;all&#8216; means that the style rule or rules within the media query apply to the web page <i>both</i> as it is displayed on-screen and printed on paper.</p>
+
+	<p>Note that there are now <i>two pairs</i> of curly braces:</p>
+	<ul>
+		<li>One pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <b>h1</b>.</li>
+
+		<li>And a second pair of opening and closing curly braces that encloses the media query.</li>
+	</ul>
+
+	<h3>The condition format a media query</h3>
+
+	<p>Web designers most commonly use media queries that depend on the width of the web browser viewport.</p>
+	
+	<p>In simple terms, viewport widths are either &#8216;big&#8217; (wide) or &#8216;small&#8217; (narrow).</p>
+
+
+	<ul>
+		<li><b>Big viewports</b>: These are viewports that are 768 pixels wide <i> or wider</i>.
+		<span class="inside-ol">&nbsp;</span>
+		In other words, viewports with a <b>min-width</b> value of <b>768px</b>.</li>
+		<li><b>Small viewports</b>: These are viewports that are 767 pixels wide <i>or narrower</i>.
+		<span class="inside-ol">&nbsp;</span>
+		In other words, viewports with a <b>max-width</b> value of <b>767px</b>.</li>
+	</ul>
+
+	<p>You can now write a media query in its full, valid format:</p>
+
+
+<pre class="language-css">
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> and (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+     <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">blue</span> }
+}
+
+<span class="token comment">/* Desktops */</span>
+<span class="token purple">@media</span> <span class="token value-text">all</span> and (<span class="token property">max-width</span>: <span class="token number">767px</span>) { 
+    <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">red</span> }
+}</pre>
+
+	<p>In this example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
+
+	<p>Below are the same two media queries, but with the single style rule for the <b>&lt;h1&gt;</b> selectors written on a single line.</p>
+	<IMG SRC="assets/img/rwd-media-queries/media-query-3.png"  ALT="Project Animation Google Fonts">
+
+	<p>Again, note the <i>two pairs</i> of opening and closing curly braces.</p>
+
 </section>
 
 
-<section id="max-width-browser-reset" class="wrapper-content bg-white">
+
+<section id="media-query-resets" class="wrapper-content bg-white">
 	<h3>Media queries: browser resets</h3>
 	<p>When using the fluid typographic equation, it is best to update the web browser resets in your stylesheet file as follows:</p>
 
@@ -115,46 +198,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </section>
 
-
-<section id="fluid-typogaphy-equation" class="wrapper-content bg-white">
-	<h2>The fluid typography equation</h2>
-
-	<p>You are now ready to use the fluid typography equation from <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
-
-	<p>At first sight, the fluid typography equation looks complex. But it becomes easy to work with if you remember the following two points:</p>
-	
-	<ul>
-		<li>Except for two values, the equation is always the same.</li>
-		<li>The only two values you ever need to change are the <i>smallest</i> and <i>largest</i> font size values.</li>
-	</ul>
-
-	<p>For example, in the case of paragraph text, you might:</p>
-	<ul>
-		<li>Set a font-size value of <b>15px</b> for the smallest mobile screen, and</li>
-		<li>Set a font-size value of <b>18px</b> for the largest laptop/desktop screen.</li>
-	</ul>
-	
-	<p>Your fluid typography equation for text paragraphs would then be as shown below.</p>
-
-<pre class="language-css">
-<span class="token class">p</span> {
-    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">15px</span> + (<span class="token number">18</span> - <span class="token number">15</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
-}</pre>
-
-	<p>As for the other values in the equation:</p>
-
-	<ul>
-		<li><b>100vw</b>: The letters vw stand for viewport or screen, and 100 means 100% wide.</li>
-		<li><b>320</b>: This is the width you have chosen for the narrowest screen.</li>
-		<li><b>1600</b>: This is the width you have chosen for the widest screen. </li>
-	</ul>
-
-	<p>As you can see from the four examples of fluid font sizes below, you only ever need to change the smallest and largest font size values.</p>
-	<IMG src="assets/img/rwd-typography/equation-examples.png" alt="fluid type examples">
-
-	<p>In the remainder of this Tutorial, you will apply media queries to the stylesheet files for the <b>page-10.html</b>, <b>page-11.html</b> and <b>page-12.html</b> sample web pages you created previously.</p>
-
-</section>
 
 
 <section id="responsive-style" class="wrapper-content">
