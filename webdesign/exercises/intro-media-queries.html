@@ -63,7 +63,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<h2>Contents</h2>
 		<p><a href="#media-query-about">About media queries</a></p>
 		<p class="toc-indent"><a href="#media-query-format">The format of a media query</a></p>
-		<p class="toc-indent"><a href="#media-query-resets">Media queries: browser resets</a></p>
+		<p class="toc-indent"><a href="#media-query-resets">Media queries: web browser resets</a></p>
 		<p><a href="#responsive-style">Editing your three sample stylesheets</a></p>
 		<p><a href="#github-upload">Uploading your CSS files to GitHub</a></p>
 	</div>
@@ -72,36 +72,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section id="media-query-about" class="wrapper-content bg-white">
 	<h2>About media queries</h2>
-	<p>In the CSS stylesheets you have created so far, all the style rules they contain apply to <i>all</i> web pages these CSS files are linked to.</p>
+	<p>In the CSS stylesheets you have created so far, the style rules they contain apply to <i>all</i> web pages these CSS files are linked to.</p>
 	
 	<p>This will be true for every type of device used &#8211; mobiles, tablets, laptops or desktops.</p>
 	
-	<p>So-called <i>media queries</i> enable web designers to create <i>conditional</i> style rules in CSS.</p>
-	
-	<p>That is, styles that are applied to web pages <i>only when certain conditions are met</i>.</p>
-
-	<p>Consider the example of a <b>&lt;h1&gt;</b> main heading. If you simply entered the following CSS rule, all main headings are displayed in the colour blue on all types of users devices.</p>
+	<p>Consider the example below of a <b>&lt;h1&gt;</b> main heading. If you simply entered this to a CSS file, all main headings are displayed in the colour blue on all types of user devices.</p>
 
 <pre class="language-css">
 <span class="token class">h1</span> {
     <span class="token property">color</span>: <span class="token value-text">blue</span>;
 }</pre>
 
-	<p>But, suppose:</p>
+	<p>So-called <i>media queries</i> enable web designers to create <i>conditional</i> style rules in CSS.</p>
+	
+	<p>That is: style rules that apply to linked web pages <i>only when certain conditions are met</i>.</p>
+
+	<p>Suppose, for example:</p>
 	
 	<ul>
-		<li>You want your main headings to display in blue on laptops and desktops, and on Apple iPad tablets in landscape orientation.
+		<li>You would like your main headings to display in blue on laptops and desktops, and also on Apple iPad tablets.
 <pre class="language-css">
   <span class="token class">h1</span> {
     <span class="token property">color</span>: <span class="token value-text">blue</span>;
 }</pre>
-		In other words, blue headings on &#8216;big&#8217; screens.</li>
-		<li>On mobiles and iPad tablets in portrait orientation, you want your main headings to be displayed in the colour red.
+		In other words, you want blue headings on &#8216;big&#8217; screens.</li>
+
+		<li>On mobiles, however, you would like your main headings to be displayed in the colour red.
 <pre class="language-css">
   <span class="token class">h1</span> {
     <span class="token property">color</span>: <span class="token value-text">red</span>;
 }</pre>		
-		In other words, red headings on &#8216;small&#8217; screens.</li>
+		In other words, you want red headings on &#8216;small&#8217; screens.</li>
 	</ul>
 
 	<p>How can this be done?</p>
@@ -111,9 +112,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<p>In simple terms, you would:</p>
 	
 	<ul>
-		<li>Enter both rules in the CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;big&#8217; screens.</li>
+		<li>Enter both style rules in the CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;big&#8217; screens.</li>
 
-		<li>Include with each rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is less than or greater than a certain width.</li>
+		<li>Include with each style rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is <b>less than</b> or <b>greater than</b> a certain width.</li>
 	</ul>
 
 	<IMG SRC="assets/img/rwd-media-queries/media-query-1.png"  ALT="Project Animation Google Fonts">
@@ -122,7 +123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 	<p>It is not enough to &#8216;open&#8217; them. You must also &#8216;close&#8217; them.</p>
 
-	<p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines  &#8211; will be controlled by the unclosed media query.</p>
+	<p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines long  &#8211; will be controlled by the unclosed media query.</p>
 
 	
 	<h3 id="media-query-format">The format of a media query</h3>
@@ -136,14 +137,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<p>Note that there are now <i>two pairs</i> of curly braces:</p>
 	<ul>
-		<li>One pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <b>h1</b>.</li>
+		<li>n inner pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <b>h1</b>.</li>
 
-		<li>And a second pair of opening and closing curly braces that encloses the media query.</li>
+		<li>And an outer pair of opening and closing curly braces that encloses the media query.</li>
 	</ul>
 
 	<h3>The condition format a media query</h3>
 
-	<p>Web designers most commonly use media queries that depend on the width of the web browser viewport.</p>
+	<p>Web designers most commonly use media queries that respond to the width of the web browser viewport.</p>
 	
 	<p>In simple terms, viewport widths are either &#8216;big&#8217; (wide) or &#8216;small&#8217; (narrow).</p>
 
@@ -157,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		In other words, viewports with a <b>max-width</b> value of <b>767px</b>.</li>
 	</ul>
 
-	<p>You can now write a media query in its full, valid format:</p>
+	<p>You can now write two media queries in their full, valid format:</p>
 
 
 <pre class="language-css">
@@ -166,14 +167,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">blue</span> }
 }
 
-<span class="token comment">/* Desktops */</span>
+<span class="token comment">/* Mobiles */</span>
 <span class="token purple">@media</span> <span class="token value-text">all</span> and (<span class="token property">max-width</span>: <span class="token number">767px</span>) { 
     <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">red</span> }
 }</pre>
 
 	<p>In this example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
 
-	<p>Below are the same two media queries, but with the single style rule for the <b>&lt;h1&gt;</b> selectors written on a single line.</p>
+	<p>Below are the same two media queries, but with the style rule for the <b>&lt;h1&gt;</b> selectors written on a single line.</p>
 	<IMG SRC="assets/img/rwd-media-queries/media-query-3.png"  ALT="Project Animation Google Fonts">
 
 	<p>Again, note the <i>two pairs</i> of opening and closing curly braces.</p>
@@ -183,8 +184,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <section id="media-query-resets" class="wrapper-content bg-white">
-	<h3>Media queries: browser resets</h3>
-	<p>When using the fluid typographic equation, it is best to update the web browser resets in your stylesheet file as follows:</p>
+	<h3>Media queries: web browser resets</h3>
+	<p>When using the media queries to control the spacing around and within HTML elements, it is best to update the web browser resets in your stylesheet file as follows:</p>
 
 <pre class="language-css">
 <span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
@@ -194,7 +195,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
 </pre>
 
-<p>You can see that this new browser reset block includes <b>100%</b> height values.</p>
+<p>This has to do with setting percentage values for horizontal and vertical widths:</p>
+
+<ul>
+	<li><b>Horizontal values</b>: Suppose, for mobile viewports, you would like a left and right padding value of <b>8%</b> for elements with a class name of <b>container-block</b>.
+	<span class="inside-ol">&nbsp;</span>
+	Your media query would look as follows.
+
+<pre class="language-css">
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> and (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">.container-block</span> { <span class="token property">padding-left</span>: <span class="token value-text">8%</span>; <span class="token property">padding-right</span>: <span class="token value-text">8%</span> }
+}</pre>
+	This value of <b>8%</b> clearly means eight-per cent of the physical width of the viewport on the user&#8217; mobile device.</li>
+
+	<li><b>Vertical values</b>: Suppose, for mobile viewports, you would like a top and bottom padding value of <b>12%</b> for elements with a class name of <b>container-block</b>.
+	<span class="inside-ol">&nbsp;</span>
+	Your media query would look as follows.
+
+<pre class="language-css">
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token value-text">all</span> and (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">.container-block</span> { <span class="token property">padding-top</span>: <span class="token value-text">12%</span>; <span class="token property">padding-bottom</span>: <span class="token value-text">12%</span> }
+}</pre>
+	But <b>12%</b> of what?
+	<span class="inside-ol">&nbsp;</span>
+	Of the actual height of the viewport on the device?
+	<span class="inside-ol">&nbsp;</span>
+	Or maybe of the height of the web page?
+</li>
+</ul>
+
+<p>To avoid this possible conflict of &#8216;how high is height&#8217;, web designers add <b>100%</b> height values to browser resets at the top of CSS files.</p>
 
 </section>
 
