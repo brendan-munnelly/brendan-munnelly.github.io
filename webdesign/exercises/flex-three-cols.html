@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>CSS Flexbox: Three Columns | Web Design & Development Tutorials | Brendan Munnelly</title>
-	<meta name="description" content="Introduction to the Box Model: A Web Design and Development Tutorial from Brendan Munnelly">
+	<meta name="description" content="Three-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds: A Web Design and Development Tutorial from Brendan Munnelly: A Web Design and Development Tutorial from Brendan Munnelly">
 
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
@@ -49,11 +49,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<li>Create and style responsive three-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds.</li>
 	</ul>
 
+	<p>You can view a finished version of the sample three-column web page you style in this Tutorial by clicking the link below. The finished sample page will open in a new tab of your web browser.</p>
+
 	<div class="four-samples">
 		<div>
+			<a href="final-flex-columns/flex-three-columns.html" target="_blank"><img src="assets/img/flex-three-cols/example-one-browser.jpg" alt="Sample image"></a>
 			<a href="final-flex-columns/flex-three-columns.html" target="_blank">flex-three-columns.html</a>
 		</div>
 	</div>
+
 </section>
 
 
@@ -74,7 +78,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="sample-page" class="wrapper-content bg-white">
 
 	<h2>Working with the three-column web page</h2>
-	<p>In this Tutorial, you will work with the sample three-column web page, stylesheet and six of the image files you downloaded in a previous Tutorial.</p>
+	<p>In this Tutorial, you will work with the sample three-column web page, the sample three-column stylesheet and six of the image files you downloaded in a previous Tutorial.</p>
 	
 	<ol>
 		<li>In Visual Studio Code, open the following two files: 
@@ -90,47 +94,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 				<li>All the content is 100% wide, left-to-right, across the browser window.
 				<span class="inside-ol">&nbsp;</span>
-				That is because the <b>item-col-3</b> child columns have not yet been styled.</li>
+				That is because the <b>item-col-3</b> child columns are defaulting to 100% width.</li>
 			</ul>
 		</li>
 		
-		<li>In VS Code, in the <b>flex-three-columns.css</b> stylesheet, add the following two sets of padding properties and styles for the <b>container-block</b> div. 
+		<li>In VS Code, in the <b>flex-three-columns.css</b> stylesheet, add the following two pairs of padding properties and values for the <b>container-block</b> div.
 		<span class="inside-ol">&nbsp;</span>
 		Each style rule is inside a media query.
 
 <pre class="language-css">
 <span class="token comment">/* ========== MAIN CONTENT CONTAINERS ========= */</span>
-/* Desktops */
-@media all and (min-width:768px) { .container-block { padding: 4% 8% } }
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">4% 8%</span> } }
 
-/* Mobiles */
-@media all and (max-width:767px) { .container-block { padding: 11% 8% } }
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">max-width</span>:<span class="token number">767px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">11% 8%</span> } }
 </pre></li>
 
-		<li>Save the <b>flex-three-columns.css</b> file and view the web page in your browser.</li>
+		<li>Save the <b>flex-three-columns.css</b> stylesheet and view the web page in your browser.</li>
 	</ol>
 
 	<p>You should now see spacing around the four edges of the <b>container-block</b> parent divs.</p>
 
-
-
-
-
 	<h3 id="flex-child">Setting up the flexbox child columns</h3>
 
-	<p>Your next task is to set up the styles of the child columns to create your two-column layout on desktop and laptop screens.</p>
+	<p>Your next task is to set the width of the <b>.item-col-3</b> child columns to create your three-column layout on desktop and laptop screens.</p>
 
 	<ol>
-		<li>In VS Code, in the <b>flex-three-columns.css</b> stylesheet, add the following width rule to your <b>item-col-3</b> child column divs within the media query for desktop/laptop screens.
+		<li>In VS Code, in the <b>flex-three-columns.css</b> stylesheet, add the following width rule to your <b>item-col-3</b> child column div within the media query for desktop/laptop screens.
 <pre class="language-css">
 <span class="token comment">/* Desktops: flexbox child columns */</span>
-@media all and (min-width: 768px) {
-    .item-col-3 { width: 29% }
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) {
+    <span class="token class">.item-col-3</span> { <span class="token property">width</span> <span class="token number">29%</span> }
 }</pre>
 
-	Note that, on mobile devices, your columns will be the full width of the screen.</li>
+	Note that, on mobile devices, your columns will fill the full width of the screen.</li>
 
-	<li>Save the <b>flex-three-columns.css</b> file and view the web page in your browser.</li>
+	<li>Save the <b>flex-three-columns.css</b> stylesheet and view the web page in your browser.</li>
 
 	</ol>
 
@@ -148,30 +148,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <pre class="language-css">
 <span class="token comment">/* Flexbox parent container */</span>
-.container-flexbox {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; 
+<span class="token class">.container-flexbox</span> {
+   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+   <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>; 
+   <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>; 
 }</pre></li>
 
-	<li>Save the <b>flex-three-columns.css</b> file and view the web page in your browser.</li>
+	<li>Save the <b>flex-three-columns.css</b> stylesheet and view the web page in your browser.</li>
 
 	</ol>
 
 <p>Your child elements should now display correctly in a three-column layout on desktops/laptop screens.</p>
 
-<p>Use your web browser's screen resizing feature to confirm that your layout displays as a single column on mobile-sized screens.</p>
+<p>Use your web browser&#8217;s screen resizing feature to confirm that your layout displays as a single column on mobile-sized screens.</p>
 
 </section>
 
 <section id="colour-background" class="wrapper-content bg-white">
 	<h2>Adding coloured backgrounds</h2>
 
-	<p>Next, you will add coloured backgrounds to your two-column layout. First, to the parent container, and then to individual child elements.</p>
+	<p>Next, you will add coloured backgrounds to your two-column layout.</p>
+	<ul>
+		<li>First, to the parent container, and</li>
 
+		<li>Then to an individual child element.</li>
+	</ul>
 
 	<h3 id="colour-parent">Adding a coloured background to the parent container</h3>
-	<p>Follow these steps</p>
+	<p>Follow these steps.</p>
 
 	<ol>
 		<li>In VS Code, in the <b>flex-three-columns.html</b> web page, add the <b>bg-dark</b> class to the first parent element.</li>
@@ -191,7 +195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 Add the following code under it:
 
 <pre class="language-css">
-.container-flexbox.bg-dark .item-col-3 * { color: #fff }
+<span class="token class">.container-flexbox.bg-dark .item-col-3</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
 </pre></li>
 
 		<li>Save the web page and view the result in your browser.</li>
@@ -200,7 +204,7 @@ Add the following code under it:
 
 
 	<h3 id="colour-child">Adding a coloured background to a child element</h3>
-	<p>Follow these steps</p>
+	<p>Follow these steps.</p>
 
 	<ol>
 		<li>In VS Code, in the <b>flex-three-columns.html</b> web page, add the <b>bg-dark</b> class to the second (middle) <b>item-col-3</b> child column inside the second parent container.</li>
@@ -211,21 +215,18 @@ Add the following code under it:
 
 		<span class="inside-ol">&nbsp;</span>
 
-		In your <b>flex-three-columns.css</b> stylesheet, near the bottom you have the following comment line and a CSS style rule.
+		In your <b>flex-three-columns.css</b> stylesheet, near the bottom, you have the following comment line and a CSS style rule.
 <pre class="language-css">
 <span class="token comment">/* Colours for sub-headings and paragraphs */</span>
-.container-flexbox.bg-dark .item-col-3 * { color: #fff }
+<span class="token class">.container-flexbox.bg-dark .item-col-3</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
 </pre>
 
 Update this by adding a new style rule for child columns.
 <pre class="language-css">
 <span class="token comment">/* Colours for sub-headings and paragraphs */</span>
-.container-flexbox.bg-dark .item-col-3 * { color: #fff }
-.container-flexbox .item-col-3.bg-dark * { color: #fff }
-</pre>
-
-
-</li>
+<span class="token class">.container-flexbox.bg-dark .item-col-3</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-flexbox .item-col-3.bg-dark</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre></li>
 
 	<li>You need to add some padding to the child column with the coloured background.
 	<span class="inside-ol">&nbsp;</span>
@@ -272,8 +273,10 @@ Update this by adding a new style rule for child columns.
 	<p><b>https://username.github.io/flex-three-columns.html</b></p>
 
 	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
 
 </section>
+
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -295,5 +298,6 @@ Update this by adding a new style rule for child columns.
 	  }
 	});
 	</script>
+
 </body>
 </html>

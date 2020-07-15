@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>CSS Flexbox: Two Columns | Web Design & Development Tutorials | Brendan Munnelly</title>
-	<meta name="description" content="Introduction to the Box Model: A Web Design and Development Tutorial from Brendan Munnelly">
+	<meta name="description" content="Two-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds: A Web Design and Development Tutorial from Brendan Munnelly">
 
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
@@ -49,10 +49,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<li>Create and style responsive two-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds.</li>
 	</ul>
 
-	<p>You can view a finished version of the sample two-column web page you will create in this Tutorial by clicking the link below. The finished sample will each open in a new tab of your web browser.</p>
+	<p>You can view a finished version of the sample two-column web page you style in this Tutorial by clicking the link below. The finished sample page will open in a new tab of your web browser.</p>
 
 	<div class="four-samples">
 		<div>
+			<a href="final-flex-columns/flex-two-columns.html" target="_blank"><img src="assets/img/flex-two-cols/example-one-browser.jpg" alt="Sample image"></a>
 			<a href="final-flex-columns/flex-two-columns.html" target="_blank">flex-two-columns.html</a>
 		</div>
 	</div>
@@ -124,7 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="sample-page" class="wrapper-content bg-white">
 
 	<h2>Working with the two-column web page</h2>
-	<p>In this Tutorial, you will work with the sample two-column web page, two-column stylesheet and two of image files you have downloaded.</p>
+	<p>In this Tutorial, you will work with the sample two-column web page, the sample two-column stylesheet, and two of the image files you have downloaded.</p>
 	
 	<ol>
 		<li>In Visual Studio Code, open the following two files: 
@@ -140,43 +141,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 				<li>All the content is 100% wide, left-to-right, across the browser window.
 				<span class="inside-ol">&nbsp;</span>
-				That is because the <b>item-col-2</b> child columns have not yet been styled.</li>
+				That is because the <b>item-col-2</b> child columns are defaulting to 100% width.</li>
 			</ul>
 		</li>
 		
-		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following two sets of padding properties and styles for the <b>container-block</b> div. 
+		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following two pairs of padding properties and values for the <b>container-block</b> div. 
 		<span class="inside-ol">&nbsp;</span>
 		Each style rule is inside a media query.
 
 <pre class="language-css">
 <span class="token comment">/* ========== MAIN CONTENT CONTAINERS ========= */</span>
-/* Desktops */
-@media all and (min-width:768px) { .container-block { padding: 4% 8% } }
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">4% 8%</span> } }
 
-/* Mobiles */
-@media all and (max-width:767px) { .container-block { padding: 11% 8% } }
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">max-width</span>:<span class="token number">767px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">11% 8%</span> } }
 </pre></li>
 
-		<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+		<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
 	</ol>
 
 	<p>You should now see spacing around the four edges of the <b>container-block</b> parent divs.</p>
 
 	<h3 id="flex-child">Setting up the flexbox child columns</h3>
 
-	<p>Your next task is to set up the styles of the child columns to create your two-column layout on desktop and laptop screens.</p>
+	<p>Your next task is to set the width of the <b>.item-col-2</b> child columns to create your two-column layout on desktop and laptop screens.</p>
 
 	<ol>
-		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following width rule to your <b>item-col-2</b> child column divs within the media query for deskop/laptop screens.
+		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following width rule to your <b>item-col-2</b> child column div within the media query for deskop/laptop screens.
 <pre class="language-css">
 <span class="token comment">/* Desktops: flexbox child columns */</span>
-@media all and (min-width: 768px) {
-    .item-col-2 { width: 47% }
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) {
+    <span class="token class">.item-col-2</span> { <span class="token property">width</span>: <span class="token number">47%</span> }
 }</pre>
 
-	Note that, on mobile devices, your columns will be the full width of the screen.</li>
+	Note that, on mobile devices, your columns will fill the full width of the screen.</li>
 
-	<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+	<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
 
 	</ol>
 
@@ -193,19 +194,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <pre class="language-css">
 <span class="token comment">/* Flexbox parent container */</span>
-.container-flexbox {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; 
+<span class="token class">.container-flexbox</span> {
+   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+   <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>; 
+   <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>; 
 }</pre></li>
 
-	<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+	<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
 
 	</ol>
 
 <p>Your child elements should now display correctly in a two-column layout on desktops/laptop screens.</p>
 
-<p>Use your web browser's screen resizing feature to confirm that your layout displays as a single column on mobile-sized screens.</p>
+<p>Use your web browser&#8217;s screen resizing feature to confirm that your layout displays as a single column on mobile-sized screens.</p>
 
 </section>
 
@@ -213,11 +214,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="colour-background" class="wrapper-content bg-white">
 	<h2>Adding coloured backgrounds</h2>
 
-	<p>Next, you will add coloured backgrounds to your two-column layout. First, to the parent container, and then to individual child elements.</p>
+	<p>Next, you will add coloured backgrounds to your two-column layout.</p>
+	<ul>
+		<li>First, to the parent container, and</li>
 
+		<li>Then to an individual child element.</li>
+	</ul>
 
 	<h3 id="colour-parent">Adding a coloured background to the parent container</h3>
-	<p>Follow these steps</p>
+	<p>Follow these steps.</p>
 
 	<ol>
 		<li>In VS Code, in the <b>flex-two-columns.html</b> web page, add the <b>bg-light</b> class to the second parent element on (about) line 33 of the page.</li>
@@ -237,7 +242,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 Add the following code under it:
 
 <pre class="language-css">
-.container-flexbox.bg-dark .item-col-2 * { color: #fff }
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
 </pre></li>
 
 		<li>Save the web page and view the result in your browser.</li>
@@ -246,7 +251,7 @@ Add the following code under it:
 
 
 	<h3 id="colour-child">Adding a coloured background to a child element</h3>
-	<p>Follow these steps</p>
+	<p>Follow these steps.</p>
 
 	<ol>
 		<li>In VS Code, in the <b>flex-two-columns.html</b> web page, add the <b>bg-dark</b> class to the first <b>item-col-2</b> child column inside the first parent container.</li>
@@ -257,21 +262,18 @@ Add the following code under it:
 
 		<span class="inside-ol">&nbsp;</span>
 
-		In your <b>flex-two-columns.css</b> stylesheet, near the bottom you have the following comment line and a CSS style rule.
+		In your <b>flex-two-columns.css</b> stylesheet, near the bottom, you have the following comment line and a CSS style rule.
 <pre class="language-css">
 <span class="token comment">/* Colours for sub-headings and paragraphs */</span>
-.container-flexbox.bg-dark .item-col-2 * { color: #fff }
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
 </pre>
 
 Update this by adding a new style rule for child columns.
 <pre class="language-css">
 <span class="token comment">/* Colours for sub-headings and paragraphs */</span>
-.container-flexbox.bg-dark .item-col-2 * { color: #fff }
-.container-flexbox .item-col-2.bg-dark * { color: #fff }
-</pre>
-
-
-</li>
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-flexbox .item-col-2.bg-dark</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre></li>
 
 	<li>You need to add some padding to the child column with the coloured background.
 	<span class="inside-ol">&nbsp;</span>
@@ -307,42 +309,39 @@ Update this by adding a new style rule for child columns.
 
 <pre class="language-css">
 <span class="token comment">/* =============== HERO BLOCK ================= */</span>
-
-.bg-hero {
-    flex-direction: column;
-    justify-content: center;
-    background-image: url('hook-head.jpg');
-
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 510px;
+<span class="token class">.bg-hero</span> {
+    <span class="token property">flex-direction</span>: <span class="token value-text">column</span>;
+    <span class="token property">justify-content</span>: <span class="token value-text">center</span>;
+    <span class="token property">background-image</span>: url('hook-head.jpg');
+    <span class="token property">background-position</span>: <span class="token value-text">center center</span>;
+    <span class="token property">background-size</span>: <span class="token value-text">cover</span>;
+    <span class="token property">background-repeat</span>: <span class="token value-text">no-repeat</span>;
+    <span class="token property">height</span>: <span class="token number">510px</span>;
 }
 
-.bg-hero h1, .bg-hero h2 {
-    letter-spacing: -2px;
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 2px 2px #222 
+<span class="token class">.bg-hero h1</span>, <span class="token class">.bg-hero h2</span> {
+    <span class="token property">letter-spacing</span>: <span class="token number">-2px</span>;
+    <span class="token property">color</span>: <span class="token value-text">#fff</span>;
+    <span class="token property">font-weight</span>: <span class="token value-text">bold</span>;
+    <span class="token property">text-shadow</span>: <span class="token number">2px 2px</span> <span class="token value-text">#222</span> 
 }
 
-.bg-hero h1 {
-    line-height: 1.1;
-    font-size: calc(80px + (100 - 80) * ((100vw - 320px)/(1600 - 320)));
+<span class="token class">.bg-hero h1</span> {
+    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">80px</span> + (<span class="token number">100</span> - <span class="token number">80</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
 }
 
-.bg-hero h2 {
-    font-size: calc(36px + (56 - 36) * ((100vw - 320px)/(1600 - 320)));
+<span class="token class">.bg-hero h2</span> {
+    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">36px</span> + (<span class="token number">56</span> - <span class="token number">36</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
 }
 
 <span class="token comment">/* Desktop */</span>
-@media all and (min-width:768px) { .bg-hero h1 { margin-bottom: 1% } }
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.bg-hero h1</span> { <span class="token property">margin-bottom</span>: <span class="token number">1%</span> } }
 
 <span class="token comment">/* Mobiles */</span>
-@media all and (max-width:767px) { 
-    .bg-hero { background-position: right center; height: 420px }
-    .bg-hero h1, .bg-hero h2 { text-align: center }
-    .bg-hero h1 { margin-bottom: 10% }
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">max-width</span>:<span class="token number">767px</span>) { 
+    <span class="token class">.bg-hero</span> { <span class="token property">background-position</span>: <span class="token value-text">right center</span>; <span class="token property">height</span>: <span class="token number">420px</span> }
+    <span class="token class">.bg-hero h1</span>, <span class="token class">.bg-hero h2</span> { <span class="token property">text-align</span>: <span class="token value-text">center</span> }
+    <span class="token class">.bg-hero h1</span> { <span class="token property">margin-bottom</span>: <span class="token number">10%</span> }
 }</pre>	</li>
 
 
@@ -377,9 +376,9 @@ Update this by adding a new style rule for child columns.
 	<p><b>https://username.github.io/flex-two-columns.html</b></p>
 
 	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
 
 </section>
-
 
 
 <p>&nbsp;</p>
@@ -402,5 +401,6 @@ Update this by adding a new style rule for child columns.
 	  }
 	});
 	</script>
+
 </body>
 </html>
