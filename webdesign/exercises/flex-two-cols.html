@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>CSS Flexbox: Two Columns | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Introduction to the Box Model: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;></a></h3>
+	<h1>CSS Flexbox: Two Columns</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Create and style responsive two-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds.</li>
+	</ul>
+
+	<p>You can view a finished version of the sample two-column web page you will create in this Tutorial by clicking the link below. The finished sample will each open in a new tab of your web browser.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-flex-columns/flex-two-columns.html" target="_blank">flex-two-columns.html</a>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#sample-files">Your sample web pages and files</a></p>
+		<p><a href="#sample-page">Working with the two-column web page</a></p>
+		<p class="toc-indent"><a href="#flex-child">Setting up the flexbox child columns</a></p>
+		<p class="toc-indent"><a href="#flex-parent">Setting up the flexbox parent element</a></p>
+		<p><a href="#colour-background">Adding coloured backgrounds</a></p>
+		<p class="toc-indent"><a href="#colour-parent">Adding a coloured background to the parent container</a></p>
+		<p class="toc-indent"><a href="#colour-child">Adding a coloured background to a child element</a></p>
+		<p><a href="#hero-block">Adding a hero block</a></p>
+		<p><a href="#upload-github">Uploading your files to GitHub</a></p>
+
+
+	</div>
+</section>
+
+<section id="sample-files" class="wrapper-content">
+	<h2>Your sample web pages and files</h2>
+	<p>Your first step is to download the files you need for this Tutorial.</p>
+	<ol>
+		<li>Download the following compressed file to your computer:
+		<span class="inside-ol">&nbsp;</span>
+		<a href="lesson-3.zip">https://www.munnelly.com/webdesign/exercises/flexbox-samples.zip</a>
+
+		<li>Copy the ZIP file into your <b>websites</b> folder.</li>
+
+		<li>Uncompress the ZIP file.</li>
+		<li>The files will unzip into a sub-folder of your <b>websites</b> folder named <b>flexbox-samples</b>.
+		<span class="inside-ol">&nbsp;</span>
+		You should see 17 files: three HTML files, three CSS files and eleven image files.</li>
+
+		<li>Copy all these files from the <b>flexbox-samples</b> sub-folder into your main <b>websites</b> folder.</li>
+
+		<li>In your web browser, such as Google Chrome or Mozilla Firefox Developer Edition, open these four web pages:
+			<span class="inside-ol">&nbsp;</span>
+			<b>flex-two-columns.html</b><br>
+			<b>flex-three-columns.html</b><br>
+			<b>flex-four-columns.html</b><br>
+			<b>flex-two-columns.css</b><br>
+			<b>flex-three-columns.css</b><br>
+			<b>flex-four-columns.css</b><br>
+			<b>directions.png</b><br>
+			<b>blackberry.jpg</b><br>
+			<b>cheesecake.jpg</b><br>
+			<b>pieceofcake.jpg</b><br>
+			<b>flower.jpg</b><br>
+			<b>heart.jpg</b><br>
+			<b>hook-head.jpg</b><br>
+			<b>sport-1.jpg</b><br>
+			<b>sport-2.jpg</b><br>
+			<b>sport-3.jpg</b><br>
+			<b>sport-4.jpg</b></li>
+	</ol>
+
+	<p>You are now ready to work with the sample files you have downloaded.</p>
+
+
+</section>
+
+
+<section id="sample-page" class="wrapper-content bg-white">
+
+	<h2>Working with the two-column web page</h2>
+	<p>In this Tutorial, you will work with the sample two-column web page, two-column stylesheet and two of image files you have downloaded.</p>
+	
+	<ol>
+		<li>In Visual Studio Code, open the following two files: 
+		<span class="inside-ol">&nbsp;</span>
+		<b>flex-two-columns.html</b><br>
+		<b>flex-two-columns.css</b></li>
+
+		<li>Display the <b>flex-two-columns.html</b> web page in your browser. You can see that:
+			<ul>
+				<li>All the content is positioned directly against the edges of the browser window.
+				<span class="inside-ol">&nbsp;</span>
+				That is because no padding (inside spacing) has been added to the <b>container-block</b> parent container elements.
+
+				<li>All the content is 100% wide, left-to-right, across the browser window.
+				<span class="inside-ol">&nbsp;</span>
+				That is because the <b>item-col-2</b> child columns have not yet been styled.</li>
+			</ul>
+		</li>
+		
+		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following two sets of padding properties and styles for the <b>container-block</b> div. 
+		<span class="inside-ol">&nbsp;</span>
+		Each style rule is inside a media query.
+
+<pre class="language-css">
+<span class="token comment">/* ========== MAIN CONTENT CONTAINERS ========= */</span>
+/* Desktops */
+@media all and (min-width:768px) { .container-block { padding: 4% 8% } }
+
+/* Mobiles */
+@media all and (max-width:767px) { .container-block { padding: 11% 8% } }
+</pre></li>
+
+		<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+	</ol>
+
+	<p>You should now see spacing around the four edges of the <b>container-block</b> parent divs.</p>
+
+	<h3 id="flex-child">Setting up the flexbox child columns</h3>
+
+	<p>Your next task is to set up the styles of the child columns to create your two-column layout on desktop and laptop screens.</p>
+
+	<ol>
+		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following width rule to your <b>item-col-2</b> child column divs within the media query for deskop/laptop screens.
+<pre class="language-css">
+<span class="token comment">/* Desktops: flexbox child columns */</span>
+@media all and (min-width: 768px) {
+    .item-col-2 { width: 47% }
+}</pre>
+
+	Note that, on mobile devices, your columns will be the full width of the screen.</li>
+
+	<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+
+	</ol>
+
+<p>As you can see, the child columns still fill the full width of the screen on desktops/laptops.</p>
+
+
+	<h3 id="flex-parent">Setting up the flexbox parent element</h3>
+
+	<p>For the web browser to display your <b>item-col-2</b> child columns at the set width of <b>47%</b>, you need to make their parent container, naned <b>container-flexbox</b>, a flexbox element.</p>
+
+	<ol>
+
+		<li>In VS Code, in the <b>flex-two-columns.css</b> stylesheet, add the following set of rules to your <b>container-flexbox</b> element.
+
+<pre class="language-css">
+<span class="token comment">/* Flexbox parent container */</span>
+.container-flexbox {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}</pre></li>
+
+	<li>Save the <b>flex-two-columns.css</b> file and view the web page in your browser.</li>
+
+	</ol>
+
+<p>Your child elements should now display correctly in a two-column layout on desktops/laptop screens.</p>
+
+<p>Use your web browser's screen resizing feature to confirm that your layout displays as a single column on mobile-sized screens.</p>
+
+</section>
+
+
+<section id="colour-background" class="wrapper-content bg-white">
+	<h2>Adding coloured backgrounds</h2>
+
+	<p>Next, you will add coloured backgrounds to your two-column layout. First, to the parent container, and then to individual child elements.</p>
+
+
+	<h3 id="colour-parent">Adding a coloured background to the parent container</h3>
+	<p>Follow these steps</p>
+
+	<ol>
+		<li>In VS Code, in the <b>flex-two-columns.html</b> web page, add the <b>bg-light</b> class to the second parent element on (about) line 33 of the page.</li>
+
+		<li>Add the <b>bg-dark</b> class to the third parent element on (about) line 54 of the page.</li>
+
+		<li>Save the web page and view the result in your browser.</li>
+
+		<li>For the parent container with the <b>bg-dark</b> background, you need to change the colour of the text.
+
+		<span class="inside-ol">&nbsp;</span>
+		In your <b>flex-two-columns.html</b> stylesheet, near the bottom, you should see the following comment line.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+</pre>
+
+Add the following code under it:
+
+<pre class="language-css">
+.container-flexbox.bg-dark .item-col-2 * { color: #fff }
+</pre></li>
+
+		<li>Save the web page and view the result in your browser.</li>
+
+	</ol>
+
+
+	<h3 id="colour-child">Adding a coloured background to a child element</h3>
+	<p>Follow these steps</p>
+
+	<ol>
+		<li>In VS Code, in the <b>flex-two-columns.html</b> web page, add the <b>bg-dark</b> class to the first <b>item-col-2</b> child column inside the first parent container.</li>
+
+		<li>Save the web page and view the result in your browser.</li>
+
+		<li>You need to change the colour of the text.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		In your <b>flex-two-columns.css</b> stylesheet, near the bottom you have the following comment line and a CSS style rule.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+.container-flexbox.bg-dark .item-col-2 * { color: #fff }
+</pre>
+
+Update this by adding a new style rule for child columns.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+.container-flexbox.bg-dark .item-col-2 * { color: #fff }
+.container-flexbox .item-col-2.bg-dark * { color: #fff }
+</pre>
+
+
+</li>
+
+	<li>You need to add some padding to the child column with the coloured background.
+	<span class="inside-ol">&nbsp;</span>
+
+	In the web page, along with the <b>bg-dark</b> class, add the <b>item-col-padding</b> class to the child element.</li>
+
+	<li>Save the web page and stylesheet, and  view the result in your browser.</li>
+
+
+	</ol>
+
+</section>
+
+<section id="hero-block" class="wrapper-content bg-white">
+	<h2>Adding a hero block</h2>
+
+	<p>Finally, here is an example of a two-column flexbox layout used to create a so-called hero block.</p>
+
+	<ol>
+		<li>In VS Code, at the bottom of the <b>flex-two-columns.html</b> web page, copy-and-paste the following:
+
+<pre class="language-html">
+&lt;div class="container-block container-flexbox bg-hero"&gt;
+    &lt;div class="item-col-2"&gt;
+        &lt;h1>Hook Head&lt;/h1&gt;
+        &lt;h2>Guiding ships &lt;br&gt;for 800 years.&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+	Save your web page.</li>
+
+	<li>In your stylesheet, copy-and-paste the following:
+
+<pre class="language-css">
+<span class="token comment">/* =============== HERO BLOCK ================= */</span>
+
+.bg-hero {
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('hook-head.jpg');
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 510px;
+}
+
+.bg-hero h1, .bg-hero h2 {
+    letter-spacing: -2px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px #222 
+}
+
+.bg-hero h1 {
+    line-height: 1.1;
+    font-size: calc(80px + (100 - 80) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.bg-hero h2 {
+    font-size: calc(36px + (56 - 36) * ((100vw - 320px)/(1600 - 320)));
+}
+
+<span class="token comment">/* Desktop */</span>
+@media all and (min-width:768px) { .bg-hero h1 { margin-bottom: 1% } }
+
+<span class="token comment">/* Mobiles */</span>
+@media all and (max-width:767px) { 
+    .bg-hero { background-position: right center; height: 420px }
+    .bg-hero h1, .bg-hero h2 { text-align: center }
+    .bg-hero h1 { margin-bottom: 10% }
+}</pre>	</li>
+
+
+	<li>Save the stylesheet and view the web page in your web browser.</li>
+
+
+	</ol>
+
+</section>
+
+<section id="upload-github" class="wrapper-content bg-white">
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>After finishing your web pages and stylesheets, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+
+		<li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.</li>
+
+		<li>Select or drag-and-drop the following files to upload them to your GitHub account:
+			<span class="inside-ol">&nbsp;</span>
+			<b>flex-two-columns.html</b><br>
+			<b>flex-two-columns.css</b><br>
+			<b>directions.png</b><br>
+			<b>hook-head.jpg</b></li>
+
+		<li>Finally, scroll down to the bottom of the GitHub screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web pages and stylesheets are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/flex-two-columns.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+</section>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+</body>
+</html>
