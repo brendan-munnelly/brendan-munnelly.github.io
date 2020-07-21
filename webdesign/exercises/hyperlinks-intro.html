@@ -62,8 +62,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="box-toc">
 		<h2>Contents</h2>
 		<p><a href="#hyperlinks-about">About hyperlinks</a></p>
-		<p class="toc-indent"><a href="#hyperlink-destinations">Hyperlinks: same or different website?</a></p>
-		<p class="toc-indent"><a href="#hyperlink-tabs">Hyperlinks: same or new browser tab?</a></p>
+		<p><a href="#hyperlink-destinations">Hyperlinks: same or different website?</a></p>
+		<p class="toc-indent"><a href="#urls-absolute">Hyperlinks with absolute URLs</a></p>
+		<p class="toc-indent"><a href="#urls-relative">Hyperlinks with relative URLs</a></p>
+		<p><a href="#hyperlink-tabs">Hyperlinks: same or new web browser tab?</a></p>
+		<p class="toc-indent"><a href="#tab-same">New page, same browser tab</a></p>
+		<p class="toc-indent"><a href="#tab-new">New page, new browser tab</a></p>
+		<p class="toc-indent"><a href="#tab-hijack">Preventing web page hijacking</a></p>
 		<p><a href="#page-prep">Preparing your sample web page</a></p>
 		<p><a href="#page-add-links">Adding hyperlinks to your sample web page</a></p>
 
@@ -80,8 +85,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<h2>About hyperlinks</h2>
 
-		<p>Hyperlinks, or more simply links, enable users to click or tap their way from one section of a web page to another, from one web page to another web page, and from one website to another website.</p>
+		<p>Hyperlinks, or more simply links, enable users to click or tap their way from one web page to another web page, and from one website to another website.</p>
 
+		<p>In the next Tutorial, <a href="hyperlinks-internal.html">Working with Internal Hyperlinks</a>, you will learn how you can also use hyperlinks to go from one section of a web page to another.</p>
 
 		<p>The general format of a hyperlink in HTML is as shown below.</p>
 
@@ -90,102 +96,155 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<p>Note the following:</p>
 		
 		<ul>
-			<li>A hyperlink begins with an opening <b>&lt;a&gt;</b> (for &#8216;anchor&#8217;) tag and ends with the closing <b>&lt;/a&gt;</b> tag.</li>
+			<li>A hyperlink begins with an opening <b>&lt;a&gt;</b> (for &#8216;anchor&#8217;) tag.</li>
+			<li>Hyperlinks end with the closing <b>&lt;/a&gt;</b> tag.</li>
 			<li>Inside the opening <b>&lt;a&gt;</b> tag is the <b>href</b> attribute that is followed by an equal to sign (<b>=</b>).</li>
-			<li>The <b>href</b> attribute holds, within quotation marks, the link destination &#8211; that is, the location to where the user will be taken when they click or tap on the link.</li>
+			<li>The <b>href</b> attribute holds, within quotation marks, the link destination.
+			<span class="inside-ol">&nbsp;</span>
+			This is the location to where the user will be taken when they click or tap on the link.</li>
 		</ul>
 
 
 		<p>Hyperlinks typically have the following format:</p>
 
 <pre class="language-html">
- &lt;<span class="blue-dark">p</span>&gt;<span class="white">To learn more, please click</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"webpage.html"</span>&gt;<span class="white">here</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-dark">p</span>&gt;
+ &lt;<span class="blue-dark">p</span>&gt;<span class="white">To learn more, please click</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"webpage.html"</span>&gt;<span class="white">here</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-dark">p</span>&gt;
 </pre>
 
-	<p>The above code would produce the following result.</p>
+	<p>The above HTML tag would produce the following result.</p>
 
 	<IMG src="assets/img/hyperlinks-intro/click-here.png" ALT="Tutorial RWD: Media Queries">
 
-	<p>This is an example of a hyperlink placed around an item of text. Hyperlinks can also be placed around an image, as shown below.</p>
+	<p>This is an example of a hyperlink placed around an item of text. In this case, the word &#8216;here&#8217;.</p>
+	
+	<p>Hyperlinks can also be placed around an image, as follows.</p>
 
 <pre class="language-html">
  &lt;<span class="blue-dark">p</span>&gt;<span class="white">Please click on the picture of a cat below.</span>&lt;/<span class="blue-dark">p</span>&gt;
 
- &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"webpage.html"</span>&gt;&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"cat.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"cat"</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+ &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"webpage.html"</span>&gt;&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span><span class="white">=</span><span class="brown">"cat.jpg"</span> <span class="blue-light">alt</span><span class="white">=</span><span class="brown">"cat"</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
 </pre>
 
 	<p>This second example would produce the following result.</p>
 
 	<IMG src="assets/img/hyperlinks-intro/cat-hyperlink.jpg" ALT="Tutorial RWD: Media Queries">
 
+</section>
 
 
+<section id="hyperlink-destinations" class="wrapper-content bg-white">
 
-	<h3 id="hyperlink-destinations">Hyperlinks: same or different website?</h3>
+	<h2>Hyperlinks: same or different website?</h2>
 
 	<p>One way of looking at hyperlinks is to ask: what is the destination of the link? Where will it send the user to?</p>
 
 	<p>In terms of their destination, you can think of hyperlinks as of two types:</p>
 
-	<ul>
-		<li><b>Hyperlinks with absolute URLs</b>: An absolute URL contains the <i>full address</i> of the web page being linked to, and begins with the <b>http://</b> or <b>https://</b> protocol.
+	<h3 id="urls-absolute">Hyperlinks with absolute URLs</h3>
+
+	<p>An absolute URL contains the <i>full address</i> of the web page being linked to, and begins with the <b>http://</b> or <b>https://</b> protocol.</p>
+
+	<p>Absolute URLs will always include the website name and typically also the name of a particular web page and perhaps too the folder that contains it.</p>
+
+	<IMG src="assets/img/hyperlinks-intro/absolute-url.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>You use absolute URLs when you want to link from one website to a different website &#8211; that is, to a website with a different domain name.</p>
+
+
+
+	<h3 id="urls-relative">Hyperlinks with relative URLs</h3>
+
+		<p>If you are linking between web pages of the <i>same</i> website, you do not need to include the  <b>http://</b> or <b>https://</b> protocol or the website domain name.</p>
+
+		<p>It is enough to enter only the web page name, such as:<br>
+		<b>services.html</b><br>
+		or <br>
+		<b>privacy-statement.html</b><br>
+		<br>
+		And perhaps also the folder that contains the web page, such as<br>
+		<b>products/shoes.html</b><br>
+		or <br>
+		<b>services/financial/insurance.html</b>
 		<span class="inside-ol">&nbsp;</span>
-		Absolute URLs will always include the website name and typically also the name of a particular web page and the folder that contains it.
-
-
-		<IMG src="assets/img/hyperlinks-intro/absolute-url.png" ALT="Tutorial RWD: Media Queries">
-
-		You use absolute URLs when you want to link from one website to a different website &#8211; that is, a website with a different domain name.</li>
-
-		<li><b>Hyperlinks with relative URLs</b>: If you are linking between web pages of the same website, you do not need to include the  <b>http://</b> or <b>https://</b> protocol or the website domain name. 
-		<span class="inside-ol">&nbsp;</span>
-		It is enough to enter only the web page name, such as <b>services.html</b> or <b>privacy-statement.html</b>, and perhaps the folder that contains the web page, such as <b>products/shoes.html</b> or <b>services/financial/insurance.html</b>
-
-		<span class="inside-ol">&nbsp;</span>
-		For example, the relative hyperlink below will take the user to a different page within the <em>same</em> folder of the <em>same</em> website.</p>
+		<p>For example, the relative hyperlink below will take the user to a different page within the <em>same</em> folder of the <em>same</em> website.</p>
 
 <pre class="language-html">
- &lt;<span class="blue-dark">p</span>&gt;<span class="white">Read about our</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"about-us.html"</span>&gt;<span class="white">team members</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-dark">p</span>&gt;
+ &lt;<span class="blue-dark">p</span>&gt;<span class="white">Read about our</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"about-us.html"</span>&gt;<span class="white">team members</span>&lt;/<span class="blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
 </pre>
 
-		<span class="inside-ol">&nbsp;</span>
-	You will commonly see relative hyperlinks used in navigation menus that provide users with access to the various pages of a website.</p>
-	<IMG src="assets/img/hyperlinks-intro/menu-relative-links.png" ALT="Tutorial RWD: Media Queries"></li>
+	<p>You will commonly see relative hyperlinks used in navigation menus that can lead users to the various pages of a website.</p>
+	<IMG src="assets/img/hyperlinks-intro/menu-relative-links.png" ALT="Tutorial RWD: Media Queries"></p>
+
+</section>
 
 
-	</ul>
+<section id="hyperlink-tabs" class="wrapper-content bg-white">
 
-
-	<h3 id="hyperlink-tabs">Hyperlinks: same or new web browser tab?</h3>
+	<h2>Hyperlinks: same or new web browser tab?</h2>
 
 	<p>You can choose to display a linked-to (&#8216;destination&#8217;) web page in the <i>same</i> or in a <i>new</i> tab of your web browser.</p>
 
-	<p>Consider the example of a web page named <b>page-1.html</b> that contains a hyperlink to a second web paged named <b> page-2.html</b>.</p>
+	<p>Consider the example of a web page named <b>page-1.html</b> that contains a hyperlink to a second web page named <b> page-2.html</b>.</p>
 
+	<h3 id="tab-same">New page, same browser tab</h3>
 	<p>In the first case below, the linked-to web page named <b>page-2.html</b> replaces the current <b>page-1.html</b> web page in the user&#8217;s web browser tab.</p>
-
-<pre class="language-html">
- &lt;<span class="token class">a</span> <span class="blue-light">href</span>=<span class="brown">"https://www.ibat.ie"</span>&gt;<span class="white">IBAT College</span>&lt;/<span class="token class">a</span>&gt;
-</pre>
 
 	<IMG src="assets/img/hyperlinks-intro/link-same-tab.png" ALT="Tutorial RWD: Media Queries">
 
-	<p>In the second case below, the linked-to <b>page-2.html</b> web page opens in a new tab of the user&#8217;s web browser. The original page is still displayed in the linked-from web browser tab.</p>
-
+<p>In the <b>page-1.html </b> web page, the HTML link code would be as follows:</p>
 <pre class="language-html">
- &lt;<span class="token class">a</span> <span class="blue-light">href</span>=<span class="brown">"https://www.ibat.ie"</span> <span class="blue-light">target</span>=<span class="brown">"_blank"</span> <span class="blue-light">rel</span>=<span class="brown">"noopener"</span>&gt;<span class="white">IBAT College</span>&lt;/<span class="token class">a</span>&gt;   
+ &lt;<span class="blue-dark">p</span>&gt;<span class="white">Click to go to</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"page-2.html"</span>&gt;<span class="white">Page 2</span>&lt;/<span class="token blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
 </pre>
+
+
+	<h3 id="tab-new">New page, new browser tab</h3>
+	<p>In the second case below, the linked-to <b>page-2.html</b> web page opens in a <i>new</i> tab of the user&#8217;s web browser. The original page is still displayed in the linked-from web browser tab.</p>
 
 	<IMG src="assets/img/hyperlinks-intro/link-new-tab.png" ALT="Tutorial RWD: Media Queries">
 
-	<p>The <b>target="_blank"</b> attribute forces the new page to open in a new tab. The <b>rel="noopener"</b> attribute is a widely-used security feature designed to prevent exploitation by malicious websites.</p>
+<p>In the <b>page-1.html </b> web page, the HTML code for this <i>open in a new tab</i> link would be as follows:</p>
 
+
+<pre class="language-html">
+ &lt;<span class="blue-dark">p</span>&gt;<span class="white">Click to go to</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"page-2.html"</span> <span class="blue-light">target</span><span class="white">=</span><span class="brown">"_blank"</span>&gt;<span class="white">Page 2</span>&lt;/<span class="token blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+
+	<p>Your hyperlink now has <i>two</i> attributes:</p>
+
+	<ul>
+		<li>The <b>href</b> attribute value contains the destination of the hyperlink.</li>
+		<li>The <b>target=_blank</b> attribute forces the new page to open in a new browser tab.</li>
+
+	</ul>
+
+	<p>The order of two attributes inside the opening tag of a hyperlink does not matter.</p>
+	
+	<p>For example, both of these hyperlinks are correct.</p>
+
+	<IMG src="assets/img/hyperlinks-intro/links-order-correct.png" ALT="Tutorial RWD: Media Queries">
+
+	<p>But ensure you separate the two attributes from each other by a single space. For example, both these hyperlinks are correct. And for the same reason.</p>
+
+	<IMG src="assets/img/hyperlinks-intro/links-order-incorrect.png" ALT="Tutorial RWD: Media Queries">
+
+	<h3 id="tab-hijack">Preventing web page hijacking</h3>
+	<p>When you open a hyperlink in a new tab of your web browser, JavaScript code in the new web page is able to take control of the original web page that you linked from.</p>
+	
+	<p>See this article from Google: <a href="https://web.dev/external-anchors-use-rel-noopener/" target="_blank" rel="noopener">Links to cross-origin destinations are unsafe</a>.</p>
+
+	<p>For this reason, a third attribute of <b>rel="noopener"</b> is a widely-used security feature that is added to hyperlinks that include the <b>target=_blank</b> attribute.</p>
+
+
+<pre class="language-html">
+ &lt;<span class="blue-light">a</span> <span class="blue-light">href</span>=<span class="brown">"https://www.website.com"</span> <span class="blue-light">target</span>=<span class="brown">"_blank"</span> <span class="blue-light">rel</span>=<span class="brown">"noopener"</span>&gt;<span class="white">Other Website</span>&lt;/<span class="token class">a</span>&gt;   
+</pre>
 
 	<p>Within the opening <b>&lt;a&gt;</b> hyperlink tag, you can place the three attributes in any order. All three hyperlink examples below are valid.</p>
 	<IMG src="assets/img/hyperlinks-intro/new-tab-options.png" ALT="Tutorial RWD: Media Queries">
 
+	<p>But, again, always enter a <i>single space</i> between the different attributes.</p>
 
-	<p>In the next section of this Tutorial, you will add hyperlinks to a web page you previously created.</p>
+	<p>In the next section of this Tutorial you will add hyperlinks to a web page you created previously.</p>
 
 
 </section>
@@ -209,8 +268,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<span class="inside-ol">&nbsp;</span>
 		At the top of the <b>page-5.css</b> stylesheet, replace the current web browser resets by copying-and-pasting the following:
 
-
-
 <pre class="language-css">
 <span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
 <span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span> }
@@ -218,8 +275,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
 <span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
 </pre></li>
-		
-		
+				
 		<li>Under the web browser resets, replace the current <b>body</b> styles with the following:
 
 <pre class="language-css">
@@ -249,7 +305,6 @@ Next, you will update the font sizes of the web page content.</li>
   <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">20px</span> + (<span class="token number">26</span> - <span class="token number">20</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
 </pre></li>
 
-
 		<li>For the <b>h3</b> sub-heading selector, update the <b>font-style</b> property from the fixed value of <b>42px</b> by copying-and-pasting this fluid value:
 
 <pre class="language-css">
@@ -276,8 +331,7 @@ Next, you will update the font sizes of the web page content.</li>
 <section id="page-add-links" class="wrapper-content bg-white">
 	<h2>Adding hyperlinks to your sample web page</h2>
 
-
-	<p>In this section you will hyperlinks to your sample <b>page-5.html</b> web page.</p>
+	<p>In this section, you will hyperlinks to your sample <b>page-5.html</b> web page.</p>
 
 	<ol>
 		<li>In VS Code, display the <b>page-5.html</b> file.</li>
@@ -294,7 +348,6 @@ Next, you will update the font sizes of the web page content.</li>
  &lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">b</span>&gt;<span class="token content">On view</span>&lt;/<span class="token blue-dark">b</span>&gt;<span class="token content">:</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="token content">=</span><span class="brown">""</span>&gt;<span class="token content">Vincent van Gogh Museum, Amsterdam</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt;
 </pre></li>
 
-
 		<li>Directly under the third image, &#8216;The Cafe Terrace at Night&#8217; on about line 41, copy-and-paste the following new paragraph and empty hyperlink:
 
 <pre class="language-html">
@@ -310,7 +363,6 @@ Next, you will update the font sizes of the web page content.</li>
 	<li>Save your web page and view the result in your browser. All four images should now have text with empty hyperlinks under them.
 	
 	<IMG src="assets/img/hyperlinks-intro/hyperlinks-empty.png" ALT="Tutorial RWD: Media Queries"></li>
-
 
 	<li>For each of the four hyperlinks, one after the other, add the following values to their <b>href</b> attribute (inside the pair of double quotes):
 
@@ -332,7 +384,11 @@ Next, you will update the font sizes of the web page content.</li>
 
 	<li>Save your web page and view the result in your browser. Click the four hyperlinks to ensure they all work correctly.</li>
 
-	<li>Finally, add the <b>target="_blank"</b> and <b>rel="noopener"</b> attributes to each of the four hyperlinks.</li>
+	<li>Finally, add these two attributes inside each of the four opening hyperlink tags:
+	<span class="inside-ol">&nbsp;</span>
+	<b>target="_blank" rel="noopener"</b>
+	<span class="inside-ol">&nbsp;</span>
+	Ensure you enter a single space between the attributes in your hyperlink opening tags.</li>
 	
 	<li>Save your web page and, in your web browser, verify the four hyperlinks all work correctly.</li>
 
