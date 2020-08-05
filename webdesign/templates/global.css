@@ -1,0 +1,1218 @@
+/*  ============= WEB BROWSER RESETS ============ */
+* { margin: 0; padding: 0; border: none; box-sizing: border-box }
+html { height: 100% }
+body { min-height: 100%; max-width: 1600px; margin-left: auto; margin-right: auto }  
+img { width: 100%; height: auto; display: block }
+html { scroll-behavior: smooth; scroll-padding-top: 72px }
+
+/* Default font and colours */
+body { font-family: sans-serif; background-color: #f5f5f5 }
+h1, h2, h3 { color: #222 }
+p, li { color: #044d6c}
+
+/* CONTENTS:
+
+27 - Menus for desktop and mobile screens
+476 - Hero block: centered text with big background image 
+530 - Hero block: flexbox with two columns 
+575 - Container for single-column of content
+610 - Faux buttons 
+654 - Fancy hyperlinks
+670 - Flexbox parent containers with child items for two, three and four-column layouts
+826 - Email sign-up form
+942 - Contact form
+1072 - Footer
+
+
+/* ===================== BEGIN MENU STYLES ========================== */
+
+/* === All screen sizes ====== */
+
+.unhide-content-under-menu { margin-top: 72px }
+
+/* Positions all menus in front of page content */
+.container-menu-desktop, 
+.container-menu-bar-mobile, 
+.flyout-menu { z-index: 999 }
+.container-menu-desktop, .container-menu-bar-mobile { width:100% }
+
+/* on mobiles - hide desktop menu */
+@media all and (max-width:767px) { 
+    .container-menu-desktop.menu-transparent,
+    .container-menu-desktop.menu-light,
+    .container-menu-desktop.menu-dark { display: none }
+}
+
+/* on desktops - hide mobile menu bar and list of menu options */
+@media all and (min-width:768px) { 
+    .container-menu-bar-mobile.menu-transparent,
+    .container-menu-bar-mobile.menu-light,
+    .container-menu-bar-mobile.menu-dark,
+    .flyout-menu.menu-transparent,
+    .flyout-menu.menu-light,
+    .flyout-menu.menu-light { display: none }
+}
+
+/* sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
+
+/* prevents content from disappearing udner sticky menus */
+.sticky-anchor {
+    position: relative;
+    border-top: 90px solid transparent;
+    margin: -90px 0 0;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+ 
+ .sticky-anchor:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+ }
+ 
+/* Height of desktop menu and mobile menu bar */
+.container-menu-desktop, .container-menu-bar-mobile { height:72px }
+
+/* website logo fixed size in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child img,
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* website logo vertically centered in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child,
+.container-menu-bar-mobile a:first-child { display: flex; flex-direction: row; align-items: center }
+
+/* hide bullet character on listed links */
+.container-menu-desktop ul li,
+.flyout-menu            ul li { list-style-type: none }
+
+/* hide link underlines on desktop and mobile menus */
+.container-menu-desktop ul li a,
+.flyout-menu            ul li a { text-decoration: none }
+
+/* make desktop menu options bold */
+.container-menu-desktop ul li a { font-weight:bold }
+
+/* style cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta,
+.flyout-menu            ul li a.btn-cta {
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    font-weight: bold;
+    /* soften corners */
+    /* border-radius: 4px; */
+    /* rounded corners */
+    border-radius: 100px
+}
+
+/* style icon in cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta i,
+.flyout-menu            ul li a.btn-cta i { margin-right: 8px; font-size: 90% }
+
+/* on mobiles, prevent scrolling outside flyout menu */
+.no-scroll { overflow: hidden }
+
+.menu-drop-shadow { box-shadow: 0 1px 10px #888 }
+
+/* ======= DESKTOP MENU ======= */
+
+/* outer parent flexbox container 
+   home page link (with website logo) at left and ul links at right are its two children */
+.container-menu-desktop {
+	display: flex;
+    justify-content: space-between;
+    padding: 0 6% 0 6%;
+    width: 100%;
+}
+
+/* menu links and cta button aligned horizontally */
+.container-menu-desktop ul li {
+    display: inline-block;
+    margin: 0 40px 0 0; /* spacing at right of menu links, cta button */
+}
+
+.container-menu-desktop ul li:last-child {
+    margin-right: 0 /* no spacing at right of last menu link or cta button */
+}
+
+/* vertically center menu links and cta button */
+.container-menu-desktop ul { display: flex; align-items: center }
+
+/* style text for links and cta button  */
+.container-menu-desktop ul li a {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button padding */
+.container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
+
+
+/* ======= MOBILE MENU  ======== */
+
+/* outer flexbox container for mobile menu bar 
+   home page link (with website logo) at left and hamburger icon at right are its two children */
+.container-menu-bar-mobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+    width: 100%;
+    padding: 0 6% 0 6%;
+}
+
+/* three bars hozizontal in hamburger icon */
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 { width: 36px; height: 4px; margin: 7px 0; transition: 0.4s }
+
+/* hamburger icon changes shape to 'X' when fly-out menu is visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
+.change .bar2 { opacity: 0 }
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
+
+/* container div for flyout menu content */
+.flyout-menu { 
+    position: fixed; display: block; 
+    top: 72px; /* same height as menu bar */
+    width: 320px; 
+    max-height: 100%;
+    height: 100%;
+    padding: 30px 40px 40px 40px;
+    transition: 0.5s;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* safari on mobiles */    
+}
+
+.flyout-menu.flyout-menu-is-closed {
+    right: -320px; /* hides flyout menu */
+}
+
+.flyout-menu {
+    right: 0; /* displays flyout menu */
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain
+}
+
+/* drop shadow border at left of fly-out menu */
+.flyout-menu {
+    box-shadow: 0px 1px 10px #888 
+}
+
+/* list of links on flyout menu */
+.flyout-menu ul li { margin: 0 40px 30px 0 }
+
+/* style flyout menu links */
+.flyout-menu ul li a {
+    font-size: 18px;
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button */
+.flyout-menu a.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
+}
+
+.flyout-menu hr { 
+    height: 4px;
+    margin: 32px 0 0 0;
+    border-style: solid;
+    border-width: 1px 
+} 
+
+.flyout-menu h4 {
+    font-size: 20px;
+    margin: 42px 0 4px 0;
+    text-align: center;
+    /* letter-spacing: 2px; *./
+    /* text-transform: uppercase */
+}
+
+.flyout-menu h5 {
+    font-size: 17px;
+    margin: 20px 0 20px 0;
+    text-align: center
+}
+
+.flyout-menu h5 a {
+    font-size: 17px;
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px
+}
+
+.flyout-menu p { 
+    text-align: center; font-size: 15px; line-height: 1.4;
+}
+
+.flyout-menu div.fly-out-profile-box,
+.flyout-menu div.fly-out-social-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.flyout-menu div.fly-out-profile-box img,
+.flyout-menu div.fly-out-profile-box p { width: 47% }
+
+.flyout-menu div.fly-out-profile-box img {
+    display: block; border-radius: 100%;
+    width: 104px; height: 104px; 
+    border-style: solid;
+    border-width: 2px
+}
+
+.flyout-menu div.fly-out-profile-box p {
+    text-align:left 
+}
+
+.flyout-menu div.fly-out-social-icons { 
+    margin-top:12px
+}
+
+.flyout-menu div.fly-out-social-icons a {
+    font-size: 26px;
+    text-align: center 
+}
+
+/* ========= Light background menu - desktops and mobiles ========= */
+
+/* background colour */
+.menu-light { 
+	background-color: #fff;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-light ul li a:link,  .menu-light ul li a:visited { color: red }
+.menu-light ul li a:hover, .menu-light ul li a:active  { color: #222 }
+
+/* cta button */
+.menu-light ul li a.btn-cta:link, 
+.menu-light ul li a.btn-cta:visited {
+    background-color: transparent;
+    color: red;
+    border-color:red
+}
+
+.menu-light ul li a.btn-cta:hover,
+.menu-light ul li a.btn-cta:active {
+    background-color: red;
+    color: #fff;
+    border-color:red
+}
+
+/* on mobiles only */
+.menu-light.flyout-menu hr { background-color: red; border-color: red } 
+
+.menu-light.flyout-menu h4,
+.menu-light.flyout-menu h5,
+.menu-light.flyout-menu h5 a, 
+.menu-light.flyout-menu p { color: red } 
+
+/* colour of hamburger icon bars */
+.menu-light .item-icon .bar1, 
+.menu-light .item-icon .bar2, 
+.menu-light .item-icon .bar3 { background-color: red }	
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: red }
+
+/* email link */
+.menu-light.flyout-menu h5 a:link, 
+.menu-light.flyout-menu h5 a:visited {
+    border-bottom-color:red;
+}
+
+.menu-light.flyout-menu h5 a:hover, 
+.menu-light.flyout-menu h5 a:active {
+    border-bottom-color: #fff;
+}
+
+/* profile image border colour */
+.menu-light.flyout-menu div.fly-out-profile-box img { border-color: red }
+
+/* contact icons */
+.menu-light.flyout-menu .fly-out-social-icons a i { color:red }
+
+/* === End light background menu === */
+
+
+
+/* ======= Dark background menu - desktops and mobiles ======= */
+
+/* background colour */
+.menu-dark { 
+	background-color: red; 
+	transition: all .5s ease-in-out
+}
+
+/* menu links */
+.menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
+.menu-dark ul li a:hover, .menu-dark ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-dark ul li a.btn-cta:link,
+.menu-dark ul li a.btn-cta:visited { 
+    background-color: red;
+    color: #fff;
+    border-color:#fff
+}
+
+.menu-dark ul li a.btn-cta:hover,
+.menu-dark ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: red;
+    border-color:#fff
+}
+
+/* on mobiles only - various content */
+.menu-dark.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-dark.flyout-menu h4,
+.menu-dark.flyout-menu h5,
+.menu-dark.flyout-menu h5 a,
+.menu-dark.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-dark .item-icon .bar1, 
+.menu-dark .item-icon .bar2, 
+.menu-dark .item-icon .bar3 { background-color: #fff }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-dark.flyout-menu h5 a:link, 
+.menu-dark.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-dark.flyout-menu h5 a:hover, 
+.menu-dark.flyout-menu h5 a:active {
+    border-bottom-color: red;
+}
+
+/* profile image border colour */
+.menu-dark.flyout-menu div.fly-out-profile-box img { border-color: red }
+
+/* contact icons */
+.menu-dark.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End dark background menu === */
+
+/* ======== Transparent background menu - desktops and mobiles =========== */
+
+/* background colour */
+.menu-transparent { 
+	background-color: transparent;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-transparent ul li a:link,  .menu-transparent ul li a:visited { color: #fff }
+.menu-transparent ul li a:hover, .menu-transparent ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-transparent ul li a.btn-cta:link,
+.menu-transparent ul li a.btn-cta:visited { 
+    background-color: red;
+    color: #fff;
+    border-color:red;
+}
+
+.menu-transparent ul li a.btn-cta:hover,
+.menu-transparent ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: red;
+    border-color:red
+}
+
+/* on mobiles only - various content */
+.menu-transparent.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-transparent.flyout-menu h4,
+.menu-transparent.flyout-menu h5,
+.menu-transparent.flyout-menu h5 a,
+.menu-transparent.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-transparent .item-icon .bar1, 
+.menu-transparent .item-icon .bar2, 
+.menu-transparent .item-icon .bar3 { background-color: red }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-transparent.flyout-menu h5 a:link, 
+.menu-transparent.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-transparent.flyout-menu h5 a:hover, 
+.menu-transparent.flyout-menu h5 a:active {
+    border-bottom-color: red;
+}
+
+/* profile image border colour */
+.menu-transparent.flyout-menu div.fly-out-profile-box img { border-color: red }
+
+/* contact icons */
+.menu-transparent.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End transparent background menu === */
+
+
+/* ======= HERO BLOCK, CENTERED TEXT, BIG IMAGE BACKGROUND ===== */
+
+.container-hero-center-bg-image {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: linear-gradient(rgba(0,0,0,0.6),rgba(138, 75, 75, 0.1)), url('doggo-1600x600.jpg');
+	background-position: center center;
+	background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center
+}
+
+.container-hero-center-bg-image h1, 
+.container-hero-center-bg-image h2 {
+	color: #fff;
+	text-shadow: 2px 2px #222;
+    text-align: center;	
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-hero-center-bg-image h1 {
+	font-size: calc(58px + (132 - 58) * ((100vw - 320px)/(1600 - 320)));
+    line-height: 1.1;
+    margin-top: 48px
+}
+
+.container-hero-center-bg-image h2 {
+	font-size: calc(26px + (64 - 26) * ((100vw - 320px)/(1600 - 320)));
+    line-height: 1.3;
+    margin-bottom: 48px
+}
+
+/* Desktops - container height and h1 bottom margin */
+@media all and (min-width:768px) { 
+	.container-hero-center-bg-image { height: 540px }
+	.container-hero-center-bg-image h1 { margin-top: 3%; margin-bottom: 1% }
+}
+
+/* Mobiles - container height, text width and h1 bottom margin */
+@media all and (max-width:767px) { 
+	.container-hero-center-bg-image { height: 450px }
+	.container-hero-center-bg-image h1 { 
+        margin-top: 18%; 
+        margin-bottom: 5%
+	}
+	.container-hero-center-bg-image h2 { 
+		width: 90%;
+		margin: 0 auto 5% auto
+	}
+}
+
+/* ======= HERO BLOCK, FLEXBOX TWO COLUMNS ===== */
+
+/* Hero block height and spacing  */
+@media all and (min-width: 1000px) {
+	.container-flexbox.container-hero-block-two-columns { 
+        background-color: #fff;
+        margin-bottom: 40px
+    }
+	.container-flexbox.container-hero-block-two-columns h1 { margin-top: 5% }
+ 
+	.container-flexbox.container-hero-block-two-columns .item-2:nth-child(2) { 
+	   display: flex;
+	   flex-direction: column;
+	   justify-content: center
+	}
+}
+ 
+@media all and (max-width: 999px) {
+	.container-flexbox.container-hero-block-two-columns { margin-top: 10% }
+    .container-flexbox.container-hero-block-two-columns .item-2:nth-child(2) { padding-bottom: 5% }
+    .container-flexbox.container-hero-block-two-columns .item-2:nth-child(1) { order: 2 }    
+}
+
+.container-flexbox.container-hero-block-two-columns .item-2 h1 { 
+	font-weight: bold; 
+	line-height: 1.1;
+	margin-bottom: 20px;
+	font-size: calc(30px + (60 - 30) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+.container-flexbox.container-hero-block-two-columns .item-2 h2 { 
+	font-weight: bold; 
+	color: gray;
+    line-height: 1.3;
+	margin-bottom: 30px;    
+	font-size: calc(18px + (32 - 18) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+.container-flexbox.container-hero-block-two-columns .item-2 img {
+    margin-bottom: 0
+}
+
+/* ======= END HERO BLOCK ===== */
+
+
+/* ==== CONTAINER FOR SINGLE COLUMN OF CONTENT ==== */
+
+/* Desktop */
+@media all and (min-width:768px) {
+    .container-one-column { padding: 4% 20% 5% 20% }
+}
+
+/* Mobiles */
+@media all and (max-width:767px) {
+     .container-one-column { 
+         padding: 7% 7% 10% 7%;
+         text-align: center;
+    }
+}
+ 
+.container-one-column h2 {
+     line-height: 1.3; margin-bottom: 12px;
+     font-size: calc(32px + (48 - 32) * ((100vw - 320px)/(1600 - 320)));
+}
+ 
+.container-one-column h3 {
+     line-height: 1.4; margin-bottom: 4px;
+     font-size: calc(22px + (32 - 22) * ((100vw - 320px)/(1600 - 320)));
+}
+ 
+.container-one-column p,
+.container-one-column li {
+     line-height: 1.5; margin-bottom:14px;
+     font-size: calc(16px + (18 - 16) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-one-column ul { margin-left: 17px }
+
+
+/* ============== FAUX BUTTONS =================== */
+
+a.button:link, a.button:visited, a.button:hover, a.button:active { 
+    text-decoration: none;
+    color: inherit;
+    border-style: solid;
+    border-width: 2px;
+    padding: 12px 24px;
+    display: inline-block;
+    line-height: 1;
+    font-weight: bold;
+    /* text-transform: uppercase;
+    letter-spacing: 1px */
+}
+ 
+a.button-solid:link, .button-solid:visited {
+    border-color: red;
+    background-color: red;
+    color: #fff
+} 
+ 
+a.button-solid:hover, .button-solid:active {
+    border-color: blue;
+    background-color: blue;
+    color: #fff
+}
+ 
+a.button-ghost:link, a.button-ghost:visited {
+    border-color: red;
+    background-color: transparent;
+    color: red
+} 
+ 
+a.button-ghost:hover, .button-ghost:active {
+    border-color: red;
+    background-color: red;
+    color: #fff
+}
+ 
+a.button-soft { border-radius: 5px }
+a.button-round { border-radius: 25px }
+
+
+
+/* ============== FANCY HYPERLINKS =================== */
+
+a.fancy-link:link, a.fancy-link:visited,
+a.fancy-link:hover, a.fancy-link:active { 
+    text-decoration: none;
+    color: inherit;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom: 2px;
+}
+
+a.fancy-link:link, a.fancy-link:visited { color: red; border-bottom-color: red }
+
+a.fancy-link:hover, a.fancy-link:active { color: blue; border-bottom-color: blue }
+
+
+/* ============== FLEXBOX MULTI-COLUMN LAYOUTS ================== */
+
+
+/* ============ PARENT FLEXBOX CONTAINERS ========== */
+
+.container-flexbox { 
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+/* Desktops only - inside padding  */
+@media all and (min-width:768px) {
+	.container-flexbox { padding: 2% 10% 1% 10% }
+}
+
+/* Mobiles only - inside padding */
+@media all and (max-width:767px) {
+	.container-flexbox { padding: 7% 8% 1% 8% }
+}
+
+/* ====== INNER FLEXBOX COLUMN: 1 COLUMN EVERY SCREEN ======= */
+
+.container-flexbox .item-1 { 
+	width: 100%;
+	padding: 1% 6% 0 6%;
+}
+
+/* ====== FLEXBOX ITEM COLUMNS: 2 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ====== */
+
+/* Desktops - 2 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-2 { 
+		width: 45%;
+		padding: 3% 0 4% 0;
+	}
+}
+
+/* Mobiles - 1 column */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-2 {
+		text-align: center; 
+		width: 100%;
+		padding: 5% 5% 5% 5%;
+	}
+}
+
+.container-flexbox .item-2 h2 {
+    font-size: calc(24px + (48 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+.container-flexbox .item-2 p {
+    font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* =======INNER FLEXBOX COLUMNS: 3 COLUMNS ON DESKTOPS, 1 COLUMN ON MOBILES ===== */
+
+/* Desktops - 3 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-3 { width: 30% }
+	.container-flexbox .item-3 { margin-bottom: 3% }
+}
+
+/* Mobiles - 1 column */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-3 { width: 100% }
+	.container-flexbox .item-3 { margin-bottom: 14% }
+}
+
+
+/* ==== INNER FLEXBOX COLUMNS: 4 COLUMNS ON DESKTOPS, 2 COLUMNS ON MOBILES ======= */
+
+/* Desktops - 4 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-4-2 { width: 22% }
+	.container-flexbox .item-4-2 { margin-bottom: 3% }
+}
+
+/* Mobiles - 2 columns */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-4-2 { width: 47% }
+	.container-flexbox .item-4-2 { margin-bottom: 10% }
+}
+
+/* ======= INNER FLEXBOX COLUMNS: 3 COLUMNS ON DESKTOPS, 2 COLUMNS ON MOBILES ===== */
+
+/* Desktops - 3 columns */
+@media all and (min-width:768px) { 
+	.container-flexbox .item-3-2 { width: 30% }
+	.container-flexbox .item-3-2 { margin-bottom: 3% }
+}
+
+/* Mobiles - 2 column */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-3-2 { width: 45% }
+	.container-flexbox .item-3-2 { margin-bottom: 14% }
+}
+
+/* Spacing under images in children of parent flexbox containers */
+.container-flexbox img { margin-bottom: 20px }
+
+/* Drop shadow effect around images  */
+img.image-shadow { 
+    box-shadow: 8px 10px 8px #888;
+    margin-bottom: 30px
+}
+
+/* Makes square images circles  */
+img.image-circle { 
+    border-radius: 100%;
+}
+
+.container-flexbox .item-1 h2 {
+    line-height: 1.2; margin-bottom: 8px;
+    font-size: calc(24px + (48 - 24) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-flexbox .item-1 p {
+    line-height: 1.5; margin-bottom: 14px;
+    font-size: calc(17px + (22 - 17) * ((100vw - 320px)/(1600 - 320)));
+}
+
+@media all and (max-width:767px) {
+    .container-flexbox .item-1 { text-align: center }
+}
+
+.container-flexbox .item-1,
+.container-flexbox .item-2 p,
+.container-flexbox .item-3 p,
+.container-flexbox .item-3-2 p,    
+.container-flexbox .item-4-2 p {
+    line-height: 1.5; margin-bottom:14px;
+    font-size: calc(16px + (18 - 16) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-flexbox .item-4-2 p {
+    line-height: 1.5; margin-bottom:14px;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-flexbox .item-2 h3,
+.container-flexbox .item-3 h3,
+.container-flexbox .item-3-2 h3,    
+.container-flexbox .item-4-2 h3 {
+    line-height: 1.2; margin-bottom:4px;
+}
+
+/* Centre-align text withn two, three and four columns on mobiles */
+@media all and (max-width:767px) {
+    .container-flexbox .item-2,    
+    .container-flexbox .item-3,
+    .container-flexbox .item-3-2,    
+    .container-flexbox .item-4-2  { text-align: center }
+}
+
+
+/* =============== BEGIN EMAIL SIGN UP FORM ================== == */
+
+/* All screens */
+.container-form-email-signup  { text-align: center; background-color: #fff; border: solid 1px gray }
+
+/* Desktop */
+@media all and (min-width:1024px) { 
+	.container-form-email-signup  {
+		margin:  4% 23% 5% 23%;
+		padding: 2% 4% 4% 4%
+	}
+}
+
+/* Mobiles */
+@media all and (max-width:1023px) { 
+	.container-form-email-signup  { 
+		margin:  6% 8% 16% 8%;
+		padding: 7% 8% 8% 8%;
+	}
+}
+
+/* == Email sign up form heading and text == */
+
+/* Heading */
+.container-form-email-signup h3 { 
+	font-weight: bold; 
+	color: #000;
+	line-height: 1.2;
+	margin-bottom: 3%;
+	font-size: calc(26px + (56 - 26) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Text */
+.container-form-email-signup p { 
+    font-weight: normal;
+    color: #000; 
+    line-height: 1.5;
+    margin-bottom: 7%;    
+	font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+
+/* == Email sign up form fields == */
+
+#email-signup-form .flex-row {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+/* Desktop */
+@media all and (min-width:768px) { 
+    #email-signup-form .flex-row { flex-direction: row }
+    #email-signup-form #email-address { flex: 1; margin: 0 30px 0 30px }
+}
+
+/* Mobiles */
+@media all and (max-width:767px) { 
+	#email-signup-form .flex-row { flex-direction: column }
+    #email-signup-form label { margin: 12px 0 0 0 }
+    #email-signup-form #email-address { margin: 0 }
+}
+
+#email-signup-form label,
+#email-signup-form input,
+#email-signup-form #btn-submit {
+	font-size: 16px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+#email-signup-form label { padding: 14px 0 }
+
+#email-signup-form label,
+#email-signup-form #btn-submit { font-weight: bold }
+
+#email-signup-form input,
+#email-signup-form #btn-submit { padding: 12px 20px }
+
+#email-signup-form ::placeholder { font-size: 96% }
+
+#email-signup-form input {
+	background-color: #f0f0f0;
+	padding: 10px 12px;
+	border: 2px solid gray;
+}
+
+#email-signup-form input:focus { 
+	background-color: #fff; 
+}
+
+#email-signup-form #btn-submit {
+	color:#fff;
+    border: none; 
+	padding: 12px 22px;    
+	background-color: blue;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 2px */
+}
+
+#email-signup-form #btn-submit:hover {
+	background-color: darkblue;
+}
+
+#email-signup-form #btn-submit i {
+	margin-left: 8px
+}
+
+/* Mobiles */
+@media all and (max-width:767px) { 
+	#email-signup-form label { padding: 0 0 14px 0  }
+	#email-signup-form input { margin: 0 0 24px 0 }
+	#email-signup-form #btn-submit { margin: 30px auto 0 auto; width: 80% }
+}
+
+
+/* =============== BEGIN CONTACT FORM CSS ============= */
+
+/* == Contact form container == */
+
+/* All screens */
+.container-contact-form { 
+	text-align: center; 
+	background-color: #fff; 
+	border: solid 1px gray
+}
+
+/* Desktop */
+@media all and (min-width:1024px) { 
+	.container-contact-form {
+		margin: 4% 23% 4% 23%;
+		padding: 2% 4% 1% 4%
+	}
+}
+
+/* Mobiles */
+@media all and (max-width:1023px) { 
+	.container-contact-form { 
+		margin: 6% 8% 18% 8%;
+		padding: 7% 8% 8% 8%;
+	}
+}
+
+/* == Contact form heading and text == */
+
+/* Heading */
+.container-contact-form h3 { 
+	font-weight: bold; 
+	color: #000;
+	line-height: 1.2;
+	margin-bottom: 3%;
+	font-size: calc(30px + (64 - 30) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Text */
+.container-contact-form p { 
+    font-weight: normal;
+    color: #000; 
+	line-height: 1.5;
+	margin-bottom: 7%;
+	font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* == Contact form fields == */
+
+#contact-form .flex-row { display: flex; justify-content: space-between }
+
+/* Desktop */
+@media all and (min-width: 1024px) {
+	#contact-form .flex-row { flex-direction: row; text-align: left; margin-bottom: 6% }
+	#contact-form .flex-row .item-name,
+	#contact-form .flex-row .item-email { width: 47% }
+	#contact-form .flex-row .item-textarea { width: 64% }
+	#contact-form .flex-row .item-btn { width: 30%; align-self: flex-end }
+}
+
+/* Mobiles */
+@media all and (max-width: 1023px) {
+	#contact-form .flex-row { flex-direction: column; text-align: center; }
+}
+
+#contact-form label, #contact-form input, #contact-form textarea {
+	font-family: sans-serif;
+	color: #000;
+	display: block;
+}
+
+#contact-form label {
+	font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1600 - 320))); 
+	font-weight: bold;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: baseline;
+}
+
+#contact-form [type="text"], 
+#contact-form [type="email"],
+#contact-form textarea { width: 100% }
+#contact-form ::placeholder { font-size: 94% }
+
+/* Mobiles */
+@media all and (max-width: 1023px) { 
+	#contact-form [type="text"], 
+	#contact-form [type="email"],
+	#contact-form textarea { margin-bottom: 20px }
+}
+
+#contact-form input, #contact-form textarea {
+	padding: 10px 12px;
+	border: 2px solid gray;
+	background-color: #f0f0f0;
+	border-radius: 5px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+	background-color: #fff;
+}
+
+#contact-form.flex-row .item-btn { width: 26% }
+
+#contact-form #btn-submit { 
+	float: right; 
+	color: #fff;
+	border: none; 
+	background-color: blue;
+	font-weight: bold;
+	padding: 12px 22px;
+	font-size: 96%;
+	border-radius: 5px;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 2px */
+}
+
+#contact-form #btn-submit:hover, 
+#contact-form #btn-submit:active { 
+	background-color: darkblue;
+}
+
+#contact-form #btn-submit i.fas {
+	margin-left: 9px;
+	font-size: 104%
+}
+
+
+
+/* =============== BEGIN FOOTER CSS ================== */
+
+
+/* == Begin footer CSS == */
+
+/* Outer footer parent container */
+.container-footer { 
+    text-align: center;
+    color:#fff;
+    background-color:#2c3e50;
+}
+
+/* Desktop footer - inside padding  */
+@media all and (min-width:768px) {
+	.container-footer { padding: 4% 8% 5% 8% }
+}
+
+/* Mobiles footer - inside padding */
+@media all and (max-width:767px) {
+	.container-footer { padding: 8% 8% 12% 8% }
+}
+
+/* Styles for footer background, text, icons and links */
+
+.container-footer h4,
+.container-footer h5,
+.container-footer ul li,
+.container-footer ul li a,
+.container-footer p,
+.container-footer p a {
+   color: #fff
+}
+
+/* Footer headings */
+.container-footer h4 {
+   font-family: serif;
+   font-weight: normal;
+   font-style: italic;
+   font-size: calc(26px + (48 - 26) * ((100vw - 320px)/(1600 - 320)));
+   margin: 0 auto 16px 0;
+}
+
+.container-footer h5 {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style:  italic;
+    color: #8d9093;
+    margin: 0 auto 36px auto;
+    font-size: calc(20px + (32 - 20) * ((100vw - 320px)/(1600 - 320)));
+}
+
+/* Footer text links and icon links */
+.container-footer ul.footer-links,
+.container-footer ul.footer-icons {
+    list-style-type: none;
+}
+
+.container-footer ul.footer-links {
+    margin: 0 auto 48px auto;
+}
+
+.container-footer ul.footer-icons {
+    margin: 0 auto 48px auto;
+}
+
+.container-footer ul.footer-links li,
+.container-footer ul.footer-icons li {
+    display: inline-block;
+    margin: 0 32px 0 0;
+}
+
+.container-footer ul.footer-links li:last-child,
+.container-footer ul.footer-icons li:last-child {
+    margin-right: 0;
+}
+
+/* Footer text links */
+.container-footer ul.footer-links li a {
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(17px + (20 - 17) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer ul.footer-links li a:link, 
+.container-footer ul.footer-links li a:visited  {
+   border-bottom-color: transparent;
+}
+
+.container-footer ul.footer-links li a:hover, 
+.container-footer ul.footer-links li a:active  {
+   border-bottom-color: #fff
+}
+
+/* Footer icons */
+.container-footer ul.footer-icons li a i {
+    text-decoration: none;
+    font-size: calc(22px + (28 - 22) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer ul.footer-icons li a:hover, 
+.container-footer ul.footer-icons li a:active  {
+   color: #fff
+}
+
+/* Privacy and legal link */
+.container-footer p a {
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer p a:link, 
+.container-footer p a:visited  {
+   border-bottom-color: transparent;
+}
+
+.container-footer p a:hover, 
+.container-footer p a:active  {
+   border-bottom-color: #fff
+}
+
+a.privacy-legal {
+    font-family: sans-serif;    
+    display: inline-block;
+    color:#fff;
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(14px + (17 - 14) * ((100vw - 320px)/(1600 - 320)));
+}
+
+a.privacy-legal:link,
+a.privacy-legal:visited {
+    border-bottom-color: transparent;
+}
+
+a.privacy-legal:active,
+a.privacy-legal:hover {
+    border-bottom-color: #fff
+}
+
+/* == End footer CSS == */
