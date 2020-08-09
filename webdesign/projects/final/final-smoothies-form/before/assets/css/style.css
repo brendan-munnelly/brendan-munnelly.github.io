@@ -1,0 +1,96 @@
+/*  ============= WEB BROWSER RESETS ============ */
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { height: 100% }
+body { min-height: 100%; max-width: 1600px; margin-left: auto; margin-right: auto }
+img { width: 100%; height: auto; display: block }
+
+/* =================== FONT ================= */
+
+body { 	font-family: 'Neucha', sans-serif }
+
+/* ============== SECTION BLOCK CONTAINERS ============= */
+
+/* Desktops */
+@media all and (min-width:768px) { 
+	.container-block { padding: 4% 12% 4% 12% }
+}
+
+/* Mobiles */
+@media all and (max-width:767px) { 
+	.container-block { padding:  12% 8% 12% 8% }
+}
+
+/* Section background colors */
+.container-block.bg-watermelon { background-color: #FBBDD9 }
+.container-block.bg-apple      { background-color: #B7F3D9 }
+.container-block.bg-blueberry  { background-color: #8C6BBE }
+.container-block.bg-lemon      { background-color: #F1F1BC }
+
+/* ============== INTRODUCTION TEXT ============ */
+
+.container-block h2 {
+	font-size: calc(26px + (54 - 26) * ((100vw - 320px) / (1600 - 320))); 
+	color: #733fc0;
+	line-height: 1.6;
+	text-align: center;
+}
+
+/* ==== FLEXBOX: PARENT AND CHILD ELEMENTS ==== */
+
+.container-flexbox { 
+	display: flex; 
+	justify-content: space-between; 
+	flex-wrap: wrap
+}
+
+/* Desktops: 2 columns */
+@media all and (min-width:768px) { 
+	.item-col-2 { width: 47% }
+}
+
+/* Mobiles: 1 column */
+@media all and (max-width:767px) { 
+	.item-col-2 { width: 100% }
+}
+
+/* ======= CONTENT INSIDE FLEXBOX CHILD COLUMNS ======= */
+
+/* Sub-headings  */
+.container-flexbox .item-col-2 h3 {
+	font-size: calc(32px + (64 - 32) * ((100vw - 320px) / (1600 - 320))); 
+	color: #d1274b;
+	line-height: 1.2;
+	letter-spacing: 2px;
+	margin-bottom: 4px;	
+}
+
+/* Text paragraphs */
+.container-flexbox .item-col-2 p { 
+	font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1600 - 320))); 
+	color: #2F4F4F;
+	line-height: 1.6;
+	letter-spacing: 1px;	
+}
+
+/* Sub-heading, paragraph text against dark background */
+.container-flexbox.bg-blueberry .item-col-2 h3,
+.container-flexbox.bg-blueberry .item-col-2 p { color: #fff } 
+
+
+/* Mobiles: center align headings, paragraphs and images within columns */
+@media all and (max-width:767px) { 
+	.container-flexbox .item-col-2 h3,
+	.container-flexbox .item-col-2 p,
+	.container-flexbox .item-col-2 img { text-align: center }
+	/* Also: bottom margin spacing under images */
+	.container-flexbox .item-col-2 img { margin-bottom: 14px }
+}
+
+/* Mobiles: Re-order columns inside first and third flexbox parent containers */
+@media all and (max-width:767px) { 
+	.container-flexbox.bg-watermelon .item-col-2:nth-child(1) { order: 2 }
+	.container-flexbox.bg-watermelon .item-col-2:nth-child(2) { order: 1 }
+	.container-flexbox.bg-blueberry  .item-col-2:nth-child(1) { order: 2 }
+	.container-flexbox.bg-blueberry  .item-col-2:nth-child(2) { order: 1 }
+}
+
