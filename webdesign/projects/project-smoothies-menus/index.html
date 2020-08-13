@@ -79,6 +79,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<p><a href="#edit-content">Updating the mobile menu content and hyperlinks</a></p>
 		<p><a href="#edit-colours">Updating the menu colours</a></p>
 		<p><a href="#style-swap-js">Adding the menu style-swapping effect</a></p>
+		<p class="toc-indent"><a href="#overlay-darken">Darkening the upper part of the hero image overlay</a></p>
+		<p class="toc-indent"><a href="#hamburger-edit">Changing the colour of the hamburger icon</a></p>
 		<p><a href="#publish-github">Uploading your project to GitHub</a></p>
 	</div>
 </section>
@@ -408,30 +410,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section id="edit-colours" class="wrapper-content bg-white">
 	<h2>Updating the menu colours</h2>
-	<p>In the <b>menus-template.html</b> file you copied-and-pasted into your <b>index.html</b> web page, the CSS class of <b>menu-light</b> is assigned to:</p>
+	<p>In the <b>menus-template.html</b> file you copied-and-pasted into your <b>index.html</b> web page, the CSS class of <b>menu-light</b> is assigned to the desktop and mobile menus. As a result:</p>
 	
 	<ul>
-		<li>The parent container for the desktop menu, named <b>container-menu-desktop</b>.</li>
-		<li>The two parent containers for the mobile menu: <b>container-menu-bar-mobile</b> and <b>flyout-menu</b></li>
+		<li>The text of the menu options is displayed in a red colour against a white background.</li>
+		<li>The text and background of the CTA button are also in the colours red and white.</li>
 	</ul>
 	
-	<p>In the <b>menus.css</b> stylesheet, this <b>menu-light</b> class sets text and hyperlinks red against a white background. You can see just a few examples of these colour properties and values below.</p>
-
-	<img src="../assets/img/project-smoothies-menus/vscode-red-text.png" alt="fa-icons-copy">
-
-	<p>Let's update this red colour to match the deep pink colour of <b>#d1274b</b> used in the web page.</p>
+	<p>Let&#8217; replace this default colour of red with the deep pink colour of <b>#d1274b</b> used elsewhere in the web page.</p>
 
 	<ol>
-		<li>In the <b>menus.css</b> stylesheet, scroll to the top of the file.</li>
-		<li>On the Visual Studio Code menu, click the <b>Edit</b> menu and then click the <b>Replace</b> command.</li>
+		<li>In VS Code, open the <b>menus.css</b> stylesheet.</li>
+		<li>From the VS Code menubar, click the <b>Edit</b> option and then choose the <b>Replace</b> command.</li>
 		<li>A new search-and-replace dialog box appears at the top-right of the Visual Studio Code screen.
 		<img src="../assets/img/project-smoothies-menus/vscode-search-replace.png" alt="fa-icons-copy"></li>
 		<li>In the first field, enter <b>red</b>.</li>
 		<li>In the second, enter <b>#d1274b</b>.</li>
 		<li>Click the left icon for <b>Replace</b>. Do <em>not</em> click the right icon for <b>Replace All</b>.</li>
-		<li>One by one, replace every occurrence of the colour <b>red</b> with <b>#d1274b</b> in your stylesheet.
+		<li>One by one, replace every occurrence of the colour <b>red</b> with <b>#d1274b</b>.
 		<span class="inside-ol">&nbsp;</span>
-		(If you choose the <b>Replace All</b> option, Visual Studio Code will replace the letters 'red' inside words such as 'cente<b>red</b>' that may be written in comments.)</li>
+		(If you choose the <b>Replace All</b> option, VS Code will replace the letters 'red' inside words such as 'cente<b>red</b>' that may be written in comments.)</li>
 		<li>Save the <b>style.css</b> file.</li>
 	</ol>
 
@@ -446,30 +444,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<h2>Adding the menu style-swapping effect</h2>
 	<p>Your final step is to use some JavaScript code in the <b>menus-template.html</b> file you copied-and-pasted into your <b>index.html</b> web page to create the following effect:</p>
 	<ul>
-		<li>When the user displays the top of the web page, either on desktop or mobile screens, the menu has a transparent background. The hero image appears directly behind the text hyperlinks. These hyperlinks are displayed in white text.</li>
+		<li>When the user displays the top of the web page, either on desktop or mobile screens, the menu has a transparent background. The hero image appears directly behind the text hyperlinks. These hyperlinks are displayed in white text.
+		<img src="../assets/img/project-smoothies-menus/visual-effect-menus-swap-1.png" alt="fa-icons-copy"></li>
 
 		<li>When the user scrolls down the web page, the transparent background is replaced by a solid white colour. And the colour of the text hyperlinks changes to deep pink.
-		<img src="../assets/img/project-smoothies-menus/visual-effect-menus-swap.png" alt="fa-icons-copy"></li>
+		<img src="../assets/img/project-smoothies-menus/visual-effect-menus-swap-2.png" alt="fa-icons-copy"></li>
 	</ul>
 
 	<p>To achieve this effect, follow these steps.</p>
 	<ol>
 		<li>In the <b>index.html</b> file, for the menu-related blocks below, replace the class of <b>menu-light</b> with the <b>menu-transparent</b> class.
 		<img src="../assets/img/project-smoothies-menus/vscode-menu-transparent.png" alt="fa-icons-copy"></li>
-		<li>Scroll down to near the bottom of the web page, and remove the <b>//</b> &#8216;comment&#8216; characters from the beginning of the JavaScript code a shown below.
+		<li>Scroll down to near the bottom of the web page, and remove the <b>//</b> characters from the beginning of the JavaScript code a shown below.
 		<img src="../assets/img/project-smoothies-menus/vscode-js-swap.png" alt="fa-icons-copy"></li>
-
-		<li>To make the menu text links easier to read against the transparent background on desktop screens, darken the overlay at the top of the hero image.
-		<span class="inside-ol">&nbsp;</span>
-		In the <b>style.css</b> file, for the <b>container-hero</b> class, increase the upper value of the overlay opacity gradient of the <b>background-image</b> property to <b>0.6</b>
-		<img src="../assets/img/project-smoothies-menus/vscode-overlay-opacity.png" alt="fa-icons-copy"></li>
-
-		<li>Change the font-family of the menu options to an easier-to-read value.
-		<img src="../assets/img/project-smoothies-menus/vscode-menu-font.png" alt="fa-icons-copy"></li>
-
-		<li>One final change: to make the hamburger icon easier-to-read against the background image, change its colour from red to white as shown below.
-		<img src="../assets/img/project-smoothies-menus/vscode-hamburger-icon.png" alt="fa-icons-copy"></li>
-		<li>Save the <b>style.css</b> file.</li>
+		<li>Save the <b>index.html</b> web page. You can now close this file.</li>
 	</ol>
 
 	<p>When the user scrolls down the web page:</p>
@@ -481,6 +469,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<ul>
 		<li>The JavaScript code removes the <b>menu-light</b> and <b>menu-drop-shadow</b> classes, and replaces them with the original <b>menu-transparent</b> class.</li>
 	</ul>
+
+
+	<h3 id="overlay-darken">Darkening the upper part of the hero image overlay</h3>
+	<p>In your <b>style.css</b> file, you can see that the hero image has a black-coloured overlay.</p>
+
+	<img src="../assets/img/project-smoothies-menus/vscode-overlay-opacity-1.png" alt="fa-icons-copy"></li>
+
+	
+	<p>Its purpose is to make the heading and sub-heading of the hero block easier to read against the image background. The overlay has a low value of <b>0.2</b>, so that the image does not appear too dull.</p>
+
+	<p>Your task is to darken the overlay &#8212; but only for the upper part of the hero image that is behind the text of the menu options. The aim is to make the menu option text easier to read.</p>
+
+	<ol>
+		<li>In the <b>style.css</b> file, for the <b>container-hero</b> class, increase the upper value of the overlay opacity gradient of the <b>background-image</b> property to <b>0.6</b>
+		<img src="../assets/img/project-smoothies-menus/vscode-overlay-opacity-2.png" alt="fa-icons-copy"></li>
+		<li>Save the <b>style.css</b> file. You can now close this stylesheet.</li>
+	</ol>
+
+
+	<h3 id="hamburger-edit">Changing the colour of the hamburger icon</h3>
+	<p>The hamburger icon, which is displayed only on mobile screens, is shown in the colour red whenever the menu has a transparent background. To make the hamburger icon more visible against the background image, let&#8217;s change its colour from red to white.</p>
+
+	<ol>
+		<li>In VS Code, open the <b>menus.css</b> stylesheet.</li>
+		<li>Change the icon colour, which is created by the <b>background-color</b> property, to white (<b>#fff</b>).
+		<img src="../assets/img/project-smoothies-menus/vscode-hamburger-icon.png" alt="fa-icons-copy"></li>
+		<li>Save the <b>menus.css</b> file. You can now close this stylesheet.</li>
+	</ol>
+
 
 	<p>That&#8217;s it. You have now completed your &#8216;Smoothies&#8217; project.</p>
 
