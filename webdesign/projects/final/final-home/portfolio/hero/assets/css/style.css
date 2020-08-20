@@ -1,0 +1,1964 @@
+/*  ============= WEB BROWSER RESETS ============ */
+* { margin: 0; padding: 0; border: none; box-sizing: border-box  }
+html { height: 100% }
+body { min-height: 100%; max-width: 1600px; margin-left: auto; margin-right: auto }  
+img { width: 100%; height: auto; display: block }
+
+
+/* === ALL SCREEN SIZES ====== */
+
+/* Positions all menus in front of page content */
+.container-menu-desktop, 
+.container-menu-bar-mobile, 
+.flyout-menu { z-index: 999; font-family: sans-serif; font-weight: bold }
+.container-menu-desktop, .container-menu-bar-mobile { 
+    width:100%; font-family: sans-serif; font-weight: bold 
+}
+
+/* on mobiles - hide desktop menu */
+@media (max-width:767px) { 
+    .container-menu-desktop.menu-transparent,
+    .container-menu-desktop.menu-light,
+    .container-menu-desktop.menu-dark { display: none }
+}
+
+/* on desktops - hide mobile menu bar and list of menu options */
+@media (min-width:768px) { 
+    .container-menu-bar-mobile.menu-transparent,
+    .container-menu-bar-mobile.menu-light,
+    .container-menu-bar-mobile.menu-dark,
+    .flyout-menu.menu-transparent,
+    .flyout-menu.menu-light,
+    .flyout-menu.menu-light { display: none }
+}
+
+/* sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
+
+/* prevents content from disappearing udner sticky menus */
+.sticky-anchor {
+    position: relative;
+    border-top: 90px solid transparent;
+    margin: -90px 0 0;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+ 
+ .sticky-anchor:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+ }
+ 
+/* Height of desktop menu and mobile menu bar */
+.container-menu-desktop, .container-menu-bar-mobile { height:72px }
+
+/* website logo fixed size in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child img,
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* website logo vertically cente#3434b0 in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child,
+.container-menu-bar-mobile a:first-child { display: flex; flex-direction: row; align-items: center }
+
+/* hide bullet character on listed links */
+.container-menu-desktop ul li,
+.flyout-menu            ul li { list-style-type: none }
+
+/* hide link underlines on desktop and mobile menus */
+.container-menu-desktop ul li a,
+.flyout-menu            ul li a { text-decoration: none }
+
+/* make desktop menu options bold */
+.container-menu-desktop ul li a { font-weight:bold }
+
+/* style cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta,
+.flyout-menu            ul li a.btn-cta {
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    font-weight: bold;
+    /* soften corners */
+    /* border-radius: 4px; */
+    /* rounded corners */
+    border-radius: 100px
+}
+
+/* style icon in cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta i,
+.flyout-menu            ul li a.btn-cta i { margin-right: 8px; font-size: 90% }
+
+/* on mobiles, prevent scrolling outside flyout menu */
+.no-scroll { overflow: hidden }
+
+.menu-drop-shadow { box-shadow: 0 1px 10px #888 }
+
+/* ======= DESKTOP MENU ======= */
+
+/* outer parent flexbox container 
+   home page link (with website logo) at left and 
+   ul links at right are its two children */
+.container-menu-desktop {
+	display: flex;
+    justify-content: space-between;
+    padding: 0 6% 0 6%;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+/* menu links and cta button aligned horizontally */
+.container-menu-desktop ul li {
+    display: inline-block;
+    margin: 0 40px 0 0; /* spacing at right of menu links, cta button */
+}
+
+.container-menu-desktop ul li:last-child {
+    margin-right: 0 /* no spacing at right of last menu link or cta button */
+}
+
+/* vertically center menu links and cta button */
+.container-menu-desktop ul { display: flex; align-items: center }
+
+/* style text for links and cta button  */
+.container-menu-desktop ul li a {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+     /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button padding */
+.container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
+
+
+/* ======= MOBILE MENU  ======== */
+
+/* outer flexbox container for mobile menu bar 
+   home page link (with website logo) at left and hamburger icon at right are its two children */
+.container-menu-bar-mobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+    width: 100%;
+    padding: 0 6% 0 6%;
+}
+
+/* three bars hozizontal in hamburger icon */
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 { width: 36px; height: 4px; margin: 7px 0; transition: 0.4s }
+
+/* hamburger icon changes shape to 'X' when fly-out menu is visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
+.change .bar2 { opacity: 0 }
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
+
+/* container div for flyout menu content */
+.flyout-menu { 
+    position: fixed; display: block; 
+    top: 72px; /* same height as menu bar */
+    width: 320px; 
+    max-height: 100%;
+    height: 100%;
+    padding: 30px 40px 40px 40px;
+    transition: 0.5s;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* safari on mobiles */    
+}
+
+.flyout-menu.flyout-menu-is-closed {
+    right: -320px; /* hides flyout menu */
+}
+
+.flyout-menu {
+    right: 0; /* displays flyout menu */
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain
+}
+
+/* drop shadow border at left of fly-out menu */
+.flyout-menu {
+    box-shadow: 0px 1px 10px #888 
+}
+
+/* list of links on flyout menu */
+.flyout-menu ul li { margin: 0 40px 30px 0 }
+
+/* style flyout menu links */
+.flyout-menu ul li a {
+    font-size: 18px;
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button */
+.flyout-menu a.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
+}
+
+.flyout-menu hr { 
+    height: 4px;
+    margin: 32px 0 0 0;
+    border-style: solid;
+    border-width: 1px 
+} 
+
+.flyout-menu h4 {
+    font-size: 20px;
+    margin: 42px 0 4px 0;
+    text-align: center;
+    /* letter-spacing: 2px; *./
+    /* text-transform: uppercase */
+}
+
+.flyout-menu h5 {
+    font-size: 17px;
+    margin: 20px 0 20px 0;
+    text-align: center
+}
+
+.flyout-menu h5 a {
+    font-size: 17px;
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px
+}
+
+.flyout-menu p { 
+    text-align: center; font-size: 15px; line-height: 1.4;
+}
+
+.flyout-menu div.fly-out-profile-box,
+.flyout-menu div.fly-out-social-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.flyout-menu div.fly-out-profile-box img,
+.flyout-menu div.fly-out-profile-box p { width: 47% }
+
+.flyout-menu div.fly-out-profile-box img {
+    display: block; border-radius: 100%;
+    width: 104px; height: 104px; 
+    border-style: solid;
+    border-width: 2px
+}
+
+.flyout-menu div.fly-out-profile-box p {
+    text-align:left 
+}
+
+.flyout-menu div.fly-out-social-icons { 
+    margin-top:12px
+}
+
+.flyout-menu div.fly-out-social-icons a {
+    font-size: 26px;
+    text-align: center 
+}
+
+/* ========= Light background menu - desktops and mobiles ========= */
+
+/* background colour */
+.menu-light { 
+	background-color: #fff;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-light ul li a:link,  .menu-light ul li a:visited { color: #3434b0 }
+.menu-light ul li a:hover, .menu-light ul li a:active  { color: #222 }
+
+/* cta button */
+.menu-light ul li a.btn-cta:link, 
+.menu-light ul li a.btn-cta:visited {
+    background-color: transparent;
+    color: #3434b0;
+    border-color:#3434b0
+}
+
+.menu-light ul li a.btn-cta:hover,
+.menu-light ul li a.btn-cta:active {
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#3434b0
+}
+
+/* on mobiles only */
+.menu-light.flyout-menu hr { background-color: #3434b0; border-color: #3434b0 } 
+
+.menu-light.flyout-menu h4,
+.menu-light.flyout-menu h5,
+.menu-light.flyout-menu h5 a, 
+.menu-light.flyout-menu p { color: #3434b0 } 
+
+/* colour of hamburger icon bars */
+.menu-light .item-icon .bar1, 
+.menu-light .item-icon .bar2, 
+.menu-light .item-icon .bar3 { background-color: #3434b0 }	
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #3434b0 }
+
+/* email link */
+.menu-light.flyout-menu h5 a:link, 
+.menu-light.flyout-menu h5 a:visited {
+    border-bottom-color:#3434b0;
+}
+
+.menu-light.flyout-menu h5 a:hover, 
+.menu-light.flyout-menu h5 a:active {
+    border-bottom-color: #fff;
+}
+
+/* profile image border colour */
+.menu-light.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-light.flyout-menu .fly-out-social-icons a i { color:#3434b0 }
+
+/* === End light background menu === */
+
+
+
+/* ======= Dark background menu - desktops and mobiles ======= */
+
+/* background colour */
+.menu-dark { 
+	background-color: #3434b0; 
+	transition: all .5s ease-in-out
+}
+
+/* menu links */
+.menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
+.menu-dark ul li a:hover, .menu-dark ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-dark ul li a.btn-cta:link,
+.menu-dark ul li a.btn-cta:visited { 
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#fff
+}
+
+.menu-dark ul li a.btn-cta:hover,
+.menu-dark ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: #3434b0;
+    border-color:#fff
+}
+
+/* on mobiles only - various content */
+.menu-dark.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-dark.flyout-menu h4,
+.menu-dark.flyout-menu h5,
+.menu-dark.flyout-menu h5 a,
+.menu-dark.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-dark .item-icon .bar1, 
+.menu-dark .item-icon .bar2, 
+.menu-dark .item-icon .bar3 { background-color: #fff }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-dark.flyout-menu h5 a:link, 
+.menu-dark.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-dark.flyout-menu h5 a:hover, 
+.menu-dark.flyout-menu h5 a:active {
+    border-bottom-color: #3434b0;
+}
+
+/* profile image border colour */
+.menu-dark.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-dark.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End dark background menu === */
+
+
+
+/* ======== Transparent background menu - desktops and mobiles =========== */
+
+/* background colour */
+.menu-transparent { 
+	background-color: transparent;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-transparent ul li a:link,  .menu-transparent ul li a:visited { color: #fff }
+.menu-transparent ul li a:hover, .menu-transparent ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-transparent ul li a.btn-cta:link,
+.menu-transparent ul li a.btn-cta:visited { 
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#3434b0;
+}
+
+.menu-transparent ul li a.btn-cta:hover,
+.menu-transparent ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: #3434b0;
+    border-color:#3434b0
+}
+
+/* on mobiles only - various content */
+.menu-transparent.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-transparent.flyout-menu h4,
+.menu-transparent.flyout-menu h5,
+.menu-transparent.flyout-menu h5 a,
+.menu-transparent.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-transparent .item-icon .bar1, 
+.menu-transparent .item-icon .bar2, 
+.menu-transparent .item-icon .bar3 { background-color: #3434b0 }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-transparent.flyout-menu h5 a:link, 
+.menu-transparent.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-transparent.flyout-menu h5 a:hover, 
+.menu-transparent.flyout-menu h5 a:active {
+    border-bottom-color: #3434b0;
+}
+
+/* profile image border colour */
+.menu-transparent.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-transparent.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End transparent background menu === */
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 1 ************ */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+.hero-1 { margin-top: 72px }
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-1 { margin-bottom: 70px; padding: 8% 20% }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-1 { margin-bottom: 40px; padding: 20% 10% }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-1 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-image: linear-gradient(90deg, #ff00cc, #333399);
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-1 h1, .hero-1 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-1 h1, .hero-1 h2 { text-align: center }
+}
+
+.hero-1 h1 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: calc(36px + (80 - 36) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-1 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(20px + (32 - 20) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-1 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-1 h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-1 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-1 .container-btn {
+        /* Spacing above button container */
+        margin-top: 6%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-1 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-1 .container-btn .item-col-2:first-child { text-align: right }
+    .hero-1 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-1 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 12%;
+    }
+    /* Buttons full width */
+    .hero-1 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-1 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-1 .container-btn a.btn-primary,
+.hero-1 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-1 a.btn-primary:link, 
+.hero-1 a.btn-primary:visited {
+    color: #fff;
+    border: solid 2px red;
+    background-color: red;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-1 a.btn-primary:focus, 
+.hero-1 a.btn-primary:hover, 
+.hero-1 a.btn-primary:active {
+    background-color:green;
+    border: solid 2px green;
+}
+
+/* Secondary button: passive states */
+.hero-1 a.btn-secondary:link, 
+.hero-1 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-1 a.btn-secondary:focus, 
+.hero-1 a.btn-secondary:hover, 
+.hero-1 a.btn-secondary:active {
+    color: lightblue;
+    border: solid 2px lightblue;
+}
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 1 ************ */
+
+
+
+
+
+/* ***************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 2 ************ */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-2 { margin-bottom: 70px; padding: 8% 20% }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-2 { margin-bottom: 40px; padding: 20% 10% }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-2 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-color: #1f364d;
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-2 h1, .hero-2 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-2 h1, .hero-2 h2 { text-align: center }
+}
+
+.hero-2 h1 { 
+    /* Font styles */
+    font-family: 'Libre Baskerville', serif;
+    color: #11ece5;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: calc(42px + (104 - 42) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-2 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: hotpink;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(20px + (32 - 20) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-2 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-2 h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-2 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-2 .container-btn {
+        /* Spacing above button container */
+        margin-top: 10%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-2 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-2 .container-btn .item-col-2:first-child { text-align: right }
+    .hero-2 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-2 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 16%;
+    }
+    /* Buttons full width */
+    .hero-2 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-2 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-2 .container-btn a.btn-primary,
+.hero-2 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-2 a.btn-primary:link, 
+.hero-2 a.btn-primary:visited {
+    color: #1f364d;
+    border: solid 2px #11ece5;
+    background-color: #11ece5;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-2 a.btn-primary:focus, 
+.hero-2 a.btn-primary:hover, 
+.hero-2 a.btn-primary:active {
+    background-color:hotpink;
+    border: solid 2px hotpink;
+}
+
+/* Secondary button: passive states */
+.hero-2 a.btn-secondary:link, 
+.hero-2 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-2 a.btn-secondary:focus, 
+.hero-2 a.btn-secondary:hover, 
+.hero-2 a.btn-secondary:active {
+    color: lightblue;
+    border: solid 2px lightblue;
+}
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 2 ************ */
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 3 ************ */
+/* **************************************************************** *
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-3 { margin-bottom: 70px; padding: 8% 20% }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-3 { margin-bottom: 40px; padding: 20% 10% }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-3 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-color: #fabbb6;
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-3 h1, .hero-3 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-3 h1, .hero-3 h2 { text-align: center }
+}
+
+.hero-3 h1 { 
+    /* Font styles */
+    font-family: 'Fjalla One', sans-serif;
+    color: #000;
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-size: calc(48px + (90 - 48) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-3 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #000;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(28px + (38 - 28) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-3 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-3 h1 { margin-bottom: 8% } }
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-3 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-3 .container-btn {
+        /* Spacing above button container */
+        margin-top: 6%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-3 .container-btn .item-col-2 { width: 100% }
+
+   /* Button alignment within their containers */
+    .hero-3 .container-btn .item-col-2:first-child { text-align: center }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-3 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 4%;
+    }
+    /* Buttons full width */
+    .hero-3 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-3 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-3 .container-btn a.btn-primary,
+.hero-3 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 0 0 6px 0;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-3 a.btn-primary:link, 
+.hero-3 a.btn-primary:visited {
+    color: #000;
+    border-bottom: solid 2px #000;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-3 a.btn-primary:focus, 
+.hero-3 a.btn-primary:hover, 
+.hero-3 a.btn-primary:active {
+    color: red;
+    border-bottom: solid 2px red;
+}
+
+/* ************* ENDS HERO BLOCK, ONE COLUMN: SAMPLE 3 ************ */
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 4 ************ */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-4 { margin-bottom: 70px; padding: 8% 20% }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-4 { margin-bottom: 40px; padding: 20% 10% }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-4 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-color: #3c1c78; 
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktop - Heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-4 h1, .hero-4 h2 { text-align: left }
+}
+
+/* Desktop - Heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-4 h1, .hero-4 h2 { text-align: center }
+}
+
+.hero-4 h1 { 
+    /* Font styles */
+    font-family: 'Roboto Slab', serif;
+    color: #000;
+    color: #ffff9c;
+    font-weight: normal;
+    line-height: 1.2;
+    font-size: calc(56px + (104 - 56) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-4 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: hotpink;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(32px + (42 - 32) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-4 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-4 h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-4 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-4 .container-btn {
+        /* Spacing above button container */
+        margin-top: 10%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-4 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-4 .container-btn .item-col-2:first-child { text-align: left }
+    .hero-4 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-4 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 20%;
+    }
+    /* Buttons full width */
+    .hero-4 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-4 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-4 .container-btn a.btn-primary,
+.hero-4 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-4 a.btn-primary:link, 
+.hero-4 a.btn-primary:visited {
+    color: #fff;
+    border: solid 2px #da3654;
+    background-color: #da3654;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-4 a.btn-primary:focus, 
+.hero-4 a.btn-primary:hover, 
+.hero-4 a.btn-primary:active {
+    color:#3c1c78;
+    border: solid 2px #11ece5;
+    background-color: #11ece5;
+}
+
+/* Secondary button: passive states */
+.hero-4 a.btn-secondary:link, 
+.hero-4 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-4 a.btn-secondary:focus, 
+.hero-4 a.btn-secondary:hover, 
+.hero-4 a.btn-secondary:active {
+    color: lightblue;
+    border: solid 2px lightblue;
+}
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 4 ************ */
+
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 5 ************ */
+/* **************************************************************** */
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-5 { margin-bottom: 70px; padding: 8% 20% }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+@media (max-width:767px) {
+    .hero-5 { margin-bottom: 40px; padding: 20% 12% }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-5 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-color: #fbf5eb   
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Heading and sub-heading alignment */
+.hero-5 h1, .hero-5 h2 { text-align: left }
+
+.hero-5 h1 { 
+    /* Font styles */
+    font-family: 'Libre Baskerville', serif;
+    color: #000;
+    font-weight: normal;
+    line-height: 1.2;
+    font-size: calc(42px + (84 - 42) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-5 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-5 .container-btn {
+        /* Spacing above button container */
+        margin-top: 6%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-5 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-5 .container-btn .item-col-2:first-child { text-align: left }
+    .hero-5 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-5 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 20%;
+    }
+    /* Buttons full width */
+    .hero-5 .container-btn .item-col-2 { width: 100%; text-align: left }
+    /* Spacing above secondary button */
+    .hero-5 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-5 .container-btn a.btn-primary,
+.hero-5 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 0 0 12px 0;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-5 a.btn-primary:link, 
+.hero-5 a.btn-primary:visited {
+    color: #000;
+    border-bottom: dashed 2px #000;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-5 a.btn-primary:focus, 
+.hero-5 a.btn-primary:hover, 
+.hero-5 a.btn-primary:active {
+    border-bottom: dashed 2px red;
+}
+
+/* ============== ENDS HERO BLOCK, ONE COLUMN: SAMPLE 5 ================ */
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 6 ************ */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-6 { margin-bottom: 70px; padding: 0 20%; height: 540px }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-6 { margin-bottom: 40px; padding: 0 10%; height: 480px }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-6 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Background color */
+    background-image: url('../../assets/img/hotel-dark.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-6 h1, .hero-6 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-6 h1, .hero-6 h2 { text-align: center }
+}
+
+.hero-6 h1 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: calc(60px + (112 - 60) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-6 h2 { 
+    /* Font styles */
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(24px + (54 - 24) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-6 h1 { margin-bottom: 2% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-6 h1 { margin-bottom: 6% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-6 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-6 .container-btn {
+        /* Spacing above button container */
+        margin-top: 6%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-6 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-6 .container-btn .item-col-2:first-child { text-align: right }
+    .hero-6 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-6 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 12%;
+    }
+    /* Buttons full width */
+    .hero-6 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-6 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-6 .container-btn a.btn-primary,
+.hero-6 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-6 a.btn-primary:link, 
+.hero-6 a.btn-primary:visited {
+    color: #fff;
+    border: solid 2px red;
+    background-color: red;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-6 a.btn-primary:focus, 
+.hero-6 a.btn-primary:hover, 
+.hero-6 a.btn-primary:active {
+    background-color:green;
+    border: solid 2px green;
+}
+
+/* Secondary button: passive states */
+.hero-6 a.btn-secondary:link, 
+.hero-6 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-6 a.btn-secondary:focus, 
+.hero-6 a.btn-secondary:hover, 
+.hero-6 a.btn-secondary:active {
+    color: red;
+    border: solid 2px red;
+}
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 6 ************ */
+
+
+
+
+
+/* ***************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 7 ************ */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-7 { margin-bottom: 70px; padding: 0 12%; height: 540px }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-7 { margin-bottom: 40px; padding: 0 10%; height: 480px }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-7 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
+    url('../../assets/img/bike-tours.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-7 h1, .hero-7 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-7 h1, .hero-7 h2 { text-align: center }
+}
+
+.hero-7 h1 { 
+    /* Font styles */
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.1;
+    font-size: calc(60px + (112 - 60) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;
+}
+
+.hero-7 h2 { 
+    /* Font styles */
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: calc(24px + (54 - 24) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;    
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-7 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-7 h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-7 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-7 .container-btn {
+        /* Spacing above button container */
+        margin-top: 8%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-7 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-7 .container-btn .item-col-2:first-child { text-align: right }
+    .hero-7 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-7 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 16%;
+    }
+    /* Buttons full width */
+    .hero-7 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-7 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-7 .container-btn a.btn-primary,
+.hero-7 .container-btn a.btn-secondary {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-7 a.btn-primary:link, 
+.hero-7 a.btn-primary:visited {
+    color: #1f364d;
+    border: solid 2px #11ece5;
+    background-color: #11ece5;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-7 a.btn-primary:focus, 
+.hero-7 a.btn-primary:hover, 
+.hero-7 a.btn-primary:active {
+    background-color:hotpink;
+    border: solid 2px hotpink;
+}
+
+/* Secondary button: passive states */
+.hero-7 a.btn-secondary:link, 
+.hero-7 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-7 a.btn-secondary:focus, 
+.hero-7 a.btn-secondary:hover, 
+.hero-7 a.btn-secondary:active {
+    color: lightblue;
+    border: solid 2px lightblue;
+}
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 7 ************ */
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 8 ************ */
+/* **************************************************************** *
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-8 { margin-bottom: 70px; padding: 0 12%; height: 520px }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-8 { margin-bottom: 40px; padding: 0 10%; height: 480px }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-8 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    background-position: center center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0,0,255,0.5),rgba(0,0,255,0.5)),
+    url('../../assets/img/meeting.jpg');    
+}
+
+
+/* === Heading and sub-heading ====*/
+
+/* Desktops - heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-8 h1, .hero-8 h2 { text-align: center }
+}
+
+/*  Mobiles - heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-8 h1, .hero-8 h2 { text-align: center }
+}
+
+.hero-8 h1 { 
+    /* Font styles */
+    font-family: 'Fjalla One', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-size: calc(42px + (96 - 42) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;
+}
+
+.hero-8 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(22px + (38 - 22) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-8 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-8 h1 { margin-bottom: 8% } }
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-8 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-8 .container-btn {
+        /* Spacing above button container */
+        margin-top: 5%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-8 .container-btn .item-col-2 { width: 100% }
+
+   /* Button alignment within their containers */
+    .hero-8 .container-btn .item-col-2:first-child { text-align: center }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-8 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 4%;
+    }
+    /* Buttons full width */
+    .hero-8 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-8 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-8 .container-btn a.btn-primary,
+.hero-8 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 0 0 6px 0;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-8 a.btn-primary:link, 
+.hero-8 a.btn-primary:visited {
+    color: #fff;
+    border-bottom: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-8 a.btn-primary:focus, 
+.hero-8 a.btn-primary:hover, 
+.hero-8 a.btn-primary:active {
+    color: blue;
+    border-bottom: solid 2px blue;
+}
+
+/* ************* ENDS HERO BLOCK, ONE COLUMN: SAMPLE 8 ************ */
+
+
+
+/* **************************************************************** */
+/* ************ BEGIN HERO BLOCK, ONE COLUMN: SAMPLE 9 ************ */
+/* **************************************************************** */
+
+/* ==== Hero block general properties ==== */
+
+/* Desktop - hero block height and inside spacing */
+@media (min-width:768px) {
+    .hero-9 { margin-bottom: 70px; padding: 0 12%; height: 520px }
+}
+
+/* Mobiles - hero block eight and inside spacing */
+ @media (max-width:767px) {
+    .hero-9 { margin-bottom: 40px; padding: 0 10%; height: 480px }
+}
+
+/* Vertical spacing above and below text and buttons */
+.hero-9 {
+    display: flex;
+    flex-direction: column;
+    /* Vertical spacing of block content */
+    justify-content: center;
+    /* Default background color */
+    background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),
+    url('../../assets/img/hook-head.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Desktop - Background image  */
+@media (min-width:768px) {
+    .hero-9 { background-image: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.3)),
+        url('../../assets/img/hook-head.jpg')
+    }
+}
+
+/* Mobile - Background image  */
+@media (max-width:767px) {
+    .hero-9 { background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),
+        url('../../assets/img/hook-head-mobile.jpg')
+    }
+}
+
+.hero-9 h1 { 
+    /* Font styles */
+    font-family: 'Libre Baskerville', serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-size: calc(42px + (96 - 42) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;
+
+}
+
+.hero-9 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(22px + (38 - 22) * ((100vw - 320px) / (1600 - 320)));
+    text-shadow: 2px 2px #222;
+
+}
+
+/* Desktop */
+@media (min-width:768px) { .hero-9 h1 { margin-bottom: 4% } }
+
+/* Mobiles */
+@media (max-width:768px) { .hero-9 h1 { margin-bottom: 8% } }
+
+
+/* === Heading and sub-heading ====*/
+
+/* Desktop - Heading and sub-heading alignment */
+@media (min-width:768px) {
+    .hero-9 h1, .hero-9 h2 { text-align: left }
+}
+
+/* Desktop - Heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-9 h1, .hero-9 h2 { text-align: center }
+}
+
+.hero-9 h1 { 
+    /* Font styles */
+    font-family: 'Libre Baskerville', serif;
+    color: #000;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.2;
+    font-size: calc(56px + (80 - 56) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.hero-9 h2 { 
+    /* Font styles */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+    font-size: calc(32px + (42 - 32) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-4 h1 { margin-bottom: 4% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-4 h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-9 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-9 .container-btn {
+        /* Spacing above button container */
+        margin-top: 10%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-9 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-9 .container-btn .item-col-2:first-child { text-align: left }
+    .hero-9 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-9 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 20%;
+    }
+    /* Buttons full width */
+    .hero-9 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-9 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-9 .container-btn a.btn-primary,
+.hero-9 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-9 a.btn-primary:link, 
+.hero-9 a.btn-primary:visited {
+    color: #fff;
+    border: solid 2px blue;
+    background-color: blue;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-9 a.btn-primary:focus, 
+.hero-9 a.btn-primary:hover, 
+.hero-9 a.btn-primary:active {
+    color:#fff;
+    border: solid 2px darkblue;
+    background-color: darkblue;
+}
+
+/* **************************************************************** */
+/* ********* BEGIN HERO BLOCK, VIDEO BACKGROUND: SAMPLE 10 ******** */
+/* **************************************************************** */
+
+
+/* ==== Hero block general properties ==== */
+
+.hero-10 { text-align: center; position: relative; overflow: hidden }
+
+.hero-10 .background-video-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    height: 500px;
+}
+
+.hero-10 .background-video { 
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+.hero-10 .bg-overlay {
+    /* Optional overlay */
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;
+    background-image: linear-gradient(rgba(29,38,113,0.7),rgba(195,55,100,0.3)); 
+}
+
+.hero-10 video[poster] { object-fit: cover; width: 100%; height: 100% }
+
+/* Desktop - height */
+@media (min-width:768px) { .hero-10 .background-video-content { height: 520px } }
+
+/* Mobiles - height  */
+@media (max-width:767px) { .hero-10 .background-video-content { height: 520px } }
+
+/* Desktop - spacing underneath */
+@media (min-width:768px) { .hero-10 { margin-bottom: 70px } }
+
+/* Mobiles - spacing underneath */
+@media (max-width:767px) { .hero-10 { margin-bottom: 40px } }
+
+
+/* === Heading and sub-heading ====*/
+
+/*  Heading and sub-heading alignment */
+@media (max-width:767px) {
+    .hero-10 .background-video-content h1,
+    .hero-10 .background-video-content h2 { 
+        text-align: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.hero-10 .background-video-content h1 { 
+    font-family: 'Fjalla One', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: calc(48px + (100 - 48) * ((100vw - 320px) / (1600 - 320)));
+    letter-spacing: 2px;
+}
+
+.hero-10 .background-video-content h2 { 
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: calc(20px + (48 - 20) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/* Desktop - Space beneath main heading  */
+@media (min-width:768px) { .hero-10 .background-video-content h1 { margin-bottom: 1% } }
+
+/* Mobiles - Space beneath main heading */
+@media (max-width:767px) { .hero-10 .background-video-content h1 { margin-bottom: 8% } }
+
+
+/*======= Buttons ======= */
+
+/* Button container */
+.hero-10 .container-btn { display: flex }
+
+/* Desktop - button container */
+@media (min-width:768px) {
+    .hero-10 .container-btn {
+        /* Spacing above button container */
+        margin-top: 8%;
+        /* Buttons postioned side-by-side */
+        flex-direction: row; justify-content: space-between;
+    }
+
+    /*Buttons half width */
+    .hero-10 .container-btn .item-col-2 { width: 47% }
+
+   /* Button alignment within their containers */
+    .hero-10 .container-btn .item-col-2:first-child { text-align: right }
+    .hero-10 .container-btn .item-col-2:last-child  { text-align: left  }
+}
+
+/* Mobiles - button container */
+@media (max-width:768px) {
+    /* Buttons, stacked primary above secondary */
+    .hero-10 .container-btn { 
+        flex-direction: column; 
+        justify-content: space-between;
+        /* Spacing above button container */
+        margin-top: 12%;
+    }
+    /* Buttons full width */
+    .hero-10 .container-btn .item-col-2 { width: 100%; text-align: center }
+    /* Spacing above secondary button */
+    .hero-10 .container-btn .item-col-2:last-child  { margin-top: 10%  }
+}
+
+/* Both buttons: all button states */
+.hero-10 .container-btn a.btn-primary,
+.hero-10 .container-btn a.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;    
+    text-decoration: none;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    display: inline-block; 
+    font-size: calc(16px + (19 - 16) * ((100vw - 320px) / (1600 - 320))); 
+}
+
+/* Primary button: passive states */
+.hero-10 a.btn-primary:link, 
+.hero-10 a.btn-primary:visited {
+    color: #fff;
+    border: solid 2px red;
+    background-color: red;
+    transition: all 0.2s linear;
+}
+
+/* Primary button: Interactive states */
+.hero-10 a.btn-primary:focus, 
+.hero-10 a.btn-primary:hover, 
+.hero-10 a.btn-primary:active {
+    background-color:green;
+    border: solid 2px green;
+}
+
+/* Secondary button: passive states */
+.hero-10 a.btn-secondary:link, 
+.hero-10 a.btn-secondary:visited {
+    color: #fff;
+    border: solid 2px #fff;
+    transition: all 0.2s linear;
+}
+
+/* Secondary button: interactive states */
+.hero-10 a.btn-secondary:focus, 
+.hero-10 a.btn-secondary:hover, 
+.hero-10 a.btn-secondary:active {
+    color: #fff;
+    background-color: green; 
+    border: solid 2px green;
+}
+
+
+/* ************** END HERO BLOCK, ONE COLUMN: SAMPLE 10 ************ */
+
+
+/* === GLOBAL TEXT COLOUR STYLES === */
+.text-red { color:red }
+.text-darkgray { color:#888 }
+
+
+/* === GLOBAL BUTTON STYLES === */
+
+/* Button shapes */
+a.btn-soft { border-radius: 5px }
+a.btn-rounded { border-radius: 40px }
+
+/* Icon spacing inside buttons */
+a.btn-primary i, a.btn-secondary i { margin-right: 12px }
