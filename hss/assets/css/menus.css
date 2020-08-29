@@ -1,0 +1,111 @@
+
+
+
+/* .unhide-content-under-menu { padding-top: 72px } */
+
+/* Prevent scrolling outside flyout menu */
+.no-scroll { overflow: hidden }
+
+/* =============== Mobile Menu Bar =============== */
+
+/* Outer flexbox container */  
+.container-menu-bar-mobile {
+    display: flex; flex-direction: row; justify-content: space-between;
+    align-items: center; padding: 0 6% 0 6%;
+    height: 72px; background-color: #fff;
+}
+
+/* Home page link (with website logo) at left  */
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* Website logo vertically centered in mobile menu bar  */
+.container-menu-bar-mobile a:first-child { 
+    display: flex; flex-direction: row; align-items: center
+}
+
+/* Hamburger icon with three bars hozizontal at right  */
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 { 
+    width: 36px; height: 4px; margin: 7px 0; 
+    transition: 0.4s;
+    background-color: #000;
+}
+
+/* Hamburger icon changes shape to 'X' when fly-out menu is visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
+.change .bar2 { opacity: 0 }
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
+
+
+/* ===============  Flyout menu ================*/
+
+/* Container for flyout menu content */
+.flyout-menu { 
+    top: 72px; /* same height as menu bar */
+    position: fixed; display: block; width: 320px; 
+    max-height: 100%; height: 100%;
+    padding: 30px 40px 40px 40px; transition: all .5s ease-in-out;
+    background-color: #feeee7;
+
+    overflow-x: hidden; overflow-y: scroll; overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* safari on mobiles */ 
+
+    right: 0; /* displays flyout menu */
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain;
+    font-family: -apple-system, BlinkMacSystemFont,'Segoe UI', Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';   
+}
+
+/* Drop shadow border at left of flyout menu */
+.flyout-menu {
+     box-shadow: 0px 1px 10px #888;
+}
+
+/* Content of flyout menu */
+.flyout-menu p { 
+    text-align: center; font-size: 15px; line-height: 1.4;
+}
+
+/* list of links on flyout menu */
+.flyout-menu ul li { 
+    list-style-type: none; /* Hide bullet character */
+    margin: 0 40px 30px 0;
+}
+
+.menu-light ul li a:link,  
+.menu-light ul li a:visited { color: #333 }
+
+.menu-light ul li a:focus, 
+.menu-light ul li a:hover, 
+.menu-light ul li a:active  { color: #222 }
+
+/* style flyout menu links */
+.flyout-menu ul li a {
+    font-size: 18px;
+    text-decoration: none  /* Hide link default underlines  */
+}
+
+.flyout-menu.flyout-menu-is-closed {
+    right: -320px; /* hides flyout menu */
+}
+
+/* Sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
+
+/* Prevents content from disappearing under sticky menus */
+.sticky-anchor {
+    position: relative;  border-top: 90px solid transparent; margin: -90px 0 0;
+    -webkit-background-clip: padding-box; -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+ 
+.sticky-anchor:before {
+    content: ""; position: absolute; top: -2px; left: 0; right: 0;
+}
+ 
+
+/* Hide on desktops */
+@media (min-width: 1024px) { 
+    .container-menu-bar-mobile { display: none }
+}
