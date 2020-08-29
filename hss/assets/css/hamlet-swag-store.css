@@ -81,6 +81,13 @@ body { font-family: "Playfair Display", serif }
 
 /* .unhide-content-under-menu { padding-top: 72px } */
 
+
+/* Positions all menus in front of page content */
+.menu-desktop, 
+.container-menu-bar-mobile, 
+.flyout-menu { z-index: 999 }
+
+
 /* Prevent scrolling outside flyout menu */
 .no-scroll { overflow: hidden }
 
@@ -590,6 +597,8 @@ a.swag-home:active { color: #b90303; border-color: #b90303; }
 	padding: 12px 22px;
 	font-size: 96%;
 	border-radius: 5px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
     /* text-transform: uppercase; */
     /* letter-spacing: 2px */
 }
@@ -603,6 +612,20 @@ a.swag-home:active { color: #b90303; border-color: #b90303; }
 #contact-form #btn-submit i.fas {
 	margin-left: 9px;
 	font-size: 104%
+}
+
+@media (min-width: 1024px) { 
+	#contact-form #btn-submit span.mobile  { display: none   } 
+	#contact-form #btn-submit span.desktop { display: inline } 
+	
+}
+@media (max-width: 1023px) { 
+	#contact-form #btn-submit span.mobile  { display: inline } 
+	#contact-form #btn-submit span.desktop { display: none   } 
+}
+
+@media (max-width: 359px) {
+	#contact-form #btn-submit i.fas { display: none }
 }
 
 /* =============== END CONTACT FORM CSS ============= */
@@ -1063,38 +1086,27 @@ a.back-to-top:active {
 	}
 }
 
-	.container-slidemeup {
-		position: fixed;
-		left: 0; top: 0;
-		animation-name: slideup;
-		animation-delay: 100s;
-		animation-duration: 0.8s;
-		animation-fill-mode: forwards;
-		animation-timing-function: ease-out;
-		background-color: yellow !important;
-	}
+@keyframes slideup {
+	0%   { top: 0 }
+	100% { top: 0px }
+}
 
-	@keyframes slideup {
-		0%   { top: 0 }
-		100% { top: 0px }
-	}
-
-	.slide-out-top {
-		animation: slide-out-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	}
+.slide-out-top {
+	animation: slide-out-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 	
-	@keyframes slide-out-top {
-	  0% {
-		-webkit-transform: translateY(0);
-				transform: translateY(0);
+@keyframes slide-out-top {
+	0% {
+	-webkit-transform: translateY(0);
+		transform: translateY(0);
 		opacity: 0.5;
-	  }
-	  100% {
-		-webkit-transform: translateY(-1000px);
-				transform: translateY(-1000px);
-		opacity: 0;
-	  }
 	}
+	100% {
+		-webkit-transform: translateY(-1000px);
+		transform: translateY(-1000px);
+	opacity: 0;
+	}
+}
 
 
 /* ============ UTILITY CLASSES ======== */
