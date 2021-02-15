@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Colours and Web Design | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Colours and Web Design: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Colours and Web Design</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Understand the three main colour systems used in web design: colour names, RGB values and hex codes.</li>
+		<li>Use web browser DevTools to identify the colours of selected web page elements.</li>
+		<li>Apply the CSS properties of color, background-color and border-color to web page elements.</li>
+	</ul>
+
+	<p>You can view finished versions of the four sample web pages you style with colours in this Tutorial by clicking the links below. The finished samples will each open in a new tab of your web browser.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-colours/page-1.html" target="_blank"><img src="assets/img/colours/example-one-browser.png" alt="Colours and Web Design"></a>
+			<a href="final-colours/page-1.html" target="_blank" class="link-exercise" >page-1.html</a>
+		</div>
+		<div>
+			<a href="final-colours/page-2.html" target="_blank"><img src="assets/img/colours/example-two-browser.png" alt="Colours and Web Design"></a>
+			<a href="final-colours/page-2.html" target="_blank" class="link-exercise" >page-2.html</a>
+		</div>
+		<div>
+			<a href="final-colours/page-3.html" target="_blank"><img src="assets/img/colours/example-three-browser.png" alt="Colours and Web Design"></a>
+			<a href="final-colours/page-3.html" target="_blank" class="link-exercise" >page-3.html</a>
+		</div>
+		<div>
+			<a href="final-colours/page-4.html" target="_blank"><img src="assets/img/colours/example-four-browser.png" alt="Colours and Web Design"></a>
+			<a href="final-colours/page-4.html" target="_blank" class="link-exercise" >page-4.html</a>
+		</div>
+	</div>
+
+
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#colours-about">About colours in web design</a></p>
+		<p class="toc-indent"><a href="#three-properties">Colours: three CSS properties</a></p>
+		<p><a href="#colours-names">The colour name system</a></p>
+		<p><a href="#colours-rgb">The RGB colour system</a></p>
+		<p><a href="#colours-hexadecimal">The hex code colour system</a></p>
+		<p class="toc-indent"><a href="#hex-decoding">Decoding the hex colour system</a></p>
+		<p class="toc-indent"><a href="#hex-shorthand">Three-character, short-hand hex codes</a></p>
+		<p><a href="#colours-devtools">Identifying colours with web browser DevTools</a></p>
+
+		<p><a href="#work-files">Adding colours to your four sample CSS files</a></p>
+		<p class="toc-indent"><a href="#update-sample-1">Updating style-1.css with colours</a></p>
+		<p class="toc-indent"><a href="#update-sample-2">Updating style-2.css with colours</a></p>
+		<p class="toc-indent"><a href="#update-sample-3">Updating style-3.css with colours</a></p>
+		<p class="toc-indent"><a href="#update-sample-4">Updating style-4.css with colours</a></p>
+		<p><a href="#upload-github">Uploading your stylesheet files to GitHub</a></p>
+
+		<p><a href="#further-resources">Further resources</a></p>
+	</div>
+</section>
+
+<section id="colours-about" class="wrapper-content bg-white">
+	<h2>About colours in web design</h2>
+	<p>Colours provide web pages with interest and personality. One way to add colour to a web page is to include images.</p>
+	
+	<p>You can see from the examples below how the same image but with different dominant colours affects the impact of a web page.</p>
+
+	<img src="assets/img/colours/colours-dominant-6.png" alt="Colours and Web Design">
+
+	<p>Many research studies have shown that colour choice in design influences user psychology and behaviour. For example:</p>
+	
+	<ul>
+		<li>The colour brown is associated with warmth and cosiness.</li>
+		<li>Blue inspires trust and confidence.</li>
+		<li>And red evokes emotions of excitement and passion.</li>
+	</ul>
+
+	<p>At the end of this Tutorial is a <a href="#further-resources">list of resources</a> you may find helpful when choosing website colours.</p>
+
+
+	<h3 id="three-properties">Colours: three CSS properties</h3>
+	<p>The three most commonly used CSS colour-related properties are listed below. Note the US-style spelling in each case.</p>
+
+	<ul>
+		<li><b>color</b>: You use this to set the colour of text elements, such as headings, paragraphs, lists and links.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display text in black.</li>
+		<li><b>background-color</b>: You can use this to set the colour behind text elements, the background of a <span class="syn">&lt;div&gt;</span> or the background of the entire <span class="syn">&lt;body&gt;</span> of a web page.
+		<span class="inside-ol">&nbsp;</span>
+		All backgrounds are coloured white by default.</li>
+		<li><b>border-color:</b> As with background-color, this can be used with text elements, <span class="syn">&lt;div&gt;</span> elements and the <span class="syn">&lt;body&gt;</span> as a whole.
+		<span class="inside-ol">&nbsp;</span>
+		All borders are coloured black by default.</li>
+	</ul>
+
+
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token comment">/* Insert colour value here */</span>; 
+   <span class="token property">background-color</span>: <span class="token comment">/* Insert colour value here */</span>; 
+   <span class="token property">border-color</span>: <span class="token comment">/* Insert colour value here */</span>; 
+</pre>
+
+	<p>In the example below, you can see the text elements <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;p&gt;</span> both have a <b>color</b> of dark blue. They are positioned in a <span class="syn">&lt;div&gt;</span> with a class name of "container-box" that has a <b>background-color</b> of light pink.</p>
+	<img src="assets/img/colours/sample-text-background.png" alt="Colours and Web Design">
+
+<pre class="language-css">
+  <span class="token class">.container-box</span> { <span class="token property">background-color</span>: <span class="token value-text">#fef1ef</span> }
+  <span class="token class">.container-box h2</span>, 
+  <span class="token class">.container-box p</span> { <span class="token property">color</span>: <span class="token value-text">#1e266d</span> }
+</pre>
+
+	<p>And here are some examples of the <b>border-color</b> property in use along with text <b>color</b> and <b>background-color</b> properties.</p>
+
+	<img src="assets/img/colours/border-colour-examples.png" alt="Colours and Web Design"><br>
+
+	<p>In web design, there are three common systems for setting colours:</p>
+	
+	<ul>
+		<li>The colour name system</li>
+		<li>The RGB system</li>
+		<li>The hex code system</li>
+	</ul>
+
+	<p>The next three sections of this Tutorial will explain each colour system in detail.</p>
+
+</section>
+
+
+<section id="colours-names" class="wrapper-content bg-white">
+	<h2>The colour name system</h2>
+	
+	<p>Simply typing a colour name &#8211; such &#8216;red&#8217; or &#8216;blue&#8217; (without quotes)  &#8211; in a CSS style rule is a common starting point when designing a new web page.</p>
+	
+<pre class="language-css">
+  <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">red</span> }
+</pre>
+	
+	<p>Many colour names are both easy-to-remember and self-explanatory. For example, &#8216;yellow&#8217;, &#8216;purple&#8217; and so on. Other colour names are less obvious, such as &#8216;hotpink&#8217;, &#8216;mediumvioletred&#8217; and &#8216;lavenderblush&#8217;.</p>
+
+	<p>Colour names are not case-sensitive. For example, these three versions of the same colour name are all valid.</p>
+
+<pre class="language-css">
+  <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">DarkOrchid</span> }
+  <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">darkorchid</span> }
+  <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">DARKORCHID</span> }
+</pre>
+
+	<p>You can see a full list of colour names on this <a href="https://www.w3schools.com/colors/colors_names.asp" target="_blank" rel="noopener">W3 Schools web page</a>.</p>
+
+	<p>However, the final version of a web page will typically use either RGB values or hex codes rather colour names for the following two reasons:</p>
+	
+	<ul>
+		<li><b>Limited choice</b>: Modern electronic screens can display at least 16 million different colours. With colour names, you are limited to only 147 choices.</li>
+		<li><b>Misleading names</b>: Even when colour names are easy-to-remember, they are not always accurate. For example, DarkGray is actually lighter than Gray.
+		<img src="assets/img/colours/shades-of-gray.png" alt="Colours and Web Design"></li>
+	</ul>
+	<p>Note that, in CSS, the colour name of grey can be written in either US spelling (gray) or UK spelling (grey). Either will work correctly.</p>
+
+</section>
+
+
+<section id="colours-rgb" class="wrapper-content bg-white">
+	<h2>The RGB colour system</h2>
+
+	<p>The RGB system is based on the following idea:</p>
+	
+	<p><b>Any colour can be created by combining different intensities of the three primary colours: red, green and blue.</b></p>
+	
+	<p>Here are a few points about the Red-Green-Blue colour system:</p>
+	
+	<ul>
+		<li>Every RGB colour is written as a list of three values: first the red value, then the green value, and then the value for blue.</li>
+		
+		<li>The individual values are separated from one another by commas.</li>
+		<li>You can write each individual value as a percentage (<b>0%</b> to <b>100%</b>) or a number (<b>0</b> to <b>255</b>). The following two examples both produce the colour red:
+		<span class="inside-ol">&nbsp;</span>
+		<b>100%,0%,0%</b><br>
+		-or-<br>
+		<b>255,0,0</b></li> 
+		<li>The three values are enclosed within brackets and preceded by the letters <b>rgb</b> (in lower-case or upper-case). In the example of red, the CSS value would look as follows:
+		<span class="inside-ol">&nbsp;</span>
+		<b>rgb(100%,0%,0%)</b><br>
+		-or-<br>
+		<b>rgb(255,0,0)</b></li>
+	</ul>
+
+<p>The following examples of CSS style rules show the RGB system used to create the three colours of blue, a light brown and magenta.</p>
+
+<pre class="language-css">
+  <span class="token class">h1</span> { <span class="token property">color</span>: <span class="yellow">rgb</span>(<span class="token number">0</span>,<span class="token number">0</span>,<span class="token number">255</span>) <span class="token comment">/* blue */</span> }
+  <span class="token class">h2</span> { <span class="token property">color</span>: <span class="yellow">rgb</span>(<span class="token number">255</span>,<span class="token number">248</span>,<span class="token number">220</span>) <span class="token comment">/* light brown */</span> }
+  <span class="token class">h3</span> { <span class="token property">color</span>: <span class="yellow">rgb</span>(<span class="token number">255</span>,<span class="token number">0</span>,<span class="token number">255</span>) <span class="token comment">/* magenta */ </span> }
+</pre>
+
+</section>
+
+
+<section id="colours-hexadecimal" class="wrapper-content bg-white">
+	<h2>The hex code colour system</h2>
+	<p>This is the colour system most widely used in web design. As with the RGB system, the displayed colour is created by combining different intensities of red, green and blue. But the hex (short for hexadecimal) code system is different in four ways:</p>
+	<ul>
+		<li>The hex colour code begins with the hash (<b>#</b>) symbol.</li>
+		<li>No commas are used to separate the red, green and blue values from one another.</li>
+		<li>The list of red, green and blue values is not enclosed in brackets.</li>
+		<li>The red, green and blue values are each written as a pair of two hexadecimal numbers.</li>
+	</ul>
+
+<p>Here are the three colours of blue, light brown and magenta written as hex codes in CSS style rules.</p>
+
+<pre class="language-css">
+  <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">#0000FF</span> <span class="token comment">/* blue */</span> }
+  <span class="token class">h2</span> { <span class="token property">color</span>: <span class="token value-text">#FFF5DC</span> <span class="token comment">/* light brown */</span> }
+  <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">#FF00FF</span> <span class="token comment">/* magenta */</span> }
+</pre>
+
+	<p>Like colour names, hex codes are not case-sensitive. For example, both #0000ff and #0000FF are valid and display the colour blue.</p>
+
+	<h3 id="hex-decoding">Decoding the hex colour system</h3>
+	<p>A hex colour code may look like a random jumble of numbers and letters. Given that this system is so widely used in web design, however, it is worth taking a few moments to understand how this colour system works.</p>
+
+	<p>Here are the main points to note:</p>
+
+	<ul>
+		<li>In the everyday decimal system, there are <b>10 number symbols</b>: 0, 1, 2, 3, 5, 6, 7, 8 and 9.
+		<span class="inside-ol">&nbsp;</span>
+		In the hexadecimal system, however, there are <b>16 number symbols</b>: 0, 1, 2, 3, 5, 6, 7, 8, 9, A, B, C, D, E and F.
+		<img src="assets/img/colours/decimal-hexadecimal.png" alt="Colours and Web Design"></li>
+
+		<li>The hexadecimal numbers A, B, C, D, and E are equal to the decimal numbers 10, 11, 12, 13, 14 and 15.
+		<img src="assets/img/colours/decimal-hexadecimal-2.png" alt="Colours and Web Design"></li>
+		
+		<li>Every hex colour code is really a combination of three number pairs.
+		<img src="assets/img/colours/decimal-hexadecimal-3.png" alt="Colours and Web Design"></li>
+		<li>As in the RGB system, the first pair is the red value, the second pair is green and the third is blue.
+		<img src="assets/img/colours/decimal-hexadecimal-4.png" alt="Colours and Web Design"></li>
+
+		<li>The smallest possible value for a pair of two hex numbers is <b>00</b>. This hex code pair is equivalent to a zero decimal percentage (<b>0%</b>) or the decimal number zero (<b>0</b>).</li>
+
+		<li>The largest possible value for a pair of two hex numbers is <b>FF</b>. This hex code pair is equivalent to one hundred per cent (<b>100%</b>) in decimal or the decimal number of <b>255</b>.
+		<img src="assets/img/colours/three-systems.png" alt="Colours and Web Design"></li>
+	</ul>
+
+	<p>So, in the hex colour code system:</p>
+	<ul>
+		<li>The colour white is <b>#FFFFFF</b>, as all three primary colours are at their maximum intensity: <b>rgb(100%,100%,100%)</b> or <b>rgb(255,255,255)</b>.</li>
+		<li>The colour black is <b>#000000</b>, as all three primary colours are set to zero: <b>rgb(0%,0%,0%)</b> or <b>rgb(0,0,0)</b>.</li>
+	</ul>
+
+
+	<h3 id="hex-shorthand">Three-character, short-hand hex codes</h3>
+	<p>Not every hex colour code needs to be written as a string of six digits. You write some hex colours in three-digit shorthand. </p>
+	
+	<p>Consider the example of the colour white. In CSS, you can write this in two ways:</p>
+
+	<p><b>#FFFFFF</b></p>
+	<p>-or-</p>
+	<p><b>#FFF</b></p>
+	
+	<p>The general rule is as follows:</p>
+	
+	<p><b>If any of the three pairs in a six-digit hex code is a duplicate, you need only write that hex digit once.</b></p>
+
+	<p>You can see some more examples of three-digit hex codes below.</p>
+	
+	<img src="assets/img/colours/shorthand-hex.png" alt="Colours and Web Design">
+	
+	<p>For every colour above, three pairs of duplicate hex digits (such as 00, 33 or FF) are shortened into one digit.</p>
+</section>
+
+
+
+
+
+<section id="colours-devtools" class="wrapper-content bg-white">
+
+	<h2>Identifying colours with web browser DevTools</h2>
+	<p>You can use the DevTools feature of web browsers to identify the colour of text and backgrounds on a web page. For example, use your web browser to visit the following website:</p>
+
+	<p><a href="https://www.citizensinformation.ie" target="_blank">https://www.citizensinformation.ie</a></p>
+
+	<p>To use the DevTools of the Google Chrome browser:</p>
+
+	<ol>
+		<li>Press <b>F12</b> to display the Chrome DevTools window.
+		<span class="inside-ol">&nbsp;</span>
+		You may find it easier to use this option with the DevTools area positioned (docked) at the bottom of the web browser window.
+		<img src="assets/img/colours/devtools-dock-chrome.png" alt="Tutorial RWD: Media Queries"></li>
+
+		<li>Click the <b>Select</b> arrow at the top-left of the Chrome DevTools window.
+
+		<img src="assets/img/colours/google-devtools-2.png" alt="Tutorial RWD: Media Queries"></li>
+
+		<li>Click on the header of the web page with the blue background. Chrome DevTools surrounds the header with a colour border.
+
+		<img src="assets/img/colours/google-devtools-3.png" alt="Tutorial RWD: Media Queries">
+
+		In the Chrome DevTools window, you can see the <b>Elements</b> panel at the left and the <b>Styles</b> sub-panel at the right.
+		<img src="assets/img/colours/google-devtools-4.png" alt="Tutorial RWD: Media Queries">
+		In the <b>Styles</b> sub-panel, you can see the text and background colour values of the selected web page element.</li>
+	</ol>
+
+	<p>To use the DevTools of the Mozilla Firefox browser:</p>
+
+	<ol>
+		<li>From the <b>Tools</b> menu, choose the <b>Web Developer</b> command and then <b>Inspector</b>.
+		<span class="inside-ol">&nbsp;</span>
+		You may find it easier to use this option with the DevTools area positioned (docked) at the bottom of the web browser window.
+		<img src="assets/img/colours/devtools-dock-firefox.png" alt="Tutorial RWD: Media Queries"></li>
+
+		<li>Click the <b>Inspect</b> arrow at the top-left of the Firefox DevTools window.
+		<img src="assets/img/colours/firefox-devtools-2.png" alt="Tutorial RWD: Media Queries"></li>
+		
+		<li>Click on the header of the web page with the blue background. Firefox DevTools surrounds the header with a blue, dashed-line border.
+
+		<img src="assets/img/colours/firefox-devtools-3.png" alt="Tutorial RWD: Media Queries">
+
+		In the centre panel of the Firefox DevTools window, you can see the text and background colour values of the selected web page element.
+
+		<img src="assets/img/colours/firefox-devtools-4.png" alt="Tutorial RWD: Media Queries"></li>
+	</ol>
+
+	<p>In both Chrome and Firefox DevTools windows, you can edit the CSS colour or other values of any selected web page element.</p>
+
+	<p>Here are a few resources to learn more about DevTools:</p>
+
+	<ul>
+		<li><a href="https://stnsvn.com/blog/how-to-learn-css-using-inspect-element-tool" target="_blank" rel="noopener">How to learn CSS using the Inspect Element tool</a> by Station Seven</li>
+		<li><a href="https://bootstrapious.com/p/chrome-devtools" target="_blank" rel="noopener">Eight Chrome DevTools hacks</a> by Bootstrapious</li>
+		<li><a href="https://www.sitepoint.com/css-debugging-and-optimization-browser-based-developer-tools/" target="_blank" rel="noopener">CSS debugging and optimization</a> by Sitepoint</li>
+		<li><a href="https://medium.com/swlh/5-ways-chrome-devtools-made-my-life-easier-d1b4a49a3826" target="_blank" rel="noopener">5 Ways DevTools made my life easier</a> by Jjy Sr</li>
+		<li><a href="https://developers.google.com/web/tools/chrome-devtools/dom/" target="_blank" rel="noopener">Get started with viewing and changing the DOM</a> by Google Developers Blog</li>
+	</ul>
+</section>
+
+
+<section id="work-files" class="wrapper-content bg-white">
+	<h2>Adding colours to your four sample CSS files</h2>
+	<p>In the <a href="intro-html.html">Introduction to HTML</a> Tutorial, you created four sample web pages with these file names:</p>
+	
+	<p><b>page-1.html</b><br>
+	<b>page-2.html</b><br>
+	<b>page-3.html</b><br>
+	<b>page-4.html</b></p>
+
+	<p>Later, in the <a href="styling-css.html">Styling Web Pages with CSS</a> Tutorial, you linked your sample web pages to these four stylesheet files:</p>
+
+	<p><b>style-1.css</b><br>
+	<b>style-2.css</b><br>
+	<b>style-3.css</b><br>
+	<b>style-4.css</b></p>
+
+	<p>Now you will add colour style rules to the four CSS files, and view the effect on the linked sample web pages.</p>
+
+
+	<h3 id="update-sample-1">Updating style-1.css with colours</h3>
+	<p>Follow these steps to add colours to your first sample web page <b>page-1.html</b> by updating its linked <b>style-1.css</b> stylesheet.</p>
+
+	<p>Currently, this web page looks as follows:</p>
+
+	<p><a href="final-styling-css/spacing/page-1.html" target="_blank"><span class="link-bold">page-1.html</span> (before colours added)</a>.</p>
+	
+	<ol>
+
+		<li>In VS Code, open the stylesheet file named <b>style-1.css</b> in your <b>websites</b> folder.</li>
+
+		<li>To the <span class="csyn">body</span> style declaration block, add this new style rule inside the curly braces:
+
+<pre class="language-css">
+   <span class="token property">background-color</span>: <span class="token value-text">lightcyan</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">h1</span>, <span class="csyn">h2</span> and <span class="csyn">h3</span> style declaration blocks, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">blue</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">p</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">darkslateblue</span>;
+</pre></li>
+
+		<li>Save the <b>style-1.css</b> file.</li>
+</ol>
+
+	<p>Display your <b>page-1.html</b> web page in your web browser.</p>
+
+	<p>It should now look like the web page at the following web address:</p>
+
+	<p><a href="final-colours/page-1.html" target="_blank"><span class="link-bold">page-1.html</span> (after colours added)</a>.</p>
+
+	<p>You can close your <b>style-1.css</b> file in VS Code.</p>
+
+
+
+
+	<h3 id="update-sample-2">Updating style-2.css with colours</h3>
+	<p>Follow these steps to add colours to your first sample web page <b>page-2.html</b> by updating its linked <b>style-2.css</b> stylesheet.</p>
+
+	<p>Currently, this web page looks as follows:</p>
+
+	<p><a href="final-styling-css/spacing/page-2.html" target="_blank"><span class="link-bold">page-2.html</span> (before colours added)</a>.</p>
+	
+	<ol>
+
+		<li>In VS Code, open the stylesheet file named <b>style-2.css</b> in your <b>websites</b> folder.</li>
+
+		<li>To the <span class="csyn">body</span> style declaration block, add this new style rule inside the curly braces:
+
+<pre class="language-css">
+   <span class="token property">background-color</span>: <span class="token value-text">antiquewhite</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">h1</span>, <span class="csyn">h2</span> and <span class="csyn">h3</span> style declaration blocks, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">brown</span>;
+</pre></li>
+
+
+		<li>Save the <b>style-2.css</b> file.</li>
+</ol>
+
+
+	<p>Display your <b>page-2.html</b> web page in your web browser.</p>
+
+	<p>It should now look like the web page at the following web address:</p>
+
+	<p><a href="final-colours/page-2.html" target="_blank"><span class="link-bold">page-2.html</span> (after colours added)</a>.</p>
+
+	<p>You can close your <b>style-2.css</b> file in VS Code.</p>
+
+
+
+
+	<h3 id="update-sample-3">Updating style-3.css with colours</h3>
+	<p>Follow these steps to add colours to your first sample web page <b>page-3.html</b> by updating its linked <b>style-3.css</b> stylesheet.</p>
+
+	<p>Currently, this web page looks as follows:</p>
+
+	<p><a href="final-styling-css/spacing/page-3.html" target="_blank"><span class="link-bold">page-3.html</span> (before colours added)</a>.</p>
+	
+	<ol>
+
+		<li>In VS Code, open the stylesheet file named <b>style-3.css</b> in your <b>websites</b> folder.</li>
+
+		<li>To the <span class="csyn">body</span> style declaration block, add this new style rule inside the curly braces:
+
+<pre class="language-css">
+   <span class="token property">background-color</span>: <span class="token value-text">purple</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">h1</span> and <span class="csyn">h2</span> style declaration blocks, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">white</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">p</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">white</span>;
+</pre></li>
+
+		<li>Save the <b>style-3.css</b> file.</li>
+</ol>
+
+
+	<p>Display your <b>page-3.html</b> web page in your web browser.</p>
+
+	<p>It should now look like the web page at the following web address:</p>
+
+	<p><a href="final-colours/page-3.html" target="_blank"><span class="link-bold">page-3.html</span> (after colours added)</a>.</p>
+
+	<p>You can close your <b>style-3.css</b> file in VS Code.</p>
+
+
+
+
+	<h3 id="update-sample-4">Updating style-4.css with colours</h3>
+	<p>Follow these steps to add colours to your first sample web page <b>page-4.html</b> by updating its linked <b>style-4.css</b> stylesheet.</p>
+
+	<p>Currently, this web page looks as follows:</p>
+
+	<p><a href="final-styling-css/spacing/page-4.html" target="_blank"><span class="link-bold">page-4.html</span> (before colours added)</a>.</p>
+	
+	<ol>
+
+		<li>In VS Code, open the stylesheet file named <b>style-4.css</b> in your <b>websites</b> folder.</li>
+
+		<li>To the <span class="csyn">body</span> style declaration block, add this new style rule inside the curly braces:
+
+<pre class="language-css">
+   <span class="token property">background-color</span>: <span class="token value-text">#1f364d</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">h1</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">white</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">h2</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">deeppink</span>;
+</pre></li>
+
+
+		<li>To the <span class="csyn">h3</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">lightgreen</span>;
+</pre></li>
+
+		<li>To the <span class="csyn">p</span> style declaration block, add this new style rule inside the curly braces:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">#81b8cd</span>;
+</pre></li>
+
+		<li>Save the <b>style-4.css</b> file.</li>
+</ol>
+
+
+	<p>Display your <b>page-4.html</b> web page in your web browser.</p>
+
+	<p>It should now look like the web page at the following web address:</p>
+
+	<p><a href="final-colours/page-4.html" target="_blank"><span class="link-bold">page-4.html</span> (after colours added)</a>.</p>
+
+	<p>You can close your <b>style-4.css</b> file in VS Code.</p>
+
+</section>
+
+
+<section id="upload-github" class="wrapper-content bg-white">
+	<h2>Uploading your stylesheet files to GitHub</h2>
+
+	<p>After completing your stylesheet updates, your next step is to upload them to your account on GitHub.</p>
+
+	<ol>
+
+		<li>If you are not already signed in to your GitHub account, sign in now.
+		<img src="assets/img/intro-html/github-signin.png" alt="github-signin"></li>
+
+		<li>In File Explorer (Windows 10) or Windows Explorer (Windows 7), select or drag-and-drop the following four files to upload them to your GitHub account.
+		<span class="inside-ol">&nbsp;</span>
+		<b>style-1.css</b><br>
+		<b>style-2.css</b><br>
+		<b>style-3.css</b><br>
+		<b>style-4.css</b></li>
+		<li>Finally, scroll down to the bottom of the GitHub screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web pages are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/page-1.html</b><br>
+	<b>https://username.github.io/page-2.html</b><br>
+	<b>https://username.github.io/page-3.html</b><br>
+	<b>https://username.github.io/page-4.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+</section>
+
+
+<section id="further-resources" class="wrapper-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+		<p><a href="https://www.intechnic.com/blog/color-psychology-101-how-color-affects-perception-of-your-website/" target="_blank" rel="noopener" class="further-title">Colour psychology 101: How colour affects perception of your website</a>
+		<br>By Safa Khudeira at the <a href="https://www.intechnic.com/blog" target="_blank" rel="noopener" style="font-weight:normal">Intechnic Blog</a></p>
+
+		<p><a href="https://neilpatel.com/blog/psychology-of-color-and-conversions/" target="_blank" rel="noopener" class="further-title">How to use the psychology of colour to increase website conversions</a>
+		<br>By Neil Patel at the <a href="https://neilpatel.com/blog/" target="_blank" rel="noopener" style="font-weight:normal">Neil Patel Blog</a></p>
+
+		<p><a href="https://designmodo.com/color-psychology-web-design/" target="_blank" rel="noopener" class="further-title">Understanding colour psychology for impactful web design</a>
+		<br>By Jerry Cao at <a href="https://designmodo.com/" target="_blank" rel="noopener" style="font-weight:normal">DesignModo</a></p>
+
+		<p><a href="https://envato.com/blog/psychology-color-web-design/" target="_blank" rel="noopener" class="further-title">The psychology of colour in web design</a>
+		<br>By Jenni McKinnon at the <a href="https://envato.com/blog/" target="_blank" rel="noopener" style="font-weight:normal">Envato Blog</a></p>
+
+		<p><a href="https://colorhunt.co/" target="_blank" rel="noopener" class="further-title">Color Hunt</a><br>
+		A platform for colour inspiration with user-contributed colour combinations.</p>
+
+		<p><a href="https://colors.muz.li/" target="_blank" rel="noopener" class="further-title">Muzli Colors</a><br>
+		A colour palette/schemes generator.</p>
+
+	</div>
+	<p><br><br>Return to <a href="index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+
+</body>
+</html>
+
