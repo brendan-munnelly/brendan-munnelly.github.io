@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>CSS Flexbox: Two Columns | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Two-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>CSS Flexbox: Two Column Layouts</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Create and style responsive two-column layouts using CSS flexbox, with fluid text, images and coloured backgrounds.</li>
+	</ul>
+
+	<p>You can view a finished version of the sample two-column web page you style in this Tutorial by clicking the link below. The finished sample page will open in a new tab of your web browser.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-flex-columns/flex-two-columns.html" target="_blank"><img src="assets/img/flex-two-cols/example-one-browser.jpg" alt="Sample image"></a>
+			<a href="final-flex-columns/flex-two-columns.html"  class="link-exercise" target="_blank">flex-two-columns.html</a>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#sample-files">Your sample web pages and files</a></p>
+		<p><a href="#sample-page">Working with the two-column web page</a></p>
+		<p class="toc-indent"><a href="#flex-child">Setting up the flexbox child columns</a></p>
+		<p class="toc-indent"><a href="#flex-parent">Setting up the flexbox parent elements</a></p>
+		<p><a href="#colour-background">Adding coloured backgrounds</a></p>
+		<p class="toc-indent"><a href="#colour-parent">Adding coloured backgrounds to parent containers</a></p>
+		<p class="toc-indent"><a href="#colour-parent-text">Changing the text colours inside a parent element</a></p>
+		<p class="toc-indent"><a href="#colour-child">Adding a coloured background to a child column</a></p>
+		<p class="toc-indent"><a href="#colour-child-text">Changing the text colours inside a child column</a></p>
+		<p><a href="#padding-child-columns">About child columns and padding</a></p>
+		<p class="toc-indent"><a href="#padding-child-column">Adding padding to a child column</a></p>
+		<p><a href="#hero-block">Adding a hero block</a></p>
+		<p><a href="#update-home-page-content">Updating the content of your home page</a></p>
+		<p><a href="#upload-github">Uploading your files to GitHub</a></p>
+
+	</div>
+</section>
+
+<section id="sample-files" class="wrapper-content">
+	<h2>Your sample web pages and files</h2>
+	<p>Your first step is to download the files you need for this Tutorial.</p>
+	<ol>
+		<li>Download the following compressed file to your computer:
+		<span class="inside-ol">&nbsp;</span>
+		<a href="flexbox-samples.zip">flexbox-samples.zip</a></li>
+
+		<li>Copy the ZIP file into your <b>websites</b> folder.</li>
+
+		<li>Uncompress the ZIP file.</li>
+		<li>The files will unzip into a sub-folder of your <b>websites</b> folder named <b>flexbox-samples</b>.
+		<span class="inside-ol">&nbsp;</span>
+		You should see 18 files: three HTML files, three CSS files and twelve image files.
+			<span class="inside-ol">&nbsp;</span>
+			<b>flex-two-columns.html</b><br>
+			<b>flex-three-columns.html</b><br>
+			<b>flex-four-columns.html</b><br><br>
+			<b>flex-two-columns.css</b><br>
+			<b>flex-three-columns.css</b><br>
+			<b>flex-four-columns.css</b><br><br>
+			<b>directions.png</b><br>
+			<b>blackberry.jpg</b><br>
+			<b>cheesecake.jpg</b><br>
+			<b>pieceofcake.jpg</b><br>
+			<b>flower.jpg</b><br>
+			<b>heart.jpg</b><br>
+			<b>hook-head.jpg</b><br>
+			<b>sport-1.jpg</b><br>
+			<b>sport-2.jpg</b><br>
+			<b>sport-3.jpg</b><br>
+			<b>sport-4.jpg</b>
+		</li>
+	
+		<li>Copy all these files from the <b>flexbox-samples</b> sub-folder into your main <b>websites</b> folder.</li>
+	</ol>
+
+	<p>You are now ready to work with the sample files you have downloaded.</p>
+
+
+</section>
+
+
+<section id="sample-page" class="wrapper-content bg-white">
+
+	<h2>Working with the two-column web page</h2>
+	<p>In this Tutorial, you will work with the sample two-column web page, the sample two-column stylesheet, and two of the image files you have downloaded.</p>
+	
+	<ol>
+		<li>In Visual Studio Code, open the following two files: 
+		<span class="inside-ol">&nbsp;</span>
+		<b>flex-two-columns.html</b><br>
+		<b>flex-two-columns.css</b></li>
+
+		<li>Display the <b>flex-two-columns.html</b> web page in your browser.
+		<img src="assets/img/flex-two-cols/flex-cols-before.png" alt="Sample image">
+		You can see that:
+		<ul>
+			<li>Coloured borders have been added to highlight the edges of the parent elements (in <span style="color:red">red</span>) and the child elements (in <span style="color:blue">blue</span>).</li>
+			<li>All the content is positioned directly against the edges of the browser window.
+			<span class="inside-ol">&nbsp;</span>
+			That is because no padding (inside spacing) has been added to the <b>container-block</b> parent container elements.</li>
+
+			<li>All the content is 100% wide, left-to-right, across the browser window.
+			<span class="inside-ol">&nbsp;</span>
+			That is because the <b>item-col-2</b> child columns are defaulting to 100% width.</li>
+		</ul>
+		</li>
+		
+		<li>In VS Code, display the <b>flex-two-columns.css</b> stylesheet.
+		<span class="inside-ol">&nbsp;</span>
+		You can see two empty styles for the <span class="csyn">.container-block</span> selector. Each is inside a media query. The first query is for desktop/laptop screens; the second, for mobiles.
+		<img src="assets/img/flex-two-cols/container-block-padding.png" alt="Sample image"></li>
+		
+		<li>Add the following padding properties and values to the two <span class="csyn">.container-block</span> selectors.
+<pre class="language-css">
+<span class="token comment">/* ========== MAIN CONTENT CONTAINERS ========= */</span>
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">4% 8%</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>:<span class="token number">767px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">11% 8%</span> } }
+</pre></li>
+
+		<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
+	</ol>
+
+	<img src="assets/img/flex-two-cols/flex-cols-incorrect.png" alt="Sample image">
+
+	<p>On desktop/laptop and on mobile-sized screens, you should now see spacing inside the red-coloured borders of the three <b>container-block</b> parent elements.</p>
+
+
+
+
+	<h3 id="flex-child">Setting up the flexbox child columns</h3>
+
+	<p>Your next task is to set the width of the <b>.item-col-2</b> child columns to create your two-column layout on desktop and laptop screens.</p>
+
+	<ol>
+
+		<li>In VS Code, display the <b>flex-two-columns.css</b> stylesheet.
+		<span class="inside-ol">&nbsp;</span>
+		You can see that, for mobile screens, a <b>width: 100%</b> has been set for the <span class="csyn">.item-col-2</span> child column selector.
+		<span class="inside-ol">&nbsp;</span>
+		However, no width value has been set for the <span class="csyn">.item-col-2</span> for desktop/laptop screens.
+		<img src="assets/img/flex-two-cols/child-col-widths.png" alt="Sample image"></li>
+		
+		<li>To create a two-column layout on large screens, copy-and-paste the following.
+<pre class="language-css">
+<span class="token comment">/* Desktops: flexbox child columns */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>:<span class="token number">768px</span>) {
+    <span class="token class">.item-col-2</span> { <span class="token property">width</span>: <span class="token number">47%</span> }
+}</pre></li>
+
+		<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
+
+	</ol>
+
+<img src="assets/img/flex-two-cols/flex-cols-stacked-incorrect.png" alt="Sample image">
+
+
+<p>As you can see:</p>
+
+
+
+<ul>
+	<li>On desktops/laptops, the <b>item-col-2</b> child columns are now a little less than half of the width of their parent container. This is what you want.</li>
+
+	<li>Unfortunately, your child columns are stacked vertically, one above the other. Instead, you want them arranged in a horizontal row, left-to-right, across the screen.</li>
+
+
+</ul>
+
+
+
+
+	<h3 id="flex-parent">Setting up the flexbox parent elements</h3>
+
+	<p>For the web browser to display the <b>item-col-2</b> child columns at your set width of <b>47%</b>, you need to make their parent container, named <b>container-flexbox</b>, a flexbox element.</p>
+
+	<ol>
+		<li>In VS Code, you can see that a <span class="csyn">.container-flexbox</span> selector has been created. But it contains no style rules.
+		<img src="assets/img/flex-two-cols/flexbox-empty.png" alt="Sample image"></li>
+
+		<li>Copy-and-paste the following three flexbox-related property and value pairs.
+<pre class="language-css">
+<span class="token comment">/* Flexbox parent container */</span>
+<span class="token class">.container-flexbox</span> {
+   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+   <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>; 
+   <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>; 
+}</pre></li>
+
+		<li>Save the <b>flex-two-columns.css</b> stylesheet and view the web page in your browser.</li>
+
+	</ol>
+
+	<p>Your child elements should now display correctly in a two-column layout on desktop/laptop screens.</p>
+
+	<img src="assets/img/flex-two-cols/flex-cols-correct.png" alt="Sample image">
+
+	<p>Use your web browser&#8217;s screen resizing feature to confirm your layout displays as a single column on mobile-sized screens.</p>
+
+</section>
+
+
+
+
+
+<section id="colour-background" class="wrapper-content bg-white">
+	<h2>Adding coloured backgrounds</h2>
+
+	<p>Next, you will add coloured backgrounds to your two-column layout: first, to a parent container and <i>all</i> its child columns; and then to an <i>individual</i> child column.</p>
+	<ul>
+		<li><b>Parent container</b>: In your web page, your parent containers have two classes: <b>container-block</b> and <b> container-flexbox</b>.
+		<span class="inside-ol">&nbsp;</span>
+		When you add a coloured background to a parent element, the padding values of the <b>container-block</b> class will prevent the content inside the parent element from pushing directly against the edges of the parent.
+		<img src="assets/img/flex-two-cols/padding-parent.png" alt="Sample image">
+		
+		So, when you add a coloured background to a parent container, you don&#8217;t also need to add any extra padding to that container.</li>
+
+		<li><b>Child column</b>: The <b>item-2-col</b> class that styles your child columns does <i>not</i> include any padding values.
+		<span class="inside-ol">&nbsp;</span>
+		So, to prevent the content inside a child element from pushing against its four edges, you will need to add to some padding values to the <b>item-2-col</b> class in your stylesheet file.
+		<img src="assets/img/flex-two-cols/padding-child.png" alt="Sample image"></li>
+	</ul>
+
+
+
+	<h3 id="colour-parent">Adding coloured backgrounds to parent containers</h3>
+	<p>Follow these steps to add coloured backgrounds to two of the three parent container elements in your web page.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>flex-two-columns.html</b> web page.</li>
+		
+		<li>To the second parent element on (about) line 37 of your page, add the <b>bg-light</b> class.
+		<img src="assets/img/flex-two-cols/parent-bg-light.png" alt="Sample image"></li>
+
+		<li>To the third parent element on (about) line 59 of the page, add the <b>bg-dark</b> class.
+		<img src="assets/img/flex-two-cols/parent-bg-dark.png" alt="Sample image">
+		<span class="inside-ol">&nbsp;</span>
+		The two background colour styles of <b>bg-light</b> (light blue) and <b>bg-dark</b> (purple, left-to-right gradient) are provided with the sample <b>flex-two-columns.css</b> stylesheet file.
+		
+		<img src="assets/img/flex-two-cols/css-coloured-bg.png" alt="Sample image"></li>
+
+		<li>Save the <b>flex-two-columns.html</b> web page and view the result in your browser.</li>
+
+	</ol>
+
+	<p>On desktop/laptop and on mobile-sized screens, your web page should now look as shown below.</p>
+
+	<img src="assets/img/flex-two-cols/bg-colours-incorrect.png" alt="Sample image">
+
+
+
+
+	<h3 id="colour-parent-text">Changing the text colours inside a parent element</h3>
+	<p>For the <span class="syn">&lt;h3&gt;</span> sub-headings and <span class="syn"><span class="syn">&lt;p&gt;</span></span> paragraphs inside the parent container with the <b>bg-dark</b> background, you need to change the colour of the text.</p>
+
+	<p>Note the <i>two-levels</i> of parent-child relationships here:</p>
+
+	<ul>
+		<li>The <span class="syn">&lt;h3&gt;</span> sub-headings and <span class="syn"><span class="syn">&lt;p&gt;</span></span> text paragraphs are children of the <b>item-col-2</b> columns.</li>
+		<li>The <b>item-col-2</b> columns are children of the parent containers with three classes: <b>container-block</b>, <b>container-flexbox</b> and <b>bg-dark</b>.</li>
+	</ul>
+
+	<p>In your <b>flex-two-columns.css</b> stylesheet, your could <i>&#8216;target&#8217;</i> the text content of the child columns by entering the following:</p>
+
+<pre class="language-css">
+<span class="token class">.container-block.container-flexbox.bg-dark .item-col-2</span> <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-block.container-flexbox.bg-dark .item-col-2</span> <span class="token class">p</span>  { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre>
+
+	<p>However, for this web page, it would be enough to type the following:</p>
+
+<pre class="language-css">
+<span class="token class">.container-block.bg-dark .item-col-2</span> <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-block.bg-dark .item-col-2</span> <span class="token class">p</span>  { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre>
+
+	<p>Or, alternatively:</p>
+
+<pre class="language-css">
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span class="token class">h3</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span class="token class">p</span>  { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre>
+
+	<p>Either will work.</p>
+
+	<p>But what if your later added to the <b>item-col-2</b> child columns other text elements with different HTML tags &#8211; such as a <span class="syn">&lt;h1&gt;</span>, <span class="syn"><span class="syn">&lt;h2&gt;</span></span> or <span class="syn">&lt;h4&gt;</span>?</p>
+
+	<p>The ideal solution is to use the universal or <i>&#8216;wildcard&#8217;</i> CSS selector of <b>*</b>  to target <i>all</i> text inside <b>item-col-2</b> child columns &#8211; regardless of their particular HTML tag.</p>
+
+	<p>Here are the steps:</p>
+
+	<ol>
+		<li>In your <b>flex-two-columns.css</b> stylesheet, near the bottom, you should see the following comment line.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+</pre>
+
+		Add the following code under it:
+
+<pre class="language-css">
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre></li>
+
+		<li>Save the web page and view the result in your browser.</li>
+
+	</ol>
+
+	<p>On desktop/laptop and on mobile-sized screens, your web page should now look as shown below.</p>
+
+	<img src="assets/img/flex-two-cols/bg-colours-correct.png" alt="Sample image">
+
+
+
+
+	<h3 id="colour-child">Adding a coloured background to a child column</h3>
+	<p>Next, you will add a background colour to a particular <b>item-col-2</b> child column inside one of the three parent containers in your web page. Follow these steps.</p>
+
+	<ol>
+		<li>In the <b>flex-two-columns.html</b> web page, add the <b>bg-dark</b> class to the first <b>item-col-2</b> child column inside the first parent container.
+		<img src="assets/img/flex-two-cols/bg-colour-child-html.png" alt="Sample image"></li>
+
+		<li>Save the web page and view the result in your browser.</li>
+
+	</ol>
+
+	<img src="assets/img/flex-two-cols/bg-colours-child-incorrect.png" alt="Sample image">
+
+	<p>As you can see, you need to perform two more tasks:</p>
+
+	<ul>
+		<li>Change the colour of the sub-headings and text paragraphs inside the child column with the dark background.</li>
+		<li>Add spacing inside the four edges of the child column.</li>
+	</ul>
+
+
+
+	<h3 id="colour-child-text">Changing the text colours inside a child column</h3>
+	<p>For the <span class="syn">&lt;h3&gt;</span> sub-headings and <span class="syn"><span class="syn">&lt;p&gt;</span></span> paragraphs inside the child column with the <b>bg-dark</b> background, you need to change the colour of the text.</p>
+
+	<p>Here are the steps:</p>
+
+	<ol>
+		<li>In your <b>flex-two-columns.css</b> stylesheet, near the bottom, you have the following comment line and a CSS style rule that applies to <i>all</i> child columns whose parent containers have a class of <b>bg-dark</b>.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre></li>
+
+		<li>Update this by adding a new style rule that applies <i>only</i> when a child element has a class <b>bg-dark</b>.
+<pre class="language-css">
+<span class="token comment">/* Colours for sub-headings and paragraphs */</span>
+<span class="token class">.container-flexbox.bg-dark .item-col-2</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-flexbox .item-col-2.bg-dark</span> <span style="color: rgb(86,156,202)">*</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre>
+		This new style rule with the <i>&#8216;wildcard&#8217;</i> CSS selector of <b>*</b> will target <i>all</i> text inside <b>item-col-2</b> child columns that have the <b>bg-dark</b> class &#8211; regardless of their particular HTML tag.</li>
+
+		<li>Save the web page and view the result in your browser.</li>
+	</ol>
+
+	<p>On desktop/laptop and on mobile-sized screens, your web page should now look as shown below.</p>
+
+	<img src="assets/img/flex-two-cols/bg-colours-child-correct.png" alt="Sample image">
+
+	<p>You can see that you need to add some padding to the child column with the coloured background.</p>
+
+</section>
+
+
+<section id="padding-child-columns" class="wrapper-content bg-white">
+
+	<h2>About child columns and padding</h2>
+	<p>As a general rule, you will always want to add padding to a child column that has a coloured background.</p>
+	
+	<p>So it makes sense to develop a <i>general solution</i> that will work for all multi-column layouts &#8211; whether they have two, three, four or even more columns.</p>
+	
+	<p>You can achieve this by following these two approaches:</p>
+
+	<ul>
+
+		<li><b>Use percentage padding values</b>: Instead of entering fixed values (such as <b>20px</b>) for padding, use percentage values (such as <b>2%</b>) instead.
+		<span class="inside-ol">&nbsp;</span>
+		As a result, your three-column layouts will have a little less padding than your two-columns ones, and your four-column layouts even less. This is generally what you will want.</li>
+
+		<li><b>Use a wild card (*) with class names</b>: In this Tutorial, you are working with two-column layouts where the child columns are styled with a class name of <b>item-col-2</b>.
+		<span class="inside-ol">&nbsp;</span>
+		In the <a href="flex-three-cols.html">CSS Flexbox: Three Column Layouts</a> and <a href="flex-four-cols.html">CSS Flexbox: Four Column Layouts</a> Tutorials, the child columns will have class names of <b>item-col-3</b> and <b>item-col-4</b>.
+		<span class="inside-ol">&nbsp;</span>
+		By using class names with a consistent format, you can apply the wild card <b>*</b> character to create a universal CSS selector that styles all classes whose names include <b>item-col-</b>.</li>
+
+	</ul>
+
+	<p>The next exercise provides an example of these two approaches in action.</p>
+
+	<h3 id="padding-child-column">Adding padding to a child column</h3>
+	<p>In these next steps, you will apply padding to a particular child column of your layout.</p>
+
+
+	<ol>
+		<li>In your <b>flex-two-columns.html</b> web page, add the new class of <b>item-col-padding</b> to the child column that has a class of <b>bg-dark</b>.
+		<img src="assets/img/flex-two-cols/bg-padding-child-html.png" alt="Sample image"></li>
+
+		<li>Save the web page and view the result in your browser. On desktop/laptop and on mobile-sized screens, your web page should now look as shown below.
+		
+		<img src="assets/img/flex-two-cols/bg-colours-child-padding-correct.png" alt="Sample image">
+		
+		The padding within the <b>item-col-2</b> child columns is created by the following two styles in the <b>flex-two-columns.css</b> file.
+
+		<img src="assets/img/flex-two-cols/col-padding-style-rules-1.png" alt="Sample image">
+
+		You need different padding values for desktops/laptop screens (displayed in <i>landscape</i> or 'sideways' mode) and mobile screens (typically displayed in <i>portrait</i> or 'upright' mode).
+		<span class="inside-ol">&nbsp;</span>
+		The <b>padding-top</b> values are slightly smaller than the <b>padding-bottom</b> values because the child columns begin with slightly larger text inside the <span class="syn">&lt;h3&gt;</span> tag and end with smaller text inside the <span class="syn"><span class="syn">&lt;p&gt;</span></span> tag.</li>
+		
+		<li>Update the two styles for the <b>item-col-padding</b> selector in your stylesheet as follows.
+		
+<pre class="language-css">
+<span class="token comment">/* Desktops: inner padding for child columns */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) {
+   [<span class="token property">class</span>*=<span class="token class">"item-col-"</span>].<span class="token class">item-col-padding</span> { <span class="token property">padding</span>: <span class="token number">1.8% 2% 2.2% 2%</span> }
+}
+
+<span class="token comment">/* Mobiles: inner padding for child columns  */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">max-width</span>:<span class="token number">767px</span>) {
+    [<span class="token property">class</span>*=<span class="token class">"item-col-"</span>].<span class="token class">item-col-padding</span> { <span class="token property">padding</span>: <span class="token number">6.5% 7% 7% 7%</span> }
+}</pre>
+
+		These updated style rules will also apply to child columns with class names such as <b>item-col-3</b> and <b>item-col-4</b>.</li>
+
+		<li>Save your stylesheet file.</li>
+	</ol>
+
+</section>
+
+<section id="hero-block" class="wrapper-content bg-white">
+	<h2>Adding a hero block</h2>
+
+	<p>Finally, here is an example of a two-column flexbox layout used to create a so-called hero block.</p>
+
+	<ol>
+		<li>In VS Code, at the bottom of the <b>flex-two-columns.html</b> web page, copy-and-paste the following:
+
+<pre class="language-html">
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"container-block container-flexbox bg-hero"</span>&gt;
+    &lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"item-col-2"</span>&gt;
+        &lt;<span class="blue-dark">h1</span>&gt;<span class="white">Hook Head</span>&lt;/<span class="blue-dark">h1</span>&gt;
+        &lt;<span class="blue-dark">h2</span>&gt;<span class="white">Guiding ships &lt;<span class="blue-dark">br</span>&gt;for 800 years.</span>&lt;/<span class="blue-dark">h2</span>&gt;
+    &lt;/<span class="blue-dark">div</span>&gt;
+&lt;/<span class="blue-dark">div</span>&gt;
+</pre>
+	Save your web page.</li>
+
+	<li>In your stylesheet, copy-and-paste the following:
+
+<pre class="language-css">
+<span class="token comment">/* =============== HERO BLOCK ================= */</span>
+<span class="token class">.bg-hero</span> {
+    <span class="token property">display</span>: <span class="token value-text">flex</span>;
+    <span class="token property">flex-direction</span>: <span class="token value-text">column</span>;
+    <span class="token property">justify-content</span>: <span class="token value-text">center</span>;
+    <span class="token property">background-image</span>: <span class="yellow">url</span>('<span class="token value-text">hook-head.jpg</span>');
+    <span class="token property">background-position</span>: <span class="token value-text">center center</span>;
+    <span class="token property">background-size</span>: <span class="token value-text">cover</span>;
+    <span class="token property">background-repeat</span>: <span class="token value-text">no-repeat</span>;
+    <span class="token property">height</span>: <span class="token number">510px</span>;
+}
+
+<span class="token class">.bg-hero h1</span>, <span class="token class">.bg-hero h2</span> {
+    <span class="token property">letter-spacing</span>: <span class="token number">-2px</span>;
+    <span class="token property">color</span>: <span class="token value-text">#fff</span>;
+    <span class="token property">font-weight</span>: <span class="token value-text">bold</span>;
+    <span class="token property">text-shadow</span>: <span class="token number">2px 2px</span> <span class="token value-text">#222</span> 
+}
+
+<span class="token class">.bg-hero h1</span> {
+    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">80px</span> + (<span class="token number">100</span> - <span class="token number">80</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
+}
+
+<span class="token class">.bg-hero h2</span> {
+    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">36px</span> + (<span class="token number">56</span> - <span class="token number">36</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
+}
+
+<span class="token comment">/* Desktop */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.bg-hero h1</span> { <span class="token property">margin-bottom</span>: <span class="token number">1%</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> <span class="token class">all</span> and (<span class="token property">max-width</span>:<span class="token number">767px</span>) { 
+    <span class="token class">.bg-hero</span> { <span class="token property">background-position</span>: <span class="token value-text">right center</span>; <span class="token property">height</span>: <span class="token number">420px</span> }
+    <span class="token class">.bg-hero h1</span>, <span class="token class">.bg-hero h2</span> { <span class="token property">text-align</span>: <span class="token value-text">center</span> }
+    <span class="token class">.bg-hero h1</span> { <span class="token property">margin-bottom</span>: <span class="token number">10%</span> }
+}</pre>	</li>
+
+
+	<li>Save the stylesheet and view the web page in your web browser.</li>
+
+	</ol>
+
+	<p>On desktop/laptop and on mobile-sized screens, your web page should now look as shown below.</p>
+
+	<img src="assets/img/flex-two-cols/hook-head.png" alt="Sample image">
+
+	<p>You are now finished working with this sample web page and stylesheet.</p>
+
+	<p>So you can now remove from your stylesheet the two styles of red borders around parent containers and blue borders around child elements.</p>
+
+	<p>Click <a href="final-flex-columns/flex-two-columns.html" target="_blank">flex-two-columns.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="update-home-page-content" class="wrapper-content">
+	<h2>Updating the content of your home page</h2>
+
+	<p>Now that you have created and styled a new sample web page, you need to add a new hyperlink to the home page of your web site.</p>
+
+	<ol>
+		<li>In VS Code, open this HTML file in your <b>websites</b> folder:
+		<span class="inside-ol">&nbsp;</span>
+		<b>index.html</b></li>
+
+		<li>Copy-and-paste the following the following new line to the bottom of your list of hyperlinks.
+
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"flex-two-columns.html"</span>&gt;<span class="white">Two Column Flexbox Layout</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+</pre></li>
+
+</ol>
+
+	<p>Save your <b>index.html</b> web page and view the result in your browser.</p>
+
+</section>
+
+<section id="upload-github" class="wrapper-content bg-white">
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>After finishing your web pages and stylesheets, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+
+		<li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.</li>
+
+		<li>Select or drag-and-drop the following files to upload them to your GitHub account:
+			<span class="inside-ol">&nbsp;</span>
+			<b>index.html</b><br>
+			<b>flex-two-columns.html</b><br>
+			<b>flex-two-columns.css</b><br>
+			<b>directions.png</b><br>
+			<b>hook-head.jpg</b></li>
+
+		<li>Finally, scroll down to the bottom of the GitHub screen, enter a short message in the <b>Commit changes</b> box and click the <b>Commit changes</b> button.</li>
+	</ol>
+
+	<p>Your web pages and stylesheets are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/flex-two-columns.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
