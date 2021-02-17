@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to CSS Flexbox | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Introduction to CSS Flexbox: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Introduction to CSS Flexbox</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Understand the concept of flexbox parent-child elements.</li>
+		<li>Use the CSS flexbox method to lay out the content of web pages in responsive grids of rows and columns.</li>
+	</ul>
+
+	<p>There are no sample files to download, create or update in this Tutorial.</p>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#flex-about">About CSS flexbox</a></p>
+		<p><a href="#flex-parent-child">Flexbox: parent and child elements</a></p>
+		<p><a href="#flex-parent">Flexbox: the parent element</a></p>
+		<p class="toc-indent"><a href="#flex-gutter">Flexbox and gutter spacing</a></p>
+		<p class="toc-indent"><a href="#flex-wrapping">Flexbox and child element wrapping in rows</a></p>
+		<p><a href="#flex-sections">Flexbox parent containers and sections</a></p>
+	</div>
+</section>
+
+<section id="flex-about" class="wrapper-content">
+	<h2>About CSS flexbox</h2>
+	<p>CSS flexbox is one of two layout methods web designers use to arrange web page content into rows and columns. (The other is called CSS grid.)</p>
+	
+	<img src="assets/img/intro-flexbox/flexbox-typical-1.png" alt="padding">
+
+	<img src="assets/img/intro-flexbox/flexbox-typical-2.png" alt="padding">
+
+</section>
+
+<section id="flex-parent-child" class="wrapper-content">
+	<h2>Flexbox: parent and child elements</h2>
+
+	<p>The flexbox layout technique is based on the concept of parent and child elements.</p>
+
+	<ul>
+		<li>A parent element will typically have a class name of <b>container-flexbox</b>, <b>wrapper-flexbox</b>, <b>flex-wrapper</b> or similar.</li>
+
+		<li>A child element in flexbox layouts is commonly known as an <i>item</i>.
+		<span class="inside-ol">&nbsp;</span>
+		For this reason, you will see child elements with names such as <b>item-col-2</b> (for two-column page layouts) and <b>item-col-3</b> (for three-column page layouts).</li>
+	</ul>
+
+	<p>Below is an example of the flexbox technique used to create a two-column layout on desktop/laptop screens.</p>
+
+	<img src="assets/img/intro-flexbox/intro-flexbox-2-cols.png" alt="padding">
+	
+	<ul>
+		<li>The first image is a sketch of the basic layout with the class names. The parent element has a red border and the two child elements have a blue border.</li>
+
+		<li>The second image shows the HTML tags and content entered in Visual Studio Code.</li>
+
+		<li>And the third image is the result as it might look in a web browser.</li>
+	</ul>
+
+	<p>Below is a three-column layout for desktop/laptop screens created with flexbox.</p>
+
+	<img src="assets/img/intro-flexbox/intro-flexbox-3-cols.png" alt="padding">
+
+</section>
+
+
+<section id="flex-parent" class="wrapper-content">
+	<h2>Flexbox: the parent element</h2>
+
+	<p>It is the parent element in a flexbox layout that makes it a flexbox layout. In particular, it is one CSS property and value pair of the parent element. See below.</p>
+
+<pre class="language-css">
+<span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
+<span class="token class">.container-flexbox</span> { 
+   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+}</pre>
+
+	<p><i>This one style rule of <b>display: flex</b> is enough to make an element a flexbox parent container.</i></p>
+
+	<p>In practice, however, you will want to add two further CSS property-value pairs to your flexbox parent containers, as shown below.</p>
+
+<pre class="language-css">
+<span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
+<span class="token class">.container-flexbox</span> { 
+   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+   <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>; 
+   <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>; 
+}</pre>
+
+	<p>Let&#8217;s look at each of these <b>justify-content</b> and <b>flex-wrap</b> properties in turn, and discover why they are necessary.</p>
+
+
+	<h3 id="flex-gutter">Flexbox and gutter spacing</h3>
+
+	<p>When you arrange web page content in two, three of four columns, you will typically want to include some empty spacing between the columns.</p>
+	
+	<p>This inter-column spacing is known as the <i>gutter</i>, a term inherited from print design.</p>
+
+	<img src="assets/img/intro-flexbox/flex-gutter-0.png" alt="padding">
+
+	<p>The total gutter spacing (of one, two or three gutters) is the space remaining or &#8216;left over&#8217; after the child elements have filled their defined widths.</p>
+
+	<p>A flexbox parent container has a CSS property called <b>justify-content</b> that controls how the gutter spacing is displayed, left-to-right, across the screen.</p>
+	
+	<p>Unfortunately, the CSS <b>justify-content</b> property has a default value of <b>flex-start</b> that will:</p>
+	
+	<ul>
+		<li>Pack or squeeze the child elements at the left of the parent container, and</li>
+		<li>Display the &#8216;left over&#8217; spacing in a single block the right of the parent container.</li>
+	</ul>
+
+	<img src="assets/img/intro-flexbox/flex-gutter-5.png" alt="padding">
+
+	<img src="assets/img/intro-flexbox/flex-gutter-1.png" alt="padding">
+
+	<p>To instead distribute this space evenly between the columns in gutters, you need to overrule the default value of the <b>justify-content</b> property by entering the value of <b>space-between</b> in the CSS stylesheet.</p>
+
+	<img src="assets/img/intro-flexbox/flex-gutter-6.png" alt="padding">
+
+	<p>This will create the desired result of evenly-spaced columns in your web browser.</p>
+	<img src="assets/img/intro-flexbox/flex-gutter-3.png" alt="padding">
+
+
+
+	<h3 id="flex-wrapping">Flexbox and child element wrapping in rows</h3>
+
+	<p>There is one more CSS property-value pair that you will usually want to apply to your parent flexbox containers.</p>
+	
+	<p>This property enables child elements to be split or <i>wrapped</i> across multiple rows within a parent element.</p>
+
+	<p>Consider the following three-column layout, displayed under a sub-heading.</p>
+	<img src="assets/img/intro-flexbox/flex-wrap-1.png" alt="padding">
+
+	<p>What would happen is you added three more child elements to this layout? The result will be as shown below.</p>
+
+	<img src="assets/img/intro-flexbox/flex-wrap-2.png" alt="padding">
+
+	<p>As you can see, the parent flexbox container forces all six child elements to display on a single row, left-to-right, across the screen.</p>
+	
+	<p>This is because a parent flexbox container has a CSS property called <b>flex-wrap</b> with a default value of <b>no-wrap</b>.</p>
+
+	<img src="assets/img/intro-flexbox/flex-nowrap.png" alt="padding">
+
+	<p>How can you retain your three-column layout, now that it contains six child elements? The effect you want to achieve is shown below.</p>
+
+	<img src="assets/img/intro-flexbox/flex-wrap-3.png" alt="padding">
+
+	<p>The solution is to override the default <b>nowrap</b> value of the <b>flex-wrap</b> property by entering a value of <b>wrap</b> for the flexbox parent container as shown below.</p>
+
+	<img src="assets/img/intro-flexbox/flex-gutter-wrap.png" alt="padding">
+
+	<p>There are many other CSS properties and values you can assign to flexbox parent containers. But for most practical web page layouts, setting values for the <b>display</b>, <b>justify-content</b> and <b>flex-wrap</b> properties is sufficient.</p>
+
+	<img src="assets/img/intro-flexbox/flex-summary.png" alt="padding">
+
+</section>
+
+
+<section id="flex-sections" class="wrapper-content">
+
+	<h2>Flexbox parent containers and sections</h2>
+
+	<p>In a previous <a href="working-with-sections.html">Tutorial</a> you learnt how web pages are commonly sub-divided into vertical blocks of content.</p>
+	
+	<p>These <i>sections</i> are designed to make the content more inviting and easier to read.</p>
+
+	<img src="assets/img/intro-flexbox/sections-front.png" alt="padding">
+
+	<p>A section typically has some padding added around its four edges. See the example of a section named <b>container-block</b> below.</p>
+
+	<img src="assets/img/intro-flexbox/flex-section-1.png" alt="padding">
+
+	<p>The result of the above CSS padding styles applied to a section would be similar to the following.</p>
+
+	<img src="assets/img/intro-flexbox/flex-section-2.png" alt="padding">
+	
+	<p>Typically, you will also want similar padding applied to flexbox parent containers, so that your multi-column layouts do not directly touch the browser left or right edges, or any other elements above or below them on the web page.</p>
+
+	<img src="assets/img/intro-flexbox/flex-section-3.png" alt="padding">
+
+	<p>You can achieve the effect simply by adding the <b>container-block</b> class to your parent flexbox containers in your HTML web page.</p>
+
+	<img src="assets/img/intro-flexbox/flex-section-4.png" alt="padding">
+
+	<p>Now that you understand the basics of CSS flexbox layout, in the next three Tutorials you will create web pages with <a href="flex-two-cols.html">two</a>, <a href="flex-three-cols.html">three</a> and <a href="flex-four-cols.html">four column</a> layouts based on this technique.</p>
+
+</section>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+</body>
+</html>

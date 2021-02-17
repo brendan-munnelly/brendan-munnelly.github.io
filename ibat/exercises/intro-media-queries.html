@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to Media Queries | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Responsive Web Design and Fluid Typography: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet"> 
+
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Introduction to Media Queries</h1>
+</div>
+
+
+<section id="learning-goals" class="wrapper-content bg-white">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Add media queries to a CSS file for the 768px breakpoint.</li>
+		<li>Use media queries to create responsive container padding and inter-line text spacing on a web page.</li>
+	</ul>
+
+	<p>You can view finished versions of the three sample web pages you will update with media queries in this Tutorial by clicking the links below. The finished samples will each open in a new tab of your web browser.</p>
+
+	<p>You created these three sample web pages and their linked stylesheets in the previous <a href="working-with-sections.html">Working with Sections</a> Tutorial.</p>
+
+
+	<div class="four-samples">
+		<div>
+			<a href="final-media/page-10.html" target="_blank"><img src="assets/img/rwd-media-queries/example-one-browser.png" alt="Sample image"></a>
+			<a href="final-media/page-10.html" target="_blank" class="link-exercise">page-10.html</a>
+		</div>
+		<div>
+			<a href="final-media/page-11.html" target="_blank"><img src="assets/img/rwd-media-queries/example-two-browser.png" alt="Sample image"></a>
+			<a href="final-media/page-11.html" target="_blank" class="link-exercise">page-11.html</a>
+		</div>
+		<div>
+			<a href="final-media/page-12.html" target="_blank"><img src="assets/img/rwd-media-queries/example-three-browser.jpg" alt="Sample image"></a>
+			<a href="final-media/page-12.html" target="_blank" class="link-exercise">page-12.html</a>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="wrapper-content bg-white">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#media-query-about">About media queries</a></p>
+		<p class="toc-indent"><a href="#media-query-format">The format of a media query</a></p>
+		<p class="toc-indent"><a href="#media-query-condition">The condition format a media query</a></p>
+		<p class="toc-indent"><a href="#media-query-resets">Media queries: web browser resets</a></p>
+		<p><a href="#responsive-style">Editing your three sample stylesheets</a></p>
+		<p><a href="#github-upload">Uploading your CSS files to GitHub</a></p>
+	</div>
+</section>
+
+
+<section id="media-query-about" class="wrapper-content bg-white">
+	<h2>About media queries</h2>
+	<p>In the CSS stylesheets you have created so far, the style rules they contain apply to <i>all</i> web pages these CSS files are linked to.</p>
+	
+	<p>This will be true for every type of device used &#8211; mobiles, tablets, laptops or desktops.</p>
+	
+	<p>Consider the example below of an <b>h1</b> main heading. If you simply entered this style rule to a CSS file, all main headings are displayed in the colour blue on all types of user devices.</p>
+
+<pre class="language-css">
+<span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">blue</span>;
+}</pre>
+
+	<p>So-called <i>media queries</i> enable web designers to create <i>conditional</i> style rules in CSS.</p>
+	
+	<p>That is: style rules that apply <i>only when certain conditions are met</i>.</p>
+
+	<p>Suppose, for example:</p>
+	
+	<ul>
+		<li>You would like your main headings to display in the colour blue on laptops and desktops, and also on Apple iPad tablets (in landscape mode).
+<pre class="language-css">
+  <span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">blue</span>;
+}</pre>
+		In other words, you want blue headings on &#8216;big&#8217; screens.</li>
+
+		<li>On mobiles, however, and also on Apple iPad tablets (in portrait mode), you would like your main headings to display in the colour red.
+<pre class="language-css">
+  <span class="token class">h1</span> {
+    <span class="token property">color</span>: <span class="token value-text">red</span>;
+}</pre>		
+		In other words, you want red headings on &#8216;small&#8217; screens.</li>
+	</ul>
+
+	<p>How can this be done?</p>
+
+	<p>The solution is to use two <i>media queries</i>.</p>
+
+	<p>In simple terms, you would:</p>
+	
+	<ul>
+		<li>Enter both style rules in the CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;small&#8217; screens.</li>
+
+		<li>Include with each style rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport (screen) is <b>less than</b> or <b>greater than</b> a certain width.</li>
+	</ul>
+
+	<img src="assets/img/rwd-media-queries/media-query-1.png"  alt="Intoduction to Media Queries">
+
+	<p>Note that all media queries have both a <i>start point</i> and an <i>end point</i>. </p>
+	
+	<p>It is not enough to &#8216;open&#8217; them. You must also &#8216;close&#8217; them.</p>
+
+	<p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines long  &#8211; will be controlled by the unclosed media query.</p>
+
+
+	
+	<h3 id="media-query-format">The format of a media query</h3>
+
+	<p>In CSS, a media is written in the following general format:</p>
+
+
+	<img src="assets/img/rwd-media-queries/media-query-2.png"  alt="Intoduction to Media Queries">
+
+	<p>Note that there are now <i>two pairs</i> of curly braces:</p>
+	<ul>
+		<li>An inner pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <span class="csyn">h1</span>.</li>
+
+		<li>And an outer pair of opening and closing curly braces that encloses the media query.</li>
+	</ul>
+
+
+	<h3 id="media-query-condition">The condition format a media query</h3>
+
+	<p>Web designers most commonly use media queries that respond to the width of the web browser viewport (screen).</p>
+	
+	<p>In simple terms, viewport widths are either &#8216;big&#8217; (wide) or &#8216;small&#8217; (narrow).</p>
+
+	<ul>
+		<li><b>Big viewports</b>: These are viewports that are 768 pixels wide <i> or wider</i>.
+		<span class="inside-ol">&nbsp;</span>
+		In other words, viewports with a <b>min-width</b> value of <b>768px</b>.</li>
+		<li><b>Small viewports</b>: These are viewports that are 767 pixels wide <i>or narrower</i>.
+		<span class="inside-ol">&nbsp;</span>
+		In other words, viewports with a <b>max-width</b> value of <b>767px</b>.</li>
+	</ul>
+
+	<p>You can now write two media queries in their full, valid format:</p>
+
+
+<pre class="language-css">
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+     <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">blue</span> }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) { 
+    <span class="token class">h1</span> { <span class="token property">color</span>: <span class="token value-text">red</span> }
+}</pre>
+
+	<p>In this example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
+
+	<img src="assets/img/rwd-media-queries/breakpoint-768.png"  alt="Intoduction to Media Queries">
+
+
+	<p>Below are the same two media queries, but with the style rule for the <span class="csyn">h1</span> selectors written on a single line.</p>
+	<img src="assets/img/rwd-media-queries/media-query-3.png"  alt="Intoduction to Media Queries">
+
+	<p>Again, note the <i>two pairs</i> of opening and closing curly braces.</p>
+
+
+	<h3 id="media-query-resets">Media queries: web browser resets</h3>
+	<p>When using the media queries to control the spacing around and within HTML elements, it is best to update the web browser resets in your stylesheet file as follows:</p>
+
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token number">0</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre>
+
+<p>This has to do with setting percentage values for horizontal and vertical widths:</p>
+
+<ul>
+	<li><b>Horizontal values</b>: Suppose, for mobile viewports, you would like a left and right padding value of <b>8%</b> for elements with a class name of <b>container-block</b>.
+	<span class="inside-ol">&nbsp;</span>
+	Your media query would look as follows.
+
+<pre class="language-css">
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">.container-block</span> { <span class="token property">padding-left</span>: <span class="token value-text">8%</span>; <span class="token property">padding-right</span>: <span class="token value-text">8%</span> }
+}</pre>
+	This value of <b>8%</b> clearly means eight-per cent of the physical width of the viewport on the user&#8217; mobile device.</li>
+
+	<li><b>Vertical values</b>: Suppose, for mobile viewports, you would like a top and bottom padding value of <b>12%</b> for elements with a class name of <b>container-block</b>.
+	<span class="inside-ol">&nbsp;</span>
+	Your media query would look as follows.
+
+<pre class="language-css">
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">.container-block</span> { <span class="token property">padding-top</span>: <span class="token value-text">12%</span>; <span class="token property">padding-bottom</span>: <span class="token value-text">12%</span> }
+}</pre>
+	But <b>12%</b> of what?
+	<span class="inside-ol">&nbsp;</span>
+	Of the actual height of the viewport on the device?
+	<span class="inside-ol">&nbsp;</span>
+	Or maybe of the height of the web page?
+</li>
+</ul>
+
+<p>To avoid this possible conflict of &#8216;how high is height?&#8217;, web designers add <b>100%</b> height values to browser resets at the top of CSS files.</p>
+
+</section>
+
+
+
+<section id="responsive-style" class="wrapper-content">
+	<h2>Editing your three sample stylesheets</h2>
+	<p>Follow these steps to update the stylesheet files for your recent sample web pages (<b>page-10.html</b>, <b>page-11.html</b> and <b>page-12.html</b>) so that they display responsively on different viewport widths.</p>
+	
+	<p>You created these sample web pages in a <a href="working-with-sections.html">previous Tutorial</a>.</p>
+	
+	<ol>
+		<li>In VS Code, open the <b>style-10.css</b>, <b>style-11.css</b> and <b>style-12.css</b> stylesheet files.</li>
+
+		<li>At the top of each stylesheet file, replace the current web browser resets by copying and pasting the following:
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token number">0</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre></li>
+
+		<li>For each stylesheet file, replace the current <span class="csyn">.container-block</span> style rules with the following:
+
+<pre class="language-css">
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">4% 18%</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>:<span class="token number">767px</span>) { <span class="token class">.container-block</span> { <span class="token property">padding</span>: <span class="token number">12% 8%</span> } }
+</pre></li>
+
+		<li>In all three stylesheets you can see that the <span class="csyn">.container-block</span> selector includes the following style rule that gives the main <span class="syn">&lt;h1&gt;</span> heading in your web pages a negative top margin value.
+
+<pre class="language-css">
+   <span class="token property">margin-top</span>: <span class="token number">-32px</span>;
+</pre>
+
+		Delete this rule.</li>
+
+		<li>In all three stylesheets, after the style declaration block for the <span class="csyn">p</span> paragraph, add these two new media queries that adjust the inter-line spacing for text paragraphs depending on the viewport width:
+
+<pre class="language-css">
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>:<span class="token number">768px</span>) { <span class="token class">.container-block p</span> { <span class="token property">line-height</span>: <span class="token number">1.8</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>:<span class="token number">767px</span>) { <span class="token class">.container-block p</span> { <span class="token property">line-height</span>: <span class="token number">1.6</span> } }
+</pre></li>
+
+		<li>Save the <b>style-10.css</b>, <b>style-11.css</b> and <b>style-12.css</b> stylesheets.</li>
+		
+		<li>Use your web browser&#8217;s viewport resizing feature to check that the horizontal and vertical spacing of the container blocks in the three web pages changes at the 768px viewport breakpoint.</li>
+
+	</ol>
+
+	<p>Click <a href="final-media/page-10.html" target="_blank">page-10.html</a>, <a href="final-media/page-11.html" target="_blank">page-11.html</a> and <a href="final-media/page-12.html" target="_blank">page-12.html</a> to view finished samples of these web pages in a new tab of your web browser.</p>
+
+</section>
+
+<section id="github-upload" class="wrapper-content">
+	<h2>Uploading your CSS files to GitHub</h2>
+
+	<p>Upload the following three stylesheet files to your account on GitHub:</p>
+
+	<p><b>style-10.css</b><br>
+	<b>style-11.css</b><br>
+	<b>style-12.css</b></p>
+
+	<p>Your updated web pages with the fluid font sizes will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/page-10.html</b><br>
+	<b>https://username.github.io/page-11.html</b><br>
+	<b>https://username.github.io/page-12.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>

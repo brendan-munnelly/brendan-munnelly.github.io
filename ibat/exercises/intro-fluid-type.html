@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to Fluid Typography | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Responsive Web Design and Fluid Typography: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet"> 
+
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Introduction to Fluid Typography</h1>
+</div>
+
+
+<section id="learning-goals" class="wrapper-content bg-white">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Understand the concept of fluid typography in web design.</li>
+		<li>Recognise that, for fluid typography to work, you must choose a minimum and a maximum viewport (screen) width.</li>
+		<li>Set a maximum viewport width in the browser resets at the beginning of a CSS file.</li>
+		<li>Apply Mike Riethmuller&#8217;s fluid typography equation to the CSS styles that control the headings, paragraphs and other text elements in a web page.</li>
+		<li>Understand that the smallest and largest font sizes are the only two values you need to change in the typographic equation.</li>
+	</ul>
+
+	<p>You can view finished versions of the three sample web pages you will update with fluid typography in this Tutorial by clicking the links below. The finished samples will each open in a new tab of your web browser.</p>
+
+	<p>You created these three sample web pages and their linked stylesheets in the previous <a href="working-with-sections.html">Working with Sections</a> Tutorial and made them responsive with the <a href="intro-media-queries.html">Introduction to Media Queries</a> Tutorial</p>
+
+
+	<div class="four-samples">
+		<div>
+			<a href="final-fluid/page-10.html" target="_blank"><img src="assets/img/rwd-media-queries/example-one-browser.png" alt="Sample image"></a>
+			<a href="final-fluid/page-10.html" target="_blank" class="link-exercise">page-10.html</a>
+		</div>
+		<div>
+			<a href="final-fluid/page-11.html" target="_blank"><img src="assets/img/rwd-media-queries/example-two-browser.png" alt="Sample image"></a>
+			<a href="final-fluid/page-11.html" target="_blank" class="link-exercise">page-11.html</a>
+		</div>
+		<div>
+			<a href="final-fluid/page-12.html" target="_blank"><img src="assets/img/rwd-media-queries/example-three-browser.jpg" alt="Sample image"></a>
+			<a href="final-fluid/page-12.html" target="_blank" class="link-exercise">page-12.html</a>
+		</div>
+	</div>
+
+
+</section>
+
+
+<section class="wrapper-content bg-white">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#fluid-typography-about">About fluid typography</a></p>
+		<p class="toc-indent"><a href="#min-max-web-page-widths">Minimum (320px) and maximum (1600px) viewport widths</a></p>
+		<p class="toc-indent"><a href="#max-width-browser-reset">Fluid typography: browser resets</a></p>
+		<p><a href="#fluid-typogaphy-equation">The fluid typography equation</a></p>
+		<p><a href="#fluid-style-10">Updating your style-10.css stylesheet</a></p>
+		<p><a href="#fluid-style-11">Updating your style-11.css stylesheet</a></p>
+		<p><a href="#fluid-style-12">Updating your style-12.css stylesheet</a></p>
+		<p><a href="#github-upload">Uploading your CSS files to GitHub</a></p>
+	</div>
+</section>
+
+
+<section id="fluid-typography-about" class="wrapper-content bg-white">
+	<h2>About fluid typography</h2>
+	<p>Fluid typography means that the font sizes of text &#8211; headings, paragraphs, bulleted lists, menu items &#8211; on a web page &#8216;scale&#8217; (shrink or expand) smoothly according to the width of the user&#8217;s viewport (screen).</p>
+
+	<p>The animated gif below is taken from an article on the <a href="https://css-tricks.com/snippets/css/fluid-typography/" target="_blank">CSS Tricks</a> website that features the widely-used implementation of the fluid typography approach developed by Australian web designer <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+
+	<img src="https://css-tricks.com/wp-content/uploads/2017/02/css-fluid-text-calc.gif" alt="fluid typography">
+</section>
+
+
+
+
+<section id="min-max-web-page-widths" class="wrapper-content bg-white">
+	<h3>Minimum (320px) and maximum (1600px) viewport widths</h3>
+	<p>To use fluid typography in your web pages, you need to decide on two values:</p>
+	
+	<ul>
+		<li><b>Smallest web page width</b>: A common choice is <b>320px</b>, the width of the screen of the most widely-used small mobile phone, the Apple iPhone 5.</li>
+		<li><b>Largest web page width</b>: Popular choices include 1366px (a common width of Windows laptop screens) and 1440px (a common width of Apple laptop screens). We will use a larger value of <b>1600px</b>.</li>
+	</ul>
+
+	<p>You will use both the 320px and 1600px values in the so-called fluid typography equation when setting fluid values for the <b>font-size</b> rule in CSS.</p>
+
+
+	<h3 id="max-width-browser-reset" >Fluid typography: browser resets</h3>
+	<p>When using the fluid typographic equation, it is best to update the web browser resets in your stylesheet file as follows:</p>
+
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre>
+
+<p>You can see that this new browser reset block includes the maximum (<b>1600px</b>) viewport width.</p>
+
+</section>
+
+
+<section id="fluid-typogaphy-equation" class="wrapper-content bg-white">
+	<h2>The fluid typography equation</h2>
+
+	<p>You are now ready to use the fluid typography equation from <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+
+	<p>At first sight, the fluid typography equation looks complex. But it becomes easy to work with if you remember the following two points:</p>
+	
+	<ul>
+		<li>Except for two values, the equation is always the same.</li>
+		<li>The only two values you ever need to change are the <i>smallest</i> and <i>largest</i> font size values.</li>
+	</ul>
+
+	<p>For example, in the case of paragraph text, you might:</p>
+	<ul>
+		<li>Set a font-size value of <b>15px</b> for the smallest mobile screen, and</li>
+		<li>Set a font-size value of <b>18px</b> for the largest laptop/desktop screen.</li>
+	</ul>
+	
+	<p>Your fluid typography equation for text paragraphs would then be as shown below.</p>
+
+<pre class="language-css">
+<span class="token class">p</span> {
+    <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">15px</span> + (<span class="token number">18</span> - <span class="token number">15</span>) * ((<span class="token number">100vw</span> - <span class="token number">320px</span>) /(<span class="token number">1600</span> - <span class="token number">320</span>)));
+}</pre>
+
+	<p>As for the other values in the equation:</p>
+
+	<ul>
+		<li><b>100vw</b>: The letters vw stand for viewport or screen, and 100 means 100% wide.</li>
+		<li><b>320</b>: This is the width you have chosen for the narrowest screen.</li>
+		<li><b>1600</b>: This is the width you have chosen for the widest screen. </li>
+	</ul>
+
+	<p>As you can see from the four examples of fluid font sizes below, you only ever need to change the smallest and largest font size values.</p>
+	<img src="assets/img/rwd-typography/equation-examples.png" alt="fluid type examples">
+
+
+	<p>Here are some examples of web pages that did not use fluid typography to scale font sizes correctly for mobile phone screens.</p>
+
+	<img src="assets/img/rwd-typography/wall-of-shame.png" alt="fluid type examples">
+
+
+	<p>In the remainder of this Tutorial, you will update with fluid <b>font-size</b> values in the stylesheet files for the <b>page-10.html</b>, <b>page-11.html</b> and <b>page-12.html</b> sample web pages you created previously.</p>
+
+</section>
+
+
+<section id="fluid-style-10" class="wrapper-content">
+	<h2>Updating your style-10.css stylesheet</h2>
+	<p>Follow these steps to add fluid <b>font-size</b> values to the stylesheet for the <b>page-10.html</b> sample web page you created in a <a href="working-with-sections.html#sections-sample-1-html">previous Tutorial</a>.
+	
+	<ol>
+		<li>In VS Code, open the <b>style-10.css</b> stylesheet file.</li>
+
+		<li>At the top of the stylesheet file, replace the current web browser resets by copying and pasting the following:
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre></li>
+
+		<li>For the <span class="csyn">h1</span> main heading selector, update the <b>font-style</b> property from the fixed value of <b>84px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">44px</span> + (<span class="token number">84</span> - <span class="token number">44</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>For the <span class="csyn">h2</span> sub-heading selector used to style the introduction text, update the <b>font-style</b> property from the fixed value of <b>28px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">20px</span> + (<span class="token number">28</span> - <span class="token number">20</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+
+		<li>For the <span class="csyn">h3</span> sub-heading selector, update the <b>font-style</b> property from the fixed value of <b>48px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">26px</span> + (<span class="token number">48</span> - <span class="token number">26</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>And for the text paragraphs styled with the <span class="csyn">p</span> selector, update the <b>font-style</b> property from the fixed value of <b>20px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">18px</span> + (<span class="token number">20</span> - <span class="token number">18</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>Save the <b>style-10.css</b> stylesheet and view your <b>page-10.html</b> page in your web browser. 
+
+		<span class="inside-ol">&nbsp;</span>
+		Use your browser&#8217;s viewport resizing feature to check the font sizes display correctly down to a minimum viewport width of 320 pixels.</li>
+
+		</ol>
+
+	<p>Click <a href="final-fluid/page-10.html" target="_blank">page-10.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="fluid-style-11" class="wrapper-content">
+	<h2>Updating your style-11.css stylesheet</h2>
+	<p>Follow these steps to add fluid <b>font-size</b> values to the stylesheet for the <b>page-11.html</b> sample web page you created in a <a href="working-with-sections.html#sections-sample-2">previous Tutorial</a>.
+	
+	<ol>
+		<li>In VS Code, open the <b>style-11.css</b> stylesheet file.</li>
+
+		<li>At the top of the stylesheet file, replace the current web browser resets by copying and pasting the following:
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre></li>
+
+		<li>For the <span class="csyn">h1</span> main heading selector, update the <b>font-style</b> property from the fixed value of <b>84px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">32px</span> + (<span class="token number">84</span> - <span class="token number">32</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>For the <span class="csyn">h2</span> sub-heading selector used to style the introduction text, update the <b>font-style</b> property from the fixed value of <b>32px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">22px</span> + (<span class="token number">32</span> - <span class="token number">22</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+
+		<li>For the <span class="csyn">h3</span> sub-heading selector, update the <b>font-style</b> property from the fixed value of <b>48px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">28px</span> + (<span class="token number">48</span> - <span class="token number">28</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>And for the text paragraphs styled with the <span class="csyn">p</span> selector, update the <b>font-style</b> property from the fixed value of <b>21px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">19px</span> + (<span class="token number">21</span> - <span class="token number">19</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>Save the <b>style-11.css</b> stylesheet and view your <b>page-11.html</b> page in your web browser. 
+		
+		<span class="inside-ol">&nbsp;</span>
+		Use your browser&#8217;s viewport resizing feature to check the font sizes display correctly down to a minimum viewport width of 320 pixels.</li>
+
+</ol>
+
+	<p>Click <a href="final-fluid/page-11.html" target="_blank">page-11.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="fluid-style-12" class="wrapper-content">
+	<h2>Updating your style-12.css stylesheet</h2>
+	<p>Follow these steps to add fluid <b>font-size</b> values to the stylesheet for the <b>page-12.html</b> sample web page you created in a <a href="working-with-sections.html#sections-sample-3">previous Tutorial</a>.
+	
+	<ol>
+		<li>In VS Code, open the <b>style-12.css</b> stylesheet file.</li>
+
+		<li>At the top of the stylesheet file, replace the current web browser resets by copying and pasting the following:
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span>; <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre></li>
+
+		<li>For the <span class="csyn">h1</span> main heading selector, update the <b>font-style</b> property from the fixed value of <b>84px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">48px</span> + (<span class="token number">84</span> - <span class="token number">48</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>For the <span class="csyn">h2</span> sub-heading selector used to style the introduction text, update the <b>font-style</b> property from the fixed value of <b>28px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">22px</span> + (<span class="token number">28</span> - <span class="token number">22</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+
+		<li>For the <span class="csyn">h3</span> sub-heading selector, update the <b>font-style</b> property from the fixed value of <b>48px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">32px</span> + (<span class="token number">48</span> - <span class="token number">32</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>And for the text paragraphs styled with the <span class="csyn">p</span> selector, update the <b>font-style</b> property from the fixed value of <b>21px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">17px</span> + (<span class="token number">21</span> - <span class="token number">17</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>Save the <b>style-12.css</b> stylesheet and view your <b>page-12.html</b> page in your web browser. 
+		
+		<span class="inside-ol">&nbsp;</span>
+		Use your browser&#8217;s viewport resizing feature to check the font sizes display correctly down to a minimum viewport width of 320 pixels.</li>
+
+		</ol>
+
+	<p>Click <a href="final-fluid/page-12.html" target="_blank">page-12.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+
+<section id="github-upload" class="wrapper-content">
+	<h2>Uploading your CSS files to GitHub</h2>
+
+	<p>Upload the following three stylesheet files to your account on GitHub:</p>
+
+	<p><b>style-10.css</b><br>
+	<b>style-11.css</b><br>
+	<b>style-12.css</b></p>
+
+	<p>Your updated web pages with the fluid font sizes will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/page-10.html</b><br>
+	<b>https://username.github.io/page-11.html</b><br>
+	<b>https://username.github.io/page-12.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
