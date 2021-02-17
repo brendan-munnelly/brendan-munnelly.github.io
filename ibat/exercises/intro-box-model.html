@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to the Box Model | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Introduction to the Box Model: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Introduction to the Box Model</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Understand the concept of the &#8216;box model&#8217; in positioning and styling elements on a web page.</li>
+		<li>Apply properties and values in CSS for three components of the box model: padding, borders and margins.</li>
+	</ul>
+
+	<p>You can view a finished version of the web page you will create in this Tutorial by clicking the link below. The finished sample will open in a new tab of your web browser.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-box/sandbox-divs.html" target="_blank"><img src="assets/img/intro-box-model/example-one-browser.png" alt="Sample image"></a>
+			<a href="final-box/sandbox-divs.html" target="_blank" class="link-exercise">sandbox-divs.html</a>
+		</div>
+	</div>
+
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#box-about">About the box model</a></p>
+		<p><a href="#box-download">Downloading your sample files</a></p>
+		<p><a href="#box-div">The box model and the <span class="code-text">&lt;div&gt;</span> tag</a></p>
+		<p><a href="#box-padding">The <span class="code-text">padding</span> property</a></p>
+		<p class="toc-indent"><a href="#box-shorthand">CSS shorthand format</a></p>
+		<p class="toc-indent"><a href="#box-mnemonic">The TROUBLE mnemonic</a></p>
+		<!-- <p><a href="#box-text">Sibling, parent and child elements</a></p> -->
+		<p><a href="#box-border">The <span class="code-text">border</span> property</a></p>
+		<p class="toc-indent"><a href="#box-sizing">The <span>box-sizing</span> property</a></p>
+		<p><a href="#box-margin">The <span class="code-text">margin</span> property</a></p>
+		<p class="toc-indent"><a href="#box-margin-negative">Margins can have negative values</a></p>
+		<p><a href="#box-classes">Working with classes and class names</a></p>
+		<p><a href="#box-selectors">Styling with parent-child selectors</a></p>
+		<!-- <p class="toc-indent"><a href="#box-muliple">Applying multiple classes</a></p> -->
+		<p class="toc-indent"><a href="#box-upload">Uploading your files to GitHub</a></p>
+
+		<p><a href="#box-overview">The box model: an overview</a></p>
+
+		<p><a href="#further-resources">Further resources</a></p>
+	</div>
+</section>
+
+<section id="box-about" class="wrapper-content">
+	<h2>About the box model</h2>
+	<p>On a web page, every element can be considered as a rectangle or more simply as a &#8216;box&#8217;</p>
+	
+	<p>An element could be a heading, text paragraph, image, video or whatever. HTML elements consist of some content inside HTML markup tags.</p>
+	
+	<p>The following are all examples of HTML elements. They have both content <i>and</i> markup tags.</p>
+
+	<img src="assets/img/intro-box-model/box-model-sample-elements.png" alt="Introduction to the Box Model">
+
+	<p>The words <i>box model</i> are used when describing the layout and visual design of HTML elements in a web page.</p>
+
+	<p>You can see an example of the  <i>box model</i> in action by inspecting the home page from of <a href="https://www.aib.ie" target="_blank">AIB bank</a> website. Notice how various page elements are grouped into rectangular blocks.</p>
+
+	<img src="assets/img/intro-box-model/div-box-model-web-page.png"  alt="Introduction to the Box Model">
+
+	<p>To sub-divide web page content into a layout of boxes, the HTML tag pair most commonly by web designers is the <span class="syn">&lt;div&gt;</span> ... <span class="syn">&lt;/div&gt;</span> tag.</p>
+
+	<p>The above AIB home page contains <b>364</b> div elements.</p>
+	
+	<p>Each of these grouping div elements and the smaller elements they contain follow the rules of the &#8216;box model&#8217;.</p>
+
+</section>
+
+
+<section id="box-download" class="wrapper-content">
+	<h2>Downloading your sample files</h2>
+	<p>Your first step is to download the files you need for this and the next two Tutorials.</p>
+	<ol>
+		<li>Download the following compressed file to your computer:
+		<span class="inside-ol">&nbsp;</span>
+		<a href="lesson-4.zip">https://www.munnelly.com/webdesign/exercises/lesson-4.zip</a></li>
+
+		<li>Copy the ZIP file into your <b>websites</b> folder.</li>
+
+		<li>Uncompress the ZIP file as shown below.
+		<img src="assets/img/intro-box-model/extract-files.png" alt="file-explorer-unzip-files"></li>
+
+		<li>The files will unzip into a sub-folder of your <b>websites</b> folder named <b>lesson-4</b>.
+		<span class="inside-ol">&nbsp;</span>
+		You should see eight files: three HTML files, three CSS files and two image files.
+
+		<span class="inside-ol">&nbsp;</span>
+		<b>sandbox-divs.html</b><br>
+		<b>sandbox-divs.css</b><br>
+		<b>page-9.html</b><br>
+		<b>style-9.css</b><br>
+		<b>page-10.html</b><br>
+		<b>style-10.css</b><br>
+		<b>student-computer-screen.jpg</b><br>
+		<b>three-staff.png</b></li>
+
+		<li>Copy all eight files from the <b>lesson-4</b> sub-folder into your main <b>websites</b> folder.</li>
+	</ol>
+
+	<p>Display the <b>sandbox-divs.html</b> web page in your Chrome or Mozilla Firefox Developer Edition browser. It should look as shown below.</p>
+
+		<img src="assets/img/intro-box-model/div-pre-web-page.png" alt="Introduction to the Box Model">
+
+</section>
+
+<section id="box-div" class="wrapper-content">
+	<h2>The box model and the <span>&lt;div&gt;</span> tag</h2>
+	<p>You are now ready to work with your downloaded sample files.</p>
+	<ol>
+		<li>Start Visual Studio Code, and then open the following two files:
+		<span class="inside-ol">&nbsp;</span>
+		<b>sandbox-divs.html</b><br>
+		<b>sandbox-divs.css</b></li>
+
+		<li>In the web page file, you can HTML tags for three elements: a main heading, a sub-headng and paragraph text.
+		<img src="assets/img/intro-box-model/div-1.png" alt="Introduction to the Box Model"></li>
+
+		<li>In the stylesheet file, you can see <i>selectors</i> and <i>declaration blocks</i> for elements from the web page. Below is the first of these three.
+		<img src="assets/img/intro-box-model/div-2.png" alt="Introduction to the Box Model">
+
+		At the top of the CSS file are two lines of web browser resets. The second controls the display of images.
+		
+		<span class="inside-ol">&nbsp;</span>
+		The first sets to zero all values of three properties that are particularly important when designing with the div tag: <b>margins</b>, <b>paddings</b> and <b>borders</b>. 
+		<img src="assets/img/intro-box-model/div-3.png" alt="Introduction to the Box Model">
+		The final property and value pair on this first line, <b>box-sizing: border-box</b>  will be <a href="#box-sizing">explained later</a> in this Tutorial.</li>
+
+		<li>Switch back to the HTML file, and add the following opening and closing div tags as shown below.
+		<img src="assets/img/intro-box-model/div-4.png" alt="Introduction to the Box Model">
+
+		Ensure you use the <b>Tab</b> key to indent the elements inside the div tag from the left edge of the Visual Studio Code window.</li>
+		
+		<li>When finished, save your <b>sandbox-divs.html</b> file and view the result in your web browser.
+		
+		
+		As you can see, adding a pair of <span class="syn">&lt;div&gt;</span> ... <span class="syn">&lt;/div&gt;</span> tag has no effect on the layout or visual appearance of a web page.
+
+		For this reason, the <span class="syn">&lt;div&gt;</span> tag in HTML is known as a &#8216;style-less&#8216; or &#8216;naked&#8217; tag.</li>
+	</ol>
+
+	
+	<p>For the <span class="syn">&lt;div&gt;</span> element in the web page, let&#8217;s add a selector, and a <b>background-color</b> property and value.</p>
+	
+	<ol>
+		<li>Switch back to the CSS file, and copy-and-paste the following new comment line, selector and declaration at the bottom of the stylesheet.
+
+<pre class="language-css">
+<span class="token comment">/* Div selector with properties and values */</span>
+
+<span class="token class">div</span> { 
+   <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+}
+</pre></li>
+
+
+		<li>When finished, save your <b>sandbox-divs.css</b> file and view the result in your web browser. 
+		<img src="assets/img/intro-box-model/div-6.png" alt="Introduction to the Box Model"></li>
+	</ol>
+		
+	<p>The <span class="syn">&lt;div&gt;</span> element now has a deep pink background colour. Notice that no other part of the web page is affected. Only the <span class="syn">&lt;div&gt;</span> and its content.</p>
+
+	<p>Now we can move on to explore the three important div properties: padding, border and margins.</p>
+
+</section>
+
+
+
+
+<section id="box-padding" class="wrapper-content">
+	<h2>The <span>padding</span> property</h2>
+	<p>Padding is the spacing between the content of an element and its four edges &#8211; top, bottom, left and right. You can think of padding as an element&#8217;s <i>inside spacing</i>.</p>
+
+	<img src="assets/img/intro-box-model/div-margins-padding.png" alt="Introduction to the Box Model">
+	
+	<p>Padding does <i>not</i> affect the spacing between an element and any other elements around it. See the examples below.</p>
+
+	<img src="assets/img/intro-box-model/div-margins-no-padding.png" alt="Introduction to the Box Model">
+
+	<p>Padding is not just for div elements. You can also add padding around text and buttons.</p>
+
+	<img src="assets/img/intro-box-model/div-padding-more.png" alt="Introduction to the Box Model">
+
+	<ol>
+		<li>Let&#8217;s add some padding to the four sides of your sample div element by copying-and-pasting the following.
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding-top</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-right</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-bottom</span>: <span class="token number">16px</span>; 
+    <span class="token property">padding-left</span>: <span class="token number">16px</span>; 
+}</pre></li>
+
+		<li>When finished, save your <b>sandbox-divs.css</b> stylesheet and view the result in your web browser. 
+		<img src="assets/img/intro-box-model/div-7.png" alt="Introduction to the Box Model"></li>
+</ol>
+	<p>The <span class="syn">&lt;div&gt;</span>  element in your web page now has some padding between its content and the four edges of the div.</p>
+
+
+
+
+
+<h3 id="box-shorthand">CSS shorthand format</h3>
+<p>In the above simple example, all four padding values have the same value of <b>16px</b>. So you can rewrite the four padding style rules into one CSS <i>shorthand</i> rule as follows.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding</span>: <span class="token number">16px</span>; 
+}</pre>
+
+<p>But sometimes padding values may be different on different sides of an element. For example copy-and-paste the following to your CSS stylesheet.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding-top</span>: <span class="token number">12px</span>; 
+    <span class="token property">padding-right</span>: <span class="token number">32px</span>; 
+    <span class="token property">padding-bottom</span>: <span class="token number">14px</span>; 
+    <span class="token property">padding-left</span>: <span class="token number">16px</span>; 
+}</pre>
+
+<p>That&#8217;s a lot of typing!</p>
+
+<p>Is there a shorthand way of entering four different padding values for an element?</p>
+
+<p>In CSS shorthand format, you could rewrite these four style rules on a single line as follows.</p>
+
+<pre class="language-css">
+    <span class="token property">padding</span>: <span class="token number">12px 32px 14px 16px</span>; 
+</pre>
+
+<p>But which one these four values refers for the top edge of the element? Or for the left edge?</p>
+
+
+
+<h3 id="box-mnemonic">The TROUBLE mnemonic</h3>
+<p>Web designers rely on a memory trick or mnemonic to help them remember which edges of an element are set by four padding values written on a single line.</p>
+	
+<p>The mnemonic is the word TROUBLE.</p>
+
+<p>Or:</p>
+	
+<p><b>T</b>(op), <b>R</b>(ight), OU <b>B</b>(ottom) and <b>L</b>(eft) E.</p>
+
+<p>In your stylesheet, replace any text you have entered for the <span class="csyn">div</span>  selector with the following, more simple values. And then save the file.</p>
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding</span>: <span class="token number">16px</span>; 
+}</pre>
+
+<p>Next, let&#8217;s explore the border property of a <span class="syn">&lt;div&gt;</span> element.</p>
+
+
+</section>
+
+
+<section id="box-border" class="wrapper-content">
+	<h2>The <span>border</span> property</h2>
+	<p>Optionally, you can add borders to a <span class="syn">&lt;div&gt;</span> or other element. A border has three sub-properties as follows:</p>
+
+	<ul>
+	
+		<li><b>border-style</b> (typically, <b>solid</b>)</li>
+		<li><b>border-width</b> (can be measured in pixels)</li>
+		<li><b>border-color</b> (colour name, RGB or hex code)</li>
+
+	</ul>
+
+	<ol>
+
+		<li>Let&#8217;s add four borders to our sample <span class="csyn">div</span> selector. Copy-and-paste the following to your stylesheet.
+	
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border-style</span>: <span class="token value-text">solid</span>; 
+    <span class="token property">border-color</span>: <span class="token value-text">green</span>; 
+    <span class="token property">border-top-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-right-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-bottom-width</span>: <span class="token number">4px</span>; 
+    <span class="token property">border-left-width</span>: <span class="token number">4px</span>; 
+}</pre></li>
+
+<li>You can see that the borders have the same width on all four sides. So, for the <span class="csyn">div</span> selector, you can rewrite the four <b>border-width</b> lines on a single line as follows.
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border-style</span>: <span class="token value-text">solid</span>; 
+    <span class="token property">border-color</span>: <span class="token value-text">green</span>; 
+    <span class="token property">border-width</span>: <span class="token number">4px</span>; 
+}</pre></li>
+
+<li>You can further shorten the three lines of border properties and values as follows.
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token number">4px</span> <span class="token value-text">solid</span> <span class="token value-text">green</span>; 
+}</pre></li>
+
+		<li>When finished, save your <b>sandbox-divs.css</b> stylesheet and view the result in your web browser. Your web page should look as shown below.
+		<img src="assets/img/intro-box-model/div-8.png" alt="Introduction to the Box Model"></li>
+
+	</ol>
+
+
+
+<h3 id="box-sizing">The <span>box-sizing</span> property</h3>
+
+<p>Consider the following example, where you give a box a fixed width of <b>300px</b>. The box also has a padding on all four sides of <b>10px</b> and a border width of <b>2px</b>.</p>
+
+<p>How wide is the box?</p>
+
+<p>By default, the web browser will calculate and display the box width as follows:</p>
+	
+<p>300px + two sides of padding (20px) + two sides of borders (4px) = 324px</p>
+
+<p>To ensure that the width of a box is exactly as you set it, include this property and setting in the web browser resets at the top of your CSS stylesheet file.</p>
+
+<pre class="language-css">
+    <span class="token property">box-sizing</span>: <span class="token value-text">border-box</span>; 
+</pre>
+
+</section>
+
+
+<section id="box-margin" class="wrapper-content">
+	<h2>The <span>margin</span> property</h2>
+
+	<p>Margins are the spacing between an element and other elements around it. You can think of margin as an element&#8217;s <i>outside spacing</i>.</p>
+	
+	<img src="assets/img/intro-box-model/div-margins-highlighted-padding.png" alt="margin">
+
+	<p>The greater the margin values of an element, the further it &#8216;pushes&#8217; or &#8216;shoves&#8217; other elements away from it. If div elements on the same web page had no margins, they would be no space between them. See the example below.</p>
+
+	<img src="assets/img/intro-box-model/div-no-margins-padding.png" alt="Introduction to the Box Model">
+
+
+	<p>Let&#8217;s add some margins to our sample div element.</p>
+
+	<ol>
+		<li>In your <b>sandbox-divs.html</b> web page, make a second copy of the <span class="syn">&lt;div&gt;</span>  element as shown below.
+		
+		<img src="assets/img/intro-box-model/div-6n.png" alt="Introduction to the Box Model"></li>
+
+		<li>Switch to your CSS file, and copy-and-paste the following.
+
+<pre class="language-css">
+<span class="token class">div</span> { 
+    <span class="token property">background-color</span>: <span class="token value-text">deeppink</span>; 
+    <span class="token property">margin</span>: <span class="token number">32px 0 32px 0</span>; 
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">4px</span> <span class="token value-text">green</span>; 
+}</pre>
+
+In the above example, the top and bottom margins each have a value of <b>32px</b>. And the left and right margins are zero.
+<span class="inside-ol">&nbsp;</span>
+As a general rule web designing web pages with <span class="syn">&lt;div&gt;</span>  elements, you will most commonly set bottom margins, then top margins and rarely left and right margins.</li>
+
+	<li>When finished, save your <b>sandbox-divs.css</b> stylesheet and view the result in your web browser. Your web page should look as shown below.
+	<img src="assets/img/intro-box-model/div-9.png" alt="Introduction to the Box Model"></li>
+
+</ol>
+
+
+
+<h3 id="box-margin-negative">Margins can have negative values</h3>
+<p>Unlike padding values and border width values, margins can have <i>negative</i> values.</p>
+
+<p>For example, copy-and-paste the following to line to the bottom of the <span class="csyn">div</span> declaration block in your stylesheet and save the file.</p>
+	
+<pre class="language-css">
+    <span class="token property">margin-left</span>: <span class="token number">-600px</span>; 
+</pre>
+
+	<p>View the result in your web browser. It should look similar to that shown below.</p>
+
+	<img src="assets/img/intro-box-model/div-10.png" alt="Introduction to the Box Model">
+	
+	<p>You can now remove this negative margin.</p>
+
+	<p>Next, add the following new line to the bottom of the <span class="csyn">h1</span>  declaration in your stylesheet and save the file.</p>
+
+<pre class="language-css">
+    <span class="token property">margin-top</span>: <span class="token number">-120px</span>; 
+</pre>
+
+	<p>Your web page should now look as follows.</p>
+	<img src="assets/img/intro-box-model/div-11.png" alt="Introduction to the Box Model">
+
+
+	<p>You will find negative margin values a useful feature when designing the layout of web pages.</p>
+
+	<p>You can now remove this negative margin property and value, and resave your stylesheet.</p>
+
+</section>
+
+
+
+<section id="box-classes" class="wrapper-content">
+	<h2>Working with classes and class names</h2>
+	<p>Modern web pages typically have many dozens of <span class="syn">&lt;div&gt;</span> elements within them.</p>
+	
+	<ul>
+		<li>Some  <span class="syn">&lt;div&gt;</span> elements will share common properties.</li>
+		<li>Other  <span class="syn">&lt;div&gt;</span> elements will be very different from one another.</li>
+	</ul>
+	<p>To design such modern web pages, you need to assign what are called <i>classes</i> to your <span class="syn">&lt;div&gt;</span> elements.</p>
+	
+	<p>In effect, a  <span class="syn">&lt;div&gt;</span> with a class is a <i>version</i> of a  <span class="syn">&lt;div&gt;</span>.</p>
+
+	<p>Other HTML elements can have classes too.</p>
+
+	<p>You assign classes to <span class="syn">&lt;div&gt;</span> element in a web page by giving them <i>class names</i>. Below you can see some examples below of class names assigned to opening <span class="syn">&lt;div&gt;</span> tags in an HTML file.</p>
+
+	<img src="assets/img/intro-box-model/div-12.png" alt="Introduction to the Box Model">
+
+
+	<p>Here are the rules about class names:</p>
+	<ul>
+		<li>Class names are entered within a pair of double quotes (<b>""</b>).
+		<img src="assets/img/intro-box-model/div-13.png" alt="Introduction to the Box Model"></li>
+		<li>Class names cannot have a space within them. You can type the hyphen (<b>-</b>) character to join words.
+		<img src="assets/img/intro-box-model/div-14.png" alt="Introduction to the Box Model"></li>
+		<li>An element can have more than one class name assigned to it. Separate the different class names with a single space.
+		<img src="assets/img/intro-box-model/div-15.png" alt="Introduction to the Box Model"></li>
+		<li>If an element has more than one class name, the order of the names is not important.</li>
+	</ul>
+
+</section>
+
+<section id="box-selectors" class="wrapper-content">
+	<h2>Styling with parent-child selectors</h2>
+	<p>Next, you will apply styles to <span class="syn">&lt;div&gt;</span> elements with different class names.</p>
+
+	<ol>
+		<li>In VS Code, open your <b>divs-sandbox.html</b> web page. 
+		<span class="inside-ol">&nbsp;</span>
+		
+		You can delete all the current content within the page <span class="syn">&lt;body&gt;</span> and replace it by copying-and-pasting the following.
+
+<pre class="language-html">
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"bono"</span>&gt;
+    &lt;<span class="blue-dark">h3</span>&gt;<span class="white">Bono</span>&lt;/<span class="blue-dark">h3</span>&gt;
+    &lt;p&gt;<span class="white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius corporis obcaecati perferendis fuga quidem ad alias debitis excepturi ipsa laudantium sapiente.</span>&lt;/<span class="blue-dark">p</span>&gt; 
+&lt;/<span class="blue-dark">div</span>&gt;
+
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"edge"</span>&gt;
+    &lt;<span class="blue-dark">h3</span>&gt;<span class="white">Edge</span>&lt;/<span class="blue-dark">h3</span>&gt;
+    &lt;p&gt;<span class="white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius corporis obcaecati perferendis fuga quidem ad alias debitis excepturi ipsa laudantium sapiente.</span>&lt;/<span class="blue-dark">p</span>&gt; 
+&lt;/<span class="blue-dark">div</span>&gt;
+
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"adam"</span>&gt;
+    &lt;<span class="blue-dark">h3</span>&gt;<span class="white">Adam</span>&lt;/<span class="blue-dark">h3</span>&gt;
+    &lt;p&gt;<span class="white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius corporis obcaecati perferendis fuga quidem ad alias debitis excepturi ipsa laudantium sapiente.</span>&lt;/<span class="blue-dark">p</span>&gt; 
+&lt;/<span class="blue-dark">div</span>&gt;
+
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"larry"</span>&gt;
+    &lt;<span class="blue-dark">h3</span>&gt;<span class="white">Larry</span>&lt;/<span class="blue-dark">h3</span>&gt;
+    &lt;p&gt;<span class="white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius corporis obcaecati perferendis fuga quidem ad alias debitis excepturi ipsa laudantium sapiente.</span>&lt;/<span class="blue-dark">p</span>&gt; 
+&lt;/<span class="blue-dark">div</span>&gt;
+</pre></li>
+
+
+	<li>You now have four <span class="syn">&lt;div&gt;</span> elements, each with its own class name. Save your web page.</li>
+
+	<li>Switch to your <b>divs-sandbox.css</b> stylesheet.</li>
+
+	<li>The visual design effect you want to achieve is as follows:
+		<ul>
+			<li>You want each of the four elements to have a different background colour.</li>
+			<li>You want two of the four elements to have dark text, and two light text.</li>
+			<li>All four will have the same padding values. They will have no borders.</li>
+			<li>The sub-headings and text paragraphs in all four elements will have the same font-family, font-size and font-weight.</li>
+		</ul>
+	
+	See the example below. (The elements are shown left-to-right for space reasons. In your web browser, they will appear stacked top-to-bottom.
+
+	<img src="assets/img/intro-box-model/div-16.png" alt="Introduction to the Box Model"></li>
+
+	<li>In your <b>divs-sandbox.css</b> stylesheet, for the <span class="csyn">h3</span> sub-heading selector, reduce the <b>margin-bottom</b> value to <b>2px</b>.</li>
+
+	<li>For the <span class="csyn">p</span> paragraph selector, reduce the <b>font-size</b> value to <b>16px</b> and the <b>line-height</b> value to <b>1.5</b>.</li>
+
+
+	<li>Next, replace the current <span class="csyn">div</span> selector and declaration by copying-and-pasting the following.
+
+<pre class="language-css">
+<span class="token class">div.bono</span> {
+    <span class="token property">background-color</span>: <span class="token value-text">#4081ec</span>;
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">40px</span>; 
+    <span class="token property">width</span>: <span class="token number">220px</span> 
+}
+
+<span class="token class">div.edge</span> {
+    <span class="token property">background-color</span>: <span class="token value-text">#ffbb33</span>;
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">40px</span>; 
+    <span class="token property">width</span>: <span class="token number">220px</span> 
+}
+
+<span class="token class">div.adam</span> {
+    <span class="token property">background-color</span>: <span class="token value-text">#f73345</span>;
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">40px</span>; 
+    <span class="token property">width</span>: <span class="token number">220px</span> 
+}
+
+<span class="token class">div.larry</span> {
+    <span class="token property">background-color</span>: <span class="token value-text">#e0e0e0</span>;
+    <span class="token property">padding</span>: <span class="token number">12px</span>; 
+    <span class="token property">margin-bottom</span>: <span class="token number">40px</span>; 
+    <span class="token property">width</span>: <span class="token number">220px</span> 
+}</pre></li>
+
+<li>The CSS selector <span class="csyn">div.bono</span> applies to web page content inside a <span class="syn">&lt;div&gt;</span> tag pair with a class name of <span class="atsyn">"bono"</span>.
+
+<span class="inside-ol">&nbsp;</span>
+Only a <span class="syn">div</span> element with this class name will be affected by the style rules within the <span class="csyn">div.bono</span> declaration.
+
+<span class="inside-ol">&nbsp;</span>
+
+Similarly, the <span class="syn">&lt;div&gt;</span> element in the web page with a class name of <span class="atsyn">edge</span> will be styled by whatever rules are within the <span class="csyn">div.edge</span> declaration block in the CSS file.
+<span class="inside-ol">&nbsp;</span>
+
+You don&#8217;t actually need to include the &#8216;div&#8217; prefix in front of the four selectors in the CSS file. So you can remove them.
+<span class="inside-ol">&nbsp;</span>
+
+The four selectors in your CSS file and their style declarations should now look as shown below.
+
+	<img src="assets/img/intro-box-model/div-17.png" alt="Introduction to the Box Model"></li>
+
+<li>Next, let&#8217;s apply colours to the sub-headings and paragraphs within the <span class="syn">&lt;div&gt;</span> elements
+
+<span class="inside-ol">&nbsp;</span>
+
+At the bottom of the stylesheet file, copy-and-paste the following.
+
+<pre class="language-css">
+<span class="token class">.bono</span> <span class="token class">h3</span>,
+<span class="token class">.bono</span> <span class="token class">p</span>,
+<span class="token class">.adam</span> <span class="token class">h3</span>,
+<span class="token class">.adam</span> <span class="token class">p</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+
+<span class="token class">.edge</span> <span class="token class">h3</span>,
+<span class="token class">.edge</span> <span class="token class">p</span>,
+<span class="token class">.larry</span> <span class="token class">h3</span>,
+<span class="token class">.larry</span> <span class="token class">p</span> { <span class="token property">color</span>: <span class="token value-text">#000</span> }
+</pre>
+
+</li>
+
+	<li>When finished, save your <b>sandbox-divs.css</b> file and view the result in your web browser.</li>
+</ol>
+
+<p>Click <a href="final-box/sandbox-divs.html" target="_blank">sandbox-divs.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+
+</section>
+
+<!--	<h3 id="boxes-parents-children">Parents, children and decendents</h3>
+	<p></p>-->
+
+
+<section id="box-overview" class="wrapper-content">
+	<h2>The box model: an overview</h2>
+	<p></p>
+
+
+	<h3>The four components of a web page element</h3>
+	<p>In the box model, every HTML element can be viewed as containing the following items:</p>
+
+	<ul>
+		<li><b>Content</b>: The content of the box. This could be text, images, videos, icons and so on.</li>
+
+		<li><b>Margin</b>: You can think of this as the box&#8217;s <em>outside spacing</em>. Margins separate the box from any surrounding elements on the same web page.
+		<span class="inside-ol">&nbsp;</span>
+		The greater the margin values of a box, the further it &#8216;pushes&#8217; or &#8216;shoves&#8217; other elements away from it.</li>
+
+		<li><b>Border</b>: Optionally, you can add borders to any box, using your chosen colour, thickness and style.</li>
+
+		<li><b>Padding</b>: You can think of this as the box's <em>inside spacing</em>. You will typically set padding values where you want to add some spacing between the content of a box and its four edges - top, bottom, left and right.</li>
+
+	</ul>
+
+	<p>For padding, borders and margins, you can use the same value for all four box edges, or assign different values to each individual edge.</p>
+
+	<img src="assets/img/intro-box-model/boxmodel.gif" style="max-width:500px" alt="Introduction to the Box Model">
+
+</section>
+
+<section id="box-upload" class="wrapper-content">
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>Upload the following web page and stylesheet to your account on GitHub:</p>
+
+	<p><b>divs-sandbox.html</b><br>
+	<b>divs-sandbox.css</b></p>
+
+	<p>Your web page will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/divs-sandbox.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+<section id="further-resources" class="wrapper-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+		<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="noopener"  class="further-title">Introduction to the CSS basic box model</a>
+		<br>From the <a href="https://developer.mozilla.org/" target="_blank" style="font-weight: normal">Mozilla Developer Network</a></p>
+
+		<p><a href="https://www.internetingishard.com/html-and-css/css-box-model/" target="_blank" rel="noopener" class="further-title">CSS box model</a>
+		<br>From <a href="https://internetingishard.com" target="_blank"  style="font-weight: normal">Interneting is Hard</a></p>
+
+		<p><a href="https://dev.to/neshaz/css-101-the-box-model-jjp" target="_blank" rel="noopener" class="further-title">CSS 101: The box model</a><br>
+		by <a href="https://dev.to/neshaz" target="_blank"  style="font-weight: normal">Nesha Zoric</a> on <a href="https://dev.to/" target="_blank"  style="font-weight: normal">dev.to</a></p>
+
+		<p><a href="https://torquemag.io/2018/06/css-box-model/" target="_blank" rel="noopener" class="further-title">The CSS box model: How to use it correctly</a><br>
+		by <a href="https://torquemag.io/author/nschaferhoff1234/" target="_blank"  style="font-weight: normal">Nick Sch&#228;ferhoff</a> on <a href="https://torquemag.io/" target="_blank"  style="font-weight: normal">Torque Mag</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=rIO5326FgPE" target="_blank" rel="noopener" class="further-title">Video: Learn CSS box model in eight minutes</a>
+		<br>From <a href="https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw" target="_blank"  style="font-weight: normal">Web Dev Simplified</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=lPm8lK4C7nc" target="_blank" rel="noopener" class="further-title">Video: CSS box model tutorial</a>
+		<br>From <a href="https://www.youtube.com/channel/UCv9bWHC0DIn-Xb7ALNoOGWQ" target="_blank"  style="font-weight: normal">W3Schools</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=M6coJNLFBWI" target="_blank" rel="noopener" class="further-title">Video: The CSS box model &#8211; margin, borders and padding explained</a>
+		<br>By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank"  style="font-weight: normal">Kevin Powell</a></p>
+
+		<p><a href="https://www.youtube.com/watch?v=WlGQdgy-M6w" target="_blank" rel="noopener" style="font-weight:bold">Video: Box-sizing &#8211; border-box explained</a>
+		<br>By <a href="https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw" target="_blank"  style="font-weight: normal">Kevin Powell</a></p>
+
+	</div>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+</body>
+</html>

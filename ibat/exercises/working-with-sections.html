@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Sections | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with Sections: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">Contents&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Working with Sections</h1>
+</div>
+
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Create and style <span class="syn">&lt;div&gt;</span> ... <span class="syn">&lt;/div&gt;</span> tags for use as vertically alternating sections in a web page.</li>
+		<li>Apply two separate CSS classes to a section <span class="syn">&lt;div&gt;</span> ... <span class="syn">&lt;/div&gt;</span>: one for basic layout and the other for visual effect.</li>
+	</ul>
+
+	<p>You can view finished versions of the three sample web pages you will create in this Tutorial by clicking the links below. The finished samples will each open in a new tab of your web browser.</p>
+
+
+	<div class="four-samples">
+		<div>
+			<a href="final-sections/page-10.html" target="_blank"><img src="assets/img/section-boxes/example-one-browser.png" alt="Sample image"></a>
+			<a href="final-sections/page-10.html" target="_blank" class="link-exercise">page-10.html</a>
+		</div>
+		<div>
+			<a href="final-sections/page-11.html" target="_blank"><img src="assets/img/section-boxes/example-two-browser.png" alt="Sample image"></a>
+			<a href="final-sections/page-11.html" target="_blank" class="link-exercise">page-11.html</a>
+		</div>
+		<div>
+			<a href="final-sections/page-12.html" target="_blank"><img src="assets/img/section-boxes/example-three-browser.jpg" alt="Sample image"></a>
+			<a href="final-sections/page-12.html" target="_blank" class="link-exercise">page-12.html</a>
+		</div>
+	</div>
+
+	<p>You will also update your website home web page with hyperlinks to your three new sample web pages.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-sections/index.html" target="_blank"><img src="assets/img/intro-images/example-home-browser.png" alt="Sample image"></a>
+			<a href="final-sections/index.html" target="_blank" class="link-exercise">index.html</a>
+		</div>
+	</div>
+
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#sections-about">About &#8216;sections&#8217; in web pages</a></p>
+		<p><a href="#sections-sample-1">Working with your sample web page</a></p>
+		<p><a href="#sections-sample-1-html">Editing with your HTML file</a></p>
+		<p class="toc-indent"><a href="#sections-red">The red border technique for visualising divs</a></p>
+		<p><a href="#sections-sample-1-css">Editing with your CSS stylesheet</a></p>
+		<p><a href="#sections-sample-1-style">Styling your container blocks</a></p>
+		<p class="toc-indent"><a href="#sections-sample-1-vspace">Controlling the vertical spacing between container blocks</a></p>
+		<p><a href="#sections-sample-2">Working with your second sample web page</a></p>
+		<p><a href="#sections-sample-3">Working with your third sample web page</a></p>
+		<p class="toc-indent"><a href="#sections-sample-3-alternating">Alternating font colours between container blocks</a></p>
+		<p class="toc-indent"><a href="#sections-sample-3-linear">Using a linear colour gradient as a background</a></p>
+		<p><a href="#update-home-page-content">Updating the content of your home page</a></p>
+		<p><a href="#sections-upload-3">Uploading your files to GitHub</a></p>
+	</div>
+</section>
+
+<section id="sections-about" class="wrapper-content">
+	<h2>About &#8216;sections&#8217; in web pages</h2>
+	<p>In web design, the word <i>section</i> is used to describe a typically vertical sub-division of content in a web page. Usually, all sections are equally important. They are sub-divided for one reason only: to make them more inviting and easier to read.</p>
+
+	<p>In this Tutorial, you will create and style three examples of web pages with vertical sections. In each case, the sections will have two alternating background colours.</p>
+
+	<img src="assets/img/section-boxes/sections-front.png" alt="Introduction to Sections">
+</section>
+
+
+<section id="sections-sample-1" class="wrapper-content">
+	<h2>Working with your sample web page</h2>
+	<p>In this Tutorial you will work with these files:</p>
+	<ul>
+		<li>The <b>page-10.html</b> web page, which contains the <b>three-staff.png</b> image.</li>
+		<li>The <b>style-10.css</b> stylesheet.</li>
+	</ul>
+
+	<p>You downloaded and unzipped these three files in the previous <a href="intro-box-model.html">Introduction to the Box Model</a> Tutorial.</p>
+
+	<p>Display the <b>page-10.html</b> web page in your Chrome or Mozilla Firefox Developer Edition browser. It should look as shown below.</p>
+
+	<img src="assets/img/section-boxes/section-pre-web-browser.png" alt="Introduction to Sections">
+
+</section>
+
+
+<section id="sections-sample-1-html" class="wrapper-content">
+	<h2>Editing with your HTML file</h2>
+	<p>You are now ready to work with your first sample web page that will contain sections.</p>
+
+	<ol>
+		<li>Start VS Code, and then open the following two files:
+		<span class="inside-ol">&nbsp;</span>
+		<b>page-10.html</b><br>
+		<b>style-10.css</b></li>
+
+		<li>In the HTML file, you can see that the first few lines of content are enclosed or &#8216;wrapped&#8217; inside a <span class="syn">&lt;div&gt;</span> ... <span class="syn">&lt;/div&gt;</span> tag pair with a class name of <b>container-block</b>.
+		<img src="assets/img/section-boxes/section-1.png" alt="Introduction to Sections">
+		Note that the three <i>child elements</i> (a main <span class="syn">&lt;h1&gt;</span> heading, an image and an <span class="syn">&lt;h2&gt;</span> sub-heading) within this <i>parent</i> <span class="syn">&lt;div&gt;</span> are indented from the left edge of the VS Code screen.</li>
+
+		<li>Under the first <b>container-block</b> you can see a second <span class="syn">&lt;div&gt;</span> with the same class name. It contains an <span class="syn">&lt;h3&gt;</span> sub-heading and two paragraphs of text. Again, note that its child elements are indented from the left edge of the screen.
+
+		<img src="assets/img/section-boxes/section-1n.png" alt="Introduction to Sections">
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Copy-and-paste three copies of this second <b>container-block</b> <span class="syn">&lt;div&gt;</span> within the page. Update the text within the <span class="syn">&lt;h3&gt;</span> sub-heading from &#8220;Sub Heading One&#8220; to &#8220;Sub Heading Two&#8220;, &#8220;Sub Heading Three&#8220; and &#8220;Sub Heading Four&#8220;.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Your web page should now look as shown below.
+
+		<img src="assets/img/section-boxes/section-2.png" alt="Introduction to Sections">
+	
+		In every case, ensure the <i>child elements</i> are indented from the left edge of the screen.
+		<span class="inside-ol">&nbsp;</span>
+		When finished, save your <b>page-10.html</b> file</li>
+
+		<li>In VS Code, view the <b>style-10.css</b> stylesheet. You can see that the <span class="csyn">.container-block</span> declaration contains only three style rules in CSS shorthand, single-line format: a solid, red border that has a width of one pixel.
+
+		<img src="assets/img/section-boxes/section-red-box.png" alt="Introduction to Sections"></li>
+
+		<li>View your <b>page-10.html</b> web page in your browser. It should look as shown below.
+		<img src="assets/img/section-boxes/section-pre.png" alt="Introduction to Sections"></li>
+	</ol>
+
+	<h3 id="sections-red">The red border technique for visualising divs</h3>
+	<p>The placing of a thin, red-coloured border around <span class="syn">&lt;div&gt;</span> elements is a common technique or &#8216;hack&#8217; used by designers to help them view the layout of <span class="syn">&lt;div&gt;</span> boxes in the web browser.</p>
+
+</section>
+
+
+<section id="sections-sample-1-css" class="wrapper-content">
+	<h2>Editing with your CSS stylesheet</h2>
+	<p>Follow these steps to add some standard layout spacing to your content block divs.</p>
+	<ol>
+		<li>In VS Code, add new padding values to the <span class="csyn">.container-block</span> declaration near the top of the stylesheet. You can simply copy-and-paste the following.
+		
+<pre class="language-css">
+<span class="token comment">/* container for web page blocks */</span>
+<span class="token class">.container-block</span> { 
+   <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">1px</span> <span class="token value-text">red</span>;
+   <span class="token property">padding</span>: <span class="token number">50px 18% 50px 18%</span>;
+}
+</pre></li>
+
+		<li>Save the <b>style-10.css</b> stylesheet and view your <b>page-10.html</b> page in your web browser. It should look as shown below.
+		
+		<img src="assets/img/section-boxes/section-pre-1.png" alt="Introduction to Sections"></li>
+
+	</ol>
+
+</section>
+
+<section id="sections-sample-1-style" class="wrapper-content">
+	<h2>Styling your container blocks</h2>
+
+	<p>In the next few steps, you will add some new classes to create different background styles for your web page.</p>
+
+	<ol>
+
+		<li>At the bottom of your <b>style-10.css</b> stylesheet, copy-and-paste these following three new selectors and style rules. Each selector does only one job: it adds a background colour.
+<pre class="language-css">
+<span class="token comment">/* Coloured backgrounds */</span>
+   <span class="token class">.bg-hero-block</span> { <span class="token property">background-color</span>: <span class="token value-text">#f5f9fb</span> }
+   <span class="token class">.bg-pastel-1</span>   { <span class="token property">background-color</span>: <span class="token value-text">#BEC7B4</span> }
+   <span class="token class">.bg-pastel-2</span>   { <span class="token property">background-color</span>: <span class="token value-text">#DEE2D9</span> }
+}
+</pre></li>
+
+		<li>You can now delete the &#8216;red box&#8217; style rule from your <span class="csyn">.container-block</span> declaration block.
+		<span class="inside-ol">&nbsp;</span>
+		A better option is to wrap it inside comment tags, just in case you want to reuse this visual guide again later.
+		<img src="assets/img/section-boxes/section-red-rule.png" alt="Introduction to Sections"></li>
+
+		<li>When finished, save your <b>style-10.css</b> stylesheet file.</li>
+
+		<li>Switch to your <b>page-10.html</b> web page, and add the following classes to the <b>container-block</b> <span class="syn">&lt;div&gt;</span> tags.
+		<img src="assets/img/section-boxes/section-new-classes.png" alt="Introduction to Sections">
+		
+		Each of your content container blocks now has <i>two classes</i> that control its appearance:
+		
+		<ul>
+			<li>A <b>container-block</b> class that controls the spacing around it, and </li>
+			<li>And a second class such as <b>bg-pastel-2</b> that controls only the colour of its background &#8211; <i>and nothing else</i>.</li>
+		</ul>
+		<img src="assets/img/section-boxes/section-multiple-classes.png" alt="Introduction to Sections"></li>
+
+		<li>Save your <b>page-10.html</b> web page and view it in your web browser. It should now look as shown below.
+
+		<img src="assets/img/section-boxes/section-final-spacing-not-fixed.png" alt="Introduction to Sections"></li>
+
+	</ol>
+
+
+	
+	<h3 id="sections-sample-1-vspace">Controlling the vertical spacing between container blocks</h3>
+
+	<p>One problem remains with your web page: there is more vertical spacing below the content of your container blocks than above them.</p>
+
+	<img src="assets/img/section-boxes/section-vertical-spacing.png" alt="Introduction to Sections">
+
+	<p><i>This does not look right</i></p>
+
+	<p>A more professional and visually pleasing web page would have <i>equal</i> vertical spacing at the top and the bottom of the content within the container blocks. See below.</p>
+
+	<img src="assets/img/section-boxes/section-vertical-spacing-correct.png" alt="Introduction to Sections">
+
+	<p>The extra vertical spacing at the bottom of your <b>container-block</b> <span class="syn">&lt;div&gt;</span> elements is the result of the <b>margin-bottom</b> value of the <span class="syn">&lt;p&gt;</span> paragraph tag.</p>
+
+<pre class="language-css">
+  <span class="token property">margin-bottom</span>: <span class="token number">20px</span>;
+</pre>
+
+	<p>You could delete this CSS style rule from the <span class="csyn">p</span> paragraph styles. Then your paragraphs would have a <b>margin-bottom</b> value of zero, as set out in the web browser resets at the top of your stylesheet file.</p>
+
+	<p>Unfortunately, there would be no vertical spacing between <span class="syn">&lt;p&gt;</span>  paragraphs of text within your container blocks. See below.</p>
+
+	<img src="assets/img/section-boxes/section-vertical-spacing-paragraphs.png" alt="Introduction to Sections">
+
+	<p>A more correct solution is as follows:</p>
+
+	<ol>
+		<li>In your <b>style-10.css</b> stylesheet, after the end of the <span class="csyn">.container-block p</span> declaration block, copy-and-paste the following new style.
+<pre class="language-css">
+<span class="token comment">/* Last paragraph at bottom of container block */</span>
+<span class="token class">.container-block p:last-child</span> { <span class="token property">margin-bottom</span>: <span class="token number">0</span> }
+</pre>
+		This new style applies <i>only</i> to the <i>final</i> paragraph within a <b>container-block</b>.
+		<span class="inside-ol">&nbsp;</span>
+		<i>No other paragraphs of text will be affected.</i></li>
+		<li>But what if the last item of content inside a <b>container-block</b> is not a paragraph, but something else? Such as an image, button, video or whatever?
+		<span class="inside-ol">&nbsp;</span>
+		The ideal solution is to use the 'wildcard' asterisk <b>*</b> character as follows.
+<pre class="language-css">
+<span class="token comment">/* Last content item at bottom of container block */</span>
+<span class="token class">.container-block</span> <span style="color: rgb(86,156,202)">*</span><span class="token class">:last-child</span> { <span class="token property">margin-bottom</span>: <span class="token number">0</span> }
+</pre></li>
+		<li>Save your stylesheet and view your <b>page-10.html</b> web page in your browser. The container blocks and the content inside them should now look as shown below.
+	<img src="assets/img/section-boxes/section-vertical-spacing-nice.png" alt="Introduction to Sections">
+
+</li>
+	</ol>
+
+	<p>Click <a href="final-sections/page-10.html" target="_blank">page-10.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="sections-sample-2" class="wrapper-content">
+	<h2>Working with your second sample web page</h2>
+
+	<p>To begin this second sample exercise, open these two files in VS Code:</p>
+
+	<ul>
+		<li>The web page named <b>page-10.html</b></li>
+		<li>The stylesheet named <b>style-10.css</b></li>
+	</ul>
+
+	<p>Next, follow the steps below:</p>
+
+	<ol>
+
+		<li>Use the <b>File | Save As</b> command to save the two files with these new file names:
+		<span class="inside-ol">&nbsp;</span>
+		<b>page-11.html</b><br>
+		<b>style-11.css</b><br></li>
+
+		<li>In the <span class="syn">&lt;head&gt;</span> of your new <b>page-11.html</b> file, copy-and-paste the following to replace the title and description tags:
+<pre class="language-html">
+ &lt;<span class="blue-dark">title</span>&gt;<span class="white">Sample of content container blocks with altenating dark styles</span>&lt;<span class="blue-dark">/title</span>&gt;
+ &lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"Using full-width divs to create a web page of alterating block containers with dark backgrounds."</span>&gt;   
+</pre>
+		</li>
+
+		<li>Also in the <span class="syn">&lt;head&gt;</span>, change the stylesheet link as follows:
+<pre class="language-html">
+ &lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"style-11.css"</span>&gt;
+</pre>
+		</li>
+
+		<li>And finally in <span class="syn">&lt;head&gt;</span>, replace the Google Fonts with the following:
+<pre class="language-html">
+<span class="token comment">&lt;!-- Google Fonts --&gt;</span>
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;  
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;  
+</pre></li>
+
+<li>When finished, save your <b>page-11.html</b> file.</li>
+
+</ol>
+
+
+<p>Next, let&#8217;s perform some style updates in the stylesheet file, <b>style-11.css</b>.</p>
+
+	<ol>
+		<li>To change the fonts, replace the values of the <b>font-family</b> property of your main heading, sub-headings and text paragraphs as follows:
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Roboto Condensed', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h2.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Roboto Condensed', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Roboto Condensed', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-p.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'PT Sans', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+		
+
+		<li>To change the font colours, replace the values of the <b>color</b> property of your main heading, sub-headings and text paragraphs as follows.
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#3e414f</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h2.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#000000</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#e1f5fe</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-p.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#fff</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+
+		<li>To change the spacing between letters within your headings and sub-headings:
+		<ul>
+			<li>For your <span class="syn">&lt;h1&gt;</span> heading, update the <b>letter-spacing</b> value as follows.
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">letter-spacing</span>: <span class="token value-text">8px</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+			<li>For your <span class="syn">&lt;h3&gt;</span> heading sub-heading, update the <b>letter-spacing</b> value as follows.
+			<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">letter-spacing</span>: <span class="token value-text">4px</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+		</ul></li>
+		
+		<li>To change the capitalisation of your headings and sub-headings, add the following new <b>text-transform</b> properties and values.
+		
+		<ul>
+			<li>For your <span class="syn">&lt;h1&gt;</span> heading, add this <b>text-transform</b> rule.
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">text-transform</span>: <span class="token value-text">uppercase</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+			<li>For your <span class="syn">&lt;h3&gt;</span> sub-heading, add this <b>text-transform</b> rule.
+			<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">text-transform</span>: <span class="token value-text">uppercase</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+		</ul></li>
+
+	<li>Next, change the names and the <b>background-color</b> values of the two CSS declarations that control the visual appearance of the alternating blocks of content.
+<pre class="language-css">
+<span class="token comment">/* Coloured backgrounds */</span>
+<span class="token class">.bg-dark-1</span> { <span class="token property">background-color</span>: <span class="token value-text">#000000</span> }
+<span class="token class">.bg-dark-2</span> { <span class="token property">background-color</span>: <span class="token value-text">#3e414f</span> }
+</pre>
+You do not need to change the class name or the <b>background-color</b> value of the <span class="csyn">.bg-hero</span> declaration.</li>
+
+<li>When finished, save your <b>style-11.css</b> stylesheet.</li>
+
+		<li>Switch to your <b>page-11.html</b> web page, and update the classes to match the class names in your stylesheet.
+
+		<ul>
+			<li>Rename the <b>bg-pastel-1</b> class to <b>bg-dark-1</b>, and </li>
+			<li>Rename the <b>bg-pastel-2</b> class to <b>bg-dark-2</b></li>
+		</ul></li>
+		
+		<li>When finished, save your web page. It should now look as shown below.
+		<img src="assets/img/section-boxes/section-dark-final.png" alt="Introduction to Sections"></li>
+	</ol>
+
+	<p>Click <a href="final-sections/page-11.html" target="_blank">page-11.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+
+</section>
+
+
+<section id="sections-sample-3" class="wrapper-content">
+	<h2>Working with your third sample web page</h2>
+
+	<p>To begin the third sample exercise, open these two files in VS Code:</p>
+
+	<ul>
+		<li>The web page named <b>page-11.html</b></li>
+		<li>The stylesheet named <b>style-11.css</b></li>
+	</ul>
+
+	<p>Next, follow the steps below:</p>
+	<ol>
+
+		<li>Use the <b>File | Save As</b> command to save the two files with these new file names:
+		<span class="inside-ol">&nbsp;</span>
+		<b>page-12.html</b><br>
+		<b>style-12.css</b><br></li>
+
+		<li>In the <span class="syn">&lt;head&gt;</span> of your new <b>page-12.html</b> file, copy-and-paste the following to replace the title and description tags:
+<pre class="language-html">
+ &lt;<span class="blue-dark">title</span>&gt;<span class="white">Sample of container blocks with altenating light and dark styles</span>&lt;<span class="blue-dark">/title</span>&gt;
+ &lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"Using full-width divs to create a web page with alterating light and dark background coloured container styles."</span>&gt;   
+</pre>
+		</li>
+
+		<li>Also in the <span class="syn">&lt;head&gt;</span>, change the stylesheet link as follows:
+<pre class="language-html">
+ &lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"style-12.css"</span>&gt;
+</pre>
+		</li>
+
+		<li>And finally in <span class="syn">&lt;head&gt;</span>, replace the Google Fonts with the following:
+<pre class="language-html">
+<span class="token comment">&lt;!-- Google Fonts --&gt;</span>
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;  
+&lt;<span class="blue-dark">link</span> <span class="blue-light">href</span>=<span class="brown">"https://fonts.googleapis.com/css2?family=Arvo&display=swap"</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span>&gt;  
+</pre></li>
+
+<li>When finished, save your <b>page-12.html</b> file.</li>
+
+</ol>
+
+
+<p>Next, let&#8217;s perform some style updates in the stylesheet file, <b>style-12.css</b>.</p>
+
+	<ol>
+		<li>To change the fonts, replace the values of the <b>font-family</b> property of your main heading, sub-headings and text paragraphs as follows:
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Fira Sans', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h2.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Fira Sans', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Fira Sans', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-p.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">font-family</span>: <span class="token value-text">'Arvo', sans-serif</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+		
+
+		<li>To change the font colours, replace the values of the <b>color</b> property of your main heading, sub-headings and text paragraphs as follows.
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#1435b3</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h2.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#696969</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#000</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections">
+
+		<img src="assets/img/section-boxes/section-css-p.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">color</span>: <span class="token value-text">#2F4F4F</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+
+		<li>To change the spacing between letters wuthin your headings and sub-headings:
+		<ul>
+			<li>For your <span class="syn">&lt;h1&gt;</span> heading, update the <b>letter-spacing</b> value as follows.
+		<img src="assets/img/section-boxes/section-css-h1.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">letter-spacing</span>: <span class="token value-text">-3px</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+			<li>For your <span class="syn">&lt;h3&gt;</span> sub-heading, update the letter-spacing value as follows.
+			<img src="assets/img/section-boxes/section-css-h3.png" alt="Introduction to Sections">
+<pre class="language-css">
+    <span class="token property">letter-spacing</span>: <span class="token value-text">-3px</span>;
+</pre>
+		<img src="assets/img/section-boxes/section-css-end.png" alt="Introduction to Sections"></li>
+		</ul></li>
+		
+		<li>To change the capitalisation of your headings, remove any <b>text-transform</b> properties and values from the <b>style-12.css</b> stylesheet.</li>
+
+	<li>Next, change the names and the <b>background-color</b> values of the two CSS declarations that control the visual appearance of the alternating blocks of content.
+<pre class="language-css">
+<span class="token comment">/* Coloured backgrounds */</span>
+<span class="token class">.bg-blue-light</span> { <span class="token property">background-color</span>: <span class="token value-text">#d8f0f5</span> }
+<span class="token class">.bg-blue-dark</span>  { <span class="token property">background-color</span>: <span class="token value-text">#1435b3</span> }
+</pre>
+You do not need to change the class name or the <b>background-color</b> value of the <span class="csyn">.bg-hero</span> declaration.</li>
+
+<li>When finished, save your <b>style-12.css</b> stylesheet.</li>
+
+		<li>Switch to your <b>page-12.html</b> web page, and update the classes to match the class names in your stylesheet.
+
+		<ul>
+			<li>Rename the <b>bg-dark-1</b> class to <b>bg-blue-dark</b>, and </li>
+			<li>Rename the <b>bg-dark-2</b> class to <b>bg-blue-light</b></li>
+		</ul></li>
+		
+		<li>When finished, save your web page. It should now look as shown below.
+		<img src="assets/img/section-boxes/section-sample-3-incorrect.png" alt="Introduction to Sections"></li>
+	</ol>
+
+
+	<h3 id="sections-sample-3-alternating">Alternating font colours between container blocks</h3>
+	<p>We still have some more work to do with this third sample web page and stylesheet.</p>
+	
+	<ul>
+		<li>For the <b>container-block</b> divs with a dark blue background, we would like both the sub-headings and text paragraphs to display in a light blue colour.</li>
+		
+		<li>For the <b>container-block</b> divs with a light blue background, we would like the sub-headings to display in a dark blue, and the text paragraphs in a dark colour closer to black.</li>
+	</ul>
+
+	<img src="assets/img/section-boxes/section-sample-3-correct.png" alt="Introduction to Sections">
+
+	<p>Follow these steps:</p>
+
+
+	<ol>
+		<li>In the <b>style-12.css</b> stylesheet, add the following new lines at the bottom of the file.
+
+<pre class="language-css">
+<span class="token comment">/* Light blue background: h3 sub-headings and p text paragraphs */</span>
+<span class="token class">.container-block.bg-blue-light h3</span> { <span class="token property">color</span>: <span class="token value-text">#1435b3</span> }
+<span class="token class">.container-block.bg-blue-light p</span>  { <span class="token property">color</span>: <span class="token value-text">#000</span> }
+
+<span class="token comment">/* Dark blue background: h3 sub-headings and p text paragraphs */</span>
+<span class="token class">.container-block.bg-blue-dark h3</span> { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+<span class="token class">.container-block.bg-blue-dark p</span>  { <span class="token property">color</span>: <span class="token value-text">#fff</span> }
+</pre>
+
+	By &#8216;joining&#8217; the two class selectors of <span class="csyn">.container-block</span> and <span class="csyn">.bg-blue-dark</span> together without any empty space between them, you are telling the web browser: <i>only</i> apply the <span class="csyn">h3</span> or <span class="csyn">p</span> style rules that follow when the container <span class="syn">&lt;div&gt;</span> block in the web page has <i>both</i> classes.
+	<span class="inside-ol">&nbsp;</span>
+	Similarly, the <span class="csyn">h3</span> or <span class="csyn">p</span> style rules that follow the <span class="csyn">.container-block.bg-blue-light</span>  combination will apply <i>only</i> to container <span class="syn">&lt;div&gt;</span> blocks in the web page that have both these classes.
+	
+	<img src="assets/img/section-boxes/section-css-combine.png" alt="Introduction to Sections"></li>
+		<li>When finished, save your <b>style-12.css</b> stylesheet and view the <b>page-12.html</b> web page in your browser.</li>
+	</ol>
+
+	<p>All done.</p>
+
+
+	<h3 id="sections-sample-3-linear">Using a linear colour gradient as a background</h3>
+	<p>In all three sample web pages above you have applied what are called <i>solid</i> background colours to your container <span class="syn">&lt;div&gt;</span> blocks, using the <b>background-color</b> style property.</p>
+
+	<p>CSS also offers a property called <b>background-image</b> that enables you to apply <i>linear gradients</i> to <span class="syn">&lt;div&gt;</span> blocks and other web page elements.</p>
+
+	<p>Linear-gradients are of two main types:</p>
+
+	<ul>
+		<li>Gradients of the <i>same</i> colour. For example, from a light blue to a dark blue.</li>
+		<li>Gradients of <i>different</i> colours. For example, from blue to green.</li>
+	</ul>
+
+	<p>Let&#8217;s apply a linear gradient background to our third sample web page.</p>
+
+	<ol>
+		<li>In VS Code, open your <b>style-12.css</b> stylesheet.</li>
+		<li>Near the bottom of the file, you can see the following selector and style rule.
+<pre class="language-css">
+   <span class="token class">.bg-blue-dark</span> { <span class="token property">background-color</span>: <span class="token value-text">#1435b3</span> }
+</pre></li>
+	<li>Replace this by copying-and-pasting the following.
+<pre class="language-css">
+   <span class="token comment">/* Default gradient direction: top to bottom */ </span>
+   <span class="token class">.bg-blue-dark</span> { <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token value-text">#0575e6</span>, <span class="token value-text">#1435b3</span>) } 
+</pre></li>
+	<li>Save your stylesheet and view your <b>page-12.html</b> web page in your browser. 
+	<span class="inside-ol">&nbsp;</span>
+	You can see that the dark blue background subtly changes from lighter to darker, in the direction from top to bottom.
+	
+	<img src="assets/img/section-boxes/section-gradient-top-bottom.png" alt="Introduction to Sections"></li>
+
+	<li>You can change the default (top-to-bottom) direction of a linear gradient by adding a direction setting within the property value. 
+	<span class="inside-ol">&nbsp;</span>
+	For example, linear gradients more commonly change from left to right.
+	<span class="inside-ol">&nbsp;</span>
+	Under the linear gradient you added earlier, copy-and-paste this new left-to-right gradient. It has the same two colours. But because of the extra <b>90deg</b> setting, the direction is different.
+<pre class="language-css">
+   <span class="token comment">/* Gradient direction: left to right */ </span> 
+   <span class="token class">.bg-blue-dark</span> { <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>, <span class="token value-text">#0575e6</span>, <span class="token value-text">#1435b3</span>) } 
+</pre></li>
+
+<li>Save your stylesheet and view your <b>page-12.html</b> web page in your browser. You can see that the dark blue background changes from left to right.
+
+	<img src="assets/img/section-boxes/section-gradient-left-right.png" alt="Introduction to Sections"></li>
+
+	</ol>
+
+
+	<p>Click <a href="final-sections/page-12.html" target="_blank">page-12.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+<p>Here are some more examples of linear gradients for you to experiment with in your web pages.</p>
+
+
+<pre class="language-css">
+   <span class="token comment">/* Green */  </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#02727e</span>,<span class="token value-text">#06b294</span>);
+</pre>
+
+<pre class="language-css">
+   <span class="token comment">/* Bronze */  </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#6b2d38</span>,<span class="token value-text">#cd6065</span>);
+</pre>
+
+<pre class="language-css">
+   <span class="token comment">/* Purple to orange - modern */  </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#e052a0</span>,<span class="token value-text">#f15c42</span>);
+</pre>
+
+
+<pre class="language-css">
+   <span class="token comment">/* Purple (AIB Bank) */  </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#802b7b</span>,<span class="token value-text">#de0a85</span>);
+</pre>
+
+<pre class="language-css">
+   <span class="token comment">/* Blue (Disney Channel ad) */ </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#07092f</span>,<span class="token value-text">#165cc0)</span>;
+</pre>
+
+<pre class="language-css">
+   <span class="token comment">/* Yellow to blue - tangy! */ </span>
+    <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#b8ea0a</span>,<span class="token value-text">#50c8f7</span>);
+</pre>
+
+</section>
+
+<section id="update-home-page-content" class="wrapper-content">
+	<h2>Updating the content of your home page</h2>
+
+	<p>Now that you have created and styled three new sample web pages, you need to add new hyperlinks to the home page of your web site.</p>
+
+	<ol>
+		<li>In VS Code, open this HTML file in your <b>websites</b> folder:
+		<span class="inside-ol">&nbsp;</span>
+		<b>index.html</b>
+		<span class="inside-ol">&nbsp;</span>
+
+		Its content should look as follows:
+		<img src="assets/img/section-boxes/home-page-body-4.png" alt="file-explorer-unzip-files"></li>
+
+		<li>Copy-and-paste the following three new lines to your web page, directly under the line that contains the link to the <b>page-9.html</b> web page.
+
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"page-10.html"</span>&gt;<span class="white">Web Page with Pastel Sections</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"page-11.html"</span>&gt;<span class="white">Web Page with Dark Sections</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"page-12.html"</span>&gt;<span class="white">Web Page with Alternating Sections</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+</pre></li>
+
+</ol>
+
+	<p>Save your <b>index.html</b> web page and view the result in your browser.</p>
+
+</section>
+
+
+<section id="sections-upload-3" class="wrapper-content">
+
+
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>Upload the following web pages, stylesheets and image to your account on GitHub:</p>
+
+	<p><b>index.html</b><br>
+	<b>page-10.html</b><br>
+	<b>page-11.html</b><br>
+	<b>page-12.html</b><br>
+	<b>style-10.css</b><br>
+	<b>style-11.css</b><br>
+	<b>style-12.css</b><br>
+	<b>three-staff.png</b></p>
+
+	<p>Your web pages will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/index.html</b><br>
+	<b>https://username.github.io/page-10.html</b><br>
+	<b>https://username.github.io/page-11.html</b><br>
+	<b>https://username.github.io/page-12.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+	<p><br><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+
