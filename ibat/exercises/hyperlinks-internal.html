@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Internal Hyperlinks | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with Hyperlinks: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">All Tutorials&nbsp;&nbsp;&lt;</a></h3>
+	<h1>Working with Internal Hyperlinks</h1>
+</div>
+
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Use internal hyperlinks with a smooth-scrolling effect to create a web page navigation system.</li>
+	</ul>
+
+	<p>You can view a finished version of the sample web page to which you will add and style internal hyperlinks in this Tutorial by clicking the link below. The finished sample page will open in a new tab of your web browser.</p>
+
+	<div class="four-samples">
+		<div>
+			<a href="final-hyperlinks-internal/after/page-6.html" target="_blank"><img src="assets/img/hyperlinks-internal/example-one-browser.png" alt="Working with Internal Hyperlinks"></a>
+			<a href="final-hyperlinks-internal/after/page-6.html"  class="link-exercise" target="_blank">page-6.html</a>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#hyperlinks-about">About internal hyperlinks</a></p>
+		<p class="toc-indent"><a href="#links-anchors">Internal hyperlinks and named anchors</a></p>
+		<p><a href="#page-prep">Preparing your sample web page</a></p>
+		<p><a href="#adding-both">Adding internal hyperlinks and named anchors</a></p>
+
+		<p class="toc-indent"><a href="#internal-hyperlinks">Adding the internal hyperlinks</a></p>
+		<p class="toc-indent"><a href="#named-anchors">Adding the destination IDs</a></p>
+		<p class="toc-indent"><a href="#smooth-scrolling">Adding the smooth scrolling effect</a></p>
+		<p class="toc-indent"><a href="#back-to-top">Adding a &#8216;Back to top&#8217; hyperlink</a></p>
+		<p><a href="#styling-hyperlinks">Styling the web page hyperlinks</a></p>
+		<p><a href="#upload-github">Uploading your files to GitHub</a></p>
+	</div>
+</section>
+
+
+
+<section id="hyperlinks-about" class="wrapper-content bg-white">
+
+	<h2>About internal hyperlinks</h2>
+
+	<p>Hyperlinks are not just for linking to web pages or other files. You can also create a hyperlink  to link to a <i>part</i> of a web page.</p>
+
+	<p>So-called <i>internal hyperlinks</i> are commonly found on lengthy web pages with large amounts of content. They enable the web designer to offer a &#8220;Table of Contents&#8221; at the top of the page which users can click/tap to navigate to a particular section of that web page.</p>
+
+	<p>Pages on Wikipedia typically include internal hyperlinks. For example, click the link below to open a Wikipedia page in a new browser tab for the Steve Goodman song, <i>City of New Orleans</i></p>
+
+
+	<p><a href="https://en.wikipedia.org/wiki/City_of_New_Orleans_(song)" target="_blank"><span style="font-weight:bold">City of New Orleans (song)</span></a></p>
+	
+	<p>After some introductory text, you can see a number of internal hyperlinks that will bring you to different parts of the <i>same</i> web page.</p>
+
+	<img src="assets/img/hyperlinks-internal/wiki-page.png" alt="Working with Internal Hyperlinks">
+
+	<p>If you click on any of these links, notice how the URL (web address) in your browser changes.</p>
+
+	<img src="assets/img/hyperlinks-internal/wiki-sections.png" alt="Working with Internal Hyperlinks">
+
+	<p>You can see that the web address is now composed of <i>two</i> parts:</p>
+
+	<ul>
+		<li>The address of the web page, and </li>
+		<li>The name of a section of the web page</li>
+	</ul>
+
+	<p>The two parts of the web address are separated by the hash <b>#</b> character. A linked-to section of a web page is known as a <i>document fragment</i>.</p>
+
+	<h3 id="links-anchors">Internal hyperlinks and named anchors</h3>
+
+	<p>Consider the basic example where you want to offer visitors a &#8220;Table of Contents&#8221; at the top of a web page. </p>
+
+	<p>You might begin by entering the following:</p>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span>&gt;<span class="token content">Contents</span>&lt;/<span class="blue-dark">h2</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Introduction</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section One</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section Two</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Summary</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+	In a web browser, this will display as shown below.
+	<img src="assets/img/hyperlinks-internal/sample-toc-1.png" alt="Working with Internal Hyperlinks">
+
+	<p>Next, you would add the internal hyperlinks. Note how the link destinations inside the <span class="atsyn">href</span> attributes always start with the <b>#</b> hash character.</p>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span>&gt;<span class="token content">Contents</span>&lt;/<span class="blue-dark">h2</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#introduction"</span>&gt;<span class="token content">Introduction</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#one"</span>&gt;<span class="token content">Section One</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#two"</span>&gt;<span class="token content">Section Two</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#three"</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#summary"</span>&gt;<span class="token content">Summary</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+</pre>
+
+	<p>Your &#8220;Table of Contents&#8221; now look like a list of hyperlinks.</p>
+	<img src="assets/img/hyperlinks-internal/sample-toc-2.png" alt="Working with Internal Hyperlinks">
+	<p>But the hyperlinks have no destinations &#8211; they do not lead anywhere.</p>
+
+	<p>Your final step is to add destination <b>IDs</b>. These are the locations in the page to which the hyperlinks will take the user. See the example below.</p>
+
+<pre class="language-html">
+    &lt;<span class="blue-dark">h3</span> <span class="blue-light">id</span><span class="token content">=</span><span class="brown">"three"</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">h3</span>&gt;
+</pre>
+	
+	<p>In the remainder of this Tutorial, you will add and style internal hyperlinks using a web page and stylesheet file you previously created.</p>
+
+</section>
+
+
+<section id="page-prep" class="wrapper-content bg-white">
+	<h2>Preparing your sample web page</h2>
+
+	<p>In this section, you will work with the sample <b>page-6.html</b> web page and <b>style-6.css</b> stylesheet in your <b>websites</b> folder.</p>
+
+	<p>You created this web page and stylesheet in the <a href="intro-images.html">Introduction to Images</a> Tutorial and updated it in the <a href="intro-google-fonts.html">Working with Google Fonts</a> Tutorial.</p>
+
+	<ol>
+		<li>In Visual Studio Code, open the following two files: 
+		<span class="inside-ol">&nbsp;</span>
+		<b>page-6.html</b><br>
+		<b>style-6.css</b></li>
+
+		<li>Your first task is to make the web page responsive by using media queries and fluid font sizes.
+		<span class="inside-ol">&nbsp;</span>
+		At the top of the <b>page-6.css</b> stylesheet, replace the current web browser resets by copying-and-pasting the following:
+
+<pre class="language-css">
+<span class="token comment">/*  ============= WEB BROWSER RESETS ============ */</span>
+<span class="token asterisk">*</span> { <span class="token property">margin</span>: <span class="token number">0</span>; <span class="token property">padding</span>: <span class="token number">0</span>; <span class="token property">border</span>: <span class="token value-text">none</span> }
+<span class="token class">html</span> { <span class="token property">height</span>: <span class="token number">100%</span> }
+<span class="token class">body</span> { <span class="token property">min-height</span>: <span class="token number">100%</span>; <span class="token property">max-width</span>: <span class="token number">1600px</span>; <span class="token property">margin-left</span>: <span class="token value-text">auto</span>; <span class="token property">margin-right</span>: <span class="token value-text">auto</span> }  
+<span class="token class">img</span> { <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token value-text">auto</span>; <span class="token property">display</span>: <span class="token value-text">block</span> }
+</pre></li>
+		
+		
+		<li>Under the web browser resets, replace the current <b>body</b> styles with the following:
+
+<pre class="language-css">
+<span class="token comment">/* ========== PAGE CONTAINER ========= */</span>
+
+<span class="token comment">/* All screen sizes */</span>
+ <span class="token class">body</span> { <span class="token property">background-color</span>: <span class="token value-text">#FFFFBD</span> }
+
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) { <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token number">1% 20% 4% 20%</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) { <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token number">4% 9% 11% 9%</span> } }</pre>
+
+Next, you will update the font sizes of the web page content.</li>
+	
+		<li>For the <span class="csyn">h1</span> main heading selector, update the <b>font-size</b> property from the fixed value of <b>72px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">52px</span> + (<span class="token number">72</span> - <span class="token number">52</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>For the <span class="csyn">h2</span> sub-heading selector, update the <b>font-size</b> property from the fixed value of <b>56px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">34px</span> + (<span class="token number">56</span> - <span class="token number">34</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>And for the text paragraphs styled with the <span class="csyn">p</span> selector, update the <b>font-size</b> property from the fixed value of <b>22px</b> by copying-and-pasting this fluid value:
+
+<pre class="language-css">
+  <span class="token property">font-size</span>: <span class="yellow">calc</span>(<span class="token number">18px</span> + (<span class="token number">22</span> - <span class="token number">18</span><span class="token punctuation">)</span> * <span class="token punctuation">((</span><span class="token number">100vw</span> - <span class="token number">320px</span>) / (<span class="token number">1600</span> - <span class="token number">320</span>)));
+</pre></li>
+
+		<li>Save the <b>page-6.css</b> stylesheet and view the <b>page-6.html</b> web page in your browser on both desktop/laptop and mobile-sized screens.</li>
+	</ol>
+
+	<a href="final-hyperlinks-internal/before/page-6.html" target="_blank"><img src="assets/img/hyperlinks-internal/tourism-before.png" alt="Working with Internal Hyperlinks"></a>
+
+	<p>Click <a href="final-hyperlinks-internal/before/page-6.html" target="_blank"><span style="font-weight:bold">page-6.html</span> <span style="font-weight:normal">(before internal hyperlinks added)</span></a> to view a finished sample of this updated and responsive web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="adding-both" class="wrapper-content bg-white">
+
+	<h2>Adding internal hyperlinks and named anchors</h2>
+
+	<p>Now you will add internal hyperlinks and destination IDs to your sample <b>page-6.html</b> web page.</p>
+	
+
+	<h3 id="internal-hyperlinks">Adding the internal hyperlinks</h3>
+	<p>Let&#8127;s begin by creating a &#8220;Table of Contents&#8221; that will help users navigate through your sample web page.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>page-6.html</b> web page.</li>
+
+		<li>Directly uner the main <span class="syn">&lt;h1&gt;</span> heading of &#8220;Ireland&#8217;s Top Five Visitor Attractions&#8221;, copy-and-paste the following:
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span>&gt;<span class="token content">Contents</span>&lt;<span class="blue-dark">/h2</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#guinness"</span>&gt;<span class="token content">1: Guinness Storehouse, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#cliffs-of-moher"</span>&gt;<span class="token content">2: Cliffs of Moher, Co. Clare</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#dublin-zoo"</span>&gt;<span class="token content">3: Dublin Zoo</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>="<span class="brown">#aquatic-centre"</span>&gt;<span class="token content">4: National Aquatic Centre, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>="<span class="brown">#kells-tcd"</span>&gt;<span class="token content">5: Book of Kells Exhibition, Trinity College, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+</pre></li>
+
+	<li>Save the <b>page-6.html</b> web page and view it in your web browser.</li>
+
+</ol>
+
+	<p>You can see the five items under the &#8220;Contents&#8221; sub-headings <em>look like</em> hyperlinks &#8211; but they are not clickable. They do not lead anywhere. </p>
+
+	<img src="assets/img/hyperlinks-internal/hyperlinks-unstyled.png" alt="Working with Internal Hyperlinks">
+
+	<p>This is because the five link destinations do not yet exist. Let&#8217;s add these now.</p>
+
+
+	<h3 id="named-anchors">Adding the destination IDs</h3>
+	<p>For the five internal hyperlinks, you will now add their link destinations.</p>
+
+	<ol>
+		<li>In your <b>page-6.html</b> web page, add five destination IDs, one for each of the <span class="syn">&lt;h2&gt;</span> sub-headings under the &#8220;Contents&#8221; list at the top of the page.
+		
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"guinness"</span>&gt;<span class="token content">Guinness Storehouse, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"cliffs-of-moher"</span>&gt;<span class="token content">Cliffs of Moher, Co. Clare</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"dublin-zoo"</span>&gt;<span class="token content">Dublin Zoo</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"aquatic-centre"</span>&gt;<span class="token content">National Aquatic Centre, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"kells-tcd"</span>&gt;<span class="token content">Book of Kells Exhibition, Trinity College, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+
+		Note that you do <i>not</i> add the hash <b>#</b> character before the link destinations.</li>
+
+		<li>Save the web page and view it in your web browser. </li>
+	</ol>
+	
+<p>The five links in under the &#8220;Contents&#8221; sub-heading at the top of the web page should now work correctly.</p>
+
+
+	<h3 id="smooth-scrolling">Adding the smooth scrolling effect</h3>
+	<p>You can see that, when clicked or tapped, the internal page links &#8216;jump&#8217; quickly to their respective destinations further down the web page.</p>
+
+	<p>Follow these steps to change this to a so-called <em>smooth-scrolling</em> effect.</p>
+
+	<ol>
+
+		<li>In VS Code, display the <b>style-6.css</b> stylesheet.</li>
+		
+		<li>Add this new rule to the bottom of the web browser resets section at the beginning of the CSS file.
+	
+<pre class="language-css">
+  <span class="token class">html</span> { <span class="token property">scroll-behavior</span>: <span class="token value-text">smooth</span> }
+</pre>
+
+	You web browser resets section should now look as follows
+	<img src="assets/img/hyperlinks-internal/resets-complete.png" alt="Working with Internal Hyperlinks"></li>
+
+	<li>Save the stylesheet and verify that the scroll effect works correctly.</li>
+
+</ol>
+
+<p>Note that this smooth-scrolling effect is not supported by the Apple Safari web browser.</p>
+
+<p>It should work in the Google Chrome, Mozilla Firefox, Microsoft Edge and Opera web browsers.</p>
+
+
+
+	<h3 id="back-to-top">Adding a &#8216;Back to top&#8216; hyperlink</h3>
+	<p>Let&#8217;s add one further internal hyperlink: one that takes the user back up to the top of the web page.</p>
+	
+	<p>Here are the steps.</p>
+
+	<ol>
+		<li>At the very top of the <b>page-6.html</b> web page, replace the current opening <span class="syn">&lt;body&gt;</span> tag with the following that includes a destination ID.
+<pre class="language-html">
+  &lt;<span class="blue-dark">body</span> <span class="blue-light">id</span>=<span class="brown">"top-of-page"</span>&gt;
+</pre>
+		This will be the destination for the &#8216;Back to top&#8216; internal hyperlink.</li>
+
+		<li>Next, at the very end of the web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, add the following internal hyperlink.
+<pre class="language-html">
+  &lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#top-of-page"</span>&gt;<span class="token content">Return to top of page</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+	The end of your web page should now look similar to that below.
+	<img src="assets/img/hyperlinks-internal/back-to-top.png" alt="Working with Internal Hyperlinks"></li>
+
+		<li>Save your web page and verify the &#8216;Back to top&#8216; link works correctly.</li>
+</ol>
+</section>
+
+
+
+
+<section id="styling-hyperlinks" class="wrapper-content bg-white">
+	<h2>Styling the web page hyperlinks</h2>
+	<p>Now you will add some style rules to the hyperlinks on your web page. Follow these steps</p>
+
+	<ol>
+
+		<li>In VS Code, display the <b>style-6.css</b> stylesheet.</li>
+		
+		<li>At the bottom of the file, add the following comment line, selector and style rules for inactive hyperlinks.
+
+<pre class="language-css">
+<span class="token comment">/* All hyperlinks on web page */</span>
+<span class="token class">a:link</span>, <span class="token class">a:visited</span> {
+    <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+    <span class="token property">color</span>: <span class="token value-text">#9D4F00</span>;
+    <span class="token property">padding-bottom</span>: <span class="token number">2px</span>;
+    <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">#455C80</span>;
+}</pre>
+
+		This removes the default hyperlink underline, colours the text dark orange, and adds a dark blue bottom border that is two pixels tall and postioned two pixels under the hyperlink text.</li>
+
+
+		<li>Under this, add the following for the hyperlinks in their various active states.
+
+<pre class="language-css">
+<span class="token class">a:hover</span>, <span class="token class">a:focus</span>, <span class="token class">a:active</span> {
+    <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+    <span class="token property">color</span>: <span class="token value-text">green</span>;
+    <span class="token property">padding-bottom</span>: <span class="token number">2px</span>;
+    <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">green</span>;
+}</pre>
+		This changes the text and bottom border colour to dark green when the hyperlinks are in any one of their three active states.</li>
+
+		<li>Save your web page.</li>
+
+	</ol>
+
+	<p>Your hyperlinks should now look as shown below, both in the &#8220;Contents&#8221; section and further down within the text of the web page.</p>
+	<img src="assets/img/hyperlinks-internal/hyperlinks-styled.png" alt="Working with Internal Hyperlinks">
+
+
+
+	<p>At the top of the web page, you need to add some space under the list of internal hyperlinks and above the bold introduction text that follows.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>page-6.html</b> web page.</li>
+
+		<li>At the beginning of the introduction text, replace the opening <span class="syn">&lt;p&gt;</span> tag with a paragraph tag that includes a new class named <b>introduction</b>.
+		
+		<img src="assets/img/hyperlinks-internal/p-intro-html.png" alt="Working with Internal Hyperlinks"></li>
+
+		<li>Switch to the <b>style-6.css</b> stylesheet.</li>
+
+		<li>At about line 51, add the following two style rules, each within a media query.
+
+<pre class="language-css">
+<span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) { <span class="token class">p.introduction</span> { <span class="token property">margin-top</span>: <span class="token number">8%</span> } }
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) { <span class="token class">p.introduction</span> { <span class="token property">margin-top</span>: <span class="token number">20%</span> } }</pre></li>
+
+		<li>Save your web page and stylesheet.</li>
+
+	</ol>
+
+	<p>You are now finished working with this sample web page and stylesheet.</p>
+
+	<p>Click <a href="final-hyperlinks-internal/after/page-6.html" target="_blank">page-6.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+
+
+
+<section id="upload-github" class="wrapper-content">
+
+
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>Upload the following web pages and stylesheet to your account on GitHub:</p>
+
+	<p><b>page-6.html</b><br>
+	<b>style-6.css</b></p>
+
+	<p>Your web pages will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/page-6.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+	<p><br>Return to <a href="../index.html">All Tutorials</a>.</p>
+
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+

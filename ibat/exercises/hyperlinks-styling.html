@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Styling Hyperlinks with CSS | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Styling Hyperlinks with CSS: A Web Design and Development Tutorial from Brendan Munnelly">
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+
+	<meta name="author" content="Brendan Munnelly">
+
+	<meta property="og:site_name" content="https://www.munnelly.com/" />
+
+	<link href="../assets/css/web-design-exercises.css" rel="stylesheet">
+
+
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All HTML projects">All Tutorials&nbsp;&nbsp;&gt;</a></h3>
+	<h1>Styling Hyperlinks with CSS</h1>
+</div>
+
+<section id="learning-goals" class="wrapper-content">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Tutorial you will be able to:</p>
+	<ul>
+		<li>Apply CSS style rules to the five hyperlink states: link, visited, focus, hover and active.</li>
+	</ul>
+
+	<p>You can view finished versions of the two sample web pages you will update with hyperlinks in this Tutorial by clicking the links below. The finished samples will each open in a new tab of your web browser.</p>
+
+
+	<div class="four-samples">
+		<div>
+			<a href="final-hyperlinks-style/after/page-5.html" target="_blank"><img src="assets/img/hyperlinks-styles/example-browser-one.png" alt="Sample image"></a>
+			<a href="final-hyperlinks-style/after/page-5.html" target="_blank" class="link-exercise">page-5.html</a>
+		</div>
+		<div>
+			<a href="final-hyperlinks-style/after/page-10.html" target="_blank"><img src="assets/img/hyperlinks-styles/example-two-browser.png" alt="Sample image"></a>
+			<a href="final-hyperlinks-style/after/page-10.html" target="_blank" class="link-exercise">page-10.html</a>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="wrapper-content">
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#hyperlinks-states">About the five hyperlink states</a></p>
+		<p class="toc-indent"><a href="#hyperlinks-passive">Hyperlinks: the two passive states</a></p>
+		<p class="toc-indent"><a href="#hyperlinks-active">Hyperlinks: the three interactive states</a></p>
+		<p><a href="#hyperlinks-classes">Hyperlinks and CSS classes</a></p>
+		<p class="toc-indent"><a href="#hyperlinks-underline">Hyperlinks and the default underline</a></p>
+		<p><a href="#hyperlinks-styling-one">Styling links on the first sample web page</a></p>
+		<p><a href="#hyperlinks-styling-two">Styling links on a second sample web page</a></p>
+		<p><a href="#upload-github">Uploading your files to GitHub</a></p>
+		<p><a href="#further-resources">Further resources</a></p>
+	</div>
+</section>
+
+
+
+
+
+<section id="hyperlinks-states" class="wrapper-content bg-white">
+
+	<h2>Abour the five hyperlink states</h2>
+
+	<p>On modern websites, hyperlinks will typically display very differently depending on the section of the web page in which they are located.</p>
+
+	<ul>
+		<li><b>Navigation hyperlinks</b>: In navigation menus and footers, hyperlinks are commonly shown without underlines. It is clear to the user, from the links&#8217; location, that these items can be clicked or tapped.
+		<img src="assets/img/hyperlinks-styles/hyperlinks-no-underline.png" alt="Styling Hyperlinks with CSS"></li>
+
+		<li><b>Hyperlinks withing text blocks</b>: When they are located inside paragraphs, however, it is good practice to place underlines beneath hyperlinks to make them stand out from the surrounding text.
+		<img src="assets/img/hyperlinks-styles/hyperlinks-underline.png" alt="Styling Hyperlinks with CSS"></li>
+
+		<li><b>Hyperlinks as buttons</b>: Hyperlinks on a web page can also be displayed as buttons, with coloured backgrounds and/or borders, and perhaps icons. Typically, hyperlinks styled as buttons do not have underlines.
+		<img src="assets/img/hyperlinks-styles/hyperlinks-buttons.png" alt="Styling Hyperlinks with CSS"> </li>
+		
+	</ul>
+
+	<p>Unlike other web page elements such as headings, paragraphs or images, hyperlinks are <i>interactive</i>. And their visual appearance can change depending on whether and how the user interacts with them.</p>
+	
+	<p>Hyperlinks are five so-called <i>states</i>, which can be grouped into two categories:</p>
+	
+	<ul>
+		<li><b>Passive states</b>: This is how a hyperlink looks when the user is not interacting with it. There are two passive states.</li>
+		
+		<li><b>Interactive states</b>: This is how a hyperlink looks when the user is interacting with it. There are three interactive states.</li>
+	</ul>
+
+
+	<h3 id="hyperlinks-passive">Hyperlinks: the two passive states</h3>
+	<p>There are two possible passive states for a hyperlink.</p>
+
+	<ul>
+		<li><span class="csyn">a:link</span> &#8212; The link has <em>not</em> been clicked or tapped by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display unvisited hyperlinks in the colour <span style="color:blue;text-decoration:underline">blue</span>.</li>
+		<li><span class="csyn">a:visited</span> &#8212; The link <em>has</em> been previously clicked or tapped by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display visited hyperlinks in the colour <span style="color:purple;text-decoration:underline">purple</span>.</li>
+	</ul>
+
+	<img src="assets/img/hyperlinks-styles/link-states-passive.png" alt="Styling Hyperlinks with CSS">
+
+	<p>In CSS, you target unvisited and visited hyperlinks in a web page using the <span class="csyn">:link</span> and <span class="csyn">:visited</span> pseudo-classes as follows:</p>
+
+<pre class="language-css">
+  <span class="token comment">/* Passive link - previously unvisited */</span>
+  <span class="token class">a:link</span> {
+     <span class="token comment">/* style rules go here */</span>
+  }
+
+  <span class="token comment">/* Passive link - previously visited */</span>
+   <span class="token class">a:visited</span>  {
+     <span class="token comment">/* style rules go here */</span>
+  }</pre>
+
+	<p>Typically, these two passive states are styled in the same way.</p>
+
+<pre class="language-css">
+  <span class="token comment">/* Passive link states */</span>
+  <span class="token class">a:link</span>,
+  <span class="token class">a:visited</span> {
+     <span class="token comment">/* style rules go here */</span>
+  }</pre>
+
+	<p>Or, on a single line:</p>
+
+<pre class="language-css">
+  <span class="token comment">/* Passive link states */</span>
+  <span class="token class">a:link</span>, <span class="token class">a:visited</span> {
+     <span class="token comment">/* style rules go here */</span>
+  }</pre>
+
+	<p>Note the colon character (<span class="csyn">:</span>) between the <span class="csyn">a</span> selector and the pseudo-class name (<span class="csyn">link</span> or <span class="csyn">visited</span>).</p>
+
+<p>For example, if you wanted your hyperlinks to appear in red when the user is not interacting with them, you would enter the following.</p>
+<pre class="language-css">
+  <span class="token comment">/* Passive link states */</span>
+  <span class="token class">a:link</span>, <span class="token class">a:visited</span> {
+     <span class="token property">color</span>: <span class="token value-text">red</span>
+  }</pre>
+
+
+
+
+	<h3 id="hyperlinks-active">Hyperlinks: the three interactive states</h3>
+	<p>There are three possible passive states for a hyperlink.</p>
+
+	<ul>
+
+		<li><span class="csyn">a:hover</span> &#8212; The user is hovering the mouse over the link.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display hovered-over links in <span style="color:blue;text-decoration:underline">blue</span> (if not previously visited) and <span style="color:purple;text-decoration:underline">purple</span> (if visited before by the user).</li>
+
+		<li><span class="csyn">a:focus</span> &#8212; The user has navigated to the hyperlink by using the <b>Tab</b> key.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers display on-focus links with a blue, dashed border.</li>
+
+		<li><span class="csyn">a:active</span> &#8212; The link is currently being clicked or tapped by the user.
+		<span class="inside-ol">&nbsp;</span>
+		By default, web browsers show active hyperlinks in the colour <span style="color:red;text-decoration:underline">red</span>.</li>
+	</ul>
+
+	<img src="assets/img/hyperlinks-styles/link-states-active.png" alt="Styling Hyperlinks with CSS">
+
+	<p>In CSS, you target these three hyperlink states using the <span class="csyn">:focus</span>, <span class="csyn">:hover</span> and <span class="csyn">:active</span> pseudo-classes.</p>
+
+	<p>Typically, all three interactive states of a hyperlink are styled in the same way.</p>
+
+
+<pre class="language-css">
+  <span class="token comment">/* Interactive link states */</span>
+  <span class="token class">a:focus</span>, <span class="token class">a:hover</span>, <span class="token class">a:active</span> {
+     <span class="token comment">/* style rules go here */</span>
+  }</pre>
+
+	<p>Again, note the colon character (<span class="csyn">:</span>) between the <span class="csyn">a</span> selector and the pseudo-class name (<span class="csyn">focus</span>, <span class="csyn">hover</span> or <span class="csyn">active</span>).</p>
+
+	<p>For example, if you wanted your hyperlinks to appear in green whenever the user is interacting with them, you would enter the following.</p>
+
+<pre class="language-css">
+  <span class="token comment">/* Passive link states */</span>
+  <span class="token class">a:hover</span>, <span class="token class">a:focus</span>, <span class="token class">a:active</span> {
+     <span class="token property">color</span>: <span class="token value-text">green</span>
+  }</pre>
+
+
+	<p>In summary, the section of a CSS file that styles hyperlinks would typically look as follows:</p>
+	
+<pre class="language-css">
+  <span class="token comment">/* ====== HYPERLINK STYLES ====== */</span>
+
+  <span class="token comment">/* Passive link states */</span>
+  <span class="token class">a:link</span>, <span class="token class">a:visited</span> {
+    <span class="token property">color</span>: <span class="token value-text">red</span>
+}
+
+  <span class="token comment">/* Interactive link states */</span>
+  <span class="token class">a:hover</span>, <span class="token class">a:focus</span>, <span class="token class">a:active</span> {
+    <span class="token property">color</span>: <span class="token value-text">green</span>
+}</pre>
+	
+
+
+	<h3>Hyperlinks: the correct order of pseudo-classes</h3>
+
+	<p>In a CSS stylesheet, it is important you place your pseudo-classes in the correct order. Otherwise, your hyperlink styles may not display the way you want them to.</p>
+
+	<p>The correct order is as follows:</p>
+	<p><span class="csyn">:link</span><br>
+	<span class="csyn">:visited</span><br>
+	<span class="csyn">:hover</span><br>
+	<span class="csyn">:focus</span><br>
+	<span class="csyn">:active</span></p>
+
+</section>
+
+
+
+
+
+
+<section id="hyperlinks-classes" class="wrapper-content bg-white">
+	<h2>Hyperlinks and CSS classes</h2>
+
+	<p>You can add classes to hyperlinks just as you can to other HTML elements such as headings and paragraphs.</p>
+
+	<p>In the sample stylesheet section below, the selector named <span class="csyn">.fancy-link</span> is used to style hyperlinks. You need to add the selector <i>five times</i> &#8211; once for each of the five possible hyperlink states.</p>
+
+	<img src="assets/img/hyperlinks-styles/css-classes.png" alt="Styling Hyperlinks with CSS">
+
+	<p>Note that a full stop (<span class="csyn">.</span>) separates the <span class="csyn">a</span> selector from the class name of <span class="csyn">fancy-link</span>.</p>
+
+	<p>And a colon (<span class="csyn">:</span>) separates the <span class="csyn">fancy-link</span> class name from the pseudo-class name, such as <span class="csyn">visited</span>, <span class="csyn">hover</span> or whatever.</p>
+
+	<img src="assets/img/hyperlinks-styles/classes-pseudo-classes.png" alt="Styling Hyperlinks with CSS">
+
+
+
+	<h3 id="hyperlinks-underline">Hyperlinks and the default underline</h3>
+	<p>By default, web browsers add an underline to all five hyperlink states. This is the result of a default value of <b>underline</b> applied to the <b>text-decoration</b> property. </p>
+
+	<p>To &#8216;turn off&#8217; this default underline, you need to add the following style rule to your CSS file.</p>
+
+<pre class="language-css">
+  <span class="token comment">/* ====== HYPERLINK STYLES ====== */</span>
+
+<span class="token comment">/* Passive link states */</span>
+<span class="token class">a:link</span>, <span class="token class">a:visited</span> {
+    <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+    <span class="token property">color</span>: <span class="token value-text">red</span>;
+}
+
+<span class="token comment">/* Interactive link states */</span>
+<span class="token class">a:hover</span>, <span class="token class">a:focus</span>, <span class="token class">a:active</span> {
+    <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+    <span class="token property">color</span>: <span class="token value-text">green</span>;
+}</pre>
+	
+	<p>Except for the special cases of hyperlinks in menus and footers, and as buttons, it is good practice to underline the visited and unvisited states of hyperlinks within blocks of text.</p>
+
+	<p>However, to underline hyperlinks, web designers typically use the <b>border-bottom</b> property rather than <b>text-decoration</b>, because it allows more options for spacing and colour.</p>
+
+</section>
+
+
+
+
+<section id="hyperlinks-styling-one" class="wrapper-content bg-white">
+
+	<h2>Styling links on the first sample web page</h2>
+	<p>In this section you will apply CSS styles to the hyperlinks you added to the <b>page-5.html</b> sample web page in the previous <a href="hyperlinks-intro.html">Introduction to Hyperlinks</a> Tutorial.</p>
+
+
+	<ol>
+		<li>In VS Code, in the <b>page-5.html</b> web page, add the following class to each of the hyperlinks directly under the four images.
+		<span class="inside-ol">&nbsp;</span>
+		<b>class="fancy-link"</b>
+		
+		<img src="assets/img/hyperlinks-styles/sample-one-classname.png" alt="Styling Hyperlinks with CSS">
+		
+		You can add a class name <i>anywhere</i> within the opening tag of a hyperlink. Ensure you separate it from the hyperlink attributes by a single space.
+		<span class="inside-ol">&nbsp;</span>
+		For example, both of these are correct.
+		<img src="assets/img/hyperlinks-styles/link-class-correct.png" alt="Styling Hyperlinks with CSS">
+
+		But both of these are incorrect. And for the same reason.
+		<img src="assets/img/hyperlinks-styles/link-class-incorrect.png" alt="Styling Hyperlinks with CSS">
+		There is no space between the <b>href</b> attribute and the <b>class</b>.</li>
+
+		<li>Display the <b>style-5.css</b> stylesheet.</li>
+
+	<li>At the bottom of the stylesheet flle, copy-and-paste the following:
+
+<pre class="language-css">
+<span class="token comment">/* ====== FANCY HYPERLINKS ====== */</span>
+
+<span class="token comment">/* Passive link styles */</span>
+
+<span class="token class">a.fancy-link:link</span>, <span class="token class">a.fancy-link:visited</span> {
+   <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+   <span class="token property">padding-bottom</span>: <span class="token number">2px</span>;
+} 
+
+<span class="token comment">/* Interactive link styles */</span>
+
+<span class="token class">a.fancy-link:hover</span>, <span class="token class">a.fancy-link:focus</span>, <span class="token class">a.fancy-link:active</span> {
+   <span class="token property">text-decoration</span>: <span class="token value-text">none</span>; 
+   <span class="token property">padding-bottom</span>: <span class="token number">2px</span>;
+}</pre>
+	You have now set up a selector for the <span class="csyn">.fancy-link</span> class, grouped the five possible hyperlink states into two categories for styling, and removed the default underline.
+	<span class="inside-ol">&nbsp;</span>
+	You have also added a spacing of <b>2px</b> that will separate the hyperlink text from whatever bottom border you place underneath it.</li>
+	
+	<li>For the first set of style rules that apply to the <span class="csyn">:link</span> and <span class="csyn">:visited</span> hyperlink states, enter the following CSS properties and values:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">#000</span>;
+   <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">#000</span>;
+</pre></li>
+
+	<li>For the second set of style rules that apply to three active states of the hyperlink, enter the following CSS properties and values:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">#f26f21</span>;
+   <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">blue</span>;
+</pre></li>
+
+	<li>Save your stylesheet. Display the web page in your browser and verify the style changes to the four hyperlinks.
+	
+	<img src="assets/img/hyperlinks-styles/sample-1-two-states.png" alt="Styling Hyperlinks with CSS"></li>
+
+	</ol>
+
+	<p>You are now finished working on your first sample web page.</p>
+
+	<p>Click <a href="final-hyperlinks-style/after/page-5.html" target="_blank">page-5.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
+<section id="hyperlinks-styling-two" class="wrapper-content bg-white">
+
+	<h2>Styling links on a second sample web page</h2>
+	<p>In this section you will apply CSS styles to the hyperlinks you added to the <b>page-10.html</b> sample web page in the previous <a href="hyperlinks-intro.html">Introduction to Hyperlinks</a> Tutorial.</p>
+
+	<ol>
+		<li>In VS Code, open the <b>page-10.html</b> and <b>style-10.css</b> files.</li>
+
+		<li>In the <b>page-10.html</b> web page, add the <b>fancy-link</b> class to each of the four hyperlinks. You can see an example below:
+		
+<pre class="language-html">
+ &lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">a</span> <span class="blue-light">class</span>=<span class="brown">fancy-link"</span> <span class="token blue-light">href</span><span class="token content">=</span><span class="brown">"#"</span>&gt;<span class="token content">Learn more</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt; 
+</pre>
+		</li>
+
+	<li>Save your web page and, in your web browser, verify that the four sections end with a hyperlink are displayed in the default style.
+	
+	<img src="assets/img/hyperlinks-styles/hyperlinks-empty-2.png" alt="Styling Hyperlinks with CSS">
+
+	In this exercise, we are concerned only with the styles of the hyperlinks, not with their destination. If you click any of these four links you have added, the web page will simply reload in the browser.</li>
+
+
+	<li>In VS Code, display the <b>style-10.css</b> stylesheet.</li>
+
+	<li>At the bottom of the stylesheet file, copy-and-paste the following:
+
+<pre class="language-css">
+<span class="token comment">/* ====== FANCY HYPERLINKS ====== */</span>
+
+<span class="token comment">/* Passive link styles */</span>
+
+<span class="token class">a.fancy-link:link</span>, <span class="token class">a.fancy-link:visited</span> {
+   <span class="token property">text-decoration</span>: <span class="token value-text">none</span>;
+   <span class="token property">padding-bottom</span>: <span class="token number">3px</span>;
+} 
+
+<span class="token comment">/* Interactive link styles */</span>
+
+<span class="token class">a.fancy-link:hover</span>, <span class="token class">a.fancy-link:focus</span>, <span class="token class">a.fancy-link:active</span> {
+   <span class="token property">text-decoration</span>: <span class="token value-text">none</span>; 
+   <span class="token property">padding-bottom</span>: <span class="token number">3px</span>;
+}</pre>
+	You have now set up a selector for the <span class="csyn">.fancy-link</span> class, grouped the five possible hyperlink states into two categories for styling, and removed the default underline.
+	<span class="inside-ol">&nbsp;</span>
+	You have also added a spacing of <b>3px</b> that will separate the hyperlink text from whatever bottom border you place underneath it.</li>
+	
+	<li>For the first set of style rules that apply to the <span class="csyn">:link</span> and <span class="csyn">:visited</span> hyperlink states, enter the following CSS properties and values:
+
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">#000</span>;
+   <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">#000</span>;
+</pre></li>
+
+
+	<li>For the second set of style rules that apply to three active states of the hyperlink, enter the following CSS properties and values:
+<pre class="language-css">
+   <span class="token property">color</span>: <span class="token value-text">blue</span>;
+   <span class="token property">border-bottom</span>: <span class="token value-text">solid</span> <span class="token number">2px</span> <span class="token value-text">blue</span>;
+</pre></li>
+
+
+	<li>Save your stylesheet. Display the web page in your browser and verify the style changes to the four hyperlinks.
+	
+	<img src="assets/img/hyperlinks-styles/sample-2-two-states.png" alt="Styling Hyperlinks with CSS"></li>
+
+	</ol>
+
+	<p>Let&#8217;s add two further style updates to the hyperlinks on the web page.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>page-10.html</b> file.</li>
+
+		<li>For each of the four hyperlinks, add the following HTML character code which represents a right-arrow at the end of &#8216;Learn more&#8217; text. Enter a single space after the text and before the character:
+		<span class="inside-ol">&nbsp;</span>
+		<b>&amp;#8594;</b>
+		<img src="assets/img/hyperlinks-styles/sample-2-html-character-code.png" alt="Styling Hyperlinks with CSS">
+		Such character codes always end with a semi-colon (<b>;</b>).
+		
+		You will find a complete list of HTML character codes at the website below.
+		<span class="inside-ol">&nbsp;</span>
+		<a href="https://www.toptal.com/designers/htmlarrows/" target="_blank" rel="noopener">A delightful reference for HTML Symbols, Entities and ASCII Character Codes</a></li>
+
+		<li>Display the <b>style-10.css</b> file.</li>
+
+		<li>To the style rules for the passive states of the <b>.fancy-link</b> selector, add the following new CSS property and value:
+		<span class="inside-ol">&nbsp;</span>
+		
+		<b> transition: all 0.2s linear; </b>
+		<span class="inside-ol">&nbsp;</span>
+		This adds a smooth transition effect as your hyperlinks change from their passive to active states and <i>vice versa</i>.
+		<span class="inside-ol">&nbsp;</span>
+		Your complete set of style rules for the passive states of the <b>.fancy-link</b> selector should nowlook as follows.
+		<img src="assets/img/hyperlinks-styles/transition.png" alt="Styling Hyperlinks with CSS"></li>
+
+		<li>Save your web page and stylesheet, and verify your updates display and work correctly.
+		
+		<img src="assets/img/hyperlinks-styles/sample-2-two-states-2.png" alt="Styling Hyperlinks with CSS"></li>
+
+	</ol>
+
+	<p>You are now finished working on your second sample web page.</p>
+
+
+	<p>Click <a href="final-hyperlinks-style/after/page-10.html" target="_blank">page-10.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+
+</section>
+
+
+<section id="upload-github" class="wrapper-content">
+
+
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>Upload the following web pages and stylesheets to your account on GitHub:</p>
+
+	<p><b>page-5.html</b><br>
+	<b>style-5.css</b><br>
+	<b>page-10.html</b><br>
+	<b>style-10.css</b></p>
+
+	<p>Your web pages will be published at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/page-5.html</b><br>
+	<b>https://username.github.io/page-10.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+<section id="further-resources" class="wrapper-content">
+
+	<div class="box-toc">
+		<h2>Further resources</h2>
+
+		<p><a href="https://css-tricks.com/css-basics-styling-links-like-boss/" target="_blank" rel="noopener" class="further-title">CSS Basics: Styling Links Like a Boss</a><br>
+		From <a href="https://css-tricks.com/" target="_blank" rel="noopener" style="font-weight:normal">CSS Tricks</a></p>
+
+
+	</div>
+	<p><br>Return to <a href="../index.html">All Tutorials</a>.</p>
+
+</section>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+	  },
+	  "content": {
+		"href": "https://www.munnelly.com/legal/"
+	  }
+	});
+	</script>
+
+</body>
+</html>
+
