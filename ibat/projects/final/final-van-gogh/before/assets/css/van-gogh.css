@@ -1,0 +1,749 @@
+/*  ============= WEB BROWSER RESETS ============ */
+* { margin: 0; padding: 0; border: none; box-sizing: border-box }
+html { height: 100% }
+body { min-height: 100%; max-width: 1600px; margin-left: auto; margin-right: auto }  
+img { width: 100%; height: auto; display: block }
+
+/* Begin menu styles */
+
+
+/* === ALL SCREEN SIZES ====== */
+
+/* Positions all menus in front of page content */
+.container-menu-desktop, 
+.container-menu-bar-mobile, 
+.flyout-menu { z-index: 999; font-family: sans-serif; font-weight: bold }
+.container-menu-desktop, .container-menu-bar-mobile { 
+    width:100%; ; font-family: sans-serif; font-weight: bold 
+}
+
+/* on mobiles - hide desktop menu */
+@media all and (max-width:767px) { 
+    .container-menu-desktop.menu-transparent,
+    .container-menu-desktop.menu-light,
+    .container-menu-desktop.menu-dark { display: none }
+}
+
+/* on desktops - hide mobile menu bar and list of menu options */
+@media all and (min-width:768px) { 
+    .container-menu-bar-mobile.menu-transparent,
+    .container-menu-bar-mobile.menu-light,
+    .container-menu-bar-mobile.menu-dark,
+    .flyout-menu.menu-transparent,
+    .flyout-menu.menu-light,
+    .flyout-menu.menu-light { display: none }
+}
+
+/* sticks menu to top of desktop and/or mobile screen */
+.menu-sticky { position: fixed; top: 0; left: 0; right: 0; }
+
+/* prevents content from disappearing udner sticky menus */
+.sticky-anchor {
+    position: relative;
+    border-top: 90px solid transparent;
+    margin: -90px 0 0;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+ }
+ 
+ .sticky-anchor:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+ }
+ 
+/* Height of desktop menu and mobile menu bar */
+.container-menu-desktop, .container-menu-bar-mobile { height:72px }
+
+/* website logo fixed size in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child img,
+.container-menu-bar-mobile a:first-child img { width: 200px; height: 40px }
+
+/* website logo vertically cente#3434b0 in desktop menu and mobile menu bar  */
+.container-menu-desktop    a:first-child,
+.container-menu-bar-mobile a:first-child { display: flex; flex-direction: row; align-items: center }
+
+/* hide bullet character on listed links */
+.container-menu-desktop ul li,
+.flyout-menu            ul li { list-style-type: none }
+
+/* hide link underlines on desktop and mobile menus */
+.container-menu-desktop ul li a,
+.flyout-menu            ul li a { text-decoration: none }
+
+/* make desktop menu options bold */
+.container-menu-desktop ul li a { font-weight:bold }
+
+/* style cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta,
+.flyout-menu            ul li a.btn-cta {
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    font-weight: bold;
+    /* soften corners */
+    /* border-radius: 4px; */
+    /* rounded corners */
+    border-radius: 100px
+}
+
+/* style icon in cta button on desktop and mobile menus */
+.container-menu-desktop ul li a.btn-cta i,
+.flyout-menu            ul li a.btn-cta i { margin-right: 8px; font-size: 90% }
+
+/* on mobiles, prevent scrolling outside flyout menu */
+.no-scroll { overflow: hidden }
+
+.menu-drop-shadow { box-shadow: 0 1px 10px #888 }
+
+/* ======= DESKTOP MENU ======= */
+
+/* outer parent flexbox container 
+   home page link (with website logo) at left and 
+   ul links at right are its two children */
+.container-menu-desktop {
+	display: flex;
+    justify-content: space-between;
+    padding: 0 6% 0 6%;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+/* menu links and cta button aligned horizontally */
+.container-menu-desktop ul li {
+    display: inline-block;
+    margin: 0 40px 0 0; /* spacing at right of menu links, cta button */
+}
+
+.container-menu-desktop ul li:last-child {
+    margin-right: 0 /* no spacing at right of last menu link or cta button */
+}
+
+/* vertically center menu links and cta button */
+.container-menu-desktop ul { display: flex; align-items: center }
+
+/* style text for links and cta button  */
+.container-menu-desktop ul li a {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));
+     /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button padding */
+.container-menu-desktop ul li a.btn-cta { padding: 6px 20px }
+
+
+/* ======= MOBILE MENU  ======== */
+
+/* outer flexbox container for mobile menu bar 
+   home page link (with website logo) at left and hamburger icon at right are its two children */
+.container-menu-bar-mobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+    width: 100%;
+    padding: 0 6% 0 6%;
+}
+
+/* three bars hozizontal in hamburger icon */
+.container-menu-bar-mobile .item-icon .bar1, 
+.container-menu-bar-mobile .item-icon .bar2, 
+.container-menu-bar-mobile .item-icon .bar3 { width: 36px; height: 4px; margin: 7px 0; transition: 0.4s }
+
+/* hamburger icon changes shape to 'X' when fly-out menu is visible */
+.change .bar1 { transform: rotate(-45deg) translate(-9px, 6px) }
+.change .bar2 { opacity: 0 }
+.change .bar3 { transform: rotate(45deg) translate(-8px, -8px) }
+
+/* container div for flyout menu content */
+.flyout-menu { 
+    position: fixed; display: block; 
+    top: 72px; /* same height as menu bar */
+    width: 320px; 
+    max-height: 100%;
+    height: 100%;
+    padding: 30px 40px 40px 40px;
+    transition: 0.5s;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* safari on mobiles */    
+}
+
+.flyout-menu.flyout-menu-is-closed {
+    right: -320px; /* hides flyout menu */
+}
+
+.flyout-menu {
+    right: 0; /* displays flyout menu */
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain
+}
+
+/* drop shadow border at left of fly-out menu */
+.flyout-menu {
+    box-shadow: 0px 1px 10px #888 
+}
+
+/* list of links on flyout menu */
+.flyout-menu ul li { margin: 0 40px 30px 0 }
+
+/* style flyout menu links */
+.flyout-menu ul li a {
+    font-size: 18px;
+    /* font-weight:bold */
+    /* text-transform: uppercase */
+}
+
+/* cta button */
+.flyout-menu a.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
+}
+
+.flyout-menu hr { 
+    height: 4px;
+    margin: 32px 0 0 0;
+    border-style: solid;
+    border-width: 1px 
+} 
+
+.flyout-menu h4 {
+    font-size: 20px;
+    margin: 42px 0 4px 0;
+    text-align: center;
+    /* letter-spacing: 2px; *./
+    /* text-transform: uppercase */
+}
+
+.flyout-menu h5 {
+    font-size: 17px;
+    margin: 20px 0 20px 0;
+    text-align: center
+}
+
+.flyout-menu h5 a {
+    font-size: 17px;
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px
+}
+
+.flyout-menu p { 
+    text-align: center; font-size: 15px; line-height: 1.4;
+}
+
+.flyout-menu div.fly-out-profile-box,
+.flyout-menu div.fly-out-social-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.flyout-menu div.fly-out-profile-box img,
+.flyout-menu div.fly-out-profile-box p { width: 47% }
+
+.flyout-menu div.fly-out-profile-box img {
+    display: block; border-radius: 100%;
+    width: 104px; height: 104px; 
+    border-style: solid;
+    border-width: 2px
+}
+
+.flyout-menu div.fly-out-profile-box p {
+    text-align:left 
+}
+
+.flyout-menu div.fly-out-social-icons { 
+    margin-top:12px
+}
+
+.flyout-menu div.fly-out-social-icons a {
+    font-size: 26px;
+    text-align: center 
+}
+
+/* ========= Light background menu - desktops and mobiles ========= */
+
+/* background colour */
+.menu-light { 
+	background-color: #fff;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-light ul li a:link,  .menu-light ul li a:visited { color: #3434b0 }
+.menu-light ul li a:hover, .menu-light ul li a:active  { color: #222 }
+
+/* cta button */
+.menu-light ul li a.btn-cta:link, 
+.menu-light ul li a.btn-cta:visited {
+    background-color: transparent;
+    color: #3434b0;
+    border-color:#3434b0
+}
+
+.menu-light ul li a.btn-cta:hover,
+.menu-light ul li a.btn-cta:active {
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#3434b0
+}
+
+/* on mobiles only */
+.menu-light.flyout-menu hr { background-color: #3434b0; border-color: #3434b0 } 
+
+.menu-light.flyout-menu h4,
+.menu-light.flyout-menu h5,
+.menu-light.flyout-menu h5 a, 
+.menu-light.flyout-menu p { color: #3434b0 } 
+
+/* colour of hamburger icon bars */
+.menu-light .item-icon .bar1, 
+.menu-light .item-icon .bar2, 
+.menu-light .item-icon .bar3 { background-color: #3434b0 }	
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #3434b0 }
+
+/* email link */
+.menu-light.flyout-menu h5 a:link, 
+.menu-light.flyout-menu h5 a:visited {
+    border-bottom-color:#3434b0;
+}
+
+.menu-light.flyout-menu h5 a:hover, 
+.menu-light.flyout-menu h5 a:active {
+    border-bottom-color: #fff;
+}
+
+/* profile image border colour */
+.menu-light.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-light.flyout-menu .fly-out-social-icons a i { color:#3434b0 }
+
+/* === End light background menu === */
+
+
+
+/* ======= Dark background menu - desktops and mobiles ======= */
+
+/* background colour */
+.menu-dark { 
+	background-color: #3434b0; 
+	transition: all .5s ease-in-out
+}
+
+/* menu links */
+.menu-dark ul li a:link,  .menu-dark ul li a:visited { color: #fff }
+.menu-dark ul li a:hover, .menu-dark ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-dark ul li a.btn-cta:link,
+.menu-dark ul li a.btn-cta:visited { 
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#fff
+}
+
+.menu-dark ul li a.btn-cta:hover,
+.menu-dark ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: #3434b0;
+    border-color:#fff
+}
+
+/* on mobiles only - various content */
+.menu-dark.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-dark.flyout-menu h4,
+.menu-dark.flyout-menu h5,
+.menu-dark.flyout-menu h5 a,
+.menu-dark.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-dark .item-icon .bar1, 
+.menu-dark .item-icon .bar2, 
+.menu-dark .item-icon .bar3 { background-color: #fff }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-dark.flyout-menu h5 a:link, 
+.menu-dark.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-dark.flyout-menu h5 a:hover, 
+.menu-dark.flyout-menu h5 a:active {
+    border-bottom-color: #3434b0;
+}
+
+/* profile image border colour */
+.menu-dark.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-dark.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End dark background menu === */
+
+
+
+/* ======== Transparent background menu - desktops and mobiles =========== */
+
+/* background colour */
+.menu-transparent { 
+	background-color: transparent;
+	transition: all .5s ease-in-out;
+}
+
+/* menu links */
+.menu-transparent ul li a:link,  .menu-transparent ul li a:visited { color: #fff }
+.menu-transparent ul li a:hover, .menu-transparent ul li a:active  { color: #b8b8b8 }
+
+/* cta button */
+.menu-transparent ul li a.btn-cta:link,
+.menu-transparent ul li a.btn-cta:visited { 
+    background-color: #3434b0;
+    color: #fff;
+    border-color:#3434b0;
+}
+
+.menu-transparent ul li a.btn-cta:hover,
+.menu-transparent ul li a.btn-cta:active { 
+    background-color: #fff;
+    color: #3434b0;
+    border-color:#3434b0
+}
+
+/* on mobiles only - various content */
+.menu-transparent.flyout-menu hr { background-color: #fff; border-color:#fff } 
+
+.menu-transparent.flyout-menu h4,
+.menu-transparent.flyout-menu h5,
+.menu-transparent.flyout-menu h5 a,
+.menu-transparent.flyout-menu p { color:#fff } 
+
+/* colour of hamburger icon bars */
+.menu-transparent .item-icon .bar1, 
+.menu-transparent .item-icon .bar2, 
+.menu-transparent .item-icon .bar3 { background-color: #3434b0 }
+
+/* phone number link */
+a[href^=tel] { text-decoration: none; color: #fff }
+
+/* email link */
+.menu-transparent.flyout-menu h5 a:link, 
+.menu-transparent.flyout-menu h5 a:visited {
+    border-bottom-color: #fff;
+}
+
+.menu-transparent.flyout-menu h5 a:hover, 
+.menu-transparent.flyout-menu h5 a:active {
+    border-bottom-color: #3434b0;
+}
+
+/* profile image border colour */
+.menu-transparent.flyout-menu div.fly-out-profile-box img { border-color: #3434b0 }
+
+/* contact icons */
+.menu-transparent.flyout-menu .fly-out-social-icons a i { color:#fff }
+
+/* === End transparent background menu === */
+
+
+/* *****************************************************************
+================END OF MENU STYLES TO COPY AND PASTE ===============
+****************************************************************** */
+
+
+
+/* ========== PAGE CONTAINER ========= */
+
+/* All screen sizes */
+body { background-color: #FFFFBD }
+
+/* Desktops */
+@media (min-width: 768px) { 
+    .page-wrapper  { padding: 10% 20% } }
+
+/* Mobiles */
+@media (max-width: 767px) { 
+    .page-wrapper  { padding:30% 9% }
+}
+
+/* Main heading */
+.page-wrapper h1 {
+    font-family: 'Merriweather', serif;    
+    font-size: calc(44px + (84 - 44) * ((100vw - 320px) / (1600 - 320)));
+    font-weight: normal;
+    color: #3434B0;
+    letter-spacing: -2px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* Small headings */
+.page-wrapper h2 {
+    font-family: 'Merriweather', serif;    
+    font-size: calc(20px + (26 - 20) * ((100vw - 320px) / (1600 - 320)));
+    color:#3434B0;
+    line-height: 1.8;
+    margin-bottom: 4px;
+}
+
+/* Smaller headings */
+.page-wrapper h3 {
+    font-family: 'Merriweather', serif;    
+    font-size: calc(26px + (42 - 26) * ((100vw - 320px) / (1600 - 320)));
+    color: #000;
+    letter-spacing:-2px;
+    margin-top: 56px;
+    margin-bottom: 2px;
+}
+
+/* Text paragraphs */
+.page-wrapper p {
+    font-family: 'Merriweather', serif;
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1600 - 320)));
+    color: #455C80;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 22px;
+}
+
+/* Text paragraphs */
+.page-wrapper p.caption {
+    line-height: 1.6;
+    margin-top: -12px;
+    margin-bottom: 42px;
+    font-size: calc(15px + (20 - 15) * ((100vw - 320px) / (1600 - 320)));
+}
+
+
+
+
+/* Images */
+.page-wrapper img { 
+    margin-bottom: 42px;
+    /* Drop shadow effect at right and bottom of image*/
+    box-shadow: 8px 10px 8px #888;    
+}
+
+/* ====== FANCY HYPERLINKS ====== */
+
+/* Passive link styles */
+
+a.fancy-link:link, a.fancy-link:visited {
+    text-decoration: none;
+    padding-bottom: 2px;
+    color: #000;
+    border-bottom: solid 2px #000;
+} 
+ 
+ /* Interactive link styles */
+ 
+ a.fancy-link:hover, a.fancy-link:focus, a.fancy-link:active {
+    text-decoration: none; 
+    padding-bottom: 2px;
+    color: #f26f21;
+    border-bottom: solid 2px #3434b0;    
+}
+
+/* =============== BEGIN FOOTER CSS ================== */
+
+
+/* == Begin footer CSS == */
+
+/* Outer footer parent container */
+.container-footer { 
+    text-align: center;
+    color:#fff;
+    background-color:rgb(36,64,84);
+}
+
+/* Desktop footer - inside padding  */
+@media all and (min-width:768px) {
+	.container-footer { padding: 4% 8% 4% 8% }
+}
+
+/* Mobiles footer - inside padding */
+@media all and (max-width:767px) {
+	.container-footer { padding: 8% 8% 12% 8% }
+}
+
+/* Styles for footer background, text, icons and links */
+
+.container-footer h4,
+.container-footer h5,
+.container-footer ul li,
+.container-footer ul li a,
+.container-footer p,
+.container-footer p a {
+   color: #fff
+}
+
+/* Footer headings */
+.container-footer h4 {
+   font-family: serif;
+   font-weight: normal;
+   font-style: italic;
+   font-size: calc(26px + (48 - 26) * ((100vw - 320px)/(1600 - 320)));
+   margin: 0 auto 16px 0;
+}
+
+.container-footer h5 {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style:  italic;
+    color: #38a696;
+    margin: 0 auto 36px auto;
+    font-size: calc(20px + (32 - 20) * ((100vw - 320px)/(1600 - 320)));
+}
+
+/* Footer text links and icon links */
+.container-footer ul.footer-links,
+.container-footer ul.footer-icons {
+    list-style-type: none;
+}
+
+.container-footer ul.footer-links {
+    margin: 0 auto 48px auto;
+}
+
+.container-footer ul.footer-icons {
+    margin: 0 auto 48px auto;
+}
+
+.container-footer ul.footer-links li,
+.container-footer ul.footer-icons li {
+    display: inline-block;
+    margin: 0 32px 0 0;
+}
+
+.container-footer ul.footer-links li:last-child,
+.container-footer ul.footer-icons li:last-child {
+    margin-right: 0;
+}
+
+/* Footer text links */
+.container-footer ul.footer-links li a {
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(17px + (20 - 17) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer ul.footer-links li a:link, 
+.container-footer ul.footer-links li a:visited  {
+   border-bottom-color: transparent;
+}
+
+.container-footer ul.footer-links li a:hover, 
+.container-footer ul.footer-links li a:active  {
+   border-bottom-color: #38a696;
+}
+
+/* Footer icons */
+.container-footer ul.footer-icons li a i {
+    text-decoration: none;
+    font-size: calc(22px + (28 - 22) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer ul.footer-icons li a:hover, 
+.container-footer ul.footer-icons li a:active  {
+   color: #38a696
+}
+
+/* Privacy and legal link */
+.container-footer p a {
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1600 - 320)));
+}
+
+.container-footer p a:link, 
+.container-footer p a:visited  {
+   border-bottom-color: transparent;
+}
+
+.container-footer p a:hover, 
+.container-footer p a:active  {
+   border-bottom-color: #38a696
+}
+
+a.privacy-legal {
+    font-family: sans-serif;    
+    display: inline-block;
+    color:#fff;
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding-bottom:2px;    
+    font-size: calc(14px + (17 - 14) * ((100vw - 320px)/(1600 - 320)));
+}
+
+a.privacy-legal:link,
+a.privacy-legal:visited {
+    border-bottom-color: transparent;
+}
+
+a.privacy-legal:active,
+a.privacy-legal:hover {
+    border-bottom-color: #38a696
+}
+
+/* == End footer CSS == */
+
+/* ----------------------------------------------
+ * Generated by Animista 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+ .slide-in-left {
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.video-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+ }
+ 
+ .video-container::after {
+    padding-top: 56.25%;
+    display: block;
+    content: '';
+ }
+ 
+ .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ }
