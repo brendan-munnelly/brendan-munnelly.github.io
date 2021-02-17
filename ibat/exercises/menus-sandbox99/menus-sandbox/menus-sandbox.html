@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+    
+    <title>menus-template</title>
+    <meta name="description" content="menus-template">
+    
+    <link href="menus-sandbox.css" rel="stylesheet">
+
+    <!-- Link to icons for Font Awesome 5 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">  
+
+</head>
+
+
+<body>
+
+
+    
+    <!-- Begin page main content -->
+        
+    <div class="page-wrapper">
+
+        <img src="dublin.jpg" alt="Dublin Customs House">
+
+        <h1>Hello, Dublin</h1>
+             
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis massa vitae ligula tempor mattis in a augue. Aenean semper eros elit, eu fermentum nisi viverra ut. Curabitur mattis elit ac condimentum efficitur. Sed cursus, libero id molestie lacinia, metus justo consequat nunc, at egestas ex justo vitae arcu. Aenean aliquam elit laoreet porta faucibus.</p>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ipsum at risus feugiat facilisis at et orci.</p>
+
+		<p>Donec ut leo eget risus mattis mattis non vitae massa. Aenean efficitur fermentum orci ac blandit. Quisque tempus tincidunt metus at interdum. Aenean elementum vehicula tellus id gravida. Aenean mollis sollicitudin elit.</p>
+
+		<p>Morbi eu ipsum sed nunc porta posuere. Donec et mi accumsan, eleifend augue ac, pellentesque risus. Maecenas in egestas dolor, vitae consequat dui.</p>
+
+		<p>Ut quis rhoncus lorem. Duis mauris arcu, luctus et velit eu, luctus rutrum magna. Morbi volutpat bibendum libero sed pellentesque. Maecenas eu scelerisque mauris. Morbi eu ipsum sed nunc porta posuere. Donec et mi accumsan, eleifend augue ac, pellentesque risus.</p>
+
+		<p>Pellentesque non dignissim tellus. Suspendisse potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>
+
+		<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
+
+		<p>Pellentesque non dignissim tellus. Ut convallis euismod quam non luctus potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>
+
+		<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
+
+		<p>Pellentesque non dignissim tellus. Suspendisse potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>
+
+		<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
+
+        <p>Pellentesque non dignissim tellus. Ut convallis euismod quam non luctus potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>
+        
+    	<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
+
+		<p>Pellentesque non dignissim tellus. Suspendisse potenti. Ut convallis euismod quam non luctus. Etiam vel sapien at sem elementum tempor eget at dolor. Integer et fringilla dolor. Duis velit turpis, faucibus id lorem a, eleifend pellentesque nisi.</p>
+
+		<p>Nunc rhoncus, massa in scelerisque lacinia, nulla justo porta eros, vel pulvinar mauris ligula vitae dui. Quisque massa nibh, venenatis sed tortor ut, tincidunt imperdiet sapien. Ut vehicula sit amet orci non sollicitudin.</p>
+
+	</div>
+
+	<!-- End of page main content-->
+
+
+	<!-- Begin JavaScript code for desktop and mobile menus -->
+    <script>
+
+        // Code to detect click of option within fly-out menu
+        let specifiedElement = document.querySelector('.flyout-menu');
+        document.addEventListener('click', function(event) {
+            var isClickInside = specifiedElement.contains(event.target);
+            //If link is within current web page
+            if (isClickInside) {
+                //Get id of anchor
+                let anchor_id = window.location.hash;
+                //Add extra spacing above anchor
+                let elemAnchor = document.querySelector(anchor_id)
+                elemAnchor.classList.add('sticky-anchor');
+                //Close fly-out menu
+                toggleMobileMenu();
+            }
+            else {
+                return;
+            }
+        });
+
+	    // Code to show/hide fly-out mobile menu -->
+        document.querySelector('.item-icon').addEventListener('click', toggleMobileMenu)
+        const pageContainer = document.querySelector('.page-container');
+   
+        function toggleMobileMenu() {
+            //toggle hamburger icon
+            const elemIcon = document.querySelector('.item-icon');
+            elemIcon.classList.toggle("change");
+            const elemHTML = document.querySelector('html');
+            const elemBody = document.querySelector('body');            
+            const elemFlyOut = document.querySelector('.flyout-menu');
+
+            //if fly-out menu is currently closed, open it.
+            if (elemIcon.classList.contains('change')) {
+                elemFlyOut.classList.remove('flyout-menu-is-closed');
+                elemFlyOut.classList.add('flyout-menu-is-open');
+                elemHTML.classList.add('no-scroll');
+                elemBody.classList.add('no-scroll');
+            }    
+            //if fly-out menu is currently open, close it.
+            else {
+                elemFlyOut.classList.remove('flyout-menu-is-open');
+                elemFlyOut.classList.add('flyout-menu-is-closed');
+                elemHTML.classList.remove('no-scroll');
+                elemBody.classList.remove('no-scroll');                                
+            }
+        }
+
+		// Code for menus with transparent background
+		//window.onscroll = function() {swapMenuStyle()};
+		const headerDesktop = document.querySelector('.container-menu-desktop');
+		const headerMobile = document.querySelector('.container-menu-bar-mobile');
+
+		const stickyDesktop = headerDesktop.offsetTop +300;
+		const stickyMobile = headerDesktop.offsetTop  +300;
+
+		function swapMenuStyle() {
+			if (window.pageYOffset > stickyDesktop) {
+				headerDesktop.classList.add("menu-light","menu-drop-shadow");
+				headerDesktop.classList.remove("menu-transparent");
+				headerMobile.classList.add("menu-light","menu-drop-shadow");
+				headerMobile.classList.remove("menu-transparent");
+
+			} else {
+				headerDesktop.classList.add("menu-transparent");
+				headerDesktop.classList.remove("menu-light","menu-drop-shadow");
+				headerMobile.classList.add("menu-transparent");
+				headerMobile.classList.remove("menu-light","menu-drop-shadow");
+			}
+		}
+
+	</script>
+	<!-- End JavaScript code for desktop and mobile menus -->
+
+
+</body>
+</html>
