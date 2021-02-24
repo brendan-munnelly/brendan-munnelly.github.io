@@ -7,6 +7,8 @@
 
     <title>Introduction to CSS | Web Design & Development Tutorials | Brendan Munnelly</title>
     <meta name="description" content="Understanding the basic structure of a CSS stylesheet, and recognising the most commonly used CSS properties in web design.">
+	
+    <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet-->
     <link rel="stylesheet" href="assets/css/brendan-munnelly-web-design-tutorials.css" />
@@ -38,18 +40,27 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-        <div class="sidebar">
-            <img src="assets/img/global/ibat-logo-desktop.png" id="ibat-logo-desktop" alt="ibat logo">
-            <img src="assets/img/global/ibat-logo-mobile.png"  id="ibat-logo-mobile"  alt="ibat logo"> 
-            <p>
-                <img src="assets/img/global/Brendan-Munnelly-IBAT-College.jpg" id="Brendan-Munnelly" alt="Brendan Munnelly, IBAT Lectuer in Web Design">
-                <a href="mailto:bmunnelly@ibat.ie">Brendan Munnelly</a>
-            </p>
-        </div>
-        <div class="content">
-            <h1>Introduction to CSS</h1>
-            <h2>Understanding the basic structure of a CSS stylesheet, and recognising the most commonly used CSS properties in web design.</h2>
-        </div>
+        <div class="wrapper">
+            <div class="sidebar">
+                <a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener">
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="assets/img/global/ibat-logo-desktop.png">
+                        <source media="(max-width: 767px)" srcset="assets/img/global/ibat-logo-mobile.png">
+                        <img src="assets/img/global/ibat-logo-desktop.png" alt="IBAT College Diploma in Web Design, Brendan Munnelly">
+                    </picture>
+                </a>
+                
+                <div>
+                    <img src="assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, IBAT Lecturer in Web Design">
+                    <p id="myEmail">bmunnelly@ibat.ie</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>About CSS Files</h1>
+                <h2>Understanding a CSS stylesheet, and recognising the most commonly used CSS properties in web design.</h2>
+            </div>
+        </div><!-- /wrapper -->
     </header>
     
     <main>
@@ -57,7 +68,7 @@
         <aside>
             <h3>COURSE</h3>
 
-            <p><a href="https://www.munnelly.com/ibat/">Home</a></p>
+            <p><a href="../index.html">Home</a></p>
 
             <h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
@@ -438,7 +449,7 @@
             
                     </li>
             
-                    <li>To increase the letter-spacing, use a negative value. For example:
+                    <li>To increase the letter-spacing, use a positive value. For example:
             
             <pre class="language-css">
               <span class="token class">h2</span> <span class="token white">(</span>
@@ -668,6 +679,20 @@
 			"href": "https://www.munnelly.com/legal/index.html"
 		}
 	});
+    </script>
+
+    <script>
+        document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+        document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+        function copyEmail() {
+            document.execCommand("copy");
+            const email_id   = document.querySelector("#myEmail");
+            const email_text = document.querySelector("#myEmail").innerText;
+            email_id.classList.remove("emailAnimation");
+            void email_id.offsetWidth;
+            email_id.classList.add("emailAnimation");
+        }
     </script>
 
 </body>
