@@ -11,6 +11,130 @@ input, button, textarea, select { font: inherit }
 
 body { font-family: 'Open Sans', sans-serif }
 
+
+/* ============ SEMANTIC BLOCKS =========== */
+
+header { width: 100% }
+
+/* ============ WRAPPER FOR CONTENT =========== */
+
+.wrapper { 
+	margin: 0 auto; padding: 0 16px; position: relative; 
+	display: flex; justify-content: space-between; flex-wrap: wrap 
+}
+
+@media (max-width: 575px)                          { .wrapper { max-width: 90% } }
+@media (min-width: 576px)  and (max-width: 767px)  { .wrapper { max-width: 90% } }
+@media (min-width: 768px)  and (max-width: 1024px) { .wrapper { max-width: 92% } }
+@media (min-width: 1025px) and (max-width: 1199px) { .wrapper { max-width: 88% } }
+@media (min-width: 1200px) and (max-width: 1399px) { .wrapper { max-width: 90% } }
+@media (min-width: 1400px)                         { .wrapper { max-width: 80% } }
+
+
+/* ================== HEADER ==================== */
+
+header {
+	background: linear-gradient(#0460CD, #021b79);
+	box-shadow: rgba(0, 0, 0, 0.5) 0 2px 4px 0;
+}
+
+/* Main content of header */
+header h1, header h2, header content p { color: #fff }
+header h1 { 
+    font-weight: 800; line-height: 1.3; letter-spacing: -1px;
+    margin-bottom: 20px;
+    font-size: calc(30px + (46 - 30) * ((100vw - 320px)/(1600 - 320)));
+}
+
+header h2 { 
+    font-weight: 400; line-height: 1.8; 
+    font-size: calc(16px + (20 - 16) * ((100vw - 320px)/(1600 - 320)));
+}
+
+header h2 a { text-decoration: underline solid; text-underline-position: under; font-weight: 600 }
+
+header h2 a:link, header h2 a:visited  {
+	color: #fff; text-decoration-color: #fff;
+}
+
+header h2 a:hover, header h2 a:hover, header h2 a:active  {
+	color: yellow; text-decoration-color: yellow;
+}
+
+header content p { line-height: 1.6; color: #fff }
+
+/* Small Mobiles */
+@media (max-width: 500px) { 
+	header { padding: 9% 0 10% 0 } 
+	header .sidebar, header .content { width: 100% }
+}
+
+/* Big Mobiles */
+@media (min-width: 501px) and (max-width: 767px) { 
+	header { padding: 6% 0 7% 0 } 
+	header .sidebar, header .content { width: 100% }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) { 
+	header { padding: 3.5% 0 3.7% 0; margin-bottom: 32px } 
+	header .sidebar { width: 20% }
+	header .content { width: 72% }   
+    header h1 { font-size: calc(22px + (36 - 22) * ((100vw - 320px)/(1600 - 320))); }
+    header h2 { font-size: calc(16px + (20 - 16) * ((100vw - 320px)/(1600 - 320))); }
+}
+
+/* Small Desktops */
+@media (min-width: 1025px) and (max-width: 1199px){ 
+	header { padding: 2.5% 0 2.7% 0; margin-bottom: 32px } 
+	header .sidebar { width: 24% }
+	header .content { width: 70% }   
+}
+
+/* Big Desktops */
+@media (min-width: 1200px) { 
+	header { padding: 2.5% 0 2.7% 0; margin-bottom: 32px } 
+	header .sidebar { width: 18% }
+	header .content { width: 77%; padding-right: 16% }   
+}
+
+/* Sidebar of header */
+header .sidebar picture img { margin-bottom: 20px; max-width: 300px }
+header .sidebar div { display: flex }
+
+/* Viewports */
+@media (max-width: 767px) { 
+    header .sidebar div { flex-direction: row; margin-bottom: 22px } 
+    header .sidebar div p { margin-left: 14px; align-self: center } 
+}
+
+@media (min-width: 768px) and (max-width: 1299px) { 
+    header .sidebar div { flex-direction: column } 
+    header .sidebar div p { margin-left: 0; margin-top: 12px; align-self: flex-start } 
+}
+
+@media (min-width: 1300px)  { 
+    header .sidebar div { flex-direction: row } 
+    header .sidebar div p { 
+        margin-left: 14px; align-self: center;
+        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1600 - 320))); 
+    }
+}
+
+header .sidebar div img { border-radius: 50%; max-width: 40px; max-height: 40px }
+header .sidebar div p { color: #fff; line-height: 1 }
+
+header .sidebar div .emailAnimation {
+    animation: emailTextColor 2s step-end both;
+}
+
+@keyframes emailTextColor {
+    from { color: yellow }
+    to   { color: white }
+}
+
+
+
 /* ================== CONTENTS BLOCK ==================== */
 
 /* Desktops  */
@@ -68,75 +192,7 @@ nav.box-toc p.toc-indent { margin-left: 40px }
 
 
 
-/* ================== HEADER ==================== */
 
-header {
-    background: linear-gradient(#0460CD, #021b79);
-    box-shadow: rgba(0, 0, 0, 0.5) 0 2px 4px 0;
-	display: flex; 
-	justify-content: space-between; 
-	flex-wrap: wrap;
-}
-
-header h1, header h2 { color: #fff }
-header img#Brendan-Munnelly { display: inline; float: left; border-radius: 50% }
-
-/* Desktops  */
-@media (min-width: 768px) { 
-	header #ibat-logo-mobile { display: none }
-	header { padding: 3.5% 10% 2.5% 4% } 
-	header .sidebar { width: 18% }
-	header .content { width: 75% }
-	header h1 { line-height: 1.2 } 
-	header h2 { line-height: 1.6 }
-	header p { margin-bottom: 0 }
-	header img { max-width: 190px; margin-bottom: 20px }
-	header img#Brendan-Munnelly { max-width: 30px; margin: 0 14px 0 0 }
-}
-
-/* Mobiles */
-@media (max-width: 767px) { 
-	header #ibat-logo-desktop { display: none }
-	header { padding: 9% 8% 10% 8% } 
-	header .sidebar, header .content { width: 100% }
-	header h1 { line-height: 1.2 } 
-	header h2 { line-height: 1.6 }
-	header img { margin-bottom: 14px }
-	header p { margin-bottom: 32px }
-	header img#Brendan-Munnelly { max-width: 30px; margin-right: 14px }
-}
-
-header h1 {
-	margin: -6px 0 20px 0;
-	font-size: calc(30px + (48 - 30) * ((100vw - 320px)/(1600 - 320)));
-	font-weight: 800;
-	letter-spacing: -1px;
-}
-
-header h2 {
-	font-weight: normal;
-	font-size: calc(16px + (20 - 16) * ((100vw - 320px)/(1600 - 320)));
-}
-
-header p { line-height: 1.6 }
-
-/* Header: hyperlinks */
-header p a { 
-	color: #fff;
-	text-decoration: none;
-	padding-bottom:2px;
-	border-bottom-width: 1px;
-	border-bottom-style: solid
-}
-
-header p a:link, header p a:visited {
-	border-bottom-color: #fff;
-	transition: 0.2s
-}
-
-header p a:hover, header p a:active {
-	border-bottom-color: red;
-}
 
 /* ================== MAIN CONTENT AREA ==================== */
 
