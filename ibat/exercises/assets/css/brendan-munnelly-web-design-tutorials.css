@@ -27,7 +27,7 @@ header { width: 100% }
 @media (min-width: 576px)  and (max-width: 767px)  { .wrapper { max-width: 90% } }
 @media (min-width: 768px)  and (max-width: 1024px) { .wrapper { max-width: 92% } }
 @media (min-width: 1025px) and (max-width: 1199px) { .wrapper { max-width: 88% } }
-@media (min-width: 1200px) and (max-width: 1399px) { .wrapper { max-width: 90% } }
+@media (min-width: 1200px) and (max-width: 1399px) { .wrapper { max-width: 94% } }
 @media (min-width: 1400px)                         { .wrapper { max-width: 80% } }
 
 
@@ -93,9 +93,9 @@ header content p { line-height: 1.6; color: #fff }
 
 /* Big Desktops */
 @media (min-width: 1200px) { 
-	header { padding: 2.5% 0 2.7% 0; margin-bottom: 32px } 
-	header .sidebar { width: 18% }
-	header .content { width: 77%; padding-right: 16% }   
+	header { padding: 2.5% 0 2.7% 0; /* margin-bottom: 32px */ } 
+	header .sidebar { width: 19% }
+	header .content { width: 75%; padding-right: 16% }   
 }
 
 /* Sidebar of header */
@@ -204,7 +204,9 @@ main {
 
 /* Desktops  */
 @media (min-width: 768px) { 
-	main { padding: 3% 20% 2% 0 }
+	/* main { padding: 3% 20% 2% 0 } */
+	main { padding: 3px 20% 2% 0 }
+
 	main section:last-child { margin-bottom: 0 }	 
 }
 
@@ -217,12 +219,14 @@ main {
 /* Desktops  */
 @media (min-width: 768px) { 
 	aside { 
-        width: 25%; 
-        top: 3%; height: 110vh; min-height: 200px; overflow: auto;
+        width: 27.7%; 
+        top: 0.5%; height: 110vh; min-height: 200px; overflow: auto;
         position: -webkit-sticky; position: sticky;
-        padding: 0 0 0 5%;
+        padding: 0 3% 0 5%;
+		background-color: #ECF0F1;
+		margin-bottom: -26px;
     }
-    article { width: 68%; min-height: 1000px }
+    article { padding-top: 32px; width: 66%; min-height: 1000px }
 }
 
 /* Mobiles */
@@ -233,11 +237,42 @@ aside   > *:last-child,
 article > *:last-child { margin-bottom: 0 }
 
 /* Aside hyperlinks */
+main aside h3 { 
+	font-size: calc(16px + (16 - 15) * ((100vw - 320px)/(1600 - 320)));
+	margin-top: 18px; line-height: 1.4;
+}
 
 aside p { 
 	font-size: calc(15px + (15 - 15) * ((100vw - 320px)/(1600 - 320)));
-	margin-bottom: 8px; line-height: 1.4
+	margin-bottom: 12px; line-height: 1.4;
 }
+
+aside p i, aside li i { color: #230cea }
+
+aside p a, aside li a {
+	text-decoration: underline solid; 
+	text-underline-position: under; 
+	font-weight: 600;
+}
+
+main aside p a:link, 
+main aside p a:visited,
+main aside li a:link,
+main aside li a:visited {
+	color: #230cea 
+}
+
+main aside p a:focus, 
+main aside p a:hover, 
+main aside p a:active, 
+main aside li a:focus
+main aside li a:active,
+main aside li a:hover {
+	color: #222;
+	transition: 0.3s;
+}
+
+main aside p a.menu-item-selected { font-weight: 700 }
 
 /* ================== SECTIONS ==================== */
 
@@ -321,7 +356,7 @@ section img { margin: 32px 0 40px 0 }
 
 /* Desktops */
 @media (min-width: 768px) { 
-	section p { margin: 0 0 20px 0; line-height: 1.6 }
+	section p { margin: 0 0 18px 0; line-height: 1.6 }
 }
 
 /* Mobiles */
@@ -350,7 +385,7 @@ section ol > li span.inside-ol { display: block; line-height: 1 }
 
 /* Desktops */
 @media (min-width: 768px) {
-	section p + ul, section p + ol { margin-top: -4px }
+	/* section p + ul, section p + ol { margin-top: -4px } */
 }
 
 /* Mobiles */
@@ -389,7 +424,7 @@ section ul > li:before {
 		padding-left: 20px ;
 		text-indent: -21px ;
 		margin: 0 0 20px 21px;
-		line-height: 1.6
+		line-height: 1.5
 	}	
 	section ul li:before { margin-right: 20px }
 }
@@ -398,9 +433,9 @@ section ul > li:before {
 @media (max-width: 767px) {
 	section ul { margin: 0 0 12px 0 }
 	section ul li { 
-		line-height: 1.6;
+		line-height: 1.5;
 		padding-left: 18px;
-		text-indent: -18px;
+		text-indent: -20px;
 		margin: 0 0 12px 18px
 	}
 	section ul li:before { margin-right: 18px }	
@@ -535,8 +570,13 @@ table.table-gray thead th p {
 }
 
 /* =========== Screenshots ============= */
-img.wider-110 { width: 110% }
-img.wider-115 { width: 115% }
+
+/* Desktops */
+@media (min-width: 768px) {
+	img.wider-105 { width: 105% }
+	img.wider-110 { width: 110% }
+	img.wider-115 { width: 115% }
+}
 
 /* ================== FOOTER ==================== */
 
@@ -651,7 +691,7 @@ pre {
 	font-family: 'Roboto Mono', monospace, sans-serif;
 	color: #fff;
 	font-weight: bold;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: calc(14px + (16 - 14) * ((100vw - 320px)/(1600 - 320)));
 	line-height: 1.8;
 	margin: 12px 0 24px 0;
@@ -870,21 +910,24 @@ a.link-exercise:hover, a.link-exercise:active {
 }
 
 .four-samples {
-	margin-top: 0;
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
 
-
-span.link-bold { font-weight: bold }
-
-.four-samples { margin-top:0; margin-bottom: 20px }
 .four-samples div { width: 47% }
 
 .four-samples div img { margin: 0 0 -20px 0 }
 
-.four-samples div a { display: block; margin: 0 0 32px 0; line-height: 1 }
+.four-samples div a { 
+	display: block; margin: 0 0 32px 0; line-height: 1;
+	font-size: calc(14px + (16 - 14) * ((100vw - 320px)/(1600 - 320)));
+}
+
+span.link-bold { font-weight: bold }
+
+
+
 
 
 
@@ -900,7 +943,7 @@ div.typewriter {
 div.typewriter h1,
 div.typewriter h2,
 div.typewriter h3,
-div.typewriter p { font-family: 'Roboto Mono', monospace; color: #000;font-size: 15px }
+div.typewriter p { font-family: 'Roboto Mono', monospace; color: #000; font-size: 15px }
 
 /* === Chapters TOC ==== */
 
@@ -936,8 +979,8 @@ div.box-toc p a {
 	.box-warning div:first-child img { margin: 0 }
 	.box-warning div:last-child p {
 		font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
-		margin-bottom: 6px;
-		line-height: 1.4; 
+		margin-bottom: 8px;
+		line-height: 1.6; 
 	}
 
 	.box-warning div:first-child { width: 18%; padding: 0 10px 0 0 }
@@ -970,3 +1013,27 @@ div.box-toc p a {
 	pre.language-html .yellow,
 	pre.language-css  .yellow { color: rgb(220,220,170) }
 	
+
+	kbd.tutorial-key {
+		display: inline-block;
+		background-color: #eee;
+		border-radius: 5px;
+		border: 1px solid #b4b4b4;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+		color: #555;
+		font-weight: 600;
+		line-height: 1;
+		padding: 3px 5px;
+		white-space: nowrap;
+		cursor: default;
+		letter-spacing: 1px;
+		user-select: none;
+		font-family: 'Open Sans', sans-serif;
+		display: inline-block;
+		margin: 0 2px;
+		font-size: 98%;
+	}
+
+
+	.no-margin-top { margin-top: 0 }
+	.no-margin-bottom { margin-bottom: 0 }
