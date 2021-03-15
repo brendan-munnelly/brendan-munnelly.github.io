@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with Colours | Web Design & Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Understandng image formats, discovering sources of free images, and adding images to your web pages.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/controls.css" />
+    <link rel="stylesheet" href="../../assets/css/flexbox-grid.css" />
+    <link rel="stylesheet" href="../../assets/css/cols-2.css" />
+
+    <!-- Google Font Poppins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+    <!-- Light Awesome icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Material icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Two Columns / One Row: <span>Text</span></h1>
+    </header>
+
+    <section class="controls">
+        <div class="wrapper-controls-flex">
+            <div>
+                <span>Section heading <span>(h2)</span>:</span> 
+                <button class="btn-col-headings btn-add" id="h2-toggle">
+                    <i class="fas fa-plus-circle"></i> Add
+                </button>
+            </div>
+
+            <div>
+                <span>Section intro <span>(p)</span>:</span> 
+                <button class="btn-col-intro btn-add btn-disabled" id="intro-toggle">
+                    <i class="fas fa-plus-circle"></i> Add
+                </button>
+            </div>
+
+            <div>
+                <span>Column headings <span>(h3)</span>:</span> 
+                <button class="btn-col-headings btn-add" id="h3-toggle">
+                    <i class="fas fa-plus-circle"></i> Add
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="HTML-Text">
+        <section class="theme-light">
+            <div class="wrapper-wide-flex">
+                <div class="col-2">
+                    <p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.</p>
+                    <p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.</p>
+                </div>
+    
+                <div class="col-2">
+                    <p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.</p>
+                    <p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.</p>
+                </div>
+    
+            </div><!-- /flexbox wrapper -->
+        </section>
+    </div>
+   
+    <section class="controls">
+        <div class="wrapper-controls-flex">
+            <div>
+                <fieldset>
+                    <legend>Theme:</legend>
+                    <div class="toggle">
+                        <input type="radio" name="theme" value="dark" id="theme-dark" />
+                        <label for="theme-dark"><i class="fas fa-sun"></i></label>
+                        <input type="radio" name="theme" value="light" id="theme-light" checked="checked" />
+                        <label for="theme-light"><i class="fas fa-moon"></i></label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Align: </legend>
+                    <div class="toggle">
+                        <input type="radio" name="alignment" value="Left Align" id="align-left" checked="checked" />
+                        <label for="align-left"><i class="fas fa-align-left"></i></label>
+                        <input type="radio" name="alignment" value="Centre Align" id="align-center" />
+                        <label for="align-center"><i class="fas fa-align-center"></i></label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Columns <span class="viewport">(&gt;1024px viewports)</span>:</legend>
+                    <div class="toggle">
+                        <input type="radio" name="col-width" value="Wide Columns" id="wide-cols" checked="checked" />
+                        <label for="wide-cols">Wide</label>
+                        <input type="radio" name="col-width" value="Narrow Columns" id="narrow-cols" />
+                        <label for="narrow-cols">Narrow</label>
+                    </div>
+                </fieldset>
+
+            </div>
+            <button id="btn-copy">
+                <i class="fa fa-code" aria-hidden="true"></i> Copy HTML
+            </button>
+        </div>
+    </section>
+    
+
+	<script>
+        document.addEventListener("DOMContentLoaded", function() { resetRadios() });
+        document.querySelector("#btn-copy").addEventListener("click", copyHTML);
+        document.querySelector("#align-center").addEventListener("click", centerAlignHTML);
+        document.querySelector("#align-left").addEventListener("click", leftAlignHTML);
+        document.querySelector("#theme-light").addEventListener("click", darkTheme);
+        document.querySelector("#theme-dark").addEventListener("click", lightTheme);
+        document.querySelector("#wide-cols").addEventListener("click", wideCols);
+        document.querySelector("#narrow-cols").addEventListener("click", narrowCols);
+
+        document.querySelector("#h2-toggle").addEventListener("click", toggleH2);
+        document.querySelector("#intro-toggle").addEventListener("click", toggleIntroPara);  
+        document.querySelector("#h3-toggle").addEventListener("click", toggleH3);
+
+        function resetRadios() {
+            document.getElementById("align-left").checked=true;
+            document.getElementById("theme-dark").checked=true;
+            document.getElementById("wide-cols").checked=true;
+            document.getElementById("intro-toggle").disabled=true;
+        }
+
+        function copyHTML() {
+            const HTML_Content = document.getElementById("HTML-Text").innerHTML;
+            const el = document.createElement('textarea');
+            el.value = HTML_Content;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            console.log("copied");
+        }
+
+        function centerAlignHTML() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            const secondChild = firstChild.firstElementChild;
+            firstChild.classList.remove("text-left");
+            firstChild.classList.add("text-center");
+        }
+
+        function leftAlignHTML() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            const secondChild = firstChild.firstElementChild;
+            firstChild.classList.remove("text-center");
+            firstChild.classList.add("text-left");
+        }
+
+        function darkTheme() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            firstChild.classList.remove("theme-light");
+            firstChild.classList.add("theme-dark");
+        }
+
+        function lightTheme() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            firstChild.classList.remove("theme-dark");
+            firstChild.classList.add("theme-light");
+        }
+
+        function wideCols() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            const secondChild = firstChild.firstElementChild;
+            secondChild.classList.remove("wrapper-narrow-flex");
+            secondChild.classList.add("wrapper-wide-flex");
+        }
+
+        function narrowCols() {
+            const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+            const secondChild = firstChild.firstElementChild;
+            secondChild.classList.remove("wrapper-wide-flex");
+            secondChild.classList.add("wrapper-narrow-flex");
+        }
+
+        function toggleH2() {
+            const btn_h2 = document.querySelector('#h2-toggle');
+            if (btn_h2.classList.contains("btn-add")) {
+                btn_h2.classList.remove("btn-add");
+                btn_h2.classList.add("btn-remove");
+                document.getElementById("h2-toggle").innerHTML = "<i class=\"fas fa-minus-circle\"><\/i> Remove";
+                let HTML_content = document.querySelector("#HTML-Text").firstElementChild.innerHTML;  
+                const firstChild = document.querySelector("#HTML-Text").firstElementChild;
+                const secondChild = firstChild.firstElementChild;
+                if (secondChild.classList.contains('wrapper-wide-flex')) {
+                    console.log("wider");
+                    // HTML_content = "<div class=\"wrapper-wide-flex\"><h2>Lorem Ipsum Dolor<\/h2><\/div>"+HTML_content;
+
+                    HTML_content = HTML_content.replace("<div class=\"wrapper-wide-flex\">","<div class=\"wrapper-wide-flex\"><h2>Lorem Ipsum Dolor<\/h2><\/div><div class=\"wrapper-wide-flex\">");
+                }
+
+                else if (secondChild.classList.contains('wrapper-narrow-flex')) {
+                    console.log("narrow");
+                    HTML_content = HTML_content.replace("<div class=\"wrapper-narrow-flex\">","<div class=\"wrapper-narrow-flex\"><h2>Lorem Ipsum Dolor<\/h2><\/div><div class=\"wrapper-narrow-flex\">");
+                }
+
+                // HTML_content = "<div class=\"wrapper-narrow-flex\">\n<h2>Lorem Ipsum Dolor<\/h2><\/div>"+HTML_content;
+
+                document.querySelector("#HTML-Text").firstElementChild.innerHTML = HTML_content;
+
+                enableIntroPara();
+            }
+
+            else {
+                btn_h2.classList.remove("btn-remove");
+                btn_h2.classList.add("btn-add");
+                document.getElementById("h2-toggle").innerHTML = "<i class=\"fas fa-plus-circle\"><\/i> Add";
+                let HTML_content = document.querySelector("#HTML-Text").firstElementChild.innerHTML;
+                HTML_content = HTML_content.replace("<h2>Lorem Ipsum Dolor<\/h2>","");
+                document.querySelector("#HTML-Text").firstElementChild.innerHTML = HTML_content;
+                disableIntroPara();
+                removeEmptyNodes();
+            }
+        }
+
+        function toggleIntroPara() {
+            const btn_para = document.querySelector('#intro-toggle');
+            // btn disabled state
+            if (btn_para.classList.contains('btn-disabled')) {
+                return;
+            }
+            // btn add state
+            else if (btn_para.classList.contains('btn-add')) {
+                document.getElementById("intro-toggle").innerHTML = "<i class=\"fas fa-minus-circle\"><\/i> Remove";
+                btn_para.classList.remove("btn-add");
+                btn_para.classList.add("btn-remove");
+                let HTML_content = document.querySelector("#HTML-Text").firstElementChild.innerHTML;
+                HTML_content = HTML_content.replace("<h2>Lorem Ipsum Dolor<\/h2>","\n<h2>Lorem Ipsum Dolor<\/h2>\n<p class=\"intro\">Possimus dolores accusamus dignissimos facilis fugiat ipsum dolor sit amet voluptas.<\/p>");
+                document.querySelector("#HTML-Text").firstElementChild.innerHTML = HTML_content;
+                disableH2();
+            }
+            else {
+                // btn remove state
+                document.getElementById("intro-toggle").innerHTML = "<i class=\"fas fa-plus-circle\"><\/i> Add";
+                btn_para.classList.remove("btn-remove");
+                btn_para.classList.add("btn-add");
+                let HTML_content = document.querySelector("#HTML-Text").firstElementChild.innerHTML;HTML_content = HTML_content.replace("\n<h2>Lorem Ipsum Dolor<\/h2>\n<p class=\"intro\">Possimus dolores accusamus dignissimos facilis fugiat ipsum dolor sit amet voluptas.<\/p>","\n<h2>Lorem Ipsum Dolor<\/h2>");
+                document.querySelector("#HTML-Text").firstElementChild.innerHTML = HTML_content;
+                enableH2();
+            }
+        }
+
+        function toggleH3() {
+            const btn_content = document.querySelector('#h3-toggle');
+
+            // add state
+            if (btn_content.classList.contains('btn-add')) {
+                btn_content.classList.remove("btn-add");
+                btn_content.classList.add("btn-remove");
+                document.getElementById("h3-toggle").innerHTML = "<i class=\"fas fa-minus-circle\"><\/i> Remove";
+                cols = "<div class=\"col-2\">\n<h3>Pellentesque gravida nullam<\/h3>\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi dignissimos.<\/p>\n<\/div>\n\n<div class=\"col-2\">\n<h3>Nam condimentum lectus elit<\/h3>\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.<\/p>\n<\/div>\n\n";
+                document.querySelector("#HTML-Text").firstElementChild.lastElementChild.innerHTML = cols;
+            }
+            // remove state
+            else {
+                btn_content.classList.remove("btn-remove");
+                btn_content.classList.add("btn-add");
+                document.getElementById("h3-toggle").innerHTML = "<i class=\"fas fa-plus-circle\"><\/i> Add";
+                cols = "<div class=\"col-3\">\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.<\/p>\n<\/div>\n\n<div class=\"col-3\">\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.<\/p>\n<\/div>\n\n<div class=\"col-3\">\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi  dignissimos.<\/p>\n<\/div>\n\n";
+                document.querySelector("#HTML-Text").firstElementChild.lastElementChild.innerHTML = cols;
+            }
+        }
+
+        // disable btn section heading
+        function disableH2() {
+            const btn_h2 = document.querySelector('#h2-toggle');
+            document.getElementById("h2-toggle").innerHTML = "<i class=\"fas fa-minus-circle\"><\/i> Remove";
+            btn_h2.classList.add("btn-disabled");
+            btn_h2.classList.add("btn-remove");
+            btn_h2.classList.remove("btn-add");
+            document.getElementById("h2-toggle").disabled=true;
+        }
+
+        function enableH2() {
+            const btn_h2 = document.querySelector('#h2-toggle');
+            document.getElementById("h2-toggle").innerHTML = "<i class=\"fas fa-minus-circle\"><\/i> Remove";
+            btn_h2.classList.remove("btn-disabled");
+            btn_h2.classList.add("btn-remove");
+            btn_h2.classList.remove("btn-add");
+            document.getElementById("h2-toggle").disabled=false;
+        }
+
+        // disable btn intro para
+        function disableIntroPara() {
+            const btn_para = document.querySelector('#intro-toggle');
+            document.getElementById("intro-toggle").innerHTML = "<i class=\"fas fa-plus-circle\"><\/i> Add";
+            btn_para.classList.add("btn-disabled");
+            document.getElementById("intro-toggle").disabled=true;
+        }
+
+        // enable btn intro para
+        function enableIntroPara() {
+            const btn_para = document.querySelector('#intro-toggle');
+            document.getElementById("intro-toggle").innerHTML = "<i class=\"fas fa-plus-circle\"><\/i> Add";
+            btn_para.classList.remove("btn-disabled");
+            document.getElementById("intro-toggle").disabled=false;
+        }
+
+        function removeEmptyNodes() {
+            const HTML_Content = document.querySelector("#HTML-Text");
+            var treeWalker = document.createTreeWalker(HTML_Content, NodeFilter.SHOW_ELEMENT);
+            var currentNode = treeWalker.currentNode
+            var emptyNodes = []
+
+            // test if a node has no text, regardless of whitespaces
+            var isNodeEmpty = node => !node.textContent.trim()
+
+            // find all empty nodes
+            while(currentNode) {
+                isNodeEmpty(currentNode) && emptyNodes.push(currentNode)
+                currentNode = treeWalker.nextNode()
+            }
+
+            // remove found empty nodes
+            emptyNodes.forEach(node => node.parentNode.removeChild(node))
+            return;
+        }
+	</script>
+
+</body>
+</html>
