@@ -9,27 +9,19 @@ img { width: 100%; height: auto; display: block }
 /* h1, h2, h3, h4 { width: 100% } */
 input, button, textarea, select { font: inherit }
 
-/* Base sans-serif system font */
+/* Sans-serif system font */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 /* ============ SECTIONS: VERTCAL PADDING ============ */
 
-/* Big Desktops/Laptops  */
-@media (min-width: 1201px) { section { padding: 3.5% 0 5% 0 } }
-
-/* Small Desktops/Laptops */
-@media (min-width: 1025px) and (max-width: 1200px ) { section { padding: 3% 0 2.5% 0 } }
-
-/* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { section { padding: 4% 0 3% 0 } }
-
-/* Wide Mobiles */
-@media (min-width: 400px) and (max-width: 767px) { section { padding: 7% 0 5% 0 } }
-
-/* Narrow Mobiles */
-@media (max-width: 399px) { section { padding: 10% 0 6% 0 } }
+@media (min-width: 1600px)                          { section { padding: 3.5% 0 5% 0 } }
+@media (min-width: 1200px) and (max-width: 1599px ) { section { padding: 3.5% 0 5% 0 } }
+@media (min-width: 1025px) and (max-width: 1199px ) { section { padding: 3% 0 3% 0 } }
+@media (min-width: 768px)  and (max-width: 1024px)  { section { padding: 4% 0 3% 0 } }
+@media (min-width: 400px)  and (max-width: 767px)   { section { padding: 7% 0 5% 0 } }
+@media (max-width: 399px)                           { section { padding: 10% 0 6% 0 } }
 
 
 /* ============= PARENT FLEX CONTAINERS ============ */
@@ -39,84 +31,60 @@ body {
     margin: 0 auto; position: relatve; align-items: stretch
 }
 
-/* Big Desktops/Laptops  */
-@media (min-width: 1201px) { 
-    .wrapper-wide-flex { max-width: 1140px }
-    .wrapper-narrow-flex { max-width: 960px }
-  /*  .wrapper-narrower-flex { max-width: 800px } */
+@media (min-width: 1200px) { 
+    .wrapper-wide-flex     { max-width: 1140px }
+    .wrapper-narrow-flex   { max-width: 960px } /*
+	.wrapper-narrower-flex { max-width: 800px } */
 }
 
 /* Small Desktops/Laptops  */
-@media (min-width: 1025px) and (max-width: 1200px ) { 
-    .wrapper-wide-flex { width: 90% } 
-    .wrapper-narrow-flex { width: 80% }
+@media (min-width: 1025px) and (max-width: 1199px ) { 
+    .wrapper-wide-flex     { width: 90% } 
+    .wrapper-narrow-flex   { width: 80% } /*
+	.wrapper-narrower-flex { max-width: 800px } */
 }
 
-/* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { 
-    [class*="wrapper-"]  { width: 90% } 
-}
+@media (min-width: 768px) and (max-width: 1024px) { [class*="wrapper-"] { width: 90% } }
+@media (min-width: 400px) and (max-width: 767px)  { [class*="wrapper-"] { width: 72%; max-width: 340px } }
+@media (max-width: 399px)                         { [class*="wrapper-"] { width: 82% } }
 
-/* Wide Mobiles */
-@media (min-width: 400px) and (max-width: 767px) { 
-    [class*="wrapper-"]  { width: 72% }
-}
-
-/* Narrow Mobiles */
-@media (max-width: 399px) { 
-    [class*="wrapper-"]  { width: 84% }
-}
 
 /* ============== CONTENT ALIGNMENT =============== */
 
-.theme-light.text-center .wrapper-wide-flex,
-.theme-dark.text-center .wrapper-wide-flex { text-align: center }
+[class*="theme-"].text-center [class*="wrapper-"] { text-align: center }
 
 
 /* ============== TYPOGRAPHY  =========== */
 
 
 
+[class*="wrapper-"]:not(.text-center)  h1  { margin-left: -6px }
+[class*="wrapper-"]:not(.text-center)  h2  { margin-left: -3px;}
 
 
-/* Light background colours */
-
-.theme-light { background-color: #fff }
-.theme-light h2 { color: #660066 }
-.theme-light p.intro { color: #535c68 }
-.theme-light * { color: #222 }
-
-/* Dark background colours */
-.theme-dark { background-color: #660066 }
-.theme-dark h2 { color: lightgoldenrodyellow }
-.theme-dark p.intro { color:#dff9fb }
-.theme-dark * { color: #fff }
-
-.theme-dark [class*="wrapper-"] > h3 { color: lightgoldenrodyellow }
-
-.theme-light [class*="wrapper-"] span.icon i { color: purple }
-.theme-light [class*="wrapper-"] ul li::marker { color: purple }
-.theme-light [class*="wrapper-"] ul.fa-ul span i { color: purple }
-
-.theme-dark [class*="wrapper-"] span.icon i { color: lightgoldenrodyellow }
-.theme-dark [class*="wrapper-"] ul li::marker { color: lightgoldenrodyellow }
-.theme-dark [class*="wrapper-"] ul.fa-ul span i { color: lightgoldenrodyellow }
-
-/* ============== UTILITY CLASSES =============== */
-
-.text-left { text-align: left }
-.text-center { text-align: center }
-
-.text-center [class*="wrapper-"] { justify-content: center }
 
 
-[class*="wrapper-"]:not(.text-center) > h1  { margin-left: -6px }
-[class*="wrapper-"]:not(.text-center) > h2  { margin-left: -3px;}
 
-img.drop-shadow { box-shadow: 8px 10px 8px #888 }
-img.drop-solid { box-shadow: 8px 10px 0 purple }
-img.border { border: solid 2px purple }
-img.corner-soft { border-radius: 15px }
+/* ================= IMAGES =============== */
+
+img.corner-soft { border-radius: 15px !important}
+
+.theme-light img.drop-shadow-faint {  
+	filter: drop-shadow(8px 8px 10px #888 )
+} 
+
+.theme-light img.drop-shadow-heavy {  
+	filter: drop-shadow(8px 8px 10px #444)
+} 
+
+.theme-light img.drop-shadow-solid { box-shadow: 8px 10px 0 purple }
+
+img.border-thin { border: solid 2px #888 }
+img.border-thick { border: solid 4px purple }
+
+
+
+
 /* For square images only */
 img.rounded { border-radius: 100% }
 
@@ -178,5 +146,42 @@ img.rounded { border-radius: 100% }
 [class*="wrapper-"] a.btn-ghost:hover i, 
 [class*="wrapper-"] a.btn-ghost:active i { color: #fff }
 
+
+
+/* ================== COLOURS ================= */
+
 .theme-light { background-color: #f7f7f8 }
 .theme-dark { background-color: purple }
+
+/* Light background colours */
+
+.theme-light { background-color: #fff }
+.theme-light h2 { color: #660066 }
+.theme-light p.intro { color: #535c68 }
+.theme-light * { color: #222 }
+
+/* Dark background colours */
+.theme-dark { background-color: #660066 }
+.theme-dark h2 { color: lightgoldenrodyellow }
+.theme-dark p.intro { color:#dff9fb }
+.theme-dark * { color: #fff }
+
+.theme-dark [class*="wrapper-"] > h3 { color: lightgoldenrodyellow }
+
+.theme-light [class*="wrapper-"] .col-3 h3,
+.theme-light [class*="wrapper-"] .col-4 h3 { color: purple }
+.theme-light [class*="wrapper-"] figure.icon i { color: purple }
+.theme-light [class*="wrapper-"] ul li::marker { color: purple }
+.theme-light [class*="wrapper-"] ul.fa-ul span i { color: purple }
+
+.theme-dark [class*="wrapper-"] figure.icon i { color: lightgoldenrodyellow }
+.theme-dark [class*="wrapper-"] ul li::marker { color: lightgoldenrodyellow }
+.theme-dark [class*="wrapper-"] ul.fa-ul span i { color: lightgoldenrodyellow }
+
+
+/* ============== UTILITY CLASSES =============== */
+
+.text-left { text-align: left }
+.text-center { text-align: center }
+
+.text-center [class*="wrapper-"] { justify-content: center }
