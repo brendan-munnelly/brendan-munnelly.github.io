@@ -16,98 +16,157 @@ body {
 
 /* ============ SECTIONS: VERTCAL PADDING ============ */
 
-@media (min-width: 1600px)                          { section { padding: 3.5% 0 5% 0 } }
-@media (min-width: 1200px) and (max-width: 1599px ) { section { padding: 3.5% 0 5% 0 } }
-@media (min-width: 1025px) and (max-width: 1199px ) { section { padding: 3% 0 3% 0 } }
-@media (min-width: 768px)  and (max-width: 1024px)  { section { padding: 4% 0 3% 0 } }
-@media (min-width: 400px)  and (max-width: 767px)   { section { padding: 7% 0 5% 0 } }
-@media (max-width: 399px)                           { section { padding: 10% 0 6% 0 } }
+@media (min-width: 1200px) { 
+	section { 
+		margin-left: auto;
+		margin-right: auto;
+		padding: 3.5% 0 5% 0; 
+		padding-left: calc( (100% - 1140px)/2 );
+		padding-right: calc( (100% - 1140px)/2 );
+	} 
+
+	.section-narrow {
+		padding-left: calc( (100% - 960px)/2 );
+		padding-right: calc( (100% - 960px)/2 );
+	}
+}
+
+@media (min-width: 1025px) and (max-width: 1199px ) { 
+	section { 
+		padding: 3% 10% 3% 10%;
+	} 
+}
+@media (min-width: 768px) and (max-width: 1024px) { 
+	section { 
+		padding: 4% 5% 3% 5%;
+	}
+}
+@media (min-width: 400px) and (max-width: 767px)  { 
+	section { 
+		padding: 7% 13% 5% 13%;
+		max-width: 340px;
+		margin-left: auto;
+		margin-right: auto
+	}
+}
+
+@media (max-width: 399px) { 
+	section { padding: 10% 14% 6% 14% } 
+}
 
 
 /* ============= PARENT FLEX CONTAINERS ============ */
 
-[class*="wrapper-"]  { 
-    display: flex;  justify-content: space-between; flex-wrap: wrap;
-    margin: 0 auto; position: relatve; align-items: stretch
+.container-flex { 
+    display: flex;  justify-content: space-between; flex-wrap: wrap; align-items: stretch;
+	width: 100%; position: relatve; text-align: left; margin: 0 auto; 
 }
 
 @media (min-width: 1200px) { 
-    .wrapper-wide-flex     { max-width: 1140px }
-    .wrapper-narrow-flex   { max-width: 960px } /*
+	.container-flex { width: 100% }
+	.wrapper-narrow-flex  { width: 90% }
+    /* .wrapper-narrow-flex   { width: 960px } /*
 	.wrapper-narrower-flex { max-width: 800px } */
 }
 
 /* Small Desktops/Laptops  */
 @media (min-width: 1025px) and (max-width: 1199px ) { 
-    .wrapper-wide-flex     { width: 90% } 
-    .wrapper-narrow-flex   { width: 80% } /*
-	.wrapper-narrower-flex { max-width: 800px } */
+    .wrapper-narrow-flex   { width: 80% }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) { [class*="wrapper-"] { width: 90% } }
-@media (min-width: 400px) and (max-width: 767px)  { [class*="wrapper-"] { width: 72%; max-width: 340px } }
-@media (max-width: 399px)                         { [class*="wrapper-"] { width: 82% } }
-
-
 /* ============== CONTENT ALIGNMENT =============== */
+section .container-flex { text-align: left }
 
-[class*="theme-"].text-center [class*="wrapper-"] { text-align: center }
+section .container-flex {
+	
+}
 
+section:not(.text-center) .container-flex { text-align: left }
+section.text-center .container-flex { text-align: center }
+
+.container-flex [class*="col-"] {
+	text-align: left !important;
+}
 
 /* ============== TYPOGRAPHY  =========== */
 
-
-
-[class*="wrapper-"]:not(.text-center)  h1  { margin-left: -6px }
-[class*="wrapper-"]:not(.text-center)  h2  { margin-left: -3px;}
-
-
-
-
+.container-flex:not(.text-center)  h1  { margin-left: -6px }
+.container-flex:not(.text-center)  h2  { margin-left: -3px;}
 
 /* ================= IMAGES =============== */
 
-img.corner-soft { border-radius: 15px !important}
+img.corner-soft { border-radius: 15px !important }
 
-.theme-light img.drop-shadow-faint {  
+img.drop-shadow-faint {  
 	filter: drop-shadow(8px 8px 10px #888 )
 } 
 
-.theme-light img.drop-shadow-heavy {  
+img.drop-shadow-heavy {  
 	filter: drop-shadow(8px 8px 10px #444)
 } 
 
-.theme-light img.drop-shadow-solid { box-shadow: 8px 10px 0 purple }
+img.drop-shadow-solid { box-shadow: 8px 10px 0 purple }
 
 img.border-thin { border: solid 2px #888 }
 img.border-thick { border: solid 4px purple }
 
-
-
-
 /* For square images only */
 img.rounded { border-radius: 100% }
+
+
+/* ================= COLUMNS =============== */
+
+.col-2.col-padding {
+	padding: 16px 18px 18px 18px
+}
+
+.col-3.col-padding {
+	padding: 16px 18px 18px 18px
+}
+
+.col-4.col-padding {
+	padding: 14px 16px 18px 16px
+}
+
+[class*="col-"].drop-shadow-faint { 
+	border: solid #D3D3D3 1px; 
+	box-shadow: 7px 5px 20px rgba(0, 0, 0, 0.1); 
+} 
+
+[class*="col-"].drop-shadow-heavy {  
+	border: solid #D3D3D3 1px; 
+	box-shadow: 7px 5px 20px rgba(0, 0, 0, 0.5); 
+} 
+
+[class*="col-"].drop-shadow-solid { box-shadow: 8px 10px 0 purple }
+
+[class*="col-"].border-thin  { border: solid 1px #888 }
+[class*="col-"].border-thick { border: solid 3px purple }
+
+[class*="col-"].corner-soft { border-radius: 15px !important}
+
 
 /* =========== BUTTONS ============= */
 
 /* Faux buttons */
-[class*="wrapper-"] a.btn-solid, [class*="wrapper-"] a.btn-ghost { 
+.container-flex a.btn-solid, .container-flex a.btn-ghost { 
 	display: inline-block;
 	line-height: 1; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
 	text-decoration: none; border-style: solid; border-width: 2px;
 	padding: 16px 32px;
 	font-size: calc(14px + (15 - 14) * ((100vw - 320px)/(1600 - 320)));
     margin-top: 12px;
+	margin-bottom: 12px !important;
 }
 
-[class*="wrapper-"] a.btn-solid i { margin-right: 12px; color: #fff }
-[class*="wrapper-"] a.btn-ghost i { margin-right: 12px; color: #230cea }
+.container-flex a.btn-solid i { margin-right: 12px; color: #fff }
+.container-flex a.btn-ghost i { margin-right: 12px; color: #230cea }
 
-[class*="wrapper-"] a.btn-soft  { border-radius: 5px }
-[class*="wrapper-"] a.btn-rounded { border-radius: 100px }
+.container-flex a.btn-soft  { border-radius: 5px }
+.container-flex a.btn-rounded { border-radius: 100px }
 
-[class*="wrapper-"] a.btn-solid:link,
-[class*="wrapper-"] a.btn-solid:visited {
+.container-flex a.btn-solid:link,
+.container-flex a.btn-solid:visited {
 	background-color: #230cea;
 	border-color: #230cea;
 	color: #fff;
@@ -115,17 +174,17 @@ img.rounded { border-radius: 100% }
 	transition: border-color 300ms;
 }
 
-[class*="wrapper-"] a.btn-solid:focus,
-[class*="wrapper-"] a.btn-solid:hover, 
-[class*="wrapper-"] a.btn-solid:active {
+.container-flex a.btn-solid:focus,
+.container-flex a.btn-solid:hover, 
+.container-flex a.btn-solid:active {
 	background-color: darkblue;
 	border-color: darkblue;
 	color: #fff;
 	transition: 0.2s;
 }
 
-[class*="wrapper-"] a.btn-ghost:link,
-[class*="wrapper-"] a.btn-ghost:visited {
+.container-flex a.btn-ghost:link,
+.container-flex a.btn-ghost:visited {
 	background-color: transparent;
 	border-color: darkblue;
 	color: darkblue;
@@ -133,18 +192,18 @@ img.rounded { border-radius: 100% }
 	transition: border-color 300ms;
 }
 
-[class*="wrapper-"] a.btn-ghost:focus,
-[class*="wrapper-"] a.btn-ghost:hover, 
-[class*="wrapper-"] a.btn-ghost:active {
+.container-flex a.btn-ghost:focus,
+.container-flex a.btn-ghost:hover, 
+.container-flex a.btn-ghost:active {
 	background-color: darkblue;
 	border-color: darkblue;
 	color: #fff;
 	transition: 0.2s;
 }
 
-[class*="wrapper-"] a.btn-ghost:focus i,
-[class*="wrapper-"] a.btn-ghost:hover i, 
-[class*="wrapper-"] a.btn-ghost:active i { color: #fff }
+.container-flex a.btn-ghost:focus i,
+.container-flex a.btn-ghost:hover i, 
+.container-flex a.btn-ghost:active i { color: #fff }
 
 
 
@@ -166,22 +225,21 @@ img.rounded { border-radius: 100% }
 .theme-dark p.intro { color:#dff9fb }
 .theme-dark * { color: #fff }
 
-.theme-dark [class*="wrapper-"] > h3 { color: lightgoldenrodyellow }
+.theme-dark .container-flex > h3 { color: lightgoldenrodyellow }
 
-.theme-light [class*="wrapper-"] .col-3 h3,
-.theme-light [class*="wrapper-"] .col-4 h3 { color: purple }
-.theme-light [class*="wrapper-"] figure.icon i { color: purple }
-.theme-light [class*="wrapper-"] ul li::marker { color: purple }
-.theme-light [class*="wrapper-"] ul.fa-ul span i { color: purple }
+.theme-light .container-flex .col-2 h3,
+.theme-light .container-flex .col-3 h3,
+.theme-light .container-flex .col-4 h3 { color: purple }
+.theme-light .container-flex figure.icon i { color: purple }
+.theme-light .container-flex ul li::marker { color: purple }
+.theme-light .container-flex ul.fa-ul span i { color: purple }
 
-.theme-dark [class*="wrapper-"] figure.icon i { color: lightgoldenrodyellow }
-.theme-dark [class*="wrapper-"] ul li::marker { color: lightgoldenrodyellow }
-.theme-dark [class*="wrapper-"] ul.fa-ul span i { color: lightgoldenrodyellow }
+.theme-dark .container-flex figure.icon i { color: lightgoldenrodyellow }
+.theme-dark .container-flex ul li::marker { color: lightgoldenrodyellow }
+.theme-dark .container-flex ul.fa-ul span i { color: lightgoldenrodyellow }
 
 
 /* ============== UTILITY CLASSES =============== */
 
 .text-left { text-align: left }
 .text-center { text-align: center }
-
-.text-center [class*="wrapper-"] { justify-content: center }
