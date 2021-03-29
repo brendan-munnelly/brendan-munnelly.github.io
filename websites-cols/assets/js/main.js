@@ -936,6 +936,27 @@ function removeEmptyNodes() {
 }
 
 /*
+//////////////// WEB PAGE THEMES  ///////////////
+*/
+
+document.getElementById("theme-dark").checked=true;
+
+document.querySelector("#theme-light").addEventListener("click", darkTheme);
+document.querySelector("#theme-dark").addEventListener("click", lightTheme);
+
+function darkTheme() {
+    const firstChild = document.querySelector("#HTML-Content").firstElementChild;
+    firstChild.classList.remove("theme-light");
+    firstChild.classList.add("theme-dark");
+}
+
+function lightTheme() {
+    const firstChild = document.querySelector("#HTML-Content").firstElementChild;
+    firstChild.classList.remove("theme-dark");
+    firstChild.classList.add("theme-light");
+}
+
+/*
 //////////////// ASSETS  ///////////////
 */
 
