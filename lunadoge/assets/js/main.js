@@ -728,7 +728,8 @@ function doVisType() {
         resetVisualEffects();
         for (i = 1; i <= col_count; i++) {
             const col_content = document.querySelector(col_no+":nth-child("+i+")");
-            col_content.innerHTML = picArray[i] + col_content.innerHTML;                
+            col_content.innerHTML = picArray[i] + col_content.innerHTML; 
+            console.log( picArray[i]);     
         }
         document.getElementById("dd_image_corners").disabled=false;
         document.getElementById("dd_image_shadows").disabled=false;
@@ -968,34 +969,34 @@ function lightTheme() {
 */
 
 let picArray = [];
-picArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/design.jpg\" alt=\"Design\"><\/figure>";
-picArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/food.jpg\" alt=\"Food\"><\/figure>";
-picArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/yellow-van.jpg\" alt=\"Yellow van\"><\/figure>";
-picArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/woman-pink.jpg\" alt=\"Woman pink\"><\/figure>";
-picArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/laptop-window.jpg\" alt=\"Laptop window\"><\/figure>";
-picArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/gap-of-dunloe.jpg\" alt=\"Gap of Dunloe\"><\/figure>";
-picArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/shop.jpg\" alt=\"Shop\"><\/figure>"; 
-picArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/landscape\/kitchen.jpg\" alt=\"Kitchen\"><\/figure>";
+picArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/design.jpg\" alt=\"Design\"><\/figure>";
+picArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/food.jpg\" alt=\"Food\"><\/figure>";
+picArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/yellow-van.jpg\" alt=\"Yellow van\"><\/figure>";
+picArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/woman-pink.jpg\" alt=\"Woman pink\"><\/figure>";
+picArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/laptop-window.jpg\" alt=\"Laptop window\"><\/figure>";
+picArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/gap-of-dunloe.jpg\" alt=\"Gap of Dunloe\"><\/figure>";
+picArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/shop.jpg\" alt=\"Shop\"><\/figure>"; 
+picArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/landscape\/kitchen.jpg\" alt=\"Kitchen\"><\/figure>";
 
 let transArray = [];
-transArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/web-dev.png\" alt=\"Man laptop\"><\/figure>";
-transArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-smiling.png\" alt=\"Woman smiling\"><\/figure>";
-transArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-spectacles.png\" alt=\"Woman Spectacles\"><\/figure>";
-transArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/man-coffee.png\" alt=\"Man Coffee\"><\/figure>";
-transArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-business.png\" alt=\"Woman business\"><\/figure>";
-transArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-planning.png\" alt=\"Woman working\"><\/figure>";
-transArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-smiling.png\" alt=\"Woman Smiling\"><\/figure>";
-transArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/transparent\/woman-looking-right.png\" alt=\"Woman looking right\"><\/figure>";
+transArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/web-dev.png\" alt=\"Man laptop\"><\/figure>";
+transArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-smiling.png\" alt=\"Woman smiling\"><\/figure>";
+transArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-spectacles.png\" alt=\"Woman Spectacles\"><\/figure>";
+transArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/man-coffee.png\" alt=\"Man Coffee\"><\/figure>";
+transArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-business.png\" alt=\"Woman business\"><\/figure>";
+transArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-planning.png\" alt=\"Woman working\"><\/figure>";
+transArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-smiling.png\" alt=\"Woman Smiling\"><\/figure>";
+transArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/transparent\/woman-looking-right.png\" alt=\"Woman looking right\"><\/figure>";
 
 let illusArray = [];  
-illusArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/building.png\" alt=\"Building\"><\/figure>";
-illusArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/resume.png\" alt=\"Resume\"><\/figure>";
-illusArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/gift.png\" alt=\"Gift\"><\/figure>";
-illusArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/work-chat.png\" alt=\"Work chat\"><\/figure>";
-illusArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/travel.png\" alt=\"Travel\"><\/figure>";
-illusArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/metrics.png\" alt=\"Metrics\"><\/figure>"; 
-illusArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/landscape.png\" alt=\"Landscape\"><\/figure>";
-illusArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"assets\/img\/drawings\/chat-bot.png\" alt=\"Chat bot\"><\/figure>";   
+illusArray[assetsArray[0]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/building.png\" alt=\"Building\"><\/figure>";
+illusArray[assetsArray[1]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/resume.png\" alt=\"Resume\"><\/figure>";
+illusArray[assetsArray[2]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/gift.png\" alt=\"Gift\"><\/figure>";
+illusArray[assetsArray[3]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/work-chat.png\" alt=\"Work chat\"><\/figure>";
+illusArray[assetsArray[4]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/travel.png\" alt=\"Travel\"><\/figure>";
+illusArray[assetsArray[5]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/metrics.png\" alt=\"Metrics\"><\/figure>"; 
+illusArray[assetsArray[6]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/landscape.png\" alt=\"Landscape\"><\/figure>";
+illusArray[assetsArray[7]]="\n\t\t\t\t\t<figure><img src=\"https:\/\/munnelly.com/lunadoge\/\assets\/img\/drawings\/chat-bot.png\" alt=\"Chat bot\"><\/figure>";   
 
 let iconLFArray = [];             
 iconLFArray[assetsArray[0]]="\n\t\t\t\t\t<figure class=\"icon\"><i class=\"fas fa-user-friends\"><\/i><\/figure>";
