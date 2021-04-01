@@ -19,7 +19,16 @@ divs.forEach(el => el.addEventListener('click', event => {
     elItem_show.classList.remove("dropdown-hidden"); 
 }));
 
+// Hide menus when click on page
+document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
 
+function hideMenus() {
+    console.log("clicked page");
+    let i;
+    for (i = 0; i < 4; i++) {
+        document.querySelector("#content-"+i).classList.add("dropdown-hidden");
+    }
+}
 /*
 //////////////// UPPER CATEGORY LABEL ABOVE H1 ///////////////
 */
@@ -91,19 +100,19 @@ function doH2() {
     // regular
     else if (opt==="1") {
         removeH2();
-        const elH2 = document.querySelector(parentWrapper+" > section > h1");
+        const elH2 = document.querySelector("section > h1");
         elH2.insertAdjacentHTML("afterend", "\n\t\t\t\t<h2>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.<\/h2>\n");
     }
     // border-top
     else if (opt==="2") {
         removeH2();
-        const elH2 = document.querySelector(parentWrapper+" > section > h1");
+        const elH2 = document.querySelector("section > h1");
         elH2.insertAdjacentHTML("afterend", "\n\t\t\t\t<hr><h2>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.<\/h2>\n");
     }
     // border-bottom
     else if (opt==="3") {
         removeH2();
-        const elH2 = document.querySelector(parentWrapper+" > section > h1");
+        const elH2 = document.querySelector("section > h1");
         elH2.insertAdjacentHTML("afterend", "\n\t\t\t\t<h2>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.<\/h2>\n<hr class=\"hr-bottom\">");             
     }
 }
