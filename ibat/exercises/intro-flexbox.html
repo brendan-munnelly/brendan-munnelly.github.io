@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Introduction to CSS Flexbox | Web Design & Development Tutorials | Brendan Munnelly</title>
-    <meta name="description" content="Using the CSS flexbox method to lay out the content of web pages in responsive grids of rows and columns.">
+    <meta name="description" content="Using the CSS flexbox method to layout the content of web pages in responsive grids of rows and columns.">
 
     <meta name="author" content="Brendan Munnelly">
 
@@ -58,7 +58,7 @@
     
             <div class="content">
                 <h1>Introduction to CSS Flexbox</h1>
-                <h2>Using the CSS flexbox method to lay out the content of web pages in responsive grids of rows and columns.</h2>
+                <h2>Using the CSS flexbox method to layout the content of web pages in responsive grids of rows and columns.</h2>
             </div>
         </div><!-- /wrapper -->
     </header>
@@ -74,10 +74,10 @@
 			<p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#flex-about">About CSS flexbox</a></p>
             <p><a href="#flex-parent-child">Flexbox: parent and child elements</a></p>
-            <p><a href="#flex-parent">Flexbox: the parent element</a></p>
-            <p><a href="#flex-gutters-rows">Flexbox: gutters and row wrapping</a></p>
-            <p><a href="#flex-wrapping">Flexbox and child element wrapping in rows</a></p>
-            <p><a href="#flex-sections">Flexbox parent containers and sections</a></p>
+			<p><a href="#box-model-update">Updating your sample box model page</a></p>
+			<p><a href="#flex-parent">Adding and styling the parent flexbox container</a></p>
+			<p><a href="#gutters-rows">Flexbox columns and gutter spacing</a></p>
+			<p><a href="#flex-wrapping">Flexbox and child element wrapping</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
         </aside>
@@ -92,7 +92,6 @@
                     <li>Use the CSS flexbox method to lay out the content of web pages in responsive grids of rows and columns.</li>
                 </ul>
 
-            <p>There are no sample files to download, create or update in this Tutorial.</p>
             </section>
 
 <section id="flex-about">
@@ -113,36 +112,15 @@
 	<ul>
 		<li>A parent element will typically have a class name of <b>container-flexbox</b>, <b>wrapper-flexbox</b>, <b>flex-wrapper</b> or similar.</li>
 
-		<li>A child element in flexbox layouts is commonly known as an <i>item</i>.
-		<span class="inside-ol">&nbsp;</span>
-		For this reason, you will see child elements with class names such as <b>item-2</b> (for two-column page layouts) and <b>item-3</b> (for three-column page layouts).</li>
-
-		<li>However, because flexbox layouts are frequently used to ceate multi-column layouts, you will inceasingly see child elements with class names such as <b>col-2</b>, <b>col-3</b> and <b>col-4</b>.</li>
+		<li>A child element in flexbox layouts is commonly known as an <i>item</i>. For this reason, you will see child elements with class names such as <b>item-top</b> and <b>item-right</b>.<span class="inside-ol">&nbsp;</span>
+		When the flexbox method is used to create multi-column layouts, however, you will see child elements with class names such as <b>col-2</b>, <b>col-3</b> and <b>col-4</b>.</li>
 	</ul>
 
-	<p>Below is an example of the flexbox technique used to create a two-column layout on desktop/laptop screens.</p>
-
-	<img src="assets/img/intro-flexbox/intro-flexbox-2-cols.png" alt="padding">
-	
-	<ul>
-		<li>The first image is a sketch of the basic layout with the class names. The parent element has a red border and the two child elements have a blue border.</li>
-
-		<li>The second image shows the HTML tags and content entered in Visual Studio Code.</li>
-
-		<li>And the third image is the result as it might look in a web browser.</li>
-	</ul>
-
-	<p>Below is a three-column layout for desktop/laptop screens created with flexbox.</p>
+	<p>Below is an example from VS Code of the HTML tags for creating a three-column layout with flexbox.</p>
 
 	<img src="assets/img/intro-flexbox/intro-flexbox-3-cols.png" alt="padding">
 
-</section>
-
-
-<section id="flex-parent">
-	<h2>Flexbox: the parent element</h2>
-
-	<p>It is the parent element in a flexbox layout that makes it a flexbox layout. In particular, it is one CSS property and value pair of the parent element. See below.</p>
+	<p>It is the parent element in a flexbox layout that makes it a flexbox layout. In particular, it is one CSS style rule of the parent element. See below.</p>
 
 <pre class="language-css">
 <span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
@@ -155,64 +133,207 @@
 <section>
 
 
-	<section>
+	<section id="box-model-update">
 		
-		<h2>Updating your sample box model page: one</h2>
-		<p>In the <a href="intro-box-model.html">Introduction to the Box Model</a> Tutorial, you applied the so-called <i>box model</i> to create four &#8216;little boxes&#8217; with the HTML <span class="syn">div</span> tag.</p>
+		<h2>Updating your sample box model page</h2>
+		<p>In the <a href="intro-box-model.html">Introduction to the Box Model</a> Tutorial, you used the HTML <span class="syn">div</span> tag to create four &#8216;little boxes&#8217;.</p>
 		
 		<p>Each one of the four <span class="syn">div</span> elements has its own class name and some style properties set in the CSS file. See one example below.</p>
 		<img src="assets/img/intro-flexbox/little-box-before.png" alt="Intro to Flexbox" class="wider-105">
 
 		<p>When displayed in a web browser, the web page shows the four &#8216;little boxes&#8217; stacked vertically one above the other.</p>
 
-		<p>See the sample <b>page-9.html</b> web page below.</p>
+		<p>See the sample <a href="final-box/after/page-9.html">page-9.html</a> web page below.</p>
 
 		<img src="assets/img/intro-flexbox/little-box-browser.png" alt="Intro to Flexbox">
 
 		<p>Let&#8217;s apply the flexbox layout parent-child method to arrange these four HTML elements side-by-side in a single, four-column row.</p>
 
 		<ol>
-			<li>In VS Code, open the following web page and stylesheet:<br>
-				<br><b>page-9.html<br>
-				style-9.css</b>
-			</li>
-			<li>In the <b>page-9.html</b> web page, &#8216;wrap &#8219; (enclose) the four <span class="syn">div</span> elements within an opening and closing pair of <span class="syn">div</span> tags with a class name of <b>container-flexbox</b>.
-			<img src="assets/img/intro-flexbox/vscode-1.png" alt="Intro to Flexbox" class="wider-115">
-			Use the <span class="kbd.tutorial-key">Tab</span> key to indent the four &#8216;little boxes&#8217; from the left margin. This will make your HTML code easier to read.
-			<ul>
-				<li>The <b>container-flexbox</b> element is now a <i>parent element</i>.</li>
-				<li>The four little boxes, with the class names of <b>bono</b>, <b>edge</b>, <b>adam</b> and <b>larry</b> are now <i>child elements</i> of this parent element.</li>
-			</ul></li>
-			<li>Save your <b>page-9.html</b> file.</li>
-			<li>Display the linked <b>style-9.css</b> stylesheet.</li>
-			<li>Because this will be a four-column rather than a single-column layout, there is less need for &#8216;white space&#8219; at the left and right edges of the viewport when the page is displayed on non-mobile screens.
+			<li>In VS Code, open the following web page on your computer that you completed in the <a href="intro-box-model.html">Introduction to the Box Model</a> Tutorial:
 			<span class="inside-ol">&nbsp;</span>
-			Update the media query for desktop/laptop screens are shown below.
-			<img src="assets/img/intro-flexbox/vscode-2.png" alt="Intro to Flexbox"></li>
+			<b>page-9.html</b>
+			<span class="inside-ol">&nbsp;</span>
+			This should be located in your &#128193; <b>websites/exercises</b> sub-folder.</li>
 
-			<li>Next, enter <span class="csyn">.container-flexbox</span> selector with the single &#8211; but important &#8211; style rule that makes it act as a flexbox parent container.
-<pre class="language-css">
-<span class="token class">.container-flexbox</span> { 
-   <span class="token property">display</span>: <span class="token value-text">flex</span>; 
-}</pre>
-			You could add this anywhere in the CSS file. But, logically, it makes most sense to enter it above the styles for its four child elements, at around lines 47-49.</li>
+			<li>Also in VS Code, open the linked stylesheet for the above web page.
+			<span class="inside-ol">&nbsp;</span>
+			<b>style-9.css</b>
+			<span class="inside-ol">&nbsp;</span>
+			This should be located in your &#128193; <b>websites/exercises/assets/css</b> sub-folder.</li>
 
-		<li>Finally, update the widths of the four child elements in the CSS file from their current fixed-width value of <b>220px</b> to a fluid, responsive width of <b>25%</b>. One example is shown below.
-		<img src="assets/img/intro-flexbox/vscode-3.png" alt="Intro to Flexbox"></li>
+			<li>Save your <b>page-9.html</b> web page with the new name of <b>page-14.html</b>.</li>
 
-		<li>Save your <b>style-9.css</b> stylesheet and then view the <b>page-9.html</b> file in your web browser. It should now look as shown below.
-		<img src="assets/img/intro-flexbox/little-box-browser-after.png" alt="Intro to Flexbox"></li>
+			<li>Save your <b>style-9.css</b> stylesheet with the new name of <b>style-14.css</b>.</li>
 
+			<li>In the <span class="syn">head</span> of <b>page-14.html</b>, update the stylesheet link from <b>style-9.css</b> to <b>style-14.css</b>.
+<pre class="language-html">&lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"stylesheet"</span> <span class="blue-light">href</span>=<span class="brown">"style-14.css"</span>&gt;
+</pre></li>
+			<li>Also in the <span class="syn">head</span> block, copy-and-paste the following to replace the current title and description details:
+<pre class="language-html">&lt;<span class="blue-dark">title</span>&gt;<span class="white">HTML5 Sample Flexbox Web Page: Four-column Layout.</span>&lt;<span class="blue-dark">/title</span>&gt;
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"Using CSS flexbox to create a web page with a four-column layout."</span>&gt;   </pre></li>
+			<li>Save the <b>page-14.html</b> file.</li>
 		</ol>
 
+		<p>You are now ready to update the web page and stylesheet to HTML5.</p>
 
 	</section>
 
 
-	<section id="gutters-rows">
-		<h2>Flexbox: gutters spacing</h2>
+	<section>
+				
+		<h2>Updating your web page to HTML5</h2>
 
-	<p>In practice, however, you will want to add two further CSS property-value pairs to your flexbox parent containers, as shown below.</p>
+		<p>Follow the steps below to make your web page HTML5-compliant.</p>
+
+		<ol>
+			<li>In VS Code, &#8216;wrap&#8217; (enclose) the four <span class="syn">div</span> elements in the <b>page-14.html</b> file within the three opening and closing HTML5 tag pairs of <span class="syn">main</span>, <span class="syn">article</span> and <span class="syn">section</span>. 
+			<span class="inside-ol">&nbsp;</span>	
+				
+			Near the top of the web page, paste the following just after the opening <span class="syn">body</span> tag.
+
+<pre class="language-html">
+&lt;<span class="blue-dark">main</span>&gt;
+&lt;<span class="blue-dark">article</span>&gt;
+
+    &lt;<span class="blue-dark">section</span>&gt;
+</pre>
+Scroll down to the bottom of the page, and just before the closing <span class="syn">body</span> tag, copy-and-paste the following.
+<span class="inside-ol">&nbsp;</span>
+<pre class="language-html">
+    &lt;/<span class="blue-dark">section</span>&gt;
+
+&lt;/<span class="blue-dark">article</span>&gt;
+&lt;/<span class="blue-dark">main</span>&gt;
+</pre>
+
+In VS Code, your <b>page-14.html</b> file should now look as follows.
+
+		<img src="assets/img/intro-flexbox/vscode-html5.png" alt="Intro to Flexbox"></li>
+				
+		<li>Save the <b>page-14.html</b> file and view it in your web browser. It should look exactly as before.</li>	
+	</ol>
+
+	<h3>Attaching &#8216;white space&#8217; to the section element</h3>
+
+
+	<p>Currently, the &#8216;white space&#8217; around the four edges of the web page content is set by CSS <span class="csyn">padding</span> values on the <span class="syn">body</span> element.</p>
+	<p>Change this as follows.</p>
+		
+		<ol>
+			<li>In VS Code, switch to the <b>style-14.css</b> file.</li>
+			<li>Near the top of the file, just after the RESETS block, delete all the following lines.
+			<img src="assets/img/intro-flexbox/vscode-body-padding-delete.png" alt="Intro to Flexbox"></li>
+			<li>Save the <b>style-14.css</b> file. 
+			
+			<span class="inside-ol">&nbsp;</span>
+
+			In your web browser, you can see that the web page content is now positioned directly against the top-left corner of the browser window.
+			<img src="assets/img/intro-flexbox/little-box-no-padding.png" alt="Intro to Flexbox"></li>
+
+			<li>In VS Code, copy-and-paste the following lines to the <b>style-14.css</b> file, to just after the RESETS block.
+	
+<pre class="language-css">
+<span class="comment">/* ======================= SECTIONS ======================== */</span>
+
+<span class="comment">/* Regular and larger screens */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">1200px</span>) { 
+  <span class="token class">section</span> { 
+      <span class="token property">margin-left</span>: <span class="token value-text">auto</span>;
+      <span class="token property">margin-right</span>: <span class="token value-text">auto</span>;
+      <span class="token property">padding</span>: <span class="token number">3.5% 0 4% 0</span>; 
+      <span class="token property">padding-left</span>: <span class="yellow">calc</span>( (<span class="token number">100%</span> - <span class="token number">1140px</span>)/2 );
+      <span class="token property">padding-right</span>: <span class="yellow">calc</span>( (<span   class="token number">100%</span> - <span class="token number">1140px</span>)/2 );
+}
+   <span class="token class">.section-narrow</span> {
+      <span class="token property">padding-left</span>: <span class="yellow">calc</span>( (<span class="token number">100%</span> - <span class="token number">920px</span>)/2 );
+      <span class="token property">padding-right</span>: <span class="yellow">calc</span>( (<span class="token number">100%</span> - <span class="token number">920px</span>)/2 );
+   } 
+}
+	
+<span class="comment">/* Tablets and smaller desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">1025px</span>) and (<span class="token property">max-width</span>: <span class="token number">1199px</span>) { 
+    <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token number">3% 10% 4% 10%</span> }
+}
+	
+<span class="comment">/* Tablets */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) and (<span class="token property">max-width</span>: <span class="token number">1024px</span>) { 
+    <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token number">4% 5% 4% 5%</span> }
+}
+	
+<span class="comment">/* Larger mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">400px</span>) and (<span class="token property">max-width</span>: <span class="token number">767px</span>)  { 
+    <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token number">7% 13% 8% 13%</span> }
+}
+	
+<span class="comment">/* Smaller mobiles */</span>
+<span class="purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">399px</span>) { 
+    <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token number">7% 10% 8% 10%</span> } 
+}</pre></li>
+			<li>Save the <b>style-14.css</b> file and view the web page in your browser.
+			<span class="inside-ol">&nbsp;</span>
+			<img src="assets/img/intro-flexbox/little-box-padding.png" alt="Intro to Flexbox"></li>
+		</ol>
+
+		<p>You can see that the web page content is no longer positioned directly against the edges  of the browser window.</p>
+			
+		<p>However, the &#8216;white space&#8217; around the four edges of the web page content is now set by CSS <span class="csyn">padding</span> on the <span class="syn">section</span> element rather than on the <span class="syn">body</span> element.</p>
+
+				
+	</section>
+
+
+	<section id="flex-parent">
+				
+		<h2>Adding and styling the parent flexbox container</h2>
+		<p>The next task is to add a new <span class="syn">div</span> element to the web page that will act as a flexbox parent container.</p>
+		<ol>
+			<li>In the <b>page-14.html</b> web page, wrap the four <span class="syn">div</span> elements within a new, outer <span class="syn">div</span> that has a class name of <b>container-flexbox</b>.
+			<img src="assets/img/intro-flexbox/vscode-1.png" alt="Intro to Flexbox" class="wider-115">
+			Use the <kbd class="tutorial-key">Tab</kbd> key to indent the four &#8216;little boxes&#8217; from the left margin. This will make your HTML code easier to read.
+			<ul>
+				<li>The <b>container-flexbox</b> element is now a <i>parent element</i>.</li>
+				<li>The four little boxes, with the class names of <b>bono</b>, <b>edge</b>, <b>adam</b> and <b>larry</b> are now <i>child elements</i> of this parent element.</li>
+			</ul></li>
+			<li>Save your <b>page-14.html</b> file.</li>
+		</ol>
+
+		<p>Next, let&#8217;s style this new <b>container-flexbox</b> <span class="syn">div</span> element so that it acts as a flexbox parent element.</p>
+
+		<ol>
+			<li>In VS Code, display the linked <b>style-14.css</b> stylesheet file.</li>
+			
+			<li>Copy-and-paste the <span class="csyn">.container-flexbox</span> selector with its single &#8211; but important &#8211; style rule that makes it act as a flexbox parent.
+<pre class="language-css">
+<span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
+<span class="token class">.container-flexbox</span> { 
+    <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+    <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>
+}</pre>
+
+			You could add this anywhere in the CSS file. But, logically, it makes the most sense to enter it above the styles for its four child elements, at around lines 76-78.
+		
+			<img src="assets/img/intro-flexbox/vscode-flexbox-css.png" alt="Intro to Flexbox">
+		</li>
+
+		<li>Finally, update the widths of the four child elements in the CSS file from their current fixed-width value of <b>220px</b> to a fluid, responsive width of <b>25%</b>. One example is shown below.
+		<img src="assets/img/intro-flexbox/vscode-3.png" alt="Intro to Flexbox"></li>
+
+		<li>Save your <b>style-14.css</b> stylesheet.</li>
+		
+		</ol>
+		
+		<p>View the <b>page-14.html</b> file in your web browser. It should now look as shown below.
+		<img src="assets/img/intro-flexbox/little-box-browser-after.png" alt="Intro to Flexbox"></p>
+
+		<p>&#x2705; &nbsp;Success. You have now created a multi-column web page layout.</p>
+	</section>
+
+
+	<section id="gutters-rows">
+		<h2>Flexbox columns and gutter spacing</h2>
+
+	<p>In practice, however, you will want to add two further CSS style rules to your flexbox parent containers, as shown below.</p>
 
 <pre class="language-css">
 <span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
@@ -222,7 +343,7 @@
    <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>; 
 }</pre>
 
-	<p>Let&#8217;s look first at the <b>justify-content</b> property and discover why it is necessary.</p>
+	<p>Let&#8217;s look first at the <span class="csyn">justify-content</span> property and its typical value of <span class="csyn">space-between</span>.</p>
 
 	<p>When you arrange web page content in two, three of four columns, you will typically want to include some empty spacing between the columns.</p>
 	
@@ -232,76 +353,85 @@
 
 	<p>The total gutter spacing (of one, two or three gutters) is the space remaining or &#8216;left over&#8217; after the child elements have filled their defined widths.</p>
 
-	<p>A flexbox parent container has a CSS property called <b>justify-content</b> that controls how the gutter spacing is displayed, left-to-right, across the screen.</p>
+	<p>A flexbox parent container has a CSS property named <span class="csyn">justify-content</span> that controls how the gutter spacing is displayed, left-to-right, across the screen.</p>
 	
-	<p>Unfortunately, the CSS <b>justify-content</b> property has a default value of <b>flex-start</b> that will:</p>
+	<p>Unfortunately, the CSS <span class="csyn">justify-content</span> property has a default value of <span class="csyn">flex-start</span> that will:</p>
 	
 	<ul>
 		<li>Pack or squeeze the child elements at the left of the parent container, and</li>
-		<li>Display the &#8216;left over&#8217; spacing in a single block the right of the parent container.</li>
+		<li>Display the &#8216;left over&#8217; spacing in a single block at the right of the parent container.</li>
 	</ul>
 
 	<img src="assets/img/intro-flexbox/flex-gutter-5.png" alt="padding">
 
 	<img src="assets/img/intro-flexbox/flex-gutter-1.png" alt="padding">
 
-	<p>To instead distribute this space evenly between the columns in gutters, you need to overrule the default value of the <b>justify-content</b> property by entering the value of <b>space-between</b> in the CSS stylesheet.</p>
+	<p>To instead distribute this &#8216;left over&#8217; space evenly between the columns in gutters, you need to override the default value of the <b>justify-content</b> property by entering the value of <b>space-between</b> in the CSS stylesheet.</p>
 
 	<img src="assets/img/intro-flexbox/flex-gutter-6.png" alt="padding">
 
 	<p>This will create the desired result of evenly-spaced columns in your web browser.</p>
 	<img src="assets/img/intro-flexbox/flex-gutter-3.png" alt="padding">
 
-</section>
+	<h3>Adding gutters between columns</h3>
 
-	<section>
+	<p>Let&#8217;s add some gutter spacing to your sample web page. Here are the steps.</p> 
 
-		<h2>Updating your sample box model web page: two</h2>
-		<p>Let&#8217;s further update the sample box model web page by adding some gutter spacing and varying the number of columns.</p>
 		<ol>
-			<li>In VS Code, display the <b>style-9.css</b> stylesheet.</li>
-			<li>Update the .container-flexbox declaration as follows.</li>
-			<li>Next, for each of the four child elements, reduce their percentage width to 23%. See one example below.</li>
-			<li>Next, for each of the four child elements, reduce their percentage width to 23%. See one example below.</li>
-			<li>Save your <b>style-9.css</b> stylesheet and then view the <b>page-9.html</b> file in your web browser. It should now look as shown below.
-			<img src="assets/img/intro-flexbox/little-box-browser-after.png" alt="Intro to Flexbox"></li>
+			<li>In VS Code, display the <b>style-14.css</b> stylesheet.</li>
+			<li>Update the <span class="csyn">.container-flexbox</span> selector by adding a new style rule as follows:
+<pre class="language-css">
+<span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
+<span class="token class">.container-flexbox</span> { 
+    <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+    <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>
+}</pre>
+
+			</li>
+			<li>For each of the four child elements, reduce their <span class="csyn">width</span> from <span class="csyn">25%</span> to <span class="csyn">23%</span>. See one example below.</li>
+			<li>Save the <b>style-14.css</b> stylesheet and then view the <b>page-14.html</b> page in your web browser. It should now look as shown below.
+			<img src="assets/img/intro-flexbox/little-box-browser-gutter.png" alt="Intro to Flexbox"></li>
 		
 		</ol>
 
 		<p>Now, as an experiment, let&#8217;s reduce the number of columns of content from four to three.</p>
 
 		<ol>
-			<li>In VS Code, display the <b>page-9.html</b> web page.</li>
-			<li>Wrap the first child element inside a comment, so that it will be be dislayed by the web browser.</li>
-			<li>Save the <b>page-9.html</b> file and view it in your web browser. It should now look as shown below.
-			<img src="assets/img/intro-flexbox/little-box-browser-after.png" alt="Intro to Flexbox"></li>
-			<li>In VS Code, edit the width of the three, non-commented child elements by increasing their values from 23% to 31%. See one exmaple below.</li>
-			<li>Save the <b>style-9.css</b> file and view the web page in your web browser. It should now look as shown below.
-			<img src="assets/img/intro-flexbox/little-box-browser-after.png" alt="Intro to Flexbox"></li>
-			<li>When finished, edit the web page and stylesheet so that four child elements are again displayed with a width of 23%.</li>
+			<li>In VS Code, display the <b>page-14.html</b> web page.</li>
+			<li>Wrap the first child element inside a comment, so that it will not be displayed by the web browser. See below.
+			<img src="assets/img/intro-flexbox/vscode-child-comment.png" alt="Intro to Flexbox"></li>
+			<li>Save the <b>page-14.html</b> file and view it in your web browser. It should now look as shown below.
+			<img src="assets/img/intro-flexbox/flexbox-gutter-3-1.png" alt="Intro to Flexbox"></li>
+			<li>In the <b>style-14.css</b> stylesheet, edit the <span class="csyn">width</span> property of the three, non-commented-out child elements by increasing the value from <span class="csyn">23%</span> to <span class="csyn">31%</span>. See one example below.
+			<img src="assets/img/intro-flexbox/vscode-child-width-31.png" alt="Intro to Flexbox"></li>
+
+			<li>Save the <b>style-14.css</b> file and view the page in your web browser. It should now look as shown below.
+			<img src="assets/img/intro-flexbox/flexbox-gutter-3-2.png" alt="Intro to Flexbox"></li>
+
+			<li>When finished, edit the web page and stylesheet so that four child elements are again displayed with a width of <span class="csyn">23%</span>.</li>
 		
 		</ol>
 	
 	</section>
 
 
-
-	<h3 id="flex-wrapping">Flexbox and child element wrapping</h3>
+<section id="flex-wrapping">
+	<h2>Flexbox and child element wrapping</h2>
 
 	<p>There is one more CSS property-value pair that you will usually want to apply to your parent flexbox containers.</p>
 	
 	<p>This property enables child elements to be split or <i>wrapped</i> across multiple rows within a parent element.</p>
 
-	<p>Consider the following three-column layout, displayed under a sub-heading.</p>
+	<p>Consider the following three-column layout, displayed under a <span class="syn">section</span>-wide heading that is above and outside the <span class="syn">container-flexbox</span> parent element.</p>
 	<img src="assets/img/intro-flexbox/flex-wrap-1.png" alt="padding">
 
-	<p>What would happen is you added three more child elements to this layout? The result will be as shown below.</p>
+	<p>What would happen if you added three more child elements to this layout? The result will be as shown below.</p>
 
 	<img src="assets/img/intro-flexbox/flex-wrap-2.png" alt="padding">
 
-	<p>As you can see, the parent flexbox container forces all six child elements to display on a single row, left-to-right, across the screen.</p>
+	<p>As you can see, the parent <span class="syn">container-flexbox</span> forces all six child elements to display on a single row, left-to-right, across the screen.</p>
 	
-	<p>This is because a parent flexbox container has a CSS property called <b>flex-wrap</b> with a default value of <b>no-wrap</b>.</p>
+	<p>This is because a parent flexbox container has a CSS property named <span class="csyn">flex-wrap</span> with a default value of <span class="csyn">nowrap</span>.</p>
 
 	<img src="assets/img/intro-flexbox/flex-nowrap.png" alt="padding">
 
@@ -309,48 +439,48 @@
 
 	<img src="assets/img/intro-flexbox/flex-wrap-3.png" alt="padding">
 
-	<p>The solution is to override the default <b>nowrap</b> value of the <b>flex-wrap</b> property by entering a value of <b>wrap</b> for the flexbox parent container as shown below.</p>
+	<p>The solution is to override the default <span class="csyn">nowrap</span> value of the <b>flex-wrap</b> property by entering a value of <span class="csyn">wrap</span> for the flexbox parent container as shown below.</p>
 
 	<img src="assets/img/intro-flexbox/flex-gutter-wrap.png" alt="padding">
 
-	<p>There are many other CSS properties and values you can assign to flexbox parent containers. But for most practical web page layouts, setting values for the <b>display</b>, <b>justify-content</b> and <b>flex-wrap</b> properties is sufficient.</p>
-
+	<p>There are many other CSS properties and values you can assign to flexbox parent containers. But for most practical web page layouts, setting values for the <span class="csyn">display</span>, <span class="csyn">justify-content</span> and <span class="csyn">flex-wrap</span> properties is sufficient.</p>
 	<img src="assets/img/intro-flexbox/flex-summary.png" alt="padding">
 
+
+	<h3>Creating a two-row, four-column grid layout</h3>
+	<p>In this final exercise, let&#8217;s edit the sample web page so that it displays content in a grid of two rows with four columns in each row. Follow these steps.</p>
+
+		<ol>
+			<li>In VS Code, in the <b>page-14.html</b> file, select, copy and paste the four <span class="syn">div</span> child elements within the <span class="syn">container-flexbox</span> parent element.</li>
+			<li>Save the <b>page-14.html</b> file and view the web page in your browser.
+			<img src="assets/img/intro-flexbox/vscode-nowrap.png" alt="padding">
+			As you can see, flexbox has squeezed all eight child elements onto a single row. 
+			<span class="inside-ol">&nbsp;</span>
+			This is despite each child <span class="syn">div</span> element having a set <span class="csyn">width</span> of <span class="csyn">23%</span> in the stylesheet.</li>
+			<li>In VS Code, display the <b>style-14.css</b> file and replace the current <span class="csyn">.container-flexbox</span> style rules with the following.
+<pre class="language-css">
+<span class="token comment">/* == FLEXBOX PARENT CONTAINER == */</span>
+<span class="token class">.container-flexbox</span> { 
+    <span class="token property">display</span>: <span class="token value-text">flex</span>; 
+    <span class="token property">justify-content</span>: <span class="token value-text">space-between</span>;
+    <span class="token property">flex-wrap</span>: <span class="token value-text">wrap</span>
+}</pre>
+			</li>
+			<li>Save the <b>style-14.css</b> file and view the web page in your browser. It should now look as shown below.
+
+				<img src="assets/img/intro-flexbox/vscode-wrap.png" alt="padding"></li>
+
+		</ol>
+
+	
+
+
+
 </section>
 
 
 
 
-<section id="flex-sections">
-
-	<h2>Flexbox parent containers and sections</h2>
-
-	<p>In a previous <a href="working-with-sections.html">Tutorial</a> you learnt how web pages are commonly sub-divided into vertical blocks of content.</p>
-	
-	<p>These <i>sections</i> are designed to make the content more inviting and easier to read.</p>
-
-	<img src="assets/img/intro-flexbox/sections-front.png" alt="padding">
-
-	<p>A section typically has some padding added around its four edges. See the example of a section named <b>container-block</b> below.</p>
-
-	<img src="assets/img/intro-flexbox/flex-section-1.png" alt="padding">
-
-	<p>The result of the above CSS padding styles applied to a section would be similar to the following.</p>
-
-	<img src="assets/img/intro-flexbox/flex-section-2.png" alt="padding">
-	
-	<p>Typically, you will also want similar padding applied to flexbox parent containers, so that your multi-column layouts do not directly touch the browser left or right edges, or any other elements above or below them on the web page.</p>
-
-	<img src="assets/img/intro-flexbox/flex-section-3.png" alt="padding">
-
-	<p>You can achieve the effect simply by adding the <b>container-block</b> class to your parent flexbox containers in your HTML web page.</p>
-
-	<img src="assets/img/intro-flexbox/flex-section-4.png" alt="padding">
-
-	<p>Now that you understand the basics of CSS flexbox layout, in the next three Tutorials you will create web pages with <a href="flex-two-cols.html">two</a>, <a href="flex-three-cols.html">three</a> and <a href="flex-four-cols.html">four column</a> layouts based on this technique.</p>
-
-</section>
 
 </article>
 </main>
