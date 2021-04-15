@@ -74,10 +74,8 @@
 			<p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#about-hero-blocks">About hero blocks with background videos</a></p>
             <p><a href="#sample-files">Working with your sample files</a></p>
-            <p><a href="#adding-bg-image">Adding the background image</a></p>
-            <p><a href="#update-css">Updating the stylesheet</a></p>
-            <p><a href="#add-shadow">Adding a text shadow</a></p>
-            <p><a href="#add-overlay"> Adding a semi-opaque overlay</a></p>
+            <p><a href="#adding-bg-image">Adding the background video</a></p>
+            <p><a href="#update-css">Updating the stylesheet for videos</a></p>
             <p><a href="#update-home-page-content">Updating website home page</a></p>
             <p><a href="#upload-github">Uploading files to GitHub</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
@@ -108,7 +106,7 @@
 
                 <h2>About hero blocks with background videos</h2>
 
-                <p>As Internet connection speeds grow faster and faster, hero blocks and other elements on web pages are increasingly using background videos. Thee are short videos of about 10 seconds that play in a continuous loop.</p>
+                <p>As Internet connection speeds grow faster and faster, hero blocks and other elements on web pages are increasingly using background videos. These are short videos of about 10 seconds that play in a continuous loop.</p>
 	
                 <p>See the examples below.</p>
               
@@ -121,7 +119,7 @@
              
                 <p>Not all users enjoy fast Internet connection speeds, however. So it is good practice to include a background image that displays until the video finishes downloading.</p>
               
-                <p>Here ae some sources of free background videos:</p>
+                <p>Here are some sources of free videos you can use as backgrounds:</p>
               
                 <ul>
                   <li><a href="https://www.pexels.com/search/videos/background/" target="_blank">Pexels</a></li>
@@ -181,8 +179,6 @@
               
               <li>Copy the downloaded video to your <b>websites/exercises/assets/videos</b> sub-folder.</li>
           
-              
-          
               <li>As a final step, rename the video file from <b>Pexels Videos 2086113.mp4</b> to <b>hero-video.mp4</b>.
               <img src="assets/img/hero-block-video/video-file-rename-2.png" alt="project in web browser"></li>
           
@@ -210,7 +206,7 @@
 &lt;/<span class="blue-dark">div</span>&gt;
 </pre></li>
 
-          <li>In the head of the web page, change the name and location of the <span class="csyn">preload</span> image to <b>assets/img/hero-still.jpg</b>.</li>
+          <li>In the <span class="syn">head</span> of the web page, change the name and location of the <span class="csyn">preload</span> image from <b>assets/img/business.jpg</b> to <b>assets/videos/hero-still.jpg</b>.</li>
 
           <li>Change the text of the page to the following, and save the page.
 <pre class="language-html">
@@ -218,7 +214,7 @@
 &lt;<span class="blue-dark">h2</span> <span class="blue-light">class</span>=<span class="brown">"slide-in-left"</span>&gt;<span class="white">A brighter career and future</span>&lt;/<span class="blue-dark">h2</span>&gt;
 </pre></li>
 
-        <li>In the <b>hero-video.css</b> file, update the <span class="csyn">background-image</span> style rule of the <span class="csyn">.bg-overlay</span> selector as folow, and save the stylesheet.
+        <li>In the <b>hero-video.css</b> file, update the <span class="csyn">background-image</span> style rule of the <span class="csyn">.bg-overlay</span> selector as follows, and save the stylesheet.
 <pre class="language-css">
 <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">rgba(29,38,113,0.7)</span>,<span class="token number">rgba(195,55,100,0.3)</span>);  
 </pre>
@@ -230,8 +226,56 @@
 
 </li>
 </ol>
-            </section>
 
+            <h3>Playing a background video on Apple iPhones and iPads</h3>
+            <p>To get your background video to play on Apple mobile and tablet devices, you will need to add a few more attributes to the opening <span class="syn">video</span> tag in the hero block of your web page.</p>
+
+            <p>Without these extra attributes, your opening <span class="syn">video</span> tag looks like this:</p>
+          
+          <pre class="language-html">&lt;<span class="blue-dark">video</span> <span class="blue-light">loop muted autoplay poster</span>=<span class="brown">"assets/videos/hero-still.jpg"</span> <span class="blue-light">class</span>=<span class="brown">"background-video"</span>&gt;   </pre>
+          
+          <p>For Apple devices, you will need to add some new attributes as follows:</p>
+          
+<pre class="language-html">&lt;<span class="blue-dark">video</span> <span class="blue-light">loop playinline muted autoplay poster</span>=<span class="brown">"assets/videos/hero-still.jpg"</span> <span class="blue-light">class</span>=<span class="brown">"background-video"</span> <span class="blue-light">disablepictureinpicture</span> <span class="blue-light">preload</span>=<span class="brown">"auto"</span>&gt;  
+</pre>
+          
+          <p>As you can see, the new attributes of the opening <span class="syn">video</span> tag are: <b>playinline</b>, <b>disablepictureinpicture</b> and <b>preload="auto"</b>.</p>
+          
+          <p>You can copy-and-paste the above into your <b>hero-video.html</b> web page, to replace the code already there.</p>
+
+          <p>Your code for embedding the video file and poster image will now look as shown below.</p>
+            <img src="assets/img/hero-block-video/vscode-apple.png" alt="project in web browser" class="wider-110">
+
+          </section>
+
+            
+          <section id="update-css">
+
+
+            <h2>Updating the stylesheet for videos</h2>
+            <p>In the <b>hero-video.css</b> file, you can see that the style rules set for a child element of the <span class="csyn">hero-bg-media</span> container apply <i>only if that child is an image</i>.</p>
+
+            <img src="assets/img/hero-block-video/vscode-object-fit-img.png"  alt="project in web browser">
+
+            <p>This needs to be updated as follows, so that the style rules apply to all child elements of <span class="csyn">hero-bg-media</span>, <i>including both image and video files</i>.</p>
+
+            <p>Replace the specific <span class="csyn">img</span> selector with the wildcard <span class="csyn">*</span> selector as shown below.</p>
+
+
+            <img src="assets/img/hero-block-video/vscode-object-fit-img-wildcard.png"  alt="project in web browser">
+
+            <p>When finished, save the <b>hero-video.css</b> stylesheet.</p>
+
+
+                      
+            <p>✅ That’s it. You have now successfully completed this Tutorial.</p>
+
+
+            <p>Click <a href="final-hero-video/after/hero-video.html" target="_blank">hero-video.html</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+
+
+      </section>
 
 
 <section id="update-home-page-content" class="wrapper-content bg-white">
