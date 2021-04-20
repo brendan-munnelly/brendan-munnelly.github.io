@@ -1,86 +1,182 @@
 
 /* ============= THREE INDIVIDUAL COLUMNS ============ */
 
-.text-center .container-flex .col-3 { text-align: center }
-.container-flex .col-3.text-center  { text-align: center !important }
-
-/* Desktops  */
+/* Non-mobiles */
 @media (min-width: 768px) { 
-    .container-flex .col-3 { width: 30% }
-    .wrapper-narrow-flex .col-3 { width: 30% }
-    .container-flex .col-3 img { margin-bottom: 24px }
-    .wrapper-narrow-flex .col-3 img { margin-bottom: 16px }
-    .container-flex .col-3 { margin-bottom: 54px }
+    .container-flex .col-3 { width: 30%; margin-bottom: 54px }
     .container-flex .col-3:nth-last-child(-n+3) { margin-bottom: 0 }
+    .container-flex.container-narrow .col-3 { width: 28%; margin-bottom: 42px }
+   /* .container-flex.container-wider .col-3 { width: 28%; margin-bottom: 42px } */
 }
 
 /* Mobiles */
 @media (max-width: 767px) { 
+    /* On mobiles, 4 columns to 1 column */
     .container-flex .col-3 { width: 100%; margin-bottom: 16px }
-    .container-flex .col-3 img { margin-bottom: 20px }
-    .container-flex .col-3:last-child { margin-bottom: 20px }
-}
+    .container-flex .col-3:nth-last-child(-n+3) { margin-bottom: 0 }
 
+    /* On mobiles, 3 columns to 2 columns */
+    .container-flex.mobile-col-2 .col-3 { width: 49.5% }
+    .container-flex.mobile-col-2 .col-3 { margin-bottom: 20px }
+    .container-flex.mobile-col-2 .col-3:nth-last-child(-n+2) { margin-bottom: 0 }
+}
 
 /* =================== TYPOGRAPHY  ================== */
 
-/* Column sub-headings */
-.container-flex .col-3 h3 {
-    margin-bottom: 2px;
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: calc(22px + (24 - 22) * ((100vw - 320px)/(1140 - 320)));
+/* All viewports: Column sub-headings */
+.container-flex .col-3 h3 { font-weight: 700; line-height: 1.15; margin-bottom: 4px }
+
+/* All viewports: Paragraphs and lists */
+.container-flex .col-3  p:last-child,
+.container-flex .col-3 li:last-child { margin-bottom: 0 }
+
+/* Large Desktops/Laptops */
+@media (min-width: 1200px) { 
+    .container-flex .col-3 h3 { font-size: 24px }
+    .container-flex .col-3 p {
+        font-size: 19px; line-height: 1.4; margin-bottom: 16px;
+    } 
+    .container-flex .col-3 li { 
+        font-size: 18px; line-height: 1.4; margin-bottom: 10px; 
+        margin-left: 17px; padding-left: 2px; 
+    }
+
+    .container-flex.container-narrow .col-3 h3 { font-size: 20px; margin-bottom: 1px }
+    .container-flex.container-narrow .col-3 p,  
+    .container-flex.container-narrow .col-3 li { 
+        font-size: 17px; line-height: 1.35; margin-bottom: 12px
+    }
 }
 
-/* Paragraphs and Lists */
-.container-flex .col-3 p, 
-.container-flex .col-3 li {
-    font-size: calc(16px + (18 - 16) * ((100vw - 320px)/(1140 - 320)))
+/* Smaller Desktops/Laptops  */
+@media (min-width: 1025px) and (max-width: 1199px ) {
+    .container-flex .col-3 h3  { font-size: 21px; margin-bottom: 1px }
+    .container-flex .col-3 p {
+        font-size: 16.5px; line-height: 1.4; margin-bottom: 16px;
+    } 
+    .container-flex .col-3 li { 
+        font-size: 16px; line-height: 1.35; margin-bottom: 10px; 
+        margin-left: 15px; padding-left: 2px; 
+    }
 }
 
-.wrapper-narrow-flex .col-3 p, 
-.wrapper-narrow-flex .col-3 li {
-    font-size: calc(15px + (16 - 15) * ((100vw - 320px)/(960 - 320)));
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .container-flex .col-3 { margin-bottom: 36px }
+    .container-flex .col-3 h3  { font-size: 19px }
+    .container-flex .col-3 p {
+        font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1140 - 320)));
+        line-height: 1.4; margin-bottom: 16px;
+    } 
+    .container-flex .col-3 li { 
+        font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1140 - 320)));
+        line-height: 1.35; margin-bottom: 10px; 
+        margin-left: 15px; padding-left: 2px; 
+    }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .container-flex .col-3 p,
-    .container-flex .col-3 ul li { line-height: 1.35 }
-    .container-flex .col-3:last-child{ margin-bottom: 20px }
+/* Larger mobiles */
+@media (min-width: 400px) and (max-width: 767px) { 
+    .container-flex .col-3 { 
+        max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px;
+    }
+    .container-flex .col-3 h3 { 
+        font-size: calc(22px + (23 - 22) * ((100vw - 320px) / (1140 - 320))) }
+
+    .container-flex .col-3 p {
+        font-size: 19px; line-height: 1.5; margin-bottom: 16px;
+    } 
+    .container-flex .col-3 li { 
+        font-size: 17px; line-height: 1.4; margin-bottom: 10px; 
+        margin-left: 15px; padding-left: 12px; 
+    }
+
+    .container-flex.mobile-col-2 .col-3:nth-child(odd) { margin-left: -5% }
+    .container-flex.mobile-col-2 .col-3:nth-child(even) { margin-right: -5% }
+    .container-flex.mobile-col-2 .col-3 { margin-bottom: 32px }
+    .container-flex.mobile-col-2 h3 { 
+        font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1140 - 320))) 
+    }
+    .container-flex.mobile-col-2 p, 
+    .container-flex.mobile-col-2 li { 
+        font-size: calc(16px + (17 - 16) * ((100vw - 320px) / (1140 - 320)));
+        line-height: 1.3;
+    }
+    .container-flex.mobile-col-2 li { padding-left: 2px }
 }
 
-/* Paragraphs */
-.container-flex .col-3 p { margin-bottom: 16px }
-.wrapper-narrow-flex .col-3 p { margin-bottom: 12px }
-.container-flex .col-3 p:last-child { margin-bottom: 0 }
+/* Smaller mobiles */
+@media (max-width: 399px) { 
+    .container-flex .col-3 { 
+        margin-bottom: 38px;
+    }
+    .container-flex .col-3 h3 { font-size: 21px }
 
-/* Lists */
-.container-flex .col-3 li   { margin-bottom: 16px }
-.wrapper-narrow-flex .col-3 li { margin-bottom: 14px; line-height: 1.4 }
+    .container-flex .col-3 p {
+        font-size: 18px; line-height: 1.5; margin-bottom: 16px;
+    } 
+    .container-flex .col-3 li { 
+        font-size: 18px; line-height: 1.4; margin-bottom: 10px; 
+        margin-left: 15px; padding-left: 12px; 
+    }
 
-@media (min-width: 768px) { 
-    .container-flex .col-3 ul li { margin-left: 17px; padding-left: 10px }
-    .container-flex .col-3 ul.fa-ul { margin-left: 14px }
-    .container-flex .col-3 ul.fa-ul li { margin-left: 14px; padding-left: 14px }
-}
-
-@media (max-width: 767px) { 
-    .container-flex .col-3 ul li { margin-left: 14px; padding-left: 8px }
-    .container-flex .col-3 ul.fa-ul { margin-left: 14px }
-    .container-flex .col-3 ul.fa-ul li { margin-left: 10px; padding-left: 10px }
-    .container-flex .col-3 ul,
-    .container-flex .col-3 ul.fa-ul { margin-bottom: -12px }
+    .container-flex.mobile-col-2 .col-3:nth-child(odd) { margin-left: -4% }
+    .container-flex.mobile-col-2 .col-3:nth-child(even) { margin-right: -4% }
+    .container-flex.mobile-col-2 .col-3 { margin-bottom: 32px }
+    .container-flex.mobile-col-2 h3 { font-size: 18px }
+    .container-flex.mobile-col-2 p, 
+    .container-flex.mobile-col-2 li { font-size: 15px; line-height: 1.3 }
+    .container-flex.mobile-col-2 li { padding-left: 2px }
 }
 
 
 
 /* ================= IMAGES ================= */
 
-@media (max-width: 767px) { 
-    .container-flex .col-3 img { margin-top: 30px }
+@media (min-width: 1200px) {
+    .container-flex .col-3 img { margin-bottom: 24px }
+    .container-flex.container-narrow .col-3 img { margin-bottom: 16px }
 }
 
-/* ================= ICONS ================= */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .container-flex .col-3 img,
+    .container-flex.container-narrow .col-3 img { margin-bottom: 16px }
+}
+
+@media (max-width: 767px) { 
+    .container-flex .col-3 img { margin-bottom: 20px }
+    .container-flex.mobile-col-3 img { margin-bottom: 10px }
+}
+
+/* ================= ICONS IN LISTS ================= */
+
+/* Large Desktops/Laptops */
+@media (min-width: 1200px) { 
+    .container-flex .col-3 ul.fa-ul { margin-left: 14px; margin-bottom: -12px }
+    .container-flex .col-3 ul.fa-ul li { margin-left: 14px; padding-left: 8px }
+}
+
+/* Smaller Desktops/Laptops  */
+@media (min-width: 1025px) and (max-width: 1199px ) {
+    .container-flex .col-3 ul.fa-ul { margin-left: 9px; margin-bottom: -12px }
+    .container-flex .col-3 ul.fa-ul li { margin-left: 14px; padding-left: 8px }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .container-flex .col-3 ul.fa-ul { margin-left: 9px; margin-bottom: -12px }
+    .container-flex .col-3 ul.fa-ul li { margin-left: 14px; padding-left: 4px }
+}
+
+/* Small viewports */
+@media (max-width: 767px) {
+    .container-flex .col-3 ul.fa-ul { margin-left: 16px; margin-bottom: -12px }
+    .container-flex .col-3 ul.fa-ul li { margin-left: 10px; padding-left: 10px }
+    .container-flex.mobile-col-2 ul.fa-ul li { margin-left: 10px; padding-left: 4px }
+}
+
+
+/* ================= ICONS AS ILLUSTRATIONS  ================= */
 
 .container-flex .col-3 figure.icon { 
     display: inline-block; line-height: 1.4;
@@ -109,6 +205,15 @@
     font-size: calc(100px + (120 - 100) * ((100vw - 320px)/(1140 - 320)));
     margin-bottom: 12px;
 }
+
+
+
+
+
+
+
+
+
 
 
 

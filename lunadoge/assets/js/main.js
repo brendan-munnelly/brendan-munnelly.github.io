@@ -137,10 +137,17 @@ function doUpperWidth() {
     // remove
     if (opt==="0") {
         elCol_1.classList.remove("section-narrow");
+        elCol_1.classList.remove("section-narrower");
     }
 
     else if (opt==="1") {
         elCol_1.classList.add("section-narrow");
+        elCol_1.classList.remove("section-narrower");
+    }
+
+    else if (opt==="2") {
+        elCol_1.classList.add("section-narrower");
+        elCol_1.classList.remove("section-narrow");
     }
 }
 
@@ -166,12 +173,13 @@ function doAlignFullWidthColumn() {
 
 if (col_no === ".col-2") {
     document.getElementById("dd_grid_width").value="1";
+    document.querySelector("#dd_grid_width").addEventListener("change", doGridWidth);
 }
-else {
+else if (col_no === ".col-3" || col_no === ".col-4" ) {
     document.getElementById("dd_grid_width").value="0";
+    document.querySelector("#dd_grid_width").addEventListener("change", doGridWidth);
 }
 
-document.querySelector("#dd_grid_width").addEventListener("change", doGridWidth);
 
 function doGridWidth(){
 
@@ -540,7 +548,9 @@ function doGridWidth(){
 //////////////// COLUMN PROPERTIES ///////////////
 */
 
-document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
+if (col_no != ".col-0") {
+    document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
+}
 
 function doColShadows() {
     let opt = document.querySelector("#dd_col_shadows").value;
@@ -605,8 +615,9 @@ function removeColShadows() {
     document.getElementById("dd_col_borders").disabled=false;
 }
 
-
-document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
+if (col_no != ".col-0") {
+    document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
+}
 
 function doColBorders() {
     let opt = document.querySelector("#dd_col_borders").value;
@@ -656,7 +667,9 @@ function doColBorders() {
     }
 }
 
-document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
+if (col_no != ".col-0") {
+    document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
+}
 
 function doColCorners() {
     let opt = document.querySelector("#dd_col_corners").value;
@@ -678,8 +691,9 @@ function doColCorners() {
     }
 }
 
-
-document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
+if (col_no != ".col-0") {
+    document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
+}
 
 function doColAlign() {
 
@@ -699,8 +713,6 @@ function doColAlign() {
         }
     }
 }
-
-
 
 /*
 //////////////// VISUALS  ///////////////

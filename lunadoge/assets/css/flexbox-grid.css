@@ -9,6 +9,10 @@ img { width: 100%; height: auto; display: block }
 /* h1, h2, h3, h4 { width: 100% } */
 input, button, textarea, select { font: inherit }
 
+header, section { width: 100% }
+/* Last element at bottom of header or section */
+header *:last-child, section *:last-child { margin-bottom: 0 }
+
 /* Sans-serif system font */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -18,22 +22,11 @@ body {
 
 @media (min-width: 1200px) { 
 	section { 
-		margin-left: auto;
-		margin-right: auto;
 		padding: 3.5% 0 5% 0; 
 		padding-left: calc( (100% - 1140px)/2 );
 		padding-right: calc( (100% - 1140px)/2 );
+		margin-left: auto; margin-right: auto;
 	} 
-
-	.section-narrow {
-		padding-left: calc( (100% - 960px)/2 );
-		padding-right: calc( (100% - 960px)/2 );
-	}
-
-	.section-narrower {
-		padding-left: calc( (100% - 800px)/2 );
-		padding-right: calc( (100% - 800px)/2 );
-	}
 }
 
 /* Tablets and smaller desktops */
@@ -48,18 +41,126 @@ body {
 
 /* Larger mobiles */
 @media (min-width: 400px) and (max-width: 767px)  { 
-	section { 
-		padding: 7% 13% 8% 13%;
-	/*	max-width: 400px; */
-		margin-left: auto;
-		margin-right: auto
-	}
+	section { padding: 7% 13% 8% 13% }
 }
 
 /* Smaller mobiles */
 @media (max-width: 399px) { 
 	section { padding: 7% 10% 8% 10% } 
 }
+
+/* Narrow section widths on large viewports only */
+@media (min-width: 1200px) { 
+	.section-narrow {
+		padding-left: calc( (100% - 800px)/2 );
+		padding-right: calc( (100% - 800px)/2 );
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1190px) { 
+	.section-narrow {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
+}
+
+/* Narrow section widths ignored on mobiles */
+@media (max-width: 767px) { .section-narrow { width: 100% } }
+
+
+/* ============ SECTIONS: DIRECT DESCENDENTS  =========== */
+
+/* Headings and text */
+
+section > h2 {
+	font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1140 - 320)));
+	line-height: 1.2; 
+	letter-spacing: -1px;
+	margin-bottom: 20px;
+}
+
+section > h3 {
+	font-size: calc(20px + (28 - 20) * ((100vw - 320px) / (1140 - 320)));
+	line-height: 1.2; 
+	margin-top: 26px; margin-bottom: 2px;
+}
+
+section > p {
+	font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1140 - 320)));
+	line-height: 1.6; margin-bottom: 16px;
+}
+
+/* Text effects */
+section > h2 span,
+section > h3 span,
+section > p span {
+	color: #0000ff; background-color: #ccd9ff;
+	padding-right: 9px; padding-left: 9px; padding-bottom: 4px;
+	border-radius: 8px;
+}
+
+/* Blockquotes */
+blockquote {
+	font-size: calc(20px + (28 - 20) * ((100vw - 320px) / (1140 - 320)));
+	line-height: 1.6; font-style: italic;
+	margin-top: 26px; margin-bottom: 2px;
+	background-color: #ccd9ff;
+	padding: 20px;
+}
+
+blockquote::before, blockquote::after { 
+	font-size: 240%;
+	font-weight: bold;
+	color: #0000ff;
+	font-family: serif;
+	line-height: 0;
+	position: relative;
+    top: 15px;
+}
+
+blockquote::before  { content: open-quote; margin-left: -6px; margin-right: 8px  }
+blockquote::after { content: close-quote; margin-left: 4px  }
+blockquote { quotes: "“" "”" "‘" "’"; }
+  
+/* Images */
+section > figure { margin-bottom: 40px }
+
+/* Images resizng */
+section > .figure-90 { width: 90% }
+section > .figure-75 { width: 75% }
+section > .figure-50 { width: 50% }
+section > .figure-25 { width: 25% }
+
+section > [class*="figure-"] {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section > .figure-110 { 
+	width: 110%;
+	margin-left: -5%;
+	margin-right: -5%;
+}
+
+/* Image fancy effects */
+
+img.shadow-faint { filter: drop-shadow(8px 8px 10px #888) }
+img.shadow-heavy { filter: drop-shadow(8px 8px 10px #444) }
+img.shadow-solid { box-shadow: 8px 10px 0 blue }
+img.soft-corners { border-radius: 15px }
+img.rotate-clock { transform: rotate(2deg) }
+img.rotate-cclock { transform: rotate(-2deg) }
+
+/* For square images only */
+img.rounded { border-radius: 50% }
+
+
+/* ============== UTILITY CLASSES =============== */
+
+.text-left   { text-align: left   !important }
+.text-center { text-align: center !important }
+
 
 
 /* ============= PARENT FLEX CONTAINERS ============ */
@@ -69,15 +170,14 @@ body {
 	width: 100%; position: relatve; text-align: left; margin: 0 auto; 
 }
 
-/* Large Desktops/Laptops  */
-@media (min-width: 1200px) { 
-	.container-flex { width: 100% }
-	.container-narrow  { width: 90% }
-}
+/* Narrow widths on large viewports only */
+@media (min-width: 1200px) { .container-narrow  { width: 90%  } }
+@media (max-width: 1199px) { .container-narrow  { width: 100% } }
+
 
 /* Small Desktops/Laptops  */
 @media (min-width: 1025px) and (max-width: 1199px ) { 
-    .container-narrow   { width: 80% }
+    .container-narrow { width: 80% }
 }
 
 /* Container width */
@@ -99,7 +199,6 @@ body {
 		width: 100%;
 		margin-left: 0;
 		margin-right: 0;
-		background-color: blanchedalmond;
 	}
 
 	/* section is 85% narrow, container is 100% wide */
@@ -107,7 +206,7 @@ body {
 	section.section-narrow > .container-flex.container-narrow {
 		margin-left: -9%;
 		margin-right: auto;
-		width: 119%;
+		width: 100%;
 	}
 
 	/* section is 100% wide, container is max 960px narrow */
@@ -125,6 +224,9 @@ body {
 	}
 }
 
+.container-flex:not(.text-center)  h1  { margin-left: -6px }
+.container-flex:not(.text-center)  h2  { margin-left: -3px;}
+
 /* ============== CONTENT ALIGNMENT =============== */
 
 section .container-flex { text-align: left }
@@ -136,10 +238,6 @@ section.text-center .container-flex { text-align: center }
 	text-align: left !important;
 }
 
-/* ============== TYPOGRAPHY  =========== */
-
-.container-flex:not(.text-center)  h1  { margin-left: -6px }
-.container-flex:not(.text-center)  h2  { margin-left: -3px;}
 
 /* ================= IMAGES =============== */
 
@@ -293,7 +391,4 @@ img.rounded { border-radius: 100% }
 .theme-dark .container-flex ul.fa-ul span i { color: lightgoldenrodyellow }
 
 
-/* ============== UTILITY CLASSES =============== */
 
-.text-left { text-align: left }
-.text-center { text-align: center }
