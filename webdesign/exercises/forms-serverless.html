@@ -68,6 +68,9 @@
             <p><a href="#register-formspree">Registering with Formspree</a></p>
             <p><a href="#edit-form">Creating a Project and Form</a></p>
             <p><a href="#buttons-add">Updating the endpoint of your forms</a></p>
+			<p><a href="#email-validation">Email address validation</a></p>
+			<p><a href="#mandatory-fields">Making a form field mandatory</a></p>
+			<p><a href="#user-feedback">Providing user feedback on form submission</a></p>
             <p><a href="#upload-github">Uploading files to GitHub</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
@@ -92,7 +95,7 @@
 
 		<p>Three such popular email-processing services that offer a free tier are the following:</p>
 			<ul>
-				<li><a href="https://tally.so" target="_blank">tally.so</a></li>
+				<li><a href="https://tally.so" target="_blank">Tally.so</a></li>
 				<li><a href="https://JamForm.com" target="_blank">Jamform</a></li>
 				<li><a href="https://liveformhq.com/" target="_blank">LiveForm</a></li>
 				<li><a href="https://formspree.io" target="_blank">Formspree</a></li>
@@ -114,7 +117,7 @@
 		At the top-right of the home page, click the <b>Get Started</b> button.</li>
 		<li>On the ‘Register for Formspree’ screen now displayed, enter the Email address you want to use with Formspree.
 		<span class="inside-ol">&nbsp;</span>
-		With Formspree, information entered to your website forms will be forwarded to you by email. The free plan available with Formspree gives you the option to use up two email addresses. The email you enter here will become one of those two addresess to which you can choose form-entered information to be forwarded.
+		With Formspree, information entered to your website forms will be forwarded to you by email. The free plan available with Formspree gives you the option to use up two email addresses. The email you enter here will become one of those two addresses to which you can choose form-entered information to be forwarded.
 		<span class="inside-ol">&nbsp;</span>
 		Next, choose a Password for your Formspree account, accept the Terms of Service and Privacy Policy, and click the <b>Register</b> button.</li>
 	</ol>
@@ -195,7 +198,145 @@
 	<p>That’s it. You have now completed this Tutorial.</p>
 	
 	<p>And you now have a functional email contact form ready to use on your website.</p>
+
+	<p>You can check your sign up form is working by entering an email address and clicking the <b>Subscribe</b> button.</p>
+
 </section>
+
+<section id="email-validation">
+
+	<h2>Email address validation</h2>
+
+	<p>The email field in your sample form is one example of the several types of fields you may include in a form. Here are some other common examples:</p>
+
+	<ul>
+		<li>&lt;input type="date"&gt;</li>
+		<li>&lt;input type="file"&gt;</li>
+		<li>&lt;input type="number"&gt;</li>
+		<li>&lt;input type="password"&gt;</li>
+		<li>&lt;input type="tel"&gt;</li>
+		<li>&lt;input type="text"&gt;</li>
+	</ul>
+
+	<p>For a complete list of form input types with an explanation of each one, see the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank">MDN Web Docs</a>.</p>
+
+	<p>A form field of the email type checks that the text entered by the user is actually an email address. If it is not, the form will display an error as shown below.</p>
+
+	<img src="assets/img/forms-serverless/validation-browser.png" style="max-width:580px" alt="Formspree">
+
+	<p>Note that:</p>
+	<ul>
+		<li>The form field <i>only</i> checks that the entered text follows the rules for a correct email address format.</li>
+		<li>The form field does <i>not</i> check that the email address actually exists.</li>
+	</ul>
+
+</section>
+
+
+<section id="mandatory-fields">
+
+	<h2>Making a form field mandatory</h2>
+
+	<p>In HTML forms, a mandatory field is one that the user <i>must</i> complete for the form to be accepted for processing.</p>
+
+	<p>Follow the simple steps below to make the email address field of your sign-up form a mandatory field.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>forms.html</b> web page.</li>
+		<li>At the end of the attributes for the email field, type the word <b>required</b>.
+		<img src="assets/img/forms-serverless/required.png" alt="Formspree" class="wider-110"></li>
+		<li>Save the file.</li>
+		
+	</ol>
+
+	<p>Test your form by clicking the <b>Subscribe</b> button without entering a value in the email field. You should the error message shown in the example below.</p>
+
+	<img src="assets/img/forms-serverless/mandatory-browser.png" style="max-width:580px" alt="Formspree">
+
+</section>
+
+<section id="user-feedback">
+	<h2>Providing user feedback on form submission</h2>
+	<p>The next step is to provide the user with feedback that the form has been successfully submitted.</p>
+
+	<ol>
+ 		<li>In VS Code, display the form.html file.</li>
+ 		<li>Update the <span class="syn">button</span> element by giving it a unique ID.  For example, <b>my-form-button</b>.
+		<img src="assets/img/forms-serverless/my-form-button.png" alt="Formspree" class="wider-110"></li>
+ 		<li>Directly under the <span class="syn">button</span>, and before the closing <span class="syn">&lt;/form&gt;</span> tag, type the following new, empty <span class="syn">&lt;div&gt;</span> element. 
+		<span class="inside-ol">&nbsp;</span>
+		The <span class="syn">&lt;div&gt;</span> has an ID of <b>form-status</b>.</li>
+
+		<li>At the bottom of the web page, just before the closing tab <span class="syn">&lt;/body&gt;</span> tag, copy-and-paste the following JavaScript code:
+<pre class="language-css">
+&lt;script&gt;
+var form = document.getElementById("email-form");
+        
+async function handleSubmit(event) {
+  event.preventDefault();
+  const status = document.getElementById("form-status");
+  const data = new FormData(event.target);
+  fetch(event.target.action, {
+	method: form.method,
+	body: data,
+	headers: {
+		'Accept': 'application/json'
+	}
+  }).then(response =&gt; {
+	document.getElementById("form-status").style.display="block";
+	status.innerHTML = "Thanks for your submission!";
+	form.reset();
+	setTimeout(function() {
+		const msg = document.getElementById("form-status");
+		msg.style.transition = '.5s';
+		msg.style.opacity = '0';
+		msg.style.visibility = 'hidden';
+		msg.style.display = 'none';
+	}, 1250);
+
+  }).catch(error =&gt; {
+	document.getElementById("form-status").style.display="block";
+	status.innerHTML = "Oops! There was a problem submitting your form."
+	setTimeout(function() {
+		const msg = document.getElementById("form-status");
+		msg.style.transition = '.5s';
+		msg.style.opacity = '0';
+		msg.style.visibility = 'hidden';
+		msg.style.display = 'none';
+	}, 1250);
+  });
+}
+form.addEventListener("submit", handleSubmit)
+
+&lt;/script&gt;</pre></li>
+
+		<li>Save the <b>forms.html</b> web page.</li>
+		<li>In VS Code, display the <b>forms.css</b> stylesheet</li>
+		<li>At the end of the /* FORMS */ section, copy-and-paste the following.
+<pre class="language-css">.container-form #form-status {
+   background-color: #e4f5e8;
+   border: solid 1px green;
+   padding: 10px;
+   line-height: 1;
+   font-size: 18px;
+   color: #000;
+   display: none;
+   font-family: sans-serif;
+   margin-top: 12px;
+   max-width: 320px;
+}</pre></li>
+ 		 <li>Save the <b>forms.css</b> file</li>
+	</ol>
+
+	<p>Test your sample form and you can see that a feedback message is briefly displayed after the form is successfully submitted.</p>
+
+	<img src="assets/img/forms-serverless/user-feedback.png" style="max-width:580px" alt="Formspree">
+
+	<p>Click <a href="final-foms/after/forms-3.html" target="_blank">here</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+
 
 <section id="upload-github">
 	<h2>Uploading your files to GitHub</h2>
