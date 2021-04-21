@@ -1,49 +1,63 @@
 /*  ============= WEB BROWSER RESETS ============ */
-* { margin: 0; padding: 0; border: none; box-sizing: border-box }
-html { height: 100% }
-body { min-height: 100%; max-width: 1600px; margin-left: auto; margin-right: auto }  
+* { margin: 0; padding: 0; border: none }
+*, *::before, *::after { box-sizing: border-box }
+html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
+scroll-behavior: smooth; scroll-padding-top: 20px }
+body { max-width: 1920px; line-height: 1.5; margin-left: auto; margin-right: auto; 
+min-height: 100vh; text-rendering: optimizeSpeed }  
 img { width: 100%; height: auto; display: block }
+input, button, textarea, select { font: inherit }
+
+/* Help prevent overflow of long words/names/URLs */
+h1, h2, h3, h4, p, li { word-break: break-word; hyphens: auto }
+  
+/* HTML5 container elements full viewport width */
+header, section, footer { width: 100% }
+/* Last element at bottom of header or section */
+header *:last-child, section *:last-child, footer *:last-child { margin-bottom: 0 }
+
+/* ================= ENDS ================ */
 
 body { background-color: #eff8f5 }
 
 /* === HERO BLOCK === */
 
-.container-hero-block {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	background-position: center center;
-	background-size: cover;
-	background-repeat: no-repeat;
+/* Horizontal spacing: Desktops */
+@media (min-width: 768px) { .hero-text-container { padding: 0 7% 3% 7% } }
+	
+/* Horizontal spacing: Mobiles */
+@media (max-width: 767px) { .hero-text-container { padding: 0 12% 5% 12% } }
+
+.hero-block {
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: gray;
+    overflow: none;
 }
 
-.container-hero-block.home-page {
-	background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../img/hero-home.jpg');
+@media (min-width: 768px) { 
+  .hero-block { height: 80vh }
 }
 
-.container-hero-block.destinations-page {
-	background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../img/hero-destinations.jpg');
-}
-
-.container-hero-block.about-us-page {
-	background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('../img/hero-about-us.jpg')
-}
-
-.container-hero-block h1, .container-hero-block h2 {
+.hero-block h1, .hero-block h2 {
 	font-weight: 700;
 	font-family: 'Raleway', sans-serif;
 	text-shadow: 2px 2px #222;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+
 }
 
-.container-hero-block h1 { 
+.hero-block h1 { 
 	color: #fff;
 	font-size: calc(42px + (102 - 42) * ((100vw - 320px)/(1600 - 320)))
 }
 
-.container-hero-block h2 {
+.hero-block h2 {
 	color:  #ff5000;
 	line-height: 1.5;
 	font-size: calc(32px + (64 - 32) * ((100vw - 320px)/(1600 - 320)));
@@ -66,6 +80,46 @@ body { background-color: #eff8f5 }
 	}
 	.container-hero-block h1 { margin-bottom: 5% }
 }
+
+
+.hero-text-container { padding: 0 12% 4% 12%; z-index: 2 }
+
+.hero-bg-media {
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 0;
+}
+                  
+.hero-bg-media img {
+    object-fit: cover; width: 100%; height: 100%;
+}
+
+.bg-overlay {
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;  
+    z-index: 1;
+    background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2));   
+}
+
+
+
+
+/* Desktop - block height, text width and h1 bottom margin */
+@media (min-width:768px) { 
+	.container-hero-block { height: 520px }
+	.container-hero-block h1, .container-hero-block h2 { 
+		width: 60%; 
+	}
+	.container-hero-block h1 { margin-bottom: 3% }
+}
+
+/* Mobiles - block height, text width and h1 bottom margin */
+@media (max-width:767px) { 
+	.container-hero-block { height: 360px }
+	.container-hero-block h1, .container-hero-block h2  { 
+		width: 90%; 
+	}
+	.container-hero-block h1 { margin-bottom: 5% }
+}
+
 
 
 /* ========= PARENT FLEXBOX CONTAINER ======= */
