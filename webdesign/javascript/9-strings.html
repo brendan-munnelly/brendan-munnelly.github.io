@@ -1,0 +1,666 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Strings | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Tutorial from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Tutorials">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron tutorial">
+	<h3><a href="index.html" title="All Web Tutorials">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Working with Strings</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+	<h3>Objectives</h3>
+
+	<p>In this Tutorial you will learn how to:</p>
+
+	<ul>
+		<li>Apply font effects such a bold and italic to a string</li>
+		<li>Determine the length of a string</li>
+		<li>Use the chartAt() method to identify the character located at a specified position a string</li>
+		<li>Use the indexOf () method to determine whether a string contains a specified character or not</li>
+		<li>Use the replace() method to replace occurrences of a particular character or characters in a string with specified alternatives</li>
+		<li>Use the split() and substring() methods to extract parts of a string from the entire string.</li>
+		<li>Create a <i>for</i> loop in JavaScript with a counter variable, a starting value, a loop condition and an increment or decrement operator</li>
+	</ul>
+
+
+	<h3>Exercise Files</h3>
+
+	<p>In this Tutorial you will work with the following HTML files:</p>
+	<ul>
+		<li><a href="exercises/9/exercise-9-1.html" target="_blank">exercise-9-1.html</a></li>
+		<li><a href="exercises/9/exercise-9-2.html" target="_blank">exercise-9-2.html</a></li>
+		<li><a href="exercises/9/exercise-9-3.html" target="_blank">exercise-9-3.html</a></li>
+
+	</ul>
+
+</section>
+
+<section >
+
+<h2>About String Objects</h2>
+
+<img src="assets/img/base-screen.png"  alt="">
+<p>JavaScript has a built-in object named String. Every time you declare a new string variable JavaScript creates a new instance of the string object. A string object has only one property &#8211; its length &#8211; but has a very wide range of methods that enable scripts to manipulate the string.</p>
+
+<p>String methods fall into four categories:</p>
+
+<ul>
+	<li><b>Formatting methods</b>: You can apply font effects such a bold and italic to a string, and change the case of its characters from lower to upper, and vice versa.</li>
+
+	<li><b>String analysis methods</b>: You can examine a string to identify the character located at a specified position in the string, and you can examine a string to see whether it contains a specified character (such as '@') or not.</li>
+
+	<li><b>String manipulation methods</b>: You can replace occurrences of a particular character or characters with specified alternatives.</li>
+
+	<li><b>Substring extraction methods</b>: You can extract parts of a string from the entire string. In the example of the email address 'joe@bloggs.com', you could extract the domain name of 'bloggs.com'.</li>
+</ul>
+
+<p>Whichever type of method you apply to a string, you must set the string equal to the result of the method operation.
+The following code declares a variable, assigns a value to it, and then applies a method to the variable that converts its content to uppercase characters.</p>
+
+<pre class="language-html">
+var fName = "john";
+fName = fName.toUpperCase;
+</pre>
+
+<p>The result of the above code is that the variable content is set to 'JOHN'. In contrast, the result of the code below is that the value of the variable is still 'John'.</p>
+
+<pre class="language-html">
+var fName = "john";
+fName.toUpperCase;
+</pre>
+
+</section>
+
+<section >
+
+<h2>Formatting Strings</h2>
+
+<p>JavaScript of fers a wide range of formatting methods that can be applied to strings. The main ones are set out in the table below.</p>
+
+<table>
+ <tr>
+	 <td><p><b>String Method</b></p></td>
+ </tr>
+ <tr>
+	 <td><p>bold()</p></td>
+ </tr>
+ <tr>
+	<td><p>italics()</p></td>
+ </tr>
+ <tr>
+	<td><p>big()</p></td>
+ </tr>
+ <tr>
+	<td><p>small()</p></td>
+ </tr>
+ <tr>
+	<td><p>strike()</p></td>
+ </tr>
+ <tr>
+	<td><p>toUpperCase()</p></td>
+ </tr>
+ <tr>
+	<td><p>toLowerCase()</p></td>
+ </tr>
+ <tr>
+	<td><p></p></td>
+ </tr>
+ <tr>
+	<td><p>(<i>colour</i>)</p></td>
+ </tr>
+</table>
+
+<p>In Exercise 9.1 you will assign a line of text to a string, apply various string formatting methods to it, and then write the formatted strings to the browser window.</p>
+
+
+<h3>Exercise 9.1: Modifying the Format of a String</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/9/exercise-9-1.html" target="_blank">exercise-9-1.html</a></p>
+
+<p>In the document body you can see a &lt;SCRIPT&gt;tag containing nine string declaration and assignment statements.</p>
+
+<p>After the existing statements type the following lines of code.</p>
+
+<pre class="language-html">
+strvar1 = strvar1.bold( );
+document.write(strvar1+&quot;&lt;br&gt;&quot;);
+strvar2 = strvar2.italics( );
+document.write(strvar2+&quot;&lt;br&gt;&quot;);
+strvar3 = strvar3.small( );
+document.write(strvar3+&quot;&lt;br&gt;&quot;);
+strvar4 = strvar4.big();
+document.write(strvar4+&quot;&lt;br&gt;&quot;);
+strvar5 = strvar5.strike( );
+document.write(strvar5+&quot;&lt;br&gt;&quot;);
+strvar6 = strvar6.toUpperCase( );
+document.write(strvar6+&quot;&lt;br&gt;&quot;);
+strvar7 = strvar7.toLowerCase( );
+document.write(strvar7+&quot;&lt;br&gt;&quot;);
+strvar8 = strvar8.fontsize('' );
+document.write(strvar8+&quot;&lt;br&gt;&quot;);
+strvar9 = strvar9.fontcolor('#FF0000');
+document.write(strvar9+&quot;&lt;br&gt;&quot;);
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>The browser window should look as shown below.</p>
+
+<p><img src="ECDL_Web_Mod5_JavaScript_files/image198.jpg"></p>
+
+<p>In this exercise you applied nine different string formatting methods to nine different strings. You can apply different formatting methods to the same string, one method aftef the other. The results, however, are unpredicable, and vary for different web browsers. You can close the file when finished.</p>
+
+</section>
+
+
+
+<section >
+
+<h2>Examining String Length</h2>
+
+<p>A string's sole property is its length. You can write the length of a string named 'address' to the browser window with the following statement.</p>
+
+<pre class="language-html">
+document.write(&lt;b&gt;String length is: &lt;/b&gt;"+address.length);
+</pre>
+
+<p>String length is a read-only property;it cannot be changed by a script. The length property of a string is automatically updated whenever the value in the string changes. the length method is useful for handling information entered by users to a HTMl form. For example, you can show an error message if the user-entered information is either too short or too long.</p>
+
+<h2>Examining String Content</h2>
+
+<p>JavaScript of fers the following two methods for examining the contents of a string.</p>
+
+<table 
+ >
+ <tr>
+	 <td><p><b>String Method</b></p></td>
+	 <td><p><b>Description</b></p></td>
+	 <td><p><b>Examples</b></p></td>
+ </tr>
+ <tr>
+	 <td><p>charAt(n)</p></td>
+	 <td><p>Use this method to find which character is located at a specified position within a string. You enter the position within the parenthesis and method returns the character at that position.</p></td>
+	 <td><p>str ="Hello world";<br>
+	 str=str.charAt(0);<br>
+	 /* returns 'H' */<br>
+	 str=str.charAt(5);<br>
+	 /* returns ' ' */</p></td>
+ </tr>
+ <tr>
+	 <td><p>indexOf("a")</p></td>
+	 <td><p>Accepts a letter, number or punctuation symbol within the parenthesis and returns the location of the first occurrence of that character within the string. You are not limited to searching for a single character. If you search for a smaller string, the method returns the position at which the smaller string begins</p></td>
+	 <td><p>str ="joe@bloggs.com";<br>
+	 str=str.indexOf("@");<br>
+	 /* returns '4' */<br>
+	 str=str.indexOf("com");<br>
+	 /* returns '11' */</p></td>
+ </tr>
+</table>
+
+<h3>String Analysis With the charAt() Method</h3>
+
+<p>You can use the charAt() method in combination with the length property to find the last character in any string. In the code below the string length is reduced by one to provide the integer for the charAt() method. This is because the length property, in counting the number of characters in the string, starts from 1 but the charAt() method starts counting from 0.</p>
+
+<pre class="language-html">
+var my_email=&quot;joe@smith.com.au;
+var email_length=my_ email.length;
+var last_char=my_ email.charAt(email_length-1);
+alert('The last character is '+last_char+'.');
+</pre>
+
+
+
+<p>You can use the charAt() method in combination with a <i>for</i> loop to read through each character in a string. Add some <i>if</i> statements and you can test the value of each individual character in the string. Let's see how this can be done.</p>
+
+<p>In the two statements below two variables are declared, and a string value is assigned to one of them. The second variable named 'oneChar' will be used to store a single character from the string, one character at a time.</p>
+
+<pre class="language-html">
+/* Declare and assign value to variable */
+var mystring = "Monday ";
+var oneChar;
+</pre>
+
+
+<p>In the next statement a <i>for</i> loop is created. The values of the counter variable range from zero to one less than the length of the string. As it happens the string in this example contains six characters, numbered zero to five. The last character in the string ('y') is therefore numbered five.</p>
+
+<pre class="language-html">
+/* Define start and upper values of for loop */
+for (i= 0;i &lt; mystring.length;i++)
+</pre>
+
+
+<p>Now add a line of code that assigns a single character from the string to the oneChar variable in each iteration of 
+the loop.</p>
+
+<pre class="language-html">
+/* Extract one character from string in each loop iteration and assign to variable */
+oneChar = str.charAt(i)
+</pre>
+
+
+<p>The single character from the string that is assigned to the oneChar variable will be different on each iteration of the <i>for</i>
+loop. On the first iteration the character assigned will be 'M' because that character is a location zero in the string. On the second iteration it will be 'o', and so on. The loop terminates when the sixth character at location five is assigned to the oneChar variable.</p>
+
+<p>Now you can use an <i>if</i> statement to test the character in the oneChar variable on each loop iteration.</p>
+
+<pre class="language-html">
+/* Test value of single extracted character in variable */
+if (oneChar = ="y") {
+    window.alert("String contains the lettef 'y'.");
+}
+
+else { 
+    window.alert("String does contains the letter 'y'.");
+}</pre>
+
+
+
+<p> That's it. You can use this combination of the charAt() method, a <i>for</i> loop and <i>if</i> statements to perform a variety of analyses on strings.</p>
+
+<h3>String Analysis With the indexOf() Method</h3>
+
+<p>Perhaps the most common use of the charAt() is to for check for invalid characters in HTML form entries. For example an email address should be restricted to letters, numbers, periods and an '@' symbol. In the statement below the indexOf method searches through the 'email' string,
+and returns a value of 10. This is the location of the first occurrence of the '@' symbol within the string.</p>
+
+<pre class="language-html">
+email = <a href="mailto:john_smith@anywhere.com">john_smith@anywhere.com</a>;
+document.write("&lt;B&gt;@ symbol is at position" &lt;/B&gt;"+email.indexOf("@");
+</pre>
+
+<p>Two points to remember about the indexOf method:</p>
+
+<ul>
+	<li><b>One instance only</b>: The indexOf method shows only the <i>first</i> occurrence of the relevant character(s) within the string. If you want to find all occurrences, you need to repeat the method on the string.</li>
+
+	<li><b>Returns -1 if no instance</b>: What happens when the indexOf() method fails to find any instance of the relevant character(s)? Does it return 'undefined'? No. Does it return '0'. No, because a zero would indicate that it has found the relevant at the first location in the string. It returns a -1.</li>
+</ul>
+
+
+<h3>Checking That a Character is Present</h3>
+
+<p>Sometimes you will want to ensure that certain characters are <i>present</i> in a string. For example, an email address should contain the @ symbol. The code below searches through the string. If an @ symbol is <i>not</i> found, a -1 is returned. Therefore any value returned other than -1 indicates that the string passes the syntax test and no error message is displayed.</p>
+
+<pre class="language-html">
+var user_ email;
+user_email = document.forms.myform.email.value;
+if (user_ email.indexOf("@")== -1 )�{
+    window.alert("You entered an invalid address. Please try again.");
+}
+</pre>
+
+
+<h3>Checking That a Character is Absent</h3>
+
+<p>You can also check that certain characters are <i>absent</i> from a string. Commas are invalid characters in email addresses. A search of the string for a comma should fail. That is, it should return a -1. In the code below any value other than a -1 displays a window.alert() box to the web page visitor.</p>
+
+<pre class="language-html">
+var user_ email;
+user_email = document.forms.myform.email.value;
+if (user_ email.indexOf(",") != -1 ) {
+    window.alert("You entered an invalid address. Please try again. );
+}
+</pre>
+
+<h3>Defining a Starting Parameter With The indexOf() Method</h3>
+
+<p>You can specify a second, optional parameter with the indexOf() method to define the location in the string at which the search should start. When you include this parameter, you type it within the method's parenthesis, and separate it from 
+the first parameter by a comma. For example.</p>
+
+<pre class="language-html">
+var emailAddr = "joe_smith@sales.bloggs.com ";
+emailAddr = emailAddr.indexOf ("bloggs", 3);
+</pre>
+
+<p>The start location parameter can be </p>
+
+<p>When you omit the starting location parameter, JavaScript begins searches the string from location zero &#8211; that is, from 
+the start of the string. The following two statements produce the same result.</p>
+
+<pre class="language-html">
+ProductDesc = ProductDesc.indexOf ("a", 0);
+ProductDesc = ProductDesc.indexOf ("a");
+</pre>
+
+<p>In the following code the indexOf()method begins its search at the letter 'd' which is character number four. (Because JavaScript counts from zero, the letter 'B' is at location, 0, 'r' is a location 1, and so on.)</p>
+
+<pre class="language-html">
+var mystring = "Brendan ";
+mystring = mystring.indexOf("n",4);
+</pre>
+
+
+<p>One use of this starting location parametef is for checking that the string under examination contains one &#8211; and <i>only</i> one &#8211; occurrence of a letter, number or punctuation symbol. A valid email address, for example, should contain just a single @ symbol.</p>
+
+<p>The following code, which you have met already, checks the 'user_email' variable to ensure that it contains an @
+symbol. The indexOf() method only returns a -1 if the @ symbol is <i>not</i> found.</p>
+
+<pre class="language-html">
+if (user_ email.indexOf("@") == -1 ) {
+    window.alert("You entered an invalid address. Please try again.");
+}
+</pre>
+
+<p> Let's declare a new variable named 'atPosition' to store the location of the @ symbol found in the email address. Remember that the indexOf() method finds only the <i>first</i> occurrence of the specified character in a string variable. In the statement below the indexOf()
+method begins its search from the second character in the string, because a valid email address cannot begin with an @ symbol.</p>
+
+<pre class="language-html">
+var atPosition = user_ email.indexOf("@",1);
+</pre>
+
+<p>Knowing the location of the first @ symbol, you can now search for a second occurrence of 
+the same symbol. You start your new search at the location immediately <i>after</i>
+the location where the first occurrence was found.</p>
+
+<pre class="language-html">
+if (user_ email.indexOf("@",atPosition+1) != -1 )� {
+    window.alert("You entered an invalid address. Please try again." );
+}
+</pre>
+
+<p>Another application of this approach would be to ensure that there is at least one period (.) after the @ symbol in an email address. Assuming that the location of the @ symbol within the string is stored in the 'atPosition' variable, you could test for a period after this location with code such as the following.</p>
+
+<pre class="language-html">
+if (user_ email.indexOf(".",atPosition+1) == -1 ) {
+    window.alert("You entered an invalid address. Please try again." );
+}
+</pre>
+
+<p>A related method called lastIndexOf() performs the same task as indexOf() &#8211; with one difference: its examines the string from the right rather than from the left.</p>
+
+<p>In Exercise 9.2 you write a script that validates the syntax an entered email address. this script does <i>not</i> verify that the entered address actually exists, only that it follows certain rules governing the syntax of all email addresses.</p>
+
+<h3>Exercise 9.2: Validating an Email Address</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/9/exercise-9-2.html" target="_blank">exercise-9-2.html</a></p>
+
+<p>In the document body is a HTML form with a text box named 'T1' and a button with an attached onclick() event handler. In the document head is the checkEmail() function containing only comments.</p>
+
+<p>Insert the following code at the beginning of the checkEmail() function.</p>
+
+<pre class="language-html">
+/* Declare variables  */
+var userEmail = document.forms.myform.T1.value;
+var atPosition = userEmail.indexOf(&quot;@&quot;,1 );
+</pre>
+
+<p>The first variable captures the user's text box input. The second stores the position of the @ symbol within the user's form entry. If the user fails to type the symbol, the variable stores a value of -1. No testing is performed at this stage.</p>
+
+<p>Enter the following code to ensure that the user's entry is of a minimum length.</p>
+
+<pre class="language-html">
+/* Check length of entered email address  */
+if (userEmail.length &lt;=5) {
+   window.alert(&quot;Too short&quot;);
+}
+</pre>
+
+<p>Enter the following code to ensure that at least one @ symbol is present at a position other than the very start of the user-entered string.</p>
+
+<pre class="language-html">
+/* Check for presence of @ symbol  */
+else if (userEmail.indexOf(&quot;@&quot;,1) == - 1 ) {
+   window.alert(&quot;Missing or misplaced @ &quot;);
+}
+</pre>
+
+<p>Enter the following code to ensure that a second @ symbol is not present after the first one.</p>
+
+<pre class="language-html">
+/* Check that @ symbol is present only once */
+else if (userEmail.indexOf(&quot;@ &quot;,atPosition+1) != -1 ) {
+   window.alert(&quot;Too many @s&quot;);
+}
+</pre>
+
+<p>Enter the following code to ensure that a period (.) is present after the @ symbol.</p>
+
+<pre class="language-html">
+/* Check that period present after @ symbol�  */
+else if (userEmail.indexOf( &quot;&quot;,atPosition+1) == -1 ) {
+   window.alert(&quot;No period after @&quot;&quot;);
+}</pre>
+
+<p><b>8</b>Finally, provide feedback to the form user that the entered email address is valid. The window.alert() box is displayed only if the entered email address has satisfied all the tests in the <i>if else if</i> decision-making structure.</p>
+
+<pre class="language-html">
+/* Confirm email address is valid�  */
+else if (userEmail.indexOf( &quot;&quot;,atPosition+1) != -1 ) {
+  window.alert(&quot;Thank You&quot;);
+}</pre>
+
+<p>Save your web page and refresh your web browser.</p>
+
+
+<p><img src="ECDL_Web_Mod5_JavaScript_files/image200.jpg"></p>
+
+<p>Enter some correctly and incorrectly formatted email addresses to verfiy that JavaScript code performs the relevant syntax checks. Note that the code does not catch all possible errors. For example, it does not test that there is at least two characters after the period (.). You can close the file when finished.</p>
+
+</section>
+
+
+
+<section >
+
+<h2>Searching and Replacing String Content</h2>
+
+<p>JavaScript's search() method is similar to the indexOf() method, with one difference: you cannot specify a starting character position with search() like you can with indexOf(). All string analyses involving the search() method begin at the start of the string. If the character or characters or not found by the method, it returns a value of -1. The following code provides a simple example.</p>
+
+<pre class="language-html">
+var mystring = "ECDL goes from strength to strength ";
+var str_location = mystring.search("ECDL");
+</pre>
+
+<p>It returns a value of 0, which the position in the string where 'ECDL' starts. If you searched for the word 'strength' within the string the search() method would return a value of 15 because the first occurrence of this word starts at that location.</p>
+
+<p>The replace() method, as its name suggests, replaces one character or series of characters with an alternative. It replaces only the <i>first</i> occurrence of the searched-for character(s) in the relevant string. Within the method's parenthesis you first type the text to find, then a comma, and then the alternative text. Here is a simple example.</p>
+
+<pre class="language-html">
+var mystring = "ECDL goes from strength to strength ";
+var mystring = mystring.replace("ECDL", "ICDL");
+document.write(mystring);
+</pre>
+
+<p>The output from this code is as shown below.</p>
+
+<p><img src="ECDL_Web_Mod5_JavaScript_files/image202.jpg"></p>
+
+<p>Suppose you use the replace() method to substitute the word 'success' for the word 'strength' as shown in the following code. What would the output be?</p>
+
+<pre class="language-html">
+var mystring = mystring.replace("strength", "success");
+</pre>
+
+<p>The answer is provided by the screenshot below. As you can see, only the first occurrence of the word 'strength' has been replaced.</p>
+
+<p><img src="ECDL_Web_Mod5_JavaScript_files/image204.jpg"></p>
+
+</section>
+
+
+
+<section >
+
+
+
+
+
+
+<h2>Substrings from Strings</h2>
+
+<p>JavaScript's substring() method enables you to extract any portion of a string. It accepts two parameters: </p>
+
+<ul>
+	<li><b>start</b>: The position of the first character to return.</li>
+
+	<li><b>end</b>: The position of the first charactef <i>after</i> the portion to return. If you omit second parametef then the end point is taken to be the last character in the string.</li>
+</ul>
+
+<p>The following code and accompanying table show the effect of the substring() method in action. All character positions are counted from zero.</p>
+
+<pre class="language-html">
+var mystring = &quot;This is a string &quot;
+</pre>
+
+<table>
+ <tr>
+	 <td><p> <b>Substring(</b><b>) Example</b></p></td>
+	 <td><p><b>Result</b></p></td>
+ </tr>
+ <tr>
+	 <td> <p> mystring.substring(0, 4);</p></td>
+	 <td><p>This</p></td>
+ </tr>
+ <tr>
+	 <td> <p> mystring.substring(1, 3);</p></td>
+	 <td><p>hi</p></td>
+ </tr>
+ <tr>
+	 <td> <p> mystring.substring(8);</p></td>
+	 <td><p>hi</p></td>
+ </tr>
+ <tr>
+	 <td><p>mystring.substring(3, 3);</p></td>
+	 <td><p>a string</p></td>
+ </tr>
+</table>
+
+<p>The last example shows that when the start and end are equal, the method returns an empty string.</p>
+
+<h3>Exercise 9.3: Extracting Substrings from a String</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/9/exercise-9-3.html" target="_blank">exercise-9-3.html</a></p>
+
+<p>In the document body you can see a HTML form that prompts the user for a string. When the user clicks the form
+button the attached event handler calls the 'splitString' function()
+in the document head. The function currently statements that capture the user's entry and test its length.</p>
+
+<p>Insert the following code to create and display the required substrings.</p>
+
+<pre class="language-html">
+/* Split string and display substrings */
+document.forms.myform.T2.value = user_string.substring(0,4);
+document.forms.myform.T3.value = user_string.substring(0,10);
+document.forms.myform.T4.value = user_string.substring(2,4);
+document.forms.myform.T5.value = user_string.substring(3,8);
+document.forms.myform.T6.value = user_string.substring(6,7);
+document.forms.myform.T7.value = user_string.substring(2,16);
+document.forms.myform.T8.value = user_string.substring(10,12);
+document.forms.myform.T9.value = user_string.substring(13,20);
+document.forms.myform.T10.value = user_string.substring(1);
+document.forms.myform.T11.value = user_string.substring(10);
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Test your script by entering some text and clicking the button. The browser window should look as shown below. You can close the file when finished.</p>
+
+<p><img src="ECDL_Web_Mod5_JavaScript_files/image208.jpg"></p>
+
+
+</section>
+
+
+
+<section >
+
+
+
+
+
+
+
+<h2>Chapter Summary</h2>
+
+<p>Every time you declare a new string variable JavaScript creates a new instance of its built-in <i>String object</i>.
+A string object has only one property &#8211; its length &#8211; but has a very wide range of methods that enable scripts to manipulate the string. Whichever type of method you apply to a string, you must set the string equal to the result of the method operation. The following code declares a variable, assigns a value to it, and then applies a method to the variable that converts its content to uppercase characters.</p>
+
+<pre class="language-html">
+var fName = "john ";
+fName = fName. toUpperCase;
+</pre>
+
+<p>String <i>formatting methods</i> enable you to apply font effects such a bold and italic to a string, and change the case of its characters from lower to upper, and vice versa.</p>
+
+<p>String <i>analysis methods</i> allow you to examine the contents of a string. For example, the <i>charAt(</i><i>)</i>
+method enables you to identify the character located at a specified position a string. You can use charAt()in combination with a <i>for</i>
+loop to read through each character in a string. Add some <i>if</i> statements and you can test the value of each individual character in the string.</p>
+
+<pre class="language-html">
+for (i= 0;i &lt; mystring.length; i++)
+  oneChar = str.charAt(i)
+  if (oneChar = ="y") {
+    window.alert("String contains the lettef 'y'.");
+  }
+  else { 
+    window.alert("String does contains the letter 'y'.");
+  }
+}
+</pre>
+
+
+<p>The <i>indexOf()</i> method allows you to determine whether a string contains a specified character or not. It shows only the <i>first</i> occurrence of the relevant character(s) within the string. If it fails to find any instance of the relevant character(s), the indexOf() method returns a -1. The example below tests for the presence of the '@' symbol.</p>
+
+<pre class="language-html">
+if (user_ email.indexOf("@") == -1 )� {
+    window.alert("You entered an invalid address. Please try again." );
+}
+</pre>
+
+<p>JavaScript's <i>search()</i> method is similar to the indexOf() method, with one difference: you cannot specify a starting character position with search() like you can with indexOf().The <i>replace()</i> method replaces one character or series of characters with an alternative. It replaces only the <i>first</i> occurrence of the searched-for character(s) in the relevant string. Here is a simple example.</p>
+
+<pre class="language-html">
+var mystring = "ECDL goes from strength to strength ";
+var mystring = mystring.replace("ECDL", "ICDL");
+document.write(mystring);
+</pre>
+
+<p>With the <i>substring()</i> method you can extract <i>parts</i> of a string from the entire string. In the example of the email address 'joe@bloggs.com', you could extract the domain name of 'bloggs.com'.</p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>

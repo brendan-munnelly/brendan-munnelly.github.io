@@ -1,0 +1,473 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Functions: Advanced | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Tutorial from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Tutorials">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All Web Tutorials">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Functions: Advanced</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+<h3>Objectives</h3>
+
+<p>In this Tutorial you will learn how to:</p>
+
+<ul>
+	<li>Pass one or more parameters to a function</li>
+	<li>Return a value from a function</li>
+	<li>Call functions with keyboard-based event handlers</li>
+</ul>
+
+<p>In this Tutorial you will meet the following terms:</p>
+
+<ul>
+	<li>Function parameter</li>
+	<li>Literal</li>
+</ul>
+
+<h3>Exercise Files</h3>
+
+<p>In this Tutorial you will work with the following HTML files:</p>
+
+<ul>
+	<li><a href="exercises/6/exercise-6-1.html" target="_blank">exercise-6-1.html</a></li>
+	<li><a href="exercises/6/exercise-6-2.html" target="_blank">exercise-6-2.html</a></li>
+	<li><a href="exercises/6/exercise-6-3.html" target="_blank">exercise-6-3.html</a></li>
+	<li><a href="exercises/6/exercise-6-4.html" target="_blank">exercise-6-4.html</a></li>
+	<li><a href="exercises/6/exercise-6-5.html" target="_blank">exercise-6-5.html</a></li>
+	<li><a href="exercises/6/exercise-6-6.html" target="_blank">exercise-6-6.html</a></li>
+
+</ul>
+
+</section>
+
+<section >
+
+
+<h2>Functions that need parameters</h2>
+
+<p>Sometimes you will want to function to perform a task that requires some 'raw material'. Providing information to a function that is then manipulated in some way is known in JavaScript terms as <i>passing a parameter</i> to a function. A function may be designed to accept several parameters.</p>
+
+<p class="defhead">Function Parameter</p>
+
+<p class="deftext">Information that is passed to a function for the function to work on. The function may use the information to perform a calculation, or to decide which of a number of 
+possible instructions to perform.</p>
+
+<p>Back in Exercise 5.12 of Chapter 4 you worked with a web page that contained three buttons and three event handlers that triggered three separate functions. </p>
+
+<p>The simplified HTML button code and the event handlers are as follows.</p>
+
+<pre class="language-html">
+&lt;button onclick ="setBackgroundBlue()"&gt;Blue Background&lt;/button&gt;
+&lt;button onclick ="setBackgroundRed()"&gt;Red Background&lt;/button&gt;
+&lt;button onclick ="setBackgroundGreen()"&gt;Red Background &lt;/button&gt;
+</pre>
+
+<p>The three functions that perform the required change to the web page's background colour are as follows.</p>
+
+<pre class="language-html">
+function setBackgroundRed() {
+    document.bgColor='#FF0000';
+}
+
+function setBackgroundGreen() {
+    document.bgColor='#00FF00';
+}
+
+function setBackgroundBlue() {
+    document.bgColor='#0000FF';
+}</pre>
+
+<p>That's a lot of scripting. Is there a shorter, alternative way to achieve the same result? Yes. Start by taking the particular colours out of the functions and placing them inside the event handlers. Also rename the function called by the event handlers as shown below.</p>
+
+<pre class="language-html">
+&lt;button onclick ="setBackground('#FF0000')"&gt;Blue Background&lt;/button&gt;
+&lt;button onclick ="setBackground('#FF0000')"&gt;Red Background&lt;/button&gt;
+&lt;button onclick ="setBackground('#FF0000')"&gt;Red Background &lt;/button&gt;
+</pre>
+
+<p>The above three event handlers don't just call the function;they also give the function the information it needs to do its job.</p>
+
+<p>With the colours in the individual event handlers, you can rewrite the three functions into a single function that accepts a parameter of colour from the event handlers.</p>
+
+<pre class="language-html">
+function setBackground(colour) {
+    document.bgColor=colour;
+}</pre>
+
+<p>Whenever the web page visitor clicks a button the colour within parenthesis is <i>passed</i> to the function as a <i>parameter</i>.
+The parameter name is typed inside the function's parenthesis. This information is then used by the function to set the web page background colour.</p>
+
+<p>In Exercise 6.1 you will pass hex Colour codes as parameters from three different event handlers to a single function.</p>
+
+<h3>Exercise 6.1: Passing a Colour Code Parameter to a Function</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-1.html" target="_blank">exercise-6-1.html</a></p>
+
+<p>Examine the file in your VS Code. In the head section you can see a function that accepts a parameter named 'textcolour'. In the body section are three buttons.</p>
+
+<p>
+<img src="assets/img/functions-advanced/1.png"></p>
+
+<p>There is no connection between the buttons in the &lt;body&gt;and the function in the &lt;head&gt; Clicking on these buttons does not trigger any action.</p>
+
+<p>Insert the following event handlers and colour codes within the three event handlers.</p>
+
+<pre class="language-html">
+&lt;button onclick=&quot; setTextColour('#000080')&quot;&gt;Blue Text&lt;/button&gt;
+#E6E6E6 ;#E6E6E6&lt;button onclick=&quot;setTextColour('#CC3300')&quot;&gt;Red Text&lt;/button&gt;
+&lt;button onclick=&quot; setTextColour('#008000')&quot;&gt;Green Text&lt;/button&gt;
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+
+<p>Click the buttons to verify that event handlers successfully pass to the text colour codes to the function. You can close the file when finished.</p>
+
+<p>In Exercise 6.2 you will pass a text strings as parameters from three different event handlers to a single function.</p>
+
+<h3>Exercise 6.2: Passing a String Parameter to a Function</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-2.html" target="_blank">exercise-6-2.html</a></p>
+
+<p>Examine the file in your VS Code. In the head section you can see a function that accepts a parameter named 'textmsg'. In the body section are three buttons.</p>
+
+<p><img src="assets/img/functions-advanced/2.png"></p>
+
+<p>There is no connection between the buttons in the &lt;body&gt;and the function in the &lt;head&gt; Clicking on these buttons does not trigger any action.</p>
+
+
+<p>Insert the following event handlers and colour codes within the three event handlers.</p>
+
+<pre class="language-html">
+&lt;button onclick=&quot;showMessage('Cancel')&quot;&gt;Cancel &lt;/button&gt;
+&lt;button onclick=&quot;showMessage('Ignore')&quot;&gt;Ignore&lt;/button&gt;
+&lt;button onclick=&quot;showMessage('Retry')&quot;&gt;Retry&lt;/button&gt;
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Click the three buttons in turn. The buttons now work because they are connected, through the onclick event handler, to the function in the document head. Also each button passes a string to the function. You can close the file when finished.</p>
+
+<h2>About Literals</h2>
+
+<p>You have learnt that a <i>variable</i> can hold a value that changes. A literal is the opposite of a variable. It's a string or number that does not change, but retains a constant value. Consider the following JavaScript statement that contains both a literal ('Your Name') and a variable ('user_name').</p>
+
+<pre class="language-html">
+document.write(&quot;Your Name: &quot;+user_name);
+</pre>
+
+<p>In Exercises 6.1 and 6.2 the details passed from the event handlers to the functions are literals. In Exercise 6.1 the literals were hex colour codes such as '#CC3300'. In Exercise 6.2 the literals were text items such as 'Cancel'. In both cases the literals were strings as they were enclosed within quotes.</p>
+
+<p class="defhead">Literal</p>
+
+<p class="deftext">A data value that is placed directly in a script. It can be a string within single or double quotes, or a number without quotes.</p>
+
+<h3>The passing of parameters: a review</h3>
+
+<p>Let's sum up what you have covered about functions and parameter-passing:</p>
+
+<ul>
+	<li><b>Event handlers</b>: A literal can be stored within the parenthesis of an event handler. In the example below the literal is the string 'Say Hello World'.
+
+<pre class="language-html">
+onclick=&quot; saySomething('Hello World')"
+</pre></li>
+
+	<li><b>Parameter-passing</b>: When an event handler is triggered by a user action such as clicking, its literal value can be passed to the function specified in the event handler.
+
+	In the example above the literal value of 'Hello World' is passed to the function named 'saySomething'.</li>
+
+	<li><b>Function variable</b>: A variable can be declared within the parenthesis of a function. In the example below the function 'saySomething' contains the variable 'message'.
+
+<pre class="language-html">
+ function saySomething(message)
+</pre></li>
+
+<li>When the function is triggered by an event handler containing a literal value, that literal is assigned as the value of that variable. The variable can then be manipulated within the function.
+
+<pre class="language-html">
+function saySomething(message) {
+    window.alert(message);
+}</pre></li>
+</ul>
+
+</section>
+
+<section >
+
+
+<h2>Passing mltiple parameters</h2>
+
+<p>You can pass multiple literals as parameters to a function, and a function's parenthesis can contain multiple variables. The only rule is this: The number of variables in the parenthesis of the function must <i>match</i> the number of literals in the event handler that calls the function.</p>
+
+<p>Exercise 6.3 provides an example of multiple parameter-passing to an arithmetic function.</p>
+
+<h3>Exercise 6.3: Passing Multiple Parameters to a Function</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-3.html" target="_blank">exercise-6-3.html</a></p>
+
+<p>Examine the file in your VS Code. In the head section you can see a function that calculates the average value of three numbers. In the body section is single button with an event handler that contains three literals. The literals are separated by commas.</p>
+
+<pre class="language-html">
+&lt;button onclick=&quot;findAverage(12,36,48)&quot;&gt;Click Here&lt;/button&gt;
+</pre>
+
+<p>Click the button and you web browser will display and error message. That is because there are no variables within the parenthesis of the called function to accept the three literals passed to it by the button's event handler.</p>
+
+<p>Insert three variables inside the parenthesis of the function as shown below. The variable names are separated by commas.</p>
+
+<pre class="language-html">
+function findAverage( firstNo,secondNo,thirdNo)
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Click the button to view a dialog box containing the average calculated by the function based on the three parameters that the event handler passed to it.</p>
+
+</section>
+
+<section >
+
+
+<h2>Functions that return values</h2>
+
+<p>You have seen how an event handler can pass a parameter to a function. The opposite is also true: a function can pass a value back to the place from which the function was called. This action is described as the function <i>returning</i> a value.</p>
+
+<p>Until now you have only called functions through event handlers such as onclick and onload. You can also call a function directly from a statement. The following two statements call two different functions. The first function call does not pass a parameter. The second function call passes the parameter named 'temperature'.</p>
+
+<pre class="language-html">
+myvar = doSomething();
+temperature = updateNow(temperature );
+</pre>
+
+<p>The statement that calls the function may be in another function in the head of the HTML document, or it may be located somewhere of the document body. </p>
+
+<p>Consider the following script in which a number is assigned to a variable and the variable's value to written to the browser window. The function named doubleIt() is then called and applied to the numeric variable, and its amended value is written to the browser window.</p>
+
+<pre class="language-html">
+var mynum = 24;
+
+document.write(&quot;number is: &quot;+mynum+&quot;&lt;br&gt;&quot;);
+mynum = doubleIt(mynum );
+document.write(&quot;Number aftef &lt;i&gt;doubleIt()&lt;\/i&gt;function applied: &quot;+mynum);
+</pre>
+
+
+<p>The code for the doubleIt() function is as follows.</p>
+
+<pre class="language-html">
+function doubleIt(mynum) {
+    mynum = mynum* 2;
+}</pre>
+
+<p>What happens when the doubleIt() function and the script that calls it are placed within a web page? The result is as shown below.</p>
+
+<p><img src="assets/img/functions-advanced/3.png"></p>
+
+<p>The cause of the error is as follows: aftef the doubleIt() performs its instruction, there is no mechanism for the function to send its answer back to the script from which the function was called. You can correct this problem by insert a <i>return</i> command that sends the 'mynum' variable back to the calling script as shown below.</p>
+
+<pre class="language-html">
+function doubleIt(mynum) {
+    mynum = mynum* 2;
+    return mynum;
+}</pre>
+
+<p>When you reload the web browser the output now looks like that shown below. As you can see, the result of the function has been successfully returned to the scripting the document body.</p>
+
+<p><img src="assets/img/functions-advanced/4.png"></p>
+
+<p>Another feature of the return command is that it halts any further execution of the function. That is, any instructions located after the return command in the function are ignored. In the example below, only the firstwindow.alert() instruction is actually performed. JavaScript ignores the three otherwindow.alert() instructions because they occur after a return command.</p>
+
+<pre class="language-html">
+function hello() {
+    window.alert("Before return statement");
+    return;
+    window.alert("After return statement");
+    window.alert("Also after return statement");
+    window.alert("And another one after the return statement");
+}</pre>
+
+<p>Exercise 6.4 provides an example of function returning a value back to the script that called it.</p>
+
+
+<h3>Exercise 6.4: Returning a Value from a Function</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-4.html" target="_blank">exercise-6-4.html</a></p>
+
+<p>Examine the file in your VS Code. In the head section you can see a function that converts a temperature in Fahrenheit to its value in Celsius.</p>
+
+<pre class="language-html">
+function toCelsius(mytemp) {
+    mytemp = ((5/9) * mytemp ) - 32;
+}</pre>
+
+<p>Within the &lt;SCRIPT&gt; tag in the document body insert statements that assign a value for conversion, that call the conversion function, and that write the 'before' and 'after' temperature values to the browser window.</p>
+
+<pre class="language-html">
+var mytemp = 18;
+document.write(&quot;Temperature in Fahrenheit is: &quot;+mytemp+&quot;&amp;deg;&lt;br&gt;&quot;);
+
+mytemp = toCelsius(mytemp );
+document.write(&quot;Temperature in Celsius" &quot;+mytemp+&quot;&amp;deg;&quot;);
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+
+<p>The result should look as shown.
+The error arises from the fact that, although the function performs the temperature conversion correctly, it does not return the result back to the script that called it.</p>
+
+<p><img src="assets/img/functions-advanced/5.png"></p>
+
+<p>Insert a return command in the function as shown below.</p>
+
+<pre class="language-html">
+mytemp = ((5/9) * mytemp ) - 32;
+return mytemp;
+}</pre>
+
+<p>Resave your file, reload your web browser, and verify that the converted temperature value is returned correctly and displayed in the browser window. You can close the file when finished.</p>
+
+<p><img src="assets/img/functions-advanced/6.png"></p>
+
+
+</section>
+
+<section >
+
+<h2>Calling functions with keyboard events</h2>
+
+<p>Mouse movements and clicks are not the only user actions that can call a function. Web page visitors can also call functions with key presses. The event handler is <i>onkeypress</i>, following by the ASCII code for the relevant key. There are two benefits from offering onkeypress event handlers on your web pages:</p>
+
+<ul>
+	<li><b>Speed of use</b>: It is generally faster for a user to perform an action by pressing a key than to reach for and move the mouse.</li>
+
+	<li><b>Accessibility</b>: Keyboard-based actions make your web pages more accessible to users with disabilities.</li>
+</ul>
+
+<p>In Exercise 6.5 you will create a form that displays the code of whichever keys are pressed by the web page visitor.</p>
+
+<h3>Exercise 6.5: Displaying Keypress Events</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-5.html" target="_blank">exercise-6-5.html</a></p>
+
+<p>In the document body is a form named 'form1' that contains a single-line text box called 'text1'. Attached to the text box is an onkeypress event handler that calls the userPress() function.</p>
+
+<p>Within the &lt;script&gt; tag in the document head insert the following statements.</p>
+
+<pre class="language-html">
+function userPress() {
+    userkey=window.event.keyCode;
+    document.forms.form1.text1.value=&quot;You pressed the &quot;+userkey+&quot;key&quot;
+}</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+
+<p>Press a number of keys in turn. In the form's text box you can see the letter, number or symbol that you typed, along with the corresponding ASCII keycode. The result should look as shown. You can close the file when finished.</p>
+
+<p>
+<img src="assets/img/functions-advanced/7.png"></p>
+
+
+</section>
+
+<section >
+
+
+
+<h2>Chapter Summary</h2>
+
+<p>Sometimes you will want to function to perform a task that requires some 'raw material'. Providing information to a function that is then manipulated in some way is known in JavaScript terms as <i>passing a parameter</i> to a function. A function may be designed to accept several parameters. The function may use the information to perform a calculation, of to decide which of a number of possible instructions to perform.</p>
+
+<p>In the example below three onclick event handlers pass hex colour codes to the function named ' setBackground()'.
+These event handlers don't just call the function;
+they also give the function the information it needs to do its job. </p>
+
+<p>Whenever the web page visitor clicks a button the colour within parenthesis is <i>passed</i> to the function as a <i>parameter</i>.
+The parameter name is typed inside the function's parenthesis. This information can then be used by the function to set the web page background colour.</p>
+
+<pre class="language-html">
+function setBackground(colour) {
+    document.bgColor=colour;
+}</pre>
+
+<p>A <i>literal</i> is the opposite of a variable. It's an item of data that does not change, but retains a constant value, and is placed directly in a script. In the above function the literals are hex colour codes. A literal can be a string within single or double quotes, or a number without quotes.</p>
+
+<p>You can pass <i>multiple literals</i> as parameters to a function, and a function's parenthesis can contain multiple variables. The only rule is this: The number of variables in the parenthesis of the function must <i>match</i> the number of literals in the event handler that calls the function.</p>
+
+<p>Event handlers are not the only way to call a function. You can also call a function directly from a statement. the following two statements call two different functions. The first function call does not pass a parameter. The second function call passes the parameter named 'temperature'.</p>
+
+<pre class="language-html">
+myvar = doSomething();
+temperature = updateNow(temperature );
+</pre>
+
+<p>The statement that calls the function may be in another function in the head of the HTML document, or it may be located somewhere of the document body. </p>
+
+<p>When a statement calls a function directly, there must be a mechanism for the function to send its result back to the location from which the function was called. JavaScript offers a <i>return</i> command for this purpose. An example is shown below.</p>
+
+<pre class="language-html">
+function doubleIt(mynum) {
+    mynum = mynum* 2;
+    return mynum;
+}</pre>
+
+<p>Another feature of the return command is that it halts any further execution of the function. That is, any instructions located after the return command in the function are ignored.</p>
+
+<p>Mouse movements and clicks are not the only user actions that can call a function. Web page visitors can also call functions with key presses. The event handler is <i>onkeypress</i>, following by the ASCII code for the relevant key.</p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>
