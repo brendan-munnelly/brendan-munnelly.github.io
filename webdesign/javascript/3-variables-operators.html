@@ -1,0 +1,659 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>3: Variables and Operators | Web Design & Development Lessons | Brendan Munnelly</title>
+	<meta name="description" content="JavaScript Variables and Operators: A Web Design and Development Lesson from Brendan Munnelly">
+
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="JavaScript; 2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/javascript/index.html">
+	<meta property="og:image" content="http://2n2l.com/javascript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet"> 
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>3: Variables and Operators</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+
+<section id="learning-goals">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<div class="box-goals">
+	<ul>
+		<li>Declare string and numeric variables and assign values to them with the <span class="syn">let</span> keyword.</li>
+		<li>Apply the correct variable naming standards</li>
+		<li>Perform addition, subtraction, multiplication and division on numeric variables</li>
+		<li>Follow the rules of operator precedence in arithmetic statements</li>
+		<li>Apply the assignment operator correctly in statements that contain variables and values, and variables only</li>
+		<li>Reveal a variable's type using the <span class="syn">typeof</span> operator.</li>
+	</ul>
+</div>
+
+	<p>In this Lesson you will meet the following terms:</p>
+	
+	<ul>
+		<li>Variable</li>
+		<li>String variable</li>
+		<li>Numeric variable</li>
+		<li>Assignment statement</li>
+	</ul>
+
+	<h3>Exercise Files</h3>
+
+	<p>In this Lesson you will work with the following web pages:</p>
+	
+	<ul>
+		<li><a href="exercises/3/exercise-3-1.html" target="_blank">exercise-3-1.html</a></li>
+		<li><a href="exercises/3/exercise-3-2.html" target="_blank">exercise-3-2.html</a></li>
+		<li><a href="exercises/3/exercise-3-3.html" target="_blank">exercise-3-3.html</a></li>
+		<li><a href="exercises/3/exercise-3-4.html" target="_blank">exercise-3-4.html</a></li>
+	</ul>
+
+	<p>You will find these files in your  📁 <b>/javascript/exercises/3/</b> sub-folder.</p>
+
+</section>
+
+<section >
+
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#js-variables">About variables in JavaScript</a></p>
+		<p class="toc-indent"><a href="#variable-names">Variable names</a></p>
+		<p class="toc-indent"><a href="#ex-3-1">Exercise 3.1: Working with variables</a></p>
+		<p class="toc-indent"><a href="#string-variables">About string variables</a></p>
+		<p class="toc-indent"><a href="#numeric-variables">About numeric variables</a></p>
+		<p><a href="#arithmetic-operators">Arithmetic operators</a></p>
+		<p class="toc-indent"><a href="#ex-3-2">Exercise 3.2: Creating a simple arithmetic script</a></p>
+		<p><a href="#operator-precedence">Operator precedence</a></p>
+		<p class="toc-indent"><a href="#ex-3-3">Exercise 3.3: Using parentheses in calculations</a></p>
+		<p><a href="#assignment-operator">About the assignment (=) operator</a></p>
+		<p><a href="#variable-retyping">Automatic variable retyping</a></p>
+		<p class="toc-indent"><a href="#typeof-operator">The <span>typeof</span> operator</a></p>
+		<p><a href="#github-upload">Uploading your JavaScript exercise files to GitHub</a></p>
+		<p><a href="#lesson-summary">Lesson summary</a></p>
+	</div>
+</section>
+
+
+
+<section id="js-variables">
+
+	<h2>About variables in JavaScript</h2>
+
+	<p>You can think of a variable as a <i>container</i> or &#8216;storage box&#8217; for a value that may be different each time the JavaScript code is run.</p>
+	
+	<p>Consider the example of a website login page that asks for a user's First Name.</p>
+
+	<img src="assets/img/variables-operators/first-name.png" alt="JavaScript">
+
+	<p>The value entered might be 'Mary' or 'John' or whatever. But in the JavaScript code that stores the value, the variable will always have the same name of, for example, userSurname.</p>
+
+	<p>In JavaScript the first thing you do with a variable is <i>declare</i> it. The following code declares the variable named FirstName.</p>
+
+<pre class="language-html">
+var FirstName;
+</pre>
+
+	<p>The declaration begins with the word <span class="syn">var</span>. This so-called keyword allocates memory storage space for new data and tells JavaScript that a new variable name is in use.</p>
+
+	<p>The more modern version of JavaScript uses the keywords <span class="syn">const</span> or <span class="syn">let</span> to declare a variable. For simplicity, the <span class="syn">let</span> keyword is always used in the examples in these Lessons. For example:</p>
+
+<pre class="language-html">
+let FirstName;
+</pre>
+
+
+	<h3 id="variable-names">Variable names</h3>
+
+	<p>Here are a few points to remember about variable names:</p>
+
+	<ul>
+		<li><b>Uniqueness</b>: Don't use the same name for two different variables within the same JavaScript code.</li>
+
+		<li><b>No spaces</b>: Variable names cannot contain spaces. &#8216;Credit Limit&#8217; and &#8216;Sub Total&#8217; are invalid variable names.</li>
+
+		<li><b>Mixed character case</b>: You can combine upper and lowercase letters in a variable name to make it easier to read. For example, &#8216;PostCode&#8217; and &#8216;AccountStatus'.</li>
+
+		<li><b>Case sensitivity</b>: Variable names are case-sensitive. &#8216;Fname&#8217; is not the same as &#8216;fName'.</li>
+	</ul>
+
+
+	<p>When you have declared a variable you will typically want to <i>assign</i> data to it. The following two statements assign values to the variables named userName and userRegion.</p>
+
+<pre class="language-html">
+let userName;
+userName = "Sheila";
+let userRegion;
+userRegion = "Australia";
+</pre>
+
+	<p>You can minimise typing by declaring a variable and assigning a value to it in the same statement on the same line. Here's two examples.</p>
+
+<pre class="language-html">
+let UserID = "289849";
+let Password = "banana42";
+</pre>
+
+	<p>In Exercise 3.1 you will declare two variables, assign values to them, and then display the variable names and values in the web page.</p>
+
+	<h3 id="ex-3-1">Exercise 3.1: Working with variables</h3>
+
+	<p>Open the following file in VS Code and web browser:</p>
+
+	<p><a href="exercises/3/exercise-3-1.html" target="_blank">exercise-3-1.html</a></p>
+
+	<p>In the empty <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair in the web page insert the two variable declarations and assignments shown below, and follow them with two <span class="syn">document.write()</span> statements.</p>
+
+<pre class="language-html">
+let FirstName = "Eddie";
+let Surname = "Hamilton"
+document.write("&lt;i&gt;First Name:&lt;\/i&gt; "+FirstName+"&lt;br&gt;");
+document.write("&lt;i&gt;Surname:&lt;\/i&gt; "+Surname);
+</pre>
+
+	<p>Save your web page and reload your web browser.</p>
+
+	<p>It should look as shown.</p>
+
+	<img src="assets/img/variables-operators/3-1.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-3-1.html</b> file when finished.</p>
+
+	<h3 id="string-variables">About string variables</h3>
+
+	<p>The variables you have worked with so far have all been of one type: the <i>string variable</i>. This is a variable type that holds letters, numbers, white (blank) spaces or punctuation symbols. </p>
+
+	<p>When you enclose the value in quotes JavaScript assumes that you want to create a string variable. For example:</p>
+
+<pre class="language-html">
+let FirstName = "Peter";
+let StreetAddress = "42 Green Avenue";
+let PhoneNumber = "045 45773758752";
+</pre>
+
+	<h3 id="numeric-variables">About numeric variables</h3>
+
+	<p>Another type of variable in JavaScript is the <i>numeric variable</i>, which stores a number that you can perform arithmetic operations on</p>
+
+	<p>When you omit the quotes around the value, JavaScript makes the variable a numeric variable. For example.</p>
+
+<pre class="language-html">
+let OrderQty = 4;
+let productPrice = 9.9;
+</pre>
+
+	<p>Consider the following example:</p>
+	<ul>
+		<li>When you assign &#8216;15&#8217; as a string variable JavaScript stores the &#8216;1&#8217; and the &#8216;5&#8217; as keyboard characters in the same way as it would store the characters &#8216;a', &#8216;z&#8217; or &#8216;@'.
+<pre class="language-html">
+   let myVar = "15";
+</pre>
+		You would store telephone numbers in JavaScript as string variables because you will never want to perform arithmetic on them, such as dividing a telephone number by two.
+		<span class="inside-ol">&nbsp;</span>
+		Don't assign a number to a string variable if you intend using that number in a calculation.</li>
+
+		<li>When you assign &#8216;15&#8217; as a numeric variable, however, JavaScript stores &#8216;15&#8217; as a number that can be manipulated by a script in combination with other numeric variables.
+<pre class="language-html">
+   let myVar = 15;
+</pre></li>
+
+	</ul>
+
+	<p>Unlike most programming languages JavaScript does not have different types of numeric variables for different types of numbers. All numbers, whether integers (whole numbers) or floating-point numbers (numbers with decimal places) are all stored within the one type of numeric variable type. Numeric variables may store ether positive or negative numbers.</p>
+
+	<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre class="language-html">
+let Temperature = -6.3456
+let errorRare = .2727
+</pre>
+
+	<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre class="language-html">
+let userIncome = 34,000 // Error. Contains a comma.
+let product ID = 645w29 // Error. Contains a letter character.
+</pre>
+
+	<p>When creating a variable you don't need to tell JavaScript whether the variable is to be string or numeric. JavaScript decides the type of variable you want according to whether or not you entered its value within quotes (string variable) or not (numeric variable).</p>
+	
+	<p class="defhead">Variable</p>
+
+	<p class="deftext">A container that can store a changing value. A variable may contain strings or numbers. Variable names must be unique, are case sensitive and cannot contain spaces.</p>
+
+</section>
+
+
+<section id="arithmetic-operators">
+
+	<h2>Arithmetic operators</h2>
+
+	<p>You can perform arithmetic with numeric variables using the arithmetic operators set out in the table below.</p>
+
+	<table class="table-gray">
+	<thead>
+	<tr>
+		<td style="width: 10%"><p><b>Operator</b></p></td>
+		<td style="width: 22%"><p><b>Operator Key Used</b></p></td>
+		<td style="width: 35%"><p><b>Description</b></p></td>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><p><b>x + y</b></p></td>
+			<td><p>The plus key</p></td>
+			<td><p>Adds the value of x and the value of y.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>x - y</b></p></td>
+			<td><p>The dash key</p></td>
+			<td><p>Subtracts the value of y from the value of  x.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>x * y</b></p></td>
+			<td><p>The asterisk key</p></td>
+			<td><p>Multiplies the value of x by the value of  y.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>x / y</b></p></td>
+			<td><p>The forward slash key</p></td>
+			<td><p>Divides the value of x by the value of y.</p></td>
+		</tr>
+	</tbody>
+	</table>
+
+	<p>In Exercise 3.2 you will declare three variables, assign numeric values to the first two, add the values together and assign the result to a third variable. Finally, you will then display all the numbers in the web page.</p>
+
+	<h3 id="ex-3-2">Exercise 3.2: Creating a simple arithmetic script</h3>
+
+	<p>Open the following file in VS Code and  web browser:</p>
+
+	<p><a href="exercises/3/exercise-3-2.html" target="_blank">exercise-3-2.html</a></p>
+
+	<p>In the empty <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair in the web page insert the variable declarations and assignments shown below, and follow them with the three <span class="syn">document.write()</span> statements.</p>
+
+<pre class="language-html">
+let FirstNumber = 36;
+let SecondNumber = 12;
+let SumResult = FirstNumber + SecondNumber;
+document.write("&lt;p&gt;First Number: "+FirstNumber+"&lt;br&gt;");
+document.write("Second Number: "+SecondNumber+"&lt;br&gt;");
+document.write("Result: &lt;b&gt;"+SumResult+"&lt;\/b&gt;&lt;\/p&gt;");
+</pre>
+
+
+	<p>Save your web page and reload your web browser. It should look as shown.</p>
+
+	<img src="assets/img/variables-operators/3-2.png" alt="JavaScript">
+
+	<p>Experiment with the file by changing the first and second number values, and by changing the arithmetic
+	operator. You can close the <b>exercise-3-2.html</b> file when finished.</p>
+
+</section>
+
+
+<section id="operator-precedence">
+
+<h2>Operator precedence</h2>
+
+	<p>JavaScript follows the rules of arithmetic when working with numeric variables and numbers:</p>
+
+	<ul>
+		<li>Division first, followed by multiplication, then addition and finally subtraction.</li>
+	</ul>
+
+	<p>For example, the following series of statements gives a result of 11 because JavaScript first multiplies 2 by 3 (resulting in 6) and then adds 5.</p>
+
+<pre class="language-html">
+let x = 5;
+let y = 2;
+let z = 3;
+let answer = x + y * z;
+</pre>
+
+	<p>You can force JavaScript to perform calculations in a particular order by using parentheses.</p>
+
+	<p>For example, the following calculation gives a result of 21. JavaScript first adds 5 and 2 (because they are within parentheses) and then multiplies that result by 3 to give 21.</p>
+
+<pre class="language-html">
+let x = 5;
+let y = 2;
+let z = 3;
+let answer = (x + y) * z;
+</pre>
+
+
+<p>Ensure that you follow every opening bracket with a matching closing bracket. For example.</p>
+
+<pre class="language-html">
+let result = ((8 * distance) + tax) / (volume - 7)
+</pre>
+
+	<p>In Exercise 3.3 you will use parentheses in a calculation that converts between temperature scales.</p>
+
+	<h3 id="ex-3-3">Exercise 3.3: Using parentheses in calculations</h3>
+
+	<p>Open the following file in VS Code and your web browser:</p>
+
+	<p><a href="exercises/3/exercise-3-3.html" target="_blank">exercise-3-3.html</a></p>
+
+	<p>In the empty <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair in the web page insert the declarations and assignments shown below.</p>
+
+<pre class="language-html">
+/* Declare variables */
+let fahrenheit;
+let celsius;
+/* Assign input temperature */
+celsius = 220;
+</pre>
+
+	<p>Next, insert the arithmetic statement that performs the temperature conversion calculation.</p>
+
+<pre class="language-html">
+/* Perform calculation */
+fahrenheit = ((9/5) * celsius ) + 32;
+</pre>
+
+<p>Finally, insert two <span class="syn">document.write()</span> statements to display the calculation input and output on the web page.</p>
+
+<pre class="language-html">
+/* Display input and result */
+document.write("Temperature (&lt;i&gt;Celsius&lt;\/i&gt;): "+celsius+"&amp;deg;&lt;br&gt;");
+document.write("Temperature (&lt;i&gt;Fahrenheit&lt;\/i&gt;): "+fahrenheit+"&amp;deg;");
+</pre>
+
+	<p>Your complete code should now look as follows.</p>
+	<img src="assets/img/variables-operators/vs-code-1.png" alt="JavaScript">
+
+
+	<p>Save your web page and view it in your web browser. It should look as shown.</p>
+
+	<img src="assets/img/variables-operators/3-3.png" alt="JavaScript">
+
+	<p>Experiment with the file by changing the input (Fahrenheit) temperature value.</p>
+	
+	<p>You can close the <b>exercise-3-3.html</b> file when finished.</p>
+
+
+</section>
+
+
+<section id="assignment-operator">
+
+	<h2>About the assignment (=) operator</h2>
+
+	<p>Putting a value into a variable is known as assignment, and is achieved through the use of the <i>assignment operator</i> (<b>=</b>). For example:</p>
+
+<pre class="language-html">
+fruit = "apple";
+</pre>
+
+	<p>This places the value of &#8216;apple&#8217; inside the variable named &#8216;fruit'. Switching around this assignment statement results in the value of &#8216;fruit&#8217; being placed inside the variable named &#8216;apple'.</p>
+
+<pre class="language-html">
+apple = "fruit";
+</pre>
+
+<p>In JavaScript the equals sign does <i>not</i> mean 'equal to' as it does in arithmetic or algebra. It means as follows:</p> 
+
+<p><i>&#8216;Take whatever is on the right of the equals sign and place it in variable on the left hand side.'</i></p>
+
+<p>JavaScript treats the left-hand side (LHS) as a variable, but the right-hand side (RHS) may be a value, another variable, or an object property. In the example below the RHS contains a value.</p>
+
+<pre class="language-html">
+country = "Bermuda";
+</pre>
+
+<p>Consider the next example. Here the RHS contains another variable. What this assignment does is copy whatever value is in the &#8216;cost&#8217; variable to the &#8216;price&#8217; variable.</p>
+
+<pre class="language-html">
+price = cost;
+</pre>
+
+<p>It's perfectly valid to place the <i>same</i> variable on both sides of the assignment operator. The following example puts the current content of the StreetAddress variable inside the StreetAddress variable. Nothing is changed as a result of this statement but no syntax rule is broken either.</p>
+
+<pre class="language-html">
+StreetAddress = StreetAddress;
+</pre>
+
+<p>Sometimes you may want to change a variable's value by a fixed amount. The following would make no sense if it where algebra.</p>
+
+<pre class="language-html">
+SalePrice = SalePrice + 20;
+</pre>
+
+<p>But in JavaScript it means &#8216;jack up the sale price by 20'. That is, insert in the sale price variable whatever is currently in that variable already plus 20.</p>
+
+<p>JavaScript does not accept an assignment statement with a value on <i>both</i> sides. The LHS must always be a variable or an object property. Running the following statement generates an error in the web browser window.</p>
+
+<pre class="language-html">
+32 = 32;
+</pre>
+
+
+<p class="defhead">Assignment statement</p>
+
+<p class="deftext">A JavaScript statement in which a variable or object property on the left of the equal sign (=) is given the value of 
+whatever is on the right of the equals sign.</p>
+
+<h2 id="variable-retyping">Automatic variable retyping</h2>
+
+<p>JavaScript, as you have learnt, decides which type of variable you want to create by the way that you first assign a value to it. When you enclose the value within quotes, JavaScript makes the variable a string variable; when you omit the quotes, JavaScript makes it a numeric variable.</p>
+
+<p>JavaScript can also change the type of a variable when you assign a value of a different type to that variable. It's called <i>automatic type conversion</i>. Consider the following two statements.</p>
+
+<pre class="language-html">
+let myvar = "12.34";
+myvar = 12.34;
+</pre>
+
+<p>In the first statement JavaScript makes the variable named &#8216;myvar&#8217; a string variable. In the second statement JavaScript changes the variable type to numeric because a number was assigned to it.</p>
+
+<p>Automatic variable type conversion is a powerful feature of JavaScript, but its very power can result in scripting errors or in scripts that produce unexpected results. You need to be particularly careful with variables types when dealing with HTML forms that accept input from web page visitors. Because forms accept input as strings you need to convert such strings to numbers when you want to include them in arithmetic calculations.</p>
+
+<h3 id="typeof-operator">The <span>typeof</span> operator</h3>
+
+<p>When you are unsure about variable type at any some point in a script you can use the <span class="syn">typeof</span> operator to reveal the variable type. You insert the <span class="syn">typeof</span> operator directly before the variable. Here are three statements in which the <span class="syn">typeof</span> operator is used within a <span class="syn">document.write()</span> statement.</p>
+
+<pre class="language-html">
+document.write(typeof SalesPrice);
+document.write(typeof x);
+document.write(typeof email_address);
+</pre>
+
+<p>Exercise 3.4 takes you through the steps setting, changing and displaying a variable's type.</p>
+
+<h3 id="ex-3-4">Exercise 3.4: Investigating a variable&#8217;s type</h3>
+
+<p>Open the following file in VS Code and  web browser:</p>
+
+<p><a href="exercises/3/exercise-3-4.html" target="_blank">exercise-3-4.html</a></p>
+
+<p>In the empty <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair in the web page insert the following code.</p>
+
+<pre class="language-html">
+let firstVar;
+document.write("&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar);
+</pre>
+
+<p>Save and reload the web page. In the browser window you can see that the variable type is 'undefined'. This is because you have only declared the variable but not assigned a value to it.</p>
+
+<img src="assets/img/variables-operators/3-4.png" alt="JavaScript">
+
+<p>Next, replace everything within the <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair with the following code.</p>
+
+
+<pre class="language-html">
+let firstVar;
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+</pre>
+
+<p>Save and reload your web page. You can see the result of four <span class="syn">document.write()</span> statements, each one displayed on a separate line.</p>
+
+<img src="assets/img/variables-operators/3-5.png" alt="JavaScript">
+
+
+
+<p>Now, add three assignment statements to your block of code at the locations shown below.</p>
+
+<img src="assets/img/variables-operators/3-6.png" alt="JavaScript">
+
+
+<p>Save and reload your web page. It should now look as shown below.</p>
+
+<img src="assets/img/variables-operators/3-7.png" alt="JavaScript">
+
+<p>You can see how the variable's type changed during the script: from undefined (no type), to numeric, then to string, and finally back to numeric again.</p>
+
+
+<p>You can close the <b>exercise-3-4.html</b> file when finished.</p>
+
+</section>
+
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/variables-operators/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/variables-operators/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/3/exercise-3-1.html<br>
+	https://username.github.io/javascript/exercises/3/exercise-3-2.html<br>
+	https://username.github.io/javascript/exercises/3/exercise-3-3.html<br>
+	https://username.github.io/javascript/exercises/3/exercise-3-4.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+
+<section id="lesson-summary">
+
+<h2>Lesson summary</h2>
+
+<p>You can think of a <i>variable</i> as a container for a value that can change. Variable names must be unique, are case sensitive and cannot contain spaces.</p>
+
+<p>A <i>string variable</i> can contain any keyboard characters, whether letters, numbers, punctuation symbols or white spaces, or any combination of these. A <i>numeric variable</i> stores a number, whether an integer (whole number) or a floating-point (decimal) number.</p>
+
+<p>Values stored in numeric variables can be used in arithmetic calculations. You can store a number in a string variable, but it cannot be used in a calculation.</p>
+
+<p>In JavaScript the first thing you do with a variable is <i>declare</i> it. The following code declares the variable named FirstName. The declaration begins with the word <span class="syn">let</span>.</p>
+
+<pre class="language-html">
+let FirstName;
+</pre>
+
+<p>JavaScript decides which type of variable you want to create by the way you assign a value to it. When you enclose the value within quotes JavaScript makes the variable a string variable. For example.</p>
+
+<pre class="language-html">
+StreetAddress = "42 Green Avenue";
+</pre>
+
+<p>When you omit the quotes JavaScript makes the variable a numeric variable. For example.</p>
+
+<pre class="language-html">
+OrderQty = 4;
+</pre>
+
+<p>You can declare a variable and assign a value to it in a single statement as follows.</p>
+
+<pre class="language-html">
+userName ="Sheila";
+userID= 634634;
+</pre>
+
+<p>Putting a value into a variable is known as <i>assignment</i>, and is achieved through the use of the assignment operator (<b>=</b>). The left hand side must always be a variable or an object property. The right hand side can be a value, a variable or an object property.</p>
+
+<p>JavaScript's <i>automatic type conversion</i> feature means that you can change the type of a variable by assigning a different type of value to it. In the first of the two statements below JavaScript makes the variable named &#8216;myvar&#8217; a string variable. In the second statement JavaScript changes the variable type to numeric because a number is assigned to it.</p>
+
+<pre class="language-html">
+let myvar = "12.34";
+myvar = 12.34;
+</pre>
+
+<p>You can use the <span class="syn">typeof</span> operator to reveal a variable's type. The following example shows the <span class="syn">typeof</span> operator used within a <span class="syn">document.write()</span> statement.</p>
+
+<pre class="language-html">
+document.write(typeof SalePrice);
+</pre>
+
+<p>You can use the addition (<b>+</b>), subtraction (<b>-</b>), multiplication (<b>*</b>) and division (<b>/</b>) operators to perform arithmetic with numeric variables.</p>
+
+<p>JavaScript follows the rules of arithmetic when working with numeric variables and numbers: division first, followed by multiplication, then addition and finally subtraction. You can force JavaScript to perform calculations in a particular order by using parentheses as shown in the example below.</p>
+
+<pre class="language-html">
+let result = ((8 * distance) + tax) / (volume - 7)
+</pre>
+
+<p>Ensure that you follow every opening bracket with a matching closing bracket.</p>
+
+		<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+
+</section>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>5: Working with User Input | Web Design & Development Lessons | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Lesson from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">   
+
+	<!-- Google Analytics -->
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>5: Working with User Input</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+
+<section id="learning-goals">
+	
+	<h2>Learning Goals</h2>
+
+	<p>In this Lesson you will learn how to:</p>
+	<div class="box-goals">
+	<ul>
+		<li>Create an HTML input field to capture a value entered by a user.</li>
+		<li>Assign the user-entered value to a JavaScript variable.</li>
+		<li>Display the variable's value on a web page.</li>
+		<li>Convert a string variable to a numeric variable with a integral or floating point value using the <span class="syn">parseInt()</span> or <span class="syn">parseFloat()</span> method</li>
+		<li>Format the number of decimal places in a numeric variable using the <span class="syn">toFixed()</span> method</li>
+	</ul>
+</div>
+
+	<h3>Exercise Files</h3>
+
+	<p>In this Lesson you will work with the following web pages:</p>
+
+	<ul>
+		<li><a href="exercises/5/exercise-5-1.html" target="_blank">exercise-5-1.html</a></li>
+		<li><a href="exercises/5/exercise-5-2.html" target="_blank">exercise-5-2.html</a></li>
+		<li><a href="exercises/5/exercise-5-3.html" target="_blank">exercise-5-3.html</a></li>
+
+	</ul>
+
+</section>
+
+
+<section >
+
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#input-field">Using HTML input fields to capture user-entered data</a></p>
+		<p class="toc-indent"><a href="#ex-5-1">Exercise 5.1: Capturing a user-entered value with an input field</a></p>
+		<p class="toc-indent"><a href="#ex-5-2">Exercise 5.2: Adding a Reset button to your web page</a></p>
+		<p><a href="#user-numbers">Handling user-entered numbers</a></p>
+		<p class="toc-indent"><a href="#ex-5-3">Exercise 5.3: Working with numeric user data</a></p>
+		<p><a href="#parse">The <span>parseInt()</span> and <span>parseFloat</span> methods</a></p>
+		<p><a href="#toFixed">Setting decimal places with the toFixed() method</a></p>
+		<p><a href="#github-upload">Uploading your JavaScript exercise files to GitHub</a></p>
+	</div>
+</section>
+
+
+<section id="input-field">
+
+<h2>Using HTML input fields to capture user-entered data</h2>
+
+<p>In previous Lessons you learnt how to assign values to string and numeric variables with JavaScript statements such as the following.</p>
+
+<pre class="language-html">
+let username ="Pamela";
+let profit = 12000;
+</pre>
+
+<p>In the above examples the values were assigned to the variables by you, the creator of the web page.</p>
+
+
+<p>The real usefulness of JavaScript, however, is its ability to capture and manipulate values entered by the visitor to a web page.</p>
+
+<p>The most common way to capture user-entered values on a web page is with a HTML <i>input box</i>.</p>
+
+<img src="assets/img/user-input/input-field-1.png" alt="JavaScript">
+
+<p>The <i>type</i> of <b>text</b> means that the field can be used to capture any keyboard characters, such as letters, numbers, spaces or currency symbols.</p>
+
+<p>Capturing information from a web page visitor is just the first step of a two-step process.</p>
+
+<p>The second is assigning the entered value to a variable in JavaScript code. To do that, you need to give a unique <b>id</b> to the input field. In the example, above, the <b>id</b> is <b>fName</b> for 'First Name'.</p>
+
+<p>In JavaScript, you can then create a new variable such as <b>userInput</b>, and use the <span class="syn">getElementById()</span> method to assign the entered value to the variable as follows:</p>
+
+<pre class="language-html">
+let userInput;
+userInput = document.getElementById("fName").value;
+</pre>
+
+<p>Or, on a single line:</p>
+
+<pre class="language-html">
+let userInput = document.getElementById("fName").value;
+</pre>
+
+<p>You can see that the above two statements follow an important rule governing all use of the assignment operator (=): </p>
+
+<p><i>The variable goes on the left hand side (LHS), and the value for assignment to the variable goes on the right hand side (RHS).</i></p>
+
+<p>Exercise 5.1 takes you through the steps of assigning a user-entered value to a variable, and then displaying that value on the web page.</p>
+
+
+<h3 id="ex-5-1">Exercise 5.1: Capturing a user-entered value with an input field</h3>
+
+<p>In your <b>websites/js-exercises/user-input</b> sub-folder, open the following file in VS Code and your web browser:</p>
+
+<p><a href="exercises/5/exercise-5-1.html" target="_blank">exercise-5-1.html</a></p>
+
+<p>It should look as shown below.</p>
+
+<img src="assets/img/user-input/5-1.png" alt="JavaScript">
+
+<p>In the HTML, you can see:</p>
+
+<ul>
+	<li>An input field with a <b>type</b> of <b>text</b> and an <b>id</b> of <b>fName</b>.
+	<img src="assets/img/user-input/5-2.png" alt="JavaScript"></li>
+	<li>A <span class="syn">div</span> element with an <b>id</b> of <b>resultBox</b>. This is where you will display the value entered by the user.
+	<img src="assets/img/user-input/5-3.png" alt="JavaScript"></li>
+</ul>
+
+<p>In VS Code, scroll down to the bottom of the web page, to just before the closing <span class="syn">&lt;/body&gt;</span> tag, and enter the following function inside a pair of <span class="syn">script</span> of tags.</p>
+
+<pre class="language-html">
+&lt;script&gt;
+function showUserInput() {
+   /* Place the value from the input field in a variable */
+   /* Display the value on web page */
+}
+&lt;/script&gt;
+</pre>
+
+<p>At the moment, your new function contains only two comment lines.</p>
+
+<p>Scroll back up to the input box and, just under it, enter this new line with a button and an event handler.</p>
+
+<pre class="language-html">
+&lt;p&gt;&lt;button onclick="showUserInput()"&gt;Show user input&lt;/button&gt;&lt;/p&gt;
+</pre>
+
+<p>Your HTML now looks as follows.</p>
+
+<img src="assets/img/user-input/5-4.png" alt="JavaScript">
+
+<p>The event handler links the button with the function at the bottom of the web page.</p>
+
+<p>Scroll back down to the function. Under the first comment line, enter the following:</p>
+
+<pre class="language-html">
+let userInput = document.getElementById("fName").value;
+</pre>
+
+<p>This places the value, entered by the user in the input field with an <b>id</b> of <b>fname</b>, in a variable named <b>userInput</b>.</p>
+
+<p>Next, under the second comment line, enter the following:</p>
+
+<pre class="language-html">
+document.getElementById("resultBox").innerHTML = "&lt;b&gt;"+userInput+"&lt;\/b&gt;";
+</pre>
+
+<p>This updates the content of the <span class="syn">div</span> element with an <b>id</b> of <b>resultBox</b> with whatever value is in the <b>userInput</b> variable.</p>
+
+<p>Your JavaScript code now look as shown below.</p>
+
+<img src="assets/img/user-input/5-5.png" alt="JavaScript">
+
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Test that your code works by entering some text in the input field and clicking the 'Show user input' button'.</p>
+
+
+<p>You can close the <b>exercise-5.1.html</b> file when finished.</p>
+
+<p>Exercise 5.2 takes you through the steps of assigning a user-entered value to a variable, and then displaying that value on the web page.</p>
+
+<h3 id="ex-5-2">Exercise 5.2: Adding a Reset button to your web page</h3>
+<p>A 'Reset' or 'Clear' button enables user to remove a value they may have entered to the input field. Let's add one to the web page you have worked on in the previous exercise.</p>
+
+<p>In VS Code and your web browser, open the following file.</p>
+
+<p><a href="exercises/5/exercise-5-2.html" target="_blank">exercise-5-2.html</a></p>
+
+<p>As you can see, it is just a finished version of <b>exercise-5.1.html</b>.</p>
+
+<p>In the HTML, replace the line that contains the 'Show user input' button and event handler with the following.</p>
+
+<pre class="language-html">
+&lt;p&gt;&lt;button onclick="showUserInput()"&gt;Show user input&lt;/button&gt; &nbsp;&nbsp;
+&lt;button onclick="resetAll()"&gt;Reset All&lt;/button&gt;&lt;/p&gt;
+</pre>
+
+<p>Scroll down to the bottom of the web page and enter this new function under the 'showUserInput()' function.</p>
+
+<pre class="language-html">
+function resetAll() {
+   document.getElementById("fName").value = "";
+   document.getElementById("resultBox").innerHTML = "";
+}
+</pre>
+
+<p>This function resets the input field and displays <span class="syn">div</span> by entering a value of 'nothing' to each one.</p>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Verify that the 'Reset All' button works.</p>
+
+<p>You can close the <b>exercise-5-2.html</b> file when finished.</p>
+
+</section>
+
+
+<section id="user-numbers">
+
+	<h2>Handling user-entered numbers</h2>
+
+	<p>It is not only strings such as names of email addresses that you will want to capture in HTML forms. You will also want to capture order quantities, financial amounts and other numbers. </p>
+
+	<p>Because an HTML text box regards everything entered to it as a string, you need to convert string variables containing numbers to actual numeric variables before using the user-entered values in calculations.</p>
+
+
+	<p>Exercise 5.3 helps you understand why you need to do this <i>type conversion</i>.</p>
+
+	<h3 id="ex-5-3">Exercise 5.3: Working with numeric user data</h3>
+
+	<p>In VS Code and your web browser, open the following file.</p>
+
+	<p><a href="exercises/5/exercise-5-3.html" target="_blank">exercise-5-3.html</a></p>
+
+	<p>In the HTML you can see two input fields, two buttons and a single two <span class="syn">div</span> box for displaying the sum of the two numbers.</p>
+
+
+<p>Scroll down to the JavaScript code at the bottom.</p>
+
+<p>In the 'addNumbers' function, under the '/* Put sum of the two numbers in a new variable */' comment line, enter the following:</p>
+
+<pre class="language-html">
+let resultdNum = firstNum + secondNum;
+</pre>
+
+<p>Next, under the '/* Display the result on the web page */' comment line, enter the following:</p>
+
+<pre class="language-html">
+document.getElementById("resultNum").innerHTML = "&lt;b&gt;"+resultdNum+"&lt;\/b&gt;";
+</pre>
+
+<p>Save your file and reload it in your web browser.</p>
+
+<p>Test your code as follows:</p>
+
+<ul>
+	<li>In the First Number input field, enter <b>12</b>.</li>
+	<li>In the Second Number input field, enter <b>34</b>.</li>
+	<li>Click the <b>Add Numbers</b> button.</li>
+</ul>
+
+<p>The result you see is probably not the answer you want.</p>
+
+
+</section>
+
+
+<section id="parse">
+
+
+
+<h2 id="toFixed">The <span>parseInt()</span> and <span>parseFloat</span> methods</h2>
+
+<p>JavaScript offers two methods for converting string variables to numeric variables.</p>
+
+<table class="table-gray">
+	<tr>
+		<td width="20%"><p><b>Method</b></p></td>
+		<td><p><b>Description</b></p></td>
+	</tr>
+	<tr>
+		<td><p><b>parseInt()</b></p></td>
+		<td> <p >Converts string variable to a numeric variable. The result is an <i>integer</i> (whole number). Anything after the decimal point is discarded.</p>
+		<p>myVar = parseInt(myVar);<br><br></p></td>
+	</tr>
+	<tr>
+		<td><p><b>parseFloat()</b></p></td>
+		<td><p>Converts string variable to a numeric variable. The result is a <i>floating point</i>  number. Anything after the decimal point is preserved.</p>
+		<p>myVar = parseFloat(myVar);</p></td>
+	</tr>
+</table>
+
+<p>Neither method checks whether the variable actually contains a number or not. Even if the variable contains a string, each method still attempt to perform the variable type conversion.</p>
+
+
+<p>In your JavaScript code, add the following new lines to the 'addNumbers()' function, just after the second variable assignment:</p>
+
+<pre class="language-html">
+ /* Convert string inputs to numeric variables */
+ firstNum = parseFloat(firstNum);
+ secondNum = parseFloat(secondNum);
+</pre>
+
+<p>Your complete code should now look as follows.</p>
+
+<img src="assets/img/user-input/5-6.png" alt="JavaScript">
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>Verify that the code now adds the two numbers correctly.</p>
+
+<p>You can close the <b>exercise-5-3.html</b> file when finished.</p>
+
+
+</section>
+
+
+<section id="toFixedNew">
+
+
+
+<h2>Setting decimal places with the <span>toFixed()</span> method</h2>
+
+<p>When displaying financial amounts on screen it is conventional to format them so that they have a fixed number of decimal places. Values such as 12.80 and 45.00 look much better than 12.8 and 45. JavaScript provides a <span class="syn">toFixed()</span> method for this purpose. You enter the number of decimal places you require in the method's parenthesis. It works only with numeric variables.</p>
+
+<p>If the variable named 'myNum' contains 123.5, for example, the following statement reformats the value in the variable to 123.50.</p>
+
+<pre class="language-html">
+myNum = myNum.toFixed(2);
+</pre>
+
+
+</section>
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/introduction/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/introduction/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/5/exercise-5-1.html<br>
+	https://username.github.io/javascript/exercises/5/exercise-5-2.html<br>
+	https://username.github.io/javascript/exercises/5/exercise-5-3.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+
+
+		<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+
+</section>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</article>
+</main>
+</body>
+</html>

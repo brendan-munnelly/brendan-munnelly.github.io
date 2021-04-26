@@ -1,0 +1,954 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>1: Writing Your First Scripts | Web Design & Development Lessons | Brendan Munnelly</title>
+	<meta name="description" content="Introduction to JavaScript: A Web Design and Development Lesson from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet"> 
+
+	<!-- Google Analytics -->
+
+
+</head>
+
+<body>
+
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>1: Writing Your First Scripts</h1>
+</div>
+
+<main>
+	<article>
+		
+<section id="learning-goals">
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<div class="box-goals">
+	<ul>
+		<li>Separate JavaScript code from the remainder of a web page using the <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair.</li>
+		<li>Write text with HTML formatting to a web page using the <span class="syn">document.write()</span> statement.</li>
+		<li>Use the forward slash (<b>/</b>) to &#8216;escape&#8217; special characters that cannot be typed directly in JavaScript statements.</li>
+		<li>Create pop-up dialog boxes using the <span class="syn">window.alert()</span> and <span class="syn">window.confirm()</span> statements</li>
+		<li>Concatenate (join together) strings of text in JavaScript statements.</li>
+		<li>Use the JavaScript Developer Console</li>
+	</ul>
+	</div>
+
+	<p>In this Lesson you will meet the following terms:</p>
+
+	<ul>
+		<li>String</li>
+		<li>Concatenation</li>
+		<li>Escape code</li>
+		<li>JavaScript statement</li>
+	</ul>
+
+	<h3>Exercise Files</h3>
+	<p>In this Lesson you will work with the following web pages.</p>
+
+	<ul>
+		<li><a href="exercises/1/exercise-1-1.html" target="_blank">exercise-1-1.html</a></li>
+		<li><a href="exercises/1/exercise-1-2.html" target="_blank">exercise-1-2.html</a></li>
+		<li><a href="exercises/1/exercise-1-3.html" target="_blank">exercise-1-3.html</a></li>
+		<li><a href="exercises/1/exercise-1-4.html" target="_blank">exercise-1-4.html</a></li>
+		<li><a href="exercises/1/exercise-1-5.html" target="_blank">exercise-1-5.html</a></li>
+		<li><a href="exercises/1/exercise-1-6.html" target="_blank">exercise-1-6.html</a></li>
+	</ul>
+</section>
+
+<section>
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#download-files">Downloading your JavaScript exercise files</a></p>
+		<p><a href="#page-creating">The <span>HTML</span> tag</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.1: Editing JavaScript Code</a></p>
+		<p><a href="#container-add">Strings and concatenation</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.2: Concatenating strings</a></p>
+		<p><a href="#two-col">Typing and escaping special characters</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.3: Escaping special characters</a></p>
+		<p><a href="#col-responsive">Combining HTML with JavaScript</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.4: Inserting HTML tags within a script</a></p>
+		<p class="toc-indent"><a href="#add-col">About single and double quotes</a></p>
+		<p><a href="#three-col">Creating line and paragraph breaks</a></p>
+		<p><a href="#four-col">Commenting your scripts</a></p>
+		<p><a href="#page-creating">Making a JavaScript statement</a></p>
+		<p class="toc-indent"><a href="#page-creating">Avoid paragraph breaks within statements</a></p>
+		<p><a href="#three-col">Working with JavaScript dialog boxes</a></p>
+		<p class="toc-indent"><a href="#add-row">The window.alert() dialog box</a></p>
+		<p class="toc-indent"><a href="#add-row">The window.confirm() dialog box</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.5: Creating a window.alert() dialog box</a></p>
+		<p class="toc-indent"><a href="#add-row">Exercise 1.6: Creating a window.confirm() dialog box</a></p>
+		<p><a href="#dev-tools">Using the JavaScript Developer Console</a></p>
+		<p><a href="#github-upload">Uploading your JavaScript exercise files to GitHub</a></p>
+		<p><a href="#lesson-summary">Lesson summary</a></p>
+	</div>
+</section>
+
+
+<section class="wrapper-content">
+
+	<h2 id="download-files">Downloading your JavaScript exercise files</h2>
+	
+	<p>Follow these steps to download the exercise files for this JavaScript Tutorial:</p>
+	<ol>
+		<li>In your &#8216;main&#8217; <b>websites</b> folder, create a new 📁 sub-folder with this name:
+		<span class="inside-ol">&nbsp;</span>
+		<b>javascript</b>
+		<img src="assets/img/introduction/file-explorer-1.png" alt="Javascript"></li>
+
+		<li>Download this compressed file:
+		<span class="inside-ol">&nbsp;</span>
+		<a href="js-exercises-1.zip">javascript-exercises.zip</a></li>
+
+		<li>Copy the ZIP file to your new 📁 <b>websites/javascript</b> sub-folder.
+		</li>
+
+		<li>Unzip the file.</li>
+
+		<li>This creates a new sub-folder of the 📁 <b>websites/javascript</b> folder with the name <b>exercises</b>.</li>
+
+		<li>You no longer need the downloaded ZIP file. So you can delete <b>javascript-exercises.zip</b>.</li>
+	</ol>
+
+	<p>Your exercise files are now ready for you to work with.</p>
+
+</section>
+
+<section>
+
+	<h2>The HTML <span>&lt;script&gt;</span> tag</h2>
+
+	<p>When a web page contains both HTML and JavaScript code, how does the web browser know which type of code it is dealing with at any one time? </p>
+
+	<p>The answer to that question is provided by the <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair. This says to the web browser:</p>
+
+	<p><i>"Everything you read between these opening and closing tags is a script."</i></p>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">script</span>&gt;
+    <i>Your JavaScript code goes here</i>
+&lt;/<span class="blue-dark">script</span>&gt;
+</pre>
+
+	<p>Note that the  <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair is part of HTML, not JavaScript.</p>
+
+	<p>Exercise 1.1 take you through the steps of editing an already existing line of JavaScript code contained in a web page.</p>
+
+	<h3>Exercise 1.1: Editing JavaScript Code</h3>
+
+	<p>In your <b>javascript/exercises/1/</b> sub-folder, open the following file in your VS Code and web browser:</p>
+
+	<p><a href="exercises/1/exercise-1-1.html" target="_blank">exercise-1-1.html</a></p>
+
+<p>You can see some JavaScript code within the body of the web page within a <span class="syn">&lt;div&gt;</span> &#8230; <span class="syn">&lt;/div&gt;</span> tag pair with a class name of <span class="syn">js-box</span>.</p>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"js-box"</span>&gt;
+
+    &lt;<span class="blue-dark">script</span>&gt;
+        <span class="blue-light">document</span>.<span class="yellow">write</span>(<span class="brown">&quot;Hello. This is my first script.&quot;</span>);
+    &lt;/<span class="blue-dark">script</span>&gt;
+
+&lt;<span class="blue-dark">div</span>&gt;
+</pre>
+
+	<p>It produces the output shown below in the web browser window.</p>
+
+	<img src="assets/img/introduction/1-1.png" alt="JavaScript">
+
+	<p>In VS Code, edit the text inside the <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair as follows.</p>
+
+<pre class="language-html">
+document.write(&quot;Hello. This is my very first script.&quot;);
+</pre>
+
+	<p>Save your web page and reload your web browser.</p>
+
+	<p>The result should look as shown below.</p>
+
+	<img src="assets/img/introduction/1-2.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-1-1.html</b> file when finished.</p>
+
+</section>
+
+
+<section>
+<h2>Strings and concatenation</h2>
+
+<p>In Exercise 1.1, the text "Hello. This is my first script." is an example of a <i>string</i>.</p>
+
+<p>In JavaScript a string is simply any collection of letters, numbers or other keyboard characters enclosed within single or double quotes.</p>
+
+<p>A string can consist of one or more blank or<i> white spaces</i>, and nothing else. The following script writes a single blank space to the web browser window.</p>
+
+<pre class="language-html">
+ document.write(&quot; &quot;);
+</pre>
+
+<p class="defhead">String</p>
+
+<p class="deftext">One or more letters, numbers, symbols, punctuation characters or blank spaces, enclosed within a pair of quotes. Generally, double (" ") rather than single (' ') quotes are used to enclose a string.</p>
+
+
+<p>You can join two or more strings together so that they display as a single string in the web browser window. String joining is achieved with the plus (<b>+</b>) operator, and is known as <i>concatenation</i>. Consider the following script.</p>
+
+<pre class="language-html">
+ document.write(&quot;Last train&quot;+&quot;to Clarksville.&quot;);
+</pre>
+
+<p>This produces the following output in a web browser.</p>
+
+<img src="assets/img/introduction/1-3.png" alt="JavaScript">
+
+<p>Notice anything missing? Yes: a single white space at the location where the two strings join together. You can edit the code in any one of three ways to correct this problem.</p>
+
+<ul>
+	<li>One approach is to amend the <i>first string</i> by inserting a white space at the end of it.
+<pre class="language-html">
+ document.write("Last train "+"to Clarksville.");
+</pre></li>
+
+<li>A second approach is to amend the second string by inserting a white space at the start of it.
+
+<pre class="language-html">
+ document.write("Last train"+" to Clarksville.");
+</pre></li>
+
+<li>A third approach is to insert the white space as a separate third string between the two existing strings.
+The result is not two but three strings joined together.
+
+<pre class="language-html">
+ document.write("Last train"+" "+"to Clarksville.");
+</pre></li>
+</ul>
+
+<p>Whichever approach you take the corrected code displays as follows in the browser window.</p>
+
+<img src="assets/img/introduction/1-4.png" alt="JavaScript">
+
+<p class="defhead">Concatenation</p>
+
+<p class="deftext">The joining together of separate strings with the plus (+) operator so that they display as a single string in the web browser window. You may need to insert white space characters to preserve readability between joined strings.</p>
+
+<p>Exercise 1.2 takes you through the steps of concatenating a number of strings.</p>
+
+<h3>Exercise 1.2: Concatenating strings</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/1/exercise-1-2.html" target="_blank">exercise-1-2.html</a></p>
+
+<p>It contains the following script.</p>
+
+<pre class="language-html">
+  document.write("Thank you for visiting my web page.");
+</pre>
+
+<p>Edit the script code as shown below.</p>
+
+<pre class="language-html">
+  document.write("Thank "+"you for visiting "+"my web"+" "+"page.");
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>The result should look as shown below.</p>
+
+<img src="assets/img/introduction/1-5.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-1-2.html</b> file when finished.</p>
+
+
+
+</section>
+
+
+<section>
+
+<h2>Typing and escaping special characters</h2>
+
+<p>All characters are not the same, at least not when used with JavaScript statements.</p>
+
+<p>There are a number of keyboard characters that produce errors when typed in JavaScript.</p>
+
+<p>Among these special characters are the double quote (<b>"</b>), the single quote (<b>'</b>), the forward slash (<b>/</b>) and the backslash (<b>\</b>).</p>
+
+<p>JavaScript overcomes this problem by providing a so-called <i>escape character</i>: the backslash (<span style="color:green;font-weight:bold">\</span>).</p>
+
+<table class="table-gray">
+ <thead>
+ <tr>
+	 <td style="width:20%"><p><b>Character</b></p></td>
+	 <td style="width:30%"><p><b>Un-escaped Character</b></p></td>
+	 <td style="width:30%"><p><b>Escaped Character</b></p></td>
+ </tr>
+  </thead>
+
+ <tbody>
+ <tr>
+	 <td style="width:20%"><p>Double quote</p></td>
+	 <td style="width:30%"><p style="font-weight:bold;color:#fff;background-color:red;padding-left:12px;width:120px">"</p></td>
+	 <td style="width:30%"><p style="background-color:lightgreen;padding-left:12px;width:120px"><b>\</b>"</p></td>
+ </tr>
+ <tr>
+	 <td style="width:20%"><p>Single quote</p></td>
+	 <td style="width:30%"><p style="font-weight:bold;color:#fff;background-color:red;padding-left:12px;width:120px">'</p></td>
+	 <td style="width:30%"><p style="background-color:lightgreen;padding-left:12px;width:120px"><b>\</b>'</p></td>
+ </tr>
+ <tr>
+	 <td style="width:20%"><p>Forward slash</p></td>
+	 <td style="width:30%"><p style="font-weight:bold;color:#fff;background-color:red;padding-left:12px;width:120px">/</p></td>
+	 <td style="width:30%"><p style="background-color:lightgreen;padding-left:12px;width:120px"><b>\</b>/</p></td>
+ </tr>
+  <tr>
+	 <td style="width:20%"><p>Backslash</p></td>
+	 <td style="width:30%"><p style="font-weight:bold;color:#fff;background-color:red;padding-left:12px;width:120px">\</p></td>
+	 <td style="width:30%"><p style="background-color:lightgreen;padding-left:12px;width:120px"><b>\</b>\</p></td>
+ </tr>
+
+  </tbody>
+</table>
+
+<p>The following JavaScript statement does not contain an escape code (\) for the two double quotes characters ("). As you can, VS Code highlights the error with a wavy underline.</p>
+
+<img src="assets/img/introduction/1-6.png" alt="JavaScript">
+
+<p>You correct this by <i>escaping</i> the two double quotes (") characters within the text as follows.</p>
+
+<img src="assets/img/introduction/1-7.png" alt="JavaScript">
+
+
+<p>Here's another example that produces an error. This one contains both double and single quotes.</p>
+
+<pre class="language-html">
+document.write("She said: "I'm a huge fan of JavaScript."); 
+</pre>
+
+<p>You correct this statement by escaping both types of quotes within the text as follows.</p>
+
+<pre class="language-html">
+document.write("She said: \"I\'m a huge fan of JavaScript.\"");
+</pre>
+
+<p>You may want to use the forward slash (/) character when referring to file paths on a computer, and the backslash (\) character to closing tags in HTML code.</p>
+
+<p>The following statement provides an example.</p>
+
+<pre class="language-html">
+document.write("&lt;b&gt;The file is in the C:/pdfs folder.&lt;/b&gt;");
+</pre>
+
+<p>You correct this statement by escaping both types of slashes as follows.</p>
+
+<pre class="language-html">
+document.write("&lt;b&gt;The file is in the c:\/pdfs folder.&lt;\/b&gt;");
+</pre>
+
+<p class="defhead">Escaped Character</p>
+
+<p class="deftext">A character that, when used in a JavaScript string, needs to be preceded by a backslash (<b>\</b>) to display correctly. Characters that need to be escaped include the double quote (<b>\"</b>), single quote (<b>\'</b>), forward slash (<b>\/</b>) and the backslash (<b>\\</b>) character itself.</p>
+
+<p>In Exercise 1.3 you will practice escaping characters within a JavaScript statement.</p>
+
+<h3>Exercise 1.3: Escaping special characters</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/1/exercise-1-3.html" target="_blank">exercise-1-3.html</a></p>
+
+<p>It contains the following script. </p>
+
+<pre class="language-html">
+ document.write("She is certain that JavaScript is "great"");
+</pre>
+
+<p>Your web browser will not display the line of text because the double quotes are not escaped.</p>
+
+<p>Edit the script code as shown below. </p>
+
+<pre class="language-html">
+ document.write("She is certain that JavaScript is \"great\"");
+</pre>
+
+<p>Save your web page and reload your web browser. The line of text now displays correctly.</p>
+
+<img src="assets/img/introduction/1-8.png" alt="JavaScript">
+
+
+<p>Edit the script code as shown below.</p>
+
+<pre class="language-html">
+ document.write("She\'s certain that JavaScript is \"great\"");
+</pre>
+
+<p>Resave the file and reload your web browser. The line of text displays correctly because the single quote is escaped.</p>
+
+<img src="assets/img/introduction/1-9.png" alt="JavaScript">
+
+
+<p>Edit the script code as shown below.</p> 
+
+<pre class="language-html">
+ document.write("She\'s certain that JavaScript is &lt;b&gt;\"great\"&lt;\/b&gt;");
+</pre>
+
+	<p>Resave the file and reload your web browser. The line of text displays correctly because the forward slash character in the closing <span class="syn">&lt;/b&gt;</span> HTML tag is escaped. The result should look as shown below.</p>
+
+	<img src="assets/img/introduction/1-10.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-1-3.html</b> file when finished.</p>
+
+
+</section>
+
+
+<section>
+
+
+<h2>Combining HTML with JavaScript</h2>
+
+<p>You have learnt how to insert JavaScript code within a HTML document. And in the Exercise 1.3 you have discovered that the opposite is also possible: HTML tags can be inserted within JavaScript code. Consider the following example.</p>
+
+<pre class="language-html">
+&lt;script&gt;
+   &lt;i&gt;
+   document.write("this string in displayed in italics.");
+   &lt;/i&gt;
+&lt;/script&gt;
+</pre>
+
+
+<p>The above code produces an error because the web browser expects to find JavaScript code after the opening <span class="syn">&lt;script&gt;</span> tag; instead it finds the HTML <span class="syn">&lt;i&gt;</span> tag. The following code does work.</p>
+
+<pre class="language-html">
+&lt;script&gt;
+   document.write("&lt;i&gt;this string in displayed in italics.&lt;\/i&gt;");
+&lt;/script&gt;
+</pre>
+
+<p>The second example differs from the first in that the <span class="syn">&lt;i&gt;</span> &#8230; <span class="syn">&lt;/i&gt;</span> tag  pair is now mixed in with the string text used by the script. Also notice that the forward slash (/) in the closing italic tag is escaped.</p>
+
+<p>In Exercise 1.4 you will include HTML tags within a string to produce formatted text.</p>
+
+<h3>Exercise 1.4: Inserting HTML tags within a script</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/1/exercise-1-4.html" target="_blank">exercise-1-4.html</a></p>
+
+<p>It contains the following script.</p>
+
+<pre class="language-html">
+document.write("A heading. Some text with bold formatting.");
+</pre>
+
+<p>Edit the script code as shown below.</p>
+
+<pre class="language-html">
+document.write("&lt;h1&gt;A heading&lt;\/h1&gt;&lt;p&gt;Some text with &lt;b&gt;bold&lt;\/b&gt; formatting.&lt;\/p&gt;");
+</pre>
+
+<p>(You should type the above code on a single line.)</p>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>The result should look as shown below.</p>
+
+<img src="assets/img/introduction/1-11.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-1-4.html</b> file when finished.</p>
+
+
+
+<h3>About single and double quotes</h3>
+
+<p>In JavaScript you can enclose a string within either single or double quotes. A web browser displays the following two strings in exactly the same way:</p>
+
+<pre class="language-html">
+document.write("This is a sample string.");
+</pre>
+
+<pre class="language-html">
+document.write('This is a sample string.');
+</pre>
+
+<p>JavaScript programmers tend to prefer double quotes because they may want to include some text within single quotes in a string.</p>
+
+
+
+</section>
+
+
+<section>
+
+
+<h2>Creating line and paragraph breaks</h2>
+
+<p>The web browser does <i>not</i> insert a line break after a <span class="syn">document.write()</span> statement. In your VS Code, the following might look like four separate text lines.</p>
+
+<pre class="language-html">
+document.write("One for sorrow,");
+document.write("Two for joy.");
+document.write("Three for a girl,");
+document.write("And four for a boy.");
+</pre>
+
+<p>But in the web browser these four <span class="syn">document.write()</span> statements display as shown.</p>
+
+<img src="assets/img/introduction/1-12.png" alt="JavaScript">
+
+<p>To insert line breaks you could include a separate <span class="syn">document.write()</span> statement for line break.</p>
+
+<pre class="language-html">
+document.write("One for sorrow,");
+document.write("&lt;br&gt;");
+document.write("Two for joy.");
+document.write("&lt;br&gt;");
+document.write("Three for a girl,");
+document.write("&lt;br&gt;");
+document.write("And four for a boy.");
+</pre>
+
+<p>A more common approach is to include the line break at the end of the <span class="syn">document.write()</span> statement.</p>
+
+<pre class="language-html">
+document.write("Three for a girl,&lt;br&gt;");
+</pre>
+
+
+<img src="assets/img/introduction/1-13.png" alt="JavaScript">
+
+<p>You could also use paragraph breaks within a <span class="syn">document.write()</span> statement.</p>
+
+<pre class="language-html">
+document.write("&lt;p&gt;One for sorrow,&lt;\/p&gt;");
+document.write("&lt;p&gt;Two for joy.&lt;\/p&gt;");
+document.write("&lt;p&gt;Three for a girl,&lt;\/p&gt;");
+document.write("&lt;p&gt;And four for a boy.&lt;\/p&gt;");
+</pre>
+
+<img src="assets/img/introduction/1-14.png" alt="JavaScript">
+
+</section>
+
+
+<section>
+
+<h2>Commenting your scripts</h2>
+
+<p> It's good practice to add comments to your scripts. Text within the comment tags does not affect the working of the script, and does not display in the browser window. A sample comment is shown below.</p>
+
+<pre class="language-html">
+<span class="token comment">/* This script changes the page background colour */</span>
+</pre>
+
+<p>Comment tags always come in pairs. The opening tag is a forward slash and an asterisk; the closing tag is the reverse. Note that the asterisks go on the inside and the slashes on the outside.</p>
+
+<p>The above is an example of a multi-line comment, which you can use for one, two, three or more lines of commented text.</p>
+
+<p>To comment out just a single line in JavaScript, begin the line with two forward slash (//) characters.</p>
+
+<pre class="language-html">
+<span class="token comment">// This script changes the page background colour</span>
+</pre>
+
+</section>
+
+
+<section>
+
+<h2>Making a JavaScript statement</h2>
+
+<p>In JavaScript as in other scripting and programming languages the word <i>statement</i> has a particular meaning.</p>
+
+<p>It is an instruction to perform a particular action. The semi-colon at the end of the llne (;) acts as a <i>statement terminator</i>. It says to JavaScript:</p>
+
+<p><i>"The statement you have just read is now finished."</i></p>
+
+<p>Here are a few JavaScript statements of the kind that you will meet in future chapters with explanatory comments.</p>
+
+<pre class="language-html">
+/* This statement adds two numbers */
+sumTotal = firstNumber+secondNumber;
+
+/* This statement displays the result of a calculation */
+window.alert(result);
+</pre>
+
+<pre class="language-html">
+/* This statement places the value of a form field in a variable */
+surname = document.myform.surname_field.value;
+</pre>
+
+<p>And here is a <span class="syn">document.write()</span> statement of the kind you have been working with in this Lesson.</p>
+
+<pre class="language-html">
+document.write("JavaScript is one word.");
+</pre>
+
+<p class="defhead">JavaScript Statement</p>
+
+<p class="deftext">An instruction to JavaScript to perform a particular action. The semi-colon (;) acts as a statement terminator.</p>
+
+<h3>Avoid paragraph breaks within statements</h3>
+
+<p>Unlike HTML and CSS, JavaScript does <i>not</i> ignore line breaks created by pressing the <b>Enter</b> key.</p>
+
+<p>Pressing the <b>Enter</b> key while typing a statement usually causes the statement to fail when the script is run in a web browser.</p>
+
+<p>The following JavaScript statement runs without error.</p>
+
+<pre class="language-html">
+document.write("Did you enjoy your visit to my web page?");
+</pre>
+
+<p>This statement, however, does result in an error.</p>
+
+<pre class="language-html">
+document.write("Did you enjoy your
+visit to my web page?");
+</pre>
+</section>
+
+
+<section>
+
+
+<h2>Working with JavaScript dialog boxes</h2>
+
+<p>You have learnt how to use JavaScript's <span class="syn">document.write()</span> statement to output text and HTML tags to the web browser window.</p>
+
+<p>Now meet two other statements for displaying information to the web page visitor.</p>
+
+<p>Rather than show the information in the browser window, however, these two create dialog boxes that appear <i>in front of</i> the browser window.</p>
+
+<h3>The <span>window.alert()</span> dialog box</h3>
+
+<p>This type of dialog box offers just a single button: an <b>OK</b> button.</p>
+
+<p><img src="assets/img/introduction/window-alert.png" alt="JavaScript"></p>
+
+<h3>The <span>window.confirm()</span> dialog box</h3>
+
+<p>This type of dialog box offers two buttons: <b>OK</b> and <b>Cancel</b>.</p>
+
+<p><img src="assets/img/introduction/window-confirm.png" alt="JavaScript"></p>
+
+<p>Here are three points to remember about the dialog box statements:</p>
+
+<ul>
+	<li><b>Text-only</b>: Both dialog boxes can display only text without HTML formatting.</li>
+	<li><b>Concatenation</b>: You can join together strings inside <span class="syn">window.alert()</span> and <span class="syn">window.confirm()</span> statements.</li>
+	<li><b>Escape codes</b>: You must escape special characters inside the <span class="syn">window.alert()</span> and <span class="syn">window.confirm()</span> statements.</li>
+</ul>
+
+
+<p>In Exercise 1.5 you will create a <span class="syn">window.alert()</span> dialog box.</p>
+
+<h3>Exercise 1.5: Creating a window.alert() dialog box</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/1/exercise-1-5.html" target="_blank">exercise-1-5.html</a></p>
+
+<p>It contains the following script.</p>
+
+<pre class="language-html">
+document.write("Hope you enjoy your visit.");
+</pre>
+
+<p>Edit the script code as shown below. </p>
+
+<pre class="language-html">
+document.alert("Hope you enjoy your visit to my web page.");
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>You can see an error in the web browser window. The reason for this is that you have incorrectly combined the JavaScript terms 'document' and ' alert()'.</p>
+
+<p>Edit the script as shown below. Resave your file and reload your browser.</p>
+
+<pre class="language-html">
+window.alert("Hope you enjoy your visit to my web page.");
+</pre>
+
+<p>The following dialog box should display in front of your web browser window. </p>
+
+<img src="assets/img/introduction/1-15.png" alt="JavaScript">
+
+
+<p>Click <b>OK</b> to close the dialog box.</p>
+
+	<p>You can close the <b>exercise-1-5.html</b> file when finished.</p>
+
+
+<p>Next, in Exercise 1.6, you will create a <span class="syn">window.confirm()</span> dialog box.</p>
+
+<h3>Exercise 1.6: Creating a window.confirm() dialog box</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/1/exercise-1-6.html" target="_blank">exercise-1-6.html</a></p>
+
+<p>It contains the following script.</p>
+
+<pre class="language-html">
+document.write("Did you enjoy your visit?");
+</pre>
+
+<p>Edit the script code as shown below. </p>
+
+<pre class="language-html">
+window.confirm("Did you &lt;b&gt;enjoy&lt;/b&gt; your visit to my web page?");
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+<p>The following dialog box should display in front of your web browser window. </p>
+
+<img src="assets/img/introduction/1-16.png" alt="JavaScript">
+
+<p>You can see that the HTML bold tag pair does <i>not</i> format the enclosed word, but is displayed as text.</p>
+
+<p>Edit the script code as shown below.</p>
+
+<pre class="language-html">
+window.confirm("Did you enjoy"+" "+"your visit to my web page?");
+</pre>
+
+<p>Resave the file and reload your web browser. The dialog box should now look as shown below. Click <b>OK</b>
+or <b>Cancel</b> to close the dialog box.</p>
+
+<img src="assets/img/introduction/1-17.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-1-6.html</b> file when finished.</p>
+
+
+</section>
+
+<section>
+
+	<h2 id="dev-tools">Using the JavaScript Developer Console</h2>
+
+	<p>Developer Tools (also known as DevTools) is an essential item in the toolbox of every front-end developer. And because DevTools are built-in to every web browser &#8211; Brave, Chrome, Safari, Edge, and Firefox or whatever &#8211; you take advantage of their many features without needing to purchase, install and configure extra software.</p>
+
+	<h3>Opening the DevTools window</h3>
+	<p>Here's a quick and easy way to open DevTools. Using your mouse, click on the three vertical dots icon at the top-right of your browser window. From the dropdown menu displayed, click the <b>More tools</b> option to display a second menu. On that menu, click the last option, <b>Developer tools</b>.</p>
+
+	<img src="assets/img/introduction/browser-devtools-icon-chrome.png" alt="JavaScript">
+
+	<p>Of the nine tabs or panels within the DevTools window, we will focus on the second one, named <b>Console</b>.</p>
+
+
+	<h3>Changing the DevTools position</h3>
+	<p>To position or &#8216;dock&#8217; the DevTools window:</p>
+	<ol>
+		<li>Open the DevTools window.</li>
+		<li>Near the top-right of the DevTools window, click the vertical ellipses (three dots) icon.
+		<img src="assets/img/introduction/docking-1.png" alt="">
+		</li>
+		<li>Click the docking position you want for the DevTools window.</li>
+	</ol>
+
+	<p>Below is an example of the DevTools window docked on the right.</p>
+
+	<img src="assets/img/introduction/devtools-right.png" alt="JavaScript">
+
+	<p>And here is an example of the DevTools window docked along the bottom.</p>
+
+	<img src="assets/img/introduction/devtools-bottom.png" alt="JavaScript">
+
+
+	<h3>Changing the DevTools font size</h3>
+	<p>To change the font size in the DevTools window, press the <b>Ctrl</b> key followed by the plus (<b>+</b>) or minus (<b>-</b>) key. To reset, press <b>Ctrl</b> and <b>0</b>.</p>
+
+	<h3>Working with the Console</h3>
+	<p>You can use the Console to display or 'log' information as part of your JavaScript development process. You can even use it to interact with a web page by performing JavaScript expressions within the page’s context.</p>
+
+	<p>You can also display into the Web Console with the keyboard shortcut <b>Ctrl + Shift + K</b> on Linux and Windows, or <b>Command + Option + K</b> on macOS. </p>
+
+	<p>Within the Console, you can type JavaScript code. For example, type an alert statement that outputs out the string Hello, World!:</p>
+
+<pre class="language-html">
+&gt;&gt; alert("Hello, World!");
+</pre>
+
+	<p>When you press the <b>ENTER</b> key, you should see the following alert pop up in your browser:</p>
+
+	<img src="assets/img/introduction/javascript-alert.png" style="max-width: 500px" alt="JavaScript">
+
+	<p>Rather than rely on annoying pop-up alerts to track the progress of your code, you can instead output messages to the Console with the <span class="syn">console.log</span> command.
+
+	<p>To output the Hello, World! string, for example, you would type the following into the Console:</p>
+
+<pre class="language-html">
+&gt;&gt; console.log("Hello, World!");
+</pre>
+
+	<p>Within the console, you’ll receive the following output:</p>
+
+<pre class="language-html">
+Output
+Hello, World!
+</pre>
+
+<p>In effect, the JavaScript Console provides you with a space to try out JavaScript code in real time by letting you use an environment similar to a terminal shell interface.</p>
+
+<p>For example you can perform arithmetic in the Console:</p>
+		
+<pre class="language-html">
+&gt;&gt; console.log(2 + 6);
+</pre>
+
+<pre class="language-html">
+Output
+8
+</pre>
+
+</section>
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/introduction/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/introduction/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/1/exercise-1-1.html<br>
+	https://username.github.io/javascript/exercises/1/exercise-1-2.html<br>
+	https://username.github.io/javascript/exercises/1/exercise-1-3.html<br>
+	https://username.github.io/javascript/exercises/1/exercise-1-4.html<br>
+	https://username.github.io/javascript/exercises/1/exercise-1-5.html<br>
+	https://username.github.io/javascript/exercises/1/exercise-1-6.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+<section>
+
+<h2>Lesson summary</h2>
+
+<p>JavaScript code in a web page must be enclosed with the HTML <span class="syn">&lt;script&gt;</span> &#8230;. <span class="syn">&lt;/script&gt;</span> tag pair as follows.</p>
+
+<pre class="language-html">
+&lt;<span class="blue-dark">script</span>&gt;
+    <i>Your JavaScript code goes here</i>
+&lt;/<span class="blue-dark">script</span>&gt;
+</pre>
+
+<p>A script is made up of one or more <i>statements</i>. Each statement is an instruction to JavaScript to perform a particular action or task. The semi-colon (<b>;</b>) acts as a <i>statement terminator</i>.</p>
+
+<p>A <i>string</i> is any collection of alphabetic, numeric or punctuation characters, or white (blank) spaces enclosed within single or double quotes.</p>
+
+<p>You can use the  <span class="syn">document.write()</span> statement to write strings, with or without HTML formatting, to the web browser window. Insert the text and any HTML tags within the parenthesis of the <span class="syn">document.write()</span> statement as shown in the example below.</p>
+
+<pre class="language-html">
+document.write("Thank you for visiting my web page.");
+</pre>
+
+<p>A number of keyboard characters produce unexpected results or errors when typed directly into a <span class="syn">document.write()</span> or other JavaScript statement. Among these are the double quote (<b>"</b>), the single quote (<b>'</b>), the forward slash (<b>/</b>) and the backslash (<b>\</b>).</p>
+
+<p>To display such characters correctly,  you must <i>escape</i> them by preceding them with a forward slash as follows: \", \", \\ and \/. An example of a string with escaped characters is shown below.</p>
+
+<pre class="language-html">
+document.write("She\'s certain that JavaScript is &lt;b&gt;\"great\"&lt;\/b&gt;");
+</pre>
+
+<p><i>Concatenation</i> is the joining together of separate strings with the plus (+) operator so that they display as a single string in the web browser window. You may need to insert white space characters to preserve readability between joined strings. An example is shown below.</p>
+
+<pre class="language-html">
+document.write("Last train"+" "+"to Clarksville.");
+</pre>
+
+<p>The <span class="syn">document.write()</span> statement does not insert a <i>line break</i> after the string that is written to the browser window. To follow a string with a line break, include the HTML line break tag as follows.</p>
+
+<pre class="language-html">
+document.write("Three for a girl,&lt;br&gt;");
+</pre>
+
+<p>Unlike HTML JavaScript does not ignore line breaks created by pressing the <b>Enter</b> key. Pressing <b>Enter</b> while typing a JavaScript statement will almost certainly cause an error to result.</p>
+
+<p>The statement below provides an example of an incorrectly inserted line break.</p>
+
+<pre class="language-html">
+document.write("Did you enjoy your
+visit to my web page?");
+</pre>
+
+<p>The <span class="syn">window.alert()</span> statement creates a dialog box in front of the browser window containing a text message and an <b>OK</b> button. The <span class="syn">window.confirm</span> statement also creates a dialog box with a text message, but displays two buttons: <b>OK</b> and <b>Cancel</b>.</p>
+
+<p>Both dialog boxes can display only unformatted text. Strings can be concatenated within a dialog box, and special characters must be escaped.</p>
+
+<p>It is good practice to include <i>comments</i> with your scripts. Text within comment tags does not affect the operation of the script, and does not display in the browser window.</p>
+
+<pre class="language-html">
+/* This script changes the page background colour */
+</pre>
+
+<p>Comment tags always come in pairs. The opening tag is a forward slash and an asterisk; the closing tag is the reverse. The asterisks go on the inside and the slashes on the outside.</p>
+
+
+
+
+		<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+
+</section>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+</article>
+</main>
+</body>
+</html>
+
