@@ -37,7 +37,7 @@
 <header>
 <div class="jumbotron tutorial">
 	<h3><a href="index.html" title="All Web Tutorials">Contents</a>&nbsp;&nbsp;&gt;</h3>
-	<h1>Looping in JavaScript</h1>
+	<h1>8: Looping in JavaScript</h1>
 </div>
 </header>
 
@@ -46,16 +46,22 @@
 
 <section id="learning-goals">
 
-	<h3>Objectives</h3>
+	<h2>Objectives</h2>
 
-	<p>In this Tutorial you will learn how to:</p>
-
+	<p>In this Lesson, you will learn how to:</p>
+	<div class="box-goals">
 	<ul>
-		<li>Create a <i>for</i> loop in JavaScript with a counter variable, a starting value, a loop condition and an increment or decrement operator</li>
+		<li>Create a <span class="syn">for</span> loop with a counter variable, a starting value, a loop condition and an increment (<span class="syn"><b>++</b></span>) or decrement operator (<span class="syn"><b>--</b></span>)</li>
+
+		<li>Create a <span class="syn">while</span> loop with a counter variable that runs only when a tested condition is satisfied</li>
+		<li>Create a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop that runs once, and runs again only when a tested condition is satisfied</li>
+		<li>Interrupt any loop type with a <span class="syn">break</span> command that, when the counter variable reaches a specified value, tells JavaScript to exit the loop</li>
+		<li>Interrupt any loop type with a <span class="syn">continue</span> command that, when the counter variable reaches a specified value, tells JavaScript to return to the top of the loop as if all the statements have been performed.</li>
+
 	</ul>
+	</div>
 
-
-	<p>In this Tutorial you will meet the following terms:</p>
+	<p>In this Lesson, you will meet the following terms:</p>
 	<ul>
 		<li>JavaScript loop</li>
 		<li>Iteration</li>
@@ -64,252 +70,642 @@
 
 	<h3>Exercise Files</h3>
 
-	<p>In this Tutorial you will work with the following HTML files:</p>
+	<p>In this Lesson,  you will work with the following HTML files:</p>
 	<ul>
-		<li><a href="assets/exercises/loops/exercise-8-1.html" target="_blank">exercise-8-1.html</a></li>
-		<li><a href="assets/exercises/loops/exercise-8-2.html" target="_blank">exercise-8-2.html</a></li>
+		<li><a href="exercises/8/exercise-8-1.html" target="_blank">exercise-8-1.html</a></li>
+		<li><a href="exercises/8/exercise-8-2.html" target="_blank">exercise-8-2.html</a></li>
+		<li><a href="exercises/8/exercise-8-3.html" target="_blank">exercise-8-3.html</a></li>
+		<li><a href="exercises/8/exercise-8-4.html" target="_blank">exercise-8-4.html</a></li>
+		<li><a href="exercises/8/exercise-8-5.html" target="_blank">exercise-8-5.html</a></li>
 	</ul>
 
 </section>
 
+<section>
+	<div class="box-toc">
+		<h2>Contents</h2>
+		<p><a href="#javascript-loops">Going on and on &#8212; until it stops: a JavaScript loop</a></p>
+
+		<p class="toc-indent"><a href="#about-for-loop">The <span class="syn">for</span> loop</a></p>
+
+		<p class="toc-indent"><a href="#about-while-loop">The <span class="syn">while</span> loop</a></p>
+
+		<p class="toc-indent"><a href="#about-while-do-loop">The <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop</a></p>
+
+		<p class="toc-indent"><a href="#loop-conditions">About loop conditions</a></p>
+
+		<p class="toc-indent"><a href="#increment-decrement">About the increment and decrement operators</a></p>
+
+		<p><a href="#for-loop-structure">The <span class="syn">for</span> loop structure</a></p>
+
+		<p class="toc-indent"><a href="#exercise-8-1">Exercise 8.1: Building a simple  <span class="syn">for</span> loop</a></p>
+
+		<p class="toc-indent"><a href="#more-for-loops">More about <span class="syn">for</span> loops</a></p>
+
+		<p class="toc-indent"><a href="#exercise-8-2">Exercise 8.2: Building a user-controlled <span class="syn">for</span> loop</a></p>
+
+		<p><a href="#while-loop-structure">The <span class="syn">while</span> loop structure</a></p>
+
+		<p class="toc-indent"><a href="#exercise-8-3">Exercise 8.3: Building a simple <span class="syn">while</span> loop</a></p>
+
+		<p class="toc-indent"><a href="#more-while">More about <span class="syn">while</span> loops</a></p>
+
+		<p><a href="#do-while-loop-structure">The <span class="syn"><span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span></span> loop structure</a></p>
+
+		<p class="toc-indent"><a href="#exercise-8-4">Exercise 8:4: Building a simple <span class="syn"><span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span></span> loop</a></p>
+
+		<p class="toc-indent"><a href="#do-while-more">More about <span class="syn"><span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span></span> loops</a></p>
+
+		<p><a href="#interrupt">Interrupting loops with <span class="syn">break</span> and <span class="syn">continue</span></a></p>
+		<p class="toc-indent"><a href="#break-command">About the <span class="syn">break</span> command</a></p>
+		<p class="toc-indent"><a href="#continue-command">About the <span class="syn">continue</span> command</a></p>
+
+		<p class="toc-indent"><a href="#exercise-8-5">Exercise 8.5: Skipping unlucky number 13</a></p>
+
+		<p><a href="#github-upload">Uploading your JavaScript exercise files to GitHub</a></p>
+
+		<p><a href="#lesson-summary">Lesson summary</a></p>
+	</div>
+</section>
+
+
 <section id="javascript-loops">
 
 
-	<h2>Going On and On: JavaScript Loops</h2>
+	<h2>Going on and on &#8212; until it stops: a JavaScript loop</h2>
 
-	<p>The word 'loop' suggests a circle. Similarly, the term 'looping' in a script implies that an instruction or set of instructions that repeat forever. Well, looping can mean that. But only if the loop is written incorrectly.</p>
+	<p>A loop is a programming structure that repeats an instruction or series of instructions when certain conditions are satisfied, and then <i>stops</i>. JavaScript offers three types of loops.</p>
 
-	<p>Properly used, a loop is a very useful programming structure that repeats an instruction or series of instructions when certain conditions are satisfied, and then <i>stops</i>. JavaScript offers three types of loops:</p>
-
+	<h3 id="about-for-loop">The <span>for</span> loop</h3>
+	<p>This is the most common loop in JavaScript, and the one that offers the most control to the developer. Use a <span class="syn">for</span> loop when:</p>
 	<ul>
-		<li><b>The <i>for</i> loop</b>: This is the most common loop in JavaScript, and the one that offers the most control to the JavaScript programmer. Use this loop when:</li>
-
-		<li>You know in advance how many times you want the loop to repeat, and</li> 
-		<li>You want the loop condition tested before the loop runs.</li>
-
-		<li><b>The <i>while</i> loop</b>: This is JavaScript's simplest loop structure. Use a <i>while</i> loop when:</li>
-
-		<li>You don't know in advance how many times you want the loop to repeat, but</li>
-
-		<li>You want the loop condition tested before the loop runs.</li>
-
-		<li><b>The <i>do-while</i> loop</b>: A variation on the <i>while</i> loop. Use this loop when:</li>
-
-		<li>You don't know in advance how many times you want the loop to repeat, and</li>
-
-		<li>You don't want the loop condition tested before the loop runs.</li>
-
-		<li>Unlike the similar-sounding <i>while</i> loop the <i>do..</i><i>while</i> loop is always performed at least once, because JavaScript tests the required condition only after the first loop occurrence.</li>
-
+		<li>You know in advance how many times you want the loop to repeat, and</li>
+		<li>You want the loop condition tested <i>before</i> the loop runs.</li>
 	</ul>
+	
+	<h3 id="about-while-loop">The <span>while</span> loop</h3>
+	<p>This is JavaScript’s simplest loop structure. Use a <span class="syn">while</span> loop when:</p>
+	<ul>
+		<li>You don’t know in advance how many times you want the loop to repeat, but</li>
+		<li>You want the loop condition tested <i>before</i> the loop runs.</li>
+	</ul>
+	
+	<h3 id="about-while-do-loop">The <span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop</h3>
+	<p>A variation on the <span class="syn">while</span> loop. Use this loop when:</p>
+	<ul>
+		<li>You don’t know in advance how many times you want the loop to repeat, and</li>
+		<li>You don’t want the loop condition tested before the loop runs.</li>
+	</ul>
+		
+	<p>Unlike the similar-sounding <span class="syn">while</span> loop, the <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while loop</span> is always performed at least once, because JavaScript tests the required condition only <i>after</i> the first loop is run.</p>
+	
 
 	<p class="defhead">JavaScript Loop</p>
 
 	<p class="deftext">A script that performs a statement or series of statements repeatedly until a certain condition is satisfied. The loop then stops and the next statement in the script after the loop is performed.</p>
 
-</section>
 
-<section id="loop-conditions">
-	<h3>About Loop Conditions</h3>
+	<h3 id="loop-conditions">About loop conditions</h3>
 
-	<p>Every loop type contains some kind of condition statement. As with the <i>if</i> command, condition statements in loops include comparison operators such as greater than (&gt;) and equal to (==).</p>
+	<p>Every loop type contains some type of condition statement. As with the <span class="syn">if</span> command, condition statements in loops include comparison operators such as greater than (<b>&gt;</b>) or equal to (<b>==</b>).</p>
 
 	<ul>
 		<li>When the condition is tested and satisfied, the loop runs.</li>
-		<li>After every time that the loop runs, it tests the condition again. The loop will keep repeating until the condition is no longer satisfied.</li>
+		<li>After every time that the loop runs, it tests the condition again.</li>
+			
+		<li>The loop will keep repeating until the condition is no longer satisfied.</li>
 	</ul>
 
 	<p>Before discovering more about these loop types and putting your knowledge in practice, you need to learn about two new assignment operators: increment (++) and decrement (--).</p>
 
-</section>
 
+	<h3 id="increment-decrement">About the increment and decrement operators</h3>
 
-<section id="increment-decrement">
-
-	<h3>About the Increment and Decrement Operators</h3>
-
-	<p>In programming the word 'increment' means 'make larger by one' and its converse of 'decrement' means 'make smaller by one'. You have met only one type of assignment operator so far, an example of which is shown below. </p>
+	<p>In programming, the word 'increment' means 'make larger by one' and its converse of 'decrement' means 'make smaller by one'. You have met only one type of assignment operator so far, an example of which is shown below. </p>
 
 <pre class="language-html">
 myvar = 42;
 </pre>
 
-	<p>As you can see it has two terms, one on each side of the equals (=) sign. Below are examples of the increment and decrement operators. These contain only a single term and do not require an equals sign.</p>
+	<p>As you can see, it has two terms, one on each side of the equals (=) sign. Below are examples of the increment and decrement operators. These contain only a single term and do not require an equals sign.</p>
 
 <pre class="language-html">
+// This has the same effect as writing firstNumber = firstNumber + 1
 firstNumber++;
-/* Above has the same effect as writing firstNumber = firstNumber + 1 */
+
+// This has the same effect as writing firstNumber = firstNumber - 1 */
 secondNumber--;
-/* Above has the same effect as writing firstNumber = firstNumber - 1 */
 </pre>
 
-	<p>These operators work only with numeric variables. They are really just a convenient shorthand notation. Now let's move on to the <i>for</i> looping structure.</p>
+	<p>These operators work only with numeric variables and are really just a convenient shorthand notation. Now let's move on to the <span class="syn">for</span> loop structure.</p>
 
 </section>
 
 
 <section id="for-loop-structure">
 
-	<h2>The <i>for</i> Loop Structure</h2>
+	<h2>The <span>for</span> loop structure</h2>
 
-	<p>A basic <i>for</i> loop in JavaScript would look as shown below.</p>
+	<p>A basic <span class="syn">for</span> loop in JavaScript would look as shown below.</p>
 
 <pre class="language-html">
-for (i=1;i&lt;=5;i++) {
-    <i>perform instruction(s );</i>
+for (i = 1; i&lt;= 5; i++) {
+    <i>perform instruction(s);</i>
 }</pre>
 
 	<p>Let's examine each element in detail.</p>
 
 	<ul>
-		<li><b>for</b>: Always type 'for', not 'FOR' of 'For'. The <i>for</i> command name is case sensitive.</li>
+		<li><b>for</b>: Always type 'for', not 'FOR' of 'For'. The <span class="syn">for</span> command name is case sensitive.</li>
 
-		<li><b>i</b>: Every loop has a <i>counter variable</i> 		that keeps track of how many times the loop has been performed. By convention, the counter variable is designated by the lower-case letter 'i'. Some programmers prefer the letter 'n', while others use the word 'count' or 'counter'.</li>
+		<li><b>i</b>: Every loop has a <i>counter variable</i> 		that keeps track of how many times the loop has been performed. By convention, the counter variable is designated by the lower-case letter 'i'. Some developers prefer the letter 'n', while others use the word 'count' or 'counter'.</li>
 
-		<li><b>i=1</b>: The loop has to start somewhere. In this example the starting point is when the counter variable has a value of 1. It could also be 12, 56 or -78.</li>
+		<li><b>i = 1</b>: The loop has to start somewhere. In this example, the starting point is when the counter variable has a value of 1. It could also be 12, 56 or -78.</li>
 
-		<li><b>i&lt;=5</b>: You don't want a loop to run indefinitely, so you set an upper limit. In this case, the loop stops when the counter variable reaches the number 5.</li>
+		<li><b>i &lt;= 5</b>: You don't want a loop to run indefinitely, so you set an upper limit. In this case, the loop stops when the counter variable reaches the number 5.</li>
 
 		<li><b>i++</b>: This tells JavaScript to add 1 repeatedly to the counter variable until the variable reaches the upper loop limit (in this case, 5). It does not have to be the increment operator. A loop can contain the decrement operator, i--.</li>
 
 	</ul>
 
-	<p>Programmers use a special term to describe the performance of a loop: iteration.</p>
+	<p>Developers use a special term to describe the performance of a loop: <i>iteration</i>.</p>
 
 	<p class="defhead">Iteration</p>
 
-	<p class="deftext">A single performance of a loop. If a loop runs fives it is said to have done five iterations.</p>
+	<p class="deftext">A single performance of a loop. If a loop runs five times, it is said to have performed five iterations.</p>
 
 	<p class="defhead">Loop Counter Variable</p>
 
-	<p class="deftext">The variable in a loop structure that keep track of how many loop iterations have been performed. The variable is typically named 'i'. Alternative names include 'n', 'count' or 'counter'.</p>
+	<p class="deftext">The variable in a loop structure that keeps track of how many loop iterations have been performed. The variable is typically named 'i'. Alternative names include 'n', 'count' or 'counter'.</p>
 
-	<p>In Exercise 8.1 you will create a simple <i>for</i> loop structure.</p>
+	<p>In Exercise 8.1, you will create a simple <span class="syn">for</span> loop structure.</p>
 
-	<h3>Exercise 8.1: Building a Simple <i>for</i> Loop</h3>
+	<h3 id="exercise-8-1">Exercise 8.1: Building a simple <span>for</span> loop</h3>
 
-	<p>Open the following file in your VS Code and web browser:</p>
+	<ol>
+	
+		<li>Open the following file in VS Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
 
-	<p><a href="assets/exercises/loops/exercise-8-1.html" target="_blank">exercise-8-1.html</a></p>
+	📄 &nbsp;&nbsp;<a href="exercises/8/exercise-8-1.html" 	target="_blank">exercise-8-1.html</a></li>
 
-	<p>After the opening &lt;script&gt; tag type the following <i>for</i> lop structure</p>
+	<li>After the opening <span class="syn">&lt;script&gt;</span> tag, type the following <span class="syn">for</span> loop structure.
 
 <pre class="language-html">
-&lt;scripts&gt;
-var i;
-for (i=1;i&lt;=5;i++)
-document.write(&quot;this is loop step number: &quot;+i+&quot;&lt;br&gt;&quot;);
-}</pre>
+let i;
+for (i = 1; i&lt;= 5; i++) {
+   document.write("This is loop step number: &lt;b&gt;"+i+"&lt;\/b&gt;.&lt;br&gt;");
+}</pre></li>
 
-	<p>Save your web page  and view it in your web browser.</p>
+	<li>Save your web page and view the result in your web browser.</li>
+
+</ol>
 
 	<p>The result should look as shown.</p>
 
-	<p><img src="assets/img/image124.jpg"></p>
+	<p><img src="assets/img/loops/8-1.png" alt="JavaScript" style="width: 600px"></p>
 
-	<p>Edit the loop code as shown below, reSave your web page, and refresh/reload your web browser. </p>
+	<p>Edit the loop code as follows, resave your web page, and reload your web browser. </p>
 
 <pre class="language-html">
-&lt;script&gt;
-for (var i=-1; i&gt;=-5;i--)
+for (i = -1; i&gt;= -5; i--)
 </pre>
 
-	<p>The result should look as shown. You can close the file when finished.</p>
+	<p>The result should look as shown.</p>
 
-	<p><img src="assets/img/image126.jpg"></p>
+	<p><img src="assets/img/loops/8-2.png" alt="JavaScript" style="width: 600px"></p>
 
-</section>
+	<p>You can close the <b>exercise-8-1.html</b> file when finished.</p>
 
-<section id="more-for-loop">
-	<h3>More About <i>for</i> Loops</h3>
 
-	<p>Here are three points to remember about the <i>for</i> loop structure in JavaScript:</p>
+	<h3 id="more-for-loops">More about <span>for</span> loops</h3>
+
+	<p>Here are three points to remember about the <span class="syn">for</span> loop structure in JavaScript:</p>
 
 	<ul>
-		<li><b>Initial and upper values</b>: Unlike the other two loop types, the initial and upper values of a <i>for</i> loop are included within the loop structure itself. These do not have to be literals, such as '3' or '-42'. They can also be variables whose values come from 
-		elsewhere in the script or from a user input. For example:
+		<li><b>Initial and upper values</b>: Unlike the other two loop types, the initial and upper values of a <span class="syn">for</span> loop are included within the loop structure itself. 
+		<span class="inside-ol">&nbsp;</span>
+		These do not have to be literals, such as '3' or '-42'. They can also be variables whose values come from elsewhere in the code or from a user input. For example:
 
 <pre class="language-html">
-for ( i=baseTemperature; i &lt;= userTemperature;i++);
+  for (i = baseTemperature; i &lt;= userTemperature; i++);
 </pre></li>
 
-	<li>In the Other two loop types, the initial and upper values are not including in the loop structure, but always come from other statements in the script.</li>
+	<li>In the other two loop types, the initial and upper values are not included in the loop structure, but always come from other statements in the script.</li>
 
-	<li><b>Curly braces</b>: The <i>for</i> loop does not require curly braches {} if the loop contains only a single instruction. You can include them if you want: they won't cause an error; they are just unnecessary. If the loop contains multiple instructions they must be enclosed within curly braces. 
+	<li><b>Curly braces</b>: The <span class="syn">for</span> loop does not require curly braches <b>{ }</b> if the loop contains only a single instruction. You can include them if you want: they won't cause an error; they are just unnecessary. 
+	<span class="inside-ol">&nbsp;</span>
+	If the loop contains multiple instructions, however, they must be enclosed within curly braces. 
 
 
 <pre class="language-html">
-for ( var i=1;
-i&lt;=5;i++) {
-document.write(&quot;this is the loop step number: &quot;+i+&quot;&lt;br&gt;&quot;);
-document.write(&quot;this is the loop step multiplied by 4: &quot;+i*4+&quot;&lt;br&gt;&quot;);
-document.write(&quot;this is the loop step divided by 2: &quot;+i/2+&quot;&lt;br&gt;&quot;);
-document.write(&quot;Still looping&lt;br&gt;&quot;);
-}</pre>
-By convention loop statements are indented. This is for one reason only: to make them easier to read.</li>
+ for (i = 1; i&lt;= 5; i++) {
+   document.write("this is the loop step number: "+i+"&lt;br&gt;");
+   document.write("this is the loop step multiplied by 4: "+i*4+"&lt;br&gt;");   
+   document.write("this is the loop step divided by 2: "+i/2+"&lt;br&gt;");
+   document.write("Still looping&lt;br&gt;");
+}</pre></li>
+
+<li><b>Indentation</b>: By convention, loop statements are indented. This is for one reason only: to make them easier to read.</li>
 
 	<li><b>Statement terminator</b>: Do not type a semi-colon after the loop condition as shown below. This will produce an error.</li>
 </ul>
 
-	<p>The general syntax of a <i>for</i> loop is shown below.</p>
+	<p>The general syntax of a <span class="syn">for</span> loop is shown below.</p>
 
 <pre class="language-html">
-for (initialisation;condition statement;countef variable update) {
-<i>statements(s) containing counter variable;�</i>
+for (initialisation; condition statement; counter variable update) {
+   <i>statements(s) containing counter variable;</i>
 }</pre>
 
-	<p>In Exercise 8.2 you will create a simple <i>for</i> loop in which the number of iterations is not a fixed literal by a variable value input by the web page visitor.</p>
+	<p>In Exercise 8.2, you will create a simple <span class="syn">for</span> loop in which the number of iterations is not a fixed literal but a variable value input by the web page visitor.</p>
 
-	<h3>Exercise 8.2: Building a User-controlled <i>for</i> Loop</h3>
+	<h3 id="exercise-8-2">Exercise 8.2: Building a user-controlled <span class="syn">for</span> loop</h3>
+	<ol>
 
-	<p>Open the following file in your VS Code and web browser:</p>
+	<li>Open the following file in VS Code and your web browser:
+	<span class="inside-ol">&nbsp;</span>
 
-	<p><a href="assets/exercises/loops/exercise-8-2.html" target="_blank">exercise-8-2.html</a></p>
+	📄 &nbsp;&nbsp;<a href="exercises/8/exercise-8-2.html" target="_blank">exercise-8-2.html</a>
+	<span class="inside-ol">&nbsp;</span>
+	It is similar to the incrementing loop that you worked on in the previous exercise.</li>
 
-	<p>It is similar to the incrementing loop that you worked on in the previous exercise.</p>
-
-	<p>After the opening &lt;script&gt; tag type the following window.prompt() statement on a single line.</p>
-
-<pre class="language-html">
-var userCount = window.prompt(&quot;Please enter your desired number of loop steps&quot;,&quot;&quot;);
-</pre>
-
-	<p>Edit the loop command as follows.</p>
+	<li>After the opening <span class="syn">&lt;script&gt;</span> tag, insert the following <span class="syn">window.prompt()</span> statement on a single line.
 
 <pre class="language-html">
-for (var i=1;i&lt;=userCount;i++)
-</pre>
+let userCount = window.prompt("Please enter your desired number of loop iterations.");</pre></li>
 
-	<p>Save your web page  and view it in your web browser.</p>
+	<li>Next, edit the loop code as follows.
 
-	<p>Type a positive number in the window.prompt() box, click <b>OK</b> and view the output in the web browser window. You can close the file when finished.</p>
+<pre class="language-html">
+for (let i = 1; i&lt;= userCount; i++)</pre></li>
 
-	<img src="assets/img/image128.jpg">
+	<li>Save your web page and display it in your web browser.</li>
+</ol>
 
-	<img src="assets/img/image130.jpg">
+	<p>Type a (small) positive number in the window.prompt() box, click <b>OK</b> and view the output in the web browser window.</p>
+
+	<p><img src="assets/img/loops/8-3.png" alt="JavaScript" style="width: 600px"></p>
+
+	<p>You can close the <b>exercise-8-2.html</b> file when finished.</p>
+
 
 </section>
 
-<section id="chapter-summary">
 
+<section>
 
-	<h2>Chapter Summary</h2>
+	<h2 id="while-loop-structure">The <span>while</span> loop structure</h2>
 
-	<p>A <i>loop</i> is a script that performs a statement or series of statements repeatedly until a certain condition is satisfied. The loop then stops and the next statement in the script after the loop is performed. A basic <i>for</i> loop in JavaScript looks as shown below.</p>
+	<p>This is the most basic loop in JavaScript. A simple <span class="syn">while</span> loop is shown below.</p>
 
 <pre class="language-html">
-for (i=1;i&lt;=5;i++) {
-<i>perform instruction(s );</i>
+ let i = 1;
+ while (i &lt; 5) 
+ {
+     perform instruction(s);
+     i++;
+ }</pre>
+
+<p>Let’s examine each element in detail.</p>
+
+<ul>
+	<li><b>i = 1</b>: Before running the loop the counter variable is set to an initial value. In this case it is 1, but it could also be 0, 410 or -20.
+	Note that the initial counter value is set outside the loop and not within it.</li>
+ 	
+	<li><b>while</b>: The while command name is case sensitive.</li>
+ 
+	<li><b>i &lt; 5</b>: This is the test condition, enclosed within parenthesis. Like for loops, the condition is tested before the loop is run.</li>
+ 	
+	<li><b>{ }</b>: The statements to be performed are enclosed within curly braces.</li>
+ 	
+	<li><b>i++</b>: The statement that increments (or decrements) the counter variable is enclosed within the curly braces.</li>
+
+	 </ul>
+
+
+<h3 id="exercise-8-3">Exercise 8.3: Building a simple <span>while</span> loop</h3>
+
+<ol>
+	<li>Open the following file in VS Code and your web browser:
+	<span class="inside-ol">&nbsp;</span>
+
+	📄 &nbsp;&nbsp;<a href="exercises/8/exercise-8-3.html" target="_blank">exercise-8-3.html</a></li>
+
+	<li>After the opening <span class="syn">&lt;script&gt;</span> tag, insert the following code.
+
+<pre class="language-html">
+ let i = 1;
+ while (i &lt;= 5) 
+ {
+    document.write("This is loop step number: &lt;b&gt;"+i+"&lt;\/b&gt;.&lt;br&gt;");
+    i++;
+ }</pre></li>
+
+	 <li>Save your file and view it in your web browser.
+ <span class="inside-ol">&nbsp;</span>
+
+The loop should run as shown below.
+
+<img src="assets/img/loops/8-4.png" alt="JavaScript" style="width: 600px">
+
+</li>
+ 
+ 
+<li>Edit the loop code as follows, so that the loop counter variable counts downwards rather than upwards.
+
+<pre class="language-html">
+ let i = 10;
+ while (i &gt;= 1) 
+ {
+    document.write("This is loop step number: &lt;b&gt;"+i+"&lt;\/b&gt;.&lt;br&gt;")
+    i--;
+ }</pre></li>
+ <li>Resave your file and reload your web browser.</li> 
+	
+</ol>
+
+<p>The result should look as shown below.</p>
+
+<img src="assets/img/loops/8-5.png" alt="JavaScript" style="width: 600px">
+
+
+<p>You can close the <b>exercise-8-3.html</b> file when finished.</p>
+
+<h3>More about <span>while</span> loops</h3>
+<p>Here are four points to remember about the <span class="syn">while</span> loop structure in JavaScript:</p>
+
+<ul>
+
+	<li><b>No initial value</b>: No start value of the counter variable is contained within the while loop structure. You must set this value in a preceding line of the script.</li>
+
+	<li><b>No upper value</b>: No ending value of the counter variable is contained within the <span class="syn">while</span> loop. Something must happen elsewhere in the script that causes the condition statement to become untrue at some point. Otherwise, the loop will run indefinitely.</li>
+
+	<li><b>Curly braces</b>: The statement(s) to be performed on each loop iteration are enclosed within curly braces { }. By convention, these statements are indented to make them easier to read.</li>
+
+	<li><b>Increment/decrement</b>: This is always the final instruction within the curly braces of a <span class="syn">while</span> loop.</li>
+
+</ul>
+
+<p>The general syntax of a <span class="syn">while</span> is as shown below.</p>
+
+<pre class="language-html">
+ while (condition statement) {
+    statements(s);
+    counter variable update;
+ }
+</pre>
+
+</section>
+
+
+<section id="do-while-loop-structure">
+	<h2>The <span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop structure</h2>
+
+<p>An important difference between <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> and <span class="syn">while</span> loops is that the condition test happens at the end of a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop rather than at the beginning. This means that a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop and the statements(s) it contains are always run at least once.</p>
+ 
+<p>A simple <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop is shown below.</p>
+
+<pre class="language-html">
+ let i = 1;
+ do
+ {
+      perform instruction(s);
+      i++;
+ }
+ while (i &lt;= 5);
+</pre>
+
+<p>Let’s examine each element in detail.</p>
+<ul>
+	<li><b>i = 1</b>: The counter variable is set to an initial value before the loop is run. It can be any number. The value is set outside the loop and not within it.</li>
+	<li><b>do</b>: The do command name is case sensitive.</li>
+	<li><b>{ }</b>: The statements to be performed are enclosed within curly braces.</li>
+	<li><b>i++</b>: The statement that increments (or decrements) the counter variable is enclosed within the curly braces.</li>
+	<li><b>while i &lt; 5</b>: This is the test condition, enclosed within parenthesis. Unlike for loops, the condition is not tested before the loop is run.</li>
+</ul>
+
+<p>In Exercise 8.4 you will create and modify a simple <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop.</p>
+
+
+<h3 id="exercise-8-4">Exercise 8:4: Building a simple <span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop</h3>
+<ol>
+	<li>Open the following file in VS Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
+	
+		📄 &nbsp;&nbsp;<a href="exercises/8/exercise-8-4.html" target="_blank">exercise-8-4.html</a></li>
+
+<li>After the opening <span class="syn">&lt;script&gt;</span> tag, insert the following code.
+
+<pre class="language-html">
+ let i = 1;
+ do
+ {
+    document.write("This is loop step: &lt;b&gt;"+i+"&lt;\/b&gt;.&lt;br&gt;");
+    i++;
+ }
+ while (i &lt;= 5);
+</pre>
+</li>
+
+ <li>Save your file and view it in your web browser. The loop should run as shown below.
+	<img src="assets/img/loops/8-6.png" alt="JavaScript" style="width: 600px">
+
+ </li>
+ 
+ 
+<li>Edit the loop condition code as follows, so that the test condition is <i>never</i> met by the loop counter variable.
+
+<pre class="language-html">
+ while (i &lt; -10);
+</pre></li>
+
+<li>Resave your file and reload your web browser.</li>
+	
+</ol>
+
+<p>The result should look as shown below. </p>
+
+<img src="assets/img/loops/8-7.png" alt="JavaScript" style="width: 600px">
+	
+<p>You can see that the <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop still runs once. </p>
+
+<p>You can close the <b>exercise-8-4.html</b> file when finished.</p>
+ 
+
+<h3 id="do-while-more">More about <span>do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loops</h3>
+<p>Here are five points to remember about the <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop structure in JavaScript:</p>
+
+<ul>
+	<li><b>No initial value</b>: No start value of the counter variable is contained within the <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop structure. You must set this value in a preceding line of the script.</li>
+	<li><b>No upper value</b>: No ending value of the counter variable is contained within the <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop. Something must happen elsewhere in the script to causes the condition statement to become untrue at some point. Otherwise, the loop will run indefinitely.</li>
+	<li><b>Curly braces</b>: The statement(s) to be performed on each loop iteration are enclosed within curly braces {}. By convention, these statement are indented to make them easier to read.</li>
+	<li><b>Increment/decrement</b>: This is always the final instruction within the curly braces of a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop.</li>
+	<li><b>Condition statement</b>: This is located at the lend of the loop, with the result that the loop and its statements(s) are <i>always run at least once</i>.</li>
+</ul>
+
+<p>The general syntax of a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop is as shown below.</p>
+
+<pre class="language-html">
+ do
+ {
+       statements(s);
+       counter variable update;
+ }
+ while (condition statement)
+</pre>
+
+<p>Here are a <span class="syn">while</span> and a <span class="syn">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop shown side by side. You can see that one is essentially the other turned upside down.
+<img src="assets/img/loops/8-8.png" alt="JavaScript" style="width: 700px">
+</p>
+
+</section>
+
+<section>
+
+<h2>Interrupting loops with <span>break</span> and <span>continue</span></h2>
+
+<p>All three JavaScript loops can include <span class="syn">break</span> and/or <span class="syn">continue</span> commands with the ability to interrupt loops when the counter variables reach a certain value. </p>
+
+
+
+<h3 id="break-command">About the <span>break</span> command</h3>
+<p>The <span class="syn">break</span> command sends the following message to JavaScript: </p>
+
+<p><i>When the counter variable reaches a specified value, exit the loop, and move on the next statement in the script after the loop.</i></p>
+
+<p>The loops below run only when the counter variable has values of 1, 2 and 3. When the counter variable reaches a value of 4, the loops stop.</p>
+
+<img src="assets/img/loops/8-9.png" alt="JavaScript">
+
+<p>The <span class="syn">break</span> command comes <i>before</i> the statement that is performed within the loop – in these three examples, a simple <span class="syn">document.write()</span> statement.</p>
+
+<p>All three interrupted loops generate the following output in a web browser window.</p>
+
+<h3 id="continue-command">About the <span>continue</span> command</h3>
+
+<p>The <span class="syn">continue</span> command also interrupts the running of a loop, but the message it sends to JavaScript is slightly different:</p>
+
+<p><i>When the counter variable reaches a specified value, don’t perform the statement(s) in the loop, but return to the top of the loop as if all the statements have been performed.</i></p>
+
+<p>The loop then continues on as normal. You typically use the <span class="syn">continue</span> command to handle special or exceptional values of the counter variable.</p>
+
+<p>The loops below run only when the counter variable has values of 1, 2, 3 and 5. When the counter variable reaches a value of 4, the loops stop, return to the top, and then continues on.</p>
+
+<img src="assets/img/loops/8-10.png" alt="JavaScript">
+
+<p>Compare the position of the <span class="syn">break</span> and <span class="syn">continue</span> commands within the three different loop types.</p>
+
+<ul>
+	<li><b>for</b>: The <span class="syn">break</span> and <span class="syn">continue</span> commands are located at similar locations &#8212; before the loop statements. 
+	<span class="inside-ol">&nbsp;</span>
+	It is easy to see why. The break and continue conditions are tested <i>before</i> the loop statements are run.</li>
+
+	<li><b>while</b> and <b>do&#8230;while loops</b>: The <span class="syn">break</span> and <span class="syn">continue</span> commands are located at similar locations &#8212; before the loop statements.
+	<span class="inside-ol">&nbsp;</span>
+	But when the <span class="syn">continue</span> command is present in either loop type, the update counter variable statement (i++) is the first rather than the last statement within the curly braces.
+	<span class="inside-ol">&nbsp;</span>To compensate, the initial value is 0 rather than 1, and the upper value is 4 rather than 5.</li>
+</ul>
+
+<p>For example, consider a <span class="syn">for</span> loop that counts from 1 to 20. Number 13 is considered unlucky. In Exercise 8.5, your task is to amend such a loop so that it skips the 13th iteration and restarts at number 14.</p>
+
+
+<h3 id="exercise-8-5">Exercise 8.5: Skipping unlucky number 13</h3>
+
+<ol>
+	<li>Open the following file in VS Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
+	
+		📄 &nbsp;&nbsp;<a href="exercises/8/exercise-8-5.html" target="_blank">exercise-8-5.html</a></li>
+
+		<li>Within the <span class="syn">script</span> tag pair, you can see a basic <span class="syn">for</span> loop that begins at 1 and terminates at 20.
+
+		<img src="assets/img/loops/8-11.png" style="max-width: 660px" alt="JavaScript"></li>
+
+		<li>Edit the loop code as shown below.
+
+<pre class="language-html">
+for (let i = 1; i &lt;= 20; i++) {
+   if (i==13)
+   continue;
+   document.write("&lt;b&gt;"+i+"&lt;\/b&gt; | ");
+}</pre></li>
+
+ <li>Save your file and view it in your web browser.</li>
+ 
+</ol>
+
+<p>The loop should run as shown below.</p>
+	
+<p><img src="assets/img/loops/8-12.png" style="max-width: 660px" alt="JavaScript"></p>
+
+<p>You can close the <b>exercise-8-5.html</b> file when finished.</p>
+
+</section>
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/loops/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/loops/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/8/exercise-8-1.html<br>
+	https://username.github.io/javascript/exercises/8/exercise-8-2.html<br>
+	https://username.github.io/javascript/exercises/8/exercise-8-3.html<br>
+	https://username.github.io/javascript/exercises/8/exercise-8-4.html<br>
+	https://username.github.io/javascript/exercises/8/exercise-8-5.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+
+
+<section id="lesson-summary">
+
+
+	<h2>Lesson Summary</h2>
+
+	<p>A <i>loop</i> is a script that performs a statement or series of statements repeatedly until a certain condition is satisfied. The loop then stops and the next statement in the script after the loop is performed. A basic <span class="syn">for</span> loop in JavaScript looks as shown below.</p>
+
+<pre class="language-html">
+for (i = 1; i&lt; = 5; i++) {
+   <i>perform instruction(s);</i>
 }</pre>
 
-	<p>Every loop has a <i>counter variable</i> (typically denoted y the letter 'i') that keeps track of how many times the loop has been performed, a starting or <i>initial value</i>, an <i>upper limit</i>, and an <i>increment</i> (i++) or <i>decrement</i> (i--) operator that increases or decreases the loop counter variable by one on each <i>iteration</i> of the loop. The <i>for</i> loop does not require curly braches {} if the loop contains only a single instruction. If the loop contains multiple instructions they must be enclosed within curly braces.</p>
+	<p>Every loop has a <i>counter variable</i> (typically denoted by the letter 'i') that keeps track of how many times the loop has been performed, a starting or <i>initial value</i>, an <i>upper limit</i>, and an <i>increment</i> (<b>i++</b>) or <i>decrement</i> (<b>i--</b>) operator that increases or decreases the loop counter variable by one on each <i>iteration</i> of the loop.</p>
 
 	<p>In each loop the initial loop counter value is set outside the loop and not within it. The test condition is enclosed within parenthesis, the statement(s) to be performed are enclosed within curly braces, as is the increment or decrement operator. </p>
 
-	<p>All three JavaScript loops can include <i>break</i> and/or <i>continue</i> commands with the ability to interrupt loops when the counter variables reaches a certain value. The <i>break</i> command tells JavaScript that, when the counter variable reaches a specified value, to exit the loop, and move on the next statement in the script after the loop. The <i>break</i> command comes before the statement(s) that are performed within the loop.</p>
+	<p>All three JavaScript loops can include <span class="syn">break</span> and/or <span class="syn">continue</span> commands with the ability to interrupt loops when the counter variables reaches a certain value.</p>
+	
+	<p>The <span class="syn">break</span> command tells JavaScript that, when the counter variable reaches a specified value, to exit the loop, and move on the next statement in the script after the loop. The <span class="syn">break</span> command comes before the statement(s) that are performed within the loop.</p>
 
-	<p>The <i>continue</i> command also interrupts the running of a loop, but it the message it sends to JavaScript is slightly different: when the counter variable reaches a specified value, don't perform the statement(s) in the loop, but return to the top of the loop as if all the statements have been performed. The loop then continues on as normal. You typically use the <i>continue</i> 	command to handle special or exceptional values of the counter variable.</p>
+	<p>The <span class="syn">continue</span> command also interrupts the running of a loop, but it the message it sends to JavaScript is slightly different: when the counter variable reaches a specified value, don't perform the statement(s) in the loop, but return to the top of the loop as if all the statements have been performed. The loop then continues on as normal. You typically use the <span class="syn">continue</span>	command to handle special or exceptional values of the counter variable.</p>
 
+	<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
 
 </section>
 
