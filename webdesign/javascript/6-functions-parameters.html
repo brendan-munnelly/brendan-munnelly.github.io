@@ -1,0 +1,554 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Functions with Parameters | Web Design & Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Tutorial from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Tutorials">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron tutorial">
+	<h3><a href="../index.html" title="All Web Tutorials">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Functions with Parameters</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+<h3>Objectives</h3>
+
+<p>In this Tutorial you will learn how to:</p>
+
+<ul>
+	<li>Pass one or more parameters to a function</li>
+	<li>Return a value back from a function to the statement that called it.</li>
+</ul>
+
+<p>In this Tutorial, you will meet the following terms:</p>
+
+<ul>
+	<li>Function parameter</li>
+	<li>Function argument</li>
+</ul>
+
+<h3>Exercise Files</h3>
+
+<p>In this Tutorial you will work with the following HTML files:</p>
+
+<ul>
+	<li><a href="exercises/6/exercise-6-1.html" target="_blank">exercise-6-1.html</a></li>
+	<li><a href="exercises/6/exercise-6-2.html" target="_blank">exercise-6-2.html</a></li>
+</ul>
+
+<p>Download the compressed file below and copy it to your <b>websites/javascript/exercises</b> sub-folder.</p>
+
+<p>📄 &nbsp;&nbsp;<a href="6.zip">6.zip</a></p>
+
+<p>Unzip the two files it contains into a sub-folder named <b>/6</b>.</p>
+
+<img src="assets/img/functions-advanced/unzip.png" alt="JavaScript">
+</section>
+
+<section>
+
+
+<h2>Functions that need parameters</h2>
+
+<p>Sometimes you will want to a function to perform a task that requires some 'raw material'. Providing information to a function that is then manipulated in some way is known in JavaScript terms as <i>passing a parameter</i> to a function. A function may be designed to accept several parameters.</p>
+
+<p>For, example the 'sumTwoNumbers' function below accepts two parameters, which it then adds together.</p>
+
+<pre class="language-html">
+function sumTwoNumbers(x,y) {
+   z = x + y;
+   console.log("Result: "+z)
+}</pre>
+
+<p>As you can see, the function definition includes the names of the parameters within brackets. When a function accepts multiple parameters, they are separated by commas.</p>
+
+<p class="defhead">Function Parameter</p>
+
+<p class="deftext">Information that is passed to a function for the function to work on. The function may use the information to perform a calculation, or to decide which of a number of possible instructions to perform.</p>
+
+<p>Note the following:</p>
+
+<ul>
+	<li>The parameters <b>x</b> and <b>y</b> are declared within the function definition. But their variable type &#8211; such as string or numeric  &#8211; is not specified.</li>
+	<li>Also, a JavaScript function does not check the number of parameters passed to it from elsewhere in the code.</li>
+</ul>
+
+<p>Such a function would be called or <i>invoked</i> elsewhere in the code as follows:</p>
+
+<pre class="language-html">
+sumTwoNumbers(2,4);
+</pre>
+
+<p>Copy the following lines to the Console tab of your browser DevTools and verify it runs correctly:</p>
+
+<pre class="language-html">
+// Function definition
+function sumTwoNumbers(x,y) {
+   z = x + y;
+   console.log("Result: "+z)
+}
+// Function call
+sumTwoNumbers(2,4);
+</pre>
+
+<p><img src="assets/img/functions-advanced/6-1.png"></p>
+
+<p>The function declaration can be located either above (before) or below (after) the call to the function. So this code will run without error.</p>
+
+<pre class="language-html">
+// Function call
+sumTwoNumbers(2,4);
+// Function definition
+function sumTwoNumbers(x,y) {
+   z = x + y;
+   console.log("Result: "+y)
+}
+</pre>
+
+<p class="defhead">Function Argument</p>
+
+<p class="deftext">The particular value of the parameter passed to a function when the function is called. If a JavaScript function changes an argument's value, the value of the parameter outside the function does not change.</p>
+
+<p>If required, you can assign a value to a parameter as part of the function declaration. For example:</p>
+
+<pre class="language-html">
+function sumTwoNumbers(x,y=4) {
+   z = x + y;	
+}</pre>
+
+<p>In summary, parameters (or 'formal' parameters) are defined as part of the function declaration. Arguments (or 'actual' parameters) are literal values that are passed to the function.</p>
+
+<p>6.1 provides an example of passing multiple parameters to a function that performs an arithmetic operation.</p>
+
+<h3>Exercise 6.1: Passing multiple parameters to a function</h3>
+
+<ol>
+
+	<li>Open the following file in VS Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
+		📄 &nbsp;&nbsp;<a href="exercises/6/exercise-6-1.html" target="_blank">exercise-6-1.html</a>
+	</li>
+
+	<li>You can see it contains three input fields (ids of <b>number-1</b>, <b>number-2</b> and <b>number-3</b>) and a 'box' created with a div HTML tag (id of <b>resultBox</b> ). 
+		<span class="inside-ol">&nbsp;</span>
+		There is also a button that displays as 'Find Average'.</li>
+
+	<li>In VS Code, just after the opening <span class="syn">script</span> tag, add an <b>onclick</b> event handler to the button to connects it to a function with the name <b>doCalc</b>.
+		
+<pre class="language-HTML">
+&lt;p&gt;&lt;button onclick="doCalc()"&gt;&lt;i class="fas fa-calculator"&gt;&lt;\/i&gt; Display Average&lt;/button&gt;&lt;\/p&gt;  </pre></li>
+
+<li>Next, add the following function to capture the user inputs, perform the arithmetic, and display the result.
+
+<pre class="language-HTML">
+function doCalc() {
+   // Assign user inputs to variables
+   let x = parseFloat(document.getElementById("number-1").value);
+   let y = parseFloat(document.getElementById("number-2").value);
+   let z = parseFloat(document.getElementById("number-3").value);
+   // Calculate the average
+   let average = (x + y + z) / 3;
+   // Display result to user   
+   document.getElementById("resultBox").innerHTML = average;     
+}</pre></li>
+
+	<li>In VS Code, save the <b>exercise-6-1.html</b> file, reload it in your web browser, and verify that the code runs correctly.
+	
+	<img src="assets/img/functions-advanced/6-ex-1.png" alt="JavaScript">
+	</li>
+</ol>
+
+	<p>Let's update the code in a number of ways.</p>
+
+	<ol>
+		<li>Remove the event handler from the button and give the button on id of <b>btnCalc</b> 
+<pre class="language-HTML">
+&lt;p&gt;&lt;button id="btnCalc"&gt;&lt;i class="fas fa-calculator"&gt;&lt;/i&gt; Display Average&lt;/button&gt;&lt;/p&gt;  
+</pre></li>
+
+		<li>Just after the opening <span class="syn">script</span> tag, add the following event listener.
+<pre class="language-HTML">
+document.getElementById("btnCalc").addEventListener('click', doCalc);
+</pre></li>		
+
+		<li>Save the <b>exercise-6-1.html</b> file, reload it in your web browser, and verify that the code still runs correctly.</li>			
+	</ol>
+		
+	
+	<p>The second step is to separate the calculation of the average of three numbers into a second function.</p>
+
+	<ol>
+
+		<li>In VS Code, replace the current <b>doCalc()</b> function with two functions as shown below.
+			
+<pre class="language-HTML">
+function doCalc() {
+   // Assign user inputs to variables
+   let x = parseFloat(document.getElementById("number-1").value);
+   let y = parseFloat(document.getElementById("number-2").value);
+   let z = parseFloat(document.getElementById("number-3").value);
+   // Call the average function
+   getAverage(x,y,z);
+}
+
+function getAverage(x,y,z) {
+   // Calculate the average
+   let average = (x + y + z) / 3;
+   // Display result to user 
+   document.getElementById("resultBox").innerHTML = average;
+}</pre>			
+		It is now the second function, named <b>getAverage</b>, that calculates the average of the three numbers and assigns the output to the <b>resultBox</b> HTML element.</li>
+
+	<li>Save the <b>exercise-6-1.html</b> file, reload it in your web browser, and verify that the code still runs correctly.</li>
+
+</ol>
+
+<p>In Exercise 6.2, you will use a function to accepts a single parameter to minimise the amount of code needed to perform a simple task.</p>
+
+	<h3>Exercise 6.2: Passing a parameter to a function</h3>
+
+	<ol>
+
+	<li>Open the following file in VS Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
+		📄 &nbsp;&nbsp;<a href="exercises/6/exercise-6-2.html" target="_blank">exercise-6-2.html</a>
+	</li>
+
+	<li>It contains three buttons, with ids of <b>btn-red</b>, <b>btn-blue</b> and <b>btn-green</b>.
+
+	<span class="inside-ol">&nbsp;</span>		
+
+    Each button is linked, via an event listener, to one of three separate functions: <b>setBgRed<b>, <b>setBgBlue</b> and </b>setBgGreen</b>.
+	
+	<img src="assets/img/functions-advanced/6-ex-2.png" alt="JavaScript"></li>
+	
+    
+    <li>Click the three buttons to verify all three functions run without error.
+		<span class="inside-ol">&nbsp;</span>
+		Now we will make some updates to the code.
+	</li>
+
+    <li>First, replace the three functions with the following single function that accepts one parameter named <b>colorCode</b>.
+
+<pre class="language-html">
+function setBgColor(colorCode) {
+   document.getElementById("js-box").style.backgroundColor = colorCode;
+}</pre></li>
+
+<li>Next, edit the three event listeners as follows.
+<pre class="language-HTML">
+document.getElementById("btn-red").addEventListener('click', function() {
+	setBgColor('#ffb3c8')
+});
+	
+document.getElementById("btn-green").addEventListener('click', function() {
+	setBgColor('#ccffcc')
+});
+	
+document.getElementById("btn-blue").addEventListener('click', function() {
+	setBgColor('#e6ecff')
+});
+</pre></li>
+
+<li>Save the <b>exercise-6-2.html</b> file, reload it in your web browser, and verify that the code still runs correctly.</li>
+
+</ol>
+
+</section>
+
+
+<section>
+
+
+<h2>Functions that return values</h2>
+
+<p>You have seen how an event handler can pass a parameter to a function. The opposite is also true: a function can pass a value back to the place from which the function was called.</p>
+
+<p>This action is described as the function <i>returning a value</i>.</p>
+
+<p>Until now you have only called functions through event handlers such as <i>onclick</i> and onload. You can also call a function directly from a statement. The following two statements call two different functions.</p>
+
+<ul>
+	<li>The first function call does not pass a parameter.</li>
+	
+	<li>The second function call passes the parameter named 'temperature'.</li>
+</ul>
+
+<pre class="language-html">
+myvar = doSomething();
+temperature = updateNow(temperature);
+</pre>
+
+<p>Consider the following script in which a number is assigned to a variable and the variable's value to written to the browser console.</p>
+
+<p>The function, named <b>doubleIt()</b>, is then called and applied to the numeric variable, and its amended value is written to the browser console.</p>
+
+<pre class="language-html">
+// Assign number to variable
+let mynum = 24;
+
+// Write number to browser console
+console.log("Number is: "+mynum);
+
+// Call function to double the number
+mynum = doubleIt(mynum);
+
+// Output number to browser console 
+console.log("Number After doubleIt() function is applied: "+mynum);
+
+// Function to double the number 
+function doubleIt(mynum) {
+    mynum = mynum * 2;
+}
+</pre>
+
+
+<p>What happens when you copy and paste the doubleIt() function and the script that calls it to the browser console?</p>
+
+<img src="assets/img/functions-advanced/6-ex-3.png" alt="JavaScript">
+
+<p>The cause of the error is as follows: aftef the doubleIt() performs its instruction, there is no mechanism for the function to send back or 'return' its answer back to the code from which the function was called.</p>
+
+<p>You can correct this problem by insert a <i>return</i> command that sends the 'mynum' variable back to the calling script as shown below.</p>
+
+<pre class="language-html">
+function doubleIt(mynum) {
+    mynum = mynum * 2;
+    return mynum;
+}</pre>
+
+<p>Copy-and-paste the updated code below to your browser console and run the code.</p>
+
+<pre class="language-html">
+// Assign number to variable
+let mynum = 24;
+	
+// Write number to browser console
+console.log("Number is: "+mynum);
+	
+// Call function to double the number
+mynum = doubleIt(mynum);
+	
+// Output number to browser console 
+console.log("Number After doubleIt() function is applied: "+mynum);
+	
+// Function to double the number 
+function doubleIt(mynum) {
+   mynum = mynum * 2;
+   return mynum;
+}
+</pre>
+
+<p>The code should now run correctly as shown below.</p>
+<img src="assets/img/functions-advanced/6-ex-3.png" alt="JavaScript">
+
+<p>Another feature of the return command is that it halts any further execution of the function. That is, any instructions located after the return command in the function are ignored. </p>
+
+
+<!--
+	In the example below, only the firstwindow.alert() instruction is actually performed. JavaScript ignores the three otherwindow.alert() instructions because they occur after a return command.</p>
+
+<pre class="language-html">
+function hello() {
+    window.alert("Before return statement");
+    return;
+    window.alert("After return statement");
+    window.alert("Also after return statement");
+    window.alert("And another one after the return statement");
+}</pre>
+
+<p>Exercise 6.4 provides an example of function returning a value back to the script that called it.</p>
+
+
+<h3>Exercise 6.4: Returning a Value from a Function</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-4.html" target="_blank">exercise-6-4.html</a></p>
+
+<p>Examine the file in your VS Code. In the head section you can see a function that converts a temperature in Fahrenheit to its value in Celsius.</p>
+
+<pre class="language-html">
+function toCelsius(mytemp) {
+    mytemp = ((5/9) * mytemp ) - 32;
+}</pre>
+
+<p>Within the &lt;SCRIPT&gt; tag in the document body insert statements that assign a value for conversion, that call the conversion function, and that write the 'before' and 'after' temperature values to the browser window.</p>
+
+<pre class="language-html">
+var mytemp = 18;
+document.write("Temperature in Fahrenheit is: "+mytemp+"&amp;deg;&lt;br&gt;");
+
+mytemp = toCelsius(mytemp );
+document.write("Temperature in Celsius" "+mytemp+"&amp;deg;");
+</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+
+<p>The result should look as shown.
+The error arises from the fact that, although the function performs the temperature conversion correctly, it does not return the result back to the script that called it.</p>
+
+<p><img src="assets/img/functions-advanced/5.png"></p>
+
+<p>Insert a return command in the function as shown below.</p>
+
+<pre class="language-html">
+mytemp = ((5/9) * mytemp ) - 32;
+return mytemp;
+}</pre>
+
+<p>Resave your file, reload your web browser, and verify that the converted temperature value is returned correctly and displayed in the browser window. You can close the file when finished.</p>
+
+<p><img src="assets/img/functions-advanced/6.png"></p>
+
+-->
+</section>
+
+<!--
+<section >
+
+<h2>Calling functions with keyboard events</h2>
+
+<p>Mouse movements and clicks are not the only user actions that can call a function. Web page visitors can also call functions with key presses. The event handler is <i>onkeypress</i>, following by the ASCII code for the relevant key. There are two benefits from offering onkeypress event handlers on your web pages:</p>
+
+<ul>
+	<li><b>Speed of use</b>: It is generally faster for a user to perform an action by pressing a key than to reach for and move the mouse.</li>
+
+	<li><b>Accessibility</b>: Keyboard-based actions make your web pages more accessible to users with disabilities.</li>
+</ul>
+
+<p>In Exercise 6.5 you will create a form that displays the code of whichever keys are pressed by the web page visitor.</p>
+
+<h3>Exercise 6.5: Displaying keypress events</h3>
+
+<p>Open the following file in your VS Code and web browser:</p>
+
+<p><a href="exercises/6/exercise-6-5.html" target="_blank">exercise-6-5.html</a></p>
+
+<p>In the document body is a form named 'form1' that contains a single-line text box called 'text1'. Attached to the text box is an onkeypress event handler that calls the userPress() function.</p>
+
+<p>Within the &lt;script&gt; tag in the document head insert the following statements.</p>
+
+<pre class="language-html">
+function userPress() {
+    userkey=window.event.keyCode;
+    document.forms.form1.text1.value="You pressed the "+userkey+"key"
+}</pre>
+
+<p>Save your web page and reload your web browser.</p>
+
+
+<p>Press a number of keys in turn. In the form's text box you can see the letter, number or symbol that you typed, along with the corresponding ASCII keycode. The result should look as shown. You can close the file when finished.</p>
+
+<p>
+<img src="assets/img/functions-advanced/7.png"></p>
+
+
+</section>
+
+<section >
+
+-->
+
+
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/loops/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/loops/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/6/exercise-6-1.html<br>
+	https://username.github.io/javascript/exercises/6/exercise-6-2.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+
+
+<section>
+
+	<h2>Lesson Summary</h2>
+	
+	<p>Sometimes you will want to function to perform a task that requires some 'raw material'. Providing information to a function that is then manipulated in some way is known in JavaScript terms as <i>passing a parameter</i> to a function. A function may be designed to accept several parameters. The function may use the information to perform a calculation, or to decide which of a number of possible instructions to perform.</p>
+	
+	<p>You can pass <i>multiple literals</i> as parameters to a function, and a function's parenthesis can contain multiple variables. The only rule is this: The number of variables in the parenthesis of the function must <i>match</i> the number of literals in the event handler that calls the function.</p>
+	
+	<p>Event handlers are not the only way to call a function. You can also call a function directly from a statement. </p>
+	
+	<p>When a statement calls a function directly, there must be a mechanism for the function to send its result back to the location from which the function was called. JavaScript offers a <i>return</i> command for this purpose. An example is shown below.</p>
+	
+	<pre class="language-html">
+	function doubleIt(mynum) {
+		mynum = mynum* 2;
+		return mynum;
+	}</pre>
+	
+	<p>Another feature of the return command is that it halts any further execution of the function. That is, any instructions located after the return command in the function are ignored.</p>
+	
+	<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>
