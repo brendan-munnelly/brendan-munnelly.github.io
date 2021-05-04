@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Arrays | JavaScript Lessons | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Lesson from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Link to icons for Font Awesome 5 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Working with Arrays</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+<h3>Learning Goals</h3>
+
+<p>In this Lesson, you will learn how to:</p>
+
+<div class="box-goals">
+<ul>
+	<li>Declare an array</li>
+	<li>Populate an array with a series of comma-separated values on a <i>single</i> line</li>
+	<li>Populate an array with a list of values and index numbers on <i>multiple</i> lines.</li>
+	<li>Access the value a particular element in an array</li>
+	<li>Use a <span class="syn">for</span> loop to read all the elements of an array</li>
+	<li>Find the length of an array</li>
+	<li>Use the length property of an array as the upper limit of the counter variable in a <span class="syn">for</span> loop</li>
+	<li>Add, modify and delete individual array elements</li>
+    <!--	<li>Sort and reverse array elements</li>
+	<li>Convert an array to a string variable</li> -->
+</ul>
+</div>
+
+<p>In this Lesson, you will meet the following term:</p>
+
+<ul>
+	<li>Array</li>
+</ul>
+
+<h3>Exercise Files</h3>
+
+<p>In this Lesson, you will work with the following HTML files:</p>
+
+<ul>
+	<li><a href="exercises/9/exercise-9-1.html" target="_blank">exercise-9-1.html</a></li>
+	<li><a href="exercises/9/exercise-9-2.html" target="_blank">exercise-9-2.html</a></li>
+    <li><a href="exercises/9/exercise-9-3.html" target="_blank">exercise-9-3.html</a></li>
+
+    <!--
+	<li><a href="exercises/9/exercise-9-4.html" target="_blank">exercise-9-4.html</a></li>
+	<li><a href="exercises/9/exercise-9-5.html" target="_blank">exercise_9-5.html</a></li>
+	<li><a href="exercises/9/exercise-9-6.html" target="_blank">exercise-9-6.html</a></li>
+
+    -->
+</ul>
+
+<p>Download the compressed file below and copy it to your <b>websites/javascript/exercises</b> sub-folder.</p>
+
+<p>📄 &nbsp;&nbsp;<a href="9.zip">9.zip</a></p>
+
+<p>Unzip the six files it contains into a sub-folder named <b>/9</b>.</p>
+
+<img src="assets/img/functions-advanced/unzip.png" alt="JavaScript">
+</section>
+
+
+<section>
+
+    <h2>Arrays: When variables are not enough</h2>
+    <p>A variable, as you have learnt, can store a value that may change over time. Think of a variable as a box, in which you can place a single value. At any stage in the script you can change the value in the box. A variable can be declared, and a value assigned to it, in a single statement as shown below.</p>
+
+<pre class="language-HTML">let userName = “Bridget”;</pre>
+
+    <p>You can think of this variable as a single-compartment box that contains just one value.</p>
+
+    <img src="assets/img/arrays/9-1.png" alt="Arrays" style="max-width:500px">
+
+    <p>But suppose you want to store several values in a box? You need a different kind of box: an <i>array</i>. You can declare and assign several values to an array as follows.</p>
+
+<pre class="language-HTML">
+let userNames = new Array ("Bridget","Carol","Christine","Deborah");
+</pre>
+
+<p>The individual <i>array elements</i> are separated by commas. You can also include single blank spaces after the commas as shown below.</p>
+
+<pre class="language-HTML">let userNames = new Array ("Bridget", "Carol", "Christine", "Deborah");</pre>
+
+    <p>This array or multi-compartment box has four values.</p>
+
+    <img src="assets/img/arrays/9-2.png" alt="Arrays" style="max-width:500px">
+
+    <p>Each array element has an identifying number known as an <i>index</i>. Index values always begin at zero. An array with 4 elements, for example, has the following index values: <b>[0]</b>, <b>[1]</b>, <b>[2]</b> and <b>[3]</b>.</p>
+
+    <img src="assets/img/arrays/9-3.png" alt="Arrays" style="max-width:500px">
+
+    <p>You must follow the same rules when naming arrays as you do when naming variables:</p>
+
+    <ul>
+        <li>Do <i>not</i> use the same name for two different arrays within the same web page.</li>
+        <li>Do <i>not</i> insert spaces within array names.</li>
+        <li>To make array names easier to read, you can combine upper and lowercase letters.</li>
+        <li>Be aware that array names are case-sensitive: 'myArray' is <i>not</i> the same as 'myarray'.</li>
+    </ul>
+
+    <p>Assigning values to the elements of an array is known as <i>populating</i> the array.</p>
+
+    <p class="defhead">Array</p>
+    <p class="deftext">A variable that can hold multiple values. Array names follow the same rules as variable names. Each <i>element</i> in an array is identified by an <i>index number</i>, beginning with zero.</p>
+
+    <p>The benefit of using arrays is that you can manipulate a large range of values with just a single name and an index number. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+
+
+
+    <h3><span class="exercise-number">Exercise 9.1</span> Creating an array: single line method</h3>
+    <p>In this exercise, you will declare and populate an array using a series of comma-separated values on a single line. This is just one of the two methods of populating an array.</p>
+
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-1.html" target="_blank">exercise-9-1.html</a>
+        </li>
+
+        <li>In the empty <span class="syn">&lt;script&gt;</span> tag pair, declare a variable named 'authors', create an array with this name, and populate the array with six values as shown below.
+
+<pre>let authors;
+authors = new Array("Goddard","Grisham","Christie","Bryson","Heller","Jerome");    </pre></li>
+
+       <li>Save the <b>exercise-9-1.html</b> web page.</li>
+    </ol>
+
+    <p>A second method of populating an array is to write, on a series of different lines, each element's value and its associated index number. For example.</p>
+
+<pre class="language-html">let userNames = new Array;
+userNames[0] = "Bridget";
+userNames[1] = "Carol";
+userNames[2] = "Christine";
+userNames[3] = "Deborah";</pre>
+
+    <p>The two approaches produce the same result.</p>
+
+    <ul>
+        <li><b>Single line method</b>: For two or more arrays, one positioned beneath the other, the single-line method makes it easier to compare the different sets of array elements. An example is shown below.
+
+<pre class="language-html" style="text-indent:0">
+let fNames = new Array("John","Kylie","Elton","Dianna");
+let sNames = new Array("Lennon","Minogue","John","Ross");</pre></li>
+
+        <li><b>Multi-line method</b>: For a single array with a large number of elements, the multi-line method makes it easier to read which element is located at which index value.</li>
+    </ul>
+
+
+
+    <h3><span class="exercise-number">Exercise 9.2</span> Creating an array: multi-line method</h3>
+    <p>In this exercise, you declare and populate an array using the one-element, one-line method.</p>
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-2.html" target="_blank">exercise-9-2.html</a>
+        </li>
+
+        <li>In the empty <span class="syn">&lt;script&gt;</span> tag pair, declare a variable named 'authors', create an array with this name, and populate the array with six values as shown below.
+<pre class="language-HTML">
+let authors;
+authors = new Array;
+authors[0] = "Goddard";
+authors[1] = "Grisham";
+authors[2] = "Christie";
+authors[3] = "Bryson";
+authors[4] = "Heller";
+authors[5] = "Jerome";</pre></li>
+
+        <li>Save the <b>exercise-9-2.html</b> web page.</li>
+    </ol>
+
+</section>
+
+
+
+<section>
+
+    <h2>Reading values from an array</h2>
+    <p>Now you know how to populate an array. But how do you read what’s stored in an array? There are two situations when you want to access or ‘get at’ array values:</p>
+
+    <ul>
+        <li>When you want to write the values to the browser window, perhaps with a <span class="syn">document.write()</span> statement.
+        <span class="inside-ol">&nbsp;</span>
+        The following example writes the 34th index value from the array named ‘email_addr’ to the browser window.
+<pre class="language-html">
+  document.write(“Email Address: "+email_addr[34]+"&lt;br&gt;");
+</pre></li>
+        
+        <li>To copy an element's value to variable, use an assignment statement such as the one shown below. 
+<pre class="language-html">
+  let customer21_id = customer_ids[21];
+</pre>
+    In the above example, the value of the 21st element in the array named 'customer_ids' is copied to the variable named 'customer_21'. The array remains unchanged.
+    <span class="inside-ol">&nbsp;</span>
+    Copying values from one array another to another is easy. Just use an assignment statement similar to the one below.
+<pre class="language-html">
+  new_films[46] = old_films[187];
+</pre>
+In this example, the value of the 187th element in the array named 'old_films' is copied to the 46th element of the array named 'new_films'.</li>
+    </ul>
+
+    <h3>Reading array values with loops</h3>
+    <p>Suppose your script contains an array named ‘fruit’ with six elements. You could write the values of the array’s six elements to the browser window with six separate <span class="syn">document.write()</span> statements as shown below.</p>
+
+<pre class="language-html">document.write("Array Element 0: "+fruit[0]+"&lt;br&gt;");
+document.write("Array Element 1: "+fruit[1]+"&lt;br&gt;");
+document.write("Array Element 2: "+fruit[2]+"&lt;br&gt;");
+document.write("Array Element 3: "+fruit[3]+"&lt;br&gt;");
+document.write("Array Element 4: "+fruit[4]+"&lt;br&gt;");
+document.write("Array Element 5: "+fruit[5]+"&lt;br&gt;");</pre>
+
+    <p>That's a lot of typing.</p>
+
+    <p>There is an easier way: use a <span class="syn">for</span> loop containing a single <span class="syn">document.write()</span> statement as shown below.</p>
+
+<pre class="language-html">for (i = 0; i &lt;= 5; i++) {
+   document.write("Array Element "+i+": "+fruit[i]+"&lt;br&gt;");
+}</pre>
+
+    <p>As you can see, there are six elements in the array. However, the initial value of the counter variable is set to 0 and the upper value is set to 5.</p>
+    
+    <p>This is because the array's index numbering runs from [0] to [5] and <i>not</i> from [1] to [6].</p>
+
+
+    <h3>The array length property</h3>
+
+    <p>To use a <span class="syn">for</span> loop to access all the values from an array, follow this simple rule:</p>
+    
+    <p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+    
+    <p>That way a <span class="syn">document.write()</span> statement is performed for each individual array element.</p>
+    
+    <p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+
+    <p>The solution is to use the <span class="syn">length</span> property of the array. This is the index number of the next empty element after highest occupied element in the array.</p>
+    
+    <p>The following statement assigns the length of the array named ‘towns’ to a variable called 'myVar'.</p>
+
+<pre class="language-html">myVar = towns.length;</pre>
+
+    <p>You can use an array <span class="syn">length</span> property as the upper limit of a <span class="syn">for</span> loop as follows.</p>
+
+<pre class="language-html">for (i=0; i &lt; fruit.length; i++) {
+   document.write(“Array element "+i+:"" fruit[i];
+}</pre>
+
+    <p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<b>&lt;</b>) and not 'less than or equal to' (<b>&lt;=</b>).</p> 
+        
+    <p>Why?</p>
+
+    <p>Because the array <span class="syn">length</span> is always one greater than the index number of the highest array element.</p>
+        
+    <p>For example, When an array has six elements, its index numbers run from [0] to [5], and its <span class="syn">length</span> property contains the value of 6.</p>
+
+    <h3><span class="exercise-number">Exercise 9.3</span> Reading array values with a <span>for</span> Loop</h3>
+    <p>In this exercise, you will use a <span class="syn">for</span> loop to write the elements of an array to a HTML table in a web browser window.</p>
+
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-3.html" target="_blank">exercise-9-3.html</a>
+        </li>
+
+        <li>You can see the array that you created and populated with six values from Exercise 9.2.</li>
+
+        <li>Beneath the final array population statement, add a single <span class="syn">document.write()</span> statement as shown below.
+<pre class="language-HTML">
+document.write(authors[0]");</pre></li>
+
+        <li>Save the HTML file and view it in your web browser. You should see the content of the first value in the array ("Goddard").
+        <img src="assets/img/arrays/9-4.png" alt="Arrays"></li>
+
+
+        <li>Next, rplace your single <span class="syn">document.write()</span> statement with a  <span class="syn">for</span> loop as follows.
+<pre class="language-html">
+for ( i = 0; i &lt= 5; i++ ) {
+    document.write("&lt;p&gt;"+authors[i]+"&lt;\/p&gt;");
+}</pre> </li>
+
+<li>Save the HTML file and view it in your web browser. It should now look as shown below. 
+    <img src="assets/img/arrays/9-5.png" alt="Arrays"></li>
+
+</ol>
+
+
+        <p>All done. You can close the <b>exercise-9-3.html</b> web page when finished.</p>
+
+</section>
+
+
+
+<section>
+
+    <h2>Assigning, modifying and deleting array values</h2>
+
+    <p>Up to now, you have populated array elements only at the time you created the array. But you can insert values into an array at any stage. The general syntax is as follows.</p>
+
+    <pre class="language-html">array_name[index_number] = element_value;</pre>
+
+    <p>The following code assigns the number 34 to the 20th index position of the array named myArray.</p>
+
+<pre class="language-html">myArray[20] = 34;</pre>
+
+    <p>You don't need to populate array elements in consecutive order, as in [0], [1], [2], [3], [4] and so on.</p>
+    
+    <p>Imagine that you have an array called 'userNames'. It contains 10 elements, indexed from [0] to [9]. The following three statements are all valid.</p>
+
+<pre class="language-html">userNames[10] = "Murphy";
+userNames[11] = "Jones";
+userNames[20] = "Collins";</pre>
+
+    <p>In other words, JavaScript allows you to have 'gaps' or unfilled elements in an array. An array with such <i>non-contiguous</i> values is said to be <i>sparsely populated</i>. JavaScript treats the value of an unfilled array element as <i>undefined</i>.</p>
+
+    <h3>Modifying array values</h3>
+
+    <p>You change the value of an array element in exactly the same way as you first assign a value to that element. If your 'userNames' array currently has values at index locations [8], [9] and [56], the following statements overwrite those values with the new ones.</p>
+
+<pre class="language-html">userNames[8] = "Harper";
+userNames[9] = "Wallace";
+userNames[56] = "Johnson";</pre>
+
+
+    <h3>Deleting array values</h3>
+    <p>You can remove the contents of an array element with the <span class="syn">delete</span> method.</p>
+
+<pre class="language-html">delete userNames[67];</pre>
+
+    <p>This does <i>not</i> actually delete the element from the array; it just sets its value as <i>undefined</i>. The <span class="syn">length</span> property of the array is unaffected.</p>
+
+</section>
+
+    <!--
+    <h3><span class="exercise-number">Exercise 9.4</span> Manipulating an array</h3>
+    
+    <p>In this exercise, you will add values to, modify and remove values from an array. In each case, you will note the effect of the operation on the array's <span class="syn">length</span> property.</p>
+
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-4.html" target="_blank">exercise-9-4.html</a>
+        </li>
+
+        <li>You can see the 'authors' array that you worked with in the previous exercises of this Lesson. 
+        <span class="inside-ol">&nbsp;</span>
+        After the array population statements is a <span class="syn">document.write()</span> statement that displays the array's length (strictly speaking, the current value of the array's <span class="syn">length</span> property) in the browser window. </li>
+
+        <li>After the <span class="syn">document.write()</span> statement, add the two new statements below. 
+<pre class="language-HTML">
+let aLength = authors.length;
+document.write("Top Element: &lt;b&gt;"+authors[aLength]+"&lt;\/b&gt;");</pre>          
+        The first declares a new variable 'aLength' and assigns to that variable the array's length. The second writes the value in that array element to the browser window.</li>
+
+        <li>Save the file and view it in your web browser.</li>
+    </ol>
+
+
+    <p class="defhead">Array length</p>
+
+    <p class="deftext">The property of an array that holds the index number of the <i>next</i> unfilled location after the currently highest or 'top' array element. In other words, array length is <i>one greater</i> than the index of the highest filled array element.</p>
+
+</section>
+
+<section>
+
+
+    <h2>Copying array values to a string</h2>
+
+    <p>You can copy all the elements of an array into a single string variable using the <span class="syn">join()</span> method. The syntax is as follows.</p>
+
+<pre class="language-html">myString = myArray.join('separator_character');</pre>
+
+    <p>If you omit the separator character, JavaScript separates the array elements in the string with commas. Here's a simple example:</p>
+
+<pre class="language-html">let aUserNames =   new Array("Smith","Higgins","Jones");
+let strUserNames = aUserNames.join;</pre>
+
+    <p>The result is a string variable with the following content:</p>
+    
+    <p>Smith,Higgins,Jones</p>
+
+    <p>Note that this operation places only a <i>copy</i> of the array's values in the string variable.</p>
+    
+    <p>The <span class="syn">join()</span> method does <i>not</i> affect original array.</p>
+
+
+    <h3><span class="exercise-number">Exercise 9.5</span> Copying array values to a string</h3>
+    
+    <p>In this exercise, you will copy an array's contents to a string variable and display the result in the web browser.</p>
+
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-5.html" target="_blank">exercise-9-5.html</a>
+        </li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li>Save the <b>exercise-9-5.html</b> file, reload it in your web browser, and verify that the code runs correctly.</li>
+
+    </ol>
+
+</section>
+
+
+
+<section>
+
+    <h2>Sorting the values of an array</h2>
+
+    <p>You cannot sort or rearrange an array’s elements in the same way as you can the rows in a spreadsheet.</p>
+    
+    <p>However, JavaScript does offer a <span class="syn">sort()</span> method that enables you to achieve a broadly similar effect.</p>
+    
+    <p>Array sorting in JavaScript is a two-step process:</p>
+
+    <ul>
+        <li>First, JavaScript copies the array's values to a string.</li>
+        <li>Second, JavaScript orders the string contents alphabetically.</li>
+    </ul>
+
+    <p>Here's a simple example:</p>
+
+<pre class="language-html">let UserNames = new Array("Smith","Higgins","Jones");
+let strUserNames = UserNames.sort();</pre>
+
+    
+    <h3><span class="exercise-number">Exercise 9.6</span> Copying array values to a sorted string</h3>
+
+    <ol>
+        <li class="space-below-extra">Open the following file in VS Code and your web browser:
+            <span class="inside-ol">&nbsp;</span>
+            📄 &nbsp;&nbsp;<a href="exercises/9/exercise-9-6.html" target="_blank">exercise-9-6.html</a>
+        </li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li>Save the <b>exercise-9-6.html</b> file, reload it in your web browser, and verify that the code runs correctly.</li>
+
+    </ol>
+
+
+    <p>The result is an alphabetically sorted string variable with the following content: "Jones,Higgins,Smith".</p>
+
+    <p>When the array contains numbers rather than text, the result of the sort() method will not be what you might expect. Consider the following example.</p>
+
+<pre class="language-html">let UserIDs = new Array(8,14,2,23);
+let strUserNames = UserNames.sort();</pre>
+
+    <p>The result is a string variable with the following content “14,2,23,8”. The reason for this is that the result of a <span class="syn">sort()</span> method operation is always a string variable, and 14 comes before 2 alphabetically.</p>
+
+    <p>In Exercise 5.6 you will apply the sort() method to two arrays, one containing strings and the other containing numbers, and output the results to the browser window.</p>
+
+
+</section>
+
+-->
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise files to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/loops/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/loops/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/9/exercise-9-1.html<br>
+	https://username.github.io/javascript/exercises/9/exercise-9-2.html<br>
+    https://username.github.io/javascript/exercises/9/exercise-9-3.html<br></b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+
+
+<section>
+
+	<h2>Lesson Summary</h2>
+	
+    <p>An <i>array</i> is a type of variable that can hold multiple values. Each element in an array is identified by an <i>index</i> number, beginning with zero. You can declare and assign several values to an array as follows.</p>
+
+<pre class="language-html">let userNames = new Array ("Bridget","Carol","Christine","Deborah");</pre>
+    
+    <p>The individual array <i>elements</i> are separated by commas. A second method of declaring and <i>populating</i> (assigning values to) an array is to write, on a series of different lines, each element’s value and its associated index number. For example.</p>
+    
+<pre class="language-html">
+let userNames = new Array;
+userNames[0] = "Bridget";
+userNames[1] = "Carol";
+userNames[2] = "Christine";
+userNames[3] = "Deborah";</pre>
+    
+    <p>You can write a value from an array element to the browser window with a statement such as the following.</p>
+    
+<pre class="language-html">document.write("Email Address: "+email_addr[34]+"&lt;br&gt;");</pre>
+    
+    <p>To assign an element’s value to a variable, use an assignment statement such as the one shown below.</p>
+    
+<pre class="language-html">let customer21_id = customer_ids[21];</pre>
+    
+    <p>Copying values from one array another to another is easy. Just use an assignment statement similar to the one below.</p>
+    
+<pre class="language-html">new_films[46] = old_films[187];</pre>
+    
+    <p>You can read all values from an array using a <span class="syn">for</span> loop such as that shown below.</p>
+    
+<pre class="language-html">for (i=0; i &lt;=5; i++)
+   document.write("Array Element "+i+": "+fruit[i]+"&lt;br&gt;");</pre>
+    
+    <p>You can use the <i>length</i> property of the array object as the upper value of the loop counter variable. This is the index number of the next empty element after highest non-empty element in the array as follows.</p>
+    
+<pre class="language-html">for (i=0; i &lt; fruit.length; i++)
+   document.write("Array element "+i+:" fruit[i];</pre>
+    
+    <p>Notice that the comparison operator for the upper value of the counter variable is ‘less than’ (<b>&lt;</b>) and not ‘less than or equal to’ (<b>&lt=</b>).</p>
+        
+    <p>This is because the array length is always one greater than the index number of the highest array element. When an array has six elements, its index numbers run from [0] to [5], and its length property contains the value of 6.</p>
+    
+    <p>You don’t need to populate array elements in consecutive order. JavaScript allows you to have ‘gaps’ or unfilled elements in an array. An array with such non-contiguous values is said to be <i>sparsely populated</i>. The value of an unfilled array element is ‘undefined’. You can remove the contents of an individual array element with the <i>delete</i> method.</p>
+    
+    <pre class="language-html">delete userNames[67];</pre>
+    
+    <p>This does <i>not</i> actually delete the element from the array; it just sets its value as ‘undefined’. The length of the array in unaffected.</p>
+    
+	<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>
