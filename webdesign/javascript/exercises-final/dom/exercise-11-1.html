@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Exercise: The DOM</title>
+    <meta name="description" content="JavaScript Exercise: The DOM">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Customise Bootstrap for practical grid layouts -->
+ 
+    <link rel="stylesheet" href="../assets/css/bootstrap-custom.css">
+    <style>
+        .container { padding-top: 40px }
+
+        section {
+            margin-top: 60px;
+            border:solid 1px yellow;
+            padding:20px;
+            background-color: lightyellow;
+            margin-bottom: 48px;
+            font-size: larger;
+            width: 110%;
+        }
+
+        main p { font-size: 22px }
+
+        #resultBox, #resultNum {
+            border: solid 1px green;
+            height: 40px;
+            background-color: #E7FFE7;
+            width: 280px;
+            padding: 3px 12px;
+        }
+       
+       #user-message {  background-color:  lightgreen }
+       .container-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-flow: row wrap;
+            align-items: flex-start;
+       }
+
+       .container-flex .col-2 { 
+        flex-grow: 1;
+        flex-basis: 47%;
+        background-color: red;
+        align-self:flex-start; }
+       
+        table#buttons { width: 100% }
+        table#buttons td { width: 50%; padding-bottom: 18px }
+        table#buttons td button { padding: 4px 10px; font-size: 18px }
+        table#buttons td button b { font-family: monospace }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="container col-md-8 offset-md-2">
+        <h1><b>Exercise 11-1</b>: The Document Object Model</h1>
+        <p>This script illustrates the DOM.</p>
+        
+        <section class="outer">
+
+        <h2 class="text-center">This is the first sub-heading</h2>
+
+        <p>Some paragraph text. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, laudantium aut minus aliquam consequatur quam laboriosam! Porro commodi totam quia. Maxime eveniet reprehenderit autem laboriosam ex fugit possimus, ullam enim?</p>
+
+        <h2 class="text-center">This is the second sub-heading</h2>
+
+        <p>Some paragraph more text. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, laudantium aut minus aliquam consequatur quam laboriosam! Porro commodi totam quia. Maxime eveniet reprehenderit autem laboriosam ex fugit possimus, ullam enim?</p>
+
+        <div id ="user-message"></div>
+
+    </section>
+
+    <table id="buttons">
+        <tr>
+            <td><button id="btn1">getElementById(<b>"id"</b>)</button></td>
+            <td><button id="btn2">document.querySelector(<b>"#id"</b>)</button></td> 
+        </tr>
+        <tr>
+            <td><button id="btn3">document.getElementsByTagName(<b>tag</b>)</button></td>
+            <td><button id="btn4">document.querySelectorAll(<b>tag</b>)</button></td>
+        </tr>
+        <tr>
+            <td><button id="btn5">document.querySelector(<b>tag</b>)</button></td>
+            <td>&nbsp;</td> 
+        </tr>
+        <tr>
+            <td><button id="btn6">document.getElementsByClassName(<b>"class"</b>)</button></td>
+            <td><button id="btn7">document.querySelectorAll(<b>".class"</b>)</button></td>
+        </tr>
+        <tr>
+            <td><button id="btn8">document.querySelector(<b>".class"</b>)</button></td>
+            <td>&nbsp;</td> 
+        </tr>
+    </table>
+
+
+    </div>
+
+    
+     <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+  
+    const allButtons = document.querySelectorAll("button");
+
+    for (let i = 0; i < allButtons.length; i++) {
+        allButtons[i].addEventListener("click", function() { doButtons() }
+        );
+    }
+
+    function doButtons() {
+        // get button id
+        const str = event.target.id.toString();
+        const id  = str.charAt(str.length-1);
+        showResponse(id);
+    }
+
+    function showResponse(id) {
+        if (id==="1") {
+            console.log("SELECTING BY UNIQUE ID");
+            let el_ID_1 = document.getElementById("user-message");
+            console.log("document.getElementById(): "+el_ID_1);
+        }
+
+        else if (id==="2") {
+            console.log("SELECTING BY UNIQUE ID");
+            let el_ID_2 = document.querySelector("#user-message"); 
+            console.log("document.querySelector(): "+el_ID_2);
+        }
+
+        else if (id==="3") {
+            console.log("SELECTING BY HTML TAG");
+            let els_Tag_1 = document.getElementsByTagName("p");
+            console.log("document.getElementsByTagName(): "+els_Tag_1);
+        }
+
+        else if (id==="4") {
+            console.log("SELECTING BY HTML TAG");
+            let els_Tag_2 = document.querySelectorAll("p");
+            console.log("document.querySelectorAll(): "+els_Tag_2);
+        }
+
+        else if (id==="5") {
+            console.log("SELECTING BY FIRST HTML TAG");
+            let els_Tag_3 = document.querySelector("p");
+            console.log("document.querySelector(): "+els_Tag_3);
+        }
+
+        else if (id==="6") {
+            console.log("SELECTING BY CSS CLASS");
+            let els_Class_1 = document.getElementsByClassName("text-center");
+            console.log("document.getElementsByClassName(): "+els_Class_1);
+        }
+
+        else if (id==="7") {
+            console.log("SELECTING BY CSS CLASS");
+            let els_Class_2 = document.querySelectorAll(".text-center");
+            console.log("document.querySelectorAll(): "+els_Class_2);
+        }
+
+        else if (id==="8") {
+            console.log("SELECTING BY FIRST CSS CLASS");
+            let els_Class_3 = document.querySelector(".text-center");
+            console.log("document.querySelectorAll(): "+els_Class_3);
+        }
+    }
+
+    </script>
+
+</body>
+</html>
