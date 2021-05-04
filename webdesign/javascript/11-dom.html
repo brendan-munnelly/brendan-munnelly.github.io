@@ -1,0 +1,436 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with the DOM | JavaScript Lessons | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Lesson from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Link to icons for Font Awesome 5 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Working with the DOM</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+    <h3>Learning Goals</h3>
+
+    <p>In this Lesson, you will learn:</p>
+
+    <div class="box-goals">
+        <ul>
+            <li>Definition of the DOM and its basic concepts</li>
+            <li>How to select elements in the DOM by id, HTML tag and CSS class</li>
+        </ul>
+    </div>
+
+    <p>In this Lesson, you will meet the following term:</p>
+
+    <ul>
+        <li>DOM</li>
+    </ul>
+
+    <h3>Exercise Files</h3>
+
+    <p>In this Lesson, you will work with the following HTML files:</p>
+
+    <ul>
+        <li><a href="exercises/11/exercise-11-1.html" target="_blank">exercise-11-1.html</a>
+    </ul>
+
+    <p>Download the compressed file below and copy it to your <b>websites/javascript/exercises</b> sub-folder.</p>
+
+    <p>📄 &nbsp;&nbsp;<a href="11.zip">11.zip</a></p>
+
+    <p>Unzip the files it contains into a sub-folder named <b>/11</b>.</p>
+
+    <img src="assets/img/functions-advanced/unzip.png" alt="JavaScript">
+</section>
+
+
+<section>
+
+    <h2>About the DOM</h2>
+    <p>When a web browser accesses a web page &#8211; also known as an <i>HTML document</i> &#8211; it performs two operations. It:</p>
+
+    <ul>
+        <li>Displays (<i>renders</i>) the web page in the browser, using any links in the page to CSS, image, video font and other files.</li>
+        <li>Creates a Document Object Model (DOM) of the web page which enables the page's content to be accessed and modified by JavaScript code. In effect, the DOM is a <i>application programming interface</i>.</li>
+    </ul>
+
+    <img src="assets/img/dom/11-1.png" alt="JavaScript">
+
+    <p>Except in the following two instances, the HTML source code of a web page and the contents of its DOM will be the same:</p>
+
+    <ul>
+        <li>The browser has found HTML errors in the web page and has automatically fixed them when creating the DOM.</li>
+        <li>The DOM has been modified by JavaScript, typically as the result of some user action such as clicking/tapping a button.</li>
+    </ul>
+        
+    <h3>DOM terminology</h3>
+    <p>To work with the DOM using JavaScript, it is important to understand a few key terms. Consider the HTML code below.</p>
+
+<pre class="language=html">&lt;a href="index.html"&gt;Home&lt;/a&gt;</pre>
+
+    <ul>
+        <li><span class="csyn">a</span> is the <strong>tag</strong></li>
+        <li><span class="csyn">href</span> is the <strong>attribute</strong></li>
+        <li><span class="csyn">index.html</span> is the <strong>attribute value</strong></li>
+        <li><span class="csyn">Home</span> is the <strong>text</strong>.</li>
+    </ul>
+        
+    <p>Everything between the opening <span class="csyn">&lt;a</span> and closing <span class="csyn">/a&gt;</span> tag pair makes the entire HTML element.</p>
+
+ 
+
+    <p class="defhead">HTML element</p>
+    <p class="deftext">Content in a web page that is marked up with an HTML tag. Most HTML elements (such as body, div, h1 and p) begin and end with an opening and closing tag pair. Others, such as link and img, are said to be self-closing. HTML elements may contain attributes with values.</p>
+    <p>A typical web page will contain many levels of elements nested inside one another in a <i>parent-child</i> relationship. Elements at the same level in a web page are said to be <i>siblings</i>.</p>
+
+    <h3>The DOM tree and nodes</h3>
+    <p>Like the HTML web page it represents, a DOM has a tree-like structure. All items in the DOM are defined as <i>nodes</i>. </p>
+    
+    <img src="assets/img/dom/dom-tree.png" style="max-width:500px" alt="DOM">
+
+    
+
+    <h3>Node types</h3>
+    <p>Every node in a DOM has a <i>node type</i>, accessed through the nodeType property. Three of the most common node types are as follows:</p>
+
+    <ul>
+        <li><b>Document node</b>: The web page itself, which is the root or parent of all other nodes in the HTML file.</li>
+        <li><b>Element node</b>: An HTML element in a web page. Examples of element nodes would include <span class="csyn">&lt;h1&gt;Main Heading&lt;/h1&gt;</span> and <span class="csyn">&lt;p&gt;Hello world&lt;/p&gt;</span>.</li>
+        <li><b>Text nodes</b>: A text string. Typically, a text node is a child of a parent element node, such as the text nodes <span class="csyn">Main Heading</span> and <span class="csyn">Hello world</span> above. However, a text node can also exist outside an element node.</li>
+    </ul>    
+        
+        <p>All DOM nodes, including the document node, have a <span class="syn">nodeType</span> property with a numeric value. See the table below.</p>
+
+        <table class="table-js">
+            <thead>
+                <tr>
+                     <th width="50%"><p><b>Node</b></p></th>
+                     <th width="50%"><p><b>Node Type</b></p></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <tr>
+                    <td><p>document</p></td>
+                    <td><p>9</p></td>
+                </tr>
+                <tr>
+                    <td><p>element</p></td>
+                    <td><p>3</p></td>
+                </tr>
+                <tr>                    <td><p>attribute</p></td>
+                    <td><p>2</p></td>
+                </tr>
+                <tr>
+                    <td><p>text</p></td>
+                    <td><p>1</p></td>
+                </tr>
+             </tbody>
+        </table>
+
+    <p>You can see a full list of node types on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType" target="_blank">MDN</a> website.</p>
+
+
+    <h3 id="exercise-11-1">Exercise 11.1: Exploring node types</h3>
+
+	<ol>
+	
+		<li>Open the following file in VS Code and your Google Chrome or Brave web browser:
+		<span class="inside-ol">&nbsp;</span>
+
+        📄 &nbsp;&nbsp;<a href="exercises/8/exercise-11-1.html" target="_blank">exercise-11-1.html</a></li>
+
+
+        <li>Open the DevTools window and then display the Elements tab. When you click on and highlight any line in the DOM, you can see that its <span class="syn">nodeType</span> value appears next to it.
+        
+        <img src="assets/img/dom/11-2.png" alt="DOM" class="wider-110"></li>
+
+        <li>Leave the file open in VS Code and your web browser.</li>
+
+</ol>
+
+    <p>Before you can work with an HTML element, you have to select it from the web page that contains it. The most common DOM selection methods are listed below.</p>
+
+    </section>
+
+    <section>
+
+        <h2>Selecting a single element by its unique id</h2>
+
+        <p>If your target HTML element has a unique id, you can use the <span class="syn">document.getElementById()</span> method to select it. Both the method syntax and the target id are <i>case-sensitive</i>.</p>
+
+        <p>The following code will retrieve an element with an id of "box-highlight".</p>
+
+<pre class="language-html">
+document.getElementById("user-message")
+</pre>
+
+        <p>A newer and alternative way of selecting an element with a unique id is the <span class="syn">document.getElementById()</span> method. See the example below.</p>
+
+<pre class="language-html">
+document.querySelector("#user-message") 
+</pre>
+
+    <p>Note that, with this second method, you must include a hash (<b>#</b>) character before the element id.</p>
+
+    <p>If there is more than one element with the same id in the web page (which there should not be!), the above two methods return the first element found. A <i>null</i> value is returned if no element with the target id exists in the web page.</p>
+
+
+    <h3 id="exercise-11-1a">Exercise 11.1 (continued): Selecting an element by id</h3>
+    <ol>
+        <li>In VS Code, scroll down to the <span class="syn">showResponse(id)</span> function, and add the following two branches:
+
+<pre class="language-html">
+if (id==="1") {
+    console.log("SELECTING BY UNIQUE ID");
+    let el_ID_1 = document.getElementById("user-message");
+    console.log("document.getElementById(): "+el_ID_1);
+}
+else if (id==="2") {
+    console.log("SELECTING BY UNIQUE ID");
+    let el_ID_2 = document.querySelector("#user-message"); 
+    console.log("document.querySelector(): "+el_ID_2);
+}</pre></li>
+        <li>Save the exercise file, reload it in your web browser and click the first two buttons for selecting by id.</li>
+        <li>In the DevTools window, note the output in the Console tab.
+        <img src="assets/img/dom/11-3.png" alt="DOM"></li>
+</ol>
+
+</section>
+
+<section>
+
+    <h2>Selecting multiple elements by HTML tag</h2>    
+
+    <p>Not every element you want to access in a web page will have a unique id.</p>
+        
+    <p>To select all elements with a particular HTML tag, use the <span class="syn">document.getElementsByTagName()</span> method. The following code selects all elements with the <span class="csyn">&lt;h2&gt;</span> tag.</p>
+        
+<pre class="language-html">
+document.getElementsByTagName("h2")
+</pre>
+
+<p>A newer and alternative way of selecting elements with a target tag is <span class="syn">document.querySelectorAll()</span>. See the example below.</p>
+
+<pre class="language-html">
+document.querySelectorAll(h2) 
+</pre>
+
+    <p>A related method is <span class="syn">document.querySelector()</span>, which returns only the <i>first element</i> in the web page with the target HTML tag. For example, if a web page has 10 sub-heaings with a <span class="csyn">h2</span> tag, the code below will rerurn only the first one as a single object.</p>
+
+<pre class="language-html">
+document.querySelector(h2) 
+</pre>
+
+    <h3 id="exercise-11-1b">Exercise 11.1 (continued): Selecting elements by tag</h3>
+    <ol>
+        <li>In VS Code, scroll down to the <span class="syn">showResponse(id)</span> function of the <b>exercise-11.1.html</b> file, and add the following three branches:
+
+<pre class="language-html">
+else if (id==="3") {
+    console.log("SELECTING BY HTML TAG");
+    let els_Tag_1 = document.getElementsByTagName("p");
+    console.log("document.getElementsByTagName(): "+els_Tag_1);
+}
+    
+else if (id==="4") {
+    console.log("SELECTING BY HTML TAG");
+    let els_Tag_2 = document.querySelectorAll("p");
+    console.log("document.querySelectorAll(): "+els_Tag_2);
+}
+    
+else if (id==="5") {
+    console.log("SELECTING BY FIRST HTML TAG");
+    let els_Tag_3 = document.querySelector("p");
+    console.log("document.querySelector(): "+els_Tag_3);
+}</pre></li>
+        <li>Resave the exercise file, reload it in your web browser and click the relevant three buttons for selecting by HTML tag.</li>
+<li>In the DevTools window, note the output in the Console tab.
+<img src="assets/img/dom/11-4.png" alt="DOM"></li>
+
+</ol>
+
+</section>
+
+<section>
+
+        <h2>Selecting multiple elements by CSS class</h2>  
+        <p>To select elements by their CSS class, use the <span class="syn">getElementsByClassName()</span> method. The code below selects the one or more elements with a class of <span class="csyn">"text-center"</span>.</p>
+
+<pre class="language-html">
+document.getElementsByClassName("text-center");
+</pre>
+
+    <p>You can also use the <span class="syn">document.querySelectorAll(".text-center")</span> method for this purpose. See below.</p>
+
+<pre class="language-html">
+document.querySelectorAll(".text-center") 
+</pre>
+
+    <p>Note that, with this second method, you must include a dot (<b>.</b>) character before the target class name.</p>
+
+    <p>An advantage of the <span class="syn">document.querySelectorAll()</span> and <span class="syn">document.querySelector()</span> methods is that you can specify a chain of ids, tags and classes as their arguments. Here are two examples.</p>
+
+<pre class="language-html">
+document.querySelectorAll("main section #introduction ".text-center") 
+</pre>
+
+<pre class="language-html">
+document.querySelector("#js-bpx p") 
+</pre>
+
+
+<h3 id="exercise-11-1c">Exercise 11.1 (continued): Selecting elements by tag</h3>
+<ol>
+    <li>In VS Code, scroll down to the <span class="syn">showResponse(id)</span> function of the <b>exerise-11.1.html</b> file, and add the following three branches:
+
+<pre class="language-html">
+else if (id==="6") {
+    console.log("SELECTING BY CSS CLASS");
+    let els_Class_1 = document.getElementsByClassName("text-center");
+    console.log("document.getElementsByClassName(): "+els_Class_1);
+}
+
+else if (id==="7") {
+    console.log("SELECTING BY CSS CLASS");
+    let els_Class_2 = document.querySelectorAll(".text-center");
+    console.log("document.querySelectorAll(): "+els_Class_2);
+}
+
+else if (id==="8") {
+    console.log("SELECTING BY FIRST CSS CLASS");
+    let els_Class_3 = document.querySelector(".text-center");
+    console.log("document.querySelectorAll(): "+els_Class_3);
+}</pre></li>
+
+    <li>Resave the exercise file, reload it in your web browser and click the relevant three buttons for selecting by CSS class.</li>
+
+<li>In the DevTools window, note the output in the Console tab.
+    <img src="assets/img/dom/11-5.png" alt="DOM"></li>
+
+</ol>
+
+</section>
+
+<section>
+
+    <h2>About HTML collections and node lists </h2>
+    <p>When you select a single element by its unique id, JavaScript returns just one object.</p>
+
+    <p>When selecting HTML elements by tag or class, however, JavaScript returns a so-called <i>collection</i>. To be more exact, JavaScript returns one of <i>two</i> types of collections. Each type is very similar to an array:</p>
+
+    <ul>
+        <li><b>HTML collection</b>: As its name suggests, this is a list of HTML elements.</li>
+        <li><b>Node list</b>: As its name suggests, this is a list of DOM nodes.</li>
+    </ul>
+    
+    <p>Just as you can with an array, you can access elements in either type of collection by their <i>index</i> number (beginning with zero). To view how many elements there are in either collection type, use the <span class="syn">length</span> property.</p>  
+        
+    <p>And you can interate through both HTML collections and node lists with a <span class="syn">for</span> loop. </p>
+
+    <p>Here are the differences between HTML collections and node lists:</p>
+
+    <ul>
+        <li>Items in an HTML collection can be accessed by their name, id, or index number. Node list items can be accessed only by their index number.</li>
+        <li>Only node list items can contain attribute nodes and text nodes.</li>
+        <li>An HTML collection is live but a node list is static and will not reflect any updates to the DOM since the web page was loaded.</li>
+    </ul>
+
+</section>
+
+    
+    <section>
+        <h2>Retrieving the content of an element</h2>
+
+
+        <p>After selecting an element in a web page, you can then access its content. Your two options are:</p>
+
+        <ul>
+            <li><b>.innerText</b>: This returns only the text content of the element, and <i>excludes</i> any HTML tags it may contain. </li>
+            <li><b>.innerHTML</b>: This returns both the text content <i>and</i> any HTML tags within it.</li>         
+        </ul>
+
+
+
+
+
+</section>
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise file to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/loops/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/loops/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/11/exercise-11-1.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+    
+	<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>

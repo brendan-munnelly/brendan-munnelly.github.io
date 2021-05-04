@@ -1,0 +1,251 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Working with Objects | JavaScript Lessons | Brendan Munnelly</title>
+	<meta name="description" content="About HTML Files: A Web Design and Development Lesson from Brendan Munnelly">
+	<meta name="author" content="Brendan Munnelly">
+ 
+	<!-- Social Meta -->
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:type:author" content="Brendan Munnelly" />
+	<meta property="og:site_name" content="2N2L Web Lessons">
+	<meta property="og:url" content="http://2n2l.com/JavaScript/index.html">
+	<meta property="og:image" content="http://2n2l.com/JavaScript/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@2n2l">
+
+	<!-- Stylesheets -->
+	<link href="assets/css/2n2l-js.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Link to icons for Font Awesome 5 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+	<!-- Google Analytics -->
+
+</head>
+
+<body>
+
+<header>
+<div class="jumbotron lesson">
+	<h3><a href="../index.html" title="All Web Lessons">Contents</a>&nbsp;&nbsp;&gt;</h3>
+	<h1>Working with Objects</h1>
+</div>
+</header>
+
+<main>
+	<article>
+
+<section id="learning-goals">
+
+<h3>Learning Goals</h3>
+
+<p>In this Lesson, you will learn how to:</p>
+
+<div class="box-goals">
+<ul>
+	<li>Create a JavaScript object with an object literal</li>
+	<li>Accessing the properties and values of an object with the dot and square-brackets notations</li>
+	<li>Assign, update and delete object properties</li>
+</ul>
+</div>
+
+<p>In this Lesson, you will meet the following term:</p>
+
+<ul>
+	<li>Object</li>
+	<li>Object Literal</li>    
+</ul>
+
+</section>
+
+<section>
+
+    <h2>About objects, properties and methods</h2>
+
+	<p>Objects, properties and methods are three important concepts in JavaScript.</p>
+	
+	<table class="table-geo-one">
+		<tbody>
+			<tr>
+				<td width="18%"><p><b>object</b></p></td>
+				<td><p>A <i>container</i> for holding properties. Many objects contain other objects, which are said to be <i>nested</i> inside them.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td width="18%"><p><b>property</b></p></td>
+				<td><p>A <i>feature</i> of an object with a name and a value. All values of a property can be read by JavaScript code, and some values can be changed.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td width="18%"><p><b>method</b></p></td>
+				<td><p>An <i>action</i> that JavaScript code can perform on an object or its properties. Method names end with a parenthesis ().</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+    <p class="defhead">JavaScript Object</p>
+	<p class="deftext">A container of information (pairs of property names and values). Examples include the <b>navigator</b>, <b>window</b>, <b>location</b> and <b>document</b> objects. Many objects contain other objects <i>nested</i> inside them. JavaScript code can read values of all properties of an object, and some values it can change.</p>
+
+</section>
+
+
+<section>
+  
+
+    <h2>Creating an object</h2>
+    <p>The <a href="https://github.com/airbnb/javascript#objects" target="_blank">recommended</a> way to create an object in JavaScript is to use a so-called <i>object literal</i>. You would create a new, empty object as follows.
+
+<pre class="language-html">
+const myDog = {};</pre></p>
+
+    <p>In a single statement, you can create an object, add some properties in it, and assign values to those properties. Use a comma (,) to separate the property-value pairs.</p>
+
+<pre class="language-html">
+const myDog = {
+    name: 'Luna',
+    breed: 'Golden Retriever',
+    description: 'Fun-loving, affectionate, and obedient.'
+    age_months: 16,
+    weight_kg: 25    
+};</pre>
+
+    <p>If your new object has more than two or three property-value pairs, it is a good idea to type each pair on a new line as shown above. This minimises typing errors when creating the object and improves readability when maintaining the code later.</p>
+
+    <p>A property name must be wrapped in single or double quotes if it contains spaces or other special characters. For example:</p>
+
+<pre class="language-html">
+const myDog = {
+    name: 'Luna',
+    breed: 'Golden Retriever',
+    description: 'Fun-loving, affectionate, and obedient.',
+    age_months: 24,
+    "weight(kg)": 25  // Special character in property name
+};</pre>
+        
+
+    <p>An object can include one or more other objects <i>nested</i> inside it.</p>
+
+<pre class="language-html">
+const myFavBand = {
+    name: 'U2',
+    website: 'u2.com',
+    "studio albums": 14,  // Special character in property name    
+    u2_band_vocals: { name: 'Bono' },
+    u2_band_guitar: { name: 'Edge' },  
+    u2_band_bass:   { name: 'Adam' },  
+    u2_band_drums:  { name: 'Larry } 
+};</pre>
+
+<p class="defhead">Object Literal</p>
+<p class="deftext">A pair curly braces <b>{ }</b> enclosing a comma-separated list of name-value pairs of properties and their values. Property values can include other object literals <i>nested</i> inside them.</p>
+
+</section>
+
+<section>
+    <h2>Accessing the properties and values of an object</h2>
+
+    <p>JavaScript offers a number of ways for viewing and working with the properties of an existing object. The two most common are the dot and square brackets options.</p>
+
+    <h3>Objects: The dot notation</h3>
+
+    <p>The simplest option for accessing objects. You separate the object name from the property name with a dot (<b>.</b>). The general syntax is as follows.</p>
+<pre class="language-html">
+objectName.propertyName</pre>
+
+    <p>Here are two examples:</p>
+<pre class="language-html">
+document.write(myDog.description);
+console.log(myFavBand.name);</pre>
+
+
+    <h3>Objects: The square brackets notation</h3>
+    <p>You must use this to access a property if its name:</p>
+    <ul>
+        <li>Contains spaces, underlines, emoji or other special characters.</li>
+        <li>Is a keyword reserved in JavaScript</li>
+    </ul>
+         
+    <p>The general syntax is:</p>
+
+<pre class="language-html">
+objName["propertyName"];
+</pre>
+
+<p>You can wrap the property name in single or double quotes. For example:</p>
+<pre class="language-html">
+document.write(myDog['weight(kg)']);
+console.log(myDog["studio albums"]);
+</pre>
+
+    <p>This notation is also necessary when accessing an object with a <span class="syn">for/in</span> loop. See below.</p>
+ 
+
+    <h3>Looping through an object's properties</h3>
+    <p>JavaScript provides a special version of the standard <span class="syn">for</span> loop to loop (<i>iterate</i>) through properties of an object. This is called a <span class="syn">for/in</span> loop. For example.</p>
+
+<pre class="language-html">
+for (let i in myDog) {
+    document.write(myDog[i]);
+}
+
+for (let key in myFavBand) {
+    console.log(myFavBand[key]);
+}</pre>
+
+</section>
+
+
+
+<section>
+
+    <h2>Adding, updating and deleting object properties</h2>
+    <p>You can add a new property-value pair to an object by assignment as follows.</p>
+<pre class="language-html">
+objMyDog.awards_won = 3;</pre>
+
+    <p>To update the current value of a property, assign the new value to it. </p>
+<pre class="language-html">
+objMyDog.awards_won = 4;</pre>
+
+    <p>To remove a property from an object, use the <i>delete</i> operator.</p>
+<pre class="language-html">
+delete objMyDog.awards_wo;</pre>
+
+    <p>In all three of the above operations, you have used the <i>dot notation</i>. The <i>brackets notation</i> would work as well.</p>
+
+<pre class="language-html">
+objMyDog["awards_won"] = 3;
+objMyDog["awards_won"] = 4;
+delete objMyDog["awards_won"];</pre>
+
+</section>
+
+
+
+
+
+<section>
+
+    <h2></h2>
+</section>
+
+
+
+</article>
+</main>
+</body>
+</html>
