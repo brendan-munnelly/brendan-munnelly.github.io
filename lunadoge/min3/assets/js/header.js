@@ -272,7 +272,7 @@ function removeHeroButtons() {
 //////////////// COPY TO CLIPBOARD ///////////////
 */
 
-document.querySelector("#dd_img_expand").addEventListener("change", doImgExpand);
+// document.querySelector("#dd_img_expand").addEventListener("change", doImgExpand);
 
 function doImgExpand() {
     let opt = document.querySelector("#dd_img_expand").value;
