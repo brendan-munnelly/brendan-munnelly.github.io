@@ -32,6 +32,27 @@ function hideMenus() {
 }
 
 /*
+//////////////// HERO HALF BACKGROUND IMAGE ///////////////
+*/
+
+function doHalfImgRight() {
+    document.querySelector(".hero-text-container").classList.remove("text-center-desktop");
+    // if buttons present
+    if (document.querySelector(".container-btn") ) {
+         document.querySelector(".container-btn").classList.remove("text-center-desktop");
+    }
+}
+
+function doHalfImgLeft() {
+    document.querySelector(".hero-text-container").classList.remove("text-center-desktop");
+    // if buttons present
+    if (document.querySelector(".container-btn") ) {
+         document.querySelector(".container-btn").classList.remove("text-center-desktop");
+    }
+}
+
+
+/*
 //////////////// TEXT LENGTH ///////////////
 */
 
