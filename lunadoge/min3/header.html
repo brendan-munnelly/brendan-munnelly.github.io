@@ -34,18 +34,23 @@
             <span id="menu-0" class="dropbtn">Header Type</span>
             <div id="content-0" class="dropdown-content dropdown-hidden" style="z-index:9999999">
                 <div class="dialog-box">
+                    <hr>
                     <a href="#" class="menu-header-type" id="menu-header-text">Text Only</a>
-                    <a href="#" class="menu-header-type" id="menu-header-bg-img">Background Image (Full)</a>
+                    <hr>
+                    <a href="#" class="menu-header-type" id="menu-header-bg-img">Background Image (Full Width)</a>
+                    <hr>
                     <a href="#" class="menu-header-type" id="menu-header-bg-img-half-right">Background Image (Half Right)</a>
-
-                    <a href="#" class="menu-header-type" id="menu-header-bg-img-half-right_trans">Background Trans (Half Right)</a>
-
                     <a href="#" class="menu-header-type" id="menu-header-bg-img-half-left">Background Image (Half Left)</a>
-
-                    <a href="#" class="menu-header-type" id="menu-header-bg-img-half-left_trans">Background Trans (Half Left)</a>
-
+                    <hr>
+                    <a href="#" class="menu-header-type" id="menu-header-bg-img-half-right_trans">Background Image (Half Right Transparent)</a>
+                    <a href="#" class="menu-header-type" id="menu-header-bg-img-half-left_trans">Background Image (Half Left Transparent)</a>
+                    <hr>
+                    <a href="#" class="menu-header-type" id="menu-header-half-img-right">Half Text | Half Image</a> 
+                    <a href="#" class="menu-header-type" id="menu-header-half-img-left">Half Image | Half Text</a> 
+                    <hr>
                     <a href="#" class="menu-header-type" id="menu-header-bg-vid">Background Video</a>
-                    <a href="#" class="menu-header-type" id="menu-header-half">Half Text/Half Image</a> 
+                    <hr>
+
                 </div>
             </div>
         </li>
@@ -132,14 +137,7 @@
                             <option value="2">Two</option>
                         </select>
                     </div><!-- /input-group -->
-                    <!--
-                    <div class="input-group">
-                        <label>Image  &nbsp;<i class="fas fa-tv"></i></label>
-                        <select id="dd_img_expand">
-                            <option value="0" selected="selected">Regular</option>
-                            <option value="1">Expanded</option>
-                       </select>
-                    </div> -->
+
                 </div>
             </div><!-- /dropdown-content -->
         </li>
@@ -186,7 +184,6 @@
             document.getElementById("dd_text_slide").value="0";
             document.getElementById("dd_hero_buttons").value="0";
             document.getElementById("dd_align_desktop").disabled=false;
-            // document.getElementById("dd_img_expand").value="0";
         }
 
         // Global variables
@@ -218,8 +215,7 @@
                     doHalfImgRight();
                     resetMenuOptions();
                     document.getElementById("dd_align_desktop").value="1";
-                    document.getElementById("dd_align_desktop").disabled=true;
-                    // document.getElementById("dd_img_expand").disabled=true;               
+                    document.getElementById("dd_align_desktop").disabled=true;      
                 }
 
                 else if (item.id === "menu-header-bg-img-half-right_trans") {
@@ -238,8 +234,7 @@
                     doHalfImgLeft();
                     resetMenuOptions();
                     document.getElementById("dd_align_desktop").value="1";
-                    document.getElementById("dd_align_desktop").disabled=true;
-                    // document.getElementById("dd_img_expand").disabled=true;               
+                    document.getElementById("dd_align_desktop").disabled=true;              
                 }
 
                 else if (item.id === "menu-header-bg-img-half-left_trans") {
@@ -248,24 +243,27 @@
                     doHalfImgRight();
                     resetMenuOptions();
                     document.getElementById("dd_align_desktop").value="1";
-                    document.getElementById("dd_align_desktop").disabled=true;
-                    // document.getElementById("dd_img_expand").disabled=true;               
+                    document.getElementById("dd_align_desktop").disabled=true;            
                 }
 
                 else if (item.id === "menu-header-bg-vid") {
                     document.querySelector("#HTML-Content").innerHTML = assets_header_bg_vid;
                     heroType = 3;
                     resetMenuOptions();
-                    /// document.getElementById("dd_img_expand").disabled=true; 
                 }
-
-                else if (item.id === "menu-header-half-img") {
-                    document.querySelector("#HTML-Content").innerHTML = assets_header_half_image;
+                
+                else if (item.id === "menu-header-half-img-right") {
+                    document.querySelector("#HTML-Content").innerHTML = assets_header_half_img_right;
                     heroType = 4; 
                     resetMenuOptions();
-                    // document.getElementById("dd_img_expand").disabled=false; 
+                    document.getElementById("dd_align_desktop").value="1";
+                    document.getElementById("dd_align_desktop").disabled=true; 
                 }
-                // resetMenuOptions();
+                else if (item.id === "menu-header-half-img-left") {
+                    document.querySelector("#HTML-Content").innerHTML = assets_header_half_img_left;
+                    heroType = 5; 
+                    resetMenuOptions();
+                }
             })
         })
 
@@ -279,13 +277,13 @@
 
         const assets_header_bg_img = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/full-background.jpg\" alt=\"sample background image\">\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
 
-        const assets_header_bg_img_right ="<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/kitchen-bowl-right.jpg\" alt=\"sample background image\">\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
+        const assets_header_bg_img_right ="<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/kitchen-bowl-right.jpg\" alt=\"sample background image\">\n\t</div><\/header>";
 
-        const assets_header_bg_img_right_trans ="<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/transparent-right.png\" alt=\"sample background image\">\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
+        const assets_header_bg_img_right_trans ="<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/transparent-right.png\" alt=\"sample background image\">\n\t</div><\/header>";
 
-        const assets_header_bg_img_left_trans ="<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/transparent-left.png\" alt=\"sample background image\">\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
+        const assets_header_bg_img_left_trans ="<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/man-coffee.png\" alt=\"sample background image\">\n\t</div><\/header>";
        
-        const assets_header_bg_img_left ="<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/kitchen-bowl-left.jpg\" alt=\"sample background image\">\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
+        const assets_header_bg_img_left ="<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets/img/hero/kitchen-bowl-left.jpg\" alt=\"sample background image\">\n\t</div><\/header>";
 
         const assets_header_bg_vid = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container text-center-desktop text-center-mobile\">\n\t\t<h1>Lorem Malesuada<\/h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<video loop playsinline muted autoplay poster=\"assets\/videos/hero-still.jpg\" class=\"background-video\" disablepictureinpicture preload=\"auto\">\n\t\t<source src=\"assets/videos/hero-video.mp4\" type=\"video\/mp4\">\n\t</video>\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
 
@@ -293,7 +291,9 @@
             
         const assets_header_buttons_pair ="\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-solid btn-rounded\"><i class=\"fas fa-shopping-cart\">\</i> Order now</a>\n\t\t\t<a href=\"#\" class=\"btn btn-ghost btn-rounded\"><i class=\"fas fa-arrow-right\"><\/i> Learn more<\/a>\n\t\t</div>"
 
-        const assets_header_half_image ="<header class=\"hero-block hero-half text-left-desktop text-center-mobile\">\n\t<div class=\"container-flex\">\n\t\t<div class=\"col-2\">\n\t\t\t<div class=\"hero-text-container text-center-mobile\">\n\t\t\t<h1>Lorem Malesuada</h1>\n\t\t\t<h2>Etiam tincidunt risus nec odio sollicitudin</h2>\n\t\t</div>\n\t\t</div>\n\t\t<div class=\"col-2\">\n\t\<img src=\"assets/img/shop.jpg\" alt=\"hero image\">\n\t\t</div>\n\t\</div>\n</header>"
+        const assets_header_half_img_right ="<header class=\"hero-block hero-half\"><div class=\"col-2\"><div class=\"hero-text-container text-center-mobile\"><h1>Lorem Malesuada<\/h1><h2>Etiam tincidunt risus nec odio sollicitudin<\/h2><\/div><\/div><div class=\"col-2\"><div class=\"hero-bg-media\"><img src=\"assets\/img\/hero\/illustration.png\" alt=\"sample background image\"><\/div><\/div><\/header>";
+
+        const assets_header_half_img_left ="<header class=\"hero-block hero-half\"><div class=\"col-2\"><div class=\"hero-bg-media\"><img src=\"assets\/img\/hero\/illustration.png\" alt=\"sample background image\"><\/div><div class=\"col-2\"><div class=\"hero-text-container text-center-mobile\"><h1>Lorem Malesuada<\/h1><h2>Etiam tincidunt risus nec odio sollicitudin<\/h2><\/div><\/div><\/div><\/header>";
 
     </script>
 
