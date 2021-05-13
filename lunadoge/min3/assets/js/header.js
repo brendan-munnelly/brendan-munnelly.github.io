@@ -293,23 +293,6 @@ function removeHeroButtons() {
 //////////////// COPY TO CLIPBOARD ///////////////
 */
 
-// document.querySelector("#dd_img_expand").addEventListener("change", doImgExpand);
-
-function doImgExpand() {
-    let opt = document.querySelector("#dd_img_expand").value;
-    if (opt==="0") {
-        document.querySelector("header.hero-block.hero-half .container-flex .col-2 img").classList.remove("img-expand");
-    }
-    else if (opt==="1") {
-        console.log("expand image");
-        document.querySelector("header.hero-block.hero-half .container-flex .col-2 img").classList.add("img-expand");
-    }
-}
-
-
-/*
-//////////////// COPY TO CLIPBOARD ///////////////
-*/
 
 document.querySelector("#btn-copy").addEventListener("click", copyHTML);
 
