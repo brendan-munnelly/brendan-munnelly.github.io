@@ -207,11 +207,11 @@ function doColShadows() {
     const el_section = document.querySelector('#HTML-Content .container-flex')
 
     if (opt==="0") {
-        // only if no background, remnove padding
-        if (!document.querySelector('#HTML-Content .container-flex.bg-color')) {
+        // only if no background or borders, remove padding
+        if ( !(document.querySelector('.bg-color-light')) || (document.querySelector('.bg-color-dark')) || (document.querySelector('.col-borders'))) {
             el_section.classList.remove("col-padding");
         }
-        el_section.classList.remove("box-shadow");
+        el_section.classList.remove("col-shadows");
         el_section.classList.remove("corners-soft");
         // Enable corner and border options
         document.getElementById("dd_col_borders").disabled=false;
@@ -222,7 +222,7 @@ function doColShadows() {
 
     else if (opt==="1") {
         el_section.classList.add("col-padding");
-        el_section.classList.add("box-shadow");
+        el_section.classList.add("col-shadows");
         el_section.classList.add("corners-soft");
         // Disable corner and border options
         document.getElementById("dd_col_borders").disabled=true;
@@ -243,8 +243,8 @@ function doColBorders() {
     const el_section = document.querySelector('#HTML-Content .container-flex')
 
     if (opt==="0") {
-        // only if no background, remnove padding
-        if (!document.querySelector('#HTML-Content .container-flex.bg-color')) {
+        // only if no background , remnove padding
+        if ( !(document.querySelector('.bg-color-light')) || (document.querySelector('.bg-color-dark')) ) {
             el_section.classList.remove("col-padding");
         }    
         el_section.classList.remove("col-borders");
@@ -293,19 +293,37 @@ function doColBackgrounds() {
     const el_section = document.querySelector('#HTML-Content .container-flex')
 
     if (opt==="0") {
-        el_section.classList.remove("bg-color");
-        document.getElementById("box-shadow").value="0";
-        document.getElementById("box-shadow").disabled=false;
+        el_section.classList.remove("bg-color-light");
+        el_section.classList.remove("bg-color-dark");
+        // If no shadows or borders, remove padding
+        if ( !(document.querySelector('.bg-color-light')) || (document.querySelector('.bg-color-dark')) || (document.querySelector('.col-borders')) || (document.querySelector('.col-shadows')) ) {
+            el_section.classList.remove("col-padding");
+        }
+
+        document.getElementById("dd_col_shadows").value="0";
+        document.getElementById("dd_col_shadows").disabled=false;
     }
 
     else if (opt==="1") {
-        el_section.classList.add("bg-color");
+        el_section.classList.add("bg-color-light");
+        el_section.classList.remove("bg-color-dark");
         el_section.classList.add("col-padding");
         document.getElementById("dd_col_corners").disabled=false; 
         document.getElementById("dd_col_corners").value="0";
         document.getElementById("dd_col_borders").disabled=false;
-        document.getElementById("box-shadow").value="0";
-        document.getElementById("box-shadow").disabled=false;
+        document.getElementById("dd_col_shadows").value="0";
+        document.getElementById("dd_col_shadows").disabled=false;
+    }
+
+    else if (opt==="2") {
+        el_section.classList.add("bg-color-dark");
+        el_section.classList.remove("bg-color-light");       
+        el_section.classList.add("col-padding");
+        document.getElementById("dd_col_corners").disabled=false; 
+        document.getElementById("dd_col_corners").value="0";
+        document.getElementById("dd_col_borders").disabled=false;
+        document.getElementById("dd_col_shadows").value="0";
+        document.getElementById("dd_col_shadows").disabled=false;
     }
 }
 
@@ -422,7 +440,7 @@ function doText() {
         
         // Test for figures (images or icons)
         else if (document.querySelector(col_no+" figure")) {
-            console.log("there are figures");
+            // console.log("there are figures");
             i, col_count = doColsCount();
             for (i; i <= col_count; i++) {
                 const el_pic = document.querySelector(col_no+":nth-child("+i+") figure");
@@ -517,7 +535,7 @@ function removeText() {
 document.querySelector("#dd_buttons").addEventListener("change", doButtons);
 
     function doButtons() {
-        console.log("Buttons");
+        // console.log("Buttons");
         let opt = document.querySelector("#dd_buttons").value;
         // remove
         if (opt==="0") {
