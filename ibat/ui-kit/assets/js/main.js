@@ -23,7 +23,6 @@ divs.forEach(el => el.addEventListener('click', event => {
 document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
 
 function hideMenus() {
-    console.log("clicked page");
     let i;
     for (i = 1; i < 6; i++) {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
@@ -77,6 +76,28 @@ function removeClassNames() {
     el_section.classList.remove("theme-four");
 }
 
+/*
+//////////////// SECTIONS: COLUMNS ORDER  ///////////////
+*/
+
+if (document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_colOrder").addEventListener("change", doColOrder);
+}
+
+function doColOrder() {
+
+    let opt = document.querySelector("#dd_colOrder").value;
+    const el_section = document.querySelector('section')
+    if (opt==="0") {
+        el_section.classList.add("split-image-right");
+        el_section.classList.remove("split-image-left");
+    }
+
+    else if (opt==="1") {
+        el_section.classList.remove("split-image-right");
+        el_section.classList.add("split-image-left");
+    }
+}
 
 /*
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
@@ -124,19 +145,16 @@ function removeClassNames() {
             /* Section upper label */
             else if (btn_id === "btn_upper_label") {
                 newStyle = "."+section_class+" .upper-label { color: var("+event.target.id+"); } \n";
-                console.log(newStyle); 
             }
 
             /* Section upper heading */
             else if (btn_id === "btn_upper_head") {
                 newStyle = "."+section_class+" .col-1 h2 { color: var("+event.target.id+") } \n";
-                console.log(newStyle); 
             }
 
             /* Section upper subheading */
             else if (btn_id === "btn_upper_subhead") {
                 newStyle = "."+section_class+" .col-1 h3 { color: var("+event.target.id+") } \n"; 
-                console.log(newStyle); 
             }
 
             /* Section upper subheading */
@@ -207,7 +225,6 @@ function removeClassNames() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
-            console.log("got here")
         }
     }
 
@@ -277,8 +294,9 @@ function removeClassNames() {
 /*
 //////////////// SECTIONS: PARAGRAPHS ///////////////
 */
-
-document.querySelector("#dd_colNos").addEventListener("change", doColumnNos);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_colNos").addEventListener("change", doColumnNos);
+}
 
 function doColumnNos() {
     let opt = document.querySelector("#dd_colNos").value;
@@ -436,7 +454,6 @@ function doColUpperAlign() {
     }
 
     else if (opt==="1") {
-        console.log("Align Left");
         el_col_1.classList.remove("text-center");
         el_section.classList.add("container-full");
     }
@@ -465,7 +482,9 @@ function doColUpperAlignStatus() {
 //////////////// COLUMNS ALIGN ///////////////
 */
 
-document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
+}
 
 function doColAlign() {
     let opt = document.querySelector("#dd_col_align").value;
@@ -484,7 +503,9 @@ function doColAlign() {
 //////////////// COLUMNS SHADOWS ///////////////
 */
 
-document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
+}
 
 function doColShadows() {
     let opt = document.querySelector("#dd_col_shadows").value;
@@ -520,7 +541,9 @@ function doColShadows() {
 //////////////// COLUMNS BORDERS ///////////////
 */
 
-document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
+}
 
 function doColBorders() {
     let opt = document.querySelector("#dd_col_borders").value;
@@ -551,7 +574,9 @@ function doColBorders() {
 //////////////// COLUMNS BORDER CORNERS ///////////////
 */
 
-document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
+}
 
 function doColCorners() {
     let opt = document.querySelector("#dd_col_corners").value;
@@ -570,7 +595,9 @@ function doColCorners() {
 //////////////// COLUMNS BACKGROUNDS ///////////////
 */
 /*
-document.querySelector("#dd_col_backgrounds").addEventListener("change", doColBackgrounds);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_col_backgrounds").addEventListener("change", doColBackgrounds);
+}
 */
 
 function doColBackgrounds() {
@@ -616,7 +643,9 @@ function doColBackgrounds() {
 //////////////// COLUMNS WIDTH ON MOBILES ///////////////
 */
 
-document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+}
 
 function doColMobileWidth() {
     let opt = document.querySelector("#dd_cols_mobile").value;
@@ -715,7 +744,6 @@ function doText() {
         removeText();
         // Test for figures AND h3 column headings
         if ( (document.querySelector(col_no+" figure")) && (document.querySelector(col_no+" h3")) ) {
-            // console.log("there are figures AND h3 column headings")
             const obj_h3 = document.querySelectorAll(col_no+" h3");
             let el_h3;
             for (let i=2 ; i <= obj_h3.length+1 ; i++) {
@@ -965,7 +993,9 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
 //////////////// VISUALS  ///////////////
 */
 
-document.querySelector("#vis-types-all").addEventListener("click", doVisType);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#vis-types-all").addEventListener("click", doVisType);
+}
 
 function doVisType() { 
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
@@ -1034,7 +1064,6 @@ function doVisType() {
     }
 
     else if (selectedValue==="icons-fa") {
-        console.log("Icons FA");
         removeVisual();
         resetVisualEffects();
         const obj_col = document.querySelectorAll(col_no);
@@ -1053,7 +1082,6 @@ function doVisType() {
     }
 
     else if (selectedValue==="icons-la") {
-        console.log("Icons LA");
         removeVisual();
         resetVisualEffects();
 
@@ -1074,7 +1102,6 @@ function doVisType() {
     }
 
     else if (selectedValue==="icons-md") {
-        console.log("Icons MD");
         removeVisual();
         resetVisualEffects();
 
@@ -1095,6 +1122,78 @@ function doVisType() {
     }
 }
 
+/*
+//////////////// VISUALS: COLS SPLIT TWO  ///////////////
+*/
+
+if (document.querySelector('.cols-2-split')) { 
+    document.querySelector("#vis-types-all").addEventListener("click", doVisTypeSplit);
+}
+
+function doVisTypeSplit() { 
+    const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+  
+    if (selectedValue==="pictures") {
+        removeVisual();
+        resetVisualEffects();
+        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-food-mobile.jpg\" alt=\"Commerce\">\n\t\t</figure>";
+        const el_col = document.querySelector('section .col-2:nth-child(3)');
+        el_col.innerHTML += newContent;
+        document.getElementById("dd_image_corners").disabled=false;
+        document.getElementById("dd_image_shadows").disabled=false;
+        document.getElementById("dd_image_borders").disabled=false;
+    }
+
+    else if (selectedValue==="transparent") {
+        removeVisual();
+        resetVisualEffects();
+
+        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-shopkeeper.png\" alt=\"Commerce\">\n\t\t</figure>";
+        const el_col = document.querySelector('section .col-2:nth-child(3)');
+        el_col.innerHTML += newContent;
+        document.getElementById("dd_image_shadows").disabled=false;
+    }
+
+    else if (selectedValue==="illustrations") {
+        removeVisual();
+        resetVisualEffects();
+
+        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-mobile-pink.png\" alt=\"Commerce\">\n\t\t</figure>";
+        const el_col = document.querySelector('section .col-2:nth-child(3)');
+        el_col.innerHTML += newContent;
+    
+        document.getElementById("dd_image_corners").disabled=false;
+        document.getElementById("dd_image_shadows").disabled=false;
+        document.getElementById("dd_image_borders").disabled=false;
+    }
+
+    else if (selectedValue==="vid-file") {
+        removeVisual();
+        resetVisualEffects();
+
+        const newContent = "\n\n\t<figure>\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t<\/figure>";
+        const el_col = document.querySelector('section .col-2:nth-child(3)');
+        el_col.innerHTML += newContent;
+    }
+
+    else if (selectedValue==="vid-yt") {
+        removeVisual();
+        resetVisualEffects();
+
+        const newContent = "\n\n\t<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t<\/figure>";
+        const el_col = document.querySelector('section .col-2:nth-child(3)');
+        el_col.innerHTML += newContent;
+    }
+}
+
 function removeVisual() {
     const parentNode = document.querySelector("#HTML-Content");
     var element_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
@@ -1104,7 +1203,6 @@ function removeVisual() {
     document.getElementById("dd_image_corners").disabled=true;
     document.getElementById("dd_image_shadows").disabled=true;
     document.getElementById("dd_image_borders").disabled=true;
-  
 }
 
 function resetVisualEffects() {
@@ -1123,7 +1221,6 @@ function resetVisualEffects() {
 document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
 
 function doImageCorners() {
-    console.log("Do image corners");
     let opt = document.querySelector("#dd_image_corners").value;
 
     if (opt==="0") {
@@ -1144,7 +1241,6 @@ function removeImageCorners() {
 document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
 
 function doImageShadows() {
-    console.log("Do image shadows");
     let opt = document.querySelector("#dd_image_shadows").value;
     // Remove image shadow
     if (opt==="0") {
@@ -1154,7 +1250,7 @@ function doImageShadows() {
     // Add image shadow
     else if (opt==="1") {
         const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-shadow");b
+        el_fig.classList.add("img-shadow");
     }
 }
 
@@ -1166,7 +1262,6 @@ function removeImageShadows() {
 document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
 
 function doImageBorders() {
-    console.log("Do image borders");
     let opt = document.querySelector("#dd_image_borders").value;
 
     if (opt==="0") {
@@ -1188,8 +1283,9 @@ function removeImageBorders() {
 /*
 //////////////// ICON PROPERTIES ///////////////
 */
-
-document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
+}
 
 function doIconSize() {
     let opt = document.querySelector("#dd_icon_size").value;
@@ -1205,7 +1301,9 @@ function doIconSize() {
     }
 }
 
-document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
+if (!document.querySelector('.cols-2-split')) { 
+    document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
+}
 
 function doIconAlign() {
     let opt = document.querySelector("#dd_icon_align").value;
@@ -1245,15 +1343,12 @@ function copyHTML() {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-        
-    console.log("copied");
 }
 
 function copyCSS() {
     var css = "", styletags = document.getElementsByTagName("style");
     for(var i = 0; i < styletags.length; i++) {
     css += "\n"+styletags[i].innerHTML }
-    console.log(css);
     const el_css = document.createElement('textarea');
     el_css.value = css;
     hideMenus();
