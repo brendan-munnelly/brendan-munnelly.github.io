@@ -302,7 +302,7 @@ function reduceCols() {
         let el_col;
         let i;
         if (col_no == ".col-3") { i = 3 }
-        else if (col_no == ".col-4") { i = 4 }
+        else if (col_no == ".col-4") { i = 2 }
             for (i ; i < obj_col.length; i++) { 
             el_col = document.querySelector(col_no+":nth-child("+i+")");
             el_col.remove();
