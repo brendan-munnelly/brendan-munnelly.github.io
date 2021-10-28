@@ -287,7 +287,11 @@ function doColumnNos() {
         reduceCols();
     }
     else if (opt==="1") {
-        if (col_no == ".col-3") {
+        if (col_no == ".col-2") {
+            document.querySelector(col_no+":nth-child(3)").insertAdjacentHTML("afterend", content_paras); 
+        }
+
+        else if (col_no == ".col-3") {
             document.querySelector(col_no+":nth-child(4)").insertAdjacentHTML("afterend", content_paras); 
         }
         else if (col_no == ".col-4") {
@@ -297,16 +301,15 @@ function doColumnNos() {
 }
 
 function reduceCols() {
-    if (document.querySelector(col_no+":nth-child(4)")) {
-        const obj_col = document.querySelectorAll(col_no);
-        let el_col;
-        let i;
-        if (col_no == ".col-3") { i = 3 }
-        else if (col_no == ".col-4") { i = 2 }
-            for (i ; i < obj_col.length; i++) { 
-            el_col = document.querySelector(col_no+":nth-child("+i+")");
-            el_col.remove();
-       }
+    let i, upper_limit;
+    if (col_no == ".col-2") { i = 2, upper_limit = 3 }
+    else if (col_no == ".col-3") { i = 2,  upper_limit = 4 }
+    else if (col_no == ".col-4") { i = 2, upper_limit = 5 }
+    const obj_col = document.querySelectorAll(col_no);
+    let el_col;
+    for (i ; i <= upper_limit; i++) { 
+        el_col = document.querySelector(col_no+":nth-child("+i+")");
+        el_col.remove();
     }
 }
 
