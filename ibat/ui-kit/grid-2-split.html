@@ -10,12 +10,9 @@
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/resets.css">
     <link rel="stylesheet" href="assets/css/modal.css" />
     <link rel="stylesheet" href="assets/css/controls-grid.css" />
-    <link rel="stylesheet" href="assets/css/layout-grid.css">
-    <link rel="stylesheet" href="assets/css/grid-2-split.css">
-    <link rel="stylesheet" href="assets/css/utils.css">
+    <link rel="stylesheet" href="assets/css/lunadoge.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
     <!-- Font Awesome 5 icons -->
@@ -66,21 +63,24 @@
                                 <label>Background</label>
                                 <div><button id="btn_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
                             </div>
-                            <h4>UPPER BLOCK</h4>
-                            <div class="input-group" style="margin-bottom: 24px">
-                                <label>Upper Label <span>&lt;div&gt;</span></label>
-                                <div><button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
-                            </div>
-                            <div class="input-group" style="margin-bottom: 24px">
+                            <h4 style="display: none">UPPER BLOCK</h4>
+                            <div class="input-group" style="display: none">
                                 <label>Heading <span>&lt;h2&gt;</span></label>
-                                <div><button id="btn_upper_head" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
-                            </div>
-                            <div class="input-group">
-                                <label>Sub-heading <span>&lt;h3&gt;</span></label>
                                 <div><button id="btn_upper_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
                             </div>
 
                             <h4>COLUMNS</h4>
+
+                            <div style="margin-bottom: 24px" class="input-group">
+                                <label>Upper Label <span>&lt;div&gt;</span></label>
+                                <div><button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+                            
+                            <div class="input-group" style="margin-bottom: 24px">
+                                <label>Heading <span>&lt;h2&gt;</span></label>
+                                <div><button id="btn_upper_head" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
                             <div class="input-group" style="margin-bottom: 24px">
                                 <label>Sub-heading <span>&lt;h3&gt;</span></label>
                                 <div><button id="btn_col_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
@@ -93,20 +93,12 @@
                     </div><!-- /dropdown-content -->
                 </li>
 
-                <li class="dropdown">
+                <li class="dropdown" style="display: none">
                     <span id="menu-2" class="dropbtn">Upper Block</span>
                     <div id="content-2" class="dropdown-content dropdown-hidden">
           
                         <div class="dialog-box">
 
-                            <div class="input-group">
-                                <label>Top Label <span>&lt;div&gt;</span></label>
-                                <select id="dd_upperLabel">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>
-                            </div><!-- /input-group -->
-  
                             <div class="input-group">
                                 <label>Section Heading <span>&lt;h2&gt;</span></label>
                                 <select id="dd_h2">
@@ -141,8 +133,17 @@
                     <div id="content-3" class="dropdown-content dropdown-hidden">
                         <form id="col-properties" name="col-properties">
                             <div class="dialog-box">
+
                                 <div class="input-group">
-                                    <label>Sub-Headings <span>&lt;h3&gt;</span></label>
+                                    <label style="width:180px">Top Label <span>&lt;div&gt;</span></label>
+                                    <select id="dd_upperLabel">
+                                        <option value="0" selected="selected">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div><!-- /input-group -->
+
+                                <div class="input-group">
+                                    <label style="width:180px">Sub-Headings <span>&lt;h3&gt;</span></label>
                                     <select id="dd_h3">
                                         <option value="0" selected="selected">Yes</option>
                                         <option value="1">None</option>
@@ -150,7 +151,7 @@
                                 </div>
         
                                 <div class="input-group">
-                                    <label>Text</label>
+                                    <label  style="width:180px">Text</label>
                                     <select id="dd_text">
                                         <option value="0">None</option>
                                         <option value="1" selected="selected">Paragraphs</option>
@@ -173,10 +174,10 @@
         
                                     <div class="input-group">
                                         <label>Faux Buttons</label>
-                                        <select id="dd_buttons">
+                                        <select id="dd_buttons_split">
                                             <option value="0" selected="selected">None</option>
-                                            <option value="1">Solid</option>
-                                            <option value="2">Ghost</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
                                         </select>
                                     </div>
         
@@ -220,36 +221,37 @@
                                         </div>
                                     </div>
 
-                                    <h4>GHOST BUTTON</h4>
+                                    <h4>SECONDARY BUTTON</h4>
                                     <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Text</label>
-                                                <div><button id="btn_a_ghost_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                                <div><button id="btn_a_secondary_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
-                                       
+                                        
                                         <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Background</label>
-                                                <div></div>
+                                                <div><button id="btn_a_secondary_passive_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
     
                                         <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Border</label>
-                                                <div><button id="btn_a_ghost_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                                <div><button id="btn_a_secondary_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
+
                                     </form>
                                 </div>    
                         </div><!-- /dialog-box -->
@@ -771,23 +773,24 @@
         // Text
         document.getElementById("dd_h3").value="0";
         document.getElementById("dd_text").value="1";
-        document.getElementById("dd_buttons").value="0";
+        document.getElementById("dd_buttons_split").value="0";
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_style").disabled=true;
 
         // Buttons
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
         document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
         document.getElementById("btn_a_primary_passive_bg").disabled=true;
         document.getElementById("btn_a_primary_active_bg").disabled=true;
         document.getElementById("btn_a_primary_passive_border").disabled=true;
         document.getElementById("btn_a_primary_active_border").disabled=true;
 
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;
 
         // Illustrations
         document.getElementById("vis_type_0").checked=true;
@@ -813,7 +816,7 @@
 
     // Initial page content load
 
-        let HTML_Content="\n\t<section class=\"theme-one container-flex cols-2-split split-image-right\">\n\t\t<div class=\"col-1 text-center\">\n\t\t\t<h2>Lorem Malesuada Dolor<\/h2>\n\t\t\t<h3>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.<\/h3>\n\t\t<\/div>\n\n\t\t<div class=\"col-2\">\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed sapiente.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\/800x800-food-mobile.jpg\" alt=\"eCommerce\"><\/figure>\n\t\t<\/div>\n\t\<\/section>";
+        let HTML_Content="\n\t<section class=\"theme-one container-flex cols-2-split split-image-right\">\n\n\t\t<div class=\"col-2\">\n\t\t\t<h2>Lorem ipsum dolo<\/h2>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus dignissimos facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed sapiente.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\/800x800-food-mobile.jpg\" alt=\"eCommerce\"><\/figure>\n\t\t<\/div>\n\t\<\/section>";
           
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
     
@@ -846,9 +849,13 @@
     /* Text Content Assets */
     const content_h3 = "\n\t\t\t\t<h3>Lorem ipsum dolo<\/h3>\n";
 
-    const content_paras = "\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-design.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed.<\/p>\n\t\t<\/div>\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-woman-pink.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed.<\/p>\n\t\t<\/div>\n";
+    const content_paras = "\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-design.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h2>Lorem ipsum dolo<\/h2><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed.<\/p>\n\t\t<\/div>\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-woman-pink.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat.<\/p>\n\t\t\t<p>Vel, sit perferendis officia ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda. Iusto ipsum eum possimus sed.<\/p>\n\t\t<\/div>\n";
 
     const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam vel faucibus. Nunc dignissim rutrum porta.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta. Maecenas rutrum tellus tristique congue finibus tristique.<\/li>\n\t\t\t\t\t<li><b>Sodales<\/b>: Fusce mollis. Vestibulum turpis elit, facilisis a metus non, ultricies congue ligula. Landit gravida nibh malesuada suscipit.<\/li>\n\t\t\t\t<\/ul>\n";
+
+    const content_button_one ="\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"><\/i> Order now</a>\n\t</div>\n\n";
+
+    const content_button_two ="\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"><\/i> Order now</a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"><\/i> Learn more<\/a>\n\t</div>\n\n";
 
     let picArray = [];
     picArray[assetsArray[0]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-design.jpg\" alt=\"Design\"><\/figure>";

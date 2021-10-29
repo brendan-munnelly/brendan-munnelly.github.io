@@ -10,12 +10,9 @@
     <meta name="author" content="Brendan Munnelly">
 
 	<!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/resets.css">
     <link rel="stylesheet" href="assets/css/modal.css" />
 	<link rel="stylesheet" href="assets/css/controls-grid.css" />
-    <link rel="stylesheet" href="assets/css/layout-grid.css">
-    <link rel="stylesheet" href="assets/css/grid-3.css">
-	<link rel="stylesheet" href="assets/css/utils.css">
+    <link rel="stylesheet" href="assets/css/lunadoge.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     
 	<!-- Font Awesome 5 icons -->
@@ -55,7 +52,7 @@
                                 </select>
                             </div>
 
-                            <div class="input-group">
+                            <div class="input-group" style="display: none">
                                 <label>Column Blocks</label>
                                 <select id="dd_colNos">
                                     <option value="0" selected="selected">3</option>
@@ -64,10 +61,12 @@
                             </div> 
 
                             <h4>COLOURS</h4>
-                            <div class="input-group" style="margin-bottom: 24px">
+                            <div class="input-group">
                                 <label>Background</label>
                                 <div><button id="btn_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                                
                             </div>
+                            <p style="margin-bottom: 24px;font-weight: 400">(Or a <a href="https://mycolor.space/gradient" target="_blank" rel="noopener">colour gradient</a>? &nbsp;Copy code to custom.css.)</p>
                             <h4>UPPER BLOCK</h4>
                             <div class="input-group" style="margin-bottom: 24px">
                                 <label>Upper Label <span>&lt;div&gt;</span></label>
@@ -916,11 +915,13 @@
     // Global variables
     let i = 2; // Initial counter value for looping through child columns 
     let col_no; // Column width of grid
+    let col_blocks; // Numnber of column blocks
     if (document.querySelector('.col-2')) { 
         col_no = ".col-2";
     }
     else if (document.querySelector('.col-3')) { 
         col_no = ".col-3";
+        col_blocks = 3;
     }
     else if (document.querySelector('.col-4')) { 
         col_no = ".col-4";
@@ -944,7 +945,7 @@
 
     const content_paras = "\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-food.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-laptop-window.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Laptop window\"><\/figure><h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t\<\/div>";
 
-    const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam vel faucibus. Nunc dignissim rutrum porta.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta. Maecenas rutrum tellus tristique congue finibus tristique.<\/li>\n\t\t\t\t\t<li><b>Sodales<\/b>: Fusce mollis. Vestibulum turpis elit, facilisis a metus non, ultricies congue ligula. Landit gravida nibh malesuada suscipit.<\/li>\n\t\t\t\t<\/ul>\n";
+    const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam vel faucibus.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta. Maecenas rutrum tellus.<\/li>\n\t\t\t\t\t<li><b>Sodales<\/b>: Fusce mollis. Vestibulum turpis elit, facilisis a metus non, ultricies congue ligula.<\/li>\n\t\t\t\t<\/ul>\n";
 
     let picArray = [];
     picArray[assetsArray[0]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-design.jpg\" alt=\"Design\"><\/figure>";
