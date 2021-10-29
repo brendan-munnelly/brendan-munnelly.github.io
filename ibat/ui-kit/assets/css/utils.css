@@ -1,9 +1,180 @@
+/* /////////////////////////////////////////////////////////////// */
+/* //////////////// COLLECTION OF UTLITY CLASSES ///////////////// */
+/* /////////////////////////////////////////////////////////////// */
+
+/* Centre horizontally all the things */
 .text-center { 
     text-align: center !important;
-    margin-left: auto;
-    margin-right: auto
+    margin-left: auto; margin-right: auto
 }
 
+/* All viewports: Paragraphs and lists */
+div[class*='col-']  p:last-child,
+div[class*='col-'] li:last-child { margin-bottom: 0 }
+
+/* Column effects */
+.col-shadows div[class*='col-']:not(.col-1) {
+    border: solid #D3D3D3 1px;
+    box-shadow: 4px 4px 20px rgba(160,160,160,0.8);
+}
+
+.col-borders div[class*='col-']:not(.col-1) {
+    border: solid 1px var(--gray-800)
+}
+
+.corners-soft div[class*='col-']:not(.col-1) {
+    border-radius: 12px
+}
+
+/* Fancy Image Effects */
+.img-shadow figure img {
+    filter: drop-shadow(8px 8px 10px var(--drop-shadow));
+}
+
+.img-border figure img {
+    border: solid 2px var(--img-border);
+}
+
+.img-corners-soft figure img {
+    border-radius: 15px;
+}
+
+.img-rotate-clock  figure img { transform: rotate(1deg) }
+.img-rotate-cclock figure img { transform: rotate(-1deg) }
+
+.img-rounded figure img { border-radius: 50% } /* Square images only */ 
+
+/* Icons as illustrations */
+.container-flex div[class*='col-'] figure.icon {
+    display: block; line-height: 1.4;
+    color: var(--gray-600);
+}
+
+/* Icons centre-aligned */
+div[class*='col-'] figure.icon { 
+    text-align: center; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Icons left-aligned */
+.icon-left div[class*='col-'] figure.icon { 
+    text-align: left;
+    margin-left: 0;
+}
+
+/* Video - files */
+.container-video-file {
+    object-fit: contain;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.container-video-file video {
+    width: 100%;
+    height: auto;
+}
+
+/* Video - YouTube */
+.container-video-yt {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+}
+ 
+.container-video-yt::after {
+    padding-top: 56.25%;
+    display: block;
+    content: '';
+}
+ 
+.container-video-yt iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Faux Buttons */
+div[class*='col-'] a.btn { 
+    margin-top: 12px; margin-bottom: 12px;
+}
+
+a.btn i { margin-right: 14px; color: inherit } 
+
+/* Primary buttons */
+.btn-primary:any-link {
+    border: solid 2px #000; 
+    color: #fff; 
+    background-color: #000; 
+} 
+
+:is(.btn-primary:focus, .btn-primary:hover, .btn-primary:active)  {
+    border: solid 2px var(--gray-700); 
+    background-color: var(--gray-700);  
+    color: #fff;
+}
+
+:is(.btn-primary:focus i, .btn-primary:hover i, .btn-primary:active i)  {
+    color: inherit;
+}
+
+/* Secondary buttons */
+.btn-secondary:any-link {
+    border: solid 2px #000; 
+    color: #000; 
+    background-color: #fff; 
+} 
+
+:is(.btn-secondary:focus, .btn-secondary:hover, .btn-secondary:active)  {
+    border: solid 2px var(--gray-700); 
+    background-color: var(--gray-700);  
+    color: #fff;
+}
+
+:is(.btn-secondary:focus i, .btn-secondary:hover i, .btn-secondary:active i)  {
+    color: inherit;
+}
+
+/* Ghost buttons */
+.btn-ghost:any-link {
+    border: solid 2px #000; 
+    color: #000; 
+    background-color: transparent; 
+} 
+
+:is(.btn-ghost:focus, .btn-ghost:hover, .btn-ghost:active)  {
+    border: solid 2px #000; 
+    background-color: #000;  
+    color: #fff;
+}
+
+:is(.btn-ghost:focus i, .btn-ghost:hover i, .btn-ghost:active i)  {
+    color: inherit;
+}
+
+/* Hyperlinks in text */
+a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+}
+
+a:any-link {
+    color: var(--blue-700);
+}
+
+:is(a:focus, a:hover, a:active) {
+    text-decoration: underline;
+    color: var(#000);
+    background-color: var(--gray-200);
+}
+
+/* Animations - only when the web page loads */
 .slide-in-top {
 	animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -50,62 +221,5 @@
 }
 
 
-/* ==================== Videos ================== */
 
-/* Video file */
-.container-video-file {
-    object-fit: contain;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-
-.container-video-file video {
-    width: 100%;
-    height: auto;
-}
-
-/* YouTube Video */
-.container-video-yt {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin-bottom: 32px;
- }
- 
- .container-video-yt::after {
-    padding-top: 56.25%;
-    display: block;
-    content: '';
- }
- 
- .container-video-yt iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
- }
-
-/* ============ IMAGE FANCY EFFECTS =========== */
-
-figure { margin-top: 24px }
-.img-shadow figure img {
-    filter: drop-shadow(8px 8px 10px var(--drop-shadow));
-}
-
-.img-border figure img {
-    border: solid 2px var(--img-border);
-}
-
-.img-corners-soft figure img {
-    border-radius: 15px;
-}
-
-.img-rotate-clock figure img { transform: rotate(1deg) }
-.img-rotate-cclock figure img { transform: rotate(-1deg) }
-
-/* For square images only */
-img.rounded { border-radius: 50% }
 
