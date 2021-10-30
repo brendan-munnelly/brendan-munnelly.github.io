@@ -4,38 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Column Layout | LunaDoge | Brendan Munnelly</title>
+    <title>One Column Layout | LunaDoge | Brendan Munnelly</title>
     <meta name="description" content="A JavaScript app for creating HTML5 web page sections. From www.munnelly.com.">
 
     <meta name="author" content="Brendan Munnelly">
 
-	<!-- Stylesheets -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/modal.css" />
-	<link rel="stylesheet" href="assets/css/controls-grid.css" />
+    <link rel="stylesheet" href="assets/css/controls-section.css" />
     <link rel="stylesheet" href="assets/css/lunadoge.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-    
-	<!-- Font Awesome 5 icons -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
 
-    <!-- Light Awesome icons -->
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-
-    <!-- Google Material Design Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-    rel="stylesheet">
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
 
 
 </head>
 
-
 <body>
 
-	<div class="controls-top">
+    <div class="controls-top">
         <nav id="control-menu">
           <ul>
                 <li><a href="index.html"><i class="fas fa-home"></i> &nbsp;Home</a></li>
-
+        
                 <li class="dropdown">
                     <span id="menu-1" class="dropbtn">Section</span>
                     <div id="content-1" class="dropdown-content dropdown-hidden">
@@ -52,186 +44,136 @@
                                 </select>
                             </div>
 
-                            <div class="input-group" style="display: none">
-                                <label>Column Blocks</label>
-                                <select id="dd_colNos">
-                                    <option value="0" selected="selected">3</option>
-                                    <option value="1">6</option>
+                            <div class="input-group">
+                                <label>Paragraphs &lt;p&gt;</label>
+                                <select id="dd_paraNos">
+                                    <option value="0">1</option>
+                                    <option value="1">2</option>
+                                    <option value="2" selected="selected">3</option>
+                                    <option value="3">4</option>
+                                    <option value="4">5</option>
+                                    <option value="5">6</option>
                                 </select>
-                            </div> 
+                            </div><!-- /input-group -->
+
+                            <div class="input-group" style="margin-bottom: 20px">
+                                <label>Section Align</label>
+                                <select id="dd_section_align">
+                                    <option value="0" selected="selected">Left</option>
+                                    <option value="1">Centre</option>
+                                </select>
+                            </div><!-- /input-group -->
 
                             <h4>COLOURS</h4>
-                            <div class="input-group">
+                            <div class="input-group" style="margin-bottom: 24px">
+                                
                                 <label>Background</label>
                                 <div><button id="btn_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
-                                
-                            </div>
-                            <p style="margin-bottom: 24px;font-weight: 400">(Or a <a href="https://mycolor.space/gradient" target="_blank" rel="noopener">colour gradient</a>? &nbsp;Copy code to custom.css.)</p>
-                            <h4>UPPER BLOCK</h4>
-                            <div class="input-group" style="margin-bottom: 24px">
-                                <label>Upper Label <span>&lt;div&gt;</span></label>
-                                <div><button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
-                            </div>
-                            <div class="input-group" style="margin-bottom: 24px">
-                                <label>Heading <span>&lt;h2&gt;</span></label>
-                                <div><button id="btn_upper_head" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
-                            </div>
-                            <div class="input-group">
-                                <label>Sub-heading <span>&lt;h3&gt;</span></label>
-                                <div><button id="btn_upper_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
                             </div>
 
-                            <h4>COLUMNS</h4>
                             <div class="input-group" style="margin-bottom: 24px">
-                                <label>Sub-heading <span>&lt;h3&gt;</span></label>
-                                <div><button id="btn_col_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                                <label>Upper Label</label>
+                                <div><button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
                             </div>
+
+                            <div class="input-group" style="margin-bottom: 24px">
+                                <label>&lt;h2&gt;, &lt;h3&gt;</label>
+                                <div><button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
                             <div class="input-group">
-                                <label>Text <span>&lt;p&gt; and &lt;li&gt;</span></label>
-                                <div><button id="btn_col_text" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                                <label>&lt;p&gt;, &lt;li&gt; and <br>&lt;figcaption&gt;</label>
+                                <div><button id="btn_text" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
                             </div>
+                            <h4>HYPERLINKS</h4>
+                            
+                            <div class="input-group">
+                                <label>Text</label>
+                                <div><button id="btn_a_passive" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;
+                                
+                                <div><button id="btn_a_active" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                               <div class="input-group">
+                                <label>Background</label>
+                                <div><button id="btn_a_passive_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
                       </div>
                     </div><!-- /dropdown-content -->
                 </li>
 
                 <li class="dropdown">
-                  <span id="menu-2" class="dropbtn">Upper Block</span>
-                  <div id="content-2" class="dropdown-content dropdown-hidden">
-        
-                      <div class="dialog-box">
-        
-                        <div class="input-group">
-                            <label>Upper Label <span>&lt;div&gt;</span></label>
-                            <select id="dd_upperLabel">
-                                <option value="0" selected="selected">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div><!-- /input-group -->
-
-                        <div class="input-group">
-                            <label>Section Heading <span>&lt;h2&gt;</span></label>
-                            <select id="dd_h2">
-                                <option value="0" selected="selected">Short</option>
-                                <option value="1">Long</option>
-                                <option value="2">None</option>
-                            </select>
-                        </div><!-- /input-group -->
-        
-                        <div class="input-group">
-                            <label>Sub-heading <span>&lt;h3&gt;</span></label>
-                            <select id="dd_subhead">
-                                <option value="0" selected="selected">Yes</option>
-                                <option value="1">None</option>
-                            </select>
-                        </div><!-- /input-group -->
-
-                        <div class="input-group">
-                            <label>Align</label>
-                            <select id="dd_align_col_1">
-                                <option value="0" selected="selected">Centre</option>
-                                <option value="1">Left</option>
-                            </select>
-                        </div><!-- /input-group -->
-              
-                    </div>
-                  </div><!-- /dropdown-content -->
-                </li>
-
-                <li class="dropdown">
-                    <span id="menu-3" class="dropbtn">Columns</span>
-                    <div id="content-3" class="dropdown-content dropdown-hidden">
+                    <span id="menu-2" class="dropbtn">Text</span>
+                    <div id="content-2" class="dropdown-content dropdown-hidden">
           
                         <form id="col-properties" name="col-properties">
-                            <div class="dialog-box">                
-                            
+                            <div class="dialog-box">     
                                 <div class="input-group">
-                                    <label>Align</label>
-                                    <select id="dd_col_align">
-                                        <option value="0" selected="selected">Left</option>
-                                        <option value="1">Center</option>
-                                    </select>
-                                </div><!-- /input-group -->
-
-                                <div class="input-group">
-                                    <label>Shadows</label>
-                                    <select id="dd_col_shadows">
+                                    <label>Upper Label <span>&lt;div&gt;</span></label>
+                                    <select id="dd_upperLabel">
                                         <option value="0" selected="selected">No</option>
                                         <option value="1">Yes</option>
                                     </select>
                                 </div><!-- /input-group -->
-                
+
                                 <div class="input-group">
-                                    <label>Borders</label>
-                                    <select id="dd_col_borders">
+                                    <label>Standfirst/Deckhead</label>
+                                    <select id="dd_standfirst">
                                         <option value="0" selected="selected">No</option>
                                         <option value="1">Yes</option>
                                     </select>
                                 </div><!-- /input-group -->
-                                            
+
                                 <div class="input-group">
-                                    <label>Corners</label>
-                                    <select id="dd_col_corners">
-                                        <option value="0" selected="selected">Square</option>
-                                        <option value="1">Soft</option>
-                                    </select>
-                                </div><!-- /input-group -->
-<!--
-                                <div class="input-group">
-                                    <label>Backgrounds</label>
-                                    <select id="dd_col_backgrounds">
+                                    <label>Sub-Headings <span>&lt;h3&gt;</span></label>
+                                    <select id="dd_h3">
                                         <option value="0" selected="selected">No</option>
-                                        <option value="1">Light</option>
-                                        <option value="2">Dark</option>
+                                        <option value="1">Yes</option>
                                     </select>
-                                </div> -->
+                                </div>
 
-                               <div class="input-group">
-                                    <label>Columns &nbsp;<i class="fas fa-mobile-alt"></i></label>
-                                    <select id="dd_cols_mobile">
-                                        <option value="0" selected="selected">One</option>
-                                        <option value="1">Two</option>
+                                <div class="input-group">
+                                    <label>List <span>&lt;ul&gt;</span></label>
+                                    <select id="dd_lists">
+                                        <option value="0" selected="selected">No</option>
+                                        <option value="1">Short</option>
+                                        <option value="2">Long</option>
                                     </select>
-                                </div><!-- /input-group -->
-
+                                </div>
                             </div>
                         </form>
                     </div><!-- /dropdown-content -->
                   </li>
 
-        
-                <li class="dropdown">
-                    <span id="menu-4" class="dropbtn">Text</span>
-                    <div id="content-4" class="dropdown-content dropdown-hidden">
+                  <li class="dropdown">
+                    <span id="menu-3" class="dropbtn">Buttons</span>
+                    <div id="content-3" class="dropdown-content dropdown-hidden">
         
                         <div class="dialog-box">
                             <div>
                                 <form id="col-content" name="col-content">
-                                   <div class="input-group">
-                                        <label>Sub-Headings <span>&lt;h3&gt;</span></label>
-                                        <select id="dd_h3">
-                                            <option value="0" selected="selected">Yes</option>
-                                            <option value="1">None</option>
-                                        </select>
-                                    </div>
-        
+
                                     <div class="input-group">
-                                        <label>Text</label>
-                                        <select id="dd_text">
-                                            <option value="0">None</option>
-                                            <option value="1" selected="selected">Paragraphs</option>
-                                            <option value="2">Lists</option>
-                                        </select>
-                                    </div>
-        
-                                    <div class="input-group">
-                                        <label>Buttons</label>
+                                        <label>Faux Buttons</label>
                                         <select id="dd_buttons">
                                             <option value="0" selected="selected">None</option>
-                                            <option value="1">Solid</option>
-                                            <option value="2">Ghost</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
                                         </select>
                                     </div>
-        
+
+                                    <div class="input-group">
+                                        <label>Button Align</label>
+                                        <select id="dd_buttons_align">
+                                            <option value="0" selected="selected">Left</option>
+                                            <option value="1">Centre</option>
+                                        </select>
+                                    </div>
+
                                     <div class="input-group">
                                         <label>Buttons Style</label>
                                         <select id="dd_buttons_style">
@@ -240,8 +182,7 @@
                                             <option value="2">Rounded</option>
                                         </select>
                                     </div>
-
-                                    <h4 style="margin-top:20px">PRIMARY BUTTON</h4>
+                                    <h4>&nbsp;&nbsp;PRIMARY BUTTON</h4>
                                     <div class="input-group two-col">
                                         <div class="column column-wider">
                                             <label>Text</label>
@@ -265,43 +206,45 @@
                                     <div class="input-group two-col">
                                         <div class="column column-wider">
                                             <label>Border</label>
-                                            <div><button  id="btn_a_primary_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                            <div><button id="btn_a_primary_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                         </div>
                                         <div class="column">
                                             <div><button id="btn_a_primary_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                         </div>
                                     </div>
 
-                                    <h4>GHOST BUTTON</h4>
+
+                                    <h4>&nbsp;&nbsp;SECONDARY BUTTON</h4>
                                     <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Text</label>
-                                                <div><button id="btn_a_ghost_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                                <div><button id="btn_a_secondary_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
                                         
                                         <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Background</label>
-                                                <div></div>
+                                                <div><button id="btn_a_secondary_passive_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
     
                                         <div class="input-group two-col">
                                             <div class="column column-wider">
                                                 <label>Border</label>
-                                                <div><button id="btn_a_ghost_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                                <div><button id="btn_a_secondary_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
                                             </div>
                                             <div class="column">
-                                                <div><button id="btn_a_ghost_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                                                <div><button id="btn_a_secondary_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
                                             </div>
                                         </div>
+
                                     </form>
                                 </div>    
                         </div><!-- /dialog-box -->
@@ -309,21 +252,21 @@
                 </li>
         
                 <li class="dropdown">
-                    <span id="menu-5" class="dropbtn">Illustrations</span>
-                    <div id="content-5" class="dropdown-content dropdown-hidden">
+                    <span id="menu-4" class="dropbtn">Illustrations</span>
+                    <div id="content-4" class="dropdown-content dropdown-hidden">
                         <div class="dialog-box">
                             <div class="flex-two-col">
                                 <div>
                                     <form id="vis-types-all" name="vis-types-all">
-                                        <h4>TYPE</h4>
+                                        <h4>IMAGE</h4>
         
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="vis_type_0" name="dd_visual" value="none">
+                                            <input type="radio" id="vis_type_0" name="dd_visual" value="none" checked>
                                             <label for="vis_type_0">None</label>
                                         </div>
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="vis_type_1" name="dd_visual" value="pictures" checked>
-                                            <label for="vis_type_1">Pictures</label>
+                                            <input type="radio" id="vis_type_1" name="dd_visual" value="pictures">
+                                            <label for="vis_type_1">Picture</label>
                                         </div>
                                         <div class="input-group-vertical">
                                             <input type="radio" id="vis_type_2" name="dd_visual" value="transparent">
@@ -331,23 +274,28 @@
                                         </div>
                                         <div class="input-group-vertical">
                                             <input type="radio" id="vis_type_3" name="dd_visual" value="illustrations">
-                                            <label for="vis_type_3">Drawings</label>
-                                        </div>
-                                        <h4>ICONS</h4>
-                                        <div class="input-group-vertical">
-                                            <input type="radio" id="vis_type_4" name="dd_visual" value="icons-fa">
-                                            <label for="vis_type_4">Font Awesome</label>
-                                        </div>
-                                        <div class="input-group-vertical">
-                                            <input type="radio" id="vis_type_5" name="dd_visual" value="icons-la">
-                                            <label for="vis_type_5">Light Awesome</label>
-                                        </div>
-                                        <div class="input-group-vertical">    
-                                            <input type="radio" id="vis_type_6" name="dd_visual" value="icons-md">
-                                            <label for="vis_type_6">Material UI</label>
+                                            <label for="vis_type_3">Drawing</label>
                                         </div>
                                     </form>
-                                </div><!-- /first-child -->
+ 
+                                <form id="vid-types-all" name="vid-types-all">
+                                    <h4>VIDS</h4>
+    
+                                    <div class="input-group-vertical">
+                                        <input type="radio" id="vid_type_0" name="dd_vid" value="none" checked>
+                                        <label for="vid_type_0">None</label>
+                                    </div>
+                                    <div class="input-group-vertical">
+                                        <input type="radio" id="vid_type_1" name="dd_vid" value="file">
+                                        <label for="vid_type_1">File</label>
+                                    </div>
+                                    <div class="input-group-vertical">
+                                        <input type="radio" id="vid_type_2" name="dd_vid" value="yt">
+                                        <label for="vid_type_2">YouTube</label>
+                                    </div>
+                                </form>
+                            </div><!-- /first-child -->
+
                                 <div>
                                     <form id="vis-properties-all" name="vis-properties-all">
                                         
@@ -377,25 +325,23 @@
                                             </select>
                                         </div><!-- /input-group -->
 
-                                        <h4>&nbsp;</h4>
-                                        <h4 style="line-height:2">&nbsp;</h4>
-                                        
                                         <div class="input-group-vertical">
-                                            <label>Icon Size</label>
-                                            <select id="dd_icon_size">
-                                                <option value="0" selected="selected">Large</option>
-                                                <option value="1">Small</option>
+                                            <label>Rotate</label>
+                                            <select id="dd_image_rotate">
+                                                <option value="0" selected="selected">None</option>
+                                                <option value="1">Clock</option>
+                                                <option value="2">CClock</option>
                                             </select>
-                                        </div>
+                                        </div><!-- /input-group -->
 
-                                        <div class="input-group-vertical">
-                                            <label>Icon Align</label>
-                                            <select id="dd_icon_align">
-                                                <option value="0" selected="selected">Centre</option>
-                                                <option value="1">Left</option>
+                                        <div style="display: none" class="input-group-vertical">
+                                            <label>Caption</label>
+                                            <select id="dd_caption">
+                                                <option value="0" selected="selected">No</option>
+                                                <option value="1">Yes</option>
                                             </select>
-                                        </div>
-                                        
+                                        </div><!-- /input-group -->
+
                                     </form>
                                 </div><!-- /second-child -->
                             </div><!-- /flex -->
@@ -412,13 +358,12 @@
                         </button>
                     </span>
                 </li>
-        
             </ul>
     </nav>
 </div>
-    
+
 <main>
-    
+
     <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -826,188 +771,101 @@
   </div><!-- / Modal -->
   
   </div><!-- / Modal content -->
+    <div id="HTML-Content">
 
-	<div id="HTML-Content">
-
-	</div>
+    </div>
 
 </main>
 
-<script>
-   
-	// Inital resets
-	document.addEventListener("DOMContentLoaded", resetMenuOptions);
+     <script>
 
-	function resetMenuOptions() {
+        // Inital resets
+        document.addEventListener("DOMContentLoaded", resetMenuOptions);
 
-        // Sections
-        document.getElementById("dd_className").value="0";
-        document.getElementById("dd_colNos").value="0";
+        function resetMenuOptions() {   
+            // Sections
+            document.getElementById("dd_className").value="0";
+            document.getElementById("dd_paraNos").value="2";
 
-        // Upper block
-		document.getElementById("dd_h2").value="0";	
-		document.getElementById("dd_subhead").value="0";
-        document.getElementById("dd_align_col_1").value="0";
-        document.getElementById("dd_upperLabel").value="0";
-            
-        // Columns
-        document.getElementById("dd_col_align").value="0";  
-        document.getElementById("dd_col_shadows").value="0";
-        document.getElementById("dd_col_shadows").disabled=false;
-        document.getElementById("dd_col_borders").value="0";
-        document.getElementById("dd_col_borders").disabled=false;
-        document.getElementById("dd_col_corners").value="0";
-        document.getElementById("dd_col_corners").disabled=true; 
-        // document.getElementById("dd_col_backgrounds").value="0";
-        // document.getElementById("dd_col_backgrounds").disabled=false; 
-        document.getElementById("dd_cols_mobile").value="0";
+            // Text
+            document.getElementById("dd_upperLabel").value="0";
+            document.getElementById("dd_section_align").value="0";
+            document.getElementById("dd_standfirst").value="0";
+            document.getElementById("dd_h3").value="0";
+            document.getElementById("dd_lists").value="0";
+            document.getElementById("dd_buttons").value="0";
+            document.getElementById("dd_buttons_align").value="0";
+            document.getElementById("dd_buttons_align").disabled=true;
+            document.getElementById("dd_buttons_style").value="0";
+            document.getElementById("dd_buttons_style").disabled=true;
 
-        // Text
-        document.getElementById("dd_h3").value="0";
-        document.getElementById("dd_text").value="1";
-        document.getElementById("dd_buttons").value="0";
-        document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("dd_buttons_style").disabled=true;
+            // Buttons
+            document.getElementById("btn_a_primary_active_text").disabled=true;
+            document.getElementById("btn_a_primary_passive_text").disabled=true;
 
-        // Buttons
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
+            document.getElementById("btn_a_primary_passive_bg").disabled=true;
+            document.getElementById("btn_a_primary_active_bg").disabled=true;
 
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;
+            document.getElementById("btn_a_primary_passive_border").disabled=true;
+            document.getElementById("btn_a_primary_active_border").disabled=true;
 
-        // Illustrations
-        document.getElementById("vis_type_0").checked=false;
-        document.getElementById("vis_type_1").checked=true;
-        document.getElementById("vis_type_2").checked=false;
-        document.getElementById("vis_type_3").checked=false;
-        document.getElementById("vis_type_4").checked=false;
-        document.getElementById("vis_type_5").checked=false;
-        document.getElementById("vis_type_6").checked=false;
+            document.getElementById("btn_a_secondary_passive_text").disabled=true;
+            document.getElementById("btn_a_secondary_active_text").disabled=true;
 
-        document.getElementById("dd_image_corners").value="0";
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+            document.getElementById("btn_a_secondary_active_bg").disabled=true;
 
-        document.getElementById("dd_icon_size").value="0";
-        document.getElementById("dd_icon_size").disabled=true;
-        document.getElementById("dd_icon_align").value="0";
-        document.getElementById("dd_icon_align").disabled=true;
-	}
+            document.getElementById("btn_a_secondary_passive_border").disabled=true;
+            document.getElementById("btn_a_secondary_active_border").disabled=true;
 
-    // Initial page content load
+            // Illustrations
+            document.getElementById("vis_type_0").checked=true;
+            document.getElementById("vis_type_1").checked=false;
+            document.getElementById("vis_type_2").checked=false;
+            document.getElementById("vis_type_3").checked=false;
 
-    let HTML_Content="";
-    HTML_Content = "\n\t<section class=\"container-flex theme-one\">\n\t\t<div class=\"col-1 text-center\">\n\t\t\t<h2>Lorem Malesuada Dolor<\/h2>\n\t\t\t<h3>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.<\/h3>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-food.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-laptop-window.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Laptop window\"><\/figure><h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t\<\/div>\n\t\<\/section>";
+            document.getElementById("vid_type_0").checked=true;
+            document.getElementById("vid_type_1").checked=false;
+            document.getElementById("vid_type_2").checked=false;
 
-    document.getElementById("HTML-Content").innerHTML = HTML_Content;
-    
-    // Global variables
-    let i = 2; // Initial counter value for looping through child columns 
-    let col_no; // Column width of grid
-    let col_blocks; // Numnber of column blocks
-    if (document.querySelector('.col-2')) { 
-        col_no = ".col-2";
-    }
-    else if (document.querySelector('.col-3')) { 
-        col_no = ".col-3";
-        col_blocks = 3;
-    }
-    else if (document.querySelector('.col-4')) { 
-        col_no = ".col-4";
-    }
-    // Number of column blocks
-    let col_count = document.querySelectorAll(col_no).length;
-    console.log("col_count: " +col_count);
-    let assetsArray = myRandomInts(col_count, col_count);
-
-    function myRandomInts(quantity, max) {
-        const arr = []
-        while(arr.length < quantity){
-            var candidateInt = Math.floor(Math.random() * max) + 1
-            if(arr.indexOf(candidateInt) === -1) arr.push(candidateInt)
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_rotate").value="0";
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_rotate").disabled=false;
         }
-        return(arr)
-    }
 
-    /* Text Content Assets */
-    const content_h3 = "\n\t\t\t\t<h3>Lorem ipsum dolo<\/h3>\n";
+        // Global variables
+        let para_nos = 3;
+        let btn_id;
 
-    const content_paras = "\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-food.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-laptop-window.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-3\">\n\t\t\t<figure><img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Laptop window\"><\/figure><h3>Lorem ipsum dolo<\/h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia ad molestias.<\/p>\n\t\t\<\/div>";
+        // Initial page content load
 
-    const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam vel faucibus.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta. Maecenas rutrum tellus.<\/li>\n\t\t\t\t\t<li><b>Sodales<\/b>: Fusce mollis. Vestibulum turpis elit, facilisis a metus non, ultricies congue ligula.<\/li>\n\t\t\t\t<\/ul>\n";
+        let HTML_Content="<section class=\"theme-one\">\n\n\t<h2>Lorem Malesuada Dolor<\/h2>\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Vel, sit <a href=\"#\">perferendis officia<\/a> ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda iusto ipsum.<\/p>\n\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Vel, sit <a href=\"#\">perferendis officia<\/a> ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda iusto ipsum.</p>\n\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Vel, sit <a href=\"#\">perferendis officia<\/a> ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda iusto ipsum.</p>\n\n<\/section>\n";
+        
+        document.getElementById("HTML-Content").innerHTML = HTML_Content;
 
-    let picArray = [];
-    picArray[assetsArray[0]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-design.jpg\" alt=\"Design\"><\/figure>";
-    picArray[assetsArray[1]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-food.jpg\" alt=\"Food\"><\/figure>";
-    picArray[assetsArray[2]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-gap-of-dunloe.jpg\" alt=\"Gap of Dunloe\"><\/figure>";
-    picArray[assetsArray[3]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-kitchen.jpg\" alt=\"Kitchen\"><\/figure>";
-    picArray[assetsArray[4]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-laptop-window.jpg\" alt=\"Laptop window\"><\/figure>";
-    picArray[assetsArray[5]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Shop\"><\/figure>";
+       /* Text Content Assets */
+        const content_h3 = "\t<h3>Lorem ipsum dolo facilisis<\/h3>\n";
 
-    let transArray = [];
-    transArray[assetsArray[0]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-man-laptop.png\" alt=\"Man laptop\"><\/figure>";
-    transArray[assetsArray[1]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-smiling.png\" alt=\"Woman smiling\"><\/figure>";
-    transArray[assetsArray[2]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-spectacles.png\" alt=\"Woman Spectacles\"><\/figure>";
-    transArray[assetsArray[3]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-man-coffee.png\" alt=\"Man Coffee\"><\/figure>";
-    transArray[assetsArray[4]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-business.png\" alt=\"Woman business\"><\/figure>";
-    transArray[assetsArray[5]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-planning.png\" alt=\"Woman working\"><\/figure>";
-    transArray[assetsArray[6]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-smiling.png\" alt=\"Woman Smiling\"><\/figure>";
-    transArray[assetsArray[7]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-trans-woman-looking-right.png\" alt=\"Woman looking right\"><\/figure>";
+        const content_paras = "\n\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Vel, sit <a href=\"#\">perferendis officia<\/a> ad molestias optio deserunt iste excepturi. qui unde dolores architecto error assumenda iusto ipsum.<\/p>\n";
 
-    let illusArray = [];  
-    illusArray[assetsArray[0]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-building.png\" alt=\"Building\"><\/figure>";
-    illusArray[assetsArray[1]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-resume.png\" alt=\"Resume\"><\/figure>";
-    illusArray[assetsArray[2]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-gift.png\" alt=\"Gift\"><\/figure>";
-    illusArray[assetsArray[3]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-work-chat.png\" alt=\"Work chat\"><\/figure>";
-    illusArray[assetsArray[4]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-travel.png\" alt=\"Travel\"><\/figure>";
-    illusArray[assetsArray[5]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-metrics.png\" alt=\"Metrics\"><\/figure>"; 
-    illusArray[assetsArray[6]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-landscape.png\" alt=\"Landscape\"><\/figure>";
-    illusArray[assetsArray[7]]="\n\t\t\t\<figure><img src=\"assets\/img\/460x300-drawing-chat-bot.png\" alt=\"Chat bot\"><\/figure>";   
+        const content_ul_short = "\n\t<ul>\n\t\t<li>Arcu quis nunc suscipit<\/li>\n\t\t<li>Egestas a hendrerit leo.<\/li>\n\t\t<li>Donec lacinia sed<\/li>\n\t<\/ul>\n";
 
-    let iconFAArray = [];             
-    iconFAArray[assetsArray[0]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-user-friends\"><\/i><\/figure>";
-    iconFAArray[assetsArray[1]]="\n\t\t\t\<figure class=\"icon\"><i class=\"far fa-comments\"><\/i><\/figure>";
-    iconFAArray[assetsArray[2]]="\n\t\t\t\<figure class=\"icon\"><i class=\"far fa-lightbulb\"><\/i><\/figure>";
-    iconFAArray[assetsArray[3]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-globe\"><\/i><\/figure>";
-    iconFAArray[assetsArray[4]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-rocket\"><\/i><\/figure>";
-    iconFAArray[assetsArray[5]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-shopping-cart\"><\/i><\/figure>";
-    iconFAArray[assetsArray[6]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-briefcase\"><\/i><\/figure>";   
-    iconFAArray[assetsArray[7]]="\n\t\t\t\<figure class=\"icon\"><i class=\"fas fa-book-reader\"><\/i><\/figure>";  
+        const content_ul_long = "\n\t<ul>\n\t\t<li>Vestibulum turpis elit facilisis a metus non, ultricies congue ligula. Landit gravida nibh malesuada suscipit.<\/li>\n\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta. Maecenas rutrum tellus tristique congue finibus tristique.<\/li>\n\t\t<li><i>Quisque<\/i>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam vel faucibus. Nunc dignissim rutrum porta.<\/li>\n\t<\/ul>\n";
 
-    let iconLAArray = [];             
-    iconLAArray[assetsArray[0]]="\n\t\t\t<figure class=\"icon\"><i class=\"las la-user-friends\"><\/i><\/figure>";
-    iconLAArray[assetsArray[1]]="\n\t\t\t<figure class=\"icon\"><i class=\"las la-comments\"><\/i><\/figure>";
-    iconLAArray[assetsArray[2]]="\n\t\t\t<figure class=\"icon\"><i class=\"las la-lightbulb\"><\/i><\/figure>";
-    iconLAArray[assetsArray[3]]="\n\t\t\t<figure class=\"icon\"><i class=\"las la-globe\"><\/i><\/figure>";
-    iconLAArray[assetsArray[4]]="\n\t\t\t<figure class=\"icon\"><i class=\"las la-rocket\"><\/i><\/figure>";
-    iconLAArray[assetsArray[5]]="\n\t\t\t\<figure class=\"icon\"><i class=\"las la-shopping-cart\"><\/i><\/figure>";   
-    iconLAArray[assetsArray[6]]="\n\t\t\t\t<figure class=\"icon\"><i class=\"las la-briefcase\"><\/i><\/figure>";
-    iconLAArray[assetsArray[7]]="\n\t\t\t\<figure class=\"icon\"><i class=\"las la-book-reader\"><\/i><\/figure>"; 
+        const content_button_one ="\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"><\/i> Order now</a>\n\t</div>\n\n";
 
-    let iconMDArray = [];             
-    iconMDArray[assetsArray[0]]="\n\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">people<\/span><\/figure>";
-    iconMDArray[assetsArray[1]]="\n\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">forum<\/span><\/figure>";
-    iconMDArray[assetsArray[2]]="\n\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">lightbulb<\/span><\/figure>";
-    iconMDArray[assetsArray[3]]="\n\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">public<\/span><\/figure>";
-    iconMDArray[assetsArray[4]]="\n\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">launch<\/span><\/figure>";
-    iconMDArray[assetsArray[5]]="\n\t\t\t\<figure class=\"icon\"><span class=\"material-icons-outlined\">shopping_cart<\/span><\/figure>";   
-    iconMDArray[assetsArray[6]]="\n\t\t\t\t<figure class=\"icon\"><span class=\"material-icons-outlined\">work_outline<\/span><\/figure>";
-    iconMDArray[assetsArray[7]]="\n\t\t\t\<figure class=\"icon\"><span class=\"material-icons-outlined\">local_library<\/span><\/figure>"; 
+        const content_button_two ="\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"><\/i> Order now</a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"><\/i> Learn more<\/a>\n\t</div>\n\n";
 
+        const content_caption = "<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption>";
     </script>
 
-<script src="assets/js/main.js"></script>
+    <script src="assets/js/section.js"></script>
+ 
 
 </body>
 </html>
