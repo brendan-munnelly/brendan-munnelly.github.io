@@ -851,7 +851,8 @@ function removeVideo() {
         const figureVid = document.querySelector('figure .container-video-file video');
         figureVid.remove();
         HTML_Content = document.getElementById("HTML-Content").innerHTML;
-HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
+        /// HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'123');
+        HTML_Content = HTML_Content.replace(/\n\n\t<figure>\n\t\t<div class=\"container-video-file\">/g,'');
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
         console.log("remove video");
     } 
@@ -859,9 +860,9 @@ HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"
     else if (document.querySelector('figure .container-video-yt')) {
         const videoYT = document.querySelector('.container-video-yt');
         videoYT.remove();
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
+        // HTML_Content = document.getElementById("HTML-Content").innerHTML;
+        // HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
+        // document.getElementById("HTML-Content").innerHTML = HTML_Content;
         console.log("remove video");
     } 
 }
