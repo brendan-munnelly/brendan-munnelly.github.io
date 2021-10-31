@@ -22,6 +22,10 @@ divs.forEach(el => el.addEventListener('click', event => {
 // Hide menus when click on page
 document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
 
+if(!navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+    document.querySelector("#HTML-Content").addEventListener("click",  hideOffCanvas);
+}
+
 function hideMenus() {
     let i;
     for (i = 1; i < 6; i++) {
@@ -102,39 +106,40 @@ function doColOrder() {
 /*
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
 */
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 
     // On click style button 
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
         // get button id
+        event.preventDefault();
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
-        displayModal();
+        displayOffCanvas();
     }));
 
-    function displayModal() {
-        modal.style.display = "block";
+    function displayOffCanvas() {
         event.preventDefault();
+        const el_offCanvas = document.querySelector("#off-canvas-block");
+        el_offCanvas.classList.remove("is-hidden");
+        el_offCanvas.classList.add("is-visible");
+        const el_HTML = document.querySelector("#HTML-Content");
+        // el_HTML.removeEventListener('click', hideOffCanvas);
+    }
+
+    document.querySelector("#btn_close").addEventListener("click", hideOffCanvas);
+
+    function hideOffCanvas() {
+        event.preventDefault();
+        var el_offCanvas = document.getElementById("off-canvas-block");
+        el_offCanvas.classList.remove("is-visible");
+        el_offCanvas.classList.add("is-hidden");
     }
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);
-      
+
     function getColorID() {
+        document.querySelector("#HTML-Content").addEventListener("click",  hideOffCanvas);
+
         if (event.target.id.toString() !="") {
             let newStyle;
             /* Section background */
@@ -250,7 +255,8 @@ function doColOrder() {
 
             /* Icons colour */
             else if (btn_id === "btn_icon_color") {
-                newStyle = "."+section_class+" figure.icon var("+event.target.id+") } \n";
+                newStyle = "."+section_class+" "+col_no+" figure.icon { color: var("+event.target.id+") } \n";
+                console.log(newStyle);
             }
 
             style = document.createElement('style');
@@ -1131,6 +1137,7 @@ function doVisType() {
         resetVisualEffects();
         document.getElementById("dd_icon_size").disabled=true;
         document.getElementById("dd_icon_align").disabled=true;
+        document.getElementById("btn_icon_color").disabled=true;
     }
 
     else if (selectedValue==="pictures") {
@@ -1147,6 +1154,7 @@ function doVisType() {
         document.getElementById("dd_image_borders").disabled=false;
         document.getElementById("dd_icon_size").disabled=true;
         document.getElementById("dd_icon_align").disabled=true;
+        document.getElementById("btn_icon_color").disabled=true;
     }
 
     else if (selectedValue==="transparent") {
@@ -1163,6 +1171,7 @@ function doVisType() {
         document.getElementById("dd_image_borders").disabled=true;
         document.getElementById("dd_icon_size").disabled=true;
         document.getElementById("dd_icon_align").disabled=true;
+        document.getElementById("btn_icon_color").disabled=true;
     }
 
     else if (selectedValue==="illustrations") {
@@ -1179,6 +1188,7 @@ function doVisType() {
         document.getElementById("dd_image_borders").disabled=true;
         document.getElementById("dd_icon_size").disabled=true;
         document.getElementById("dd_icon_align").disabled=true;
+        document.getElementById("btn_icon_color").disabled=true;
     }
 
     else if (selectedValue==="icons-fa") {
@@ -1197,6 +1207,7 @@ function doVisType() {
 
         document.getElementById("dd_icon_size").disabled=false;
         document.getElementById("dd_icon_align").disabled=false;
+        document.getElementById("btn_icon_color").disabled=false;
     }
 
     else if (selectedValue==="icons-la") {
@@ -1216,7 +1227,7 @@ function doVisType() {
 
         document.getElementById("dd_icon_size").disabled=false;
         document.getElementById("dd_icon_align").disabled=false;
-
+        document.getElementById("btn_icon_color").disabled=false;
     }
 
     else if (selectedValue==="icons-md") {
@@ -1236,7 +1247,7 @@ function doVisType() {
         
         document.getElementById("dd_icon_size").disabled=false;
         document.getElementById("dd_icon_align").disabled=false;
-
+        document.getElementById("btn_icon_color").disabled=false;
     }
 }
 
