@@ -69,73 +69,73 @@ function hideMenus() {
             let newStyle;
             /* Header background */
             if (btn_id === "btn_bg") {
-                newStyle = "header { background-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block { background-color: var("+event.target.id+") }";
             }
 
             /* Header upper label */
             else if (btn_id === "btn_upper_label") {
-                newStyle = "header .upper-label { color: var("+event.target.id+"); } \n";
+                newStyle = "header.hero-block .upper-label { color: var("+event.target.id+"); } \n";
                 console.log(newStyle); 
             }
                         
             /* Header h1 */
             else if (btn_id === "btn_head") {
-                newStyle = "header h1 { color: var("+event.target.id+") } \n";
+                newStyle = "header.hero-block h1 { color: var("+event.target.id+") } \n";
             }
 
             /* Header h2 */
             else if (btn_id === "btn_subhead") {
-                newStyle = "header h2 { color: var("+event.target.id+") } \n";
+                newStyle = "header.hero-block h2 { color: var("+event.target.id+") } \n";
             }
 
             /* Primary button text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "header a.btn-primary:link { color: var("+event.target.id+") } \n header a.btn-primary:visited { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:link { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { color: var("+event.target.id+") }";
             }
             /* Primary button text colour: active */
            else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "header a.btn-primary:focus { color: var("+event.target.id+") } \n header a.btn-primary:hover { color: var("+event.target.id+") } \n header a.btn-primary:active { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { color: var("+event.target.id+") }";
             } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "header a.btn-primary:link { background-color: var("+event.target.id+") } \n header a.btn-primary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-primary:link { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { background-color: var("+event.target.id+") } \n.";
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "header a.btn-primary:focus { background-color: var("+event.target.id+") } \n header a.btn-primary:hover { background-color: var("+event.target.id+") } \n header a.btn-primary:active { background-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { background-color: var("+event.target.id+") }";
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "header a.btn-primary:link { border-color: var("+event.target.id+") } \n header a.btn-primary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-primary:link { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { border-color: var("+event.target.id+") } \n.";
             }
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "header a.btn-primary:focus { border-color: var("+event.target.id+") } \n header a.btn-primary:hover { border-color: var("+event.target.id+") } \n header a.btn-primary:active { border-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { border-color: var("+event.target.id+") }";
             }
 
             /* secondary button text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "header a.btn-secondary:link { color: var("+event.target.id+") } \n header a.btn-secondary:visited { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:link { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { color: var("+event.target.id+") }";
             }
             /* secondary button text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "header a.btn-secondary:focus { color: var("+event.target.id+") } \n header a.btn-secondary:hover { color: var("+event.target.id+") } \n header a.btn-secondary:active { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:active { color: var("+event.target.id+") }";
             }
             /* secondary button background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "header a.btn-secondary:link { background-color: var("+event.target.id+") } \n header a.btn-secondary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-secondary:link { background-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { background-color: var("+event.target.id+") } \n.";
             }
             /* secondary button background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "header a.btn-secondary:focus { background-color: var("+event.target.id+") } \n header  a.btn-secondary:hover { background-color: var("+event.target.id+") } \n header  a.btn-secondary:active { background-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { background-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { background-color: var("+event.target.id+") } \n header.hero-block  a.btn-secondary:active { background-color: var("+event.target.id+") }";
             }
             /* secondary button border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "header a.btn-secondary:link { border-color: var("+event.target.id+") } \n header  a.btn-secondary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-secondary:link { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { border-color: var("+event.target.id+") } \n.";
             }
             /* secondary button border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "header a.btn-secondary:focus { border-color: var("+event.target.id+") } \n header  a.btn-secondary:hover { border-color: var("+event.target.id+") } \n header  a.btn-secondary:active { border-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:active { border-color: var("+event.target.id+") }";
             }
 
             style = document.createElement('style');
