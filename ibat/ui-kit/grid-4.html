@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Four Column Layout | LunaDoge | Brendan Munnelly</title>
-    <meta name="description" content="A JavaScript app for creating HTML5 web page sections. From www.munnelly.com.">
+    <meta name="description" content="A JavaScript app for creating HTML5 web page snippets. From www.munnelly.com.">
 
     <meta name="author" content="Brendan Munnelly">
 
 	<!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/modal.css" />
-	<link rel="stylesheet" href="assets/css/controls-grid.css" />
+    <link rel="stylesheet" href="assets/css/off-canvas.css" />
+    <link rel="stylesheet" href="assets/css/controls-grid.css" />
     <link rel="stylesheet" href="assets/css/lunadoge.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
@@ -98,7 +98,7 @@
                       <div class="dialog-box">
 
                         <div class="input-group">
-                            <label>Top Label <span>&lt;div&gt;</span></label>
+                            <label>Upper Label <span>&lt;div&gt;</span></label>
                             <select id="dd_upperLabel">
                                 <option value="0" selected="selected">No</option>
                                 <option value="1">Yes</option>
@@ -221,7 +221,7 @@
                                     </div>
         
                                     <div class="input-group">
-                                        <label>Faux Buttons</label>
+                                        <label>Buttons</label>
                                         <select id="dd_buttons">
                                             <option value="0" selected="selected">None</option>
                                             <option value="1">Solid</option>
@@ -344,6 +344,8 @@
                                             <input type="radio" id="vis_type_6" name="dd_visual" value="icons-md">
                                             <label for="vis_type_6">Material UI</label>
                                         </div>
+
+                                        
                                     </form>
                                 </div><!-- /first-child -->
                                 <div>
@@ -393,6 +395,12 @@
                                                 <option value="1">Left</option>
                                             </select>
                                         </div>
+
+                                        <div class="input-group" style="margin-top: 10px">
+                                            <label>Icon Colour</label>
+                                            <div style="display: inline-block"><button id="btn_icon_color" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                                        </div>
+
                                     </form>
                                 </div><!-- /second-child -->
                             </div><!-- /flex -->
@@ -416,15 +424,9 @@
     
 <main>
 
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          
-          <form id="picker-box">  
+    <div id="off-canvas-block" class="is-hidden">
+        <span class="close" id="btn_close">&times;</span>
+        <form id="picker-box">  
             <div class="container-two-col">
                 <div class="col-2-picker">
         
@@ -821,10 +823,7 @@
         </div><!-- /flex container-->    
       </form>
     
-      </div><!-- / Modal -->
-      
-      </div><!-- / Modal content -->
-    
+    </div>
 
 	<div id="HTML-Content">
 
@@ -903,6 +902,7 @@
         document.getElementById("dd_icon_size").disabled=true;
         document.getElementById("dd_icon_align").value="0";
         document.getElementById("dd_icon_align").disabled=true;
+        document.getElementById("btn_icon_color").disabled=true;
 	}
 
 
@@ -944,7 +944,7 @@
 
     const content_paras = "\n\t\t<div class=\"col-4\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-design.jpg\" alt=\"Design\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat ad molestias optio deserunt iste excepturi.<\/p>\n\t\t<\/div>\n\t\t<div class=\"col-4\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-woman-pink.jpg\" alt=\"Woman pink\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat ad molestias optio deserunt iste excepturi.<\/p>\n\t\t<\/div>\n\t\t<div class=\"col-4\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-laptop-window.jpg\" alt=\"Laptop window\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat ad molestias optio deserunt iste excepturi.<\/p>\n\t\t<\/div>\n\t\t<div class=\"col-4\">\n\t\t\t<figure><img src=\"assets\/img\//420x250-food.jpg\" alt=\"Food\"><\/figure>\n\t\t\t<h3>Lorem ipsum dolo<\/h3>\n\t\t\t<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat ad molestias optio deserunt iste excepturi.<\/p>\n\t\t<\/div>\n\t";
 
-    const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta.<\/li>\n\t\t\t\t\t<li><b>Sodales<\/b>: Fusce mollis. Vestibulum turpis elit, facilisis a metus non ultricies congue.<\/li>\n\t\t\t\t<\/ul>\n";
+    const content_list = "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Quisque<\/b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia sed quam.<\/li>\n\t\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum porta.<\/li>\n\t\t\t\t<\/ul>\n";
 
     let picArray = [];
     picArray[assetsArray[0]]="\n\t\t\t<figure><img src=\"assets\/img\/420x250-design.jpg\" alt=\"Design\"><\/figure>";
