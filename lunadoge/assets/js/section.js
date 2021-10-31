@@ -34,7 +34,7 @@ function hideMenus() {
 
 // Get current section class
 
-let section_class = "style-one";
+let section_class = "theme-one";
 document.querySelector("#dd_className").addEventListener("change", doClassName);
 
 function doClassName() {
@@ -44,88 +44,260 @@ function doClassName() {
 
     if ( opt==="0") {
         removeClassNames();
-        el_section.classList.add("style-one");
-        section_class = "style-one";
+        el_section.classList.add("theme-one");
+        section_class = "theme-one";
     }
     
     else if ( opt==="1") {
         removeClassNames();
-        el_section.classList.add("style-two");
-        section_class = "style-two";
+        el_section.classList.add("theme-two");
+        section_class = "theme-two";
     }
 
     else if ( opt==="2") {
         removeClassNames();
-        el_section.classList.add("style-three");
-        section_class = "style-three";
+        el_section.classList.add("theme-three");
+        section_class = "theme-three";
     }
 
     else if ( opt==="3") {
         removeClassNames();
-        el_section.classList.add("style-four");
-        section_class = "style-four";
+        el_section.classList.add("theme-four");
+        section_class = "theme-four";
     }
 }
 
 function removeClassNames() {
     const el_section = document.querySelector("section");
-    el_section.classList.remove("style-one");
-    el_section.classList.remove("style-two");
-    el_section.classList.remove("style-three");
-    el_section.classList.remove("style-four");
+    el_section.classList.remove("theme-one");
+    el_section.classList.remove("theme-two");
+    el_section.classList.remove("theme-three");
+    el_section.classList.remove("theme-four");
+}
+
+/*
+//////////////// SECTION: ALIGN ///////////////
+*/
+
+document.querySelector("#dd_section_align").addEventListener("change", doSectionAlign);
+
+function doSectionAlign() {
+    let opt = document.querySelector("#dd_section_align").value;
+    const el_upperlabel = document.querySelector('section')
+
+    if (opt==="0") {
+        el_upperlabel.classList.remove("text-center");
+    }
+
+    else if (opt==="1") {
+        el_upperlabel.classList.add("text-center");
+    }
 }
 
 
 /*
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
 */
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 
     // On click style button 
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
         // get button id
+        event.preventDefault();
         btn_id = event.target.id.toString();
-        modal.style.display = "block";
+        console.log("Button ID: "+btn_id);
+        displayOffCanvas();
     }));
+
+    function displayOffCanvas() {
+        event.preventDefault();
+        const el_offCanvas = document.querySelector("#off-canvas-block");
+        el_offCanvas.classList.remove("is-hidden");
+        el_offCanvas.classList.add("is-visible");
+    }
+
+    document.querySelector("#btn_close").addEventListener("click", hideOffCanvas);
+
+    function hideOffCanvas() {
+        event.preventDefault();
+        var el_offCanvas = document.getElementById("off-canvas-block");
+        el_offCanvas.classList.remove("is-visible");
+        el_offCanvas.classList.add("is-hidden");
+    }
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);
       
     function getColorID() {
         if (event.target.id.toString() !="") {
-            console.log("id not nothing");
             let newStyle;
             if (btn_id === "btn_bg") {
                 newStyle = "."+section_class+" { background-color: var("+event.target.id+") }";
+                console.log("Background colour: " +newStyle);
             }
+
+            /* Section upper label */
+            else if (btn_id === "btn_upper_label") {
+                newStyle = "."+section_class+" .upper-label { color: var("+event.target.id+"); } \n";
+                console.log(newStyle); 
+            }
+                        
+            /* Section headings */
             else if (btn_id === "btn_subhead") {
                 newStyle = "."+section_class+" h2 { color: var("+event.target.id+") } \n." +section_class+" h3 { color: var("+event.target.id+") } \n."+section_class+" .upper-label { color: var("+event.target.id+") }"; 
             }
 
+            /* Section text */
             else if (btn_id === "btn_text") {
                 newStyle = "."+section_class+" p { color: var("+event.target.id+") } \n." +section_class+" li { color: var("+event.target.id+") }"; 
-
             }
+
+            /* Hyperlink text colour: passive */
+            else if (btn_id === "btn_a_passive") {
+                newStyle = "."+section_class+" a:link { color: var("+event.target.id+") } \n." +section_class+ " a:visited { color: var("+event.target.id+") }";
+            }
+
+            /* Hyperlink text colour: active */
+            else if (btn_id === "btn_a_active") {
+                newStyle = "."+section_class+" a:focus { color: var("+event.target.id+") } \n." +section_class+ " a:hover { color: var("+event.target.id+") } \n." +section_class+ " a:active { color: var("+event.target.id+") }";
+           }
+
+           /* Hyperlink background colour: passive */
+           else if (btn_id === "btn_a_passive_bg") {
+            newStyle = "."+section_class+" a:link { background-color: var("+event.target.id+") } \n." +section_class+ " a:visited { background-color: var("+event.target.id+") } \n.";
+            }
+
+           /* Hyperlink background colour: active */
+            else if (btn_id === "btn_a_active_bg") {
+                newStyle = "."+section_class+" a:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a:active { background-color: var("+event.target.id+") }";
+            }
+
+            /* Primary button text colour: passive */
+            else if (btn_id === "btn_a_primary_passive_text") {
+                newStyle = "."+section_class+" a.btn-primary:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { color: var("+event.target.id+") }";
+            }
+            /* Primary button text colour: active */
+           else if (btn_id === "btn_a_primary_active_text") {
+                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
+            } 
+            /* Primary button background colour: passive */
+            else if (btn_id === "btn_a_primary_passive_bg") {
+                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { background-color: var("+event.target.id+") } \n.";
+            }
+            /* Primary button background colour: active */
+            else if (btn_id === "btn_a_primary_active_bg") {
+                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
+            }
+            /* Primary button border colour: passive */
+            else if (btn_id === "btn_a_primary_passive_border") {
+                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { border-color: var("+event.target.id+") } \n.";
+            }
+            /* Primary button border colour: active */
+            else if (btn_id === "btn_a_primary_active_border") {
+                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { border-color: var("+event.target.id+") }";
+            }
+
+            /* secondary button text colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_text") {
+                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { color: var("+event.target.id+") }";
+            }
+            /* secondary button text colour: active */
+            else if (btn_id === "btn_a_secondary_active_text") {
+                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { color: var("+event.target.id+") }";
+            }
+            /* secondary button background colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_bg") {
+                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { background-color: var("+event.target.id+") } \n.";
+            }
+            /* secondary button background colour: active */
+            else if (btn_id === "btn_a_secondary_active_bg") {
+                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { background-color: var("+event.target.id+") }";
+            }
+            /* secondary button border colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_border") {
+                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { border-color: var("+event.target.id+") } \n.";
+            }
+            /* secondary button border colour: active */
+            else if (btn_id === "btn_a_secondary_active_border") {
+                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { border-color: var("+event.target.id+") }";
+            }
+
+            /* Icons colour */
+            else if (btn_id === "btn_icon_color") {
+                newStyle = "."+section_class+" figure.icon var("+event.target.id+") } \n.";
+            }
+            
             style = document.createElement('style');
             document.head.appendChild(style);
             // style.type = 'text/css';
             style.appendChild(document.createTextNode(newStyle));
             
         }
+    }
+
+    function enableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+        document.getElementById("btn_a_secondary_passive_text").disabled=false;
+        document.getElementById("btn_a_secondary_active_text").disabled=false;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+        document.getElementById("btn_a_secondary_active_bg").disabled=false;
+        document.getElementById("btn_a_secondary_passive_border").disabled=false;
+        document.getElementById("btn_a_secondary_active_border").disabled=false;
+    }
+
+    function enablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+    }
+
+    function enableSecondaryButtons() {
+        document.getElementById("btn_a_secondary_passive_text").disabled=false;
+        document.getElementById("btn_a_secondary_active_text").disabled=false;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+        document.getElementById("btn_a_secondary_active_bg").disabled=false;
+        document.getElementById("btn_a_secondary_passive_border").disabled=false;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;        
+    }
+
+    function disableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;
+    }
+
+    function disablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+    }
+
+    function disableSecondaryButtons() {
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;        
     }
 /*
 //////////////// SECTIONS: PARAGRAPHS ///////////////
@@ -184,13 +356,11 @@ function doUpperLabel() {
     // remove
     if (opt==="0") {
         removeUpperLabel();
-        document.getElementById("dd_upperLabel_align").disabled=true;
     }
     // add
     else if (opt==="1") {
         removeUpperLabel();
-        document.getElementById("dd_upperLabel_align").disabled=false;
-        document.querySelector("h2").insertAdjacentHTML("beforebegin", "<div class=\"upper-label\">Category Label<\/div>\n");
+        document.querySelector("h2").insertAdjacentHTML("beforebegin", "<div class=\"upper-label\">Upper Label Text<\/div>\n");
     }
 }
 
@@ -198,27 +368,7 @@ function removeUpperLabel() {
     if (document.querySelector('.upper-label')) {
         const upperLabel = document.querySelector('.upper-label');
         upperLabel.remove();
-        document.getElementById("dd_upperLabel_align").value="0";
     } 
-}
-
-/*
-//////////////// TEXT: UPPER CATEGORY LABEL ALIGN ABOVE H2 ///////////////
-*/
-
-document.querySelector("#dd_upperLabel_align").addEventListener("change", doUpperLabelAlign);
-
-function doUpperLabelAlign() {
-    let opt = document.querySelector("#dd_upperLabel_align").value;
-    const el_upperlabel = document.querySelector('.upper-label')
-
-    if (opt==="0") {
-        el_upperlabel.classList.remove("text-center");
-    }
-
-    else if (opt==="1") {
-        el_upperlabel.classList.add("text-center");
-    }
 }
 
 /*
@@ -305,120 +455,78 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
 /*
 //////////////// FAUX BUTTONS ////////////////////
 */
+
 document.querySelector("#dd_buttons").addEventListener("change", doButtons);
 
     function doButtons() {
-        // console.log("Buttons");
         let opt = document.querySelector("#dd_buttons").value;
-        // remove
+
         if (opt==="0") {
             removeButtons();
+            disableAllButtons();
         }
-
-        // solid
+       
         else if (opt==="1") {
             removeButtons();
-            btn_class="btn-solid";
-            i, col_count = doColsCount();
-            if (document.querySelector(".cols-2-split")) {
-                for (i = 2; i <= col_count; i += 3) {
-                    el_cols = document.querySelector(".cols-2-split .col-2:nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
-            else {
-                for (i; i <= col_count; i++) {
-                    el_cols = document.querySelector(col_no+":nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
+            enablePrimaryButtons();
+            disableSecondaryButtons();
+            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
+            document.getElementById("dd_buttons_align").disabled=false;
+            document.getElementById("dd_buttons_style").value="0";
+            document.getElementById("dd_buttons_style").disabled=false;
         }
 
-        // ghost
         else if (opt==="2") {
             removeButtons();
-            btn_class="btn-ghost";
-            i, col_count = doColsCount();
-            if (document.querySelector(".cols-2-split")) {
-                for (i = 2; i <= col_count; i += 3) {
-                    el_cols = document.querySelector(".cols-2-split .col-2:nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
-            else {
-                for (i; i <= col_count; i++) {
-                    el_cols = document.querySelector(col_no+":nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
+            enableAllButtons();
+            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
+            document.getElementById("dd_buttons_align").value="0";
+            document.getElementById("dd_buttons_align").disabled=false;
+            document.getElementById("dd_buttons_style").value="0";
+            document.getElementById("dd_buttons_style").disabled=false;
         }
-
-        // gradient
-        else if (opt==="3") {
-            removeButtons();
-            btn_class="btn-gradient";
-            i, col_count = doColsCount();
-            if (document.querySelector(".cols-2-split")) {
-                for (i = 2; i <= col_count; i += 3) {
-                    el_cols = document.querySelector(".cols-2-split .col-2:nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
-            else {
-                for (i; i <= col_count; i++) {
-                    el_cols = document.querySelector(col_no+":nth-child("+i+")");
-                    addButons(el_cols,btn_class);
-                }
-            }
-        }
-    }
-
-    function addButons(el_cols,btn_class) {
-        console.log("Add buttons");
-        console.log("el_cols:" +el_cols)
-        const el_btn = document.createElement('a');
-        el_btn.setAttribute("href", "#");
-        el_btn.setAttribute("class", "btn "+btn_class);
-        const el_icon = document.createElement('i');
-        el_icon.setAttribute("class", "fas fa-shopping-cart");
-        el_btn.append(el_icon);
-        const btn_text = "Order Now";
-        el_icon.insertAdjacentHTML('afterend', btn_text);;
-        el_cols.append(el_btn);
-
-        HTML_content = document.querySelector("#HTML-Content").innerHTML;
-        HTML_content = HTML_content.replace("/n/t/t/t/", "");
-        document.querySelector("#HTML-Content").innerHTML = HTML_content;
-        
-        document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("dd_buttons_style").disabled=false;
     }
 
     function removeButtons() {
-        console.log("remove buttons");
-        i, col_count = doColsCount();
-
-        if (document.querySelector(".cols-split")) {
-            for (i = 1; i <= col_count; i += 3) {
-                const elButtons = document.querySelector('a.btn');
-                elButtons.remove();
-            }
+        if (document.querySelector("section .container-btn")) {
+            const elBtn = document.querySelector("section .container-btn");
+            elBtn.remove();
+            document.getElementById("dd_buttons_align").value="0";
+            document.getElementById("dd_buttons_align").disabled=true;
+            document.getElementById("dd_buttons_style").value="0";
+            document.getElementById("dd_buttons_style").disabled=true;
         }
-        else {
-            for (i; i <= col_count; i++) {
-                if (document.querySelector('a.btn')) {
-                    const elButtons = document.querySelector('a.btn');
-                    elButtons.remove();
-                }
-            }
-        }
-        document.getElementById("dd_buttons_style").disabled=true;
-        document.getElementById("dd_buttons_style").value="0";
     }
+
+/*
+//////////////// FAUX BUTTONS: BUTTONS ALIGN ////////////////////
+*/
+
+document.querySelector("#dd_buttons_align").addEventListener("change", doButtonsAlign);
+
+    function doButtonsAlign() {
+        let opt = document.querySelector("#dd_buttons_align").value;
+        // remove (left)
+        if (opt==="0") {
+            const el_btn = document.querySelector("section .container-btn");
+            el_btn.classList.remove("text-center");
+        }
+        // add (centre)
+        else if (opt==="1") {
+            const el_btn = document.querySelector("section .container-btn");
+            el_btn.classList.add("text-center");
+        }
+    }
+
+
+/*
+//////////////// FAUX BUTTONS: BUTTONS CORNER STYLE ////////////////////
+*/
 
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
 
     function doButtonsStyle() {
+        console.log("Do buttons style");
         let opt = document.querySelector("#dd_buttons_style").value;
         // remove
         if (opt==="0") {
@@ -426,33 +534,51 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
         }
         // soft
         else if (opt==="1") {
+            console.log("Add soft");
             removeButtonsStyle();
-            i, col_count = doColsCount();
-            for (i; i <= col_count; i++) {
-                const el_btn = document.querySelector(col_no+":nth-child("+i+") a");
-                el_btn.classList.add("btn-soft");
+            if (document.querySelector(".btn-primary")) {
+                const el_btn_primary = document.querySelector("a.btn-primary");
+                el_btn_primary.classList.add("btn-soft");
+            }
+    
+            if (document.querySelector(".btn-secondary")) {
+                const el_btn_secondary = document.querySelector("a.btn-secondary");
+                el_btn_secondary.classList.add("btn-soft");
             }
         }
 
         // rounded
         else if (opt==="2") {
             removeButtonsStyle();
-            i, col_count = doColsCount();
-            for (i; i <= col_count; i++) {
-                const el_btn = document.querySelector(col_no+":nth-child("+i+") a");
-                el_btn.classList.add("btn-rounded");
-            } 
+            console.log("Add rounded");
+            if (document.querySelector(".btn-primary")) {
+                const el_btn_primary = document.querySelector("a.btn-primary");
+                el_btn_primary.classList.add("btn-rounded");
+            }
+    
+            if (document.querySelector(".btn-secondary")) {
+                const el_btn_secondary = document.querySelector("a.btn-secondary");
+                el_btn_secondary.classList.add("btn-rounded");
+            }
         }
     }
 
     function removeButtonsStyle() {
-        i, col_count = doColsCount();
-        for (i; i <= col_count; i++) {
-            const el_btn = document.querySelector(col_no+":nth-child("+i+") a");
-            el_btn.classList.remove("btn-soft");
-            el_btn.classList.remove("btn-rounded");
+
+        if (document.querySelector(".btn-primary")) {
+            const el_btn_primary = document.querySelector("a.btn-primary");
+            el_btn_primary.classList.remove("btn-soft");
+            el_btn_primary.classList.remove("btn-rounded");
+        }
+
+        if (document.querySelector(".btn-secondary")) {
+            const el_btn_secondary = document.querySelector("a.btn-secondary");
+            el_btn_secondary.classList.remove("btn-soft");
+            el_btn_secondary.classList.remove("btn-rounded");
         }
     }
+
+
 
 /*
 //////////////// VISUALS: IMAGES  ///////////////
@@ -645,6 +771,35 @@ function resetImageEffects() {
     removeImageBorders();
 }
 
+/* Figure caption */
+
+document.querySelector("#dd_caption").addEventListener("change", doCaption);
+
+function doCaption() {
+    let opt = document.querySelector("#dd_caption").value;
+
+    if (opt==="0") {
+        // removeCaption();
+    }
+
+    else if (opt==="1") {
+        const el_fig = document.querySelectorAll("figure");
+        console.log("Add caption")
+        HTML_Content = document.getElementById("HTML-Content").innerHTML;
+        HTML_Content = HTML_Content.replace(/<\/figure>/g,'<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption><\/figure>');
+        document.getElementById("HTML-Content").innerHTML = HTML_Content;
+    }
+}
+
+function removeCaption() {
+    if (document.querySelector("figcaption")) {
+        const el_figcap = document.querySelectorAll("figcaption");
+        for (let i = 0 ; i < el_figcap.length ; i++) {
+            el_figcap[i].remove();
+        }
+    }
+}
+
 
 /*
 //////////////// VISUALS: VIDEOS  ///////////////
@@ -693,7 +848,8 @@ function removeVideo() {
         const figureVid = document.querySelector('figure .container-video-file video');
         figureVid.remove();
         HTML_Content = document.getElementById("HTML-Content").innerHTML;
-HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
+        /// HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'123');
+        HTML_Content = HTML_Content.replace(/\n\n\t<figure>\n\t\t<div class=\"container-video-file\">/g,'');
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
         console.log("remove video");
     } 
@@ -701,9 +857,9 @@ HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"
     else if (document.querySelector('figure .container-video-yt')) {
         const videoYT = document.querySelector('.container-video-yt');
         videoYT.remove();
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
+        // HTML_Content = document.getElementById("HTML-Content").innerHTML;
+        // HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
+        // document.getElementById("HTML-Content").innerHTML = HTML_Content;
         console.log("remove video");
     } 
 }
