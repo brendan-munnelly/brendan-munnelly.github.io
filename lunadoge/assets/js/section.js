@@ -605,7 +605,7 @@ function doVisType() {
     else if (selectedValue==="pictures") {
         removeImage();
         resetImageEffects();
-        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\//800x480-business-group.jpg\" alt=\"Business group\">\n\t<\/figure>\n");
+        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/800x480-business-group.jpg\" alt=\"Business group\">\n\t<\/figure>\n");
         document.getElementById("dd_image_corners").disabled=false;
         document.getElementById("dd_image_shadows").disabled=false;
         document.getElementById("dd_image_borders").disabled=false;
