@@ -173,7 +173,7 @@ function doColOrder() {
 
             /* Section text */
             else if (btn_id === "btn_col_text") {
-                newStyle = "."+section_class+" "+col_no+" p { color: var("+event.target.id+") } \n." + "."+section_class+" "+col_no+" li { color: var("+event.target.id+") } \n"; 
+                newStyle = "."+section_class+" "+col_no+" p { color: var("+event.target.id+") } \n" + "."+section_class+" "+col_no+" li { color: var("+event.target.id+") } \n"; 
             }
 
             /* Column background */
@@ -202,7 +202,7 @@ function doColOrder() {
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") } \n ." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
