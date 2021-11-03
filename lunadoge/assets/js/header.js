@@ -193,6 +193,7 @@ function removeUpperLabel() {
         const upperLabel = document.querySelector('.upper-label');
         disableLabelColor();
         upperLabel.remove();
+        document.getElementById("dd_upperLabel").value="0";
     } 
 }
 
