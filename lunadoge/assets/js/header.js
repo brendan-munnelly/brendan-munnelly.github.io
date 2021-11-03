@@ -28,7 +28,6 @@ function hideMenus() {
     }
 }
 
-
 /*
 //////////////// HEADER COLOURS ///////////////
 */
@@ -90,52 +89,52 @@ function hideMenus() {
 
             /* Primary button text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "header.hero-block a.btn-primary:link { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:link { color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:visited { color: var("+event.target.id+") }";
             }
             /* Primary button text colour: active */
            else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "header.hero-block a.btn-primary:focus { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:hover { color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:active { color: var("+event.target.id+") }";
             } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "header.hero-block a.btn-primary:link { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-primary:link { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:visited { background-color: var("+event.target.id+") } \n";
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "header.hero-block a.btn-primary:focus { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { background-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { background-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:hover { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:active { background-color: var("+event.target.id+") }";
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "header.hero-block a.btn-primary:link { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-primary:link { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:visited { border-color: var("+event.target.id+") } \n";
             }
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "header.hero-block a.btn-primary:focus { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:hover { border-color: var("+event.target.id+") } \n header.hero-block a.btn-primary:active { border-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-primary:focus { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:hover { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-primary:active { border-color: var("+event.target.id+") }";
             }
 
             /* secondary button text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "header.hero-block a.btn-secondary:link { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:link { color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:visited { color: var("+event.target.id+") }";
             }
             /* secondary button text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "header.hero-block a.btn-secondary:focus { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:active { color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:hover { color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:active { color: var("+event.target.id+") }";
             }
             /* secondary button background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "header.hero-block a.btn-secondary:link { background-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-secondary:link { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:visited { background-color: var("+event.target.id+") } \n";
             }
             /* secondary button background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "header.hero-block a.btn-secondary:focus { background-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { background-color: var("+event.target.id+") } \n header.hero-block  a.btn-secondary:active { background-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:hover { background-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:active { background-color: var("+event.target.id+") }";
             }
             /* secondary button border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "header.hero-block a.btn-secondary:link { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "header.hero-block a.btn-secondary:link { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:visited { border-color: var("+event.target.id+") } \n";
             }
             /* secondary button border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "header.hero-block a.btn-secondary:focus { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:hover { border-color: var("+event.target.id+") } \n header.hero-block a.btn-secondary:active { border-color: var("+event.target.id+") }";
+                newStyle = "header.hero-block a.btn-secondary:focus { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:hover { border-color: var("+event.target.id+") } \nheader.hero-block a.btn-secondary:active { border-color: var("+event.target.id+") }";
             }
 
             style = document.createElement('style');
@@ -145,6 +144,28 @@ function hideMenus() {
             
         }
     }
+
+/*
+//////////////// COLOURS: ENABLE/DISABLE BACKGROUND ///////////////
+*/
+
+function disableBgColor() {
+    document.getElementById("btn_bg").disabled=true;
+}
+
+
+function enableBgColor() {
+    document.getElementById("btn_bg").disabled=false;
+}
+
+
+function disableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=true;
+}
+
+function enableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=false;
+}
 
 /*
 //////////////// TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
@@ -163,12 +184,14 @@ function doUpperLabel() {
     else if (opt==="1") {
         removeUpperLabel();
         document.querySelector("h1").insertAdjacentHTML("beforebegin", "<div class=\"upper-label\">Upper Label Text<\/div>\n");
+        enableLabelColor();
     }
 }
 
 function removeUpperLabel() {
     if (document.querySelector('.upper-label')) {
         const upperLabel = document.querySelector('.upper-label');
+        disableLabelColor();
         upperLabel.remove();
     } 
 }
@@ -273,7 +296,6 @@ function doTextAnimation() {
         document.querySelector("h1").classList.add("fade-in");
         document.querySelector("h2").classList.add("fade-in");
     }
-
 }
 
 function removeTextAnimation() {
@@ -365,7 +387,6 @@ function doAlignMobile() {
         }
     }
 }
-
 
 /*
 //////////////// HERO BUTTONS ///////////////
