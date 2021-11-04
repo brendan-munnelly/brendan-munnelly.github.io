@@ -31,9 +31,9 @@
             <span id="menu-1" class="dropbtn">Header Type</span>
             <div id="content-1" class="dropdown-content dropdown-hidden" style="z-index:9999999">
                 
-                <div class="dialog-box">
+                <div class="dialog-box" id="menu-type-options">
                     <hr>
-                    <a href="#" class="menu-header-type" id="menu-header-text">Text Only</a>
+                    <a href="#" class="menu-header-type selected" id="menu-header-text">Text Only</a>
                     <hr>
                     <a href="#" class="menu-header-type" id="menu-header-bg-img">Background Image (Full Width)</a>
                     <a href="#" class="menu-header-type" id="menu-header-bg-vid">Background Video (Full Width)</a>
@@ -668,16 +668,6 @@
           </div><!-- / Modal content -->
           
         <div id="HTML-Content">
-            <header>
-                <div class="hero-text-container text-center-desktop text-center-mobile">
-                    <h1>Lorem Malesuada</h1>
-                    <h2>Etiam tincidunt risus nec odio sollicitudin</h2>
-                    <div class="container-btn">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Order now</a>
-                        <a href="#" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> Learn more</a>
-                    </div>
-                </div>
-            </header>
             
         </div>
 </main>
@@ -685,6 +675,7 @@
     <script>
 
         // Inital resets
+        document.addEventListener("DOMContentLoaded", loadInitialContent);
         document.addEventListener("DOMContentLoaded", resetMenuOptions);
 
         function resetMenuOptions() {
@@ -702,10 +693,25 @@
         // Global variables
         let heroType = 1;
 
+        function loadInitialContent() {
+            let HTML_Content ="<header class=\"hero-block\"><div class=\"hero-text-container text-center-desktop text-center-mobile\"><h1>Lorem Malesuada</h1><h2>Etiam tincidunt risus nec odio sollicitudin</h2><div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i> Order now</a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i>Learn more</a></div></div></header>";
+            document.getElementById("HTML-Content").innerHTML = HTML_Content;
+            document.getElementById("dd_align_desktop").value="0";
+            document.getElementById("dd_align_mobile").value="0";
+            document.getElementById("dd_text_shadow").value="1";
+        }
+
+        // Rremove 'selected' option from header type menu
+
+
         // Load hero type content 
         document.querySelectorAll('.menu-header-type').forEach(item => {
             item.addEventListener('click', event => {
-                
+                // remove 'selected' class from all options
+                for (i = 1; i <= 9; i++) {
+                    document.querySelector("#menu-type-options a:nth-of-type("+i+")").classList.remove("selected"); 
+                }
+
                 //get id
                 if (item.id === "menu-header-text") {
                     document.querySelector("#HTML-Content").innerHTML = assets_header_text_only;
@@ -715,15 +721,19 @@
                     enableBgColor();
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="0";
+                    document.getElementById("menu-header-text").classList.add("selected");
                 }
+
                 else if (item.id === "menu-header-bg-img") {
                     document.querySelector("#HTML-Content").innerHTML = assets_header_bg_img;
                     heroType = 2;
                     resetMenuOptions();
                     doHeaderAlignment(heroType);
                     disableBgColor();
+                    doTextShadow();
                     document.getElementById("dd_align_desktop").value="0";
-                    document.getElementById("dd_align_mobile").value="0";   
+                    document.getElementById("dd_align_mobile").value="0";
+                    document.getElementById("menu-header-bg-img").classList.add("selected");
                 }
 
                 else if (item.id === "menu-header-bg-vid") {
@@ -732,8 +742,10 @@
                     resetMenuOptions();
                     doHeaderAlignment(heroType);
                     disableBgColor();
+                    doTextShadow();
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="0";
+                    document.getElementById("menu-header-bg-vid").classList.add("selected");
                 }
 
                 else if (item.id === "menu-header-bg-img-half-right") {
@@ -744,6 +756,7 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-bg-img-half-right").classList.add("selected");
                 }
 
                 else if (item.id === "menu-header-bg-img-half-right_trans") {
@@ -754,6 +767,7 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-bg-img-half-right_trans").classList.add("selected");
                 }
 
                 else if (item.id === "menu-header-bg-img-half-left") {
@@ -764,6 +778,7 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-bg-img-half-left").classList.add("selected");
                 }
 
                 else if (item.id === "menu-header-bg-img-half-left_trans") {
@@ -774,6 +789,7 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-bg-img-half-left_trans").classList.add("selected");
                 }
                 
                 else if (item.id === "menu-header-half-img-right") {
@@ -784,6 +800,8 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-half-img-right").classList.add("selected");
+                   
                 }
                 else if (item.id === "menu-header-half-img-left") {
                     document.querySelector("#HTML-Content").innerHTML = assets_header_half_img_left;
@@ -793,10 +811,12 @@
                     document.getElementById("dd_align_desktop").value="0";
                     document.getElementById("dd_align_mobile").value="1";
                     resetMenuOptions();
+                    document.getElementById("menu-header-half-img-left").classList.add("selected");
                 }
             })
         })
 
+        
         /* Text Content Assets */
         const assets_header_h1 ="\n\t\t<h1>Lorem Malesuada<\/h1>";
 
@@ -833,8 +853,7 @@
         // Text right, regular image on left
         const assets_header_half_img_left ="<header class=\"hero-block hero-half half-img-left\">\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t\t<img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Shop front\">\n\t\t<\/div>\n\t<\/div>\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>"+assets_header_buttons_pair+"\n<\/header>";
 
-        let HTML_Content = assets_header_text_only;
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
+
 
     </script>
 
