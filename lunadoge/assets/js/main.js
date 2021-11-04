@@ -1,4 +1,3 @@
-
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
@@ -593,7 +592,6 @@ function doColUpperAlign() {
 /*
 //////////////// UPDATE UPPER COLUMN ALIGN STATUS ///////////////
 */
-
 
 function doColUpperAlignStatus() {
     // Either h2 or h3 present in .col-1

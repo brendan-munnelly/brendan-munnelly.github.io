@@ -191,8 +191,8 @@ function doUpperLabel() {
 function removeUpperLabel() {
     if (document.querySelector('.upper-label')) {
         const upperLabel = document.querySelector('.upper-label');
-        disableLabelColor();
         upperLabel.remove();
+        disableLabelColor();
         document.getElementById("dd_upperLabel").value="0";
     } 
 }

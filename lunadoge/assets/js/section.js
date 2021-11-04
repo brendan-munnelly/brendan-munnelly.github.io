@@ -299,7 +299,32 @@ function doSectionAlign() {
         document.getElementById("btn_a_secondary_passive_border").disabled=true;
         document.getElementById("btn_a_secondary_active_border").disabled=true;        
     }
+
 /*
+//////////////// COLOURS: ENABLE/DISABLE BACKGROUND ///////////////
+*/
+
+function disableBgColor() {
+    document.getElementById("btn_bg").disabled=true;
+}
+
+
+function enableBgColor() {
+    document.getElementById("btn_bg").disabled=false;
+}
+
+
+function disableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=true;
+}
+
+function enableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=false;
+}
+
+
+
+    /*
 //////////////// SECTIONS: PARAGRAPHS ///////////////
 */
 
@@ -340,6 +365,7 @@ function reduceParas() {
             el_para[i].remove();
         }
     }
+
     //Add one para
     document.querySelector("section h2").insertAdjacentHTML("afterend",content_paras);
 }
@@ -361,6 +387,7 @@ function doUpperLabel() {
     else if (opt==="1") {
         removeUpperLabel();
         document.querySelector("h2").insertAdjacentHTML("beforebegin", "<div class=\"upper-label\">Upper Label Text<\/div>\n");
+        enableLabelColor();
     }
 }
 
@@ -368,8 +395,11 @@ function removeUpperLabel() {
     if (document.querySelector('.upper-label')) {
         const upperLabel = document.querySelector('.upper-label');
         upperLabel.remove();
+        disableLabelColor();
+        document.getElementById("dd_upperLabel").value="0";
     } 
 }
+
 
 /*
 //////////////// TEXT: STANDFIRST ///////////////
@@ -578,8 +608,6 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
         }
     }
 
-
-
 /*
 //////////////// VISUALS: IMAGES  ///////////////
 */
@@ -655,8 +683,6 @@ function resetImageEffects() {
     removeImageShadows();
     removeImageBorders();
 }
-
-
 
 /*
 //////////////// VISUAL PROPERTIES ///////////////
@@ -857,10 +883,11 @@ function removeVideo() {
     else if (document.querySelector('figure .container-video-yt')) {
         const videoYT = document.querySelector('.container-video-yt');
         videoYT.remove();
-        // HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        // HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'');
-        // document.getElementById("HTML-Content").innerHTML = HTML_Content;
-        console.log("remove video");
+        HTML_Content = document.getElementById("HTML-Content").innerHTML;
+        HTML_Content = HTML_Content.replace(/<figure>/g, '');
+        HTML_Content = HTML_Content.replace(/<\/figure>/g, '');
+        HTML_Content = HTML_Content.replace(/\n\n{6}/g, '\n');
+        document.getElementById("HTML-Content").innerHTML = HTML_Content;
     } 
 }
 
@@ -873,7 +900,11 @@ document.querySelector("#btn-copy").addEventListener("click", copyHTML);
 
 function copyHTML() {
     // removeEmptyNodes();
-    const HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    
+    HTML_Content = HTML_Content.replace(/\t/g, '');
+    HTML_Content = HTML_Content.replace(/\n\n{3}/g, '\n');
+
     const el = document.createElement('textarea');
     el.value = HTML_Content;
     hideMenus();
