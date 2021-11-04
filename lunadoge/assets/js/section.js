@@ -132,13 +132,11 @@ function doSectionAlign() {
             let newStyle;
             if (btn_id === "btn_bg") {
                 newStyle = "."+section_class+" { background-color: var("+event.target.id+") }";
-                console.log("Background colour: " +newStyle);
             }
 
             /* Section upper label */
             else if (btn_id === "btn_upper_label") {
-                newStyle = "."+section_class+" .upper-label { color: var("+event.target.id+"); } \n";
-                console.log(newStyle); 
+                newStyle = "."+section_class+" .upper-label { color: var("+event.target.id+") }";
             }
                         
             /* Section headings */
@@ -148,27 +146,27 @@ function doSectionAlign() {
 
             /* Section text */
             else if (btn_id === "btn_text") {
-                newStyle = "."+section_class+" p { color: var("+event.target.id+") } \n." +section_class+" li { color: var("+event.target.id+") }"; 
+                newStyle = "."+section_class+" p { color: var("+event.target.id+") }\n." +section_class+" li { color: var("+event.target.id+") }"; 
             }
 
             /* Hyperlink text colour: passive */
             else if (btn_id === "btn_a_passive") {
-                newStyle = "."+section_class+" a:link { color: var("+event.target.id+") } \n." +section_class+ " a:visited { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a:link { color: var("+event.target.id+") }\n." +section_class+ " a:visited { color: var("+event.target.id+") }";
             }
 
             /* Hyperlink text colour: active */
             else if (btn_id === "btn_a_active") {
-                newStyle = "."+section_class+" a:focus { color: var("+event.target.id+") } \n." +section_class+ " a:hover { color: var("+event.target.id+") } \n." +section_class+ " a:active { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a:focus { color: var("+event.target.id+") }\n." +section_class+ " a:hover { color: var("+event.target.id+") } \n." +section_class+ " a:active { color: var("+event.target.id+") }";
            }
 
            /* Hyperlink background colour: passive */
            else if (btn_id === "btn_a_passive_bg") {
-            newStyle = "."+section_class+" a:link { background-color: var("+event.target.id+") } \n." +section_class+ " a:visited { background-color: var("+event.target.id+") } \n.";
+            newStyle = "."+section_class+" a:link { background-color: var("+event.target.id+") }\n." +section_class+ " a:visited { background-color: var("+event.target.id+") }";
             }
 
            /* Hyperlink background colour: active */
             else if (btn_id === "btn_a_active_bg") {
-                newStyle = "."+section_class+" a:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a:active { background-color: var("+event.target.id+") }";
             }
 
             /* Primary button text colour: passive */
@@ -177,53 +175,53 @@ function doSectionAlign() {
             }
             /* Primary button text colour: active */
            else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
             } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+event.target.id+") }";
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+event.target.id+") }";
             }
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:hover { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:active { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+event.target.id+") }";
             }
 
             /* secondary button text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+event.target.id+") }";
             }
             /* secondary button text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { color: var("+event.target.id+") }";
             }
             /* secondary button background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { background-color: var("+event.target.id+") } \n.";
+                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+event.target.id+") }";
             }
             /* secondary button background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { background-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+event.target.id+") }";
             }
             /* secondary button border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:visited { border-color: var("+event.target.id+") } \n.";
+                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+event.target.id+") }";
             }
             /* secondary button border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:hover { border-color: var("+event.target.id+") } \n." +section_class+ " a.btn-secondary:active { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+event.target.id+") }";
             }
 
             /* Icons colour */
             else if (btn_id === "btn_icon_color") {
-                newStyle = "."+section_class+" figure.icon var("+event.target.id+") } \n.";
+                newStyle = "."+section_class+" figure.icon var("+event.target.id+") }";
             }
             
             style = document.createElement('style');
@@ -874,8 +872,8 @@ function removeVideo() {
         const figureVid = document.querySelector('figure .container-video-file video');
         figureVid.remove();
         HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        /// HTML_Content = HTML_Content.replace(/<figure><div class=\"container-video-file\"><\/div><\/figure>/g,'123');
         HTML_Content = HTML_Content.replace(/\n\n\t<figure>\n\t\t<div class=\"container-video-file\">/g,'');
+        HTML_Content = HTML_Content.replace(/\n\n{3}/g, '\n');
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
         console.log("remove video");
     } 
@@ -903,7 +901,7 @@ function copyHTML() {
     let HTML_Content = document.getElementById("HTML-Content").innerHTML;
     
     HTML_Content = HTML_Content.replace(/\t/g, '');
-    HTML_Content = HTML_Content.replace(/\n\n{3}/g, '\n');
+    HTML_Content = HTML_Content.replace(/\n\n{8}/g, '\n');
 
     const el = document.createElement('textarea');
     el.value = HTML_Content;
