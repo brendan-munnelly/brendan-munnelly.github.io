@@ -306,11 +306,9 @@ function disableBgColor() {
     document.getElementById("btn_bg").disabled=true;
 }
 
-
 function enableBgColor() {
     document.getElementById("btn_bg").disabled=false;
 }
-
 
 function disableLabelColor() {
     document.getElementById("btn_upper_label").disabled=true;
@@ -320,9 +318,7 @@ function enableLabelColor() {
     document.getElementById("btn_upper_label").disabled=false;
 }
 
-
-
-    /*
+/*
 //////////////// SECTIONS: PARAGRAPHS ///////////////
 */
 
