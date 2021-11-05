@@ -98,17 +98,19 @@ function removeClassNames() {
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
 */
 
-    // On click style button 
+    // On click style button to open colour picker 
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
         // get button id
-        event.preventDefault();
-        btn_id = event.target.id.toString();
+        // event.preventDefault();
+        // btn_id = event.target.id.toString();
+        btn_id = event.target.id;
         console.log("Button ID: "+btn_id);
         displayOffCanvas();
     }));
 
     function displayOffCanvas() {
+        event.stopPropagation();
         event.preventDefault();
         const el_offCanvas = document.querySelector("#off-canvas-block");
         el_offCanvas.classList.remove("is-hidden");
@@ -117,21 +119,36 @@ function removeClassNames() {
     }
 
     document.querySelector("#btn_close").addEventListener("click", hideOffCanvas);
+    document.querySelector("#HTML-Content").addEventListener("click",  hideOffCanvas);
 
     function hideOffCanvas() {
+        event.stopPropagation();
         event.preventDefault();
         var el_offCanvas = document.getElementById("off-canvas-block");
         el_offCanvas.classList.remove("is-visible");
         el_offCanvas.classList.add("is-hidden");
     }
 
+    const parent = document.querySelector('#picker-box');
+
+    parent.addEventListener('click', handleLabelClick);
+    
+    function handleLabelClick(event) {
+      const label = event.target.closest("label");
+      if (label && this.contains(label)) {
+        // Ignore this click
+        return;
+      }
+        console.log('Clicked');
+    }
+
     document.querySelector("#picker-box").addEventListener("click", getColorID);
 
-    function getColorID() {
-        document.querySelector("#HTML-Content").addEventListener("click",  hideOffCanvas);
-
-        if (event.target.id.toString() !="") {
-            let newStyle;
+    function getColorID(event) {
+        if (event.target.id === "")  {
+            return;
+        }
+            let newStyle; 
             /* Section background */
             if (btn_id === "btn_bg") {
                 newStyle = "."+section_class+" { background-color: var("+event.target.id+") }";
@@ -257,7 +274,7 @@ function removeClassNames() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
-        }
+        
     }
 
     function enableAllButtons() {

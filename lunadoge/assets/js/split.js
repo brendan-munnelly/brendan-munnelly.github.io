@@ -124,14 +124,12 @@ function doColOrder() {
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
         // get button id
-        event.preventDefault();
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
         displayOffCanvas();
     }));
 
     function displayOffCanvas() {
-        event.preventDefault();
         const el_offCanvas = document.querySelector("#off-canvas-block");
         el_offCanvas.classList.remove("is-hidden");
         el_offCanvas.classList.add("is-visible");
@@ -141,7 +139,6 @@ function doColOrder() {
     document.querySelector("#btn_close").addEventListener("click", hideOffCanvas);
 
     function hideOffCanvas() {
-        event.preventDefault();
         var el_offCanvas = document.getElementById("off-canvas-block");
         el_offCanvas.classList.remove("is-visible");
         el_offCanvas.classList.add("is-hidden");
@@ -149,11 +146,11 @@ function doColOrder() {
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);
 
-    function getColorID() {
-        document.querySelector("#HTML-Content").addEventListener("click",  hideOffCanvas);
-
-        if (event.target.id.toString() !="") {
-            let newStyle;
+    function getColorID(event) {
+        if ( event.target.id === "")  {
+            return;
+        }
+            let newStyle; 
 
             /* Section background */
             if (btn_id === "btn_bg") {
@@ -232,7 +229,6 @@ function doColOrder() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
-        }
     }
 
     function enableAllButtons() {

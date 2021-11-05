@@ -61,11 +61,24 @@ function hideMenus() {
         event.preventDefault();
     }
 
+    document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
+    
+    function handleLabelClick(event) {
+        const label = event.target.closest("label");
+        if (label && this.contains(label)) {
+            // Ignore this click
+            return;
+        }
+        // console.log('Clicked');
+    }
+
     document.querySelector("#picker-box").addEventListener("click", getColorID);
       
-    function getColorID() {
-        if (event.target.id.toString() !="") {
-            let newStyle;
+    function getColorID(event) {
+        if (event.target.id === "")  {
+            return;
+        }
+            let newStyle; 
             /* Header background */
             if (btn_id === "btn_bg") {
                 newStyle = "header.hero-block { background-color: var("+event.target.id+") }\n";
@@ -139,7 +152,6 @@ function hideMenus() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));   
-        }
     }
 
 /*
