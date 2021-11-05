@@ -69,6 +69,21 @@ function doClassName() {
         el_section.classList.add("theme-four");
         section_class = "theme-four";
     }
+    else if ( opt==="4") {
+        removeClassNames();
+        el_section.classList.add("theme-four");
+        section_class = "theme-four";
+    }
+    else if ( opt==="5") {
+        removeClassNames();
+        el_section.classList.add("theme-four");
+        section_class = "theme-four";
+    }
+    else if ( opt==="6") {
+        removeClassNames();
+        el_section.classList.add("theme-four");
+        section_class = "theme-four";
+    }
 }
 
 function removeClassNames() {
