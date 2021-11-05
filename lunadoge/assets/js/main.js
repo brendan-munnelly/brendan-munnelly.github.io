@@ -80,29 +80,6 @@ function removeClassNames() {
 }
 
 /*
-//////////////// SECTIONS: COLUMNS ORDER  ///////////////
-*/
-
-if (document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_colOrder").addEventListener("change", doColOrder);
-}
-
-function doColOrder() {
-
-    let opt = document.querySelector("#dd_colOrder").value;
-    const el_section = document.querySelector('section')
-    if (opt==="0") {
-        el_section.classList.add("split-image-right");
-        el_section.classList.remove("split-image-left");
-    }
-
-    else if (opt==="1") {
-        el_section.classList.remove("split-image-right");
-        el_section.classList.add("split-image-left");
-    }
-}
-
-/*
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
 */
 
@@ -152,12 +129,7 @@ function doColOrder() {
 
             /* Section upper heading */
             else if (btn_id === "btn_upper_head") {
-                if (!document.querySelector('.cols-2-split')) {
-                    newStyle = "."+section_class+" .col-1 h2 { color: var("+event.target.id+") }";
-                }
-                if (document.querySelector('.cols-2-split')) {
-                    newStyle = "."+section_class+" .col-2 h2 { color: var("+event.target.id+") }";
-                }
+                newStyle = "."+section_class+" .col-1 h2 { color: var("+event.target.id+") }";
             }
 
             /* Section upper subheading */
@@ -281,13 +253,11 @@ function doColOrder() {
         document.getElementById("btn_a_primary_passive_border").disabled=false;
         document.getElementById("btn_a_primary_active_border").disabled=false;
 
-        if (!document.querySelector('.cols-2-split')) { 
-            document.getElementById("btn_a_ghost_passive_text").disabled=false;
-            document.getElementById("btn_a_ghost_passive_border").disabled=false;
-            document.getElementById("btn_a_ghost_active_text").disabled=false;
-            document.getElementById("btn_a_ghost_active_bg").disabled=false;
-            document.getElementById("btn_a_ghost_active_border").disabled=false;
-        }
+        document.getElementById("btn_a_ghost_passive_text").disabled=false;
+        document.getElementById("btn_a_ghost_passive_border").disabled=false;
+        document.getElementById("btn_a_ghost_active_text").disabled=false;
+        document.getElementById("btn_a_ghost_active_bg").disabled=false;
+        document.getElementById("btn_a_ghost_active_border").disabled=false;
     }
 
     function enablePrimaryButtons() {
@@ -314,21 +284,12 @@ function doColOrder() {
         document.getElementById("btn_a_primary_active_bg").disabled=true;
         document.getElementById("btn_a_primary_passive_border").disabled=true;
         document.getElementById("btn_a_primary_active_border").disabled=true;
-        if (!document.querySelector('.cols-2-split')) { 
-            document.getElementById("btn_a_ghost_passive_text").disabled=true;
-            document.getElementById("btn_a_ghost_passive_border").disabled=true;
-            document.getElementById("btn_a_ghost_active_text").disabled=true;
-            document.getElementById("btn_a_ghost_active_bg").disabled=true;
-            document.getElementById("btn_a_ghost_active_border").disabled=true;
-        }
-        if (document.querySelector('.cols-2-split')) { 
-            document.getElementById("btn_a_secondary_passive_text").disabled=true;
-            document.getElementById("btn_a_secondary_active_text").disabled=true;
-            document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-            document.getElementById("btn_a_secondary_active_bg").disabled=true;
-            document.getElementById("btn_a_secondary_passive_border").disabled=true;
-            document.getElementById("btn_a_secondary_active_border").disabled=true;
-        }
+
+        document.getElementById("btn_a_ghost_passive_text").disabled=true;
+        document.getElementById("btn_a_ghost_passive_border").disabled=true;
+        document.getElementById("btn_a_ghost_active_text").disabled=true;
+        document.getElementById("btn_a_ghost_active_bg").disabled=true;
+        document.getElementById("btn_a_ghost_active_border").disabled=true;
     }
 
     function disablePrimaryButtons() {
@@ -372,9 +333,7 @@ function enableLabelColor() {
 /*
 //////////////// SECTIONS: PARAGRAPHS ///////////////
 */
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_colNos").addEventListener("change", doColumnNos);
-}
+document.querySelector("#dd_colNos").addEventListener("change", doColumnNos);
 
 function doColumnNos() {
     let opt = document.querySelector("#dd_colNos").value;
@@ -417,9 +376,7 @@ function reduceCols() {
 //////////////// UPPER BLOCK: MAIN HEADING H2 ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_h2").addEventListener("change", doH2);
-}
+document.querySelector("#dd_h2").addEventListener("change", doH2);
 
 function doH2() {
     let opt = document.querySelector("#dd_h2").value;
@@ -437,8 +394,13 @@ function doH2() {
         const newContent = document.createTextNode("Lorem Malesuada Dolor");
         newH2.appendChild(newContent);
         const currentDiv = document.querySelector('.col-1');
-        currentDiv.classList.remove("h2-long-text");      
-        currentDiv.prepend(newH2);
+        currentDiv.classList.remove("h2-long-text"); 
+        if (!document.querySelector('.upper-label')) {
+            currentDiv.prepend(newH2);
+        }
+        else {
+            document.querySelector(".upper-label").insertAdjacentHTML("afterend", "<h2>Lorem Malesuada Dolor</h2>"); 
+        }
         doColUpperAlignStatus();
     }
 
@@ -450,7 +412,12 @@ function doH2() {
         newH2.appendChild(newContent);
         const currentDiv = document.querySelector('.col-1');
         currentDiv.classList.add("h2-long-text");
-        currentDiv.prepend(newH2);
+        if (!document.querySelector('.upper-label')) {
+            currentDiv.prepend(newH2);
+        }
+        else {
+            document.querySelector(".upper-label").insertAdjacentHTML("afterend", "<h2>Etiam tincidunt risus nec odio non blandit ipsum facilisis</h2>"); 
+        }     
         doColUpperAlignStatus();
     }
 }
@@ -461,40 +428,6 @@ function removeH2() {
         const elH2 = document.querySelector('.col-1 h2');
         elH2.remove();
         doColUpperAlignStatus();
-    }
-}
-
-
-/*
-//////////////// COL-2-SPLIT: MAIN HEADING H2 ///////////////
-*/
-
-if (document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_h2_split").addEventListener("change", doH2Split);
-}
-
-function doH2Split() {
-    let opt = document.querySelector("#dd_h2_split").value;
-
-    // remove
-    if (opt==="1") {
-        removeH2Split();
-    }
-
-    // add h2 
-    else if (opt==="0") {
-        const newH2 = document.createElement("h2");
-        const newContent = document.createTextNode("Lorem ipsum dolo");
-        newH2.appendChild(newContent);
-        const currentDiv = document.querySelector('.col-2');
-        currentDiv.prepend(newH2);
-    }
-}
-
-function removeH2Split() {
-    if (document.querySelector('.col-2 h2')) {
-        const elH2 = document.querySelector('.col-2 h2');
-        elH2.remove();
     }
 }
 
@@ -537,34 +470,17 @@ function doUpperLabel() {
     const opt = document.querySelector("#dd_upperLabel").value;
     // remove
     if (opt==="0") {
-        if (!document.querySelector('.cols-2-split')) {
-            removeUpperLabel();
-        }
-        else if (document.querySelector('.cols-2-split')) {
-            removeUpperLabelSplit();
-        }
+        removeUpperLabel();
     }
     // regular
     else if (opt==="1") {
-        if (!document.querySelector('.cols-2-split')) { 
-            const newUpperLabel = document.createElement("div");
-            const newContent = document.createTextNode("Upper Label Text");
-            newUpperLabel.appendChild(newContent);
-            newUpperLabel.classList.add("upper-label"); 
-            el_parent = document.querySelector(".col-1");
-            el_parent.prepend(newUpperLabel);
-            enableLabelColor();
-        }
-
-        if (document.querySelector('.cols-2-split')) { 
-            const newUpperLabel = document.createElement("div");
-            const newContent = document.createTextNode("Upper Label Text");
-            newUpperLabel.appendChild(newContent);
-            newUpperLabel.classList.add("upper-label"); 
-            el_parent = document.querySelector(".col-2");
-            el_parent.prepend(newUpperLabel);
-            enableLabelColor();
-        }
+        const newUpperLabel = document.createElement("div");
+        const newContent = document.createTextNode("Upper Label Text");
+        newUpperLabel.appendChild(newContent);
+        newUpperLabel.classList.add("upper-label"); 
+        el_parent = document.querySelector(".col-1");
+        el_parent.prepend(newUpperLabel);
+        enableLabelColor();
     }
 }
 
@@ -631,9 +547,7 @@ function doColUpperAlignStatus() {
 //////////////// COLUMNS ALIGN ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
-}
+document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
 
 function doColAlign() {
     let opt = document.querySelector("#dd_col_align").value;
@@ -652,9 +566,7 @@ function doColAlign() {
 //////////////// COLUMNS SHADOWS ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
-}
+document.querySelector("#dd_col_shadows").addEventListener("change", doColShadows);
 
 function doColShadows() {
     let opt = document.querySelector("#dd_col_shadows").value;
@@ -686,9 +598,7 @@ function doColShadows() {
 //////////////// COLUMNS BORDERS ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
-}
+document.querySelector("#dd_col_borders").addEventListener("change", doColBorders);
 
 function doColBorders() {
     let opt = document.querySelector("#dd_col_borders").value;
@@ -716,9 +626,7 @@ function doColBorders() {
 //////////////// COLUMNS BORDER CORNERS ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
-}
+document.querySelector("#dd_col_corners").addEventListener("change", doColCorners);
 
 function doColCorners() {
     let opt = document.querySelector("#dd_col_corners").value;
@@ -737,9 +645,7 @@ function doColCorners() {
 //////////////// COLUMNS WIDTH ON MOBILES ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
-}
+document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
 
 function doColMobileWidth() {
     let opt = document.querySelector("#dd_cols_mobile").value;
@@ -758,9 +664,7 @@ function doColMobileWidth() {
 //////////////// COLUMN SUB-HEADINGS ////////////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_h3").addEventListener("change", doH3);
-}
+document.querySelector("#dd_h3").addEventListener("change", doH3);
 
     function doH3() {
         let opt = document.querySelector("#dd_h3").value;
@@ -946,9 +850,7 @@ function removeText() {
 //////////////// FAUX BUTTONS ////////////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_buttons").addEventListener("change", doButtons);
-}
+document.querySelector("#dd_buttons").addEventListener("change", doButtons);
 
     function doButtons() {
         let opt = document.querySelector("#dd_buttons").value;
@@ -1022,49 +924,6 @@ if (!document.querySelector('.cols-2-split')) {
 
 
 /*
-//////////////// FAUX BUTTONS: SPLIT TEXT AND IMAGE ////////////////////
-*/
-
-if (document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_buttons_split").addEventListener("change", doButtonsSplit);
-}
-
-    function doButtonsSplit() {
-        let opt = document.querySelector("#dd_buttons_split").value;
-
-        if (opt==="0") {
-            removeButtonsSplit();
-            disableAllButtons();
-        }
-       
-        else if (opt==="1") {
-            removeButtonsSplit();
-            enablePrimaryButtons();
-            disableSecondaryButtons();
-            document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
-            document.getElementById("dd_buttons_style").value="0";
-            document.getElementById("dd_buttons_style").disabled=false;
-        }
-
-        else if (opt==="2") {
-            removeButtonsSplit();
-            enableAllButtons();
-            document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
-            document.getElementById("dd_buttons_style").value="0";
-            document.getElementById("dd_buttons_style").disabled=false;
-        }
-    }
-
-    function removeButtonsSplit() {
-        if (document.querySelector("section .container-btn")) {
-            const elBtn = document.querySelector("section .container-btn");
-            elBtn.remove();
-            document.getElementById("dd_buttons_style").value="0";
-            document.getElementById("dd_buttons_style").disabled=true;
-        }
-    }
-
-/*
 //////////////// FAUX BUTTONS: STYLE ////////////////////
 */
 
@@ -1079,46 +938,22 @@ if (document.querySelector('.cols-2-split')) {
         // soft
         else if (opt==="1") {
             removeButtonsStyle();
-
-            if (!document.querySelector('.cols-2-split')) { 
-                const obj_btns = document.querySelectorAll("a.btn");
-                let el_btns;
-                for (let i=2 ; i <= obj_btns.length+1; i++) {
-                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
-                    el_btns.classList.add("btn-soft");
-                }
-            }
-
-            else if (document.querySelector('.cols-2-split')) { 
-                const obj_btns = document.querySelectorAll("a.btn");
-                let el_btns;
-                for (let i=1 ; i <= obj_btns.length; i++) {
-                    el_btns = document.querySelector("a.btn:nth-child("+i+")");
-                    el_btns.classList.add("btn-soft");
-                }
+            const obj_btns = document.querySelectorAll("a.btn");
+            let el_btns;
+            for (let i=2 ; i <= obj_btns.length+1; i++) {
+                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                el_btns.classList.add("btn-soft");
             }
         }
 
         // rounded
         else if (opt==="2") {
             removeButtonsStyle();
-
-            if (!document.querySelector('.cols-2-split')) { 
-                const obj_btns = document.querySelectorAll("a.btn");
-                let el_btns;
-                for (let i=2 ; i <= obj_btns.length+1; i++) {
-                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
-                    el_btns.classList.add("btn-rounded");
-                }
-            }
-
-            else if (document.querySelector('.cols-2-split')) { 
-                const obj_btns = document.querySelectorAll("a.btn");
-                let el_btns;
-                for (let i=1 ; i <= obj_btns.length; i++) {
-                    el_btns = document.querySelector("a.btn:nth-child("+i+")");
-                    el_btns.classList.add("btn-rounded");
-                }
+            const obj_btns = document.querySelectorAll("a.btn");
+            let el_btns;
+            for (let i=2 ; i <= obj_btns.length+1; i++) {
+                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                el_btns.classList.add("btn-rounded");
             }
         }
     }
@@ -1126,23 +961,11 @@ if (document.querySelector('.cols-2-split')) {
     function removeButtonsStyle() {
         const obj_btns = document.querySelectorAll("a.btn");
 
-        if (!document.querySelector('.cols-2-split')) { 
-            let el_btns;
-            for (let i=2 ; i <= obj_btns.length+1; i++) {
-                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
-                el_btns.classList.remove("btn-soft");
-                el_btns.classList.remove("btn-rounded");
-            }
-        }
-
-        else if (document.querySelector('.cols-2-split')) { 
-            const obj_btns = document.querySelectorAll("a.btn");
-            let el_btns;
-            for (let i=1 ; i <= obj_btns.length; i++) {
-                el_btns = document.querySelector("a.btn:nth-child("+i+")");
-                el_btns.classList.remove("btn-soft");
-                el_btns.classList.remove("btn-rounded");
-            }
+        let el_btns;
+        for (let i=2 ; i <= obj_btns.length+1; i++) {
+            el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+            el_btns.classList.remove("btn-soft");
+            el_btns.classList.remove("btn-rounded");
         }
     }
 
@@ -1151,9 +974,7 @@ if (document.querySelector('.cols-2-split')) {
 //////////////// VISUALS  ///////////////
 */
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#vis-types-all").addEventListener("click", doVisType);
-}
+document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
 function doVisType() { 
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
@@ -1285,78 +1106,6 @@ function doVisType() {
     }
 }
 
-/*
-//////////////// VISUALS: COLS SPLIT TWO  ///////////////
-*/
-
-if (document.querySelector('.cols-2-split')) { 
-    document.querySelector("#vis-types-all").addEventListener("click", doVisTypeSplit);
-}
-
-function doVisTypeSplit() { 
-    const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-  
-    if (selectedValue==="pictures") {
-        removeVisual();
-        resetVisualEffects();
-        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-food-mobile.jpg\" alt=\"Commerce\">\n\t\t</figure>";
-        const el_col = document.querySelector('section .col-2:nth-child(2)');
-        el_col.innerHTML += newContent;
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-    }
-
-    else if (selectedValue==="transparent") {
-        removeVisual();
-        resetVisualEffects();
-
-        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-shopkeeper.png\" alt=\"Commerce\">\n\t\t</figure>";
-        const el_col = document.querySelector('section .col-2:nth-child(2)');
-        el_col.innerHTML += newContent;
-        document.getElementById("dd_image_shadows").disabled=false;
-    }
-
-    else if (selectedValue==="illustrations") {
-        removeVisual();
-        resetVisualEffects();
-
-        const newContent = "\n\t\t<figure>\n\t\t\t<img src=\"assets/img/800x800-mobile-pink.png\" alt=\"Commerce\">\n\t\t</figure>";
-        const el_col = document.querySelector('section .col-2:nth-child(2)');
-        el_col.innerHTML += newContent;
-    
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-    }
-
-    else if (selectedValue==="vid-file") {
-        removeVisual();
-        resetVisualEffects();
-
-        const newContent = "\n\n\t<figure>\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t<\/figure>";
-        const el_col = document.querySelector('section .col-2:nth-child(2)');
-        el_col.innerHTML += newContent;
-    }
-
-    else if (selectedValue==="vid-yt") {
-        removeVisual();
-        resetVisualEffects();
-
-        const newContent = "\n\n\t<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t<\/figure>";
-        const el_col = document.querySelector('section .col-2:nth-child(2)');
-        el_col.innerHTML += newContent;
-    }
-}
-
 function removeVisual() {
     const parentNode = document.querySelector("#HTML-Content");
     var element_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
@@ -1375,7 +1124,6 @@ function resetVisualEffects() {
     removeImageShadows();
     removeImageBorders();
 }
-
 
 /*
 //////////////// VISUAL PROPERTIES ///////////////
@@ -1446,9 +1194,9 @@ function removeImageBorders() {
 /*
 //////////////// ICON PROPERTIES ///////////////
 */
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
-}
+
+document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
+
 
 function doIconSize() {
     let opt = document.querySelector("#dd_icon_size").value;
@@ -1464,9 +1212,7 @@ function doIconSize() {
     }
 }
 
-if (!document.querySelector('.cols-2-split')) { 
-    document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
-}
+document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
 
 function doIconAlign() {
     let opt = document.querySelector("#dd_icon_align").value;
