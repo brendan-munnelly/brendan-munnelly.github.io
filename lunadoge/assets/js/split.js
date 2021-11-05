@@ -138,6 +138,7 @@ function doColOrder() {
 
         if (event.target.id.toString() !="") {
             let newStyle;
+
             /* Section background */
             if (btn_id === "btn_bg") {
                 newStyle = "."+section_class+" { background-color: var("+event.target.id+") }";
@@ -145,59 +146,36 @@ function doColOrder() {
 
             /* Section upper label */
             else if (btn_id === "btn_upper_label") {
-                newStyle = "."+section_class+" .upper-label { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" .col-2 .upper-label { color: var("+event.target.id+") }";
+            }
+                    
+            /* Section heading */
+            else if (btn_id === "btn_col_head") {
+                newStyle = "."+section_class+" .col-2 h2 { color: var("+event.target.id+") }";
             }
 
-            /* Section upper heading */
-            else if (btn_id === "btn_upper_head") {
-                if (!document.querySelector('.cols-2-split')) {
-                    newStyle = "."+section_class+" .col-1 h2 { color: var("+event.target.id+") }";
-                }
-                if (document.querySelector('.cols-2-split')) {
-                    newStyle = "."+section_class+" .col-2 h2 { color: var("+event.target.id+") }";
-                }
-            }
-
-            /* Section upper subheading */
-            else if (btn_id === "btn_upper_subhead") {
-                newStyle = "."+section_class+" .col-1 h3 { color: var("+event.target.id+") }"; 
-            }
-
-            /* Section upper subheading */
+            /* Section sub-heading */
             else if (btn_id === "btn_col_subhead") {
-                newStyle = "."+section_class+" "+col_no+" h3 { color: var("+event.target.id+") }"; 
+                newStyle = "."+section_class+" .col-2 h3 { color: var("+event.target.id+") }";
             }
 
             /* Section text */
             else if (btn_id === "btn_col_text") {
-                newStyle = "."+section_class+" "+col_no+" p { color: var("+event.target.id+") }\n" + "."+section_class+" "+col_no+" li { color: var("+event.target.id+") }"; 
+                newStyle = "."+section_class+" .col-2 p { color: var("+event.target.id+") }\n." +section_class+" .col-2 li { color: var("+event.target.id+") }"; 
             }
-
-            /* Column background */
-            else if (btn_id === "btn_col_background") {
-                newStyle = "."+section_class+" "+col_no+" { background-color: var("+event.target.id+") }";
-            }
-
-            /* Column borders colour */
-            else if (btn_id === "btn_col_border_color") {
-                newStyle = "."+section_class+".col-borders "+col_no+" { border-color: var("+event.target.id+") }";
-            }            
 
             /* Primary button text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "."+section_class+" a.btn-primary:link { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { color: var("+event.target.id+") }";
             }
-
             /* Primary button text colour: active */
             else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") }\n."+section_class+ " a.btn-primary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
-            }
-
+                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
+            } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
                 newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+event.target.id+") }";
             }
-
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
                 newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
@@ -209,30 +187,6 @@ function doColOrder() {
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
                 newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+event.target.id+") }";
-            }
-
-            /* ghost button text colour: passive */
-            else if (btn_id === "btn_a_ghost_passive_text") {
-                newStyle = "."+section_class+" a.btn-ghost:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-ghost:visited { color: var("+event.target.id+") }";
-            }
-
-            /* ghost button text colour: active */
-            else if (btn_id === "btn_a_ghost_active_text") {
-                newStyle = "."+section_class+" a.btn-ghost:focus { color: var("+event.target.id+") } \n." +section_class+ " a.btn-ghost:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:active { color: var("+event.target.id+") }";
-            }
- 
-            /* ghost button border colour: passive */
-            else if (btn_id === "btn_a_ghost_passive_border") {
-                newStyle = "."+section_class+" a.btn-ghost:link { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:visited { border-color: var("+event.target.id+") }";
-            }
-            /* ghost button border colour: active */
-            else if (btn_id === "btn_a_ghost_active_border") {
-                newStyle = "."+section_class+" a.btn-ghost:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:active { border-color: var("+event.target.id+") }";
-            }
-
-            /* ghost button background colour: active */
-            else if (btn_id === "btn_a_ghost_active_bg") {
-                newStyle = "."+section_class+" a.btn-ghost:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-ghost:active { background-color: var("+event.target.id+") }";
             }
 
             /* secondary button text colour: passive */
@@ -259,12 +213,6 @@ function doColOrder() {
             else if (btn_id === "btn_a_secondary_active_border") {
                 newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+event.target.id+") }";
             }
-
-            /* Icons colour */
-            else if (btn_id === "btn_icon_color") {
-                newStyle = "."+section_class+" "+col_no+" figure.icon { color: var("+event.target.id+") }";
-            }
-
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
