@@ -432,6 +432,7 @@ function doH2() {
     // add short
     else if (opt==="0") {
         removeH2();
+        document.getElementById("btn_col_subhead").disabled=false;
         const newH2 = document.createElement("h2");
         const newContent = document.createTextNode("Lorem Malesuada Dolor");
         newH2.appendChild(newContent);
@@ -456,6 +457,7 @@ function doH2() {
 
 function removeH2() {
     if (document.querySelector('.col-1 h2')) {
+        document.getElementById("btn_col_subhead").disabled=true;
         const elH2 = document.querySelector('.col-1 h2');
         elH2.remove();
         doColUpperAlignStatus();
@@ -526,7 +528,7 @@ function removeSubHead() {
 }
 
 /*
-//////////////// UPPER CATEGORY LABEL ABOVE H1 ///////////////
+//////////////// UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
 document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
