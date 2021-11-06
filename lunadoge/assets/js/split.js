@@ -86,27 +86,6 @@ function removeClassNames() {
 }
 
 /*
-//////////////// SECTIONS: COLUMNS ORDER  ///////////////
-*/
-
-document.querySelector("#dd_colOrder").addEventListener("change", doColOrder);
-
-function doColOrder() {
-
-    let opt = document.querySelector("#dd_colOrder").value;
-    const el_section = document.querySelector('section')
-    if (opt==="0") {
-        el_section.classList.add("split-image-right");
-        el_section.classList.remove("split-image-left");
-    }
-
-    else if (opt==="1") {
-        el_section.classList.remove("split-image-right");
-        el_section.classList.add("split-image-left");
-    }
-}
-
-/*
 //////////////// SECTIONS: BACKGROUND COLOUR ///////////////
 */
 
@@ -126,6 +105,8 @@ function doColOrder() {
         }
     }
 
+    let btn_id; // item to be coloured
+
     // On click style button 
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
@@ -140,104 +121,85 @@ function doColOrder() {
         event.preventDefault();
     }
 
-    document.querySelector("#picker-box").addEventListener('click', handleBubbleClick);
-    
-    function handleBubbleClick(event) {
-        event.stopPropagation();
-        const label = event.target.closest("label");
-        if (label && this.contains(label)) {
-            // Ignore this click
-            return;
-        }
-        console.log('Label click detected');
-        const span = event.target.closest("span");
-        if (span && this.contains(span)) {
-            // Ignore this click
-            return;
-        }
-        console.log('Span click detected');
-    }
-    
-    document.querySelector("#picker-box").addEventListener("click", getColorID);
-    function getColorID(event) {
-        if ( event.target.id === "")  {
-            return;
-        }
+    var radios = document.querySelectorAll('input[type=radio][name="picker-radio"]');
+    radios.forEach(radio => radio.addEventListener('change', () => getColorID(radio.value)));
+
+    function getColorID(color_code) {
             let newStyle; 
 
             /* Section background */
             if (btn_id === "btn_bg") {
-                newStyle = "."+section_class+" { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" { background-color: var("+color_code+") }";
             }
 
             /* Section upper label */
             else if (btn_id === "btn_upper_label") {
-                newStyle = "."+section_class+" .col-2 .upper-label { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" .col-2 .upper-label { color: var("+color_code+") }";
             }
                     
             /* Section heading */
             else if (btn_id === "btn_col_head") {
-                newStyle = "."+section_class+" .col-2 h2 { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" .col-2 h2 { color: var("+color_code+") }";
             }
 
             /* Section sub-heading */
             else if (btn_id === "btn_col_subhead") {
-                newStyle = "."+section_class+" .col-2 h3 { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" .col-2 h3 { color: var("+color_code+") }";
             }
 
             /* Section text */
             else if (btn_id === "btn_col_text") {
-                newStyle = "."+section_class+" .col-2 p { color: var("+event.target.id+") }\n." +section_class+" .col-2 li { color: var("+event.target.id+") }"; 
+                newStyle = "."+section_class+" .col-2 p { color: var("+color_code+") }\n." +section_class+" .col-2 li { color: var("+color_code+") }"; 
             }
 
             /* Primary button text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "."+section_class+" a.btn-primary:link { color: var("+event.target.id+") } \n." +section_class+ " a.btn-primary:visited { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { color: var("+color_code+") } \n." +section_class+ " a.btn-primary:visited { color: var("+color_code+") }";
             }
             /* Primary button text colour: active */
             else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { color: var("+color_code+") }";
             } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+color_code+") }";
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+color_code+") }";
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+color_code+") }";
             }
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+color_code+") }";
             }
 
             /* secondary button text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+color_code+") }";
             }
             /* secondary button text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { color: var("+color_code+") }";
             }
             /* secondary button background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+color_code+") }";
             }
             /* secondary button background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+color_code+") }";
             }
             /* secondary button border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+color_code+") }";
             }
             /* secondary button border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+event.target.id+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+event.target.id+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+color_code+") }";
             }
             style = document.createElement('style');
             document.head.appendChild(style);
@@ -245,91 +207,25 @@ function doColOrder() {
             document.getElementById("btn-copy-css").disabled=false;
     }
 
-    function enableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-    }
-
-    function enableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-        document.getElementById("btn_a_secondary_passive_text").disabled=false;
-        document.getElementById("btn_a_secondary_active_text").disabled=false;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
-        document.getElementById("btn_a_secondary_active_bg").disabled=false;
-        document.getElementById("btn_a_secondary_passive_border").disabled=false;
-        document.getElementById("btn_a_secondary_active_border").disabled=false;
-    }
-
-    function enablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-    }
-
-    function enableSecondaryButtons() {
-        document.getElementById("btn_a_secondary_passive_text").disabled=false;
-        document.getElementById("btn_a_secondary_active_text").disabled=false;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
-        document.getElementById("btn_a_secondary_active_bg").disabled=false;
-        document.getElementById("btn_a_secondary_passive_border").disabled=false;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;        
-    }
-
-    function disableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-        document.getElementById("btn_a_secondary_passive_text").disabled=true;
-        document.getElementById("btn_a_secondary_active_text").disabled=true;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-        document.getElementById("btn_a_secondary_active_bg").disabled=true;
-        document.getElementById("btn_a_secondary_passive_border").disabled=true;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;
-    }
-
-    function disablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-    }
-
-    function disableSecondaryButtons() {
-        document.getElementById("btn_a_secondary_passive_text").disabled=true;
-        document.getElementById("btn_a_secondary_active_text").disabled=true;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-        document.getElementById("btn_a_secondary_active_bg").disabled=true;
-        document.getElementById("btn_a_secondary_passive_border").disabled=true;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;        
-    }
-
-/*
-//////////////// COLOURS: ENABLE/DISABLE UPPER LABEL ///////////////
+    /*
+//////////////// SECTIONS: COLUMNS ORDER  ///////////////
 */
 
-function disableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=true;
-}
+document.querySelector("#dd_colOrder").addEventListener("change", doColOrder);
 
-function enableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=false;
+function doColOrder() {
+
+    let opt = document.querySelector("#dd_colOrder").value;
+    const el_section = document.querySelector('section')
+    if (opt==="0") {
+        el_section.classList.add("split-image-right");
+        el_section.classList.remove("split-image-left");
+    }
+
+    else if (opt==="1") {
+        el_section.classList.remove("split-image-right");
+        el_section.classList.add("split-image-left");
+    }
 }
 
 
@@ -472,7 +368,7 @@ function removeParaList() {
 }
 
 /*
-//////////////// FAUX BUTTONS: SPLIT TEXT AND IMAGE ////////////////////
+//////////////// BUTTONS: SPLIT TEXT AND IMAGE ////////////////////
 */
 
 document.querySelector("#dd_buttons_split").addEventListener("change", doButtonsSplit);
@@ -524,7 +420,7 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
     }
 
 /*
-//////////////// FAUX BUTTONS: STYLE ////////////////////
+//////////////// BUTTONS: STYLE ////////////////////
 */
 
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
@@ -604,6 +500,96 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
             }
         }
     }
+
+    
+    function enableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+    }
+
+    function enableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+        document.getElementById("btn_a_secondary_passive_text").disabled=false;
+        document.getElementById("btn_a_secondary_active_text").disabled=false;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+        document.getElementById("btn_a_secondary_active_bg").disabled=false;
+        document.getElementById("btn_a_secondary_passive_border").disabled=false;
+        document.getElementById("btn_a_secondary_active_border").disabled=false;
+    }
+
+    function enablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+    }
+
+    function enableSecondaryButtons() {
+        document.getElementById("btn_a_secondary_passive_text").disabled=false;
+        document.getElementById("btn_a_secondary_active_text").disabled=false;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+        document.getElementById("btn_a_secondary_active_bg").disabled=false;
+        document.getElementById("btn_a_secondary_passive_border").disabled=false;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;        
+    }
+
+    function disableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;
+    }
+
+    function disablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+    }
+
+    function disableSecondaryButtons() {
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;        
+    }
+
+/*
+//////////////// COLOURS: ENABLE/DISABLE UPPER LABEL ///////////////
+*/
+
+function disableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=true;
+}
+
+function enableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=false;
+}
+
+
 
 /*
 //////////////// VISUALS: COLS SPLIT TWO  ///////////////
