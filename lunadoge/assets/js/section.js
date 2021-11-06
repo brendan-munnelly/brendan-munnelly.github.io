@@ -242,6 +242,7 @@ function removeClassNames() {
             document.head.appendChild(style);
             // style.type = 'text/css';
             style.appendChild(document.createTextNode(newStyle));
+            document.getElementById("btn-copy-css").disabled=false;
     }
 
 

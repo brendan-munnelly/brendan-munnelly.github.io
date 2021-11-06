@@ -158,11 +158,12 @@ function hideMenus() {
             console.log(newStyle); 
             style = document.createElement('style');
             document.head.appendChild(style);
-            style.appendChild(document.createTextNode(newStyle));   
+            style.appendChild(document.createTextNode(newStyle));
+            document.getElementById("btn-copy-css").disabled=false;   
     }
 
 /*
-//////////////// COLOURS: ENABLE/DISABLE BACKGROUND ///////////////
+//////////////// COLOURS: ENABLE/DISABLE ///////////////
 */
 
 function disableBgColor() {
@@ -343,7 +344,6 @@ function doHeaderAlignment(heroType) {
     }
 
     else if ( heroType === 4 ) {
-        console.log("got here");
         const el_cont = document.querySelector(".hero-text-container"); 
         el_cont.classList.remove("text-center-desktop");
         el_cont.classList.add("text-center-mobile");
@@ -526,13 +526,12 @@ function disableSecondaryButtons() {
 }
 
 /*
-//////////////// FAUX BUTTONS: BUTTONS CORNER STYLE ////////////////////
+//////////////// BUTTONS: CORNER STYLE ////////////////////
 */
 
 document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
 
 function doButtonsStyle() {
-    console.log("Do buttons style");
     let opt = document.querySelector("#dd_buttons_style").value;
     // remove
     if (opt==="0") {
@@ -540,7 +539,6 @@ function doButtonsStyle() {
     }
     // soft
     else if (opt==="1") {
-        console.log("Add soft");
         removeButtonsStyle();
         if (document.querySelector(".btn-primary")) {
             const el_btn_primary = document.querySelector("a.btn-primary");
@@ -556,7 +554,6 @@ function doButtonsStyle() {
     // rounded
     else if (opt==="2") {
         removeButtonsStyle();
-        console.log("Add rounded");
         if (document.querySelector(".btn-primary")) {
             const el_btn_primary = document.querySelector("a.btn-primary");
             el_btn_primary.classList.add("btn-rounded");
@@ -588,7 +585,6 @@ function removeButtonsStyle() {
 /*
 //////////////// COPY TO CLIPBOARD ///////////////
 */
-
 
 document.querySelector("#btn-copy").addEventListener("click", copyHTML);
 

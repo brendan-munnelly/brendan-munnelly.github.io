@@ -242,6 +242,7 @@ function doColOrder() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
+            document.getElementById("btn-copy-css").disabled=false;
     }
 
     function enableAllButtons() {

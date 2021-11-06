@@ -135,6 +135,12 @@ function removeClassNames() {
             return;
         }
         console.log('Span click detected');
+        const divcol = event.target.closest("div");
+        if (divcol && this.contains(divcol)) {
+            // Ignore this click
+            return;
+        }
+        console.log('Div click detected');
     }
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);
@@ -271,80 +277,7 @@ function removeClassNames() {
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
-        
-    }
-
-    function enableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-
-        document.getElementById("btn_a_ghost_passive_text").disabled=false;
-        document.getElementById("btn_a_ghost_passive_border").disabled=false;
-        document.getElementById("btn_a_ghost_active_text").disabled=false;
-        document.getElementById("btn_a_ghost_active_bg").disabled=false;
-        document.getElementById("btn_a_ghost_active_border").disabled=false;
-    }
-
-    function enablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-    }
-
-    function enableGhostButtons() {
-        document.getElementById("btn_a_ghost_passive_text").disabled=false;
-        document.getElementById("btn_a_ghost_passive_border").disabled=false;
-        document.getElementById("btn_a_ghost_active_text").disabled=false;
-        document.getElementById("btn_a_ghost_active_bg").disabled=false;
-        document.getElementById("btn_a_ghost_active_border").disabled=false;        
-    }
-
-    function disableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;
-    }
-
-    function disablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-    }
-
-    function disableGhostButtons() {
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;        
-    }
-
-    function disableSecondaryButtons() {
-        document.getElementById("btn_a_secondary_passive_text").disabled=true;
-        document.getElementById("btn_a_secondary_active_text").disabled=true;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-        document.getElementById("btn_a_secondary_active_bg").disabled=true;
-        document.getElementById("btn_a_secondary_passive_border").disabled=true;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;
+            document.getElementById("btn-copy-css").disabled=false;
     }
 
 /*
@@ -378,7 +311,7 @@ function doColumnNos() {
         else if (col_no == ".col-3") {
             document.querySelector(col_no+":nth-child(4)").insertAdjacentHTML("afterend", content_paras);
             col_blocks = 6;
-            console.log(col_blocks = 6);
+            // console.log(col_blocks = 6);
         }
 
         else if (col_no == ".col-4") {
@@ -876,7 +809,7 @@ function removeText() {
 
 
 /*
-//////////////// FAUX BUTTONS ////////////////////
+//////////////// BUTTONS ////////////////////
 */
 
 document.querySelector("#dd_buttons").addEventListener("change", doButtons);
@@ -953,7 +886,7 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
 
 
 /*
-//////////////// FAUX BUTTONS: STYLE ////////////////////
+//////////////// BUTTONS: STYLE ////////////////////
 */
 
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
@@ -998,6 +931,78 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
         }
     }
 
+    function enableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+
+        document.getElementById("btn_a_ghost_passive_text").disabled=false;
+        document.getElementById("btn_a_ghost_passive_border").disabled=false;
+        document.getElementById("btn_a_ghost_active_text").disabled=false;
+        document.getElementById("btn_a_ghost_active_bg").disabled=false;
+        document.getElementById("btn_a_ghost_active_border").disabled=false;
+    }
+
+    function enablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=false;
+        document.getElementById("btn_a_primary_active_text").disabled=false;
+        document.getElementById("btn_a_primary_passive_bg").disabled=false;
+        document.getElementById("btn_a_primary_active_bg").disabled=false;
+        document.getElementById("btn_a_primary_passive_border").disabled=false;
+        document.getElementById("btn_a_primary_active_border").disabled=false;
+    }
+
+    function enableGhostButtons() {
+        document.getElementById("btn_a_ghost_passive_text").disabled=false;
+        document.getElementById("btn_a_ghost_passive_border").disabled=false;
+        document.getElementById("btn_a_ghost_active_text").disabled=false;
+        document.getElementById("btn_a_ghost_active_bg").disabled=false;
+        document.getElementById("btn_a_ghost_active_border").disabled=false;        
+    }
+
+    function disableAllButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+
+        document.getElementById("btn_a_ghost_passive_text").disabled=true;
+        document.getElementById("btn_a_ghost_passive_border").disabled=true;
+        document.getElementById("btn_a_ghost_active_text").disabled=true;
+        document.getElementById("btn_a_ghost_active_bg").disabled=true;
+        document.getElementById("btn_a_ghost_active_border").disabled=true;
+    }
+
+    function disablePrimaryButtons() {
+        document.getElementById("btn_a_primary_passive_text").disabled=true;
+        document.getElementById("btn_a_primary_active_text").disabled=true;
+        document.getElementById("btn_a_primary_passive_bg").disabled=true;
+        document.getElementById("btn_a_primary_active_bg").disabled=true;
+        document.getElementById("btn_a_primary_passive_border").disabled=true;
+        document.getElementById("btn_a_primary_active_border").disabled=true;
+    }
+
+    function disableGhostButtons() {
+        document.getElementById("btn_a_ghost_passive_text").disabled=true;
+        document.getElementById("btn_a_ghost_passive_border").disabled=true;
+        document.getElementById("btn_a_ghost_active_text").disabled=true;
+        document.getElementById("btn_a_ghost_active_bg").disabled=true;
+        document.getElementById("btn_a_ghost_active_border").disabled=true;        
+    }
+
+    function disableSecondaryButtons() {
+        document.getElementById("btn_a_secondary_passive_text").disabled=true;
+        document.getElementById("btn_a_secondary_active_text").disabled=true;
+        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+        document.getElementById("btn_a_secondary_active_bg").disabled=true;
+        document.getElementById("btn_a_secondary_passive_border").disabled=true;
+        document.getElementById("btn_a_secondary_active_border").disabled=true;
+    }
 
 /*
 //////////////// VISUALS  ///////////////
