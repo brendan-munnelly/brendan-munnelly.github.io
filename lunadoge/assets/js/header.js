@@ -40,7 +40,7 @@ function hideMenus() {
         modal.style.display = "none";
     }
     
-    // When the user clicks anywhere outside of the modal, close it
+    // When the user clicks anywhere outside the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -64,12 +64,13 @@ function hideMenus() {
     document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
     
     function handleLabelClick(event) {
+        event.stopPropagation();
         const label = event.target.closest("label");
         if (label && this.contains(label)) {
             // Ignore this click
             return;
         }
-        // console.log('Clicked');
+        console.log('Label click detected');
     }
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);

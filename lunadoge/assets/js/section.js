@@ -29,10 +29,8 @@ function hideMenus() {
 }
 
 /*
-//////////////// SECTION: CLASS NAMES ///////////////
+//////////////// SECTION CLASS NAMES ///////////////
 */
-
-// Get current section class
 
 let section_class = "theme-one";
 document.querySelector("#dd_className").addEventListener("change", doClassName);
@@ -65,21 +63,15 @@ function doClassName() {
         el_section.classList.add("theme-four");
         section_class = "theme-four";
     }
-
     else if ( opt==="4") {
         removeClassNames();
-        el_section.classList.add("theme-four");
-        section_class = "theme-four";
+        el_section.classList.add("theme-five");
+        section_class = "theme-five";
     }
     else if ( opt==="5") {
         removeClassNames();
-        el_section.classList.add("theme-four");
-        section_class = "theme-four";
-    }
-    else if ( opt==="6") {
-        removeClassNames();
-        el_section.classList.add("theme-four");
-        section_class = "theme-four";
+        el_section.classList.add("theme-six");
+        section_class = "theme-six";
     }
 }
 
@@ -89,31 +81,29 @@ function removeClassNames() {
     el_section.classList.remove("theme-two");
     el_section.classList.remove("theme-three");
     el_section.classList.remove("theme-four");
+    el_section.classList.remove("theme-five");
+    el_section.classList.remove("theme-six");
 }
 
 /*
-//////////////// SECTION: ALIGN ///////////////
+//////////////// COLOUR PICKER ///////////////
 */
 
-document.querySelector("#dd_section_align").addEventListener("change", doSectionAlign);
-
-function doSectionAlign() {
-    let opt = document.querySelector("#dd_section_align").value;
-    const el_upperlabel = document.querySelector('section')
-
-    if (opt==="0") {
-        el_upperlabel.classList.remove("text-center");
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
     }
-
-    else if (opt==="1") {
-        el_upperlabel.classList.add("text-center");
+    
+    // When the user clicks anywhere outside the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
-}
-
-
-/*
-//////////////// SECTIONS: BACKGROUND COLOUR ///////////////
-*/
 
     // On click style button 
     let all_btns = document.querySelectorAll('.btn_style');
@@ -121,25 +111,28 @@ function doSectionAlign() {
         // get button id
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
-        displayOffCanvas();
+        displayModal();
     }));
 
-    function displayOffCanvas() {
-        const el_offCanvas = document.querySelector("#off-canvas-block");
-        el_offCanvas.classList.remove("is-hidden");
-        el_offCanvas.classList.add("is-visible");
+    function displayModal() {
+        modal.style.display = "block";
+        event.preventDefault();
     }
 
-    document.querySelector("#btn_close").addEventListener("click", hideOffCanvas);
-
-    function hideOffCanvas() {
-        var el_offCanvas = document.getElementById("off-canvas-block");
-        el_offCanvas.classList.remove("is-visible");
-        el_offCanvas.classList.add("is-hidden");
+    document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
+    
+    function handleLabelClick(event) {
+        // event.preventDefault();
+        event.stopPropagation();
+        const label = event.target.closest("label");
+        if (label && this.contains(label)) {
+            // Ignore this click
+            return;
+        }
+        console.log('Label click detected');
     }
 
-    document.querySelector("#picker-box").addEventListener("click", getColorID);
-      
+    document.querySelector("#picker-box").addEventListener("click", getColorID);      
     function getColorID(event) {
         if ( event.target.id === "")  {
             return;
@@ -246,6 +239,26 @@ function doSectionAlign() {
             style.appendChild(document.createTextNode(newStyle));
     }
 
+
+/*
+//////////////// SECTION: ALIGN ///////////////
+*/
+
+document.querySelector("#dd_section_align").addEventListener("change", doSectionAlign);
+
+function doSectionAlign() {
+    let opt = document.querySelector("#dd_section_align").value;
+    const el_upperlabel = document.querySelector('section')
+
+    if (opt==="0") {
+        el_upperlabel.classList.remove("text-center");
+    }
+
+    else if (opt==="1") {
+        el_upperlabel.classList.add("text-center");
+    }
+}
+
     function enableAllButtons() {
         document.getElementById("btn_a_primary_passive_text").disabled=false;
         document.getElementById("btn_a_primary_active_text").disabled=false;
@@ -311,6 +324,7 @@ function doSectionAlign() {
         document.getElementById("btn_a_secondary_passive_border").disabled=true;
         document.getElementById("btn_a_secondary_active_border").disabled=true;        
     }
+
 
 /*
 //////////////// COLOURS: ENABLE/DISABLE BACKGROUND ///////////////
