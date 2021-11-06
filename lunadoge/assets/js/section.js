@@ -119,10 +119,9 @@ function removeClassNames() {
         event.preventDefault();
     }
 
-    document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
+    document.querySelector("#picker-box").addEventListener('click', handleBubbleClick);
     
-    function handleLabelClick(event) {
-        // event.preventDefault();
+    function handleBubbleClick(event) {
         event.stopPropagation();
         const label = event.target.closest("label");
         if (label && this.contains(label)) {
@@ -130,6 +129,12 @@ function removeClassNames() {
             return;
         }
         console.log('Label click detected');
+        const span = event.target.closest("span");
+        if (span && this.contains(span)) {
+            // Ignore this click
+            return;
+        }
+        console.log('Span click detected');
     }
 
     document.querySelector("#picker-box").addEventListener("click", getColorID);      
