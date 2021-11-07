@@ -59,48 +59,41 @@ function hideMenus() {
         // get button id
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
-        if (!btn_id) {
-            // alert("btn_id problem");
-            document.querySelector("#box-msg").classList.add("is-visible");
-            document.querySelector("#box-msg").classList.remove("is-hidden");
-        }
-        else {
-            document.querySelector("#box-msg").classList.remove("is-visible");
-            document.querySelector("#box-msg").classList.add("is-hidden");
-            displayModal();
-        }
+        displayModal();
     }));
-
-    document.querySelector(".close-box-msg").addEventListener('click', closeBoxMsg);
-
-    function closeBoxMsg() {
-        document.querySelector("#box-msg").classList.remove("is-visible");
-        document.querySelector("#box-msg").classList.add("is-hidden");
-    }
 
     function displayModal() {
         modal.style.display = "block";
         event.preventDefault();
     }
 
-    document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
+    /*
+    const el_parent = document.querySelector('#picker-box');
+    el_parent.addEventListener('click', handleLabelClick);
     
     function handleLabelClick(event) {
-        event.stopPropagation();
         const label = event.target.closest("label");
+        const span =  event.target.closest("span");
         if (label && this.contains(label)) {
+            // console.log('Label clicked');
             // Ignore this click
             return;
         }
-        // console.log('Label click detected');
-        const span = event.target.closest("span");
         if (span && this.contains(span)) {
+            // console.log('Span clicked');
             // Ignore this click
             return;
         }
-        // console.log('Span click detected');
+        if ( !(label && this.contains(label)) && !(span && this.contains(span)) ) {
+            var radios = document.querySelectorAll('input[type=radio][name="picker-radio"]');
+            getColorID(event.target.id); 
+        }
     }
 
+//    var radios = document.querySelectorAll('input[type=radio][name="picker-radio"]');
+//    radios.forEach(radio => radio.addEventListener('change', () => getColorID(radio.value)));
+        
+*/
         function getColorID(color_code) {
             /* Header background */
             if (btn_id === "btn_bg") {
@@ -214,12 +207,13 @@ function hideMenus() {
                 doUpdateArray(sub_string,newStyle); 
             }
 
+            //console.log(newStyle); 
             style = document.createElement('style');
             document.head.appendChild(style);
             style.appendChild(document.createTextNode(newStyle));
             document.getElementById("btn-copy-css").disabled=false;
-            // console.log("Button ID: "+btn_id);
-            // console.log("newStyle: "+newStyle);
+            console.log("Button ID: "+btn_id);
+            console.log("newStyle: "+newStyle);
         }
 
        function doUpdateArray(sub_string,newStyle) {
@@ -669,22 +663,30 @@ function copyHTML() {
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
-    document.body.removeChild(el); 
+    document.body.removeChild(el);
+        
+    console.log("copied");
 }
 
 function copyCSS() {
     hideMenus();
+    // var css = "", styletags = document.getElementsByTagName("style");
+    // for(var i = 0; i < styletags.length; i++) {
+        // css += "\n"+styletags[i].innerHTML
+    // }
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
     strCSS = strCSS.replace(/,/g, ".");
     strCSS = strCSS.replace(/.header/g, "header");
+    // strCSS = "."+strCSS;
     el_css.value = strCSS;
     document.body.appendChild(el_css);
     el_css.select();
     document.execCommand('copy');
     document.body.removeChild(el_css);  
-    // console.log(strCSS);
+    
+    console.log(strCSS);
 }
 
 /*

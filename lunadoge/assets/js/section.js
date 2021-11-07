@@ -86,9 +86,8 @@ function removeClassNames() {
 }
 
 /*
-//////////////// COLOUR PICKER ///////////////
+//////////////// HEADER COLOURS ///////////////
 */
-
     // Get the modal
     var modal = document.getElementById("myModal");
     // Get the <span> element that closes the modal
@@ -106,128 +105,218 @@ function removeClassNames() {
     }
 
     let btn_id; // item to be coloured
+    let newStyle; // full selector and style rule
+    let sub_string; // style rule excerpt
+    const arrCSS = []; // array for style rules to copy
 
     // On click style button 
     let all_btns = document.querySelectorAll('.btn_style');
     all_btns.forEach(el => el.addEventListener('click', event => {
+        event.preventDefault();
         // get button id
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
-        displayModal();
+        if (!btn_id) {
+            // alert("btn_id problem");
+            document.querySelector("#box-msg").classList.add("is-visible");
+            document.querySelector("#box-msg").classList.remove("is-hidden");
+        }
+        else {
+            document.querySelector("#box-msg").classList.remove("is-visible");
+            document.querySelector("#box-msg").classList.add("is-hidden");
+            displayModal();
+        }
     }));
+
+    document.querySelector(".close-box-msg").addEventListener('click', closeBoxMsg);
+
+    function closeBoxMsg() {
+        document.querySelector("#box-msg").classList.remove("is-visible");
+        document.querySelector("#box-msg").classList.add("is-hidden");
+    }
 
     function displayModal() {
         modal.style.display = "block";
         event.preventDefault();
     }
 
-    var radios = document.querySelectorAll('input[type=radio][name="picker-radio"]');
-    radios.forEach(radio => radio.addEventListener('change', () => getColorID(radio.value)));
+    document.querySelector("#picker-box").addEventListener('click', suppressBubblingClicks);
+    
+    function suppressBubblingClicks(event) {
+        // event.preventDefault();
+        event.stopPropagation();
+        const label = event.target.closest("label");
+        if (label && this.contains(label)) {
+            event.stopPropagation();
+            // Ignore this click
+            return;
+        }
+        // console.log('Label click detected');
+        const span = event.target.closest("span");
+        if (span && this.contains(span)) {
+            event.stopPropagation();
+            // Ignore this click
+            return;
+        }
+        // console.log('Span click detected');
+    }
 
-    function getColorID(color_code) {
-            let newStyle; 
-       
+        function getColorID(color_code) {
             if (btn_id === "btn_bg") {
-                newStyle = "."+section_class+" { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" { background-color: var("+color_code+") }\n";
+                sub_string = "."+section_class+" { background-color";
+                doUpdateArray(sub_string,newStyle)
             }
 
             /* Section upper label */
             else if (btn_id === "btn_upper_label") {
-                newStyle = "."+section_class+" .upper-label { color: var("+color_code+") }";
+                newStyle = "."+section_class+" .upper-label { color: var("+color_code+") }\n";
+                sub_string = ".upper-label";
+                doUpdateArray(sub_string,newStyle);
             }
                         
             /* Section headings */
             else if (btn_id === "btn_subhead") {
-                newStyle = "."+section_class+" h2 { color: var("+color_code+") } \n." +section_class+" h3 { color: var("+color_code+") } \n."+section_class+" .upper-label { color: var("+color_code+") }"; 
+                newStyle = "."+section_class+" h2 { color: var("+color_code+") } \n." +section_class+" h3 { color: var("+color_code+") } \n."+section_class+" .upper-label { color: var("+color_code+") }\n"; 
+                sub_string = "h2";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* Section text */
             else if (btn_id === "btn_text") {
-                newStyle = "."+section_class+" p { color: var("+color_code+") }\n." +section_class+" li { color: var("+color_code+") }"; 
+                newStyle = "."+section_class+" p { color: var("+color_code+") }\n." +section_class+" li { color: var("+color_code+") }\n"; 
+                sub_string = "p { color";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* Hyperlink text colour: passive */
             else if (btn_id === "btn_a_passive") {
-                newStyle = "."+section_class+" a:link { color: var("+color_code+") }\n." +section_class+ " a:visited { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a:not(.btn):link { color: var("+color_code+") }\n." +section_class+ " a:not(.btn):visited { color: var("+color_code+") }\n";
+                sub_string = "a:not(.btn):link { color";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* Hyperlink text colour: active */
             else if (btn_id === "btn_a_active") {
-                newStyle = "."+section_class+" a:focus { color: var("+color_code+") }\n." +section_class+ " a:hover { color: var("+color_code+") } \n." +section_class+ " a:active { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a:not(.btn):focus { color: var("+color_code+") }\n." +section_class+ " a:not(.btn):hover { color: var("+color_code+") } \n." +section_class+ " a:not(.btn):active { color: var("+color_code+") }\n";
+                sub_string = "a:not(.btn):focus { color";
+                doUpdateArray(sub_string,newStyle);
            }
 
-           /* Hyperlink background colour: passive */
-           else if (btn_id === "btn_a_passive_bg") {
-            newStyle = "."+section_class+" a:link { background-color: var("+color_code+") }\n." +section_class+ " a:visited { background-color: var("+color_code+") }";
+            /* Hyperlink background colour: passive */
+            else if (btn_id === "btn_a_passive_bg") {
+                newStyle = "."+section_class+" a:not(.btn):link { background-color: var("+color_code+") }\n." +section_class+ " a:not(.btn):visited { background-color: var("+color_code+") }\n";
+                sub_string = "a:not(.btn):link { background-color";
+                doUpdateArray(sub_string,newStyle);
             }
 
-           /* Hyperlink background colour: active */
+            /* Hyperlink background colour: active */
             else if (btn_id === "btn_a_active_bg") {
-                newStyle = "."+section_class+" a:focus { background-color: var("+color_code+") } \n." +section_class+ " a:hover { background-color: var("+color_code+") }\n." +section_class+ " a:active { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a:not(.btn):focus { background-color: var("+color_code+") } \n." +section_class+ " a:not(.btn):hover { background-color: var("+color_code+") }\n." +section_class+ " a:not(.btn):active { background-color: var("+color_code+") }\n";
+                sub_string = "a:not(.btn):focus { background-color";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* Primary button text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "."+section_class+" a.btn-primary:link { color: var("+color_code+") } \n." +section_class+ " a.btn-primary:visited { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { color: var("+color_code+") } \n." +section_class+ " a.btn-primary:visited { color: var("+color_code+") }\n";
+                sub_string = "a.btn-primary:link { color";
+                doUpdateArray(sub_string,newStyle);
             }
             /* Primary button text colour: active */
            else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { color: var("+color_code+") }\n";
+                sub_string = "a.btn-primary:focus { color";
+                doUpdateArray(sub_string,newStyle);
             } 
             /* Primary button background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+color_code+") }\n";
+                sub_string = "a.btn-primary:link { background-color";
+                doUpdateArray(sub_string,newStyle);
             }
             /* Primary button background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+color_code+") }\n";
+                sub_string = "header a.btn-primary:focus { background-color";
+                doUpdateArray(sub_string,newStyle);
             }
             /* Primary button border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+color_code+") }\n";
+                sub_string = ".btn-primary:link { border-color";
+                doUpdateArray(sub_string,newStyle);
             }
             /* Primary button border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+color_code+") }\n";
+                sub_string = "header a.btn-primary:focus";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* secondary button text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:link { color";
+                doUpdateArray(sub_string,newStyle);       
             }
             /* secondary button text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:focus { color";
+                doUpdateArray(sub_string,newStyle); 
             }
             /* secondary button background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:link { background-color";
+                doUpdateArray(sub_string,newStyle); 
+
             }
             /* secondary button background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:focus { background-color";
+                doUpdateArray(sub_string,newStyle); 
             }
             /* secondary button border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:link { border-color";
+                doUpdateArray(sub_string,newStyle); 
             }
             /* secondary button border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+color_code+") }";
+                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+color_code+") }\n";
+                sub_string = "a.btn-secondary:focus { border-color";
+                doUpdateArray(sub_string,newStyle); 
             }
 
             /* Icons colour */
             else if (btn_id === "btn_icon_color") {
-                newStyle = "."+section_class+" figure.icon var("+color_code+") }";
+                newStyle = "."+section_class+" figure.icon var("+color_code+") }\n";
+                sub_string = "icon";
+                doUpdateArray(sub_string,newStyle); 
             }
-            
+
             style = document.createElement('style');
             document.head.appendChild(style);
-            // style.type = 'text/css';
             style.appendChild(document.createTextNode(newStyle));
             document.getElementById("btn-copy-css").disabled=false;
+            // console.log("Button ID: "+btn_id);
+            // console.log("newStyle: "+newStyle);
     }
 
+    function doUpdateArray(sub_string,newStyle) {
+        if ( arrCSS.some(e => e.includes(sub_string)) ) {
+            const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+            arrCSS.splice(arrPos, 1);
+            arrCSS.push(newStyle);
+        }
+        else {
+            arrCSS.push(newStyle);
+        }
+   }
 
 /*
 //////////////// SECTION: ALIGN ///////////////
@@ -344,7 +433,7 @@ document.querySelector("#dd_paraNos").addEventListener("change", doParaNos);
 function doParaNos() {
     let opt = document.querySelector("#dd_paraNos").value;
     para_nos = parseInt(opt) + 1;
-    console.log("Para Nos: "+para_nos);
+    // console.log("Para Nos: "+para_nos);
     removeH3();
     reduceParas();
     removeImage();
@@ -567,7 +656,6 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
 
     function doButtonsStyle() {
-        console.log("Do buttons style");
         let opt = document.querySelector("#dd_buttons_style").value;
         // remove
         if (opt==="0") {
@@ -575,7 +663,6 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
         }
         // soft
         else if (opt==="1") {
-            console.log("Add soft");
             removeButtonsStyle();
             if (document.querySelector(".btn-primary")) {
                 const el_btn_primary = document.querySelector("a.btn-primary");
@@ -591,7 +678,6 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
         // rounded
         else if (opt==="2") {
             removeButtonsStyle();
-            console.log("Add rounded");
             if (document.querySelector(".btn-primary")) {
                 const el_btn_primary = document.querySelector("a.btn-primary");
                 el_btn_primary.classList.add("btn-rounded");
@@ -704,7 +790,6 @@ function resetImageEffects() {
 document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
 
 function doImageShadows() {
-    console.log("Do image shadows");
     let opt = document.querySelector("#dd_image_shadows").value;
     // Remove image shadow
     if (opt==="0") {
@@ -729,7 +814,6 @@ function removeImageShadows() {
 document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
 
 function doImageBorders() {
-    console.log("Do image borders");
     let opt = document.querySelector("#dd_image_borders").value;
 
     if (opt==="0") {
@@ -753,7 +837,6 @@ function removeImageBorders() {
 document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
 
 function doImageCorners() {
-    console.log("Do image corners");
     let opt = document.querySelector("#dd_image_corners").value;
 
     if (opt==="0") {
@@ -775,7 +858,6 @@ function removeImageCorners() {
 document.querySelector("#dd_image_rotate").addEventListener("change", doImageRotate);
 
 function doImageRotate() {
-    console.log("Do image rotate");
     let opt = document.querySelector("#dd_image_rotate").value;
 
     if (opt==="0") {
@@ -821,7 +903,6 @@ function doCaption() {
 
     else if (opt==="1") {
         const el_fig = document.querySelectorAll("figure");
-        console.log("Add caption")
         HTML_Content = document.getElementById("HTML-Content").innerHTML;
         HTML_Content = HTML_Content.replace(/<\/figure>/g,'<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption><\/figure>');
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
@@ -888,7 +969,6 @@ function removeVideo() {
         HTML_Content = HTML_Content.replace(/\n\n\t<figure>\n\t\t<div class=\"container-video-file\">/g,'');
         HTML_Content = HTML_Content.replace(/\n\n{3}/g, '\n');
         document.getElementById("HTML-Content").innerHTML = HTML_Content;
-        console.log("remove video");
     } 
 
     else if (document.querySelector('figure .container-video-yt')) {
@@ -919,28 +999,29 @@ function copyHTML() {
     const el = document.createElement('textarea');
     el.value = HTML_Content;
     hideMenus();
-
+    
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-        
-    console.log("copied");
+
 }
 
 function copyCSS() {
-    var css = "", styletags = document.getElementsByTagName("style");
-    for(var i = 0; i < styletags.length; i++) {
-    css += "\n"+styletags[i].innerHTML }
-    console.log(css);
-    const el_css = document.createElement('textarea');
-    el_css.value = css;
     hideMenus();
+    const el_css = document.createElement('textarea');
+    let aLength = arrCSS.length;
+    let strCSS  = arrCSS.join(",");
+    strCSS = strCSS.replace(/,/g, ".");
+    strCSS = strCSS.replace(/.header/g, "header");
 
+    strCSS = strCSS.replace(/..theme/g, ".theme");
+    el_css.value = strCSS;
     document.body.appendChild(el_css);
     el_css.select();
     document.execCommand('copy');
-    document.body.removeChild(el_css);        
+    document.body.removeChild(el_css);  
+   // console.log(strCSS);
 }
 
 /*
