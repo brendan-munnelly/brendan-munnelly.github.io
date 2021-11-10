@@ -1262,8 +1262,17 @@ div[class*='col-'] a.btn {
 
 a.btn-soft { border-radius: 8px; }
 a.btn-rounded { border-radius: 50px }
-a.btn i { align-self: center; margin-right: 14px; color: inherit } 
+a.btn i { align-self: center; color: inherit; margin-right: 14px  } 
 
+a.btn { /* display: flex; flex-direction: row;
+    justify-content: space-between; */
+	align-items: center; 
+    /* justify-content: center; */ 
+}
+
+a.btn span { display: inline-block }
+a.btn span.first-child { margin-right: 14px; margin-left: 0; color: red;  } 
+a.btn span.last-child  { margin-left: 14px; margin-right: 0; color: green } 
 
 /* Primary buttons */
 .btn-primary:any-link {
@@ -1320,6 +1329,144 @@ a.btn i { align-self: center; margin-right: 14px; color: inherit }
     color: inherit;
 }
 
+
+/* ================== FOOTER =============== */
+
+/* Outer footer parent container */
+
+
+/* Desktop footer - inside padding  */
+@media (min-width:768px) {
+	footer { padding: 4% 8% 2% 8% }
+}
+
+/* Mobiles footer - inside padding */
+@media (max-width:767px) {
+	footer { padding: 8% 8% 6% 8% }
+}
+
+/* Desktops/Laptops */
+@media (min-width: 1200px) { 
+	footer { 
+		padding: 3.5% calc((100% - 900px)/2) 5% calc((100% - 900px)/2); 
+		margin: 0 auto;
+	} 
+}
+
+/* Tablets and smaller desktops */
+@media (min-width: 1025px) and (max-width: 1199px ) { 
+	footer { padding: 3% 10% 7% 10% } 
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) { 
+	footer { padding: 5% 5% 6% 5% }
+}
+
+/* Larger mobiles */
+@media (min-width: 400px) and (max-width: 767px)  { 
+	footer { padding: 9% 13% 12% 13% }
+}
+
+/* Smaller mobiles */
+@media (max-width: 399px) { 
+	footer { padding: 9% 10% 12% 10% } 
+}
+
+footer { 
+    text-align: center;
+    background-color: var(--ontrend-800);
+}
+
+/* Footer headings */
+footer h2 {
+   font-weight: normal;
+   font-style: italic;
+   font-size: calc(26px + (48 - 26) * ((100vw - 320px)/(1600 - 320)));
+   margin: 0 auto 16px auto;
+   color: var(--white-000);
+}
+
+footer h3 {
+    font-weight: normal;
+    font-style:  italic;
+    color: var(--gray-300);
+    margin: 0 auto 36px auto;
+    font-size: calc(20px + (32 - 20) * ((100vw - 320px)/(1600 - 320)));
+}
+
+/* Footer text links and icon links */
+footer ul.footer-links, 
+footer ul.footer-icons { 
+    list-style-type: none;
+    margin: 0 auto 48px auto
+}
+
+footer ul.footer-links li,
+footer ul.footer-icons li {
+    display: inline-block;
+    margin: 0 32px 0 0;
+}
+
+footer ul.footer-links li:last-child,
+footer ul.footer-icons li:last-child {
+    margin-right: 0;
+}
+
+/* Footer text links */
+footer ul.footer-links li a:link,
+footer ul.footer-links li a:visited {
+    font-size: calc(17px + (20 - 17) * ((100vw - 320px)/(1600 - 320)));
+    text-decoration: underline;
+    text-decoration-thickness: auto;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+    text-decoration-color: var(--white-000);
+    color: var(--white-000);
+    transition: all 0.2s linear;
+}
+
+footer ul.footer-links li a:hover, 
+footer ul.footer-links li a:active  {
+    text-decoration-color: transparent;
+    background-color: transparent;
+}
+
+/* Footer icons */
+footer ul.footer-icons li a i {
+    text-decoration: none;
+    font-size: calc(22px + (28 - 22) * ((100vw - 320px)/(1600 - 320)));
+    color: var(--white-000);
+}
+
+footer ul.footer-icons li a:link i,
+footer ul.footer-icons li a:visited i,
+footer ul.footer-icons li a:hover i,
+footer ul.footer-icons li a:active i {
+    color: var(--white-000);
+    background-color: transparent !important;
+}
+
+/* Privacy and legal link */
+footer p.privacy a:link, footer p.privacy a:hover {
+    font-size: calc(17px + (20 - 17) * ((100vw - 320px)/(1600 - 320)));
+    text-decoration: underline;
+    text-decoration-thickness: auto;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+    text-decoration-color: var(--white-000);
+    color: var(--white-000);
+    transition: all 0.2s linear;
+}
+
+footer p.privacy a:hover, footer p.privacy a:active {
+    text-decoration-color: transparent;
+    background-color: transparent;
+}
+
+
+/* ============ UTILITY CLASSES ============== */
+
 /* Animations - only when the web page loads */
 .slide-in-top {
 	animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -1365,7 +1512,3 @@ a.btn i { align-self: center; margin-right: 14px; color: inherit }
     0%   { opacity: 0; }
     100% { opacity: 1 }
 }
-
-
-
-
