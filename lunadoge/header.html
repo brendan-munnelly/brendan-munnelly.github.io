@@ -172,6 +172,14 @@
                                 </select>
                             </div>
 
+                            <div class="input-group">
+                                <label>Buttons Icon</label>
+                                <select id="dd_buttons_icon">
+                                    <option value="0" selected="selected">At Left</option>
+                                    <option value="1">At Right</option>
+                                </select>
+                            </div>
+
                             <h4 style="margin-top: 18px">PRIMARY BUTTON</h4>
                             <div class="input-group two-col">
                                 <div class="column column-wider">
@@ -697,6 +705,8 @@
             document.getElementById("dd_text_slide").value="0";
             document.getElementById("dd_hero_buttons").value="2";
             document.getElementById("dd_buttons_style").value="0";
+            document.getElementById("dd_buttons_icon").disabled=false;
+            document.getElementById("dd_buttons_icon").value="0";
             document.getElementById("btn_upper_label").disabled=true;
             document.getElementById("btn-copy-css").disabled=true;
         }
@@ -705,7 +715,7 @@
         let heroType = 1;
  
         function loadInitialContent() {
-            let HTML_Content ="<header class=\"hero-block\"><div class=\"hero-text-container text-center-desktop text-center-mobile\"><h1>Lorem Malesuada</h1><h2>Etiam tincidunt risus nec odio sollicitudin</h2><div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i> Order now</a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i>Learn more</a></div></div></header>";
+            let HTML_Content ="<header class=\"hero-block\"><div class=\"hero-text-container text-center-desktop text-center-mobile\"><h1>Lorem Malesuada</h1><h2>Etiam tincidunt risus nec odio sollicitudin</h2><div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a></div></div></header>";
             document.getElementById("HTML-Content").innerHTML = HTML_Content;
             document.getElementById("dd_align_desktop").value="0";
             document.getElementById("dd_align_mobile").value="0";
@@ -833,36 +843,37 @@
 
         const assets_header_h2 ="\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin</h2>";
 
-        const assets_header_buttons_one ="\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\">\</i> Order now</a>\n\t\t</div>"
+        const assets_header_buttons_one ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\">\</i><span>Order now</span></a></div>"
             
-        const assets_header_buttons_pair ="\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i> Order now</a>\n\t\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i> Learn more</a>\n\t\t</div>";
+        const assets_header_buttons_pair ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a></div>";
         
         // Text only
         const assets_header_text_only = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n<\/header>";
         
         // Background image
-        const assets_header_bg_img = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/1920x800-cafe.jpg\" alt=\"Cafe\">\n\t\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
+        const assets_header_bg_img = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/1920\/800\" alt=\"Placeholder image\">\n\t\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
 
+          
         // Background video
         const assets_header_bg_vid = "<header class=\"hero-block\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<video loop playsinline muted autoplay poster=\"assets\/videos/hero-still.jpg\" class=\"background-video\" disablepictureinpicture preload=\"auto\">\n\t\t<source src=\"assets/videos/hero-video.mp4\" type=\"video\/mp4\">\n\t</video>\n\t</div>\n\t<div class=\"bg-overlay\"><\/div>\n<\/header>";
 
         // Background image right, text on left 
-        const assets_header_bg_img_right = "<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/640x426-kitchen-bowl-right.jpg\" alt=\"sample background image\">\n\t</div>\n<\/header>";
+        const assets_header_bg_img_right = "<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/640\/426\" alt=\"sample background image\">\n\t</div>\n<\/header>";
 
         // Background trans image right, text on left 
         const assets_header_bg_img_right_trans = "<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/460x300-trans-woman-smiling.png\" alt=\"sample background image\">\n\t</div>\n<\/header>";
 
         // Background image left, text on right 
-        const assets_header_bg_img_left = "<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/640x426-kitchen-bowl-right.jpg\" alt=\"sample background image\">\n\t</div>\n<\/header>";
+        const assets_header_bg_img_left = "<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/640\/426\" alt=\"Placeholder image\">\n\t</div>\n<\/header>";
 
         // Background trans image left, text on right
         const assets_header_bg_img_left_trans = "<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/460x300-trans-man-coffee.png\" alt=\"sample background image\">\n\t</div>\n<\/header>";
 
         // Text left, regular image on right
-        const assets_header_half_img_right ="<header class=\"hero-block hero-half half-img-right\">\n\t\<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t<\/div>\n<\/div><div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t<img src=\"assets\/img\/420x250-kitchen.jpg\" alt=\"Kitchen\">\n\t\t<\/div>\n\t<\/div>\n<\/header>";
+        const assets_header_half_img_right ="<header class=\"hero-block hero-half half-img-right\">\n\t\<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+assets_header_buttons_pair+"\n\t<\/div>\n<\/div><div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/420\/250\" alt=\"Kitchen\">\n\t\t<\/div>\n\t<\/div>\n<\/header>";
 
         // Text right, regular image on left
-        const assets_header_half_img_left ="<header class=\"hero-block hero-half half-img-left\">\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t\t<img src=\"assets\/img\/420x250-shop.jpg\" alt=\"Shop front\">\n\t\t<\/div>\n\t<\/div>\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>"+assets_header_buttons_pair+"\n<\/header>";
+        const assets_header_half_img_left ="<header class=\"hero-block hero-half half-img-left\">\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t\t<img src=\"https://picsum.photos/420\/250\" alt=\"Shop front\">\n\t\t<\/div>\n\t<\/div>\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>"+assets_header_buttons_pair+"\n<\/header>";
 
     </script>
 
