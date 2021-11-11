@@ -16,7 +16,7 @@ footer *:last-child { margin-bottom: 0 !important }
 
 /* ================ HERO BLOCK ================ */
 
-header.hero-block { background-color: var(--pink-600) }
+header.hero-block { background-color: var(--blue-600) }
 
 .hero-block {
     position: relative; overflow: hidden;
@@ -1262,17 +1262,13 @@ div[class*='col-'] a.btn {
 
 a.btn-soft { border-radius: 8px; }
 a.btn-rounded { border-radius: 50px }
-a.btn i { align-self: center; color: inherit; margin-right: 14px  } 
-
-a.btn { /* display: flex; flex-direction: row;
-    justify-content: space-between; */
-	align-items: center; 
-    /* justify-content: center; */ 
-}
-
+a.btn i { align-self: center; color: inherit; display: inline-block; /* margin-right: 14px */ } 
 a.btn span { display: inline-block }
-a.btn span.first-child { margin-right: 14px; margin-left: 0; color: red;  } 
-a.btn span.last-child  { margin-left: 14px; margin-right: 0; color: green } 
+
+a.btn { align-items: center }
+a.btn span { display: inline-block }
+
+a.btn > *:first-child { margin-right: 14px; margin-left: 0 } 
 
 /* Primary buttons */
 .btn-primary:any-link {
@@ -1380,8 +1376,7 @@ footer {
 
 /* Footer headings */
 footer h2 {
-   font-weight: normal;
-   font-style: italic;
+   font-weight: 700;
    font-size: calc(26px + (48 - 26) * ((100vw - 320px)/(1600 - 320)));
    margin: 0 auto 16px auto;
    color: var(--white-000);
@@ -1418,7 +1413,6 @@ footer ul.footer-links li a:link,
 footer ul.footer-links li a:visited {
     font-size: calc(17px + (20 - 17) * ((100vw - 320px)/(1600 - 320)));
     text-decoration: underline;
-    text-decoration-thickness: auto;
     text-decoration-thickness: 2px;
     text-underline-offset: 7px;
     text-decoration-color: var(--white-000);
@@ -1433,18 +1427,21 @@ footer ul.footer-links li a:active  {
 }
 
 /* Footer icons */
-footer ul.footer-icons li a i {
-    text-decoration: none;
+footer ul.footer-icons li a:any-link i {
+    text-decoration: none !important;
     font-size: calc(22px + (28 - 22) * ((100vw - 320px)/(1600 - 320)));
     color: var(--white-000);
+    border-bottom-width: 0;
+    transition: all 0.2s linear;
 }
 
-footer ul.footer-icons li a:link i,
-footer ul.footer-icons li a:visited i,
-footer ul.footer-icons li a:hover i,
-footer ul.footer-icons li a:active i {
+:is(footer ul.footer-icons li a:focus i, footer ul.footer-icons li a:hover i, footer ul.footer-icons li a:active i) {
+    text-decoration: none;
+    border-bottom-width: 0;
+    border-bottom-color: transparent !important; 
+    text-decoration-thickness: 0;
+    text-underline-offset: 0;
     color: var(--white-000);
-    background-color: transparent !important;
 }
 
 /* Privacy and legal link */
