@@ -583,7 +583,7 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
     }
 
 /*
-//////////////// FAUX BUTTONS ////////////////////
+//////////////// BUTTONS ////////////////////
 */
 
 document.querySelector("#dd_buttons").addEventListener("change", doButtons);
@@ -595,25 +595,24 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
             removeButtons();
             disableAllButtons();
         }
-       
+        // one button
         else if (opt==="1") {
             removeButtons();
             enablePrimaryButtons();
             disableSecondaryButtons();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
             document.getElementById("dd_buttons_align").disabled=false;
-            document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=false;
+            document.getElementById("dd_buttons_icon").disabled=false;
         }
-
+        // two buttons
         else if (opt==="2") {
             removeButtons();
             enableAllButtons();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
-            document.getElementById("dd_buttons_align").value="0";
             document.getElementById("dd_buttons_align").disabled=false;
-            document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=false;
+            document.getElementById("dd_buttons_icon").disabled=false;
         }
     }
 
@@ -625,11 +624,13 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
             document.getElementById("dd_buttons_align").disabled=true;
             document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=true;
+            document.getElementById("dd_buttons_icon").value="0";
+            document.getElementById("dd_buttons_icon").disabled=false;
         }
     }
 
 /*
-//////////////// FAUX BUTTONS: BUTTONS ALIGN ////////////////////
+//////////////// BUTTONS: BUTTONS ALIGN ////////////////////
 */
 
 document.querySelector("#dd_buttons_align").addEventListener("change", doButtonsAlign);
@@ -650,7 +651,7 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
 
 
 /*
-//////////////// FAUX BUTTONS: BUTTONS CORNER STYLE ////////////////////
+//////////////// BUTTONS: BUTTONS CORNER STYLE ////////////////////
 */
 
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
@@ -706,6 +707,56 @@ document.querySelector("#dd_buttons_align").addEventListener("change", doButtons
     }
 
 /*
+//////////////// BUTTONS: ICON POSITION ////////////////////
+*/
+
+document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
+
+function swapButtonIcons() {
+    let opt = document.querySelector("#dd_buttons_icon").value;
+    if (document.querySelector("a.btn")) {      
+        let el_btn;
+        const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
+        const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
+        const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
+        const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+
+        if (opt==="0") {
+            if (document.querySelector("a.btn-primary")) {
+                const el_btn = document.querySelector("a.btn-primary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_right_primary, icon_left_primary);
+                el_btn.innerHTML = btn_content;
+            }
+    
+            if (document.querySelector("a.btn-secondary")) {
+                const el_btn = document.querySelector("a.btn-secondary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_right_secondary, icon_left_secondary);
+                el_btn.innerHTML = btn_content;
+            }
+        }
+
+        // move text to left, icon to right
+        if (opt==="1") {
+            if (document.querySelector("a.btn-primary")) {
+                const el_btn = document.querySelector("a.btn-primary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_left_primary, icon_right_primary);
+                el_btn.innerHTML = btn_content;
+            }
+    
+            if (document.querySelector("a.btn-secondary")) {
+                const el_btn = document.querySelector("a.btn-secondary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_left_secondary, icon_right_secondary);
+                el_btn.innerHTML = btn_content;
+            }
+        }
+    }
+}
+
+/*
 //////////////// VISUALS: IMAGES  ///////////////
 */
 
@@ -730,7 +781,7 @@ function doVisType() {
     else if (selectedValue==="pictures") {
         removeImage();
         resetImageEffects();
-        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/800x480-business-group.jpg\" alt=\"Business group\">\n\t<\/figure>\n");
+        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"https://picsum.photos/800\/480\" alt=\"Placeholder image\">\n\t<\/figure>\n");
         document.getElementById("dd_image_corners").disabled=false;
         document.getElementById("dd_image_shadows").disabled=false;
         document.getElementById("dd_image_borders").disabled=false;

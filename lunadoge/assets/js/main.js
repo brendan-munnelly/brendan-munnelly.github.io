@@ -606,7 +606,6 @@ function doColShadows() {
     }
 }
 
-
 /*
 //////////////// COLUMNS BORDERS ///////////////
 */
@@ -894,7 +893,6 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
             enableGhostButtons();
 
             btn_class="btn-ghost";
-
             const obj_col = document.querySelectorAll(col_no);
             let el_cols;
             for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
@@ -902,7 +900,6 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
                 addButons(el_cols,btn_class);
             }
         } 
-        
     }
 
     function addButons(el_cols,btn_class) {
@@ -912,16 +909,18 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
         const el_icon = document.createElement('i');
         el_icon.setAttribute("class", "fas fa-shopping-cart");
         el_btn.append(el_icon);
-        const btn_text = "Order Now";
+        const btn_text = "<span>Order Now</span>";
         el_icon.insertAdjacentHTML('afterend', btn_text);
         el_cols.append(el_btn);
 
-        HTML_content = document.querySelector("#HTML-Content").innerHTML;
-        HTML_content = HTML_content.replace("/n/t/t/t/", "");
-        document.querySelector("#HTML-Content").innerHTML = HTML_content;
+        // HTML_content = document.querySelector("#HTML-Content").innerHTML;
+        // HTML_content = HTML_content.replace("/n/t/t/t/", "");
+        // document.querySelector("#HTML-Content").innerHTML = HTML_content;
         
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_style").disabled=false;
+        document.getElementById("dd_buttons_icon").value="0";
+        document.getElementById("dd_buttons_icon").disabled=false;
     }
 
     function removeButtons() {
@@ -933,8 +932,41 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
         }
         document.getElementById("dd_buttons_style").disabled=true;
         document.getElementById("dd_buttons_style").value="0";
+        document.getElementById("dd_buttons_icon").disabled=true;
+        document.getElementById("dd_buttons_icon").value="0";
     }
 
+    document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
+
+    function swapButtonIcons() {
+        let opt = document.querySelector("#dd_buttons_icon").value;
+        if (document.querySelector("a.btn")) {
+            
+            let el_btns;
+            const obj_btns = document.querySelectorAll("a.btn");
+            const icon_left  ="<i class=\"fas fa-shopping-cart\"><\/i><span>Order Now<\/span>";
+            const icon_right ="<span>Order Now<\/span><i class=\"fas fa-arrow-circle-right\"><\/i>";
+
+            if (opt==="0") {
+                for (let i=2 ; i <= obj_btns.length+1; i++) {
+                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                    btn_content = el_btns.innerHTML;
+                    btn_content = btn_content.replace(icon_right, icon_left);
+                    el_btns.innerHTML = btn_content;
+                }
+            }
+
+            // move text to left, icon to right
+            else if (opt==="1") {
+                for (let i=2 ; i <= obj_btns.length+1; i++) {
+                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                    btn_content = el_btns.innerHTML;
+                    btn_content = btn_content.replace(icon_left, icon_right);
+                    el_btns.innerHTML = btn_content;
+                }
+            }
+        }
+    }
 
 /*
 //////////////// BUTTONS: STYLE ////////////////////
@@ -943,6 +975,7 @@ document.querySelector("#dd_buttons").addEventListener("change", doButtons);
     document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
 
     function doButtonsStyle() {
+
         let opt = document.querySelector("#dd_buttons_style").value;
         // remove
         if (opt==="0") {

@@ -463,6 +463,7 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
             disableAllButtons();
         }
        
+        // one button
         else if (opt==="1") {
             removeButtonsSplit();
             enablePrimaryButtons();
@@ -475,8 +476,9 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
             }
             document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=false;
+            document.getElementById("dd_buttons_icon").disabled=false;
         }
-
+        // two buttons
         else if (opt==="2") {
             removeButtonsSplit();
             enableAllButtons();
@@ -489,6 +491,7 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
             }
             document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=false;
+            document.getElementById("dd_buttons_icon").disabled=false;
         }
     }
 
@@ -498,6 +501,8 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
             elBtn.remove();
             document.getElementById("dd_buttons_style").value="0";
             document.getElementById("dd_buttons_style").disabled=true;
+            document.getElementById("dd_buttons_icon").value="0";
+            document.getElementById("dd_buttons_icon").disabled=true;
         }
     }
 
@@ -583,7 +588,57 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
         }
     }
 
+/*
+//////////////// BUTTONS: ICON POSITION ////////////////////
+*/
+
+document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
+
+function swapButtonIcons() {
+    let opt = document.querySelector("#dd_buttons_icon").value;
+    if (document.querySelector("a.btn")) {      
+        let el_btn;
+        const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
+        const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
+        const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
+        const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+
+        if (opt==="0") {
+            if (document.querySelector("a.btn-primary")) {
+                const el_btn = document.querySelector("a.btn-primary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_right_primary, icon_left_primary);
+                el_btn.innerHTML = btn_content;
+            }
     
+            if (document.querySelector("a.btn-secondary")) {
+                const el_btn = document.querySelector("a.btn-secondary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_right_secondary, icon_left_secondary);
+                el_btn.innerHTML = btn_content;
+            }
+        }
+
+        // move text to left, icon to right
+        if (opt==="1") {
+            if (document.querySelector("a.btn-primary")) {
+                const el_btn = document.querySelector("a.btn-primary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_left_primary, icon_right_primary);
+                el_btn.innerHTML = btn_content;
+            }
+    
+            if (document.querySelector("a.btn-secondary")) {
+                const el_btn = document.querySelector("a.btn-secondary");
+                btn_content = el_btn.innerHTML;
+                btn_content = btn_content.replace(icon_left_secondary, icon_right_secondary);
+                el_btn.innerHTML = btn_content;
+            }
+        }
+    }
+}
+
+
     function enableAllButtons() {
         document.getElementById("btn_a_primary_passive_text").disabled=false;
         document.getElementById("btn_a_primary_active_text").disabled=false;
