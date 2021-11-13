@@ -380,13 +380,21 @@ function doTextAnimation() {
 
     else if (opt==="3") {
         removeTextAnimation();
+        document.querySelector("h1").classList.add("slide-in-right");
+        if (document.querySelector("h2")) {
+            document.querySelector("h2").classList.add("slide-in-right");
+        }
+    }
+
+    else if (opt==="4") {
+        removeTextAnimation();
         document.querySelector("h1").classList.add("slide-in-bottom");
         if (document.querySelector("h2")) {
             document.querySelector("h2").classList.add("slide-in-bottom");
         }
     }
 
-    else if (opt==="4") {
+    else if (opt==="5") {
         removeTextAnimation();
         document.querySelector("h1").classList.add("fade-in");
         if (document.querySelector("h2")) {
@@ -398,12 +406,14 @@ function doTextAnimation() {
 function removeTextAnimation() {
     document.querySelector("h1").classList.remove("slide-in-top");
     document.querySelector("h1").classList.remove("slide-in-left");
+    document.querySelector("h1").classList.remove("slide-in-right");
     document.querySelector("h1").classList.remove("slide-in-bottom");
     document.querySelector("h1").classList.remove("fade-in");
 
     if (document.querySelector("h2")) {
         document.querySelector("h2").classList.remove("slide-in-top");
         document.querySelector("h2").classList.remove("slide-in-left");
+        document.querySelector("h2").classList.remove("slide-in-right");
         document.querySelector("h2").classList.remove("slide-in-bottom");
         document.querySelector("h2").classList.remove("fade-in");
     }
