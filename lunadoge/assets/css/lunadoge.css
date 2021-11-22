@@ -23,8 +23,13 @@ header.hero-block { background-color: var(--blue-600) }
     display: flex; flex-direction: column; justify-content: center;
 }
 
-@media (min-width: 1200px) { 
+
+@media (min-width: 1366px) { 
     .hero-block { min-height: 85vh }
+}
+
+@media (min-width: 1200px) and (max-width: 1365px) {
+    .hero-block { min-height: 500px }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
@@ -34,7 +39,6 @@ header.hero-block { background-color: var(--blue-600) }
 @media (max-width: 767px) { 
     .hero-block { min-height: 480px; padding: 8% 0  }
 }
-
 
 /* Headings */
 .hero-block h1, .hero-block h2 { color: var(--white-000) }
@@ -78,7 +82,48 @@ header.hero-block { background-color: var(--blue-600) }
     color: var(--white-000);
 }
 
-.hero-text-container { padding: 0 12% 2% 12%; z-index: 2 }
+.hero-text-container,
+.container-btn { padding: 0 12% 2% 12%; z-index: 2 }
+
+@media (min-width: 768px) {
+    .hero-block.bg-img-right .container-btn, 
+    .hero-block.hero-half.half-img-right .container-btn,
+    .hero-block.bg-img-left .container-btn,
+    .hero-block.hero-half.half-img-left  .container-btn { 
+        margin-top: 30px
+    }
+
+    .hero-block.bg-img-right .container-btn {
+        padding-left: 6%;
+    }
+
+    .hero-block.hero-half.half-img-right .container-btn { 
+        padding-left: 16%;
+    }
+
+    .hero-block.bg-img-left .container-btn {
+        padding-left: 6%;
+        margin-left: 50%;
+    }
+
+    .hero-block.hero-half.half-img-left .container-btn { 
+        padding-left: 0;
+    }
+
+    .hero-block.bg-img-right .container-btn a:nth-child(2), 
+    .hero-block.bg-img-left  .container-btn a:nth-child(2),
+    .hero-block.hero-half.half-img-right .container-btn a:nth-child(2),
+    .hero-block.hero-half.half-img-left  .container-btn a:nth-child(2) { 
+        margin-left: 32px 
+    }
+
+    .hero-block.bg-img-right .container-btn a.btn, 
+    .hero-block.bg-img-left .container-btn a.btn,
+    .hero-block.hero-half.half-img-right .container-btn a.btn,
+    .hero-block.hero-half.half-img-left  .container-btn a.btn { 
+        padding: 14px 22px
+    }
+}
 
 .hero-bg-media {
     position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;
@@ -95,39 +140,80 @@ header.hero-block { background-color: var(--blue-600) }
 
 /* Alignment .hero-block: desktops */
 @media (min-width: 768px) {
-    .hero-text-container.text-center-desktop { text-align: center }
+    .hero-block.text-center-desktop { text-align: center }
 }
  
 /* Alignment: mobiles */
  @media (max-width: 767px) {
-    .hero-text-container.text-center-mobile { text-align: center }
-    .hero-text-container.text-left-mobile   { text-align: left  }
+    .hero-block.text-center-mobile { text-align: center }
 }
  
 /* Buttons */
 
-.hero-block .container-btn a.btn { display: inline-block }
-
-/* Desktops */
-@media (min-width: 768px) {
-    .hero-block .container-btn { margin-top: 64px }
-    .hero-block h1 + .container-btn { margin-top: 120px }
-    .hero-block .container-btn a:nth-child(1) { margin-right: 40px }
+.hero-block .container-btn a.btn {
+    font-size: calc(18px + (19 - 18) * ((100vw - 320px)/(1600 - 320)));
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* Desktops: button(s) centre-aligned */
+/* Non-mobiles */
 @media (min-width: 768px) {
-    .hero-block .container-btn.text-center-desktop { justify-content: center }   
+    .hero-block .container-btn a.btn { padding: 14px 32px }
 }
 
 /* Mobiles */
 @media (max-width: 767px) {
-    .hero-block .container-btn.text-center-mobile .btn { align-self: center }
-    .hero-block .container-btn { margin-top: 42px; flex-direction: column }
-    .hero-block .container-btn .btn { align-self: flex-start }
+    .hero-block .container-btn a.btn { padding: 12px 26px }
+}
+
+/* Desktops */
+@media (min-width: 768px) {
+    .hero-block .container-btn a.btn { display: inline-block }
+    .hero-block .container-btn { margin-top: 64px }
+    .hero-block h1 + .container-btn { margin-top: 120px }
+    .hero-block .container-btn a:nth-child(2) { margin-left: 60px }
+}
+
+/* Desktops: button(s) centre-aligned */
+@media (min-width: 768px) {
+    .hero-block.text-center-desktop .container-btn { justify-content: center }   
+}
+
+/* Mobiles */
+@media (max-width: 767px) {
+    .hero-block .container-btn { 
+        margin-top: 42px; 
+        display: flex; 
+        flex-direction: column;
+    }
+    .hero-block h1 + .container-btn { margin-top: 120px }
     .hero-block .container-btn a:first-child { margin-bottom: 32px }
     .hero-block .container-btn a:last-child { margin-bottom: 0 }
-    .hero-block h1 + .container-btn { margin-top: 120px }
+
+    header.hero-block.text-center-mobile .container-btn { 
+        align-self: center;
+    }
+}
+
+/* Secondary buttons */
+.hero-block .container-btn a.btn-secondary:link, 
+.hero-block .container-btn a.btn-secondary:visited,
+.hero-block .container-btn a.btn-ghost:link, 
+.hero-block .container-btn a.btn-ghost:visited {
+    border: solid 2px #fff;
+    color: #fff; 
+    background-color: transparent; 
+} 
+
+.hero-block .container-btn a.btn-secondary:focus, 
+.hero-block .container-btn a.btn-secondary:hover, 
+.hero-block .container-btn a.btn-secondary:active,
+.hero-block .container-btn a.btn-ghost:focus, 
+.hero-block .container-btn a.btn-ghost:hover, 
+.hero-block .container-btn a.btn-ghost:active {
+    border: solid 2px var(--gray-700); 
+    background-color: var(--gray-700);  
+    color: #fff;
 }
 
 /* ========== BACKGROUND IMAGE HALF =========== */
@@ -147,6 +233,8 @@ header.hero-block { background-color: var(--blue-600) }
     .hero-block.bg-img-right .hero-bg-media  { left: 50% }
     .hero-block.bg-img-left  .hero-text-container { margin-left: 50% }
     .hero-block.bg-img-left  .hero-bg-media  { right: 50% }
+    .hero-block.bg-img-right .container-btn a.btn, 
+    .hero-block.bg-img-left  .container-btn a.btn { display: inline-block }
 }
 
 /* Small desktops and tablets */
@@ -164,7 +252,7 @@ header.hero-block { background-color: var(--blue-600) }
         margin-top: 42px;
         flex-direction: column;
     }
-    .hero-block .container-btn .btn { align-self: flex-start }
+    .hero-block .container-btn a.btn { align-self: flex-start }
     .hero-block.bg-img-left  .container-btn a:first-child,
     .hero-block.bg-img-right .container-btn a:first-child { margin-bottom: 32px }
     .hero-block.bg-img-left  .container-btn a:last-child, 
@@ -185,17 +273,22 @@ header.hero-block { background-color: var(--blue-600) }
     }
     .hero-block.bg-img-right div, .hero-block.bg-img-left div { position: relative }
     .hero-block.bg-img-right .hero-text-container,
-    .hero-block.bg-img-left  .hero-text-container { padding: 0 12% 12% 12% } 
+    .hero-block.bg-img-left  .hero-text-container { padding: 0 12% 12% 12% }
+
     .hero-block.bg-img-left  .container-btn,
-    .hero-block.bg-img-right .container-btn { margin-top: 42px; flex-direction: column }
+    .hero-block.bg-img-right .container-btn { flex-direction: column }
+
     .hero-block.bg-img-left  .container-btn .btn, 
     .hero-block.bg-img-right .container-btn .btn { align-self: flex-start }
+
     .hero-block.bg-img-left  .container-btn a:first-child,
     .hero-block.bg-img-right .container-btn a:first-child { margin-bottom: 32px }
+
     .hero-block.bg-img-left  .container-btn a:last-child, 
     .hero-block.bg-img-right .container-btn a:last-child  { margin-bottom: 0 }
-    .hero-block.bg-img-right .container-btn.text-center-mobile .btn,
-    .hero-block.bg-img-left  .container-btn.text-center-mobile .btn {
+
+    .hero-block.bg-img-right.text-center-mobile .container-btn .btn,
+    .hero-block.bg-img-left.text-center-mobile  .container-btn .btn {
         text-align: center; margin-left: auto; margin-right: auto
     }
 }
@@ -207,17 +300,25 @@ header.hero-block { background-color: var(--blue-600) }
         width: 70%; height: auto; text-align: center;
         margin: -32px auto 32px auto;
     }
+    .hero-block.bg-img-right .container-btn,
+    .hero-block.bg-img-left .container-btn { margin-top: -20px; margin-bottom: 42px }
+}
+
+/* Small mobiles */
+@media (max-width: 559px) {
+    .hero-block.bg-img-right .container-btn,
+    .hero-block.bg-img-left .container-btn { margin-top: 0; margin-bottom: 40px }
 }
 
 /* Typography */
 .hero-block.bg-img-left  .hero-text-container h1,
 .hero-block.bg-img-right .hero-text-container h1 {
-    font-size: calc(48px + (84 - 48) * ((100vw - 320px) / (1600 - 320)));
+    font-size: calc(48px + (72 - 48) * ((100vw - 320px) / (1600 - 320)));
 }
 
 .hero-block.bg-img-left  .hero-text-container h2,
 .hero-block.bg-img-right .hero-text-container h2 {
-    font-size: calc(22px + (42 - 22) * ((100vw - 320px) / (1600 - 320)));
+    font-size: calc(22px + (36 - 22) * ((100vw - 320px) / (1600 - 320)));
 } 
 
 .hero-block.bg-img-left  .hero-text-container h1.text-long,
@@ -228,7 +329,7 @@ header.hero-block { background-color: var(--blue-600) }
 }
 
 
-/* ========== HALF TEXT AND HALF IMAGE =========== */
+/* ========== TWO COLUMN HEADER =========== */
 
 .hero-block.hero-half { display: flex }
 .hero-block.hero-half .hero-text-container,
@@ -251,6 +352,7 @@ header.hero-block { background-color: var(--blue-600) }
     letter-spacing: 0;
     line-height: 1.2;
 }
+
 /* Desktops */
 @media (min-width: 768px) { 
     .hero-block.hero-half { flex-direction: row; justify-content: space-between; }
@@ -264,48 +366,82 @@ header.hero-block { background-color: var(--blue-600) }
 @media (max-width: 767px) { 
     .hero-block.hero-half { flex-direction: column; padding: 8% 0 10% 0  }
     .hero-block.hero-half .col-2 { width: 100% }
+    .hero-block.hero-half .container-btn {
+        display: flex; 
+        flex-direction: column;
+        margin-bottom: 10px !important
+    }
 }
 
 @media (min-width: 1140px) { 
-    .hero-block.hero-half.half-img-right .col-2 .hero-text-container  { padding: 4% 0 4% 16% }
+    .hero-block.hero-half.half-img-right .col-2 .hero-text-container  { padding: 4% 0 4% 6% }
+    .hero-block.hero-half.half-img-right .col-2 .container-btn { padding-left: 6% }
     .hero-block.hero-half.half-img-right .col-2 .hero-bg-media { padding: 4% 16% 4% 0 }
+
     .hero-block.hero-half.half-img-left  .col-2 .hero-text-container  { padding: 4% 16% 4% 0 }
-    .hero-block.hero-half.half-img-left  .col-2 .hero-bg-media { padding: 4% 0 4% 16% }
+    .hero-block.hero-half.half-img-left  .col-2 .hero-bg-media { padding: 4% 0 4% 10% }
     .hero-block.hero-half .col-2 { width: 48% }
 }
 
 @media (min-width: 1025px) and (max-width: 1139px) { 
+    .hero-block.hero-half.half-img-right .col-2:first-child { width: 59% }
+    .hero-block.hero-half.half-img-right .col-2:last-child  { width: 39% }
     .hero-block.hero-half.half-img-right .col-2 .hero-text-container  { padding: 3% 0 3% 12% }
+    .hero-block.hero-half.half-img-right .col-2 .container-btn { padding-left: 6% }
+    .hero-block.hero-half.half-img-right .col-2 .container-btn  { padding-left: 12% }
     .hero-block.hero-half.half-img-right .col-2 .hero-bg-media { padding: 3% 12% 3% 0 }
-    .hero-block.hero-half.half-img-left  .col-2 .hero-text-container  { padding: 3% 8% 3% 4%}
-    .hero-block.hero-half.half-img-left  .col-2 .hero-bg-media { padding: 3% 0 3% 12% }
-    .hero-block.hero-half .col-2 { width: 49% }
+
+    .hero-block.hero-half.half-img-left .col-2:first-child { width: 39% }
+    .hero-block.hero-half.half-img-left .col-2:last-child  { width: 59% }
+    .hero-block.hero-half.half-img-left  .col-2 .hero-text-container  { padding: 3% 8% 3% 0 }
+    .hero-block.hero-half.half-img-left  .col-2 .container-btn  { padding-left: 0 }
+    .hero-block.hero-half.half-img-left  .col-2 .hero-bg-media { padding: 3% 0 3% 8% }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) { 
-    .hero-block.hero-half.half-img-right .col-2 .hero-text-container  { padding: 0 0 0 9% }
+    .hero-block.hero-half.half-img-right .col-2 .hero-text-container  { padding: 0 0 0 5% }
+    .hero-block.hero-half.half-img-right .col-2 .container-btn { padding-left: 5% }
     .hero-block.hero-half.half-img-right .col-2 .hero-bg-media { padding: 0 9% 0 0 }
+
     .hero-block.hero-half.half-img-left  .col-2 .hero-text-container  { padding: 0 9% 0 0 }
     .hero-block.hero-half.half-img-left  .col-2 .hero-bg-media { padding: 0 0 0 9% }
     
-    .hero-block.hero-half.half-img-right .col-2:first-child { width: 59% }
-    .hero-block.hero-half.half-img-right .col-2:last-child  { width: 39% }
-    .hero-block.hero-half.half-img-left  .col-2:first-child { width: 39% }
-    .hero-block.hero-half.half-img-left  .col-2:last-child  { width: 59% }
-    .hero-block.hero-half.half-img-left .col-2 .hero-text-container { padding: 0 4% 0 5% }
+    .hero-block.hero-half.half-img-right .col-2:first-child { width: 69% }
+    .hero-block.hero-half.half-img-right .col-2:last-child  { width: 29% }
+
+    .hero-block.hero-half.half-img-left  .col-2:first-child { width: 29% }
+    .hero-block.hero-half.half-img-left  .col-2:last-child  { width: 69% }
+    .hero-block.hero-half.half-img-left  .col-2 .hero-text-container { padding: 0 4% 0 5% }
+    .hero-block.hero-half.half-img-left  .col-2 .container-btn { padding-left: 5% }
 }
 
 /* All mobiles */
 @media (max-width: 767px) {
+
+    header.hero-block.hero-half.half-img-right.text-center-mobile .container-btn,
+    header.hero-block.hero-half.half-img-left.text-center-mobile .container-btn {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header.hero-block.hero-half.half-img-right.text-center-mobile .container-btn a.btn,
+    header.hero-block.hero-half.half-img-left.text-center-mobile .container-btn a.btn {
+        align-self: center;
+        text-align: center;
+        align-items: center;
+    }
+
     .hero-block.hero-half.half-img-right .col-2:first-child { order: 2 }
     .hero-block.hero-half.half-img-right .col-2:last-child  { order: 1 }
+
     .hero-block.hero-half .hero-text-container .container-btn {
         margin-top: 42px;
         flex-direction: column;
         align-self: flex-start;
     }
 
-    .hero-block.hero-half .hero-text-container .container-btn.text-center-mobile {
+    .hero-block.hero-half.text-center-mobile .hero-text-container .container-btn {
         text-align: center;
         align-items: center;
     }
@@ -316,41 +452,47 @@ header.hero-block { background-color: var(--blue-600) }
     .hero-block.hero-half.half-img-left .container-btn {
         text-align: center;
         margin-left: 0;
-        margin-right:0;
+        margin-right: 0;
+    }
+
+    .hero-block.hero-half.half-img-left .col-2,
+    .hero-block.hero-half.half-img-right .col-2 { padding-bottom: 0; padding-bottom: 0 }
+
+    .hero-block.hero-half.half-img-left .col-2:nth-child(1) {
+        margin-bottom: 12px !important
+    }
+
+    .hero-block.hero-half.half-img-right .col-2:nth-child(1) {
+        margin-bottom: -20px !important
     }
 }
 
 /* Large mobiles */
 @media (min-width: 560px) and (max-width: 767px ) {
+
+    .hero-block.hero-half .col-2 {
+        width: 100%; 
+        max-width: 600px; 
+        margin-left: auto; margin-right: auto; 
+    }
+
     .hero-block.hero-half .col-2 .hero-bg-media {
-        width: 50%; height: auto; text-align: center;
-        margin: 0 auto 32px auto;
+        width: 80%; height: auto; text-align: center;
+        margin: 0 auto 0 auto;
     }
 }
 
 /* Small mobiles */
 @media (max-width: 559px) {
     .hero-block.hero-half .col-2 .hero-bg-media {
-        width: 70%; height: auto; text-align: center;
-        margin: 0 auto 32px auto;
+        width: 90%; height: auto; text-align: center;
+        margin: 0 auto 0 auto;
     }
 }
 
-.hero-block .container-btn a.btn {
-    font-size: calc(18px + (19 - 18) * ((100vw - 320px)/(1600 - 320)));
-    text-decoration: none;
-    font-weight: bold;
-}
 
-/* Non-mobiles */
-@media (min-width: 768px) {
-    .hero-block .container-btn a.btn { padding: 14px 32px }
-}
 
-/* Mobiles */
-@media (max-width: 767px) {
-    .hero-block .container-btn a.btn { padding: 12px 26px }
-}
+
 
 /* ========= SECTIONS: HORIZONTAL AND VERTICAL SPACING ======== */
 
@@ -516,6 +658,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 	.col-1 { 
 		padding-left: calc((100% - 800px)/2);
 		padding-right: calc((100% - 800px)/2);
+        padding-bottom: 1%;
 		margin: 0 auto;
 	} 
 }
@@ -524,7 +667,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 @media (min-width: 1025px) and (max-width: 1199px ) {
     .col-1 { 
         padding-left: 12%;
-        padding-right: 12% 
+        padding-right: 12%;
+        padding-bottom: 0;
     }
 }
 
@@ -532,7 +676,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 @media (min-width: 768px) and (max-width: 1024px) { 
     .col-1 { 
         padding-left: 5%;
-        padding-right: 5% 
+        padding-right: 5%;
+        padding-bottom: 1%;
     }
 }
 
@@ -540,7 +685,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 @media (min-width: 400px) and (max-width: 767px)  { 
     .col-1 { 
         padding-left: 13%;
-        padding-right: 13% 
+        padding-right: 13%;
+        padding-bottom: 1%;
     }
 }
 
@@ -548,7 +694,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 @media (max-width: 399px) { 
     .col-1 { 
         padding-left: 10%;
-        padding-right: 10% 
+        padding-right: 10%;
+        padding-bottom: 1%;
     }
 }
 
@@ -692,11 +839,6 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* Padding on columns */
 .col-padding .col-2 {
     padding: 26px 28px 28px 28px;
-}
-
-.col-2 a.btn { 
-	padding: 16px 32px;
-	font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1600 - 320)));
 }
 
 @media (min-width: 1200px) {
@@ -853,12 +995,6 @@ On large screens (and sometimes small screens too), the div child elements are t
     width: 100%; 
 }
 
-.cols-2-split .container-btn a.btn {
-    font-size: calc(18px + (19 - 18) * ((100vw - 320px)/(1600 - 320)));
-    text-decoration: none;
-    font-weight: bold;
-}
-
 /* Non-mobiles */
 @media (min-width: 768px) {
     .cols-2-split .container-btn { 
@@ -867,7 +1003,6 @@ On large screens (and sometimes small screens too), the div child elements are t
         justify-content: flex-start;
         text-align: left;
     }
-    .cols-2-split .container-btn a.btn { padding: 14px 22px }
     .cols-2-split .container-btn a:first-child { margin-right: 40px }
 }
 
@@ -878,7 +1013,6 @@ On large screens (and sometimes small screens too), the div child elements are t
         flex-direction: column;
         align-self: flex-start
     }
-    .cols-2-split .container-btn a.btn { padding: 12px 26px }
     .cols-2-split .container-btn a:first-child { margin-bottom: 30px }
     .cols-2-split .container-btn a:last-child { margin-bottom: 32px !important }
 }
@@ -940,12 +1074,6 @@ On large screens (and sometimes small screens too), the div child elements are t
     font-size: calc(17px + (18 - 17) * ((100vw - 320px) / (1140 - 320))); 
     line-height: 1.4; margin-bottom: 10px; 
     margin-left: 15px; padding-left: 12px; 
-}
-
-/* =============== FAUX BUTTONS ================ */
-.col-3 a.btn { 
-	padding: 14px 32px;
-	font-size: calc(17px + (19 - 17) * ((100vw - 320px)/(1600 - 320)));
 }
 
 /* ================= IMAGES, DRAWINGS, BIG ICONS ================= */
@@ -1060,11 +1188,7 @@ On large screens (and sometimes small screens too), the div child elements are t
     padding: 16px 16px 16px 16px;
 }
 
-/* =============== FAUX BUTTONS ================ */
-.col-4 a.btn { 
-	padding: 14px 28px;
-	font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1600 - 320)));
-}
+
 
 /* ================= IMAGES, DRAWINGS, BIG ICONS ================= */
 
@@ -1243,89 +1367,102 @@ a:not(.btn):any-link {
     background-color: var(--gray-200);
 }
 
-/* Faux Buttons */
+/* =============== BUTTONS: REAL AND FAUX ============== */
 
-a.btn { 
+a.btn, button { 
     font-family: var(--sans-serif);
     font-weight: bold; 
     line-height: 1;
     text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: all 0.3s linear;
 }
 
 div[class*='col-'] a.btn { 
-    margin-top: 12px; margin-bottom: 12px;
+    margin-top: 12px;
     position: relative;
-	display: inline-flex;
-	flex: 0 0 auto;
-	flex-direction: row;
-	justify-content: center;
-    font-weight: 700;
+	display: inline-block;
 }
 
-a.btn-soft, button.btn-soft { border-radius: 8px; }
+a.btn-soft, button.btn-soft { border-radius: 12px; }
 a.btn-rounded, button.btn-rounded { border-radius: 50px }
-a.btn i, button i { align-self: center; color: inherit; display: inline-block } 
+a.btn i, button i { 
+    align-self: center; 
+    color: inherit; 
+    display: inline-block;
+    font-size: 102%;
+} 
 
 a.btn span, button span { display: inline-block }
-
-a.btn, button { align-items: center }
 
 a.btn > *:nth-child(2), 
 button > *:nth-child(2) { margin-left: 14px; margin-right: 0 } 
 
 /* Primary buttons */
-.btn-primary:any-link {
+.btn-primary:link, 
+.btn-primary:visited {
     border: solid 2px #000; 
     color: #fff; 
     background-color: #000; 
-    transition: all 0.2s linear;
 } 
 
-:is(.btn-primary:focus, .btn-primary:hover, .btn-primary:active)  {
+a.btn-primary:focus, 
+a.btn-primary:hover, 
+a.btn-primary:active  {
     border: solid 2px var(--gray-700); 
     background-color: var(--gray-700);  
     color: #fff;
-}
-
-:is(.btn-primary:focus i, .btn-primary:hover i, .btn-primary:active i)  {
-    color: inherit;
 }
 
 /* Secondary buttons */
-.btn-secondary:any-link {
+a.btn-secondary:link, 
+a.btn-secondary:visited,
+a.btn-ghost:link, 
+a.btn-ghost:visited {
     border: solid 2px #000;
     color: #000; 
-    background-color: #fff; 
-    transition: all 0.2s linear;
+    background-color: transparent; 
 } 
 
-:is(.btn-secondary:focus, .btn-secondary:hover, .btn-secondary:active)  {
+a.btn-secondary:focus, 
+a.btn-secondary:hover, 
+a.btn-secondary:active,
+a.btn-ghost:focus, 
+a.btn-ghost:hover, 
+a.btn-ghost:active {
     border: solid 2px var(--gray-700); 
     background-color: var(--gray-700);  
     color: #fff;
 }
 
-:is(.btn-secondary:focus i, .btn-secondary:hover i, .btn-secondary:active i)  {
-    color: inherit;
+/* Single-column layout */
+@media (min-width: 1200px) { 
+    section > .container-btn a.btn { padding: 15px 32px 17px 28px; }
 }
 
-/* Ghost buttons */
-.btn-ghost:any-link {
-    border: solid 2px #000; 
-    color: #000; 
-    background-color: transparent; 
-    font-weight: 700;
-    transition: all 0.2s linear;
-} 
-
-:is(.btn-ghost:focus, .btn-ghost:hover, .btn-ghost:active)  {
-    border: solid 2px #000; 
-    background-color: #000;  
-    color: #fff;
+/* Single-column layout */
+@media (min-width: 768px) and (max-width: 1119px) { 
+    section > .container-btn a.btn { padding: 14px 22px 17px 22px }
 }
 
-:is(.btn-ghost:focus i, .btn-ghost:hover i, .btn-ghost:active i)  {
-    color: inherit;
+@media (max-width: 767px) {
+    section > .container-btn a.btn { padding: 15px 32px 17px 28px }
+}
+
+/* Multi-column layouts */
+.col-2 a.btn, .cols-2-split a.btn, .col-3 a.btn { 
+	padding: 15px 32px 17px 28px;
+	font-size: calc(17px + (19 - 17) * ((100vw - 320px)/(1600 - 320)));
+}
+
+@media (min-width: 1119px) { .cols-2-split .container-btn a.btn { padding: 14px 22px 17px 22px } }
+
+.col-4 a.btn { 
+	padding: 14px 28px 16px 26px;
+	font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1600 - 320)));
 }
 
 /* ================== CONTACT FORM =============== */
