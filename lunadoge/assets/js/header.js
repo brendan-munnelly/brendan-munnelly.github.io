@@ -426,7 +426,7 @@ function removeTextAnimation() {
 /* Default alignment based on header type */
 function doHeaderAlignment(heroType) {
     if (( heroType === 1) || (heroType === 2) || (heroType === 3) ) {
-        const el_cont = document.querySelector(".hero-text-container"); 
+        const el_cont = document.querySelector("header.hero-block"); 
         el_cont.classList.add("text-center-desktop");
         el_cont.classList.add("text-center-mobile");
         document.getElementById("dd_align_desktop").value="0";
@@ -435,13 +435,13 @@ function doHeaderAlignment(heroType) {
     }
 
     else if ( heroType === 4 ) {
-        const el_cont = document.querySelector(".hero-text-container"); 
+        const el_cont = document.querySelector("header.hero-block"); 
         el_cont.classList.remove("text-center-desktop");
         el_cont.classList.add("text-center-mobile");
         // if buttons present
-        if (document.querySelector(".container-btn") ) {
-            document.querySelector(".container-btn").classList.remove("text-center-desktop");
-        }
+        // if (document.querySelector(".container-btn") ) {
+        //    document.querySelector(".container-btn").classList.remove("text-center-desktop");
+        //}
         document.getElementById("dd_align_desktop").value="1";
         document.getElementById("dd_align_mobile").value="0";
     }
@@ -455,19 +455,19 @@ function doAlignDesktop() {
     let opt = document.querySelector("#dd_align_desktop").value;
 
     if (opt==="0") {
-        document.querySelector(".hero-text-container").classList.add("text-center-desktop");
+        document.querySelector("header.hero-block").classList.add("text-center-desktop");
         // if buttons present
-        if (document.querySelector(".container-btn") ) {
-             document.querySelector(".container-btn").classList.add("text-center-desktop");
-        }
+        // if (document.querySelector(".container-btn") ) {
+        //      document.querySelector(".container-btn").classList.add("text-center-desktop");
+        // }
     }
 
     else if (opt==="1") {
-        document.querySelector(".hero-text-container").classList.remove("text-center-desktop");
+        document.querySelector("header.hero-block").classList.remove("text-center-desktop");
         // if buttons present
-        if (document.querySelector(".container-btn") ) {
-             document.querySelector(".container-btn").classList.remove("text-center-desktop");
-        }
+        // if (document.querySelector(".container-btn") ) {
+        //     document.querySelector(".container-btn").classList.remove("text-center-desktop");
+        // }
     }
 }
 
@@ -476,21 +476,21 @@ document.querySelector("#dd_align_mobile").addEventListener("change", doAlignMob
 function doAlignMobile() {
     let opt = document.querySelector("#dd_align_mobile").value;
     if (opt==="0") {
-        document.querySelector(".hero-text-container").classList.add("text-center-mobile");
+        document.querySelector("header.hero-block").classList.add("text-center-mobile");
         // if buttons present
-        if (document.querySelector(".container-btn") ) {      
-            document.querySelector(".container-btn").classList.add("text-center-mobile");
-            document.querySelector(".container-btn").classList.remove("text-left-mobile");
-       }
+        // if (document.querySelector(".container-btn") ) {      
+        //    document.querySelector(".container-btn").classList.add("text-center-mobile");
+        //    document.querySelector(".container-btn").classList.remove("text-left-mobile");
+       // }
 
     }
     else if (opt==="1") {
-        document.querySelector(".hero-text-container").classList.remove("text-center-mobile"); 
+        document.querySelector("header.hero-block").classList.remove("text-center-mobile"); 
         // if buttons present       
-        if (document.querySelector(".container-btn") ) {
-            document.querySelector(".container-btn").classList.remove("text-center-mobile");
-            document.querySelector(".container-btn").classList.add("text-left-mobile");
-        }
+        // if (document.querySelector(".container-btn") ) {
+        //    document.querySelector(".container-btn").classList.remove("text-center-mobile");
+        //    document.querySelector(".container-btn").classList.add("text-left-mobile");
+        //}
     }
 }
 
