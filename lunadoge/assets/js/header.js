@@ -130,89 +130,94 @@ function hideMenus() {
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button text colour: passive */
+            /* ======= PRIMARY BUTTONS =========*/
+
+            /* Text colour: passive */
             else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "header a.btn-primary:link { color: var("+color_code+") }\nheader a.btn-primary:visited { color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:link { color";
+                newStyle = "header.hero-block a.btn-primary:link,\nheader.hero-block a.btn-primary:visited { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:visited { color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button text colour: active */
-           else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "header a.btn-primary:focus { color: var("+color_code+") }\nheader a.btn-primary:hover { color: var("+color_code+") }\nheader a.btn-primary:active { color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:focus { color";
+            /* Text colour: active */
+            else if (btn_id === "btn_a_primary_active_text") {
+                newStyle = "header.hero-block a.btn-primary:focus,\nheader.hero-block a.btn-primary:hover,\nheader.hero-block a.btn-primary:active { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:active { color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button background colour: passive */
+            /* Background colour: passive */
             else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "header a.btn-primary:link { background-color: var("+color_code+") }\nheader a.btn-primary:visited { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:link { background-color";
+                newStyle = "header.hero-block a.btn-primary:link,\nheader.hero-block a.btn-primary:visited { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:visited { background-color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button background colour: active */
+            /* Background colour: active */
             else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "header a.btn-primary:focus { background-color: var("+color_code+") }\nheader a.btn-primary:hover { background-color: var("+color_code+") }\nheader a.btn-primary:active { background-color: var("+color_code+") }\n";
-                sub_string = "header a.btn-primary:focus { background-color";
+                newStyle = "header.hero-block a.btn-primary:focus,\nheader.hero-block a.btn-primary:hover,\nheader.hero-block a.btn-primary:active { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:active { background-color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button border colour: passive */
+            /* Border colour: passive */
             else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "header a.btn-primary:link { border-color: var("+color_code+") }\nheader a.btn-primary:visited { border-color: var("+color_code+") }\n";
-                sub_string = ".btn-primary:link { border-color";
+                newStyle = "header.hero-block a.btn-primary:link,\nheader.hero-block a.btn-primary:visited { border-color: var("+color_code+") }\n\n";
+                sub_string = ".btn-primary:visited { border-color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* Primary button border colour: active */
+            /* Border colour: active */
             else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "header a.btn-primary:focus { border-color: var("+color_code+") }\nheader a.btn-primary:hover { border-color: var("+color_code+") }\nheader a.btn-primary:active { border-color: var("+color_code+") }\n";
-                sub_string = "header a.btn-primary:focus";
+                newStyle = "header.hero-block a.btn-primary:focus,\nheader.hero-block a.btn-primary:hover,\nheader.hero-block a.btn-primary:active { border-color: var("+color_code+") }\n\n";
+                sub_string = "btn-primary:active { border-color";
                 doUpdateArray(sub_string,newStyle);
             }
 
-            /* secondary button text colour: passive */
+            /* ========== SECONDARY BUTTONS =========== */
+
+            /* Text colour: passive */
             else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "header a.btn-secondary:link { color: var("+color_code+") }\nheader a.btn-secondary:visited { color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { color";
-                doUpdateArray(sub_string,newStyle);               
+                newStyle = "header.hero-block a.btn-secondary:link,\nheader.hero-block a.btn-secondary:visited { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { color";
+                doUpdateArray(sub_string,newStyle); 
             }
 
-            /* secondary button text colour: active */
+            /* Text colour: active */
             else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "header a.btn-secondary:focus { color: var("+color_code+") }\nheader a.btn-secondary:hover { color: var("+color_code+") }\nheader a.btn-secondary:active { color: var("+color_code+") }\n";
+                newStyle = "header.hero-block a.btn-secondary:focus,\nheader.hero-block a.btn-secondary:hover,\nheader.hero-block a.btn-secondary:active { color: var("+color_code+") }\n\n";
                 sub_string = "a.btn-secondary:focus { color";
                 doUpdateArray(sub_string,newStyle); 
             }
-
-            /* secondary button background colour: passive */
+ 
+            /* Background colour: passive */
             else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "header a.btn-secondary:link { background-color: var("+color_code+") }\nheader a.btn-secondary:visited { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { background-color";
+                newStyle = "header.hero-block a.btn-secondary:link,\nheader.hero-block a.btn-secondary:visited { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { background";
                 doUpdateArray(sub_string,newStyle); 
             }
 
-            /* secondary button background colour: active */
+            /* Background colour: active */
             else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "header a.btn-secondary:focus { background-color: var("+color_code+") }\nheader a.btn-secondary:hover { background-color: var("+color_code+") }\nheader a.btn-secondary:active { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:focus { background-color";
+                newStyle = "header.hero-block a.btn-secondary:focus,\nheader.hero-block a.btn-secondary:hover,\nheader.hero-block a.btn-secondary:active { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:active { background";
                 doUpdateArray(sub_string,newStyle); 
             }
-
-            /* secondary button border colour: passive */
+            
+            /* Border colour: passive */
             else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "header a.btn-secondary:link { border-color: var("+color_code+") }\nheader a.btn-secondary:visited { border-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { border-color";
+                newStyle = "header.hero-block a.btn-secondary:link,\nheader.hero-block a.btn-secondary:visited { border-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { border";
                 doUpdateArray(sub_string,newStyle); 
             }
 
-            /* secondary button border colour: active */
+            /* Border colour: active */
             else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "header a.btn-secondary:focus { border-color: var("+color_code+") }\nheader a.btn-secondary:hover { border-color: var("+color_code+") }\nheader a.btn-secondary:active { border-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:focus { border-color";
+                newStyle = "header.hero-block a.btn-secondary:focus,\nheader.hero-block a.btn-secondary:hover,\nheader.hero-block a.btn-secondary:active { border-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:active { border";
                 doUpdateArray(sub_string,newStyle); 
             }
+
 
             style = document.createElement('style');
             document.head.appendChild(style);
@@ -512,20 +517,7 @@ function doHeroButtons() {
         removeHeroButtons();
         disableAllButtons();
         enablePrimaryButtons();
-        // Test for h2
-        if (document.querySelector("h2")) {
-            document.querySelector("h2").insertAdjacentHTML("afterend", assets_header_buttons_one);
-        }
-        else {
-            document.querySelector("h1").insertAdjacentHTML("afterend", assets_header_buttons_one);
-        }
-        // Test alignment of hero-text-container
-        if (document.querySelector(".hero-text-container.text-center-desktop") ) {
-            document.querySelector(".container-btn").classList.add("text-center-desktop");
-        }
-        if (document.querySelector(".hero-text-container.text-center-mobile") ) {
-            document.querySelector(".container-btn").classList.add("text-center-mobile");
-        }
+        document.querySelector(".hero-text-container").insertAdjacentHTML("afterend",assets_header_buttons_one);
         document.getElementById("dd_buttons_style").disabled=false;
         document.getElementById("dd_buttons_icon").disabled=false;
     }
@@ -534,14 +526,7 @@ function doHeroButtons() {
     else if (opt==="2") {
         removeHeroButtons();
         enableAllButtons();
-
-        // Test for h2
-        if (document.querySelector("h2")) {
-            document.querySelector("h2").insertAdjacentHTML("afterend", assets_header_buttons_pair);
-        }
-        else {
-            document.querySelector("h1").insertAdjacentHTML("afterend", assets_header_buttons_pair);
-        }
+        document.querySelector(".hero-text-container").insertAdjacentHTML("afterend", assets_header_buttons_pair);
         document.getElementById("dd_buttons_icon").disabled=false;
         document.getElementById("dd_buttons_style").disabled=false;
     }
@@ -754,7 +739,7 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,/g, ".");
+    // strCSS = strCSS.replace(/,/g, ".");
     strCSS = strCSS.replace(/.header/g, "header");
     el_css.value = strCSS;
     document.body.appendChild(el_css);
