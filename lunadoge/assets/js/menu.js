@@ -1,23 +1,3 @@
-// Detect click of option is within mobile menu
-const elemMenuList = document.querySelector('.container-menu ul');
-document.addEventListener('click', function(event) {
-const isClickInside = elemMenuList.contains(event.target);
-            
-// If clicked link is outside mobile menu
-if (isClickInside) {
-    //Get id of anchor
-//    let anchor_id = window.location.hash;
-    //Add extra spacing above anchor
-//    let elemAnchor = document.querySelector(anchor_id)
-//    elemAnchor.classList.add('sticky-anchor');
-    //Close fly-out menu
-//    toggleMobileMenu();
-}
-    else {
-        return;
-    }
-});
-
 // Check initial viepwort width
 document.addEventListener("DOMContentLoaded", checkViewportWidth);
 
