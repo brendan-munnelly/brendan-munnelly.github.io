@@ -383,13 +383,15 @@ function doStickyMenu() {
         removeStickyMenu();
         enableCSS();
         enableSticky();
-        const newStyle = "header.hero-block { margin-top: 0 }\n";
-        sub_string = "header.hero-block { margin-top: 0 }";
-        doUpdateArray(sub_string,newStyle);
 
         if (document.querySelector(".container-menu")) {
             const el_menu = document.querySelector(".container-menu");
             el_menu.classList.add("menu-sticky");
+        }
+
+        if (document.querySelector(".hero-block")) {
+            const el_menu = document.querySelector(".hero-block");
+            el_menu.classList.add("header-under-menu-sticky");
         }
     }
 }
@@ -399,6 +401,11 @@ function removeStickyMenu() {
     if (document.querySelector(".container-menu")) {
         const el_menu = document.querySelector(".container-menu");
         el_menu.classList.remove("menu-sticky");
+    }
+
+    if (document.querySelector(".hero-block")) {
+        const el_menu = document.querySelector(".hero-block");
+        el_menu.classList.remove("header-under-menu-sticky");
     }
 }
 

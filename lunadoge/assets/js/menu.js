@@ -6,12 +6,12 @@ const isClickInside = elemMenuList.contains(event.target);
 // If clicked link is outside mobile menu
 if (isClickInside) {
     //Get id of anchor
-    let anchor_id = window.location.hash;
+//    let anchor_id = window.location.hash;
     //Add extra spacing above anchor
-    let elemAnchor = document.querySelector(anchor_id)
-    elemAnchor.classList.add('sticky-anchor');
+//    let elemAnchor = document.querySelector(anchor_id)
+//    elemAnchor.classList.add('sticky-anchor');
     //Close fly-out menu
-    toggleMobileMenu();
+//    toggleMobileMenu();
 }
     else {
         return;
