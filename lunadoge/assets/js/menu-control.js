@@ -210,21 +210,24 @@ function hideMenus() {
             else if (btn_id === "btn_a_cta_active_border") {
                 newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { border-color: var("+color_code+") }\n";
                 sub_string = "a#btn-cta:active";
+                doUpdateArray(sub_string,newStyle);
             }
 
-            /* HAMBURGER ICON *
+            /* HAMBURGER ICON */
 
             /* Non-sticky */
             else if (btn_id === "btn_hamburger") {
                 newStyle = ".container-menu .item-icon .bar1, .container-menu .item-icon .bar2, .container-menu .item-icon .bar3 { background-color: var("+color_code+") }\n";
                 sub_string = ".container-menu .item-icon .bar1";
+                doUpdateArray(sub_string,newStyle);
             }
 
             /* Sticky */
             else if (btn_id === "btn_hamburger_sticky") {
                 newStyle = ".container-menu.menu-on-scroll .item-icon .bar1, .container-menu.menu-on-scroll .item-icon .bar2, .container-menu.menu-on-scroll .item-icon .bar3 { background-color: var("+color_code+") }\n";
                 sub_string = "container-menu.menu-on-scroll .item-icon .bar1";
-            }            
+                doUpdateArray(sub_string,newStyle);
+            }         
 
             style = document.createElement('style');
             document.head.appendChild(style);
@@ -236,6 +239,7 @@ function hideMenus() {
         }
 
        function doUpdateArray(sub_string,newStyle) {
+           console.log("hello here: "+newStyle);
             if ( arrCSS.some(e => e.includes(sub_string)) ) {
                 const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
                 arrCSS.splice(arrPos, 1);
