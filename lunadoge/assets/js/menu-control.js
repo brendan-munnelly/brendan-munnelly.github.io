@@ -217,13 +217,13 @@ function hideMenus() {
             /* Non-sticky */
             else if (btn_id === "btn_hamburger") {
                 newStyle = ".container-menu .item-icon .bar1, .container-menu .item-icon .bar2, .container-menu .item-icon .bar3 { background-color: var("+color_code+") }\n";
-                sub_string = "container-menu .item-icon .bar1";
+                sub_string = ".container-menu .item-icon .bar1";
             }
 
             /* Sticky */
             else if (btn_id === "btn_hamburger_sticky") {
                 newStyle = ".container-menu.menu-on-scroll .item-icon .bar1, .container-menu.menu-on-scroll .item-icon .bar2, .container-menu.menu-on-scroll .item-icon .bar3 { background-color: var("+color_code+") }\n";
-                sub_string = ".container-menu.menu-sticky .item-icon .bar1";
+                sub_string = "container-menu.menu-on-scroll .item-icon .bar1";
             }            
 
             style = document.createElement('style');
