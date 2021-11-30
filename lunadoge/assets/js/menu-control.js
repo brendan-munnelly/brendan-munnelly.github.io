@@ -142,7 +142,6 @@ function hideMenus() {
                 doUpdateArray(sub_string,newStyle);            
             }
 
-
             /* Mobile-only: passive */
             else if (btn_id === "btn_link_mobile_passive_text") {
                 newStyle = ".container-menu.menu-mobile ul.mobile-display a:link,\n.container-menu.menu-mobile ul.mobile-display a:visited { color: var("+color_code+") }\n";
