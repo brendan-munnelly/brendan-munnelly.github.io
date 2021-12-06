@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Web Page Title</title>
+    <meta name="description" content="Sample web page description goes here.">
+
+	<!-- Preload hero image -->
+
+
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/lunadoge-v2.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+	<!-- Google Fonts -->
+
+    
+	<!-- Font Awesome 5 icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+    <!-- Light Awesome icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Google Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+    rel="stylesheet">
+
+    <style>
+
+    /* Minimum heights: desktops/laptops general */
+    @media (min-width: 1537px) { header.hero-block.hero-half { min-height: 660px } }
+    @media (min-width: 1140px) and (max-width: 1535px) { 
+        header.hero-block.hero-half { min-height: 540px } 
+    }
+
+    @media (min-width: 1025px) and (max-width: 1139px) { 
+        header.hero-block.hero-half { min-height: 500px } 
+    }
+
+    /* Minimum heights: desktops/laptops specific */
+    @media (width: 1920px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1600px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1536px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1440px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1366px) { header.hero-block.hero-half { min-height: 88vh } }
+    @media (width: 1280px) { header.hero-block.hero-half { min-height: 72vh } }
+
+    /* Minimum heights: tablets general */
+    @media (min-width: 768px) and (max-width: 1024px) { 
+        header.hero-block.hero-half { min-height: 440px } 
+    }
+
+    /* Minimum heights: tablets specific */
+    @media (width: 768px) { header.hero-block.hero-half { min-height: 48vh } }
+    @media (width: 962px) { header.hero-block.hero-half { min-height: 80vh } }
+
+    /* Minimum heights: mobiles large */
+    @media (min-width: 540px) and (max-width: 767px) { 
+        header.hero-block.hero-half { min-height: 520px } 
+    }
+
+    /* Minimum heights: mobiles small */
+    @media (max-width: 539px) { 
+        header.hero-block.hero-half { min-height: 540px } 
+    }
+
+    /* Stacking order (Z-INDEX) of elements inside hero block */
+    /* Text IN FRONT of overlay and full-width image */
+    header.hero-block.hero-half .upper-label,
+    header.hero-block.hero-half .container-text, 
+    header.hero-block.hero-half .container-btn { z-index: 2 } 
+
+    /* Overlay BEHIND text and IN FRONT of full-width image */
+    header.hero-block.hero-half .bg-overlay {
+        position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;
+        background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));    
+    }
+
+    /* Full-width image BEHIND text and BEHIND overlay */
+    header.hero-block.hero-half .hero-bg-media {
+        position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;
+    }
+
+    /* Image/video completely FILLS hero block */
+    header.hero-block.hero-half .hero-bg-media * { object-fit: cover; width: 100%; height: 100% }
+
+    /* Relative VERTICAL position of hero block elements */
+
+    @media (width: 1920px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1600px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1536px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1440px) { header.hero-block.hero-half { min-height: 80vh } }
+    @media (width: 1366px) { header.hero-block.hero-half { min-height: 88vh } }
+    @media (width: 1280px) { header.hero-block.hero-half { min-height: 70vh } }
+
+    @media (min-width: 1600px) {
+        header.hero-block.hero-half .upper-label { margin-top: 5%; margin-bottom: -9% !important }
+        header.hero-block.hero-half .container-btn { margin-bottom: 10% !important }
+    }
+
+    @media (min-width: 1140px) and (max-width: 1599px) {
+        header.hero-block.hero-half .upper-label { margin-top: 8%; margin-bottom: -5% }
+        header.hero-block.hero-half .container-btn { margin-bottom: 12% !important }
+    }
+
+    @media (min-width: 1025px) and (max-width: 1139px) {
+        header.hero-block.hero-half .upper-label { margin-top: 8% }
+        header.hero-block.hero-half .container-btn { margin-bottom: 10% !important }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .hero-half .upper-label { margin-top: 8%; }
+        .hero-half .container-btn { 
+            margin-top: 10%; margin-bottom: 15% !important }
+    }
+
+    /* Large mobiles */
+    @media (min-width: 540px) and (max-width: 767px) {
+        header.hero-block.hero-half .upper-label { margin-top: 5%; margin-bottom: 6% }
+    }
+
+    /* Small mobiles */
+    @media (max-width: 539px) {
+        header.hero-block.hero-half .upper-label { margin-top: -2%; margin-bottom: 10% }
+    }
+
+    header.hero-block.hero-half h1 { margin-bottom: 2% }
+    @media (min-width: 768px) and (max-width: 1024px) { 
+        header.hero-block.hero-half h1 { margin-top: 3% } 
+    }
+
+    @media (max-width: 767px) { header.hero-block.hero-half h1 { margin-bottom: 5% } }
+
+
+    /* Elements: Upper label */
+    header.hero-block.hero-half .upper-label {
+        font-weight: 400; display: block;
+        font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1140 - 320)));
+        color: var(--white-000);
+        margin-left: 3px
+    }
+
+    /* Elements: Headings */
+    header.hero-block.hero-half h1, header.hero-block.hero-half h2 { color: var(--white-000) }
+    header.hero-block.hero-half h1 { line-height: 1.2; margin-bottom: 2% }
+    header.hero-block.hero-half h2 { line-height: 1.3 }
+
+    header.hero-block.hero-half h1 {
+        font-size: calc(42px + (84 - 42) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    header.hero-block.hero-half h1.text-long {
+        font-size: calc(28px + (72 - 28) * ((100vw - 320px) / (1920 - 320)));
+        letter-spacing: 0; line-height: 1.3;
+    }
+
+    header.hero-block.hero-half h2 {
+        font-size: calc(22px + (36 - 22) * ((100vw - 320px) / (1600 - 320)));
+        font-weight: 400;
+    }
+
+    @media (min-width: 768px) {
+        header.hero-block.hero-half h1 { letter-spacing: -2px }
+        header.hero-block.hero-half h2 { letter-spacing: -1px }
+    }
+
+    @media (max-width: 767px) {
+        header.hero-block.hero-half h1 { letter-spacing: -1px }
+        header.hero-block.hero-half h2 { letter-spacing: 0 }   
+    }
+
+    /* Elements: Buttons */
+    header.hero-block.hero-half a.btn {
+        font-size: calc(18px + (21 - 18) * ((100vw - 320px)/(1920 - 320)));
+        text-decoration: none; font-weight: bold; border-style: solid;
+    }
+
+    @media (min-width: 768px) { 
+        header.hero-block.hero-half a.btn { border-width: 3px; padding: 16px 24px } 
+    }
+
+    @media (max-width: 767px) { 
+        header.hero-block.hero-half a.btn { border-width: 2px; padding: 15px 26px } 
+    }
+
+    /* Primary button */
+    header.hero-block.hero-half a.btn-primary:link, 
+    header.hero-block.hero-half a.btn-primary:visited {
+        color: #fff; background-color: #000; border-color: #000; 
+    } 
+
+    header.hero-block.hero-half a.btn-primary:focus, 
+    header.hero-block.hero-half a.btn-primary:hover, 
+    header.hero-block.hero-half a.btn-primary:active {
+        color: #fff;  background-color: var(--gray-700); border-color: var(--gray-700); 
+    }
+
+    /* Secondary button */
+    header.hero-block.hero-half a.btn-secondary:link, 
+    header.hero-block.hero-half a.btn-secondary:visited {
+        color: #fff; background-color: transparent; border-color: #fff; 
+    } 
+
+    header.hero-block.hero-half a.btn-secondary:focus, 
+    header.hero-block.hero-half a.btn-secondary:hover, 
+    header.hero-block.hero-half a.btn-secondary:active {
+        color: #fff;  background-color: var(--gray-700); border-color: var(--gray-700); 
+    }
+
+    /* Button positioning */
+    @media (min-width: 1025px) {
+        .hero-half a.btn { display: inline-block }  /* Side-by-side */
+        .hero-half .container-btn a:nth-child(2) { margin-left: 8% }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .hero-half .container-btn { /* Stacked */
+            display: flex; flex-direction: column; align-self: flex-start
+        }
+        .hero-half .container-btn a:first-child { margin-bottom: 5% }
+        .hero-block.hero-half .container-btn a:last-child  { margin-bottom: 0 }
+    }
+
+    @media (min-width: 768px) {
+        .hero-half { padding: 0; display: flex; flex-direction: row; justify-content: center; }
+
+        /* Image at left, text at right */
+        .hero-half.img-left .col-2:nth-child(1)  { position: relative } 
+        .hero-half.img-left .col-2:nth-child(2)  { 
+            display: flex; flex-direction: column;
+            justify-content: space-between
+        }
+
+        /* Image at right, text at left */
+        .hero-half.img-right .col-2:nth-child(1) { 
+            display: flex; flex-direction: column; justify-content: space-between
+        } 
+        .hero-half.img-right .col-2:nth-child(2) { position: relative } 
+
+        .hero-half .hero-bg-media { position: absolute }
+        .hero-half img { 
+            object-fit: cover; height: 100%; width: auto;
+            object-position: center center; border-radius: 50%;
+        }
+    }
+
+    @media (min-width: 1140px) {
+        .hero-half .col-2 { width: 50% }
+        .hero-half.img-spacing .hero-bg-media img { height: 86%; width: auto }
+        .hero-half .container-btn a:nth-child(2) { margin-left: 8% }
+
+        /* Image at left, text at right */
+        .hero-half.img-left.img-spacing .col-2:nth-child(1) { width: 48% }
+        .hero-half.img-left.img-spacing .col-2:nth-child(2) { 
+            width: 52%; padding-right: 4% 
+        }
+        .hero-half.img-left.img-spacing .hero-bg-media { left: 20%; top: 10% }
+        .hero-half.img-left.img-full .col-2:nth-child(1) { width: 48% }
+        .hero-half.img-left.img-full .col-2:nth-child(2) { 
+            width: 52%; padding-right: 4%; padding-left: 5%
+        }
+
+        /* Image at right */
+        .hero-half.img-right.img-spacing .col-2:nth-child(1) { width: 54%; padding: 0 4% 0 8% }
+        .hero-half.img-right.img-spacing .col-2:nth-child(2) { width: 46% }
+        .hero-half.img-right.img-spacing .hero-bg-media { left: 5%; top: 10% }
+        .hero-half.img-right.img-full .col-2:nth-child(1) { 
+            width: 50%; padding-right: 4%; padding-left: 5%
+        }
+        .hero-half.img-right.img-full .col-2:nth-child(2) { width: 50% }
+    }
+
+    @media (min-width: 1140px) and (max-width: 1279px ){
+        .hero-half.img-left.img-spacing  .col-2:nth-child(2) { padding-left: 2% }
+        .hero-half.img-right.img-spacing .col-2:nth-child(1) { padding-left: 6% }
+    }
+
+    @media (min-width: 1025px) and (max-width: 1139px) {
+        .hero-half .container-btn a:nth-child(2) { margin-left: 5% }
+        .hero-half.img-spacing .hero-bg-media img { height: 80%; width: auto }
+         /* Image at left, text at right */
+        .hero-half.img-left.img-spacing .col-2:nth-child(1) { 
+            width: 45%; padding-right: 4% 
+        }
+        .hero-half.img-left .col-2:nth-child(2) { width: 55% }
+        .hero-half.img-left.img-spacing .col-2:nth-child(2) { padding-left: 0 }
+        .hero-half.img-left.img-spacing .col-2:nth-child(2) { padding-left: 0 }
+        .hero-half.img-left.img-spacing .hero-bg-media { left: 12%; top: 15% }
+        .hero-half.img-left.img-full .col-2:nth-child(1) { width: 48% }
+        .hero-half.img-left.img-full .col-2:nth-child(2) { 
+            width: 52%; padding-right: 4%; padding-left: 5%
+        }
+
+        /* Image at right, text at left */
+        .hero-half.img-right.img-spacing .col-2:nth-child(1) { width: 54%; padding: 0 4% 0 6% }
+        .hero-half.img-right.img-spacing .col-2:nth-child(2) { width: 46% }
+        .hero-half.img-right.img-spacing .hero-bg-media { left: 10%; top: 15% }
+        .hero-half.img-right.img-full .col-2:nth-child(1) { 
+            width: 50%; padding-right: 4%; padding-left: 5%
+        }
+        .hero-half.img-right.img-full .col-2:nth-child(2) { width: 50% }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .hero-half .container-btn a:nth-child(2) { margin-left: 0; margin-top: 10% }
+         /* Image at left, text at right */
+        .hero-half.img-left.img-spacing .hero-bg-media img { height: 64%; width: auto }
+        .hero-half.img-left.img-spacing .col-2:nth-child(1) { width: 45% }
+        .hero-half.img-left.img-spacing .col-2:nth-child(2) { 
+            width: 55%; padding-left: 4%; padding-right: 4%
+        }
+        .hero-half.img-left.img-spacing .hero-bg-media { left: 12%; top: 15% }
+        .hero-half.img-left.img-full .col-2:nth-child(1) { width: 46% }
+        .hero-half.img-left.img-full .col-2:nth-child(2) { 
+            width: 54%; padding-right: 4%; padding-left: 5%
+        }
+
+        /* Image at right, text at left */
+        .hero-half.img-right.img-spacing .hero-bg-media img { height: 70%; width: auto }
+        .hero-half.img-right.img-spacing .col-2:nth-child(1) { width: 52%; padding: 0 4% 0 6% }
+        .hero-half.img-right.img-spacing .col-2:nth-child(2) { width: 48% }
+        .hero-half.img-right.img-spacing .hero-bg-media { left: 5%; top: 20% }
+        .hero-half.img-right.img-full .col-2:nth-child(1) { 
+            width: 54%; padding-right: 4%; padding-left: 5%
+        }
+        .hero-half.img-right.img-full .col-2:nth-child(2) { width: 46% }
+    }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- navigation menu -->
+ 
+
+    <!-- header hero block -->
+    <header class="hero-block hero-half img-right img-spacing text-center-mobile">
+        
+        <div class="col-2">
+            <div class="upper-label">Special Offer</div>
+            <div class="container-text">
+                <h1>Lorem Malesuada</h1>
+                <h2>Etiam tincidunt risus nec odio nec odio.</h2>
+            </div>
+
+            <div class="container-btn">
+                <a href="#" class="btn btn-primary"><i class="fas fa-shopping-cart"></i><span>Order now</span></a>
+               <a href="#" class="btn btn-secondary"><i class="fas fa-arrow-right"></i><span>Learn more</span></a>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="hero-bg-media">
+                <img src="assets/img/ui-designer-1.jpg" alt="Sample image">
+            </div>
+        </div>
+
+    </header>
+    <!-- /header hero block -->
+
+    <!-- main content with sections -->
+    <main>
+        
+	<section class="container-flex theme-one">
+		<div class="col-1 text-center">
+			<h2>Lorem Malesuada Dolor</h2>
+			<h3>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.</h3>
+		</div>
+
+		<div class="col-3">
+			<figure><img src="assets/img/surfer.svg" alt="Placeholder image"></figure>
+			<h3>Lorem ipsum dolo</h3>
+			<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+		</div>
+
+		<div class="col-3">
+			<figure><img src="https://picsum.photos/420/250" alt="Placeholder image"></figure>
+			<h3>Lorem ipsum dolo</h3>
+			<p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+		</div>
+
+		<div class="col-3">
+			<figure><img src="https://picsum.photos/420/250" alt="Placeholder image"></figure><h3>Lorem ipsum dolo</h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+		</div>
+	</section>
+
+    </main>
+    <!-- /main content with sections -->
+    
+    <!-- footer -->
+    <!-- <footer></footer> -->
+    <!-- /footer -->   
+
+
+</body>
+</html>
