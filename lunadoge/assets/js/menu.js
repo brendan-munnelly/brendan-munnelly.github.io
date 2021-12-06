@@ -2,16 +2,18 @@
 document.addEventListener("DOMContentLoaded", checkViewportWidth);
 
 function checkViewportWidth() {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    const elemMenuList = document.querySelector('.container-menu');
+    if (document.querySelector('.container-menu')) {
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const elemMenuList = document.querySelector('.container-menu');
 
-    if (vw >= 768) {
-        elemMenuList.classList.add("menu-desktop");
-        elemMenuList.classList.remove("menu-mobile");
-    }
-    else {
-        elemMenuList.classList.add("menu-mobile");
-        elemMenuList.classList.remove("menu-desktop");
+        if (vw >= 768) {
+            elemMenuList.classList.add("menu-desktop");
+            elemMenuList.classList.remove("menu-mobile");
+        }
+        else {
+            elemMenuList.classList.add("menu-mobile");
+            elemMenuList.classList.remove("menu-desktop");
+        }
     }
 }
 
@@ -47,9 +49,11 @@ function toggleMobileMenu() {
 }
 
 // On-scroll colours
-window.onscroll = function() {swapMenuStyle()};
-const el_menu = document.querySelector('.container-menu');
-const el_menu_onscroll = el_menu.offsetTop +300;
+if (document.querySelector('.container-menu')) {
+    window.onscroll = function() {swapMenuStyle()};
+    const el_menu = document.querySelector('.container-menu');
+    const el_menu_onscroll = el_menu.offsetTop +300;
+}
 
 function swapMenuStyle() {
 	if ( window.pageYOffset > el_menu_onscroll) {
@@ -66,7 +70,9 @@ document.addEventListener("DOMContentLoaded", checkMenuScrollPosition);
 function checkMenuScrollPosition() {
     var y = window.scrollY;
     if (y === 0) {
-        const el_menu = document.querySelector('.container-menu');
-        el_menu.classList.remove("menu-on-scroll")
+        if (document.querySelector('.container-menu')) {
+            const el_menu = document.querySelector('.container-menu');
+            el_menu.classList.remove("menu-on-scroll")
+        }
     }
 }
