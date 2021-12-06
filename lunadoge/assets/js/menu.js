@@ -18,8 +18,10 @@ function checkViewportWidth() {
 // Monitor viepwort width
 window.onresize = checkViewportWidth;
 
-// Show/hide fly-out mobile menu -->
-document.querySelector('.item-icon').addEventListener('click', toggleMobileMenu)
+// Show/hide fly-out mobile menu
+if (document.querySelector('.container-menu')) {
+    document.querySelector('.item-icon').addEventListener('click', toggleMobileMenu)
+}
 
    
 function toggleMobileMenu() {
