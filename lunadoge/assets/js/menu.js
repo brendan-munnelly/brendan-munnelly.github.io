@@ -25,7 +25,6 @@ if (document.querySelector('.container-menu')) {
     document.querySelector('.item-icon').addEventListener('click', toggleMobileMenu)
 }
 
-   
 function toggleMobileMenu() {
     //toggle hamburger icon
     const elemIcon = document.querySelector('.item-icon');
@@ -56,12 +55,16 @@ if (document.querySelector('.container-menu')) {
 }
 
 function swapMenuStyle() {
-	if ( window.pageYOffset > el_menu_onscroll) {
-		el_menu.classList.add("menu-on-scroll");
-	} 
-    else {
-        el_menu.classList.remove("menu-on-scroll")
-	}
+    if (document.querySelector('.container-menu')) {
+        const el_menu = document.querySelector('.container-menu');
+        const el_menu_onscroll = el_menu.offsetTop +300;
+        if ( window.pageYOffset > el_menu_onscroll) {
+            el_menu.classList.add("menu-on-scroll");
+        } 
+        else {
+            el_menu.classList.remove("menu-on-scroll")
+        }
+    }
 }
 
 // Check initial menu scroll position
