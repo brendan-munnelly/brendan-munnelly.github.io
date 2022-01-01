@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Layout | LunaDoge | Brendan Munnelly</title>
+    <meta name="description" content="A JavaScript app for creating HTML5 web page snippets. From www.munnelly.com.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/controls-general.css" />
+    <link rel="stylesheet" href="assets/css/controls-menu.css" />
+    <link rel="stylesheet" href="assets/css/ceardai.css">
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="controls-top">
+
+        <nav id="control-menu">
+            <div>
+               <a href="index.html"><img src="assets/img/website-logo.png" alt="Website logo"></a>
+            </div>
+
+            <ul>
+                <li class="dropdown">
+
+                    <span id="menu-1" class="dropbtn">Header Type</span>
+                    <div id="content-1" class="dropdown-content dropdown-hidden" style="z-index:9999999">
+                        
+                        <div class="dialog-box" id="menu-type-options">
+                            <hr>
+                            <a href="#" class="menu-header-type selected" id="menu-header-text">Text Only</a>
+                            <hr>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-img">Background Image (Full Width)</a>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-vid">Background Video (Full Width)</a>
+                            <hr>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-img-half-right">Text left, full image right</a>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-img-half-right_trans">Text left, transparent image right</a>
+                            <a href="#" class="menu-header-type" id="menu-header-half-img-right">Text left, regular image right</a> 
+                            <hr>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-img-half-left">Full image left, text right</a>
+                            <a href="#" class="menu-header-type" id="menu-header-bg-img-half-left_trans">Transparent image left, text right</a>
+                            <a href="#" class="menu-header-type" id="menu-header-half-img-left">Regular image left, text right</a> 
+                            <hr>
+        
+                        </div>
+                    </div>
+                </li>
+        
+
+                <li class="dropdown">
+                    <span id="menu-2" class="dropbtn">Main Options</span>
+                    <div id="content-2" class="dropdown-content dropdown-hidden">
+          
+                        <div class="dialog-box">
+
+                            <h4>COLOURS</h4>
+                            <div class="input-group" style="margin-bottom: 24px">
+                                
+                                <label>Background</label>
+                                <div><button id="btn_bg_menu_desktop" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
+                            <h4>HYPERLINKS</h4>
+                            
+                            <div class="input-group">
+                                <label>Text</label>
+                                <div><button id="btn_link_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_link_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                            <h4 style="margin-top: 18px;margin-bottom:12px">CTA BUTTON</h4>
+
+                            <div class="input-group">
+                                <label>Button Style</label>
+                                <select id="dd_cta_button_style">
+                                    <option value="0" selected="selected">Corner</option>
+                                    <option value="1">Soft</option>
+                                    <option value="2">Rounded</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Button Icon</label>
+                                <select id="dd_cta_button_icon">
+                                    <option value="0" selected="selected">At Right</option>
+                                    <option value="1">At Left</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group" style="margin-top:20px">
+                                <label>Text</label>
+                                <div><button id="btn_a_cta_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                            <div class="input-group" style="margin-top:20px">
+
+                                <label>Background</label>
+                                <div><button id="btn_a_cta_passive_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                            <div class="input-group" style="margin-top:20px">
+
+                                <label>Border</label>
+                                <div><button id="btn_a_cta_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                           <!--
+                            <div class="input-group">
+                                <label>Bottom Shadow</label>
+                                <select id="dd_bottom_shadow">
+                                    <option value="0" selected="selected">No</option>
+                                    <option value="1">Yes</option>
+                                     <option value="1">On Scroll</option> 
+                                </select>
+                            </div>
+                        -->
+                  
+                      </div>
+                    </div><!-- /dropdown-content -->
+                </li>
+
+                <li class="dropdown">
+                    <span id="menu-3" class="dropbtn">Mobile Menu</span>
+                    <div id="content-3" class="dropdown-content dropdown-hidden">
+
+                        <div class="dialog-box">
+
+                            <div class="input-group" style="margin-top: 10px">
+                                <label style="min-width:140px">Hamburger Icon</label>
+                                <div><button id="btn_hamburger" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
+                            <p style="font-weight:400; margin-bottom: 12px; margin-top: 32px">Same as desktop colours <br>unless you change them here.</p>
+
+                            <h4>COLOURS</h4>
+                            <div class="input-group" style="margin-bottom: 12px">
+                                <label style="min-width:140px">Background</label>
+                                <div><button id="btn_bg_menu_mobile" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
+                            <h4>HYPERLINKS</h4>
+                            
+                            <div class="input-group" style="margin-bottom: 12px">
+                                <label style="min-width:140px">Text</label>
+                                <div><button id="btn_link_mobile_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_link_mobile_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active&nbsp;&nbsp;</button></div>
+                            </div>
+
+                        </div>
+
+                    </div><!-- /dropdown-content -->
+                </li>
+
+
+                <li class="dropdown">
+                    <span id="menu-4" class="dropbtn">Sticky Menu</span>
+                    <div id="content-4" class="dropdown-content dropdown-hidden">
+          
+                        <div class="dialog-box">
+
+                            <div class="input-group">
+                                <label style="width: 140px">Sticky Menu</label>
+                                <select id="dd_sticky">
+                                    <option value="0" selected="selected">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <h4>COLOURS</h4>
+                            <div class="input-group" style="margin-bottom: 12px">
+                                
+                                <label style="width: 140px">Background</label>
+                                <div><button id="btn_bg_onscroll_menu" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+
+                            <h4>HYPERLINKS</h4>
+                            
+                            <div class="input-group">
+                                <label style="width: 140px">Text</label>
+                                <div><button id="btn_link_onscroll_passive" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_link_onscroll_active" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                            </div>
+
+                            <h4 style="margin-top: 18px;">CTA BUTTON</h4>
+                            
+                            <div class="input-group">
+                                <label style="width: 140px">Text</label>
+                                <div><button id="btn_a_cta_onscroll_passive_text" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_onscroll_active_text" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                            </div>
+                            
+                            <div class="input-group two-col" style="margin-top: 20px">
+                                <label style="width: 140px">Background</label>
+                                <div><button id="btn_a_cta_onscroll_passive_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_onscroll_active_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                            </div>
+
+                            <div class="input-group two-col" style="margin-top: 20px">
+                                <label style="width: 140px">Border</label>
+                                <div><button id="btn_a_cta_onscroll_passive_border" class="btn_style"><i class="fas fa-paint-roller"></i> Passive</button></div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div><button id="btn_a_cta_onscroll_active_border" class="btn_style"><i class="fas fa-paint-roller"></i> Active</button></div>
+                            </div>
+                            
+                            <div class="input-group" style="margin-top: 20px">
+                                <label style="min-width:140px">Hamburger Icon</label>
+                                <div><button id="btn_hamburger_sticky" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                            </div>
+                        </div><!-- /dialog-box -->
+                    </div><!-- /#content-1 -->
+                </li><!-- /.dropdown -->
+
+            </ul>
+
+            <ul>
+                <li>
+                    <button id="btn-copy"><i class="far fa-copy"></i>Copy HTML</button>
+                </li>
+                <li>
+                    <button id="btn-copy-css" onclick="copyCSS()" disabled><i class="far fa-copy"></i>Copy CSS</button>
+                </li>
+            </ul>
+
+        </nav><!-- /#control-menu-->
+    </div><!-- /.controls-top-->
+
+
+<main>
+
+    <div id="box-msg" class="is-hidden">
+        <span class="close-box-msg">x</span>
+        <h3><i class="fas fa-exclamation-circle"></i> &nbsp;Ooops</h3>
+        <p>Browser error has occured.</p>
+        <ul class="fa-ul">
+            <li><span class="fa-li"><i class="fas fa-check"></i></span> Please try again to select a colour.</li>
+            <li><span class="fa-li"><i class="fas fa-check"></i></span> If that does not work, please reload the web page.</li>
+        </ul>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+       <!-- Modal content -->
+       <div class="modal-content">
+         <span class="close">&times;</span>
+         
+         <form id="picker-box">  
+           <div class="container-two-col">
+               <div class="col-2-picker">
+                
+                    <h3>Gray</h3>
+                    <input type="radio" name="picker-radio" id="--gray-100" value="--gray-100" onclick="getColorID(id)" />
+                    <label for="--gray-100"><span class="gray-100"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-200" value="--gray-200" onclick="getColorID(id)" />
+                    <label for="--gray-200"><span class="gray-200"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-300"  value="--gray-300" onclick="getColorID(id)" />
+                    <label for="--gray-300"><span class="gray-300"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-400"  value="--gray-400" onclick="getColorID(id)" />
+                    <label for="--gray-400"><span class="gray-400"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-500"  value="--gray-500" onclick="getColorID(id)" />
+                    <label for="--gray-500"><span class="gray-500"></span></label>
+                    
+                    <input type="radio" name="picker-radio" id="--gray-600"  value="--gray-600" onclick="getColorID(id)" />
+                    <label for="--gray-600"><span class="gray-600"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-700"  value="--gray-700" onclick="getColorID(id)" />
+                    <label for="--gray-700"><span class="gray-700"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-800"  value="--gray-800" onclick="getColorID(id)" />
+                    <label for="--gray-800"><span class="gray-800"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--gray-900"  value="--gray-900" onclick="getColorID(id)" />
+                    <label for="--gray-900"><span class="gray-900"></span></label>
+                </div>
+        
+                <div class="col-2-picker">
+                    <h3>Blue</h3>
+            
+                    <input type="radio" name="picker-radio" id="--blue-100" value="--blue-100" onclick="getColorID(id)" />
+                    <label for="--blue-100"><span class="blue-100"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-200" value="--blue-200" onclick="getColorID(id)" />
+                    <label for="--blue-200"><span class="blue-200"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-300"  value="--blue-300" onclick="getColorID(id)" />
+                    <label for="--blue-300"><span class="blue-300"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-400"  value="--blue-400" onclick="getColorID(id)" />
+                    <label for="--blue-400"><span class="blue-400"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-500"  value="--blue-500" onclick="getColorID(id)" />
+                    <label for="--blue-500"><span class="blue-500"></span></label>
+                    
+                    <input type="radio" name="picker-radio" id="--blue-600"  value="--blue-600" onclick="getColorID(id)" />
+                    <label for="--blue-600"><span class="blue-600"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-700"  value="--blue-700" onclick="getColorID(id)" />
+                    <label for="--blue-700"><span class="blue-700"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-800"  value="--blue-800" onclick="getColorID(id)" />
+                    <label for="--blue-800"><span class="blue-800"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--blue-900"  value="--blue-900" onclick="getColorID(id)" />
+                    <label for="--blue-900"><span class="blue-900"></span></label>
+        
+                </div>
+                <div class="col-2-picker">
+    
+                    <h3>Indigo</h3>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-100" value="--indigo-100" onclick="getColorID(id)" />
+                    <label for="--indigo-100"><span class="indigo-100"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-200" value="--indigo-200" onclick="getColorID(id)" />
+                    <label for="--indigo-200"><span class="indigo-200"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-300"  value="--indigo-300" onclick="getColorID(id)" />
+                    <label for="--indigo-300"><span class="indigo-300"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-400"  value="--indigo-400" onclick="getColorID(id)" />
+                    <label for="--indigo-400"><span class="indigo-400"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-500"  value="--indigo-500" onclick="getColorID(id)" />
+                    <label for="--indigo-500"><span class="indigo-500"></span></label>
+                    
+                    <input type="radio" name="picker-radio" id="--indigo-600"  value="--indigo-600" onclick="getColorID(id)" />
+                    <label for="--indigo-600"><span class="indigo-600"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-700"  value="--indigo-700" onclick="getColorID(id)" />
+                    <label for="--indigo-700"><span class="indigo-700"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-800"  value="--indigo-800" onclick="getColorID(id)" />
+                    <label for="--indigo-800"><span class="indigo-800"></span></label>
+            
+                    <input type="radio" name="picker-radio" id="--indigo-900"  value="--indigo-900" onclick="getColorID(id)" />
+                    <label for="--indigo-900"><span class="indigo-900"></span></label>
+            
+                    </div>
+                    <div class="col-2-picker">
+            
+                <h3>Purple</h3>
+                
+                <input type="radio" name="picker-radio" id="--purple-100" value="--purple-100" onclick="getColorID(id)" />
+                <label for="--purple-100"><span class="purple-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-200" value="--purple-200" onclick="getColorID(id)" />
+                <label for="--purple-200"><span class="purple-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-300"  value="--purple-300" onclick="getColorID(id)" />
+                <label for="--purple-300"><span class="purple-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-400"  value="--purple-400" onclick="getColorID(id)" />
+                <label for="--purple-400"><span class="purple-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-500"  value="--purple-500" onclick="getColorID(id)" />
+                <label for="--purple-500"><span class="purple-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--purple-600"  value="--purple-600" onclick="getColorID(id)" />
+                <label for="--purple-600"><span class="purple-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-700"  value="--purple-700" onclick="getColorID(id)" />
+                <label for="--purple-700"><span class="purple-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-800"  value="--purple-800" onclick="getColorID(id)" />
+                <label for="--purple-800"><span class="purple-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--purple-900"  value="--purple-900" onclick="getColorID(id)" />
+                <label for="--purple-900"><span class="purple-900"></span></label>
+            
+                </div>
+                <div class="col-2-picker">
+        
+                <h3>Pink</h3>
+            
+                <input type="radio" name="picker-radio" id="--pink-100" value="--pink-100" onclick="getColorID(id)" />
+                <label for="--pink-100"><span class="pink-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-200" value="--pink-200" onclick="getColorID(id)" />
+                <label for="--pink-200"><span class="pink-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-300"  value="--pink-300" onclick="getColorID(id)" />
+                <label for="--pink-300"><span class="pink-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-400"  value="--pink-400" onclick="getColorID(id)" />
+                <label for="--pink-400"><span class="pink-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-500"  value="--pink-500" onclick="getColorID(id)" />
+                <label for="--pink-500"><span class="pink-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--pink-600"  value="--pink-600" onclick="getColorID(id)" />
+                <label for="--pink-600"><span class="pink-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-700"  value="--pink-700" onclick="getColorID(id)" />
+                <label for="--pink-700"><span class="pink-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-800"  value="--pink-800" onclick="getColorID(id)" />
+                <label for="--pink-800"><span class="pink-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--pink-900"  value="--pink-900" onclick="getColorID(id)" />
+                <label for="--pink-900"><span class="pink-900"></span></label>
+                </div>
+        
+                <div class="col-2-picker">
+        
+                <h3>Red</h3>
+            
+                <input type="radio" name="picker-radio" id="--red-100" value="--red-100" onclick="getColorID(id)" />
+                <label for="--red-100"><span class="red-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-200" value="--red-200" onclick="getColorID(id)" />
+                <label for="--red-200"><span class="red-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-300"  value="--red-300" onclick="getColorID(id)" />
+                <label for="--red-300"><span class="red-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-400"  value="--red-400" onclick="getColorID(id)" />
+                <label for="--red-400"><span class="red-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-500"  value="--red-500" onclick="getColorID(id)" />
+                <label for="--red-500"><span class="red-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--red-600"  value="--red-600" onclick="getColorID(id)" />
+                <label for="--red-600"><span class="red-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-700"  value="--red-700" onclick="getColorID(id)" />
+                <label for="--red-700"><span class="red-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-800"  value="--red-800" onclick="getColorID(id)" />
+                <label for="--red-800"><span class="red-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--red-900"  value="--red-900" onclick="getColorID(id)" />
+                <label for="--red-900"><span class="red-900"></span></label>
+            
+                </div>
+                <div class="col-2-picker">
+        
+                <h3>Orange</h3>
+            
+                <input type="radio" name="picker-radio" id="--orange-100" value="--orange-100" onclick="getColorID(id)" />
+                <label for="--orange-100"><span class="orange-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-200" value="--orange-200" onclick="getColorID(id)" />
+                <label for="--orange-200"><span class="orange-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-300"  value="--orange-300" onclick="getColorID(id)" />
+                <label for="--orange-300"><span class="orange-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-400"  value="--orange-400" onclick="getColorID(id)" />
+                <label for="--orange-400"><span class="orange-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-500"  value="--orange-500" onclick="getColorID(id)" />
+                <label for="--orange-500"><span class="orange-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--orange-600"  value="--orange-600" onclick="getColorID(id)" />
+                <label for="--orange-600"><span class="orange-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-700"  value="--orange-700" onclick="getColorID(id)" />
+                <label for="--orange-700"><span class="orange-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-800"  value="--orange-800" onclick="getColorID(id)" />
+                <label for="--orange-800"><span class="orange-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--orange-900"  value="--orange-900" onclick="getColorID(id)" />
+                <label for="--orange-900"><span class="orange-900"></span></label>
+            
+                </div>
+                <div class="col-2-picker">
+        
+                <h3>Yellow</h3>
+            
+                <input type="radio" name="picker-radio" id="--yellow-100" value="--yellow-100" onclick="getColorID(id)" />
+                <label for="--yellow-100"><span class="yellow-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-200" value="--yellow-200" onclick="getColorID(id)" />
+                <label for="--yellow-200"><span class="yellow-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-300"  value="--yellow-300" onclick="getColorID(id)" />
+                <label for="--yellow-300"><span class="yellow-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-400"  value="--yellow-400" onclick="getColorID(id)" />
+                <label for="--yellow-400"><span class="yellow-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-500"  value="--yellow-500" onclick="getColorID(id)" />
+                <label for="--yellow-500"><span class="yellow-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--yellow-600"  value="--yellow-600" onclick="getColorID(id)" />
+                <label for="--yellow-600"><span class="yellow-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-700"  value="--yellow-700" onclick="getColorID(id)" />
+                <label for="--yellow-700"><span class="yellow-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-800"  value="--yellow-800" onclick="getColorID(id)" />
+                <label for="--yellow-800"><span class="yellow-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--yellow-900"  value="--yellow-900" onclick="getColorID(id)" />
+                <label for="--yellow-900"><span class="yellow-900"></span></label>
+            
+                </div>
+                <div class="col-2-picker">
+        
+                <h3>Green</h3>
+            
+                <input type="radio" name="picker-radio" id="--green-100" value="--green-100" onclick="getColorID(id)" />
+                <label for="--green-100"><span class="green-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-200" value="--green-200" onclick="getColorID(id)" />
+                <label for="--green-200"><span class="green-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-300"  value="--green-300" onclick="getColorID(id)" />
+                <label for="--green-300"><span class="green-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-400"  value="--green-400" onclick="getColorID(id)" />
+                <label for="--green-400"><span class="green-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-500"  value="--green-500" onclick="getColorID(id)" />
+                <label for="--green-500"><span class="green-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--green-600"  value="--green-600" onclick="getColorID(id)" />
+                <label for="--green-600"><span class="green-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-700"  value="--green-700" onclick="getColorID(id)" />
+                <label for="--green-700"><span class="green-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-800"  value="--green-800" onclick="getColorID(id)" />
+                <label for="--green-800"><span class="green-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--green-900"  value="--green-900" onclick="getColorID(id)" />
+                <label for="--green-900"><span class="green-900"></span></label>
+            
+                </div>
+        
+                <div class="col-2-picker">
+        
+                <h3>Teal</h3>
+          
+                <input type="radio" name="picker-radio" id="--teal-100" value="--teal-100" onclick="getColorID(id)" />
+                <label for="--teal-100"><span class="teal-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-200" value="--teal-200" onclick="getColorID(id)" />
+                <label for="--teal-200"><span class="teal-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-300"  value="--teal-300" onclick="getColorID(id)" />
+                <label for="--teal-300"><span class="teal-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-400"  value="--teal-400" onclick="getColorID(id)" />
+                <label for="--teal-400"><span class="teal-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-500"  value="--teal-500" onclick="getColorID(id)" />
+                <label for="--teal-500"><span class="teal-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--teal-600"  value="--teal-600" onclick="getColorID(id)" />
+                <label for="--teal-600"><span class="teal-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-700"  value="--teal-700" onclick="getColorID(id)" />
+                <label for="--teal-700"><span class="teal-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-800"  value="--teal-800" onclick="getColorID(id)" />
+                <label for="--teal-800"><span class="teal-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--teal-900"  value="--teal-900" onclick="getColorID(id)" />
+                <label for="--teal-900"><span class="teal-900"></span></label>
+            
+                </div>
+                <div class="col-2-picker">
+        
+                <h3>Cyan</h3>
+            
+                <input type="radio" name="picker-radio" id="--cyan-100" value="--cyan-100" onclick="getColorID(id)" />
+                <label for="--cyan-100"><span class="cyan-100"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-200" value="--cyan-200" onclick="getColorID(id)" />
+                <label for="--cyan-200"><span class="cyan-200"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-300"  value="--cyan-300" onclick="getColorID(id)" />
+                <label for="--cyan-300"><span class="cyan-300"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-400"  value="--cyan-400" onclick="getColorID(id)" />
+                <label for="--cyan-400"><span class="cyan-400"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-500"  value="--cyan-500" onclick="getColorID(id)" />
+                <label for="--cyan-500"><span class="cyan-500"></span></label>
+                
+                <input type="radio" name="picker-radio" id="--cyan-600"  value="--cyan-600" onclick="getColorID(id)" />
+                <label for="--cyan-600"><span class="cyan-600"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-700"  value="--cyan-700" onclick="getColorID(id)" />
+                <label for="--cyan-700"><span class="cyan-700"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-800"  value="--cyan-800" onclick="getColorID(id)" />
+                <label for="--cyan-800"><span class="cyan-800"></span></label>
+            
+                <input type="radio" name="picker-radio" id="--cyan-900"  value="--cyan-900" onclick="getColorID(id)" />
+                <label for="--cyan-900"><span class="cyan-900"></span></label>        
+                </div>
+    
+                <div class="col-2-picker">
+        
+                    <h3>On Trend</h3>
+              
+                    <input type="radio" name="picker-radio" id="--ontrend-100" value="--ontrend-100" onclick="getColorID(id)" />
+                    <label for="--ontrend-100"><span class="ontrend-100"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-200" value="--ontrend-200" onclick="getColorID(id)" />
+                    <label for="--ontrend-200"><span class="ontrend-200"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-300"  value="--ontrend-300" onclick="getColorID(id)" />
+                    <label for="--ontrend-300"><span class="ontrend-300"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-400"  value="--ontrend-400" onclick="getColorID(id)" />
+                    <label for="--ontrend-400"><span class="ontrend-400"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-500"  value="--ontrend-500" onclick="getColorID(id)" />
+                    <label for="--ontrend-500"><span class="ontrend-500"></span></label>
+                    
+                    <input type="radio" name="picker-radio" id="--ontrend-600"  value="--ontrend-600" onclick="getColorID(id)" />
+                    <label for="--ontrend-600"><span class="ontrend-600"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-700"  value="--ontrend-700" onclick="getColorID(id)" />
+                    <label for="--ontrend-700"><span class="ontrend-700"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-800"  value="--ontrend-800" onclick="getColorID(id)" />
+                    <label for="--ontrend-800"><span class="ontrend-800"></span></label>
+                
+                    <input type="radio" name="picker-radio" id="--ontrend-900"  value="--ontrend-900" onclick="getColorID(id)" />
+                    <label for="--ontrend-900"><span class="ontrend-900"></span></label>
+                
+                    </div>
+                    <div class="col-2-picker">
+                        <h3>Black and White</h3>
+                        <input type="radio" name="picker-radio" id="--black-000"  value="--black-000" onclick="getColorID(id)" />
+                        <label for="--black-000"><span class="black-000"></span></label>
+                        <input type="radio" name="picker-radio" id="--white-000"  value="--white-000" onclick="getColorID(id)" />
+                        <label for="--white-000"><span class="white-000"></span></label>
+                    </div>
+
+                    <div class="col-2-picker">
+                        <h3>Transparent</h3>
+                        <input type="radio" name="picker-radio" id="--trans-000"  value="--trans-000" onclick="getColorID(id)" />
+                        <label for="--trans-000"><span class="--trans-000"></span></label>
+                    </div>
+   
+       </div><!-- /flex container-->    
+     </form>
+   
+     </div><!-- / Modal -->
+     
+     </div><!-- / Modal content -->
+     
+   <div id="HTML-Content">
+       
+        <div id="Menu-Content">
+            <nav class="container-menu">
+                <a href="#"><img src="assets/img/website-logo.png" alt="website logo"></a>
+                <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>            
+                    <li><a href="#" id="btn-cta"><span>CTA Link</span><i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+                <div class="item-icon">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container-header"></div>
+
+        <section class="container-flex theme-one">
+            <div class="col-1 text-center">
+                <h2>Lorem Malesuada Dolor</h2>
+                <h3>Etiam tincidunt risus nec odio sollicitudin, non blandit ipsum facilisis class aptent.</h3>
+            </div>
+    
+            <div class="col-3">
+                <figure><img src="https://picsum.photos/420/250" alt="Placeholder image"></figure>
+                <h3>Lorem ipsum dolo</h3>
+                <p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+            </div>
+    
+            <div class="col-3">
+                <figure><img src="https://picsum.photos/420/250" alt="Placeholder image"></figure>
+                <h3>Lorem ipsum dolo</h3>
+                <p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+            </div>
+    
+            <div class="col-3">
+                <figure><img src="https://picsum.photos/420/250" alt="Placeholder image"></figure><h3>Lorem ipsum dolo</h3><p>Lorem ipsum dolor sit amet voluptas. Consectetur adipisicing. Possimus dolores accusamus facilis fugiat. Velsit perferendis officia.</p>
+            </div>
+        </section>
+
+    </div>
+
+</main>
+
+     <script>
+
+        // Inital resets
+        document.addEventListener("DOMContentLoaded", loadInitialContent);
+        document.addEventListener("DOMContentLoaded", resetMenuOptions);
+
+        function resetMenuOptions() { 
+            
+            document.getElementById("btn_bg_menu_desktop").disabled=false;
+            document.getElementById("btn_link_passive_text").disabled=false;
+            document.getElementById("btn_link_active_text").disabled=false;
+
+            document.getElementById("dd_cta_button_style").value="0";
+            document.getElementById("dd_cta_button_icon").value="0";
+
+            document.getElementById("btn_a_cta_passive_text").disabled=false;
+            document.getElementById("btn_a_cta_active_text").disabled=false;
+            document.getElementById("btn_a_cta_passive_bg").disabled=false;
+            document.getElementById("btn_a_cta_active_bg").disabled=false;
+            document.getElementById("btn_a_cta_passive_border").disabled=false;
+            document.getElementById("btn_a_cta_active_border").disabled=false;
+            // document.getElementById("dd_bottom_shadow").value="0";
+
+            // Sticky On Scroll
+            document.getElementById("dd_sticky").value="0";
+            document.getElementById("btn_bg_onscroll_menu").disabled=true;
+            document.getElementById("btn_link_onscroll_passive").disabled=true;
+            document.getElementById("btn_link_onscroll_active").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_passive_text").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_active_text").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_passive_bg").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_active_bg").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_passive_border").disabled=true;
+            document.getElementById("btn_a_cta_onscroll_active_border").disabled=true;
+            document.getElementById("btn-copy-css").disabled=true;
+        }
+
+        function loadInitialContent() {
+            let Header_Content ="<header class=\"hero-block text-center-desktop text-center-mobile\">\n\t<div class=\"hero-text-container\">\n\t\t<h1>Lorem Malesuada</h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin</h2>\n\t<\/div>\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>\n\t\</div>\n</header>\n\n";
+            document.querySelector(".container-header").innerHTML = Header_Content;
+        }
+
+        // Global variables
+        let heroType = 1;
+
+        // Load hero type content 
+        document.querySelectorAll('.menu-header-type').forEach(item => {
+            item.addEventListener('click', event => {
+                // remove 'selected' class from all options
+                for (i = 1; i <= 9; i++) {
+                    document.querySelector("#menu-type-options a:nth-of-type("+i+")").classList.remove("selected"); 
+                }
+                resetMenuOptions();
+                // remove sticky menu
+                const el_menu_sticky = document.querySelector(".container-menu");
+                el_menu_sticky.classList.remove("menu-sticky");
+                const el_header_under = document.querySelector(".hero-block");
+                el_header_under.classList.remove("header-under-menu-sticky");
+
+                //get id
+                if (item.id === "menu-header-text") {
+                    document.querySelector(".container-header").innerHTML = assets_header_text_only;
+                    heroType = 1;
+                }
+
+                else if (item.id === "menu-header-bg-img") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_img;
+                    heroType = 2;
+                }
+
+                else if (item.id === "menu-header-bg-vid") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_vid;
+                    heroType = 3;
+                }
+
+                else if (item.id === "menu-header-bg-img-half-right") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_img_right;
+                    heroType = 4;
+                }
+
+                else if (item.id === "menu-header-bg-img-half-right_trans") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_img_right_trans;
+                    heroType = 4;
+                }
+
+                else if (item.id === "menu-header-bg-img-half-left") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_img_left;
+                    heroType = 4;
+                }
+
+                else if (item.id === "menu-header-bg-img-half-left_trans") {
+                    document.querySelector(".container-header").innerHTML = assets_header_bg_img_left_trans;
+                    heroType = 4;
+                }
+                
+                else if (item.id === "menu-header-half-img-right") {
+                    document.querySelector(".container-header").innerHTML = assets_header_half_img_right;
+                    heroType = 4; 
+                }
+                else if (item.id === "menu-header-half-img-left") {
+                    document.querySelector(".container-header").innerHTML = assets_header_half_img_left;
+                    heroType = 4; 
+                }
+            })
+        })
+
+        
+    /* Text Content Assets */
+    const assets_header_h1 ="\n\t\t<h1>Lorem Malesuada<\/h1>";
+
+    const assets_header_h2 ="\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>";
+
+    const assets_header_buttons_one ="\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\">\</i><span>Order now</span></a>\n\t\t</div>"
+    
+    const assets_header_buttons_pair ="\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a>\n\t\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a>\n\t\t</div>";
+
+    // Text only
+    const assets_header_text_only = "<header class=\"hero-block text-center-desktop text-center-mobile\">\n\t<div class=\"hero-text-container\">\n\t\t<h1>Lorem Malesuada</h1>\n\t\t<h2>Etiam tincidunt risus nec odio sollicitudin</h2>\n\t<\/div>\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>\n\t\</div>\n</header>\n\n";
+
+    // Background image
+    const assets_header_bg_img = "<header class=\"hero-block text-center-desktop text-center-mobile\">\n\n\t<div class=\"hero-text-container\">\n\t\t<h1 class=\"text-shadow\">Lorem Malesuada<\/h1>\n\t\t<h2 class=\"text-shadow\">Etiam tincidunt risus nec odio sollicitudin<\/h2>"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/1920\/800\" alt=\"Placeholder image\">\n\t</div>\n\n\t<div class=\"bg-overlay\"><\/div>\n\n<\/header>";
+    
+    // Background video
+    const assets_header_bg_vid = "<header class=\"hero-block text-center-desktop text-center-mobile\">\n\n\t<div class=\"hero-text-container\">\n\t\t<h1 class=\"text-shadow\">Lorem Malesuada<\/h1>\n\t\t<h2 class=\"text-shadow\">Etiam tincidunt risus nec odio sollicitudin<\/h2>"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<video loop playsinline muted autoplay poster=\"https:\/\/munnelly.com/lunadoge/assets\/videos/hero-still.jpg\" class=\"background-video\" disablepictureinpicture preload=\"auto\">\n\t\t\t<source src=\"https:\/\/munnelly.com/lunadoge/assets/videos/hero-video.mp4\" type=\"video\/mp4\">\n\t\t</video>\n\t</div>\n\n\t<div class=\"bg-overlay\"><\/div>\n\n<\/header>";
+
+    // Background image right, text on left 
+    const assets_header_bg_img_right = "<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>\n\n"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/640\/426\" alt=\"sample background image\">\n\t</div>\n<\/header>";
+
+    // Background trans image right, text on left 
+    const assets_header_bg_img_right_trans = "<header class=\"hero-block bg-img-right\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>\n\n"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https:\/\/munnelly.com/lunadoge/assets\/img/hair.png\" alt=\"sample background image\">\n\t</div>\n<\/header>";
+
+    // Background image left, text on right 
+    const assets_header_bg_img_left = "<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>\n\n"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https://picsum.photos/640\/426\" alt=\"Placeholder image\">\n\t</div>\n<\/header>";
+
+    // Background trans image left, text on right
+    const assets_header_bg_img_left_trans = "<header class=\"hero-block bg-img-left\">\n\t<div class=\"hero-text-container\">"+assets_header_h1+assets_header_h2+"\n\t<\/div>\n\n"+assets_header_buttons_pair+"\n\t</div>\n\t<div class=\"hero-bg-media\">\n\t\t<img src=\"https:\/\/munnelly.com/lunadoge/assets\/img\/460x300-trans-man-standing.png\" alt=\"sample background image\">\n\t</div>\n<\/header>";
+
+    // Text left, regular image on right
+    const assets_header_half_img_right ="<header class=\"hero-block hero-half half-img-right text-center-mobile\">\n\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">\n\t\t\t<h1>Lorem Malesuada</h1>\n\t\t\t<h2>Etiam tincidunt risus nec odio sollicitudin</h2>\n\t\t</div>\n\t\t<div class=\"container-btn\">\n\t\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a>\n\t\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t\t<img src=\"https://picsum.photos\/340\/260\" alt=\"Sample image\">\n\t\t</div>\n\t</div>\n\n<\/header>";
+
+    // Text right, regular image on left
+    const assets_header_half_img_left ="<header class=\"hero-block hero-half half-img-left text-center-mobile\">\n\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-bg-media\">\n\t\t\t<img src=\"https://picsum.photos/340\/260\" alt=\"Shop front\">\n\t\t<\/div>\n\t<\/div>\n\n\t<div class=\"col-2\">\n\t\t<div class=\"hero-text-container\">\n\t\t\t<h1>Lorem Malesuada<\/h1>\n\t\t\t<h2>Etiam tincidunt risus nec odio sollicitudin<\/h2>\n\t\t<\/div>\n\n\t\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a>\n\t\t</div>\n\t</div>\n\t</div>\n<\/header>\n";
+
+    </script>
+     <script src="assets/js/menu.js"></script>
+    <script src="assets/js/menu-control.js"></script>
+
+</body>
+</html>
