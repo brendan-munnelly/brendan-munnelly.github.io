@@ -1,0 +1,553 @@
+body { background-color: #fff }
+
+.controls-top { 
+    height: 58px;
+    position: fixed; top: 0; width: 100%; max-width: 1920px; z-index: 999;
+    box-shadow: 4px 4px 10px #888; padding: 0 5%;
+    background-color: #2b2a33;
+}
+
+#control-menu { display: flex; flex-direction: row; justify-content: space-between }
+
+#control-menu div:nth-child(1) { align-self: flex-start }
+
+#control-menu:nth-child(1) a img { margin-top: 9px; width: 140px; height: 40px; outline: 0 }
+
+
+/* ============= NAVBAR MENU OPTIONS ================== */
+
+#control-menu ul  { list-style-type: none }
+
+#control-menu #menu-0 a:link, 
+#control-menu #menu-0 a:visited {
+    color: #0acceb; text-decoration: none; font-weight: 500;
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1920 - 320)));
+    display: inline-block; 
+}
+
+#control-menu #menu-0 a:focus, 
+#control-menu #menu-0 a:hover,
+#control-menu #menu-0 a:active { color: #fff; background-color: transparent }
+
+#control-menu ul li { display: inline-block }
+
+#control-menu > ul li.dropdown { display: inline-block }
+
+#control-menu > ul li.dropdown .dropbtn { 
+    color: #0acceb; text-decoration: none; font-weight: 500;
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1920 - 320)));
+    display: inline-block; padding: 14px 20px; height: 58px;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+#control-menu > ul li.dropdown:last-child { margin-right: 0 }
+#control-menu > ul li.dropdown .dropbtn:focus,
+#control-menu > ul li.dropdown .dropbtn:hover,
+#control-menu > ul li.dropdown .dropbtn:active { 
+    color: #fff; background-color: #42414d;
+}
+
+#control-menu > ul:last-of-type { align-self: center; text-align: right; min-width: 25% }
+
+@media (max-width: 1000px) { #control-menu > ul:last-of-type { display: none } }
+
+
+/* ============= DROPDOWN MENUS ================== */
+
+#control-menu .dropdown-content {
+    display: block; position: absolute; min-width: 160px; top: 68px; left: 40px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+}
+
+#control-menu .dropdown-hidden { display: none }
+
+
+/* ============= DIALOG BOXES ================== */
+
+.dialog-box-header {
+    position: relative;
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #000;
+    color: #fff;
+    margin-left: 1px; margin-right: 1px; margin-bottom: -6px; 
+    display: flex;  flex-direction: row;
+    justify-content: space-between;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.dialog-box-header span.text {
+    letter-spacing: 2px; margin-left: 6px;
+    color: inherit; padding-bottom: 1px;
+}
+
+.dialog-box-header span.text i { margin-right: 10px; color: #00ddff } 
+
+.dialog-box-header span.close-x {
+    text-align: right;
+    background-color: #3d3c43;
+    color: #fff;
+    padding: 0 8px 4px 8px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1; 
+    cursor: pointer; user-select: none; white-space: nowrap;
+    transition: all 0.3s linear;
+}
+
+
+#control-menu .dialog-box {
+    background-color: rgb(66,65,67);
+    padding: 24px 32px 24px 32px; 
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);    
+    text-align: left; border: solid 1px var(--gray-400);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.dialog-box h4 { 
+    font-size: 17px; color: #fff; font-weight: 400; letter-spacing: 1px; 
+}
+
+.dialog-box hr { 
+    background-color: var(--gray-500); height: 1px;
+    margin-top: -8px; margin-bottom: 16px 
+}
+
+.dialog-box *:last-child { margin-bottom: 0 }
+
+.dialog-box i.fas, .dialog-box i.far { 
+    display: inline-block; color:#fff;
+    margin: 6px 12px 0 0;
+}
+
+.dialog-box button i.fas, .dialog-box button i.far { 
+    display: inline-block; color:#000;
+}
+
+.dialog-box .input-group { 
+    display: flex; justify-content: flex-start; margin-bottom: 24px 
+}
+
+.dialog-box .input-group-vertical { 
+    display: flex; justify-content: flex-start; margin-bottom: 2px 
+}
+
+.dialog-box .input-group select, 
+.dialog-box .input-group-vertical select { 
+    border-radius: 2px;
+}
+
+.dialog-box .input-group:last-child { margin-bottom: 0 }
+
+.dialog-box .input-group-vertical { padding: 6px 0 }
+
+.dialog-box .input-group label,
+.dialog-box .input-group-vertical label { 
+    color: #fff; font-weight: 600; padding-top: 4px;
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px)/(1920 - 320)));
+}
+
+.dialog-box .input-group label span,
+.dialog-box .input-group-vertical label span { font-weight: normal }
+
+.dialog-box .input-group select,
+.dialog-box .input-group-vertical select {
+    padding: 6px 6px; font-weight: 500; color: #fff;
+    background-color: rgb(43,42,51); line-height: 1.5;
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px)/(1920 - 320)));
+}
+
+.dialog-box .input-group select:disabled,
+.dialog-box .input-group-vertical select:disabled {
+    font-weight: 400; color: var(--gray-500); background-color: rgb(66,65,67);
+}
+
+.dialog-box .input-group input[disabled] + label, 
+.dialog-box .input-group-vertical input[disabled] + label { color: var(--gray-500) }
+
+.input-group.two-col { display: flex; flex-direction: row }
+
+.input-group.two-col .column.column-wider { width: 47%; min-width: 300px; padding-right: 20px }
+
+.input-group.two-col label, .input-group.two-col div { display: inline-block }
+
+input[type="radio"][disabled] + label { color: var(--gray-500) }
+
+input[type="radio"][disabled] { border-color: var(--gray-600) }
+
+
+/* ================ BUTTONS  ================= */
+
+.controls-top button { border-width: 0 }
+
+.controls-top .input-group button { 
+    font-size: 16px; color: #000; background-color: #00ddff;
+    padding: 3px 14px 6px 12px; font-weight: 400; border-radius: 4px;
+    border: solid 1px #00ddff; 
+}
+
+.controls-top .input-group button:hover,
+.controls-top .input-group button:active  { 
+    color: #000; background-color: rgb(138,235,255); 
+}
+
+.controls-top .input-group button i { 
+    font-size: 12px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.controls-top .input-group button:disabled {
+    background-color: #3d3c43;
+    color: var(--gray-500);
+    border: solid 1px var(--gray-500);
+}
+
+.controls-top .input-group button:disabled i {
+    color: var(--gray-600);
+}
+
+/* ============== HTML CONTENT AREA ================ */
+
+#HTML-Content { 
+    margin-top: 58px;
+    position: relative; 
+    z-index: 0;
+}
+
+/* ============== MODAL ================ */
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 99999; 
+    padding-top: 20px; 
+    left: 0; top: 20px; width: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    transition: all .4s;
+    height: 100vh;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; padding: 12px 40px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    position: relative;
+    max-width: 900px;
+}
+
+/* The Close Button */
+#myModal .close {
+    position: absolute; top: 10px; right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #585858;
+    text-decoration: none;
+}
+
+#myModal .close:hover, #myModal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#myModal .container-two-col {
+    display: flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    align-items: stretch;
+    /* position: relatve; */ 
+}
+
+#myModal .col-2-picker {
+    width: 48%;
+    margin-bottom: 16px;
+}
+
+#myModal .col-2-picker form {
+    display: inline-block;
+    padding: 0
+}
+
+#myModal .col-2-picker input {
+    padding: 0; margin: 0
+}
+
+#myModal .col-2-picker h3 {
+    font-size: 17px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+#myModal label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: solid 1px #888;
+    border-radius: 50%;
+}
+
+#myModal label:hover span {
+    transform: scale(1.25);
+}
+
+#myModal label span {
+    display: block; width: 100%; height: 100%; 
+    transition: transform 0.2s ease-in-out; border-radius: 50%;
+}
+
+#myModal input[type=radio] {
+    display: none;
+}
+
+#myModal input[type=radio]:checked + label span {
+    transform: scale(1.25);
+}
+
+#myModal input[type=radio]:checked + label  {
+    border: 2px solid #222; border-radius: 50%;
+}
+
+form#picker-box label span.blue  { background: var(--blue) }
+label .blue-100  { background: var(--blue-100) }
+label .blue-200  { background: var(--blue-200) }
+label .blue-300  { background: var(--blue-300) }
+label .blue-400  { background: var(--blue-400) }
+label .blue-500  { background: var(--blue-500) }
+label .blue-600  { background: var(--blue-600) }
+label .blue-700  { background: var(--blue-700) }
+label .blue-800  { background: var(--blue-800) }   
+label .blue-900  { background: var(--blue-900) }
+
+form#picker-box label span.indigo  { background: var(--indigo) }
+label .indigo-100  { background: var(--indigo-100) }
+label .indigo-200  { background: var(--indigo-200) }
+label .indigo-300  { background: var(--indigo-300) }
+label .indigo-400  { background: var(--indigo-400) }
+label .indigo-500  { background: var(--indigo-500) }
+label .indigo-600  { background: var(--indigo-600) }
+label .indigo-700  { background: var(--indigo-700) }
+label .indigo-800  { background: var(--indigo-800) }   
+label .indigo-900  { background: var(--indigo-900) }
+
+
+form#picker-box label span.purple  { background: var(--purple) }
+label .purple-100  { background: var(--purple-100) }
+label .purple-200  { background: var(--purple-200) }
+label .purple-300  { background: var(--purple-300) }
+label .purple-400  { background: var(--purple-400) }
+label .purple-500  { background: var(--purple-500) }
+label .purple-600  { background: var(--purple-600) }
+label .purple-700  { background: var(--purple-700) }
+label .purple-800  { background: var(--purple-800) }   
+label .purple-900  { background: var(--purple-900) }
+
+form#picker-box label span.pink  { background: var(--pink) }
+label .pink-100  { background: var(--pink-100) }
+label .pink-200  { background: var(--pink-200) }
+label .pink-300  { background: var(--pink-300) }
+label .pink-400  { background: var(--pink-400) }
+label .pink-500  { background: var(--pink-500) }
+label .pink-600  { background: var(--pink-600) }
+label .pink-700  { background: var(--pink-700) }
+label .pink-800  { background: var(--pink-800) }   
+label .pink-900  { background: var(--pink-900) }
+
+form#picker-box label span.red  { background: var(--red) }
+label .red-100  { background: var(--red-100) }
+label .red-200  { background: var(--red-200) }
+label .red-300  { background: var(--red-300) }
+label .red-400  { background: var(--red-400) }
+label .red-500  { background: var(--red-500) }
+label .red-600  { background: var(--red-600) }
+label .red-700  { background: var(--red-700) }
+label .red-800  { background: var(--red-800) }   
+label .red-900  { background: var(--red-900) }
+
+form#picker-box label span.orange  { background: var(--orange) }
+label .orange-100  { background: var(--orange-100) }
+label .orange-200  { background: var(--orange-200) }
+label .orange-300  { background: var(--orange-300) }
+label .orange-400  { background: var(--orange-400) }
+label .orange-500  { background: var(--orange-500) }
+label .orange-600  { background: var(--orange-600) }
+label .orange-700  { background: var(--orange-700) }
+label .orange-800  { background: var(--orange-800) }   
+label .orange-900  { background: var(--orange-900) }
+
+form#picker-box label span.yellow  { background: var(--yellow) }
+label .yellow-100  { background: var(--yellow-100) }
+label .yellow-200  { background: var(--yellow-200) }
+label .yellow-300  { background: var(--yellow-300) }
+label .yellow-400  { background: var(--yellow-400) }
+label .yellow-500  { background: var(--yellow-500) }
+label .yellow-600  { background: var(--yellow-600) }
+label .yellow-700  { background: var(--yellow-700) }
+label .yellow-800  { background: var(--yellow-800) }   
+label .yellow-900  { background: var(--yellow-900) }
+
+form#picker-box label span.green  { background: var(--green) }
+label .green-100  { background: var(--green-100) }
+label .green-200  { background: var(--green-200) }
+label .green-300  { background: var(--green-300) }
+label .green-400  { background: var(--green-400) }
+label .green-500  { background: var(--green-500) }
+label .green-600  { background: var(--green-600) }
+label .green-700  { background: var(--green-700) }
+label .green-800  { background: var(--green-800) }   
+label .green-900  { background: var(--green-900) }
+
+form#picker-box label span.teal  { background: var(--teal) }
+label .teal-100  { background: var(--teal-100) }
+label .teal-200  { background: var(--teal-200) }
+label .teal-300  { background: var(--teal-300) }
+label .teal-400  { background: var(--teal-400) }
+label .teal-500  { background: var(--teal-500) }
+label .teal-600  { background: var(--teal-600) }
+label .teal-700  { background: var(--teal-700) }
+label .teal-800  { background: var(--teal-800) }   
+label .teal-900  { background: var(--teal-900) }
+
+form#picker-box label span.cyan  { background: var(--cyan) }
+label .cyan-100  { background: var(--cyan-100) }
+label .cyan-200  { background: var(--cyan-200) }
+label .cyan-300  { background: var(--cyan-300) }
+label .cyan-400  { background: var(--cyan-400) }
+label .cyan-500  { background: var(--cyan-500) }
+label .cyan-600  { background: var(--cyan-600) }
+label .cyan-700  { background: var(--cyan-700) }
+label .cyan-800  { background: var(--cyan-800) }   
+label .cyan-900  { background: var(--cyan-900) }
+
+form#picker-box label span.gray  { background: var(--gray) }
+label .gray-100  { background: var(--gray-100) }
+label .gray-200  { background: var(--gray-200) }
+label .gray-300  { background: var(--gray-300) }
+label .gray-400  { background: var(--gray-400) }
+label .gray-500  { background: var(--gray-500) }
+label .gray-600  { background: var(--gray-600) }
+label .gray-700  { background: var(--gray-700) }
+label .gray-800  { background: var(--gray-800) }   
+label .gray-900  { background: var(--gray-900) }
+
+label .ontrend-100  { background: var(--ontrend-100) }
+label .ontrend-200  { background: var(--ontrend-200) }
+label .ontrend-300  { background: var(--ontrend-300) }
+label .ontrend-400  { background: var(--ontrend-400) }
+label .ontrend-500  { background: var(--ontrend-500) }
+label .ontrend-600  { background: var(--ontrend-600) }
+label .ontrend-700  { background: var(--ontrend-700) }
+label .ontrend-800  { background: var(--ontrend-800) }   
+label .ontrend-900  { background: var(--ontrend-900) }
+
+label .black-000  { background: var(--black-000) }   
+label .white-000  { background: var(--white-000); border: solid 1px #000 }
+
+/* =================== MESSAGE BOX ==================== */
+
+#box-msg.is-visible { top: 80px; z-index: 1 }
+#box-msg.is-hidden { top: -2000px }
+
+#box-msg {
+    width: 400px;
+    min-height: 120px;
+    left: 30%;
+    right: 30%;
+    background-color: #222;
+    overflow: auto; /* Enable scroll if needed */
+    transition: all .4s;
+    background-color: #1f364d;
+    margin: auto; padding: 18px 40px 22px 40px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    position: fixed;
+    box-shadow: 4px 4px 20px rgba(160,160,160,0.8);
+}
+
+/* The Close Button */
+#box-msg .close-box-msg {
+    position: absolute; top: 10px; right: 20px;
+    font-size: 28px;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+}
+
+#box-msg .close-box-msg:hover, #box-msg .close-box-msg:focus {
+    color: pink;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#box-msg h3 {
+    font-size: calc(19px + (24 - 19) * ((100vw - 320px)/(1140 - 320)));
+    color: #fff
+}
+
+#box-msg h3 i {
+    color: #feca57;
+}
+
+#box-msg p, #box-msg li {
+    font-size: calc(17px + (19 - 17) * ((100vw - 320px)/(1140 - 320)));
+    color: #fff;
+    margin-bottom:6px;
+}
+
+#box-msg li {
+    font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1140 - 320)));
+    margin-left: -11px; padding-left: 5px; 
+}
+
+#box-msg li span i {
+    font-size: calc(15px + (16 - 15) * ((100vw - 320px)/(1140 - 320)));
+    color: #55efc4
+}
+
+/* === COPY CODE BUTTONS ===*/
+
+.copy-code-btns {
+    position: fixed; bottom: 0; right: 0; padding: 10px;
+    background-color: var(--gray-900);
+    border-top-left-radius: 5px;
+    color: #fff
+}
+
+#btn-copy, #btn-copy-css {
+    padding: 9px 14px 10px 14px;
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px)/(1920 - 320)));
+    background-color: #00ddff; border-color: #00ddff;
+    color: #000; font-weight: 600;
+    line-height: 1; border-radius: 5px; border-width: 2px;
+}
+
+#btn-copy:hover, #btn-copy-css:hover { 
+    background-color: #0faec9; border-color: #0faec9 }
+
+#btn-copy-css:disabled {
+    background-color: var(--gray-200);
+    color: var(--gray-600); 
+    border-color: var(--gray-400);
+    border-radius: 5px;
+}
+
+#btn-copy-css:disabled:focus,
+#btn-copy-css:disabled:hover,
+#btn-copy-css:disabled:active {
+    background-color: var(--gray-200);
+    color: var(--gray-600); 
+    border-color: var(--gray-400);
+}
+
+#btn-copy i, #btn-copy-css i { margin-right: 10px }
+#btn-copy { margin-right: 14px }
+
+
