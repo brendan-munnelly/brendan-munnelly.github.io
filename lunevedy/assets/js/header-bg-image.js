@@ -171,24 +171,6 @@ function hideSidebar() {
         if ((btn_id === "btn_a_primary_passive_bg") || (btn_id === "btn_a_primary_active_bg") ||(btn_id === "btn_a_primary_passive_border") || (btn_id === "btn_a_primary_active_border") || (btn_id === "btn_a_secondary_passive_bg") || (btn_id === "btn_a_secondary_active_bg") ||(btn_id === "btn_a_secondary_passive_border") || (btn_id === "btn_a_secondary_active_border") || (btn_id === "btn_a_cta_passive_bg") || (btn_id === "btn_a_cta_active_bg") || (btn_id === "btn_a_cta_passive_border") || (btn_id === "btn_a_cta_active_border") || (btn_id === "btn_a_cta_onscroll_passive_bg") || (btn_id === "btn_a_cta_onscroll_active_bg") || (btn_id === "btn_a_cta_onscroll_passive_border") || (btn_id === "btn_a_cta_onscroll_active_border") || (btn_id==="btn_a_cta_passive_bg") || (btn_id==="btn_a_cta_active_bg") || (btn_id==="btn_a_cta_passive_border") || (btn_id==="btn_a_cta_active_border") || (btn_id==="btn_a_cta_onscroll_passive_bg") || (btn_id==="btn_a_cta_onscroll_active_bg") || (btn_id==="btn_a_cta_onscroll_passive_border") || (btn_id==="btn_a_cta_onscroll_active_border") || ((btn_id==="btn_bg_menu_desktop") && ( document.querySelector(".menu-sticky")) ) || ( (btn_id==="btn_bg_menu_mobile") && ( document.querySelector(".menu-sticky"))) ) {
             enableTransColCode();
         }
-        // modal.style.display = "block";
-        if (btn_id === "btn_bg") {
-            const el_hero = document.querySelector(".hero-block");
-            el_hero.classList.remove("hero-bg-gradient");
-            console.log("removed gradient");
-            document.querySelector("#bg_gradient_options").style.display='none';
-            document.querySelector("#btn_gradient_input_group").style.display='flex';
-            document.querySelector("#content-2 .dialog-box hr").style.display='block';
-
-            if ( arrCSS.some(e => e.includes("background-image:")) ) {
-                // console.log("Already as style in HEAD");
-                const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
-                arrCSS.splice(arrPos, 1);
-                if (arrCSS.length==0) {
-                    disableCSS();
-                }
-            }
-        }
         showSidebar();
         event.preventDefault();
     }
@@ -452,44 +434,12 @@ function hideSidebar() {
             sub_string = "container-menu.menu-on-scroll .item-icon .bar1";
             doUpdateArray(sub_string,newStyle);
         }
-        
-        else if (btn_id === "btn_gradient_from") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            if (document.querySelector(".hero-block.hero-light")) {
-                newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            } 
-        
-            else if (document.querySelector(".hero-block.hero-dark")) {
-                newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            }
-            doUpdateArray(sub_string,newStyle);
-        }
-        
-        else if (btn_id === "btn_gradient_to") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            if (document.querySelector(".hero-block.hero-light")) {
-                newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            } 
-        
-            else if (document.querySelector(".hero-block.hero-dark")) {
-                newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            }
-            doUpdateArray(sub_string,newStyle);
-        }
 
         style = document.createElement('style');
         document.head.appendChild(style);
         style.appendChild(document.createTextNode(newStyle));
         enableCSS();
-}
+    }
 
 function doUpdateArray(sub_string,newStyle) {
     if ( arrCSS.some(e => e.includes(sub_string)) ) {
@@ -515,85 +465,25 @@ function disableTransColCode() {
 }
 
 /*
-//////////////// HERO BLOCK GRADIENT BACKGROUND ////////////////////
+//////////////// HERO BLOCK OVERLAY OPACITY ////////////////////
 */
 
-// document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
+var slider = document.getElementById("slider-thumb");
+var output = document.getElementById("slider-display");
+output.innerHTML = ((slider.value)/10).toFixed(1); // Display the default slider value
 
-function doBgGradient() {
-    // Add default gradient
-    console.log("Added gradient");
-    const el_hero = document.querySelector(".hero-block");
-    el_hero.classList.add("hero-bg-gradient");
-    // Show/hide gradient options
-    document.querySelector("#bg_gradient_options").style.display='block';
-    document.querySelector("#btn_gradient_input_group").style.display='none';
-    document.querySelector("#content-2 .dialog-box hr").style.display='none';
-       
-    if (document.querySelector(".hero-block.hero-light")) {
-        newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient(var(--hero-bg-gradient-deg), var(--hero-bg-gradient-from-light), var(--hero-bg-gradient-to-light)) } \n";
-    } 
-
-    else if (document.querySelector(".hero-block.hero-dark")) {
-        newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient(var(--hero-bg-gradient-deg), var(--hero-bg-gradient-from-dark), var(--hero-bg-gradient-to-dark)) } \n";
-    }
-
-    sub_string = "linear-gradient";
-    doUpdateArray(sub_string,newStyle);
-    style = document.createElement('style');
-    document.head.appendChild(style);
-    style.appendChild(document.createTextNode(newStyle));
-    enableCSS();
-}
-
-function doGradientSplit() {
-    sub_string = "linear-gradient";
-    const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
-    let el_old_bg_value = arrCSS[arrPos];
-    if (document.querySelector(".hero-block.hero-light")) {
-        el_old_bg_value = el_old_bg_value.replace(".hero-light.hero-bg-gradient { background-image: linear-gradient(", "");
-    }
-    else if (document.querySelector(".hero-block.hero-dark")) {
-        el_old_bg_value = el_old_bg_value.replace(".hero-dark.hero-bg-gradient { background-image: linear-gradient(", "");      
-    }
-    el_old_bg_value = el_old_bg_value.replace(")) }", ")")
-    return el_old_bg_value.split(/[\s,]+/)
-}
-
-// document.querySelector("#switch-bg-gradient").addEventListener("change", doDegGradient);
-
-function doDegGradient() {
-    const rbs = document.querySelectorAll("input[name='switch-gradient']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    console.log("Gradient direction: "+selectedValue);
-    let arrThree = doGradientSplit();
-    let item_deg =  arrThree[0];
-    let item_from = arrThree[1];
-    let item_to =   arrThree[2];
-    console.log("Old Deg: "+item_deg);
-    console.log("New Deg: "+selectedValue);
-    if (document.querySelector(".hero-block.hero-light")) {
-        newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+selectedValue+", "+item_from+", "+item_to+") } \n";
-    } 
-
-    else if (document.querySelector(".hero-block.hero-dark")) {
-        newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+selectedValue+", "+item_from+", "+item_to+") } \n";
-    }
-    sub_string = "linear-gradient";
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    output.innerHTML = ((this.value)/10).toFixed(1);
+    sub_string = "background-image";
+    newStyle = ".hero-block .container-overlay { background-image: linear-gradient(rgba(0,0,0,"+output.innerHTML+"),rgba(0,0,0,"+output.innerHTML+")); } \n";
     doUpdateArray(sub_string,newStyle);
 
     style = document.createElement('style');
     document.head.appendChild(style);
     style.appendChild(document.createTextNode(newStyle));
     enableCSS();
-}
+} 
 
 /*
 //////////////// TEXT SHADOW  ///////////////
@@ -856,7 +746,7 @@ function doUpperLabel() {
     // add
     else if (opt==="1") {
         removeUpperLabel();
-        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% of all week<\/span><\/div>\n\n\t");
+        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
     }
 }
@@ -1323,31 +1213,13 @@ function doNudgeMobile() {
 /* ================ DIALOG BOXES =================== */
 
 // Make dialog boxes element draggable:
-
-if (document.getElementById("content-1")) {
-    dragElement(document.getElementById("content-1"));
-}
-
-if (document.getElementById("content-2")) {
-    dragElement(document.getElementById("content-2"));
-}
-if (document.getElementById("content-3")) {
-    dragElement(document.getElementById("content-3"));
-}
-if (document.getElementById("content-4")) {
-    dragElement(document.getElementById("content-4"));
-}
-if (document.getElementById("content-5")) {
-    dragElement(document.getElementById("content-5"));
-}
-
-if (document.getElementById("content-6")) {
-    dragElement(document.getElementById("content-6"));
-}
-
-if (document.getElementById("content-7")) {
-    dragElement(document.getElementById("content-7"));
-}
+dragElement(document.getElementById("content-1"));
+dragElement(document.getElementById("content-2"));
+dragElement(document.getElementById("content-3"));
+// dragElement(document.getElementById("content-4"));
+dragElement(document.getElementById("content-5"));
+dragElement(document.getElementById("content-6"));
+dragElement(document.getElementById("content-7"));
 
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -1359,7 +1231,7 @@ function dragElement(elmnt) {
         // otherwise, move the DIV from anywhere inside the DIV:
         elmnt.onmousedown = dragMouseDown;
     }
-
+    
     function dragMouseDown(e) {
         e = e || window.event;
         // e.preventDefault();
@@ -1401,6 +1273,7 @@ if (document.querySelector("#content-2 .dialog-box-header")) {
 if (document.querySelector("#content-3 .dialog-box-header")) {
     document.querySelector("#content-3 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
+
 if (document.querySelector("#content-4 .dialog-box-header")) {
     document.querySelector("#content-4 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
@@ -1416,6 +1289,7 @@ if (document.querySelector("#content-6 .dialog-box-header")) {
 if (document.querySelector("#content-7 .dialog-box-header")) {
     document.querySelector("#content-7 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
+
 
 function hideDialogBox() {
     document.querySelector("#content-1").classList.add("dropdown-hidden"); 

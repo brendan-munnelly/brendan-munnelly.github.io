@@ -820,7 +820,7 @@ function doUpperLabel() {
     // add
     else if (opt==="1") {
         removeUpperLabel();
-        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% of all week<\/span><\/div>\n\n\t");
+        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
     }
 }
