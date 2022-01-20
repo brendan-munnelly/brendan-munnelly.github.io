@@ -282,11 +282,21 @@ section *:last-child, footer *:last-child { margin-bottom: 0 !important }
    --hero-btn-secondary-active-bg: var(--gray-700);
    --hero-btn-secondary-active-border: var(--gray-700);
 
-   --hero-bg-gradient-deg:  90deg;
+   --hero-bg-gradient-deg: 90deg;
    --hero-bg-gradient-from-light: var(--slate-050);
    --hero-bg-gradient-to-light:   var(--slate-200);
    --hero-bg-gradient-from-dark:  var(--slate-500);
    --hero-bg-gradient-to-dark:    var(--slate-900);
+
+   --overlay-direction-desktop: 90deg;
+   --overlay-trans-start-desktop: 0.3;
+   --overlay-trans-end-desktop: 0.3;
+
+   --overlay-direction-mobile: 90deg;
+   --overlay-trans-start-mobile: 0.3;
+   --overlay-trans-end-mobile: 0.3;
+
+   --overlay-opacity: 0.3;
 }
 
 /* Global font */
@@ -546,11 +556,11 @@ body { font-family: var(--global-font) }
 }
 
 .hero-light.hero-bg-gradient { 
-    background-image: linear-gradient(var(--hero-bg-gradient-deg),var(--hero-bg-gradient-from-light), var(--hero-bg-gradient-to-light)) 
+    background-image: linear-gradient(var(--hero-bg-gradient-deg),var(--hero-bg-gradient-from-light), var(--hero-bg-gradient-to-light));
 }
 
 .hero-dark.hero-bg-gradient { 
-    background-image: linear-gradient(var(--hero-bg-gradient-deg),var(--hero-bg-gradient-from-dark), var(--hero-bg-gradient-to-dark)) 
+    background-image: linear-gradient(var(--hero-bg-gradient-deg),var(--hero-bg-gradient-from-dark), var(--hero-bg-gradient-to-dark));
 }
 
 .hero-dark { background-color: var(--slate-900) }
@@ -1033,7 +1043,7 @@ body { font-family: var(--global-font) }
     .hero-bg { min-height: calc(100vw / 3.8 ); padding: 0 var(--spacing-m) } 
     .hero-bg .container-upper-label { margin-top: 6%; margin-bottom: -4%  } 
     .hero-bg .container-text { margin-top: 8%; margin-bottom: 14% } 
-    .hero-bg .container-btn { margin-bottom: 10% }
+    .hero-bg .container-btn { margin-bottom: 12% }
     .hero-bg .container-text.text-long { margin-top: 14% } 
 }
 
@@ -1042,7 +1052,7 @@ body { font-family: var(--global-font) }
     .hero-bg { min-height: 400px; padding: 0 var(--spacing-m) } 
     .hero-bg .container-upper-label { margin-top: 10%; margin-bottom: -4% } 
     .hero-bg .container-text { margin-top: 10%; margin-bottom: 18% } 
-    .hero-bg .container-btn { margin-bottom: 14% } 
+    .hero-bg .container-btn { margin-bottom: 16% } 
     .hero-bg .container-text.text-long { margin-top: 14% } 
 }
 
@@ -1066,8 +1076,25 @@ body { font-family: var(--global-font) }
 .hero-block .container-overlay {
     position: absolute; z-index: 2;
     top: 0; right: 0; bottom: 0; left: 0;
-    background-image: linear-gradient(90deg, rgba(0,0,0,0.3),rgba(0,0,0,0.3));
 }
+
+.hero-block .container-overlay {
+    background-image: linear-gradient(rgba(0,0,0,var(--overlay-opacity)),rgba(0,0,0,var(--overlay-opacity)));
+}
+
+/*
+@media (min-width: 768px) {
+    .hero-block .container-overlay {
+        background-image: linear-gradient(var(--overlay-direction-desktop), rgba(0,0,0,var(--overlay-trans-start-desktop)),rgba(0,0,0,var(--overlay-trans-end-desktop)));
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-block .container-overlay {
+        background-image: linear-gradient(var(--overlay-direction-mobile), rgba(0,0,0,var(--overlay-trans-start-mobile)),rgba(0,0,0,var(--overlay-trans-end-mobile)));
+    }
+}
+*/
 
 /* Full-width image BEHIND text and BEHIND overlay */
 .hero-block .container-media {
