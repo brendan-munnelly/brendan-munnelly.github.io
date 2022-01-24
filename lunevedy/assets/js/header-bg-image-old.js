@@ -1,7 +1,8 @@
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
-document.querySelector("#dd_actions").addEventListener("change", displayActions);
+
+document.querySelector("#dd_actions").addEventListener("click", displayActions);
 
 function displayActions() {
     const opt = document.querySelector("#dd_actions").value;
@@ -12,10 +13,6 @@ function displayActions() {
     document.querySelector("#content-5").classList.add("dropdown-hidden"); 
     document.querySelector("#content-6").classList.add("dropdown-hidden"); 
     document.querySelector("#content-7").classList.add("dropdown-hidden"); 
-    const modal = document.getElementById("myModal");
-    
-    // modal.style.display = "none";
-    hideSidebar();
 
     // show Hero Block options
     if (opt==="0") {
@@ -40,6 +37,7 @@ function displayActions() {
     }
 }
 
+
 // Deselect all
 
 let divs = document.querySelectorAll('.dropbtn');
@@ -49,16 +47,12 @@ divs.forEach(el => el.addEventListener('click', event => {
     for (i = 1; i < 8; i++) {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
     }
-    const modal = document.getElementById("myModal");
-    const span = document.querySelector('#myModal .close-modal')
-    hideSidebar();
-    // modal.style.display = "none";
     // get id
     const str = event.target.id.toString();
     const id = str.charAt(str.length-1);
     const elItem_show = document.querySelector("#content-"+id);
     elItem_show.classList.remove("dropdown-hidden"); 
-
+    // console.log("Menu: "+id);
 }));
 
 // Hide menus when click on page
@@ -69,9 +63,6 @@ function hideMenus() {
     for (i = 1; i < 8; i++) {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
     }
-    const modal = document.getElementById("myModal");
-    // modal.style.display = "none";
-    hideSidebar();
 }
 
 document.onkeydown = function(evt) {
@@ -85,53 +76,25 @@ document.onkeydown = function(evt) {
     if (isEscape) {
         hideMenus()
     }
-}
-
-document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    var isEscape = false;
-    if ("key" in evt) {
-        isEscape = (evt.key === "Escape" || evt.key === "Esc");
-    } else {
-        isEscape = (evt.keyCode === 27);
-    }
-    if (isEscape) {
-        hideMenus()
-    }
-}
-
-/*
-//////////////// SIDE FLYOUT WITH COLOR PICKER  ///////////////
-*/
-
-function showSidebar() {
-    document.querySelector("#myModal").classList.add("display-sidebar");
-    document.querySelector("#myModal").classList.remove("hide-sidebar");
-}
-
-function hideSidebar() {
-    document.querySelector("#myModal").classList.add("hide-sidebar");
-    document.querySelector("#myModal").classList.remove("show-sidebar");
-    document.querySelector("#myModal").scrollTo(0, 0);
 }
 
 /*
 //////////////// HEADER COLOURS ///////////////
 */
     // Get the modal
-    const modal = document.getElementById("myModal");
-    const span = document.querySelector('#myModal .close-modal')
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        // modal.style.display = "none";
-        hideSidebar();
+        modal.style.display = "none";
         disableTransColCode();
     }
     
     // When the user clicks anywhere outside the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            // modal.style.display = "none";
-            hideSidebar();
+            modal.style.display = "none";
             disableTransColCode();
         }
     }
@@ -150,6 +113,7 @@ function hideSidebar() {
         console.log("Button ID: "+btn_id);
 
         if (!btn_id) {
+            // alert("btn_id problem");
             document.querySelector("#box-msg").classList.add("is-visible");
             document.querySelector("#box-msg").classList.remove("is-hidden");
         }
@@ -168,10 +132,10 @@ function hideSidebar() {
     }
 
     function displayModal() {
-        if ((btn_id === "btn_a_primary_passive_bg") || (btn_id === "btn_a_primary_active_bg") ||(btn_id === "btn_a_primary_passive_border") || (btn_id === "btn_a_primary_active_border") || (btn_id === "btn_a_secondary_passive_bg") || (btn_id === "btn_a_secondary_active_bg") ||(btn_id === "btn_a_secondary_passive_border") || (btn_id === "btn_a_secondary_active_border") || (btn_id === "btn_a_cta_passive_bg") || (btn_id === "btn_a_cta_active_bg") || (btn_id === "btn_a_cta_passive_border") || (btn_id === "btn_a_cta_active_border") || (btn_id === "btn_a_cta_onscroll_passive_bg") || (btn_id === "btn_a_cta_onscroll_active_bg") || (btn_id === "btn_a_cta_onscroll_passive_border") || (btn_id === "btn_a_cta_onscroll_active_border") || (btn_id==="btn_a_cta_passive_bg") || (btn_id==="btn_a_cta_active_bg") || (btn_id==="btn_a_cta_passive_border") || (btn_id==="btn_a_cta_active_border") || (btn_id==="btn_a_cta_onscroll_passive_bg") || (btn_id==="btn_a_cta_onscroll_active_bg") || (btn_id==="btn_a_cta_onscroll_passive_border") || (btn_id==="btn_a_cta_onscroll_active_border") || ((btn_id==="btn_bg_menu_desktop") && ( document.querySelector(".menu-sticky")) ) || ( (btn_id==="btn_bg_menu_mobile") && ( document.querySelector(".menu-sticky"))) ) {
+        if ((btn_id === "btn_a_primary_passive_bg") || (btn_id === "btn_a_primary_active_bg") ||(btn_id === "btn_a_primary_passive_border") || (btn_id === "btn_a_primary_active_border") || (btn_id === "btn_a_secondary_passive_bg") || (btn_id === "btn_a_secondary_active_bg") ||(btn_id === "btn_a_secondary_passive_border") || (btn_id === "btn_a_secondary_active_border") || (btn_id === "btn_a_cta_passive_bg") || (btn_id === "btn_a_cta_active_bg") || (btn_id === "btn_a_cta_passive_border") || (btn_id === "btn_a_cta_active_border") || (btn_id === "btn_a_cta_onscroll_passive_bg") || (btn_id === "btn_a_cta_onscroll_active_bg") || (btn_id === "btn_a_cta_onscroll_passive_border") || (btn_id === "btn_a_cta_onscroll_active_border") ) {
             enableTransColCode();
         }
-        showSidebar();
+        modal.style.display = "block";
         event.preventDefault();
     }
 
@@ -194,263 +158,265 @@ function hideSidebar() {
     }
 
     function getColorID(color_code) {
-        /* Header background */
-        if (btn_id === "btn_bg") {
-            newStyle = ".hero-block { background-color: var("+color_code+") }\n";
-            sub_string = ".hero-block {";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Header background */
+            if (btn_id === "btn_bg") {
+                newStyle = ".hero-block { background-color: var("+color_code+") }\n";
+                sub_string = ".hero-block {";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Header upper label */
-        else if (btn_id === "btn_upper_label") {
-            newStyle = ".hero-block .container-upper-label { color: var("+color_code+") }\n";
-            sub_string = ".container-upper-label";
-            doUpdateArray(sub_string,newStyle);
-        }
-                    
-        /* Header h1 */
-        else if (btn_id === "btn_head") {
-            newStyle = ".hero-block h1 { color: var("+color_code+") }\n";
-            sub_string = "h1";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Header upper label */
+            else if (btn_id === "btn_upper_label") {
+                newStyle = ".hero-block .container-upper-label { color: var("+color_code+") }\n";
+                sub_string = ".container-upper-label";
+                doUpdateArray(sub_string,newStyle);
+            }
+                        
+            /* Header h1 */
+            else if (btn_id === "btn_head") {
+                newStyle = ".hero-block h1 { color: var("+color_code+") }\n";
+                sub_string = "h1";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Header h2 */
-        else if (btn_id === "btn_subhead") {
-            newStyle = ".hero-block h2 { color: var("+color_code+") }\n";
-            sub_string = "h2";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Header h2 */
+            else if (btn_id === "btn_subhead") {
+                newStyle = ".hero-block h2 { color: var("+color_code+") }\n";
+                sub_string = "h2";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* ======= PRIMARY BUTTONS =========*/
-        
-        /* Text colour: passive */
-        else if (btn_id === "btn_a_primary_passive_text") {
-            newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-primary:visited { color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* ======= PRIMARY BUTTONS =========*/
+            
+            /* Text colour: passive */
+            else if (btn_id === "btn_a_primary_passive_text") {
+                newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:visited { color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Text colour: active */
-        else if (btn_id === "btn_a_primary_active_text") {
-            newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-primary:active { color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Text colour: active */
+            else if (btn_id === "btn_a_primary_active_text") {
+                newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:active { color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Background colour: passive */
-        else if (btn_id === "btn_a_primary_passive_bg") {
-            newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-primary:visited { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Background colour: passive */
+            else if (btn_id === "btn_a_primary_passive_bg") {
+                newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:visited { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Background colour: active */
-        else if (btn_id === "btn_a_primary_active_bg") {
-            newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-primary:active { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Background colour: active */
+            else if (btn_id === "btn_a_primary_active_bg") {
+                newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-primary:active { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Border colour: passive */
-        else if (btn_id === "btn_a_primary_passive_border") {
-            newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { border-color: var("+color_code+") }\n\n";
-            sub_string = ".btn-primary:visited { border-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Border colour: passive */
+            else if (btn_id === "btn_a_primary_passive_border") {
+                newStyle = ".hero-block a.btn-primary:link,\n.hero-block a.btn-primary:visited { border-color: var("+color_code+") }\n\n";
+                sub_string = ".btn-primary:visited { border-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Border colour: active */
-        else if (btn_id === "btn_a_primary_active_border") {
-            newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { border-color: var("+color_code+") }\n\n";
-            sub_string = "btn-primary:active { border-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Border colour: active */
+            else if (btn_id === "btn_a_primary_active_border") {
+                newStyle = ".hero-block a.btn-primary:focus,\n.hero-block a.btn-primary:hover,\n.hero-block a.btn-primary:active { border-color: var("+color_code+") }\n\n";
+                sub_string = "btn-primary:active { border-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* ========== SECONDARY BUTTONS =========== */
+            /* ========== SECONDARY BUTTONS =========== */
 
-        /* Text colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_text") {
-            newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { color";
-            doUpdateArray(sub_string,newStyle); 
-        }
+            /* Text colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_text") {
+                newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { color";
+                doUpdateArray(sub_string,newStyle); 
+            }
 
-        /* Text colour: active */
-        else if (btn_id === "btn_a_secondary_active_text") {
-            newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:focus { color";
-            doUpdateArray(sub_string,newStyle); 
-        }
+            /* Text colour: active */
+            else if (btn_id === "btn_a_secondary_active_text") {
+                newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:focus { color";
+                doUpdateArray(sub_string,newStyle); 
+            }
+ 
+            /* Background colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_bg") {
+                newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { background";
+                doUpdateArray(sub_string,newStyle); 
+            }
 
-        /* Background colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_bg") {
-            newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { background";
-            doUpdateArray(sub_string,newStyle); 
-        }
+            /* Background colour: active */
+            else if (btn_id === "btn_a_secondary_active_bg") {
+                newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { background-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:active { background";
+                doUpdateArray(sub_string,newStyle); 
+            }
+            
+            /* Border colour: passive */
+            else if (btn_id === "btn_a_secondary_passive_border") {
+                newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { border-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:visited { border";
+                doUpdateArray(sub_string,newStyle); 
+            }
 
-        /* Background colour: active */
-        else if (btn_id === "btn_a_secondary_active_bg") {
-            newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:active { background";
-            doUpdateArray(sub_string,newStyle); 
-        }
-        
-        /* Border colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_border") {
-            newStyle = ".hero-block a.btn-secondary:link,\n.hero-block a.btn-secondary:visited { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { border";
-            doUpdateArray(sub_string,newStyle); 
-        }
+            /* Border colour: active */
+            else if (btn_id === "btn_a_secondary_active_border") {
+                newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { border-color: var("+color_code+") }\n\n";
+                sub_string = "a.btn-secondary:active { border";
+                doUpdateArray(sub_string,newStyle); 
+            }
 
-        /* Border colour: active */
-        else if (btn_id === "btn_a_secondary_active_border") {
-            newStyle = ".hero-block a.btn-secondary:focus,\n.hero-block a.btn-secondary:hover,\n.hero-block a.btn-secondary:active { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:active { border";
-            doUpdateArray(sub_string,newStyle); 
-        }
+            /* MENU BACKGROUNDS */
 
-        /* MENU BACKGROUNDS */
+            /* Desktop/default mobile */
+            else if (btn_id === "btn_bg_menu_desktop") {
+                newStyle = ".container-menu.menu-desktop { background-color: var("+color_code+") }\n.container-menu.menu-mobile { background-color: var("+color_code+") }\n.container-menu.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-desktop { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Desktop/default mobile */
-        else if (btn_id === "btn_bg_menu_desktop") {
-            newStyle = ".container-menu.menu-desktop { background-color: var("+color_code+") }\n.container-menu.menu-mobile { background-color: var("+color_code+") }\n.container-menu.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-desktop { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Mobile-only */
+            else if (btn_id === "btn_bg_menu_mobile") {
+                newStyle = ".container-menu.menu-mobile,\n.container-menu.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
+                sub_string = ".container-menu.menu-mobile ul.mobile-display { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Mobile-only */
-        else if (btn_id === "btn_bg_menu_mobile") {
-            newStyle = ".container-menu.menu-mobile,\n.container-menu.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
-            sub_string = ".container-menu.menu-mobile ul.mobile-display { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* On-scroll only */            
+            else if (btn_id === "btn_bg_onscroll_menu") {
+                newStyle = ".container-menu.menu-sticky.menu-desktop.menu-on-scroll,\n.container-menu.menu-sticky.menu-mobile.menu-on-scroll,\n.container-menu.menu-sticky.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-sticky.menu-mobile.menu-on-scroll ul.mobile-display { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* On-scroll only */            
-        else if (btn_id === "btn_bg_onscroll_menu") {
-            newStyle = ".container-menu.menu-sticky.menu-desktop.menu-on-scroll,\n.container-menu.menu-sticky.menu-mobile.menu-on-scroll,\n.container-menu.menu-sticky.menu-mobile ul.mobile-display { background-color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-sticky.menu-mobile.menu-on-scroll ul.mobile-display { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* HYPERLINKS */
 
-        /* HYPERLINKS */
+            /* Desktop/mobile default: passive */
+            else if (btn_id === "btn_link_passive_text") {
+                newStyle = ".container-menu ul li a:link,\n.container-menu ul li a:visited { color: var("+color_code+") }\n";
+                sub_string = "container-menu ul li a:visited { color";
+                doUpdateArray(sub_string,newStyle);            
+            }
 
-        /* Desktop/mobile default: passive */
-        else if (btn_id === "btn_link_passive_text") {
-            newStyle = ".container-menu ul li a:link,\n.container-menu ul li a:visited { color: var("+color_code+") }\n";
-            sub_string = "container-menu ul li a:visited { color";
-            doUpdateArray(sub_string,newStyle);            
-        }
+            /* Desktop/mobile default: passive */
+            else if (btn_id === "btn_link_active_text") {
+                newStyle = ".container-menu ul li a:focus,\n.container-menu ul li a:hover,\n.container-menu ul li a:active { color: var("+color_code+") }\n";
+                sub_string = "container-menu ul li a:active { color";
+                doUpdateArray(sub_string,newStyle);            
+            }
 
-        /* Desktop/mobile default: passive */
-        else if (btn_id === "btn_link_active_text") {
-            newStyle = ".container-menu ul li a:focus,\n.container-menu ul li a:hover,\n.container-menu ul li a:active { color: var("+color_code+") }\n";
-            sub_string = "container-menu ul li a:active { color";
-            doUpdateArray(sub_string,newStyle);            
-        }
+            /* Mobile-only: passive */
+            else if (btn_id === "btn_link_mobile_passive_text") {
+                newStyle = ".container-menu.menu-mobile ul.mobile-display li a:link,\n.container-menu.menu-mobile ul.mobile-display li a:visited { color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-mobile li a:visited { color";
+                doUpdateArray(sub_string,newStyle);            
+            }
 
-        /* Mobile-only: passive */
-        else if (btn_id === "btn_link_mobile_passive_text") {
-            newStyle = ".container-menu.menu-mobile ul.mobile-display li a:link,\n.container-menu.menu-mobile ul.mobile-display li a:visited { color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-mobile li a:visited { color";
-            doUpdateArray(sub_string,newStyle);            
-        }
+            /* Mobile-only: active */
+            else if (btn_id === "btn_link_mobile_active_text") {
+                newStyle = ".container-menu.menu-mobile ul.mobile-display li a:focus,\n.container-menu.menu-mobile ul.mobile-display li a:hover,\n.container-menu.menu-mobile ul.mobile-display li a:active { color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-mobile ul.mobile-display li a:active";
+                doUpdateArray(sub_string,newStyle); 
+            }
+            
+            /* On-scroll: passive */
+            else if (btn_id === "btn_link_onscroll_passive") {
+                newStyle = ".container-menu.menu-on-scroll ul li a:link,\n.container-menu.menu-on-scroll ul li a:visited { color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-on-scroll ul li a:visited { color";
+                doUpdateArray(sub_string,newStyle);            
+            }
 
-        /* Mobile-only: active */
-        else if (btn_id === "btn_link_mobile_active_text") {
-            newStyle = ".container-menu.menu-mobile ul.mobile-display li a:focus,\n.container-menu.menu-mobile ul.mobile-display li a:hover,\n.container-menu.menu-mobile ul.mobile-display li a:active { color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-mobile ul.mobile-display li a:active";
-            doUpdateArray(sub_string,newStyle); 
-        }
-        
-        /* On-scroll: passive */
-        else if (btn_id === "btn_link_onscroll_passive") {
-            newStyle = ".container-menu.menu-on-scroll ul li a:link,\n.container-menu.menu-on-scroll ul li a:visited { color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-on-scroll ul li a:visited { color";
-            doUpdateArray(sub_string,newStyle);            
-        }
+            /* On-scroll: active */
+            else if (btn_id === "btn_link_onscroll_active") {
+                newStyle = ".container-menu.menu-on-scroll ul li a:focus,\n.container-menu.menu-on-scroll ul li a:hover,\n.container-menu.menu-on-scroll ul li a:active { color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-on-scroll ul li a:active { color";
+                doUpdateArray(sub_string,newStyle); 
+            }            
 
-        /* On-scroll: active */
-        else if (btn_id === "btn_link_onscroll_active") {
-            newStyle = ".container-menu.menu-on-scroll ul li a:focus,\n.container-menu.menu-on-scroll ul li a:hover,\n.container-menu.menu-on-scroll ul li a:active { color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-on-scroll ul li a:active { color";
-            doUpdateArray(sub_string,newStyle); 
-        }            
+            /* CTA button text colour: passive */
+            else if (btn_id === "btn_a_cta_passive_text") {
+                newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:visited { color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button text colour: passive */
-        else if (btn_id === "btn_a_cta_passive_text") {
-            newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:visited { color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* CTA button text colour: active */
+           else if (btn_id === "btn_a_cta_active_text") {
+                newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:active { color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button text colour: active */
-       else if (btn_id === "btn_a_cta_active_text") {
-            newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:active { color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* CTA button background colour: passive */
+            else if (btn_id === "btn_a_cta_passive_bg") {
+                newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { background-color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:visited { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button background colour: passive */
-        else if (btn_id === "btn_a_cta_passive_bg") {
-            newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { background-color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:visited { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* CTA button background colour: active */
+            else if (btn_id === "btn_a_cta_active_bg") {
+                newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { background-color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:active { background-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button background colour: active */
-        else if (btn_id === "btn_a_cta_active_bg") {
-            newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { background-color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:active { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* CTA button border colour: passive */
+            else if (btn_id === "btn_a_cta_passive_border") {
+                newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { border-color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:visited { border-color";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button border colour: passive */
-        else if (btn_id === "btn_a_cta_passive_border") {
-            newStyle = ".container-menu a#btn-cta:link,\n.container-menu a#btn-cta:visited { border-color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:visited { border-color";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* CTA button border colour: active */
+            else if (btn_id === "btn_a_cta_active_border") {
+                newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { border-color: var("+color_code+") }\n";
+                sub_string = "a#btn-cta:active";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* CTA button border colour: active */
-        else if (btn_id === "btn_a_cta_active_border") {
-            newStyle = ".container-menu a#btn-cta:focus,\n.container-menu a#btn-cta:hover,\n.container-menu a#btn-cta:active { border-color: var("+color_code+") }\n";
-            sub_string = "a#btn-cta:active";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* HAMBURGER ICON */
 
-        /* HAMBURGER ICON */
+            /* Non-sticky */
+            else if (btn_id === "btn_hamburger") {
+                newStyle = ".container-menu .item-icon .bar1, .container-menu .item-icon .bar2, .container-menu .item-icon .bar3 { background-color: var("+color_code+") }\n";
+                sub_string = ".container-menu .item-icon .bar1";
+                doUpdateArray(sub_string,newStyle);
+            }
 
-        /* Non-sticky */
-        else if (btn_id === "btn_hamburger") {
-            newStyle = ".container-menu .item-icon .bar1, .container-menu .item-icon .bar2, .container-menu .item-icon .bar3 { background-color: var("+color_code+") }\n";
-            sub_string = ".container-menu .item-icon .bar1";
-            doUpdateArray(sub_string,newStyle);
-        }
+            /* Sticky */
+            else if (btn_id === "btn_hamburger_sticky") {
+                newStyle = ".container-menu.menu-on-scroll .item-icon .bar1, .container-menu.menu-on-scroll .item-icon .bar2, .container-menu.menu-on-scroll .item-icon .bar3 { background-color: var("+color_code+") }\n";
+                sub_string = "container-menu.menu-on-scroll .item-icon .bar1";
+                doUpdateArray(sub_string,newStyle);
+            }         
 
-        /* Sticky */
-        else if (btn_id === "btn_hamburger_sticky") {
-            newStyle = ".container-menu.menu-on-scroll .item-icon .bar1, .container-menu.menu-on-scroll .item-icon .bar2, .container-menu.menu-on-scroll .item-icon .bar3 { background-color: var("+color_code+") }\n";
-            sub_string = "container-menu.menu-on-scroll .item-icon .bar1";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        style = document.createElement('style');
-        document.head.appendChild(style);
-        style.appendChild(document.createTextNode(newStyle));
-        enableCSS();
+            style = document.createElement('style');
+            document.head.appendChild(style);
+            style.appendChild(document.createTextNode(newStyle));
+            enableCSS();
+            // console.log("Button ID: "+btn_id);
+            // console.log("newStyle: "+newStyle);
     }
 
-function doUpdateArray(sub_string,newStyle) {
-    if ( arrCSS.some(e => e.includes(sub_string)) ) {
-        const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
-        arrCSS.splice(arrPos, 1);
-        arrCSS.push(newStyle);
+    function doUpdateArray(sub_string,newStyle) {
+        if ( arrCSS.some(e => e.includes(sub_string)) ) {
+            const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+            arrCSS.splice(arrPos, 1);
+            arrCSS.push(newStyle);
+        }
+        else {
+            arrCSS.push(newStyle);
+        }
     }
-    else {
-        arrCSS.push(newStyle);
-    }
-}
 
 /*
 //////////////// COLORS: TRANSPARENT OPTION ////////////////////
@@ -462,46 +428,6 @@ function enableTransColCode() {
 
 function disableTransColCode() {
     document.getElementById("color-transparent").style.display="none";
-}
-
-/*
-//////////////// HERO BLOCK OVERLAY OPACITY ////////////////////
-*/
-
-var slider = document.getElementById("slider-thumb");
-var output = document.getElementById("slider-display");
-output.innerHTML = ((slider.value)/10).toFixed(1); // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = ((this.value)/10).toFixed(1);
-    sub_string = "background-image";
-    newStyle = ".hero-block .container-overlay { background-image: linear-gradient(rgba(0,0,0,"+output.innerHTML+"),rgba(0,0,0,"+output.innerHTML+")); } \n";
-    doUpdateArray(sub_string,newStyle);
-
-    style = document.createElement('style');
-    document.head.appendChild(style);
-    style.appendChild(document.createTextNode(newStyle));
-    enableCSS();
-} 
-
-
-/*
-//////////////// TEXT SHADOW  ///////////////
-*/
-
-document.querySelector("#dd_text_shadow").addEventListener("change", doTextShadow);
-    
-function doTextShadow() {
-    let opt = document.querySelector("#dd_text_shadow").value;
-    if (opt==="0") {
-        document.querySelector("h1").classList.add("text-shadow");
-        document.querySelector("h2").classList.add("text-shadow");
-    }
-    else if (opt==="1") {
-        document.querySelector("h1").classList.remove("text-shadow");
-        document.querySelector("h2").classList.remove("text-shadow");
-    }
 }
 
 /*
@@ -622,27 +548,6 @@ function swapButtonIconsCTA() {
 }
 
 /*
-//////////////// MENU: ILLUSTRATION ////////////////////
-*/
-
-document.querySelector("#dd_focal_point").addEventListener("change", doImgFocalPoint);
-
-function doImgFocalPoint() {
-    let opt = document.querySelector("#dd_focal_point").value;
-    if (opt==="0") {
-        document.querySelector(".container-media img").src = "assets/img/1920x800-center.jpg";
-    }
-    else if (opt==="1") {
-        console.log("Image right");
-        document.querySelector(".container-media img").src = "assets/img/1920x800-right.jpg";
-    }
-    else if (opt==="2") {
-        console.log("Image left");
-        document.querySelector(".container-media img").src = "assets/img/1920x800-left.jpg";
-    }
-}
-
-/*
 //////////////// MENU: STICKY ////////////////////
 */
 
@@ -705,8 +610,6 @@ function disableSticky() {
     document.getElementById("btn_a_cta_onscroll_passive_border").disabled=true;
     document.getElementById("btn_a_cta_onscroll_active_border").disabled=true;
     document.getElementById("btn_hamburger_sticky").disabled=true;
-    // set menu background to dark
-    // document.querySelector(".container-menu").style.backgroundColor= "var(--slate-900)";
 }
 
 
@@ -747,7 +650,7 @@ function doUpperLabel() {
     // add
     else if (opt==="1") {
         removeUpperLabel();
-        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+        document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% of all week<\/span><\/div>\n\n\t");
         enableLabelColor();
     }
 }
@@ -776,7 +679,7 @@ function doTextLength() {
     }
     else if (opt==="1") {
         document.querySelector(".container-text").classList.add("text-long");
-        document.querySelector("h1").innerHTML = "Sometimes a short heading is not enough and a longer one is needed.";
+        document.querySelector("h1").innerHTML = "Sometimes a short heading is not enough and you need a longer one.";
     }
 }
 
@@ -808,6 +711,22 @@ function removeH2() {
     if (document.querySelector("h2")) {
         const elH2 = document.querySelector("h2");
         elH2.remove();
+    }
+}
+
+/*
+//////////////// H1 AND H1 TEXT WIDTH  ///////////////
+*/
+
+document.querySelector("#dd_text_width").addEventListener("change", doTextWidth);
+    
+function doTextWidth() {
+    let opt = document.querySelector("#dd_text_width").value;
+    if (opt==="0") {
+        document.querySelector(".hero-block").classList.remove("text-width-50");
+    }
+    else if (opt==="1") {
+        document.querySelector(".hero-block").classList.add("text-width-50");
     }
 }
 
@@ -904,7 +823,6 @@ function doAlignDesktop() {
 
     else if (opt==="1") {
         document.querySelector(".hero-block").classList.remove("text-center-desktop");   
-        enableTextStart();
     }
 }
 
@@ -917,45 +835,6 @@ function doAlignMobile() {
     }
     else if (opt==="1") {
         document.querySelector(".hero-block").classList.remove("text-center-mobile"); 
-    }
-}
-
-
-/*
-//////////////// H1 AND H1 TEXT WIDTH  ///////////////
-*/
-
-document.querySelector("#dd_text_width").addEventListener("change", doTextWidth);
-    
-function doTextWidth() {
-    let opt = document.querySelector("#dd_text_width").value;
-    if (opt==="0") {
-        document.querySelector(".hero-block").classList.remove("text-width-50");
-        document.getElementById("dd_text_start").disabled=true;
-    }
-    else if (opt==="1") {
-        document.querySelector(".hero-block").classList.add("text-width-50");
-        enableTextStart();
-    }
-}
-
-function enableTextStart() {
-    const elHero = document.querySelector(".hero-block");
-    if ((elHero.classList.contains('text-width-50')) && (!elHero.classList.contains('text-center-desktop'))) {
-        document.getElementById("dd_text_start").disabled=false;
-    }
-}
-
-document.querySelector("#dd_text_start").addEventListener("change", doTextStart);
-    
-function doTextStart() {
-
-    let opt = document.querySelector("#dd_text_start").value;
-    if (opt==="0") {
-        document.querySelector(".hero-block").classList.remove("text-start-center");
-    }
-    else if (opt==="1") {
-        document.querySelector(".hero-block").classList.add("text-start-center");
     }
 }
 
@@ -1188,39 +1067,420 @@ function swapButtonIcons() {
     }
 }
 
-/* ================== ILLUSTRATION =================== */
-document.querySelector("#dd_nudge_mobile").addEventListener("change", doNudgeMobile);
+/*
+//////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
+*/
 
-function doNudgeMobile() {
-    let opt = document.querySelector("#dd_nudge_mobile").value;
-    const el_media = document.querySelector(".container-media");
+/* Enable visual */
+document.querySelector("#dd_yn_vis").addEventListener("change",checkVis);
+
+function checkVis() {
+    let opt = document.querySelector("#dd_yn_vis").value;
+    if (opt==="1") { enableVis() }
+    else if (opt==="0") { disablsAllVisProps() }
+}
+
+function enableVis() {
+    // Enable all radio options
+    document.getElementById("vis_type_0").disabled=false;
+    document.getElementById("vis_type_1").disabled=false;
+    document.getElementById("vis_type_2").disabled=false;
+    document.getElementById("vis_type_3").disabled=false;
+    document.getElementById("vis_type_4").disabled=false;
+
+    //Enable visual width
+    document.getElementById("dd_yn_vis_width").disabled=false;
+    enableImgProps();
+    disableVidProps();
+
+    // Select first (picture) radio button
+    document.getElementById("vis_type_0").checked=true;
+
+    // Add picture
+    let hero_block = document.querySelector('#HTML-Content .hero-block');
+    let child_obj = document.createElement("figure");
+    child_obj.innerHTML = "\n\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Cafe interior\">\n\t";
+    hero_block.appendChild(child_obj);
+}
+
+function disablsAllVisProps() {
+    // Disable all radio options
+    document.getElementById("vis_type_0").disabled=true;
+    document.getElementById("vis_type_1").disabled=true;
+    document.getElementById("vis_type_2").disabled=true;
+    document.getElementById("vis_type_3").disabled=true;
+    document.getElementById("vis_type_4").disabled=true;
+
+    // Disable visual width
+    document.getElementById("dd_yn_vis_width").disabled=true;
+    document.getElementById("dd_yn_vis_width").value="0";
+
+    document.getElementById("vis_type_0").checked=true;
+    disableImgProps();
+    disableVidProps();
+    // Remove image or video
+    if ((document.querySelector('figure')) && (document.querySelector("#dd_yn_vis").value)==="0") {
+        let hero_block = document.querySelector('.hero-block');
+        let hero_figure = document.querySelector('.hero-block figure');
+        hero_block.removeChild(hero_figure);
+    }
+}
+
+function disableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=true;
+    document.getElementById("dd_image_shadows").disabled=true;
+    document.getElementById("dd_image_borders").disabled=true;
+    const el_label_1 = document.querySelector("#label_img_shadows");
+    const el_label_2 = document.querySelector("#label_img_borders");
+    const el_label_3 = document.querySelector("#label_img_corners");
+    el_label_1.classList.add('disabled-gray');
+    el_label_2.classList.add('disabled-gray');
+    el_label_3.classList.add('disabled-gray');
+}
+
+function enableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=false;
+    document.getElementById("dd_image_shadows").disabled=false;
+    document.getElementById("dd_image_borders").disabled=false;
+    const el_label_1 = document.querySelector("#label_img_shadows");
+    const el_label_2 = document.querySelector("#label_img_borders");
+    const el_label_3 = document.querySelector("#label_img_corners");
+    el_label_1.classList.remove('disabled-gray');
+    el_label_2.classList.remove('disabled-gray');
+    el_label_3.classList.remove('disabled-gray');
+}
+
+function disableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_borders").disabled=true;
+    document.getElementById("dd_vid_shadows").disabled=true;
+    const el_label_1 = document.querySelector("#label_vid_shadows");
+    const el_label_2 = document.querySelector("#label_vid_borders");
+    el_label_1.classList.add('disabled-gray');
+    el_label_2.classList.add('disabled-gray');
+
+}
+
+function enableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_borders").disabled=false;
+    document.getElementById("dd_vid_shadows").disabled=false;
+    const el_label_1 = document.querySelector("#label_vid_shadows");
+    const el_label_2 = document.querySelector("#label_vid_borders");
+    el_label_1.classList.remove('disabled-gray');
+    el_label_2.classList.remove('disabled-gray');
+}
+
+
+/*
+//////////////// VISUAL ELEMENT WIDTH (811px AND ABOVE ) ///////////////
+*/
+
+document.querySelector("#dd_yn_vis_width").addEventListener("change", doFigWidth);
+
+function doFigWidth() {
+    const opt = document.querySelector("#dd_yn_vis_width").value;
+    const el_hero = document.querySelector(".hero-block");
+
+    // remove
+    if (opt==="0") {
+        el_hero.classList.remove("figure-width-50");
+        el_hero.classList.remove("figure-width-100");
+    }
+    // 50%
+    else if (opt==="1") {
+        el_hero.classList.remove("figure-width-100");
+        el_hero.classList.add("figure-width-50");
+    }
+
+    // 100%
+    else if (opt==="2") {
+        el_hero.classList.remove("figure-width-50");
+        el_hero.classList.add("figure-width-100");
+    }
+}
+
+document.querySelector("#vis-types-all").addEventListener("click", doVisType);
+
+function doVisType() { 
+    const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
+    let selectedValue;
+    
+    if (document.querySelector("#dd_yn_vis").value==="1") {
+        for (const rb of rbs) {
+            if (rb.checked) {
+                selectedValue = rb.value;
+                break;
+            }
+        }
+    
+        if (selectedValue==="none") {
+            removeVisual();
+            resetVisualEffects();
+        }
+
+        let hero_block = document.querySelector('.hero-block');
+
+        if (selectedValue==="pictures") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+            let child_obj = document.createElement("figure");
+            child_obj.innerHTML = "\n\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"big pic\">\n";
+            hero_block.appendChild(child_obj);           
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_0").checked=true;
+        }
+
+        else if (selectedValue==="transparent") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+            let child_obj = document.createElement("figure");
+            child_obj.innerHTML = "\n\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"big pic\">\n";
+            hero_block.appendChild(child_obj);
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_1").checked=true;
+        }
+
+        else if (selectedValue==="illustrations") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+            let child_obj = document.createElement("figure");
+            child_obj.innerHTML = "\n\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"big pic\">\n";
+            hero_block.appendChild(child_obj);
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_2").checked=true;
+        }
+
+        else if (selectedValue==="vid-file") {
+            removeVisual();
+            resetVisualEffects();
+            disableImgProps();
+            enableVidProps();
+            let child_obj = document.createElement("figure");
+            child_obj.innerHTML = "\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"https:\/\/munnelly.com/lunadoge/assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t";
+            hero_block.appendChild(child_obj);
+            document.getElementById("vis_type_3").checked=true;
+        }
+
+        else if (selectedValue==="vid-yt") {
+            removeVisual();
+            resetVisualEffects();
+            disableImgProps();
+            enableVidProps();
+            let child_obj = document.createElement("figure");
+
+            child_obj.innerHTML = "\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t";
+            hero_block.appendChild(child_obj);
+            document.getElementById("vis_type_4").checked=true;
+        }
+    }
+}
+
+function resetVisualEffects() {
+    document.getElementById("dd_image_shadows").value="0";
+    document.getElementById("dd_image_borders").value="0";
+    document.getElementById("dd_image_shadows").value="0";
+    document.getElementById("dd_vid_borders").value="0";
+    document.getElementById("dd_vid_shadows").value="0";
+    removeFigShadows();
+    removeFigBorders();
+    const el_hero = document.querySelector(".hero-block");
+    el_hero.classList.remove("figure-width-50");
+    el_hero.classList.remove("figure-width-100");
+    document.getElementById("dd_yn_vis_width").value="0";
+}
+
+function removeVisual() {
+    const parentNode = document.querySelector("#HTML-Content");
+    var element_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
+    for (var index = 0, len = element_img.length; index < len; index++) {
+        element_img[index].parentNode.removeChild(element_img[index]);
+    }
+
+    if (document.querySelector('figure')) {
+        let hero_block = document.querySelector('.hero-block');
+        let hero_figure = document.querySelector('.hero-block figure');
+        hero_block.removeChild(hero_figure);
+    }
+
+    document.getElementById("dd_image_corners").disabled=true;
+    document.getElementById("dd_image_shadows").disabled=true;
+    document.getElementById("dd_image_borders").disabled=true;
+    document.getElementById("dd_vid_shadows").disabled=true;
+    document.getElementById("dd_vid_borders").disabled=true;
+    document.getElementById("vis_type_0").checked=true;
+}
+
+
+
+/*
+//////////////// VISUAL PROPERTIES ///////////////
+*/
+
+document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
+
+function doImageCorners() {
+    let opt = document.querySelector("#dd_image_corners").value;
 
     if (opt==="0") {
-        el_media.classList.remove("pull-to-left");
-        el_media.classList.remove("push-to-right");
+        removeImageCorners();
     }
 
     else if (opt==="1") {
-        el_media.classList.remove("push-to-right");
-        el_media.classList.add("pull-to-left");
-    }
-
-    else if (opt==="2") {
-        el_media.classList.remove("pull-to-left");
-        el_media.classList.add("push-to-right");
+        const el_fig = document.querySelector('.hero-block img');
+        el_fig.classList.add("corners-soft");
     }
 }
+
+function removeImageCorners() {
+    const el_fig = document.querySelector('.hero-block img');
+    el_fig.classList.remove("corners-soft");
+}
+
+document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
+
+function doImageShadows() {
+    let opt = document.querySelector("#dd_image_shadows").value;
+    // Remove image shadow
+    if (opt==="0") {
+        removeFigShadows();
+    }
+
+    // Add image shadow
+    else if (opt==="1") {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.add("figure-shadow");
+    }
+}
+
+document.querySelector("#dd_vid_shadows").addEventListener("change", doVidShadows);
+
+function doVidShadows() {
+    let opt = document.querySelector("#dd_vid_shadows").value;
+    // Remove video shadow
+    if (opt==="0") {
+        removeFigShadows();
+    }
+
+    // Add video shadow
+    else if (opt==="1") {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.add("figure-shadow");
+    }
+}
+
+function removeFigShadows() {
+    if (document.querySelector('figure')) {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.remove("figure-shadow");
+    }
+}
+
+document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
+
+function doImageBorders() {
+    let opt = document.querySelector("#dd_image_borders").value;
+
+    if (opt==="0") {
+        removeFigBorders();
+    }
+
+    // Add image border
+    else if (opt==="1") {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.add("figure-border");
+    }
+}
+
+document.querySelector("#dd_vid_borders").addEventListener("change", doVidBorders);
+
+function doVidBorders() {
+    let opt = document.querySelector("#dd_vid_borders").value;
+
+    if (opt==="0") {
+        if (document.querySelector('.container-video-yt')) {
+            const el_yt = document.querySelector('container-video-yt');
+            el_yt.classList.remove("figure-border");
+        }
+        else {
+            const el_vid = document.querySelector('video');
+            el_vid.classList.remove("figure-border");
+        }
+    }
+
+    // Add video border
+    else if (opt==="1") {
+        if (document.querySelector('.container-video-yt')) {
+            const el_yt = document.querySelector('.container-video-yt');
+            el_yt.classList.add("figure-border");
+        }
+        else {
+            const el_vid = document.querySelector('video');
+            el_vid.classList.add("figure-border");
+        }
+    }
+}
+
+function removeFigBorders() {
+    if (document.querySelector('figure')) {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.remove("figure-border");
+    }
+}
+
+
+
+// Dropdown menus 
+
 
 /* ================ DIALOG BOXES =================== */
 
 // Make dialog boxes element draggable:
-dragElement(document.getElementById("content-1"));
-dragElement(document.getElementById("content-2"));
-dragElement(document.getElementById("content-3"));
-// dragElement(document.getElementById("content-4"));
-dragElement(document.getElementById("content-5"));
-dragElement(document.getElementById("content-6"));
-dragElement(document.getElementById("content-7"));
+
+if (document.getElementById("content-1")) {
+    dragElement(document.getElementById("content-1"));
+}
+
+if (document.getElementById("content-2")) {
+    dragElement(document.getElementById("content-2"));
+}
+if (document.getElementById("content-3")) {
+    dragElement(document.getElementById("content-3"));
+}
+if (document.getElementById("content-4")) {
+    dragElement(document.getElementById("content-4"));
+}
+if (document.getElementById("content-5")) {
+    dragElement(document.getElementById("content-5"));
+}
+
+if (document.getElementById("content-6")) {
+    dragElement(document.getElementById("content-6"));
+}
+
+if (document.getElementById("content-7")) {
+    dragElement(document.getElementById("content-7"));
+}
 
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -1232,7 +1492,7 @@ function dragElement(elmnt) {
         // otherwise, move the DIV from anywhere inside the DIV:
         elmnt.onmousedown = dragMouseDown;
     }
-    
+
     function dragMouseDown(e) {
         e = e || window.event;
         // e.preventDefault();
@@ -1274,7 +1534,6 @@ if (document.querySelector("#content-2 .dialog-box-header")) {
 if (document.querySelector("#content-3 .dialog-box-header")) {
     document.querySelector("#content-3 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
-
 if (document.querySelector("#content-4 .dialog-box-header")) {
     document.querySelector("#content-4 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
@@ -1291,7 +1550,6 @@ if (document.querySelector("#content-7 .dialog-box-header")) {
     document.querySelector("#content-7 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
 }
 
-
 function hideDialogBox() {
     document.querySelector("#content-1").classList.add("dropdown-hidden"); 
     document.querySelector("#content-2").classList.add("dropdown-hidden"); 
@@ -1300,10 +1558,6 @@ function hideDialogBox() {
     document.querySelector("#content-5").classList.add("dropdown-hidden"); 
     document.querySelector("#content-6").classList.add("dropdown-hidden"); 
     document.querySelector("#content-7").classList.add("dropdown-hidden"); 
-    const modal = document.getElementById("myModal");
-    // modal.style.display = "none";
-    hideSidebar();
-    disableTransColCode();
 } 
 
 
@@ -1315,10 +1569,6 @@ document.querySelector("#btn-copy").addEventListener("click", copyHTML);
 
 function enableCSS() {
     document.getElementById("btn-copy-css").disabled=false;
-}
-
-function disableCSS() {
-    document.getElementById("btn-copy-css").disabled=true;
 }
 
 function copyHTML() {
