@@ -630,15 +630,15 @@ document.querySelector("#dd_focal_point").addEventListener("change", doVidFocalP
 function doVidFocalPoint() {
     let opt = document.querySelector("#dd_focal_point").value;
     if (opt==="0") {
-        document.querySelector(".container-media video").setAttribute('poster',assets_video_focal_center);
+        document.querySelector(".container-media video").setAttribute('poster',assets_poster_focal_center);
         document.querySelector(".container-media video").src = assets_video_focal_center;
     }
     else if (opt==="1") {
-        document.querySelector(".container-media video").setAttribute('poster',assets_video_focal_right);
+        document.querySelector(".container-media video").setAttribute('poster',assets_poster_focal_right);
         document.querySelector(".container-media video").src = assets_video_focal_right;
     }
     else if (opt==="2") {
-        document.querySelector(".container-media video").setAttribute('poster',assets_video_focal_left);
+        document.querySelector(".container-media video").setAttribute('poster',assets_poster_focal_left);
         document.querySelector(".container-media video").src = assets_video_focal_left;
     }
 }
