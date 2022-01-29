@@ -11,11 +11,16 @@ divs.forEach(el => el.addEventListener('click', event => {
     for (i = 1; i < 5; i++) {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
     }
+    const modal = document.getElementById("myModal");
+    const span = document.querySelector('#myModal .close-modal')
+    hideSidebar();
+    // modal.style.display = "none";
     // get id
     const str = event.target.id.toString();
     const id = str.charAt(str.length-1);
     const elItem_show = document.querySelector("#content-"+id);
     elItem_show.classList.remove("dropdown-hidden"); 
+
 }));
 
 // Hide menus when click on page
@@ -26,13 +31,81 @@ function hideMenus() {
     for (i = 1; i < 5; i++) {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
     }
+    const modal = document.getElementById("myModal");
+    // modal.style.display = "none";
+    hideSidebar();
+}
+
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc");
+    } else {
+        isEscape = (evt.keyCode === 27);
+    }
+    if (isEscape) {
+        hideMenus()
+    }
+}
+
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc");
+    } else {
+        isEscape = (evt.keyCode === 27);
+    }
+    if (isEscape) {
+        hideMenus()
+    }
 }
 
 /*
-//////////////// SECTION CLASS NAMES ///////////////
+//////////////// SECTION: THEME  ///////////////
 */
 
-let section_class = "theme-one";
+document.querySelector("#switch-section-theme").addEventListener("change", doSectionTheme);
+
+let section_theme;
+
+function doSectionTheme() {
+    hideMenus();
+    const rbs = document.querySelectorAll("input[name='switch-one']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    // remove all styles
+    var hs = document.querySelectorAll('style');
+    for (var i=0, max = hs.length; i < max; i++) {
+        hs[i].parentNode.removeChild(hs[i]);
+    }
+
+    document.querySelector("section").classList.remove("section-bg-gradient"); 
+    document.querySelector("#bg_gradient_options").style.display='none';
+
+    if (selectedValue==="light") {
+        document.querySelector("section").classList.remove("theme-dark"); 
+        document.querySelector("section").classList.add("theme-light"); 
+    }
+    else if (selectedValue==="dark") {
+        document.querySelector("section").classList.remove("theme-light"); 
+        document.querySelector("section").classList.add("theme-dark"); 
+    }
+    disableCSS();
+}
+
+/*
+//////////////// SECTION: CLASS NAMES ///////////////
+*/
+
+let section_class = "section-style-1";
 document.querySelector("#dd_className").addEventListener("change", doClassName);
 
 function doClassName() {
@@ -42,65 +115,102 @@ function doClassName() {
 
     if ( opt==="0") {
         removeClassNames();
-        el_section.classList.add("theme-one");
-        section_class = "theme-one";
+        el_section.classList.add("section-style-1");
+        section_class = "section-style-1";
     }
     
     else if ( opt==="1") {
         removeClassNames();
-        el_section.classList.add("theme-two");
-        section_class = "theme-two";
+        el_section.classList.add("section-style-2");
+        section_class = "section-style-2";
     }
 
     else if ( opt==="2") {
         removeClassNames();
-        el_section.classList.add("theme-three");
-        section_class = "theme-three";
+        el_section.classList.add("section-style-3");
+        section_class = "section-style-3";
     }
 
     else if ( opt==="3") {
         removeClassNames();
-        el_section.classList.add("theme-four");
-        section_class = "theme-four";
-    }
-    else if ( opt==="4") {
-        removeClassNames();
-        el_section.classList.add("theme-five");
-        section_class = "theme-five";
-    }
-    else if ( opt==="5") {
-        removeClassNames();
-        el_section.classList.add("theme-six");
-        section_class = "theme-six";
+        el_section.classList.add("section-style-4");
+        section_class = "section-style-4";
     }
 }
 
 function removeClassNames() {
     const el_section = document.querySelector("section");
-    el_section.classList.remove("theme-one");
-    el_section.classList.remove("theme-two");
-    el_section.classList.remove("theme-three");
-    el_section.classList.remove("theme-four");
-    el_section.classList.remove("theme-five");
-    el_section.classList.remove("theme-six");
+    el_section.classList.remove("section-style-1");
+    el_section.classList.remove("section-style-2");
+    el_section.classList.remove("section-style-3");
+    el_section.classList.remove("section-style-4");
+}
+
+
+/*
+//////////////// SECTION: ALIGN ///////////////
+*/
+
+document.querySelector("#dd_align_desktop_section").addEventListener("change", doAlignDesktopSection);
+    
+function doAlignDesktopSection() {
+    let opt = document.querySelector("#dd_align_desktop_section").value;
+    console.log("got here align desktop");
+    if (opt==="0") {
+        document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
+    }
+
+    else if (opt==="1") {
+        document.querySelector("#HTML-Content section").classList.add("text-center-desktop");   
+        console.log("got here center-align desktop");
+    }
+}
+
+document.querySelector("#dd_align_mobile_section").addEventListener("change", doAlignMobileSection);
+
+function doAlignMobileSection() {
+    let opt = document.querySelector("#dd_align_mobile_section").value;
+    if (opt==="0") {
+        document.querySelector("section").classList.remove("text-center-mobile");
+    }
+    else if (opt==="1") {
+        document.querySelector("section").classList.add("text-center-mobile"); 
+    }
+}
+
+/*
+//////////////// SIDE FLYOUT WITH COLOR PICKER  ///////////////
+*/
+
+function showSidebar() {
+    document.querySelector("#myModal").classList.add("display-sidebar");
+    document.querySelector("#myModal").classList.remove("hide-sidebar");
+}
+
+function hideSidebar() {
+    document.querySelector("#myModal").classList.add("hide-sidebar");
+    document.querySelector("#myModal").classList.remove("show-sidebar");
+    document.querySelector("#myModal").scrollTo(0, 0);
 }
 
 /*
 //////////////// HEADER COLOURS ///////////////
 */
     // Get the modal
-    var modal = document.getElementById("myModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on <span> (x), close the modal
+    const modal = document.getElementById("myModal");
+    const span = document.querySelector('#myModal .close-modal')
     span.onclick = function() {
-        modal.style.display = "none";
+        // modal.style.display = "none";
+        hideSidebar();
+        disableTransColCode();
     }
     
     // When the user clicks anywhere outside the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            // modal.style.display = "none";
+            hideSidebar();
+            disableTransColCode();
         }
     }
 
@@ -116,8 +226,8 @@ function removeClassNames() {
         // get button id
         btn_id = event.target.id.toString();
         console.log("Button ID: "+btn_id);
+
         if (!btn_id) {
-            // alert("btn_id problem");
             document.querySelector("#box-msg").classList.add("is-visible");
             document.querySelector("#box-msg").classList.remove("is-hidden");
         }
@@ -136,276 +246,348 @@ function removeClassNames() {
     }
 
     function displayModal() {
-        modal.style.display = "block";
+        if ((btn_id === "btn_a_primary_passive_bg") || (btn_id === "btn_a_primary_active_bg") ||(btn_id === "btn_a_primary_passive_border") || (btn_id === "btn_a_primary_active_border") || (btn_id === "btn_a_secondary_passive_bg") || (btn_id === "btn_a_secondary_active_bg") ||(btn_id === "btn_a_secondary_passive_border") || (btn_id === "btn_a_secondary_active_border") ) {
+            enableTransColCode();
+        }
+        // modal.style.display = "block";
+        if (btn_id === "btn_bg") {
+            const el_section = document.querySelector("section");
+            el_section.classList.remove("section-bg-gradient");
+            // console.log("removed gradient");
+            document.querySelector("#bg_gradient_options").style.display='none';
+            document.querySelector("#btn_gradient_input_group").style.display='flex';
+            document.querySelector("#content-1 .dialog-box hr").style.display='block';
+
+            if ( arrCSS.some(e => e.includes("background-image:")) ) {
+                // console.log("Already as style in HEAD");
+                const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
+                arrCSS.splice(arrPos, 1);
+                if (arrCSS.length==0) {
+                    disableCSS();
+                }
+            }
+        }
+        showSidebar();
         event.preventDefault();
     }
 
-    document.querySelector("#picker-box").addEventListener('click', suppressBubblingClicks);
+    document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
     
-    function suppressBubblingClicks(event) {
-        // event.preventDefault();
+    function handleLabelClick(event) {
         event.stopPropagation();
         const label = event.target.closest("label");
         if (label && this.contains(label)) {
-            event.stopPropagation();
             // Ignore this click
             return;
         }
         // console.log('Label click detected');
         const span = event.target.closest("span");
         if (span && this.contains(span)) {
-            event.stopPropagation();
             // Ignore this click
             return;
         }
         // console.log('Span click detected');
     }
 
-        function getColorID(color_code) {
-            if (btn_id === "btn_bg") {
-                newStyle = "."+section_class+" { background-color: var("+color_code+") }\n";
-                sub_string = "."+section_class+" { background-color";
-                doUpdateArray(sub_string,newStyle)
-            }
-
-            /* Section upper label */
-            else if (btn_id === "btn_upper_label") {
-                newStyle = "."+section_class+" .upper-label { color: var("+color_code+") }\n";
-                sub_string = ".upper-label";
-                doUpdateArray(sub_string,newStyle);
-            }
-                        
-            /* Section headings */
-            else if (btn_id === "btn_subhead") {
-                newStyle = "."+section_class+" h2 { color: var("+color_code+") } \n." +section_class+" h3 { color: var("+color_code+") } \n."+section_class+" .upper-label { color: var("+color_code+") }\n"; 
-                sub_string = "h2";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* Section text */
-            else if (btn_id === "btn_text") {
-                newStyle = "."+section_class+" p { color: var("+color_code+") }\n." +section_class+" li { color: var("+color_code+") }\n"; 
-                sub_string = "p { color";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* Hyperlink text colour: passive */
-            else if (btn_id === "btn_a_passive") {
-                newStyle = "."+section_class+" a:not(.btn):link { color: var("+color_code+") }\n." +section_class+ " a:not(.btn):visited { color: var("+color_code+") }\n";
-                sub_string = "a:not(.btn):link { color";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* Hyperlink text colour: active */
-            else if (btn_id === "btn_a_active") {
-                newStyle = "."+section_class+" a:not(.btn):focus { color: var("+color_code+") }\n." +section_class+ " a:not(.btn):hover { color: var("+color_code+") } \n." +section_class+ " a:not(.btn):active { color: var("+color_code+") }\n";
-                sub_string = "a:not(.btn):focus { color";
-                doUpdateArray(sub_string,newStyle);
-           }
-
-            /* Hyperlink background colour: passive */
-            else if (btn_id === "btn_a_passive_bg") {
-                newStyle = "."+section_class+" a:not(.btn):link { background-color: var("+color_code+") }\n." +section_class+ " a:not(.btn):visited { background-color: var("+color_code+") }\n";
-                sub_string = "a:not(.btn):link { background-color";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* Hyperlink background colour: active */
-            else if (btn_id === "btn_a_active_bg") {
-                newStyle = "."+section_class+" a:not(.btn):focus { background-color: var("+color_code+") } \n." +section_class+ " a:not(.btn):hover { background-color: var("+color_code+") }\n." +section_class+ " a:not(.btn):active { background-color: var("+color_code+") }\n";
-                sub_string = "a:not(.btn):focus { background-color";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* Primary button text colour: passive */
-            else if (btn_id === "btn_a_primary_passive_text") {
-                newStyle = "."+section_class+" a.btn-primary:link { color: var("+color_code+") } \n." +section_class+ " a.btn-primary:visited { color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:link { color";
-                doUpdateArray(sub_string,newStyle);
-            }
-            /* Primary button text colour: active */
-           else if (btn_id === "btn_a_primary_active_text") {
-                newStyle = "."+section_class+" a.btn-primary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:focus { color";
-                doUpdateArray(sub_string,newStyle);
-            } 
-            /* Primary button background colour: passive */
-            else if (btn_id === "btn_a_primary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-primary:link { background-color";
-                doUpdateArray(sub_string,newStyle);
-            }
-            /* Primary button background colour: active */
-            else if (btn_id === "btn_a_primary_active_bg") {
-                newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+color_code+") }\n";
-                sub_string = "header a.btn-primary:focus { background-color";
-                doUpdateArray(sub_string,newStyle);
-            }
-            /* Primary button border colour: passive */
-            else if (btn_id === "btn_a_primary_passive_border") {
-                newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+color_code+") }\n";
-                sub_string = ".btn-primary:link { border-color";
-                doUpdateArray(sub_string,newStyle);
-            }
-            /* Primary button border colour: active */
-            else if (btn_id === "btn_a_primary_active_border") {
-                newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+color_code+") }\n";
-                sub_string = "header a.btn-primary:focus";
-                doUpdateArray(sub_string,newStyle);
-            }
-
-            /* secondary button text colour: passive */
-            else if (btn_id === "btn_a_secondary_passive_text") {
-                newStyle = "."+section_class+" a.btn-secondary:link { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { color";
-                doUpdateArray(sub_string,newStyle);       
-            }
-            /* secondary button text colour: active */
-            else if (btn_id === "btn_a_secondary_active_text") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:focus { color";
-                doUpdateArray(sub_string,newStyle); 
-            }
-            /* secondary button background colour: passive */
-            else if (btn_id === "btn_a_secondary_passive_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { background-color";
-                doUpdateArray(sub_string,newStyle); 
-
-            }
-            /* secondary button background colour: active */
-            else if (btn_id === "btn_a_secondary_active_bg") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { background-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:focus { background-color";
-                doUpdateArray(sub_string,newStyle); 
-            }
-            /* secondary button border colour: passive */
-            else if (btn_id === "btn_a_secondary_passive_border") {
-                newStyle = "."+section_class+" a.btn-secondary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:visited { border-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:link { border-color";
-                doUpdateArray(sub_string,newStyle); 
-            }
-            /* secondary button border colour: active */
-            else if (btn_id === "btn_a_secondary_active_border") {
-                newStyle = "."+section_class+" a.btn-secondary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-secondary:active { border-color: var("+color_code+") }\n";
-                sub_string = "a.btn-secondary:focus { border-color";
-                doUpdateArray(sub_string,newStyle); 
-            }
-
-            /* Icons colour */
-            else if (btn_id === "btn_icon_color") {
-                newStyle = "."+section_class+" figure.icon var("+color_code+") }\n";
-                sub_string = "icon";
-                doUpdateArray(sub_string,newStyle); 
-            }
-
-            style = document.createElement('style');
-            document.head.appendChild(style);
-            style.appendChild(document.createTextNode(newStyle));
-            document.getElementById("btn-copy-css").disabled=false;
-            // console.log("Button ID: "+btn_id);
-            // console.log("newStyle: "+newStyle);
-    }
-
-    function doUpdateArray(sub_string,newStyle) {
-        if ( arrCSS.some(e => e.includes(sub_string)) ) {
-            const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
-            arrCSS.splice(arrPos, 1);
-            arrCSS.push(newStyle);
+    function getColorID(color_code) {
+        if (document.querySelector("section.theme-light")) {
+            section_theme = "section."+section_class+".theme-light";
         }
-        else {
-            arrCSS.push(newStyle);
+        else if (document.querySelector("section.theme-dark")) {
+            section_theme = "section."+section_class+".theme-dark";
         }
-   }
 
-/*
-//////////////// SECTION: ALIGN ///////////////
-*/
+        /* Header background */
+        if (btn_id === "btn_bg") {
+            newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
+            sub_string = section_theme+ " { background-color: {";
+            doUpdateArray(sub_string,newStyle);
+        }
 
-document.querySelector("#dd_section_align").addEventListener("change", doSectionAlign);
+        else if (btn_id === "btn_gradient_from") {
+            sub_string = "linear-gradient";
+            let arrThree = doGradientSplit();
+            let item_deg =  arrThree[0];
+            let item_from = arrThree[1];
+            let item_to =   arrThree[2];
+            console.log("Old From Color: "+item_from);
+            console.log("New From Color: "+color_code);
+            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
+            doUpdateArray(sub_string,newStyle);
+        }
+        
+        else if (btn_id === "btn_gradient_to") {
+            sub_string = "linear-gradient";
+            let arrThree = doGradientSplit();
+            let item_deg =  arrThree[0];
+            let item_from = arrThree[1];
+            let item_to =   arrThree[2];
+            console.log("Old To Color: "+item_to);
+            console.log("New To Color: "+color_code);
+            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
+            console.log(newStyle);
+            doUpdateArray(sub_string,newStyle);
+        }
 
-function doSectionAlign() {
-    let opt = document.querySelector("#dd_section_align").value;
-    const el_upperlabel = document.querySelector('section')
+        /* Header upper label */
+        else if (btn_id === "btn_upper_label") {
+            newStyle = section_theme+ " .container-upper-label { color: var("+color_code+") }\n";
+            sub_string = ".container-upper-label";
+            doUpdateArray(sub_string,newStyle);
+        }
+                    
+        /* Header h2 */
+        else if (btn_id === "btn_head") {
+            newStyle = section_theme+ " h2 { color: var("+color_code+") }\n";
+            sub_string = "h2";
+            doUpdateArray(sub_string,newStyle);
+        }
 
-    if (opt==="0") {
-        el_upperlabel.classList.remove("text-center");
+        /* Header h3 */
+        else if (btn_id === "btn_subhead") {
+            newStyle = section_theme+ " h3 { color: var("+color_code+") }\n";
+            sub_string = "h3";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Section text */
+        else if (btn_id === "btn_text") {
+            newStyle = section_theme+ " p { color: var("+color_code+") } \n"+section_theme+" li { color: var("+color_code+") } \n"; 
+            sub_string = "p { color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* ======= PRIMARY BUTTONS =========*/
+        
+        /* Text colour: passive */
+        else if (btn_id === "btn_a_primary_passive_text") {
+            newStyle = section_theme+" a.btn-primary:link,\n"+section_theme+" a.btn-primary:visited { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-primary:visited { color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Text colour: active */
+        else if (btn_id === "btn_a_primary_active_text") {
+            newStyle = section_theme+" a.btn-primary:focus,\n"+section_theme+" a.btn-primary:hover,\n"+section_theme+" a.btn-primary:active { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-primary:active { color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Background colour: passive */
+        else if (btn_id === "btn_a_primary_passive_bg") {
+            newStyle = section_theme+" a.btn-primary:link,\n"+section_theme+" a.btn-primary:visited { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-primary:visited { background-color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Background colour: active */
+        else if (btn_id === "btn_a_primary_active_bg") {
+            newStyle = section_theme+" a.btn-primary:focus,\n"+section_theme+" a.btn-primary:hover,\n"+section_theme+" a.btn-primary:active { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-primary:active { background-color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Border colour: passive */
+        else if (btn_id === "btn_a_primary_passive_border") {
+            newStyle = section_theme+" a.btn-primary:link,\n"+section_theme+" a.btn-primary:visited { border-color: var("+color_code+") }\n\n";
+            sub_string = ".btn-primary:visited { border-color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Border colour: active */
+        else if (btn_id === "btn_a_primary_active_border") {
+            newStyle = section_theme+" a.btn-primary:focus,\n"+section_theme+" a.btn-primary:hover,\n"+section_theme+" a.btn-primary:active { border-color: var("+color_code+") }\n\n";
+            sub_string = "btn-primary:active { border-color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* ========== SECONDARY BUTTONS =========== */
+
+        /* Text colour: passive */
+        else if (btn_id === "btn_a_secondary_passive_text") {
+            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:visited { color";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+        /* Text colour: active */
+        else if (btn_id === "btn_a_secondary_active_text") {
+            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:focus { color";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+        /* Background colour: passive */
+        else if (btn_id === "btn_a_secondary_passive_bg") {
+            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:visited { background";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+        /* Background colour: active */
+        else if (btn_id === "btn_a_secondary_active_bg") {
+            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:active { background";
+            doUpdateArray(sub_string,newStyle); 
+        }
+        
+        /* Border colour: passive */
+        else if (btn_id === "btn_a_secondary_passive_border") {
+            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:visited { border";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+        /* Border colour: active */
+        else if (btn_id === "btn_a_secondary_active_border") {
+            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn-secondary:active { border";
+            doUpdateArray(sub_string,newStyle); 
+        }
+        
+        style = document.createElement('style');
+        document.head.appendChild(style);
+        style.appendChild(document.createTextNode(newStyle));
+        enableCSS();
+}
+
+function doUpdateArray(sub_string,newStyle) {
+    if ( arrCSS.some(e => e.includes(sub_string)) ) {
+        const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+        arrCSS.splice(arrPos, 1);
+        arrCSS.push(newStyle);
     }
-
-    else if (opt==="1") {
-        el_upperlabel.classList.add("text-center");
+    else {
+        arrCSS.push(newStyle);
     }
 }
 
-    function enableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-        document.getElementById("btn_a_secondary_passive_text").disabled=false;
-        document.getElementById("btn_a_secondary_active_text").disabled=false;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
-        document.getElementById("btn_a_secondary_active_bg").disabled=false;
-        document.getElementById("btn_a_secondary_passive_border").disabled=false;
-        document.getElementById("btn_a_secondary_active_border").disabled=false;
-    }
+/*
+//////////////// COLORS: TRANSPARENT OPTION ////////////////////
+*/
 
-    function enablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-    }
+function enableTransColCode() {
+    document.getElementById("color-transparent").style.display="block";
+}
 
-    function enableSecondaryButtons() {
-        document.getElementById("btn_a_secondary_passive_text").disabled=false;
-        document.getElementById("btn_a_secondary_active_text").disabled=false;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=false;
-        document.getElementById("btn_a_secondary_active_bg").disabled=false;
-        document.getElementById("btn_a_secondary_passive_border").disabled=false;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;        
-    }
-
-    function disableAllButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-        document.getElementById("btn_a_secondary_passive_text").disabled=true;
-        document.getElementById("btn_a_secondary_active_text").disabled=true;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-        document.getElementById("btn_a_secondary_active_bg").disabled=true;
-        document.getElementById("btn_a_secondary_passive_border").disabled=true;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;
-    }
-
-    function disablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-    }
-
-    function disableSecondaryButtons() {
-        document.getElementById("btn_a_secondary_passive_text").disabled=true;
-        document.getElementById("btn_a_secondary_active_text").disabled=true;
-        document.getElementById("btn_a_secondary_passive_bg").disabled=true;
-        document.getElementById("btn_a_secondary_active_bg").disabled=true;
-        document.getElementById("btn_a_secondary_passive_border").disabled=true;
-        document.getElementById("btn_a_secondary_active_border").disabled=true;        
-    }
-
+function disableTransColCode() {
+    document.getElementById("color-transparent").style.display="none";
+}
 
 /*
-//////////////// COLOURS: ENABLE/DISABLE BACKGROUND ///////////////
+//////////////// SECTION: GRADIENT BACKGROUND ////////////////////
+*/
+
+document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
+
+function doBgGradient() {
+    if (document.querySelector("section.theme-light")) {
+        section_theme = "section."+section_class+".theme-light";
+    }
+    else if (document.querySelector("section.theme-dark")) {
+        section_theme = "section."+section_class+".theme-dark";
+    }
+
+    // Add default gradient
+    const el_section = document.querySelector("section");
+    el_section.classList.add("section-bg-gradient");
+    // Show/hide gradient options
+    document.querySelector("#bg_gradient_options").style.display='block';
+    document.querySelector("#btn_gradient_input_group").style.display='none';
+    document.querySelector("#content-1 .dialog-box hr").style.display='none';
+       
+    newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient(var(--section-bg-gradient-deg), var(--section-bg-gradient-from-light), var(--section-bg-gradient-to-light)) } \n";
+
+    sub_string = "linear-gradient";
+    doUpdateArray(sub_string,newStyle);
+    style = document.createElement('style');
+    document.head.appendChild(style);
+    style.appendChild(document.createTextNode(newStyle));
+    enableCSS();
+}
+
+function doGradientSplit() {
+    sub_string = "linear-gradient";
+    const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+    let el_old_bg_value = arrCSS[arrPos];
+    el_old_bg_value = el_old_bg_value.replace(section_theme+".section-bg-gradient { background-image: linear-gradient(", "");
+    el_old_bg_value = el_old_bg_value.replace(")) }", ")")
+    return el_old_bg_value.split(/[\s,]+/)
+}
+
+document.querySelector("#switch-bg-gradient").addEventListener("change", doDegGradient);
+
+function doDegGradient() {
+    const rbs = document.querySelectorAll("input[name='switch-gradient']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    console.log("Gradient direction: "+selectedValue);
+    let arrThree = doGradientSplit();
+    let item_deg =  arrThree[0];
+    let item_from = arrThree[1];
+    let item_to =   arrThree[2];
+    console.log("Old Deg: "+item_deg);
+    console.log("New Deg: "+selectedValue);
+    newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+selectedValue+", "+item_from+", "+item_to+") } \n";
+
+    sub_string = "linear-gradient";
+    // doUpdateArray(sub_string,newStyle);
+
+    style = document.createElement('style');
+    document.head.appendChild(style);
+    style.appendChild(document.createTextNode(newStyle));
+    enableCSS();
+}
+
+/*
+//////////////// TEXT ANIMATION ///////////////
+*/
+
+document.querySelector("#dd_text_slide").addEventListener("change", doTextAnimation);
+    
+function doTextAnimation() {
+    let opt = document.querySelector("#dd_text_slide").value;
+    if (opt==="0") {
+        removeTextAnimation();
+    }
+    else if (opt==="1") {
+        removeTextAnimation();
+        document.querySelector("#HTML-Content section").classList.add("slide-in-top");
+    }
+    else if (opt==="2") {
+        removeTextAnimation();
+        document.querySelector("#HTML-Content section").classList.add("slide-in-left");
+    }
+    else if (opt==="3") {
+        removeTextAnimation();
+        document.querySelector("#HTML-Content section").classList.add("slide-in-right");
+    }
+    else if (opt==="4") {
+        removeTextAnimation();
+        document.querySelector("#HTML-Content section").classList.add("slide-in-bottom");
+    }
+    else if (opt==="5") {
+        removeTextAnimation();
+        document.querySelector("#HTML-Content section").classList.add("fade-in");
+    }
+}
+
+function removeTextAnimation() {
+    document.querySelector("#HTML-Content section").classList.remove("slide-in-top");
+    document.querySelector("#HTML-Content section").classList.remove("slide-in-left");
+    document.querySelector("#HTML-Content section").classList.remove("slide-in-right");
+    document.querySelector("#HTML-Content section").classList.remove("slide-in-bottom");
+    document.querySelector("#HTML-Content section").classList.remove("fade-in");
+}
+
+/*
+//////////////// COLOURS: ENABLE/DISABLE ///////////////
 */
 
 function disableBgColor() {
@@ -425,56 +607,9 @@ function enableLabelColor() {
 }
 
 /*
-//////////////// SECTIONS: PARAGRAPHS ///////////////
-*/
-
-document.querySelector("#dd_paraNos").addEventListener("change", doParaNos);
-
-function doParaNos() {
-    let opt = document.querySelector("#dd_paraNos").value;
-    para_nos = parseInt(opt) + 1;
-    // console.log("Para Nos: "+para_nos);
-    removeH3();
-    reduceParas();
-    removeImage();
-    removeVideo();
-    resetImageEffects();
-    removeLists();
-    document.getElementById("vis_type_0").checked=true;
-    document.getElementById("vid_type_0").checked=true;
-    document.getElementById("dd_image_shadows").disabled=true;
-    document.getElementById("dd_image_borders").disabled=true;
-    document.getElementById("dd_image_corners").disabled=true;
-    document.getElementById("dd_image_rotate").disabled=true;
-
-    for (let i=1; i <= opt; i++) {
-        document.querySelector("section p").insertAdjacentHTML("afterend", content_paras);
-    }
-    if (para_nos === 1) {
-        document.getElementById("dd_h3").disabled=true;
-    }
-    else {
-        document.getElementById("dd_h3").disabled=false;
-    }
-}
-
-function reduceParas() {
-    if (document.querySelector("p")) {
-        const el_para = document.querySelectorAll("p");
-        for (var i = 0 ; i < el_para.length ; i++) {
-            el_para[i].remove();
-        }
-    }
-
-    //Add one para
-    document.querySelector("section h2").insertAdjacentHTML("afterend",content_paras);
-}
-
-/*
 //////////////// TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.getElementById("dd_upperLabel").value="0";
 document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
@@ -486,23 +621,72 @@ function doUpperLabel() {
     // add
     else if (opt==="1") {
         removeUpperLabel();
-        document.querySelector("h2").insertAdjacentHTML("beforebegin", "<div class=\"upper-label\">Upper Label Text<\/div>\n");
+        document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
     }
 }
 
 function removeUpperLabel() {
-    if (document.querySelector('.upper-label')) {
-        const upperLabel = document.querySelector('.upper-label');
+    if (document.querySelector('.container-upper-label')) {
+        const upperLabel = document.querySelector('.container-upper-label');
         upperLabel.remove();
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
         disableLabelColor();
         document.getElementById("dd_upperLabel").value="0";
     } 
 }
 
+/*
+//////////////// TEXT LENGTH ///////////////
+*/
+
+document.querySelector("#dd_text_length_h2").addEventListener("change", doTextLength);
+    
+function doTextLength() {
+    let opt = document.querySelector("#dd_text_length_h2").value;
+    if (opt==="0") {
+        document.querySelector("section h2").innerHTML = "Nice heading";
+    }
+    else if (opt==="1") {
+        document.querySelector("section h2").innerHTML = "Sometimes a short heading is not enough and a longer one is needed.";
+    }
+}
 
 /*
-//////////////// TEXT: STANDFIRST ///////////////
+//////////////// TEXT: H3 SUB-HEADINGS ////////////////////
+*/
+
+document.querySelector("#dd_h3").addEventListener("change", doH3);
+
+function doH3() {
+    let opt = document.querySelector("#dd_h3").value;
+    let para_nos  = 3;
+
+    if (opt==="0") {
+        removeH3();
+        document.getElementById("btn_subhead").disabled=true;
+    }
+       
+    else {
+        removeH3();
+        for (let i=2; i <= (para_nos); i++) {
+            document.querySelector("section p:nth-of-type("+i+")").insertAdjacentHTML("beforebegin", assets_header_h3);
+            document.getElementById("btn_subhead").disabled=false;
+        }
+    }    
+}
+
+function removeH3() {
+    if (document.querySelector("section h3")) {
+        const elH3 = document.querySelectorAll("section h3");
+        for (var i = 0 ; i < elH3.length ; i++) {
+            elH3[i].remove();
+        }
+    }
+}
+
+/*
+//////////////// TEXT: DECKHEAD / STANDFIRST ///////////////
 */
 
 document.querySelector("#dd_standfirst").addEventListener("change", doStandFirst);
@@ -518,36 +702,6 @@ function doStandFirst() {
        el_sf.classList.add("standfirst");
     }
 }
-
-/*
-//////////////// TEXT: H3 SUB-HEADINGS ////////////////////
-*/
-
-document.querySelector("#dd_h3").addEventListener("change", doH3);
-
-    function doH3() {
-        let opt = document.querySelector("#dd_h3").value;
-
-        if (opt==="0") {
-            removeH3();
-        }
-       
-        else {
-            removeH3();
-            for (let i=2; i <= (para_nos); i++) {
-                document.querySelector("section p:nth-of-type("+i+")").insertAdjacentHTML("beforebegin", content_h3);
-            }
-        }    
-    }
-
-    function removeH3() {
-        if (document.querySelector("section h3")) {
-            const elH3 = document.querySelectorAll("section h3");
-            for (var i = 0 ; i < elH3.length ; i++) {
-                elH3[i].remove();
-            }
-        }
-    }
 
 /*
 //////////////// TEXT: LISTS  ///////////////
@@ -583,128 +737,237 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
     }
 
 /*
-//////////////// BUTTONS ////////////////////
+//////////////// H2 SUB HEADING UNDER H1 ///////////////
 */
 
-document.querySelector("#dd_buttons").addEventListener("change", doButtons);
+// document.querySelector("#dd_h2").addEventListener("change", doH2);
+// document.getElementById("dd_h2").value="0";
 
-    function doButtons() {
-        let opt = document.querySelector("#dd_buttons").value;
-
-        if (opt==="0") {
-            removeButtons();
-            disableAllButtons();
-        }
-        // one button
-        else if (opt==="1") {
-            removeButtons();
-            enablePrimaryButtons();
-            disableSecondaryButtons();
-            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
-            document.getElementById("dd_buttons_align").disabled=false;
-            document.getElementById("dd_buttons_style").disabled=false;
-            document.getElementById("dd_buttons_icon").disabled=false;
-        }
-        // two buttons
-        else if (opt==="2") {
-            removeButtons();
-            enableAllButtons();
-            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
-            document.getElementById("dd_buttons_align").disabled=false;
-            document.getElementById("dd_buttons_style").disabled=false;
-            document.getElementById("dd_buttons_icon").disabled=false;
-        }
+function doH2() {
+    let opt = document.querySelector("#dd_h2").value;
+    //  regular
+    if (opt==="0") {
+        removeH2();
+        const elH2 = document.querySelector("h1");
+        elH2.insertAdjacentHTML("afterend", assets_header_h2);
+        document.getElementById("btn_subhead").disabled=false;
     }
-
-    function removeButtons() {
-        if (document.querySelector("section .container-btn")) {
-            const elBtn = document.querySelector("section .container-btn");
-            elBtn.remove();
-            document.getElementById("dd_buttons_align").value="0";
-            document.getElementById("dd_buttons_align").disabled=true;
-            document.getElementById("dd_buttons_style").value="0";
-            document.getElementById("dd_buttons_style").disabled=true;
-            document.getElementById("dd_buttons_icon").value="0";
-            document.getElementById("dd_buttons_icon").disabled=false;
-        }
+    
+    // None
+    else if (opt==="1") {
+        removeH2();
+        document.getElementById("btn_subhead").disabled=true;
     }
+}
+
+function removeH2() {
+    if (document.querySelector("h2")) {
+        const elH2 = document.querySelector("h2");
+        elH2.remove();
+    }
+}
 
 /*
-//////////////// BUTTONS: BUTTONS ALIGN ////////////////////
+//////////////// H1 AND H1 TEXT WIDTH  ///////////////
 */
 
-document.querySelector("#dd_buttons_align").addEventListener("change", doButtonsAlign);
-
-    function doButtonsAlign() {
-        let opt = document.querySelector("#dd_buttons_align").value;
-        // remove (left)
-        if (opt==="0") {
-            const el_btn = document.querySelector("section .container-btn");
-            el_btn.classList.remove("text-center");
-        }
-        // add (centre)
-        else if (opt==="1") {
-            const el_btn = document.querySelector("section .container-btn");
-            el_btn.classList.add("text-center");
-        }
+document.querySelector("#dd_section_width").addEventListener("change", doTextWidth);
+    
+function doTextWidth() {
+    let opt = document.querySelector("#dd_section_width").value;
+    if (opt==="0") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.remove("section-width-1140px");
     }
+    else if (opt==="1") {
+        document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.add("section-width-1024px");
+    }
+    else if (opt==="2") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.add("section-width-1140px");
+    }
+}
 
 
 /*
-//////////////// BUTTONS: BUTTONS CORNER STYLE ////////////////////
+//////////////// SECTION: BUTTONS ///////////////
 */
 
-    document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
-
-    function doButtonsStyle() {
-        let opt = document.querySelector("#dd_buttons_style").value;
-        // remove
-        if (opt==="0") {
-            removeButtonsStyle();
-        }
-        // soft
-        else if (opt==="1") {
-            removeButtonsStyle();
-            if (document.querySelector(".btn-primary")) {
-                const el_btn_primary = document.querySelector("a.btn-primary");
-                el_btn_primary.classList.add("btn-soft");
-            }
-    
-            if (document.querySelector(".btn-secondary")) {
-                const el_btn_secondary = document.querySelector("a.btn-secondary");
-                el_btn_secondary.classList.add("btn-soft");
-            }
-        }
-
-        // rounded
-        else if (opt==="2") {
-            removeButtonsStyle();
-            if (document.querySelector(".btn-primary")) {
-                const el_btn_primary = document.querySelector("a.btn-primary");
-                el_btn_primary.classList.add("btn-rounded");
-            }
-    
-            if (document.querySelector(".btn-secondary")) {
-                const el_btn_secondary = document.querySelector("a.btn-secondary");
-                el_btn_secondary.classList.add("btn-rounded");
-            }
-        }
+document.getElementById("dd_section_buttons").value="0";
+document.querySelector("#dd_section_buttons").addEventListener("change", doSectionButtons);
+function doSectionButtons() {
+    const opt = document.querySelector("#dd_section_buttons").value;
+    // remove
+    if (opt==="0") {
+        removeSectionButtons();
+        disableAllButtons();
+    }
+    // one button
+    else if (opt==="1") {
+        removeSectionButtons();
+        disableAllButtons();
+        enablePrimaryButtons();
+        document.querySelector("section p:first-of-type").insertAdjacentHTML("afterend",assets_section_buttons_one);
+        document.getElementById("dd_buttons_style").disabled=false;
+        document.getElementById("dd_buttons_style").value="0";
+        document.getElementById("dd_buttons_icon").disabled=false;
+        document.getElementById("dd_buttons_icon").value="1";
     }
 
-    function removeButtonsStyle() {
+    // two buttons
+    else if (opt==="2") {
+        removeSectionButtons();
+        enableAllButtons();
+        document.querySelector("section p:first-of-type").insertAdjacentHTML("afterend", assets_section_buttons_pair);
+        document.getElementById("dd_buttons_icon").disabled=false;
+        document.getElementById("dd_buttons_style").value="0";
+        document.getElementById("dd_buttons_style").disabled=false;
+        document.getElementById("dd_buttons_icon").value="0";
+    }
+}
 
+function removeSectionButtons() {
+    const elements = document.getElementsByClassName("container-btn");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+    document.getElementById("dd_buttons_icon").disabled=true;
+    document.getElementById("dd_buttons_style").disabled=true;
+}
+
+function enableAllButtons() {
+    document.getElementById("dd_buttons_icon").disabled=false;
+    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("btn_a_primary_passive_text").disabled=false;
+    document.getElementById("btn_a_primary_active_text").disabled=false;
+    document.getElementById("btn_a_primary_passive_bg").disabled=false;
+    document.getElementById("btn_a_primary_active_bg").disabled=false;
+    document.getElementById("btn_a_primary_passive_border").disabled=false;
+    document.getElementById("btn_a_primary_active_border").disabled=false;
+    document.getElementById("btn_a_secondary_passive_text").disabled=false;
+    document.getElementById("btn_a_secondary_active_text").disabled=false;
+    document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+    document.getElementById("btn_a_secondary_active_bg").disabled=false;
+    document.getElementById("btn_a_secondary_passive_border").disabled=false;
+    document.getElementById("btn_a_secondary_active_border").disabled=false;
+}
+
+function enablePrimaryButtons() {
+    document.getElementById("dd_buttons_icon").disabled=false;
+    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("btn_a_primary_passive_text").disabled=false;
+    document.getElementById("btn_a_primary_active_text").disabled=false;
+    document.getElementById("btn_a_primary_passive_bg").disabled=false;
+    document.getElementById("btn_a_primary_active_bg").disabled=false;
+    document.getElementById("btn_a_primary_passive_border").disabled=false;
+    document.getElementById("btn_a_primary_active_border").disabled=false;
+}
+
+function enableSecondaryButtons() {
+    document.getElementById("dd_buttons_icon").disabled=false;
+    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("btn_a_secondary_passive_text").disabled=false;
+    document.getElementById("btn_a_secondary_active_text").disabled=false;
+    document.getElementById("btn_a_secondary_passive_bg").disabled=false;
+    document.getElementById("btn_a_secondary_active_bg").disabled=false;
+    document.getElementById("btn_a_secondary_passive_border").disabled=false;
+    document.getElementById("btn_a_secondary_active_border").disabled=true;        
+}
+
+function disableAllButtons() {
+    document.getElementById("dd_buttons_style").value="0";
+    document.getElementById("dd_buttons_icon").value="0";
+    document.getElementById("dd_buttons_icon").disabled=true;
+    document.getElementById("btn_upper_label").disabled=true;
+
+    document.getElementById("btn_a_primary_passive_text").disabled=true;
+    document.getElementById("btn_a_primary_active_text").disabled=true;
+    document.getElementById("btn_a_primary_passive_bg").disabled=true;
+    document.getElementById("btn_a_primary_active_bg").disabled=true;
+    document.getElementById("btn_a_primary_passive_border").disabled=true;
+    document.getElementById("btn_a_primary_active_border").disabled=true;
+    document.getElementById("btn_a_secondary_passive_text").disabled=true;
+    document.getElementById("btn_a_secondary_active_text").disabled=true;
+    document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+    document.getElementById("btn_a_secondary_active_bg").disabled=true;
+    document.getElementById("btn_a_secondary_passive_border").disabled=true;
+    document.getElementById("btn_a_secondary_active_border").disabled=true;
+}
+
+function disablePrimaryButtons() {
+    document.getElementById("btn_a_primary_passive_text").disabled=true;
+    document.getElementById("btn_a_primary_active_text").disabled=true;
+    document.getElementById("btn_a_primary_passive_bg").disabled=true;
+    document.getElementById("btn_a_primary_active_bg").disabled=true;
+    document.getElementById("btn_a_primary_passive_border").disabled=true;
+    document.getElementById("btn_a_primary_active_border").disabled=true;
+}
+
+function disableSecondaryButtons() {
+    document.getElementById("btn_a_secondary_passive_text").disabled=true;
+    document.getElementById("btn_a_secondary_active_text").disabled=true;
+    document.getElementById("btn_a_secondary_passive_bg").disabled=true;
+    document.getElementById("btn_a_secondary_active_bg").disabled=true;
+    document.getElementById("btn_a_secondary_passive_border").disabled=true;
+    document.getElementById("btn_a_secondary_active_border").disabled=true;        
+}
+
+/*
+//////////////// BUTTONS: CORNER STYLE ////////////////////
+*/
+
+document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
+
+function doButtonsStyle() {
+    let opt = document.querySelector("#dd_buttons_style").value;
+    // remove
+    if (opt==="0") {
+        removeButtonsStyle();
+    }
+    // soft
+    else if (opt==="1") {
+        removeButtonsStyle();
         if (document.querySelector(".btn-primary")) {
             const el_btn_primary = document.querySelector("a.btn-primary");
-            el_btn_primary.classList.remove("btn-soft");
-            el_btn_primary.classList.remove("btn-rounded");
+            el_btn_primary.classList.add("btn-soft");
         }
 
         if (document.querySelector(".btn-secondary")) {
             const el_btn_secondary = document.querySelector("a.btn-secondary");
-            el_btn_secondary.classList.remove("btn-soft");
-            el_btn_secondary.classList.remove("btn-rounded");
+            el_btn_secondary.classList.add("btn-soft");
         }
     }
+
+    // rounded
+    else if (opt==="2") {
+        removeButtonsStyle();
+        if (document.querySelector(".btn-primary")) {
+            const el_btn_primary = document.querySelector("a.btn-primary");
+            el_btn_primary.classList.add("btn-rounded");
+        }
+
+        if (document.querySelector(".btn-secondary")) {
+            const el_btn_secondary = document.querySelector("a.btn-secondary");
+            el_btn_secondary.classList.add("btn-rounded");
+        }
+    }
+}
+
+function removeButtonsStyle() {
+
+    if (document.querySelector(".btn-primary")) {
+        const el_btn_primary = document.querySelector("a.btn-primary");
+        el_btn_primary.classList.remove("btn-soft");
+        el_btn_primary.classList.remove("btn-rounded");
+    }
+
+    if (document.querySelector(".btn-secondary")) {
+        const el_btn_secondary = document.querySelector("a.btn-secondary");
+        el_btn_secondary.classList.remove("btn-soft");
+        el_btn_secondary.classList.remove("btn-rounded");
+    }
+}
 
 /*
 //////////////// BUTTONS: ICON POSITION ////////////////////
@@ -714,51 +977,161 @@ document.querySelector("#dd_buttons_icon").addEventListener("change", swapButton
 
 function swapButtonIcons() {
     let opt = document.querySelector("#dd_buttons_icon").value;
+    // Verify at least primary button exists
     if (document.querySelector("a.btn")) {      
-        let el_btn;
+        // Set up button icon and text content;
         const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
         const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
         const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
         const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
 
         if (opt==="0") {
-            if (document.querySelector("a.btn-primary")) {
-                const el_btn = document.querySelector("a.btn-primary");
-                btn_content = el_btn.innerHTML;
-                btn_content = btn_content.replace(icon_right_primary, icon_left_primary);
-                el_btn.innerHTML = btn_content;
-            }
-    
+            // Icon at left. Text at right.
             if (document.querySelector("a.btn-secondary")) {
-                const el_btn = document.querySelector("a.btn-secondary");
-                btn_content = el_btn.innerHTML;
-                btn_content = btn_content.replace(icon_right_secondary, icon_left_secondary);
-                el_btn.innerHTML = btn_content;
+                const el_btn_1 = document.querySelector("a.btn-primary");
+                el_btn_1.innerHTML = icon_left_primary;
+                const el_btn_2 = document.querySelector("a.btn-secondary");
+                el_btn_2.innerHTML = icon_left_secondary;
+            }
+            else {
+                const el_btn = document.querySelector("a.btn-primary");
+                el_btn.innerHTML = "<i class=\"fas fa-arrow-right\"></i><span>Start free trial<\/span>";
             }
         }
 
-        // move text to left, icon to right
-        if (opt==="1") {
+        // Text at left. Icon at right.
+        else if (opt==="1") {
+            if (document.querySelector("a.btn-secondary")) {
+                const el_btn_1 = document.querySelector("a.btn-primary");
+                el_btn_1.innerHTML = icon_right_primary;
+                const el_btn_2 = document.querySelector("a.btn-secondary");
+                el_btn_2.innerHTML = icon_right_secondary;
+            }
+            else {
+                const el_btn = document.querySelector("a.btn-primary");
+                el_btn.innerHTML = "<span>Start free trial<\/span><i class=\"fas fa-arrow-right\"><\/i>";
+            }
+        }
+         
+        // Text only. No icon.
+        else if (opt==="2") {
             if (document.querySelector("a.btn-primary")) {
                 const el_btn = document.querySelector("a.btn-primary");
-                btn_content = el_btn.innerHTML;
-                btn_content = btn_content.replace(icon_left_primary, icon_right_primary);
+                const btn_content = "<span>Order now</span>";
                 el_btn.innerHTML = btn_content;
             }
     
             if (document.querySelector("a.btn-secondary")) {
                 const el_btn = document.querySelector("a.btn-secondary");
-                btn_content = el_btn.innerHTML;
-                btn_content = btn_content.replace(icon_left_secondary, icon_right_secondary);
+                const btn_content = "<span>Learn more</span>";
                 el_btn.innerHTML = btn_content;
-            }
+            }       
         }
     }
 }
 
 /*
-//////////////// VISUALS: IMAGES  ///////////////
+//////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
 */
+
+/* Enable visual */
+document.querySelector("#dd_yn_vis").addEventListener("change",checkVis);
+
+function checkVis() {
+    let opt = document.querySelector("#dd_yn_vis").value;
+    if (opt==="1") { enableVis() }
+    else if (opt==="0") { disablsAllVisProps() }
+}
+
+function enableVis() {
+    // Enable all radio options
+    document.getElementById("vis_type_0").disabled=false;
+    document.getElementById("vis_type_1").disabled=false;
+    document.getElementById("vis_type_2").disabled=false;
+    document.getElementById("vis_type_3").disabled=false;
+    document.getElementById("vis_type_4").disabled=false;
+
+    //Enable visual width
+    document.getElementById("dd_yn_vis_width").disabled=false;
+    enableImgProps();
+    disableVidProps();
+
+    // Select first (picture) radio button
+    document.getElementById("vis_type_0").checked=true;
+
+    // Add picture
+    document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");
+}
+
+function disablsAllVisProps() {
+    // Disable all radio options
+    document.getElementById("vis_type_0").disabled=true;
+    document.getElementById("vis_type_1").disabled=true;
+    document.getElementById("vis_type_2").disabled=true;
+    document.getElementById("vis_type_3").disabled=true;
+    document.getElementById("vis_type_4").disabled=true;
+
+    // Disable visual width
+    document.getElementById("dd_yn_vis_width").disabled=true;
+    document.getElementById("dd_yn_vis_width").value="0";
+
+    document.getElementById("vis_type_0").checked=true;
+    disableImgProps();
+    disableVidProps();
+    // Remove image or video
+    if ((document.querySelector('figure')) && (document.querySelector("#dd_yn_vis").value)==="0") {
+        let section_block = document.querySelector('section');
+        let section_figure = document.querySelector('section figure');
+        section_block.removeChild(section_figure);
+    }
+}
+
+function disableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=true;
+    document.getElementById("dd_image_shadows").disabled=true;
+    document.getElementById("dd_image_borders").disabled=true;
+    const el_label_1 = document.querySelector("#label_img_shadows");
+    const el_label_2 = document.querySelector("#label_img_borders");
+    const el_label_3 = document.querySelector("#label_img_corners");
+    el_label_1.classList.add('disabled-gray');
+    el_label_2.classList.add('disabled-gray');
+    el_label_3.classList.add('disabled-gray');
+}
+
+function enableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=false;
+    document.getElementById("dd_image_shadows").disabled=false;
+    document.getElementById("dd_image_borders").disabled=false;
+    const el_label_1 = document.querySelector("#label_img_shadows");
+    const el_label_2 = document.querySelector("#label_img_borders");
+    const el_label_3 = document.querySelector("#label_img_corners");
+    el_label_1.classList.remove('disabled-gray');
+    el_label_2.classList.remove('disabled-gray');
+    el_label_3.classList.remove('disabled-gray');
+}
+
+function disableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_borders").disabled=true;
+    document.getElementById("dd_vid_shadows").disabled=true;
+    const el_label_1 = document.querySelector("#label_vid_shadows");
+    const el_label_2 = document.querySelector("#label_vid_borders");
+    el_label_1.classList.add('disabled-gray');
+    el_label_2.classList.add('disabled-gray');
+
+}
+
+function enableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_borders").disabled=false;
+    document.getElementById("dd_vid_shadows").disabled=false;
+    const el_label_1 = document.querySelector("#label_vid_shadows");
+    const el_label_2 = document.querySelector("#label_vid_borders");
+    el_label_1.classList.remove('disabled-gray');
+    el_label_2.classList.remove('disabled-gray');
+}
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
@@ -766,124 +1139,120 @@ function doVisType() {
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
     let selectedValue;
     
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
+    if (document.querySelector("#dd_yn_vis").value==="1") {
+        for (const rb of rbs) {
+            if (rb.checked) {
+                selectedValue = rb.value;
+                break;
+            }
         }
-    }
-  
-    if (selectedValue==="none") {
-        removeImage();
-        resetImageEffects();
-    }
+    
+        if (selectedValue==="none") {
+            removeVisual();
+            resetVisualEffects();
+        }
 
-    else if (selectedValue==="pictures") {
-        removeImage();
-        resetImageEffects();
-        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"https://picsum.photos/800\/480\" alt=\"Placeholder image\">\n\t<\/figure>\n");
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_image_rotate").disabled=false;
-    }
+        if (selectedValue==="pictures") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");        
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_0").checked=true;
+        }
 
-    else if (selectedValue==="transparent") {
-        removeImage();
-        resetImageEffects();
-        document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"https:\/\/munnelly.com/lunadoge\/assets\/img\//800x480-product-sneaker.png\" alt=\"Product Sneaker\">\n\t<\/figure>\n");
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=true;
-        document.getElementById("dd_image_rotate").disabled=false;
-    }
+        else if (selectedValue==="transparent") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_1").checked=true;
+        }
 
-    else if (selectedValue==="illustrations") {
-        removeImage();
-        resetImageEffects();
-        document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\//800x480-drawing.png\" alt=\"Product Sneaker\">\n\t<\/figure>\n");
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=true;
-        document.getElementById("dd_image_rotate").disabled=false;
+        else if (selectedValue==="illustrations") {
+            removeVisual();
+            resetVisualEffects();
+            disableVidProps();
+
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
+            document.getElementById("dd_image_shadows").disabled=false;
+            document.getElementById("dd_image_borders").disabled=false;
+            document.getElementById("dd_image_corners").disabled=false;
+            document.getElementById("dd_image_shadows").value="0";
+            document.getElementById("dd_image_borders").value="0";
+            document.getElementById("dd_image_corners").value="0";
+            document.getElementById("vis_type_2").checked=true;
+        }
+
+        else if (selectedValue==="vid-file") {
+            removeVisual();
+            resetVisualEffects();
+            disableImgProps();
+            enableVidProps();
+            document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"https:\/\/munnelly.com/lunadoge/assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
+            document.getElementById("vis_type_3").checked=true;
+        }
+
+        else if (selectedValue==="vid-yt") {
+            removeVisual();
+            resetVisualEffects();
+            disableImgProps();
+            enableVidProps();
+            document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
+            document.getElementById("vis_type_4").checked=true;
+        }
     }
 }
 
-function removeImage() {
-    if (document.querySelector('section figure img')) {
-        const figureVis = document.querySelector('section figure img');
-        figureVis.remove();
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/<figure><\/figure>/g,'');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
-    } 
+function resetVisualEffects() {
+    document.getElementById("dd_image_shadows").value="0";
+    document.getElementById("dd_image_borders").value="0";
+    document.getElementById("dd_image_shadows").value="0";
+    document.getElementById("dd_vid_borders").value="0";
+    document.getElementById("dd_vid_shadows").value="0";
+    removeFigShadows();
+    removeFigBorders();
+    const el_section = document.querySelector("section");
+    el_section.classList.remove("figure-width-50");
+    el_section.classList.remove("figure-width-100");
+    document.getElementById("dd_yn_vis_width").value="0";
+}
+
+function removeVisual() {
+    const parentNode = document.querySelector("#HTML-Content");
+    var element_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
+    for (var index = 0, len = element_img.length; index < len; index++) {
+        element_img[index].parentNode.removeChild(element_img[index]);
+    }
+
+    if (document.querySelector('figure')) {
+        let hero_block = document.querySelector('.hero-block');
+        let hero_figure = document.querySelector('.hero-block figure');
+        hero_block.removeChild(hero_figure);
+    }
+
     document.getElementById("dd_image_corners").disabled=true;
     document.getElementById("dd_image_shadows").disabled=true;
     document.getElementById("dd_image_borders").disabled=true;
-    document.getElementById("dd_image_rotate").disabled=true;
-}
-
-function resetImageEffects() {
-    document.getElementById("dd_image_shadows").value="0";
-    document.getElementById("dd_image_borders").value="0";
-    document.getElementById("dd_image_corners").value="0";
-    document.getElementById("dd_image_rotate").value="0";
-    removeImageShadows();
-    removeImageBorders();
+    document.getElementById("dd_vid_shadows").disabled=true;
+    document.getElementById("dd_vid_borders").disabled=true;
+    document.getElementById("vis_type_0").checked=true;
 }
 
 /*
 //////////////// VISUAL PROPERTIES ///////////////
 */
-
-/* Image Drop Shadow */
-
-document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
-
-function doImageShadows() {
-    let opt = document.querySelector("#dd_image_shadows").value;
-    // Remove image shadow
-    if (opt==="0") {
-        removeImageShadows();
-    }
-
-    // Add image shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-shadow");
-    }
-}
-
-function removeImageShadows() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-shadow");
-}
-
-
-/* Image Borders */
-
-document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
-
-function doImageBorders() {
-    let opt = document.querySelector("#dd_image_borders").value;
-
-    if (opt==="0") {
-        removeImageBorders();
-    }
-
-    // Add image border
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-border");
-    }
-}
-
-function removeImageBorders() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-border");
-}
-
-/* Image Corners */
 
 document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
 
@@ -895,144 +1264,242 @@ function doImageCorners() {
     }
 
     else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-corners-soft");
+        const el_fig = document.querySelector('section figure img');
+        el_fig.classList.add("corners-soft");
     }
 }
 
 function removeImageCorners() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-corners-soft");
+    const el_fig = document.querySelector('section figure img');
+    el_fig.classList.remove("corners-soft");
 }
 
-/* Image Rotate */
-document.querySelector("#dd_image_rotate").addEventListener("change", doImageRotate);
+document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
 
-function doImageRotate() {
-    let opt = document.querySelector("#dd_image_rotate").value;
+function doImageShadows() {
+    let opt = document.querySelector("#dd_image_shadows").value;
+    // Remove image shadow
+    if (opt==="0") {
+        removeFigShadows();
+    }
+
+    // Add image shadow
+    else if (opt==="1") {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.add("figure-shadow");
+    }
+}
+
+document.querySelector("#dd_vid_shadows").addEventListener("change", doVidShadows);
+
+function doVidShadows() {
+    let opt = document.querySelector("#dd_vid_shadows").value;
+    // Remove video shadow
+    if (opt==="0") {
+        removeFigShadows();
+    }
+
+    // Add video shadow
+    else if (opt==="1") {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.add("figure-shadow");
+    }
+}
+
+function removeFigShadows() {
+    if (document.querySelector('figure')) {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.remove("figure-shadow");
+    }
+}
+
+document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
+
+function doImageBorders() {
+    let opt = document.querySelector("#dd_image_borders").value;
 
     if (opt==="0") {
-        removeImageRotate();
+        removeFigBorders();
     }
 
+    // Add image border
     else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-rotate-clock");
-    }
-
-    else if (opt==="2") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-rotate-cclock");
+        const el_fig = document.querySelector('figure img');
+        el_fig.classList.add("figure-border");
     }
 }
 
-function removeImageRotate() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-rotate-clock");
-    el_fig.classList.remove("img-rotate-cclock");
-}
+document.querySelector("#dd_vid_borders").addEventListener("change", doVidBorders);
 
-function resetImageEffects() {
-    document.getElementById("dd_image_shadows").value="0";
-    document.getElementById("dd_image_borders").value="0";
-    document.getElementById("dd_image_corners").value="0";
-    document.getElementById("dd_image_rotate").value="0";
-    removeImageShadows();
-    removeImageBorders();
-}
-
-/* Figure caption */
-
-document.querySelector("#dd_caption").addEventListener("change", doCaption);
-
-function doCaption() {
-    let opt = document.querySelector("#dd_caption").value;
+function doVidBorders() {
+    let opt = document.querySelector("#dd_vid_borders").value;
 
     if (opt==="0") {
-        // removeCaption();
+        if (document.querySelector('.container-video-yt')) {
+            const el_yt = document.querySelector('container-video-yt');
+            el_yt.classList.remove("figure-border");
+        }
+        else {
+            const el_vid = document.querySelector('video');
+            el_vid.classList.remove("figure-border");
+        }
     }
 
+    // Add video border
     else if (opt==="1") {
-        const el_fig = document.querySelectorAll("figure");
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/<\/figure>/g,'<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption><\/figure>');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
-    }
-}
-
-function removeCaption() {
-    if (document.querySelector("figcaption")) {
-        const el_figcap = document.querySelectorAll("figcaption");
-        for (let i = 0 ; i < el_figcap.length ; i++) {
-            el_figcap[i].remove();
+        if (document.querySelector('.container-video-yt')) {
+            const el_yt = document.querySelector('.container-video-yt');
+            el_yt.classList.add("figure-border");
+        }
+        else {
+            const el_vid = document.querySelector('video');
+            el_vid.classList.add("figure-border");
         }
     }
 }
 
+function removeFigBorders() {
+    if (document.querySelector('figure')) {
+        const el_fig = document.querySelector('figure');
+        el_fig.classList.remove("figure-border");
+    }
+}
 
 /*
-//////////////// VISUALS: VIDEOS  ///////////////
+//////////////// VISUAL ELEMENT WIDTH (811px AND ABOVE ) ///////////////
 */
 
-document.querySelector("#vid-types-all").addEventListener("click", doVidType);
+document.querySelector("#dd_yn_vis_width").addEventListener("change", doFigWidth);
 
-function doVidType() { 
-    const rbs = document.querySelectorAll("#vid-types-all input[name='dd_vid']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-  
-    if (selectedValue==="none") {
-        removeVideo();
-    }
+function doFigWidth() {
+    const opt = document.querySelector("#dd_yn_vis_width").value;
+    const el_section_fig = document.querySelector("section figure");
 
-    else if (selectedValue==="file") {
-        removeVideo();
-        if (document.querySelector("section p:nth-of-type(2)")) {
-            document.querySelector('section p:nth-of-type(2)').insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"https:\/\/munnelly.com/lunadoge/assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t<\/figure>");
-        }
-        else {
-            document.querySelector('section p:nth-of-type(1)').insertAdjacentHTML("afterend", "\n\n\t<figure><div class=\"container-video-file\">\n\t\t<video controls>\n\t\t\t\t<source src=\"assets\/videos\/whiteboard.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t<\/figure>");
-        }
+    // remove
+    if (opt==="0") {
+        el_section_fig.classList.remove("figure-width-50");
+        el_section_fig.classList.remove("figure-width-80");
     }
-
-    else if (selectedValue==="yt") {
-        removeVideo();
-        if (document.querySelector("section p:nth-of-type(2)")) {
-            document.querySelector('section p:nth-of-type(2)').insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t<\/figure>");
-        }
-        else {
-            document.querySelector('section p:nth-of-type(1)').insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t\<\/div>\n\t\<\/figure>");
-        }
+    // 50%
+    else if (opt==="1") {
+        el_section_fig.classList.remove("figure-width-50");
+        el_section_fig.classList.add("figure-width-80");
+    }
+    // 50%
+    else if (opt==="2") {
+        el_section_fig.classList.remove("figure-width-80");
+        el_section_fig.classList.add("figure-width-50");
     }
 }
 
-function removeVideo() {
-    if (document.querySelector('section figure .container-video-file video')) {
-        const figureVid = document.querySelector('figure .container-video-file video');
-        figureVid.remove();
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/\n\n\t<figure>\n\t\t<div class=\"container-video-file\">/g,'');
-        HTML_Content = HTML_Content.replace(/\n\n{3}/g, '\n');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
-    } 
 
-    else if (document.querySelector('figure .container-video-yt')) {
-        const videoYT = document.querySelector('.container-video-yt');
-        videoYT.remove();
-        HTML_Content = document.getElementById("HTML-Content").innerHTML;
-        HTML_Content = HTML_Content.replace(/<figure>/g, '');
-        HTML_Content = HTML_Content.replace(/<\/figure>/g, '');
-        HTML_Content = HTML_Content.replace(/\n\n{6}/g, '\n');
-        document.getElementById("HTML-Content").innerHTML = HTML_Content;
-    } 
+/* ================ DIALOG BOXES =================== */
+
+// Make dialog boxes element draggable:
+
+if (document.getElementById("content-1")) {
+    dragElement(document.getElementById("content-1"));
 }
 
+if (document.getElementById("content-2")) {
+    dragElement(document.getElementById("content-2"));
+}
+if (document.getElementById("content-3")) {
+    dragElement(document.getElementById("content-3"));
+}
+if (document.getElementById("content-4")) {
+    dragElement(document.getElementById("content-4"));
+}
+if (document.getElementById("content-5")) {
+    dragElement(document.getElementById("content-5"));
+}
+
+if (document.getElementById("content-6")) {
+    dragElement(document.getElementById("content-6"));
+}
+
+if (document.getElementById("content-7")) {
+    dragElement(document.getElementById("content-7"));
+}
+
+function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+        // if present, the header is where you move the DIV from:
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } 
+    else {
+        // otherwise, move the DIV from anywhere inside the DIV:
+        elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        // e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        // e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+if (document.querySelector("#content-1 .dialog-box-header")) {
+    document.querySelector("#content-1 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+
+if (document.querySelector("#content-2 .dialog-box-header")) {
+    document.querySelector("#content-2 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+if (document.querySelector("#content-3 .dialog-box-header")) {
+    document.querySelector("#content-3 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+if (document.querySelector("#content-4 .dialog-box-header")) {
+    document.querySelector("#content-4 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+
+if (document.querySelector("#content-5 .dialog-box-header")) {
+    document.querySelector("#content-5 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+
+if (document.querySelector("#content-6 .dialog-box-header")) {
+    document.querySelector("#content-6 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+
+if (document.querySelector("#content-7 .dialog-box-header")) {
+    document.querySelector("#content-7 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
+}
+
+function hideDialogBox() {
+    document.querySelector("#content-1").classList.add("dropdown-hidden"); 
+    document.querySelector("#content-2").classList.add("dropdown-hidden"); 
+    document.querySelector("#content-3").classList.add("dropdown-hidden"); 
+    document.querySelector("#content-4").classList.add("dropdown-hidden"); 
+    const modal = document.getElementById("myModal");
+    // modal.style.display = "none";
+    hideSidebar();
+    disableTransColCode();
+} 
 
 /*
 //////////////// COPY TO CLIPBOARD ///////////////
@@ -1040,22 +1507,25 @@ function removeVideo() {
 
 document.querySelector("#btn-copy").addEventListener("click", copyHTML);
 
+function enableCSS() {
+    document.getElementById("btn-copy-css").disabled=false;
+}
+
+function disableCSS() {
+    document.getElementById("btn-copy-css").disabled=true;
+}
+
 function copyHTML() {
     // removeEmptyNodes();
-    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
-    
-    HTML_Content = HTML_Content.replace(/\t/g, '');
-    HTML_Content = HTML_Content.replace(/\n\n{8}/g, '\n');
-
+    const HTML_Content = document.getElementById("HTML-Content").innerHTML;
     const el = document.createElement('textarea');
     el.value = HTML_Content;
     hideMenus();
-    
+
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
-    document.body.removeChild(el);
-
+    document.body.removeChild(el); 
 }
 
 function copyCSS() {
@@ -1063,16 +1533,14 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,/g, ".");
-    strCSS = strCSS.replace(/.header/g, "header");
-
-    strCSS = strCSS.replace(/..theme/g, ".theme");
+    strCSS = strCSS.replace(/,section/g, "section");
+    // strCSS = strCSS.replace(/..container/g, ".container");
     el_css.value = strCSS;
     document.body.appendChild(el_css);
     el_css.select();
     document.execCommand('copy');
     document.body.removeChild(el_css);  
-   // console.log(strCSS);
+    // console.log(strCSS);
 }
 
 /*
@@ -1098,4 +1566,3 @@ function removeEmptyNodes() {
     emptyNodes.forEach(node => node.parentNode.removeChild(node))
     return;
 }
-
