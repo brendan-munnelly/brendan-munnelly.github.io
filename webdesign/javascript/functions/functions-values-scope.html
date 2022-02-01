@@ -44,23 +44,15 @@
 		<header>
 			<div class="wrapper">
 				<div class="sidebar">
-					<a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener">
-						<picture>
-							<source media="(min-width: 768px)" srcset="assets/img/global/ibat-logo-desktop.png">
-							<source media="(max-width: 767px)" srcset="assets/img/global/ibat-logo-mobile.png">
-							<img src="assets/img/global/ibat-logo-desktop.png" alt="IBAT College Diploma in Web Design, Brendan Munnelly">
-						</picture>
-					</a>
-					
 					<div>
-						<img src="assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, IBAT Lecturer in Web Design">
-						<p id="myEmail">bmunnelly@ibat.ie</p>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
 					</div>
 				</div>
 		
 				<div class="content">
 					<h1>Functions in JavaScript</h1>
-					<h2>Creating a free GitHub account, choosing a website name and setting up a repository for hosting your web pages.</h2>
+					<h2>Creating function declarations and function expr4essions in JavaScript. And working with anonymous and arrow functions.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -70,7 +62,7 @@
 			<aside>
 				<h3>WEB DESIGN</h3>
 	
-				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
@@ -94,18 +86,121 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-			<li>Create a free account on the GitHub website.</li>
-			<li>Choose a <i>username</i> that will be the first part of your website address.</li>
-			<li>Create a project location (called a <i>repository</i> or &#8216;repo&#8217;) on GitHub for hosting your website.</li>
-			<li>Create a web page directly on GitHub and display it in your web browser.</li>
+			<li>Create a function declaration.</li>
+			<li>Create a function expression.</li>
+			<li>Recognise that function declarations are hoisted but function expressions are not.</li>
+			<li>Recognise that function expressions may be unnamed or anonymous.</li>
+			<li>Use arrow functions that contain one or multiple statements.</li>
 		</ul>
 
 	</section>
 
 	<section id="github-email-password">
 
-        <h2>About functions</h2>
-        <p>Functions are the building blocks of a programming language. You can think of a function as a &#8216;box&#8217; or &#8216;sub-program&#8217; that stores some code inside it.</p>
+		<!-- 
+
+		function whatsMyAge (age) {
+		console .log( `Your age is $ { age }` );
+		}
+		whatsMyAge(19); // Your age is 19.
+		whatsMyAge(7); // Your age is 7.
+		whatsMyAge(31); // Your age is 31.
+		// During the first invocation, 19 is our parameter, which we can
+		pass to the function because we allowed it to receive a parameter
+		by having “age” between the parentheses in the function.
+		18
+
+		function sumA(a, b) {
+  			return a + b;
+		}
+
+		// Works!
+		const sum = (function sumB(a, b) {
+			return a + b;
+		});
+		sum(1, 2);
+
+All functions return a value, which can be specified using the return statement, which comes after the return keyword. A function that doesn’t explicitly return anything (such as all the examples we have seen so far) will return undefined by default.
+
+The function in this example will return the string 'Howdy World!':
+
+function howdy(){    return 'Howdy World!';}
+
+This means we can now assign a function invocation to a variable, and the value of that variable will be the return value of that function:
+
+const message = howdy();<< 'Howdy World!'
+
+The variable message now points to the return value of the howdy() function, which is the string 'Howdy World!'. This may seem trivial in this instance (that is, why not just assign the variable to the string directly?), but we can create a more complex function that has different return values depending on certain conditions. This then allows us to assign different values to the message variable depending on those conditions.
+		-->
+
+		<script>
+
+		// function declaration
+		function sumA(a, b) {
+  			return a + b;
+			// console.log(`Output: ${a + b}`);
+		}
+
+		// const answerA = sumA(1, 2);
+		// console.log(`Output: ${answerA}`);
+
+		// function expression
+		const sumB = function (a, b) {
+			//console.log(`Output: ${a + b}`);
+			return a + b;
+		};
+
+		sumB(3, 4);
+		// const answerB = sumA(1, 2);
+		// console.log(`Output: ${answerB}`);
+
+		</script>
+
+        <h2>About functions and return values</h2>
+        <p>All functions return a value that can be specified using a statement after the <span class="syn-js">return</span> keyword. A function that does not return anything (for example, if it just outputs to the browser console) will return <i>undefined</i>.</p>
+		<p>See the two sample functions below.</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration</span>		
+function sumA(a, b) {
+   console.log(`Output A: ${a + b}`);
+}
+
+sumA(1, 2);
+
+<span class="comment">// Anonymous function expression</span>	
+const sumB = function (a, b) {
+	console.log(`Output: ${a + b}`);
+};
+
+sumB(3, 4);
+</pre>
+
+		<p>Each functiion takes two input values and adds them. When called, each function outputs to the browser console. Neither functions returns a value back to anywhere else in program.</p>
+
+		<p>Amend these two functions as follows:</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration</span>		
+function sumA(a, b) {
+   return a + b;
+}
+
+<span class="comment">// Call function AND assign return value to a variable</span>
+const answerA = sumA(1, 2);
+console.log(`Output: ${answerA}`);
+
+<span class="comment">// Anonymous function expression</span>	
+const sumB = function (a, b) {
+   return a + b;
+};
+
+<span class="comment">// Call function AND assign return value to a variable</span>
+const answerB = sumB(3, 4);
+console.log(`Output: ${answerB}`);
+</pre>
+
+
         
         <p>In summary:</p>
         
@@ -353,26 +448,24 @@
 
 	<div class="item-3">
 		<h4>Site Map</h4>
-		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/ibat/">Home</a></p>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
 		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
 		
 	</div>
 
 	<div class="item-3">
-		<h4>Professional Diploma in Web Design</h4>
-		<p>A ten-week, part-time course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a> for <a href="https://www.ibat.ie" target="_blank">IBAT College</a>, Dublin. </p>
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
 			
 	</div>
 
 	<div class="item-3">
 		<h4>Contact</h4>
-		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.ibat.ie">www.ibat.ie</a></p>
-		<p><i class="fas fa-phone-square fa-fw"></i><a href="tel:018075055">01 807 5055</a></p>
-		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:enquiry@ibat.ie">enquiry@ibat.ie</a></p>
-	</div>            
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
 
 </footer>
-
 
 <!-- JavaScript for Cookie Consent Popup Message -->
 <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
