@@ -1207,9 +1207,6 @@ function doVisType() {
         let child_obj = document.createElement("figure");
         child_obj.innerHTML = "\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src="+el_vid_file+" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t";
         col_fig.appendChild(child_obj);
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_image_corners").disabled=false;
         document.getElementById("dd_image_shadows").value="0";
         document.getElementById("dd_image_borders").value="0";
         document.getElementById("dd_image_corners").value="0";
@@ -1225,6 +1222,9 @@ function doVisType() {
         child_obj.innerHTML = "\n\t\t\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t\n\t";
         col_fig.appendChild(child_obj);
         document.getElementById("vis_type_5").checked=true;
+        document.getElementById("dd_image_shadows").value="0";
+        document.getElementById("dd_image_borders").value="0";
+        document.getElementById("dd_image_corners").value="0";
     }  
 }
 
