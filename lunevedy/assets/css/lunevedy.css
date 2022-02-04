@@ -4,8 +4,9 @@
 *, *::before, *::after { box-sizing: border-box }
 html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
 scroll-behavior: smooth; scroll-padding-top: 20px }
-body { /* max-width: 1920px; */ line-height: 1.5; margin-left: auto; margin-right: auto; 
-min-height: 100vh; text-rendering: optimizeSpeed }  
+body { line-height: 1.5; min-height: 100vh }
+@media (max-width: 767px ) { body { text-rendering: optimizeSpeed } }
+@media (min-width: 768px ) { body { text-rendering: optimizeLegibility } }
 img { width: 100%; height: auto; display: block }
 
 /* HTML5 container elements full viewport width */
@@ -610,12 +611,6 @@ body { font-family: var(--global-font) }
 
 .hero-dark .container-upper-label { color: var(--slate-050) }
 
-/* ====== Horozontal alignment ====== */
-
-@media (min-width: 768px) { .hero-block.text-center-desktop { text-align: center } }
-@media (max-width: 767px) { .hero-block.text-center-mobile  { text-align: center } }
-
-
 /* ========== VERTICAL SPACING AND HORIZONTAL PADDING ============ */
 
 /* Biggest screens */
@@ -1135,47 +1130,52 @@ body { font-family: var(--global-font) }
 
 /* ============== 'HERO BLOCK': TWO COLUMN =========== */
 
+/* ====== Maximun width of content ====== */
+
 /* ====== Minimum heights ====== */
 
 /* Biggest screens */
 @media (min-width: 2561px) { 
-    .hero-half { min-height: calc(100vw / 3.2); padding: 0 var(--spacing-l) } 
-    .hero-half .container-upper-label { margin-top: 7%; margin-bottom: -6%  } 
-    .hero-half .container-text { margin-top: 8%; margin-bottom: 12% } 
-    .hero-half .container-btn { margin-bottom: 6% }
-    .hero-half .container-text.text-long + .container-btn { margin-top: -5% }
-}
-
-/* Biggest screens */
-@media (min-width: 2561px) { 
-    .hero-half { min-height: calc(100vw / 3.2);  padding: 0 var(--spacing-l) } 
+    .hero-half { min-height: calc(100vw / 3.8);  
+        padding-left: calc((100% - 1140px)/2);
+        padding-right: calc((100% - 1140px)/2);
+    } 
     .hero-half .container-upper-label { margin-top: 8%; margin-bottom: -4%  } 
-    .hero-half .container-text { margin-top: 8%; margin-bottom: 12% } 
+    .hero-half .container-text { margin-top: 8%; margin-bottom: 6% } 
     .hero-half .container-btn { margin-bottom: 6% }
     .hero-half .container-text.text-long + .container-btn { margin-top: -5% }
 }
 
 /* Bigger screens */
 @media (min-width: 1921px) and (max-width: 2560px) {
-    .hero-half { min-height: calc(100vw / 3.2); padding: 0 var(--spacing-l) }  
+    .hero-half { min-height: calc(100vw / 4); 
+        padding-left: calc((100% - 1140px)/2);
+        padding-right: calc((100% - 1140px)/2);
+    }  
     .hero-half .container-upper-label { margin-top: 8%; margin-bottom: -4%  } 
-    .hero-half .container-text { margin-top: 8%; margin-bottom: 12% } 
+    .hero-half .container-text { margin-top: 8%; margin-bottom: 0% } 
     .hero-half .container-btn { margin-bottom: 6% }
     .hero-half .container-text.text-long + .container-btn { margin-top: -5% }
 }
 
 /* Modern desktops/laptops */
 @media (min-width: 1441px) and (max-width: 1920px) { 
-    .hero-half { min-height: calc(100vw / 3.2) } 
+    .hero-half { min-height: calc(100vw / 3.4);
+        padding-left: calc((100% - 1140px)/2);
+        padding-right: calc((100% - 1140px)/2);
+    } 
     .hero-half .container-upper-label { margin-top: 8%; margin-bottom: -4%  } 
-    .hero-half .container-text { margin-top: 8%; margin-bottom: 12% } 
+    .hero-half .container-text { margin-top: 8%; margin-bottom: 6% } 
     .hero-half .container-btn { margin-bottom: 6% }
     .hero-half .container-text.text-long + .container-btn { margin-top: -4% }
 }
 
-/* Regalar desktops/laptops */
+/* Regular desktops/laptops */
 @media (min-width: 1025px) and (max-width: 1440px) {
-    .hero-half { min-height: calc(100vw / 3.2) }  
+    .hero-half { min-height: calc(100vw / 3.2);
+        padding-left: calc((100% - 1140px)/2);
+        padding-right: calc((100% - 1140px)/2);
+    }  
     .hero-half .container-upper-label { margin-top: 0; margin-bottom: 32px  } 
     .hero-half .container-text { margin-top: 8%; margin-bottom: 10% } 
     .hero-half .container-btn { margin-bottom: 6% }
@@ -1193,9 +1193,9 @@ body { font-family: var(--global-font) }
 
 /* Smaller Tablets: Portrait */
 @media (min-width: 600px) and (max-width: 810px) {
-    .hero-half { min-height: calc(100vw / 3.8 ); padding: 0 var(--spacing-m) } 
+    .hero-half { min-height: calc(100vw / 3.8 ); padding: 0 var(--spacing-xs) } 
     .hero-half .container-upper-label { margin-top: 6%; margin-bottom: -4%  } 
-    .hero-half .container-text { margin-top: 8%; margin-bottom: 14% } 
+    .hero-half .container-text { margin-top: 8%; margin-bottom: 42px} 
     .hero-half .container-btn { margin-bottom: 12% }
     .hero-half .container-text.text-long { margin-top: 14% } 
 }
@@ -1204,7 +1204,7 @@ body { font-family: var(--global-font) }
 @media (max-width: 599px) { 
     .hero-half { min-height: 400px; padding: 0 var(--spacing-m) } 
     .hero-half .container-upper-label { margin-top: 10%; margin-bottom: -4% } 
-    .hero-half .container-text { margin-top: 10%; margin-bottom: 18% } 
+    .hero-half .container-text { margin-top: 10%; margin-bottom: 36px } 
     .hero-half .container-btn { margin-bottom: 16% } 
     .hero-half .container-text.text-long { margin-top: 14% } 
 }
@@ -1221,7 +1221,7 @@ body { font-family: var(--global-font) }
 @media (min-width: 768px) {
     /* Columns side-by-side */
     .hero-half { 
-        display: flex; flex-direction: row; justify-content: center; padding: 0 
+        display: flex; flex-direction: row; justify-content: center; 
     }
     /* Column content top-to-bottom */
     .hero-half .col-2 { 
@@ -1235,7 +1235,6 @@ body { font-family: var(--global-font) }
     }
     /* When text at left and image at right */
     .hero-half .col-2:nth-child(2) .container-media { margin-left: 50% }
-
 }
 
 /* Desktops: horizontal padding in column with text */
@@ -1268,26 +1267,26 @@ body { font-family: var(--global-font) }
 
 /* Headings size */
 .hero-half h1 {
-    font-size: calc(36px + (84 - 36) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(40px + (43 - 40) * ((100vw - 320px) / (560 - 320)));
 }
 
 .hero-half h2 {
-    font-size: calc(22px + (26 - 22) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(21px + (22 - 21) * ((100vw - 320px) / (560 - 320)));
 }
 
 @media (min-width: 768px) {
     .hero-half .text-long h1 {
-        font-size: calc(32px + (58 - 32) * ((100vw - 768px) / (1920 - 768)));
+        font-size: calc(32px + (58 - 32) * ((100vw - 768px) / (560 - 768)));
     }
     .hero-half .text-long h2 {
-        font-size: calc(20px + (28 - 20) * ((100vw - 768px) / (1920 - 768)));
+        font-size: calc(20px + (28 - 20) * ((100vw - 768px) / (560- 768)));
     }
 }
 
 /* Buttons size */
 @media (min-width: 1440px) {
     .hero-half a.btn {
-        padding: 16px 28px 18px 28px; border-width: 3px;
+        padding: 16px 28px 18px 28px; border-width: 2px;
         font-size: calc(18px + (21 - 18) * ((100vw - 320px)/(1920 - 320)));
     }
 }
@@ -1320,7 +1319,7 @@ body { font-family: var(--global-font) }
 }
 
 @media (max-width: 767px) {
-    .hero-half .col-2 { max-width: 500px }
+    .hero-half .col-2 { max-width: 500px; margin-bottom: 0  }
 
     .hero-half .col-2 .container-media { 
         max-width: 500px; text-align: center; margin-left: auto; margin-right: auto;  
@@ -1336,6 +1335,7 @@ body { font-family: var(--global-font) }
         flex-direction: column; 
         display: inline-block;
         max-width: 400px;
+        margin-top: 12px;
     }
   
    .hero-half.text-center-mobile .container-btn { 
@@ -1347,7 +1347,12 @@ body { font-family: var(--global-font) }
         margin-top: var(--spacing-m) 
     }
 
-    .hero-half .col-2 { min-height: 50vh }
+    .hero-half .col-2 .container-btn {
+        margin-bottom: 48px;
+    }
+
+    .hero-half .col-2 figure { margin-bottom: 48px; }
+    /* (.hero-half .col-2 { min-height: 50vh } */
 
     /* Text in left column. Visual in right */
     /* Flex first column, space evenly */
@@ -1391,7 +1396,7 @@ body { font-family: var(--global-font) }
 }
 
 
-/* ========== TWO COLUMN HEADER =========== */
+/* ========== MENUS AND TWO COLUMN HEADER =========== */
 
 @media (min-width: 1921px) { 
     nav.container-menu.menu-sticky ~ header.hero-half { min-height: calc(540px + 72px) }
@@ -1433,38 +1438,21 @@ body { font-family: var(--global-font) }
 }
 
 /* Tablets and smaller desktops */
-@media (min-width: 1025px) and (max-width: 1199px ) { 
-	section { padding: 3% 14% 3% 14% } 
-}
-
+@media (min-width: 1025px) and (max-width: 1199px ) { section { padding: 3% 14% 3% 14% } }
 /* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { 
-	section { padding: 4% 5% 4% 5% }
-}
-
+@media (min-width: 768px) and (max-width: 1024px)   { section { padding: 4% 5% 4% 5% } }
 /* Larger mobiles */
-@media (min-width: 400px) and (max-width: 767px)  { 
-	section { padding: 7% 13% 8% 13% }
-}
-
+@media (min-width: 400px) and (max-width: 767px)    { section { padding: 9% 13% 10% 13% } }
 /* Smaller mobiles */
-@media (max-width: 399px) { 
-	section { padding: 7% 10% 8% 10% } 
-}
+@media (max-width: 399px)                           { section { padding: 9% 10% 10% 10% } }
 
 /* Final section block above footer */
 section:last-child { padding-bottom: 6% }
 
-/* ====== Horozontal alignment ====== */
-
-@media (min-width: 768px) { section.text-center-desktop { text-align: center } }
-@media (max-width: 767px) { section.text-center-mobile  { text-align: center } }
-
-
 /* ========== THEME: LIGHT ========== */
 
 .theme-light { background-color: var(--slate-050) } 
-section.theme-light .container-upper-label { color: var(--slate-900) }
+.theme-light .container-upper-label { color: var(--slate-900) }
 .theme-light h1, .theme-light h2, .theme-light h3, 
 .theme-light p, .theme-light li { color: var(--slate-900) }
 
@@ -1506,7 +1494,7 @@ section.theme-light .container-upper-label { color: var(--slate-900) }
 
 .theme-dark { background-color: var(--slate-900) }
 
-section.theme-dark .container-upper-label { color: var(--slate-050) }
+.theme-dark .container-upper-label { color: var(--slate-050) }
 
 .theme-dark h1, .theme-dark h2, .theme-dark h3, 
 .theme-dark p, .theme-dark li { color: var(--slate-050) }
@@ -1551,11 +1539,10 @@ section.theme-dark .container-upper-label { color: var(--slate-050) }
 
 section.theme-dark .container-upper-label { color: var(--slate-050) }
 
+
 /* ===== SECTIONS: FULL-WIDTH (NO FLEXBOX PARENT-CHILD COLUMNS ) ====== */
 
-/* Upper heading */
-section > .container-upper-label { display: block; margin-bottom: 48px }
-
+/* Upper label heading */
 @media (min-width: 768px) { section > .container-upper-label { margin-bottom: 48px } }
 @media (max-width: 767px) { section > .container-upper-label { margin-bottom: 32px } }
 
@@ -1569,7 +1556,7 @@ section:not(.text-center-desktop) .container-upper-label,
 section:not(.text-center-mobile)  .container-upper-label { margin-left: -1% }
 
 section > h2 {
-	font-size: calc(26px + (42 - 26) * ((100vw - 320px) / (1140 - 320)));
+	font-size: calc(28px + (42 - 28) * ((100vw - 320px) / (1140 - 320)));
 	line-height: 1.2; 
 	letter-spacing: -1px;
 }
@@ -1583,8 +1570,12 @@ section > h3 {
     color: var(--gray-600) 
 }
 
+/* Paragraphs AND lists */
+section > p, section > ul > li { 
+	font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1140 - 320)));
+}
+
 section > p {
-	font-size: calc(19px + (22 - 19) * ((100vw - 320px) / (1140 - 320)));
 	line-height: 1.6; margin-bottom: 16px;
 }
 
@@ -1595,12 +1586,7 @@ section > p.standfirst {
 }
 
 section ul { margin-bottom: 18px }
-
-section > ul > li { 
-	font-size: calc(19px + (22 - 19) * ((100vw - 320px) / (1140 - 320)));
-    line-height: 1.5; margin-bottom: 14px; 
-    margin-left: 22px; padding-left: 12px; 
-}
+section > ul > li { margin-left: 22px; padding-left: 12px; margin-bottom: 14px }
 
 /* All viewports: Paragraphs and lists */
 section > p:last-child,
@@ -1611,10 +1597,7 @@ section > figure { margin-top: 20px; margin-bottom: 32px }
 
 /* Faux buttons */
 section > .container-btn {
-    display: flex; 
-    justify-content: space-between; 
-    flex-wrap: wrap; 
-    align-items: flex-start;
+    display: flex; justify-content: space-between; flex-wrap: wrap; align-items: flex-start;
     width: 100%; 
 }
 
@@ -1668,11 +1651,10 @@ section > .container-btn a.btn {
     }
 }
 
-
 section.text-center-desktop > figure,
-section.text-center-mobile > figure { margin-left: auto; margin-right: auto }
+section.text-center-mobile  > figure { margin-left: auto; margin-right: auto }
 
-/* == 50% text width 811px and wider == */
+/* == 50% text for widths 811px and wider == */
 @media (min-width: 811px) {
     /* Narrow (50%-wide) text: left-aligned */
     section > .figure-width-50 { width: 50% } 
@@ -1870,7 +1852,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* Paragraphs and Lists */
 .col-2 p {
     font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1140 - 320)));
-    line-height: 1.5; margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .col-2 li { 
@@ -2013,7 +1995,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* Paragraphs and Lists */
 .cols-2-split .col-2 p {
     font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1140 - 320)));
-    line-height: 1.5; margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .cols-2-split .col-2 li { 
@@ -2118,7 +2100,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 .col-3 p {
     font-size: calc(17px + (19 - 17) * ((100vw - 320px) / (1140 - 320)));
-    line-height: 1.5; margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .col-3 li { 
@@ -2450,7 +2432,7 @@ a.btn, button {
     transition: all 0.3s linear;
 }
 
-@media (min-width: 768px) { a.btn { border-width: 3px } }
+@media (min-width: 768px) { a.btn { border-width: 2px } }
 @media (max-width: 767px) { a.btn { border-width: 2px } }
 
 div[class*='col-:not(.hero-block)'] a.btn { 
@@ -2824,6 +2806,15 @@ footer p.privacy a:hover, footer p.privacy a:active {
 
 
 /* ============ UTILITY CLASSES ============== */
+
+/* Horozontal alignment */
+.text-center { text-align: center; margin-left: auto; margin-right: auto }
+@media (min-width: 768px) { .text-center-desktop { 
+    text-align: center; margin-left: auto; margin-right: auto  } 
+}
+@media (max-width: 767px) { .text-center-mobile  { 
+    text-align: center; margin-left: auto; margin-right: auto } 
+}
 
 /* Animations - only when the web page loads */
 .slide-in-top {
