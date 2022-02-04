@@ -308,6 +308,8 @@ section *:last-child, footer *:last-child { margin-bottom: 0 !important }
     --section-upper-label: calc(16px + (24 - 16) * (100vw - 320px) / (1920 - 320));
 
     --column-upper-label-color: var(--gray-700); 
+
+    --section-btn-breakpoint: 768px;
 }
 
 /* Global font */
@@ -1586,7 +1588,7 @@ section ul { margin-bottom: 18px }
 section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
 
 @media (min-width: 768px) { section > ul > li { margin-left: 20px; padding-left: 10px } }
-@media (max-width: 767px) { section > ul > li { margin-left: 18px; padding-left: 10px } }
+@media (max-width: 767px) { section > ul > li { margin-left: 16px; padding-left: 8px } }
 
 /* All viewports: Paragraphs and lists */
 section > p:last-child,
@@ -1628,7 +1630,7 @@ section > .container-btn a.btn {
 }
 
 /* Non-mobiles */
-@media (min-width: 768px) {
+@media (min-width: var(--section-btn-breakpoint) ) {
     section > .container-btn { 
         margin-top: 32px; margin-bottom: 32px; 
         flex-direction: row;
@@ -1652,9 +1654,11 @@ section > .container-btn a.btn {
         align-self: flex-start;
         padding-left: 0;
     }
-    section > .container-btn a.btn { padding: 12px 22px 13px 22px }
-    section > .container-btn a:first-child { margin-bottom: 40px }
-    section > .container-btn a:last-child { margin-bottom: 24px !important }
+    section > .container-btn a.btn { padding: 12px 16px 12px 16px }
+    section > .container-btn a:first-child { margin-bottom: 0 }
+    section > .container-btn a:nth-child(2) { 
+        margin-top: 32px; margin-bottom: 24px !important 
+    }
 
     section.text-center > .container-btn a.btn,
     section > .container-btn.text-center a.btn {
@@ -2472,7 +2476,8 @@ div[class*='col-:not(.hero-block)'] a.btn {
 }
 
 a.btn-soft, button.btn-soft { border-radius: 12px; }
-a.btn-rounded, button.btn-rounded { border-radius: 50px }
+a.btn-rounded, button.btn-rounded,
+a.btn-pill, button.btn-pill { border-radius: 50px }
 a.btn i, button i { 
     align-self: center; 
     color: inherit; 
