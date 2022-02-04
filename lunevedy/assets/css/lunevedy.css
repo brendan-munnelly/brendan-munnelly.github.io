@@ -1442,9 +1442,9 @@ body { font-family: var(--global-font) }
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1024px)   { section { padding: 4% 5% 4% 5% } }
 /* Larger mobiles */
-@media (min-width: 400px) and (max-width: 767px)    { section { padding: 9% 13% 10% 13% } }
+@media (min-width: 400px) and (max-width: 767px)    { section { padding: 13% 13% 14% 13% } }
 /* Smaller mobiles */
-@media (max-width: 399px)                           { section { padding: 9% 10% 10% 10% } }
+@media (max-width: 399px)                           { section { padding: 13% 10% 14% 10% } }
 
 /* Final section block above footer */
 section:last-child { padding-bottom: 6% }
@@ -1547,13 +1547,10 @@ section.theme-dark .container-upper-label { color: var(--slate-050) }
 @media (max-width: 767px) { section > .container-upper-label { margin-bottom: 32px } }
 
 section > .container-upper-label span {
-    font-weight: 500; padding: 2px 10px 2px 10px;
+    font-weight: 500; /* padding: 2px 10px 2px 10px; */
     font-size: var(--section-upper-label);
     color: inherit;
 }
-
-section:not(.text-center-desktop) .container-upper-label,
-section:not(.text-center-mobile)  .container-upper-label { margin-left: -1% }
 
 section > h2 {
 	font-size: calc(28px + (42 - 28) * ((100vw - 320px) / (1140 - 320)));
@@ -2387,9 +2384,21 @@ div[class*='col-'] figure.icon {
 /* Hyperlinks in text */
 a:not(.btn):link, a:not(.btn):visited {
     text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 7px;
     transition: all 0.2s linear;
+}
+
+@media (min-width: 768px) {
+    a:not(.btn):link, a:not(.btn):visited { 
+        text-decoration-thickness: 2px;
+        text-underline-offset: 7px;
+    }
+}
+
+@media (max-width: 767px) {
+    a:not(.btn):link, a:not(.btn):visited {
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 5px;
+    }
 }
 
 .theme-light a:not(.btn):link, 
