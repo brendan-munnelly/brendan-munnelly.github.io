@@ -25,6 +25,8 @@
     <style>
 
     </style>
+
+
 </head>
 
 
@@ -62,18 +64,20 @@
 
                             <div class="input-group">
                                 <label>Section Class</label>
-                                <select id="dd_className" style="width:140px">
+                                <select id="dd_className" style="width:150px">
                                     <option value="0" selected="selected">section-style-1</option>
                                     <option value="1">section-style-2</option>
                                     <option value="2">section-style-3</option>
                                     <option value="3">section-style-4</option>
+                                    <option value="3">section-style-5</option>
+                                    <option value="3">section-style-6</option>
                                 </select>
                             </div>
                             <hr>
                             <div class="input-group">
                                 <label>Section Width</label>
                                 &nbsp;<i class="fas fa-tv"></i>
-                                <select id="dd_section_width">
+                                <select id="dd_section_width" style="width:0px">
                                     <option value="0" selected="selected">800px</option>
                                     <option value="1">1024px</option>
                                     <option value="2">1140px</option>
@@ -227,30 +231,52 @@
                             <div>
                                 <form id="col-content" name="col-content">
                                     <div class="input-group">
-                                        <label>Buttons</label>
+                                        <label style="width: 62px">Buttons</label>
                                         <select id="dd_section_buttons">
                                             <option value="0">None</option>
                                             <option value="1">One</option>
                                             <option value="2" selected="selected">Two</option>
                                         </select>
-
-                                        <label style="margin-left: 38px">Icon</label>
-                                        <select id="dd_buttons_icon" style="margin-left: -110px; min-width: 90px">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label style="width: 46px">Icon</label>
+                                        <select id="dd_buttons_icon" style="width:90px">
                                             <option value="0" selected="selected">At Left</option>
                                             <option value="1">At Right</option>
                                             <option value="2">None</option>
                                         </select>
-                                    </div>
-    
-                                    <div class="input-group">
-                                        <label>Buttons Style</label>
-                                        <select id="dd_buttons_style">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label style="width: 50px">Style</label>
+                                        <select id="dd_buttons_style" style="width:84px">
                                             <option value="0" selected="selected">Corner</option>
                                             <option value="1">Soft</option>
-                                             <option value="2">Pill</option>
+                                            <option value="2">Pill</option>
                                         </select>
                                     </div>
                                     <hr>
+
+                                    <div class="input-group">
+                                        <label>Horizontal Alignment</label>
+                                        &nbsp;<i class="fas fa-tv"></i> <select id="dd_align_desktop_btns" style="width:80px">
+                                            <option value="0" selected="selected">Left</option>      
+                                            <option value="1">Center</option>
+                                        </select>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-mobile-alt"></i><select id="dd_align_mobile_btns"  style="width:80px">
+                                            <option value="0" selected="selected">Left</option>      
+                                            <option value="1">Center</option>
+                                        </select>
+                                    </div><!-- /.input-group -->
+
+                                    <div class="input-group" style="margin-bottom: -8px">
+                                        <label>Stacked vertically</label>
+                                        &nbsp;<i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;
+                                        <select id="dd_mobile_stacked_btns" style="width:80px">
+                                            <option value="0" selected="selected">Yes</option>      
+                                            <option value="1">No</option>
+                                        </select>
+                                    </div><!-- /.input-group -->
+         
+                                    <hr>
+                                    
                                     <h4 style="margin-top: 18px">PRIMARY BUTTON</h4>
                                     <div class="input-group two-col">
                                         <div class="column column-wider">
@@ -343,6 +369,7 @@
                                 <div>  
                                     <div class="input-group">
                                         <label style="width: 130px; padding-left: 30px">Width</label>
+                                        <i class="fas fa-tv"></i>&nbsp;
                                         <select id="dd_yn_vis_width" style="width: 84px">
                                             <option value="0" selected="selected">100%</option>
                                             <option value="1">80%</option>
@@ -2157,7 +2184,13 @@
             document.getElementById("dd_buttons_style").disabled=true;
             document.getElementById("dd_buttons_icon").disabled=true;
             document.getElementById("dd_buttons_icon").value="0";
-            document.getElementById("btn_upper_label").disabled=true;
+            document.getElementById("dd_align_desktop_btns").disabled=true;
+            document.getElementById("dd_align_desktop_btns").value="0";
+            document.getElementById("dd_align_mobile_btns").disabled=true;
+            document.getElementById("dd_align_mobile_btns").value="0";
+            document.getElementById("dd_mobile_stacked_btns").disabled=true;
+            document.getElementById("dd_mobile_stacked_btns").value="0";
+
             document.getElementById("btn_a_primary_passive_text").disabled=true;
             document.getElementById("btn_a_primary_active_text").disabled=true;
             document.getElementById("btn_a_primary_passive_bg").disabled=true;
@@ -2218,7 +2251,7 @@
 
         const assets_section_buttons_one = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><span>Start free trial<\/span><i class=\"fas fa-arrow-right\"></i></a>\n\t</div>\n";
 
-        const assets_section_buttons_pair = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>";
+        const assets_section_buttons_pair = "\n\n\t<div class=\"container-btn mobile-stacked\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>";
 
         const content_caption = "<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption>";
 
