@@ -136,6 +136,18 @@ function doClassName() {
         el_section.classList.add("section-style-4");
         section_class = "section-style-4";
     }
+
+    else if ( opt==="4") {
+        removeClassNames();
+        el_section.classList.add("section-style-5");
+        section_class = "section-style-5";
+    }
+
+    else if ( opt==="5") {
+        removeClassNames();
+        el_section.classList.add("section-style-6");
+        section_class = "section-style-6";
+    }
 }
 
 function removeClassNames() {
@@ -144,8 +156,31 @@ function removeClassNames() {
     el_section.classList.remove("section-style-2");
     el_section.classList.remove("section-style-3");
     el_section.classList.remove("section-style-4");
+    el_section.classList.remove("section-style-5");
+    el_section.classList.remove("section-style-6");
 }
 
+/*
+//////////////// SECTION: WIDTH  ///////////////
+*/
+
+document.querySelector("#dd_section_width").addEventListener("change", doTextWidth);
+    
+function doTextWidth() {
+    let opt = document.querySelector("#dd_section_width").value;
+    if (opt==="0") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.remove("section-width-1140px");
+    }
+    else if (opt==="1") {
+        document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.add("section-width-1024px");
+    }
+    else if (opt==="2") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.add("section-width-1140px");
+    }
+}
 
 /*
 //////////////// SECTION: ALIGN ///////////////
@@ -155,14 +190,16 @@ document.querySelector("#dd_align_desktop_section").addEventListener("change", d
     
 function doAlignDesktopSection() {
     let opt = document.querySelector("#dd_align_desktop_section").value;
-    console.log("got here align desktop");
     if (opt==="0") {
         document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
+        document.getElementById("dd_align_desktop_btns").disabled=false;
+        document.getElementById("dd_align_desktop_btns").value="0";
     }
 
     else if (opt==="1") {
-        document.querySelector("#HTML-Content section").classList.add("text-center-desktop");   
-        console.log("got here center-align desktop");
+        document.querySelector("#HTML-Content section").classList.add("text-center-desktop"); 
+        document.getElementById("dd_align_desktop_btns").value="1";
+        document.getElementById("dd_align_desktop_btns").disabled=true;
     }
 }
 
@@ -171,10 +208,14 @@ document.querySelector("#dd_align_mobile_section").addEventListener("change", do
 function doAlignMobileSection() {
     let opt = document.querySelector("#dd_align_mobile_section").value;
     if (opt==="0") {
-        document.querySelector("section").classList.remove("text-center-mobile");
+        document.querySelector("#HTML-Content section").classList.remove("text-center-mobile");
+        document.getElementById("dd_align_mobile_btns").disabled=false;
+        document.getElementById("dd_align_mobile_btns").value="0";
     }
     else if (opt==="1") {
-        document.querySelector("section").classList.add("text-center-mobile"); 
+        document.querySelector("#HTML-Content section").classList.add("text-center-mobile"); 
+        document.getElementById("dd_align_mobile_btns").value="1";
+        document.getElementById("dd_align_mobile_btns").disabled=true;
     }
 }
 
@@ -194,7 +235,7 @@ function hideSidebar() {
 }
 
 /*
-//////////////// HEADER COLOURS ///////////////
+//////////////// SECTION: COLOURS ///////////////
 */
     // Get the modal
     const modal = document.getElementById("myModal");
@@ -546,7 +587,7 @@ function doDegGradient() {
 }
 
 /*
-//////////////// TEXT ANIMATION ///////////////
+//////////////// SECTION TEXT: ANIMATION ///////////////
 */
 
 document.querySelector("#dd_text_slide").addEventListener("change", doTextAnimation);
@@ -607,7 +648,7 @@ function enableLabelColor() {
 }
 
 /*
-//////////////// TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// SECTION TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
 document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
@@ -637,7 +678,7 @@ function removeUpperLabel() {
 }
 
 /*
-//////////////// TEXT LENGTH ///////////////
+//////////////// SECTION TEXT: H2 HEADING LENGTH ///////////////
 */
 
 document.querySelector("#dd_text_length_h2").addEventListener("change", doTextLength);
@@ -653,7 +694,7 @@ function doTextLength() {
 }
 
 /*
-//////////////// TEXT: H3 SUB-HEADINGS ////////////////////
+//////////////// SECTION TEXT: H3 SUB-HEADINGS ////////////////////
 */
 
 document.querySelector("#dd_h3").addEventListener("change", doH3);
@@ -686,7 +727,7 @@ function removeH3() {
 }
 
 /*
-//////////////// TEXT: DECKHEAD / STANDFIRST ///////////////
+//////////////// SECTION TEXT: DECKHEAD / STANDFIRST ///////////////
 */
 
 document.querySelector("#dd_standfirst").addEventListener("change", doStandFirst);
@@ -704,7 +745,7 @@ function doStandFirst() {
 }
 
 /*
-//////////////// TEXT: LISTS  ///////////////
+//////////////// SECTION TEXT: LISTS  ///////////////
 */
 
 document.querySelector("#dd_lists").addEventListener("change", doLists);
@@ -736,59 +777,6 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
         }
     }
 
-/*
-//////////////// H2 SUB HEADING UNDER H1 ///////////////
-*/
-
-// document.querySelector("#dd_h2").addEventListener("change", doH2);
-// document.getElementById("dd_h2").value="0";
-
-function doH2() {
-    let opt = document.querySelector("#dd_h2").value;
-    //  regular
-    if (opt==="0") {
-        removeH2();
-        const elH2 = document.querySelector("h1");
-        elH2.insertAdjacentHTML("afterend", assets_header_h2);
-        document.getElementById("btn_subhead").disabled=false;
-    }
-    
-    // None
-    else if (opt==="1") {
-        removeH2();
-        document.getElementById("btn_subhead").disabled=true;
-    }
-}
-
-function removeH2() {
-    if (document.querySelector("h2")) {
-        const elH2 = document.querySelector("h2");
-        elH2.remove();
-    }
-}
-
-/*
-//////////////// H1 AND H1 TEXT WIDTH  ///////////////
-*/
-
-document.querySelector("#dd_section_width").addEventListener("change", doTextWidth);
-    
-function doTextWidth() {
-    let opt = document.querySelector("#dd_section_width").value;
-    if (opt==="0") {
-        document.querySelector("section").classList.remove("section-width-1024px");
-        document.querySelector("section").classList.remove("section-width-1140px");
-    }
-    else if (opt==="1") {
-        document.querySelector("section").classList.remove("section-width-1140px");
-        document.querySelector("section").classList.add("section-width-1024px");
-    }
-    else if (opt==="2") {
-        document.querySelector("section").classList.remove("section-width-1024px");
-        document.querySelector("section").classList.add("section-width-1140px");
-    }
-}
-
 
 /*
 //////////////// SECTION: BUTTONS ///////////////
@@ -813,6 +801,26 @@ function doSectionButtons() {
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_icon").disabled=false;
         document.getElementById("dd_buttons_icon").value="1";
+        document.getElementById("dd_mobile_stacked_btns").disabled=true;
+        document.getElementById("dd_mobile_stacked_btns").value="0";
+
+        if (document.querySelector("section.text-center-desktop")) {
+            document.getElementById("dd_align_desktop_btns").disabled=true;
+            document.getElementById("dd_align_desktop_btns").value="1";
+        }
+        else {
+            document.getElementById("dd_align_desktop_btns").disabled=false;
+            document.getElementById("dd_align_desktop_btns").value="0";
+        }
+
+        if (document.querySelector("section.text-center-mobile")) {
+            document.getElementById("dd_align_mobile_btns").disabled=true;
+            document.getElementById("dd_align_mobile_btns").value="1";
+        }
+        else {
+            document.getElementById("dd_align_mobile_btns").disabled=false;
+            document.getElementById("dd_align_mobile_btns").value="0";
+        }
     }
 
     // two buttons
@@ -824,6 +832,26 @@ function doSectionButtons() {
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_style").disabled=false;
         document.getElementById("dd_buttons_icon").value="0";
+        document.getElementById("dd_mobile_stacked_btns").disabled=false;
+        document.getElementById("dd_mobile_stacked_btns").value="0";
+        
+        if (document.querySelector("section.text-center-desktop")) {
+            document.getElementById("dd_align_desktop_btns").disabled=true;
+            document.getElementById("dd_align_desktop_btns").value="1";
+        }
+        else {
+            document.getElementById("dd_align_desktop_btns").disabled=false;
+            document.getElementById("dd_align_desktop_btns").value="0";
+        }
+
+        if (document.querySelector("section.text-center-mobile")) {
+            document.getElementById("dd_align_mobile_btns").disabled=true;
+            document.getElementById("dd_align_mobile_btns").value="1";
+        }
+        else {
+            document.getElementById("dd_align_mobile_btns").disabled=false;
+            document.getElementById("dd_align_mobile_btns").value="0";
+        }
     }
 }
 
@@ -834,11 +862,16 @@ function removeSectionButtons() {
     }
     document.getElementById("dd_buttons_icon").disabled=true;
     document.getElementById("dd_buttons_style").disabled=true;
+    document.getElementById("dd_align_desktop_btns").disabled=true;
+    document.getElementById("dd_align_mobile_btns").disabled=true;
+    document.getElementById("dd_mobile_stacked_btns").disabled=true;
+    document.getElementById("dd_mobile_stacked_btns").value="0";
 }
 
 function enableAllButtons() {
     document.getElementById("dd_buttons_icon").disabled=false;
-    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("dd_buttons_style").disabled=false;
+
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
     document.getElementById("btn_a_primary_passive_bg").disabled=false;
@@ -855,7 +888,7 @@ function enableAllButtons() {
 
 function enablePrimaryButtons() {
     document.getElementById("dd_buttons_icon").disabled=false;
-    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("dd_buttons_style").disabled=false;
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
     document.getElementById("btn_a_primary_passive_bg").disabled=false;
@@ -866,7 +899,7 @@ function enablePrimaryButtons() {
 
 function enableSecondaryButtons() {
     document.getElementById("dd_buttons_icon").disabled=false;
-    document.getElementById("btn_upper_label").disabled=false;
+    document.getElementById("dd_buttons_style").disabled=false;
     document.getElementById("btn_a_secondary_passive_text").disabled=false;
     document.getElementById("btn_a_secondary_active_text").disabled=false;
     document.getElementById("btn_a_secondary_passive_bg").disabled=false;
@@ -876,10 +909,10 @@ function enableSecondaryButtons() {
 }
 
 function disableAllButtons() {
-    document.getElementById("dd_buttons_style").value="0";
-    document.getElementById("dd_buttons_icon").value="0";
     document.getElementById("dd_buttons_icon").disabled=true;
-    document.getElementById("btn_upper_label").disabled=true;
+    document.getElementById("dd_buttons_icon").value="0";
+    document.getElementById("dd_buttons_style").disabled=true;
+    document.getElementById("dd_buttons_style").value="0";
 
     document.getElementById("btn_a_primary_passive_text").disabled=true;
     document.getElementById("btn_a_primary_active_text").disabled=true;
@@ -1029,6 +1062,52 @@ function swapButtonIcons() {
         }
     }
 }
+
+/*
+//////////////// BUTTONS: ALIGN HORIZONTALLY  ////////////////////
+*/
+
+document.querySelector("#dd_align_desktop_btns").addEventListener("change", doAlignDesktopBtns);
+    
+function doAlignDesktopBtns() {
+    let opt = document.querySelector("#dd_align_desktop_btns").value;
+    if (opt==="0") {
+        document.querySelector(".container-btn").classList.remove("text-center-desktop");
+    }
+
+    else if (opt==="1") {
+        document.querySelector(".container-btn").classList.add("text-center-desktop");   
+    }
+}
+
+document.querySelector("#dd_align_mobile_btns").addEventListener("change", doAlignMobileBtns);
+
+function doAlignMobileBtns() {
+    let opt = document.querySelector("#dd_align_mobile_btns").value;
+    if (opt==="0") {
+        document.querySelector(".container-btn").classList.remove("text-center-mobile");
+    }
+    else if (opt==="1") {
+        document.querySelector(".container-btn").classList.add("text-center-mobile"); 
+    }
+}
+
+/*
+//////////////// BUTTONS: STACK ////////////////////
+*/
+
+document.querySelector("#dd_mobile_stacked_btns").addEventListener("change", doStackBtns);
+
+function doStackBtns() {
+    let opt = document.querySelector("#dd_mobile_stacked_btns").value;
+    if (opt==="0") {
+        document.querySelector(".container-btn").classList.add("mobile-stacked");
+    }
+    else if (opt==="1") {
+        document.querySelector(".container-btn").classList.remove("mobile-stacked"); 
+    }
+}
+
 
 /*
 //////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
