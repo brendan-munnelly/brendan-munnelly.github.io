@@ -309,7 +309,7 @@ section *:last-child, footer *:last-child { margin-bottom: 0 !important }
 
     --column-upper-label-color: var(--gray-700); 
 
-    /* --section-btn-breakpoint: 768px; */
+    --section-btn-breakpoint: 768px;
 }
 
 /* Global font */
@@ -1446,7 +1446,7 @@ body { font-family: var(--global-font) }
 /* Larger mobiles */
 @media (min-width: 440px) and (max-width: 767px)    { section { padding: 8% 13% 9% 13% } }
 /* Smaller mobiles */
-@media (max-width: 399px)                           { section { padding: 12% 10% 14% 10% } }
+@media (max-width: 439px)                           { section { padding: 12% 10% 14% 10% } }
 
 /* Final section block above footer */
 section:last-child { padding-bottom: 6% }
@@ -1574,9 +1574,7 @@ section > p, section > ul > li {
 	font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1140 - 320)));
 }
 
-section > p {
-	line-height: 1.6; margin-bottom: 16px;
-}
+section > p { line-height: 1.6; margin-bottom: 16px }
 
 section > p.standfirst {
     font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
@@ -1594,16 +1592,15 @@ section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
 section > p:last-child,
 section > ul li:last-child { margin-bottom: 0 }
 
-/* Images */
-section > figure { margin-top: 20px; margin-bottom: 32px }
 
-/* Faux buttons */
+/* Faux buttons container */
 section > .container-btn {
-    display: flex; justify-content: space-between; 
+    display: flex; /* justify-content: space-between; */
     flex-wrap: wrap; align-items: flex-start;
-    width: 100%; 
+    width: 100%; margin-top: 32px; margin-bottom: 32px;
 }
 
+/* Horizontal spacing between buttons */
 @media (min-width: 768px) {
     section > .container-btn a.btn > *:nth-child(2), 
     section > .container-btn button > *:nth-child(2) { margin-left: 14px } 
@@ -1614,13 +1611,17 @@ section > .container-btn {
     section > .container-btn button > *:nth-child(2) { margin-left: 10px } 
 }
 
-/* Single-column layout */
+/* Faux buttons size and padding */
+section > .container-btn a.btn {
+    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1140 - 320)));
+    text-decoration: none; font-weight: 700;
+}
+
 @media (min-width: 1200px) { 
     section > .container-btn a.btn { padding: 14px 22px 16px 18px; }
 }
 
-/* Single-column layout */
-@media (min-width: 768px) and (max-width: 1119px) { 
+@media (min-width: 768px) and (max-width: 1199px) { 
     section > .container-btn a.btn { padding: 13px 22px 15px 16px }
 }
 
@@ -1628,55 +1629,49 @@ section > .container-btn {
     section > .container-btn a.btn { padding: 14px 12px 16px 12px }
 }
 
-section.text-center > .container-btn,
-section > .container-btn.text-center { 
-    justify-content: center
-}
-
-section > .container-btn a.btn {
-    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1140 - 320)));
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Non-mobiles */
+/* Buttons layout: arranged horizontally */
 @media (min-width: 768px ) {
-    section > .container-btn { 
-        flex-direction: row;
-        justify-content: flex-start;
-        text-align: left;
-        margin-top: 32px; margin-bottom: 32px; padding-left: 0;
-    }
-    section > .container-btn a.btn { padding: 12px 16px 17px 16px }
-    section > .container-btn a:first-child { margin-right: 56px }
-    section.text-center-desktop > .container-btn { 
-        justify-content: center; margin-left: auto; margin-right: auto 
-    }
+    section > .container-btn { flex-direction: row; justify-content: flex-start }
+    section.text-center-desktop > .container-btn,
+    section > .container-btn.text-center-desktop { justify-content: center }
 }
 
-/* Mobiles */
+@media (min-width: 768px ) { section > .container-btn a:nth-child(1) { margin-right: 56px } }
+@media (max-width: 767px ) { section > .container-btn a:nth-child(1) { margin-right: 42px } }
+
+/* Buttons layout: stacked vertically */
 @media (max-width: 767px) {
-    section > .container-btn {
-        flex-direction: column;
-        align-self: flex-start;
-        margin-top: 32px; padding-left: 0;
-    }
-    section > .container-btn a.btn { padding: 12px 16px 12px 16px }
-    section > .container-btn a:first-child { margin-bottom: 0 }
-    section > .container-btn a:nth-child(2) { margin-top: 32px }
+    section > .container-btn.mobile-stacked { flex-direction: column; align-self: flex-start }
+    section > .container-btn.mobile-stacked a:first-child { margin-bottom: 0 }
+    section > .container-btn.mobile-stacked a:nth-child(2) { margin-top: 32px }
 
-    section.text-center > .container-btn a.btn,
-    section > .container-btn.text-center a.btn {
-        align-self: center
-    }
-    section.text-center-mobile > .container-btn { 
-        align-items: center;
-        margin-left: auto; margin-right: auto 
-    }
+    section.text-center-mobile > .container-btn.mobile-stacked a.btn,
+    section > .container-btn.mobile-stacked.text-center-mobile a.btn { align-self: center }
+    section.text-center-mobile > .container-btn.mobile-stacked { align-items: center } 
+}
+
+/* Buttons layout: not stacked vertically */
+@media (max-width: 767px) {
+    section > .container-btn:not(.mobile-stacked) { flex-direction: row; justify-content: flex-start }
+    section.text-center-desktop > .container-btn:not(.mobile-stacked),
+    section > .container-btn.text-center-desktop:not(.mobile-stacked) { justify-content: center }
+    
+}
+
+/* Buttons: Horizontal alignment */
+@media (min-width: 768px) {
+    section.text-center-desktop > .container-btn,
+    section > .container-btn.text-center-desktop { justify-content: center }
+}
+
+@media (max-width: 767px) {
+    section.text-center-mobile > .container-btn,
+    section > .container-btn.text-center-mobile { justify-content: center }
 }
 
 
-
+/* Images */
+section > figure { margin-top: 20px; margin-bottom: 32px }
 
 section.text-center-desktop > figure,
 section.text-center-mobile  > figure { margin-left: auto; margin-right: auto }
