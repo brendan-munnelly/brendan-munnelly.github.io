@@ -1449,7 +1449,7 @@ body { font-family: var(--global-font) }
 @media (max-width: 439px)                           { section { padding: 12% 10% 14% 10% } }
 
 /* Final section block above footer */
-section:last-child { padding-bottom: 6% }
+/* section:last-child { padding-bottom: 6% } */
 
 /* ========== THEME: LIGHT ========== */
 
@@ -1592,12 +1592,11 @@ section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
 section > p:last-child,
 section > ul li:last-child { margin-bottom: 0 }
 
-
 /* Faux buttons container */
 section > .container-btn {
     display: flex; /* justify-content: space-between; */
     flex-wrap: wrap; align-items: flex-start;
-    width: 100%; margin-top: 32px; margin-bottom: 32px;
+    width: 100%; margin-top: 32px; 
 }
 
 /* Horizontal spacing between buttons */
@@ -1615,6 +1614,7 @@ section > .container-btn {
 section > .container-btn a.btn {
     font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1140 - 320)));
     text-decoration: none; font-weight: 700;
+    margin-bottom: 32px !important;
 }
 
 @media (min-width: 1200px) { 
@@ -1629,33 +1629,22 @@ section > .container-btn a.btn {
     section > .container-btn a.btn { padding: 14px 12px 16px 12px }
 }
 
-/* Buttons layout: arranged horizontally */
-@media (min-width: 768px ) {
-    section > .container-btn { flex-direction: row; justify-content: flex-start }
-    section.text-center-desktop > .container-btn,
-    section > .container-btn.text-center-desktop { justify-content: center }
-}
-
 @media (min-width: 768px ) { section > .container-btn a:nth-child(1) { margin-right: 56px } }
-@media (max-width: 767px ) { section > .container-btn a:nth-child(1) { margin-right: 32px } }
+@media (max-width: 767px ) { section > .container-btn a:nth-child(1) { margin-right: 32px } } 
 
-/* Buttons layout: stacked vertically */
-@media (max-width: 767px) {
-    section > .container-btn { flex-direction: column; align-self: flex-start }
-    section > .container-btn a:first-child { margin-bottom: 0 }
-    section > .container-btn a:nth-child(2) { margin-top: 32px }
-
-    section.text-center-mobile > .container-btn a.btn,
-    section > .container-btn.text-center-mobile a.btn { align-self: center }
-    section.text-center-mobile > .container-btn { align-items: center } 
+/* Buttons centered */
+@media (min-width: 768px) {
+    section.text-center-desktop > .container-btn a.btn,
+    section > .container-btn.text-center-desktop a.btn { 
+        margin-left: 24px; margin-right: 24px;
+    }
 }
 
-/* Buttons layout: not stacked vertically */
 @media (max-width: 767px) {
-    section > .container-btn.mobile-not-stacked { flex-direction: row; justify-content: flex-start }
-    section > .container-btn.mobile-not-stacked a:nth-child(2) { margin-top: 0 }
-    section.text-center-desktop > .container-btn.mobile-not-stacked,
-    section > .container-btn.text-center-desktop.mobile-not-stacked { justify-content: center }
+    section.text-center-mobile > .container-btn a.btn,
+    section > .container-btn.text-center-mobile a.btn { 
+        margin-left: 16px; margin-right: 16px;
+    }
 }
 
 /* Buttons: Horizontal alignment */
@@ -1668,7 +1657,6 @@ section > .container-btn a.btn {
     section.text-center-mobile > .container-btn,
     section > .container-btn.text-center-mobile { justify-content: center }
 }
-
 
 /* Images */
 section > figure { margin-top: 20px; margin-bottom: 32px }
