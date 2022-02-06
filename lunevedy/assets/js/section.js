@@ -801,8 +801,6 @@ function doSectionButtons() {
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_icon").disabled=false;
         document.getElementById("dd_buttons_icon").value="1";
-        document.getElementById("dd_mobile_stacked_btns").disabled=true;
-        document.getElementById("dd_mobile_stacked_btns").value="0";
 
         if (document.querySelector("section.text-center-desktop")) {
             document.getElementById("dd_align_desktop_btns").disabled=true;
@@ -832,8 +830,6 @@ function doSectionButtons() {
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_style").disabled=false;
         document.getElementById("dd_buttons_icon").value="0";
-        document.getElementById("dd_mobile_stacked_btns").disabled=false;
-        document.getElementById("dd_mobile_stacked_btns").value="0";
         
         if (document.querySelector("section.text-center-desktop")) {
             document.getElementById("dd_align_desktop_btns").disabled=true;
@@ -864,8 +860,6 @@ function removeSectionButtons() {
     document.getElementById("dd_buttons_style").disabled=true;
     document.getElementById("dd_align_desktop_btns").disabled=true;
     document.getElementById("dd_align_mobile_btns").disabled=true;
-    document.getElementById("dd_mobile_stacked_btns").disabled=true;
-    document.getElementById("dd_mobile_stacked_btns").value="0";
 }
 
 function enableAllButtons() {
@@ -1091,23 +1085,6 @@ function doAlignMobileBtns() {
         document.querySelector(".container-btn").classList.add("text-center-mobile"); 
     }
 }
-
-/*
-//////////////// BUTTONS: STACK ////////////////////
-*/
-
-document.querySelector("#dd_mobile_stacked_btns").addEventListener("change", doStackBtns);
-
-function doStackBtns() {
-    let opt = document.querySelector("#dd_mobile_stacked_btns").value;
-    if (opt==="0") {
-        document.querySelector(".container-btn").classList.add("mobile-stacked");
-    }
-    else if (opt==="1") {
-        document.querySelector(".container-btn").classList.remove("mobile-stacked"); 
-    }
-}
-
 
 /*
 //////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
