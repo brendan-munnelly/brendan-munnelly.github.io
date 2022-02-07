@@ -971,12 +971,12 @@ function doButtonsStyle() {
         removeButtonsStyle();
         if (document.querySelector(".btn-primary")) {
             const el_btn_primary = document.querySelector("a.btn-primary");
-            el_btn_primary.classList.add("btn-rounded");
+            el_btn_primary.classList.add("btn-pill");
         }
 
         if (document.querySelector(".btn-secondary")) {
             const el_btn_secondary = document.querySelector("a.btn-secondary");
-            el_btn_secondary.classList.add("btn-rounded");
+            el_btn_secondary.classList.add("btn-pill");
         }
     }
 }
@@ -986,13 +986,13 @@ function removeButtonsStyle() {
     if (document.querySelector(".btn-primary")) {
         const el_btn_primary = document.querySelector("a.btn-primary");
         el_btn_primary.classList.remove("btn-soft");
-        el_btn_primary.classList.remove("btn-rounded");
+        el_btn_primary.classList.remove("btn-pill");
     }
 
     if (document.querySelector(".btn-secondary")) {
         const el_btn_secondary = document.querySelector("a.btn-secondary");
         el_btn_secondary.classList.remove("btn-soft");
-        el_btn_secondary.classList.remove("btn-rounded");
+        el_btn_secondary.classList.remove("btn-pill");
     }
 }
 
