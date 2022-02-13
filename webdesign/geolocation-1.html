@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .ad4 {    position: relative;} 
+        .no-geolocation .ad4 {    display: none;}
+        .ad4 h1 { font-size: 20px;    font-family: AcknowledgementMedium;    text-align: center;}
+    </style>
+
+
+</head>
+<body>
+
+    <article class="ad-ad4">
+        <div id="mapDiv">
+            <h1>Where in the world are you?</h1>
+            <form id="geoForm">
+                <input type="button" id="geobutton" value="Tell us!">
+            </form>
+        </div>
+    </article>
+
+
+    <script>
+
+    var geobutton = document.getElementById('geobutton');geobutton.addEventListener('click', determineLocation);
+
+    function determineLocation() {
+        if (navigator.geolocation) {
+            // First callback for success, second for failure
+            // navigator.geolocation.getCurrentPosition(whereAmI, oopsError);
+            navigator.geolocation.getCurrentPosition(displayOnMap);
+        }
+        else {
+            // An old web browser has let you down.
+            positionStatus.innerHTML = '<p>Your web browser does not support Geolocation.</p>';
+        }
+    }
+
+    function oopsError(error) {
+        console.log('ERROR(' + error.code + '): ' + error.message);
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                positionStatus.innerHTML = "User denied the request for Geolocation."
+            break;
+            case error.POSITION_UNAVAILABLE:
+                positionStatus.innerHTML = "Location information is unavailable."
+            break;
+            case error.TIMEOUT:
+                positionStatus.innerHTML = "The request to get user location timed out. It took too long and the web browser gave up."
+            break;
+            case error.UNKNOWN_ERROR:
+                positionStatus.innerHTML = "An unknown error occurred."
+            break;
+        }
+    } 
+    
+    void getCurrentPosition(successCallback, errorCallback, options);
+
+        function displayOnMap(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            // Let’s use Google Maps to display the location
+            var myOptions = {
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP    };
+                var map = new google.maps.Map(document.getElementById("geoForm"), myOptions);        
+                var initialLocation = new google.maps.LatLng(latitude, longitude);
+                var marker = new google.maps.Marker({    
+                    position: initialLocation,
+                    map: map,
+                    title: "Hello World!"
+                });
+            }
+
+            map.setCenter(initialLocation);
+
+    </script>
+
+    <!-- google maps API-->
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
+    </script>
+</body>
+</html>
