@@ -105,7 +105,7 @@ function doSectionTheme() {
 //////////////// SECTION: CLASS NAMES ///////////////
 */
 
-let section_class = "section-style-1";
+let section_class = "section-selector-1";
 document.querySelector("#dd_className").addEventListener("change", doClassName);
 
 function doClassName() {
@@ -115,37 +115,50 @@ function doClassName() {
 
     if ( opt==="0") {
         removeClassNames();
-        el_section.classList.add("section-style-1");
-        section_class = "section-style-1";
+        el_section.classList.add("section-selector-1");
+        section_class = "section-selector-1";
     }
     
     else if ( opt==="1") {
         removeClassNames();
-        el_section.classList.add("section-style-2");
-        section_class = "section-style-2";
+        el_section.classList.add("section-selector-2");
+        section_class = "section-selector-2";
     }
 
     else if ( opt==="2") {
         removeClassNames();
-        el_section.classList.add("section-style-3");
-        section_class = "section-style-3";
+        el_section.classList.add("section-selector-3");
+        section_class = "section-selector-3";
     }
 
     else if ( opt==="3") {
         removeClassNames();
-        el_section.classList.add("section-style-4");
-        section_class = "section-style-4";
+        el_section.classList.add("section-selector-4");
+        section_class = "section-selector-4";
+    }
+
+    else if ( opt==="4") {
+        removeClassNames();
+        el_section.classList.add("section-selector-5");
+        section_class = "section-selector-5";
+    }
+
+    else if ( opt==="5") {
+        removeClassNames();
+        el_section.classList.add("section-selector-6");
+        section_class = "section-selector-6";
     }
 }
 
 function removeClassNames() {
     const el_section = document.querySelector("section");
-    el_section.classList.remove("section-style-1");
-    el_section.classList.remove("section-style-2");
-    el_section.classList.remove("section-style-3");
-    el_section.classList.remove("section-style-4");
+    el_section.classList.remove("section-selector-1");
+    el_section.classList.remove("section-selector-2");
+    el_section.classList.remove("section-selector-3");
+    el_section.classList.remove("section-selector-4");
+    el_section.classList.remove("section-selector-5");
+    el_section.classList.remove("section-selector-6");
 }
-
 
 /*
 //////////////// SIDE FLYOUT WITH COLOR PICKER  ///////////////
@@ -221,20 +234,20 @@ function hideSidebar() {
         // modal.style.display = "block";
         if (btn_id === "btn_bg") {
             const el_section = document.querySelector("section");
-            el_section.classList.remove("section-bg-gradient");
-            // console.log("removed gradient");
-            document.querySelector("#bg_gradient_options").style.display='none';
-            document.querySelector("#btn_gradient_input_group").style.display='flex';
-            document.querySelector("#content-1 .dialog-box hr").style.display='block';
+            // el_section.classList.remove("section-bg-gradient");
+            // // console.log("removed gradient");
+            // document.querySelector("#bg_gradient_options").style.display='none';
+            // // document.querySelector("#btn_gradient_input_group").style.display='flex';
+            // document.querySelector("#content-1 .dialog-box hr").style.display='block';
 
-            if ( arrCSS.some(e => e.includes("background-image:")) ) {
-                // console.log("Already as style in HEAD");
-                const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
-                arrCSS.splice(arrPos, 1);
-                if (arrCSS.length==0) {
-                    disableCSS();
-                }
-            }
+            // if ( arrCSS.some(e => e.includes("background-image:")) ) {
+            //     // console.log("Already as style in HEAD");
+            //     const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
+            //     arrCSS.splice(arrPos, 1);
+            //     if (arrCSS.length==0) {
+            //         disableCSS();
+            //     }
+            // }
         }
         showSidebar();
         event.preventDefault();
@@ -260,43 +273,44 @@ function hideSidebar() {
 
     function getColorID(color_code) {
         if (document.querySelector("section.theme-light")) {
-            section_theme = "section."+section_class+".theme-light";
+            section_theme = "section.theme-light."+section_class;
         }
         else if (document.querySelector("section.theme-dark")) {
-            section_theme = "section."+section_class+".theme-dark";
+            section_theme = "section.theme-dark."+section_class;
         }
 
-        /* Header background */
+        /* Section background */
         if (btn_id === "btn_bg") {
             newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
-            sub_string = section_theme+ " { background-color: {";
+            sub_string = section_theme+ " { background-color: ";
             doUpdateArray(sub_string,newStyle);
+            console.log("sub_string: "+sub_string);
         }
 
-        else if (btn_id === "btn_gradient_from") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old From Color: "+item_from);
-            console.log("New From Color: "+color_code);
-            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            doUpdateArray(sub_string,newStyle);
-        }
+        // else if (btn_id === "btn_gradient_from") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old From Color: "+item_from);
+        //     console.log("New From Color: "+color_code);
+        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
+        //     doUpdateArray(sub_string,newStyle);
+        // }
         
-        else if (btn_id === "btn_gradient_to") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old To Color: "+item_to);
-            console.log("New To Color: "+color_code);
-            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            console.log(newStyle);
-            doUpdateArray(sub_string,newStyle);
-        }
+        // else if (btn_id === "btn_gradient_to") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old To Color: "+item_to);
+        //     console.log("New To Color: "+color_code);
+        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
+        //     console.log(newStyle);
+        //     doUpdateArray(sub_string,newStyle);
+        // }
 
         /* Header upper label */
         else if (btn_id === "btn_upper_label") {
@@ -425,6 +439,7 @@ function doUpdateArray(sub_string,newStyle) {
         const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
         arrCSS.splice(arrPos, 1);
         arrCSS.push(newStyle);
+        console.log("Includes background-color sub-string")
     }
     else {
         arrCSS.push(newStyle);
@@ -469,7 +484,7 @@ function doColOrder() {
 //////////////// SECTION: GRADIENT BACKGROUND ////////////////////
 */
 
-document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
+// document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
 
 function doBgGradient() {
     if (document.querySelector("section.theme-light")) {
@@ -484,7 +499,7 @@ function doBgGradient() {
     el_section.classList.add("section-bg-gradient");
     // Show/hide gradient options
     document.querySelector("#bg_gradient_options").style.display='block';
-    document.querySelector("#btn_gradient_input_group").style.display='none';
+    // document.querySelector("#btn_gradient_input_group").style.display='none';
     document.querySelector("#content-1 .dialog-box hr").style.display='none';
        
     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient(var(--section-bg-gradient-deg), var(--section-bg-gradient-from-light), var(--section-bg-gradient-to-light)) } \n";
@@ -760,11 +775,15 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
 
         else if (opt==="1") {
             removeLists();
+            const el_para_2 = document.querySelector('section p:last-of-type');
+            el_para_2.remove();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_short);
         }
 
         else if (opt==="2") {
             removeLists();
+            const el_para_2 = document.querySelector('section p:last-of-type');
+            el_para_2.remove();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_long);
         }
     }
@@ -775,6 +794,8 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
             for (var i = 0 ; i < elUL.length ; i++) {
                 elUL[i].remove();
             }
+            // Restore third paragraph
+            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", "<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation.</p>");
         }
     }
 
@@ -813,18 +834,27 @@ function removeH2() {
 //////////////// H1 AND H1 TEXT WIDTH  ///////////////
 */
 
-document.querySelector("#dd_section_width").addEventListener("change", doTextWidth);
+/*
+//////////////// SECTION: WIDTH  ///////////////
+*/
+
+document.querySelector("#dd_section_width").addEventListener("change", doSectionWidth);
     
-function doTextWidth() {
+function doSectionWidth() {
     let opt = document.querySelector("#dd_section_width").value;
     if (opt==="0") {
         document.querySelector("section").classList.remove("section-width-930px");
+        document.querySelector("section").classList.remove("section-width-1024px");
     }
     else if (opt==="1") {
+        document.querySelector("section").classList.remove("section-width-930px");
+        document.querySelector("section").classList.add("section-width-1024px");
+    }
+    else if (opt==="2") {
+        document.querySelector("section").classList.remove("section-width-1024px");
         document.querySelector("section").classList.add("section-width-930px");
     }
 }
-
 /*
 //////////////// BUTTONS: SPLIT TEXT AND IMAGE ////////////////////
 */
@@ -1155,6 +1185,7 @@ function doVisType() {
         removeVisual();
         resetVisualEffects();
         disableVidProps();
+        enableImgProps();
         let child_obj = document.createElement("figure");
         child_obj.innerHTML = "<img src="+el_picture+" alt=\"Placeholder image\">";
         col_fig.appendChild(child_obj);
@@ -1171,6 +1202,7 @@ function doVisType() {
         removeVisual();
         resetVisualEffects();
         disableVidProps();
+        enableImgProps();
         let child_obj = document.createElement("figure");
         child_obj.innerHTML = "<img src="+el_pic_trans+" alt=\"Placeholder image\">";
         col_fig.appendChild(child_obj);
@@ -1187,6 +1219,7 @@ function doVisType() {
         removeVisual();
         resetVisualEffects();
         disableVidProps();
+        enableImgProps();
         let child_obj = document.createElement("figure");
         child_obj.innerHTML = "<img src="+el_drawing+" alt=\"Placeholder image\">";
         col_fig.appendChild(child_obj);

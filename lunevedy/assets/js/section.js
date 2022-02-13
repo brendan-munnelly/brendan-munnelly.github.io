@@ -105,7 +105,7 @@ function doSectionTheme() {
 //////////////// SECTION: CLASS NAMES ///////////////
 */
 
-let section_class = "section-style-1";
+let section_class = "section-selector-1";
 document.querySelector("#dd_className").addEventListener("change", doClassName);
 
 function doClassName() {
@@ -115,49 +115,49 @@ function doClassName() {
 
     if ( opt==="0") {
         removeClassNames();
-        el_section.classList.add("section-style-1");
-        section_class = "section-style-1";
+        el_section.classList.add("section-selector-1");
+        section_class = "section-selector-1";
     }
     
     else if ( opt==="1") {
         removeClassNames();
-        el_section.classList.add("section-style-2");
-        section_class = "section-style-2";
+        el_section.classList.add("section-selector-2");
+        section_class = "section-selector-2";
     }
 
     else if ( opt==="2") {
         removeClassNames();
-        el_section.classList.add("section-style-3");
-        section_class = "section-style-3";
+        el_section.classList.add("section-selector-3");
+        section_class = "section-selector-3";
     }
 
     else if ( opt==="3") {
         removeClassNames();
-        el_section.classList.add("section-style-4");
-        section_class = "section-style-4";
+        el_section.classList.add("section-selector-4");
+        section_class = "section-selector-4";
     }
 
     else if ( opt==="4") {
         removeClassNames();
-        el_section.classList.add("section-style-5");
-        section_class = "section-style-5";
+        el_section.classList.add("section-selector-5");
+        section_class = "section-selector-5";
     }
 
     else if ( opt==="5") {
         removeClassNames();
-        el_section.classList.add("section-style-6");
-        section_class = "section-style-6";
+        el_section.classList.add("section-selector-6");
+        section_class = "section-selector-6";
     }
 }
 
 function removeClassNames() {
     const el_section = document.querySelector("section");
-    el_section.classList.remove("section-style-1");
-    el_section.classList.remove("section-style-2");
-    el_section.classList.remove("section-style-3");
-    el_section.classList.remove("section-style-4");
-    el_section.classList.remove("section-style-5");
-    el_section.classList.remove("section-style-6");
+    el_section.classList.remove("section-selector-1");
+    el_section.classList.remove("section-selector-2");
+    el_section.classList.remove("section-selector-3");
+    el_section.classList.remove("section-selector-4");
+    el_section.classList.remove("section-selector-5");
+    el_section.classList.remove("section-selector-6");
 }
 
 /*
@@ -293,20 +293,20 @@ function hideSidebar() {
         // modal.style.display = "block";
         if (btn_id === "btn_bg") {
             const el_section = document.querySelector("section");
-            el_section.classList.remove("section-bg-gradient");
+            // el_section.classList.remove("section-bg-gradient");
             // console.log("removed gradient");
-            document.querySelector("#bg_gradient_options").style.display='none';
-            document.querySelector("#btn_gradient_input_group").style.display='flex';
-            document.querySelector("#content-1 .dialog-box hr").style.display='block';
+            // document.querySelector("#bg_gradient_options").style.display='none';
+            // document.querySelector("#btn_gradient_input_group").style.display='flex';
+            // document.querySelector("#content-1 .dialog-box hr").style.display='block';
 
-            if ( arrCSS.some(e => e.includes("background-image:")) ) {
-                // console.log("Already as style in HEAD");
-                const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
-                arrCSS.splice(arrPos, 1);
-                if (arrCSS.length==0) {
-                    disableCSS();
-                }
-            }
+            // if ( arrCSS.some(e => e.includes("background-image:")) ) {
+            //     // console.log("Already as style in HEAD");
+            //     const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
+            //     arrCSS.splice(arrPos, 1);
+            //     if (arrCSS.length==0) {
+            //         disableCSS();
+            //     }
+            // }
         }
         showSidebar();
         event.preventDefault();
@@ -332,43 +332,43 @@ function hideSidebar() {
 
     function getColorID(color_code) {
         if (document.querySelector("section.theme-light")) {
-            section_theme = "section."+section_class+".theme-light";
+            section_theme = "section.theme-light."+section_class;
         }
         else if (document.querySelector("section.theme-dark")) {
-            section_theme = "section."+section_class+".theme-dark";
+            section_theme = "section.theme-dark."+section_class;
         }
 
-        /* Header background */
+        /* Section background */
         if (btn_id === "btn_bg") {
             newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
-            sub_string = section_theme+ " { background-color: {";
+            sub_string = section_theme+ " { background-color: ";
             doUpdateArray(sub_string,newStyle);
         }
 
-        else if (btn_id === "btn_gradient_from") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old From Color: "+item_from);
-            console.log("New From Color: "+color_code);
-            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            doUpdateArray(sub_string,newStyle);
-        }
+        // else if (btn_id === "btn_gradient_from") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old From Color: "+item_from);
+        //     console.log("New From Color: "+color_code);
+        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
+        //     doUpdateArray(sub_string,newStyle);
+        // }
         
-        else if (btn_id === "btn_gradient_to") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old To Color: "+item_to);
-            console.log("New To Color: "+color_code);
-            newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            console.log(newStyle);
-            doUpdateArray(sub_string,newStyle);
-        }
+        // else if (btn_id === "btn_gradient_to") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old To Color: "+item_to);
+        //     console.log("New To Color: "+color_code);
+        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
+        //     console.log(newStyle);
+        //     doUpdateArray(sub_string,newStyle);
+        // }
 
         /* Header upper label */
         else if (btn_id === "btn_upper_label") {
@@ -380,14 +380,14 @@ function hideSidebar() {
         /* Header h2 */
         else if (btn_id === "btn_head") {
             newStyle = section_theme+ " h2 { color: var("+color_code+") }\n";
-            sub_string = "h2";
+            sub_string = "h2 { color:";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Header h3 */
         else if (btn_id === "btn_subhead") {
             newStyle = section_theme+ " h3 { color: var("+color_code+") }\n";
-            sub_string = "h3";
+            sub_string = "h3 { color:";
             doUpdateArray(sub_string,newStyle);
         }
 
@@ -493,6 +493,7 @@ function hideSidebar() {
 }
 
 function doUpdateArray(sub_string,newStyle) {
+    console.log("Passed in sub_string: "+sub_string);
     if ( arrCSS.some(e => e.includes(sub_string)) ) {
         const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
         arrCSS.splice(arrPos, 1);
@@ -519,7 +520,7 @@ function disableTransColCode() {
 //////////////// SECTION: GRADIENT BACKGROUND ////////////////////
 */
 
-document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
+// document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
 
 function doBgGradient() {
     if (document.querySelector("section.theme-light")) {
@@ -534,7 +535,7 @@ function doBgGradient() {
     el_section.classList.add("section-bg-gradient");
     // Show/hide gradient options
     document.querySelector("#bg_gradient_options").style.display='block';
-    document.querySelector("#btn_gradient_input_group").style.display='none';
+    // document.querySelector("#btn_gradient_input_group").style.display='none';
     document.querySelector("#content-1 .dialog-box hr").style.display='none';
        
     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient(var(--section-bg-gradient-deg), var(--section-bg-gradient-from-light), var(--section-bg-gradient-to-light)) } \n";
@@ -759,11 +760,15 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
 
         else if (opt==="1") {
             removeLists();
+            const el_para_2 = document.querySelector('section p:last-of-type');
+            el_para_2.remove();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_short);
         }
 
         else if (opt==="2") {
             removeLists();
+            const el_para_2 = document.querySelector('section p:last-of-type');
+            el_para_2.remove();
             document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_long);
         }
     }
@@ -774,6 +779,8 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
             for (var i = 0 ; i < elUL.length ; i++) {
                 elUL[i].remove();
             }
+            // Restore third paragraph
+            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", "<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI. Bring to the table win-win survival strategies to ensure proactive domination.</p>");
         }
     }
 
@@ -1087,7 +1094,7 @@ function doAlignMobileBtns() {
 }
 
 /*
-//////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
+//////////////// VISUAL ELEMENT INSIDE SINGLE-COLUMN LAYOUT ///////////////
 */
 
 /* Enable visual */
@@ -1109,6 +1116,10 @@ function enableVis() {
 
     //Enable visual width
     document.getElementById("dd_yn_vis_width").disabled=false;
+    const el_label_width = document.querySelector("#label_img_width");
+    const el_label_icon = document.querySelector("#icon_img_width");
+    el_label_icon.classList.remove('disabled-gray');
+    el_label_width.classList.remove('disabled-gray');
     enableImgProps();
     disableVidProps();
 
@@ -1120,6 +1131,8 @@ function enableVis() {
 }
 
 function disablsAllVisProps() {
+    // Disable desktop align
+    disableDesktopAlignFig();
     // Disable all radio options
     document.getElementById("vis_type_0").disabled=true;
     document.getElementById("vis_type_1").disabled=true;
@@ -1130,6 +1143,10 @@ function disablsAllVisProps() {
     // Disable visual width
     document.getElementById("dd_yn_vis_width").disabled=true;
     document.getElementById("dd_yn_vis_width").value="0";
+    const el_label_width = document.querySelector("#label_img_width");
+    const el_label_icon = document.querySelector("#icon_img_width");
+    el_label_icon.classList.add('disabled-gray');
+    el_label_width.classList.add('disabled-gray');
 
     document.getElementById("vis_type_0").checked=true;
     disableImgProps();
@@ -1147,22 +1164,26 @@ function disableImgProps() {
     document.getElementById("dd_image_corners").disabled=true;
     document.getElementById("dd_image_shadows").disabled=true;
     document.getElementById("dd_image_borders").disabled=true;
+    const el_label_width = document.getElementById("dd_yn_vis_width");
     const el_label_1 = document.querySelector("#label_img_shadows");
     const el_label_2 = document.querySelector("#label_img_borders");
     const el_label_3 = document.querySelector("#label_img_corners");
+    el_label_width.classList.add('disabled-gray');
     el_label_1.classList.add('disabled-gray');
     el_label_2.classList.add('disabled-gray');
     el_label_3.classList.add('disabled-gray');
 }
 
 function enableImgProps() {
-    // Disable image options
     document.getElementById("dd_image_corners").disabled=false;
     document.getElementById("dd_image_shadows").disabled=false;
     document.getElementById("dd_image_borders").disabled=false;
+    const el_label_width = document.getElementById("dd_yn_vis_width");
     const el_label_1 = document.querySelector("#label_img_shadows");
     const el_label_2 = document.querySelector("#label_img_borders");
     const el_label_3 = document.querySelector("#label_img_corners");
+
+    el_label_width.classList.remove('disabled-gray');
     el_label_1.classList.remove('disabled-gray');
     el_label_2.classList.remove('disabled-gray');
     el_label_3.classList.remove('disabled-gray');
@@ -1176,7 +1197,6 @@ function disableVidProps() {
     const el_label_2 = document.querySelector("#label_vid_borders");
     el_label_1.classList.add('disabled-gray');
     el_label_2.classList.add('disabled-gray');
-
 }
 
 function enableVidProps() {
@@ -1187,6 +1207,8 @@ function enableVidProps() {
     const el_label_2 = document.querySelector("#label_vid_borders");
     el_label_1.classList.remove('disabled-gray');
     el_label_2.classList.remove('disabled-gray');
+    const el_label_width = document.getElementById("dd_yn_vis_width");
+    el_label_width.classList.remove('disabled-gray');
 }
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
@@ -1206,12 +1228,14 @@ function doVisType() {
         if (selectedValue==="none") {
             removeVisual();
             resetVisualEffects();
+            disableDesktopAlignFig();
         }
 
         if (selectedValue==="pictures") {
             removeVisual();
             resetVisualEffects();
             disableVidProps();
+            disableDesktopAlignFig();
             document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");        
             document.getElementById("dd_image_shadows").disabled=false;
             document.getElementById("dd_image_borders").disabled=false;
@@ -1226,6 +1250,7 @@ function doVisType() {
             removeVisual();
             resetVisualEffects();
             disableVidProps();
+            disableDesktopAlignFig();
             document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
             document.getElementById("dd_image_shadows").disabled=false;
             document.getElementById("dd_image_borders").disabled=false;
@@ -1240,6 +1265,7 @@ function doVisType() {
             removeVisual();
             resetVisualEffects();
             disableVidProps();
+            disableDesktopAlignFig();
 
             document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
             document.getElementById("dd_image_shadows").disabled=false;
@@ -1256,6 +1282,7 @@ function doVisType() {
             resetVisualEffects();
             disableImgProps();
             enableVidProps();
+            disableDesktopAlignFig();
             document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
             document.getElementById("vis_type_3").checked=true;
         }
@@ -1265,6 +1292,7 @@ function doVisType() {
             resetVisualEffects();
             disableImgProps();
             enableVidProps();
+            disableDesktopAlignFig();
             document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
             document.getElementById("vis_type_4").checked=true;
         }
@@ -1304,6 +1332,23 @@ function removeVisual() {
     document.getElementById("dd_vid_shadows").disabled=true;
     document.getElementById("dd_vid_borders").disabled=true;
     document.getElementById("vis_type_0").checked=true;
+}
+
+/*
+//////////////// ILLUSTRATIONS: ALIGN ON DESKTOP  ////////////////////
+*/
+
+document.querySelector("#dd_align_desktop_figure").addEventListener("change", doAlignDesktopFig);
+    
+function doAlignDesktopFig() {
+    let opt = document.querySelector("#dd_align_desktop_figure").value;
+    if (opt==="0") {
+        document.querySelector("section figure").classList.remove("text-center-desktop");
+    }
+
+    else if (opt==="1") {
+        document.querySelector("section figure").classList.add("text-center-desktop");   
+    }
 }
 
 /*
@@ -1435,18 +1480,44 @@ function doFigWidth() {
     if (opt==="0") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.remove("figure-width-80");
+        disableDesktopAlignFig();
     }
     // 50%
     else if (opt==="1") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.add("figure-width-80");
+        enableDesktopAlignFig();
     }
     // 50%
     else if (opt==="2") {
         el_section_fig.classList.remove("figure-width-80");
         el_section_fig.classList.add("figure-width-50");
+        enableDesktopAlignFig();
     }
 }
+
+function enableDesktopAlignFig() {
+    document.querySelector("#dd_align_desktop_figure").disabled=false;
+    document.querySelector("#dd_align_desktop_figure").value="0";
+    const el_desktop_align_label = document.querySelector("#label_fig_desktop_align");
+    const el_desktop_align_icon = document.querySelector("#icon_fig_desktop_align");
+
+    el_desktop_align_label.classList.remove('disabled-gray');
+    el_desktop_align_icon.classList.remove('disabled-gray');
+
+}
+
+function disableDesktopAlignFig() {
+    document.querySelector("#dd_align_desktop_figure").disabled=true;
+    document.querySelector("#dd_align_desktop_figure").value="0";
+    const el_desktop_align_label = document.querySelector("#label_fig_desktop_align");
+    const el_desktop_align_icon = document.querySelector("#icon_fig_desktop_align");
+
+    el_desktop_align_label.classList.add('disabled-gray');
+    el_desktop_align_icon.classList.add('disabled-gray');
+
+}
+
 
 
 /* ================ DIALOG BOXES =================== */
