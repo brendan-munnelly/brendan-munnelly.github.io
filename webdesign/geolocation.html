@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="robots" content="noindex">
+	<title>Wine Geolocation</title>
+
+	<link href="assets/css/wine.css" rel="stylesheet"> 
+
+	<link href="https://fonts.googleapis.com/css?family=EB+Garamond:500,500i,700,700i%7COpen+Sans+Condensed:700%7CRoboto+Mono:400,400i&display=swap" rel="stylesheet"> 
+
+</head>
+
+<body>
+
+<div class="container-one-column">
+
+<h2>The Geolocation API</h2>
+
+<p>As first standardized by the <a href="https://www.w3.org/TR/geolocation-API/" class="fancy-link" target="_blank">World Wide Web Consortium (W3C)</a> in October 2013, the Geolocation API enables web browsers to request a user&#8217;s location.</p>
+
+<p>For the Geolocation API to work, the web browser&#8217;s <span class="text-mono">navigator</span> object needs to be able to instantiate a <span class="text-mono">navigator.geolocation</span> object. All modern browsers can do this. But it is good practice to check by wrapping your code inside an <span class="text-mono">if-else</span> statement.</p>
+
+<pre><code><span class="keyword-code">if</span> (<span class="blue-light">navigator</span>.<span class="blue-light">geolocation</span>) {
+  <span class="comment-code">// Yay! The bar is open and accepting orders for location data.</span>
+}
+<span class="keyword-code">else</span> {
+  <span class="comment-code">// Sigh. An old browser has let you down.</span>
+}</code></pre>
+
+<p>The <span class="text-mono">navigator.geolocation</span> object exposes:</p>
+
+<ul>
+	<li>A <span class="text-mono">getCurrentPosition()</span> method that asynchronously requests the user&#8217;s location and, if successful, returns...</li>
+	<li>A <span class="text-mono">Position</span> object which itself contains a <span class="text-mono">Coordinates</span> object which in turn contains...</li>
+	<li>A set attribute-value pairs in JSON format. Among these are values for latitude and longitude, plus altitude, accuracy and a few others.</li>
+</ul>
+
+<p>Only a single parameter is absolutely necessary for the <span class="text-mono">getCurrentPosition()</span> method: a callback function that runs if the location request is successful. In the example below that logs location data to the browser console, the callback function is named <span class="text-mono">whereAmI()</span>.</p>
+
+<pre><code><span class="keyword-code">if</span> (<span class="blue-light">navigator</span>.<span class="blue-light">geolocation</span>) {
+    <span class="comment-code">// On-success, run callback to return position</span>
+    <span class="blue-light">navigator</span>.<span class="blue-light">geolocation</span>.<span class="function-code">getCurrentPosition</span>(<span class="blue-light">whereAmI</span>);
+}
+
+<span class="blue-dark">function</span> <span class="function-code">whereAmI</span>(<span class="blue-light">position</span>) {
+    <span class="comment-code">// Get coordinate parameters</span>
+    <span class="blue-dark">const</span> <span class="blue-light">long</span> = <span class="blue-light">position</span>.<span class="blue-light">coords</span>.<span class="blue-light">longitude</span>;
+    <span class="blue-dark">const</span> <span class="blue-light">lat</span> &nbsp;= <span class="blue-light">position</span>.<span class="blue-light">coords</span>.<span class="blue-light">latitude</span>;
+
+    <span class="string">console</span>.<span class="function-code">log</span>(<span class="brown-code">'Latitude: '</span>+<span class="blue-light">lat</span>+<span class="brown-code">' | Longitude: '</span>+<span class="blue-light">long</span>);
+}
+</code></pre>
+
+<img src="assets/img/geo-console-log.png" alt="Geolocation API coordinates console.log output to Google Chrome DevTools">
+
+<p>When combined with a mapping API, the Geolocation API enables developers to build location-aware web and mobile applications. For example, apps that plot a user&#8217;s coordinates on a map or display personalized information relevant to their current location.</p>
+
+<img src="assets/img/geo-wine-bars.png" alt="Example of location-aware Google search">
+
+<h3>User Privacy</h3>
+<p>As required by the <a href="https://www.w3.org/TR/geolocation-API/#privacy_for_uas" class="fancy-link" target="_blank">W3C Geolocation API Specification</a>, the web browser must display a privacy-protecting, permission-seeking dialog box such as that below before it attempts to discover a user&#8217;s position.</p>
+
+<img src="assets/img/geo-browser-get-permission.png" alt="Permission-seeking dialog of Gelolocation API">
+
+<p>Similarly, apps that rely on location data must first request user permission before doing so.</p>
+
+<img src="assets/img/geo-apps-get-permission.png" alt="Permission-seeking apps using the Geolocation API">
+
+
+<h3>Location Data Sourcing And Accuracy</h3>
+<p>The web browser will use the best available functionality on the device to access location information.</p>
+
+<ul>
+	<li>A computer generally uses Wi-Fi or IP-based positioning techniques.</li>
+	<li>A smartphone may use a combination of A-GPS, Wi-Fi positioning and cell tower triangulation.</li>
+</ul>
+
+<p>The location is approximate and may vary depending on such factors as the user&#8217;s public IP address, the proximity of cell towers, A-GPS availability, Wi-Fi access points, and the type of web browser.</p>
+
+<h3>Error Handling</h3>
+<p>As a second argument to the <span class="text-mono">getCurrentPosition()</span> method, you can provide an error handling callback function such as that below.</p>
+
+<pre><code><span class="keyword-code">if</span> (<span class="blue-light">navigator</span>.<span class="blue-light">geolocation</span>) {
+    <span class="comment-code">// Callbacks for on-success and on-error</span>
+    <span class="blue-light">navigator</span>.<span class="blue-light">geolocation</span>.<span class="function-code">getCurrentPosition</span>(<span class="blue-light">whereAmI</span>, <span class="blue-light">oopsError</span>); 
+}</code></pre>
+
+<p>Your on-error callback function will expect a <span class="text-mono">PositionError</span> object that contains two properties: a numeric code and a descriptive text message.</p>
+
+<pre><code><span class="blue-dark">function</span> <span class="function-code">oopsError</span>(error) {
+    <span class="string">console</span>.<span class="function-code">log</span>(<span class="brown-code">'ERROR('</span> + <span class="blue-light">error.code</span> + <span class="brown-code">'): '</span> + <span class="blue-light">error.message</span>);
+}</code></pre>
+
+<p>Here are the properties of the <span class="text-mono">PositionError</span> onject:</p>
+
+<table class="table-geo-one">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Message</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>PERMISSION_DENIED</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>POSITION_UNAVAILABLE</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>TIMEOUT</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<h3>Geolocation: A Sample Script</h3>
+<p>At the link below is a basic location-finding web app that uses the Geolocation API to retrieve a user&#8217;s latitude and longitude. The returned coordinates populate a hyperlink to the OpenStreetMap website which, if clicked, will plot their location at zoom level 19.</p>
+
+<p>The web app&#8217;s HTML includes a message box for displaying the progress of the request and, if the request is unsuccessful, the appropriate error message.</p>
+
+<p>To run the web app, click the &#8216;Where Am I?&#8217; button and then, when prompted, click &#8216;Allow Access&#8217;.</p>
+
+<p><a href="geo-app.html" target="_blank">A Basic Web App Using the Geolocation API</a></p>
+
+	<p><br>===<br></p>
+	<p><a href="https://hbr.org/2019/05/ranking-countries-and-industries-by-tech-data-and-business-skills">Ranking Countries and Industries by Tech, Data, and Business Skills</a></p>
+
+
+
+	<p><a href="https://medium.com/@winetalksclub/where-do-the-best-wines-come-from-e647e87687f7">Best wines come from</a></p>
+
+	<p><a href="https://businesstech.co.za/news/business/240307/the-worlds-biggest-wine-producers-in-2018-including-south-africa/">The world&#8217;s biggest wine producers in 2018</a></p>
+
+	</div>
+ </BODY>
+</HTML>
