@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Arrays: An Introducion | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Arrays in JavaScript Tutorial">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Arrays in JavaScript</h1>
+					<h2>Creating function declarations and function expr4essions in JavaScript. And working with anonymous and arrow functions.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>WEB DESIGN</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-functions">About functions</a></p>
+				<p class="toc-indent"><a href="#function-names">Function names</a></p>
+				<p class="toc-indent"><a href="#function-code-blocks">Functions and code blocks</a></p>
+				<p><a href="#function-declarations">Function declarations</a></p>
+				<p class="toc-indent"><a href="#function-coding styles">Function declarations and coding styles</a></p>
+				<p class="toc-indent"><a href="#function-declarations-hoisted">Function declarations are <i>hoisted</i></a></p>
+				<p><a href="#function-expressions">Function expressions</a></p>
+				<p class="toc-indent"><a href="#function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></a></p>
+				<p><a href="#function-anonymous">Anonymous function expressions</a></p>
+				<p><a href="#function-arrow">Arrow function expressions</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a function declaration.</li>
+			<li>Create a function expression.</li>
+			<li>Recognise that function declarations are hoisted but function expressions are not.</li>
+			<li>Recognise that function expressions may be unnamed or anonymous.</li>
+			<li>Use arrow functions that contain one or multiple statements.</li>
+		</ul>
+
+	</section>
+
+    <section>
+
+        <h2>Arrays: When variables are not enough</h2>
+        <p>A variable, as you have learnt, can store a value. Think of a variable as a box, in which you can place a <i>single</i> value. If the variable is <i>mutable</i> (created with <span class="syn-js">let</span> or <span class="syn-js">var</span> keywords), you can change the value in the box at any stage.</p>
+
+        <p>You can think of this variable as a single-compartment &#8216;box:&#8217; that contains just one value.</p>
+
+        <img src="assets/img/9-1.png" alt="Arrays" style="max-width:500px">
+    
+        <p>But suppose you want to store <i>several</i> values in a box? You need a different kind of variable or &#8216;box:&#8217; an <i>array</i>. </p>
+
+		<p>The array or multi-compartment box below has four values.</p>
+    
+		<img src="assets/img/9-2.png" alt="Arrays" style="max-width:500px">
+		
+		<p>Each array element has an identifying number known as an <i>index</i>. Index values always begin at zero. An array with 4 elements, for example, has the following index values: <b>[0]</b>, <b>[1]</b>, <b>[2]</b> and <b>[3]</b>.</p>
+		
+		<img src="assets/img/9-3.png" alt="Arrays" style="max-width:500px">
+	
+		<h3>Naming arrays</h3>
+        <p>You must follow the same rules when naming arrays as you do when naming variables:</p>
+    
+        <ul>
+            <li>Do <i>not</i> use the same name for two different arrays within the same web page.</li>
+            <li>Do <i>not</i> insert spaces within array names.</li>
+            <li>To make array names easier to read, you can combine upper and lowercase letters.</li>
+            <li>Be aware that array names are case-sensitive: <b>myArray</b> is <i>not</i> the same as <b>myarray</b>.</li>
+        </ul>
+
+
+		<p>Arrays in JavaScript are a special type of object. The <span class="syn-js">typeof</span> operator when applied an array will return "object".</p>
+
+        <p class="defhead">Array</p>
+        <p class="deftext">A mutable variable that can hold multiple values. Array names follow the same rules as variable names. Each <i>element</i> in an array is identified by an <i>index number</i>, beginning with zero.</p>
+
+		<p>The benefit of using arrays is that you can manipulate a large range of values with just a single name and an index number. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+
+		<p>With arrays, variables can now store <i>datasets</i>.</p>
+		
+	<section>
+
+		<h2>Creating an array</h2>
+
+		<p>In JavaScript you can create an array in either of two ways</p>
+
+		<ul>
+			<li><b>Array literal</b>: See the example below:
+<pre class="language-js">
+  const userNames = ["Bridget","Carol","Christine","Deborah"];  </pre></li>
+			<li><b>The new keyword</b>: See the example below:
+<pre class="language-js">
+  const userNames = new Array ("Bridget","Carol","Christine","Deborah");  </pre></li>
+		</ul>
+
+		<p>The above two methods create exactly the same array. In both cases, the individual <i>array elements</i> are separated by commas. Optionally, you can also include spaces with the commas for readability.</p>
+		
+		<p>Developers generally prefer the array literal method with the <span class="syn-js">const</span> keyword.</p>
+		
+		<p>Note that using <span class="syn-js">const</span> means the array name cannot be reassigned in the same scope. However, the items in the array may still be changed if required.</p>
+		
+		<p>As with regular (single value) variables, you can <i>declare</i> an array before <i>initialising</i> (assigning a value) to it. See the example below of creating an empty array.</p>
+
+<pre class="language-js">
+ const userNames = []; </pre>
+
+	</section>
+
+
+
+	<section>
+
+		<h2>Populating an array</h2>
+		<p>Adding elements to an array is known as <i>populating</i> the array. You can create and populate an array in a single statement as shown below.</p>
+
+<pre class="language-js">
+const nums = [1,2,3,4,5];
+const mixed = new Array("Movie title", 15.99, 2012, null, true);</pre>
+
+	<p>As you can see, the elements in a array do not need to be of the same data type. Arrays can contain objects, functions and also other arrays. An array that contains another array is called a <i>multi-dimensional</i> array.</p>
+
+	<h3>The length of an array</h3>
+
+	<p>Every array has a <span class="syn-js">length</span> property that reveals the number of elements in the array. The syntax is as follows.</p>
+<pre class="language-js"> <i>array_name</i>.length</pre>
+
+<p>Here is a simple example that will output the number 4 to the console.</p>
+
+<pre class="language-js"> const fruits = ["Apple", "Pineapple", "Banana", "Grapes"];
+ console.log("Number of items in fruit array: "+fruits.length);</pre>
+    
+
+	<section>
+
+		<h2>Reading array contents</h2>
+
+		<p>How do you read what&#8217;s stored in an array? There are two situations when you want to access or &#8216;get at&#8217; array values:</p>
+    
+        <ul>
+            <li>When you want to write the values to the browser window, perhaps with a <span class="syn-js">document.write()</span> statement.
+            <span class="inside-ol">&nbsp;</span>
+            The following example writes the 34th index value from the array named <b>email_addr</b> to the browser window.
+<pre class="language-js">
+  document.write(“Email Address: "+email_addr[34]+"&lt;br&gt;");
+</pre></li>
+            
+            <li>To copy an element&#8217;s value to regular (single-value) variable, use an assignment statement such as the one shown below. 
+<pre class="language-js">
+  let customer21_id = customer_ids[21];
+</pre>
+        In the above example, the value of the 21st element in the array named <b>customer_ids</b> is copied to the variable named <b>customer_21</b>. The array remains unchanged.</li>
+    </ul>
+
+	<p>Here is the syntax for reading the last element in an array.</p>
+
+<pre class="language-js">
+  console.log("Last element"+ fruits.length-1);
+</pre>
+
+		<h3>Looping through an array with <code>for</code> ... <code>next</code></h3>
+		<p>Suppose your script contains an array named <b>fruits</b> with six elements. You could write the values of the array&#8216;s six elements to the browser console with six separate <span class="syn-js">console.log()</span> statements as shown below.</p>
+    
+<pre class="language-js"> console.log("Array Element 0: "+fruits[0]);
+ console.log("Array Element 1: "+fruits[1]);
+ console.log("Array Element 2: "+fruits[2]);
+ console.log("Array Element 3: "+fruits[3]);
+ console.log("Array Element 4: "+fruits[4]);
+ console.log("Array Element 5: "+fruits[5]);</pre>
+
+		<p>That's a lot of typing.</p>
+			
+		<p>There is an easier way: use a <span class="syn-js">for...next</span> loop containing a single <span class="syn-js">console.log()</span> statement as shown below.</p>
+
+<pre class="language-js">for (i = 0; i &lt;= 5; i++) {
+   console.log("Array Element "+i+": "+fruits[i]);
+}</pre>
+
+		<p>As you can see, there are six elements in the array. However, the initial value of the <i>counter variable</i> <b>i</b> is set to <b>0</b> and the upper value is set to <b>5</b>.</p>
+		
+		<p>This is because the array's index numbering runs from <b>[0]</b> to <b>[5]</b> and <i>not</i> from <b>[1]</b> to <b>[6]</b>.</p>
+
+		<p>To use a <span class="syn-js">for...next</span> loop to access all the values from an array, follow this simple rule:</p>
+		
+		<p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+		
+		<p>That way a <span class="syn-js">console.log()</span> statement is performed for each individual array element.</p>
+		
+		<p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+
+		<p>The solution is to use the array <span class="syn-js">length</span> property as the upper limit of a <span class="syn-js">for...next</span> loop as follows.</p>
+
+<pre class="language-js">for (i = 0; i &lt; fruits.length; i++) {
+  console.log("Looping with for ... next: "+fruits[i]);
+}</pre>
+
+		<p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<b>&lt;</b>) and not 'less than or equal to' (<b>&lt;=</b>).</p> 
+			
+		<p>Why?</p>
+
+		<p>Because the array <span class="syn-js">length</span> is always one greater than the index number of the highest array element.</p>
+			
+		<p>For example, When an array has six elements, its index numbers run from <b>[0]</b> to <b>[5]</b>, and its <span class="syn-js">length</span> property contains the value of <b>6</b>.</p>
+
+
+		<h3>Looping through an array with <code>for</code> ... <code>in</code></h3>
+		<p>There is an ever easier way to loop through the values of an array: the <span class="syn-js">for...in</span> loop. See the example below.</p>
+
+
+<pre class="language-js">for (i in fruits) {
+  console.log("Looping with for ... in: "+fruits[i]);
+}}</pre>		
+
+	</section>
+   
+    
+    <section>
+    
+        <h2>Assigning, modifying and deleting array values</h2>
+    
+        <p>Up to now, you have populated array elements only at the time you created the array. But you can insert values into an array at any stage. The general syntax is as follows.</p>
+    
+<pre class="language-js"><i>array_name</i>[index_number] = element_value;</pre>
+    
+        <p>The following code assigns the number 34 to the 20th index position of the array named <b>myArray</b>.</p>
+    
+<pre class="language-js">myArray[20] = 34;</pre>
+    
+        <p>You don't need to populate array elements in consecutive order, as in <b>[0]</b>, <b>[1]</b>, <b>[2]</b>, <b>[3]</b>, <b>[4]</b> and so on.</p>
+        
+        <p>Imagine that you have an array called <b>userNames</b>. It contains 10 elements, indexed from <b>[0]</b> to <b>[9]</b>. The following three statements are all valid.</p>
+    
+<pre class="language-js">userNames[10] = "Murphy";
+userNames[11] = "Jones";
+userNames[20] = "Collins";</pre>
+    
+        <p>In other words, JavaScript allows you to have &#8216;gaps&#8217; or unfilled elements in an array. An array with such <i>non-contiguous</i> values is said to be <i>sparsely populated</i>. JavaScript treats the value of an unfilled array element as <i>undefined</i>.</p>
+    
+        <h3>Modifying array values</h3>
+    
+        <p>You change the value of an array element in exactly the same way as you first assign a value to that element. If your <b>userNames</b> array currently has values at index locations <b>[8]</b>, <b>[9]</b> and <b>[56]</b>, the following statements overwrite those values with the new ones.</p>
+    
+<pre class="language-js">userNames[8] = "Harper";
+userNames[9] = "Wallace";
+userNames[56] = "Johnson";</pre>
+    
+    
+        <h3>Deleting array values</h3>
+        <p>You can remove the contents of an array element with the <span class="syn-js">delete</span> method.</p>
+    
+<pre class="language-js">delete userNames[67];</pre>
+    
+        <p>This does <i>not</i> actually delete the element from the array; it just sets its value as <i>undefined</i>. The <span class="syn-js">length</span> property of the array is unaffected.</p>
+
+		<p>This way of deleting an element from an array is <i>not recommended</i>.</p>
+    
+    </section>
+
+
+<section>
+
+	<h2>The <code>pop()</code> and <code>push()</code> methods</h2>
+
+
+	<p></p>
+</section>
+
+
+
+
+
+
+
+<section>
+	<h2>Common array methods</h2>
+
+	<h3>The <code>filter</code> method</h3>
+
+	<p>Use this method to <i>query</i> an array for values that meet certain conditions. The <span class="syn-js">filter()</span> method works as follows:</p>
+	
+	<ul>
+		<li>It invokes a callback function once for each element in the original array,</li>
+		<li>If an element does not meet the query conditions, it is skipped. Indexes with unassigned values or that have been deleted are ignored.</li>
+		<li>Values that do meet the query conditions are copied to a new array. The original array is unchanged.</li>
+		<li>If no elements meet the query conditions, an empty array will be returned.</li>
+	</ul>
+
+	<p>Consider the example below.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( function (num) {
+   return num &gt; 6;
+});</pre>
+
+	<p>We can replace this anonymous callback function with a shorter arrow function as follows.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( (num) =&gt; {
+   return num &gt; 6;
+});</pre>
+
+	<p>In this example, the query function accepts only a single parameter, contain only one statement, and returns only one value. So we can remove the parenthesis (), the return keyword and the code block {}.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( num =&gt; num &gt; 6 );</pre>
+
+<p>Here is another example of the filter() method in action.</p>
+
+<pre class="language-js">const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const filteredWords = words.filter(word =&gt; word.length &gt; 6);</pre>
+	
+<p>The following example returns all prime numbers in the array.</p>
+
+
+	<h3></h3>
+	<p>orEach() is an iteration method, and it is mainly used for the serial execution of functionality against a list of elements. The forEach() method executes a function once for each item in the array. The method is called on the array object that you wish to manipulate, and the function to call is provided as an argument.</p>
+
+	<p>he map(), filter(), and reduce() methods are designed to produce a return value, whether that value is a single object or an array.</p>
+
+	<p>In contrast, the forEach() method returns undefined. This can cause negative effects in some cases, such as when trying to chain multiple method calls together. As such, the forEach() method is generally used to perform serial execution of a function against a list of inputs.</p>
+
+</section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
