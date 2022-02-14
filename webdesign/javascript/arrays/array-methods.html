@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Arrays: Iteration Methods | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Arrays in JavaScript Tutorial">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Arrays in JavaScript</h1>
+					<h2>Creating function declarations and function expr4essions in JavaScript. And working with anonymous and arrow functions.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>WEB DESIGN</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-functions">About functions</a></p>
+				<p class="toc-indent"><a href="#function-names">Function names</a></p>
+				<p class="toc-indent"><a href="#function-code-blocks">Functions and code blocks</a></p>
+				<p><a href="#function-declarations">Function declarations</a></p>
+				<p class="toc-indent"><a href="#function-coding styles">Function declarations and coding styles</a></p>
+				<p class="toc-indent"><a href="#function-declarations-hoisted">Function declarations are <i>hoisted</i></a></p>
+				<p><a href="#function-expressions">Function expressions</a></p>
+				<p class="toc-indent"><a href="#function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></a></p>
+				<p><a href="#function-anonymous">Anonymous function expressions</a></p>
+				<p><a href="#function-arrow">Arrow function expressions</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a function declaration.</li>
+			<li>Create a function expression.</li>
+			<li>Recognise that function declarations are hoisted but function expressions are not.</li>
+			<li>Recognise that function expressions may be unnamed or anonymous.</li>
+			<li>Use arrow functions that contain one or multiple statements.</li>
+		</ul>
+
+	</section>
+
+    <section>
+
+        <h2>Array iteration methods</h2>
+        <p>A variable, as you have learnt, can store a value. Think of a variable as a box, in which you can place a <i>single</i> value. If the variable is <i>mutable</i> (created with <span class="syn-js">let</span> or <span class="syn-js">var</span> keywords), you can change the value in the box at any stage.</p>
+        
+        <p>A variable can be created (<i>declared</i>), and a value assigned to it (<i>initialised</i>), in a single statement as shown below.</p>
+
+<pre class="language-js">let userName = “Bridget”;</pre>
+    
+        <p>You can think of this variable as a single-compartment box that contains just one value.</p>
+    
+        <img src="assets/img/9-1.png" alt="Arrays" style="max-width:500px">
+    
+        <p>But suppose you want to store <i>several</i> values in a box? You need a different kind of box: an <i>array</i>. You can declare an array and assign several values to it as follows.</p>
+    
+<pre class="language-js">
+let userNames = new Array ("Bridget","Carol","Christine","Deborah");
+</pre>
+    
+    <p>The individual <i>array elements</i> are separated by commas. You can also include single blank spaces after the commas as shown below.</p>
+    
+<pre class="language-js">let userNames = new Array ("Bridget", "Carol", "Christine", "Deborah");</pre>
+    
+        <p>This array or multi-compartment box has four values.</p>
+    
+        <img src="assets/img/9-2.png" alt="Arrays" style="max-width:500px">
+    
+        <p>Each array element has an identifying number known as an <i>index</i>. Index values always begin at zero. An array with 4 elements, for example, has the following index values: <b>[0]</b>, <b>[1]</b>, <b>[2]</b> and <b>[3]</b>.</p>
+    
+        <img src="assets/img/9-3.png" alt="Arrays" style="max-width:500px">
+    
+        <p>You must follow the same rules when naming arrays as you do when naming variables:</p>
+    
+        <ul>
+            <li>Do <i>not</i> use the same name for two different arrays within the same web page.</li>
+            <li>Do <i>not</i> insert spaces within array names.</li>
+            <li>To make array names easier to read, you can combine upper and lowercase letters.</li>
+            <li>Be aware that array names are case-sensitive: <b>myArray</b> is <i>not</i> the same as <b>myarray</b>.</li>
+        </ul>
+    
+        <p>Assigning values to the elements of an array is known as <i>populating</i> the array.</p>
+    
+        <p class="defhead">Array</p>
+        <p class="deftext">A mutable variable that can hold multiple values. Array names follow the same rules as variable names. Each <i>element</i> in an array is identified by an <i>index number</i>, beginning with zero.</p>
+    
+        <p>The benefit of using arrays is that you can manipulate a large range of values with just a single name and an index number. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+    
+    
+        <h3><span class="exercise-number">Exercise 9.1</span> Creating an array: single line method</h3>
+        <p>In this exercise, you will declare and populate an array using a series of comma-separated values on a single line. This is just one of the two methods of populating an array.</p>
+    
+        <ol>
+            <li class="space-below-extra">Open the following file in VS Code and your web browser:
+                <span class="inside-ol">&nbsp;</span>
+                📄 &nbsp;&nbsp;<b>exercise-9-1.html</b>
+            </li>
+    
+            <li>In the empty <span class="syn">&lt;script&gt;</span> tag pair, declare a variable named 'authors', create an array with this name, and populate the array with six values as shown below.
+    
+<pre class="language-js">let authors;
+authors = new Array("Goddard","Grisham","Christie","Bryson","Heller","Jerome");</pre></li>
+    
+           <li>Save the <b>exercise-9-1.html</b> web page.</li>
+        </ol>
+    
+        <p>A second method of populating an array is to write, on a series of different lines, each element's value and its associated index number. For example.</p>
+    
+<pre class="language-js">let userNames = new Array;
+userNames[0] = "Bridget";
+userNames[1] = "Carol";
+userNames[2] = "Christine";
+userNames[3] = "Deborah";</pre>
+    
+        <p>The two approaches produce the same result.</p>
+    
+        <ul>
+            <li><b>Single line method</b>: For two or more arrays, one positioned beneath the other, the single-line method makes it easier to compare the different sets of array elements. An example is shown below.
+    
+<pre class="language-js">
+let fNames = new Array("John","Kylie","Elton","Dianna");
+let sNames = new Array("Lennon","Minogue","John","Ross");</pre></li>
+    
+            <li><b>Multi-line method</b>: For a single array with a large number of elements, the multi-line method makes it easier to read which element is located at which index value.</li>
+        </ul>
+    
+    
+    
+        <h3><span class="exercise-number">Exercise 9.2</span> Creating an array: multi-line method</h3>
+        <p>In this exercise, you declare and populate an array using the one-element, one-line method.</p>
+        <ol>
+            <li class="space-below-extra">Open the following file in VS Code and your web browser:
+                <span class="inside-ol">&nbsp;</span>
+                📄 &nbsp;&nbsp;<b>exercise-9-2.html</b>
+            </li>
+    
+            <li>In the empty <span class="syn">&lt;script&gt;</span> tag pair, declare a variable named 'authors', create an array with this name, and populate the array with six values as shown below.
+<pre class="language-js">
+let authors;
+authors = new Array;
+authors[0] = "Goddard";
+authors[1] = "Grisham";
+authors[2] = "Christie";
+authors[3] = "Bryson";
+authors[4] = "Heller";
+authors[5] = "Jerome";</pre></li>
+    
+            <li>Save the <b>exercise-9-2.html</b> web page.</li>
+        </ol>
+    
+    </section>
+    
+    
+    
+    <section>
+    
+        <h2>Reading values from an array</h2>
+        <p>Now you know how to populate an array. But how do you read what’s stored in an array? There are two situations when you want to access or ‘get at’ array values:</p>
+    
+        <ul>
+            <li>When you want to write the values to the browser window, perhaps with a <span class="syn">document.write()</span> statement.
+            <span class="inside-ol">&nbsp;</span>
+            The following example writes the 34th index value from the array named ‘email_addr’ to the browser window.
+<pre class="language-js">
+document.write(“Email Address: "+email_addr[34]+"&lt;br&gt;");
+</pre></li>
+            
+            <li>To copy an element's value to variable, use an assignment statement such as the one shown below. 
+<pre class="language-html">
+let customer21_id = customer_ids[21];
+</pre>
+        In the above example, the value of the 21st element in the array named 'customer_ids' is copied to the variable named 'customer_21'. The array remains unchanged.
+        <span class="inside-ol">&nbsp;</span>
+        Copying values from one array another to another is easy. Just use an assignment statement similar to the one below.
+<pre class="language-js">
+new_films[46] = old_films[187];
+</pre>
+    In this example, the value of the 187th element in the array named 'old_films' is copied to the 46th element of the array named 'new_films'.</li>
+        </ul>
+    
+        <h3>Reading array values with loops</h3>
+        <p>Suppose your script contains an array named ‘fruit’ with six elements. You could write the values of the array’s six elements to the browser window with six separate <span class="syn">document.write()</span> statements as shown below.</p>
+    
+<pre class="language-js">document.write("Array Element 0: "+fruit[0]+"&lt;br&gt;");
+document.write("Array Element 1: "+fruit[1]+"&lt;br&gt;");
+document.write("Array Element 2: "+fruit[2]+"&lt;br&gt;");
+document.write("Array Element 3: "+fruit[3]+"&lt;br&gt;");
+document.write("Array Element 4: "+fruit[4]+"&lt;br&gt;");
+document.write("Array Element 5: "+fruit[5]+"&lt;br&gt;");</pre>
+    
+        <p>That's a lot of typing.</p>
+    
+        <p>There is an easier way: use a <span class="syn">for</span> loop containing a single <span class="syn">document.write()</span> statement as shown below.</p>
+    
+<pre class="language-js">for (i = 0; i &lt;= 5; i++) {
+document.write("Array Element "+i+": "+fruit[i]+"&lt;br&gt;");
+}</pre>
+    
+        <p>As you can see, there are six elements in the array. However, the initial value of the counter variable is set to 0 and the upper value is set to 5.</p>
+        
+        <p>This is because the array's index numbering runs from [0] to [5] and <i>not</i> from [1] to [6].</p>
+    
+    
+        <h3>The array length property</h3>
+    
+        <p>To use a <span class="syn">for</span> loop to access all the values from an array, follow this simple rule:</p>
+        
+        <p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+        
+        <p>That way a <span class="syn">document.write()</span> statement is performed for each individual array element.</p>
+        
+        <p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+    
+        <p>The solution is to use the <span class="syn">length</span> property of the array. This is the index number of the next empty element after highest occupied element in the array.</p>
+        
+        <p>The following statement assigns the length of the array named ‘towns’ to a variable called 'myVar'.</p>
+    
+<pre class="language-js">myVar = towns.length;</pre>
+    
+        <p>You can use an array <span class="syn">length</span> property as the upper limit of a <span class="syn">for</span> loop as follows.</p>
+    
+<pre class="language-js">for (i=0; i &lt; fruit.length; i++) {
+document.write(“Array element "+i+:"" fruit[i];
+}</pre>
+    
+        <p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<b>&lt;</b>) and not 'less than or equal to' (<b>&lt;=</b>).</p> 
+            
+        <p>Why?</p>
+    
+        <p>Because the array <span class="syn">length</span> is always one greater than the index number of the highest array element.</p>
+            
+        <p>For example, When an array has six elements, its index numbers run from [0] to [5], and its <span class="syn">length</span> property contains the value of 6.</p>
+    
+        <h3><span class="exercise-number">Exercise 9.3</span> Reading array values with a <span>for</span> Loop</h3>
+        <p>In this exercise, you will use a <span class="syn">for</span> loop to write the elements of an array to a HTML table in a web browser window.</p>
+    
+        <ol>
+            <li class="space-below-extra">Open the following file in VS Code and your web browser:
+                <span class="inside-ol">&nbsp;</span>
+                📄 &nbsp;&nbsp;<b>exercise-9-3.html</b>
+            </li>
+    
+            <li>You can see the array that you created and populated with six values from Exercise 9.2.</li>
+    
+            <li>Beneath the final array population statement, add a single <span class="syn">document.write()</span> statement as shown below.
+<pre class="language-js">
+document.write(authors[0]");</pre></li>
+    
+            <li>Save the HTML file and view it in your web browser. You should see the content of the first value in the array ("Goddard").
+            <img src="assets/img/9-4.png" alt="Arrays"></li>
+    
+    
+            <li>Next, rplace your single <span class="syn">document.write()</span> statement with a  <span class="syn">for</span> loop as follows.
+<pre class="language-js">
+for ( i = 0; i &lt= 5; i++ ) {
+   document.write("&lt;p&gt;"+authors[i]+"&lt;\/p&gt;");
+}</pre> </li>
+    
+    <li>Save the HTML file and view it in your web browser. It should now look as shown below. 
+        <img src="assets/img/9-5.png" alt="Arrays"></li>
+    
+    </ol>
+    
+    
+            <p>All done. You can close the <b>exercise-9-3.html</b> web page when finished.</p>
+    
+    </section>
+    
+    
+    
+    <section>
+    
+        <h2>Assigning, modifying and deleting array values</h2>
+    
+        <p>Up to now, you have populated array elements only at the time you created the array. But you can insert values into an array at any stage. The general syntax is as follows.</p>
+    
+        <pre class="language-html">array_name[index_number] = element_value;</pre>
+    
+        <p>The following code assigns the number 34 to the 20th index position of the array named myArray.</p>
+    
+<pre class="language-js">myArray[20] = 34;</pre>
+    
+        <p>You don't need to populate array elements in consecutive order, as in [0], [1], [2], [3], [4] and so on.</p>
+        
+        <p>Imagine that you have an array called 'userNames'. It contains 10 elements, indexed from [0] to [9]. The following three statements are all valid.</p>
+    
+<pre class="language-js">userNames[10] = "Murphy";
+userNames[11] = "Jones";
+userNames[20] = "Collins";</pre>
+    
+        <p>In other words, JavaScript allows you to have 'gaps' or unfilled elements in an array. An array with such <i>non-contiguous</i> values is said to be <i>sparsely populated</i>. JavaScript treats the value of an unfilled array element as <i>undefined</i>.</p>
+    
+        <h3>Modifying array values</h3>
+    
+        <p>You change the value of an array element in exactly the same way as you first assign a value to that element. If your 'userNames' array currently has values at index locations [8], [9] and [56], the following statements overwrite those values with the new ones.</p>
+    
+<pre class="language-js">userNames[8] = "Harper";
+userNames[9] = "Wallace";
+userNames[56] = "Johnson";</pre>
+    
+    
+        <h3>Deleting array values</h3>
+        <p>You can remove the contents of an array element with the <span class="syn">delete</span> method.</p>
+    
+<pre class="language-js">delete userNames[67];</pre>
+    
+        <p>This does <i>not</i> actually delete the element from the array; it just sets its value as <i>undefined</i>. The <span class="syn">length</span> property of the array is unaffected.</p>
+    
+    </section>
+
+<section>
+	<h2>Common array methods</h2>
+
+	<h3>The <code>filter</code> method</h3>
+
+	<p>Use this method to <i>query</i> an array for values that meet certain conditions. The <span class="syn-js">filter()</span> method works as follows:</p>
+	
+	<ul>
+		<li>It invokes a callback function once for each element in the original array,</li>
+		<li>If an element does not meet the query conditions, it is skipped. Indexes with unassigned values or that have been deleted are ignored.</li>
+		<li>Values that do meet the query conditions are copied to a new array. The original array is unchanged.</li>
+		<li>If no elements meet the query conditions, an empty array will be returned.</li>
+	</ul>
+
+	<p>Consider the example below.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( function (num) {
+   return num &gt; 6;
+});</pre>
+
+	<p>We can replace this anonymous callback function with a shorter arrow function as follows.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( (num) =&gt; {
+   return num &gt; 6;
+});</pre>
+
+	<p>In this example, the query function accepts only a single parameter, contain only one statement, and returns only one value. So we can remove the parenthesis (), the return keyword and the code block {}.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( num =&gt; num &gt; 6 );</pre>
+
+<p>Here is another example of the filter() method in action.</p>
+
+<pre class="language-js">const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const filteredWords = words.filter(word =&gt; word.length &gt; 6);</pre>
+	
+<p>The following example returns all prime numbers in the array.</p>
+
+
+	<h3></h3>
+	<p>orEach() is an iteration method, and it is mainly used for the serial execution of functionality against a list of elements. The forEach() method executes a function once for each item in the array. The method is called on the array object that you wish to manipulate, and the function to call is provided as an argument.</p>
+
+	<p>he map(), filter(), and reduce() methods are designed to produce a return value, whether that value is a single object or an array.</p>
+
+	<p>In contrast, the forEach() method returns undefined. This can cause negative effects in some cases, such as when trying to chain multiple method calls together. As such, the forEach() method is generally used to perform serial execution of a function against a list of inputs.</p>
+
+
+
+
+</section>
+
+	<section class="theme-dark" id="about-functions">
+
+        <h2>About arrays</h2>
+        <p>Functions are the building blocks of a programming language. You can think of a function as a &#8216;box&#8217; or &#8216;sub-program&#8217; that stores some code inside it.</p>
+        
+        <p>In summary:</p>
+        
+        <ul>
+            <li>A function is a block of code that performs a particular task.</li>
+            <li>Whenever the program needs that task to be performed, it <i>invokes</i> (&#8216;calls&#8217; or &#8216;fires&#8217;) the function and runs the code inside it.</li>
+        </ul>
+	
+		<img src="assets/img/functions-diagram.png" alt="JavaScript functions diagram">
+
+		<p>Dividing your program into functions brings one huge advantage: You need to write the code inside functions only once &#8211; but the program can invoke and run the functions as many times as is needed.</p>
+
+        <p>In short, functions are reusable and recyclable ♻️ code blocks.</p>
+
+		<h3 id="function-names">Function names</h3>
+		<p>In a JavaScript program, you can call a function by typing its name, followed by a pair of parenthesis <span class="syn-js">()</span> and a semi-colon <span class="syn-js">;</span> For example:</p>
+
+		<pre class="language-js"><span class="yellow">displayGreeting</span>();</pre>
+
+        <p>There is no space between the function name and the opening parenthesis.</p>
+
+		<p>Here are some important points about naming functions in JavaScript:</p>
+	
+		<ul>
+			<li><b>Names must be unique</b>: Not every function need to have a name. (Functions can be anonymous.) But when a function has a name, that name must be unique. No two functions in the same scope may have the same name.</li>
+
+			<li><b>No spaces or hyphens</b>: Function names may not contain spaces or the hyphen character (<span class="syn-js">-</span>).
+			<span class="inside-ol">&nbsp;</span>
+			The underline character (<span class="syn-js">_</span>) may be used and often is.</li>
+
+			<li><b>Mixed character case</b>: Developers typically combine upper and lowercase letters in a function name to make the name easier to read. For example, <span class="syn-js">setFontSize()</span> and <span class="syn-js">calculateTax()</span>. This convention is known as <i>camelCase</i>.</li>
+
+			<li><b>Case sensitivity</b>: Function names are case-sensitive. <span class="syn-js">UpdateTotal()</span> and <span class="syn-js">updateTOTAL()</span> are two different function names.</li>
+
+		</ul>
+	  
+		<p>It's always a good idea to start a function name with an imperative verb (an action word such as &#8216;add&#8217;, &#8216;sum&#8217;, &#8216;calculate&#8217;, &#8216;update&#8217;, &#8216;display&#8217; or &#8216;push&#8217;) that describes what the function does.</p>
+	
+		<h3 id="function-code-blocks">Functions and code blocks</h3>
+        <p>In JavaScript, a code block is some code inside a pair of braces <span class="syn-js">{}</span>, also known as curly brackets. The code of a function is called the <i>function body</i> and is always written inside a pair of braces.</p>
+				
+		<p>Typically, the code inside the code block is indented from the left by two spaces to make the function easier to read.</p>
+
+		<img src="assets/img/code-blocks.png" alt="JavaScript code blocks" style="max-width: 500px">
+
+		<p>JavaScript functions may be created in different ways. Two of the most common are <i>function declarations</i> and <i>function expressions</i>. See below.</p>
+
+	</section>
+
+    <section class="theme-dark" id="function-declarations">
+
+        <h2>Function declarations</h2>
+        <p>One way to create a function is to <i>declare</i> it with the relevant JavaScript <i>keyword</i>, much in the same way you would declare a variable.</p>
+
+		<ul>
+			<li>You declare variables with the <span class="syn-js">var</span>, <span class="syn-js">const</span> or <span class="syn-js">let</span> keywords.</li>
+			<li>You declare a function with the <span class="syn-js">function</span> keyword.</li>
+		</ul>
+		
+		<p>See the sample function declaration below:</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration</span>
+<span class="blue-dark">function</span> <span class="yellow">displayGreeting</span>() {
+   <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="brown">"Hello, world!"</span>);
+}
+</pre>
+
+        <p>Here is the syntax of a function declaration:</p>
+        
+        <ul>
+            <li>Begins with the function keyword<img src="assets/img/function-declaration-1.png" alt="JavaScript function declaration keyword" style="max-width: 440px; margin-top: 4px"></li>
+            
+			<li>Then, after a space, comes the function name<img src="assets/img/function-declaration-2.png" alt="JavaScript function declaration function name"  style="max-width: 440px; margin-top: 4px"></li>
+            <li>Then, without a space, is a pair of parentheses <span class="syn-js">()</span>. This may include one or more parameters separated by commas.<img src="assets/img/function-declaration-3.png" alt="JavaScript function declaration parenthesis"  style="max-width: 440px; margin-top: 4px"></li>
+            <li>Finally, inside a code block <span class="syn-js">{}</span>, you type the function's code.<img src="assets/img/function-declaration-4.png" alt="JavaScript function declaration code block"  style="max-width: 440px; margin-top: 4px"></li>
+        </ul>
+
+		<p>You would call this function as shown below.</p>
+		<img src="assets/img/function-declaration-5.png" alt="JavaScript function declaration calling"  style="max-width: 440px; margin-top: 4px">
+
+		<h3 id="function-coding styles">Function declarations and coding styles</h3>
+		<p>Developers write function declarations in slightly different ways.</p>
+		
+		<ul>
+			<li>The space after the pair of parenthesis <span class="syn-js">()</span> and before the opening brace <span class="syn-js">{</span> of the code block is optional. </li>
+			<li>And some developers begin the code block <span class="syn-js">{}</span> on a new line. All three examples below will run correctly.</li>
+		</ul>
+
+		<img src="assets/img/function-declaration-styles.png" alt="JavaScript function declaration styles" class="wider-115">
+
+		<h3 id="function-declarations-hoisted">Function declarations are <i>hoisted</i></h3>
+
+        <p>A function declaration creates a function variable (with the same name as the function name) in the current scope.</p>
+        
+        <p>Function variables are <i>hoisted</i>. As a result, you can call them <i>before or after</i> they are declared. Both of the code samples below will run without error.</p>
+
+		<img src="assets/img/function-declaration-hoisted.png" alt="JavaScript function declaration hoisted" class="wider-115">
+
+
+		<!-- Since a function declaration is not an executable statement, it is not common to end it with a semicolon. -->
+
+        <!--<p>The role of the function declaration syntax is to create standalone functions. Function declarations are expected inside the global scope or the direct the scope of other functions. it is not recommended to use function declarations inside conditionals (if) and loops (while, for):</p> -->
+
+    </section>
+
+
+
+<section class="theme-dark" id="function-expressions">
+
+	<h2>Function expressions</h2>
+	<p>A second way to create a function is with a <i>function expression</i>. See the example below:</p>
+
+<pre class="language-js">
+<span class="comment">// Function expression</span>
+<span class="blue-dark">const</span> <span class="blue-light">greeting</span> = (<span class="blue-dark">function</span> <span class="yellow">displayGreeting</span>() {
+   <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="brown">"Hello, world!"</span>);
+});	
+</pre>
+
+	<p>A function expression is stored inside a regular JavaScript variable.</p> 
+
+	<p>The syntax of a function expression as follows:</p>
+        
+	<ul>
+		<li>Begin by writing a function declaration as shown below<img src="assets/img/function-expression-1.png" alt="JavaScript function expression variable" style="max-width: 580px; margin-top: 6px"></li>
+		<li>Enclose the function declaration inside a pair of parenthesis <span class="syn-js">()</span> .<img src="assets/img/function-expression-2a.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>
+		<li>Add a semi-colon statement terminator <span class="syn-js">;</span> at the end.
+		<img src="assets/img/function-expression-2.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
+		A function expression ends with a semi-colon because it is a part of an executable statement.
+		</li>
+		<li>Begin the code with an equals <span class="syn-js">=</span> sign to make it the RHS of an assignment statement.<img src="assets/img/function-expression-3.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>   
+		<li>On the LHS, write the variable <i>keyword</i> and the name of the variable that will store the function.<img src="assets/img/function-expression-4.png" alt="JavaScript function expression code block" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
+		Developers typically use the <span class="syn-js">const</span> variable type to store a function expression. This is to ensure the function is not accidentally changed or overwritten elsewhere in the program.</li>   
+	   
+	</ul>
+
+	<p>Note the following:</p>
+
+	<ul>
+		<li>A function declaration begins with the <span class="syn-js">function</span> keyword.</li>
+		<li>A function expression includes the <span class="syn-js">function</span> keyword, but begins with a variable declaration.</li>
+	</ul>
+
+	<p>Strictly speaking, a function expression is not stored inside a JavaScript variable. Only the the <i>value</i> that the function expression evaluates to is stored in the variable.</p>
+
+	<h3 id="function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></h3>
+
+	<p>You call a function expression in a similar way to how you call a function declaration. The difference is that you type the variable name rather than the function name. As with calling a function declaration, you follow this, without a space, with a pair of parenthesis <span class="syn-js">()</span>. See the example below.</p>
+	<img src="assets/img/function-expression-5.png" alt="JavaScript function expression calling" style="max-width: 580px">
+
+	<p>Here are two important differences between function declarations and function expressions:</p>
+
+	<ul>
+		<li>Unlike a function declaration, a function expression does not create a function variable (which is <i>hoisted</i>).</li>
+		<li>Instead, the function is stored inside a regular variable (which is <i>not hoisted</i>).</li>
+	</ul>
+
+	<p>As a result, you can call a function expression only after you have created it &#8211; and never before.</p>
+
+	<img src="assets/img/function-expression-not-hoisted.png" alt="JavaScript function expression not hoisted" class="wider-115">
+
+	<p>In other words, you must treat a variable that stores a function expression in the same way as any other variable &#8211; first declare it, and only then use it.</p>
+
+	
+
+	</section>
+
+	<section class="theme-dark" id="function-anonymous">
+
+        <h2>Anonymous function expressions</h2>
+        <p>Consider the sample function expression below.</p>
+		
+		<img src="assets/img/functions-anonymous-1.png" alt="JavaScript anonymous function expression" style="max-width: 600px">
+		
+		<p>You can see that the function contains <i>two</i> names:</p>
+		<ul>
+			<li><b>A variable name</b>: In this example, <span class="syn-js">greeting</span>.</li>
+			<li><b>A function name</b>: In this example, <span class="syn-js">displayGreeting</span>.</li>
+		</ul>
+
+		<p>But only one name is needed to call the function elsewhere in the program &#8211; the variable name.</p>
+		
+		<p>So: do we need the function name at all?</p>
+			
+		<p>Answer: 'No'.</p>
+
+		<p>You can convert a <i>named function expression</i> to an unnamed or <i>anonymous function expression</i> as follows:</p>
+
+		<ul>
+			<li>Remove the function name. But leave the parenthesis <span class="syn-js">()</span> after the keyword <span class="syn-js">function</span>.
+			<img src="assets/img/functions-anonymous-2.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
+			<li>Remove the outer parenthesis <span class="syn-js">()</span> that encloses the RHS of the assignment statement.
+			<img src="assets/img/functions-anonymous-3.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
+		</ul>
+		<p>That's it. You have now created an anonymous function.</p>
+	</section>
+
+
+	<section class="theme-dark" id="function-arrow">
+
+        <h2>Arrow function expressions</h2>
+        <p>A so-called <i>arrow function</i> is a short-hand or quick way of typing an anonymous function expression.</p>
+
+		<p>Because arrow functions are always anonymous, you must assign them to a variable if you ant to call them from elsewhere in the program.</p>
+		
+		<p>You can convert a regular anonymous function to an arrow function as follows:</p>
+
+		<ul>
+			<li>Remove the <span class="syn-js">function</span> keyword. But leave the parenthesis <span class="syn-js">()</span>.
+			<img src="assets/img/functions-arrow-1.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+			<li>After the <span class="syn-js">()</span> and before the opening code block <span class="syn-js">{</span>, type an equals sign and a right arrow character <span class="syn-js">=&gt;</span>
+			<img src="assets/img/functions-arrow-2.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+		</ul>
+
+		<p>That's it. You have now created an arrow function.</p>
+
+		<p>For a function expression that contains only <i>one</i> statement, you can make the syntax of the arrow function even shorter. Here are the steps:</p>
+		
+		<ul>
+			<li>Place all the function code on one line.<img src="assets/img/functions-arrow-3.png" alt="JavaScript arrow function" style="max-width: 600px">
+			</li>
+			<li>Remove the code block braces <span class="syn-js">{}</span> and the final statement terminator <span class="syn-js">;</span>.<img src="assets/img/functions-arrow-4.png" alt="JavaScript arrow functionn" style="max-width: 600px"></li>
+		</ul>
+
+		<p>This is possible only for single-statement functions. Arrow functions with multiple statements still need to include a code block <span class="syn-js">{}</span> that ends with a <span class="syn-js">;</span> terminator.</p>
+		<img src="assets/img/functions-arrow-5.png" alt="JavaScript arrow function" style="max-width: 600px">
+
+		<p>Notice that, with arrow functions, the JavaScript syntax for declaring and initializing variables, and for creating function expressions, is very similar.</p>
+
+		<p>In both cases, the LHS of the assignment statement contains a variable type such as <span class="syn-js">const</span> and a variable name.</p>
+
+		<img src="assets/img/functions-arrow-6.png" alt="JavaScript arrow function" style="max-width: 500px">
+
+		<p>One difference is that, for arrow functions, the RHS of the assignment statement begins with the <span class="syn-js">() =&gt;</span> characters.</p>
+
+		<p>Another difference is that, unless the arrow function contains only one statement, the RHS will also contain code block braces <span class="syn-js">{}</span>.</p>
+
+	</section>
+
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
