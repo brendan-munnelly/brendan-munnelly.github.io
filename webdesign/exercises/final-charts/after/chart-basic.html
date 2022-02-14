@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Sample Chart in chart.js</title>
+    <meta name="description" content="A sample bar chart with default values using chart.js.">
+    <link rel="stylesheet" href="assets/css/charts.css">
+
+</head>
+
+<body>
+
+    <main>
+        
+        <section>
+            <h2>Sample Chart</h2>
+            <div class="container-chart">
+                <canvas id="bar-chart" style="background-color: var(--slate-200)"></canvas>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Bar chart script -->
+<script>
+
+    // The canvas reference ID to display the chart
+    const chartCanvas = document.querySelector('#bar-chart')
+    
+       // Create a new chart instance
+       const newLineChart = new Chart(chartCanvas, {
+                
+          // Chart configuration
+          type: 'bar', // chart type
+          data: {
+             // Sample five data labels on the horizontal axis
+             labels: ['label-1', 'label-2', 'label-3', 'label-4', 'label-5'],
+                // Sample five chart datasets
+                datasets: [
+                {
+                label: 'My First Chart', // Chart label
+                // Five data points (no % or currency symbols )
+                data: [42, 48, 54, 58, 64], 
+                // Background colors of bars
+                backgroundColor: ['yellow', 'blue', 'brown', 'purple', 'indigo'], 
+                // Chart border styles
+                borderWidth: 1,
+                borderColor: 'black',
+                },
+              ],
+            },
+            // Canvas not responsive by default
+            options: {
+                responsive: true,
+                // indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid:{
+                            display:false
+                        },
+                        ticks: {
+                            color: 'red',
+                            font: { size: 16 },
+                        },
+                    },
+                    y: {
+                        grid:{
+                            display:false
+                        },
+                        min: 30,
+                        ticks: {
+                            color: 'blue', 
+                            font: { size: 16 },
+                            callback: function (value) {
+                            return value + '%';
+                            },
+                        },
+                    }
+                }
+            }
+       });
+    
+    </script>
+
+
+
+</body>
+</html>
