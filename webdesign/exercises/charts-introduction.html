@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Introduction to Charts | Web Design & Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Using the Chart.js JavaScript library to create simple charts on a web page and to add basic styling options.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/brendan-munnelly-web-design-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <header>
+        <div class="wrapper">
+          <div class="sidebar">
+            <div>
+                <img src="assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+                <p id="myEmail">brendan@munnelly.com</p>
+            </div>
+        </div>
+    
+            <div class="content">
+                <h1>Introduction to Charts</h1>
+                <h2>Using the Chart.js JavaScript library to create simple charts on a web page and to add basic styling options.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+    
+    <main>
+
+		<aside>
+            <h3>WEB DESIGN COURSE</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about">Charts and web pages</a></p>
+            
+            <p><a href="#overview">An overview of Chart.js</a></p>
+            <p class="toc-indent"><a href="#charts-canvas">Chart.js and the canvas element</a></p>
+            <p class="toc-indent"><a href="#charts-html">Chart.js and HTML</a></p>
+            <p class="toc-indent"><a href="#charts-css">Chart.js and CSS</a></p>
+            <p class="toc-indent"><a href="#charts-js">Chart.js and JavaScript</a></p>
+            <p><a href="#chart-basic">Creating a basic chart</a></p>
+            <p class="toc-indent"><a href="#charts-styles">Adding colours and borders to a chart</a></p>
+
+            <p><a href="#chart-horizontal">Converting to a horizontal bar chart</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+			<section id="learning-goals">
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Add and style a basic chart to a web page with the Chart.js JavaScript library.</li>
+                </ul>
+
+            </section>
+
+
+            <section id="about" class="wrapper-content bg-white">
+
+                <h2>Charts and web pages</h2>
+
+                <p>A number of libraries of JavaScript code have been created to help front-end developers display numerical data in graphical format. Two of the most popular are:</p>
+                
+                <ul>
+                    <li><a href="https://developers.google.com/chart" target="_blank">Google Charts</a>: A powerful and free gallery of interactive charts and data tools.</li>
+                    <li><a href="https://www.chartjs.org/" target="_blank">Chart.js</a>: An open source, community-supported library that can create eight different chart types.</li>
+                </ul>
+
+                <p>In this Tutorial you will use the second JavaScript library to create the following two chart types:</p>
+                <ul>
+                    <li>Bar chart</li>
+                    <li>Horizontal bar chart</li>
+                </ul>
+
+            </section>
+                
+            <section id="overview">
+                
+                <h2>An overview of Chart.js</h2>
+
+
+                <p>There are three main steps needed to create a Chart.js graph in a web page. Before creating some sample charts, let's look at each step:</p>
+
+                <ul>
+                    <li><b>Canvas</b>: The Charts.js library uses the HTML <span>canvas</span> element as a container for its charts.</li>
+                    <li><b>HTML</b>: You need to link your web page to a CDN that hosts the Chart.js library. And create a <span class="syn">&lt;canvas&gt;</span> element in the page with a unique <span class="csyn">&lt;canvas&gt;</span> to contain the chart.</li>
+                    <li><b>CSS</b>: You need to create a parent element with a <span class="csyn">position: relative</span> for the <span class="syn">&lt;canvas&gt;</span> element to ensure it displays responsively on different viewport sizes.</li>
+                    <li><b>JavaScript</b>: Your JavaScript code will create a chart instance, specify the chart type, and set various configuration and styling options.</li>
+                </ul>
+
+                <h3 id="charts-canvas">Chart.js and the canvas element</h3>
+
+                <p>The HTML <span class="syn">&lt;canvas&gt;</span> element is used to draw graphics on a web page. Note that this element is only a <i>container</i> for graphics. You need to use JavaScript to actually draw the graphics.</p>
+
+                <p>A span <span class="syn">&lt;canvas&gt;</span> element is rectangular in shape and, by default, has no content and no border.</p>
+
+                <h3 id="charts-html">Chart.js and HTML</h3>
+
+                <p>The simplest way to use the Chart.js library in a web page is by adding a link to a Content Delivery Network (CDN) near the bottom of the HTML file. See below.</p>
+
+<pre class="language-js">
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"&gt;&lt;/script&gt;   </pre>
+
+                <p>You can see the full list of recommended Chart.js CDN links on the <a target="_blank" href="https://cdnjs.com/libraries/Chart.js">Cloudfare</a> website. The latest version of Chart.js is 3.7.1.</p>
+                
+                <p>You can also install Chart.js through  <a target="_blank" href="https://www.npmjs.com/package/chart.js">npm</a>, <a target="_blank" href="https://yarnpkg.com/package/react-chartjs-2">yarn</a>, or any other package manager installer for the Node, React, Vue, Angular, or any other supporting frameworks.</p>
+
+                <p>Your next step is to create an HTML element with the <span class="syn">&lt;canvas&gt;</span> tag in the <span class="syn">&lt;body&gt;</span> of your HTML file that will contain your chart.</p>
+                
+                <p>A very basic example is shown below.</p>
+
+<pre class="language-js">&lt;canvas id="myChart" width="1600" height="900"&gt;&lt;/canvas&gt;</pre>
+
+                <p>If you want to add several charts to the same page, ensure you give every one a unique <span class="syn">id</span>. You will use the <span class="syn">id</span> property to reference each chart in JavaScript and perhaps also CSS.</p>
+
+                <p>Also ensure you position the <span class="syn">&lt;canvas&gt;</span> element in your HTML file <i>before</i> the CDN link to the Chart.js JavaScript library.</p>
+
+                <h3 id="charts-css">Chart.js and CSS</h3>
+
+                <p>To make your chart responsive so that it displays correctly on various viewport sizes, wrap your <span class="syn">canvas</span> in a parent HTML tag. See the example below.</p>
+
+<pre class="language-js">
+&lt;div class="container-chart"&gt;
+   &lt;canvas id="myChart"&gt;&lt;/canvas&gt;
+&lt;/div&gt;</pre>
+
+                <p>In the linked stylsheet file, the chart container div element will have style rules such as the following.</p>
+
+<pre class="language-css">
+.container-chart { 
+   position: relative; 
+   width: 100%;
+   padding: 20px;
+}</pre>                
+
+                <p>As you shall see in the JavaScript section below, the <span class="syn">canvas</span> tag is not responsive by default. So you will need to set the Chart.js configuration option named <span class="csyn">responsive</span> to <span class="csyn">true</span>. Your chart will then resize responsively by taking the width and height of its parent HTML <span class="syn">div</span> element.</p>
+
+
+                <h3 id="charts-js">Chart.js and JavaScript</h3>
+
+                <p>Your JavaScript code will include the following:</p>
+                <ul>
+                    <li>The canvas reference to display the chart on the web page.
+                    <img src="assets/img/charts/charts-1.png" alt="canvas chart"></li>
+                    <li>The chart instance, which is needed to initiate each new chart.
+                    <img src="assets/img/charts/charts-2.png" alt="canvas chart"></li>
+                    <li>The chart configuration which specifies the chart type.
+                    <img src="assets/img/charts/charts-3.png" alt="canvas chart"></li>
+                    <li>The dataset labels, the datasets for the chart, the chart label (the chart title) and any further configuration options.
+                    <img src="assets/img/charts/charts-4.png" alt="canvas chart">
+                    In the example above are five datasets with five labels, and a label for the chart as a whole.</li>
+                </ul>
+
+                <p>Note that the array of <span class="csyn">data</span> values includes only numbers and no currency (such as €), percentage (%) or other symbols.</p>
+                <p>To add any symbol to data in Chart.js, you need to define a callback function in the chart configuration options.</p>
+
+                <p>Next, let's create a very simple chart.</p>
+
+            </section>
+  
+            <section id="chart-basic" class="wrapper-content bg-white">
+
+                <h2>Creating a basic chart</h2>
+            
+                <p>Download and unzip this file:</p>
+
+                <p><a href="charts-exercises.zip">charts-exercises.zip</a></p>
+
+                <p>Follow the steps below.</p>
+            
+                <ol>
+                    <li>In Visual Studio Code, open the following file: 
+                    <span class="inside-ol">&nbsp;</span>
+                    <b>chart-basic.html</b>
+                    <span class="inside-ol">&nbsp;</span>
+                    This web page is linked to a basic stylesheet named <b>charts.css</b> and a CDN hosting the chart.js library.</li>
+                    <li>Within the <span class="syn">main</span> tag in the page, copy-and-paste the following.
+<pre class="language-js">
+&lt;section&gt;
+   &lt;h2&gt;Sample Chart&lt;/h2&gt;
+   &lt;div class="container-chart"&gt;
+      &lt;canvas id="bar-chart"&gt;&lt;/canvas&gt;
+   &lt;/div&gt;
+&lt;/section&gt;</pre>
+                        
+                    This is the HTML container that will hold your chart.</li>
+                    
+                    <li>After the closing <span class="syn">&lt;/script&gt;</span> tag that loads the chart.js library, copy-and-paste the following JavaScript code.
+
+<pre class="language-js">
+<span class="comment">&lt;!-- Bar chart script --&gt;</span>
+&lt;script&gt;
+
+<span class="comment">// The canvas reference ID to display the chart</span>
+const chartCanvas = document.querySelector('#bar-chart')
+
+   <span class="comment">// Create a new chart instance</span>
+   const newLineChart = new Chart(chartCanvas, {
+            
+      <span class="comment">// Chart configuration</span>
+      type: 'bar', <span class="comment">// chart type</span>
+      data: {
+         <span class="comment">// Sample five data labels on the horizontal axis</span>
+         labels: ['label-1', 'label-2', 'label-3', 'label-4', 'label-5'],
+            <span class="comment">// Sample five chart datasets</span>
+            datasets: [
+            {
+            label: 'My First Chart', <span class="comment">// Chart label</span>
+            <span class="comment">// Five data points (no % or currency symbols )</span>
+            data: [42, 48, 54, 58, 64], 
+            },
+          ],
+        },
+        <span class="comment">// Canvas not responsive by default</span>
+        options: {
+           responsive: true
+        }
+   });
+
+&lt;/script&gt;</pre></li>
+                
+                    <li>Save the <b>chart-basic.html</b> web page and view it in your web browser. It should look as showw below.
+                    <img src="assets/img/charts/charts-5.png" alt="canvas chart"></li>
+                
+                </ol>
+                
+                <p>If you hover over the chart with the mouse you can see it includes built-in tooltips.</p>
+
+                <h3 id="charts-styles">Adding colours and borders to a chart</h3>
+
+                <p>Let's add some colours to this simple chart. Here are the steps.</p>
+
+                <ol>
+                    <li>In the chart JavaScript code, directly under the <span class="csyn">data</span> array, copy and-paste the following.
+<pre class="language-js"><span class="comment">// Chart data background color</span>
+backgroundColor: ['yellow'],</pre>
+                    Your code should now look as follows.
+                    <img src="assets/img/charts/charts-6.png" alt="canvas chart"></li>
+                    <li>Save the <b>chart-basic.html</b> web page and view it in your web browser. All five vertical bars should now have a background colour of yellow.</li>
+                    <li>In VS Code, replace the single colour with the following.
+<pre class="language-js"><span class="comment">// Chart data background colors</span>
+backgroundColor: ['yellow', 'blue', 'brown', 'purple', 'indigo']</pre></li>
+                    <li>Save the <b>chart-basic.html</b> web page. It should now look as follows.
+                    <img src="assets/img/charts/charts-7.png" alt="canvas chart"></li>
+                    <li>Add some border styles as shown below.
+                    <img src="assets/img/charts/charts-8.png" alt="canvas chart"></li>
+                </ol>
+
+            </section>
+                
+            <section id="chart-horizontal">
+                <h2>Converting to a horizontal bar chart</h2>
+                <p>Finally, let's convert the bar chart to a horizontal bar chart. The newer versions of Chart.js do not have a separate chart type value for a horizontal bar chart.</p>
+                
+                <p>Instead, you create a standard bar chart and add the following to the chart options. See below.</p>
+
+                <img src="assets/img/charts/charts-8.png" alt="canvas chart">
+                
+                <p>Update your <b>chart-basic.html</b> web page and view it in your web browser. It should now look as shown below.</p>
+                <img src="assets/img/charts/charts-10.png" alt="canvas chart">
+            <p>&nbsp;</p>
+
+
+
+            </section>
+
+            <section>
+                <h2>Working with Chart Types</h2>
+                <p>Using data from the following web page and the <b>chart-types.html</b> web page, create some sample bar, horizontal bar, line and pie charts.</p>
+                <a target="_blank" href="https://insights.stackoverflow.com/survey/2021"><b>Stack Overflow Developer Survey 2021</b></a>
+            </section>
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
