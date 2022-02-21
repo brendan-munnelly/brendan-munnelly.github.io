@@ -81,6 +81,7 @@
 			</aside>
 	
 	<article>
+
 	<section id="learning-goals">
 		<h2>Learning Goals</h2>
 		<p>At the end of this Tutorial, you will be able to:</p>
@@ -103,620 +104,362 @@
         <p>JavaScript offers two types of strings:</p>
 
         <ul>
-            <li><b>String primitives</b>: </li>
-            <li><b>String obejcts</b>:</li>
+            <li>String primitives</li>
+            <li>String objects</li>
         </ul>
 
         <p>This Lesson focuses only on the more commonly-used string primitives.</p>
 
-        <pre>
-            <span class="comment">// Initializing a new string primitive</span>
-            <span class="token keyword">const</span> stringPrimitive <span class="token operator">=</span> <span class="token string">"A new string."</span><span class="token punctuation">;</span>
-        </pre>
+		<h3>Assigning strings to variables</h3>
 
-        <pre>
-            <span class="token comment">// Initializing a new String object</span>
-            <span class="token keyword">const</span> stringObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"A new string."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
-        </pre>
+		<p>To assign a string to a variable, wrap the value in single or double quotes.</p>
+<pre>const myStr1 = "Hello"; <span class="comment">// JavaScript treats myStr1 as a string</span>
+const myStr2 = 'World'; <span class="comment">// JavaScript treats myStr2 as a string</span>
+const myStr3 = " ";     <span class="comment">// JavaScript treats myStr3 as a string</span></pre>		
+		<p>Note that a whitepace character is treated as a valid string. The <b>myStr3</b> variable is not empty.</p>
+
+		<p>With the <span class="syn-js">let</span> keyword, an empty string can be <i>declared</i> (created) in one statement and then <i>initialised</i> (first value assigned to it) in another.</p>
+<pre>let myStr4 = ""; <span class="comment">// Empty string</span></pre>
+<pre>myStr4 = "Some text here"; <span class="comment">// String now has a value</span></pre>
+		
+		<p>You cannot declare an empty string with <span class="syn-js">const</span>. An error will result.</p>
+
+		<img src="assets/img/const-error-1.png" alt="Error with empty const variable">
+
+		<p>A string declared with <span class="syn-js">let</span> (but not <span class="syn-js">const</span>) can be reassigned.</p>
+<pre>let myStr5 = "Things are looking good."; 
+myStr5 = "Things are looking even better."; <span class="comment">// New value assigned</span></pre>
+		
+		<p>Attempting to reassign a variable created with <span class="syn-js">const</span> throws an error as shown below.</p>
+
+		<img src="assets/img/const-error-2.png" alt="Error with empty const variable">
 
 
-        <p>We can use the <code>typeof</code> operator to determine the type of a value. In the first example, we simply assigned a string to a variable.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">typeof</span> stringPrimitive<span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>string
-</code></pre>
-<p>In the second example, we used <code>new String()</code> to create a string object and assign it to a variable.</p>
+		<h3>The <code>typeof</code> operator</h3>
+		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
 
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">typeof</span> stringObject<span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>object
-</code></pre>
+<pre><span class="comment">// all statements returns string </span> 
+console.log(`Data type of myStr1: ${typeof myStr1}`);
+console.log(`Data type of myStr2: ${typeof myStr2}`);
+console.log(`Data type of myStr3: ${typeof myStr3}`);
+console.log(`Data type of myStr4: ${typeof myStr4}`);
+console.log(`Data type of myStr5: ${typeof myStr5}`);</pre>
+
+</section>
 
 
 
-    <section id ="strings-indexes">
-        <h2>Strings and indexes</h2>
-        <p>JavaScript assigns and <i>index number</i> to each character in a string, starting with <b>0</b>. See below.</p>
-        <p>To demonstrate, we will create a string with the value <code>How are you?</code>.</p>
+<section>
+	<h2>Strings and index position</h2>
 
-        <p>The first character in the string is <code>H</code>, which corresponds to the index <code>0</code>. The last character is <code>?</code>, which corresponds to <code>11</code>. The whitespace characters also have an index, at <code>3</code> and <code>7</code>.</p>
+	<p>JavaScript assigns an <i>index number</i> to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. See below.</p>
 
-      
-        <h3 id="strings-characters">Accessing characters</h3>
-        <p>Being able to access every character in a string gives us a number of ways to work with and manipulate strings.</p>  
+	<img src="assets/img/hello-world.png" alt="Sample string in JavaScript">
 
-        <p>Using square bracket notation, we can access any character in the string.</p>
-        <p>We’re going to demonstrate how to access characters and indices with the <code>How are you?</code> string.</p>
+    <p>See the sample code below.</p>
 
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
+<pre>let strHelloWorld = "Hello, World!";
+console.log(`Position [0]: ${strHelloWorld[0]};`)   <span class="comment">// returns H</span>
+console.log(`Position [5]: ${strHelloWorld[5]};`)   <span class="comment">// returns ,</span>
+console.log(`Position [6]: ${strHelloWorld[6]};`)   <span class="comment">// returns whitespace</span>
+console.log(`Position [7]: ${strHelloWorld[7]};`)   <span class="comment">// returns W</span>
+console.log(`Position [12]: ${strHelloWorld[12]};`) <span class="comment">// returns !</span></pre>
 
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>r
-</code></pre>
+
+   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>. The whitespace character also have an index, at <b>6</b>.</p>
+
+   <p>Being able to access every character in a string with the square bracket <span class="syn-js">[]</span> notation makes it easy to access and manipulate strings.</p>  
+
+	<h3>The length of a string</h3>
+	<p>Every string has a <span class="syn-js">length</span> property that reveals the number of characters in the string. The syntax is as follows.</p>
+	<pre class="language-js"> <i>string_name</i>.length</pre>
+
+	<p>The following example will output a string length of <b>13</b> to the console.</p>
+
+<pre class="language-js">console.log(Number of chars in strHelloWorld: "+strHelloWorld.length); 
+<span class="comment">// returns 13</span></pre>
+    
+	<p>Remember: the length of a string is always <i>one number greater</i> that the string&#8217;s highest index number.</p>
+
+	<h3>Trimming whitespace from a string</h3>
+
+	<p>Users of online forms can enter unnecessary whitespace characters at the start or end of an input field. To remove these spaces, use the following JavaScript method. These spaces are called <i>padding</i>.</p>
+
+	<table class="table-js-methods">
+        <tbody>
+            <tr>
+               <td style="min-width: 20%"><p><span class="syn-js">.trim()</span></p></td>
+               <td><p>Returns a new string without any whitespace characters at the start and end of the string.</p></td>
+            </tr>
+        </tbody>
+    </table>                    
+
+	<p>This method will return a new string. This means the original string will be unchanged. So you will probably want to reassign the string variable to the new, trimmed value as follows.</p>
+
+	<p>See the sample code.</p>
+
+<pre>let strUserFirstName = "  Marie ";
+strUserFirstName = strUserFirstName.trim();
+console.log(`Trimmed string variable: ${strUserFirstName};`)
+<span class="comment">// returns Marie</span></pre>
+
+	<p>In addition to whitespaces, <span class="syn-js">trim()</span> also removes tab, no-break space and line terminator characters.</p>
+
+	<p>Note that <span class="syn-js">trim()</span> only works for characters at the start and end of a string. Any spaces between words are unaffected.</p>
+
+
+
+	<h3>Changing the case of string characters</h3>
+
+	<p>You can use the followwing methods to change the case of a string.</p>
+	
+	
+	<p>Because each method actually creates a new string, you will typically want to reassign the converted values back to the original strings.</p>
+
+	<table class="table-js-methods">
+        <tbody>
+            <tr>
+               <td style="min-width: 30%"><p><span class="syn-js">.toUpperCase()</span></p></td>
+               <td><p>Returns a new string of all upper-case characters.</p></td>
+            </tr>
+            <tr>
+               <td style="min-width: 30%"><p><span class="syn-js">.toLowerCase()</span></p></td>
+               <td><p>Returns a new string of all lower-case characters.</p></td>
+            </tr>
+        </tbody>
+    </table>                    
+
+	<p>See the sample code below.</p>
+
+<pre>let strMakeUpper = "U2\'s First Album";
+let strMakeLower = "U2\'s Second Album";
+strMakeUpper = strMakeUpper.toUpperCase();
+console.log(`All Uppercase String One: ${strMakeUpper}`);
+<span class="comment">// returns U2's SECOND ALBUM</span>
+strMakeLower = strMakeLower.toLowerCase(); 
+console.log(`All Lowercase String Two: ${strMakeLower}`);
+<span class="comment">// returns u2's second album</span></pre>
+
+
+
+
+</section>
+
+
+
+
+<section>
+	<h2>Joining strings together</h2>
+
+	<p>You can use the plus <span class="syn-js">+</span> operator to <i>concatenate</i> (join) strings together into one string. Often you will want to include a whitespace character before or after the <span class="syn-js">+</span> when joining strings.</p>
+	
+	<p>See the examples below.</p>
+
+<pre>console.log(`"John"+"Lennon": ${"John"+"Lennon"}`);
+<span class="comment">// returns JohnLennon</span>
+console.log(`"John "+"Lennon": ${"John "+"Lennon"}`);
+<span class="comment">// returns John Lennon</span>
+console.log(`"John" +" Lennon": ${"John" +" Lennon"}`);
+<span class="comment">// returns John Lennon</span></pre>
+
+	<p>JavaScript also offers a <span class="syn-js">concat(a,b)</span> method. But this is best avoided because it will thrown an error if arguments passed are not string variables. The <span class="syn-js">+</span> operator will <i>coerce</i> any non-string values to strings.</p>
+
+
+</section>
+
+
+<section>
+	<h2>Slicing strings apart</h2>
+
+	<p>The opposite of concatenating strings is to <i>splice</i> a string. That is, to break a single string into two string variables. You can use the following method.</p>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td><p><span class="syn-js">.slice(start,end)</span></p></td>
+				<td><p>Returns a new string extracted at the specified <i>start</i> position fromthe original string.</p>
+				
+				<p>If the optional <b>end</b> argument is omiited, the new string will include every character of the original string up to the end.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See the examples below.</p>
+
+<pre>let strForSplicing = "A Long Day\'s Journey Into Night";
+console.log(`Splice at position [6] to end: ${strForSplicing.slice(6)}`);
+<span class="comment">// returns Day's Journey Into Night</span>
+console.log(`Splice from position [7] to [10]: ${strForSplicing.slice(7,10)}`);
+<span class="comment">// returns Day</span></pre>
+
+	<p>The original string is unchanged.</p>
+
+</section>
 
 <section>
 
+	<h2>Querying a string by index position(s)</h2>
+    
+	<p>Do you need to know what character(s) occur at particular index positions(s) in a string? JavaScript provides three methods to answer that question.</p>
+	
+	<p>All three methods below are case-senstive and create a new string containing the returned result. The tested string is unchanged.</p>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td><p><span class="syn-js">.charAt(index)</span></p></td>
+				<td><p>Returns the character at the specified <i>index</i> position.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>Here are two simple examples.</p>
+
+<pre>const strMoveTitle = "The Man Who Shot Liberty Valence";
+console.log(`Character at position [0]: ${strMoveTitle.charAt(0)}`);
+<span class="comment">// returns T</span>
+console.log(`Character at position [17]: ${strMoveTitle.charAt(17)}`);
+<span class="comment">// returns l</span></pre>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td  style="width: 35%"><p><span class="syn-js">substring(start, end)</span></p></td>
+				<td><p>Returns the string character(s) between <b>start</b> and <b>end</b> index positions, but <i>not including</i> the <b>end</b> position.</p>
+				
+				<p>Omit the <b>end</b> argument to include all characters from the <b>start</b> to the end of the string.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See an examples below.</p>
+
+<pre>console.log(`Characters from position [0] to before position [3]: ${strMoveTitle.substring(0,3)}`);  
+<span class="comment">// returns The</span>
+console.log(`Characters from position [4] to string end: ${strMoveTitle.substring(4)}`);
+<span class="comment">// Who Shot Liberty Valence</span></pre>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td style="width: 35%"><p><span class="syn-js">substr(start, length)</span></p></td>
+				<td><p>Returns the string character(s) from the specified <b>start</b> position. The optional <b>length</b> parameter sets an ending index position.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See an example below.</p>
+
+<pre>console.log(`3 Characters, beginning at position [0]: ${strMoveTitle.substr(0,3)}`);  
+<span class="comment">// returns The</span>
+console.log(`8 Characters, beginning at position [4]: ${strMoveTitle.substr(4,8)}`);  
+<span class="comment">// returns Man Who</span></pre>
+
+	<p>If you supply these methods with arguments that are out of range, JavaScript returns an empty string <span class="syn-js">""</span>.</p>
+</section>
+
+
 <section id="strings-methods-summary">
 
-    <h2>String methods: a summary</h2>
-
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td>concat([string,,])</td>
-                <td>Joins specified string literal values (specify multiple strings separated by comma) and returns a new string.</td>
-            </tr>
-            <tr>
-                <td>slice(startNumber, endNumber)</td>
-                <td>Extracts a section of a string based on specified starting and ending index and returns a new string.
-                    
-
-                </td>
-            </tr>
-            <tr>
-                <td>split(separatorString, limitNumber)
-                    
-
-                </td>
-                <td>Splits a String into an array of strings by separating the string into substrings based on specified separator. Regular expression can also be used as separator.
-                    
-
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    </section>
     <section>
         <h2>Querying a string for character(s)</h2>
 
-        <p>Often you will want to know if a string contains particular character(s). And sometimes you will want to test if the character(s) occur at the start or end of the string.</p>
-        
-        <p>All three methods below return <span class="syn-js">true</span> or <span class="syn-js">false</span>.</p>
+        <p>Often you will want to know if a string contains particular character(s).</p>
+		
+		<p>In the two simplest cases, where the search-for characters(s) are at the start or the end of the string, you can use one of these methods.</p>
+		
+        <table class="table-js-methods">
+            <tbody>
+				<tr>
+                    <td style="width:40%"><p><span class="syn-js">.startsWith(searchString)</span></p></td>
+                    <td><p>Returns <span class="syn-js">true</span> if a string begins with specified character(s).</p></td>
+                </tr>
+                <tr>
+					<td style="width:40%"><p><span class="syn-js">.endsWith(searchString)</span></p></td>
+                    <td><p>Returns <span class="syn-js">true</span> if a string ends with specified character(s).</p></td>
+                </tr>
+            </tbody>
+        </table>
+
+		<p>See the code samples below.</p>
+
+<pre>
+console.log(`Does Movie Title begin with "Th": ${strMoveTitle.startsWith("Th")}`);
+<span class="comment">// returns true</span>
+console.log(`Does Movie Title end with "VALENCE": ${strMoveTitle.endsWith("VALENCE")}`);
+<span class="comment">// returns false. Search is case-sensitive</span></pre>		
+
+		<p>More generally, you can test if character(s) are located <i>anywhere</i> in a string with this method.</p>
 
         <table class="table-js-methods">
             <tbody>
                 <tr>
-                    <td style="width:45%"><span class="syn-js">.includes(searchString, position)</span></td>
-                    <td>Checks if the specified character(s) occur anywhere in a string. This method is case-sensitive. The optional <span class="syn-js">position</span> parameter begins the search at a particular <i>index value</i>. Its default value is <b>0</b>. This newer method has replaced the older, slower indexOf() method.</td>
-                </tr>
-    
-                <tr>
-                    <td><span class="syn-js">.startsWith()</span></td>
-                    <td>Checks if a string begins with specified character(s).</td>
+                    <td style="width:35%"><p><span class="syn-js">.includes(searchString, position)</span></p></td>
+                    <td><p>Tests if the specified character(s) occur anywhere in a string.</p>
+					<p>The optional <span class="syn-js">position</span> parameter begins the search at a particular <i>index value</i>. Its default value is <b>0</b>.</p></td>
                 </tr>
 
-                <tr>
-                    <td><span class="syn-js">.endsWith()</span></td>
-                    <td>Checks if a string ends with specified character(s).</td>
-                </tr>
             </tbody>
         </table>
-        <p>indexOf(SearchString, Position): Returns the index of first occurrence of specified String starting from specified number index. Returns -1 if not found.</p>
+
+		<p>Here are some examples.</p>
+
+<pre>console.log(`Does Movie Title include "Shot" anywhere? ${strMoveTitle.includes("Shot")}`);  
+<span class="comment"> // returns true</span>
+console.log(`Does Movie Title include "The" after position [4]: ${strMoveTitle.includes("The", 4)}`);  
+<span class="comment"> // returns true</span></pre>		
+
+		<p> This newer method is preferred over the older, slower <span class="syn-js">indexOf()</span> method.</p>
+
+</section>
 
 
         <section>
-            <h2>Querying a string by index location(s)</h2>
-    
-            <p>Need to know what character(s) occur at particular index location(s) in a string? All three methods below create a new string containing the returned result. The queried string is unchanged.</p>
-    
-            <table class="table-js-methods">
-                <tbody>
-                    <tr>
-                        <td><span class="syn-js">.charAt(index)</span></td>
-                        <td>Returns the character at the specified index position.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="syn-js">substring(start, end)</span></td>
-                        <td>Returns the string character(s) between start and end index positions. </td>
-                    </tr>
-                    <tr>
-                        <td><span class="syn-js">substr(start, length)</span></td>
-                        <td>Returns the string character(s) from the specified starting position. The optional length parameter sets and ending index position. </td>
-                    </tr>
-                    </tbody>
-            </table>
-    
-            <p>If you supply these methods with index position(s) that are out of range, JavaScript returns an empty string <span class="syn-js">""</span>.</p>
 
-            <section>
-                <h2>Replacing character(s) in a string</h2>
-                <p></p>
-                
+            <h2>Searching and replacing character(s) in a string</h2>
 
+			<p>You can search a string for a value and replace it with a new value using the following method.</p>
+			
                 <table class="table-js-methods">
                     <tbody>
                         <tr>
-                            <td>replace(searchValue, replaceValue) </td>
-                            <td>Search specified string value and replace with specified replace Value string and return new string. Regular expression can also be used as searchValue. </td>
+                            <td style="width: 35%"><p><span class="syn-js">.replace(searchValue, replaceValue)</span></p></td>
+                            <td><p>The first parameter is the value to be found. And the second parameter is the value you want to replace it with.</p></td>
                         </tr>
                        </tbody>
                     </table>
 
-                    
+<p>See the example below.</p>					
+
+<pre>let strSearch = "It was the best of times. It was the worst of times.";
+console.log(`Replaces "times" with "years": ${strSearch.replace("times", "years")}`);
+<span class="comment"> // returns It was the best of years. It was the worst of times.</span></pre>
+
+	<p>By default, this method:</p>
+
+	<ul>
+		<li>Repalces only the first occurence of the searched-for string.</li>
+		<li>Is case-sensitive.</li>
+	</ul>
+
+	<p>You can change this by using two regular expression parameters.</p>
+
+	<ul>
+		<li>Add the global parameter to replace <i>every</i> occurences of the searched-for string.</li>
+		<li>Add the global parameter to replace <i>all</i> occurences, regardless of letter case.</li>
+	</ul>
+
+<p>See the examples below.</p>
+
+<pre>console.log(`Replaces "TiMeS" with "years": ${strSearch.replace("/times/gi", "years")}`);
+<span class="comment"> // returns It was the best of years. It was the worst of years.</span></pre>
+
+
+
             </section>
 
-            <section>
 
-            <p>Display methods</p>
 
-            <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <td>toLowerCase()</td>
-                    <td>Returns lower case string value.</td>
-                </tr>
-            <tr>
-                    <td>toUpperCase()</td>
-                    <td>Returns upper case string value.</td>
-                </tr>
-                </tbody>
-            </table>
-
-</section>
-
-    <p>We can also use the <code>charAt()</code> method to return the character using the index number as a parameter.</p>
-    <div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    </code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-    <pre><code><div class="secondary-code-label" title="Output">Output</div>r
-    </code></pre>
-    <p>Alternatively, we can use <code>indexOf()</code> to return the index number by the first instance of a character.</p>
-    <div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"o"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    </code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-    <pre><code><div class="secondary-code-label" title="Output">Output</div>1
-    </code></pre>
-    <p>Although “o” appears twice in the <code>How are you?</code> string, <code>indexOf()</code> will get the first instance.</p>
-    <p><code>lastIndexOf()</code> is used to find the last instance.</p>
-    <div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">"o"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    </code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-    <pre><code><div class="secondary-code-label" title="Output">Output</div>9
-    </code></pre>
-    <p>For both of these methods, you can also search for multiple characters in the string. It will return the index number of the first character in the instance.</p>
-    <div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"are"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    </code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-    <pre><code><div class="secondary-code-label" title="Output">Output</div>4
-    </code></pre>
-<p>The <code>slice()</code> method, on the other hand, returns the characters between two index numbers. The first parameter will be the starting index number, and the second parameter will be the index number where it should end.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>you
-</code></pre>
-<p>Note that <code>11</code> is <code>?</code>, but <code>?</code> is not part of the returned output. <code>slice()</code> will return what is between, but not including, the last parameter.</p>
-<p>If a second parameter is not included, <code>slice()</code> will return everything from the parameter to the end of the string.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>you?
-</code></pre>
-<p>To summarize, <code>charAt()</code> and <code>slice()</code> will help return string values based on index numbers, and <code>indexOf()</code> and <code>lastIndexOf()</code> will do the opposite, returning index numbers based on the provided string characters.</p>
-<h2 id="finding-the-length-of-a-string">Finding the Length of a String</h2>
-<p>Using the <code>length</code> property, we can return the number of characters in a string.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>12
-</code></pre>
-<p>Remember that the <code>length</code> property is returning the actual number of characters starting with 1, which comes out to 12, not the final index number, which starts at <code>0</code> and ends at <code>11</code>.</p>
-<h2 id="converting-to-upper-or-lower-case">Converting to Upper or Lower Case</h2>
-<p>The two built-in methods <code>toUpperCase()</code> and <code>toLowerCase()</code> are helpful ways to format text and make textual comparisons in JavaScript.</p>
-<p><code>toUpperCase()</code> will convert all characters to uppercase characters.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>HOW ARE YOU?
-</code></pre>
-<p><code>toLowerCase()</code> will convert all characters to lowercase characters.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token string">"How are you?"</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>how are you?
-</code></pre>
-<p>These two formatting methods take no additional parameters.</p>
-<p>It is worth noting that these methods do not change the original string.</p>
-<h2 id="splitting-strings">Splitting Strings</h2>
-<p>JavaScript has a very useful method for splitting a string by a character and creating a new <a href="https://www.digitalocean.com/community/tutorials/understanding-arrays-in-javascript">array</a> out of the sections. We will use the <code>split()</code> method to separate the array by a whitespace character, represented by  <code>" "</code>.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> originalString <span class="token operator">=</span> <span class="token string">"How are you?"</span><span class="token punctuation">;</span>
-
-<span class="token comment">// Split string by whitespace character</span>
-<span class="token keyword">const</span> splitString <span class="token operator">=</span> originalString<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>splitString<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>[ 'How', 'are', 'you?' ]
-</code></pre>
-<p>Now that we have a new array in the <code>splitString</code> variable, we can access each section with an index number.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript">splitString<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>are
-</code></pre>
-<p>If an empty parameter is given, <code>split()</code> will create a comma-separated array with each character in the string.</p>
-<p>By splitting strings you can determine how many words are in a sentence, and use the method as a way to determine people’s first names and last names, for example.</p>
-<h2 id="trimming-whitespace">Trimming Whitespace</h2>
-<p>The JavaScript <code>trim()</code> method removes white space from both ends of a string, but not anywhere in between. Whitespace can be tabs or spaces.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> tooMuchWhitespace <span class="token operator">=</span> <span class="token string">"     How are you?     "</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> trimmed <span class="token operator">=</span> tooMuchWhitespace<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>trimmed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>How are you?
-</code></pre>
-<p>The <code>trim()</code> method is a simple way to perform the common task of removing excess whitespace.</p>
-<h2 id="finding-and-replacing-string-values">Finding and Replacing String Values</h2>
-<p>We can search a string for a value, and replace it with a new value using the <code>replace()</code> method. The first parameter will be the value to be found, and the second parameter will be the value to replace it with.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> originalString <span class="token operator">=</span> <span class="token string">"How are you?"</span>
-
-<span class="token comment">// Replace the first instance of "How" with "Where"</span>
-<span class="token keyword">const</span> newString <span class="token operator">=</span> originalString<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"How"</span><span class="token punctuation">,</span> <span class="token string">"Where"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newString<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>Where are you?
-</code></pre>
-<p>In addition to being able to replace a value with another string value, we can also use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expressions</a> to make <code>replace()</code> more powerful. For instance, <code>replace()</code> only affects the first value, but we can use the <code>g</code> (global) flag to catch all instances of a value, and the <code>i</code> (case insensitive) flag to ignore case.</p>
-<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> originalString <span class="token operator">=</span> <span class="token string">"Javascript is a programming language. I'm learning javascript."</span>
-
-<span class="token comment">// Search string for "javascript" and replace with "JavaScript"</span>
-<span class="token keyword">const</span> newString <span class="token operator">=</span> originalString<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">javascript</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">"JavaScript"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newString<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div><div class="toolbar-item"><span style="display: none;"></span></div></div></div>
-<pre><code><div class="secondary-code-label" title="Output">Output</div>JavaScript is a programming language. I'm learning JavaScript.
-</code></pre>
-<p>This is a very common task that makes use of Regular Expressions. Visit <a href="http://regexr.com/">Regexr</a> to practice more examples of RegEx.</p>
-
-
-<section>
-    <h2>Finding characters in a string</h2>
-
-</section>
-
-<section>
-    <h2>String case conversion</h2>
-</section>
-
-
-<section>
-    <h2>Creating sub-strings</h2>
-
-    <p>slice(startNumber, endNumber)</p>
-
-    <p>Extracts a section of a string based on specified starting and ending index and returns a new string.</p>
-
-    <p>substr(start, length)</p>
-
-    <p>Returns the characters in a string from specified starting position through the specified number of characters (length). </p>
-
-    <p>substring(start, end) </p>
-
-    <p>Returns the characters in a string between start and end indexes. </p>
-
-</section>
-
-
-<section>
-    <h2>Working with multiple strings</h2>
-
-
-    <p>concat([string,,]) </p>
-
-    <p>Joins specified string literal values (specify multiple strings separated by comma) and returns a new string. </p>
-
-
-</section>
-
-<h2 id="conclusion">Conclusion</h2>
-<p>Strings are one of the most frequently used data types, and there is a lot we can do with them.</p>
-<p>In this tutorial, we learned the difference between the string primitive and <code>String</code> object, how strings are indexed, and how to use the built-in methods and properties of strings to access characters, format text, and find and replace values.</p>
-<p>For a more general overview on strings, read the tutorial “<a href="https://www.digitalocean.com/community/tutorials/how-to-work-with-strings-in-javascript">How To Work with Strings in JavaScript</a></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<h2>Basics: Variables</h2>
-
-        <p>Modern JavaScript offers two keywords for declaring (creating) variables.</p>
-
-        <h3>The let variable declaration</h3>
-        <p>Use this to create a variable whose value can change.</p>
-
-        <h3>The const variable declaration</h3>
-        <p>This works just <span class="syn-js">let</span>, but creates variable whose value cannot be changed.</p>
-
-        <p>Such as variable should never be the left-hand side of an assignment or the operand of <span class="syn-js">++</span> or <span class="syn-js">--</span>.</p>
-
-
-		<p>Block-scoping helps with keeping the effects of code fragments more local (see the next section for a demonstration). And it's more mainstream than function-scoping, which eases moving between JavaScript and other programming languages.</p>
-		
-        <p>Avoid <span class="syn-js">var</span>. </p>
-		<h2>From IIFEs to blocks</h2>
-
-		<p>In ES5, you had to use a pattern called IIFE (Immediately-Invoked Function Expression) if you wanted to restrict the scope of a variable tmp to a block:</p>
-		<pre>
-		(function () {  // open IIFE
-			var tmp = ···;
-			···
-		}());  // close IIFE
-		
-		console.log(tmp); // ReferenceError</pre>
-		
-		<p>In ECMAScript 6, you can simply use a block and a let declaration (or a const declaration):</p>
-		
-		<pre>{  // open block
-			let tmp = ···;
-			···
-		}  // close block
-		
-		console.log(tmp); // ReferenceError</pre>
-		
-		
-
-        <h2>About functions</h2>
-        <p>Functions are the building blocks of a programming language. You can think of a function as a &#8216;box&#8217; or &#8216;sub-program&#8217; that stores some code inside it.</p>
-        
-        <p>In summary:</p>
-        
-        <ul>
-            <li>A function is a block of code that performs a particular task.</li>
-            <li>Whenever the program needs that task to be performed, it <i>invokes</i> (&#8216;calls&#8217; or &#8216;fires&#8217;) the function and runs the code inside it.</li>
-        </ul>
-	
-		<img src="assets/img/functions-diagram.png" alt="JavaScript functions diagram">
-
-		<p>Dividing your program into functions brings one huge advantage: You need to write the code inside functions only once &#8211; but the program can invoke and run the functions as many times as is needed.</p>
-
-        <p>In short, functions are reusable and recyclable ♻️ code blocks.</p>
-
-		<h3 id="function-names">Function names</h3>
-		<p>In a JavaScript program, you can call a function by typing its name, followed by a pair of parenthesis <span class="syn-js">()</span> and a semi-colon <span class="syn-js">;</span> For example:</p>
-
-		<pre class="language-js"><span class="yellow">displayGreeting</span>();</pre>
-
-        <p>There is no space between the function name and the opening parenthesis.</p>
-
-		<p>Here are some important points about naming functions in JavaScript:</p>
-	
-		<ul>
-			<li><b>Names must be unique</b>: Not every function need to have a name. (Functions can be anonymous.) But when a function has a name, that name must be unique. No two functions in the same scope may have the same name.</li>
-
-			<li><b>No spaces or hyphens</b>: Function names may not contain spaces or the hyphen character (<span class="syn-js">-</span>).
-			<span class="inside-ol">&nbsp;</span>
-			The underline character (<span class="syn-js">_</span>) may be used and often is.</li>
-
-			<li><b>Mixed character case</b>: Developers typically combine upper and lowercase letters in a function name to make the name easier to read. For example, <span class="syn-js">setFontSize()</span> and <span class="syn-js">calculateTax()</span>. This convention is known as <i>camelCase</i>.</li>
-
-			<li><b>Case sensitivity</b>: Function names are case-sensitive. <span class="syn-js">UpdateTotal()</span> and <span class="syn-js">updateTOTAL()</span> are two different function names.</li>
-
-		</ul>
-	  
-		<p>It's always a good idea to start a function name with an imperative verb (an action word such as &#8216;add&#8217;, &#8216;sum&#8217;, &#8216;calculate&#8217;, &#8216;update&#8217;, &#8216;display&#8217; or &#8216;push&#8217;) that describes what the function does.</p>
-	
-		<h3>Functions and code blocks</h3>
-        <p>In JavaScript, a code block is some code inside a pair of braces <span class="syn-js">{}</span>, also known as curly brackets. The code of a function is called the <i>function body</i> and is always written inside a pair of braces.</p>
-				
-		<p>Typically, the code inside the code block is indented from the left by two spaces to make the function easier to read.</p>
-
-		<img src="assets/img/code-blocks.png" alt="JavaScript code blocks" style="max-width: 500px">
-
-		<p>JavaScript functions may be created in different ways. Two of the most common are <i>function declarations</i> and <i>function expressions</i>. See below.</p>
-
-	</section>
-
-    <section class="theme-dark">
-
-        <h2>Function declarations</h2>
-        <p>One way to create a function is to <i>declare</i> it with the relevant JavaScript <i>keyword</i>, much in the same way you would declare a variable.</p>
-
-		<ul>
-			<li>You declare variables with the <span class="syn-js">var</span>, <span class="syn-js">const</span> or <span class="syn-js">let</span> keywords.</li>
-			<li>You declare a function with the <span class="syn-js">function</span> keyword.</li>
-		</ul>
-		
-		<p>See the sample function declaration below:</p>
-
-<pre class="language-js">
-<span class="comment">// Function declaration</span>
-<span class="blue-dark">function</span> <span class="yellow">displayGreeting</span>() {
-   <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="brown">"Hello, world!"</span>);
-}
-</pre>
-
-        <p>Here is the syntax of a function declaration:</p>
-        
-        <ul>
-            <li>Begins with the function keyword<img src="assets/img/function-declaration-1.png" alt="JavaScript function declaration keyword" style="max-width: 440px; margin-top: 4px"></li>
-            
-			<li>Then, after a space, comes the function name<img src="assets/img/function-declaration-2.png" alt="JavaScript function declaration function name"  style="max-width: 440px; margin-top: 4px"></li>
-            <li>Then, without a space, is a pair of parentheses <span class="syn-js">()</span>. This may include one or more parameters separated by commas.<img src="assets/img/function-declaration-3.png" alt="JavaScript function declaration parenthesis"  style="max-width: 440px; margin-top: 4px"></li>
-            <li>Finally, inside a code block <span class="syn-js">{}</span>, you type the function's code.<img src="assets/img/function-declaration-4.png" alt="JavaScript function declaration code block"  style="max-width: 440px; margin-top: 4px"></li>
-        </ul>
-
-		<p>You would call this function as shown below.</p>
-		<img src="assets/img/function-declaration-5.png" alt="JavaScript function declaration calling"  style="max-width: 440px; margin-top: 4px">
-
-		<h3>Function declarations and coding styles</h3>
-		<p>Developers write function declarations in slightly different ways.</p>
-		
-		<ul>
-			<li>The space after the pair of parenthesis <span class="syn-js">()</span> and before the opening brace <span class="syn-js">{</span> of the code block is optional. </li>
-			<li>And some developers begin the code block <span class="syn-js">{}</span> on a new line. All three examples below will run correctly.</li>
-		</ul>
-
-		<img src="assets/img/function-declaration-styles.png" alt="JavaScript function declaration styles" class="wider-115">
-
-		<h3>Function declarations are <i>hoisted</i></h3>
-
-        <p>A function declaration creates a function variable (with the same name as the function name) in the current scope.</p>
-        
-        <p>Function variables are <i>hoisted</i>. As a result, you can call them <i>before or after</i> they are declared. Both of the code samples below will run without error.</p>
-
-		<img src="assets/img/function-declaration-hoisted.png" alt="JavaScript function declaration hoisted" class="wider-115">
-
-
-		<!-- Since a function declaration is not an executable statement, it is not common to end it with a semicolon. -->
-
-        <!--<p>The role of the function declaration syntax is to create standalone functions. Function declarations are expected inside the global scope or the direct the scope of other functions. it is not recommended to use function declarations inside conditionals (if) and loops (while, for):</p> -->
-
-    </section>
-
-
-
-<section class="theme-dark">
-
-	<h2>Function expressions</h2>
-	<p>A second way to create a function is with a <i>function expression</i>. See the example below:</p>
-
-<pre class="language-js">
-<span class="comment">// Function expression</span>
-<span class="blue-dark">const</span> <span class="blue-light">greeting</span> = (<span class="blue-dark">function</span> <span class="yellow">displayGreeting</span>() {
-   <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="brown">"Hello, world!"</span>);
-});	
-</pre>
-
-	<p>A function expression is stored inside a regular JavaScript variable.</p> 
-
-	<p>The syntax of a function expression as follows:</p>
-        
-	<ul>
-		<li>Begin by writing a function declaration as shown below<img src="assets/img/function-expression-1.png" alt="JavaScript function expression variable" style="max-width: 580px; margin-top: 6px"></li>
-		<li>Enclose the function declaration inside a pair of parenthesis <span class="syn-js">()</span> .<img src="assets/img/function-expression-2a.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>
-		<li>Add a semi-colon statement terminator <span class="syn-js">;</span> at the end.
-		<img src="assets/img/function-expression-2.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
-		A function expression ends with a semi-colon because it is a part of an executable statement.
-		</li>
-		<li>Begin the code with an equals <span class="syn-js">=</span> sign to make it the RHS of an assignment statement.<img src="assets/img/function-expression-3.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>   
-		<li>On the LHS, write the variable <i>keyword</i> and the name of the variable that will store the function.<img src="assets/img/function-expression-4.png" alt="JavaScript function expression code block" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
-		Developers typically use the <span class="syn-js">const</span> variable type to store a function expression. This is to ensure the function is not accidentally changed or overwritten elsewhere in the program.</li>   
-	   
-	</ul>
-
-	<p>Note the following:</p>
-
-	<ul>
-		<li>A function declaration begins with the <span class="syn-js">function</span> keyword.</li>
-		<li>A function expression includes the <span class="syn-js">function</span> keyword, but begins with a variable declaration.</li>
-	</ul>
-
-	<p>Strictly speaking, a function expression is not stored inside a JavaScript variable. Only the the <i>value</i> that the function expression evaluates to is stored in the variable.</p>
-
-	<h3>Function expressions are <i>not hoisted</i></h3>
-
-	<p>You call a function expression in a similar way to how you call a function declaration. The difference is that you type the variable name rather than the function name. As with calling a function declaration, you follow this, without a space, with a pair of parenthesis <span class="syn-js">()</span>. See the example below.</p>
-	<img src="assets/img/function-expression-5.png" alt="JavaScript function expression calling" style="max-width: 580px">
-
-	<p>Here are two important differences between function declarations and function expressions:</p>
-
-	<ul>
-		<li>Unlike a function declaration, a function expression does not create a function variable (which is <i>hoisted</i>).</li>
-		<li>Instead, the function is stored inside a regular variable (which is <i>not hoisted</i>).</li>
-	</ul>
-
-	<p>As a result, you can call a function expression only after you have created it &#8211; and never before.</p>
-
-	<img src="assets/img/function-expression-not-hoisted.png" alt="JavaScript function expression not hoisted" class="wider-115">
-
-	<p>In other words, you must treat a variable that stores a function expression in the same way as any other variable &#8211; first declare it, and only then use it.</p>
-
-	
-
-	</section>
-
-	<section class="theme-dark">
-
-        <h2>Anonymous function expressions</h2>
-        <p>Consider the sample function expression below.</p>
-		
-		<img src="assets/img/functions-anonymous-1.png" alt="JavaScript anonymous function expression" style="max-width: 600px">
-		
-		<p>You can see that the function contains <i>two</i> names:</p>
-		<ul>
-			<li><b>A variable name</b>: In this example, <span class="syn-js">greeting</span>.</li>
-			<li><b>A function name</b>: In this example, <span class="syn-js">displayGreeting</span>.</li>
-		</ul>
-
-		<p>But only one name is needed to call the function elsewhere in the program &#8211; the variable name.</p>
-		
-		<p>So: do we need the function name at all?</p>
-			
-		<p>Answer: 'No'.</p>
-
-		<p>You can convert a <i>named function expression</i> to an unnamed or <i>anonymous function expression</i> as follows:</p>
-
-		<ul>
-			<li>Remove the function name. But leave the parenthesis <span class="syn-js">()</span> after the keyword <span class="syn-js">function</span>.
-			<img src="assets/img/functions-anonymous-2.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
-			<li>Remove the outer parenthesis <span class="syn-js">()</span> that encloses the RHS of the assignment statement.
-			<img src="assets/img/functions-anonymous-3.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
-		</ul>
-		<p>That's it. You have now created an anonymous function.</p>
-	</section>
-
-
-	<section class="theme-dark">
-
-        <h2>Arrow function expressions</h2>
-        <p>A so-called <i>arrow function</i> is a short-hand or quick way of typing an anonymous function expression.</p>
-		
-		<p>You can convert a regular anonymous function to an arrow function as follows:</p>
-
-		<ul>
-			<li>Remove the <span class="syn-js">function</span> keyword. But leave the parenthesis <span class="syn-js">()</span>.
-			<img src="assets/img/functions-arrow-1.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
-			<li>After the <span class="syn-js">()</span> and before the opening code block <span class="syn-js">{</span>, type an equals sign and a right arrow character <span class="syn-js">=&gt;</span>
-			<img src="assets/img/functions-arrow-2.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
-		</ul>
-
-		<p>That's it. You have now created an arrow function.</p>
-
-		<p>For a function expression that contains only <i>one</i> statement, you can make the syntax of the arrow function even shorter. Here are the steps:</p>
-		
-		<ul>
-			<li>Place all the function code on one line.<img src="assets/img/functions-arrow-3.png" alt="JavaScript arrow function" style="max-width: 600px">
-			</li>
-			<li>Remove the code block braces <span class="syn-js">{}</span> and the final statement terminator <span class="syn-js">;</span>.<img src="assets/img/functions-arrow-4.png" alt="JavaScript arrow functionn" style="max-width: 600px"></li>
-		</ul>
-
-		<p>This is possible only for single-statement functions. Arrow functions with multiple statements still need to include a code block <span class="syn-js">{}</span> that ends with a <span class="syn-js">;</span> terminator.</p>
-		<img src="assets/img/functions-arrow-5.png" alt="JavaScript arrow function" style="max-width: 600px">
-
-		<p>Notice that, with arrow functions, the JavaScript syntax for declaring and initializing variables, and for creating function expressions, is very similar.</p>
-
-		<p>In both cases, the LHS of the assignment statement contains a variable type such as <span class="syn-js">const</span> and a variable name.</p>
-
-		<img src="assets/img/functions-arrow-6.png" alt="JavaScript arrow function" style="max-width: 500px">
-
-		<p>One difference is that, for arrow functions, the RHS of the assignment statement begins with the <span class="syn-js">() =&gt;</span> characters.</p>
-
-		<p>Another difference is that, unless the arrow function contains only one statement, the RHS will also contain code block braces <span class="syn-js">{}</span>.</p>
-
-	</section>
 
 
 
