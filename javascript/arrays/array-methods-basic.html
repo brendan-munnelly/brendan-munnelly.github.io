@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Arrays: Basic Methods | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Arrays in JavaScript Tutorial">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Arrays: Basic methods</h1>
+					<h2>Using basic array methods to add and remove array elements, copy a part of an array, and convert an array to a comma-separated string variable.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>WEB DESIGN</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#array-first">Arrays: working with the first element</a></p>
+				<p class="toc-indent"><a href="#array-shift">The shift() method</a></p>
+				<p class="toc-indent"><a href="#array-unshift">The unshift() method</a></p>
+				<p><a href="#array-last">Arrays: working with the last element</a></p>
+				<p class="toc-indent"><a href="#array-pop">The pop() method</a></p>
+				<p class="toc-indent"><a href="#array-push">The push() method</a></p>
+				<p><a href="#array-splice">Adding and removing array elements with splice()</a></p>
+				<p class="toc-indent"><a href="#array-splice-add">Adding elements with splice()</a></p>
+				<p class="toc-indent"><a href="#array-splice-remove">Removing elements with splice()</a></p>
+				<p><a href="#array-copy-out">Copying out part of an array</a></p>
+				<p><a href="#array-to-string">Converting an array to a string</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Add and remove an element at the start of an array.</li>
+			<li>Add and remove an element at the end of an array.</li>
+			<li>Adding or removing an element at a specified index position in an array.</li>
+			<li>Copying out part of an array to a new array, based on index position.</li>
+			<li>Converting an array to a string.</li>
+		</ul>
+
+	</section>
+
+
+	<section id="array-first">
+
+		<h2>Arrays: working with the first element</h2>
+        <p>JavaScript offers two methods for working with the first element in an array. That is, the element at the <b>[0]</b> index position.</p>
+
+		<h3 id="array-shift">The <code>shift()</code> method</h3>
+		<p>This method <i>removes</i> the first array element. All other elements are 'shifted' downwards to a lower index position. For example, the element that was at <b>[1]</b> is now at position <b>[0]</b>. See below.</p>
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.shift();
+let fruitShifted = fruits.shift();</pre>
+
+<p>This method returns the value that was removed or &#8216;shifted out&#8217;. The array <span class="syn-js">length</span> will be decreased by one.</p>
+
+		<h3 id="array-unshift">The <code>unshift()</code> method</h3>
+		<p>This method <i>adds</i> a new element at the beginning (position <b>[0]</b>) of an array, which you enter as an argument in the parenthesis <span class="syn-js">()</span>. All other elements are moved up or 'unshifted' to a higher index position. For example, the element that was at <b>[1]</b> is now at position <b>[2]</b>. See below.</p>
+
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.unshift("Lemon");
+let arrLength = fruits.push("Kiwi");</pre>
+
+<p>As with <span class="syn-js">shift()</span>, this method returns the new array <span class="syn-js">length</span>, which will be one greater than before.</p>
+
+
+	</section>
+
+
+    <section id="array-last">
+
+
+        <h2>Arrays: working with the last element</h2>
+        <p>JavaScript offers two methods for working with the <i>last</i> element in an array. That is, the element with the highest <i>index</i> number.</p>
+
+		<h3 id="array-pop">The <code>pop()</code> method</h3>
+		<p>Use this method to <i>remove</i> the last element from an array. See the example below.</p>
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.pop();
+let fruitRemoved = fruits.pop();</pre>
+
+<p>This method returns the value that was removed or &#8216;popped out&#8217;. The array <span class="syn-js">length</span> will be decreased by one.</p>
+
+		<h3 id="array-push">The <code>push()</code> method</h3>
+		<p>This method <i>adds</i> a new element at the end of an array, which you enter as an argument in the parenthesis <span class="syn-js">()</span>. See below.</p>
+
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.push("Kiwi");
+let arrLength = fruits.push("Kiwi");</pre>
+
+<p>This method returns the new array <span class="syn-js">length</span>, which will be one greater than before.</p>
+
+</section>
+
+<section>
+
+		<h2 id="array-splice">Adding and removing array elements with <code>splice()</code></h2>
+
+		<p>JavaScript offers a  <span class="syn-js">splice()</span> method for adding or removing an element at a <i>specified index position</i> in an array. It takes the following parameters:</p>
+
+		<ul>
+			<li>The first parameter (a number) specifies the position where new elements should be added (&#8216;spliced in&#8217;).</li>
+			<li>The second parameter (also a number) specifies how many elements should be removed.</li>
+			<li>The remaining parameters (any data type) are optional. If included, they define the new elements to be added, in comma-separated format.</li>
+		</ul>
+
+		<h3  id="array-splice-add">Adding an element with <code>splice()</code></h3>
+		<p>In the example below, new elements are added at index position <b>[2]</b>, zero elements are removed, and two string elements are added.</p>
+
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  fruits.splice(2, 0, "Lemon", "Kiwi");</pre>
+
+<p>The method returns an array with the deleted items, if any. </p>		
+
+		<h3  id="array-splice-remove">Removing an element with <code>splice()</code></h3>
+		<p>You can use <span class="syn-js">splice()</span> to remove elements &#8211; without leaving &#8216;holes&#8217; (elements with a value of <i>undefined</i>) in the array.</p>
+
+		<p>In the example below, the first element is deleted.</p>
+
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  fruits.splice(0, 1);</pre>
+
+</section>
+
+	<section id="array-copy-out">
+
+		<h2>Copying out part of an array</h2>
+
+		<p>You can create a new array based on a specified part of an existing array with the <span class="syn-js">slice()</span> method. The original array is unchanged.</p>
+
+		<p>This method takes two arguments.</p>
+
+		<ul>
+			<li>The first or <i>start</i> argument defines the index position where the method will begin its copy operation.</li>
+			<li>The second or <i>finish</i> argument defines the index position up to which (but <i>not including</i>) the method will end its copy operation. If this end argument is omitted, the method slices out the rest of the array.</li>
+		</ul>
+
+		<p>The example below slices out the elements "Orange" and "Lemon".</p>
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const slicedFruits1 = fruits.slice(1, 3);</pre>
+
+<p>The example below slices out all elements starting from array element <b>[1]</b> ("Orange").</p>
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const slicedFruits2 = fruits.slice(1);</pre>
+
+
+	</section>
+
+	<section>
+
+		<h2 id="array-to-string">Converting an array to a string</h2>
+		<p>Use the toString method to convert all the elements to a comma-separated string variable. See the example below.</p>
+  <pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const newString = fruits.toString();</pre>
+
+	  <p>&nbsp;</p>
+	</section>
+
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>

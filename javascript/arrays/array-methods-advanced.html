@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Arrays: An Introducion | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Arrays in JavaScript Tutorial">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Arrays in JavaScript</h1>
+					<h2>Creating function declarations and function expr4essions in JavaScript. And working with anonymous and arrow functions.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>WEB DESIGN</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-functions">About functions</a></p>
+				<p class="toc-indent"><a href="#function-names">Function names</a></p>
+				<p class="toc-indent"><a href="#function-code-blocks">Functions and code blocks</a></p>
+				<p><a href="#function-declarations">Function declarations</a></p>
+				<p class="toc-indent"><a href="#function-coding styles">Function declarations and coding styles</a></p>
+				<p class="toc-indent"><a href="#function-declarations-hoisted">Function declarations are <i>hoisted</i></a></p>
+				<p><a href="#function-expressions">Function expressions</a></p>
+				<p class="toc-indent"><a href="#function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></a></p>
+				<p><a href="#function-anonymous">Anonymous function expressions</a></p>
+				<p><a href="#function-arrow">Arrow function expressions</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a function declaration.</li>
+			<li>Create a function expression.</li>
+			<li>Recognise that function declarations are hoisted but function expressions are not.</li>
+			<li>Recognise that function expressions may be unnamed or anonymous.</li>
+			<li>Use arrow functions that contain one or multiple statements.</li>
+		</ul>
+
+	</section>
+
+ 
+<section>
+	<h2>Advanced array methods</h2>
+</section>
+
+<section>
+	<h3>The <code>filter()</code> method</h3>
+
+	<p>Use this method to <i>query</i> an array for values that meet certain conditions. The <span class="syn-js">filter()</span> method works as follows:</p>
+	
+	<ul>
+		<li>It invokes a callback function once for each element in the original array,</li>
+		<li>If an element does not meet the query conditions, it is skipped. Indexes with unassigned values or that have been deleted are ignored.</li>
+		<li>Values that do meet the query conditions are copied to a new array. The original array is unchanged.</li>
+		<li>If no elements meet the query conditions, an empty array will be returned.</li>
+	</ul>
+
+	<p>Consider the example below.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( function (num) {
+   return num &gt; 6;
+});</pre>
+
+	<p>We can replace this anonymous callback function with a shorter arrow function as follows.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( (num) =&gt; {
+   return num &gt; 6;
+});</pre>
+
+	<p>In this example, the query function accepts only a single parameter, contain only one statement, and returns only one value. So we can remove the parenthesis (), the return keyword and the code block {}.</p>
+
+<pre class="language-js">let nums = [1,2,3,4,5,6,7,8,9,10];
+
+let filteredNums = nums.filter( num =&gt; num &gt; 6 );</pre>
+
+<p>Here is another example of the filter() method in action.</p>
+
+<pre class="language-js">const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const filteredWords = words.filter(word =&gt; word.length &gt; 6);</pre>
+	
+<p>The following example returns all prime numbers in the array.</p>
+
+
+	<h3>The <code>forEach()</code> method</h3>
+	<p>orEach() is an iteration method, and it is mainly used for the serial execution of functionality against a list of elements. The forEach() method executes a function once for each item in the array. The method is called on the array object that you wish to manipulate, and the function to call is provided as an argument.</p>
+
+
+
+	<p>he map(), filter(), and reduce() methods are designed to produce a return value, whether that value is a single object or an array.</p>
+
+	<p>In contrast, the forEach() method returns undefined. This can cause negative effects in some cases, such as when trying to chain multiple method calls together. As such, the forEach() method is generally used to perform serial execution of a function against a list of inputs.</p>
+
+</section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>Web Design Course</h4>
+		<p>An online course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>

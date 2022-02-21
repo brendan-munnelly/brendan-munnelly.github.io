@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Numbers - JavaScript Code Snippets</title>
+    <meta name="description" content="Some sample JavaScript code snippets for declaring and testing for numeric variables, performing arithmetic, and using various Math object methods for manipulating integers and floats, finding maximum and minimum values, and generating random numbers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet"> 
+
+    <!-- Basic CSS minified -->
+    <style>
+    * { margin: 0; padding: 0; border: none }
+    *, *::before, *::after { box-sizing: border-box }
+    html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
+    scroll-behavior: smooth; scroll-padding-top: 20px }
+    body { line-height: 1.5; min-height: 100vh; font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif }
+    @media (max-width: 767px ) { body { text-rendering: optimizeSpeed } }
+    @media (min-width: 768px ) { body { text-rendering: optimizeLegibility } }
+    img { width: 100%; height: auto; display: block }
+    section *:last-child, footer *:last-child { margin-bottom: 0 !important }
+
+    body { font-family:-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif }
+    header { background: linear-gradient(#0460CD, #021b79);
+    box-shadow: rgba(0, 0, 0, 0.5) 0 2px 4px 0 }
+    @media (min-width: 1200px) { header { padding: 2% calc((100% - 800px)/2) 3% calc((100% - 800px)/2); margin: 0 auto; }}
+    @media (min-width: 1025px) and (max-width: 1199px ) { header { padding: 3% 14% 4% 14% } }
+    @media (min-width: 768px) and (max-width: 1024px) { header { padding: 3% 8% 4% 8% } }
+    @media (min-width: 440px) and (max-width: 767px) { header { padding: 6% 13% 9% 13% } }
+    @media (max-width: 439px) { header { padding: 6% 10% 9% 10% } }
+
+    @media (min-width: 1200px) { section { padding: 3.5% calc((100% - 800px)/2) 5% calc((100% - 800px)/2); margin: 0 auto; }}
+    @media (min-width: 1025px) and (max-width: 1199px ) { section { padding: 3% 14% 3% 14% } }
+    @media (min-width: 768px) and (max-width: 1024px) { section { padding: 5% 8% 6% 8% } }
+    @media (min-width: 440px) and (max-width: 767px) { section { padding: 8% 13% 9% 13% } }
+    @media (max-width: 439px) { section { padding: 12% 10% 14% 10% } }
+
+    footer { background: #0C4A6E }
+    @media (min-width: 1200px) { footer { padding: 3.5% calc((100% - 800px)/2) 5% calc((100% - 800px)/2); margin: 0 auto; }}
+    @media (min-width: 1025px) and (max-width: 1199px ) { footer { padding: 3% 14% 3% 14% } }
+    @media (min-width: 768px) and (max-width: 1024px) { footer { padding: 5% 8% 6% 8% } }
+    @media (min-width: 440px) and (max-width: 767px) { footer { padding: 8% 13% 9% 13% } }
+    @media (max-width: 439px) { footer { padding: 12% 10% 14% 10% } }
+    
+    header > h1 { font-size: calc(28px + (42 - 28) * ((100vw - 320px) / (1140 - 320)));
+	line-height: 1.2; letter-spacing: -1px; margin-bottom: 14px; font-weight: 400; color: #fff }
+
+    header > h1 .font-mono {
+        font-size: calc(27px + (38 - 27) * ((100vw - 320px) / (1140 - 320)));
+        font-family: 'Roboto Mono', monospace; letter-spacing: -2px;  font-weight: 400;
+        word-spacing: -.4ch; color: #ECEFF1; 
+    }
+
+    header > p { font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1140 - 320))); 
+    color: #fff }
+
+    @media (max-width: 767px) { 
+        header .font-mono,
+        header > p a { display: block; padding-left: 0 !important; margin-top: 6px } 
+    }
+
+    header p a:link, header p a:visited { font-weight: 400; color: #E0F2FE; padding-left: 10px;
+        text-decoration-thickness: 1.5px; text-underline-offset: 6px }
+    header p a:focus, header p a:hover, header p a:active { 
+        color: #38BDF8; background-color: transparent }
+
+    section p.standfirst { font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1140 - 320))); margin-bottom: 20px }
+    section > p, section > ul > li, section > ol li { font-size: calc(17px + (19 - 17) * ((100vw - 320px) / (1140 - 320))); color: #263238 }
+    section > p { line-height: 1.6; margin-bottom: 16px }
+    section > ol li b { font-weight: 600 }
+    section ul { margin-bottom: 18px }
+    section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
+    @media (min-width: 768px) { section > ul > li { margin-left: 24px; padding-left: 10px } }
+    @media (max-width: 767px) { section > ul > li { margin-left: 16px; padding-left: 8px } }
+    section > ul > li > ul { margin-left: 20px }
+    /* All viewports: Paragraphs and lists */
+    section:first-child { padding-top: 32px } 
+    section > p:last-child,  section > ul li:last-child { margin-bottom: 0 }
+    
+    section > h3 { font-size: calc(22px + (26 - 22) * ((100vw - 320px) / (1140 - 320))); font-weight: 600 }
+
+    .box-topics { background-color: #ECEFF1; padding: 14px 20px 20px 20px; border-radius: 5px; margin-bottom: 32px; box-shadow: 2px 2px 10px #a0aec0 }
+    span.syn-js {
+		padding: 1px 6px 1px 6px; font-size: 86%; border-radius: 4px; font-weight: 400;
+		background-color: #f7df1e;
+		color: #000; font-family: 'Roboto Mono', monospace;  letter-spacing: -1px;
+	}
+    section > ul > li > ul > li span.syn-js { padding: 0 6px 0 6px; font-size: 80% }
+    section a:link, 
+    section a:visited { 
+        color: #0369A1; text-decoration: underline;
+        transition: all 0.2s linear; font-weight: 600;
+        text-decoration-thickness: 2px; text-underline-offset: 4px
+    }
+    section a:focus, section a:hover, section a:active { 
+        color: #000;
+        background-color: #CFD8DC;
+    }
+
+	kbd {
+		display: inline-block; background-color: #eee;
+		border-radius: 5px; border: 1px solid #b4b4b4;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+		color: #555; font-weight: 600; line-height: 1; padding: 4px 7px;
+		white-space: nowrap; cursor: default; user-select: none;
+		font-family: 'Roboto Mono', monospace; letter-spacing: -0.5px;
+		margin: 0 2px; font-size: 80%;
+	}
+
+    section ol { counter-reset: li-counter }
+    section ol > li { position: relative }
+    section ol > li:before {
+        position: absolute; top: 2px; left: -32px; line-height: 1; text-align: center; 
+        border-radius: 50%; padding: 2px 4px 2px 3px; font-weight: bold; 
+        content: counter(li-counter); counter-increment: li-counter;
+        color: #023753; background-color: #fff;
+        border: solid 2px #023753;
+        font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
+    }
+
+    /* Desktops */
+    @media (min-width: 768px) {
+        section ol { margin: 8px 0 20px 32px }
+        section ol > li { margin-bottom: 20px; padding-left: 20px; line-height: 1.6 }
+
+        section ol > li:before { 
+            line-height: 1.3; 
+            width: 28px; height: 28px; 
+            padding: 0;
+        }
+        section ol > li > ul { margin: 12px 0 0 16px }
+        section ol > li > ul > li { padding-left: 24px; margin: 0 0 12px 0; list-style-type: disc; padding-left: 12px; line-height: 1.3 }
+    }
+
+    /* Mobiles */
+    @media  (max-width: 767px) {
+        section ol { margin: 0 0 20px 32px }
+        section ol > li { margin-bottom: 20px; padding-left: 16px; line-height: 1.4 }
+        section ol > li:before { 
+            line-height: 1.3; 
+            width: 24px; height: 24px; 
+            padding: 0;
+        }
+        section ol > li > ul { margin: 6px 0 0 22px }
+        section ol > li > ul > li { padding-left: 18px; margin: 0 0 8px 0; text-indent:-20px }
+    }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Working with Numbers: <span class="font-mono">JS Code Snippets</span></h1>
+        <p>See the online Lesson: <a href="https://www.munnelly.com/javascript/numbers/index.html">Working with Numbers</a></p>
+    </header>
+    
+    <main>
+        <section>
+
+        <p class="standfirst">Some sample JavaScript code snippets for:</p>
+        
+        <ul class="box-topics">
+			<li>Declaring numeric variables in JavaScript and using <span class="syn-js">typeof</span> and <span class="syn-js">IsNaN()</span> to test that a variable contains a number which can be used in calculations.</li>
+			<li>Perform addition, subtraction, multiplication, and division on numeric variables.</li>
+            <li>Apply operator precedence in arithmetic calculations.</li>
+			<li>Use methods of the JavaScript <span class="syn-js">Math</span> object to:<ul>
+                <li>Manipulate positive and negative numbers (<span class="syn-js">Math.abs(n)</span> and <span class="syn-js">Math.sign(n)</span>)</li>
+                <li>Work with integers and floats (<span class="syn-js">Math.round(n)</span> and <span class="syn-js">Math.trunc(n)</span>)</li>
+                <li>Find maximum and minimum values (<span class="syn-js">Math.max(x,y,z)</span> and <span class="syn-js">Math.min(x,y,z)</span>)</li>
+                <li>Calculate ceiling and floor values (<span class="syn-js">Math.ceil(n)</span> and <span class="syn-js">Math.floor(n)</span>)</li>
+                <li>Generate random numbers (<span class="syn-js">Math.random()</span>).</li></ul>
+            </li>
+        </ul>
+
+<textarea id="text" style="display: none">
+    <!DOCTYPE html><html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <style>@media (min-width:1200px){header{padding:2% calc((100% - 800px)/ 2) 3% calc((100% - 800px)/ 2);margin:0 auto}}@media (min-width:1025px) and (max-width:1199px){header{padding:3% 14% 4% 14%}}@media (min-width:768px) and (max-width:1024px){header{padding:3% 8% 4% 8%}}@media (max-width:767px){header{padding:6% 13% 9% 13%}}h1 .font-mono{color:#888}body{font-family:sans-serif}li,p{font-size:18px;line-height:1.5}li{margin-bottom:12px}</style>
+        </head>
+        <body>
+        <header>
+            <h1>Working with Numbers: <span class="font-mono">JS Code Snippets</span></h1>
+            <p>See the online Lesson: <a href="https://www.munnelly.com/javascript/numbers/index.html">Working with Numbers</a></p>
+            <p>View the JavaScript output in your web browser by pressing the following keys and selecting the <b>Console</b> tab:</p>
+            <ul>
+                <li><b>Ctrl</b> + <b>Shift</b> + <b>i</b> (Windows)</li>
+                <li><b>⌘ Command</b> + <b>Shift</b> + <b>i</b> (Mac).</li>
+            </ul>
+        </header>
+        <main>
+
+        <!-- JavaScript code snippets start below -->
+        <script>
+            console.log("%c=== ASSIGNING NUMBER AND STRING VARIABLES ===", "color: white; background-color: green; padding: 2px");
+            const myVar1 =   1234; // JavaScript treats myVar1 as a number
+            const myVar2 = "1234"; // JavaScript treats myVar2 as a string
+            const myVar3 = '1234'; // JavaScript treats myVar3 as a string
+            console.log(`Number or string? ${typeof myVar1};`)
+            console.log(`Number or string? ${typeof myVar2};`)
+            console.log(`Number or string? ${typeof myVar3};`)
+    
+            console.log("\n%c=== VARIABLE TYPE CONVERSION ===", "color: white; background-color: green; padding: 2px");
+    
+            let someVar;
+            console.log(`Data type of someVar (empty): ${typeof someVar}`); // returns undefined
+            someVar = "12";
+            console.log(`Data type of someVar ("12"): ${typeof someVar}`); // returns string
+            someVar = 12;
+            console.log(`Data type of someVar (12): ${typeof someVar}`); // returns number
+            someVar = "12";
+            console.log(`Data type of someVar ("12"): ${typeof someVar}`); // returns string
+    
+            const stringVar = "Some text";
+            console.log(`Is this Not a Number ("Some text"): ${isNaN(stringVar)}`);
+            const numVar = 42;			
+            console.log(`Is this Not a Number (42): ${isNaN(numVar)}`);
+    
+            console.log("\n%c=== TEST THAT A VARIABLE IS A NUMBER ===", "color: white; background-color: green; padding: 2px");
+    
+            const varPossibleNumber = 2;
+            if (typeof varPossibleNumber === 'number') {
+                console.log("Safe to use in calculation...")
+            }
+            if (!isNaN(varPossibleNumber)) {
+                console.log("Safe to use in calculation...")
+            }
+    
+            console.log("\n%c=== ARTITMETIC ===", "color: white; background-color: green; padding: 2px");
+    
+            console.log(`Addition (12 + 8): ${12 + 8}`);
+            console.log(`Subtraction (12 - 8): ${12 - 8}`);
+            console.log(`Multiplication (12 * 8): ${12 * 8}`);
+            console.log(`Division (12 / 8): ${12 / 8}`);
+    
+            console.log("\n%c=== OPERATOR PRECEDENCE ===", "color: white; background-color: green; padding: 2px");
+            console.log(`5 + 2 * 3: ${5 + 2 * 3}`);
+            console.log(`(5 + 2) * 3: ${(5 + 2) * 3}`);
+    
+            console.log("\n%c=== TEMPERATURE CONVERSION FUNCTION ===", "color: white; background-color: green; padding: 2px");
+            function convertToFahrenheit(celsius) {
+                varFahrenheit = ((9/5) * celsius) + 32;
+                console.log(`${celsius} Celsius:  = ${varFahrenheit} Fahrenheit`);
+            }
+    
+            convertToFahrenheit(20);
+
+            console.log("\n%c=== INCREMENT AND DECREMENT NUMERIC VARIABLES ===", "color: white; background-color: green; padding: 2px");
+            let myNum1 = 7; 
+            let myNum2 = 24; 
+            console.log(`myNum1 is 7`); 
+            console.log(`Prefix operator (++myNum1) is ${++myNum1}`); 
+            console.log(`myNum2 is 24`); 
+            console.log(`Prefix operator (--myNum2) is ${--myNum2}`);             
+    
+            console.log("\n%c=== POSTIVE AND NEGATIVE NUMBERS ===", "color: white; background-color: green; padding: 2px");
+            
+            // Absolute value of supplied number
+            console.log(`Absolute value of number (-100): ${Math.abs(-100)}`);
+    
+            // Postive or negative number?
+            console.log(`Positive or negative number (19.99)? ${Math.sign(19.99)}`);
+            console.log(`Positive or negative number (-5)? ${Math.sign(-5)}`);
+            console.log(`Positive or negative number (0)? ${Math.sign(0)}`);
+    
+            console.log("\n%c=== ROUNDED AND TRUNCATED NUMBERS ===", "color: white; background-color: green; padding: 2px");        
+            // Rounding numbers
+            console.log(`Rounded number (3.14159): ${Math.round(3.14159)}`);
+            console.log(`Rounded number (9.75): ${Math.round(9.75)}`);
+            console.log(`Rounded number (5.50): ${Math.round(5.50)}`);
+            console.log(`Rounded number (-8.25): ${Math.round(-8.25)}`);
+    
+            // Truncating numbers
+            console.log(`Truncated number (3.14159) ${Math.trunc(3.14159)}`);
+    
+            console.log("\n%c=== CEILING AND FLOORS ===", "color: white; background-color: green; padding: 2px");
+    
+            console.log(`Ceiling (.95): ${Math.ceil(.95)}`);
+            console.log(`Ceiling (4): ${Math.ceil(4)}`);
+            console.log(`Ceiling (7.004): ${Math.ceil(7.004)}`);
+            console.log(`Ceiling (-7.004): ${Math.ceil(-7.004)}`);
+    
+            console.log(`Floor (45.95): ${Math.floor(45.95)}`);
+            console.log(`Floor (45.05): ${Math.floor(45.05)}`);
+            console.log(`Floor (4) ${Math.floor(4)}`);
+            console.log(`Floor (-45.05): ${Math.floor(-45.05)}`);
+            console.log(`Floor (-45.95): ${Math.floor(-45.95)}`);
+    
+            console.log("\n%c=== MAXIMUM AND MINIMUM VALUES ===", "color: white; background-color: green; padding: 2px");
+    
+            console.log(`Largest number (1, 2, 3)? ${Math.max(1, 3, 2)}`);
+            console.log(`Largest number (-1, -2, -3)? ${Math.max(-1, -3, -2)}`);
+            console.log(`Smallest number (1, 2, 3)? ${Math.max(1, 3, 2)}`);
+            console.log(`Smallest number (-1, -2, -3)? ${Math.max(-1, -3, -2)}`);
+    
+            console.log("\n%c=== RANDOM NUMBERS ===", "color: white; background-color: green; padding: 2px");
+    
+            // Simplest random numbers
+            console.log(`Float number from 0 to less than 1: ${Math.random()}`); 
+    
+            // Random integers less than supplied parameter
+            console.log(`Random integer from 0 to less than 3: ${Math.floor(Math.random()*3)}`);
+            console.log(`Random integer from 0 to less than 10: ${Math.floor(Math.random()*10)}`);
+            
+    
+            console.log("\n%c=== RANDOM NUMBER FUNCTIONS ===", "color: white; background-color: green; padding: 2px");        
+            // Function to generate random integer one less than supplied parameter
+            function getRandomIntUpper(max) {
+              return Math.floor(Math.random() * max);
+            }
+                            
+            console.log(`Random integer in range 0-4: ${getRandomIntUpper(5)}`);
+            console.log(`Random integer in range 0-5: ${getRandomIntUpper(6)}`);
+    
+            // Function accepts as parameters smallest and largest integers generated inclusively.
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1) + min); 
+            }
+    
+            // Both the min and max arguments are inclusive
+            // console.log(`Random integer in inclusive range 1-9: ${getRandomInt(1,9)}')};
+            console.log(`Random integer in inclusive range 1-9: ${getRandomInt(1,9)}`);
+            console.log(`Random integer in inclusive range 20-24: ${getRandomInt(20,24)}`);
+    
+           </script>
+           <!-- End of code snippets -->
+    
+    </main>
+    </body>
+    </html>
+</textarea>
+
+<h3>Instructions for use</h3>
+        <ol>
+            <li><input type="button" id="btn" value="Download" style="display: inline-block;font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1140 - 320))); color: #0369A1; transition: all 0.2s linear; font-weight: 600; border-bottom: solid 2px #0369A1; background-color: transparent" /> the web page containing the JavaScript code.</li>
+
+            <li>Open the page in <a href="https://www.brave.com" target="_blank" rel="noopener">Brave</a> or other, lesser web browsers.</li>
+
+            <li>View the JavaScript output by pressing the following keys and selecting the <b>Console</b> tab:
+                <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (Windows)</li>
+                    
+                    <li><kbd>⌘ Command</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (Mac).</li>
+                </ul>
+            </li>
+
+            <li>Open the web page in <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>, <a href="https://vscode.dev/" target="_blank" rel="noopener">VS Code Online</a> or <a href="https://www.sublimetext.com/" target="_blank" rel="noopener"> Sublime Text</a>. All are good choices.</li>
+
+            <li>Play around with the JavaScript code. Change things and see what happens.</li>
+
+        </ol>
+        <p>✅  &nbsp;That&#8217;s it.</p>
+    </section>
+
+    <script>
+        function download(filename, textInput) {
+            const element = document.createElement('a');
+            element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(textInput));
+            element.setAttribute('download', filename);
+            document.body.appendChild(element);
+            element.click();
+        }
+        document.getElementById("btn").addEventListener("click", function () {
+            const text = document.getElementById("text").value;
+            const filename = "code-snippets-numbers.html";
+            download(filename, text);
+        }, false);
+  </script>
+  
+       
+    <footer>
+        <a href="https://www.brave.com" target="_blank" rel="noopener"><img src="../../assets/img/brave-banner-ad.png" alt="brave.com web browser"></a>
+    </footer>
+
+    </main>
+
+    <script>
+        // Code snippets start here
+        console.log("%c=== CREATING AND POPULATING ARRAYS ===", "color: white; background-color: green; padding: 2px");
+
+        // Create an empty array
+        arrEmpty = [];
+        console.log("My array is empty :-( "+arrEmpty);
+
+        // Create an array with values
+        arrNotEmpty = ["Element here", "Another element here"];
+        console.log("Yah! My array has elements :-) "+arrNotEmpty);
+
+        // Create two new arrays
+        const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford"];
+        const arrPrices = [11.99, 24.50, 34.25, 49.99];
+
+        // Output two arrays
+        console.log(arrCars);
+        console.log("Text label: "+arrCars);
+        console.log(`Text Label: ${arrCars}`);
+
+        console.log(`My arrCars has these strings: ${arrCars}`);
+        console.log(`My arrPrices has these numbers: ${arrPrices}`);
+
+        // New array created using multiple lines for readability
+        const arrUserIDs = [
+            4032,
+            5229,
+            6317
+        ];
+
+        // Output array
+        console.log(`My arrUserIDs array: ${arrUserIDs}`);
+
+        const arrMixed = ["Movie title", 15.99, 2012, null, true];
+        console.log(`Array with different data types: ${arrMixed}`);
+
+        console.log("\n%c=== ARRAY DATA TYPE ===", "color: white; background-color: green; padding: 2px");
+
+        // Output data type of arrays
+        console.log("What data type is arrCars? "+typeof arrCars);
+        console.log("Is arrCars an array? "+Array.isArray("arrCars"));
+
+        console.log("\n%c=== ARRAY LENGTH ===", "color: white; background-color: green; padding: 2px");
+
+        // Output array.length
+        const arrFruits = ["Apple","Banana","Blueberry","Pear","Lemon"];
+        console.log("How many cars in arrCars? "+arrCars.length);
+        console.log("How many fruits in arrFruits? "+arrFruits.length);
+
+        console.log("\n%c=== ARRAY VALUES AT INDEX POSITIONS ===", "color: white; background-color: green; padding: 2px");
+
+        // Output array items by index position
+        console.log("1st [0] value in arrCars: "+arrCars[0]);
+        console.log("2nd [1] value in arrPrices: "+arrPrices[1]);
+        console.log("3rd [2] value in arrFruits: "+arrFruits[2]);
+
+        console.log("============")
+
+        // Loop through array with for ... next
+        for (i = 0; i < arrMixed.length; i++) {
+            console.log("Looping with for ... next: "+arrMixed[i]);
+        }
+
+        for (i = 0; i < arrMixed.length; i++) {
+            console.log(`Array element ${i}: ${arrMixed[i]}`);
+        }
+
+        console.log("============")
+
+        // Loop through array with for ... in
+        for (i of arrMixed) {
+            console.log("Looping with for ... in: "+arrMixed[i]);
+        }
+
+        // Add values to arrays
+        arrMixed[5] ="cheese";
+
+        console.log("============")
+
+        for (i in arrFruits) {
+            console.log("New Looping with for ... in: "+arrMixed[i]);
+        }
+
+        console.log("============")
+
+        for (i in arrMixed) {
+            console.log("New Looping with for ... in: "+arrMixed[i]);
+        }
+
+        console.log("============")
+
+        const myArray = [24];
+        console.log(myArray);
+        // const myArray = [34];
+        console.log(myArray);
+
+        // End of code snippets 
+    </script>
+</body>
+</html>
+
