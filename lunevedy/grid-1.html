@@ -101,7 +101,7 @@
                             </div>
                             <hr>
 
-                            <div class="input-group" style="margin-bottom: 18px">
+                            <div class="input-group">
                                 <label>Alignment</label>
                                 &nbsp;<i class="fa-solid fa-desktop ui-icon"></i>
 
@@ -115,7 +115,7 @@
                             </div><!-- /.input-group -->
  
 
-                            <div class="input-group" style="margin-bottom: 18px">
+                            <div class="input-group">
                                 <label>&nbsp;</label>
                                 &nbsp;<i class="fas fa-mobile-alt" style="margin-right: 25px"></i>
                                 <form id="switch-horz-align-mobile" class="switch-field">
@@ -191,48 +191,49 @@
                         <div class="dialog-box">
 
                             <div class="input-group">
-                                <label>Upper Label <span>&lt;div&gt;</span></label>
-                                <select id="dd_upperLabel">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>&nbsp; &nbsp; &nbsp;
-                                <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
-                            </div><!-- /.input-group -->
+                                <label for="cb_upperLabelOn">Upper Label <span>&lt;div&gt;</span></label>
+                                <form id="cb_upperLabel">
+                                    <input id="cb_upperLabelOn" type="checkbox" class="switch">
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
+                                </form>
+                            </div><!-- /input-group -->
 
                             <div class="input-group">
                                 <label>Heading <span>&lt;h2&gt;</span></label>
-                                <select id="dd_text_length_h2">
-                                    <option value="0" selected="selected">Short</option>
-                                    <option value="1">Long</option>
-                                </select>&nbsp;&nbsp; &nbsp;
                                 <button id="btn_head" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
-                                <label>Sub-heading <span>&lt;h3&gt;</span></label>
-                                <select id="dd_h3">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>&nbsp; &nbsp;&nbsp;&nbsp; 
-                                <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
-                            </div><!-- /.input-group -->
-
-                            <div class="input-group">
-                                <label>Standfirst / Deckhead</label>
-                                <select id="dd_standfirst">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>
+                                <label for="cb_upperH3On">Sub-Heading <span>&lt;h3&gt;</span></label>
+                                <form id="cb_upperH3">
+                                    <input id="cb_upperH3On" type="checkbox" class="switch" />
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
+                                </form>
                             </div><!-- /input-group -->
 
                             <div class="input-group">
-                                <label>List <span>&lt;li&gt;</span></label>
-                                <select id="dd_lists">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Short</option>
-                                    <option value="2">Long</option>
-                                </select>
-                            </div><!-- /.input-group -->
+                                <label for="cb_standfirst">Standfirst / Deckhead</label>
+                                <form id="cb_standfirst">
+                                    <input id="cb_standfirstOn" type="checkbox" class="switch" />
+                                </form>
+                            </div><!-- /input-group -->
+
+                            <div class="input-group">
+                                <label for="switch-section-list">List <span>&lt;li&gt;</span></label>
+                                <form id="switch-section-list" class="switch-field">
+
+                                    <input type="radio" id="radio-section-list-none" name="section-list-type" value="list-none" checked/>
+                                    <label for="radio-section-list-none">None</label>
+
+                                    <input type="radio" id="radio-section-list-short" name="section-list-type" value="list-short" />
+                                    <label for="radio-section-list-short">Short</label>
+
+                                    <input type="radio" id="radio-section-list-long" name="section-list-type" value="list-long" />
+                                    <label for="radio-section-list-long">Long</label>
+                                </form>
+                            </div>
 
                             <div class="input-group">
                                 <label><span>&lt;p&gt;</span> and <span>&lt;li&gt;</span></label>
@@ -2152,7 +2153,7 @@
     <div id="HTML-Content">
 
         <section class="theme-light section-selector-1">
-            <h2>Nice section heading</h2>
+            <h2>Section heading</h2>
             <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to <a href="https://www.cipsum.com/">corporate strategy</a> foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
 
             <p>At the end of the day, going forward, a <a href="https://www.cipsum.com/">new normal</a> that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints.</p>
@@ -2191,18 +2192,16 @@
             document.getElementById("radio-desktop-width-800").checked = true;
             document.getElementById("radio-horz-left-desktop").checked = true;
             document.getElementById("radio-horz-left-mobile").checked  = true;
-
             document.getElementById("dd_text_slide").value="0";
             document.getElementById("bg_gradient_options").display="none";
 
             // Text menu
-            document.getElementById("dd_upperLabel").value="0";
+            document.getElementById("cb_upperLabelOn").checked = false;
             document.getElementById("btn_upper_label").disabled=true;
-            document.getElementById("dd_h3").value="0";
+            document.getElementById("cb_upperH3On").checked = false;
             document.getElementById("btn_subhead").disabled=true;
-            document.getElementById("dd_lists").value="0";
-            document.getElementById("dd_text_length_h2").value="0";
-            document.getElementById("dd_standfirst").value="0";
+            document.getElementById("cb_standfirstOn").checked=false;
+            document.getElementById("radio-section-list-none").checked=true;
 
             // Buttons menu
             document.getElementById("dd_section_buttons").value="0";

@@ -185,40 +185,43 @@
                         <div class="dialog-box">
 
                             <div class="input-group">
-                                <label>Upper Label <span>&lt;div&gt;</span></label>
-                                <select id="dd_upperLabel">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>&nbsp; &nbsp; &nbsp;
-                                <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
-                            </div><!-- /.input-group -->
+                                <label for="cb_upperLabelOn">Upper Label <span>&lt;div&gt;</span></label>
+                                <form id="cb_upperLabel">
+                                    <input id="cb_upperLabelOn" type="checkbox" class="switch">
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
+                                </form>
+                            </div><!-- /input-group -->
+
 
                             <div class="input-group">
                                 <label>Heading <span>&lt;h2&gt;</span></label>
-                                <select id="dd_text_length_h2">
-                                    <option value="0" selected="selected">Short</option>
-                                    <option value="1">Long</option>
-                                </select>&nbsp; &nbsp; &nbsp;
                                 <button id="btn_head" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
-                                <label>Sub-heading <span>&lt;h3&gt;</span></label>
-                                <select id="dd_h3">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Yes</option>
-                                </select>&nbsp; &nbsp; &nbsp;
-                                <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
-                            </div><!-- /.input-group -->
+                                <label for="cb_upperH3On">Sub-Heading <span>&lt;h3&gt;</span></label>
+                                <form id="cb_upperH3">
+                                    <input id="cb_upperH3On" type="checkbox" class="switch" />
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
+                                </form>
+                            </div><!-- /input-group -->
 
                             <div class="input-group">
-                                <label>List <span>&lt;li&gt;</span></label>
-                                <select id="dd_lists">
-                                    <option value="0" selected="selected">No</option>
-                                    <option value="1">Short</option>
-                                    <option value="2">Long</option>
-                                </select>
-                            </div><!-- /.input-group -->
+                                <label for="switch-col-list">List <span>&lt;li&gt;</span></label>
+                                <form id="switch-col-list" class="switch-field">
+
+                                    <input type="radio" id="radio-col-list-none" name="col-list-type" value="list-none" checked/>
+                                    <label for="radio-col-list-none">None</label>
+
+                                    <input type="radio" id="radio-col-list-short" name="col-list-type" value="list-short" />
+                                    <label for="radio-col-list-short">Short</label>
+
+                                    <input type="radio" id="radio-col-list-long" name="col-list-type" value="list-long" />
+                                    <label for="radio-col-list-long">Long</label>
+                                </form>
+                            </div>
 
                             <div class="input-group">
                                 <label><span>&lt;p&gt;</span> and <span>&lt;li&gt;</span></label>
@@ -2115,12 +2118,12 @@
             // document.getElementById("bg_gradient_options").display="none";
 
             // Text menu
-            document.getElementById("dd_upperLabel").value="0";
+            document.getElementById("cb_upperLabelOn").checked = false;
             document.getElementById("btn_upper_label").disabled=true;
-            document.getElementById("dd_h3").value="0";
+            document.getElementById("cb_upperH3On").checked = false;
             document.getElementById("btn_subhead").disabled=true;
-            document.getElementById("dd_lists").value="0";
-            document.getElementById("dd_text_length_h2").value="0";
+            document.getElementById("radio-col-list-none").checked = true;
+            
 
             // Buttons menu
             document.getElementById("dd_buttons_split").value="0";
@@ -2170,14 +2173,11 @@
         // Global variables
 
         function loadInitialContent() {
-            let HTML_Content="\n\t\t<section class=\"theme-light section-selector-1 container-flex cols-2-split split-image-right\">\n\n\t\t<div class=\"col-2\">\n\t\t\t<h2>Nice heading here<\/h2>\n\t\t\t<p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline.<\/p>\n\t\t\t<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src="+el_picture+" alt=\"Placeholder image\"><\/figure>\n\t\t<\/div>\n\t\<\/section>";
+            let HTML_Content="\n\t\t<section class=\"theme-light section-selector-1 container-flex cols-2-split split-image-right\">\n\n\t\t<div class=\"col-2\">\n\t\t\t<h2>Section heading<\/h2>\n\t\t\t<p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline.<\/p>\n\t\t\t<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation.<\/p>\n\t\t<\/div>\n\n\t\t<div class=\"col-2\">\n\t\t\t<figure><img src="+el_picture+" alt=\"Placeholder image\"><\/figure>\n\t\t<\/div>\n\t\<\/section>";
             document.getElementById("HTML-Content").innerHTML = HTML_Content;
         }
         
         /* Text Content Assets */
-        const assets_header_h2 ="\n\t\t<h2>Nice heading here<\/h2>";
-        const assets_header_h2_long ="\n\t\t<h2>Sometimes a short heading is not enough and a longer one is needed.<\/h2>";
-
         const assets_header_h3 ="\n\t<h3>Nice sub-heading here<\/h3>\n";
 
         const content_paras_2 = "\n\t<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation.<\/p>\n";
@@ -2188,17 +2188,16 @@
 
         const assets_section_buttons_one = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><span>Start free trial<\/span><i class=\"fas fa-arrow-right\"></i></a>\n\t</div>\n";
 
+        const content_button_one ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\">\</i><span>Order now</span></a></div>"
+
         const assets_section_buttons_pair = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>";
 
-        const content_caption = "<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption>";
+        const content_button_two ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a></div>";
 
         /* Text Content Assets */
         const content_list = "\n\n\t\t\t<ul>\n\t\t\t\t<li><b>Quisque</b>: Arcu quis nunc suscipit egestas a hendrerit leo. Donec lacinia id posuere.</li>\n\t\t\t\t<li><b>Maecenas</b>: Rutrum tellus tristique congue finibus. Nunc dignissim rutrum vitae.</li>\n\t\t\t\t<li><b>Pretium</b>: Nulla sodales eleifend purus eget pharetra. Mauris libero libero suscipit.</li>\n\t\t\t</ul>\n";
 
-        const content_button_one ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\">\</i><span>Order now</span></a></div>"
-                
-        const content_button_two ="\n\t\t<div class=\"container-btn\"><a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-shopping-cart\"></i><span>Order now</span></a><a href=\"#\" class=\"btn btn-secondary\"><i class=\"fas fa-arrow-right\"></i><span>Learn more</span></a></div>";
-
+        const content_caption = "<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption>";
 
         const el_picture = "assets\/img\/800x480-cafe.jpg";
         const el_pic_trans = "assets\/img\/800x480-trainers.png";
