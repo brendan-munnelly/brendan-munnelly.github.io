@@ -11,11 +11,11 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/controls-general.css" />
-    <link rel="stylesheet" href="assets/css/controls-header-grid.css" />
+    <link rel="stylesheet" href="assets/css/controls-grid-1.css" />
     <link rel="stylesheet" href="assets/css/lunevedy.css">
     
-    <!-- Font Awesome 5 icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
@@ -47,9 +47,21 @@
                     <input type="radio" id="radio-two" name="switch-one" value="dark" />
                     <label for="radio-two"><i class="fas fa-moon"></i></label>
                 </form>
+
+                <span style="color:#fff">Outlines:&nbsp;</span>&nbsp;&nbsp;
+                <label for="cb-outlines" class="checkbox toggle ios">
+                    <input type="checkbox" id="cb-outlines" name="cb-outlines" value="no"/>
+                    <span>
+                     &nbsp;&nbsp;
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                    </span>
+                    <a class="slide-button"></a>
+                  </label>
+
             </div>
 
-            <ul>
+            <ul id="ui-menus">
                 <li class="dropdown">
                     <span id="menu-1" class="dropbtn">Section</span>
                     <div id="content-1" class="dropdown-content dropdown-hidden">
@@ -64,47 +76,60 @@
 
                             <div class="input-group">
                                 <label>Section Class</label>
-                                <select id="dd_className" style="width:150px">
+                                <select id="dd_className" style="width:160px">
                                     <option value="0" selected="selected">section-selector-1</option>
                                     <option value="1">section-selector-2</option>
                                     <option value="2">section-selector-3</option>
                                     <option value="3">section-selector-4</option>
-                                    <option value="3">section-selector-5</option>
-                                    <option value="3">section-selector-6</option>
+                                    <option value="4">section-selector-5</option>
+                                    <option value="5">section-selector-6</option>
                                 </select>
                             </div>
                             <hr>
+
                             <div class="input-group">
-                                <label>Section Width</label>
-                                &nbsp;<i class="fas fa-tv"></i>
-                                <select id="dd_section_width" style="width:0px">
-                                    <option value="0" selected="selected">800px</option>
-                                    <option value="1">1024px</option>
-                                    <option value="2">1140px</option>
-                                </select>
-                            </div><!-- /.input-group -->
+                                <label>Width</label>
+                                &nbsp;<i class="fa-solid fa-desktop ui-icon"></i>
+                                <form id="switch-section-width-desktop" class="switch-field">
+                                    <input type="radio" id="radio-desktop-width-800" name="section-width-desktop" value="800px" checked/>
+                                    <label for="radio-desktop-width-800">800px</label>
+                                    <input type="radio" id="radio-desktop-width-1024" name="section-width-desktop" value="1024px" />
+                                    <label for="radio-desktop-width-1024">1024px</label>
+                                    <input type="radio" id="radio-desktop-width-1140" name="section-width-desktop" value="1140px" />
+                                    <label for="radio-desktop-width-1140">1140px</label>
+                                </form>
+                            </div>
                             <hr>
+
                             <div class="input-group" style="margin-bottom: 18px">
-                                <label>Horizontal Alignment</label>
-                                &nbsp;<i class="fas fa-tv"></i> <select id="dd_align_desktop_section">
-                                    <option value="0" selected="selected">Left</option>      
-                                    <option value="1">Center</option>
-                                </select>
+                                <label>Alignment</label>
+                                &nbsp;<i class="fa-solid fa-desktop ui-icon"></i>
+
+                                &nbsp;                        
+                                <form id="switch-horz-align-desktop" class="switch-field">
+                                    <input type="radio" id="radio-horz-left-desktop" name="horz-align-desktop" value="left" checked/>
+                                    <label for="radio-horz-left-desktop"><i class="fa-solid fa-align-left"></i></label>
+                                    <input type="radio" id="radio-horz-center-desktop" name="horz-align-desktop" value="center" />
+                                    <label for="radio-horz-center-desktop"><i class="fa-solid fa-align-center"></i></label>
+                                </form>
                             </div><!-- /.input-group -->
  
-                            <div class="input-group">
-                                <label>&nbsp;</label>
-                                &nbsp;<i class="fas fa-mobile-alt" style="margin-right: 23px"></i><select id="dd_align_mobile_section">
-                                    <option value="0" selected="selected">Left</option>      
-                                    <option value="1">Center</option>
-                                </select>
-                            </div><!-- /.input-group -->
 
+                            <div class="input-group" style="margin-bottom: 18px">
+                                <label>&nbsp;</label>
+                                &nbsp;<i class="fas fa-mobile-alt" style="margin-right: 25px"></i>
+                                <form id="switch-horz-align-mobile" class="switch-field">
+                                    <input type="radio" id="radio-horz-left-mobile" name="horz-align-mobile" value="left" checked/>
+                                    <label for="radio-horz-left-mobile"><i class="fa-solid fa-align-left"></i></label>
+                                    <input type="radio" id="radio-horz-center-mobile" name="horz-align-mobile" value="center" />
+                                    <label for="radio-horz-center-mobile"><i class="fa-solid fa-align-center"></i></label>
+                                </form>
+                            </div><!-- /.input-group -->
                             <hr>
 
                             <div class="input-group">
-                                <label>Background Color</label>
-                                <div>&nbsp;<button id="btn_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button></div>
+                                <label>Background</label>
+                                <div>&nbsp;<button id="btn_bg" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button></div>
                             </div><!-- input group -->
                             <!--
                             <div class="input-group" id="btn_gradient_input_group">
@@ -171,7 +196,7 @@
                                     <option value="0" selected="selected">No</option>
                                     <option value="1">Yes</option>
                                 </select>&nbsp; &nbsp; &nbsp;
-                                <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
+                                <button id="btn_upper_label" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
@@ -180,7 +205,7 @@
                                     <option value="0" selected="selected">Short</option>
                                     <option value="1">Long</option>
                                 </select>&nbsp;&nbsp; &nbsp;
-                                <button id="btn_head" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
+                                <button id="btn_head" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
@@ -189,7 +214,7 @@
                                     <option value="0" selected="selected">No</option>
                                     <option value="1">Yes</option>
                                 </select>&nbsp; &nbsp;&nbsp;&nbsp; 
-                                <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
+                                <button id="btn_subhead" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
@@ -211,7 +236,7 @@
 
                             <div class="input-group">
                                 <label><span>&lt;p&gt;</span> and <span>&lt;li&gt;</span></label>
-                                <button id="btn_text" class="btn_style"><i class="fas fa-paint-roller"></i> Choose</button>
+                                <button id="btn_text" class="btn_style"><i class="fas fa-paint-roller"></i> Color</button>
                             </div><!-- /.input-group -->
 
                         </div><!-- /dialog-box -->
@@ -256,7 +281,7 @@
 
                                     <div class="input-group">
                                         <label>Horizontal Alignment</label>
-                                        &nbsp;<i class="fas fa-tv"></i> <select id="dd_align_desktop_btns" style="width:80px">
+                                        &nbsp;<i class="fa-solid fa-desktop"></i> <select id="dd_align_desktop_btns" style="width:80px">
                                             <option value="0" selected="selected">Left</option>      
                                             <option value="1">Center</option>
                                         </select>
@@ -359,7 +384,7 @@
                                 
                                 <div>  
                                     <div class="input-group">
-                                        <label id="label_img_width" style="width: 90px; padding-left: 30px" class="disabled-gray">Width</label><i class="fas fa-tv disabled-gray" id="icon_img_width"></i>&nbsp;
+                                        <label id="label_img_width" style="width: 90px; padding-left: 30px" class="disabled-gray">Width</label><i class="fa-solid fa-desktop disabled-gray" id="icon_img_width"></i>&nbsp;
                                         <select id="dd_yn_vis_width" style="width: 84px">
                                             <option value="0" selected="selected">100%</option>
                                             <option value="1">80%</option>
@@ -371,7 +396,7 @@
 
                             <div class="input-group" style="margin-top: 18px; margin-bottom: 18px">
                                 <label id="label_fig_desktop_align" class="disabled-gray" style="width: 180px">Horizontal Alignment</label>
-                               <i class="fas fa-tv disabled-gray" id="icon_fig_desktop_align"></i>&nbsp;<select id="dd_align_desktop_figure">
+                               <i class="fa-solid fa-desktop disabled-gray" id="icon_fig_desktop_align"></i>&nbsp;<select id="dd_align_desktop_figure">
                                     <option value="0" selected="selected">Left</option>      
                                     <option value="1">Center</option>
                                 </select>
@@ -487,7 +512,7 @@
                 <span class="text">
                     <i class="fas fa-dog"></i>COLOR PICKER
                 </span>
-                <span class="close-modal"><i class="fas fa-arrow-left"></i></span>
+                <span class="close-modal"><i class="fa-solid fa-arrow-left"></i></span>
             </div>
               
             <form id="picker-box" name="picker-box">  
@@ -2130,9 +2155,9 @@
             <h2>Nice section heading</h2>
             <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to <a href="https://www.cipsum.com/">corporate strategy</a> foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
 
-            <p>At the end of the day, going forward, a <a href="https://www.cipsum.com/">new normal</a> that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+            <p>At the end of the day, going forward, a <a href="https://www.cipsum.com/">new normal</a> that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints.</p>
 
-            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI. Bring to the table win-win survival strategies to ensure proactive domination.</p>
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed <a href="https://www.cipsum.com/">convergence</a> without revolutionary ROI. Bring to the table win-win survival strategies to ensure proactive domination.</p>
 
         </section>
 
@@ -2153,17 +2178,20 @@
 
         function resetMenuOptions() {
             document.getElementById("radio-one").checked = true;
-            document.getElementById("radio-lr").checked = true;
-            document.getElementById("menu-1").style.display="inline-block";
-            document.getElementById("menu-2").style.display="inline-block";
-            document.getElementById("menu-3").style.display="inline-block";
-            document.getElementById("menu-4").style.display="inline-block";
+            // document.getElementById("radio-lr").checked = true;
+            document.getElementById("cb-outlines").checked = false;
+
+            // document.getElementById("menu-1").style.display="inline-block";
+            // document.getElementById("menu-2").style.display="inline-block";
+            // document.getElementById("menu-3").style.display="inline-block";
+            // document.getElementById("menu-4").style.display="inline-block";
 
             // Section menu
             document.getElementById("dd_className").value="0";
-            document.getElementById("dd_section_width").value="0";
-            document.getElementById("dd_align_desktop_section").value="0";
-            document.getElementById("dd_align_mobile_section").value="0";
+            document.getElementById("radio-desktop-width-800").checked = true;
+            document.getElementById("radio-horz-left-desktop").checked = true;
+            document.getElementById("radio-horz-left-mobile").checked  = true;
+
             document.getElementById("dd_text_slide").value="0";
             document.getElementById("bg_gradient_options").display="none";
 
@@ -2255,8 +2283,8 @@
 
     </script>
 
-    <script src="assets/js/section.js"></script>
-
+    <script src="assets/js/grid-general.js"></script>
+    <script src="assets/js/grid-1.js"></script>
     
 </body>
 </html>
