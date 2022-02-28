@@ -58,7 +58,9 @@ body { background-color: #fff }
 /* ============= DROPDOWN MENUS ================== */
 
 #control-menu .dropdown-content {
-    display: block; position: absolute; min-width: 160px; top: 68px; left: 12px;
+    display: block; position: absolute; min-width: 160px; top: 68px; 
+    left: 12px;
+    /* right: 32px; */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
 }
 
@@ -122,6 +124,11 @@ body { background-color: #fff }
 }
 
 .dialog-box *:last-child { margin-bottom: 0 }
+
+
+.dialog-box i.fa-solid.ui-icon { 
+    display: inline-block; color:#fff; margin-top: 6px; margin-right: 12px 
+}
 
 .dialog-box i.fas, .dialog-box i.far { 
     display: inline-block; color:#fff;
@@ -192,7 +199,7 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
 
 .controls-top .input-group button { 
     font-size: 16px; color: #000; background-color: #00ddff;
-    padding: 3px 14px 6px 12px; font-weight: 400; border-radius: 4px;
+    padding: 3px 16px 6px 14px; font-weight: 400; border-radius: 4px;
     border: solid 1px #00ddff; 
 }
 
@@ -225,22 +232,21 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
     z-index: 0;
 }
 
+/* =========== LIGHT/DARK SWITCH BUTTON ================ */
 
-/* =========== LIGHT/DARK RADIO BUTTON ================ */
-
-#control-menu .switch-field { 
+#control-menu > div > .switch-field { 
     display: flex; flex-direction: row;
     overflow: hidden; margin-right: 40px;
 }
 
-#control-menu .switch-field input {
+#control-menu > div > .switch-field input {
     position: absolute !important;
     clip: rect(0, 0, 0, 0);
     height: 1px; width: 1px; border: 0;
     overflow: hidden;
 }
 
-#control-menu .switch-field label {
+#control-menu > div > .switch-field label {
     background-color: var(--gray-600); color: var(--gray-900); 
     font-size: 16px;
     font-weight: 700;
@@ -253,18 +259,43 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
     transition: all 0.1s ease-in-out;
 }
 
-#control-menu .switch-field label:hover { cursor: pointer }
+#control-menu > div > .switch-field label:hover { cursor: pointer }
 
-#control-menu .switch-field input:checked + label { 
-    box-shadow: none;
-    background-color: #00ddff;
-    color: #000; 
+#control-menu > div > .switch-field input:checked + label { 
+    box-shadow: none; background-color: #00ddff; color: #000; 
+}
 
- }
+#control-menu > div > .switch-field label:first-of-type { border-radius: 4px 0 0 4px }
+#control-menu > div > .switch-field label:last-of-type { border-radius: 0 4px 4px 0 }
 
- #control-menu .switch-field label:first-of-type {border-radius: 4px 0 0 4px }
 
- #control-menu .switch-field label:last-of-type { border-radius: 0 4px 4px 0 }
+/* =========== DIALOG BOX SWITCH BUTTON ================ */
+
+.dialog-box .switch-field { display: flex; overflow: hidden }
+
+.dialog-box .switch-field input {
+	position: absolute !important; overflow: hidden; 
+	clip: rect(0, 0, 0, 0); height: 1px; width: 1px; border: 0;
+}
+
+.dialog-box .switch-field label {
+    background-color: var(--gray-400); color: var(--gray-700); 
+    font-size: 16px; line-height: 1; text-align: center;  
+    padding: 6px 10px; margin-right: -1px; font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.dialog-box .switch-field label:hover { cursor: pointer }
+
+.dialog-box .switch-field input:checked + label {  
+    box-shadow: none; background-color: #000; color: var(--gray-200)
+}
+
+.dialog-box .switch-field label:first-of-type { border-radius: 4px 0 0 4px }
+
+.dialog-box .switch-field label:last-of-type { border-radius: 0 4px 4px 0 }
 
 
 /* ============== MODAL ================ */
@@ -678,5 +709,113 @@ label .white-000  { background: var(--white-000); border: solid 1px #000 }
 
 #btn-copy i, #btn-copy-css i { margin-right: 10px }
 #btn-copy { margin-right: 14px }
+
+
+.slide-button, .toggle span span { display: none }
+@media only screen { 
+    label.checkbox.toggle.ios { width: 50px }
+    .toggle { display: block; height: 24px; position: relative }
+    .toggle .slide-button { display: block; transition: all 0.3s ease-out }
+    .toggle label, .toggle > span { line-height: 24px; vertical-align: middle }
+    .toggle input:focus ~ .slide-button, .toggle input:focus + label { outline: 1px dotted #888 }
+    
+    .toggle label { position: relative; z-index: 3; display: block; width: 100% }
+    .toggle input { position: absolute; opacity: 0; z-index: 5 }
+
+    .toggle input:checked ~ .slide-button { right: 50% }
+    .toggle > span {
+        position: absolute; left: -50px; padding-right: 50px;
+        width: 100%; margin: 0; text-align: left;
+    }
+
+    .toggle > span span {
+        position: absolute; top: 0; left: 0; z-index: 5; width: 50%;
+        display: block; text-align: center;
+    }
+
+    .toggle > span span:last-child { left: 50% }
+    .toggle .slide-button {
+        position: absolute; right: 0; top: 0; width: 50%; height: 100%;
+        z-index: 4; display: block; padding: 0;
+    }
+
+    .ios.toggle { color: #fff }
+    .ios.toggle .slide-button {
+        width: 24px; background-color: var(--slate-100); border-color: var(--slate-300);
+        border-radius: 100%; transition: all 0.3s ease-out;
+        box-shadow: inset 0 -3px 3px rgba(0, 0, 0, 0.025), 0 1px 4px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .ios.toggle > span span { width: 100%; left: 0 }
+    .ios.toggle > span span:first-of-type { opacity: 0; padding-left: 24px }
+    .ios.toggle > span span:last-of-type { padding-right: 24px }
+
+    .ios.toggle > span:before {
+        content: ""; display: block;
+        width: 100%; height: 100%; left: 50px; top: 0; position: absolute;
+        background-color: #718096; border: 1px solid var(--slate-700);
+        border-radius: 20px; transition: all 0.3s ease-out;
+        box-shadow: inset rgba(0, 0, 0, 0.1) 0 1px 0;
+    }
+
+    .ios.toggle input:first-of-type:checked ~ .slide-button { left: 0 }
+    .ios.toggle input:first-of-type:checked ~ span:before {
+        border-color: #00ddff; box-shadow: inset 0 0 0 24px #00ddff;
+    }
+    
+    .ios.toggle input:first-of-type:checked ~ span span { opacity: 0 }
+    .ios.toggle input:first-of-type:checked ~ span span:first-of-type { 
+        opacity: 1; color: #fff;
+    }
+
+    .ios input:checked + label { color: #3a3a3a }
+}
+
+/* === Switch buttons in menus === */
+
+/* Background area */
+input[type=checkbox].switch { width: 54px; border-radius: 11px }
+
+/* Background area: Checked */
+input[type=checkbox].switch:checked { --x: 29px }
+
+/* Checkbox */
+input[type=checkbox] {
+    height: 23px; margin: 0; cursor: pointer;
+    outline: none; display: inline-block; vertical-align: middle; position: relative;
+    background: var(--gray-400);
+    -webkit-appearance: none; -moz-appearance: none;
+}
+
+/* Checkbox: Checked */
+input[type=checkbox]:checked {
+    background-color: #02d5f4;
+    background-color: #000;
+    --d-o: .3s; --d-t: .6s; --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+}
+
+/* Checkbox: Not enabled */ 
+input[type=checkbox]:disabled { 
+    background-color: var(--trans-000); border: solid 1px var(--gray-400);
+}
+
+/* Checkbox: Checked and not enabled */ 
+input[type=checkbox]:disabled:checked { 
+    background-color: var(--black-000); border: solid 1px var(--gray-400);
+}
+
+/* Dot */
+input[type=checkbox]:after {
+    content: ""; display: block; left: 0; top: 0; position: absolute;
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+}
+
+input[type=checkbox].switch:after {
+    left: 2px; top: 1px; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gray-200); transform: translateX(var(--x));
+}
+
+input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
+
 
 
