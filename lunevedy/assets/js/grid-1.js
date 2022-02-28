@@ -557,31 +557,22 @@ function enableBgColor() {
     document.getElementById("btn_bg").disabled=false;
 }
 
-function disableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=true;
-}
-
-function enableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=false;
-}
 
 /*
 //////////////// SECTION TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
-    const opt = document.querySelector("#dd_upperLabel").value;
-    // remove
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperLabelOn").checked) {
         removeUpperLabel();
     }
-    // add
-    else if (opt==="1") {
+    
+    else {
         removeUpperLabel();
         document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
-        enableLabelColor();
+        document.getElementById("btn_upper_label").disabled=false;
     }
 }
 
@@ -590,39 +581,19 @@ function removeUpperLabel() {
         const upperLabel = document.querySelector('.container-upper-label');
         upperLabel.remove();
         document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
-        disableLabelColor();
-        document.getElementById("dd_upperLabel").value="0";
+        document.getElementById("btn_upper_label").disabled=true;
     } 
-}
-
-/*
-//////////////// SECTION TEXT: H2 HEADING LENGTH ///////////////
-*/
-
-document.querySelector("#dd_text_length_h2").addEventListener("change", doTextLength);
-    
-function doTextLength() {
-    let opt = document.querySelector("#dd_text_length_h2").value;
-    if (opt==="0") {
-        document.querySelector("section h2").innerHTML = "Nice heading";
-    }
-    else if (opt==="1") {
-        document.querySelector("section h2").innerHTML = "Sometimes a short heading is not enough and a longer one is needed.";
-    }
 }
 
 /*
 //////////////// SECTION TEXT: H3 SUB-HEADINGS ////////////////////
 */
 
-document.querySelector("#dd_h3").addEventListener("change", doH3);
+document.querySelector("#cb_upperH3On").addEventListener("change", doH3);
 
 function doH3() {
-    let opt = document.querySelector("#dd_h3").value;
-
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperH3On").checked) {
         removeH3();
-        document.getElementById("btn_subhead").disabled=true;
     }
        
     else {
@@ -635,6 +606,7 @@ function doH3() {
 function removeH3() {
     if (document.querySelector("section h3")) {
         document.querySelector("section h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
     }
 }
 
@@ -642,17 +614,14 @@ function removeH3() {
 //////////////// SECTION TEXT: DECKHEAD / STANDFIRST ///////////////
 */
 
-document.querySelector("#dd_standfirst").addEventListener("change", doStandFirst);
+document.querySelector("#cb_standfirstOn").addEventListener("change", doStandFirst);
 
 function doStandFirst() {
-    let opt = document.querySelector("#dd_standfirst").value;
-    const el_sf = document.querySelector('section p:nth-of-type(1)');
-    if (opt==="0") {
-       el_sf.classList.remove("standfirst");
+    if (!document.getElementById("cb_standfirstOn").checked) {
+        document.querySelector("section > p").classList.remove("standfirst");
     }
-
-    else if (opt==="1") {
-       el_sf.classList.add("standfirst");
+    else {
+        document.querySelector("section > p").classList.add("standfirst");
     }
 }
 
@@ -660,40 +629,46 @@ function doStandFirst() {
 //////////////// SECTION TEXT: LISTS  ///////////////
 */
 
-document.querySelector("#dd_lists").addEventListener("change", doLists);
+document.querySelector("#switch-section-list").addEventListener("change", doLists);
 
-    function doLists() {
-        let opt = document.querySelector("#dd_lists").value;
+function doLists() {
+    const rbs = document.querySelectorAll("input[name='section-list-type']");
+    let selectedValue;
 
-        if (opt==="0") {
-            removeLists();
-        }
-
-        else if (opt==="1") {
-            removeLists();
-            const el_para_2 = document.querySelector('section p:last-of-type');
-            el_para_2.remove();
-            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_short);
-        }
-
-        else if (opt==="2") {
-            removeLists();
-            const el_para_2 = document.querySelector('section p:last-of-type');
-            el_para_2.remove();
-            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_long);
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
         }
     }
-
-    function removeLists() {
-        if (document.querySelector("section ul")) {
-            const elUL = document.querySelectorAll("section ul");
-            for (var i = 0 ; i < elUL.length ; i++) {
-                elUL[i].remove();
-            }
-            // Restore third paragraph
-            document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", "<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI. Bring to the table win-win survival strategies to ensure proactive domination.</p>");
-        }
+    console.log("selectedValue: "+selectedValue);
+    if (selectedValue==="list-none") {
+        removeLists();
     }
+
+    else if (selectedValue==="list-short") {
+        removeLists();
+        document.querySelector('section p:last-of-type').remove();
+        document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_short);
+    }
+
+    else if (selectedValue==="list-long") {
+        removeLists();
+        document.querySelector('section p:last-of-type').remove();
+        document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_ul_long);
+    }
+}
+
+function removeLists() {
+    if (document.querySelector("section ul")) {
+        const elUL = document.querySelectorAll("section ul");
+        for (var i = 0 ; i < elUL.length ; i++) {
+            elUL[i].remove();
+        }
+        // Restore third paragraph
+        document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", "<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI. Bring to the table win-win survival strategies to ensure proactive domination.</p>");
+    }
+}
 
 
 /*

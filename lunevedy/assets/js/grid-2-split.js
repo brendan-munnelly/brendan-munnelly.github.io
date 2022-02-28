@@ -583,38 +583,22 @@ function enableLabelColor() {
     document.getElementById("btn_upper_label").disabled=false;
 }
 
-/*
-//////////////// TEXT LENGTH ///////////////
-*/
-
-document.querySelector("#dd_text_length_h2").addEventListener("change", doTextLength);
-    
-function doTextLength() {
-    let opt = document.querySelector("#dd_text_length_h2").value;
-    if (opt==="0") {
-        document.querySelector("section h2").innerHTML = assets_header_h2;
-    }
-    else if (opt==="1") {
-        document.querySelector("section h2").innerHTML = assets_header_h2_long;
-    }
-}
 
 /*
-//////////////// COLUMN LABEL ABOVE H2 ///////////////
+//////////////// SECTION TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
-    const opt = document.querySelector("#dd_upperLabel").value;
-    // remove
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperLabelOn").checked) {
         removeUpperLabel();
     }
-    // regular
-    else if (opt==="1") {
-        document.querySelector("section .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
-        enableLabelColor();
+    
+    else {
+        removeUpperLabel();
+        document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+        document.getElementById("btn_upper_label").disabled=false;
     }
 }
 
@@ -622,29 +606,27 @@ function removeUpperLabel() {
     if (document.querySelector('.container-upper-label')) {
         const upperLabel = document.querySelector('.container-upper-label');
         upperLabel.remove();
-        disableLabelColor();
-        document.getElementById("dd_upperLabel").value="0";
-    }
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        document.getElementById("btn_upper_label").disabled=true;
+    } 
 }
 
 /*
 //////////////// TEXT: H3 SUB-HEADINGS ////////////////////
 */
 
-document.querySelector("#dd_h3").addEventListener("change", doH3);
+document.querySelector("#cb_upperH3On").addEventListener("change", doH3);
 
 function doH3() {
-    let opt = document.querySelector("#dd_h3").value;
-
-    if (document.querySelector("#dd_h3").value ==="0") {
+    if (!document.getElementById("cb_upperH3On").checked) {
         if (document.querySelector(".cols-2-split .col-2 h3")) {
             document.querySelector(".cols-2-split .col-2 h3").remove();
         }
         document.getElementById("btn_subhead").disabled=true;
-        document.getElementById("btn_subhead").value="0";
     }
        
-    if (document.querySelector("#dd_h3").value ==="1") {
+    else {
+        removeH3();
         if (!document.querySelector(".cols-2-split .col-2 h3")) {
             document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
         }
@@ -652,67 +634,82 @@ function doH3() {
             return
         }
         document.getElementById("btn_subhead").disabled=false;
+    }    
+}
+
+function removeH3() {
+    if (document.querySelector(".cols-2-split .col-2 h3")) {
+        document.querySelector(".cols-2-split .col-2 h3").remove();
     }
-}    
+    document.getElementById("btn_subhead").disabled=true;
+}
+
 
 /*
 //////////////// TEXT: LISTS  ///////////////
 */
 
-document.querySelector("#dd_lists").addEventListener("change", doLists);
+document.querySelector("#switch-col-list").addEventListener("change", doLists);
 
-    function doLists() {
-        let opt = document.querySelector("#dd_lists").value;
+function doLists() {
+    const rbs = document.querySelectorAll("input[name='col-list-type']");
+    let selectedValue;
 
-        if (opt==="0") {
-            removeList();
-            // Restore second paragraph
-            if (document.querySelector('.cols-2-split .col-2 > h3')) {
-                document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_paras_2);
-            }
-            else {
-                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_paras_2);
-            }
-        }
-
-        else if (opt==="1") {
-            removeList();
-            // Remove last paragraph.
-            if (document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)')) {
-                document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)').remove();
-            }
-
-            // Add short list after h3 or first paragraph.
-            if (document.querySelector('.cols-2-split .col-2 > h3')) {
-                document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_ul_short);
-            }
-            else {
-                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_short);
-            }
-        }
-
-        else if (opt==="2") {
-            removeList();
-            // Remove last paragraph.
-            if (document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)')) {
-                document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)').remove();
-            }
-            // Add short list after h3 or first paragraph.
-            if (document.querySelector('.cols-2-split .col-2 > h3')) {
-                document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_ul_long);
-            }
-            else {
-                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_long);
-            }
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
         }
     }
 
-    function removeList() {
-        if (document.querySelector(".cols-2-split .col-2 ul")) {
-            document.querySelector(".cols-2-split .col-2 ul").remove();
+    if (selectedValue==="list-none") {
+        removeLists();
+        // Restore second paragraph
+        if (document.querySelector('.cols-2-split .col-2 > h3')) {
+            document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_paras_2);
+        }
+        else {
+            document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_paras_2);
         }
     }
 
+    else if (selectedValue==="list-short") {
+        removeLists();
+        // Remove last paragraph.
+        if (document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)')) {
+            document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)').remove();
+        }
+
+        // Add short list after h3 or first paragraph.
+        if (document.querySelector('.cols-2-split .col-2 > h3')) {
+            document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_ul_short);
+        }
+        else {
+            document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_short);
+        }
+    }
+
+    else if (selectedValue==="list-long") {
+        removeLists();
+        // Remove last paragraph.
+        if (document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)')) {
+            document.querySelector('.cols-2-split .col-2 > p:nth-of-type(2)').remove();
+        }
+        // Add short list after h3 or first paragraph.
+        if (document.querySelector('.cols-2-split .col-2 > h3')) {
+            document.querySelector(".cols-2-split .col-2 > h3").insertAdjacentHTML("afterend", content_ul_long);
+        }
+        else {
+            document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_long);
+        }
+    }
+}
+
+function removeLists() {
+   if (document.querySelector(".cols-2-split .col-2 ul")) {
+        document.querySelector(".cols-2-split .col-2 ul").remove();
+    }
+}
 
 /*
 //////////////// BUTTONS: SPLIT TEXT AND IMAGE ////////////////////

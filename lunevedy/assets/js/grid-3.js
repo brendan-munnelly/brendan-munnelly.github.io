@@ -501,7 +501,7 @@ function disableTransColCode() {
 
 
 /*
-//////////////// UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// UPPER BLOCK: LABEL ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
