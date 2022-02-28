@@ -1,4 +1,61 @@
 /*
+//////////////// SECTION: WIDTH DESKTOP ////////////////////
+*/
+
+document.querySelector("#switch-section-width-desktop").addEventListener("change", doWidthDesktopSection);
+
+function doWidthDesktopSection() {
+    const rbs = document.querySelectorAll("input[name='section-width-desktop']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    console.log("selectedValue: "+selectedValue);
+
+    if (selectedValue==="1024px") {
+        document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.add("section-width-1024px");
+    }
+    else if (selectedValue==="1140px") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.add("section-width-1140px");
+    }
+}
+
+
+/*
+//////////////// SECTION: COLUMN ORDER ////////////////////
+*/
+
+document.querySelector("#switch-col-visual-desktop").addEventListener("change", doColOrderDesktop);
+
+function doColOrderDesktop() {
+    const rbs = document.querySelectorAll("input[name='col-visual-desktop']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    console.log("selectedValue: "+selectedValue);
+
+    if (selectedValue==="col-visual-right") {
+        document.querySelector("section").classList.remove("split-image-left");
+        document.querySelector("section").classList.add("split-image-right");
+    }
+    else if (selectedValue==="col-visual-left") {
+        document.querySelector("section").classList.remove("split-image-right");
+        document.querySelector("section").classList.add("split-image-left");
+    }
+}
+
+/*
 //////////////// HEADER COLOURS ///////////////
 */
     // Get the modal
@@ -282,28 +339,6 @@ function disableTransColCode() {
 }
 
 /*
-//////////////// SECTIONS: COLUMNS ORDER  ///////////////
-*/
-
-document.querySelector("#dd_colOrder").addEventListener("change", doColOrder);
-
-function doColOrder() {
-    document.getElementById("dd_text_slide").value="0";
-    let opt = document.querySelector("#dd_colOrder").value;
-    const el_section = document.querySelector('section')
-    if (opt==="0") {
-        el_section.classList.add("split-image-right");
-        el_section.classList.remove("split-image-left");
-    }
-
-    else if (opt==="1") {
-        el_section.classList.remove("split-image-right");
-        el_section.classList.add("split-image-left");
-    }
-}
-
-
-/*
 //////////////// SECTION: GRADIENT BACKGROUND ////////////////////
 */
 
@@ -379,44 +414,81 @@ function doDegGradient() {
 */
 
 document.querySelector("#dd_text_slide").addEventListener("change", doTextAnimation);
-    
+
 function doTextAnimation() {
     let opt = document.querySelector("#dd_text_slide").value;
     if (opt==="0") {
         removeTextAnimation();
     }
+    let animationType;
+    console.log("opt: "+opt);
 
-    else if (opt==="1") {
+    if (opt==="1") { 
         removeTextAnimation();
+        animationType = "slide-in-sides"; 
+        applyAnimation(animationType);
+    }
+
+    if (opt==="2") { 
+        removeTextAnimation();
+        animationType = "slide-in-top"; 
+        applyAnimation(animationType);
+    }
+
+    if (opt==="3") {
+        removeTextAnimation();
+        animationType = "slide-in-bottom"; 
+        applyAnimation(animationType);
+    }
+
+    if (opt==="4") {
+        removeTextAnimation();
+        animationType = "fade-in"; 
+        applyAnimation(animationType);
+    }
+}
+
+function applyAnimation(animationType) {
+
+    if (animationType ==="slide-in-sides") {
 
         if (document.querySelector("#HTML-Content section.split-image-right")) {
-
+            // Image at right
+            document.querySelector("#HTML-Content section figure").classList.add("slide-in-right");
+            // All else at left
+            if (document.querySelector("#HTML-Content section .container-upper-label")) {
+                document.querySelector("#HTML-Content section .container-upper-label").classList.add("slide-in-left");
+            }
             document.querySelector("#HTML-Content section h2").classList.add("slide-in-left");
+            if (document.querySelector("#HTML-Content section h3")) {
+                document.querySelector("#HTML-Content section h3").classList.add("slide-in-left");
+            }
             let paras = document.querySelectorAll("#HTML-Content section p");
             for (i = 0; i < paras.length; ++i) {
                 paras[i].classList.add("slide-in-left")
-            }
-            document.querySelector("#HTML-Content section figure").classList.add("slide-in-right");
-            if (document.querySelector("#HTML-Content section .container-upper-label")) {
-                document.querySelector("#HTML-Content section  .container-upper-label").classList.add("slide-in-left");
             }
             if (document.querySelector("#HTML-Content section ul")) {
                 document.querySelector("#HTML-Content section ul").classList.add("slide-in-left");
             }
             if (document.querySelector("#HTML-Content section .container-btn")) {
-                document.querySelector("#HTML-Content section  .container-btn").classList.add("slide-in-left");
+                document.querySelector("#HTML-Content section .container-btn").classList.add("slide-in-left");
             }
         }
 
         else if (document.querySelector("#HTML-Content section.split-image-left")) {
+            // Image at left
+            document.querySelector("#HTML-Content section figure").classList.add("slide-in-left");
+            // All else at right
+            if (document.querySelector("#HTML-Content section .container-upper-label")) {
+                document.querySelector("#HTML-Content section .container-upper-label").classList.add("slide-in-right");
+            }
             document.querySelector("#HTML-Content section h2").classList.add("slide-in-right");
+            if (document.querySelector("#HTML-Content section h3")) {
+                document.querySelector("#HTML-Content section h3").classList.add("slide-in-right");
+            }
             let paras = document.querySelectorAll("#HTML-Content section p");
             for (i = 0; i < paras.length; ++i) {
                 paras[i].classList.add("slide-in-right")
-            }
-            document.querySelector("#HTML-Content section figure").classList.add("slide-in-left");
-            if (document.querySelector("#HTML-Content section .container-upper-label")) {
-                document.querySelector("#HTML-Content section  .container-upper-label").classList.add("slide-in-right");
             }
             if (document.querySelector("#HTML-Content section ul")) {
                 document.querySelector("#HTML-Content section ul").classList.add("slide-in-right");
@@ -427,61 +499,66 @@ function doTextAnimation() {
         }
     }
 
-    else if (opt==="2") {
-        removeTextAnimation();
-        document.querySelector("#HTML-Content section h2").classList.add("slide-in-bottom");
+    else {
+
+        if (document.querySelector("#HTML-Content section .container-upper-label")) {
+            document.querySelector("#HTML-Content section .container-upper-label").classList.add(animationType);
+        }
+
+        document.querySelector("#HTML-Content section h2").classList.add(animationType);
+
+        if (document.querySelector("#HTML-Content section h3")) {
+            document.querySelector("#HTML-Content section h3").classList.add(animationType);
+        }
+
         let paras = document.querySelectorAll("#HTML-Content section p");
         for (i = 0; i < paras.length; ++i) {
-            paras[i].classList.add("slide-in-bottom")
+            paras[i].classList.add(animationType)
         }
-        document.querySelector("#HTML-Content section figure").classList.add("slide-in-bottom");
-        if (document.querySelector("#HTML-Content section .container-upper-label")) {
-            document.querySelector("#HTML-Content section  .container-upper-label").classList.add("slide-in-bottom");
-        }
+
         if (document.querySelector("#HTML-Content section ul")) {
-            document.querySelector("#HTML-Content section ul").classList.add("slide-in-bottom");
+            document.querySelector("#HTML-Content section ul").classList.add(animationType);
         }
+        
+        if (document.querySelector("#HTML-Content section figure")) {
+            document.querySelector("#HTML-Content section figure").classList.add(animationType);
+        }
+        
         if (document.querySelector("#HTML-Content section .container-btn")) {
-            document.querySelector("#HTML-Content section  .container-btn").classList.add("slide-in-bottom");
-        }
-    }
-    else if (opt==="3") {
-        removeTextAnimation();
-        document.querySelector("#HTML-Content section h2").classList.add("fade-in");
-        let paras = document.querySelectorAll("#HTML-Content section p");
-        for (i = 0; i < paras.length; ++i) {
-            paras[i].classList.add("fade-in")
-        }
-        document.querySelector("#HTML-Content section figure").classList.add("fade-in");
-        if (document.querySelector("#HTML-Content section .container-upper-label")) {
-            document.querySelector("#HTML-Content section .container-upper-label").classList.add("fade-in");
-        }
-        if (document.querySelector("#HTML-Content section ul")) {
-            document.querySelector("#HTML-Content section ul").classList.add("fade-in");
-        }
-        if (document.querySelector("#HTML-Content section .container-btn")) {
-            document.querySelector("#HTML-Content section .container-btn").classList.add("fade-in");
+            document.querySelector("#HTML-Content section .container-btn").classList.add(animationType);
         }
     }
 }
 
 function removeTextAnimation() {
+    if (document.querySelector("#HTML-Content section .container-upper-label")) {
+        document.querySelector("#HTML-Content section .container-upper-label").removeAttribute("class");
+    }
+
     document.querySelector("#HTML-Content section h2").removeAttribute("class");
+
+    if (document.querySelector("#HTML-Content section h3")) {
+        document.querySelector("#HTML-Content section h3").removeAttribute("class");
+    }
+
     let paras = document.querySelectorAll("#HTML-Content section p");
     for (i = 0; i < paras.length; ++i) {
         paras[i].removeAttribute("class");
     }
-    document.querySelector("#HTML-Content section figure").removeAttribute("class");
-    if (document.querySelector("#HTML-Content section .container-upper-label")) {
-        document.querySelector("#HTML-Content section .container-upper-label").removeAttribute("class");
-    }
+
     if (document.querySelector("#HTML-Content section ul")) {
         document.querySelector("#HTML-Content section ul").removeAttribute("class");
     }
+
+    if (document.querySelector("#HTML-Content section figure")) {
+        document.querySelector("#HTML-Content section figure").removeAttribute("class");
+    }
+
     if (document.querySelector("#HTML-Content section .container-btn")) {
+        document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-in-top");
         document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-in-bottom");
-        document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-left");
-        document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-right");
+        document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-in-left");
+        document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-in-right");
         document.querySelector("#HTML-Content section .container-btn").classList.remove("fade-in");
     }
 }
@@ -637,27 +714,6 @@ document.querySelector("#dd_lists").addEventListener("change", doLists);
     }
 
 
-/*
-//////////////// SECTION: WIDTH  ///////////////
-*/
-
-document.querySelector("#dd_section_width").addEventListener("change", doSectionWidth);
-    
-function doSectionWidth() {
-    let opt = document.querySelector("#dd_section_width").value;
-    if (opt==="0") {
-        document.querySelector("section").classList.remove("section-width-930px");
-        document.querySelector("section").classList.remove("section-width-1024px");
-    }
-    else if (opt==="1") {
-        document.querySelector("section").classList.remove("section-width-930px");
-        document.querySelector("section").classList.add("section-width-1024px");
-    }
-    else if (opt==="2") {
-        document.querySelector("section").classList.remove("section-width-1024px");
-        document.querySelector("section").classList.add("section-width-930px");
-    }
-}
 /*
 //////////////// BUTTONS: SPLIT TEXT AND IMAGE ////////////////////
 */
@@ -1195,177 +1251,3 @@ function removeFigBorders() {
     }
 }
 
-
-/* ================ DIALOG BOXES =================== */
-
-// Make dialog boxes element draggable:
-
-if (document.getElementById("content-1")) {
-    dragElement(document.getElementById("content-1"));
-}
-
-if (document.getElementById("content-2")) {
-    dragElement(document.getElementById("content-2"));
-}
-if (document.getElementById("content-3")) {
-    dragElement(document.getElementById("content-3"));
-}
-if (document.getElementById("content-4")) {
-    dragElement(document.getElementById("content-4"));
-}
-if (document.getElementById("content-5")) {
-    dragElement(document.getElementById("content-5"));
-}
-
-if (document.getElementById("content-6")) {
-    dragElement(document.getElementById("content-6"));
-}
-
-if (document.getElementById("content-7")) {
-    dragElement(document.getElementById("content-7"));
-}
-
-function dragElement(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.getElementById(elmnt.id + "header")) {
-        // if present, the header is where you move the DIV from:
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    } 
-    else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        elmnt.onmousedown = dragMouseDown;
-    }
-
-    function dragMouseDown(e) {
-        e = e || window.event;
-        // e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
-    }
-
-    function elementDrag(e) {
-        e = e || window.event;
-        // e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    }
-
-    function closeDragElement() {
-        // stop moving when mouse button is released:
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
-}
-
-if (document.querySelector("#content-1 .dialog-box-header")) {
-    document.querySelector("#content-1 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-
-if (document.querySelector("#content-2 .dialog-box-header")) {
-    document.querySelector("#content-2 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-if (document.querySelector("#content-3 .dialog-box-header")) {
-    document.querySelector("#content-3 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-if (document.querySelector("#content-4 .dialog-box-header")) {
-    document.querySelector("#content-4 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-
-if (document.querySelector("#content-5 .dialog-box-header")) {
-    document.querySelector("#content-5 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-
-if (document.querySelector("#content-6 .dialog-box-header")) {
-    document.querySelector("#content-6 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-
-if (document.querySelector("#content-7 .dialog-box-header")) {
-    document.querySelector("#content-7 .dialog-box-header span.close-x").addEventListener("click", hideDialogBox);
-}
-
-function hideDialogBox() {
-    document.querySelector("#content-1").classList.add("dropdown-hidden"); 
-    document.querySelector("#content-2").classList.add("dropdown-hidden"); 
-    document.querySelector("#content-3").classList.add("dropdown-hidden"); 
-    document.querySelector("#content-4").classList.add("dropdown-hidden"); 
-    const modal = document.getElementById("myModal");
-    // modal.style.display = "none";
-    hideSidebar();
-    disableTransColCode();
-} 
-
-/*
-//////////////// COPY TO CLIPBOARD ///////////////
-*/
-
-document.querySelector("#btn-copy").addEventListener("click", copyHTML);
-
-function enableCSS() {
-    document.getElementById("btn-copy-css").disabled=false;
-}
-
-function disableCSS() {
-    document.getElementById("btn-copy-css").disabled=true;
-}
-
-function copyHTML() {
-    // removeEmptyNodes();
-    const HTML_Content = document.getElementById("HTML-Content").innerHTML;
-    const el = document.createElement('textarea');
-    el.value = HTML_Content;
-    hideMenus();
-
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el); 
-}
-
-function copyCSS() {
-    hideMenus();
-    const el_css = document.createElement('textarea');
-    let aLength = arrCSS.length;
-    let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,section/g, "section");
-    // strCSS = strCSS.replace(/..container/g, ".container");
-    el_css.value = strCSS;
-    document.body.appendChild(el_css);
-    el_css.select();
-    document.execCommand('copy');
-    document.body.removeChild(el_css);  
-    // console.log(strCSS);
-}
-
-/*
-//////////////// REMOVE LEFTOVER NODES  ///////////////
-*/
-
-function removeEmptyNodes() {
-    const HTML_Content = document.querySelector("#HTML-Content");
-    var treeWalker = document.createTreeWalker(HTML_Content, NodeFilter.SHOW_ELEMENT);
-    var currentNode = treeWalker.currentNode
-    var emptyNodes = []
-
-    // test if a node has no text, regardless of whitespaces
-    var isNodeEmpty = node => !node.textContent.trim()
-
-    // find all empty nodes
-    while(currentNode) {
-        isNodeEmpty(currentNode) && emptyNodes.push(currentNode)
-        currentNode = treeWalker.nextNode()
-    }
-
-    // remove found empty nodes
-    emptyNodes.forEach(node => node.parentNode.removeChild(node))
-    return;
-}
