@@ -1,67 +1,3 @@
-/*
-//////////////// SECTION: WIDTH  ///////////////
-*/
-
-document.querySelector("#switch-section-width-desktop").addEventListener("change", doWidthDesktopSection);
-
-function doWidthDesktopSection() {
-    console.log("Got here");
-    const rbs = document.querySelectorAll("input[name='section-width-desktop']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    if (selectedValue==="1024px") {
-        document.querySelector("section").classList.add("section-width-1024px");
-    }
-    else if (selectedValue==="1140px") {
-        document.querySelector("section").classList.remove("section-width-1024px");
-    }
-}
-
-document.querySelector("#switch-upper-block-align").addEventListener("change", doUpperBlockAlign);
-
-function doUpperBlockAlign() {
-    const rbs = document.querySelectorAll("input[name='upper-block-align']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    if (selectedValue==="left") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("text-center");
-    }
-    else if (selectedValue==="center") {
-        document.querySelector("#HTML-Content section .col-1").classList.add("text-center"); 
-    }
-}
-
-document.querySelector("#switch-upper-block-width").addEventListener("change", doUpperBlockWidth);
-
-function doUpperBlockWidth() {
-    const rbs = document.querySelectorAll("input[name='upper-block-width']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    if (selectedValue==="width-full") {
-        document.querySelector("#HTML-Content section .col-1").classList.add("width-full");
-    }
-    else if (selectedValue==="width-800px") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("width-full"); 
-    }
-}
 
 /*
 //////////////// HEADER COLOURS ///////////////
@@ -119,24 +55,6 @@ function doUpperBlockWidth() {
         if ((btn_id === "btn_a_primary_passive_bg") || (btn_id === "btn_a_primary_active_bg") ||(btn_id === "btn_a_primary_passive_border") || (btn_id === "btn_a_primary_active_border") || (btn_id === "btn_a_secondary_passive_bg") || (btn_id === "btn_a_secondary_active_bg") ||(btn_id === "btn_a_secondary_passive_border") || (btn_id === "btn_a_secondary_active_border") ) {
             enableTransColCode();
         }
-        // modal.style.display = "block";
-        if (btn_id === "btn_bg") {
-            const el_section = document.querySelector("section");
-            // el_section.classList.remove("section-bg-gradient");
-            // // console.log("removed gradient");
-            // document.querySelector("#bg_gradient_options").style.display='none';
-            // // document.querySelector("#btn_gradient_input_group").style.display='flex';
-            // document.querySelector("#content-1 .dialog-box hr").style.display='block';
-
-            // if ( arrCSS.some(e => e.includes("background-image:")) ) {
-            //     // console.log("Already as style in HEAD");
-            //     const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
-            //     arrCSS.splice(arrPos, 1);
-            //     if (arrCSS.length==0) {
-            //         disableCSS();
-            //     }
-            // }
-        }
         showSidebar();
         event.preventDefault();
     }
@@ -172,64 +90,58 @@ function doUpperBlockWidth() {
             newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
             sub_string = section_theme+ " { background-color: ";
             doUpdateArray(sub_string,newStyle);
-            console.log("sub_string: "+sub_string);
         }
 
-        // else if (btn_id === "btn_gradient_from") {
-        //     sub_string = "linear-gradient";
-        //     let arrThree = doGradientSplit();
-        //     let item_deg =  arrThree[0];
-        //     let item_from = arrThree[1];
-        //     let item_to =   arrThree[2];
-        //     console.log("Old From Color: "+item_from);
-        //     console.log("New From Color: "+color_code);
-        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-        //     doUpdateArray(sub_string,newStyle);
-        // }
-        
-        // else if (btn_id === "btn_gradient_to") {
-        //     sub_string = "linear-gradient";
-        //     let arrThree = doGradientSplit();
-        //     let item_deg =  arrThree[0];
-        //     let item_from = arrThree[1];
-        //     let item_to =   arrThree[2];
-        //     console.log("Old To Color: "+item_to);
-        //     console.log("New To Color: "+color_code);
-        //     newStyle = section_theme+".section-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-        //     console.log(newStyle);
-        //     doUpdateArray(sub_string,newStyle);
-        // }
-
-        /* Header upper label */
+        /* Section upper label */
         else if (btn_id === "btn_upper_label") {
             newStyle = section_theme+ " .container-upper-label { color: var("+color_code+") }\n";
             sub_string = ".container-upper-label";
             doUpdateArray(sub_string,newStyle);
         }
-                    
-        /* Header h2 */
-        else if (btn_id === "btn_head") {
-            newStyle = section_theme+ " h2 { color: var("+color_code+") }\n";
+
+        /* Section upper heading */
+        else if (btn_id === "btn_upper_head") {
+            newStyle = section_theme+ " .col-1 h2 { color: var("+color_code+") }\n";
             sub_string = "h2";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* Header h3 */
-        else if (btn_id === "btn_subhead") {
-            newStyle = section_theme+ " h3 { color: var("+color_code+") }\n";
-            sub_string = "h3";
-            doUpdateArray(sub_string,newStyle);
+        /* Section upper subheading */
+        else if (btn_id === "btn_upper_subhead") {
+            newStyle = section_theme+ " .col-1 h3 { color: var("+color_code+") }\n";
+            sub_string = "col-1 h3";
+            doUpdateArray(sub_string,newStyle); 
         }
-
-        /* Section text */
-        else if (btn_id === "btn_text") {
-            newStyle = section_theme+ " p { color: var("+color_code+") } \n"+section_theme+" li { color: var("+color_code+") } \n"; 
-            sub_string = "p { color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* ======= PRIMARY BUTTONS =========*/
         
+        /* Column subheading */
+        else if (btn_id === "btn_col_subhead") {
+            newStyle = section_theme+ " "+col_no+" h3 { color: var("+color_code+") }\n";
+            sub_string = section_class+" "+col_no+" h3";
+            doUpdateArray(sub_string,newStyle);  
+        }
+        
+        /* Column text */
+        else if (btn_id === "btn_col_text") {
+            newStyle = section_theme+ " "+col_no+" p { color: var("+color_code+") }\n." +section_class+" "+col_no+" li { color: var("+color_code+") }\n"; 
+            sub_string = col_no+" p {";
+            doUpdateArray(sub_string,newStyle); 
+        }
+        
+        /* Column background */
+        else if (btn_id === "btn_col_background") {
+            newStyle = section_theme+ " "+col_no+" { background-color: var("+color_code+") }\n";
+            sub_string = col_no+" { background-color";
+            doUpdateArray(sub_string,newStyle);
+        }
+        
+        /* Column borders colour */
+        else if (btn_id === "btn_col_border_color") {
+            newStyle = section_theme+ ".col-borders "+col_no+" { border-color: var("+color_code+") }\n";
+            sub_string = "col-borders";
+            doUpdateArray(sub_string,newStyle);
+        }            
+        
+        /* === Buttons === */        
         /* Text colour: passive */
         else if (btn_id === "btn_a_primary_passive_text") {
             newStyle = section_theme+" a.btn-primary:link,\n"+section_theme+" a.btn-primary:visited { color: var("+color_code+") }\n\n";
@@ -272,220 +184,30 @@ function doUpperBlockWidth() {
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* ========== SECONDARY BUTTONS =========== */
-
-        /* Text colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_text") {
-            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { color";
-            doUpdateArray(sub_string,newStyle); 
+        /* Icons colour */
+        else if (btn_id === "btn_icon_color") {
+            newStyle =  section_theme+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
         }
-
-        /* Text colour: active */
-        else if (btn_id === "btn_a_secondary_active_text") {
-            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:focus { color";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-        /* Background colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_bg") {
-            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { background";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-        /* Background colour: active */
-        else if (btn_id === "btn_a_secondary_active_bg") {
-            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:active { background";
-            doUpdateArray(sub_string,newStyle); 
-        }
-        
-        /* Border colour: passive */
-        else if (btn_id === "btn_a_secondary_passive_border") {
-            newStyle = section_theme+" a.btn-secondary:link,\n"+section_theme+" a.btn-secondary:visited { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:visited { border";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-        /* Border colour: active */
-        else if (btn_id === "btn_a_secondary_active_border") {
-            newStyle = section_theme+" a.btn-secondary:focus,\n"+section_theme+" a.btn-secondary:hover,\n"+section_theme+" a.btn-secondary:active { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn-secondary:active { border";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-                    /* Section background */
-                    if (btn_id === "btn_bg") {
-                        newStyle = "."+section_class+" { background-color: var("+color_code+") }\n";
-                        sub_string = section_class+" { background-color";
-                        doUpdateArray(sub_string,newStyle)
-                    }
-        
-                    /* Section upper label */
-                    else if (btn_id === "btn_upper_label") {
-                        newStyle = "."+section_class+" .container-upper-label { color: var("+color_code+") }\n";
-                        sub_string = ".upper-label";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Section upper heading */
-                    else if (btn_id === "btn_upper_head") {
-                        newStyle = "."+section_class+" .col-1 h2 { color: var("+color_code+") }\n";
-                        sub_string = "h2";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Section upper subheading */
-                    else if (btn_id === "btn_upper_subhead") {
-                        newStyle = "."+section_class+" .col-1 h3 { color: var("+color_code+") }\n";
-                        sub_string = "col-1 h3";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-        
-                    /* Column subheading */
-                    else if (btn_id === "btn_col_subhead") {
-                        newStyle = "."+section_class+" "+col_no+" h3 { color: var("+color_code+") }\n";
-                        sub_string = section_class+" "+col_no+" h3";
-                        doUpdateArray(sub_string,newStyle);  
-                    }
-        
-                    /* Column text */
-                    else if (btn_id === "btn_col_text") {
-                        newStyle = "."+section_class+" "+col_no+" p { color: var("+color_code+") }\n." +section_class+" "+col_no+" li { color: var("+color_code+") }\n"; 
-                        sub_string = col_no+" p {";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-        
-                    /* Column background */
-                    else if (btn_id === "btn_col_background") {
-                        newStyle = "."+section_class+" "+col_no+" { background-color: var("+color_code+") }\n";
-                        sub_string = col_no+" { background-color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Column borders colour */
-                    else if (btn_id === "btn_col_border_color") {
-                        newStyle = "."+section_class+".col-borders "+col_no+" { border-color: var("+color_code+") }\n";
-                        sub_string = "col-borders";
-                        doUpdateArray(sub_string,newStyle);
-                    }            
-        
-                    /* TEXT */
-                    /* Primary button text colour: passive */
-                    else if (btn_id === "btn_a_primary_passive_text") {
-                        newStyle = "."+section_class+" a.btn-primary:link { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { color: var("+color_code+") }\n";
-                        sub_string = "a.btn-primary:link { color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Primary button text colour: active */
-                    else if (btn_id === "btn_a_primary_active_text") {
-                        newStyle = "."+section_class+" a.btn-primary:focus { color: var("+color_code+") }\n."+section_class+ " a.btn-primary:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { color: var("+color_code+") }\n";
-                        sub_string = "a.btn-primary:focus { color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* BACKGROUND */
-                    /* Primary button background colour: passive */
-                    else if (btn_id === "btn_a_primary_passive_bg") {
-                        newStyle = "."+section_class+" a.btn-primary:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { background-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-primary:link { background-color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Primary button background colour: active */
-                    else if (btn_id === "btn_a_primary_active_bg") {
-                        newStyle = "."+section_class+" a.btn-primary:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { background-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-primary:focus { background-color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* BORDER */
-                    /* Primary button border colour: passive */
-                    else if (btn_id === "btn_a_primary_passive_border") {
-                        newStyle = "."+section_class+" a.btn-primary:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:visited { border-color: var("+color_code+") }\n";
-                        sub_string = ".btn-primary:link { border-color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* Primary button border colour: active */
-                    else if (btn_id === "btn_a_primary_active_border") {
-                        newStyle = "."+section_class+" a.btn-primary:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-primary:active { border-color: var("+color_code+") }\n";
-                        sub_string = "btn-primary:focus { border-color";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
-                    /* TEXT */
-                    /* ghost button text colour: passive */
-                    else if (btn_id === "btn_a_ghost_passive_text") {
-                        newStyle = "."+section_class+" a.btn-ghost:link { color: var("+color_code+") } \n." +section_class+ " a.btn-ghost:visited { color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:link { color";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-        
-                    /* ghost button text colour: active */
-                    else if (btn_id === "btn_a_ghost_active_text") {
-                        newStyle = "."+section_class+" a.btn-ghost:focus { color: var("+color_code+") } \n." +section_class+ " a.btn-ghost:hover { color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:active { color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:focus { color";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-         
-                    /* BACKGROUND */            
-                    /* ghost button background colour: passive */
-                    else if (btn_id === "btn_a_ghost_passive_bg") {
-                        newStyle = "."+section_class+" a.btn-ghost:link { background-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:visited { background-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:link { background";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-                    /* ghost button background colour: active */
-                    else if (btn_id === "btn_a_ghost_active_bg") {
-                        newStyle = "."+section_class+" a.btn-ghost:focus { background-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:hover { background-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:active { background-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:focus { background";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-                    
-                    /* BORDER */
-                    /* ghost button border colour: passive */
-                    else if (btn_id === "btn_a_ghost_passive_border") {
-                        newStyle = "."+section_class+" a.btn-ghost:link { border-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:visited { border-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:link { border";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-        
-                    /* ghost button border colour: active */
-                    else if (btn_id === "btn_a_ghost_active_border") {
-                        newStyle = "."+section_class+" a.btn-ghost:focus { border-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:hover { border-color: var("+color_code+") }\n." +section_class+ " a.btn-ghost:active { border-color: var("+color_code+") }\n";
-                        sub_string = "a.btn-ghost:focus { border";
-                        doUpdateArray(sub_string,newStyle); 
-                    }
-        
-                    /* Icons colour */
-                    else if (btn_id === "btn_icon_color") {
-                        newStyle = "."+section_class+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
-                        sub_string = "figure.icon";
-                        doUpdateArray(sub_string,newStyle);
-                    }
-        
         
         style = document.createElement('style');
         document.head.appendChild(style);
         style.appendChild(document.createTextNode(newStyle));
         enableCSS();
-}
+    }
 
-function doUpdateArray(sub_string,newStyle) {
-    if ( arrCSS.some(e => e.includes(sub_string)) ) {
-        const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
-        arrCSS.splice(arrPos, 1);
-        arrCSS.push(newStyle);
-        console.log("Includes background-color sub-string")
+    function doUpdateArray(sub_string,newStyle) {
+        if ( arrCSS.some(e => e.includes(sub_string)) ) {
+            const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+            arrCSS.splice(arrPos, 1);
+            arrCSS.push(newStyle);
+            console.log("Includes background-color sub-string")
+        }
+        else {
+            arrCSS.push(newStyle);
+        }
     }
-    else {
-        arrCSS.push(newStyle);
-    }
-}
 
 /*
 //////////////// COLORS: TRANSPARENT OPTION ////////////////////
@@ -497,152 +219,6 @@ function enableTransColCode() {
 
 function disableTransColCode() {
     document.getElementById("color-transparent").style.display="none";
-}
-
-
-/*
-//////////////// UPPER BLOCK: LABEL ABOVE H2 ///////////////
-*/
-
-document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
-
-function doUpperLabel() {
-    if (!document.getElementById("cb_upperLabelOn").checked) {
-        removeUpperLabel();
-    }
-    else {
-        const newUpperLabelDiv = document.createElement("div");
-        const newUpperLabelSpan = document.createElement("span");
-        newUpperLabelDiv.appendChild(newUpperLabelSpan);
-        newUpperLabelDiv.classList.add("container-upper-label"); 
-        document.querySelector("section .col-1").prepend(newUpperLabelDiv);
-        document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
-        enableLabelColor();
-    }
-}
-
-function removeUpperLabel() {
-    if (document.querySelector('.col-1 .container-upper-label')) {
-        const upperLabel = document.querySelector('.col-1 .container-upper-label');
-        upperLabel.remove();
-        // doColUpperAlignStatus();
-        disableLabelColor();
-        document.getElementById("cb_upperLabelOn").checked = false;
-    }
-}
-
-function disableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=true;
-}
-
-function enableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=false;
-}
-
-/*
-//////////////// UPPER BLOCK: MAIN HEADING H2 ///////////////
-*/
-
-document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
-
-function doUpperH2() {
-    if (!document.getElementById("cb_upperH2On").checked) {
-        removeUpperH2();
-    }
-    else {
-        removeUpperH2();
-        document.getElementById("btn_upper_head").disabled=false;
-        const newH2 = document.createElement("h2");
-        const newContent = document.createTextNode("Nice heading here");
-        newH2.appendChild(newContent);
-        const currentDiv = document.querySelector('.col-1');
-        if (!document.querySelector('.container-upper-label')) {
-            currentDiv.prepend(newH2);
-        }
-        else {
-            document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
-        }
-        // doColUpperAlignStatus();
-    }
-}
-
-function removeUpperH2() {
-    if (document.querySelector('.col-1 h2')) {
-        document.getElementById("btn_upper_head").disabled=true;
-        const elH2 = document.querySelector('.col-1 h2');
-        elH2.remove();
-        // doColUpperAlignStatus();
-    }
-}
-
-/*
-//////////////// UPPER BLOCK: SUB-HEADING H3 ///////////////
-*/
-
-document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
-
-function doUpperH3() {
-    if (!document.getElementById("cb_upperH3On").checked) {
-        removeUpperH3();
-    }
-
-    else {
-        const newSubHead = document.createElement("h3");
-        const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
-        newSubHead.appendChild(newContent);
-        const currentDiv = document.querySelector('.col-1');
-        currentDiv.append(newSubHead);
-        // doColUpperAlignStatus();
-        document.getElementById("btn_upper_subhead").disabled=false;
-    }
-}
-
-function removeUpperH3() {
-    if (document.querySelector('.col-1 h3')) {
-        document.getElementById("btn_upper_subhead").disabled=true;
-        const elH3 = document.querySelector('.col-1 h3');
-        elH3.remove();
-    // doColUpperAlignStatus();
-    }
-}
-
-
-/*
-//////////////// UPPER BLOCK: COLUMN ALIGN ///////////////
-*/
-
-
-function doColUpperAlign() {
-    let opt = document.querySelector("#dd_align_col_1").value;
-    const el_section = document.querySelector('section')
-    const el_col_1 = document.querySelector('.col-1')
-
-    if (opt==="0") {
-        el_col_1.classList.add("text-center");
-        el_section.classList.remove("container-full");
-    }
-
-    else if (opt==="1") {
-        el_col_1.classList.remove("text-center");
-        el_section.classList.add("container-full");
-    }
-}
-
-/*
-//////////////// UPDATE UPPER COLUMN ALIGN STATUS ///////////////
-*/
-
-function doColUpperAlignStatus() {
-    // Either h2 or h3 present in .col-1
-    if ( 
-        document.querySelector('.col-1 h2') || document.querySelector('.col-1 h3')
-        ) {
-        document.getElementById("dd_align_col_1").disabled=false;
-    }
-    // Both h2 and h3 missing from .col-1
-    else {
-        document.getElementById("dd_align_col_1").disabled=true;
-    }
 }
 
 
@@ -947,122 +523,124 @@ function removeText() {
     }
 }
 
-
 /*
 //////////////// BUTTONS ////////////////////
 */
 
-// document.querySelector("#dd_buttons").addEventListener("change", doButtons);
+document.querySelector("#cb_colButtonsOn").addEventListener("change", doColButtons);
 
-    function doButtons() {
-        let opt = document.querySelector("#dd_buttons").value;
-        // remove
-        if (opt==="0") {
-            removeButtons();
-            disableAllButtons();
+function doColButtons() {
+
+    if (!document.getElementById("cb_colButtonsOn").checked) {
+        removeColButtons();
+        disableColButtons();
+    }
+    else {
+        let btn_class="btn-primary";
+        const obj_col = document.querySelectorAll(col_no);
+        let el_cols; // each child column block
+
+        for (let i = 2; i <= obj_col.length+1; i++) {            
+            el_cols = document.querySelector(col_no+":nth-child("+i+")");
+            addColButons(el_cols,btn_class);
         }
+        enableColButtons();
+    }
+}
 
-        // primary
-        else if (opt==="1") {
-            removeButtons();
-            enablePrimaryButtons();
-            disableGhostButtons();
-            btn_class="btn-primary";
+function addColButons(el_cols,btn_class) {
+    const el_btn = document.createElement('a');
+    el_btn.setAttribute("href", "#");
+    el_btn.setAttribute("class", "btn "+btn_class);
+    const el_icon = document.createElement('i');
+    el_icon.setAttribute("class", "fas fa-shopping-cart");
+    el_btn.append(el_icon);
+    const btn_text = "<span>Order Now</span>";
+    el_icon.insertAdjacentHTML('afterend', btn_text);
+    el_cols.append(el_btn);
+}
 
-            const obj_col = document.querySelectorAll(col_no);
-            let el_cols;
-            for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-                el_cols = document.querySelector(col_no+":nth-child("+i+")");
-                addButons(el_cols,btn_class);
-            }
+function removeColButtons() {
+    const obj_btns = document.querySelectorAll("a.btn");
+    let el_btns;
+    for (let i=2 ; i <= obj_btns.length+1; i++) {
+        el_btns = document.querySelector("a.btn");
+        el_btns.remove();
+    }
+    document.getElementById("dd_buttons_style").disabled=true;
+    document.getElementById("dd_buttons_style").value="0";
+    disableColButtons();
+}
+
+/*
+//////////////// BUTTONS: ICONS POSITION ////////////////////
+*/
+
+document.querySelector("#switch-btns-icons-position").addEventListener("change", swapButtonIcons);
+
+function swapButtonIcons() {
+
+    const rbs = document.querySelectorAll("input[name='btns-icons-position']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
         }
-        // ghost
-        else if (opt==="2") {
-            removeButtons();
-            disablePrimaryButtons();
-            enableGhostButtons();
-
-            btn_class="btn-ghost";
-            const obj_col = document.querySelectorAll(col_no);
-            let el_cols;
-            for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-                el_cols = document.querySelector(col_no+":nth-child("+i+")");
-                addButons(el_cols,btn_class);
-            }
-        } 
     }
 
-    function addButons(el_cols,btn_class) {
-        const el_btn = document.createElement('a');
-        el_btn.setAttribute("href", "#");
-        el_btn.setAttribute("class", "btn "+btn_class);
-        const el_icon = document.createElement('i');
-        el_icon.setAttribute("class", "fas fa-shopping-cart");
-        el_btn.append(el_icon);
-        const btn_text = "<span>Order Now</span>";
-        el_icon.insertAdjacentHTML('afterend', btn_text);
-        el_cols.append(el_btn);
-
-        // HTML_content = document.querySelector("#HTML-Content").innerHTML;
-        // HTML_content = HTML_content.replace("/n/t/t/t/", "");
-        // document.querySelector("#HTML-Content").innerHTML = HTML_content;
-        
-        document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("dd_buttons_style").disabled=false;
-        document.getElementById("dd_buttons_icon").value="0";
-        document.getElementById("dd_buttons_icon").disabled=false;
-    }
-
-    function removeButtons() {
-        const obj_btns = document.querySelectorAll("a.btn");
-        let el_btns;
-        for (let i=2 ; i <= obj_btns.length+1; i++) {
-            el_btns = document.querySelector("a.btn");
-            el_btns.remove();
-        }
-        document.getElementById("dd_buttons_style").disabled=true;
-        document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("dd_buttons_icon").disabled=true;
-        document.getElementById("dd_buttons_icon").value="0";
-    }
-
-    document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
-
-    function swapButtonIcons() {
-        let opt = document.querySelector("#dd_buttons_icon").value;
-        if (document.querySelector("a.btn")) {
+    if (document.querySelector("a.btn")) {
             
-            let el_btns;
-            const obj_btns = document.querySelectorAll("a.btn");
-            const icon_left  ="<i class=\"fas fa-shopping-cart\"><\/i><span>Order Now<\/span>";
-            const icon_right ="<span>Order Now<\/span><i class=\"fas fa-arrow-circle-right\"><\/i>";
+        let el_btns;
+        const obj_btns = document.querySelectorAll("a.btn");
+        const icon_left  ="<i class=\"fas fa-shopping-cart\"><\/i><span>Order Now<\/span>";
+        const icon_right ="<span>Order Now<\/span><i class=\"fas fa-arrow-circle-right\"><\/i>";
 
-            if (opt==="0") {
-                for (let i=2 ; i <= obj_btns.length+1; i++) {
-                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
-                    btn_content = el_btns.innerHTML;
+        if (selectedValue==="btns-icons-left") {
+        // move text to right, icon to left
+            for (let i=2 ; i <= obj_btns.length+1; i++) {
+                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                btn_content = el_btns.innerHTML;
+
+                if (( btn_content = icon_right) || (btn_content = icon_right)) {
                     btn_content = btn_content.replace(icon_right, icon_left);
                     el_btns.innerHTML = btn_content;
                 }
             }
-
+        }
+    
+        else if (selectedValue==="btns-icons-right") {
             // move text to left, icon to right
-            else if (opt==="1") {
-                for (let i=2 ; i <= obj_btns.length+1; i++) {
-                    el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
-                    btn_content = el_btns.innerHTML;
+            for (let i=2 ; i <= obj_btns.length+1; i++) {
+                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                btn_content = el_btns.innerHTML;
+
+                if (( btn_content = icon_right) || (btn_content = icon_right)) {
                     btn_content = btn_content.replace(icon_left, icon_right);
                     el_btns.innerHTML = btn_content;
                 }
             }
         }
+    
+        else if (selectedValue==="btns-icons-none") {
+            // Only text, No icons.
+            for (let i=2 ; i <= obj_btns.length+1; i++) {
+                el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
+                btn_content = el_btns.innerHTML;
+                btn_content = "<span>Order now</span>";
+                el_btns.innerHTML = btn_content;
+            }
+        }
+
     }
+}
 
 /*
 //////////////// BUTTONS: STYLE ////////////////////
 */
 
-    document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
+document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
 
     function doButtonsStyle() {
 
@@ -1087,6 +665,9 @@ function removeText() {
             removeButtonsStyle();
             const obj_btns = document.querySelectorAll("a.btn");
             let el_btns;
+            // loop through columns.
+            // nth-child cols begin at 2.
+            // So first column updated has loop index [i] of 2, second has [i] of 3, etc.
             for (let i=2 ; i <= obj_btns.length+1; i++) {
                 el_btns = document.querySelector(col_no+":nth-child("+i+") a.btn");
                 el_btns.classList.add("btn-rounded");
@@ -1105,79 +686,56 @@ function removeText() {
         }
     }
 
-    function enableAllButtons() {
+    function enableColButtons() {
         document.getElementById("btn_a_primary_passive_text").disabled=false;
         document.getElementById("btn_a_primary_active_text").disabled=false;
         document.getElementById("btn_a_primary_passive_bg").disabled=false;
         document.getElementById("btn_a_primary_active_bg").disabled=false;
         document.getElementById("btn_a_primary_passive_border").disabled=false;
         document.getElementById("btn_a_primary_active_border").disabled=false;
-
-        document.getElementById("btn_a_ghost_passive_text").disabled=false;
-        document.getElementById("btn_a_ghost_passive_border").disabled=false;
-        document.getElementById("btn_a_ghost_active_text").disabled=false;
-        document.getElementById("btn_a_ghost_active_bg").disabled=false;
-        document.getElementById("btn_a_ghost_active_border").disabled=false;
+        document.getElementById("dd_buttons_style").value="0";
+        document.getElementById("dd_buttons_style").disabled=false;
+        document.getElementById("rd-btns-icons-left").checked=true;
+        document.getElementById("rd-btns-icons-left").disabled=false;
+        document.getElementById("rd-btns-icons-right").disabled=false;
+        document.getElementById("rd-btns-icons-none").disabled=false;
+        // document.getElementById("dd_buttons_icon").disabled=false;
     }
 
-    function enablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=false;
-        document.getElementById("btn_a_primary_active_text").disabled=false;
-        document.getElementById("btn_a_primary_passive_bg").disabled=false;
-        document.getElementById("btn_a_primary_active_bg").disabled=false;
-        document.getElementById("btn_a_primary_passive_border").disabled=false;
-        document.getElementById("btn_a_primary_active_border").disabled=false;
-    }
-
-    function enableGhostButtons() {
-        document.getElementById("btn_a_ghost_passive_text").disabled=false;
-        document.getElementById("btn_a_ghost_passive_border").disabled=false;
-        document.getElementById("btn_a_ghost_active_text").disabled=false;
-        document.getElementById("btn_a_ghost_active_bg").disabled=false;
-        document.getElementById("btn_a_ghost_active_border").disabled=false;        
-    }
-
-    function disableAllButtons() {
+    function disableColButtons() {
         document.getElementById("btn_a_primary_passive_text").disabled=true;
         document.getElementById("btn_a_primary_active_text").disabled=true;
         document.getElementById("btn_a_primary_passive_bg").disabled=true;
         document.getElementById("btn_a_primary_active_bg").disabled=true;
         document.getElementById("btn_a_primary_passive_border").disabled=true;
         document.getElementById("btn_a_primary_active_border").disabled=true;
+        document.getElementById("rd-btns-icons-left").checked=false;
+        document.getElementById("rd-btns-icons-right").checked=false;
+        document.getElementById("rd-btns-icons-none").checked=false;
+        document.getElementById("rd-btns-icons-left").disabled=true;
+        document.getElementById("rd-btns-icons-right").disabled=true;
+        document.getElementById("rd-btns-icons-none").disabled=true;
 
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;
-    }
-
-    function disablePrimaryButtons() {
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-    }
-
-    function disableGhostButtons() {
-        document.getElementById("btn_a_ghost_passive_text").disabled=true;
-        document.getElementById("btn_a_ghost_active_text").disabled=true;
-        document.getElementById("btn_a_ghost_passive_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;
-        document.getElementById("btn_a_ghost_active_bg").disabled=true;
-        document.getElementById("btn_a_ghost_active_border").disabled=true;        
     }
 
 /*
-//////////////// VISUALS  ///////////////
+////////////////////// VISUALS  ///////////////////////
 */
+
+// GLOBAL VARIABLES
+
+// Class names of columns in grid: .col-2, .col-3 or .col-4
+let col_no;
+if (document.querySelector('.col-2')) { col_no = ".col-2" }
+else if (document.querySelector('.col-3')) { col_no = ".col-3" }
+else if (document.querySelector('.col-4')) { col_no = ".col-4" }
+// Number column blocks to loop through
+let col_count = document.querySelectorAll(col_no).length;
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
 function doVisType() { 
-    const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
+    const rbs = document.querySelectorAll("#vis-types-all input[name='visual_options']");
     let selectedValue;
     
     for (const rb of rbs) {
@@ -1189,213 +747,106 @@ function doVisType() {
   
     if (selectedValue==="none") {
         removeVisual();
-        resetVisualEffects();
-        document.getElementById("dd_icon_size").disabled=true;
-        document.getElementById("dd_icon_align").disabled=true;
-        document.getElementById("btn_icon_color").disabled=true;
     }
 
-    else if (selectedValue==="pictures") {
+    else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
         removeVisual();
-        resetVisualEffects();
         const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
+        let el_cols; // each child column block
+        // loop through columns.
+        // nth-child cols begin at 2.
+        // So first column updated has loop index [i] of 2, second has [i] of 3, etc.
+        for (let i = 2; i <= obj_col.length+1; i++) {
+            // Current content of each column block
             el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = picArray[i-1] + el_cols.innerHTML; 
+            // Add figure at end of current content
+            if (selectedValue==="pictures") {
+                el_cols.innerHTML = arrPic[i-2] + el_cols.innerHTML; 
+            }
+            else if (selectedValue==="transparent") {
+                el_cols.innerHTML = arrTrans[i-2] + el_cols.innerHTML; 
+            }
+            else if (selectedValue==="illustrations") {
+                el_cols.innerHTML = arrIllus[i-2] + el_cols.innerHTML; 
+            }
         }
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_icon_size").disabled=true;
-        document.getElementById("dd_icon_align").disabled=true;
-        document.getElementById("btn_icon_color").disabled=true;
+        // Enable image properties
+        document.getElementById("dd_fig_shadows").disabled=false;
+        document.getElementById("dd_fig_shadows").value="0";
+        document.getElementById("dd_fig_corners").disabled=false;
+        document.getElementById("dd_fig_corners").value="0";
     }
 
-    else if (selectedValue==="transparent") {
-        removeVisual();
-        resetVisualEffects();
-        const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-            el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = transArray[i-1] + el_cols.innerHTML; 
-        }
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=true;
-        document.getElementById("dd_icon_size").disabled=true;
-        document.getElementById("dd_icon_align").disabled=true;
-        document.getElementById("btn_icon_color").disabled=true;
-    }
-
-    else if (selectedValue==="illustrations") {
+    else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") || (selectedValue==="icons-md") ) {
         removeVisual();
         const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
+        for (let i = 2; i <= parseInt(obj_col.length)+1; i++) {
             el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = illusArray[i-1] + el_cols.innerHTML; 
+            if (selectedValue==="icons-fa") {
+                el_cols.innerHTML = arrIconFA[i-2] + el_cols.innerHTML; 
+            }
+            else if (selectedValue==="icons-la") {
+                el_cols.innerHTML = arrIconLA[i-2] + el_cols.innerHTML; 
+            }
+            else if (selectedValue==="icons-md") {
+                el_cols.innerHTML = arrIconMD[i-2] + el_cols.innerHTML; 
+            }
         }
-
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=true;
-        document.getElementById("dd_icon_size").disabled=true;
-        document.getElementById("dd_icon_align").disabled=true;
-        document.getElementById("btn_icon_color").disabled=true;
-    }
-
-    else if (selectedValue==="icons-fa") {
-        removeVisual();
-        resetVisualEffects();
-        const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-            el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = iconFAArray[i-1] + el_cols.innerHTML; 
-        }
-
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=true;
-        document.getElementById("dd_image_borders").disabled=true;
-
-        document.getElementById("dd_icon_size").disabled=false;
-        document.getElementById("dd_icon_align").disabled=false;
-        document.getElementById("btn_icon_color").disabled=false;
-    }
-
-    else if (selectedValue==="icons-la") {
-        removeVisual();
-        resetVisualEffects();
-
-        const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-            el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = iconLAArray[i-1] + el_cols.innerHTML; 
-        }
-
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=true;
-        document.getElementById("dd_image_borders").disabled=true;
-
-        document.getElementById("dd_icon_size").disabled=false;
-        document.getElementById("dd_icon_align").disabled=false;
-        document.getElementById("btn_icon_color").disabled=false;
-    }
-
-    else if (selectedValue==="icons-md") {
-        removeVisual();
-        resetVisualEffects();
-
-        const obj_col = document.querySelectorAll(col_no);
-        let el_cols;
-        for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-            el_cols = document.querySelector(col_no+":nth-child("+i+")");
-            el_cols.innerHTML = iconMDArray[i-1] + el_cols.innerHTML; 
-        }
-
-        document.getElementById("dd_image_corners").disabled=true;
-        document.getElementById("dd_image_shadows").disabled=true;
-        document.getElementById("dd_image_borders").disabled=true;
-        
+        // Enables icon properties
         document.getElementById("dd_icon_size").disabled=false;
         document.getElementById("dd_icon_align").disabled=false;
         document.getElementById("btn_icon_color").disabled=false;
     }
 }
 
-function removeVisual() {
-    const parentNode = document.querySelector("#HTML-Content");
-    var element_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
-    for (var index = 0, len = element_img.length; index < len; index++) {
-        element_img[index].parentNode.removeChild(element_img[index]);
-    }
-    document.getElementById("dd_image_corners").disabled=true;
-    document.getElementById("dd_image_shadows").disabled=true;
-    document.getElementById("dd_image_borders").disabled=true;
-}
-
-function resetVisualEffects() {
-    document.getElementById("dd_image_shadows").value="0";
-    document.getElementById("dd_image_borders").value="0";
-    document.getElementById("dd_image_corners").value="0";
-    removeImageShadows();
-    removeImageBorders();
-}
 
 /*
-//////////////// VISUAL PROPERTIES ///////////////
+//////////////// VISUAL PROPERTIES: IMAGE CORNERS ///////////////
 */
 
-document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
+document.querySelector("#dd_fig_corners").addEventListener("change", doImageCorners);
 
 function doImageCorners() {
-    let opt = document.querySelector("#dd_image_corners").value;
+    let opt = document.querySelector("#dd_fig_corners").value;
 
     if (opt==="0") {
-        removeImageCorners();
+        const el_fig = document.querySelector('section');
+        el_fig.classList.remove("fig-corners-soft");
     }
 
     else if (opt==="1") {
         const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-corners-soft");
+        el_fig.classList.add("fig-corners-soft");
     }
-}
-
-function removeImageCorners() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-corners-soft");
-}
-
-document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
-
-function doImageShadows() {
-    let opt = document.querySelector("#dd_image_shadows").value;
-    // Remove image shadow
-    if (opt==="0") {
-        removeImageShadows();
-    }
-
-    // Add image shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-shadow");
-    }
-}
-
-function removeImageShadows() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-shadow");
-}
-
-document.querySelector("#dd_image_borders").addEventListener("change", doImageBorders);
-
-function doImageBorders() {
-    let opt = document.querySelector("#dd_image_borders").value;
-
-    if (opt==="0") {
-        removeImageBorders();
-    }
-
-    // Add image border
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("img-border");
-    }
-}
-
-function removeImageBorders() {
-    const el_fig = document.querySelector('section');
-    el_fig.classList.remove("img-border");
 }
 
 /*
-//////////////// ICON PROPERTIES ///////////////
+//////////////// VISUAL PROPERTIES: SHADOWS ///////////////
 */
 
-// document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
+document.querySelector("#dd_fig_shadows").addEventListener("change", doImageShadows);
+
+function doImageShadows() {
+    let opt = document.querySelector("#dd_fig_shadows").value;
+
+    // Remove figure shadow
+    if (opt==="0") {
+        const el_fig = document.querySelector('section');
+        el_fig.classList.remove("fig-shadow");
+    }
+
+    // Add figure shadow
+    else if (opt==="1") {
+        const el_fig = document.querySelector('section');
+        el_fig.classList.add("fig-shadow");
+    }
+}
+
+/*
+//////////////// ICON PROPERTIES: SIZE ///////////////
+*/
+
+document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
 
 
 function doIconSize() {
@@ -1412,7 +863,11 @@ function doIconSize() {
     }
 }
 
-// document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
+/*
+//////////////// ICON PROPERTIES: ALIGN ///////////////
+*/
+
+document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
 
 function doIconAlign() {
     let opt = document.querySelector("#dd_icon_align").value;
@@ -1429,3 +884,22 @@ function doIconAlign() {
 }
 
 
+function removeVisual() {
+    const parentNode = document.querySelector("#HTML-Content");
+    var el_img = Array.prototype.slice.call(document.getElementsByTagName("figure"),0); 
+    for (let i = 0; i < el_img.length; i++) {
+        el_img[i].parentNode.removeChild(el_img[i]);
+    }
+    // Remove any corner or shadow properties
+    document.querySelector('section').classList.remove("fig-corners-soft");
+    document.querySelector('section').classList.remove("fig-shadow");
+    // Disable image properties
+    document.getElementById("dd_fig_shadows").disabled=true;
+    document.getElementById("dd_fig_shadows").value="0";
+    document.getElementById("dd_fig_corners").disabled=true;
+    document.getElementById("dd_fig_corners").value="0";
+    // Disable icon properties
+    document.getElementById("dd_icon_size").disabled=true;
+    document.getElementById("dd_icon_align").disabled=true;
+    document.getElementById("btn_icon_color").disabled=true;
+}

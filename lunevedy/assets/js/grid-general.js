@@ -1,8 +1,18 @@
+// *** Global variables
+// Number of dropdown menus on Lunevery navbar
+const uiUIenusLength = document.querySelectorAll("#ui-menus li").length;
+// Used by color picker to identify section for copying to user's HTML file.
+// values with be "section-selector-1", ... "section-selector-6".
+let section_class ="section-selector-1"; 
+
+// Used by color picker. Either 'theme-light' or 'theme-dark'.
+let section_theme = "section.theme-light."+section_class;
+
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
-const uiUIenusLength = document.querySelectorAll("#ui-menus li").length;
-// Hide all menus
+
+// Hide all menus - except currently selected one.
 let divs = document.querySelectorAll('.dropbtn');
 divs.forEach(el => el.addEventListener('click', event => {
     for (let i = 1; i <= uiUIenusLength; i++) {
@@ -18,7 +28,7 @@ divs.forEach(el => el.addEventListener('click', event => {
     hideSidebar();
 }));
 
-// Hide menus when click on page
+// Hide all menus when user clicks on page.
 document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
 
 function hideMenus() {
@@ -28,7 +38,7 @@ function hideMenus() {
     hideSidebar();
 }
 
-// Hide menus when press Esc
+// Hide menus when users presses Esc key.
 document.onkeydown = function(evt) {
     evt = evt || window.event;
     var isEscape = false;
@@ -42,6 +52,19 @@ document.onkeydown = function(evt) {
     }
 }
 
+// Hide dialog box when user clicks X icon
+for (let i = 1; i <= uiUIenusLength; i++) {
+    document.querySelector(`#content-${[i]} .dialog-box-header span.close-x`).addEventListener("click", hideDialogBox);
+}
+
+function hideDialogBox() {
+    for (let i = 1; i <= uiUIenusLength; i++) {
+        document.querySelector(`#content-${[i]}`).classList.add("dropdown-hidden"); 
+    }
+    hideSidebar();
+    disableTransColCode();
+} 
+
 /* Show/hide color picker */
 function showSidebar() {
     document.querySelector("#myModal").classList.add("display-sidebar");
@@ -51,102 +74,7 @@ function showSidebar() {
 function hideSidebar() {
     document.querySelector("#myModal").classList.add("hide-sidebar");
     document.querySelector("#myModal").classList.remove("show-sidebar");
-    document.querySelector("#myModal").scrollTo(0, 0);
-}
-
-/*
-//////////////// SECTION: THEME  ///////////////
-*/
-
-document.querySelector("#switch-section-theme").addEventListener("change", doSectionTheme);
-
-// Used by color picker
-let section_theme;
-
-function doSectionTheme() {
-    hideMenus();
-    const rbs = document.querySelectorAll("input[name='switch-one']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    // Remove all styles
-    var hs = document.querySelectorAll('style');
-    for (var i=0, max = hs.length; i < max; i++) {
-        hs[i].parentNode.removeChild(hs[i]);
-    }
-
-    if (selectedValue==="light") {
-        document.querySelector("section").classList.remove("theme-dark"); 
-        document.querySelector("section").classList.add("theme-light"); 
-    }
-    else if (selectedValue==="dark") {
-        document.querySelector("section").classList.remove("theme-light"); 
-        document.querySelector("section").classList.add("theme-dark"); 
-    }
-
-    // Check for outlines
-    if (document.querySelector("#cb-outlines").checked) {
-        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = document.head || document.getElementsByTagName('head')[0],
-        style_checked = document.createElement('style');
-        head_checked.appendChild(style_checked);
-        style_checked.type = 'text/css';
-        style_checked.appendChild(document.createTextNode(css_checked));
-    }
-    disableCSS();
-}
-
-/*
-//////////////// SECTION: OUTLINES  ///////////////
-*/
-
-document.querySelector("#cb-outlines").addEventListener("change", toggleOutlines);
-
-function toggleOutlines() {
-    if (document.querySelector("#cb-outlines").checked) {
-        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = document.head || document.getElementsByTagName('head')[0],
-        style_checked = document.createElement('style');
-        head_checked.appendChild(style_checked);
-        style_checked.type = 'text/css';
-        style_checked.appendChild(document.createTextNode(css_checked));
-    }
-
-    else {
-        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
-        head_unchecked = document.head || document.getElementsByTagName('head')[0],
-        style_unchecked = document.createElement('style');
-        head_unchecked.appendChild(style_unchecked);
-        style_unchecked.type = 'text/css';
-        style_unchecked.appendChild(document.createTextNode(css_unchecked));
-    }
-}    
-
-/*
-//////////////// SECTION: CLASS NAMES ///////////////
-*/
-
-let section_class ="section-selector-1";
-
-document.querySelector("#dd_className").addEventListener("change", doClassName);
-
-function doClassName() {
-    removeClassNames();
-    let opt = 1 + parseInt(document.querySelector("#dd_className").value);
-    section_class = "section-selector-"+opt;
-    document.querySelector("section").classList.add("section-selector-"+opt);
-}
-
-function removeClassNames() {
-    const el_section = document.querySelector("section");
-    for (let i = 1; i <= 6; i++) {
-        el_section.classList.remove("section-selector-"+[i]);
-    }
+    document.querySelector("#myModal").scrollTo(0, 0); // scrolls to top of sidebar
 }
 
 /* ================ DIALOG BOXES =================== */
@@ -199,17 +127,438 @@ function dragElement(elmnt) {
     }
 }
 
-for (let i = 1; i <= uiUIenusLength; i++) {
-    document.querySelector(`#content-${[i]} .dialog-box-header span.close-x`).addEventListener("click", hideDialogBox);
+/*
+//////////////// SECTION: THEME  ///////////////
+*/
+
+document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
+
+function doSectionTheme() {
+    hideMenus();
+    const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    // Remove all styles
+    var hs = document.querySelectorAll('style');
+    for (var i=0, max = hs.length; i < max; i++) {
+        hs[i].parentNode.removeChild(hs[i]);
+    }
+
+    if (selectedValue==="light") {
+        document.querySelector("section").classList.remove("theme-dark"); 
+        document.querySelector("section").classList.add("theme-light"); 
+    }
+    else if (selectedValue==="dark") {
+        document.querySelector("section").classList.remove("theme-light"); 
+        document.querySelector("section").classList.add("theme-dark"); 
+    }
+
+    // Check for outlines
+    if (document.querySelector("#cb-outlines").checked) {
+        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = document.head || document.getElementsByTagName('head')[0],
+        style_checked = document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(document.createTextNode(css_checked));
+    }
+    disableCSS();
 }
 
-function hideDialogBox() {
-    for (let i = 1; i <= uiUIenusLength; i++) {
-        document.querySelector(`#content-${[i]}`).classList.add("dropdown-hidden"); 
+/*
+//////////////// SECTION: OUTLINES  ///////////////
+*/
+
+document.querySelector("#cb_outlines").addEventListener("change", toggleOutlines);
+
+function toggleOutlines() {
+    if (document.querySelector("#cb_outlines").checked) {
+        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = document.head || document.getElementsByTagName('head')[0],
+        style_checked = document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(document.createTextNode(css_checked));
     }
-    hideSidebar();
-    disableTransColCode();
-} 
+
+    else {
+        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
+        head_unchecked = document.head || document.getElementsByTagName('head')[0],
+        style_unchecked = document.createElement('style');
+        head_unchecked.appendChild(style_unchecked);
+        style_unchecked.type = 'text/css';
+        style_unchecked.appendChild(document.createTextNode(css_unchecked));
+    }
+}    
+
+/*
+//////////////// SECTION: CLASS NAMES ///////////////
+*/
+
+document.querySelector("#dd_className").addEventListener("change", doClassName);
+
+function doClassName() {
+    removeClassNames();
+    let opt = 1 + parseInt(document.querySelector("#dd_className").value);
+    section_class = "section-selector-"+opt;
+    document.querySelector("section").classList.add("section-selector-"+opt);
+}
+
+function removeClassNames() {
+    const el_section = document.querySelector("section");
+    for (let i = 1; i <= uiUIenusLength; i++) {
+        el_section.classList.remove("section-selector-"+[i]);
+    }
+}
+
+/*
+//////////////// GRID-0 AND GRID-2-SPLIT: SECTION WIDTH ///////////////
+*/
+
+document.querySelector("#switch_section_width_desktop").addEventListener("change", doWidthDesktopSection);
+
+function doWidthDesktopSection() {
+    const rbs = document.querySelectorAll("input[name='section-width-desktop']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="800px") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.remove("section-width-1140px");
+    }
+    else if (selectedValue==="1024px") {
+        document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.add("section-width-1024px");
+    }
+    else if (selectedValue==="1140px") {
+        document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.add("section-width-1140px");
+    }
+}
+
+/*
+//////////////// GRID-2, GRID-3 and GRID-4: UPPER COLUMN WIDTH ///////////////
+*/
+
+if (document.querySelector("#switch-upper-block-width")) {
+    document.querySelector("#switch-upper-block-width").addEventListener("change", doUpperBlockWidth);
+}
+
+function doUpperBlockWidth() {
+    const rbs = document.querySelectorAll("input[name='upper-block-width']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="width-full") {
+        document.querySelector("#HTML-Content section .col-1").classList.add("width-full");
+    }
+    else if (selectedValue==="width-800px") {
+        document.querySelector("#HTML-Content section .col-1").classList.remove("width-full"); 
+    }
+}
+
+/*
+//////////////// GRID-0: ALIGN FOR ENTIRE SECTION ///////////////
+*/
+
+if (document.querySelector("#switch-horz-align-desktop")) {
+    document.querySelector("#switch-horz-align-desktop").addEventListener("change", doAlignDesktopSection);
+}
+
+function doAlignDesktopSection() {
+    const rbs = document.querySelectorAll("input[name='horz-align-desktop']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="left") {
+        document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
+        document.getElementById("dd_align_desktop_btns").disabled=false;
+        document.getElementById("dd_align_desktop_btns").value="0";
+
+    }
+    else if (selectedValue==="center") {
+        document.querySelector("#HTML-Content section").classList.add("text-center-desktop"); 
+        document.getElementById("dd_align_desktop_btns").value="1";
+        document.getElementById("dd_align_desktop_btns").disabled=true;
+    }
+}
+
+if (document.querySelector("#switch-horz-align-mobile")) {
+    document.querySelector("#switch-horz-align-mobile").addEventListener("change", doAlignMobileSection);
+}
+
+function doAlignMobileSection() {
+
+    const rbs = document.querySelectorAll("input[name='horz-align-mobile']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="left") {
+        document.querySelector("section").classList.remove("text-center-mobile");
+        document.getElementById("dd_align_desktop_btns").disabled=false;
+        document.getElementById("dd_align_desktop_btns").value="0";
+
+    }
+    else if (selectedValue==="center") {
+        document.querySelector("section").classList.add("text-center-mobile"); 
+        document.getElementById("dd_align_desktop_btns").value="1";
+        document.getElementById("dd_align_desktop_btns").disabled=true;
+    }
+}
+
+/*
+//////////////// GRID-0, GRID-2, GRID-3 and GRID-4: UPPER COLUMN ALIGN ///////////////
+*/
+
+if (document.querySelector("#switch-upper-block-align")) {
+    document.querySelector("#switch-upper-block-align").addEventListener("change", doUpperBlockAlign);
+}
+
+function doUpperBlockAlign() {
+    const rbs = document.querySelectorAll("input[name='upper-block-align']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="left") {
+        document.querySelector("section .col-1").classList.remove("text-center");
+    }
+    else if (selectedValue==="center") {
+        document.querySelector("section .col-1").classList.add("text-center"); 
+    }
+}
+
+
+
+/*
+//////////////// ALL GRIDS: UPPER CATEGORY LABEL ABOVE H2 ///////////////
+*/
+
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
+
+function doUpperLabel() {
+
+    // Single column
+    if (document.querySelector("section > h2")) {
+        if (!document.getElementById("cb_upperLabelOn").checked) {
+            removeUpperLabel();
+        }
+        else {
+            document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            document.getElementById("btn_upper_label").disabled=false;
+            enableLabelColor();
+        }
+    }
+
+    // 2-Column split
+    else if (document.querySelector("section.cols-2-split")) {
+        if (!document.getElementById("cb_upperLabelOn").checked) {
+            removeUpperLabel();
+        }
+        else {
+            removeUpperLabel();
+            document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            document.getElementById("btn_upper_label").disabled=false;
+            enableLabelColor();
+        }
+    }
+
+    // 2, 3 or 4-Column
+    else if (document.querySelector("section .col-1")) {
+        if (!document.getElementById("cb_upperLabelOn").checked) {
+            removeUpperLabel();
+        }
+        else {
+            removeUpperLabel();
+            const newUpperLabelDiv = document.createElement("div");
+            const newUpperLabelSpan = document.createElement("span");
+            newUpperLabelDiv.appendChild(newUpperLabelSpan);
+            newUpperLabelDiv.classList.add("container-upper-label"); 
+            document.querySelector("section .col-1").prepend(newUpperLabelDiv);
+            document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
+            enableLabelColor();
+        }
+    }
+}
+
+function removeUpperLabel() {
+    if (document.querySelector('.container-upper-label')) {
+    const upperLabel = document.querySelector('.container-upper-label');
+        upperLabel.remove();
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        document.getElementById("btn_upper_label").disabled=true;
+        disableLabelColor();
+    }
+}
+
+function disableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=true;
+    document.querySelector("label[for='cb_upperLabelOn']").style.color = "var(--gray-500)";
+}
+
+function enableLabelColor() {
+    document.getElementById("btn_upper_label").disabled=false;
+    document.querySelector("label[for='cb_upperLabelOn']").style.color = "#fff";
+}
+
+/*
+//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
+*/
+if (document.querySelector("#cb_upperH2On")) {
+    document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
+}
+
+function doUpperH2() {
+    if (!document.getElementById("cb_upperH2On").checked) {
+        removeUpperH2();
+    }
+    else {
+        removeUpperH2();
+        document.getElementById("btn_upper_head").disabled=false;
+        const newH2 = document.createElement("h2");
+        const newContent = document.createTextNode("Nice heading here");
+        newH2.appendChild(newContent);
+        const currentDiv = document.querySelector('.col-1');
+        if (!document.querySelector('.container-upper-label')) {
+            currentDiv.prepend(newH2);
+        }
+        else {
+            document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
+        }
+    }
+}
+
+function removeUpperH2() {
+    if (document.querySelector('.col-1 h2')) {
+        document.getElementById("btn_upper_head").disabled=true;
+        const elH2 = document.querySelector('.col-1 h2');
+        elH2.remove();
+    }
+}
+
+/*
+//////////////// H3 SUB-HEADINGS ////////////////////
+*/
+
+document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
+
+function doUpperH3() {
+
+    // Single column
+    if (document.querySelector("section > h2")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            removeUpperH3();
+            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
+            document.getElementById("btn_subhead").disabled=false;
+        }            
+    }
+
+    // 2-Column split
+    else if (document.querySelector("section.cols-2-split")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            if (!document.querySelector(".cols-2-split .col-2 h3")) {
+                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
+                document.getElementById("btn_subhead").disabled=false;
+            }
+            else {
+                return
+            }
+        }
+    }
+
+    // 2, 3 or 4-Column
+    else if (document.querySelector("section .col-1")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            removeUpperH3();
+            const newSubHead = document.createElement("h3");
+            const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
+            newSubHead.appendChild(newContent);
+            const currentDiv = document.querySelector('.col-1');
+            currentDiv.append(newSubHead);
+            document.getElementById("btn_upper_subhead").disabled=false;
+            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+        }
+    }
+}
+
+function removeUpperH3() {
+    document.querySelector("label[for='cb_upperH3On']").style.color = "var(--gray-500)";
+    if (document.querySelector("section > h3")) {
+        document.querySelector("section > h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
+    }
+
+    else if (document.querySelector("section.cols-2-split")) {
+        document.querySelector("section.cols-2-split .col-2 h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
+    }
+    else if (document.querySelector("section .col-1 h3")) {
+        document.querySelector("section .col-1 h3").remove();
+        document.getElementById("btn_upper_subhead").disabled=true;
+    }
+}
+
+/*
+//////////////// GRID-0: DECKHEAD / STANDFIRST ///////////////
+*/
+
+if (document.querySelector("#cb_standfirstOn")) {
+    document.querySelector("#cb_standfirstOn").addEventListener("change", doStandFirst);
+}
+
+function doStandFirst() {
+    if (!document.getElementById("cb_standfirstOn").checked) {
+        document.querySelector("label[for='cb_standfirstOn']").style.color = "var(--gray-500)";
+        document.querySelector("section > p").classList.remove("standfirst");
+    }
+    else {
+        document.querySelector("label[for='cb_standfirstOn']").style.color = "#fff";
+        document.querySelector("section > p").classList.add("standfirst");
+    }
+}
+
 
 /*
 //////////////// COPY TO CLIPBOARD ///////////////
