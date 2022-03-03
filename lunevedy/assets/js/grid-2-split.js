@@ -869,53 +869,6 @@ function swapButtonIcons() {
 //////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
 */
 
-function disableImgProps() {
-    // Disable image options
-    document.getElementById("dd_image_corners").disabled=true;
-    document.getElementById("dd_image_shadows").disabled=true;
-    document.getElementById("dd_image_borders").disabled=true;
-    const el_label_1 = document.querySelector("#label_img_shadows");
-    const el_label_2 = document.querySelector("#label_img_borders");
-    const el_label_3 = document.querySelector("#label_img_corners");
-    el_label_1.classList.add('disabled-gray');
-    el_label_2.classList.add('disabled-gray');
-    el_label_3.classList.add('disabled-gray');
-}
-
-function enableImgProps() {
-    // Disable image options
-    document.getElementById("dd_image_corners").disabled=false;
-    document.getElementById("dd_image_shadows").disabled=false;
-    document.getElementById("dd_image_borders").disabled=false;
-    const el_label_1 = document.querySelector("#label_img_shadows");
-    const el_label_2 = document.querySelector("#label_img_borders");
-    const el_label_3 = document.querySelector("#label_img_corners");
-    el_label_1.classList.remove('disabled-gray');
-    el_label_2.classList.remove('disabled-gray');
-    el_label_3.classList.remove('disabled-gray');
-}
-
-function disableVidProps() {
-    // Disable video options
-    document.getElementById("dd_vid_borders").disabled=true;
-    document.getElementById("dd_vid_shadows").disabled=true;
-    const el_label_1 = document.querySelector("#label_vid_shadows");
-    const el_label_2 = document.querySelector("#label_vid_borders");
-    el_label_1.classList.add('disabled-gray');
-    el_label_2.classList.add('disabled-gray');
-
-}
-
-function enableVidProps() {
-    // Disable video options
-    document.getElementById("dd_vid_borders").disabled=false;
-    document.getElementById("dd_vid_shadows").disabled=false;
-    const el_label_1 = document.querySelector("#label_vid_shadows");
-    const el_label_2 = document.querySelector("#label_vid_borders");
-    el_label_1.classList.remove('disabled-gray');
-    el_label_2.classList.remove('disabled-gray');
-}
-
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
 function doVisType() { 
@@ -931,100 +884,63 @@ function doVisType() {
     
     let col_fig = document.querySelector('#HTML-Content section .col-2:nth-of-type(2)');
 
-    if (selectedValue==="pictures") {
+    if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
         removeVisual();
-        resetVisualEffects();
         disableVidProps();
         enableImgProps();
+
         let child_obj = document.createElement("figure");
-        child_obj.innerHTML = "<img src="+el_picture+" alt=\"Placeholder image\">";
-        col_fig.appendChild(child_obj);
+
+        if (selectedValue==="pictures") {
+            console.log("el_picture: "+el_picture);
+            child_obj.innerHTML = "<img src="+el_picture+" alt=\"Placeholder image\">";
+            col_fig.appendChild(child_obj);
+            document.getElementById("vis_type_1").checked=true;
+        }
+
+        else if (selectedValue==="transparent") {
+            console.log("el_pic_tran: "+el_pic_trans);
+            child_obj.innerHTML = "<img src="+el_pic_trans+" alt=\"Placeholder image\">";
+            col_fig.appendChild(child_obj);
+            document.getElementById("vis_type_2").checked=true;
+        }
+
+        else if (selectedValue==="illustrations") {
+            console.log("el_drawing: "+el_drawing);
+            child_obj.innerHTML = "<img src="+el_drawing+" alt=\"Placeholder image\">";
+            col_fig.appendChild(child_obj);
+            document.getElementById("vis_type_3").checked=true;
+        }
+
         document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_image_corners").disabled=false;
         document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
         document.getElementById("dd_image_corners").value="0";
-        document.getElementById("vis_type_1").checked=true;
     }
 
-    else if (selectedValue==="transparent") {
+    else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
         removeVisual();
-        resetVisualEffects();
-        disableVidProps();
-        enableImgProps();
-        let child_obj = document.createElement("figure");
-        child_obj.innerHTML = "<img src="+el_pic_trans+" alt=\"Placeholder image\">";
-        col_fig.appendChild(child_obj);
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
-        document.getElementById("dd_image_corners").value="0";
-        document.getElementById("vis_type_2").checked=true;
-    }
-
-    else if (selectedValue==="illustrations") {
-        removeVisual();
-        resetVisualEffects();
-        disableVidProps();
-        enableImgProps();
-        let child_obj = document.createElement("figure");
-        child_obj.innerHTML = "<img src="+el_drawing+" alt=\"Placeholder image\">";
-        col_fig.appendChild(child_obj);
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_borders").disabled=false;
-        document.getElementById("dd_image_corners").disabled=false;
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
-        document.getElementById("dd_image_corners").value="0";
-        document.getElementById("vis_type_3").checked=true;
-    }
-
-    else if (selectedValue==="vid-file") {
-        removeVisual();
-        resetVisualEffects();
         disableImgProps();
         enableVidProps();
-        let child_obj = document.createElement("figure");
-        child_obj.innerHTML = "\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src="+el_vid_file+" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t";
-        col_fig.appendChild(child_obj);
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
-        document.getElementById("dd_image_corners").value="0";
-        document.getElementById("vis_type_4").checked=true;
-    }
 
-    else if (selectedValue==="vid-yt") {
-        removeVisual();
-        resetVisualEffects();
-        disableImgProps();
-        enableVidProps();
         let child_obj = document.createElement("figure");
-        child_obj.innerHTML = "\n\t\t\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t\n\t";
-        col_fig.appendChild(child_obj);
-        document.getElementById("vis_type_5").checked=true;
+
+        if (selectedValue==="vid-file") {
+            child_obj.innerHTML = "\n\t\t<div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src="+el_vid_file+" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div>\n\t";
+            col_fig.appendChild(child_obj);
+            document.getElementById("vis_type_4").checked=true;
+        }
+
+        else if (selectedValue==="vid-yt") {
+            child_obj.innerHTML = "\n\t\t\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t\n\t";
+            col_fig.appendChild(child_obj);
+            document.getElementById("vis_type_5").checked=true;
+        }
         document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_borders").value="0";
+        document.getElementById("dd_image_corners").value="0";
+        document.getElementById("dd_image_shadows").value="0";
         document.getElementById("dd_image_corners").value="0";
     }  
 }
-
-function removeVisual() {
-    const el_col_figure = document.querySelector('section figure');
-    el_col_figure.remove();
-}
-
-function resetVisualEffects() {
-    document.getElementById("dd_image_shadows").value="0";
-    document.getElementById("dd_image_borders").value="0";
-    document.getElementById("dd_image_shadows").value="0";
-    document.getElementById("dd_vid_borders").value="0";
-    document.getElementById("dd_vid_shadows").value="0";
-    removeFigShadows();
-}
-
 
 /*
 //////////////// VISUAL PROPERTIES ///////////////
@@ -1035,37 +951,35 @@ document.querySelector("#dd_image_corners").addEventListener("change", doImageCo
 function doImageCorners() {
     let opt = document.querySelector("#dd_image_corners").value;
 
-    if (opt==="0") {
-        removeImageCorners();
-    }
-
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section figure img');
-        el_fig.classList.add("corners-soft");
+    if (document.querySelector('section figure')) {
+        // Remove figure shadow
+        if (opt==="0") {
+            document.querySelector('section').classList.remove("fig-corners-soft");
+        }
+        // Add figure shadow
+        else if (opt==="1") {
+            document.querySelector('section').classList.add("fig-corners-soft");
+        }
     }
 }
-
-function removeImageCorners() {
-    const el_fig = document.querySelector('section figure img');
-    el_fig.classList.remove("corners-soft");
-}
-
 
 /* =========== VISUAL SHADOWS ============ */
 
 document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
 
 function doImageShadows() {
-    let opt = document.querySelector("#dd_image_shadows").value;
-    // Remove image shadow
-    if (opt==="0") {
-        removeFigShadows();
-    }
 
-    // Add image shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section figure');
-        el_fig.classList.add("figure-shadow");
+    let opt = document.querySelector("#dd_image_shadows").value;
+
+    if (document.querySelector('section figure')) {
+        // Remove figure shadow
+        if (opt==="0") {
+            document.querySelector('section').classList.remove("fig-shadow");
+        }
+        // Add figure shadow
+        else if (opt==="1") {
+            document.querySelector('section').classList.add("fig-shadow");
+        }
     }
 }
 
@@ -1074,24 +988,53 @@ document.querySelector("#dd_vid_shadows").addEventListener("change", doVidShadow
 function doVidShadows() {
 
     if (document.querySelector('section figure')) {
-        const el_fig = document.querySelector('section figure');
-
         let opt = document.querySelector("#dd_vid_shadows").value;
-        // Remove video shadow
+        // Remove figure shadow
         if (opt==="0") {
-            removeFigShadows();
+            document.querySelector('section').classList.remove("fig-shadow");
         }
-
-        // Add video shadow
+        // Add figure shadow
         else if (opt==="1") {
-            el_fig.classList.add("figure-shadow");
+            document.querySelector('section').classList.add("fig-shadow");
         }
     }
 }
 
-function removeFigShadows() {
+function disableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=true;
+    document.getElementById("dd_image_shadows").disabled=true;
+    document.querySelector("label[for='dd_image_corners']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='dd_image_shadows']").style.color = "var(--gray-500)";
+}
+
+function enableImgProps() {
+    // Disable image options
+    document.getElementById("dd_image_corners").disabled=false;
+    document.getElementById("dd_image_shadows").disabled=false;
+    document.querySelector("label[for='dd_image_corners']").style.color = "#fff";
+    document.querySelector("label[for='dd_image_shadows']").style.color = "#fff";
+}
+
+function disableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_shadows").disabled=true;
+    document.querySelector("label[for='dd_vid_shadows']").style.color = "var(--gray-500)";
+}
+
+function enableVidProps() {
+    // Disable video options
+    document.getElementById("dd_vid_shadows").disabled=false;
+    document.querySelector("label[for='dd_vid_shadows']").style.color = "#fff";
+}
+
+function removeVisual() {
     if (document.querySelector('section figure')) {
-        const el_fig = document.querySelector('figure');
-        el_fig.classList.add("figure-shadow");
+        document.querySelector('section figure').remove();
+        disableImgProps();
+        disableVidProps();
     }
 }
+
+
+
