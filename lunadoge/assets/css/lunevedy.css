@@ -309,7 +309,7 @@ section *:last-child, footer *:last-child { margin-bottom: 0 !important }
 
     --column-upper-label-color: var(--gray-700); 
 
-    /* --section-btn-breakpoint: 768px; */
+    --section-btn-breakpoint: 768px;
 }
 
 /* Global font */
@@ -421,7 +421,7 @@ body { font-family: var(--global-font) }
 @media (min-width: 1441px) { .container-menu ul li { margin-right: 60px } }
 
 @media (min-width: 811px) and (max-width: 1024px) { .container-menu { padding: 0 4% } }
-@media (max-width: 810px)  { .container-menu { padding: 0 6% } }
+@media (max-width: 810px) { .container-menu { padding: 0 6% } }
 
 .container-menu ul li a { display: inline-block }
 
@@ -1281,7 +1281,7 @@ body { font-family: var(--global-font) }
         font-size: calc(32px + (58 - 32) * ((100vw - 768px) / (560 - 768)));
     }
     .hero-half .text-long h2 {
-        font-size: calc(20px + (28 - 20) * ((100vw - 768px) / (560- 768)));
+        font-size: calc(20px + (28 - 20) * ((100vw - 768px) / (560 - 768)));
     }
 }
 
@@ -1429,6 +1429,13 @@ body { font-family: var(--global-font) }
 
 /* A 'part' of a web page that is not a 'header' or a 'footer' or a 'nav' (menu). Typically, sections have a heading (usually h2). */
 
+section {
+    display: flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    align-items: stretch;
+}
+
 /* Desktops/Laptops */
 @media (min-width: 1200px) { 
 	section { 
@@ -1446,10 +1453,10 @@ body { font-family: var(--global-font) }
 /* Larger mobiles */
 @media (min-width: 440px) and (max-width: 767px)    { section { padding: 8% 13% 9% 13% } }
 /* Smaller mobiles */
-@media (max-width: 399px)                           { section { padding: 12% 10% 14% 10% } }
+@media (max-width: 439px)                           { section { padding: 12% 10% 14% 10% } }
 
 /* Final section block above footer */
-section:last-child { padding-bottom: 6% }
+/* section:last-child { padding-bottom: 6% } */
 
 /* ========== THEME: LIGHT ========== */
 
@@ -1457,6 +1464,9 @@ section:last-child { padding-bottom: 6% }
 .theme-light .container-upper-label { color: var(--slate-900) }
 .theme-light h1, .theme-light h2, .theme-light h3, 
 .theme-light p, .theme-light li { color: var(--slate-900) }
+
+.theme-light .col-1 h3 { color: var(--slate-700); }
+
 
 .theme-light a.btn-primary:link, 
 .theme-light a.btn-primary:visited {
@@ -1505,6 +1515,8 @@ section:last-child { padding-bottom: 6% }
 .theme-dark h2, .theme-dark h3 { color: var(--slate-100)}
 .theme-dark h2, .theme-dark h3 { color: var(--sky-400)}
 
+.theme-dark .col-1 h3 { color: var(--slate-100); }
+
 .theme-dark a.btn-primary:link, 
 .theme-dark a.btn-primary:visited {
     color:            var(--slate-900);
@@ -1545,11 +1557,12 @@ section.theme-dark .container-upper-label { color: var(--slate-050) }
 /* ===== SECTIONS: FULL-WIDTH (NO FLEXBOX PARENT-CHILD COLUMNS ) ====== */
 
 /* Upper label heading */
+section > .container-upper-label { width: 100%; font-weight: 600 }
 @media (min-width: 768px) { section > .container-upper-label { margin-bottom: 48px } }
 @media (max-width: 767px) { section > .container-upper-label { margin-bottom: 32px } }
 
 section > .container-upper-label span {
-    font-weight: 500; /* padding: 2px 10px 2px 10px; */
+    font-weight: 600; /* padding: 2px 10px 2px 10px; */
     font-size: var(--font-size-section-upper-label);
     color: inherit;
 }
@@ -1566,7 +1579,8 @@ section > h3 {
 	font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
 	line-height: 1.2; 
 	margin-top: 40px; margin-bottom: 2px;
-    color: var(--gray-600) 
+    color: var(--gray-600);
+    font-weight: 600;
 }
 
 /* Paragraphs AND lists */
@@ -1574,9 +1588,7 @@ section > p, section > ul > li {
 	font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1140 - 320)));
 }
 
-section > p {
-	line-height: 1.6; margin-bottom: 16px;
-}
+section > p { line-height: 1.6; margin-bottom: 16px }
 
 section > p.standfirst {
     font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
@@ -1594,16 +1606,75 @@ section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
 section > p:last-child,
 section > ul li:last-child { margin-bottom: 0 }
 
-/* Images */
-section > figure { margin-top: 20px; margin-bottom: 32px }
-
-/* Faux buttons */
-section > .container-btn {
-    display: flex; justify-content: space-between; 
-    flex-wrap: wrap; align-items: flex-start;
-    width: 100%; 
+/* Align elements */
+@media (min-width: 768px) {
+    section.text-center-desktop > .container-upper-label,
+    section.text-center-desktop > h2, section.text-center-desktop > h3,
+    section.text-center-desktop > ul { 
+        text-align: center; margin-left: auto; margin-right: auto
+    }
 }
 
+@media (max-width: 767px) {
+    section.text-center-mobile > .container-upper-label,
+    section.text-center-mobile > h2, section.text-center-mobile > h3,
+    section.text-center-mobile ul { 
+        text-align: center; margin-left: auto; margin-right: auto
+    }
+}
+
+/* Faux buttons container */
+section > .container-btn {
+    display: flex; /* justify-content: space-between; */
+    flex-wrap: wrap; align-items: flex-start;
+    width: 100%; margin-top: 32px; 
+}
+
+/* Buttons left-aligned */
+@media (min-width: 768px ) { section > .container-btn a:nth-child(1) { margin-right: 56px } }
+@media (max-width: 767px ) { section > .container-btn a:nth-child(1) { margin-right: 32px } } 
+
+/* Buttons centered */
+section.text-center-desktop > .container-btn,
+section > .container-btn.text-center-desktop { justify-content: center }
+
+@media (min-width: 768px) {
+    section.text-center-desktop > .container-btn a.btn,
+    section > .container-btn.text-center-desktop a.btn { 
+        margin-left: 24px; margin-right: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    section.text-center-mobile > .container-btn a.btn,
+    section > .container-btn.text-center-mobile a.btn { 
+        margin-left: 16px; margin-right: 16px;
+    }
+}
+
+/* Faux buttons size and padding */
+section > .container-btn a.btn {
+    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1140 - 320)));
+    text-decoration: none; font-weight: 700;
+    margin-bottom: 32px !important;
+}
+
+@media (min-width: 1200px) { 
+    section > .container-btn a.btn { padding: 15px 22px 19px 22px }
+    section > .container-btn a.btn-pill { padding: 18px 26px 21px 26px }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) { 
+    section > .container-btn a.btn { padding: 13px 18px 15px 18px }
+    section > .container-btn a.btn-pill { padding: 18px 21px 20px 21px }
+}
+
+@media (max-width: 767px) {
+    section > .container-btn a.btn { padding: 14px 12px 16px 12px }
+    section > .container-btn a.btn-pill { padding: 16px 18px 18px 18px }
+}
+
+/* Horizontal spacing within buttons: text and icons */
 @media (min-width: 768px) {
     section > .container-btn a.btn > *:nth-child(2), 
     section > .container-btn button > *:nth-child(2) { margin-left: 14px } 
@@ -1614,69 +1685,9 @@ section > .container-btn {
     section > .container-btn button > *:nth-child(2) { margin-left: 10px } 
 }
 
-/* Single-column layout */
-@media (min-width: 1200px) { 
-    section > .container-btn a.btn { padding: 14px 22px 16px 18px; }
-}
 
-/* Single-column layout */
-@media (min-width: 768px) and (max-width: 1119px) { 
-    section > .container-btn a.btn { padding: 13px 22px 15px 16px }
-}
-
-@media (max-width: 767px) {
-    section > .container-btn a.btn { padding: 14px 12px 16px 12px }
-}
-
-section.text-center > .container-btn,
-section > .container-btn.text-center { 
-    justify-content: center
-}
-
-section > .container-btn a.btn {
-    font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1140 - 320)));
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Non-mobiles */
-@media (min-width: 768px ) {
-    section > .container-btn { 
-        flex-direction: row;
-        justify-content: flex-start;
-        text-align: left;
-        margin-top: 32px; margin-bottom: 32px; padding-left: 0;
-    }
-    section > .container-btn a.btn { padding: 12px 16px 17px 16px }
-    section > .container-btn a:first-child { margin-right: 56px }
-    section.text-center-desktop > .container-btn { 
-        justify-content: center; margin-left: auto; margin-right: auto 
-    }
-}
-
-/* Mobiles */
-@media (max-width: 767px) {
-    section > .container-btn {
-        flex-direction: column;
-        align-self: flex-start;
-        margin-top: 32px; margin-bottom: 24px; padding-left: 0;
-    }
-    section > .container-btn a.btn { padding: 12px 16px 12px 16px }
-    section > .container-btn a:first-child { margin-bottom: 0 }
-    section > .container-btn a:nth-child(2) { margin-top: 32px }
-
-    section.text-center > .container-btn a.btn,
-    section > .container-btn.text-center a.btn {
-        align-self: center
-    }
-    section.text-center-mobile > .container-btn { 
-        align-items: center;
-        margin-left: auto; margin-right: auto 
-    }
-}
-
-
-
+/* Images */
+section > figure { margin-top: 20px; margin-bottom: 32px }
 
 section.text-center-desktop > figure,
 section.text-center-mobile  > figure { margin-left: auto; margin-right: auto }
@@ -1698,9 +1709,16 @@ On large screens (and sometimes small screens too), the div child elements are t
     justify-content: space-between; 
     flex-wrap: wrap; 
     align-items: stretch;
-    width: 100%; 
-    padding-left: 8%;
-    padding-right: 8%; 
+}
+
+@media (min-width: 1200px) { 
+	.container-flex { 
+        padding: 3.5% calc((100% - 1140px)/2) 5% calc((100% - 1140px)/2);
+		margin: 0 auto;
+	}
+    .section-width-1024px { padding: 3.5% calc((100% - 1024px)/2) 5% calc((100% - 1024px)/2);
+        margin: 0 auto;
+    }
 }
 
 /* ========= FLEXBOX SECTIONS: SINGLE COLUMN, FULL-WIDTH ========= */
@@ -1708,55 +1726,32 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 /* Desktops/Laptops */
 @media (min-width: 1200px) { 
-	.col-1 { 
-		padding-left: calc((100% - 800px)/2);
-		padding-right: calc((100% - 800px)/2);
-        padding-bottom: 1%;
-		margin: 0 auto;
-	} 
+    .col-1 { padding-bottom: 1%; width: 100% }
+    .col-1 .container-upper-label, .col-1 h2, .col-1 h3 { 
+        padding: 0 calc(100% - 800px) 1% 0; margin: 0 }
+
+    .col-1.text-center { width: 100%; margin: 0 auto }
+    .col-1.text-center .container-upper-label, 
+    .col-1.text-center h2, .col-1.text-center h3 {
+        padding: 0 calc((100% - 800px)/2) 1% calc((100% - 800px)/2);
+        margin: 0 auto; 
+    }
+    .col-1.width-full { padding: 0 0 1% 0; margin: 0 auto; width: 100%; }
+    .col-1.width-full .container-upper-label,
+    .col-1.width-full h2, .col-1.width-full h3 { padding: 0; margin: 0 }
 }
 
 /* Tablets and smaller desktops */
-@media (min-width: 1025px) and (max-width: 1199px ) {
-    .col-1 { 
-        padding-left: 12%;
-        padding-right: 12%;
-        padding-bottom: 0;
-    }
-}
+@media (min-width: 1025px) and (max-width: 1199px ) { .col-1 { padding-bottom: 0 } }
 
 /* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { 
-    .col-1 { 
-        padding-left: 5%;
-        padding-right: 5%;
-        padding-bottom: 1%;
-    }
-}
+@media (min-width: 768px) and (max-width: 1024px)  { .col-1 { padding: 0 5% 1% 5% } }
 
 /* Larger mobiles */
-@media (min-width: 400px) and (max-width: 767px)  { 
-    .col-1 { 
-        padding-left: 13%;
-        padding-right: 13%;
-        padding-bottom: 1%;
-    }
-}
+@media (min-width: 400px) and (max-width: 767px)   { .col-1 { padding: 0 13% 1% 13% } }
 
 /* Smaller mobiles */
-@media (max-width: 399px) { 
-    .col-1 { 
-        padding-left: 10%;
-        padding-right: 10%;
-        padding-bottom: 1%;
-    }
-}
-
-/* All viewports */
-.col-1 {
-    width: 100%;
-    margin-bottom: 42px;
-}
+@media (max-width: 399px) { .col-1 { padding: 0 10% 1% 10% } }
 
 /* Sub-headings (h2 and h3) inside .col-1 child element */
 
@@ -1766,19 +1761,13 @@ On large screens (and sometimes small screens too), the div child elements are t
     line-height: 1.1;
     letter-spacing: -2px;
     margin-bottom: 32px;
-    color: var(--gray-900);
-}
-
-.col-1 h1.long-text {
-    font-size: calc(28px + (48 - 28) * ((100vw - 320px) / (1140 - 320)));
 }
 
 .col-1 h3 {
     font-size: calc(22px + (28 - 22) * ((100vw - 320px) / (1140 - 320)));
-    font-weight: normal;
+    font-weight: 500; color: var(--slate-700);
     line-height: 1.3;
     margin-top: -12px;
-    color: var(--gray-700);
 }
 
 /* Adjust upper block h2 and h3 letter-spacing for mobiles */
@@ -1789,10 +1778,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 /* Upper heading inside .col-1 child element */
 .col-1 .container-upper-label {
-    font-weight: bold; display: inline-block;
+    font-weight: 600; display: inline-block;
     font-size: calc(16px + (18 - 16) * ((100vw - 320px)/(1140 - 320)));
-    text-transform: uppercase; 
-    letter-spacing: 6px; word-spacing: 120%;
     margin-bottom: 32px;
 }
 
@@ -1893,17 +1880,7 @@ On large screens (and sometimes small screens too), the div child elements are t
     padding: 26px 28px 28px 28px;
 }
 
-@media (min-width: 1200px) {
-    .col-2 figure { margin-bottom: 32px }
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-    .col-2 figure { margin-bottom: 26px }
-}
-
-@media (max-width: 767px) { 
-    .col-2 figure { margin-bottom: 20px }
-}
+@media (max-width: 767px) { .col-2 figure { margin-bottom: 48px !important } }
 
 /* Font Awesome: Larger and smaller icons */
 .col-2 figure.icon i[class*='fa'] { font-size: 116px }
@@ -1942,29 +1919,29 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* ============= TWO COLUMNS: SPLIT TEXT AND IMAGE ============ */
 
 @media (min-width: 1200px) { 
+    .cols-2-split { 
+        padding: 4.5% calc((100% - 1140px)/2) 5% calc((100% - 1140px)/2);
+        margin: 0 auto;
+    }
+    .cols-2-split.section-width-1024px { 
+        padding-left: calc((100% - 1024px)/2); padding-right: calc((100% - 1024px)/2);  
+    }
     .cols-2-split.section-width-930px { 
-        padding: 5% calc((100% - 930px)/2) 3% calc((100% - 1024px)/2) 
+        padding-left: calc((100% - 930px)/2); padding-right: calc((100% - 930px)/2);  
     }
 }
 
 /* Desktops/Laptops */
-@media (min-width: 1025px) { 
-    .cols-2-split { padding: 5% 10% 3% 10%;	} 
-}
+@media (min-width: 1025px) and (max-width: 1199px) { .cols-2-split { padding: 5% 10% 5% 10% } }
 
 /* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { 
-    .cols-2-split { padding: 4% 10% 4% 10%; }
-}
+@media (min-width: 768px) and (max-width: 1024px) { .cols-2-split { padding: 4% 10% 4% 10% } }
+
 /* Larger mobiles */
-@media (min-width: 400px) and (max-width: 767px)  { 
-	.cols-2-split { padding: 6% 13% 6% 13%; } 
-}
+@media (min-width: 400px) and (max-width: 767px) { .cols-2-split { padding: 6% 13% 6% 13%; } }
 
 /* Smaller mobiles */
-@media (max-width: 399px) { 
-	.cols-2-split { padding: 9% 10% 8% 10%; } 
-}
+@media (max-width: 399px) { .cols-2-split { padding: 9% 10% 4% 10% } }
 
 /* Individual Columns */
 .cols-2-split .col-2 {
@@ -2016,14 +1993,15 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* Column sub-headings */
 .cols-2-split .col-2 h3 {
     font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
-    font-weight: 700; line-height: 1.15; margin-bottom: 6px; margin-top: 12px;
+    font-weight: 600; line-height: 1.15; margin-bottom: 6px; margin-top: 12px;
 }
 
 /* Paragraphs and Lists */
-.cols-2-split .col-2 p {
+.cols-2-split .col-2 p, .cols-2-split .col-2 l {
     font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1140 - 320)));
-    margin-bottom: 16px;
 }
+
+.cols-2-split .col-2 p { margin-bottom: 16px }
 
 .cols-2-split .col-2 li { 
     font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1140 - 320))); 
@@ -2078,7 +2056,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 /* Figures */
 @media (max-width: 767px) { 
-    .cols-2-split .col-2 figure { margin-bottom: 24px !important }
+    .cols-2-split .col-2 figure { margin-bottom: 42px !important }
 }
 
 /* ============= THREE COLUMNS ============ */
@@ -2118,7 +2096,7 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 .col-3 h3 { 
     font-size: calc(22px + (24 - 22) * ((100vw - 320px) / (1140 - 320)));
-    font-weight: 700; line-height: 1.15; margin-bottom: 6px;
+    font-weight: 600; line-height: 1.15; margin-bottom: 6px;
 }
 
 @media (max-width: 767px) { 
@@ -2347,6 +2325,20 @@ section.col-borders .col-4 {
     border-radius: 15px;
 }
 
+section.fig-corners-soft figure img,
+section.fig-corners-soft .col-2 figure img,
+section.fig-corners-soft .col-3 figure img,
+section.fig-corners-soft .col-4 figure img {
+    border-radius: 15px;
+}
+
+section.fig-shadow figure img,
+section.fig-shadow .col-2 figure img,
+section.fig-shadow .col-3 figure img,
+section.fig-shadow .col-4 figure img {
+    filter: drop-shadow(8px 8px 10px var(--drop-shadow));
+}
+
 .img-rotate-clock  figure img { transform: rotate(1deg) }
 .img-rotate-cclock figure img { transform: rotate(-1deg) }
 
@@ -2532,11 +2524,13 @@ a.btn-secondary:active {
 .col-2 a.btn, .col-3 a.btn { 
 	padding: 15px 32px 17px 28px;
 	font-size: calc(17px + (19 - 17) * ((100vw - 320px)/(1920 - 320)));
+    display: inline-block;
 }
 
 .col-4 a.btn { 
 	padding: 14px 28px 16px 26px;
 	font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1920 - 320)));
+    display: inline-block;
 }
 
 /* ================== CONTACT FORM =============== */
