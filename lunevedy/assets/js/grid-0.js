@@ -711,41 +711,28 @@ function doAlignMobileBtns() {
 */
 
 /* Enable visual */
-document.querySelector("#dd_yn_vis").addEventListener("change",checkVis);
+document.querySelector("#cb_visual").addEventListener("change",checkVis);
 
 function checkVis() {
-    let opt = document.querySelector("#dd_yn_vis").value;
-    if (opt==="1") { enableVis() }
-    else if (opt==="0") { removeVisual() }
+
+    if (!document.getElementById("cb_visualOn").checked) {
+        removeVisual();
+    }
+    else {
+        enableRBs();
+        enableVisualWidth();
+        enableImgProps();
+        disableVidProps();
+        disableVisualAlign();
+
+        // Select first (picture) radio button
+        document.getElementById("vis_type_0").checked=true;
+
+        // Add picture
+        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");
+    }
 }
 
-function enableVis() {
-    // Enable all radio options
-    document.getElementById("vis_type_0").disabled=false;
-    document.getElementById("vis_type_1").disabled=false;
-    document.getElementById("vis_type_2").disabled=false;
-    document.getElementById("vis_type_3").disabled=false;
-    document.getElementById("vis_type_4").disabled=false;
-
-    //Enable visual width
-    document.querySelector("#dd_yn_vis_width").disabled=false;
-    document.querySelector("#dd_yn_vis_width").value="0";
-    document.querySelector("label[for='dd_yn_vis_width']").style.color = "#fff";
-
-    // Select first (picture) radio button
-    document.getElementById("vis_type_0").checked=true;
-
-    // Add picture
-    document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");
-
-    // Enable image properties and labels
-    document.getElementById("dd_img_corners").disabled=false;
-    document.getElementById("dd_img_corners").value="0";
-    document.querySelector("label[for='dd_img_corners']").style.color = "#fff";
-    document.getElementById("dd_img_shadows").disabled=false;
-    document.getElementById("dd_img_shadows").value="0";
-    document.querySelector("label[for='dd_img_shadows']").style.color = "#fff";
-}
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
@@ -753,21 +740,30 @@ function doVisType() {
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
     let selectedValue;
     
-    if (document.querySelector("#dd_yn_vis").value==="1") {
+    // if (document.querySelector("#cb_visualOn".checked)) {
+
         for (const rb of rbs) {
             if (rb.checked) {
                 selectedValue = rb.value;
                 break;
             }
         }
-    
+        console.log("selectedValue: "+selectedValue);
         if (selectedValue==="none") {
             removeVisual();
-            disableDesktopAlignFig();
+            disableRBs();
+            disableVisualWidth()
+            disableVisualAlign();
+            disableImgProps();
         }
 
         else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
-            removeVisual();
+            resetVisual();
+            enableRBs();
+            enableVisualWidth();
+            enableImgProps();
+            disableVidProps();
+            disableVisualAlign();
             if (selectedValue==="pictures") {
                 document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");        
                 document.getElementById("vis_type_0").checked=true;
@@ -783,151 +779,58 @@ function doVisType() {
                 document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
                 document.getElementById("vis_type_2").checked=true;
             }
-            // Enables fig width
-            document.querySelector("#dd_yn_vis_width").disabled=false;
-            document.querySelector("#dd_yn_vis_width").value="0";
-            document.querySelector("label[for='dd_yn_vis_width']").style.color = "#fff";
-
-            // Enable image properties and labels
-            document.getElementById("dd_img_corners").disabled=false;
-            document.getElementById("dd_img_corners").value="0";
-            document.getElementById("dd_img_shadows").disabled=false;
-            document.getElementById("dd_img_shadows").value="0";
-            document.querySelector("label[for='dd_img_corners']").style.color = "#fff";
-            document.querySelector("label[for='dd_img_shadows']").style.color = "#fff";                
-
-            // Disable video properties and labels
-            document.getElementById("dd_vid_shadows").disabled=true;
-            document.getElementById("dd_vid_shadows").value="0";
-            document.querySelector("label[for='dd_vid_shadows']").style.color = "var(--gray-500)";
-
-            // Enable all radio button labels
-            document.querySelector("label[for='vis_type_0']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_1']").style.color = "#fff";                
-            document.querySelector("label[for='vis_type_2']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_3']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_4']").style.color = "#fff";
         }
 
         else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
-
+            resetVisual();
+            enableRBs();
+            enableVisualWidth();
+            disableImgProps();
+            enableVidProps();
+            disableVisualAlign();
             if (selectedValue==="vid-file") {
-                removeVisual();
-                // disableDesktopAlignFig();
                 document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
                 document.getElementById("vis_type_3").checked=true;
             }
 
             else if (selectedValue==="vid-yt") {
-                removeVisual();
                 document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
                 document.getElementById("vis_type_4").checked=true;
             }
 
-            // Enables fig width
-            document.querySelector("#dd_yn_vis_width").disabled=false;
-            document.querySelector("#dd_yn_vis_width").value="0";
-            document.querySelector("label[for='dd_yn_vis_width']").style.color = "#fff";
-
-            // Disable image properties and labels
-            document.getElementById("dd_img_corners").disabled=true;
-            document.getElementById("dd_img_corners").value="0";
-            document.getElementById("dd_img_shadows").disabled=true;
-            document.getElementById("dd_img_shadows").value="0";
-            document.querySelector("label[for='dd_img_corners']").style.color = "var(--gray-500)";
-            document.querySelector("label[for='dd_img_shadows']").style.color = "var(--gray-500)";
-            
-            // Enable video properties and labels
-            document.getElementById("dd_vid_shadows").disabled=false;
-            document.getElementById("dd_vid_shadows").value="0";
-            document.querySelector("label[for='dd_vid_shadows']").style.color = "#fff";
-
-            // Enable all radio button labels
-            document.querySelector("label[for='vis_type_0']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_1']").style.color = "#fff";                
-            document.querySelector("label[for='vis_type_2']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_3']").style.color = "#fff";
-            document.querySelector("label[for='vis_type_4']").style.color = "#fff";            
-        }
-    }
+           // Enable all radio button labels
+           document.querySelector("label[for='vis_type_0']").style.color = "#fff";
+           document.querySelector("label[for='vis_type_1']").style.color = "#fff";                
+           document.querySelector("label[for='vis_type_2']").style.color = "#fff";
+           document.querySelector("label[for='vis_type_3']").style.color = "#fff";
+           document.querySelector("label[for='vis_type_4']").style.color = "#fff";            
+       }
+    // }
 }
 
 /*
 //////////////// ILLUSTRATIONS: ALIGN ON DESKTOP  ////////////////////
 */
 
-document.querySelector("#dd_align_desktop_figure").addEventListener("change", doAlignDesktopFig);
+document.querySelector("#switch-section-desktop-figure-align").addEventListener("change", doAlignDesktopFig);
     
 function doAlignDesktopFig() {
-    let opt = document.querySelector("#dd_align_desktop_figure").value;
-    if (opt==="0") {
+
+    const rbs = document.querySelectorAll("input[name='section-desktop-figure-align']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="fig-left") {
         document.querySelector("section figure").classList.remove("text-center-desktop");
     }
-
-    else if (opt==="1") {
+    else if (selectedValue==="fig-center") {
         document.querySelector("section figure").classList.add("text-center-desktop");   
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: CORNERS ///////////////
-*/
-
-document.querySelector("#dd_img_corners").addEventListener("change", doImageCorners);
-
-function doImageCorners() {
-    let opt = document.querySelector("#dd_img_corners").value;
-
-    if (opt==="0") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.remove("fig-corners-soft");
-    }
-
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("fig-corners-soft");
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
-*/
-
-document.querySelector("#dd_img_shadows").addEventListener("change", doImageShadows);
-
-function doImageShadows() {
-    let opt = document.querySelector("#dd_img_shadows").value;
-    // Remove figure shadow
-    if (opt==="0") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.remove("fig-shadow");
-    }
-
-    // Add figure shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("fig-shadow");
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: VIDEO SHADOWS ///////////////
-*/
-
-document.querySelector("#dd_vid_shadows").addEventListener("change", doVidShadows);
-
-function doVidShadows() {
-    let opt = document.querySelector("#dd_vid_shadows").value;
-    // Remove figure shadow
-    if (opt==="0") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.remove("fig-shadow");
-    }
-
-    // Add figure shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("fig-shadow");
     }
 }
 
@@ -935,45 +838,202 @@ function doVidShadows() {
 //////////////// VISUAL ELEMENT WIDTH (811px AND ABOVE ) ///////////////
 */
 
-document.querySelector("#dd_yn_vis_width").addEventListener("change", doFigWidth);
+document.querySelector("#switch_section_vis_width_desktop").addEventListener("change", doFigWidthDesktop);
 
-function doFigWidth() {
-    const opt = document.querySelector("#dd_yn_vis_width").value;
+function doFigWidthDesktop() {
+    const rbs = document.querySelectorAll("input[name='section-vis-width-desktop']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
     const el_section_fig = document.querySelector("section figure");
-
-    // remove
-    if (opt==="0") {
+    if (selectedValue==="100") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.remove("figure-width-80");
-        disableDesktopAlignFig();
+        disableVisualAlign();
     }
-    // 50%
-    else if (opt==="1") {
+
+    else if (selectedValue==="80") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.add("figure-width-80");
-        enableDesktopAlignFig();
+        enableVisualAlign();
     }
-    // 50%
-    else if (opt==="2") {
+
+    else if (selectedValue==="50") {
         el_section_fig.classList.remove("figure-width-80");
         el_section_fig.classList.add("figure-width-50");
-        enableDesktopAlignFig();
+        enableVisualAlign();        
     }
 }
 
-function enableDesktopAlignFig() {
-    document.querySelector("#dd_align_desktop_figure").disabled=false;
-    document.querySelector("#dd_align_desktop_figure").value="0";
-    document.querySelector("label[for='dd_align_desktop_figure']").style.color = "#fff";
+/*
+//////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
+*/
+
+/* Enable image shadows */
+document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
+
+function doImgShadows() {
+
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-shadow");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-shadow");
+    }
 }
 
-function disableDesktopAlignFig() {
-    document.querySelector("#dd_align_desktop_figure").disabled=true;
-    document.querySelector("#dd_align_desktop_figure").value="0";
-    document.querySelector("label[for='dd_align_desktop_figure']").style.color = "var(--gray-500)";
+/*
+//////////////// VISUAL PROPERTIES: CORNERS ///////////////
+*/
+
+document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
+
+function doImgCorners() {
+
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-corners-soft");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-corners-soft");
+    }
 }
 
-function removeVisual() {
+/*
+//////////////// VISUAL PROPERTIES: VIDEO SHADOWS ///////////////
+*/
+
+/* Enable image shadows */
+document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
+
+function doVidShadows() {
+
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-shadow");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-shadow");
+    }
+}
+
+/* ================ VISUAL PROPERTIES ================= */
+
+// All radio buttons
+function enableRBs() {
+    document.getElementById("vis_type_0").checked=false;
+    document.getElementById("vis_type_1").checked=false;
+    document.getElementById("vis_type_2").checked=false;
+    document.getElementById("vis_type_3").checked=false;
+    document.getElementById("vis_type_4").checked=false;
+    document.getElementById("vis_type_0").disabled=false;
+    document.getElementById("vis_type_1").disabled=false;
+    document.getElementById("vis_type_2").disabled=false;
+    document.getElementById("vis_type_3").disabled=false;
+    document.getElementById("vis_type_4").disabled=false;
+    document.querySelector("label[for='vis_type_0']").style.color = "#fff";
+    document.querySelector("label[for='vis_type_1']").style.color = "#fff";                
+    document.querySelector("label[for='vis_type_2']").style.color = "#fff";
+    document.querySelector("label[for='vis_type_3']").style.color = "#fff";
+    document.querySelector("label[for='vis_type_4']").style.color = "#fff";
+}
+
+function disableRBs() {
+    document.getElementById("vis_type_0").checked=false;
+    document.getElementById("vis_type_1").checked=false;
+    document.getElementById("vis_type_2").checked=false;
+    document.getElementById("vis_type_3").checked=false;
+    document.getElementById("vis_type_4").checked=false;
+    document.getElementById("vis_type_0").disabled=true;
+    document.getElementById("vis_type_1").disabled=true;
+    document.getElementById("vis_type_2").disabled=true;
+    document.getElementById("vis_type_3").disabled=true;
+    document.getElementById("vis_type_4").disabled=true;
+    document.querySelector("label[for='vis_type_0']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='vis_type_1']").style.color = "var(--gray-500)";                
+    document.querySelector("label[for='vis_type_2']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='vis_type_3']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='vis_type_4']").style.color = "var(--gray-500)";
+    console.log("Got to disable RBs");
+}
+
+
+// Visual width
+function enableVisualWidth() {
+    console.log("enableVisualWidth()");
+    document.querySelector("label[for='switch_section_vis_width_desktop']").style.color = "#fff";
+    document.getElementById("rb_vis_width_desktop_100").disabled=false;
+    document.getElementById("rb_vis_width_desktop_80").disabled=false;
+    document.getElementById("rb_vis_width_desktop_50").disabled=false;
+    document.getElementById("rb_vis_width_desktop_100").checked=true;
+}
+
+function disableVisualWidth() {
+    document.querySelector("label[for='switch_section_vis_width_desktop']").style.color = "var(--gray-500)";
+    document.getElementById("rb_vis_width_desktop_100").disabled=true;
+    document.getElementById("rb_vis_width_desktop_80").disabled=true;
+    document.getElementById("rb_vis_width_desktop_50").disabled=true;
+    document.getElementById("rb_vis_width_desktop_100").checked=false;
+    document.getElementById("rb_vis_width_desktop_80").checked=false;
+    document.getElementById("rb_vis_width_desktop_50").checked=false;
+}
+
+// Visual align
+function enableVisualAlign() {
+    document.querySelector("label[for='switch-section-desktop-figure-align']").style.color = "#fff";
+    document.getElementById("rb_desktop_figure_align_left").disabled=false;
+    document.getElementById("rb_desktop_figure_align_left").checked=true;
+    document.getElementById("rb_desktop_figure_align_center").disabled=false;
+}
+
+function disableVisualAlign() {
+    document.querySelector("label[for='switch-section-desktop-figure-align']").style.color = "var(--gray-500)";
+    // document.getElementById("rb_desktop_figure_align_left").checked=false;
+    document.getElementById("rb_desktop_figure_align_left").disabled=true;
+    document.getElementById("rb_desktop_figure_align_left").checked=false;
+    document.getElementById("rb_desktop_figure_align_center").disabled=true;
+    document.getElementById("rb_desktop_figure_align_center").checked=false;
+}
+
+// Image properties with labels
+function enableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=false;
+    document.getElementById("cb_img_corners").checked=false;
+    document.getElementById("cb_img_shadowsOn").disabled=false;
+    document.getElementById("cb_img_shadows").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "#fff";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
+}
+
+function disableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=true;
+    document.getElementById("cb_img_cornersOn").checked=false;
+    document.getElementById("cb_img_shadowsOn").disabled=true;
+    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+}
+
+// Video properties with labels
+function enableVidProps() {
+    document.getElementById("cb_vid_shadowsOn").disabled=false;
+    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_vid_shadows']").style.color = "#fff";
+}
+
+function disableVidProps() {
+    document.getElementById("cb_vid_shadowsOn").disabled=true;
+    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_vid_shadows']").style.color = "var(--gray-500)";
+}
+
+function resetVisual() {
     if (document.querySelector('section figure')) {
         let el_content = document.querySelector('section');
         let el_fig = document.querySelector('section figure');
@@ -986,41 +1046,19 @@ function removeVisual() {
     document.getElementById("vis_type_2").checked=false;
     document.getElementById("vis_type_3").checked=false;
     document.getElementById("vis_type_4").checked=false;
-    document.getElementById("vis_type_0").disabled=true;
-    document.getElementById("vis_type_1").disabled=true;
-    document.getElementById("vis_type_2").disabled=true;
-    document.getElementById("vis_type_3").disabled=true;
-    document.getElementById("vis_type_4").disabled=true;
+    disableImgProps();
+    disableVidProps();
+}
 
-    // Grey-out radio labels
-    document.querySelector("label[for='vis_type_0']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='vis_type_1']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='vis_type_2']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='vis_type_3']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='vis_type_4']").style.color = "var(--gray-500)";
-
-    // Remove any corner, shadow or width properties 
-    document.querySelector('section').classList.remove("fig-corners-soft");
-    document.querySelector('section').classList.remove("fig-shadow");
-    document.querySelector('section').classList.remove("figure-width-50");
-    document.querySelector('section').classList.remove("figure-width-100");
-
-    // Disable image and video properties and labels
-    document.querySelector("#dd_yn_vis_width").disabled=true;
-    document.querySelector("#dd_yn_vis_width").value="0";
-    document.querySelector("label[for='dd_yn_vis_width']").style.color = "var(--gray-500)";
-
-    document.querySelector("#dd_align_desktop_figure").disabled=true;
-    document.querySelector("#dd_align_desktop_figure").value="0";
-    document.querySelector("label[for='dd_align_desktop_figure']").style.color = "var(--gray-500)";
-
-    document.getElementById("dd_img_corners").disabled=true;
-    document.getElementById("dd_img_corners").value="0";
-    document.querySelector("label[for='dd_img_corners']").style.color = "var(--gray-500)";
-    document.getElementById("dd_img_shadows").value="0";
-    document.getElementById("dd_img_shadows").disabled=true;
-    document.querySelector("label[for='dd_img_shadows']").style.color = "var(--gray-500)";            
-    document.getElementById("dd_vid_shadows").value="0";
-    document.getElementById("dd_vid_shadows").disabled=true;
-    document.querySelector("label[for='dd_vid_shadows']").style.color = "var(--gray-500)";            
+function removeVisual() {
+    if (document.querySelector('section figure')) {
+        let el_content = document.querySelector('section');
+        let el_fig = document.querySelector('section figure');
+        el_content.removeChild(el_fig);
+    }
+    disableRBs();
+    disableVisualWidth();
+    disableVisualAlign();
+    disableImgProps();
+    disableVidProps();
 }
