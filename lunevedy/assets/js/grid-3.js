@@ -558,6 +558,7 @@ function addColButons(el_cols,btn_class) {
     const btn_text = "<span>Order Now</span>";
     el_icon.insertAdjacentHTML('afterend', btn_text);
     el_cols.append(el_btn);
+    window.scrollTo(0,document.querySelector("#HTML-Content").scrollHeight);
 }
 
 function removeColButtons() {
@@ -771,10 +772,7 @@ function doVisType() {
             }
         }
         // Enable image properties
-        document.getElementById("dd_fig_shadows").disabled=false;
-        document.getElementById("dd_fig_shadows").value="0";
-        document.getElementById("dd_fig_corners").disabled=false;
-        document.getElementById("dd_fig_corners").value="0";
+        enableImgProps();
     }
 
     else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") || (selectedValue==="icons-md") ) {
@@ -804,43 +802,56 @@ function doVisType() {
 //////////////// VISUAL PROPERTIES: IMAGE CORNERS ///////////////
 */
 
-document.querySelector("#dd_fig_corners").addEventListener("change", doImageCorners);
+document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
 
-function doImageCorners() {
-    let opt = document.querySelector("#dd_fig_corners").value;
+function doImgCorners() {
 
-    if (opt==="0") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.remove("fig-corners-soft");
+    if (!document.getElementById("cb_img_cornersOn").checked) {
+        document.querySelector('section').classList.remove("fig-corners-soft");
+       
     }
-
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("fig-corners-soft");
+    else {
+        document.querySelector('section').classList.add("fig-corners-soft");
     }
 }
+
 
 /*
-//////////////// VISUAL PROPERTIES: SHADOWS ///////////////
+//////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
 */
 
-document.querySelector("#dd_fig_shadows").addEventListener("change", doImageShadows);
+/* Enable image shadows */
 
-function doImageShadows() {
-    let opt = document.querySelector("#dd_fig_shadows").value;
-
-    // Remove figure shadow
-    if (opt==="0") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.remove("fig-shadow");
+function doImgShadows() {
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-shadow");
+       
     }
-
-    // Add figure shadow
-    else if (opt==="1") {
-        const el_fig = document.querySelector('section');
-        el_fig.classList.add("fig-shadow");
+    else {
+        document.querySelector('section').classList.add("fig-shadow");
     }
 }
+
+
+// Image properties with labels
+function enableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=false;
+    document.getElementById("cb_img_corners").checked=false;
+    // document.getElementById("cb_img_shadowsOn").disabled=false;
+    // document.getElementById("cb_img_shadows").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "#fff";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
+}
+
+function disableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=true;
+    document.getElementById("cb_img_cornersOn").checked=false;
+    // document.getElementById("cb_img_shadowsOn").disabled=true;
+    // document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+}
+
 
 /*
 //////////////// ICON PROPERTIES: SIZE ///////////////
@@ -894,10 +905,7 @@ function removeVisual() {
     document.querySelector('section').classList.remove("fig-corners-soft");
     document.querySelector('section').classList.remove("fig-shadow");
     // Disable image properties
-    document.getElementById("dd_fig_shadows").disabled=true;
-    document.getElementById("dd_fig_shadows").value="0";
-    document.getElementById("dd_fig_corners").disabled=true;
-    document.getElementById("dd_fig_corners").value="0";
+    disableImgProps();
     // Disable icon properties
     document.getElementById("dd_icon_size").disabled=true;
     document.getElementById("dd_icon_align").disabled=true;

@@ -842,9 +842,7 @@ function doVisType() {
             document.getElementById("vis_type_3").checked=true;
         }
 
-        document.getElementById("dd_image_shadows").disabled=false;
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_corners").value="0";
+        document.getElementById("cb_img_shadows").disabled=false;
     }
 
     else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
@@ -865,10 +863,6 @@ function doVisType() {
             col_fig.appendChild(child_obj);
             document.getElementById("vis_type_5").checked=true;
         }
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_corners").value="0";
-        document.getElementById("dd_image_shadows").value="0";
-        document.getElementById("dd_image_corners").value="0";
     }  
 }
 
@@ -876,86 +870,85 @@ function doVisType() {
 //////////////// VISUAL PROPERTIES ///////////////
 */
 
-document.querySelector("#dd_image_corners").addEventListener("change", doImageCorners);
+/* =========== VISUAL: IMAGE SHADOWS ============ */
 
-function doImageCorners() {
-    let opt = document.querySelector("#dd_image_corners").value;
+document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
 
-    if (document.querySelector('section figure')) {
-        // Remove figure shadow
-        if (opt==="0") {
-            document.querySelector('section').classList.remove("fig-corners-soft");
-        }
-        // Add figure shadow
-        else if (opt==="1") {
-            document.querySelector('section').classList.add("fig-corners-soft");
-        }
+function doImgShadows() {
+
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-shadow");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-shadow");
     }
 }
 
-/* =========== VISUAL SHADOWS ============ */
+/*
+//////////////// VISUAL: IMAGE CORNERS ///////////////
+*/
 
-document.querySelector("#dd_image_shadows").addEventListener("change", doImageShadows);
+document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
 
-function doImageShadows() {
+function doImgCorners() {
 
-    let opt = document.querySelector("#dd_image_shadows").value;
-
-    if (document.querySelector('section figure')) {
-        // Remove figure shadow
-        if (opt==="0") {
-            document.querySelector('section').classList.remove("fig-shadow");
-        }
-        // Add figure shadow
-        else if (opt==="1") {
-            document.querySelector('section').classList.add("fig-shadow");
-        }
+    if (!document.getElementById("cb_img_cornersOn").checked) {
+        document.querySelector('section').classList.remove("fig-corners-soft");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-corners-soft");
     }
 }
 
-document.querySelector("#dd_vid_shadows").addEventListener("change", doVidShadows);
+
+/* =========== VISUAL: VIDEO SHADOWS ============ */
+
+document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
 
 function doVidShadows() {
 
-    if (document.querySelector('section figure')) {
-        let opt = document.querySelector("#dd_vid_shadows").value;
-        // Remove figure shadow
-        if (opt==="0") {
-            document.querySelector('section').classList.remove("fig-shadow");
-        }
-        // Add figure shadow
-        else if (opt==="1") {
-            document.querySelector('section').classList.add("fig-shadow");
-        }
+    if (!document.getElementById("cb_vid_shadowsOn").checked) {
+        document.querySelector('section').classList.remove("fig-shadow");
+       
+    }
+    else {
+        document.querySelector('section').classList.add("fig-shadow");
     }
 }
 
-function disableImgProps() {
-    // Disable image options
-    document.getElementById("dd_image_corners").disabled=true;
-    document.getElementById("dd_image_shadows").disabled=true;
-    document.querySelector("label[for='dd_image_corners']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='dd_image_shadows']").style.color = "var(--gray-500)";
+/* ============== VISUAL PROPERTIES: ENABLE/DISABLE ========= */
+// Image properties with labels
+function enableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=false;
+    document.getElementById("cb_img_corners").checked=false;
+    document.getElementById("cb_img_shadowsOn").disabled=false;
+    document.getElementById("cb_img_shadows").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "#fff";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
 }
 
-function enableImgProps() {
-    // Disable image options
-    document.getElementById("dd_image_corners").disabled=false;
-    document.getElementById("dd_image_shadows").disabled=false;
-    document.querySelector("label[for='dd_image_corners']").style.color = "#fff";
-    document.querySelector("label[for='dd_image_shadows']").style.color = "#fff";
+function disableImgProps() {
+    document.getElementById("cb_img_cornersOn").disabled=true;
+    document.getElementById("cb_img_cornersOn").checked=false;
+    document.getElementById("cb_img_shadowsOn").disabled=true;
+    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+}
+
+// Video properties with labels
+function enableVidProps() {
+    document.getElementById("cb_vid_shadowsOn").disabled=false;
+    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_vid_shadows']").style.color = "#fff";
 }
 
 function disableVidProps() {
-    // Disable video options
-    document.getElementById("dd_vid_shadows").disabled=true;
-    document.querySelector("label[for='dd_vid_shadows']").style.color = "var(--gray-500)";
-}
-
-function enableVidProps() {
-    // Disable video options
-    document.getElementById("dd_vid_shadows").disabled=false;
-    document.querySelector("label[for='dd_vid_shadows']").style.color = "#fff";
+    document.getElementById("cb_vid_shadowsOn").disabled=true;
+    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_vid_shadows']").style.color = "var(--gray-500)";
 }
 
 function removeVisual() {
