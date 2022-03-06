@@ -842,7 +842,7 @@ function doVisType() {
             document.getElementById("vis_type_3").checked=true;
         }
 
-        document.getElementById("cb_img_shadows").disabled=false;
+        document.getElementById("cb_img_shadowsOn").disabled=false;
     }
 
     else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
@@ -872,7 +872,7 @@ function doVisType() {
 
 /* =========== VISUAL: IMAGE SHADOWS ============ */
 
-document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
+document.querySelector("#cb_img_shadowsOn").addEventListener("change", doImgShadows);
 
 function doImgShadows() {
 
@@ -889,7 +889,7 @@ function doImgShadows() {
 //////////////// VISUAL: IMAGE CORNERS ///////////////
 */
 
-document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
+document.querySelector("#cb_img_cornersOn").addEventListener("change", doImgCorners);
 
 function doImgCorners() {
 
@@ -905,7 +905,7 @@ function doImgCorners() {
 
 /* =========== VISUAL: VIDEO SHADOWS ============ */
 
-document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
+document.querySelector("#cb_vid_shadowsOn").addEventListener("change", doVidShadows);
 
 function doVidShadows() {
 
@@ -922,11 +922,11 @@ function doVidShadows() {
 // Image properties with labels
 function enableImgProps() {
     document.getElementById("cb_img_cornersOn").disabled=false;
-    document.getElementById("cb_img_corners").checked=false;
+    document.getElementById("cb_img_cornersOn").checked=false;
     document.getElementById("cb_img_shadowsOn").disabled=false;
-    document.getElementById("cb_img_shadows").checked=false;
-    document.querySelector("label[for='cb_img_corners']").style.color = "#fff";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
+    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_cornersOn']").style.color = "#fff";
+    document.querySelector("label[for='cb_img_shadowsOn']").style.color = "#fff";
 }
 
 function disableImgProps() {
@@ -934,28 +934,30 @@ function disableImgProps() {
     document.getElementById("cb_img_cornersOn").checked=false;
     document.getElementById("cb_img_shadowsOn").disabled=true;
     document.getElementById("cb_img_shadowsOn").checked=false;
-    document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_cornersOn']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_shadowsOn']").style.color = "var(--gray-500)";
 }
 
 // Video properties with labels
 function enableVidProps() {
     document.getElementById("cb_vid_shadowsOn").disabled=false;
     document.getElementById("cb_vid_shadowsOn").checked=false;
-    document.querySelector("label[for='cb_vid_shadows']").style.color = "#fff";
+    document.querySelector("label[for='cb_vid_shadowsOn']").style.color = "#fff";
 }
 
 function disableVidProps() {
     document.getElementById("cb_vid_shadowsOn").disabled=true;
     document.getElementById("cb_vid_shadowsOn").checked=false;
-    document.querySelector("label[for='cb_vid_shadows']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_vid_shadowsOn']").style.color = "var(--gray-500)";
+    document.querySelector('section').classList.remove("fig-shadow");
+    document.querySelector('section').classList.remove("fig-corners-soft");
 }
 
 function removeVisual() {
     if (document.querySelector('section figure')) {
-        document.querySelector('section figure').remove();
         disableImgProps();
         disableVidProps();
+        document.querySelector('section figure').remove();
     }
 }
 

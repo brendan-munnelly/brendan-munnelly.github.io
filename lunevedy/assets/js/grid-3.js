@@ -801,7 +801,7 @@ function doVisType() {
 //////////////// VISUAL PROPERTIES: IMAGE CORNERS ///////////////
 */
 
-document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
+document.querySelector("#cb_img_cornersOn").addEventListener("change", doImgCorners);
 
 function doImgCorners() {
 
@@ -820,11 +820,12 @@ function doImgCorners() {
 */
 
 /* Enable image shadows */
+document.querySelector("#cb_img_shadowsOn").addEventListener("change", doImgShadows);
+
 
 function doImgShadows() {
     if (!document.getElementById("cb_img_shadowsOn").checked) {
         document.querySelector('section').classList.remove("fig-shadow");
-       
     }
     else {
         document.querySelector('section').classList.add("fig-shadow");
@@ -835,20 +836,22 @@ function doImgShadows() {
 // Image properties with labels
 function enableImgProps() {
     document.getElementById("cb_img_cornersOn").disabled=false;
-    document.getElementById("cb_img_corners").checked=false;
-    // document.getElementById("cb_img_shadowsOn").disabled=false;
-    // document.getElementById("cb_img_shadows").checked=false;
-    document.querySelector("label[for='cb_img_corners']").style.color = "#fff";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
+    document.getElementById("cb_img_cornersOn").checked=false;
+    document.getElementById("cb_img_shadowsOn").disabled=false;
+    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_cornersOn']").style.color = "#fff";
+    document.querySelector("label[for='cb_img_shadowsOn']").style.color = "#fff";
 }
 
 function disableImgProps() {
     document.getElementById("cb_img_cornersOn").disabled=true;
     document.getElementById("cb_img_cornersOn").checked=false;
-    // document.getElementById("cb_img_shadowsOn").disabled=true;
-    // document.getElementById("cb_img_shadowsOn").checked=false;
-    document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+    document.getElementById("cb_img_shadowsOn").disabled=true;
+    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.querySelector("label[for='cb_img_cornersOn']").style.color = "var(--gray-500)";
+    document.querySelector("label[for='cb_img_shadowsOn']").style.color = "var(--gray-500)";
+    document.querySelector('section').classList.remove("fig-shadow");
+    document.querySelector('section').classList.remove("fig-corners-soft");
 }
 
 
