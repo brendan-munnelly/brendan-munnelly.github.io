@@ -700,7 +700,6 @@ document.querySelector("#dd_buttons_style").addEventListener("change", doButtons
         document.getElementById("rd-btns-icons-left").disabled=false;
         document.getElementById("rd-btns-icons-right").disabled=false;
         document.getElementById("rd-btns-icons-none").disabled=false;
-        // document.getElementById("dd_buttons_icon").disabled=false;
     }
 
     function disableColButtons() {

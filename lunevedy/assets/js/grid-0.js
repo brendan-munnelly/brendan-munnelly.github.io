@@ -419,8 +419,6 @@ function doSectionButtons() {
         document.querySelector("section p:first-of-type").insertAdjacentHTML("afterend",assets_section_buttons_one);
         document.getElementById("dd_buttons_style").disabled=false;
         document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("dd_buttons_icon").disabled=false;
-        document.getElementById("dd_buttons_icon").value="1";
 
         if (document.querySelector("section.text-center-desktop")) {
             document.getElementById("dd_align_desktop_btns").disabled=true;
@@ -446,10 +444,8 @@ function doSectionButtons() {
         removeSectionButtons();
         enableAllButtons();
         document.querySelector("section p:first-of-type").insertAdjacentHTML("afterend", assets_section_buttons_pair);
-        document.getElementById("dd_buttons_icon").disabled=false;
         document.getElementById("dd_buttons_style").value="0";
         document.getElementById("dd_buttons_style").disabled=false;
-        document.getElementById("dd_buttons_icon").value="0";
         
         if (document.querySelector("section.text-center-desktop")) {
             document.getElementById("dd_align_desktop_btns").disabled=true;
@@ -476,15 +472,37 @@ function removeSectionButtons() {
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
-    document.getElementById("dd_buttons_icon").disabled=true;
+    // Button style
     document.getElementById("dd_buttons_style").disabled=true;
+    // Button icon
+    document.getElementById("switch-btns-icons-position").disabled=true;
+    document.querySelector("label[for='switch-btns-icons-position']").style.color = "var(--gray-500)";
+    document.getElementById("rd-btns-icons-left").disabled=true;
+    document.getElementById("rd-btns-icons-left").checked=false;
+    document.getElementById("rd-btns-icons-right").disabled=true;
+    document.getElementById("rd-btns-icons-right").checked=false;
+    document.getElementById("rd-btns-icons-none").disabled=true;
+    document.getElementById("rd-btns-icons-none").checked=false;
+    // Button align
     document.getElementById("dd_align_desktop_btns").disabled=true;
     document.getElementById("dd_align_mobile_btns").disabled=true;
 }
 
 function enableAllButtons() {
-    document.getElementById("dd_buttons_icon").disabled=false;
+    // Button style
     document.getElementById("dd_buttons_style").disabled=false;
+
+    // Button icon
+    document.getElementById("switch-btns-icons-position").disabled=false;
+    document.querySelector("label[for='switch-btns-icons-position']").style.color = "#fff";
+    document.getElementById("rd-btns-icons-left").disabled=false;
+    document.getElementById("rd-btns-icons-left").checked=true;
+    document.getElementById("rd-btns-icons-right").disabled=false;
+    document.getElementById("rd-btns-icons-right").checked=false;
+    document.getElementById("rd-btns-icons-none").disabled=false;
+    document.getElementById("rd-btns-icons-none").checked=false;
+
+    // Button align
 
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
@@ -501,8 +519,20 @@ function enableAllButtons() {
 }
 
 function enablePrimaryButtons() {
-    document.getElementById("dd_buttons_icon").disabled=false;
     document.getElementById("dd_buttons_style").disabled=false;
+
+    // Button icon
+    document.getElementById("switch-btns-icons-position").disabled=false;
+    document.querySelector("label[for='switch-btns-icons-position']").style.color = "#fff";
+    document.getElementById("rd-btns-icons-left").disabled=false;
+    document.getElementById("rd-btns-icons-left").checked=false;
+    document.getElementById("rd-btns-icons-right").disabled=false;
+    document.getElementById("rd-btns-icons-right").checked=true;
+    document.getElementById("rd-btns-icons-none").disabled=false;
+    document.getElementById("rd-btns-icons-none").checked=false;
+
+    // Button align
+
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
     document.getElementById("btn_a_primary_passive_bg").disabled=false;
@@ -512,8 +542,19 @@ function enablePrimaryButtons() {
 }
 
 function enableSecondaryButtons() {
-    document.getElementById("dd_buttons_icon").disabled=false;
+    // Button style
     document.getElementById("dd_buttons_style").disabled=false;
+
+    // Button icon
+    document.getElementById("switch-btns-icons-position").disabled=false;
+    document.querySelector("label[for='switch-btns-icons-position']").style.color = "#fff";
+    document.getElementById("rd-btns-icons-left").disabled=false;
+    document.getElementById("rd-btns-icons-left").checked=true;
+    document.getElementById("rd-btns-icons-right").disabled=false;
+    document.getElementById("rd-btns-icons-right").checked=false;
+    document.getElementById("rd-btns-icons-none").disabled=false;
+    document.getElementById("rd-btns-icons-none").checked=false;
+
     document.getElementById("btn_a_secondary_passive_text").disabled=false;
     document.getElementById("btn_a_secondary_active_text").disabled=false;
     document.getElementById("btn_a_secondary_passive_bg").disabled=false;
@@ -523,10 +564,19 @@ function enableSecondaryButtons() {
 }
 
 function disableAllButtons() {
-    document.getElementById("dd_buttons_icon").disabled=true;
-    document.getElementById("dd_buttons_icon").value="0";
+    // Button style
     document.getElementById("dd_buttons_style").disabled=true;
     document.getElementById("dd_buttons_style").value="0";
+
+    // Button icon
+    document.getElementById("switch-btns-icons-position").disabled=true;
+    document.querySelector("label[for='switch-btns-icons-position']").style.color = "var(--gray-500)";
+    document.getElementById("rd-btns-icons-left").disabled=true;
+    document.getElementById("rd-btns-icons-left").checked=false;
+    document.getElementById("rd-btns-icons-right").disabled=true;
+    document.getElementById("rd-btns-icons-right").checked=false;
+    document.getElementById("rd-btns-icons-none").disabled=true;
+    document.getElementById("rd-btns-icons-none").checked=false;
 
     document.getElementById("btn_a_primary_passive_text").disabled=true;
     document.getElementById("btn_a_primary_active_text").disabled=true;
@@ -617,13 +667,25 @@ function removeButtonsStyle() {
 }
 
 /*
-//////////////// BUTTONS: ICON POSITION ////////////////////
+//////////////// BUTTONS: ICONS POSITION ////////////////////
 */
 
-document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
+if (document.querySelector("#switch-btns-icons-position")) {
+document.querySelector("#switch-btns-icons-position").addEventListener("change", swapButtonIcons);
+}
 
 function swapButtonIcons() {
-    let opt = document.querySelector("#dd_buttons_icon").value;
+
+    const rbs = document.querySelectorAll("input[name='btns-icons-position']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
     // Verify at least primary button exists
     if (document.querySelector("a.btn")) {      
         // Set up button icon and text content;
@@ -632,7 +694,8 @@ function swapButtonIcons() {
         const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
         const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
 
-        if (opt==="0") {
+        if (selectedValue==="btns-icons-left") {
+        // move text to right, icon to left
             // Icon at left. Text at right.
             if (document.querySelector("a.btn-secondary")) {
                 const el_btn_1 = document.querySelector("a.btn-primary");
@@ -645,9 +708,9 @@ function swapButtonIcons() {
                 el_btn.innerHTML = "<i class=\"fas fa-arrow-right\"></i><span>Start free trial<\/span>";
             }
         }
-
-        // Text at left. Icon at right.
-        else if (opt==="1") {
+    
+        else if (selectedValue==="btns-icons-right") {
+            // move text to left, icon to right
             if (document.querySelector("a.btn-secondary")) {
                 const el_btn_1 = document.querySelector("a.btn-primary");
                 el_btn_1.innerHTML = icon_right_primary;
@@ -659,9 +722,9 @@ function swapButtonIcons() {
                 el_btn.innerHTML = "<span>Start free trial<\/span><i class=\"fas fa-arrow-right\"><\/i>";
             }
         }
-         
-        // Text only. No icon.
-        else if (opt==="2") {
+    
+        else if (selectedValue==="btns-icons-none") {
+            // Only text, No icons.
             if (document.querySelector("a.btn-primary")) {
                 const el_btn = document.querySelector("a.btn-primary");
                 const btn_content = "<span>Order now</span>";
@@ -674,8 +737,67 @@ function swapButtonIcons() {
                 el_btn.innerHTML = btn_content;
             }       
         }
+
     }
 }
+
+
+// // document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
+
+// function swapButtonIcons() {
+//     let opt = document.querySelector("#dd_buttons_icon").value;
+//     // Verify at least primary button exists
+//     if (document.querySelector("a.btn")) {      
+//         // Set up button icon and text content;
+//         const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
+//         const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
+//         const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
+//         const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+
+//         if (opt==="0") {
+//             // Icon at left. Text at right.
+//             if (document.querySelector("a.btn-secondary")) {
+//                 const el_btn_1 = document.querySelector("a.btn-primary");
+//                 el_btn_1.innerHTML = icon_left_primary;
+//                 const el_btn_2 = document.querySelector("a.btn-secondary");
+//                 el_btn_2.innerHTML = icon_left_secondary;
+//             }
+//             else {
+//                 const el_btn = document.querySelector("a.btn-primary");
+//                 el_btn.innerHTML = "<i class=\"fas fa-arrow-right\"></i><span>Start free trial<\/span>";
+//             }
+//         }
+
+//         // Text at left. Icon at right.
+//         else if (opt==="1") {
+//             if (document.querySelector("a.btn-secondary")) {
+//                 const el_btn_1 = document.querySelector("a.btn-primary");
+//                 el_btn_1.innerHTML = icon_right_primary;
+//                 const el_btn_2 = document.querySelector("a.btn-secondary");
+//                 el_btn_2.innerHTML = icon_right_secondary;
+//             }
+//             else {
+//                 const el_btn = document.querySelector("a.btn-primary");
+//                 el_btn.innerHTML = "<span>Start free trial<\/span><i class=\"fas fa-arrow-right\"><\/i>";
+//             }
+//         }
+         
+//         // Text only. No icon.
+//         else if (opt==="2") {
+//             if (document.querySelector("a.btn-primary")) {
+//                 const el_btn = document.querySelector("a.btn-primary");
+//                 const btn_content = "<span>Order now</span>";
+//                 el_btn.innerHTML = btn_content;
+//             }
+    
+//             if (document.querySelector("a.btn-secondary")) {
+//                 const el_btn = document.querySelector("a.btn-secondary");
+//                 const btn_content = "<span>Learn more</span>";
+//                 el_btn.innerHTML = btn_content;
+//             }       
+//         }
+//     }
+// }
 
 /*
 //////////////// BUTTONS: ALIGN HORIZONTALLY  ////////////////////
@@ -914,7 +1036,7 @@ document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadow
 
 function doVidShadows() {
 
-    if (!document.getElementById("cb_img_shadowsOn").checked) {
+    if (!document.getElementById("cb_vid_shadowsOn").checked) {
         document.querySelector('section').classList.remove("fig-shadow");
        
     }
@@ -1018,6 +1140,7 @@ function disableImgProps() {
     document.getElementById("cb_img_shadowsOn").checked=false;
     document.querySelector("label[for='cb_img_corners']").style.color = "var(--gray-500)";
     document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
+    document.querySelector('section').classList.remove("fig-shadow");
 }
 
 // Video properties with labels
@@ -1031,6 +1154,7 @@ function disableVidProps() {
     document.getElementById("cb_vid_shadowsOn").disabled=true;
     document.getElementById("cb_vid_shadowsOn").checked=false;
     document.querySelector("label[for='cb_vid_shadows']").style.color = "var(--gray-500)";
+    document.querySelector('section').classList.remove("fig-shadow");
 }
 
 function resetVisual() {
@@ -1046,6 +1170,7 @@ function resetVisual() {
     document.getElementById("vis_type_2").checked=false;
     document.getElementById("vis_type_3").checked=false;
     document.getElementById("vis_type_4").checked=false;
+    document.querySelector('section').classList.remove("fig-shadow");
     disableImgProps();
     disableVidProps();
 }
