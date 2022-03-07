@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Functions: Values and Scope | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating functions with input parameters, passing arguments to them, and returning the output from a function to a variable in the calling program.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Functions: values and scope</h1>
+					<h2>Creating functions with input parameters, passing arguments to them, and returning the output from a function to a variable in the calling program.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#passing-values">Passing values to functions</a></p>
+				<p class="toc-indent"><a href="#functions-parameters">Functions and parameters</a></p>
+				<p class="toc-indent"><a href="#functions-arguments">Functions and arguments</a></p>
+				<p class="toc-indent"><a href="#arrow-functions-parameters">Arrow function syntax</a></p>
+				<p><a href="#functions-return-values">Functions and return values</a></p>
+				<p class="toc-indent"><a href="#accessing-return-values">Accessing return values from functions</a></p>
+
+				<p><a href="#arrow-functions-return-values">Arrow functions and returning values</a></p>
+
+				<p class="toc-indent"><a href="#arrow-functions-explicit-returns">Explicit returns</a></p>
+
+				<p class="toc-indent"><a href="#arrow-functions-implicit-returns">Implicit returns</a></p>
+
+				<p><a href="#functions-default-parameters">Default function parameters</a></p>
+
+				<p><a href="#functions-scope">Functions and scope</a></p>
+				<p class="toc-indent"><a href="#function-scope">Function scope</a></p>
+				<p class="toc-indent"><a href="#block-scope">Block scope</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a function with one or more parameters.</li>
+			<li>Pass one or more arguments to a function.</li>
+			<li>Assign a value returned from a function to a variable in the calling program.</li>
+			<li>Understand function and block scope in a JavaScript program.</li>
+			<li>Understand how variables are created in different ways by the <span class="syn-js">var</span>, <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords.</li>
+		</ul>
+
+		<div class="code-snippets">
+			<p>Functions: value and scope: <a href="code-snippets/code-snippets-functions-values-scope-download.html" target="_blank">JS Code Snippets</a></p>
+		</div>
+
+	</section>
+
+
+
+	<section id="passing-values">
+
+		<h2>Passing values to functions</h2>
+		<p>As you learnt in the <a href="index.html">Introduction to functions</a>, a function is a &#8216;mini-program&#8217; that performs a particular task within a larger, complete program.</p>
+
+		<p>Typically, you will want to provide some information to a function for the function to perform its task. You can think of this as &#8216;feeding&#8217; the function.</p>
+		
+		<p>Technically, &#8216;feeding&#8217; a function is called <i>passing a value</i> to the function. You pass a value &#8211; or maybe multiple values &#8211; to a function when you <i>invoke</i> (call or fire) the function.</p>
+
+		<h3 id="functions-parameters">Functions and parameters</h3>
+		<p>A variable that stores the expected input to a function is called a <i>parameter</i>.</p>
+		
+		<ul>
+			<li>You specify the parameter(s) expected by a function when you create the function.</li>
+			<li>You type the parameter(s) inside the parenthesis <span class="syn-js">()</span> of the function.</li>
+		</ul>
+
+		<p>See the examples below.</p>
+
+		<img src="assets/img/functions-parameters-1.png" alt="JavaScript function parameters" class="wider-115">
+
+		<p>A function may accept multiple parameters, separated by a <span class="syn-js">,</span> comma. The space between parameters is optional.</p>
+
+		<img src="assets/img/functions-parameters-2.png" alt="JavaScript function parameters" class="wider-115">
+
+		<h3 id="functions-arguments">Functions and arguments</h3>
+		<p>Parameters are what you specify when you create the function. <i>Arguments</i> are what you pass to the function when you invoke (call or fire) the function.</p>
+
+		<img src="assets/img/function-pass-values-1.png" alt="JavaScript function passing values" style="max-width: 500px">
+		
+		<p>In the example above:</p>
+			
+		<ul>
+			<li>A function is created with a <i>parameter</i> named <span class="syn-js">age</span>.</li>
+			<li>When the function is called by the program, an <i>argument</i> of <span class="syn-js">21</span> is passed to the function.</li>
+		</ul>
+
+		<p>You will often see the words &#8216;parameter&#8217; and &#8216;argument&#8217; written as follows:</p>
+
+		<img src="assets/img/functions-parameters-3.png" alt="JavaScript function passing values" style="max-width: 600px">
+
+			
+		<h3 id="arrow-functions-parameters">Arrow function syntax</h3>
+
+		<p>If an arrow function has only one parameter, you can omit the <span class="syn-js">()</span> parenthesis.</p>
+
+		<img src="assets/img/function-arrow-single-parameter.png" alt="JavaScript function passing values" style="max-width: 700px">
+
+
+		<p>You will sometimes see the words parameter and argument used interchangeably.</p>
+
+		</section>
+
+		<section id="functions-return-values">
+
+			<h2>Functions and return values</h2>
+			<p>All JavaScript functions return a value to the code that invoked (called or fired) them &#8211; even if the <span class="syn-js">return</span> keyword is not included in  the function.</p>
+
+			<p>A function that does not return anything (for example, a function that just outputs to the browser console) will return a value of <i>undefined</i> by default.</p>
+			
+			<p>Consider the three functions below.</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration with parameters</span>		
+function sumA(a, b) {
+   console.log(`Output A: ${a + b}`);
+}
+
+<span class="comment">// Function call with arguments</span>
+sumA(1, 2);</pre>
+
+
+<pre class="language-js">
+<span class="comment">// Anonymous function expression with parameters</span>	
+const sumB = function (a, b) {
+   console.log(`Output B: ${a + b}`);
+};
+
+<span class="comment">// Function call with arguments</span>
+sumB(3, 4);</pre>
+
+<pre class="language-js">
+<span class="comment">// Arrow function with parameters</span>	
+const sumC = (a, b) =&gt; console.log(`Output C: ${a + b}`); 
+
+<span class="comment">// Function call with arguments</span>
+sumC(5, 6);</pre>
+
+<p>Note the following:</p>
+
+<ul>
+	<li>Each function is designed to accept two input values, add them, and output the result to the web browser console.</li>
+	<li>None of the three functions returns a value back to anywhere else in the program. (Or, more exactly, all three return a value of <i>undefined</i>.)</li>
+</ul>
+
+	<p>General rule: You only need to return something from a function if that returned value will be used elsewhere in the calling program.</p>
+
+		<h3 id="accessing-return-values">Accessing return values from functions</h3>
+		<p>Below you can see three similar functions to the ones above. The difference is that all three now return values back to the calling program.</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration with parameters
+// Includes return statement</span>		
+function sumA(a, b) {
+   console.log(`Output A: ${a + b}`);
+   return (a + b);
+}
+
+<span class="comment">// Function call with arguments</span>
+sumA(1, 2);</pre>
+
+<pre class="language-js">
+<span class="comment">// Anonymous function expression with parameters
+// Includes return statement</span>			
+const sumB = function (a, b) {
+   console.log(`Output B: ${a + b}`);
+   return (a + b);
+};
+
+<span class="comment">// Function call with arguments</span>
+sumB(3, 4);</pre>
+
+<pre class="language-js">
+<span class="comment">// Arrow function with parameters
+// Includes return statement</span>			
+const sumC = (a, b) =&gt; { 
+   console.log(`Output C: ${a + b}`);
+   return (a + b);
+}; 
+
+<span class="comment">// Function call with arguments</span>
+sumC(5, 6);</pre>
+
+		<p>But how can the calling program access these return values?</p>
+
+		<p>The answer is to create a variable in the calling program to store the value returned by each function. See the code below.</p>
+
+<pre class="language-js">
+<span class="comment">// Function declaration with parameters</span>		
+function sumA(a, b) {
+   console.log(`Output A: ${a + b}`);
+   return (a + b);
+}
+
+<span class="comment">// Function call with arguments
+// Includes variable to access the function's returned value</span>
+let resultA = sumA(1, 2);
+console.log(`Returned result A: ${resultA}`);</pre>
+
+<pre class="language-js">
+<span class="comment">// Anonymous function expression with parameters</span>	
+const sumB = function (a, b) {
+   console.log(`Output B: ${a + b}`);
+   return (a + b);
+};
+
+<span class="comment">// Function call with arguments
+// Includes variable to access the function's returned value</span>
+let resultB = sumB(3, 4);
+console.log(`Returned result B: ${resultB}`);</pre>
+
+<pre class="language-js">
+<span class="comment">// Arrow function with parameters</span>	
+const sumC = (a, b) =&gt; { 
+   console.log(`Output C: ${a + b}`);
+   return (a + b);
+}; 
+
+<span class="comment">// Function call with arguments
+// Includes variable to access the function's returned value</span>
+let resultC = sumC(5, 6);
+console.log(`Returned resultC: ${resultC}`);</pre>
+
+
+	<p>Of course, you don&#8217;t have to create the variable for storing the returned value at the same time you call the function.</p>
+	
+	<p>You could create the variable earlier in the program.</p>
+
+	<p>See the final form of the three code samples below.</p>
+
+<pre class="language-js">
+<span class="comment">// Create variables to store values to be returned by functions</span>
+let resultA;
+let resultB;
+let resultC;</pre>
+
+<pre class="language-js">
+<span class="comment">// Function declaration with parameters</span>		
+function sumA(a, b) {
+   console.log(`Output A: ${a + b}`);
+   return (a + b);
+}
+
+<span class="comment">// Function call with arguments</span>
+resultA = sumB(3, 4);
+console.log(`Returned result A: ${resultA}`);</pre>
+
+<pre class="language-js">
+<span class="comment">// Anonymous function expression with parameters</span>	
+const sumB = function (a, b) {
+   console.log(`Output B: ${a + b}`);
+   return (a + b);
+};
+
+<span class="comment">// Function call with arguments</span>
+resultB = sumB(3, 4);
+console.log(`Returned result B: ${resultB}`);</pre>
+
+<pre class="language-js">
+<span class="comment">// Arrow function with parameters</span>	
+const sumC = (a, b) =&gt; { 
+   console.log(`Output C: ${a + b}`);
+   return (a + b);
+}; 
+
+<span class="comment">// Function call with arguments</span>
+resultC = sumC(5, 6);
+console.log(`Returned result C: ${resultC}`);</pre>
+
+</section>
+
+
+<section>
+
+	<h2 id="arrow-functions-return-values">Arrow functions and returning values</h2>
+	<p>Arrow functions follow different rules when returning values to the calling program. They can have two types of returns: <i>explicit returns</i> and <i>implicit returns</i>.</p>
+
+	<h3 id="arrow-functions-explicit-returns">Explicit returns</h3>
+	<p>When an arrow function contains the <span class="syn-js">return</span> keyword, that is called an <i>explicit return</i>. The <span class="syn-js">return</span> keyword must be inside a code block <span class="syn-js">{}</span>. See the example below.</p>
+
+<pre class="language-js">
+<span class="comment">// Single-line arrow function
+// Code block contains return keyword</span>
+const squareNum = num =&gt; { return num * num; }</pre>
+
+<pre class="language-js">
+console.log(`Five squared is: ${squareNum(5)}`);</pre>
+
+	<h3 id="arrow-functions-implicit-returns">Implicit returns</h3>
+	<p>An arrow function can return a value to the calling program <i>without</i> using the <span class="syn-js">return</span> keyword. This is called an <i>implicit return</i>.</p>
+	
+	<p>You can only use an implicit return if the function is returning just <i>one value</i> and does <i>not</i> contain a code block <span class="syn-js">{}</span>. See the example below.</p>
+
+<pre class="language-js">
+<span class="comment">// Single-line arrow function. No return keyword.</span>
+const doubleNum1 = num =&gt; num * 2;</pre>
+	
+</section>
+
+<section id="functions-default-parameters">
+	
+	<h2>Default function parameters</h2>
+
+	<p>What happens if the number of arguments you pass to a function is different to the number of parameters the function expects to receive?</p>
+
+	<p>In JavaScript, a parameter of a function has a default value of <span class="syn-js">undefined</span>.</p>
+		
+	<p>This means that if you fail to pass the expected argument when calling the function, the function gives the missing parameter this default value. See the example below.</p>
+	
+<pre class="language-js">
+function showGreeting(message) {
+   console.log(message);
+}
+showGreeting(); <span class="comment">// Outputs 'undefined'</span></pre>
+
+<p>You can use the assignment operator <span class="syn-js">=</span> to set a default value for a function parameter as follows.</p>
+
+<pre class="language-js">
+function showGreeting(message='Hello, world!') {
+   console.log(message);
+}
+showGreeting(); // <span class="comment">Outputs 'Hello, world!'</span>
+showGreeting('Hi, there'); <span class="comment">// Outputs 'hi, there!'</span></pre>
+
+<p>If too many arguments are provided when a function is called, the function will simply ignore the excess arguments.</p>
+
+<p>Consider the following function that finds the average of three numbers.</p>
+
+<pre class="language-js">
+averageThreeNums = (x,y,z) =&gt; {
+   let result = (x + y + z)/3;
+   console.log(`Average of three numbers is: ${result}`);
+}
+
+averageThreeNums(1,2,3,4,5,6); <span class="comment">// ignores 4, 5, 6</span>
+averageThreeNums(1,2,3,4,5); <span class="comment">// ignores 4, 5</span>
+averageThreeNums(1,2,3,4); <span class="comment">// ignores 4</span>
+averageThreeNums(1,2,3);
+<span class="comment">// result is always '2'</span></pre>
+
+
+
+</section>
+
+
+<section id="functions-scope">
+
+	<h2>Functions and scope</h2>
+	<p>The word <i>scope</i> means the availability of a variable or other item in a particular area of a program. </p>
+
+	<ul>
+		<li><b>Global scope</b>: There is only one global scope in a JavaScript program. This is the area outside any functions in the program.
+		<img src="assets/img/variable-scope-global.png" alt="JavaScript function passing values" style="max-width: 600px">
+		<span class="inside-ol">&nbsp;</span>
+		Variables defined in the global scope can be accessed and altered from any function or block scope anywhere in the program.</li>
+		<li><b>Local scope</b>: Variables declared inside a function are <i>local</i> to that function.
+		<img src="assets/img/variable-scope-local.png" alt="JavaScript function passing values" style="max-width: 600px">
+		<span class="inside-ol">&nbsp;</span> 
+		Every function has its own scope. The same variable name can be used in different functions because local variables are not accessible across functions.</li>
+	</ul>
+
+	<p>Local scope can be divided into <i>function scope</i> and <i>block scope</i>.</p>
+
+	<h3 id="function-scope">Function scope</h3>
+	<p>Whenever you declare a variable in a function, the variable is visible only within the function. You cannot access it outside the function.</p>
+	
+	<p><span class="syn-js">var</span> is the keyword to define a variable for function-scope accessibility.</p>
+
+	<h3 id="block-scope">Block scope</h3>
+	<p>Block scope is the area within <span class="syn-js">if</span> and <span class="syn-js">switch</span> conditions, and within <span class="syn-js">for</span> and <span class="syn-js">while</span> loops.</p>
+		
+	<p>As a general rule, whenever you see parenthesis <span class="syn-js">{}</span>, it is a code block.</p>
+	
+	<p>The <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords enable you to declare variables in the block scope. These variables are accessible only within their code blocks.</p>
+
+</section>
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
