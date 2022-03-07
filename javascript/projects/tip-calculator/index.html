@@ -5,29 +5,9 @@
             <style>@media (min-width:1200px){header, section{padding:2% calc((100% - 800px)/ 2) 3% calc((100% - 800px)/ 2);margin:0 auto}}@media (min-width:1025px) and (max-width:1199px){header, section{padding:3% 14% 4% 14%}}@media (min-width:768px) and (max-width:1024px){header, section{padding:3% 8% 4% 8%}}@media (max-width:767px){header, section{padding:6% 13% 9% 13%}}h1 .font-mono{color:#888}body{font-family:sans-serif}li,p{font-size:22px;line-height:1.5}li{margin-bottom:12px}
             input, select { font-size: 20px; padding: 4px }
 
-            .btn { 
-                display: block;
-                padding: 1.2em 2em;
-                border: 1px none #000;
-                background-color: blue;
-                -webkit-transition: all 350ms ease;
-                transition: all 350ms ease;
-                color: #fff;
-                font-size: 1rem;
-                line-height: 1;
-                margin-top: 32px;
-                border-radius: 50px;
-            }
-            .btn:hover {background-color: darkblue }
-
-            .btn i { margin-right: 16px }
-
-            .bg-gray { background-color: lightgray; padding: 20px }
-            .bg-lightblue { background-color: lightblue; padding: 20px }
         </style>
 
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         </head>
 
@@ -75,41 +55,10 @@
         <!-- JavaScript code start below -->
         <script>
 
-            //Calculate Tip
-            function calculateTip() {
                 let billAmount = document.getElementById("billAmount").value;
                 let serviceQuality = document.getElementById("serviceQuality").value;
                 let numOfPeople = document.getElementById("numOfPeople").value;
 
-                //validate input
-                if (billAmount === "" || serviceQuality == 0) {
-                    alert("Please enter values");
-                    return;
-                }
-
-                //Calculate tip
-                let tipTotal = (billAmount * serviceQuality) / numOfPeople;
-                //round to two decimal places
-                tipTotal = Math.round(tipTotal * 100) / 100;
-                //next line allows us to always have two digits after decimal point
-                tipTotal = tipTotal.toFixed(2);
-                //Display the tip
-                document.getElementById("tipDisplayBox").style.display = "block";
-                document.getElementById("tipTotal").innerHTML = tipTotal;
-                document.getElementById("tipEach").innerHTML = (tipTotal / numOfPeople).toFixed(2);
-
-                //Check to see if this input is empty or less than or equal to 1
-                if (numOfPeople === "" || numOfPeople <= 1) {
-                    numOfPeople = 1;
-                    tipEach = tipTotal;
-                } 
-            }
-
-            //Hide the tip amount on load
-            document.getElementById("tipDisplayBox").style.display = "none";
-
-            //click to call function
-            document.getElementById("calculate").onclick = () => calculateTip();
        </script>
 
     </body>
