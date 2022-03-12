@@ -235,16 +235,24 @@ function doWidthDesktopSection() {
     }
 
     if (selectedValue==="800px") {
-        document.querySelector("section").classList.remove("section-width-1024px");
         document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.remove("section-width-1200px");
+        document.querySelector("section").classList.add("section-width-800px");
     }
     else if (selectedValue==="1024px") {
         document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.remove("section-width-1200px");
         document.querySelector("section").classList.add("section-width-1024px");
     }
     else if (selectedValue==="1140px") {
         document.querySelector("section").classList.remove("section-width-1024px");
+        document.querySelector("section").classList.remove("section-width-1200px");
         document.querySelector("section").classList.add("section-width-1140px");
+    }
+    else if (selectedValue==="1200px") {
+        document.querySelector("section").classList.remove("section-width-800px");
+        document.querySelector("section").classList.remove("section-width-1140px");
+        document.querySelector("section").classList.add("section-width-1200px");
     }
 }
 
