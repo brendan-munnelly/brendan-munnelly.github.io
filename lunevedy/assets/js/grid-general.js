@@ -377,7 +377,6 @@ function doUpperLabel() {
         else {
             document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
-            enableLabelColor();
         }
     }
 
@@ -390,7 +389,6 @@ function doUpperLabel() {
             removeUpperLabel();
             document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
-            enableLabelColor();
         }
     }
 
@@ -407,7 +405,6 @@ function doUpperLabel() {
             newUpperLabelDiv.classList.add("container-upper-label"); 
             document.querySelector("section .col-1").prepend(newUpperLabelDiv);
             document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
-            enableLabelColor();
         }
     }
 }
@@ -418,19 +415,9 @@ function removeUpperLabel() {
         upperLabel.remove();
         document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
         document.getElementById("btn_upper_label").disabled=true;
-        disableLabelColor();
     }
 }
 
-function disableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=true;
-    document.querySelector("label[for='cb_upperLabelOn']").style.color = "var(--gray-500)";
-}
-
-function enableLabelColor() {
-    document.getElementById("btn_upper_label").disabled=false;
-    document.querySelector("label[for='cb_upperLabelOn']").style.color = "#fff";
-}
 
 /*
 //////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
@@ -482,7 +469,7 @@ function doUpperH3() {
         }
         else {
             removeUpperH3();
-            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
             document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
             document.getElementById("btn_subhead").disabled=false;
         }            
@@ -494,7 +481,7 @@ function doUpperH3() {
             removeUpperH3();
         }
         else {
-            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
             if (!document.querySelector(".cols-2-split .col-2 h3")) {
                 document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
                 document.getElementById("btn_subhead").disabled=false;
@@ -518,13 +505,13 @@ function doUpperH3() {
             const currentDiv = document.querySelector('.col-1');
             currentDiv.append(newSubHead);
             document.getElementById("btn_upper_subhead").disabled=false;
-            document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
         }
     }
 }
 
 function removeUpperH3() {
-    document.querySelector("label[for='cb_upperH3On']").style.color = "var(--gray-500)";
+    // document.querySelector("label[for='cb_upperH3On']").style.color = "var(--gray-500)";
     if (document.querySelector("section > h3")) {
         document.querySelector("section > h3").remove();
         document.getElementById("btn_subhead").disabled=true;
@@ -550,7 +537,7 @@ if (document.querySelector("#cb_standfirstOn")) {
 
 function doStandFirst() {
     if (!document.getElementById("cb_standfirstOn").checked) {
-        document.querySelector("label[for='cb_standfirstOn']").style.color = "var(--gray-500)";
+        // document.querySelector("label[for='cb_standfirstOn']").style.color = "var(--gray-500)";
         document.querySelector("section > p").classList.remove("standfirst");
     }
     else {
@@ -558,7 +545,6 @@ function doStandFirst() {
         document.querySelector("section > p").classList.add("standfirst");
     }
 }
-
 
 /*
 //////////////// COPY TO CLIPBOARD ///////////////
@@ -575,9 +561,9 @@ function disableCSS() {
 }
 
 function copyHTML() {
-    // removeEmptyNodes();
-    const HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
     const el = document.createElement('textarea');
+
     el.value = HTML_Content;
     hideMenus();
 
@@ -585,6 +571,7 @@ function copyHTML() {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el); 
+
 }
 
 function copyCSS() {

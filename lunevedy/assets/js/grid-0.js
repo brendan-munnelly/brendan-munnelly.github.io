@@ -375,19 +375,19 @@ function doLists() {
         removeLists();
         document.querySelector('section p:last-of-type').remove();
         document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_ul_short);
-        document.querySelector("label[for='switch-section-list']").style.color = "#fff";
+        // document.querySelector("label[for='switch-section-list']").style.color = "#fff";
     }
 
     else if (selectedValue==="list-long") {
         removeLists();
         document.querySelector('section p:last-of-type').remove();
         document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_ul_long);
-        document.querySelector("label[for='switch-section-list']").style.color = "#fff";
+        // document.querySelector("label[for='switch-section-list']").style.color = "#fff";
     }
 }
 
 function removeLists() {
-    document.querySelector("label[for='switch-section-list']").style.color = "var(--gray-500)";
+    // document.querySelector("label[for='switch-section-list']").style.color = "var(--gray-500)";
     if (document.querySelector("section ul")) {
         const elUL = document.querySelectorAll("section ul");
         for (var i = 0 ; i < elUL.length ; i++) {
@@ -396,6 +396,8 @@ function removeLists() {
         // Restore third paragraph
         document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_para_last);
     }
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    HTML_Content = HTML_Content.replace(/\t\n\n\n/g,"");
 }
 
 /*
@@ -486,6 +488,8 @@ function removeSectionButtons() {
     // Button align
     document.getElementById("dd_align_desktop_btns").disabled=true;
     document.getElementById("dd_align_mobile_btns").disabled=true;
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    HTML_Content = HTML_Content.replace(/\t\n\n\n/g,"");
 }
 
 function enableAllButtons() {
@@ -742,62 +746,6 @@ function swapButtonIcons() {
 }
 
 
-// // document.querySelector("#dd_buttons_icon").addEventListener("change", swapButtonIcons);
-
-// function swapButtonIcons() {
-//     let opt = document.querySelector("#dd_buttons_icon").value;
-//     // Verify at least primary button exists
-//     if (document.querySelector("a.btn")) {      
-//         // Set up button icon and text content;
-//         const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
-//         const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
-//         const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
-//         const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
-
-//         if (opt==="0") {
-//             // Icon at left. Text at right.
-//             if (document.querySelector("a.btn-secondary")) {
-//                 const el_btn_1 = document.querySelector("a.btn-primary");
-//                 el_btn_1.innerHTML = icon_left_primary;
-//                 const el_btn_2 = document.querySelector("a.btn-secondary");
-//                 el_btn_2.innerHTML = icon_left_secondary;
-//             }
-//             else {
-//                 const el_btn = document.querySelector("a.btn-primary");
-//                 el_btn.innerHTML = "<i class=\"fas fa-arrow-right\"></i><span>Start free trial<\/span>";
-//             }
-//         }
-
-//         // Text at left. Icon at right.
-//         else if (opt==="1") {
-//             if (document.querySelector("a.btn-secondary")) {
-//                 const el_btn_1 = document.querySelector("a.btn-primary");
-//                 el_btn_1.innerHTML = icon_right_primary;
-//                 const el_btn_2 = document.querySelector("a.btn-secondary");
-//                 el_btn_2.innerHTML = icon_right_secondary;
-//             }
-//             else {
-//                 const el_btn = document.querySelector("a.btn-primary");
-//                 el_btn.innerHTML = "<span>Start free trial<\/span><i class=\"fas fa-arrow-right\"><\/i>";
-//             }
-//         }
-         
-//         // Text only. No icon.
-//         else if (opt==="2") {
-//             if (document.querySelector("a.btn-primary")) {
-//                 const el_btn = document.querySelector("a.btn-primary");
-//                 const btn_content = "<span>Order now</span>";
-//                 el_btn.innerHTML = btn_content;
-//             }
-    
-//             if (document.querySelector("a.btn-secondary")) {
-//                 const el_btn = document.querySelector("a.btn-secondary");
-//                 const btn_content = "<span>Learn more</span>";
-//                 el_btn.innerHTML = btn_content;
-//             }       
-//         }
-//     }
-// }
 
 /*
 //////////////// BUTTONS: ALIGN HORIZONTALLY  ////////////////////
@@ -851,7 +799,7 @@ function checkVis() {
         document.getElementById("vis_type_0").checked=true;
 
         // Add picture
-        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");
+        document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>");
     }
 }
 
@@ -862,72 +810,63 @@ function doVisType() {
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
     let selectedValue;
     
-    // if (document.querySelector("#cb_visualOn".checked)) {
-
-        for (const rb of rbs) {
-            if (rb.checked) {
-                selectedValue = rb.value;
-                break;
-            }
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
         }
-        console.log("selectedValue: "+selectedValue);
-        if (selectedValue==="none") {
-            removeVisual();
-            disableRBs();
-            disableVisualWidth()
-            disableVisualAlign();
-            disableImgProps();
-        }
+    }
 
-        else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
-            resetVisual();
-            enableRBs();
-            enableVisualWidth();
-            enableImgProps();
-            disableVidProps();
-            disableVisualAlign();
-            if (selectedValue==="pictures") {
-                document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>\n");        
-                document.getElementById("vis_type_0").checked=true;
-            }
+    if (selectedValue==="none") {
+        removeVisual();
+        disableRBs();
+        disableVisualWidth()
+        disableVisualAlign();
+        disableImgProps();
+    }
+
+    else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
+        resetVisual();
+        enableRBs();
+        enableVisualWidth();
+        enableImgProps();
+        disableVidProps();
+        disableVisualAlign();
+        if (selectedValue==="pictures") {
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>");        
+            document.getElementById("vis_type_0").checked=true;
+        }
     
-            else if (selectedValue==="transparent") {
-                document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
-                document.getElementById("vis_type_1").checked=true;
-                document.querySelector("label[for='vis_type_1']").style.color = "#fff";
-            }
-
-            else if (selectedValue==="illustrations") {
-                document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>\n"); 
-                document.getElementById("vis_type_2").checked=true;
-            }
+        else if (selectedValue==="transparent") {
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
+            document.getElementById("vis_type_1").checked=true;
         }
 
-        else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
-            resetVisual();
-            enableRBs();
-            enableVisualWidth();
-            disableImgProps();
-            enableVidProps();
-            disableVisualAlign();
-            if (selectedValue==="vid-file") {
-                document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
-                document.getElementById("vis_type_3").checked=true;
-            }
+        else if (selectedValue==="illustrations") {
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
+            document.getElementById("vis_type_2").checked=true;
+        }
 
-            else if (selectedValue==="vid-yt") {
-                document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
-                document.getElementById("vis_type_4").checked=true;
-            }
+    } // Ends pics branch
 
-           // Enable all radio button labels
-           document.querySelector("label[for='vis_type_0']").style.color = "#fff";
-           document.querySelector("label[for='vis_type_1']").style.color = "#fff";                
-           document.querySelector("label[for='vis_type_2']").style.color = "#fff";
-           document.querySelector("label[for='vis_type_3']").style.color = "#fff";
-           document.querySelector("label[for='vis_type_4']").style.color = "#fff";            
-       }
-    // }
+    else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
+        resetVisual();
+        enableRBs();
+        enableVisualWidth();
+        disableImgProps();
+        enableVidProps();
+        disableVisualAlign();
+        if (selectedValue==="vid-file") {
+            document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
+            document.getElementById("vis_type_3").checked=true;
+        }
+
+        else if (selectedValue==="vid-yt") {
+            document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
+            document.getElementById("vis_type_4").checked=true;
+        }
+     
+    } // Ends video branch
 }
 
 /*
@@ -1082,13 +1021,13 @@ function disableRBs() {
     document.querySelector("label[for='vis_type_2']").style.color = "var(--gray-500)";
     document.querySelector("label[for='vis_type_3']").style.color = "var(--gray-500)";
     document.querySelector("label[for='vis_type_4']").style.color = "var(--gray-500)";
-    console.log("Got to disable RBs");
+    // console.log("Got to disable RBs");
 }
 
 
 // Visual width
 function enableVisualWidth() {
-    console.log("enableVisualWidth()");
+    // console.log("enableVisualWidth()");
     document.querySelector("label[for='switch_section_vis_width_desktop']").style.color = "#fff";
     document.getElementById("rb_vis_width_desktop_100").disabled=false;
     document.getElementById("rb_vis_width_desktop_80").disabled=false;
@@ -1186,4 +1125,7 @@ function removeVisual() {
     disableVisualAlign();
     disableImgProps();
     disableVidProps();
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    HTML_Content = HTML_Content.replace(/\t\n\n/g, "");
+    document.getElementById("HTML-Content").innerHTML = HTML_Content;
 }
