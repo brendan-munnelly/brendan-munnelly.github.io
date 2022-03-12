@@ -405,6 +405,7 @@ function doUpperLabel() {
             newUpperLabelDiv.classList.add("container-upper-label"); 
             document.querySelector("section .col-1").prepend(newUpperLabelDiv);
             document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
+            document.getElementById("btn_upper_label").disabled=false;
         }
     }
 }
