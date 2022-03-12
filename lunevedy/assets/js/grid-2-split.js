@@ -450,7 +450,6 @@ function removeTextAnimation() {
         document.querySelector("#HTML-Content section .container-btn").classList.remove("slide-in-right");
         document.querySelector("#HTML-Content section .container-btn").classList.remove("fade-in");
     }
-    document.querySelector("label[for='dd_text_slide']").style.color = "var(--gray-500)";
 }
 
 /*
@@ -508,7 +507,6 @@ function doLists() {
         else {
             document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_short);
         }
-        document.querySelector("label[for='switch-col-list']").style.color = "#fff";
     }
 
     else if (selectedValue==="list-long") {
@@ -524,7 +522,6 @@ function doLists() {
         else {
             document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", content_ul_long);
         }
-        document.querySelector("label[for='switch-col-list']").style.color = "#fff";
     }
 }
 
@@ -532,7 +529,6 @@ function removeLists() {
    if (document.querySelector(".cols-2-split .col-2 ul")) {
         document.querySelector(".cols-2-split .col-2 ul").remove();
     }
-    document.querySelector("label[for='switch-col-list']").style.color = "var(--gray-500)";
 }
 
 /*
