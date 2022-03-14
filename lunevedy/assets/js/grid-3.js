@@ -357,10 +357,9 @@ document.querySelector("#dd_h3").addEventListener("change", doH3);
             // Test for figures (images or icons)
             if (document.querySelector(col_no+" figure")) {
                 const obj_fig = document.querySelectorAll('figure');
-                let el_fig;
                 for (let i=2 ; i <= obj_fig.length+1 ; i++) {
-                    el_fig = document.querySelector(col_no+":nth-child("+i+") figure" );
-                    el_fig.insertAdjacentHTML("afterend", content_h3);
+                    el_fig = document.querySelector(col_no+":nth-child("+i+") figure");
+                    el_fig.insertAdjacentHTML("afterend", content_h3[i]);
                }
             }
             
@@ -370,7 +369,7 @@ document.querySelector("#dd_h3").addEventListener("change", doH3);
                 let el_para;
                 for (let i=2 ; i <= obj_para.length+1 ; i++) {
                     el_para = document.querySelector(col_no+":nth-child("+i+") p");
-                    el_paras.insertAdjacentHTML("beforebegin", content_h3);
+                    el_para.insertAdjacentHTML("beforebegin", content_h3[i]);
                }
             }
 
@@ -380,7 +379,7 @@ document.querySelector("#dd_h3").addEventListener("change", doH3);
                 let el_ul;
                 for (let i=2 ; i <= obj_ul.length+1 ; i++) {
                     el_ul = document.querySelector(col_no+":nth-child("+i+") ul");
-                    el_ul.insertAdjacentHTML("beforebegin", content_list);
+                    el_ul.insertAdjacentHTML("beforebegin", content_h3[i]);
                }
             }
 
@@ -390,7 +389,7 @@ document.querySelector("#dd_h3").addEventListener("change", doH3);
                 let el_col;
                 for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
                     el_col = document.querySelector(col_no+":nth-child("+i+")");
-                    el_col.innerHTML = content_h3;
+                    el_col.innerHTML = content_h3[i];
                 }
             }
         }
@@ -429,7 +428,7 @@ function doText() {
             let el_h3;
             for (let i=2 ; i <= obj_h3.length+1 ; i++) {
                 el_h3 = document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_paras);
+                el_h3.insertAdjacentHTML("afterend", content_paras[i]);
            }
         }
         
@@ -439,7 +438,7 @@ function doText() {
             let el_fig;
             for (let i=2 ; i <= obj_fig.length+1 ; i++) {
                 el_fig = document.querySelector(col_no+":nth-child("+i+") figure");
-                el_fig.insertAdjacentHTML("afterend", content_list);
+                el_fig.insertAdjacentHTML("afterend", content_paras[i]);
            }
         }
 
@@ -449,7 +448,7 @@ function doText() {
             let el_h3;
             for (let i=2 ; i <= obj_h3.length+1 ; i++) {
                 el_h3 = document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_paras);
+                el_h3.insertAdjacentHTML("afterend", content_paras[i]);
            }
         }
 
@@ -459,7 +458,7 @@ function doText() {
             let el_col;
             for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
                 el_col = document.querySelector(col_no+":nth-child("+i+")");
-                el_col.innerHTML = content_paras;
+                el_col.innerHTML = content_paras[i];
             }
         }
     }
@@ -472,7 +471,7 @@ function doText() {
             let el_h3;
             for (let i=2 ; i <= obj_h3.length+1 ; i++) {
                 el_h3 = document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_list);
+                el_h3.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
         
@@ -482,7 +481,7 @@ function doText() {
             let el_fig;
             for (let i=2 ; i <= obj_fig.length+1 ; i++) {
                 el_fig =  document.querySelector(col_no+":nth-child("+i+") figure");
-                el_fig.insertAdjacentHTML("afterend", content_list);
+                el_fig.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
 
@@ -492,7 +491,7 @@ function doText() {
             let el_h3;
             for (let i=2 ; i <= obj_h3.length+1 ; i++) {
                 el_h3 = document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_list);
+                el_h3.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
 
@@ -721,16 +720,6 @@ document.querySelector("#dd_buttons_style").addEventListener("change", doButtons
 /*
 ////////////////////// VISUALS  ///////////////////////
 */
-
-// GLOBAL VARIABLES
-
-// Class names of columns in grid: .col-2, .col-3 or .col-4
-let col_no;
-if (document.querySelector('.col-2')) { col_no = ".col-2" }
-else if (document.querySelector('.col-3')) { col_no = ".col-3" }
-else if (document.querySelector('.col-4')) { col_no = ".col-4" }
-// Number column blocks to loop through
-let col_count = document.querySelectorAll(col_no).length;
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
