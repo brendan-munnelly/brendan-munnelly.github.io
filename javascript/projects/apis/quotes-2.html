@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body { background-color: #fbf88b }
+
+        h1 {
+            text-align: center;
+            color: black;
+            font: sans-serif;
+            font-family: 'Roboto', sans-serif; 
+            font-weight: bold; 
+            font-size: 3rem; 
+        }
+
+        #app {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;   
+        }
+
+        .movie {
+            width: 200px;
+            height: 100%;
+            font-family: 'Roboto', sans-serif; 
+            padding: 1%; 
+            margin: 5%;
+            background: green;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #0f9b0f, #0F550F);  
+            background: linear-gradient(to right, #0f9b0f, #0F550F);   
+        }
+
+        .author { 
+            color: white;
+            text-align: right; 
+            font-size: 1rem;
+        }
+
+        .quote {
+            color: white;
+            text-align: center; 
+            font-size: 1.4rem;
+        }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+    <h1>Breaking Bad Quotes</h1>
+    <!-- Your Awesome HTML -->
+    <div id="app"></div>
+
+
+
+    <script>
+
+        // Get the API feed
+        const getAPIFeed = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes/5';
+
+        // Show the feed data
+        const showFeedData = (data) => {
+            
+            // Check the data   
+            console.log(data);
+
+            // How much data is there?
+            console.log(data.length);
+
+            // How do you access a single data entry? 
+            console.log(data[0]);
+            
+            // Loop-through data, one item at a time
+            for (i=0; i < data.length; i++) { 
+            
+            // HTML/CSS layout for data presentation. 
+            // jQuery for easy DOM manipulations: `text()`, `attr()`, `addClass()`, etc. 
+                let template = `<div class="movie">
+                <div class="author">${data[i].author}</div>  
+                <div class="quote">(<span>${data[i].quote}</span>) </div>
+                </div>
+                `;
+            
+            // Show data within template using jQuery `append()`
+            $('#app').append(template);
+            
+            } // end for loop
+            
+        }; // end of showFeedData function
+
+        /************
+        * Got template? Got data? Show it. 
+        * jQuery convenience function for JSON and API data
+        * First parameter: url to data
+        * Second parameter: callback function runs on success
+        * https://api.jquery.com/jQuery.getJSON
+        ************/ 
+        $.getJSON( getAPIFeed, showFeedData);
+
+
+    </script>
+
+</body>
+</html>
