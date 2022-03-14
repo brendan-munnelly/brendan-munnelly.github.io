@@ -203,7 +203,7 @@
     
             async function fetchJSONData() {
                 let response = await fetch('https://type.fit/api/quotes'); 
-                let data = await response.text(); 
+                let data = await response.json(); 
                 console.log(data);
             }
     
@@ -239,9 +239,9 @@
                             return;
                         }
     
-                        let data = response.text(); 
-                        // work with the data
-                        console.log(data);
+                        response.text().then((data) => {
+                            // console.log(data);
+                        });
                     })
     
                     .catch(error => {
