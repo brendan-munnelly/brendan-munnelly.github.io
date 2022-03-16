@@ -843,7 +843,7 @@ function doVisType() {
         }
 
         else if (selectedValue==="illustrations") {
-            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-drawing.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
+            document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/teamwork.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
             document.getElementById("vis_type_2").checked=true;
         }
 
