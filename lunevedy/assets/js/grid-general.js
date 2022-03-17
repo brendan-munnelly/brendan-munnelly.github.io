@@ -285,12 +285,18 @@ function doUpperBlockWidth() {
             break;
         }
     }
-    if (selectedValue==="width-full") {
-        document.querySelector("#HTML-Content section .col-1").classList.add("width-full");
+    if (selectedValue==="800px") {
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1200px");
     }
-    else if (selectedValue==="width-800px") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("width-full"); 
+    else if (selectedValue==="1140px") {
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1200px");        
+        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px"); 
     }
+    else if (selectedValue==="1200px") {
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");                
+        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1200px"); 
+    }    
 }
 
 /*
