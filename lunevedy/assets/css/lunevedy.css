@@ -312,6 +312,65 @@ section *:last-child, footer *:last-child { margin-bottom: 0 !important }
     --section-btn-breakpoint: 768px;
 }
 
+/* ========= FONT SCALES ======== */
+:root {    
+    --font-size-1: 1rem;
+    --scale:       1.250; /* Perfect fourth */
+    --scale-sm:    1.125; /* Major second: mobile */
+    --scale-lg:    1.333; /* Major third: desktop */
+    --scale-xl:    1.414; /* Augmented fourth: desktop */
+}
+
+/* Default desktop scale (1.250) */
+:root {    
+    --font-size-2: calc(var(--font-size-1) * var(--scale)); /* 1.25rem/20.00px */
+    --font-size-3: calc(var(--font-size-2) * var(--scale)); /* 1.563rem/25.00px */
+    --font-size-4: calc(var(--font-size-3) * var(--scale)); /* 1.953rem/31.25px */
+    --font-size-5: calc(var(--font-size-4) * var(--scale)); /* 2.441rem/39.06px */
+    --font-size-6: calc(var(--font-size-5) * var(--scale)); /* 3.052rem/48.83px */
+    --font-size-7: calc(var(--font-size-6) * var(--scale)); /* 3.815rem/61.038px */
+}
+
+/* Open props fluid /*
+/* --font-size-fluid-0: clamp(.75rem, 1.5vw, 1rem);
+--font-size-fluid-1: clamp(1rem, 2vw, 1.5rem);
+--font-size-fluid-2: clamp(1.5rem, 3vw, 2.5rem);
+--font-size-fluid-3: clamp(2rem, 4vw, 3.5rem); */
+
+
+/* Large desktop scale (1.333) */
+:root {    
+    --font-size-lg-2: calc(var(--font-size-1)    * var(--scale-lg)); /* 1.333rem/21.33px */
+    --font-size-lg-3: calc(var(--font-size-lg-2) * var(--scale-lg)); /* 1.777rem/28.43px */
+    --font-size-lg-4: calc(var(--font-size-lg-3) * var(--scale-lg)); /* 2.369rem/37.90px */
+    --font-size-lg-5: calc(var(--font-size-lg-4) * var(--scale-lg)); /* 3.157rem/50.52px */
+    --font-size-lg-6: calc(var(--font-size-lg-5) * var(--scale-lg)); /* 4.209rem/67.34px */
+    --font-size-lg-7: calc(var(--font-size-lg-6) * var(--scale-lg)); /* 5.611rem/89.76px */
+}
+
+/* Larger desktop scale (1.414) */
+:root {    
+    --font-size-xl-2: calc(var(--font-size-1)    * var(--scale-xl)); /* 1.414rem/22.62px */
+    --font-size-xl-3: calc(var(--font-size-xl-2) * var(--scale-xl)); /* 1.999rem/31.99px */
+    --font-size-xl-4: calc(var(--font-size-xl-3) * var(--scale-xl)); /* 2.827rem/45.23px */
+    --font-size-xl-5: calc(var(--font-size-xl-4) * var(--scale-xl)); /* 3.998rem/63.96px */
+    --font-size-xl-6: calc(var(--font-size-xl-5) * var(--scale-xl)); /* 5.653rem/90.44px */
+    --font-size-xl-7: calc(var(--font-size-xl-6) * var(--scale-xl)); /* 8.140rem/130.60px */
+}
+
+@media (max-width: 767px) {
+    :root {
+        /* Major second mobile (1.1250) */
+        --font-size-sm-2: calc(var(--font-size-1)    * var(--scale-sm)); /* 1.25rem/20.00px */
+        --font-size-sm-3: calc(var(--font-size-sm-2) * var(--scale-sm)); /* 1.563rem/25.00px */
+        --font-size-sm-4: calc(var(--font-size-sm-3) * var(--scale-sm)); /* 1.953rem/31.25px */
+        --font-size-sm-5: calc(var(--font-size-sm-4) * var(--scale-sm)); /* 2.441rem/39.06px */
+        --font-size-sm-6: calc(var(--font-size-sm-5) * var(--scale-sm)); /* 3.052rem/48.83px */
+        --font-size-sm-7: calc(var(--font-size-sm-6) * var(--scale-sm)); /* 3.815rem/61.038px */
+    }
+}
+
+
 /* Global font */
 body { font-family: var(--global-font) }
 
@@ -577,7 +636,7 @@ body { font-family: var(--global-font) }
 }
 
 .hero-dark { background-color: var(--slate-900) }
-.hero-dark .container-upper-label span { color: var(--slate-050) }
+.hero-dark .container-upper-label span { color: var(--slate-300) }
 .hero-dark h1 { color: var(--slate-050) }
 .hero-dark h2 { color: var(--slate-050) }
 
@@ -1436,6 +1495,11 @@ section {
     align-items: stretch;
 }
 
+/* Larger screens */
+@media (min-width: 1360px) { 
+    .section-width-1320px { padding: 3.5% calc((100% - 1320px)/2) 5% calc((100% - 1320px)/2) }
+}
+
 /* Desktops/Laptops */
 @media (min-width: 1200px) { 
 	section { 
@@ -1462,7 +1526,7 @@ section {
 /* ========== THEME: LIGHT ========== */
 
 .theme-light { background-color: var(--slate-050) } 
-.theme-light .container-upper-label { color: var(--slate-900) }
+.theme-light .container-upper-label { color: var(--slate-700) }
 .theme-light h1, .theme-light h2, .theme-light h3, 
 .theme-light p, .theme-light li { color: var(--slate-900) }
 
@@ -1552,10 +1616,12 @@ section {
     background-image: linear-gradient(var(--section-bg-gradient-deg),var(--section-bg-gradient-from-dark), var(--section-bg-gradient-to-dark));
 }
 
-section.theme-dark .container-upper-label { color: var(--slate-050) }
+section.theme-dark .container-upper-label { color: var(--slate-200) }
 
 
 /* ===== SECTIONS: FULL-WIDTH (NO FLEXBOX PARENT-CHILD COLUMNS ) ====== */
+
+section > .col-1 { width: 100% }
 
 /* Upper label heading */
 section > .container-upper-label { width: 100%; font-weight: 600 }
@@ -1572,6 +1638,7 @@ section > h2 {
 	font-size: calc(28px + (42 - 28) * ((100vw - 320px) / (1140 - 320)));
 	line-height: 1.2; 
 	letter-spacing: -1px;
+    width: 100%;
 }
 @media (min-width: 768px) { section > h2 { margin-bottom: 24px } }
 @media (max-width: 767px) { section > h2 { margin-bottom: 12px } }
@@ -1582,6 +1649,7 @@ section > h3 {
 	margin-top: 27px; margin-bottom: 2px;
     color: var(--gray-600);
     font-weight: 700;
+    width: 100%;
 }
 
 /* Paragraphs AND lists */
@@ -1724,6 +1792,14 @@ On large screens (and sometimes small screens too), the div child elements are t
     align-items: stretch;
 }
 
+/* Larger screens */
+@media (min-width: 1360px) { 
+    .container-flex.section-width-1320px { 
+        padding: 3.5% calc((100% - 1320px)/2) 5% calc((100% - 1320px)/2) 
+    }
+}
+
+
 @media (min-width: 1200px) { 
 	.container-flex { 
         padding: 3.5% calc((100% - 1140px)/2) 5% calc((100% - 1140px)/2);
@@ -1741,6 +1817,8 @@ On large screens (and sometimes small screens too), the div child elements are t
 
 /* ========= FLEXBOX SECTIONS: SINGLE COLUMN, FULL-WIDTH ========= */
 /* For first, introduction content of a multi-column section. */
+
+section > .col-1 { width: 100% }
 
 /* Desktops/Laptops */
 @media (min-width: 1200px) { 
@@ -1772,12 +1850,25 @@ On large screens (and sometimes small screens too), the div child elements are t
 /* Mobiles */
 @media (max-width: 767px)   { section > .col-1 { padding: 0 4% 5% 4% } }
 
-/* Upper col 1 widths on multi-column layouts */
+/* ======== Content inside .col-1 ========= */
+.col-1 .container-upper-label {
+    font-weight: 600; display: inline-block; width: 100%;
+    font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1140 - 320)));
+}
 
-/* Sub-headings (h2 and h3) inside .col-1 child element */
-/* section > .col-1 h2 { margin-bottom: 20px !important } */
-@media (max-width: 767px) { section > .col-1 h3 { margin-bottom: 16px !important } }
-section > .col-1 .container-upper-label { margin-bottom: 3% !important } 
+
+@media (min-width: 768px) { section > .col-1 .container-upper-label { margin-bottom: 22px } } 
+@media (max-width: 767px) { section > .col-1 .container-upper-label { margin-bottom: 24px } } 
+
+@media (max-width: 767px) {
+     section > .col-1 h3 { margin-bottom: 16px !important } 
+}
+
+@media (min-width: 768px) {
+    section > .col-1 .container-upper-label { 
+        width: 100%; margin-bottom: 20px; 
+    }
+} 
 
 section > .col-1 h2 {
     font-weight: 700; line-height: 1.1; letter-spacing: -1px;
@@ -1789,12 +1880,6 @@ section > .col-1 h3 {
     font-weight: 500; color: var(--slate-700); line-height: 1.3;
 }
 
-/* Upper heading inside .col-1 child element */
-.col-1 .container-upper-label {
-    font-weight: 600; display: inline-block;
-    font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1140 - 320)));
-    margin-bottom: 20px !important;
-}
 
 /* ============= TWO COLUMNS ============ */
 
@@ -2183,6 +2268,7 @@ section > .col-1 h3 {
 /* Non-mobiles */
 @media (min-width: 768px) { 
     .col-4 { width: 23.5%; margin-bottom: 48px }
+    .col-4 { margin-bottom: 28px }
     .col-4:nth-last-child(-n+4) { margin-bottom: 0 }
 }
 
@@ -2211,7 +2297,7 @@ section > .col-1 h3 {
 
 .col-4 h3 { 
     font-size: calc(20px + (22 - 20) * ((100vw - 320px) / (1140 - 320)));
-    font-weight: 700; line-height: 1.15; margin-bottom: 6px;
+    font-weight: 600; line-height: 1.15; margin-bottom: 6px;
 }
 
 @media (max-width: 767px) { 
@@ -2230,13 +2316,10 @@ section > .col-1 h3 {
 }
 
 /* All viewports: Paragraphs and lists */
-.col-4  p:last-child,
-.col-4 li:last-child { margin-bottom: 0 }
+.col-4  p:last-child, .col-4 li:last-child { margin-bottom: 0 }
 
 /* Padding on columns */
-.col-padding .col-4 {
-    padding: 16px 16px 16px 16px;
-}
+.col-padding .col-4 { padding: 16px 16px 16px 16px }
 
 
 /* ================= IMAGES, DRAWINGS, BIG ICONS ================= */
