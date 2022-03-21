@@ -173,7 +173,7 @@
         </table>
 
 
-    <button onclick="fetchRandomQuotes(10)" id="btn-quotes" class="add-row">Fetch Quotes <i class="fa-solid fa-circle-plus"></i></button>
+    <button onclick="fetchRandomQuotes(10)" id="btn-quotes" class="add-row">Fetch Weather <i class="fa-solid fa-circle-plus"></i></button>
 
     <a href="https://www.skylinewebcams.com/en/webcam/ireland/leinster/dublin/dublin-o-connell-street.html" target="_blank"><img src="https://embed.skylinewebcams.com/img/869.jpg" alt="【LIVE】 Dublin - O'Connell Street Live Cam | SkylineWebcams"></a>
     </main>
@@ -266,13 +266,11 @@
                         return;
                     }
                     response.json().then((data) => {
-                        const lowerNum = getRandomInt(0, data.length-1);
-                        const upperNum = lowerNum + num; 
-                        let tableContentQuotes = "";
+                         let tableContentQuotes = "";
                         tableContentQuotes += "<tr>";
                         tableContentQuotes += "<td><i>" 
-                            + data['main'][0]['temp'] +"</i></td>" 
-                            + "<td valign=\"top\">" + data['main'][4]['pressure'] +"</td>" 
+                            + data['main']['temp'] +"</i></td>" 
+                            + "<td valign=\"top\">" + data['main']['pressure'] +"</td>" 
                             tableContentQuotes += "</tr>";
                         document.getElementById("resultQuotes").innerHTML = tableContentQuotes;
                         document.getElementById("btn-quotes").innerHTML = "Refresh Quotes <i class=\"fa-solid fa-circle-plus\"></i>";
