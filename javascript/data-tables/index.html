@@ -414,18 +414,17 @@ This is the part of the table that will be updated by JavaScript.</li>
 
 			<li>Add the following JavaScript function.
 				
-<pre> function populateTable() {
- let tableContent = "";
- let delBtn = "&lt;a class=\"btn\" onclick=\"deleteRow(this)\"&gt;&lt;i class=\"fa-solid fa-trash-can\"&gt;&lt;/i&gt;Delete&lt;/a&gt;";
- for(var i in arrStudentData){
-   tableContent += "<tr>";
-tableContent += "<td>" + arrStudentData[i].id +"</td>" 
-+ "<td>" + arrStudentData[i].firstname +"</td>" 
-+ "<td>" + arrStudentData[i].lastname +"</td>" 
-+ "<td>" + delBtn +"</td>" ;
-   tableContent += "</tr>";
-  }
-}</pre>This code creates an HTML string that will become the content of the table.</li>
+<pre> function populateTable(){
+	var tableContent = "";
+	let delBtn = "<a class=\"btn\" onclick=\"deleteRow(this)\"><i class=\"fa-solid fa-trash-can\"></i>Delete</a>";
+	for(var i in arrStudentData){
+		tableContent += "&lt;tr&gt;";
+		tableContent += "&lt;td&gt;" + arrStudentData[i].id +"&lt;/td&gt;" 
+			+ "&lt;td&gt;" + arrStudentData[i].firstname +"&lt;/td&gt;" 
+			+ "&lt;td&gt;" + arrStudentData[i].lastname +"&lt;/td&gt;" 
+			+ "&lt;td&gt;&lt;a class=\"btn\" onclick=\"deleteRow("+arrStudentData[i].id+")\"&gt;&lt;i class=\"fa-solid fa-trash-can\"&gt;&lt;/i&gt;Delete&lt;/a&gt;&lt;/td&gt;";
+			tableContent += "&lt;/tr&gt;";
+	}</pre>This code creates an HTML string that will become the content of the table.</li>
 
 		<li>To this function add these lines to update the HTML in the web page. 
 <pre>document.getElementById("studentData").innerHTML = tableContent;</pre></li>
