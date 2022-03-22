@@ -1,0 +1,176 @@
+     <!DOCTYPE html><html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <style>@media (min-width:1200px){header{padding:2% calc((100% - 800px)/ 2) 3% calc((100% - 800px)/ 2);margin:0 auto}}@media (min-width:1025px) and (max-width:1199px){header{padding:3% 14% 4% 14%}}@media (min-width:768px) and (max-width:1024px){header{padding:3% 8% 4% 8%}}@media (max-width:767px){header{padding:6% 13% 9% 13%}}h1 .font-mono{color:#888}body{font-family:sans-serif}li,p{font-size:18px;line-height:1.5}li{margin-bottom:12px}</style>
+        </head>
+        <body>
+        <header>
+            <h1>Introduction to Arrays: <span class="font-mono">JS Code Snippets</span></h1>
+            <p>See the online Lesson: <a href="https://www.munnelly.com/javascript/arrays/index.html">Arrays: An Introduction</a></p>
+            <p>View the JavaScript output in your web browser by pressing the following keys and selecting the <b>Console</b> tab:</p>
+            <ul>
+                <li><b>Ctrl</b> + <b>Shift</b> + <b>i</b> (Windows)</li>
+                <li><b>⌘ Command</b> + <b>Shift</b> + <b>i</b> (Mac).</li>
+            </ul>
+        </header>
+        <main>
+
+        <!-- JavaScript ode snippets start below -->
+        <script>
+    
+        console.log("%c=== CREATING AND POPULATING ARRAYS ===", "color: white; background-color: green; padding: 2px");
+
+        // Create an empty array
+        arrEmpty = [];
+        console.log("My array is empty :-( "+arrEmpty);
+
+        // Create an array with values
+        arrNotEmpty = ["Element here", "Another element here", "Yet another element here"];
+        console.log("Yah! My array has elements :-) "+arrNotEmpty);
+
+        // Create two new arrays
+        const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford", "Mercedes-Benz"];
+        const arrPrices = [11.99, 24.50, 34.25, 49.99, 22.25];
+
+        // Output two arrays
+        console.log(arrCars);
+        console.log("Text label: "+arrCars);
+        console.log(`Text Label: ${arrCars}`);
+
+        console.log(`My arrCars has these strings: ${arrCars}`);
+        console.log(`My arrPrices has these numbers: ${arrPrices}`);
+
+        // New array created using multiple lines for readability
+        const arrUserIDs = [
+            4032,
+            5229,
+            6317
+        ];
+
+        // Output array
+        console.log(`My arrUserIDs array: ${arrUserIDs}`);
+
+        const arrMixed = ["Movie title", 15.99, 2012, null, true];
+        console.log(`Array with different data types: ${arrMixed}`);
+
+        console.log("\n%c=== ARRAY DATA TYPE ===", "color: white; background-color: green; padding: 2px");
+
+        // Output data type of arrays
+        console.log("What data type is arrCars? "+typeof arrCars);
+        console.log("Is arrCars an array? "+Array.isArray("arrCars"));
+
+        console.log("\n%c=== ARRAY LENGTH ===", "color: white; background-color: green; padding: 2px");
+
+        // Output array.length
+        const arrFruits = ["Apple","Banana","Blueberry","Pear","Lemon", "Grapes"];
+        console.log("How many cars in arrCars? "+arrCars.length);
+        console.log("How many fruits in arrFruits? "+arrFruits.length);
+
+        console.log("\n%c=== ARRAY VALUES AT INDEX POSITIONS ===", "color: white; background-color: green; padding: 2px");
+
+        // Output array items by index position
+        console.log("1st [0] value in arrCars: "+arrCars[0]);
+        console.log("2nd [1] value in arrPrices: "+arrPrices[1]);
+        console.log("3rd [2] value in arrFruits: "+arrFruits[2]);
+        console.log("3rd [2] value in arrCars: "+arrCars[2]);
+        console.log("6th [5] value in arrFruits: "+arrFruits[5]);
+
+        console.log("Last element in arr arrFruits: "+arrFruits[arrFruits.length - 1]);
+        console.log("Last element in arrCars: "+arrCars[arrCars.length - 1]);
+
+
+        console.log("\n%c=== LOOPING THROUGH ARRAYS ===", "color: white; background-color: green; padding: 2px");
+
+        // Loop through array with for ... next
+        for (i = 0; i < arrMixed.length; i++) {
+            console.log(`Looping arrMixed with for ... next:  ${i}: ${arrMixed[i]}`);
+        }
+
+        for (i = 0; i < arrFruits.length; i++) {
+            console.log(`Looping arrFruits with for ... next:  ${i}: ${arrFruits[i]}`);
+        }
+
+        for (i = 0; i < arrCars.length; i++) {
+            console.log(`Looping arrCars with for ... next:  ${i}: ${arrCars[i]}`);
+        }
+
+        console.log("============")
+
+        // Loop through array with for ... of
+        for (item of arrFruits) {
+            console.log(`Loop with arrFruits for ... of: ${item}`);
+        }
+
+        for (item of arrCars) {
+            console.log(`Loop with arrCars for ... of: ${item}`);
+        }
+
+        console.log("============")
+        // Loop through array with forEach
+        arrCars.forEach(element => console.log(`Loop arrCars with forEach: ${element}`));
+
+        arrFruits.forEach(item => console.log(`Loop arrFruits with forEach: ${item}`));
+
+
+        console.log("\n%c=== ADD ELEMENTS ===", "color: white; background-color: green; padding: 2px");
+        
+        const myArray = [24];
+        console.log(myArray);
+
+        arrFruits.forEach(item => console.log(`Loop arrFruits BEFORE: ${item}`));
+        arrFruits.shift();
+        arrFruits.forEach(item => console.log(`Loop arrFruits AFTER shift(): ${item}`));
+        let arrFruitsShifted = arrFruits.shift();
+        console.log("arrFruitsShifted: " +arrFruitsShifted);
+
+        arrCars.forEach(item => console.log(`Loop arrCars BEFORE: ${item}`));
+        arrCars.unshift("VW");
+        arrCars.forEach(item => console.log(`Loop arrCars AFTER unshift(): ${item}`));
+
+        for (item of arrFruits) {
+            console.log(`Loop BEFORE pop() applied: ${item}`);
+        }
+        arrFruits.pop();
+
+        for (item of arrFruits) {
+            console.log(`Loop AFTER pop() applied: ${item}`);
+        }
+        let fruitRemoved = arrFruits.pop();
+        console.log("Removed item: "+fruitRemoved);
+
+        arrFruits.push("Kiwi");
+
+        for (item of arrFruits) {
+            console.log(`Loop AFTER push("Kiwi") applied: ${item}`);
+        }
+
+        const arrNewFruits = ["Banana", "Orange", "Apple", "Mango"];
+
+        for (item of arrNewFruits) {
+            console.log(`Lopp BEFORE splice(0, 1) applied: ${item}`);
+        }
+
+        arrNewFruits.splice(1, 1);
+
+
+        const arrFruits1 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        for (item of arrFruits1) {
+            console.log(`arrFruits1: ${item}`);
+        }
+        const slicedarrFruits1 = arrFruits1.slice(1, 3);
+       
+        for (item of slicedarrFruits1) {
+            console.log(`New subset of arrFruits1: ${item}`);
+        }
+
+        const arrFruits9 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        const newString = arrFruits9.toString();
+
+        console.log(`newString from Array: ${newString}`);
+
+       </script>
+       <!-- End of code snippets -->
+
+    </main>
+    </body>
+    </html>

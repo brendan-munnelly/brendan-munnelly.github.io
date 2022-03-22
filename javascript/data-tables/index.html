@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Data Tables | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Arrays in JavaScript Tutorial">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Data Tables</h1>
+					<h2>Creating and stylling HTML tables, adding and deleting table rows with JavaScript, and populating a table from an array of objects.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#arrays-about">Arrays: When variables are not enough</a></p>
+				<p><a href="#arrays-naming">Naming your arrays</a></p>
+				<p class="toc-indent"><a href="#arrays-naming-conventions">Array naming conventions</a></p>
+
+				<p><a href="#arrays-creating">Creating an array</a></p>
+				<p><a href="#arrays-populating">Populating an array</a></p>
+
+				<p class="toc-indent"><a href="#arrays-multiple-data-types">One array: multiple data types</a></p>
+
+				<p class="toc-indent"><a href="#arrays-length">The length of an array</a></p>
+				<p><a href="#arrays-reading">Reading array contents</a></p>
+
+				<p class="toc-indent"><a href="#arrays-looping-for-next">Looping through an array with <i>for ...next</i></a></p>
+
+				<p class="toc-indent"><a href="#arrays-looping-for-in">Looping through an array with <i>for...of</i></a></p>
+
+				<p><a href="#arrays-updating">Updating array values</a></p>
+
+				<p class="toc-indent"><a href="#arrays-modifying">Modifying array values</a></p>
+				<p class="toc-indent"><a href="#arrays-deleting">Deleting array values</a></p>
+
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create style HTML tables.</li>
+			<li>Using the addRow and deleteRow methods.</li>
+			<li>Populate a table from an array of objects.</li>
+		</ul>
+
+	</section>
+
+    <section id="arrays-about">
+
+        <h2>Tables in HTML</h2>
+        <p>A table is a structured set of data made up of rows (left-to-right) and columns (top-to-bottom).</p>
+
+		<p>In HTML:</p>
+		
+		<ul>
+			<li>A table is enclosed inside a pair of <span class="syn">&lt;table&gt;</span> and <span class="syn">&lt;/table&gt;</span> tags.</li>
+			<li>A table row is enclosed inside a pair of <span class="syn">&lt;tr&gt;</span> and <span class="syn">&lt;/tr&gt;</span> tags.</li>
+			<li>And each single cell on a table is enclosed inside a pair of <span class="syn">&lt;td&gt;</span> and <span class="syn">&lt;/td&gt;</span> tags.</li>
+		</ul>
+
+		<p>See the simple example below.</p>
+
+<pre>&lt;table&gt;
+  <span class="comment">&lt!-- first row --&gt;</span>
+  &lt;tr&gt;
+     &lt;td&gt;Row 1, Cell 1&lt;/td&gt;
+     &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+     &lt;td&gt;Row 1, Cell 3&lt;/td&gt;
+  &lt;/tr&gt;
+  <span class="comment">&lt!-- second row --&gt;</span>
+  &lt;tr&gt;
+     &lt;td&gt;Row 2, Cell 1&lt;/td&gt;
+     &lt;td&gt;Row 2, Cell 2&lt;/td&gt;
+     &lt;td&gt;Row 2, Cell 3&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+
+
+		<p>In practice, tables typically have a <span class="syn">thead</span> section (that contains the column headings) and a <span class="syn">tbody</span> section (that holds the tadble data).</p>
+
+		<p>Note that the cells in the head are wrapped in <span class="syn">th</span> rather than <span class="syn">td</span> trags.</p>
+		
+<pre>&lt;table&gt;
+  <span class="comment">&lt!-- table header --&gt;</span>
+  &lt;thead&gt;
+  &lt;tr&gt;
+     &lt;th&gt;Header 1&lt;/th&gt;
+     &lt;th&gt;Header 2&lt;/th&gt;
+     &lt;th&gt;Header 3&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  <span class="comment">&lt!-- first row --&gt;</span>
+  &lt;tr&gt;
+     &lt;td&gt;Row 1, Cell 1&lt;/td&gt;
+     &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+     &lt;td&gt;Row 1, Cell 3&lt;/td&gt;
+  &lt;/tr&gt;
+  <span class="comment">&lt!-- second row --&gt;</span>
+  &lt;tr&gt;
+     &lt;td&gt;Row 2, Cell 1&lt;/td&gt;
+     &lt;td&gt;Row 2, Cell 2&lt;/td&gt;
+     &lt;td&gt;Row 2, Cell 3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+
+		<p>As with other HTML elements, you can apply CSS styles to tables. Typcially, CSS styles are applied the borders and background colours.</p>
+
+		<h3>Adding CSS to a table</h3>
+
+		<p>Follow these stpes to add some basic styling to three sample tables.</p>
+
+		<ol>
+			<li>Open and save on your computer the following file:
+				<span class="inside-ol">&nbsp;</span>
+				<a href="code-snippets/table-exercise-1.html">table-exercise-1.html</a>
+				<span class="inside-ol">&nbsp;</span>
+				This contains three sample tables inside a div with a class of <span class="syn">.container-table</span>.
+			</li>
+			<li>Add a class of <span class="syn">data table</span> to all three tables.</li>
+			<li>In the <span class="syn">style</span> section in the <span class="syn">head</span> of the web page, add this class with the style rules below.
+<pre>
+<span class="comment">/* All tables */</span>
+.data-table {
+   border-collapse: collapse;
+   font-size: 18px;
+   width: 100%;
+   overflow: scroll; 
+   margin-bottom: 56px;
+   border: solid 1px #888;
+   box-shadow: 8px 8px 8px #888;  
+}</pre></li>
+
+			<li>For the cells of the tables, add these styles.
+<pre>.data-table th, .data-table td { padding: 8px 18px }</pre></li>
+
+			<li>Next, add some styles to make each of the tables look a little different.
+			<span class="inside-ol">&nbsp;</span>
+
+			Begin by adding a new class of <span class="syn">table-lines</span> to the first of the three tables. And then add this class to the head of the web page.
+
+			<pre><span class="comment">/* Tables with horizontal lines under rows */ </span>
+.table-lines { background-color: #fffceb }
+.table-lines tr { border-bottom: solid 1px #222 }</pre></li>
+
+			<li>To the second table, add a class of <span class="syn">.table-theme-light</span>. And then add the class below to the <span class="syn">style</span> section in the <span class="syn">head</span> of the web page.
+
+<pre><span class="comment">/* Tables with light theme */</span>
+.table-theme-light thead tr th { background-color: lightgray }
+.table-theme-light tr:nth-child(odd)  { background-color: #fff }
+.table-theme-light tr:nth-child(even) { background-color: #E1E4E7 }</pre></li>
+
+			<li>Finally, add a class of <span class="syn">.table-theme-dark</span> to the third table. And then add the class below with the others.
+<pre><span class="comment">/* Tables with dark theme */</span>
+.table-theme-dark { color: #fff }
+.table-theme-dark thead tr th { background-color: #000 }
+.table-theme-dark tr:nth-child(odd)  { background-color: #0e2439 }
+.table-theme-dark tr:nth-child(even) { background-color: #1f364d }</pre></li>
+			<li>Save your web page and view in your web browser. Your tables should look as shown below.</li>
+		</ol>
+
+		<img src="assets/img/tables-1.png" alt="Tabless witb CSS">
+
+		<p>By using the CSS pseudo classes of <span class="syn">:nth-child(odd)</span> and <span class="syn">:nth-child(even)</span>, you have created so-called <i>zebra tables</i>. That is, tables with alternating rows with different background colours.</p>
+
+		<p>Three extra styles you may want to add to your tables are the following:</p>
+
+		<ul>
+			<li><b>Left-align headings</b>: By default, column headings in the <span class="syn">thead</span> are centre-aligned. You can left-align all cells as follows.
+<pre> .data-table th, .data-table td { padding: 8px 18px; text-align: left }</pre></li>
+				
+			<li><b>Highlight first column</b>: You can use the pseudo class of <span class="syn">:hover</span> to highlight the content of the first column of a table - for example, to make the text bold. Try adding this style rule.
+<pre> .table-theme-dark td:first-of-type { font-weight: 700 }</pre></li>
+
+			<li><b>Highlight active rows</b>: You can highlight the row of a table that the user is currently hovering over with this rule.
+<pre> .table-theme-dark tr:hover { background-color: red }</pre></li>
+
+		</ul>
+    
+		<p>Lastly, let's add some visual interest to the area of the web page behind the table. So-called <i>mesh</i> backgrounds are very popular. See this <a href="https://www.antoinegiry.fr/" target="_blank">website</a>.</p>
+
+		<p>You can add a mesh backround to the web page as follows.</p>
+
+	<ol>
+		<li>Go to the <a href="https://csshero.org/mesher/" target="_blank"> Mesher</a> website.</li>
+		<li>Choose your preferred background colour combination.</li>
+		<li>Click the <b>Copy CSS</b> button.</li>
+		<li>Paste the CSS to the <span class="syn">.container-table</span> class.</li>
+	</ol>
+
+        <p>That's it. You have completed the first table exercises.</p>
+
+	</section>
+
+	<section>
+		<h2>Deleting table rows with JavaScript</h2>
+
+		<p>JavaScript has a <span class="csyn">deleteRows()</span> method for removing a row from a HTML table. The following exercise provides an example.</p>
+
+		<ol>
+			<li>Open and save on your computer the following file:
+				<span class="inside-ol">&nbsp;</span>
+				<a href="code-snippets/table-exercise-2.html">table-exercise-2.html</a>
+				<span class="inside-ol">&nbsp;</span><span class="inside-ol">&nbsp;</span>
+				This contains a sample table with four rows and three cells in each row - <b>Student ID</b>, <b>First Name</b> and <b>Last Name</b>.</li>
+
+			<li>In the <span class="syn">thead</span> row, add the fourth cell below.
+<pre> &lt;th&gt;Action&lt;/th&gt;</pre></li>
+
+			<li>To each of the four <span class="syn">thead</span> rows, add this fourth cell.
+<pre>&lt;td&gt;&lt;a class="btn"&gt;Delete&lt;/a&gt;&lt;/td&gt;</pre>
+</li>
+
+			<li>Include within each button hyperlink the relvant Student ID. For example:
+<pre>&lt;a class="btn" id="1234"&gt;Delete&lt;/a&gt;&lt;/td&gt;</pre></li>
+
+			<li>Add the CSS styles of <span class="syn">a.btn</span> and <span class="syn">a.btn:hover</span>. And add a suitable Font Awesome icon to the button.</li>
+
+			<li>Save your table and view it in your web browser. It should look as shown below.
+
+			<img src="assets/img/tables-2.png" alt="Delete table row"></li>
+</ol>
+
+
+	<p>The next steps are to add the JavaScript code for removing a selected row from the table.</p>
+
+	<ol>
+
+		<li>Before adding any JavaScript, add the style riule below to the CSS for the table buttons.
+
+<pre> .table-theme-light td a.btn &gt; * { pointer-events: none; }</pre>
+
+		This prevents an event being triggered when the user clicks on any text or icon element inside the button.</li> 
+
+		<li>Add an id of <span class="syn">#myTable</span> to the sample table.</li>
+
+		<li>Add a <span class="syn">script</span> tag to the bottom of the web page and enter the following code.
+
+<pre>
+let all_btns = document.querySelectorAll('#myTable .btn');
+
+all_btns.forEach(el =&gt; el.addEventListener('click', event =&gt; {
+  event.preventDefault();
+  console.log("Clicked button");
+  // get button id
+  btn_id = event.currentTarget.id;
+  console.log("Button ID: "+btn_id);
+  // deleteRow(btn_id);
+}));</pre>
+
+			<span class="inside-ol">&nbsp;</span>
+	Check your DevTools console to verify your code works correctly.</li>
+
+<li>Uncomment the last line above and add the function below.
+<pre> function deleteRow(btn_id) {
+    const rows = document.querySelectorAll("#myTable tr");
+    for (let i = rows.length; i--;) {
+	   if(rows[i].innerHTML.includes(`id="${btn_id}"`)) {
+           rows[i].parentNode.removeChild(rows[i]);
+       }
+    }
+ }</pre></li>
+			<li>Save your web page and view in your web browser. Verify that your code works correctly. Remove any console.log statements.</li>
+
+</ol>
+
+</section>
+
+
+<section>
+
+		<h2>Adding table rows with JavaScript</h2>
+
+		<p>JavaScript has an <span class="csyn">addRows()</span> method for add a new row to a HTML table. The following exercise provides an example.</p>
+
+		<ol>
+			<li>Open and save on your computer the following file:
+				<span class="inside-ol">&nbsp;</span>
+				<a href="code-snippets/table-exercise-3.html">table-exercise-3.html</a></li>
+
+			<li>Under the sample table, add the following HTML for the button. 
+
+<pre>&lt;p&gt;&lt;button class="add-row" onclick="addRow()"&gt;Add row &lt;i class="fa-solid fa-circle-plus"&gt;&lt;/i&gt;&lt;/button&gt;&lt;/p&gt;</pre></li>
+
+			<li>Add some CSS for the new button. Save your table and view it in your web browser. It should look as shown below.
+
+				<img src="assets/img/tables-3.png" alt="Delete table row"></li>
+
+			<li>You will need a Student ID for each new you you add. So add this function at the bottom of your JavaScript code. 
+<pre> function getRandomInt(min, max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+   return Math.floor(Math.random() * (max - min + 1) + min); 
+ }</pre></li>
+
+			<li>Begin adding the function code for adding a new row to the table as follows.
+<pre> function addRow() {
+   let table = document.getElementById("myTable");
+    // Create an empty &lt;tr&gt; element and add it to the last position of the table
+    let row = table.insertRow(-1);
+    // Insert new empty cells (&lt;td&gt; elements) in new &lt;tr&gt; element:
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
+    let cell3 = row.insertCell(2);
+    let cell4 = row.insertCell(3);
+}</pre></li>	
+
+			<li>Now add the code for populating the first three cells of every new row with data.
+<pre> // Add content to the new cells:
+  let student_id = getRandomInt(4000, 9000);
+  cell1.innerText = student_id;
+  cell2.innerText = "First Name here"; 
+  cell3.innerText = "Last Name here";</pre></li>
+
+  <li>Finally, add the code for the Delete button.
+<pre>  cell4.innerHTML = "&lt;a class=\"btn\" id=\""+student_id+"\" onclick=\"deleteRow("+student_id+")\"&gt;&lt;i class=\"fa-solid fa-trash-can\"&gt;&lt;/i&gt;Delete&lt;/a&gt;";</pre></li>
+
+			<li>Save your web page and verify your code works correctly.</li>
+</ol>
+
+</section>
+
+
+<section>
+
+
+		<h2>Populating a table from an array</h2>
+
+		<p>In his next exercise you will populate an HTML table with data stored in an array.</p>
+
+		<ol>
+			<li>Open and save on your computer the following file:
+				<span class="inside-ol">&nbsp;</span>
+				<a href="code-snippets/table-exercise-4.html">table-exercise-4.html</a>
+				<span class="inside-ol">&nbsp;</span>
+				The sample table contains only a <span class="syn">thead</span> section and no <span class="syn">tbody.</span></li>
+			
+			<li>In the JavaScript code, paste in the following array of objects.
+<pre>
+const arrStudentData = [
+    {id: "1224", firstname: "John", lastname: "Smith"},
+    {id: "5678", firstname: "Jane", lastname: "Higgins"},
+    {id: "1717", firstname: "Frank", lastname: "Jones"},
+    {id: "2121", firstname: "Mary", lastname: "Dwyer"}
+];</pre>
+This is data that will be used to populate the table.</li>
+
+
+
+			<li>Update the table HTML by adding the following line just before the cloosg table tag.as follows.
+<pre> &lt;tbody id= "studentData"&gt;&lt;/tbody&gt;</pre>
+This is the part of the table that will be updated by JavaScript.</li>	
+
+			<li>Add the following JavaScript function.
+				
+<pre> function populateTable() {
+ let tableContent = "";
+ let delBtn = "&lt;a class=\"btn\" onclick=\"deleteRow(this)\"&gt;&lt;i class=\"fa-solid fa-trash-can\"&gt;&lt;/i&gt;Delete&lt;/a&gt;";
+ for(var i in arrStudentData){
+   tableContent += "<tr>";
+tableContent += "<td>" + arrStudentData[i].id +"</td>" 
++ "<td>" + arrStudentData[i].firstname +"</td>" 
++ "<td>" + arrStudentData[i].lastname +"</td>" 
++ "<td>" + delBtn +"</td>" ;
+   tableContent += "</tr>";
+  }
+}</pre>This code creates an HTML string that will become the content of the table.</li>
+
+		<li>To this function add these lines to update the HTML in the web page. 
+<pre>document.getElementById("studentData").innerHTML = tableContent;</pre></li>
+
+<li>Update Button content after it has been clciked by the user.
+
+<pre> document.getElementById("btn_populate").innerHTML = "Refresh Table &lt;i class=\"fa-solid fa-circle-plus\"&gt;&lt;/i&gt;";</pre></li>
+
+<li>Finally, update the following line within the deleteRow() function.</li>
+<pre> if(rows[i].innerHTML.includes(btn_id)) {</pre>
+<li>Save your web page and verify your code works correctly.</li>
+
+</ol>
+
+</section>
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
