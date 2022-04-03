@@ -221,25 +221,30 @@ function disableTransColCode() {
     document.getElementById("color-transparent").style.display="none";
 }
 
-
 /*
 //////////////// COLUMNS ALIGN ///////////////
 */
 
-document.querySelector("#dd_col_align").addEventListener("change", doColAlign);
+document.querySelector("#switch-col-align").addEventListener("change", doColAlign);
 
 function doColAlign() {
-    let opt = document.querySelector("#dd_col_align").value;
-    const el_section = document.querySelector('#HTML-Content .container-flex')
+    const rbs = document.querySelectorAll("input[name='col-align']");
+    let selectedValue;
 
-    if (opt==="0") {
-        el_section.classList.remove("text-center");
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
     }
-
-    else if (opt==="1") {
-        el_section.classList.add("text-center");
+    if (selectedValue==="left") {
+        document.querySelector(".container-flex").classList.remove("text-center");
+    }
+    else if (selectedValue==="center") {
+        document.querySelector(".container-flex").classList.add("text-center"); 
     }
 }
+
 
 /*
 //////////////// COLUMNS SHADOWS ///////////////
@@ -414,12 +419,15 @@ document.querySelector("#dd_text").addEventListener("change", doText);
 function doText() {
     let opt = document.querySelector("#dd_text").value;
    
+
     // remove
     if (opt==="0") {
+        document.querySelector("#btn_col_text").disabled=true;
         removeText();
     }
     
     else if (opt==="1") {
+        document.querySelector("#btn_col_text").disabled=false;
         // Do Paragraphs
         removeText();
         // Test for figures AND h3 column headings
@@ -465,6 +473,7 @@ function doText() {
 
     else if (opt==="2") {
         removeText();
+        document.querySelector("#btn_col_text").disabled=false;
         // Test for figures AND h3 column headings
         if ( (document.querySelector(col_no+" figure")) && (document.querySelector(col_no+" h3")) ) {
             const obj_h3 = document.querySelectorAll(col_no+" h3");
@@ -780,7 +789,10 @@ function doVisType() {
         }
         // Enables icon properties
         document.getElementById("dd_icon_size").disabled=false;
-        document.getElementById("dd_icon_align").disabled=false;
+        document.getElementById("radio-icon-align-left").disabled=false;
+        document.getElementById("radio-icon-align-center").disabled=false;
+        document.getElementById("radio-icon-align-left").checked=false;
+        document.getElementById("radio-icon-align-center").checked=true;        
         document.getElementById("btn_icon_color").disabled=false;
     }
 }
@@ -869,19 +881,27 @@ function doIconSize() {
 //////////////// ICON PROPERTIES: ALIGN ///////////////
 */
 
-document.querySelector("#dd_icon_align").addEventListener("change", doIconAlign);
+document.querySelector("#switch-icon-align").addEventListener("change", doIconAlign);
 
 function doIconAlign() {
-    let opt = document.querySelector("#dd_icon_align").value;
-    //Restore centre align
-    if (opt==="0") {
-        const el_section = document.querySelector("section");
-        el_section.classList.remove("icon-left");
+
+    const rbs = document.querySelectorAll("input[name='radio-icon-align']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
     }
-    //Left align
-    else if (opt==="1") {
-        const el_section = document.querySelector("section");
+
+    const el_section = document.querySelector("section");
+
+    if (selectedValue==="left") {
         el_section.classList.add("icon-left");
+    }
+    else if (selectedValue==="center") {
+        el_section.classList.remove("icon-left");
     }
 }
 
@@ -899,6 +919,9 @@ function removeVisual() {
     disableImgProps();
     // Disable icon properties
     document.getElementById("dd_icon_size").disabled=true;
-    document.getElementById("dd_icon_align").disabled=true;
+    document.getElementById("radio-icon-align-left").disabled=true;
+    document.getElementById("radio-icon-align-center").disabled=true;
+    document.getElementById("radio-icon-align-left").checked=false;
+    document.getElementById("radio-icon-align-center").checked=false;        
     document.getElementById("btn_icon_color").disabled=true;
 }
