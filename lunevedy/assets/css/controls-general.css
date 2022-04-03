@@ -14,8 +14,11 @@ body { background-color: #fff }
 
 #control-menu:nth-child(1) a img { margin-top: 9px; width: 140px; height: 40px; outline: 0 }
 
+#control-menu button > * { pointer-events: none !important }
 
 /* ============= NAVBAR MENU OPTIONS ================== */
+
+#ui-menus { display: none }
 
 #control-menu ul  { list-style-type: none }
 
@@ -43,16 +46,59 @@ body { background-color: #fff }
     user-select: none;
     white-space: nowrap;
 }
+
 #control-menu > ul li.dropdown:last-child { margin-right: 0 }
 #control-menu > ul li.dropdown .dropbtn:focus,
 #control-menu > ul li.dropdown .dropbtn:hover,
 #control-menu > ul li.dropdown .dropbtn:active { 
-    color: #fff; background-color: #42414d;
+    color: #fff; background-color: var(--gray-700);
 }
 
 #control-menu > ul:last-of-type { align-self: center; text-align: right; min-width: 25% }
 
 @media (max-width: 1000px) { #control-menu > ul:last-of-type { display: none } }
+
+#control-menu .page-preview-header { 
+    padding: 0; margin: 0;
+    position: relative; text-align: center;
+    position: relative; display: none;
+    background-color: #2b2a33; line-height: 1; 
+   
+}
+
+#control-menu .page-preview-header span { 
+    padding: 0; margin: 0; background-color:#2b2a33;
+    display: inline-block
+}
+
+#control-menu .page-preview-header span img { display: inline;  }
+
+#respDesktopLarge img { width: 52px; height: 52px }
+#respDesktopSmall img { width: 48px; height: 52px }
+#respTabletLandscape img { width: 52px; height: 52px }
+#respTabletPortrait img { width: 42px; height: 52px }
+#respMobileSmall img, #respMobileLarge img { width: 40px; height: 52px }
+
+#control-menu .page-preview-header span > * { pointer-events: none }
+
+.page-preview-body {
+    position: relative; 
+    height: calc(100% - 70px); overflow: hidden;
+    text-align: center; margin: 58px auto 0 auto;
+    padding-bottom: 56.25%; max-width: 100%;
+}
+
+.page-preview-body iframe { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border: none; display: inline-block
+}
+
+.page-preview-body.resp-desktop { width: 100% }
+.page-preview-body.resp-desktop-small { width: 1200px }
+.page-preview-body.resp-tablet-landscape { width: 1024px }
+.page-preview-body.resp-tablet-portrait { width: 768px }
+.page-preview-body.resp-mobile-large { width: 450px }
+.page-preview-body.resp-mobile-small { width: 320px }
 
 
 /* ============= DROPDOWN MENUS ================== */
@@ -184,10 +230,9 @@ body { background-color: #fff }
 .dialog-box .input-group-vertical input[disabled] + label { color: var(--gray-500) }
 
 
-
 .input-group.two-col { display: flex; flex-direction: row }
 
-.input-group.two-col .column.column-wider { width: 47%; min-width: 240px; padding-right: 20px }
+.input-group.two-col .column.column-wider { width: 47%; min-width: 260px; padding-right: 20px }
 
 .input-group.two-col label, .input-group.two-col div { display: inline-block }
 
@@ -201,8 +246,8 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
 .controls-top button { border-width: 0 }
 
 .controls-top .input-group button { 
-    font-size: 16px; color: #000; background-color: #00ddff;
-    padding: 3px 16px 6px 14px; font-weight: 400; border-radius: 4px;
+    font-size: 15px; color: #000; background-color: #00ddff;
+    padding: 0 22px 8px 12px; font-weight: 400; border-radius: 4px;
     border: solid 1px #00ddff; 
 }
 
@@ -233,6 +278,8 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
     margin-top: 58px;
     position: relative; 
     z-index: 0;
+    resize: both;
+    overflow: auto;
 }
 
 
@@ -250,9 +297,10 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
 
 .dialog-box .switch-field label, 
 .dialog-box div .input-group .switch-field label {
-    background-color: var(--gray-400); color: var(--gray-700); 
+    background-color: var(--gray-400); 
+    color: var(--gray-700);  fill: var(--gray-700);
     font-size: 16px; line-height: 1; text-align: center;  
-    padding: 6px 10px; margin-right: -1px; font-weight: 600;
+    padding: 4px 10px 0 6px; margin-right: -1px; font-weight: 600;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
     transition: all 0.1s ease-in-out;
@@ -261,10 +309,10 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
 .dialog-box .switch-field label:hover,
 .dialog-box div .input-group .switch-field label:hover { cursor: pointer }
 
-
 .dialog-box .switch-field input:checked + label,
 .dialog-box div .input-group .switch-field input:checked + label {  
-    box-shadow: none; background-color: #000; color: var(--gray-200)
+    box-shadow: none; background-color: #000; 
+    color: var(--gray-200); fill: var(--gray-200) !important;
 }
 
 .dialog-box .switch-field label:first-of-type,
@@ -272,6 +320,10 @@ input[type="radio"][disabled] { border-color: var(--gray-600) }
 
 .dialog-box .switch-field label:last-of-type,
 .dialog-boxdiv .input-group  .switch-field label:last-of-type { border-radius: 0 4px 4px 0 }
+
+#rb-horz-left-mobile:checked + label {
+    fill: var(--gray-200) !important;
+}
 
 
 /* ============== MODAL ================ */
@@ -684,6 +736,8 @@ label .white-000  { background: var(--white-000); border: solid 1px #000 }
 }
 
 #btn-copy i, #btn-copy-css i { margin-right: 10px }
+#btn-copy svg, #btn-copy-css svg { margin-right: 5px; padding-top: 2px; fill: #222 }
+
 #btn-copy { margin-right: 14px }
 
 
@@ -745,12 +799,14 @@ label .white-000  { background: var(--white-000); border: solid 1px #000 }
     }
 
     .ios input:checked + label { color: #3a3a3a }
+
+    .svg-icon-desktop, .svg-icon-mobile { margin-right: 12px; margin-top: 6px; fill: #fff }
 }
 
 /* === Switch buttons in menus === */
 
 /* Background area */
-input[type=checkbox].switch { width: 54px; border-radius: 11px }
+input[type=checkbox].switch { width: 54px; border-radius: 11px; margin-top: 6px }
 
 /* Background area: Checked */
 input[type=checkbox].switch:checked { --x: 29px }
@@ -795,7 +851,11 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
 
 .ui-icon { color: inherit !important }
 
-.ui-icon-svg { width: 22px; height: 22px }
+.ui-icon-paint-svg { width: 22px; height: 20px; padding-top: 6px; margin-right: 8px }
+
+.controls-top .input-group button:disabled .ui-icon-paint-svg {
+    fill: var(--gray-600);
+}
 
 /* LOWER LEFT */
 
@@ -861,4 +921,10 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
 .lower-left input[type=checkbox]:checked {
     background-color: #00ddff;
     --d-o: .3s; --d-t: .6s; --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+}
+
+.resp-mobile {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
 }
