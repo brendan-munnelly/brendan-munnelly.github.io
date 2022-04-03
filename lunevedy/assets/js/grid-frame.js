@@ -8,21 +8,6 @@ let section_class ="section-selector-1";
 // Used by color picker. Either 'theme-light' or 'theme-dark'.
 let section_theme = "section.theme-light."+section_class;
 
-// GLOBAL VARIABLES
-
-// Class names of columns in grid: .col-2, .col-3 or .col-4
-let col_no;
-if (document.querySelector('.col-2')) { col_no = ".col-2" }
-else if (document.querySelector('.col-3')) { col_no = ".col-3" }
-else if (document.querySelector('.col-4')) { col_no = ".col-4" }
-
-// Number column blocks to loop through
-let col_count = document.querySelectorAll(col_no).length;
-
-console.log("col_no: "+col_no);
-console.log("col_count: "+col_count);
-
-
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
@@ -57,8 +42,11 @@ divs.forEach(el => el.addEventListener('click', event => {
 }));
 
 // Hide all menus when user clicks on page.
-document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
 
+
+window.onload=function(){
+    iframe.contentWindow.document.querySelector('#HTML-Content').addEventListener('click',hideMenus,false);
+}
 
 function hideMenus() {
     for (let i = 1; i <= uiUIenusLength; i++) {
@@ -160,45 +148,45 @@ function dragElement(elmnt) {
 //////////////// SECTION: THEME  ///////////////
 */
 
-document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
+    document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
 
-function doSectionTheme() {
-    hideMenus();
-    const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
-    let selectedValue;
+    function doSectionTheme() {
+        hideMenus();
+        const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
+        let selectedValue;
 
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
+        for (const rb of rbs) {
+            if (rb.checked) {
+                selectedValue = rb.value;
+                break;
+            }
         }
-    }
-    // Remove all styles
-    var hs = document.querySelectorAll('style');
-    for (var i=0, max = hs.length; i < max; i++) {
-        hs[i].parentNode.removeChild(hs[i]);
-    }
+        // Remove all styles
+        var hs = iframe.contentWindow.document.querySelectorAll('style');
+        for (var i=0, max = hs.length; i < max; i++) {
+            hs[i].parentNode.removeChild(hs[i]);
+        }
 
-    if (selectedValue==="light") {
-        document.querySelector("section").classList.remove("theme-dark"); 
-        document.querySelector("section").classList.add("theme-light"); 
-    }
-    else if (selectedValue==="dark") {
-        document.querySelector("section").classList.remove("theme-light"); 
-        document.querySelector("section").classList.add("theme-dark"); 
-    }
+        if (selectedValue==="light") {
+            iframe.contentWindow.document.querySelector("section").classList.remove("theme-dark"); 
+            iframe.contentWindow.document.querySelector("section").classList.add("theme-light"); 
+        }
+        else if (selectedValue==="dark") {
+            iframe.contentWindow.document.querySelector("section").classList.remove("theme-light"); 
+            iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
+        }
 
-    // Check for outlines
-    if (document.querySelector("#cb-outlines").checked) {
-        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = document.head || document.getElementsByTagName('head')[0],
-        style_checked = document.createElement('style');
-        head_checked.appendChild(style_checked);
-        style_checked.type = 'text/css';
-        style_checked.appendChild(document.createTextNode(css_checked));
+        // Check for outlines
+        if (document.querySelector("#cb-outlines").checked) {
+            // const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+            // head_checked = document.head || document.getElementsByTagName('head')[0],
+            // style_checked = document.createElement('style');
+            // head_checked.appendChild(style_checked);
+            // style_checked.type = 'text/css';
+            // style_checked.appendChild(document.createTextNode(css_checked));
+        }
+        disableCSS();
     }
-    disableCSS();
-}
 
 /*
 //////////////// SECTION: OUTLINES  ///////////////
@@ -236,11 +224,11 @@ function doClassName() {
     removeClassNames();
     let opt = 1 + parseInt(document.querySelector("#dd_className").value);
     section_class = "section-selector-"+opt;
-    document.querySelector("section").classList.add("section-selector-"+opt);
+    iframe.contentWindow.document.querySelector("section").classList.add("section-selector-"+opt);
 }
 
 function removeClassNames() {
-    const el_section = document.querySelector("section");
+    const el_section = iframe.contentWindow.document.querySelector("section");
     for (let i = 1; i <= uiUIenusLength; i++) {
         el_section.classList.remove("section-selector-"+[i]);
     }
@@ -258,28 +246,28 @@ function doWidthDesktopSection() {
     deleteSectionWidth();
 
     if (opt==="1") {
-        document.querySelector("section").classList.add("section-width-930px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-930px");
     }
     else if (opt==="2") {
-        document.querySelector("section").classList.add("section-width-1024px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1024px");
     }
     else if (opt==="3") {
-        document.querySelector("section").classList.add("section-width-1140px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1140px");
     }
     else if (opt==="4") {
-        document.querySelector("section").classList.add("section-width-1320px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1320px");
     }
     else if (opt==="5") {
-        document.querySelector("section").classList.add("section-width-1536px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1536px");
     }
 }
 
 function deleteSectionWidth() {
-    document.querySelector("section").classList.remove("section-width-930px");
-    document.querySelector("section").classList.remove("section-width-1024px");
-    document.querySelector("section").classList.remove("section-width-1140px");
-    document.querySelector("section").classList.remove("section-width-1320px");
-    document.querySelector("section").classList.remove("section-width-1536px");                
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-930px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1024px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1140px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1320px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1536px");                
 }
 
 /*
@@ -293,22 +281,22 @@ function doUpperBlockWidth() {
     let opt = document.querySelector("#dd_upper_block_width").value;
 
     if (opt==="0") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
 
     }
 
     else if (opt==="1") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-930px");
     }
 
     else if (opt==="2") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
-        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px");
     }    
 }
 
@@ -331,15 +319,15 @@ function doAlignDesktopSection() {
         }
     }
     if (selectedValue==="left") {
-        document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
-        document.getElementById("dd_align_desktop_btns").disabled=false;
-        document.getElementById("dd_align_desktop_btns").value="0";
+        iframe.contentWindow.document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
+        iframe.contentWindow.document.getElementById("dd_align_desktop_btns").disabled=false;
+        iframe.contentWindow.document.getElementById("dd_align_desktop_btns").value="0";
 
     }
     else if (selectedValue==="center") {
         document.querySelector("#HTML-Content section").classList.add("text-center-desktop"); 
-        document.getElementById("dd_align_desktop_btns").value="1";
-        document.getElementById("dd_align_desktop_btns").disabled=true;
+        iframe.contentWindow.document.getElementById("dd_align_desktop_btns").value="1";
+        iframe.contentWindow.document.getElementById("dd_align_desktop_btns").disabled=true;
     }
 }
 
@@ -390,10 +378,10 @@ function doUpperBlockAlign() {
         }
     }
     if (selectedValue==="left") {
-        document.querySelector("section .col-1").classList.remove("text-center");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("text-center");
     }
     else if (selectedValue==="center") {
-        document.querySelector("section .col-1").classList.add("text-center"); 
+        iframe.contentWindow.document.querySelector("section .col-1").classList.add("text-center"); 
     }
 }
 
@@ -408,30 +396,30 @@ document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLab
 function doUpperLabel() {
 
     // Single column
-    if (document.querySelector("section > h2")) {
+    if (iframe.contentWindow.document.querySelector("section > h2")) {
         if (!document.getElementById("cb_upperLabelOn").checked) {
             removeUpperLabel();
         }
         else {
-            document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            iframe.contentWindow.document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
 
     // 2-Column split
-    else if (document.querySelector("section.cols-2-split")) {
+    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
         if (!document.getElementById("cb_upperLabelOn").checked) {
             removeUpperLabel();
         }
         else {
             removeUpperLabel();
-            document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            iframe.contentWindow.document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
 
     // 2, 3 or 4-Column
-    else if (document.querySelector("section .col-1")) {
+    else if (iframe.contentWindow.document.querySelector("section .col-1")) {
         if (!document.getElementById("cb_upperLabelOn").checked) {
             removeUpperLabel();
         }
@@ -441,18 +429,18 @@ function doUpperLabel() {
             const newUpperLabelSpan = document.createElement("span");
             newUpperLabelDiv.appendChild(newUpperLabelSpan);
             newUpperLabelDiv.classList.add("container-upper-label"); 
-            document.querySelector("section .col-1").prepend(newUpperLabelDiv);
-            document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
+            iframe.contentWindow.document.querySelector("section .col-1").prepend(newUpperLabelDiv);
+            iframe.contentWindow.document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
 }
 
 function removeUpperLabel() {
-    if (document.querySelector('.container-upper-label')) {
-    const upperLabel = document.querySelector('.container-upper-label');
+    if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
+    const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
         upperLabel.remove();
-        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\n\n", "");
         document.getElementById("btn_upper_label").disabled=true;
     }
 }
@@ -475,20 +463,20 @@ function doUpperH2() {
         const newH2 = document.createElement("h2");
         const newContent = document.createTextNode("Nice heading here");
         newH2.appendChild(newContent);
-        const currentDiv = document.querySelector('.col-1');
-        if (!document.querySelector('.container-upper-label')) {
+        const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
+        if (!iframe.contentWindow.document.querySelector('.container-upper-label')) {
             currentDiv.prepend(newH2);
         }
         else {
-            document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
+            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
         }
     }
 }
 
 function removeUpperH2() {
-    if (document.querySelector('.col-1 h2')) {
+    if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
         document.getElementById("btn_upper_head").disabled=true;
-        const elH2 = document.querySelector('.col-1 h2');
+        const elH2 = iframe.contentWindow.document.querySelector('.col-1 h2');
         elH2.remove();
     }
 }
@@ -502,27 +490,26 @@ document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
 function doUpperH3() {
 
     // Single column
-    if (document.querySelector("section > h2")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
+    if (iframe.contentWindow.document.querySelector("section > h2")) {
+        if (!iframe.contentWindow.getElementById("cb_upperH3On").checked) {
             removeUpperH3();
         }
         else {
             removeUpperH3();
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-            document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
+            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
             document.getElementById("btn_subhead").disabled=false;
         }            
     }
 
     // 2-Column split
-    else if (document.querySelector("section.cols-2-split")) {
+    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
         if (!document.getElementById("cb_upperH3On").checked) {
             removeUpperH3();
         }
         else {
             // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-            if (!document.querySelector(".cols-2-split .col-2 h3")) {
-                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
+            if (!iframe.contentWindow.document.querySelector(".cols-2-split .col-2 h3")) {
+                iframe.contentWindow.document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
                 document.getElementById("btn_subhead").disabled=false;
             }
             else {
@@ -532,7 +519,7 @@ function doUpperH3() {
     }
 
     // 2, 3 or 4-Column
-    else if (document.querySelector("section .col-1")) {
+    else if (iframe.contentWindow.document.querySelector("section .col-1")) {
         if (!document.getElementById("cb_upperH3On").checked) {
             removeUpperH3();
         }
@@ -541,27 +528,25 @@ function doUpperH3() {
             const newSubHead = document.createElement("h3");
             const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
             newSubHead.appendChild(newContent);
-            const currentDiv = document.querySelector('.col-1');
+            const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
             currentDiv.append(newSubHead);
             document.getElementById("btn_upper_subhead").disabled=false;
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
         }
     }
 }
 
 function removeUpperH3() {
-    // document.querySelector("label[for='cb_upperH3On']").style.color = "var(--gray-500)";
-    if (document.querySelector("section > h3")) {
-        document.querySelector("section > h3").remove();
+    if (iframe.contentWindow.document.querySelector("section > h3")) {
+        iframe.contentWindow.document.querySelector("section > h3").remove();
         document.getElementById("btn_subhead").disabled=true;
     }
 
-    else if (document.querySelector("section.cols-2-split")) {
-        document.querySelector("section.cols-2-split .col-2 h3").remove();
+    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
+        iframe.contentWindow.document.querySelector("section.cols-2-split .col-2 h3").remove();
         document.getElementById("btn_subhead").disabled=true;
     }
-    else if (document.querySelector("section .col-1 h3")) {
-        document.querySelector("section .col-1 h3").remove();
+    else if (iframe.contentWindow.document.querySelector("section .col-1 h3")) {
+        iframe.contentWindow.document.querySelector("section .col-1 h3").remove();
         document.getElementById("btn_upper_subhead").disabled=true;
     }
 }
@@ -576,12 +561,11 @@ if (document.querySelector("#cb_standfirstOn")) {
 
 function doStandFirst() {
     if (!document.getElementById("cb_standfirstOn").checked) {
-        // document.querySelector("label[for='cb_standfirstOn']").style.color = "var(--gray-500)";
-        document.querySelector("section > p").classList.remove("standfirst");
+        iframe.contentWindow.document.querySelector("section > p").classList.remove("standfirst");
     }
     else {
         document.querySelector("label[for='cb_standfirstOn']").style.color = "#fff";
-        document.querySelector("section > p").classList.add("standfirst");
+        iframe.contentWindow.document.querySelector("section > p").classList.add("standfirst");
     }
 }
 
@@ -600,7 +584,7 @@ function disableCSS() {
 }
 
 function copyHTML() {
-    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    let HTML_Content = iframe.contentWindow.document.getElementById("HTML-Content").innerHTML;
     const el = document.createElement('textarea');
 
     el.value = HTML_Content;
@@ -652,3 +636,65 @@ function removeEmptyNodes() {
     return;
 }
 
+/*
+//////////////// Responsive resizing icons in navbar ///////////////
+*/
+
+const iconsResponsive = document.querySelectorAll('.icon_resize_respon');
+
+iconsResponsive.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+        // document.querySelector(icon).classList.remove("selected");
+        // Get current icon id
+        const id = e.currentTarget.id.toString();
+        console.log("id:" +id);
+        document.getElementById(id).classList.add("selected");
+        resetResponsive();
+
+        if (id==="respDesktop") {
+            document.getElementById("page-preview-body").classList.add("resp-desktop");
+            document.querySelector("#respDesktop img").src = "assets/img/icon-resize-desktop-large-selected.png";
+        }
+
+        if (id==="respDesktopSmall") {
+            document.getElementById("page-preview-body").classList.add("resp-desktop-small");
+            document.querySelector("#respDesktopSmall img").src = "assets/img/icon-resize-desktop-small-selected.png";
+        }
+
+        else if (id==="respTabletLandscape") {
+            document.getElementById("page-preview-body").classList.add("resp-tablet-landscape");
+            document.querySelector("#respTabletLandscape img").src = "assets/img/icon-resize-tablet-landscape-selected.png";
+        }
+        else if (id==="respTabletPortrait") {
+            document.getElementById("page-preview-body").classList.add("resp-tablet-portrait");
+            document.querySelector("#respTabletPortrait img").src = "assets/img/icon-resize-tablet-portrait-selected.png";
+        }        
+        
+        else if (id==="respMobileLarge") {
+            document.getElementById("page-preview-body").classList.add("resp-mobile-large");
+            document.querySelector("#respMobileLarge img").src = "assets/img/icon-resize-mobile-large-selected.png";
+        }        
+
+        else if (id==="respMobileSmall") {
+            document.getElementById("page-preview-body").classList.add("resp-mobile-small")
+            document.querySelector("#respMobileSmall img").src = "assets/img/icon-resize-mobile-small-selected.png";           
+        }        
+    });
+});
+
+
+function resetResponsive() {
+    document.getElementById("page-preview-body").classList.remove("resp-desktop");
+    document.getElementById("page-preview-body").classList.remove("resp-desktop-small");
+    document.getElementById("page-preview-body").classList.remove("resp-tablet-landscape");
+    document.getElementById("page-preview-body").classList.remove("resp-tablet-portrait");
+    document.getElementById("page-preview-body").classList.remove("resp-mobile-large");
+    document.getElementById("page-preview-body").classList.remove("resp-mobile-small");
+
+    document.querySelector("#respDesktop img").src = "assets/img/icon-resize-desktop-large.png";
+    document.querySelector("#respDesktopSmall img").src = "assets/img/icon-resize-desktop-small.png";
+    document.querySelector("#respTabletLandscape img").src = "assets/img/icon-resize-tablet-landscape.png";
+    document.querySelector("#respTabletPortrait img").src = "assets/img/icon-resize-tablet-portrait.png";
+    document.querySelector("#respMobileLarge img").src = "assets/img/icon-resize-mobile-large.png";
+    document.querySelector("#respMobileSmall img").src = "assets/img/icon-resize-mobile-small.png";     
+}
