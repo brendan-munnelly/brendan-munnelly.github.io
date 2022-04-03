@@ -783,6 +783,10 @@ document.querySelector("#dd_buttons_style").addEventListener("change", doButtons
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
 function doVisType() { 
+    if (iframe.contentWindow.document.querySelector('.col-2')) { col_no = ".col-2" }
+    else if (iframe.contentWindow.document.querySelector('.col-3')) { col_no = ".col-3" }
+    else if (iframe.contentWindow.document.querySelector('.col-4')) { col_no = ".col-4" }
+
     const rbs = document.querySelectorAll("#vis-types-all input[name='visual_options']");
     let selectedValue;
     
