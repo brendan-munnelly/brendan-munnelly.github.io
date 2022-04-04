@@ -76,55 +76,64 @@
 
     <section id="tables-html">
 
-        <h2>Base Web Page</h2>
-        <p>Download the following web page thta contains all the necesary HTML and CSS for this project:</p>
+		<h2>Setting up the base web page</h2>
 
-		<p><a href="https://munnelly.com/javascript/2022-js/portfolio/js/quotes.html">quotes.html</a></p>
+        <p>Your first task is to set up the base web page.</p>
+
+        <ol>
+            <li>In your <b>portfolio/js</b> folder, create a new sub-folder named <b>quotes</b>.</li>
+            <li>Download the following file to this new <b>portfolio/js/quotes</b> folder.
+                <span class="inside-ol">&nbsp;</span>
+               	<a href="https://munnelly.com/javascript/2022-js/portfolio/js/quotes/index.html">index.html</a></li>
+            <li>Give it the filename <b>index.html</b>.</li>
+            <li>Update the website logo, favicon, <span class="syn">&lt;title&gt;</span> tag and the <span class="syn">&lt;footer&gt;</span> with your own details.</li>
+        </ol>
 		
+        <p>This file contains all the necessary HTML and CSS for this project.</p>
 
 	</section>		
 
 	<section>
 
-		<h2 id="tables-css">JavaScript Code</h2>
+		<h2 id="tables-css">Adding the JavaScript code</h2>
+	
+		<p>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, add the following JavaScript code within a <span class="syn">&lt;script&gt;</span> tag.</p>
 
-<pre>
-	document.querySelector("#btn-quotes").addEventListener("click", fetchRandomNumQuotes);
+<pre>document.querySelector("#btn-quotes").addEventListener("click", fetchRandomNumQuotes);
 
-	async function fetchRandomNumQuotes() { 
-		await fetch('https://type.fit/api/quotes')
+async function fetchRandomNumQuotes() { 
+   await fetch('https://type.fit/api/quotes')
 
-			.then(response => {
-				if (response.status !== 200) {
-					console.log('Error Status Code: ' + response.status);
-					return;
-				}
-				response.json().then((data) => {
-					console.log(data);
-					const lowerNum = getRandomInt(0, data.length-10);
-					const upperNum = lowerNum + 9; 
-					let html_block = "";
-					for (i= lowerNum; i < upperNum; i++) { 
-						html_block = html_block + `<div class="col-3"><p><span>&#8220;</span>${data[i].text}<span>&#8221;</span></p><h3>${data[i].author}</h3></div>`;
-						document.getElementById("quotes-box").innerHTML = html_block;
-					}
-				});
-			})
+      .then(response =&gt; {
+         if (response.status !== 200) {
+            console.log('Error Status Code: ' + response.status);
+            return;
+         }
+         response.json().then((data) =&gt; {
+            console.log(data);
+            const lowerNum = getRandomInt(0, data.length-10);
+            const upperNum = lowerNum + 9; 
+            let html_block = "";
+            for (i= lowerNum; i &lt; upperNum; i++) { 
+               html_block = html_block + `&lt;div class="col-3"&gt;&lt;p&gt;&lt;span&gt;&#8220;&lt;/span&gt;${data[i].text}&lt;span&gt;&#8221;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;${data[i].author}&lt;/h3&gt;&lt;/div&gt;`;
+               document.getElementById("quotes-box").innerHTML = html_block;
+            }
+         });
+       })
 
-			.catch(error => {
-				// handle any error
-		   });
+       .catch(error =&gt; {
+          // handle any error
+      });
 
-	}
+}
 
-	function getRandomInt(min, max) {
-		min = Math.ceil(min);
-		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - min + 1) + min); 
-	}
+function getRandomInt(min, max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+   return Math.floor(Math.random() * (max - min + 1) + min); 
+}</pre>
 
-
-</pre>
+<p>Add some CSS styling in the <span class="syn">style</span> tag in the <span class="syn">head</span> of the web page</p>
 
 <p>Save your finished file with the name <b>index.html</b> in the <b>portfolio/js/quotes</b> sub-folder.</p>
 
