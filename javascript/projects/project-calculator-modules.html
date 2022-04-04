@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	  <title>Calculator with Modules | JavaScript Project | Brendan Munnelly</title>
+    <meta name="description" content="A basic calculator that uses export/import statements to share code with a JavaScript module file.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Calculator with Modules</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>A basic calculator that uses export/import statements to share code with a JavaScript module file.</p>
+
+	</section>
+
+    <section id="tables-html">
+
+        <h2>Setting up the base web page</h2>
+
+        <p>Your first task is to set up the base web page.</p>
+
+        <ol>
+            <li>In your <b>portfolio/js</b> folder, create a new sub-folder named <b>calculator-modules</b>.</li>
+            <li>Download the following file to this new <b>portfolio/js/calculator-modules</b> folder.
+                <span class="inside-ol">&nbsp;</span>
+                <a href="https://munnelly.com/javascript/2022-js/portfolio/js/calculator-modules.html">index.html</a></li>
+            <li>Give it the filename <b>index.html</b>.</li>
+            <li>Update the website logo, favicon, <span class="syn">&lt;title&gt;</span> tag and the <span class="syn">&lt;footer&gt;</span> with your own details.</li>
+        </ol>
+		
+        <p>This file contains all the necessary HTML and CSS for this project.</p>
+
+	</section>		
+
+	<section>
+
+		<h2 id="tables-css">Adding some JavaScript code</h2>
+        <p>Now it's time to add the JavaScript code.</p>
+
+        <ol>
+            <li>In your <b>portfolio/js/calculator-modules</b> folder, create a new, empty file and name it <b>app.js</b>.</li>
+            <li>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, link to the file that will hold your JavaScript code.
+<pre>&lt;script src="app.js"&gt;&lt;/script&gt;</pre>
+Save your <b>index.html</b> web page.</li>
+            <li>Into your <b>app.js</b> file, copy-and-paste the JavaScript code below.
+
+<pre>const calculator = {
+  displayValue: '0',
+  firstOperand: null,
+  waitingForSecondOperand: false,
+  operator: null,
+};
+
+function inputDigit(digit) {
+  const { displayValue, waitingForSecondOperand } = calculator;
+
+  if (waitingForSecondOperand === true) {
+    calculator.displayValue = digit;
+    calculator.waitingForSecondOperand = false;
+  } else {
+    calculator.displayValue =
+      displayValue === '0' ? digit : displayValue + digit;
+  }
+}
+
+function inputDecimal(dot) {
+  if (calculator.waitingForSecondOperand === true) {
+    calculator.displayValue = '0.';
+    calculator.waitingForSecondOperand = false;
+    return;
+  }
+
+  if (!calculator.displayValue.includes(dot)) {
+    calculator.displayValue += dot;
+  }
+}
+
+function handleOperator(nextOperator) {
+  const { firstOperand, displayValue, operator } = calculator;
+  const inputValue = parseFloat(displayValue);
+
+  if (operator && calculator.waitingForSecondOperand) {
+    calculator.operator = nextOperator;
+    return;
+  }
+
+  if (firstOperand == null && !isNaN(inputValue)) {
+    calculator.firstOperand = inputValue;
+  } else if (operator) {
+    const currentValue = firstOperand || 0;
+    const result = calculate(currentValue, inputValue, operator);
+
+    calculator.displayValue = String(result);
+    calculator.firstOperand = result;
+  }
+
+  calculator.waitingForSecondOperand = true;
+  calculator.operator = nextOperator;
+}
+
+function calculate(firstOperand, secondOperand, operator) {
+  if (operator === '+') {
+    return firstOperand + secondOperand;
+  } else if (operator === '-') {
+    return firstOperand - secondOperand;
+  } else if (operator === '*') {
+    return firstOperand * secondOperand;
+  } else if (operator === '/') {
+    return firstOperand / secondOperand;
+  }
+
+  return secondOperand;
+}
+
+function resetCalculator() {
+  calculator.displayValue = '0';
+  calculator.firstOperand = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.operator = null;
+}
+
+function updateDisplay() {
+  const display = document.querySelector('.calculator-screen');
+  display.value = calculator.displayValue;
+}
+
+updateDisplay();
+
+const keys = document.querySelector('.calculator-keys');
+keys.addEventListener('click', event => {
+  const { target } = event;
+  if (!target.matches('button')) {
+    return;
+  }
+
+  if (target.classList.contains('operator')) {
+    handleOperator(target.value);
+    updateDisplay();
+    return;
+  }
+
+  if (target.classList.contains('decimal')) {
+    inputDecimal(target.value);
+    updateDisplay();
+    return;
+  }
+
+  if (target.classList.contains('all-clear')) {
+    resetCalculator();
+    updateDisplay();
+    return;
+  }
+
+  inputDigit(target.value);
+  updateDisplay();
+});</pre></li>
+        <li>Finally, save the <b>app.js</b> and <b>index.html</b> files.</li>
+        </ol>
+
+		<p>Open your <b>portfolio/js/calculator-modules/index.html</b> file in a web browser and verify it works correctly.</p>
+
+    </section>
+
+
+<section>
+    <h2>Dividing the JavaScript code into files</h2>
+
+    <p>Your task now is to remove some code from the <b>apps.js</b> file and place it in a separate file that will become a module.</p>
+
+    <ol>
+        <li>In VSCode, create a new empty file in your <b>portfolio/js/calculator-modules</b> folder and name it as follows:
+            <span class="inside-ol">&nbsp;</span>
+            <b>perform-calculations.js</b></li>
+        <li>Into this new <b>perform-calculations.js</b> file, cut-and-paste the <span class="syn-js">calculate(firstOperand, secondOperand, operator)</span> function from the <b>app.js</b> file.</li>
+        <li>Save all your files. </li>
+    </ol>
+    <p>If you test the calculator in your web browser, you can see it no longer works correctly.</p>
+
+</section>
+
+
+<section>
+    <h2>Adding the import and export keywords</h2>
+    <p>You will now add the <span class="syn-js">export</span> and <span class="syn-js">import</span> keywords to enable code to be shared between the files.</p>
+
+    <ol>
+        <li>In your <b>perform-calculations.js</b> file, add the <span class="syn-js">export</span> keyword before the function as follows:
+<pre>export function calculate(firstOperand, secondOperand, operator) {</pre></li>
+        <li>In the <b>app.js</b> file, <i>at the very top of the file</i>, add the following <span class="syn-js">import</span> statement:
+<pre>import { calculate } from './perform-calculations.js'</pre>        
+    Note that the <span class="syn-js">import</span> statement(s) must always be at the top of the file before any other code, are enclosed within braces <span class="syn-js">{ }</span>.
+    <span class="inside-ol">&nbsp;</span>
+
+    If you were importing multiple items (variables, arrays, functions or whatever) from a module, you would separate the identifiers by commas. For example.
+<pre>import { sum, difference, product, quotient } from './some-file.js'</pre>
+<span class="inside-ol">&nbsp;</span>
+    
+    It is also necessary to include the relative path. In this case, it is <span class="syn">./</span>.</li>
+        
+        <li>At the bottom of your <b>index.html</b> web page, update the JavaScript links as follows.
+<pre>&lt;script type="module" src="app-final.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="perform-calculations.js"&lt;/script&gt;</pre>            
+            
+The <span class="syn">type="module"</span> attribute ensures the code is loaded as a module and not a regular script.</li>
+            
+        <li>Save your files.</li>
+    </ol>
+
+    <p>Modules must be loaded in a web server environment. They will not work if loaded from the regular file system.</p>
+
+    <p>Upload the <b>calculator-modules</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+<!--
+<section>
+
+    <h2>Adding LiveServer to VSCode</h2>
+
+    <p></p>
+
+</section>
+-->
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
