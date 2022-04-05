@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Weather for Dublin city | JavaScript Project | Brendan Munnelly</title>
+	<meta name="description" content="Uses the Fetch API to retrieve current weather information for the city of Dublin, Ireland.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Weather for Dublin</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>Uses the Fetch API to retrieve current weather information for the city of Dublin, Ireland.</p>
+
+
+	</section>
+
+    <section id="tables-html">
+
+		<h2>Setting up the base web page</h2>
+
+        <p>Your first task is to set up the base web page.</p>
+
+        <ol>
+            <li>In your <b>portfolio/js</b> folder, create a new sub-folder named <b>weather</b>.</li>
+            <li>Download the following file to this new <b>portfolio/js/weather</b> folder.
+                <span class="inside-ol">&nbsp;</span>
+               	<a href="https://munnelly.com/javascript/2022-js/portfolio/js/weather/index.html">index.html</a></li>
+            <li>Give it the filename <b>index.html</b>.</li>
+            <li>Update the website logo, favicon, <span class="syn">&lt;title&gt;</span> tag and the <span class="syn">&lt;footer&gt;</span> with your own details.</li>
+        </ol>
+		
+        <p>This file contains all the necessary HTML and CSS for this project.</p>
+
+		<p><b>Note</b>: Ensure the file is linked to the <b>lunadoge.min.css</b> stylesheet, and not the older <b>lunadoge.css</b> version.</p>
+		
+
+		<h3 id="project-images">Project images</h3>
+		<p>In your <b>portfolio/js/weather</b> folder, create an <b>assets/img</b> sub-folder.</p>
+		<p>Download the following two images to your new <b>portfolio/js/counter/assets/img</b> sub-folder.</p>
+		<div class="four-samples">
+			<div>
+				<a href="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-day.jpg"><img src="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-day.jpg" alt="Sample image"></a>
+				<a href="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-day.jpg" class="link-exercise" target="_blank">dublin-day.jpg</a>
+			</div>
+			<div>
+				<a href="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-night.jpg"><img src="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-night.jpg" alt="Sample image"></a>
+				<a href="https://munnelly.com/javascript/2022-js/portfolio/js/weather/assets/img/dublin-night.jpg" class="link-exercise" target="_blank">dublin-night.jpg</a>
+			</div>
+		</div>
+   
+		<p><br>You now have all the resources you need for your JavaScript Weather project.</p>	
+
+	</section>		
+
+	<section>
+
+		<h2 id="tables-css">Re-creating the table with JavaScript</h2>
+
+		<p>Your first task is to transform the table from static HTML into a table that is created by JavaScript. You need only to re-create the table rows in JavaScript and not the full table. Here are the steps.</p>
+
+		<ol>
+			<li>In your <b>portfolio/js/weather</b> folder, create a new empty file named <b>app.js</b>.</li>
+			<li>In this <b>app.js</b> file, add the following function.
+<pre>function populatetableRows() {
+
+)</pre></li>
+			<li>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, link to this <b>app.js</b> file.</li>
+			<li>In the <b>index.html</b> web page, select and cut the table rows as shown below.
+			<img src="weather-1.png" alt="weather pic">
+			Save the web page.</li>
+			<li>In the app.js file, add a new variable <b>strTableRows</b>, paste in the table rows and enclose the pasted text inside a pair of back ticks <span class="syn-js">`</span> as shown below.
+			<img src="weather-2.png" alt="weather pic" style="max-width: 600px"></li>
+			<li>Assign the <b>strTableRows</b> to the table rows in the web page as follows.
+			<img src="weather-3.png" alt="weather pic" class="wider-115"></li>
+			
+		</ol>
+	</section>		
+
+
+	<section>
+
+	<h2 id="tables-css2">Running the function when the web page loads</h2>
+
+
+		<p>You want your <span class="syn-js">populatetableRows()</span> function to run as soon as the web page loads. You have two options.</p>
+		
+		<h3>Immediately-invoked Function Expression (IIFE)</h3>
+		<p>In JavaScript an IIFE (pronounced iffy) is a function that runs without needing to be invoked or called from elsewhere in the program. It has the following syntax.</p>
+<pre>(function doSomething() {
+<span class="comment">/* function body */</span>
+})()</pre>		
+		<p>Note that:</p>
+
+		<ul>
+			<li>The entire function is enclosed within parentheseis <span class="syn-js">( )</span>.</li>
+			<li>At the end, after the closing parentheseis <span class="syn-js">)</span> is a pair of parentheseis <span class="syn-js">()</span>.</li>
+		</ul>
+
+		<p>IIFEs are very useful because they enable code to be run immediately - but do not add variables to the global object.</p>
+
+		<p>Transform your <span class="syn-js">populatetableRows()</span> function into an IIFE as shown below.</p>
+
+		<img src="weather-4.png" alt="weather pic" class="wider-115">
+
+		<p>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. The code should now run and the table rows should be created.</p>
+
+
+		<h3>Adding an event listener to the web page</h3>
+		<p>A second option for running a JavaScript function when a web page loads is to add an event listener for the web page. The syntax is as follows.</p>
+<pre>document.addEventListener("DOMContentLoaded", doSomething);</pre>
+		
+		<p>Try this second option by removing the IIFE syntax from your <span class="syn-js">populatetableRows()</span> and adding the following before or after it in the <b>app.js</b> file.</p>
+
+		<img src="weather-5.png" alt="weather pic">
+
+		<p>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. Once again, the code should now run and the table rows should be created.</p>
+
+	</section>
+
+		<section>		
+
+		<h2 id="tables-css-3">Exploring the Open Weather API</h2>
+
+		<p>A public API from <a href="https://openweathermap.org/" target="_blank">Open Weather</a> provides access to current weather data for any location on Earth including over 200,000 cities. The data is frequently updated based on the global and local weather models, satellites, radars and a vast network of weather stations.</p>
+
+		<p>Let's try it out.</p>
+
+		<ol>
+			<li>Open a new tab in your web browser and enter the following web address with an API end-point. 
+<pre>http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0  </pre>
+You can see that the link contains a city name <b>Paris</b> and a country code <b>fr</b>. 
+These two parameters are not case-sensitive. For example, you could enter them as <b>paris</b> and a <b>FR</b>. See below.
+<pre>http://api.openweathermap.org/data/2.5/weather?q=paris,FR&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0   </pre></li>
+			<li>Here is the current weather in <b>London</b> in the <b>UK</b>.
+<pre>http://api.openweathermap.org/data/2.5/weather?q=london,uk&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0  </pre></li>
+			<li>And here is the current weather in <b>New York</b> in the <b>US</b>. Note the <b>+</b> character to join the two words <b>New</b> and <b>York</b>.
+<pre>http://api.openweathermap.org/data/2.5/weather?q=new+york,us&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0  </pre></li>
+		</ol>
+	
+		<p>The API requires a key for access. You can obtain one for free at this link: <a href="https://openweathermap.org/appid" target="_blank">Subscribe for API</a>.</p>
+
+
+		<p>The API provides a wide range of data items. In this project, we will use the following four.</p>
+
+		<img src="weather-6.png" alt="weather pic" style="max-width: 500px">		
+
+	</section>
+
+<section>
+
+	<h2>Using the Fetch API</h2>
+
+	<p>The JavaScript Fetch API has the following general syntax. In the example below, the feed data is provided in JSON format.</p>
+
+
+<pre>async function fetchSomeData() { 
+   await fetch('https://apinnnnn.com/folders/parameters')
+
+      .then(response =&gt; {
+         if (response.status !== 200) {
+            console.log('Error Status Code: ' + response.status);
+            return;
+         }
+         response.json().then((data) =&gt; {
+            <span class="comment">// Extract data from feed and display in web page</span>
+         });
+       })
+
+       .catch(error =&gt; {
+          // handle any error
+      });
+}</pre>
+
+	<p>Let's include this API code within the <span class="syn-js">populatetableRows()</span>.</p>
+
+	<ol>
+		<li>Open the <b>app.js</b> file and add the Fetch API code as shown below.
+		<img src="weather-7.png" alt="weather pic" class="wider-115"></li>
+		<li>Save your <b>app.js</b> script and view the web page in your browser. It should look as shown before.</li>
+		<li>Open your browser console and verify that the data is being obtained in JSON format from the weather feed.</li>
+		<li>In the JavaScript code, update the four table cells as follows.
+		<img src="weather-8.png" alt="weather pic" style="max-width: 500px">
+		You can now remove the <span class="syn-js">console.log</span> statement.</li>
+		<li>At the top of the <b>app.js</b> file, add this new function.
+<pre>const capitalize = s =&gt; s && s[0].toUpperCase() + s.slice(1)</pre></li>
+
+		<li>Apply this function to the first item of weather data as follows.
+			<img src="weather-9.png" alt="weather pic" style="max-width: 600px"></li>
+	</ol>
+
+	<p>Save your <b>app.js</b> script, view the web page in your browser and verify the page works correctly.</p>
+
+	<p>Upload the <b>weather</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+
+</section>
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
