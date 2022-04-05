@@ -11,8 +11,7 @@ async function populatetableRows() {
             return;
         }
         response.json().then((data) => {
-            console.log(data);
-            let strTableRows = `<tr>
+                let strTableRows = `<tr>
                     <td><span>Summary</span></td>
                     <td>${capitalize(data["weather"][0]["description"])}</td>
                 </tr>
@@ -38,3 +37,15 @@ async function populatetableRows() {
        });
 
 }
+
+function change_background() {
+    let d = new Date();
+    let n = d.getHours();
+    if (n > 23 || n <= 6) {
+        document.querySelector(".theme-js").style.backgroundImage  ="url('assets/img/dublin-night.jpg')";
+    } else {
+        document.querySelector(".theme-js").style.backgroundImage  ="url('assets/img/dublin-day.jpg')";
+    }
+}
+
+change_background();
