@@ -250,7 +250,7 @@ function removeClassNames() {
 //////////////// GRID-0 AND GRID-2-SPLIT: SECTION WIDTH ///////////////
 */
 
-document.querySelector("#dd_text_width").addEventListener("change", doWidthDesktopSection);
+// document.querySelector("#dd_text_width").addEventListener("change", doWidthDesktopSection);
 
 function doWidthDesktopSection() {
 
