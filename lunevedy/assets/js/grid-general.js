@@ -286,7 +286,7 @@ function deleteSectionWidth() {
 //////////////// GRID-2, GRID-3 and GRID-4: UPPER COLUMN WIDTH ///////////////
 */
 
-document.querySelector("#dd_upper_block_width").addEventListener("change", doUpperBlockWidth);
+// document.querySelector("#dd_upper_block_width").addEventListener("change", doUpperBlockWidth);
 
 
 function doUpperBlockWidth() {
