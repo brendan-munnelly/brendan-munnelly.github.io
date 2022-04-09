@@ -1503,11 +1503,11 @@ section {
 /* Tablets and smaller desktops */
 @media (min-width: 1025px) and (max-width: 1199px ) { section { padding: 3% 14% 3% 14% } }
 /* Tablets */
-@media (min-width: 768px) and (max-width: 1024px)   { section { padding: 5% 8% 6% 8% } }
+@media (min-width: 768px) and (max-width: 1024px)   { section { padding: 4% 3% 5% 3% } }
 /* Larger mobiles */
-@media (min-width: 440px) and (max-width: 767px)    { section { padding: 8% 13% 9% 13% } }
+@media (min-width: 440px) and (max-width: 767px)    { section { padding: 5% 3% 5% 3% } }
 /* Smaller mobiles */
-@media (max-width: 439px)                           { section { padding: 8% 10% 14% 10% } }
+@media (max-width: 439px)                           { section { padding: 8% 2% 14% 3% } }
 
 /* Final section block above footer */
 /* section:last-child { padding-bottom: 6% } */
@@ -1528,7 +1528,7 @@ section {
     .section-width-1320px { padding: 3.5% calc((100% - 1320px)/2) 5% calc((100% - 1320px)/2) }
     .section-width-1140px { padding: 3.5% calc((100% - 1140px)/2) 5% calc((100% - 1140px)/2) } 
     .section-width-1024px { padding: 3.5% calc((100% - 1024px)/2) 5% calc((100% - 1024px)/2) }
-    .section-width-930px  { padding: 3.5% calc((100% - 930px)/2) 5% calc((100% - 930px)/2) }    
+    .section-width-960px  { padding: 3.5% calc((100% - 960px)/2) 5% calc((100% - 960px)/2) }    
 }
 
 /* Small desktop screens */
@@ -1537,10 +1537,8 @@ section {
     .section-width-1320px { padding: 3.5% calc((100% - 1320px)/2) 5% calc((100% - 1320px)/2) } 
     .section-width-1140px { padding: 3.5% calc((100% - 1140px)/2) 5% calc((100% - 1140px)/2) }
     .section-width-1024px { padding: 3.5% calc((100% - 1024px)/2) 5% calc((100% - 1024px)/2) }
-    .section-width-930px  { padding: 3.5% calc((100% - 930px)/2) 5% calc((100% - 930px)/2) }
+    .section-width-960px  { padding: 3.5% calc((100% - 960px)/2) 5% calc((100% - 960px)/2) }
 }
-
-
 
 /* ========== THEME: LIGHT ========== */
 
@@ -1847,27 +1845,43 @@ On large screens (and sometimes small screens too), the div child elements are t
 section > .col-1 { width: 100% }
 
 /* Desktops/Laptops */
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
+    
+    section > .col-1.text-center { margin: 0 auto; padding-top: 0; padding-bottom: 3% }
+    section > .col-1:not(.text-center) { 
+        margin: 0; padding-top: 0; padding-bottom: 3% !important;
+    }
+
+    /* Default widths */
 	section > .col-1.text-center { 
-        padding: 0 calc((100% - 800px)/2) 2% calc((100% - 800px)/2);
-        margin: 0 auto;
+        padding-left:  calc((100% - 800px)/2); 
+        padding-right: calc((100% - 800px)/2);
+	}
+
+    section > .col-1:not(.text-center) { 
+        padding-left: 0; padding-bottom: 2%;
+        padding-right: calc((100% - 800px)/2);
 	}    
 
-    section > .col-1 :not(.text-center) { padding: 0 calc(100% - 800px) 2% 0; margin: 0 }
-   
-    section > .col-1.text-center.col-1-width-930px { 
-        padding: 0 calc((100% - 930px)/2) 1.8% calc((100% - 930px)/2);
-        margin: 0 auto;
+    section > .col-1.text-center.col-1-width-960px {    
+        padding-left:  calc((100% - 960px)/2); 
+        padding-right: calc((100% - 960px)/2);
+    }
+
+    section > .col-1.col-1-width-960px:not(.text-center) {    
+        padding-left: 0; padding-bottom: 2%;
+        padding-right: calc((100% - 960px)/2);
     }
 
     section > .col-1.text-center.col-1-width-1140px { 
-        padding: 0 calc((100% - 1140px)/2) 1.5% calc((100% - 1140px)/2);
-        margin: 0 auto;
+        padding-left:  calc((100% - 1140px)/2); 
+        padding-right: calc((100% - 1140px)/2);
     }
 
-    section > .col-1.col-1-width-930px :not(.text-center) { padding: 0 calc(100% - 930px) 1.8% 0; margin: 0 }
-
-    section > .col-1.col-1-width-1140px :not(.text-center) { padding: 0 calc(100% - 1140px) 1.5% 0; margin: 0 }
+    section > .col-1.col-1-width-1140px:not(.text-center) { 
+        padding-left: 0; padding-bottom: 2%;
+        padding-right: calc((100% - 1140px)/2);
+    }
 
 }
 
@@ -1881,18 +1895,14 @@ section > .col-1 { width: 100% }
 @media (max-width: 767px)   { section > .col-1 { padding: 0 4% 5% 4% } }
 
 /* ======== Content inside .col-1 ========= */
+
 .col-1 .container-upper-label {
     font-weight: 600; display: inline-block; width: 100%;
     font-size: calc(17px + (18 - 17) * ((100vw - 320px)/(1140 - 320)));
 }
 
-
 @media (min-width: 768px) { section > .col-1 .container-upper-label { margin-bottom: 22px } } 
 @media (max-width: 767px) { section > .col-1 .container-upper-label { margin-bottom: 24px } } 
-
-@media (max-width: 767px) {
-     section > .col-1 h3 { margin-bottom: 16px !important } 
-}
 
 @media (min-width: 768px) {
     section > .col-1 .container-upper-label { 
@@ -1903,10 +1913,11 @@ section > .col-1 { width: 100% }
 section > .col-1 h2 {
     font-weight: 700; line-height: 1.1; letter-spacing: -1px;
     font-size: calc(28px + (48 - 28) * ((100vw - 320px) / (1140 - 320)));
+    padding: 0 !important; margin-bottom: 14px;
 }
 
 section > .col-1 h3 {
-    font-size: calc(19px + (28 - 19) * ((100vw - 320px) / (1140 - 320)));
+    font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1140 - 320)));
     font-weight: 500; color: var(--slate-700); line-height: 1.3;
 }
 
@@ -2246,6 +2257,10 @@ section > .col-1 h3 {
     margin-left: 15px; padding-left: 12px; 
 }
 
+/* ================= Buttons ================= */
+
+.col-3 a.btn { margin-top: 12px }
+
 /* ================= IMAGES, DRAWINGS, BIG ICONS ================= */
 
 @media (min-width: 1200px) {
@@ -2355,6 +2370,9 @@ section > .col-1 h3 {
 /* Padding on columns */
 .col-padding .col-4 { padding: 16px 16px 16px 16px }
 
+/* ================= Buttons ================= */
+
+.col-4 a.btn { margin-top: 8px }
 
 /* ================= IMAGES, DRAWINGS, BIG ICONS ================= */
 
@@ -2577,10 +2595,10 @@ a:not(.btn):link, a:not(.btn):visited {
 /* =============== BUTTONS: REAL AND FAUX ============== */
 
 a.btn, button { 
-    font-family: var(--sans-serif); font-weight: 700; line-height: 1; text-decoration: none;
+    font-family: var(--sans-serif); line-height: 1; text-decoration: none;
     cursor: pointer; user-select: none; white-space: nowrap;
-    font-weight: 600; border-style: solid;
-    transition: all 0.3s linear;
+    font-weight: 600; border-style: solid; transition: all 0.3s linear;
+    border-width: 2px
 }
 
 @media (min-width: 768px) { a.btn { border-width: 2px } }
