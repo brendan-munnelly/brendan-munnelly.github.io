@@ -9,8 +9,8 @@ else if (iframe.contentWindow.document.querySelector('.col-4')) { col_no = ".col
 // Number column blocks to loop through
 let col_count = iframe.contentWindow.document.querySelectorAll(col_no).length;
 
-console.log("col_no 99: "+col_no);
-console.log("col_count 99: "+col_count);
+// console.log("col_no 99: "+col_no);
+// console.log("col_count 99: "+col_count);
 
 /*
 //////////////// HEADER COLOURS ///////////////
@@ -220,7 +220,7 @@ console.log("col_count 99: "+col_count);
             const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
             arrCSS.splice(arrPos, 1);
             arrCSS.push(newStyle);
-            console.log("Includes background-color sub-string")
+            // console.log("Includes background-color sub-string")
         }
         else {
             arrCSS.push(newStyle);
@@ -578,7 +578,7 @@ function doColButtons() {
     else if (iframe.contentWindow.document.querySelector('.col-3')) { col_no = ".col-3" }
     else if (iframe.contentWindow.document.querySelector('.col-4')) { col_no = ".col-4" }
 
-    console.log("col_no is: "+col_no)
+    // console.log("col_no is: "+col_no)
     if (!document.getElementById("cb_colButtonsOn").checked) {
         removeColButtons();
         disableColButtons();
@@ -606,7 +606,7 @@ function addColButtons(el_cols,btn_class) {
     const btn_text = "<span>Order Now</span>";
     el_icon.insertAdjacentHTML('afterend', btn_text);
     el_cols.append(el_btn);
-    // window.scrollTo(0,document.querySelector("#HTML-Content").scrollHeight);
+    window.scrollTo(0,iframe.contentWindow.document.querySelector("#HTML-Content").scrollHeight);
 }
 
 function removeColButtons() {
@@ -879,7 +879,7 @@ document.querySelector("#cb_img_shadowsOn").addEventListener("change", doImgShad
 
 
 function doImgShadows() {
-    if (!iframe.contentWindow.document.getElementById("cb_img_shadowsOn").checked) {
+    if (!document.getElementById("cb_img_shadowsOn").checked) {
         iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
     }
     else {

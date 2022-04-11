@@ -11,17 +11,17 @@ let section_theme = "section.theme-light."+section_class;
 // GLOBAL VARIABLES
 
 // Class names of columns in grid: .col-2, .col-3 or .col-4
-let col_no;
-if (document.querySelector('.col-2')) { col_no = ".col-2" }
-else if (document.querySelector('.col-3')) { col_no = ".col-3" }
-else if (document.querySelector('.col-4')) { col_no = ".col-4" }
 
-// Number column blocks to loop through
-let col_count = document.querySelectorAll(col_no).length;
+if ( (document.querySelector('.col-2')) || (document.querySelector('.col-3')) || (document.querySelector('.col-4')) ) {
+    if (document.querySelector('.col-2')) { col_no = ".col-2" }
+    else if (document.querySelector('.col-3')) { col_no = ".col-3" }
+    else if (document.querySelector('.col-4')) { col_no = ".col-4" }
 
-console.log("col_no: "+col_no);
-console.log("col_count: "+col_count);
-
+    // Number column blocks to loop through
+    let col_count = document.querySelectorAll(col_no).length;
+    console.log("col_no: "+col_no);
+    console.log("col_count: "+col_count);
+}
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -189,7 +189,7 @@ function doSectionTheme() {
     }
 
     // Check for outlines
-    if (document.querySelector("#cb-outlines").checked) {
+    if (document.querySelector("#cb_outlines").checked) {
         const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
         head_checked = document.head || document.getElementsByTagName('head')[0],
         style_checked = document.createElement('style');
@@ -250,7 +250,7 @@ function removeClassNames() {
 //////////////// GRID-0 AND GRID-2-SPLIT: SECTION WIDTH ///////////////
 */
 
-// document.querySelector("#dd_text_width").addEventListener("change", doWidthDesktopSection);
+document.querySelector("#dd_text_width").addEventListener("change", doWidthDesktopSection);
 
 function doWidthDesktopSection() {
 
@@ -258,7 +258,7 @@ function doWidthDesktopSection() {
     deleteSectionWidth();
 
     if (opt==="1") {
-        document.querySelector("section").classList.add("section-width-930px");
+        document.querySelector("section").classList.add("section-width-960px");
     }
     else if (opt==="2") {
         document.querySelector("section").classList.add("section-width-1024px");
@@ -275,7 +275,7 @@ function doWidthDesktopSection() {
 }
 
 function deleteSectionWidth() {
-    document.querySelector("section").classList.remove("section-width-930px");
+    document.querySelector("section").classList.remove("section-width-960px");
     document.querySelector("section").classList.remove("section-width-1024px");
     document.querySelector("section").classList.remove("section-width-1140px");
     document.querySelector("section").classList.remove("section-width-1320px");
@@ -285,15 +285,15 @@ function deleteSectionWidth() {
 /*
 //////////////// GRID-2, GRID-3 and GRID-4: UPPER COLUMN WIDTH ///////////////
 */
-
-// document.querySelector("#dd_upper_block_width").addEventListener("change", doUpperBlockWidth);
-
+if (document.querySelector("#dd_upper_block_width")) {
+    document.querySelector("#dd_upper_block_width").addEventListener("change", doUpperBlockWidth);
+}
 
 function doUpperBlockWidth() {
     let opt = document.querySelector("#dd_upper_block_width").value;
 
     if (opt==="0") {
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
         document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
 
@@ -302,12 +302,12 @@ function doUpperBlockWidth() {
     else if (opt==="1") {
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-930px");
+        document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-960px");
     }
 
     else if (opt==="2") {
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px");
     }    
 }

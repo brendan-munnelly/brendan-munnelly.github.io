@@ -172,23 +172,23 @@ function hideSidebar() {
             enableTransColCode();
         }
         // modal.style.display = "block";
-        if (btn_id === "btn_bg") {
-            const el_hero = document.querySelector(".hero-block");
-            el_hero.classList.remove("hero-bg-gradient");
-            console.log("removed gradient");
-            document.querySelector("#bg_gradient_options").style.display='none';
-            document.querySelector("#btn_gradient_input_group").style.display='flex';
-            document.querySelector("#content-2 .dialog-box hr").style.display='block';
+        // if (btn_id === "btn_bg") {
+        //     const el_hero = document.querySelector(".hero-block");
+            // el_hero.classList.remove("hero-bg-gradient");
+            // console.log("removed gradient");
+            // document.querySelector("#bg_gradient_options").style.display='none';
+            // document.querySelector("#btn_gradient_input_group").style.display='flex';
+            // document.querySelector("#content-2 .dialog-box hr").style.display='block';
 
-            if ( arrCSS.some(e => e.includes("background-image:")) ) {
-                // console.log("Already as style in HEAD");
-                const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
-                arrCSS.splice(arrPos, 1);
-                if (arrCSS.length==0) {
-                    disableCSS();
-                }
-            }
-        }
+            // if ( arrCSS.some(e => e.includes("background-image:")) ) {
+            //     // console.log("Already as style in HEAD");
+            //     const arrPos = arrCSS.findIndex(e => e.includes(sub_string));
+            //     arrCSS.splice(arrPos, 1);
+            //     if (arrCSS.length==0) {
+            //         disableCSS();
+            //     }
+            // }
+        // }
         showSidebar();
         event.preventDefault();
     }
@@ -214,6 +214,7 @@ function hideSidebar() {
     function getColorID(color_code) {
         /* Header background */
         if (btn_id === "btn_bg") {
+            console.log("Got this far")
             newStyle = ".hero-block { background-color: var("+color_code+") }\n";
             sub_string = ".hero-block {";
             doUpdateArray(sub_string,newStyle);
@@ -453,59 +454,60 @@ function hideSidebar() {
             doUpdateArray(sub_string,newStyle);
         }
         
-        else if (btn_id === "btn_gradient_from") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old Frpm Color: "+item_from);
-            console.log("New From Color: "+color_code);
-            if (document.querySelector(".hero-block.hero-light")) {
-                newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            } 
+        // else if (btn_id === "btn_gradient_from") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old Frpm Color: "+item_from);
+        //     console.log("New From Color: "+color_code);
+        //     if (document.querySelector(".hero-block.hero-light")) {
+        //         newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
+        //     } 
         
-            else if (document.querySelector(".hero-block.hero-dark")) {
-                newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
-            }
-            doUpdateArray(sub_string,newStyle);
-        }
+        //     else if (document.querySelector(".hero-block.hero-dark")) {
+        //         newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", var("+color_code+"), "+item_to+") } \n";
+        //     }
+        //     doUpdateArray(sub_string,newStyle);
+        // }
         
-        else if (btn_id === "btn_gradient_to") {
-            sub_string = "linear-gradient";
-            let arrThree = doGradientSplit();
-            let item_deg =  arrThree[0];
-            let item_from = arrThree[1];
-            let item_to =   arrThree[2];
-            console.log("Old To Color: "+item_to);
-            console.log("New To Color: "+color_code);
-            if (document.querySelector(".hero-block.hero-light")) {
-                newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            } 
+        // else if (btn_id === "btn_gradient_to") {
+        //     sub_string = "linear-gradient";
+        //     let arrThree = doGradientSplit();
+        //     let item_deg =  arrThree[0];
+        //     let item_from = arrThree[1];
+        //     let item_to =   arrThree[2];
+        //     console.log("Old To Color: "+item_to);
+        //     console.log("New To Color: "+color_code);
+        //     if (document.querySelector(".hero-block.hero-light")) {
+        //         newStyle = ".hero-light.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
+        //     } 
         
-            else if (document.querySelector(".hero-block.hero-dark")) {
-                newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
-            }
-            console.log(newStyle);
-            doUpdateArray(sub_string,newStyle);
-        }
+        //     else if (document.querySelector(".hero-block.hero-dark")) {
+        //         newStyle = ".hero-dark.hero-bg-gradient { background-image: linear-gradient("+item_deg+", "+item_from+", var("+color_code+")) } \n";
+        //     }
+        //     console.log(newStyle);
+        //     doUpdateArray(sub_string,newStyle);
+        // }
 
         style = document.createElement('style');
         document.head.appendChild(style);
         style.appendChild(document.createTextNode(newStyle));
         enableCSS();
-}
+    }
 
-function doUpdateArray(sub_string,newStyle) {
-    if ( arrCSS.some(e => e.includes(sub_string)) ) {
-        const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
-        arrCSS.splice(arrPos, 1);
-        arrCSS.push(newStyle);
+    function doUpdateArray(sub_string,newStyle) {
+        if ( arrCSS.some(e => e.includes(sub_string)) ) {
+            const arrPos =arrCSS.findIndex(e => e.includes(sub_string));
+            arrCSS.splice(arrPos, 1);
+            arrCSS.push(newStyle);
+            console.log("Includes background-color sub-string")
+        }
+        else {
+            arrCSS.push(newStyle);
+        }
     }
-    else {
-        arrCSS.push(newStyle);
-    }
-}
 
 /*
 //////////////// COLORS: TRANSPARENT OPTION ////////////////////
@@ -523,7 +525,7 @@ function disableTransColCode() {
 //////////////// HERO BLOCK GRADIENT BACKGROUND ////////////////////
 */
 
-document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
+// document.querySelector("#btn_gradient").addEventListener("click", doBgGradient);
 
 function doBgGradient() {
     // Add default gradient
@@ -565,7 +567,7 @@ function doGradientSplit() {
     return el_old_bg_value.split(/[\s,]+/)
 }
 
-document.querySelector("#switch-bg-gradient").addEventListener("change", doDegGradient);
+// document.querySelector("#switch-bg-gradient").addEventListener("change", doDegGradient);
 
 function doDegGradient() {
     const rbs = document.querySelectorAll("input[name='switch-gradient']");

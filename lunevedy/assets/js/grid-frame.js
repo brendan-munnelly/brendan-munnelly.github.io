@@ -177,13 +177,13 @@ function dragElement(elmnt) {
         }
 
         // Check for outlines
-        if (document.querySelector("#cb-outlines").checked) {
-            // const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-            // head_checked = document.head || document.getElementsByTagName('head')[0],
-            // style_checked = document.createElement('style');
-            // head_checked.appendChild(style_checked);
-            // style_checked.type = 'text/css';
-            // style_checked.appendChild(document.createTextNode(css_checked));
+        if (document.querySelector("#cb_outlines").checked) {
+            const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+            head_checked = document.head || document.getElementsByTagName('head')[0],
+            style_checked = document.createElement('style');
+            head_checked.appendChild(style_checked);
+            style_checked.type = 'text/css';
+            style_checked.appendChild(document.createTextNode(css_checked));
         }
         disableCSS();
     }
@@ -195,22 +195,23 @@ function dragElement(elmnt) {
 document.querySelector("#cb_outlines").addEventListener("change", toggleOutlines);
 
 function toggleOutlines() {
+    
     if (document.querySelector("#cb_outlines").checked) {
         const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = document.head || document.getElementsByTagName('head')[0],
+        head_checked = iframe.contentWindow.document.getElementsByTagName('head')[0],
         style_checked = document.createElement('style');
         head_checked.appendChild(style_checked);
         style_checked.type = 'text/css';
-        style_checked.appendChild(document.createTextNode(css_checked));
+        style_checked.appendChild(iframe.contentWindow.document.createTextNode(css_checked));
     }
 
     else {
         const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
-        head_unchecked = document.head || document.getElementsByTagName('head')[0],
+        head_unchecked = iframe.contentWindow.document.getElementsByTagName('head')[0],
         style_unchecked = document.createElement('style');
         head_unchecked.appendChild(style_unchecked);
         style_unchecked.type = 'text/css';
-        style_unchecked.appendChild(document.createTextNode(css_unchecked));
+        style_unchecked.appendChild(iframe.contentWindow.document.createTextNode(css_unchecked));
     }
 }    
 
@@ -246,7 +247,7 @@ function doWidthDesktopSection() {
     deleteSectionWidth();
 
     if (opt==="1") {
-        iframe.contentWindow.document.querySelector("section").classList.add("section-width-930px");
+        iframe.contentWindow.document.querySelector("section").classList.add("section-width-960px");
     }
     else if (opt==="2") {
         iframe.contentWindow.document.querySelector("section").classList.add("section-width-1024px");
@@ -263,7 +264,7 @@ function doWidthDesktopSection() {
 }
 
 function deleteSectionWidth() {
-    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-930px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-960px");
     iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1024px");
     iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1140px");
     iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1320px");
@@ -281,7 +282,7 @@ function doUpperBlockWidth() {
     let opt = document.querySelector("#dd_upper_block_width").value;
 
     if (opt==="0") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
 
@@ -290,12 +291,12 @@ function doUpperBlockWidth() {
     else if (opt==="1") {
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-960px");
     }
 
     else if (opt==="2") {
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-930px");
+        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px");
     }    
 }
@@ -609,7 +610,6 @@ function copyCSS() {
     el_css.select();
     document.execCommand('copy');
     document.body.removeChild(el_css);  
-    // console.log(strCSS);
 }
 
 /*
@@ -647,54 +647,53 @@ iconsResponsive.forEach(icon => {
         // document.querySelector(icon).classList.remove("selected");
         // Get current icon id
         const id = e.currentTarget.id.toString();
-        console.log("id:" +id);
         document.getElementById(id).classList.add("selected");
         resetResponsive();
 
-        if (id==="respDesktop") {
-            document.getElementById("page-preview-body").classList.add("resp-desktop");
-            document.querySelector("#respDesktop img").src = "assets/img/icon-resize-desktop-large-selected.png";
+        if (id==="respDesktopLarge") {
+            document.getElementById("page-preview-body").classList.add("resp-desktop-large");
+            document.querySelector("#respDesktopLarge img").src = "assets/img/icons/icon-resize-desktop-large-selected.png";
         }
 
         if (id==="respDesktopSmall") {
             document.getElementById("page-preview-body").classList.add("resp-desktop-small");
-            document.querySelector("#respDesktopSmall img").src = "assets/img/icon-resize-desktop-small-selected.png";
+            document.querySelector("#respDesktopSmall img").src = "assets/img/icons/icon-resize-desktop-small-selected.png";
         }
 
         else if (id==="respTabletLandscape") {
             document.getElementById("page-preview-body").classList.add("resp-tablet-landscape");
-            document.querySelector("#respTabletLandscape img").src = "assets/img/icon-resize-tablet-landscape-selected.png";
+            document.querySelector("#respTabletLandscape img").src = "assets/img/icons/icon-resize-tablet-landscape-selected.png";
         }
         else if (id==="respTabletPortrait") {
             document.getElementById("page-preview-body").classList.add("resp-tablet-portrait");
-            document.querySelector("#respTabletPortrait img").src = "assets/img/icon-resize-tablet-portrait-selected.png";
+            document.querySelector("#respTabletPortrait img").src = "assets/img/icons/icon-resize-tablet-portrait-selected.png";
         }        
         
         else if (id==="respMobileLarge") {
             document.getElementById("page-preview-body").classList.add("resp-mobile-large");
-            document.querySelector("#respMobileLarge img").src = "assets/img/icon-resize-mobile-large-selected.png";
+            document.querySelector("#respMobileLarge img").src = "assets/img/icons/icon-resize-mobile-large-selected.png";
         }        
 
         else if (id==="respMobileSmall") {
             document.getElementById("page-preview-body").classList.add("resp-mobile-small")
-            document.querySelector("#respMobileSmall img").src = "assets/img/icon-resize-mobile-small-selected.png";           
+            document.querySelector("#respMobileSmall img").src = "assets/img/icons/icon-resize-mobile-small-selected.png";           
         }        
     });
 });
 
 
 function resetResponsive() {
-    document.getElementById("page-preview-body").classList.remove("resp-desktop");
+    document.getElementById("page-preview-body").classList.remove("resp-desktop-large");
     document.getElementById("page-preview-body").classList.remove("resp-desktop-small");
     document.getElementById("page-preview-body").classList.remove("resp-tablet-landscape");
     document.getElementById("page-preview-body").classList.remove("resp-tablet-portrait");
     document.getElementById("page-preview-body").classList.remove("resp-mobile-large");
     document.getElementById("page-preview-body").classList.remove("resp-mobile-small");
 
-    document.querySelector("#respDesktop img").src = "assets/img/icon-resize-desktop-large.png";
-    document.querySelector("#respDesktopSmall img").src = "assets/img/icon-resize-desktop-small.png";
-    document.querySelector("#respTabletLandscape img").src = "assets/img/icon-resize-tablet-landscape.png";
-    document.querySelector("#respTabletPortrait img").src = "assets/img/icon-resize-tablet-portrait.png";
-    document.querySelector("#respMobileLarge img").src = "assets/img/icon-resize-mobile-large.png";
-    document.querySelector("#respMobileSmall img").src = "assets/img/icon-resize-mobile-small.png";     
+    document.querySelector("#respDesktopLarge img").src = "assets/img/icons/icon-resize-desktop-large.png";
+    document.querySelector("#respDesktopSmall img").src = "assets/img/icons/icon-resize-desktop-small.png";
+    document.querySelector("#respTabletLandscape img").src = "assets/img/icons/icon-resize-tablet-landscape.png";
+    document.querySelector("#respTabletPortrait img").src = "assets/img/icons/icon-resize-tablet-portrait.png";
+    document.querySelector("#respMobileLarge img").src = "assets/img/icons/icon-resize-mobile-large.png";  
+    document.querySelector("#respMobileSmall img").src = "assets/img/icons/icon-resize-mobile-small.png";  
 }
