@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Layout | Lunevedy CSS | Brendan Munnelly</title>
+    <meta name="description" content="A JavaScript app for creating HTML5 web page snippets. From www.munnelly.com.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/controls-general.css" />
+    <link rel="stylesheet" href="assets/css/controls-grid-0.css" />
+    <link rel="stylesheet" href="assets/css/lunevedy.css">
+    
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="manifest" href="assets/img/site.webmanifest">
+
+    <style>
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="controls-top">
+
+        <nav id="control-menu">
+            <div>
+                <a href="index.html"><img src="assets/img/website-logo.png"></a>
+                <a href="index.html" id="back">&lt; &nbsp;Back</a>
+            </div>
+
+            <ul id="ui-menus">
+            </ul>
+        </nav><!-- /#control-menu-->
+    </div><!-- /.controls-top-->
+
+<main>
+
+       <div id="HTML-Content">
+
+           <section class="container-contact-form">
+
+                <!-- Contact form starts here -->
+                <form id="contact-form" name="contact-form" accept-charset="utf-8" method="post" action="https://formspree.io/nnnnnnnn">
+
+                    <div class="contact-form-upper text-center">
+                        <h2>Get in touch</h2>
+                        <p>Use the form below to let me know a little more about your objectives and I'll get back to you.</p>
+                    </div>
+
+                    <!-- Begin contact form fields -->
+
+                    <div class="flex-row">
+                        <div class="item-name">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" name="name" id="full-name" placeholder="Your First and Last Name." required>
+                        </div>
+                        <div class="item-email">
+                            <label for="email-address">Email</label>
+                            <input type="email" name="_replyto" id="email-address" placeholder="Your Email Address." required>
+                        </div>
+                    </div>
+
+                    <div class="flex-row">
+                        <div class="item-textarea">
+                            <label for="message">Message</label>
+                            <textarea rows="5" name="message" id="message" placeholder="Your Message." required></textarea>
+                        </div>
+
+                        <div class="item-btn">
+                            <button id="btn-submit" type="submit"><span>Send</span><i class="fas fa-arrow-circle-right"></i></button> 
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                    <!-- End contact form fields -->
+
+                </form><!-- Contact form ends here -->
+        </section><!-- End container for contact form -->
+
+    </div>
+
+
+
+    <div class="copy-code-btns">
+        &nbsp;Copy code &nbsp;&nbsp;<button id="btn-copy">
+            <svg width="16" height="16" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M5.503 4.627 5.5 6.75v10.504a3.25 3.25 0 0 0 3.25 3.25h8.616a2.251 2.251 0 0 1-2.122 1.5H8.75A4.75 4.75 0 0 1 4 17.254V6.75c0-.98.627-1.815 1.503-2.123ZM17.75 2A2.25 2.25 0 0 1 20 4.25v13a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-13A2.25 2.25 0 0 1 8.75 2h9Z" /></svg>HTML
+        </button>
+        <button id="btn-copy-css" onclick="copyCSS()" disabled>
+            <svg width="16" height="16" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M5.503 4.627 5.5 6.75v10.504a3.25 3.25 0 0 0 3.25 3.25h8.616a2.251 2.251 0 0 1-2.122 1.5H8.75A4.75 4.75 0 0 1 4 17.254V6.75c0-.98.627-1.815 1.503-2.123ZM17.75 2A2.25 2.25 0 0 1 20 4.25v13a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-13A2.25 2.25 0 0 1 8.75 2h9Z" /></svg>CSS
+        </button>
+    </div>
+        
+    </main>
+
+     <script>
+
+
+/*
+//////////////// COPY TO CLIPBOARD ///////////////
+*/
+
+document.querySelector("#btn-copy").addEventListener("click", copyHTML);
+
+function enableCSS() {
+    document.getElementById("btn-copy-css").disabled=false;
+}
+
+function disableCSS() {
+    document.getElementById("btn-copy-css").disabled=true;
+}
+
+function copyHTML() {
+    let HTML_Content = document.getElementById("HTML-Content").innerHTML;
+    const el = document.createElement('textarea');
+
+    el.value = HTML_Content;
+
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el); 
+}
+
+function copyCSS() {
+    const el_css = document.createElement('textarea');
+    let aLength = arrCSS.length;
+    let strCSS  = arrCSS.join(",");
+    strCSS = strCSS.replace(/,section/g, "section");
+    // strCSS = strCSS.replace(/..container/g, ".container");
+    el_css.value = strCSS;
+    document.body.appendChild(el_css);
+    el_css.select();
+    document.execCommand('copy');
+    document.body.removeChild(el_css);  
+}
+
+        </script>
+
+
+
+</body>
+</html>
