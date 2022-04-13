@@ -1,11 +1,31 @@
+/* ============ GLOBAL CUSTOM PROPERTIES ============  */
+
+:root {
+    /* UI Dark default */
+    --ui-dark-bg: #000;
+    --ui-dark-link-passive: #0acceb;
+    --ui-dark-link-active: #fff;
+
+    /* UI Dark pink */
+    --ui-pink-bg: deeppink;
+}
+
+
 body { background-color: #fff }
 
 .controls-top { 
     height: 58px;
     position: fixed; top: 0; width: 100%; /* max-width: 1920px; */ z-index: 999;
     /* box-shadow: 4px 4px 10px #888; padding: 0 1%  0 3%; */
-    background-color: #2b2a33;
     padding-left: 3%; 
+}
+
+.controls-top.ui-dark { 
+    background-color: var(--ui-dark-bg) }
+
+.controls-top.ui-pink {
+    background-color: var(--ui-pink-bg);
+    color: #fff
 }
 
 #control-menu { display: flex; flex-direction: row; justify-content: space-between }
@@ -31,18 +51,29 @@ body { background-color: #fff }
 #control-menu #menu-0 a:hover,
 #control-menu #menu-0 a:active { color: #fff; background-color: transparent }
 
+#control-menu.ui-dark #menu-0 a:link, 
+#control-menu.ui-dark #menu-0 a:visited { color: var(--ui-dark-link-passive) }
+
+#control-menu.ui-dark #menu-0 a:focus, 
+#control-menu.ui-dark #menu-0 a:hover,
+#control-menu.ui-dark #menu-0 a:active { 
+    color: var(--ui-dark-link-passive) ; background-color: transparent
+}
+
 #control-menu ul li { display: inline-block }
 
 #control-menu > ul li.dropdown { display: inline-block }
 
 #control-menu > ul li.dropdown .dropbtn { 
     color: #0acceb; text-decoration: none; font-weight: 500;
-    font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1920 - 320)));
+    /* font-size: calc(15px + (18 - 15) * ((100vw - 320px)/(1920 - 320))); */
     display: inline-block; padding: 14px 20px; height: 58px;
     text-decoration: none;
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
+    /* font-size: 17px; */
+    font-size: 1.063rem;
 }
 
 #control-menu > ul li.dropdown:last-child { margin-right: 0 }
@@ -156,6 +187,7 @@ body { background-color: #fff }
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     opacity: 0.95;
+    background-color: var(--pink-600);
 }
 
 .dialog-box h4 { font-size: 17px; color: #fff; font-weight: 400; letter-spacing: 1px }
