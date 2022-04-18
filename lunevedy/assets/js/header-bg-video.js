@@ -116,6 +116,103 @@ function hideSidebar() {
 }
 
 /*
+//////////////// SECTION: THEME  ///////////////
+*/
+
+document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
+
+function doSectionTheme() {
+    hideMenus();
+    const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    // Remove all styles
+    var hs = document.querySelectorAll('style');
+    for (var i=0, max = hs.length; i < max; i++) {
+        hs[i].parentNode.removeChild(hs[i]);
+    }
+
+    if (selectedValue==="light") {
+        document.querySelector("header").classList.remove("theme-dark"); 
+        document.querySelector("header").classList.add("theme-light"); 
+    }
+    else if (selectedValue==="dark") {
+        document.querySelector("header").classList.remove("theme-light"); 
+        document.querySelector("header").classList.add("theme-dark"); 
+    }
+
+    // Check for outlines
+    if (document.querySelector("#cb_outlines").checked) {
+        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = document.head || document.getElementsByTagName('head')[0],
+        style_checked = document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(document.createTextNode(css_checked));
+    }
+    disableCSS();
+}
+
+/*
+//////////////// SECTION: OUTLINES  ///////////////
+*/
+
+document.querySelector("#cb_outlines").addEventListener("change", toggleOutlines);
+
+function toggleOutlines() {
+    if (document.querySelector("#cb_outlines").checked) {
+        const css_checked = "#HTML-Content header, #HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = document.head || document.getElementsByTagName('head')[0],
+        style_checked = document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(document.createTextNode(css_checked));
+    }
+
+    else {
+        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
+        head_unchecked = document.head || document.getElementsByTagName('head')[0],
+        style_unchecked = document.createElement('style');
+        head_unchecked.appendChild(style_unchecked);
+        style_unchecked.type = 'text/css';
+        style_unchecked.appendChild(document.createTextNode(css_unchecked));
+    }
+}    
+
+/*
+//////////////// SECTION: OUTLINES  ///////////////
+*/
+
+document.querySelector("#cb_outlines").addEventListener("change", toggleOutlines);
+
+function toggleOutlines() {
+    if (document.querySelector("#cb_outlines").checked) {
+        const css_checked = "#HTML-Content header, #HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = document.head || document.getElementsByTagName('head')[0],
+        style_checked = document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(document.createTextNode(css_checked));
+    }
+
+    else {
+        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
+        head_unchecked = document.head || document.getElementsByTagName('head')[0],
+        style_unchecked = document.createElement('style');
+        head_unchecked.appendChild(style_unchecked);
+        style_unchecked.type = 'text/css';
+        style_unchecked.appendChild(document.createTextNode(css_unchecked));
+    }
+}    
+
+
+/*
 //////////////// HEADER COLOURS ///////////////
 */
     // Get the modal

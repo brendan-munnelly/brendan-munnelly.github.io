@@ -1,3 +1,18 @@
+// GLOBAL VARIABLES
+
+// Class names of columns in grid: .col-2, .col-3 or .col-4
+
+if ( (document.querySelector('.col-2')) || (document.querySelector('.col-3')) || (document.querySelector('.col-4')) ) {
+    if (document.querySelector('.col-2')) { col_no = ".col-2" }
+    else if (document.querySelector('.col-3')) { col_no = ".col-3" }
+    else if (document.querySelector('.col-4')) { col_no = ".col-4" }
+
+    // Number column blocks to loop through
+    let col_count = document.querySelectorAll(col_no).length;
+    console.log("col_no: "+col_no);
+    console.log("col_count: "+col_count);
+}
+
 
 /*
 //////////////// HEADER COLOURS ///////////////
@@ -222,6 +237,188 @@ function disableTransColCode() {
 }
 
 /*
+//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
+*/
+
+document.querySelector("#cb_upperBlockOn").addEventListener("change", doUpperBlock);
+
+function doUpperBlock() {
+    if (!document.getElementById("cb_upperBlockOn").checked) {
+        removeUpperBlock();
+    }
+    else {
+        const newUpperBlockDiv = document.createElement("div");
+        newUpperBlockDiv.classList.add("col-1"); 
+        newUpperBlockDiv.classList.add("text-center"); 
+        document.querySelector("section").prepend(newUpperBlockDiv);
+        document.querySelector('.col-1').innerHTML = document.querySelector('.col-1').innerHTML.replace('', '\n\t\t\t<h2>Nice heading here</h2>\n\t\t\t<h3>Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.</h3>\n\t\t');
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class="col-1 text-center">', '\n\n\t\t<div class="col-1 text-center">');
+        // Enable properties
+        document.getElementById("dd_upper_block_width").disabled=false;
+        document.getElementById("radio-upper-align-left").disabled=false;
+        document.getElementById("radio-upper-align-left").checked=false;
+        document.getElementById("radio-upper-align-center").disabled=false;
+        document.getElementById("radio-upper-align-center").checked=true;
+        document.getElementById("cb_upperLabelOn").disabled=false;
+        document.getElementById("cb_upperLabelOn").checked=false;
+        document.getElementById("cb_upperH2On").disabled=false;
+        document.getElementById("cb_upperH2On").checked=true;
+        document.getElementById("cb_upperH3On").disabled=false;
+        document.getElementById("cb_upperH3On").checked=true;
+        document.getElementById("btn_upper_label").disabled=true;
+        document.getElementById("btn_upper_head").disabled=false;
+        document.getElementById("btn_upper_subhead").disabled=false;
+        document.querySelector("#content-2 .svg-icon-desktop").style.fill='#fff';
+    }
+}
+
+function removeUpperBlock() {
+    if (document.querySelector('.col-1')) {
+        const elCol1 = document.querySelector('.col-1');
+        elCol1.remove();
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\n\n\t\t<div class="+col_no+">", "<div class="+col_no+">");
+    }
+    // Disable properties
+    document.getElementById("dd_upper_block_width").disabled=true;
+    document.getElementById("radio-upper-align-left").disabled=true;
+    document.getElementById("radio-upper-align-left").checked=false;
+    document.getElementById("radio-upper-align-center").disabled=true;
+    document.getElementById("radio-upper-align-center").checked=false;
+    document.getElementById("cb_upperBlockOn").checked=false;
+    document.querySelector("#content-2 .svg-icon-desktop").style.fill='var(--gray-600)';
+    document.getElementById("cb_upperLabelOn").disabled=true;
+    document.getElementById("cb_upperLabelOn").checked=false;
+    document.getElementById("cb_upperH2On").disabled=true;
+    document.getElementById("cb_upperH2On").checked=false;
+    document.getElementById("cb_upperH3On").disabled=true;
+    document.getElementById("cb_upperH3On").checked=false;
+    document.getElementById("btn_upper_label").disabled=true;
+    document.getElementById("btn_upper_head").disabled=true;
+    document.getElementById("btn_upper_subhead").disabled=true;
+}
+
+/*
+//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
+*/
+
+document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
+
+
+function doUpperH2() {
+    if (!document.getElementById("cb_upperH2On").checked) {
+        removeUpperH2();
+    }
+    else {
+        removeUpperH2();
+        document.getElementById("btn_upper_head").disabled=false;
+        const newH2 = document.createElement("h2");
+        const newContent = document.createTextNode("Nice heading here");
+        newH2.appendChild(newContent);
+        const currentDiv = document.querySelector('.col-1');
+        if (!document.querySelector('.container-upper-label')) {
+            currentDiv.prepend(newH2);
+        }
+        else {
+            document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
+        }
+    }
+}
+
+function removeUpperH2() {
+    if (document.querySelector('.col-1 h2')) {
+        document.getElementById("btn_upper_head").disabled=true;
+        const elH2 = document.querySelector('.col-1 h2');
+        elH2.remove();
+        if (document.querySelector('section .col-1.text-center')) {
+            document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1 text-center\">\n\t\t\t', '<div class=\"col-1 text-center\">');
+        }
+        if (document.querySelector('section .col-1')) {
+            document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
+        }
+    }
+}
+
+/*
+//////////////// H3 SUB-HEADINGS ////////////////////
+*/
+
+document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
+
+function doUpperH3() {
+
+    // Single column
+    if (document.querySelector("section > h2")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            removeUpperH3();
+            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
+            document.getElementById("btn_subhead").disabled=false;
+        }            
+    }
+
+    // 2-Column split
+    else if (document.querySelector("section.cols-2-split")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
+            if (!document.querySelector(".cols-2-split .col-2 h3")) {
+                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
+                document.getElementById("btn_subhead").disabled=false;
+            }
+            else {
+                return
+            }
+        }
+    }
+
+    // 2, 3 or 4-Column
+    else if (document.querySelector("section .col-1")) {
+        if (!document.getElementById("cb_upperH3On").checked) {
+            removeUpperH3();
+        }
+        else {
+            removeUpperH3();
+            const newSubHead = document.createElement("h3");
+            const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
+            newSubHead.appendChild(newContent);
+            const currentDiv = document.querySelector('.col-1');
+            currentDiv.append(newSubHead);
+            document.getElementById("btn_upper_subhead").disabled=false;
+        }
+    }
+}
+
+function removeUpperH3() {
+    if (document.querySelector("section > h3")) {
+        document.querySelector("section > h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
+    }
+
+    else if (document.querySelector("section.cols-2-split")) {
+        document.querySelector("section.cols-2-split .col-2 h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
+    }
+    else if (document.querySelector("section .col-1 h3")) {
+        document.querySelector("section .col-1 h3").remove();
+        document.getElementById("btn_upper_subhead").disabled=true;
+    }
+    if (document.querySelector('.col-1 h2')) {
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<\/h2>\n\t\t\t', '<\/h2>');
+    }
+    // if (document.querySelector('section .col-1')) {
+    //     document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
+    // }
+}
+
+
+
+
+/*
 //////////////// COLUMNS ALIGN ///////////////
 */
 
@@ -347,16 +544,15 @@ function doColMobileWidth() {
 //////////////// COLUMN SUB-HEADINGS ////////////////////
 */
 
-document.querySelector("#dd_h3").addEventListener("change", doH3);
+document.querySelector("#cb_h3").addEventListener("change", doH3);
 
     function doH3() {
-        let opt = document.querySelector("#dd_h3").value;
-        // remove
-        if (opt==="1") {
+
+        if (!document.getElementById("cb_h3").checked) {
             removeH3();
         }
-        
-        else if (opt==="0") {
+
+        else {
             removeH3();
             document.getElementById("btn_col_subhead").disabled=false;
             // Test for figures (images or icons)
@@ -404,9 +600,10 @@ document.querySelector("#dd_h3").addEventListener("change", doH3);
         if (document.querySelector(col_no+" h3")) {
             document.getElementById("btn_col_subhead").disabled=true;
             const elH3 = document.querySelectorAll(col_no+" h3");
-            for (var i = 0 ; i < elH3.length ; i++) {
+            for (let i = 0 ; i < elH3.length ; i++) {
                 elH3[i].remove();
             }
+            document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>');  
         }
     }
 
@@ -529,6 +726,7 @@ function removeText() {
     for (var i = 0 ; i < el_list.length ; i++) {
         el_list[i].remove();
     }
+    document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replaceAll('\t\n\t\t<\/div>', '<\/div>');  
 }
 
 /*
@@ -760,16 +958,24 @@ function doVisType() {
             // Add figure at end of current content
             if (selectedValue==="pictures") {
                 el_cols.innerHTML = arrPic[i-2] + el_cols.innerHTML; 
+                // Enable image properties
+                enableImgProps();            
             }
             else if (selectedValue==="transparent") {
                 el_cols.innerHTML = arrTrans[i-2] + el_cols.innerHTML; 
+                // Enable image properties
+                enableImgProps(); 
+                // Disable soft corners
+                document.getElementById("cb_img_cornersOn").disabled=true;
+                document.getElementById("cb_img_cornersOn").checked=false;
+                // document.querySelector("label[for='cb_img_cornersOn']").style.color = "var(--gray-500)";
             }
             else if (selectedValue==="illustrations") {
-                el_cols.innerHTML = arrIllus[i-2] + el_cols.innerHTML; 
+                el_cols.innerHTML = arrIllus[i-2] + el_cols.innerHTML;                
+                // Enable image properties
+                enableImgProps();       
             }
         }
-        // Enable image properties
-        enableImgProps();
     }
 
     else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") || (selectedValue==="icons-md") ) {
@@ -849,8 +1055,8 @@ function disableImgProps() {
     document.getElementById("cb_img_cornersOn").checked=false;
     document.getElementById("cb_img_shadowsOn").disabled=true;
     document.getElementById("cb_img_shadowsOn").checked=false;
-    document.querySelector("label[for='cb_img_cornersOn']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='cb_img_shadowsOn']").style.color = "var(--gray-500)";
+    // document.querySelector("label[for='cb_img_cornersOn']").style.color = "var(--gray-500)";
+    // document.querySelector("label[for='cb_img_shadowsOn']").style.color = "var(--gray-500)";
     document.querySelector('section').classList.remove("fig-shadow");
     document.querySelector('section').classList.remove("fig-corners-soft");
 }
@@ -912,6 +1118,17 @@ function removeVisual() {
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
+    // Replace tabs and line breaks
+    const obj_col = document.querySelectorAll(col_no);
+    let el_cols; // each child column block
+    // loop through columns.
+    // nth-child cols begin at 2.
+    // So first column updated has loop index [i] of 2, second has [i] of 3, etc.
+    for (let i = 2; i <= obj_col.length+1; i++) {
+        el_cols = document.querySelector(col_no+":nth-child("+i+")");
+        el_cols.innerHTML = el_cols.innerHTML.replace('\n\t\t\t\n\t\t\t<h3>','<h3>');
+    }
+    
     // Remove any corner or shadow properties
     document.querySelector('section').classList.remove("fig-corners-soft");
     document.querySelector('section').classList.remove("fig-shadow");

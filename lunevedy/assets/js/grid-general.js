@@ -2,26 +2,12 @@
 // Number of dropdown menus on Lunevery navbar
 const uiUIenusLength = document.querySelectorAll("#ui-menus li").length;
 // Used by color picker to identify section for copying to user's HTML file.
-// values with be "section-selector-1", ... "section-selector-6".
+// Values with be "section-selector-1", ... "section-selector-6".
 let section_class ="section-selector-1"; 
 
 // Used by color picker. Either 'theme-light' or 'theme-dark'.
 let section_theme = "section.theme-light."+section_class;
 
-// GLOBAL VARIABLES
-
-// Class names of columns in grid: .col-2, .col-3 or .col-4
-
-if ( (document.querySelector('.col-2')) || (document.querySelector('.col-3')) || (document.querySelector('.col-4')) ) {
-    if (document.querySelector('.col-2')) { col_no = ".col-2" }
-    else if (document.querySelector('.col-3')) { col_no = ".col-3" }
-    else if (document.querySelector('.col-4')) { col_no = ".col-4" }
-
-    // Number column blocks to loop through
-    let col_count = document.querySelectorAll(col_no).length;
-    console.log("col_no: "+col_no);
-    console.log("col_count: "+col_count);
-}
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -58,7 +44,6 @@ divs.forEach(el => el.addEventListener('click', event => {
 
 // Hide all menus when user clicks on page.
 document.querySelector("#HTML-Content").addEventListener("click", hideMenus);
-
 
 function hideMenus() {
     for (let i = 1; i <= uiUIenusLength; i++) {
@@ -296,7 +281,6 @@ function doUpperBlockWidth() {
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
         document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
-
     }
 
     else if (opt==="1") {
@@ -397,10 +381,8 @@ function doUpperBlockAlign() {
     }
 }
 
-
-
 /*
-//////////////// ALL GRIDS: UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// ALL LAYOUTS: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
@@ -413,7 +395,7 @@ function doUpperLabel() {
             removeUpperLabel();
         }
         else {
-            document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
@@ -425,7 +407,7 @@ function doUpperLabel() {
         }
         else {
             removeUpperLabel();
-            document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
+            document.querySelector(".cols-2-split .col-2 h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
@@ -442,7 +424,10 @@ function doUpperLabel() {
             newUpperLabelDiv.appendChild(newUpperLabelSpan);
             newUpperLabelDiv.classList.add("container-upper-label"); 
             document.querySelector("section .col-1").prepend(newUpperLabelDiv);
-            document.querySelector("section .col-1 .container-upper-label span").innerText = "10% off all week";
+            document.querySelector("section .col-1 .container-upper-label span").innerText = "CATEGORY";
+
+            document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class="col-1 text-center"><div class="container-upper-label"><span>CATEGORY</span></div>', '<div class="col-1 text-center">\n\t\t\t<div class="container-upper-label">\n\t\t\t\t<span>CATEGORY</span>\n\t\t\t</div>');
+
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
@@ -452,117 +437,15 @@ function removeUpperLabel() {
     if (document.querySelector('.container-upper-label')) {
     const upperLabel = document.querySelector('.container-upper-label');
         upperLabel.remove();
-        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('\n\t\t\t<h2>Section heading<\/h2>', '<h2>Section heading<\/h2>');
         document.getElementById("btn_upper_label").disabled=true;
     }
-}
+    // If 2, 3 or 4 columns
 
-
-/*
-//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
-*/
-if (document.querySelector("#cb_upperH2On")) {
-    document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
-}
-
-function doUpperH2() {
-    if (!document.getElementById("cb_upperH2On").checked) {
-        removeUpperH2();
-    }
-    else {
-        removeUpperH2();
-        document.getElementById("btn_upper_head").disabled=false;
-        const newH2 = document.createElement("h2");
-        const newContent = document.createTextNode("Nice heading here");
-        newH2.appendChild(newContent);
-        const currentDiv = document.querySelector('.col-1');
-        if (!document.querySelector('.container-upper-label')) {
-            currentDiv.prepend(newH2);
+    if ( (document.querySelector('.col-3'))  || (document.querySelector('.col-4')) ) {
+        if ( (!document.querySelector('.col-1 h2')) && (!document.querySelector('.col-1 h3') )) {
+            removeUpperBlock();
         }
-        else {
-            document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
-        }
-    }
-}
-
-function removeUpperH2() {
-    if (document.querySelector('.col-1 h2')) {
-        document.getElementById("btn_upper_head").disabled=true;
-        const elH2 = document.querySelector('.col-1 h2');
-        elH2.remove();
-    }
-}
-
-/*
-//////////////// H3 SUB-HEADINGS ////////////////////
-*/
-
-document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
-
-function doUpperH3() {
-
-    // Single column
-    if (document.querySelector("section > h2")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-            document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
-            document.getElementById("btn_subhead").disabled=false;
-        }            
-    }
-
-    // 2-Column split
-    else if (document.querySelector("section.cols-2-split")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-            if (!document.querySelector(".cols-2-split .col-2 h3")) {
-                document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
-                document.getElementById("btn_subhead").disabled=false;
-            }
-            else {
-                return
-            }
-        }
-    }
-
-    // 2, 3 or 4-Column
-    else if (document.querySelector("section .col-1")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            const newSubHead = document.createElement("h3");
-            const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
-            newSubHead.appendChild(newContent);
-            const currentDiv = document.querySelector('.col-1');
-            currentDiv.append(newSubHead);
-            document.getElementById("btn_upper_subhead").disabled=false;
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-        }
-    }
-}
-
-function removeUpperH3() {
-    // document.querySelector("label[for='cb_upperH3On']").style.color = "var(--gray-500)";
-    if (document.querySelector("section > h3")) {
-        document.querySelector("section > h3").remove();
-        document.getElementById("btn_subhead").disabled=true;
-    }
-
-    else if (document.querySelector("section.cols-2-split")) {
-        document.querySelector("section.cols-2-split .col-2 h3").remove();
-        document.getElementById("btn_subhead").disabled=true;
-    }
-    else if (document.querySelector("section .col-1 h3")) {
-        document.querySelector("section .col-1 h3").remove();
-        document.getElementById("btn_upper_subhead").disabled=true;
     }
 }
 
