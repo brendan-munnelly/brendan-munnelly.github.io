@@ -592,42 +592,42 @@ body { font-family: var(--global-font) }
 
 /* --- Default colours --- */
 
-.hero-light { background-color: var(--slate-050) } 
-.hero-light .container-upper-label span { color: var(--slate-900) }
-.hero-light h1 { color: var(--slate-900) }
-.hero-light h2 { color: var(--slate-900) }
+.header.theme-light { background-color: #fff } 
+.header.theme-light .container-upper-label span { color: var(--slate-900) }
+.header.theme-light h1 { color: var(--slate-900) }
+.header.theme-light h2 { color: var(--slate-900) }
 
-.hero-light a.btn-primary:link, 
-.hero-light a.btn-primary:visited {
+.header.theme-light a.btn-primary:link, 
+.header.theme-light a.btn-primary:visited {
     color:            var(--slate-050);
     background-color: var(--slate-900);
     border-color:     var(--slate-900);
 } 
 
-.hero-light a.btn-primary:focus, 
-.hero-light a.btn-primary:hover, 
-.hero-light a.btn-primary:active {
+.header.theme-light a.btn-primary:focus, 
+.header.theme-light a.btn-primary:hover, 
+.header.theme-light a.btn-primary:active {
     color:            var(--slate-050);
     background-color: var(--slate-600);
     border-color:     var(--slate-600);
 }
 
-.hero-light a.btn-secondary:link, 
-.hero-light a.btn-secondary:visited {
+.header.theme-light a.btn-secondary:link, 
+.header.theme-light a.btn-secondary:visited {
     color:            var(--slate-900);
     background-color: var(--trans-000);
     border-color:     var(--slate-900);
 } 
 
-.hero-light a.btn-secondary:focus, 
-.hero-light a.btn-secondary:hover, 
-.hero-light a.btn-secondary:active {
+.header.theme-light a.btn-secondary:focus, 
+.header.theme-light a.btn-secondary:hover, 
+.header.theme-light a.btn-secondary:active {
     color:            var(--slate-050);
     background-color: var(--slate-600);
     border-color:     var(--slate-600);
 }
 
-.hero-light.hero-bg-gradient { 
+.header.theme-light.hero-bg-gradient { 
     background-image: linear-gradient(var(--hero-bg-gradient-deg),var(--hero-bg-gradient-from-light), var(--hero-bg-gradient-to-light));
 }
 
@@ -1594,9 +1594,9 @@ section {
 .theme-dark h1, .theme-dark h2, .theme-dark h3, 
 .theme-dark p, .theme-dark li { color: var(--slate-050) }
 
-.theme-dark h2, .theme-dark h3 { color: var(--green-400)}
-.theme-dark h2, .theme-dark h3 { color: var(--slate-100)}
-.theme-dark h2, .theme-dark h3 { color: var(--sky-400)}
+/* .theme-dark h2, .theme-dark h3 { color: var(--green-400)}
+.theme-dark h2, .theme-dark h3 { color: var(--slate-100)} */
+/* .theme-dark h2, .theme-dark h3 { color: var(--sky-400)} */
 
 .theme-dark .col-1 h3 { color: var(--slate-100); }
 
@@ -1860,7 +1860,7 @@ section > .col-1 { width: 100% }
 
     section > .col-1:not(.text-center) { 
         padding-left: 0; padding-bottom: 2%;
-        padding-right: calc((100% - 800px)/2);
+        padding-right: calc(100% - 800px);
 	}    
 
     section > .col-1.text-center.col-1-width-960px {    
@@ -1870,7 +1870,7 @@ section > .col-1 { width: 100% }
 
     section > .col-1.col-1-width-960px:not(.text-center) {    
         padding-left: 0; padding-bottom: 2%;
-        padding-right: calc((100% - 960px)/2);
+        padding-right: calc(100% - 960px);
     }
 
     section > .col-1.text-center.col-1-width-1140px { 
@@ -1880,7 +1880,7 @@ section > .col-1 { width: 100% }
 
     section > .col-1.col-1-width-1140px:not(.text-center) { 
         padding-left: 0; padding-bottom: 2%;
-        padding-right: calc((100% - 1140px)/2);
+        padding-right: calc(100% - 1140px);
     }
 
 }
@@ -2601,9 +2601,6 @@ a.btn, button {
     border-width: 2px
 }
 
-@media (min-width: 768px) { a.btn { border-width: 2px } }
-@media (max-width: 767px) { a.btn { border-width: 2px } }
-
 div[class*='col-:not(.hero-block)'] a.btn { 
     margin-top: 12px;
     position: relative;
@@ -2833,48 +2830,18 @@ a.btn-secondary:active {
 
 /* ================== FOOTER =============== */
 
-/* Desktop footer - inside padding  */
-@media (min-width:768px) {
-	footer { padding: 4% 8% 2% 8% }
-}
+footer.theme-dark  { background-color: var(--trend-800) }
+footer.theme-light { background-color: var(--white-000) }
 
-/* Mobiles footer - inside padding */
-@media (max-width:767px) {
-	footer { padding: 8% 8% 6% 8% }
-}
+/* Padding */
+@media (min-width: 768px) { footer { padding: 3% 8% 4% 8% } }
+@media (max-width: 767px) { footer { padding: 8% 8% 6% 8% } }
 
-/* Desktops/Laptops */
-@media (min-width: 1200px) { 
-	footer { 
-		padding: 3.5% calc((100% - 900px)/2) 5% calc((100% - 900px)/2); 
-		margin: 0 auto;
-	} 
-}
+@media (min-width: 1025px) and (max-width: 1199px ) { footer { padding: 3% 10% 7% 10% } }
+@media (min-width: 768px)  and (max-width: 1024px)  { footer { padding: 5% 5% 6% 5% } }
+@media (max-width: 767px)                           { footer { padding: 8% 7% 12% 7% } }
 
-/* Tablets and smaller desktops */
-@media (min-width: 1025px) and (max-width: 1199px ) { 
-	footer { padding: 3% 10% 7% 10% } 
-}
 
-/* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) { 
-	footer { padding: 5% 5% 6% 5% }
-}
-
-/* Larger mobiles */
-@media (min-width: 400px) and (max-width: 767px)  { 
-	footer { padding: 9% 13% 12% 13% }
-}
-
-/* Smaller mobiles */
-@media (max-width: 399px) { 
-	footer { padding: 9% 10% 12% 10% } 
-}
-
-footer { 
-    text-align: center;
-    background-color: var(--trend-800);
-}
 
 /* Footer headings */
 footer h2 {
@@ -2888,7 +2855,7 @@ footer h3 {
     font-weight: normal;
     font-style:  italic;
     color: var(--gray-300);
-    margin: 0 auto 36px auto;
+    margin: 0 auto 20px auto;
     font-size: calc(20px + (32 - 20) * ((100vw - 320px)/(1920 - 320)));
 }
 
@@ -2931,7 +2898,7 @@ footer ul.footer-links li a:active  {
 /* Footer icons */
 footer ul.footer-icons li a:any-link i {
     text-decoration: none !important;
-    font-size: calc(22px + (28 - 22) * ((100vw - 320px)/(1920 - 320)));
+    font-size: calc(22px + (36 - 22) * ((100vw - 320px)/(1920 - 320)));
     color: var(--white-000);
     border-bottom-width: 0;
     transition: all 0.2s linear;
@@ -2962,6 +2929,14 @@ footer p.privacy a:hover, footer p.privacy a:active {
     text-decoration-color: transparent;
     background-color: transparent;
 }
+
+
+/* Footer-1 */
+.footer-1 { text-align: center; margin-left: auto; margin-right: auto }
+
+/* Footer-2 */
+.footer-2 { text-align: left; margin: 0 }
+
 
 
 /* ============ UTILITY CLASSES ============== */

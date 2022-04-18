@@ -18,7 +18,7 @@ body { background-color: #fff }
     position: fixed; top: 0; width: 100%; /* max-width: 1920px; */ z-index: 999;
     /* box-shadow: 4px 4px 10px #888; padding: 0 1%  0 3%; */
     padding-left: 3%; 
-    background-color: var(--ui-dark-bg) }
+    background-color: var(--ui-dark-bg);
 }
 
 .controls-top.ui-dark { 
@@ -29,7 +29,10 @@ body { background-color: #fff }
     color: #fff
 }
 
-#control-menu { display: flex; flex-direction: row; justify-content: space-between }
+#control-menu { 
+    display: flex; flex-direction: row; justify-content: space-between;
+    max-width: 1800px;    
+}
 
 #control-menu div:nth-child(1) { align-self: flex-start }
 
@@ -90,10 +93,8 @@ body { background-color: #fff }
 
 #control-menu .page-preview-header { 
     padding: 0; margin: 0;
-    position: relative; text-align: center;
-    position: relative; display: none;
+    position: relative; text-align: center; display: none;
     background-color: #2b2a33; line-height: 1; 
-   
 }
 
 #control-menu .page-preview-header span { 
@@ -670,6 +671,7 @@ label .trend-900  { background: var(--trend-900) }
 
 label .black-000  { background: var(--black-000) }   
 label .white-000  { background: var(--white-000); border: solid 1px #000 }
+label .trans-000  { background: var(--black-000); border: solid 1px var(--gray-300) }   
 
 /* =================== MESSAGE BOX ==================== */
 
@@ -732,45 +734,6 @@ label .white-000  { background: var(--white-000); border: solid 1px #000 }
     color: #55efc4
 }
 
-/* === COPY CODE BUTTONS ===*/
-
-.copy-code-btns {
-    position: fixed; bottom: 0; right: 0; padding: 14px;
-    background-color: var(--gray-900);
-    border-top-left-radius: 5px;
-    color: #fff
-}
-
-#btn-copy, #btn-copy-css {
-    padding: 7px 14px 8px 14px;
-    font-size: calc(14px + (15 - 14) * ((100vw - 320px)/(1920 - 320)));
-    background-color: #00ddff; border-color: #00ddff;
-    color: #000; font-weight: 600;
-    line-height: 1; border-radius: 5px; border-width: 2px;
-}
-
-#btn-copy:hover, #btn-copy-css:hover { 
-    background-color: #0faec9; border-color: #0faec9 }
-
-#btn-copy-css:disabled {
-    background-color: var(--gray-200);
-    color: var(--gray-600); 
-    border-color: var(--gray-400);
-    border-radius: 5px;
-}
-
-#btn-copy-css:disabled:focus,
-#btn-copy-css:disabled:hover,
-#btn-copy-css:disabled:active {
-    background-color: var(--gray-200);
-    color: var(--gray-600); 
-    border-color: var(--gray-400);
-}
-
-#btn-copy i, #btn-copy-css i { margin-right: 10px }
-#btn-copy svg, #btn-copy-css svg { margin-right: 5px; padding-top: 2px; fill: #222 }
-
-#btn-copy { margin-right: 14px }
 
 
 .slide-button, .toggle span span { display: none }
@@ -833,6 +796,7 @@ label .white-000  { background: var(--white-000); border: solid 1px #000 }
     .ios input:checked + label { color: #3a3a3a }
 
     .svg-icon-desktop, .svg-icon-mobile { margin-right: 12px; margin-top: 6px; fill: #fff }
+    .svg-icon-desktop.disabled { fill: var(--gray-500) }
 }
 
 /* === Switch buttons in menus === */
@@ -889,29 +853,28 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
     fill: var(--gray-600);
 }
 
-/* LOWER LEFT */
 
-/* === COPY CODE BUTTONS ===*/
+/* ==== LOWER LEFT OPTIONS ==== */
 
 .lower-left {
-    display: flex;
-    position: fixed; bottom: 0; padding: 10px;
-    background-color: var(--gray-900);
-    border-top-right-radius: 5px;
-    color: #fff;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    min-width: 360px;
-    padding-bottom: 16px; padding-top: 16px
+    display: flex; position: fixed; bottom: 0;
+    color: #fff; background-color: var(--gray-900); border-top-right-radius: 5px;
+    justify-content: space-between; flex-wrap: nowrap;
+    padding: 10px 26px 12px 20px;
 }
 
-.lower-left div:nth-child(1) { width: 34%; padding-top: 2px }
-.lower-left div:nth-child(2) { width: 28%; }
-.lower-left div:nth-child(3) { width: 21%; padding-top: 2px }
-.lower-left div:nth-child(4) { width: 18%; padding-top: 4px }
+.lower-left div:nth-child(1) { padding-top: 5px; padding-right: 20px; line-height: 1.3 }
+.lower-left div:nth-child(2) { padding-top: 6px; padding-right: 26px }
+.lower-left div:nth-child(3) { padding-top: 6px; padding-right: 20px }
+.lower-left div:nth-child(4) { padding-top: 20px }
 
+.lower-left input[type="checkbox"].switch { margin-top: 0 }
 
 /* =========== LIGHT/DARK SWITCH BUTTON ================ */
+
+.lower-left div span { display: inline-block; font-size: 15px; line-height: 1.3 }
+
+.lower-left div label { display: inline-block; font-size: 15px; line-height: 1.3 }
 
 .lower-left .switch-field { display: flex; flex-direction: row; overflow: hidden }
 
@@ -923,12 +886,13 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
 }
 
 .lower-left .switch-field label {
-    background-color: var(--gray-600); color: var(--gray-900); 
+    background-color: var(--gray-600); 
+    color: var(--gray-900); 
     font-size: 16px;
     font-weight: 700;
     line-height: 1;
     text-align: center;
-    padding: 7px 9px;
+    padding: 7px 9px 7px 9px;
     margin-right: -1px; 
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
@@ -943,7 +907,7 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
 }
 
 .lower-left .switch-field label:first-of-type { border-radius: 4px 0 0 4px }
-.lower-left .switch-field label:last-of-type { border-radius: 0 4px 4px 0 }
+.lower-left .switch-field label:last-of-type  { border-radius: 0 6px 6px 0 }
 
 .lower-left input[type=checkbox] {
     margin-top: -6px; margin-right: 0;
@@ -953,6 +917,54 @@ input[type=checkbox].switch:not(:checked):after { background: var(--gray-600) }
 .lower-left input[type=checkbox]:checked {
     background-color: #00ddff;
     --d-o: .3s; --d-t: .6s; --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+}
+
+/* ===== COPY CODE BUTTONS ===== */
+
+.copy-code-btns {
+    position: fixed; bottom: 0; right: 0; padding: 8px 26px 14px 20px;
+    color: #fff; background-color: var(--gray-900);
+    border-top-left-radius: 5px;
+    display: flex; justify-content: space-between; flex-wrap: nowrap;
+}
+
+.copy-code-btns span { padding-top: 5px; padding-right: 20px; line-height: 1.3 }
+
+.copy-code-btns button {
+    margin-top: 9px;
+    border: none; display: inline-block; box-sizing: content-box; height: 22px;
+    padding: 4px 14px 12px 14px; font-size: 15px;
+    color: #000; background-color: #00ddff; border-color: #00ddff;
+    font-weight: 600; vertical-align: middle;
+    line-height: 1; border-radius: 5px; border-width: 2px;
+} 
+
+.copy-code-btns button > :nth-child(1) { margin-right: 8px }
+.copy-code-btns button > :nth-child(2) { margin: 0 !important }
+
+.copy-code-btns button span { 
+    display: inline-block; padding: 0; font-weight: 600
+}
+
+.copy-code-btns button svg { margin-top: 2px; fill: #000 }
+
+.copy-code-btns button:hover { background-color: #0faec9; border-color: #0faec9 }
+
+#btn-copy { margin-right: 14px }
+
+#btn-copy-css:disabled {
+    background-color: var(--gray-200);
+    color: var(--gray-600); 
+    border-color: var(--gray-400);
+    border-radius: 5px;
+}
+
+#btn-copy-css:disabled:focus,
+#btn-copy-css:disabled:hover,
+#btn-copy-css:disabled:active {
+    background-color: var(--gray-200);
+    color: var(--gray-600); 
+    border-color: var(--gray-400);
 }
 
 .resp-mobile {
