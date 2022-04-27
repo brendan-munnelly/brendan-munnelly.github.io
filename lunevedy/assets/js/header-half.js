@@ -901,16 +901,15 @@ function enableLabelColor() {
 //////////////// COLUMN LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
-    const opt = document.querySelector("#dd_upperLabel").value;
     // remove
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperLabelOn").checked) {
         removeUpperLabel();
     }
-    // regular
-    else if (opt==="1") {
+    // add
+    else {
         document.querySelector("#HTML-Content .col-2 h1").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
     }
@@ -921,7 +920,6 @@ function removeUpperLabel() {
         const upperLabel = document.querySelector('.container-upper-label');
         upperLabel.remove();
         disableLabelColor();
-        document.getElementById("dd_upperLabel").value="0";
     }
 }
 

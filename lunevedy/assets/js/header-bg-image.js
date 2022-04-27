@@ -303,7 +303,7 @@ function hideSidebar() {
 
         /* Header upper label */
         else if (btn_id === "btn_upper_label") {
-            newStyle = ".hero-block .container-upper-label { color: var("+color_code+") }\n";
+            newStyle = ".hero-block .container-upper-label span { color: var("+color_code+") }\n";
             sub_string = ".container-upper-label";
             doUpdateArray(sub_string,newStyle);
         }
@@ -856,17 +856,15 @@ function enableLabelColor() {
 //////////////// TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.getElementById("dd_upperLabel").value="0";
-document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
-    const opt = document.querySelector("#dd_upperLabel").value;
     // remove
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperLabelOn").checked) {
         removeUpperLabel();
     }
     // add
-    else if (opt==="1") {
+    else {
         removeUpperLabel();
         document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
@@ -879,7 +877,6 @@ function removeUpperLabel() {
         upperLabel.remove();
         document.querySelector('.hero-block').innerHTML = document.querySelector('.hero-block').innerHTML.replace("\t\n\n", "");
         disableLabelColor();
-        document.getElementById("dd_upperLabel").value="0";
     } 
 }
 
@@ -1014,30 +1011,43 @@ function doHeaderAlignment(heroType) {
 
 /* Set alignment - desktop */
 
-document.querySelector("#dd_align_desktop").addEventListener("change", doAlignDesktop);
-    
+document.querySelector("#switch-desktop-align").addEventListener("change", doAlignDesktop);
+
 function doAlignDesktop() {
-    let opt = document.querySelector("#dd_align_desktop").value;
+    const rbs = document.querySelectorAll("input[name='align_desktop']");
+    let selectedValue;
 
-    if (opt==="0") {
-        document.querySelector(".hero-block").classList.add("text-center-desktop");
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
     }
-
-    else if (opt==="1") {
+    if (selectedValue==="left") {
         document.querySelector(".hero-block").classList.remove("text-center-desktop");   
-        enableTextStart();
+    }
+    else if (selectedValue==="center") {
+        document.querySelector(".hero-block").classList.add("text-center-desktop");
     }
 }
 
-document.querySelector("#dd_align_mobile").addEventListener("change", doAlignMobile);
+document.querySelector("#switch-mobile-align").addEventListener("change", doAlignMobile);
 
 function doAlignMobile() {
-    let opt = document.querySelector("#dd_align_mobile").value;
-    if (opt==="0") {
-        document.querySelector(".hero-block").classList.add("text-center-mobile");
+    const rbs = document.querySelectorAll("input[name='align_mobile']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
     }
-    else if (opt==="1") {
-        document.querySelector(".hero-block").classList.remove("text-center-mobile"); 
+    if (selectedValue==="left") {
+        document.querySelector(".hero-block").classList.remove("text-center-mobile");   
+    }
+    else if (selectedValue==="center") {
+        document.querySelector(".hero-block").classList.add("text-center-mobile");
     }
 }
 

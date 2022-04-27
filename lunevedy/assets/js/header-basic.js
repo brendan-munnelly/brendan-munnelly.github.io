@@ -880,17 +880,15 @@ function enableLabelColor() {
 //////////////// TEXT: UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.getElementById("dd_upperLabel").value="0";
-document.querySelector("#dd_upperLabel").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
-    const opt = document.querySelector("#dd_upperLabel").value;
     // remove
-    if (opt==="0") {
+    if (!document.getElementById("cb_upperLabelOn").checked) {
         removeUpperLabel();
     }
     // add
-    else if (opt==="1") {
+    else {
         removeUpperLabel();
         document.querySelector(".container-text").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>10% off all week<\/span><\/div>\n\n\t");
         enableLabelColor();
@@ -903,7 +901,6 @@ function removeUpperLabel() {
         upperLabel.remove();
         document.querySelector('.hero-block').innerHTML = document.querySelector('.hero-block').innerHTML.replace("\t\n\n", "");
         disableLabelColor();
-        document.getElementById("dd_upperLabel").value="0";
     } 
 }
 
@@ -1044,41 +1041,56 @@ function removeTextAnimation() {
 */
 
 /* Default alignment based on header type */
-function doHeaderAlignment(heroType) {
-    const el_cont = document.querySelector(".hero-block"); 
-    el_cont.classList.add("text-center-desktop");
-    el_cont.classList.add("text-center-mobile");
-    document.getElementById("dd_align_desktop").value="0";
-    document.getElementById("dd_align_mobile").value="0";
-}
+// function doHeaderAlignment(heroType) {
+//     const el_cont = document.querySelector(".hero-block"); 
+//     el_cont.classList.add("text-center-desktop");
+//     el_cont.classList.add("text-center-mobile");
+//     document.getElementById("dd_align_desktop").value="0";
+//     document.getElementById("dd_align_mobile").value="0";
+// }
 
 /* Set alignment - desktop */
 
-document.querySelector("#dd_align_desktop").addEventListener("change", doAlignDesktop);
-    
+document.querySelector("#switch-desktop-align").addEventListener("change", doAlignDesktop);
+
 function doAlignDesktop() {
-    let opt = document.querySelector("#dd_align_desktop").value;
+    const rbs = document.querySelectorAll("input[name='align_desktop']");
+    let selectedValue;
 
-    if (opt==="0") {
-        document.querySelector(".hero-block").classList.add("text-center-desktop");
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
     }
-
-    else if (opt==="1") {
+    if (selectedValue==="left") {
         document.querySelector(".hero-block").classList.remove("text-center-desktop");   
     }
+    else if (selectedValue==="center") {
+        document.querySelector(".hero-block").classList.add("text-center-desktop");
+    }
 }
 
-document.querySelector("#dd_align_mobile").addEventListener("change", doAlignMobile);
+document.querySelector("#switch-mobile-align").addEventListener("change", doAlignMobile);
 
 function doAlignMobile() {
-    let opt = document.querySelector("#dd_align_mobile").value;
-    if (opt==="0") {
+    const rbs = document.querySelectorAll("input[name='align_mobile']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="left") {
+        document.querySelector(".hero-block").classList.remove("text-center-mobile");   
+    }
+    else if (selectedValue==="center") {
         document.querySelector(".hero-block").classList.add("text-center-mobile");
     }
-    else if (opt==="1") {
-        document.querySelector(".hero-block").classList.remove("text-center-mobile"); 
-    }
 }
+
 
 /*
 //////////////// HERO BUTTONS ///////////////
