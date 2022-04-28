@@ -1,3 +1,8 @@
+/* After frame content loads */
+function onFrameLoaded() {
+    loadGrid0();
+} 
+
 function loadGrid0() {
 
     // *** Global variables

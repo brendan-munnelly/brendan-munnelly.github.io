@@ -1,3 +1,8 @@
+/* After frame content loads */
+function onFrameLoaded() {
+    loadGridSplit();
+} 
+
 function loadGridSplit() {
 
 // *** Global variables
