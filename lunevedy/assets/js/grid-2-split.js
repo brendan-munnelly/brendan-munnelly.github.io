@@ -1,4 +1,4 @@
-function loadAllGridSplit() {
+function loadGridSplit() {
 
 // *** Global variables
 // Number of dropdown menus on Lunevery navbar
@@ -23,18 +23,15 @@ divs.forEach(el => el.addEventListener('click', event => {
     }
     // Get current menu id
     const strMenu = event.currentTarget.id.toString();
-    const id = strMenu.charAt(strMenu.length-1);
-    const elItem_show = document.querySelector("#content-"+id);
+    const menuId = strMenu.charAt(strMenu.length-1);
+    const elItem_show = document.querySelector("#content-"+menuId);
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
     // Hide color picker
     hideSidebar();
 }));
 
-// Hide all menus and color picker when user clicks on work area.
-window.onload=function(){
-    iframe.contentWindow.document.querySelector('#HTML-Content').addEventListener('click',hideMenus,false);
-}
+document.querySelector('#page-preview-body').addEventListener('click',hideMenus,false);
 
 function hideMenus() {
     for (let i = 1; i <= uiUIenusLength; i++) {
@@ -1334,12 +1331,10 @@ function doResizeWidth() {
 }
 
 function showRespIcons() {
-    console.log("Show responsive icons");
     document.querySelector('.page-preview-options').classList.add("show-options");
 }
 
 function hideRespIcons() {
-    console.log("Hide responsive icons");
     document.querySelector('.page-preview-options').classList.remove("show-options");
 }
 
@@ -1349,35 +1344,35 @@ iconsResponsive.forEach(icon => {
     icon.addEventListener('click', (e) => {
         // document.querySelector(icon).classList.remove("selected");
         // Get current icon id
-        const id = e.currentTarget.id.toString();
-        document.getElementById(id).classList.add("selected");
+        const iconId = e.currentTarget.id.toString();
+        document.getElementById(iconId).classList.add("selected");
         resetResponsive();
 
-        if (id==="respDesktopLarge") {
+        if (iconId==="respDesktopLarge") {
             document.getElementById("page-preview-body").classList.add("resp-desktop-large");
             document.querySelector("#respDesktopLarge img").src = "assets/img/icons/icon-resize-desktop-large.png";
         }
 
-        if (id==="respDesktopSmall") {
+        else if (iconId==="respDesktopSmall") {
             document.getElementById("page-preview-body").classList.add("resp-desktop-small");
             document.querySelector("#respDesktopSmall img").src = "assets/img/icons/icon-resize-desktop-small.png";
         }
 
-        else if (id==="respTabletLandscape") {
+        else if (iconId==="respTabletLandscape") {
             document.getElementById("page-preview-body").classList.add("resp-tablet-landscape");
             document.querySelector("#respTabletLandscape img").src = "assets/img/icons/icon-resize-tablet-landscape.png";
         }
-        else if (id==="respTabletPortrait") {
+        else if (iconId==="respTabletPortrait") {
             document.getElementById("page-preview-body").classList.add("resp-tablet-portrait");
             document.querySelector("#respTabletPortrait img").src = "assets/img/icons/icon-resize-tablet-portrait.png";
         }        
         
-        else if (id==="respMobileLarge") {
+        else if (iconId==="respMobileLarge") {
             document.getElementById("page-preview-body").classList.add("resp-mobile-large");
             document.querySelector("#respMobileLarge img").src = "assets/img/icons/icon-resize-mobile-large.png";
         }        
 
-        else if (id==="respMobileSmall") {
+        else if (iconId==="respMobileSmall") {
             document.getElementById("page-preview-body").classList.add("resp-mobile-small")
             document.querySelector("#respMobileSmall img").src = "assets/img/icons/icon-resize-mobile-small.png";           
         }        
