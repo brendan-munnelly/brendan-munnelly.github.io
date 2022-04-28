@@ -693,14 +693,14 @@ function doUpperH2() {
         removeUpperH2();
         document.getElementById("btn_upper_head").disabled=false;
         const newH2 = document.createElement("h2");
-        const newContent = document.createTextNode("Nice heading here");
+        const newContent = document.createTextNode("Nice section heading");
         newH2.appendChild(newContent);
         const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
         if (!iframe.contentWindow.document.querySelector('.container-upper-label')) {
             currentDiv.prepend(newH2);
         }
         else {
-            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
+            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice section heading</h2>"); 
         }
     }
 }
@@ -794,7 +794,7 @@ function doUpperBlock() {
         newUpperBlockDiv.classList.add("col-1"); 
         newUpperBlockDiv.classList.add("text-center"); 
         iframe.contentWindow.document.querySelector("section").prepend(newUpperBlockDiv);
-        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace('', '\n\t\t\t<h2>Nice heading here</h2>\n\t\t\t<h3>Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.</h3>\n\t\t');
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace('', '\n\t\t\t<h2>Nice section heading</h2>\n\t\t\t<h3>Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.</h3>\n\t\t');
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class="col-1 text-center">', '\n\n\t\t<div class="col-1 text-center">');
         // Enable properties
         document.getElementById("dd_upper_block_width").disabled=false;
@@ -855,14 +855,14 @@ function doUpperH2() {
         removeUpperH2();
         document.getElementById("btn_upper_head").disabled=false;
         const newH2 = iframe.contentWindow.document.createElement("h2");
-        const newContent = iframe.contentWindow.document.createTextNode("Nice heading here");
+        const newContent = iframe.contentWindow.document.createTextNode("Nice section heading");
         newH2.appendChild(newContent);
         const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
         if (!iframe.contentWindow.document.querySelector('.container-upper-label')) {
             currentDiv.prepend(newH2);
         }
         else {
-            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice heading here</h2>"); 
+            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice section heading</h2>"); 
         }
     }
 }
