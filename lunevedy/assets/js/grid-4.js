@@ -1,9 +1,9 @@
 /* After frame content loads */
 function onFrameLoaded() {
-    loadGrid3();
+    loadGrid4();
 } 
 
-function loadGrid3() {
+function loadGrid4() {
 
 // *** Global variables
 // Number of dropdown menus on Lunevery navbar
