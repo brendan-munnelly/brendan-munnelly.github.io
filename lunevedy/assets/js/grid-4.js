@@ -1405,7 +1405,7 @@ document.querySelector("#dd_buttons_style").addEventListener("change", doButtons
     }
 
 /*
-////////////////////// VISUALS  ///////////////////////
+////////////////////// VISUALS ///////////////////////
 */
 
 document.querySelector("#vis-types-all").addEventListener("click", doVisType);
@@ -1450,7 +1450,7 @@ function doVisType() {
         enableImgProps();
     }
 
-    else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") || (selectedValue==="icons-md") ) {
+    else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") ) {
         removeVisual();
         const obj_col = iframe.contentWindow.document.querySelectorAll(col_no);
         for (let i = 2; i <= parseInt(obj_col.length)+1; i++) {
@@ -1461,12 +1461,12 @@ function doVisType() {
             else if (selectedValue==="icons-la") {
                 el_cols.innerHTML = arrIconLA[i-2] + el_cols.innerHTML; 
             }
-            else if (selectedValue==="icons-md") {
-                el_cols.innerHTML = arrIconMD[i-2] + el_cols.innerHTML; 
-            }
         }
         // Enables icon properties
-        document.getElementById("dd_icon_size").disabled=false;
+        document.getElementById("cb-icon-size-plus").checked=true;
+        document.getElementById("cb-icon-size-minus").checked=false;
+        document.getElementById("cb-icon-size-plus").disabled=false;
+        document.getElementById("cb-icon-size-minus").disabled=false;
         document.getElementById("radio-icon-align-left").disabled=false;
         document.getElementById("radio-icon-align-center").disabled=false;
         document.getElementById("radio-icon-align-left").checked=false;
@@ -1492,7 +1492,6 @@ function doImgCorners() {
         iframe.contentWindow.document.querySelector('section').classList.add("fig-corners-soft");
     }
 }
-
 
 /*
 //////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
@@ -1538,19 +1537,24 @@ function disableImgProps() {
 //////////////// ICON PROPERTIES: SIZE ///////////////
 */
 
-document.querySelector("#dd_icon_size").addEventListener("change", doIconSize);
-
+document.querySelector("#switch-icon-size").addEventListener("change", doIconSize);
 
 function doIconSize() {
-    let opt = document.querySelector("#dd_icon_size").value;
-    //Restore normal size
-    if (opt==="0") {
-        const el_section = iframe.contentWindow.document.querySelector("section");
+    const rbs = document.querySelectorAll("input[name='icon-size']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    const el_section = iframe.contentWindow.document.querySelector("section");
+    if (selectedValue==="icon-plus") {
         el_section.classList.remove("icon-small");
     }
-    //Left align
-    else if (opt==="1") {
-        const el_section = iframe.contentWindow.document.querySelector("section");
+    else if (selectedValue==="icon-minus") {
         el_section.classList.add("icon-small");
     }
 }
@@ -1596,7 +1600,10 @@ function removeVisual() {
     // Disable image properties
     disableImgProps();
     // Disable icon properties
-    document.getElementById("dd_icon_size").disabled=true;
+    document.getElementById("cb-icon-size-plus").checked=false;
+    document.getElementById("cb-icon-size-minus").checked=false;
+    document.getElementById("cb-icon-size-plus").disabled=true;
+    document.getElementById("cb-icon-size-minus").disabled=true;
     document.getElementById("radio-icon-align-left").disabled=true;
     document.getElementById("radio-icon-align-center").disabled=true;
     document.getElementById("radio-icon-align-left").checked=false;
