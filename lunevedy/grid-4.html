@@ -223,30 +223,21 @@
                                         <button id="btn_col_background" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button>
                                     </div>
         
-        
                                     <div class="input-group">
-                                        <label>Shadows</label>
-                                        <select id="dd_col_shadows">
-                                            <option value="0" selected="selected">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>
-                                    </div>
-                           
+                                        <label for="cb_col_shadows">Shadows</label>
+                                        <input id="cb_col_shadows" type="checkbox" class="switch">
+                                    </div><!-- /input-group -->      
+
                                     <div class="input-group">
-                                        <label>Borders</label>
-                                        <select id="dd_col_borders">
-                                            <option value="0" selected="selected">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button id="btn_col_border_color" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                                        <label for="cb_col_borders">Borders</label>
+                                        <input id="cb_col_borders" type="checkbox" class="switch">
+                                        
+                                        <button id="btn_col_border_color" class="btn_style" style="margin-left: 60px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                                     </div><!-- /input-group -->
         
                                     <div class="input-group">
-                                        <label>Corners</label>
-                                        <select id="dd_col_corners">
-                                            <option value="0" selected="selected">Square</option>
-                                            <option value="1">Soft</option>
-                                        </select>
+                                        <label for="cb_col_corners">Corners</label>
+                                        <input id="cb_col_corners" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
         
                                 </div>
@@ -2132,7 +2123,6 @@
         <iframe src="grid-4-embed.html" style="border:0" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
     </div>
 
-
     <div class="lower-left">
 
         <div>
@@ -2227,6 +2217,11 @@
     </main>
 
     <script>
+
+    sessionStorage.clear();   
+    sessionStorage.setItem('col-background', 'default');
+    let col_no = ".col-4";
+
     function getResolution() {
         const realWidth = window.screen.width * window.devicePixelRatio;
         const realHeight = window.screen.height * window.devicePixelRatio;
@@ -2261,14 +2256,16 @@
             
         // Columns
         document.getElementById("radio-col-align-left").checked = true;
-        document.getElementById("dd_col_shadows").value="0";
-        document.getElementById("dd_col_shadows").disabled=false;
+        document.getElementById("cb_col_shadows").disabled=false;
+        document.getElementById("cb_col_shadows").checked=false;
+
         document.getElementById("btn_col_background").disabled=false;
 
-        document.getElementById("dd_col_borders").value="0";
-        document.getElementById("dd_col_borders").disabled=false;    
+        document.getElementById("cb_col_borders").checked=false;
+        document.getElementById("cb_col_borders").disabled=false;    
         document.getElementById("btn_col_border_color").disabled=true;
-        document.getElementById("dd_col_corners").disabled=true; 
+        document.getElementById("cb_col_corners").disabled=true; 
+        document.getElementById("cb_col_corners").checked=false; 
         document.getElementById("dd_cols_mobile").value="0";
 
         // Text
@@ -2378,7 +2375,7 @@
 
 </script>
 
-    <script src="assets/js/grid-4.js"></script>
+    <script src="assets/js/grid-3-4.js"></script>
 
 </body>
 </html>
