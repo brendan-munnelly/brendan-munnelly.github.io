@@ -36,8 +36,11 @@ function loadGrid0() {
         hideSidebar();
     }));
     
-    document.querySelector('#page-preview-body').addEventListener('click',hideMenus,false);
-    
+    // Hide all menus and color picker when user clicks on frame container.
+    window.onload=function(){
+        iframe.contentWindow.document.querySelector('#HTML-Content').addEventListener('click',hideMenus,false);
+    }
+   
     function hideMenus() {
         for (let i = 1; i <= uiUIenusLength; i++) {
             document.querySelector("#content-"+i).classList.add("dropdown-hidden");
