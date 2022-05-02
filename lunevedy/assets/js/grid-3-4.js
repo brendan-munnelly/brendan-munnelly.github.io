@@ -1,9 +1,9 @@
 /* After frame content loads */
 function onFrameLoaded() {
-    loadGrid3();
+    loadGrid();
 } 
 
-function loadGrid3() {
+function loadGrid() {
 
 // *** Global variables
 // Number of dropdown menus on Lunevery navbar
@@ -939,12 +939,13 @@ function doColAlign() {
     }
 }
 
-
 /*
 //////////////// COLUMNS WIDTH ON MOBILES ///////////////
 */
 
-document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+if (document.querySelector("#dd_cols_mobile")) {
+    document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+}
 
 function doColMobileWidth() {
     let opt = document.querySelector("#dd_cols_mobile").value;
