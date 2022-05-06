@@ -19,6 +19,8 @@ let section_theme = "section.theme-light."+section_class;
 // Number column blocks to loop through
 let col_count = iframe.contentWindow.document.querySelectorAll(col_no).length;
 
+sessionStorage.setItem('col-count', col_count);
+
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
@@ -36,13 +38,13 @@ divs.forEach(el => el.addEventListener('click', event => {
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
     
-    if (iframe.contentWindow.document.querySelector('.col-3') || iframe.contentWindow.document.querySelector('.col-4') ) {
-        // Work with upper block
-        if (menuId==="2") {
-            window.scrollTo(0,0);
-        }
+    if (iframe.contentWindow.document.querySelector('.col-1') ) {
+        // // Work with upper block
+        // if (menuId==="2") {
+        //     window.scrollTo(0,0);
+        // }
         // Work with columns
-        else if (menuId==="3") {
+        if (menuId==="3") {
             let el = iframe.contentWindow.document.querySelector(col_no);
             el.scrollIntoView(true);
         }
@@ -321,7 +323,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
                 break;
             }
         }
-        // console.log('color_code: '+color_code);
 
         if (iframe.contentWindow.document.querySelector("section.theme-light")) {
             section_theme = "section.theme-light."+section_class;
@@ -378,7 +379,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             sub_string = col_no+" { background-color";
             doUpdateArray(sub_string,newStyle);
 
-            // Set sessiion storage
+            // Set session storage
             if ( ((iframe.contentWindow.document.querySelector("section.theme-light")) && (color_code==="--white-000")) || ((iframe.contentWindow.document.querySelector("section.theme-dark")) && (color_code==="--slate-900")) ) {
                 sessionStorage.setItem('col-background', 'default');
                 RemoveColPadding();
@@ -516,7 +517,7 @@ function RemoveColPadding() {
 }    
 
 /*
-//////////////// GRID-0 AND GRID-2-SPLIT: SECTION WIDTH ///////////////
+//////////////// SECTION WIDTH ///////////////
 */
 
 document.querySelector("#dd_text_width").addEventListener("change", doWidthDesktopSection);
@@ -552,7 +553,7 @@ function deleteSectionWidth() {
 }
 
 /*
-//////////////// GRID-2, GRID-3 and GRID-4: UPPER COLUMN WIDTH ///////////////
+//////////////// UPPER COLUMN WIDTH ///////////////
 */
 
 document.querySelector("#dd_upper_block_width").addEventListener("change", doUpperBlockWidth);
@@ -564,7 +565,6 @@ function doUpperBlockWidth() {
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
         iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
-
     }
 
     else if (opt==="1") {
@@ -581,7 +581,7 @@ function doUpperBlockWidth() {
 }
 
 /*
-//////////////// GRID-2, GRID-3 and GRID-4: UPPER COLUMN ALIGN ///////////////
+//////////////// UPPER COLUMN ALIGN ///////////////
 */
 
 if (document.querySelector("#switch-upper-block-align")) {
@@ -607,26 +607,14 @@ function doUpperBlockAlign() {
 }
 
 /*
-//////////////// ALL GRIDS: UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
 
-    // Single column
-    if (iframe.contentWindow.document.querySelector("section > h2")) {
-        if (!document.getElementById("cb_upperLabelOn").checked) {
-            removeUpperLabel();
-        }
-        else {
-            iframe.contentWindow.document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
-            document.getElementById("btn_upper_label").disabled=false;
-        }
-    }
-
-    // 2, 3 or 4-Column
-    else if (iframe.contentWindow.document.querySelector("section .col-1")) {
+    if (iframe.contentWindow.document.querySelector("section .col-1")) {
         if (!document.getElementById("cb_upperLabelOn").checked) {
             removeUpperLabel();
         }
@@ -638,6 +626,8 @@ function doUpperLabel() {
             newUpperLabelDiv.classList.add("container-upper-label"); 
             iframe.contentWindow.document.querySelector("section .col-1").prepend(newUpperLabelDiv);
             iframe.contentWindow.document.querySelector("section .col-1 .container-upper-label span").innerText = "CATEGORY";
+            iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<div class=\"container-upper-label\">", "\n\t\t\t<div class=\"container-upper-label\">\n\t\t\t\t");
+            iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<\/span>", "<\/span>\n\t\t\t");
             document.getElementById("btn_upper_label").disabled=false;
         }
     }
@@ -645,17 +635,20 @@ function doUpperLabel() {
 
 function removeUpperLabel() {
     if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
-    const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
+        const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
         upperLabel.remove();
-        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("\t\t\t\n", "");
         document.getElementById("btn_upper_label").disabled=true;
+        if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
+            removeUpperBlock();
+        }
     }
 }
 
-
 /*
-//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
+//////////////// UPPER BLOCK: MAIN HEADING H2 ///////////////
 */
+
 if (document.querySelector("#cb_upperH2On")) {
     document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
 }
@@ -667,8 +660,8 @@ function doUpperH2() {
     else {
         removeUpperH2();
         document.getElementById("btn_upper_head").disabled=false;
-        const newH2 = document.createElement("h2");
-        const newContent = document.createTextNode("Nice section heading");
+        const newH2 = iframe.contentWindow.document.createElement("h2");
+        const newContent = iframe.contentWindow.document.createTextNode("Nice section heading");
         newH2.appendChild(newContent);
         const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
         if (!iframe.contentWindow.document.querySelector('.container-upper-label')) {
@@ -685,60 +678,61 @@ function removeUpperH2() {
         document.getElementById("btn_upper_head").disabled=true;
         const elH2 = iframe.contentWindow.document.querySelector('.col-1 h2');
         elH2.remove();
+        if (iframe.contentWindow.document.querySelector('section .col-1.text-center')) {
+            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1 text-center\">\n\t\t\t', '<div class=\"col-1 text-center\">');
+        }
+        if (iframe.contentWindow.document.querySelector('section .col-1')) {
+            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
+        }
     }
 }
 
 /*
-//////////////// UPPER H3 SUB-HEADINGS ////////////////////
+//////////////// UPPER H3 SUB-HEADING ////////////////////
 */
 
 document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
 
 function doUpperH3() {
-
-    // Single column
-    if (iframe.contentWindow.document.querySelector("section > h2")) {
-        if (!iframe.contentWindow.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
-            document.getElementById("btn_subhead").disabled=false;
-        }            
+    if (!document.getElementById("cb_upperH3On").checked) {
+        removeUpperH3();
     }
-
-    // 2, 3 or 4-Column
-    else if (iframe.contentWindow.document.querySelector("section .col-1")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            const newSubHead = document.createElement("h3");
-            const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
-            newSubHead.appendChild(newContent);
-            const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
-            currentDiv.append(newSubHead);
-            document.getElementById("btn_upper_subhead").disabled=false;
-        }
+    else {
+        removeUpperH3();
+        const newSubHead = document.createElement("h3");
+        const newContent = document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
+        newSubHead.appendChild(newContent);
+        const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
+        currentDiv.append(newSubHead);
+        document.getElementById("btn_upper_subhead").disabled=false;
     }
 }
+
 
 function removeUpperH3() {
     if (iframe.contentWindow.document.querySelector("section > h3")) {
         iframe.contentWindow.document.querySelector("section > h3").remove();
         document.getElementById("btn_subhead").disabled=true;
     }
+
+    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
+        iframe.contentWindow.document.querySelector("section.cols-2-split .col-2 h3").remove();
+        document.getElementById("btn_subhead").disabled=true;
+    }
     else if (iframe.contentWindow.document.querySelector("section .col-1 h3")) {
         iframe.contentWindow.document.querySelector("section .col-1 h3").remove();
         document.getElementById("btn_upper_subhead").disabled=true;
     }
+    if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/h2>\n\t\t\t', '<\/h2>');
+    }
+    // if (document.querySelector('section .col-1')) {
+    //     document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
+    // }
 }
 
-
 /*
-//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
+//////////////// UPPER BLOCK ///////////////
 */
 
 document.querySelector("#cb_upperBlockOn").addEventListener("change", doUpperBlock);
@@ -777,143 +771,32 @@ function removeUpperBlock() {
     if (iframe.contentWindow.document.querySelector('.col-1')) {
         const elCol1 = iframe.contentWindow.document.querySelector('.col-1');
         elCol1.remove();
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("\n\n\t\t<div class="+col_no+">", "<div class="+col_no+">");
-    }
-    // Disable properties
-    document.getElementById("dd_upper_block_width").disabled=true;
-    document.getElementById("radio-upper-align-left").disabled=true;
-    document.getElementById("radio-upper-align-left").checked=false;
-    document.getElementById("radio-upper-align-center").disabled=true;
-    document.getElementById("radio-upper-align-center").checked=false;
-    document.getElementById("cb_upperBlockOn").checked=false;
-    document.querySelector("#content-2 .svg-icon-desktop").style.fill='var(--gray-600)';
-    document.getElementById("cb_upperLabelOn").disabled=true;
-    document.getElementById("cb_upperLabelOn").checked=false;
-    document.getElementById("cb_upperH2On").disabled=true;
-    document.getElementById("cb_upperH2On").checked=false;
-    document.getElementById("cb_upperH3On").disabled=true;
-    document.getElementById("cb_upperH3On").checked=false;
-    document.getElementById("btn_upper_label").disabled=true;
-    document.getElementById("btn_upper_head").disabled=true;
-    document.getElementById("btn_upper_subhead").disabled=true;
-}
+        col_no = col_no.slice(1)
+        iframe.contentWindow.document.querySelector('section').innerHTML = 
+        iframe.contentWindow.document.querySelector('section').innerHTML.replace("\n\n\t\t<div class=\""+col_no+"\">", "<div class=\""+col_no+"\">");
 
-/*
-//////////////// UPPER BLOCK GRID-3 AND GRID-4: MAIN HEADING H2 ///////////////
-*/
-
-document.querySelector("#cb_upperH2On").addEventListener("change", doUpperH2);
-
-
-function doUpperH2() {
-    if (!document.getElementById("cb_upperH2On").checked) {
-        removeUpperH2();
-    }
-    else {
-        removeUpperH2();
-        document.getElementById("btn_upper_head").disabled=false;
-        const newH2 = iframe.contentWindow.document.createElement("h2");
-        const newContent = iframe.contentWindow.document.createTextNode("Nice section heading");
-        newH2.appendChild(newContent);
-        const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
-        if (!iframe.contentWindow.document.querySelector('.container-upper-label')) {
-            currentDiv.prepend(newH2);
-        }
-        else {
-            iframe.contentWindow.document.querySelector(".container-upper-label").insertAdjacentHTML("afterend", "<h2>Nice section heading</h2>"); 
-        }
-    }
-}
-
-function removeUpperH2() {
-    if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
+        // Disable properties
+        document.getElementById("dd_upper_block_width").disabled=true;
+        document.getElementById("radio-upper-align-left").disabled=true;
+        document.getElementById("radio-upper-align-left").checked=false;
+        document.getElementById("radio-upper-align-center").disabled=true;
+        document.getElementById("radio-upper-align-center").checked=false;
+        document.getElementById("cb_upperBlockOn").checked=false;
+        document.querySelector("#content-2 .svg-icon-desktop").style.fill='var(--gray-600)';
+        document.getElementById("cb_upperLabelOn").disabled=true;
+        document.getElementById("cb_upperLabelOn").checked=false;
+        document.getElementById("cb_upperH2On").disabled=true;
+        document.getElementById("cb_upperH2On").checked=false;
+        document.getElementById("cb_upperH3On").disabled=true;
+        document.getElementById("cb_upperH3On").checked=false;
+        document.getElementById("btn_upper_label").disabled=true;
         document.getElementById("btn_upper_head").disabled=true;
-        const elH2 = iframe.contentWindow.document.querySelector('.col-1 h2');
-        elH2.remove();
-        if (iframe.contentWindow.document.querySelector('section .col-1.text-center')) {
-            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1 text-center\">\n\t\t\t', '<div class=\"col-1 text-center\">');
-        }
-        if (iframe.contentWindow.document.querySelector('section .col-1')) {
-            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
-        }
-    }
-}
-
-/*
-//////////////// H3 SUB-HEADINGS ////////////////////
-*/
-
-document.querySelector("#cb_upperH3On").addEventListener("change", doUpperH3);
-
-function doUpperH3() {
-
-    // Single column
-    if (iframe.contentWindow.document.querySelector("section > h2")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            // document.querySelector("label[for='cb_upperH3On']").style.color = "#fff";
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", assets_header_h3);
-            document.getElementById("btn_subhead").disabled=false;
-        }            
-    }
-
-    // 2-Column split
-    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            if (!iframe.contentWindow.document.querySelector(".cols-2-split .col-2 h3")) {
-                iframe.contentWindow.document.querySelector(".cols-2-split .col-2 > p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
-                document.getElementById("btn_subhead").disabled=false;
-            }
-            else {
-                return
-            }
-        }
-    }
-
-    // 2, 3 or 4-Column
-    else if (iframe.contentWindow.document.querySelector("section .col-1")) {
-        if (!document.getElementById("cb_upperH3On").checked) {
-            removeUpperH3();
-        }
-        else {
-            removeUpperH3();
-            const newSubHead = iframe.contentWindow.document.createElement("h3");
-            const newContent = iframe.contentWindow.document.createTextNode("Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.");
-            newSubHead.appendChild(newContent);
-            const currentDiv = iframe.contentWindow.document.querySelector('.col-1');
-            currentDiv.append(newSubHead);
-            document.getElementById("btn_upper_subhead").disabled=false;
-        }
-    }
-}
-
-function removeUpperH3() {
-    if (iframe.contentWindow.document.querySelector("section > h3")) {
-        iframe.contentWindow.document.querySelector("section > h3").remove();
-        document.getElementById("btn_subhead").disabled=true;
-    }
-
-    else if (iframe.contentWindow.document.querySelector("section.cols-2-split")) {
-        iframe.contentWindow.document.querySelector("section.cols-2-split .col-2 h3").remove();
-        document.getElementById("btn_subhead").disabled=true;
-    }
-    else if (iframe.contentWindow.document.querySelector("section .col-1 h3")) {
-        iframe.contentWindow.document.querySelector("section .col-1 h3").remove();
         document.getElementById("btn_upper_subhead").disabled=true;
+        // Restore .col-n
+        col_no = "."+col_no;
     }
-    if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/h2>\n\t\t\t', '<\/h2>');
-    }
-    // if (document.querySelector('section .col-1')) {
-    //     document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
-    // }
 }
+
 
 /*
 //////////////// COLUMNS ALIGN ///////////////
@@ -966,67 +849,79 @@ function doColMobileWidth() {
 
 document.querySelector("#cb_h3").addEventListener("change", doColH3);
 
-    function doColH3() {
-        if (!document.getElementById("cb_h3").checked) {
-            removeColH3();
-        }
+function doColH3() {
+    if (!document.getElementById("cb_h3").checked) {
+        removeColH3();
+    }
 
+    else {
+        removeColH3();
+        document.getElementById("btn_col_subhead").disabled=false;
+
+        // Test for .col-1. Affects div:nth-of-type loop.
+        let counterOffset;
+        if (iframe.contentWindow.document.querySelector("section > .col-1")) {
+            counterOffset = 2;
+        }
         else {
-            removeColH3();
-            document.getElementById("btn_col_subhead").disabled=false;
-            
-            // Test for figures (images or icons)
-            if (iframe.contentWindow.document.querySelector(col_no+" figure")) {
-                const obj_fig = iframe.contentWindow.document.querySelectorAll('figure');
-                for (let i=2 ; i <= obj_fig.length+1 ; i++) {
-                    el_fig = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") figure");
-                    el_fig.insertAdjacentHTML("afterend", content_h3[i]);
-               }
-            }
-            
-            // Test for paragraphs
-            else if (iframe.contentWindow.document.querySelector(col_no+" p")) {
-                const obj_para = iframe.contentWindow.document.querySelectorAll(col_no+" p");
-                let el_para;
-                for (let i=2 ; i <= obj_para.length+1 ; i++) {
-                    el_para = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") p");
-                    el_para.insertAdjacentHTML("beforebegin", content_h3[i]);
-               }
-            }
+            counterOffset = 1;
+        }
 
-            // Test for lists
-            else if (iframe.contentWindow.document.querySelector(col_no+" ul")) {
-                const obj_ul = iframe.contentWindow.document.querySelectorAll(col_no+" ul");
-                let el_ul;
-                for (let i=2 ; i <= obj_ul.length+1 ; i++) {
-                    el_ul = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") ul");
-                    el_ul.insertAdjacentHTML("beforebegin", content_h3[i]);
-               }
-            }
+        // Count column blocks
+        let col_count = +parseInt(sessionStorage.getItem('col-count'));
 
-            // No pics, icons, paras, lists
-            else {
-                const obj_col = iframe.contentWindow.document.querySelectorAll(col_no);
-                let el_col;
-                for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-                    el_col = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+")");
-                    el_col.innerHTML = content_h3[i];
-                }
+        // Test for figures (images or icons)
+        if (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) {
+            // Loop through figures
+            let el_fig;
+            for (let i = 0; i < col_count; i++) {
+                el_fig = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[i+counterOffset]+') > figure');
+                el_fig.insertAdjacentHTML("afterend", content_h3[i]);
+            }
+        }
+            
+        // Test for paragraphs
+        else if (iframe.contentWindow.document.querySelector(col_no+" p")) {
+            // Loop through paragraphs
+            let el_para;
+            for (let j = 0; j < col_count; j++) {
+                el_para = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[j+counterOffset]+') > p');                
+                el_para.insertAdjacentHTML("beforebegin", content_h3[j]);
+            }
+        }
+
+        // Test for lists
+        else if (iframe.contentWindow.document.querySelector("section > "+col_no+" > ul")) {
+            // Loop through lists
+            let el_ul;
+            for (let k = 0; k < col_count; k++) {
+                el_ul = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[k+counterOffset]+') > ul');
+                el_ul.insertAdjacentHTML("beforebegin", content_h3[k]);
+            }
+        }
+
+        // No pics, icons, paras, lists
+        else {
+            // Loop through columns
+            let el_col;
+            for (let n = 0 ; n < col_count; n++) {
+                el_col = iframe.contentWindow.document.querySelector(col_no+":nth-child("+n+")");
+                el_col.innerHTML = content_h3[n];
             }
         }
     }
+}
 
-    function removeColH3() {
-        if (iframe.contentWindow.document.querySelector(col_no+" h3")) {
-            document.getElementById("btn_col_subhead").disabled=true;
-            const elH3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
-            for (let i = 0 ; i < elH3.length ; i++) {
-                elH3[i].remove();
-            }
-            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>');  
+function removeColH3() {
+    if (iframe.contentWindow.document.querySelector(col_no+" h3")) {
+        document.getElementById("btn_col_subhead").disabled=true;
+        const elH3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
+        for (let i = 0 ; i < elH3.length ; i++) {
+            elH3[i].remove();
         }
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>');  
     }
-
+}
 
 /*
 //////////////// COLUMN PARAGRAPHS OR LISTS ////////////////////
@@ -1048,43 +943,56 @@ function doText() {
         document.querySelector("#btn_col_text").disabled=false;
         // Do Paragraphs
         removeText();
+
+        // Test for .col-1. Affects div:nth-of-type loop.
+        let counterOffset;
+        if (iframe.contentWindow.document.querySelector("section > .col-1")) {
+            counterOffset = 2;
+        }
+        else {
+            counterOffset = 1;
+        }
+
+        // Count column blocks
+        let col_count = +parseInt(sessionStorage.getItem('col-count'));
+
         // Test for figures AND h3 column headings
-        if ( (iframe.contentWindow.document.querySelector(col_no+" figure")) && (iframe.contentWindow.document.querySelector(col_no+" h3")) ) {
-            const obj_h3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
+        if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
+            // Loop through h3 sub-headings
             let el_h3;
-            for (let i=2 ; i <= obj_h3.length+1 ; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") h3");
+            for (let i = 0; i < col_count; i++) {
+                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[i+counterOffset]+') > h3');
                 el_h3.insertAdjacentHTML("afterend", content_paras[i]);
            }
         }
         
         // Test for figures (images or icons) and NO h3 column headings
-        else if ( (iframe.contentWindow.document.querySelector(col_no+" figure")) && (!iframe.contentWindow.document.querySelector(col_no+" h3")) ) {
-            const obj_fig = iframe.contentWindow.document.querySelectorAll(col_no+" figure");
+        else if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (!iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
+            // Loop through figures
             let el_fig;
-            for (let i=2 ; i <= obj_fig.length+1 ; i++) {
-                el_fig = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") figure");
-                el_fig.insertAdjacentHTML("afterend", content_paras[i]);
+            for (let j = 0; j < col_count; j++) {
+                el_fig = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[j+counterOffset]+') > figure');
+                el_fig.insertAdjacentHTML("afterend", content_paras[j]);
            }
         }
 
         // Test for h3 column headings and NO figures
-        else if ( (!iframe.contentWindow.document.querySelector(col_no+" figure")) && (iframe.contentWindow.document.querySelector(col_no+" h3")) ) {
-            const obj_h3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
+        else if ( (!iframe.contentWindow.document.querySelector("section > "+col_no+" figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
+            // Loop through h3 sub-headings
             let el_h3;
-            for (let i=2 ; i <= obj_h3.length+1 ; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_paras[i]);
+            for (let k = 0; k < col_count; k++) {
+                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[k+counterOffset]+') > h3');
+                el_h3.insertAdjacentHTML("afterend", content_paras[k]);
            }
         }
 
         // No figures AND no column headings
-        else if ( (!iframe.contentWindow.document.querySelector(col_no+" figure")) && (!iframe.contentWindow.document.querySelector(col_no+" h3")) ) {
-            const obj_col = iframe.contentWindow.document.querySelectorAll(col_no);
+        else if ( (!iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (!iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
+            // Loop through columns
             let el_col;
-            for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-                el_col = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+")");
-                el_col.innerHTML = content_paras[i];
+            for (let n = 0; n < col_count; n++) {
+                el_col = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[n+counterOffset]);
+                el_col.innerHTML = content_paras[n];
             }
         }
     }
@@ -1092,43 +1000,56 @@ function doText() {
     else if (opt==="2") {
         removeText();
         document.querySelector("#btn_col_text").disabled=false;
+
+        // Test for .col-1. Affects div:nth-of-type loop.
+        let counterOffset;
+        if (iframe.contentWindow.document.querySelector("section > .col-1")) {
+            counterOffset = 2;
+        }
+        else {
+            counterOffset = 1;
+        }
+
+        // Count column blocks
+        let col_count = +parseInt(sessionStorage.getItem('col-count'));
+
         // Test for figures AND h3 column headings
-        if ( (iframe.contentWindow.document.querySelector(col_no+" figure")) && (iframe.contentWindow.document.querySelector(col_no+" h3")) ) {
-            const obj_h3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
+        if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" h3")) ) {
+            // Loop through h3 sub-headings
             let el_h3;
-            for (let i=2 ; i <= obj_h3.length+1 ; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") h3");
+            for (let i = 0; i < col_count; i++) {
+                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[i+counterOffset]+') > h3');
                 el_h3.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
         
         // Test for figures (images or icons)
-        else if (iframe.contentWindow.document.querySelector(col_no+" figure")) {
-            const obj_fig = iframe.contentWindow.document.querySelectorAll(col_no+" figure");
+        else if (iframe.contentWindow.document.querySelector("section > "+col_no+" figure")) {
+            // Loop through figures
             let el_fig;
-            for (let i=2 ; i <= obj_fig.length+1 ; i++) {
-                el_fig =  iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") figure");
-                el_fig.insertAdjacentHTML("afterend", content_list[i]);
+            for (let j = 0; j < col_count; j++) {
+                el_fig =  iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[j+counterOffset]+') > figure');
+                el_fig.insertAdjacentHTML("afterend", content_list[j]);
            }
         }
 
         // Test for h3 column headings
-        else if (iframe.contentWindow.document.querySelector(col_no+" h3")) {
-            const obj_h3 = iframe.contentWindow.document.querySelectorAll(col_no+" h3");
+        else if (iframe.contentWindow.document.querySelector("section > "+col_no+" h3")) {
+            // Loop through h3 sub-headings
             let el_h3;
-            for (let i=2 ; i <= obj_h3.length+1 ; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+") h3");
-                el_h3.insertAdjacentHTML("afterend", content_list[i]);
+            for (let k = 0; k < col_count; k++) {
+                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[k+counterOffset]+') > h3');
+                el_h3.insertAdjacentHTML("afterend", content_list[k]);
            }
         }
 
         // No pics, icons, h3 headings
         else {
-            const obj_col = iframe.contentWindow.document.querySelectorAll(col_no);
+            // Loop through columns
             let el_col;
-            for (let i=2 ; i <= parseInt(obj_col.length)+1 ; i++) {
-                el_col = iframe.contentWindow.document.querySelector(col_no+":nth-child("+i+")");
-                el_col.innerHTML =  content_list;
+            for (let n = 0; n < col_count; n++) {
+                el_col = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[n+counterOffset]);
+                el_col.innerHTML = content_list;
             }
         }
     }
@@ -1246,7 +1167,6 @@ function doColButtons() {
     else if (iframe.contentWindow.document.querySelector('.col-3')) { col_no = ".col-3" }
     else if (iframe.contentWindow.document.querySelector('.col-4')) { col_no = ".col-4" }
 
-    // console.log("col_no is: "+col_no)
     if (!document.getElementById("cb_colButtonsOn").checked) {
         removeColButtons();
         disableColButtons();
@@ -1633,6 +1553,8 @@ function removeVisual() {
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
+
+    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll("<div class=\"col-3\">\n\t\t\t", "<div class=\"col-3\">");
     // Remove any corner or shadow properties
     iframe.contentWindow.document.querySelector('section').classList.remove("fig-corners-soft");
     iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");

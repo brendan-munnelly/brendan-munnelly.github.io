@@ -3,15 +3,17 @@ document.addEventListener("DOMContentLoaded", checkViewportWidth);
 
 function checkViewportWidth() {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    const elemMenuList = document.querySelector('.container-menu');
 
-    if (vw >= 1025) {
-        elemMenuList.classList.add("menu-desktop");
-        elemMenuList.classList.remove("menu-mobile");
-    }
-    else {
-        elemMenuList.classList.add("menu-mobile");
-        elemMenuList.classList.remove("menu-desktop");
+    if (document.querySelector('.container-menu')) {
+        const elemMenuList = document.querySelector('.container-menu');
+        if (vw >= 1025) {
+            elemMenuList.classList.add("menu-desktop");
+            elemMenuList.classList.remove("menu-mobile");
+        }
+        else {
+            elemMenuList.classList.add("menu-mobile");
+            elemMenuList.classList.remove("menu-desktop");
+        }
     }
 }
 
@@ -19,8 +21,10 @@ function checkViewportWidth() {
 window.onresize = checkViewportWidth;
 
 // Show/hide fly-out mobile menu -->
-document.querySelector('.container-menu .item-icon').addEventListener('click', toggleMobileMenu);
 
+if (document.querySelector('.container-menu .item-icon')) {
+    document.querySelector('.container-menu .item-icon').addEventListener('click', toggleMobileMenu);
+}
   
 function toggleMobileMenu() {
     //toggle hamburger icon
@@ -45,9 +49,15 @@ function toggleMobileMenu() {
 }
 
 // On-scroll colours
-window.onscroll = function() {swapMenuStyle()};
-const el_menu = document.querySelector('.container-menu');
-const el_menu_onscroll = el_menu.offsetTop +300;
+
+if (document.querySelector('.container-menu')) {
+    window.onscroll = function() {swapMenuStyle()};
+}
+
+if (document.querySelector('.container-menu')) {
+    const el_menu = document.querySelector('.container-menu');
+    const el_menu_onscroll = el_menu.offsetTop +300;
+}
 
 function swapMenuStyle() {
 	if ( window.pageYOffset > el_menu_onscroll) {
@@ -59,7 +69,9 @@ function swapMenuStyle() {
 }
 
 // Check initial menu scroll position
-document.addEventListener("DOMContentLoaded", checkMenuScrollPosition);
+if (document.querySelector('.container-menu')) {
+    document.addEventListener("DOMContentLoaded", checkMenuScrollPosition);
+}
 
 function checkMenuScrollPosition() {
     var y = window.scrollY;
