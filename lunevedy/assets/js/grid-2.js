@@ -749,11 +749,12 @@ function doUpperBlock() {
         iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace('', '\n\t\t\t<h2>Nice section heading</h2>\n\t\t\t<h3>Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.</h3>\n\t\t');
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class="col-1 text-center">', '\n\n\t\t<div class="col-1 text-center">');
         // Enable properties
-        document.getElementById("cb_upper_block").checked=true;
+        document.getElementById("dd_upper_block_width").disabled=false;
         document.getElementById("rb_upper_align_left").disabled=false;
         document.getElementById("rb_upper_align_left").checked=false;
-        document.getElementById("rb_upper_align_center").disabled=false;
         document.getElementById("rb_upper_align_center").checked=true;
+        document.getElementById("rb_upper_align_center").disabled=false;
+        document.getElementById("dd_upper_block_width").disabled=false;
 
         document.getElementById("cb_upper_label").disabled=false;
         document.getElementById("cb_upper_label").checked=false;
@@ -783,6 +784,7 @@ function removeUpperBlock() {
         document.getElementById("rb_upper_align_center").disabled=true;
         document.getElementById("rb_upper_align_center").checked=false;
         document.getElementById("dd_upper_block_width").disabled=true;
+
         document.querySelector("#content-2 .svg-icon-desktop").style.fill='var(--gray-600)';
         document.getElementById("cb_upper_label").disabled=true;
         document.getElementById("cb_upper_label").checked=false;
@@ -1210,6 +1212,103 @@ function removeColButtons() {
 }
 
 /*
+//////////////// BUTTONS: TYPE ////////////////////
+*/
+
+document.querySelector("#dd_buttons_type").addEventListener("change", doButtonsType);
+
+function doButtonsType() {
+    let opt = document.querySelector("#dd_buttons_type").value;
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+    
+    // Solid
+    if (opt==="0") {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-outline");
+            el_btn.classList.remove("btn-link");
+            el_btn.classList.add("btn-primary");
+        }
+    }
+
+    // Outline
+    else if (opt==="1") {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-primary");
+            el_btn.classList.remove("btn-link");
+            el_btn.classList.add("btn-outline");
+        }
+    }
+
+    // Link
+    else if (opt==="2") {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-primary");
+            el_btn.classList.remove("btn-outline");
+            el_btn.classList.add("btn-link");
+        }
+    }
+}
+
+/*
+//////////////// BUTTONS: STYLE ////////////////////
+*/
+
+document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
+
+function doButtonsStyle() {
+    let opt = document.querySelector("#dd_buttons_style").value;
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+    
+    // remove
+    if (opt==="0") {
+        removeButtonsStyle();
+    }
+
+    // soft
+    else if (opt==="1") {
+        removeButtonsStyle();
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-soft");
+        }
+    }
+
+    // rounded
+    else if (opt==="2") {
+        removeButtonsStyle();
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-rounded");
+        }
+    }
+}
+
+function removeButtonsStyle() {
+    let opt = document.querySelector("#dd_buttons_style").value;
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+    // Loop through buttons
+    for (let i = 0; i < col_count; i++) {        
+        el_btn = obj_btn[i];
+        el_btn.classList.remove("btn-soft");
+        el_btn.classList.remove("btn-rounded");
+    }
+}
+
+/*
 //////////////// BUTTONS: ICONS POSITION ////////////////////
 */
 
@@ -1273,103 +1372,6 @@ function swapButtonIcons() {
     }
 }
 
-/*
-//////////////// BUTTONS: TYPE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_type").addEventListener("change", doButtonsType);
-
-function doButtonsType() {
-    let opt = document.querySelector("#dd_buttons_type").value;
-    const col_count = parseInt(sessionStorage.getItem('col-count'));
-    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
-    let el_btn;
-    
-    // Solid
-    if (opt==="0") {
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-outline");
-            el_btn.classList.remove("btn-link");
-            el_btn.classList.add("btn-primary");
-        }
-    }
-
-    // Outline
-    else if (opt==="1") {
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-primary");
-            el_btn.classList.remove("btn-link");
-            el_btn.classList.add("btn-outline");
-        }
-    }
-
-    // Link
-    else if (opt==="2") {
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-primary");
-            el_btn.classList.remove("btn-outline");
-            el_btn.classList.add("btn-link");
-        }
-    }
-}
-
-
-/*
-//////////////// BUTTONS: STYLE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
-
-function doButtonsStyle() {
-    let opt = document.querySelector("#dd_buttons_style").value;
-    const col_count = parseInt(sessionStorage.getItem('col-count'));
-    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
-    let el_btn;
-    
-    // remove
-    if (opt==="0") {
-        removeButtonsStyle();
-    }
-
-    // soft
-    else if (opt==="1") {
-        removeButtonsStyle();
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.add("btn-soft");
-        }
-    }
-
-    // rounded
-    else if (opt==="2") {
-        removeButtonsStyle();
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.add("btn-rounded");
-        }
-    }
-}
-
-function removeButtonsStyle() {
-    let opt = document.querySelector("#dd_buttons_style").value;
-    const col_count = parseInt(sessionStorage.getItem('col-count'));
-    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
-    let el_btn;
-    // Loop through buttons
-    for (let i = 0; i < col_count; i++) {        
-        el_btn = obj_btn[i];
-        el_btn.classList.remove("btn-soft");
-        el_btn.classList.remove("btn-rounded");
-    }
-}
 
 /*
 //////////////// BUTTONS: WIDTH ///////////////
@@ -1399,7 +1401,7 @@ function doBtnWidth() {
 }
 
 /*
-//////////////// BUTTONS: STYLE ////////////////////
+//////////////// BUTTONS: SIZE ////////////////////
 */
 
 document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsSize);
@@ -1440,6 +1442,7 @@ function doButtonsSize() {
     }    
 }
 
+
 function enableColButtons() {
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
@@ -1451,16 +1454,6 @@ function enableColButtons() {
     document.getElementById("dd_buttons_type").value="0";
     document.getElementById("dd_buttons_style").value="0";
     document.getElementById("dd_buttons_style").disabled=false;
-    console.log("col_no: "+col_no);
-    if (col_no === '.col-4') {
-        document.getElementById("dd_buttons_size").value="0";
-        console.log("Button size to small.");
-    }
-    else {
-        document.getElementById("dd_buttons_size").value="1";
-        console.log("Button size to regualr.");
-    }
-
     document.getElementById("dd_buttons_size").value="1";
     document.getElementById("dd_buttons_size").disabled=false;
     document.getElementById("rd-btns-icons-left").checked=true;
