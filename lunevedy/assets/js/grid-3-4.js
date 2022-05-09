@@ -1186,6 +1186,9 @@ function addColButtons(el_cols,btn_class) {
     const el_btn = document.createElement('a');
     el_btn.setAttribute("href", "#");
     el_btn.setAttribute("class", "btn "+btn_class);
+    if (col_no === '.col-4') {
+        el_btn.classList.add("btn-small");
+    }
     const el_icon = document.createElement('i');
     el_icon.setAttribute("class", "fas fa-shopping-cart");
     el_btn.append(el_icon);
@@ -1451,6 +1454,8 @@ function enableColButtons() {
     document.getElementById("dd_buttons_type").value="0";
     document.getElementById("dd_buttons_style").value="0";
     document.getElementById("dd_buttons_style").disabled=false;
+    document.getElementById("dd_buttons_size").disabled=false;
+
     console.log("col_no: "+col_no);
     if (col_no === '.col-4') {
         document.getElementById("dd_buttons_size").value="0";
@@ -1458,11 +1463,8 @@ function enableColButtons() {
     }
     else {
         document.getElementById("dd_buttons_size").value="1";
-        console.log("Button size to regualr.");
+        console.log("Button size to regular.");
     }
-
-    document.getElementById("dd_buttons_size").value="1";
-    document.getElementById("dd_buttons_size").disabled=false;
     document.getElementById("rd-btns-icons-left").checked=true;
     document.getElementById("rd-btns-icons-left").disabled=false;
     document.getElementById("rd-btns-icons-right").disabled=false;
