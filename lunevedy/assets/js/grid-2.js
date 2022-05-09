@@ -1091,7 +1091,7 @@ function doColShadows() {
         document.getElementById("cb_col_borders").checked=false;
         document.getElementById("cb_col_corners").disabled=false; 
         document.getElementById("cb_col_corners").checked=false;
-        document.getElementById("cb_col_shadows").disabled=true; 
+        // document.getElementById("cb_col_shadows").disabled=true; 
         document.getElementById("cb_col_shadows").checked=false; 
         RemoveColPadding();
     }
