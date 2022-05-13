@@ -39,12 +39,12 @@ divs.forEach(el => el.addEventListener('click', event => {
     elItem_show.classList.remove("dropdown-hidden"); 
     
     if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        // // Work with upper block
-        // if (menuId==="2") {
-        //     window.scrollTo(0,0);
-        // }
+        // Work with upper block
+        if (menuId==="2") {
+            window.scrollTo(0,0);
+        }
         // Work with columns
-        if (menuId==="3") {
+        else if (menuId==="3") {
             let el = iframe.contentWindow.document.querySelector(col_no);
             el.scrollIntoView(true);
         }
@@ -1438,6 +1438,61 @@ function doButtonsSize() {
     }    
 }
 
+/*
+//////////////// BUTTONS: SHADOW ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_shadow").addEventListener("change", doBtnShadow);
+
+function doBtnShadow() {
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+
+    if (!document.getElementById("cb_col_buttons_shadow").checked) {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-shadow");
+        }
+    }
+    else {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-shadow");
+        }
+    }
+}
+
+/*
+//////////////// BUTTONS: UPPERCASE ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_uppercase").addEventListener("change", doBtnUCase);
+
+function doBtnUCase() {
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+
+    if (!document.getElementById("cb_col_buttons_uppercase").checked) {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-uppercase");
+        }
+    }
+    else {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-uppercase");
+        }
+    }
+}
+
+
 function enableColButtons() {
     document.getElementById("btn_a_primary_passive_text").disabled=false;
     document.getElementById("btn_a_primary_active_text").disabled=false;
@@ -1462,6 +1517,10 @@ function enableColButtons() {
     document.getElementById("rd-btns-icons-none").disabled=false;
     document.getElementById("cb_col_buttons_width").disabled=false;
     document.getElementById("cb_col_buttons_width").checked=false;
+    document.getElementById("cb_col_buttons_shadow").disabled=false;
+    document.getElementById("cb_col_buttons_shadow").checked=false;
+    document.getElementById("cb_col_buttons_uppercase").disabled=false;
+    document.getElementById("cb_col_buttons_uppercase").checked=false;
 }
 
 function disableColButtons() {
@@ -1485,6 +1544,10 @@ function disableColButtons() {
     document.getElementById("dd_buttons_size").disabled=true;
     document.getElementById("cb_col_buttons_width").disabled=true;
     document.getElementById("cb_col_buttons_width").checked=false;
+    document.getElementById("cb_col_buttons_shadow").disabled=true;
+    document.getElementById("cb_col_buttons_shadow").checked=false;
+    document.getElementById("cb_col_buttons_uppercase").disabled=true;
+    document.getElementById("cb_col_buttons_uppercase").checked=false;
 }
 
 /*

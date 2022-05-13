@@ -935,67 +935,64 @@ document.querySelector("#dd_text").addEventListener("change", doText);
 function doText() {
 
     let opt = document.querySelector("#dd_text").value;
-   
+    // Count column blocks
+    let col_count = parseInt(sessionStorage.getItem('col-count')); 
+    
     // remove
     if (opt==="0") {
         document.querySelector("#btn_col_text").disabled=true;
         removeText();
     }
     
+    // paragraphs
     else if (opt==="1") {
         document.querySelector("#btn_col_text").disabled=false;
-        // Do Paragraphs
         removeText();
-
-        // Test for .col-1. Affects div:nth-of-type loop.
-        let counterOffset;
-        if (iframe.contentWindow.document.querySelector("section > .col-1")) {
-            counterOffset = 2;
-        }
-        else {
-            counterOffset = 1;
-        }
-
-        // Count column blocks
-        let col_count = parseInt(sessionStorage.getItem('col-count'));
 
         // Test for figures AND h3 column headings
         if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
-            // Loop through h3 sub-headings
+
+            const objH3 = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > h3");
             let el_h3;
+            // Loop through h3 sub-headings
             for (let i = 0; i < col_count; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[i+counterOffset]+') > h3');
+                el_h3 = objH3[i]; 
                 el_h3.insertAdjacentHTML("afterend", content_paras[i]);
-           }
+            }
         }
         
         // Test for figures (images or icons) and NO h3 column headings
         else if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (!iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
-            // Loop through figures
+
+            const objFig = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > figure");
             let el_fig;
-            for (let j = 0; j < col_count; j++) {
-                el_fig = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[j+counterOffset]+') > figure');
-                el_fig.insertAdjacentHTML("afterend", content_paras[j]);
-           }
+            // Loop through figures
+            for (let i = 0; i < col_count; i++) {
+                el_fig = objFig[i]; 
+                el_fig.insertAdjacentHTML("afterend", content_paras[i]);
+            }
         }
 
         // Test for h3 column headings and NO figures
         else if ( (!iframe.contentWindow.document.querySelector("section > "+col_no+" figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
-            // Loop through h3 sub-headings
+
+            const objH3 = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > h3");
             let el_h3;
-            for (let k = 0; k < col_count; k++) {
-                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[k+counterOffset]+') > h3');
-                el_h3.insertAdjacentHTML("afterend", content_paras[k]);
+            // Loop through H3 sub-headings
+            for (let i = 0; i < col_count; i++) {
+                el_h3 = objH3[i]; 
+                el_h3.insertAdjacentHTML("afterend", content_paras[i]);
            }
         }
 
         // No figures AND no column headings
         else if ( (!iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (!iframe.contentWindow.document.querySelector("section > "+col_no+" > h3")) ) {
-            // Loop through columns
+            const objCol = iframe.contentWindow.document.querySelectorAll("section > "+col_no);
             let el_col;
-            for (let n = 0; n < col_count; n++) {
-                el_col = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[n+counterOffset]);
-                el_col.innerHTML = content_paras[n];
+            // Loop through columns
+            for (let i = 0; i < col_count; i++) {
+                el_col = objCol[i]; 
+                el_col.innerHTML = content_paras[i];
             }
         }
     }
@@ -1004,55 +1001,50 @@ function doText() {
         removeText();
         document.querySelector("#btn_col_text").disabled=false;
 
-        // Test for .col-1. Affects div:nth-of-type loop.
-        let counterOffset;
-        if (iframe.contentWindow.document.querySelector("section > .col-1")) {
-            counterOffset = 2;
-        }
-        else {
-            counterOffset = 1;
-        }
-
         // Count column blocks
         let col_count = parseInt(sessionStorage.getItem('col-count'));
 
         // Test for figures AND h3 column headings
         if ( (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) && (iframe.contentWindow.document.querySelector("section > "+col_no+" h3")) ) {
-            // Loop through h3 sub-headings
+            const objH3 = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > h3");
             let el_h3;
+            // Loop through H3 sub-headings
             for (let i = 0; i < col_count; i++) {
-                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[i+counterOffset]+') > h3');
+                el_h3 = objH3[i]; 
                 el_h3.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
         
         // Test for figures (images or icons)
-        else if (iframe.contentWindow.document.querySelector("section > "+col_no+" figure")) {
+        else if (iframe.contentWindow.document.querySelector("section > "+col_no+" > figure")) {
+            const objFig = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > figure");
             // Loop through figures
             let el_fig;
-            for (let j = 0; j < col_count; j++) {
-                el_fig =  iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[j+counterOffset]+') > figure');
-                el_fig.insertAdjacentHTML("afterend", content_list[j]);
+            for (let i = 0; i < col_count; i++) {
+                el_fig = objFig[i];
+                el_fig.insertAdjacentHTML("afterend", content_list[i]);
            }
         }
 
         // Test for h3 column headings
         else if (iframe.contentWindow.document.querySelector("section > "+col_no+" h3")) {
-            // Loop through h3 sub-headings
+            const objH3 = iframe.contentWindow.document.querySelectorAll("section > "+col_no+" > h3");
             let el_h3;
-            for (let k = 0; k < col_count; k++) {
-                el_h3 = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[k+counterOffset]+') > h3');
-                el_h3.insertAdjacentHTML("afterend", content_list[k]);
-           }
+            // Loop through H3s in columns
+            for (let i = 0; i < col_count; i++) {
+                el_h3 = objH3[i];
+                el_h3.insertAdjacentHTML("afterend", content_list[i]);
+            }
         }
 
         // No pics, icons, h3 headings
         else {
-            // Loop through columns
+            const objCol = iframe.contentWindow.document.querySelectorAll("section > "+col_no);
             let el_col;
-            for (let n = 0; n < col_count; n++) {
-                el_col = iframe.contentWindow.document.querySelector('section > div:nth-of-type('+[n+counterOffset]);
-                el_col.innerHTML = content_list;
+            // Loop through columns
+            for (let i = 0; i < col_count; i++) {
+                el_col = objCol[i];
+                el_col.innerHTML = content_list[i];
             }
         }
     }
@@ -1071,6 +1063,8 @@ function removeText() {
     for (var i = 0 ; i < el_list.length ; i++) {
         el_list[i].remove();
     }
+    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll("\t\n\t\t<\/div>", "<\/div>");
+    enableColButtons();
 }
 
 /*
@@ -1442,6 +1436,60 @@ function doButtonsSize() {
     }    
 }
 
+/*
+//////////////// BUTTONS: SHADOW ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_shadow").addEventListener("change", doBtnShadow);
+
+function doBtnShadow() {
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+
+    if (!document.getElementById("cb_col_buttons_shadow").checked) {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-shadow");
+        }
+    }
+    else {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-shadow");
+        }
+    }
+}
+
+/*
+//////////////// BUTTONS: UPPERCASE ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_uppercase").addEventListener("change", doBtnUCase);
+
+function doBtnUCase() {
+    const col_count = parseInt(sessionStorage.getItem('col-count'));
+    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
+    let el_btn;
+
+    if (!document.getElementById("cb_col_buttons_uppercase").checked) {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.remove("btn-uppercase");
+        }
+    }
+    else {
+        // Loop through buttons
+        for (let i = 0; i < col_count; i++) {        
+            el_btn = obj_btn[i];
+            el_btn.classList.add("btn-uppercase");
+        }
+    }
+}
+
 
 function enableColButtons() {
     document.getElementById("btn_a_primary_passive_text").disabled=false;
@@ -1460,6 +1508,10 @@ function enableColButtons() {
     document.getElementById("rd-btns-icons-left").disabled=false;
     document.getElementById("rd-btns-icons-right").disabled=false;
     document.getElementById("rd-btns-icons-none").disabled=false;
+    document.getElementById("cb_col_buttons_shadow").disabled=false;
+    document.getElementById("cb_col_buttons_shadow").checked=false;
+    document.getElementById("cb_col_buttons_uppercase").disabled=false;
+    document.getElementById("cb_col_buttons_uppercase").checked=false;
     document.getElementById("cb_col_buttons_width").disabled=false;
     document.getElementById("cb_col_buttons_width").checked=false;
 }
@@ -1485,6 +1537,10 @@ function disableColButtons() {
     document.getElementById("dd_buttons_size").disabled=true;
     document.getElementById("cb_col_buttons_width").disabled=true;
     document.getElementById("cb_col_buttons_width").checked=false;
+    document.getElementById("cb_col_buttons_shadow").disabled=true;
+    document.getElementById("cb_col_buttons_shadow").checked=false;
+    document.getElementById("cb_col_buttons_uppercase").disabled=true;
+    document.getElementById("cb_col_buttons_uppercase").checked=false;
 }
 
 /*
