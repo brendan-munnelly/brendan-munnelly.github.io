@@ -1,8 +1,3 @@
-/* After frame content loads */
-function onFrameLoaded() {
-    loadGrid0();
-} 
-
 function loadGrid0() {
 
     // *** Global variables
@@ -687,19 +682,20 @@ function removeTextAnimation() {
 
 
 /*
-//////////////// ALL LAYOUTS: UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// UPPER CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#cb_upperLabelOn").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_upperLabel").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
 
     // Single column
-    if (!document.getElementById("cb_upperLabelOn").checked) {
+    if (!document.getElementById("cb_upperLabel").checked) {
         removeUpperLabel();
     }
     else {
-        iframe.contentWindow.document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
+        iframe.contentWindow.document.querySelector("section > h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t\t");
+        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\n\n\t\t<h2>", "<h2>");
         document.getElementById("btn_upper_label").disabled=false;
     }
 }
@@ -717,14 +713,15 @@ function removeUpperLabel() {
 //////////////// STANDFIRST ///////////////
 */
 
-document.querySelector("#cb_standfirstOn").addEventListener("change", doStandFirst);
+document.querySelector("#cb_standfirst").addEventListener("change", doStandFirst);
 
 function doStandFirst() {
-    if (!document.getElementById("cb_standfirstOn").checked) {
+    if (!document.getElementById("cb_standfirst").checked) {
         iframe.contentWindow.document.querySelector("section > p").classList.remove("standfirst");
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<p class=\"\">', '<p>');
     }
     else {
-        document.querySelector("label[for='cb_standfirstOn']").style.color = "#fff";
+        document.querySelector("label[for='cb_standfirst']").style.color = "#fff";
         iframe.contentWindow.document.querySelector("section > p").classList.add("standfirst");
     }
 }
@@ -733,17 +730,19 @@ function doStandFirst() {
 //////////////// H3 SUB-HEADINGS ////////////////////
 */
 
-document.querySelector("#cb_H3On").addEventListener("change", doColH3);
+document.querySelector("#cb_H3").addEventListener("change", doColH3);
 
 function doColH3() {
 
-    if (!document.getElementById("cb_H3On").checked) {
-        removeColH3();
+    if (!document.getElementById("cb_H3").checked) {
+        removeH3();
     }
 
     else {
         if (!iframe.contentWindow.document.querySelector("section h3")) {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", assets_header_h3);
+            iframe.contentWindow.document.querySelector("section p:nth-of-type(2)").insertAdjacentHTML("beforebegin", assets_header_h3);
+            // iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('</h3>\n\n', '</h3>\n');
+            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("empowerment.</p>\n\n\t", "empowerment.</p>\n\n");
             document.getElementById("btn_subhead").disabled=false;
         }
         else {
@@ -752,8 +751,9 @@ function doColH3() {
     }
 }
 
-function removeColH3() {
+function removeH3() {
     iframe.contentWindow.document.querySelector("section h3").remove();
+    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/p>\n\n', '<\/p>\n');
     document.getElementById("btn_subhead").disabled=true;
 }
 
@@ -776,33 +776,42 @@ function doLists() {
     }
     
     if (selectedValue==="list-none") {
-        removeLists();
+        removeList();
     }
 
     else if (selectedValue==="list-short") {
-        removeLists();
+        removeList();
         iframe.contentWindow.document.querySelector('section p:last-of-type').remove();
         iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_ul_short);
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<\/p>\t', '<\/p>');
     }
 
     else if (selectedValue==="list-long") {
-        removeLists();
+        removeList();
         iframe.contentWindow.document.querySelector('section p:last-of-type').remove();
         iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_ul_long);
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<\/p>\t', '<\/p>');
     }
 }
 
-function removeLists() {
-    if (iframe.contentWindow.document.querySelector("section ul")) {
-        const elUL = iframe.contentWindow.document.querySelectorAll("section ul");
-        for (var i = 0 ; i < elUL.length ; i++) {
-            elUL[i].remove();
-        }
+function removeList() {
+    if (iframe.contentWindow.document.querySelector("section > ul")) {
+        const elUL = iframe.contentWindow.document.querySelector("section > ul");
+        elUL.remove();
         // Restore third paragraph
         iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", assets_para_last);
     }
-    let HTML_Content = iframe.contentWindow.document.getElementById("HTML-Content").innerHTML;
-    HTML_Content = HTML_Content.replace(/\t\n\n\n/g,"");
+    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/p>\n\n\t\t\n\n', '<\/p>');
+
+    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/p>        ', '<\/p>');
+
+    let sectionContent = iframe.contentWindow.document.querySelector('section').innerHTML;
+
+    const count = (sectionContent.match(/<\/p>\t/g) || []).length;
+    for (let i = 0; i <= count; i++) {
+        sectionContent = sectionContent.replace('</p>\t', '</p>');
+    }
+    iframe.contentWindow.document.querySelector('section').innerHTML = sectionContent;
 }
 
 /*
@@ -1203,7 +1212,7 @@ function checkVis() {
         document.getElementById("vis_type_0").checked=true;
 
         // Add picture
-        iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>");
+        iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-restaurant.jpg\" alt=\"Placeholder image\">\n\t\t<\/figure>");
     }
 }
 
@@ -1237,19 +1246,26 @@ function doVisType() {
         disableVidProps();
         disableVisualAlign();
         if (selectedValue==="pictures") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-cafe-interior.jpg\" alt=\"Placeholder image\">\n\t<\/figure>");        
+            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-restaurant.jpg\" alt=\"Placeholder image\">\n\t\t<\/figure>");        
             document.getElementById("vis_type_0").checked=true;
+
         }
     
         else if (selectedValue==="transparent") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/1920x1158-bag-brown.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
+            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-office.png\" alt=\"Placeholder image\">\n\t\t<\/figure>"); 
             document.getElementById("vis_type_1").checked=true;
+            document.getElementById("cb_img_corners").disabled=true;
+            document.getElementById("cb_img_corners").checked=false;
         }
 
         else if (selectedValue==="illustrations") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\t<figure>\n\t\t<img src=\"assets\/img\/teamwork.png\" alt=\"Placeholder image\">\n\t<\/figure>"); 
+            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-teamwork.png\" alt=\"Placeholder image\">\n\t\t<\/figure>"); 
             document.getElementById("vis_type_2").checked=true;
+            document.getElementById("cb_img_corners").disabled=true;
+            document.getElementById("cb_img_corners").checked=false;            
         }
+        
+    iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\t\n\n", "");
 
     } // Ends pics branch
 
@@ -1261,14 +1277,15 @@ function doVisType() {
         enableVidProps();
         disableVisualAlign();
         if (selectedValue==="vid-file") {
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "\n\t\t<figure><div class=\"container-video-file\">\n\t\t\t<video controls>\n\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t<\/video>\n\t\t</div></figurte>\n\t");
+            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<div class=\"container-video-file\">\n\t\t\t\t<video controls>\n\t\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t\t<\/video>\n\t\t\t</div>\n\t\t</figure>");
             document.getElementById("vis_type_3").checked=true;
         }
 
         else if (selectedValue==="vid-yt") {
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "<figure>\n\t\t<div class=\"container-video-yt\">\n\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t<\/iframe>\n\t\t<\/div>\n\t</figure>");
+            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<div class=\"container-video-yt\">\n\t\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t\t<\/iframe>\n\t\t\t<\/div>\n\t\t</figure>");
             document.getElementById("vis_type_4").checked=true;
         }
+        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\t\n\n", "");
      
     } // Ends video branch
 }
@@ -1300,7 +1317,7 @@ function doAlignDesktopFig() {
 }
 
 /*
-//////////////// VISUAL ELEMENT WIDTH (811px AND ABOVE ) ///////////////
+//////////////// VISUAL ELEMENT WIDTH (600px AND ABOVE ) ///////////////
 */
 
 document.querySelector("#switch_section_vis_width_desktop").addEventListener("change", doFigWidthDesktop);
@@ -1344,9 +1361,8 @@ document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadow
 
 function doImgShadows() {
 
-    if (!document.getElementById("cb_img_shadowsOn").checked) {
+    if (!document.getElementById("cb_img_shadows").checked) {
         iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-       
     }
     else {
         iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
@@ -1361,9 +1377,8 @@ document.querySelector("#cb_img_corners").addEventListener("change", doImgCorner
 
 function doImgCorners() {
 
-    if (!document.getElementById("cb_img_shadowsOn").checked) {
+    if (!document.getElementById("cb_img_corners").checked) {
         iframe.contentWindow.document.querySelector('section').classList.remove("fig-corners-soft");
-       
     }
     else {
         iframe.contentWindow.document.querySelector('section').classList.add("fig-corners-soft");
@@ -1374,17 +1389,19 @@ function doImgCorners() {
 //////////////// VISUAL PROPERTIES: VIDEO SHADOWS ///////////////
 */
 
-/* Enable image shadows */
+/* Enable video shadows */
 document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
 
 function doVidShadows() {
+    console.log("got to function");
 
-    if (!document.getElementById("cb_vid_shadowsOn").checked) {
+    if (!document.getElementById("cb_vid_shadows").checked) {
         iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-       
+        console.log("remove shadows");
     }
     else {
         iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
+        console.log("add shadows");
     }
 }
 
@@ -1451,29 +1468,29 @@ function disableVisualAlign() {
 
 // Image properties with labels
 function enableImgProps() {
-    document.getElementById("cb_img_cornersOn").disabled=false;
+    document.getElementById("cb_img_corners").disabled=false;
     document.getElementById("cb_img_corners").checked=false;
-    document.getElementById("cb_img_shadowsOn").disabled=false;
+    document.getElementById("cb_img_shadows").disabled=false;
     document.getElementById("cb_img_shadows").checked=false;
 }
 
 function disableImgProps() {
-    document.getElementById("cb_img_cornersOn").disabled=true;
-    document.getElementById("cb_img_cornersOn").checked=false;
-    document.getElementById("cb_img_shadowsOn").disabled=true;
-    document.getElementById("cb_img_shadowsOn").checked=false;
+    document.getElementById("cb_img_corners").disabled=true;
+    document.getElementById("cb_img_corners").checked=false;
+    document.getElementById("cb_img_shadows").disabled=true;
+    document.getElementById("cb_img_shadows").checked=false;
     iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
 }
 
 // Video properties with labels
 function enableVidProps() {
-    document.getElementById("cb_vid_shadowsOn").disabled=false;
-    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.getElementById("cb_vid_shadows").disabled=false;
+    document.getElementById("cb_vid_shadows").checked=false;
 }
 
 function disableVidProps() {
-    document.getElementById("cb_vid_shadowsOn").disabled=true;
-    document.getElementById("cb_vid_shadowsOn").checked=false;
+    document.getElementById("cb_vid_shadows").disabled=true;
+    document.getElementById("cb_vid_shadows").checked=false;
     iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
 }
 
@@ -1496,11 +1513,15 @@ function resetVisual() {
 }
 
 function removeVisual() {
-    if (iframe.contentWindow.document.querySelector('section figure')) {
-        let el_content = document.querySelector('section');
-        let el_fig = document.querySelector('section figure');
+    if (iframe.contentWindow.document.querySelector('section')) {
+        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("</figure>", "</figure>\n\n\t");
+        let el_content = iframe.contentWindow.document.querySelector('section');
+        let el_fig = iframe.contentWindow.document.querySelector('section figure');
         el_content.removeChild(el_fig);
+
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("empowerment.</p>\n\n\t", "empowerment.</p>\n\n");
     }
+
     disableRBs();
     disableVisualWidth();
     disableVisualAlign();

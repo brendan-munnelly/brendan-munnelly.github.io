@@ -10,11 +10,14 @@ function loadGridSplit() {
 const uiUIenusLength = document.querySelectorAll("#ui-menus li").length;
 
 // Used by color picker to identify section for copying to user's HTML file.
-// Values with be "section-selector-1", ... "section-selector-6".
+// values with be "section-selector-1", ... "section-selector-6".
 let section_class ="section-selector-1"; 
 
 // Used by color picker. Either 'theme-light' or 'theme-dark'.
 let section_theme = "section.theme-light."+section_class;
+
+// Number column blocks to loop through
+let col_count = iframe.contentWindow.document.querySelectorAll(col_no).length;
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -32,11 +35,30 @@ divs.forEach(el => el.addEventListener('click', event => {
     const elItem_show = document.querySelector("#content-"+menuId);
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
+    
+    if (iframe.contentWindow.document.querySelector('.col-3') || iframe.contentWindow.document.querySelector('.col-4') ) {
+        // Work with upper block
+        if (menuId==="2") {
+            window.scrollTo(0,0);
+        }
+        // Work with columns
+        else if (menuId==="3") {
+            let el = iframe.contentWindow.document.querySelector(col_no);
+            el.scrollIntoView(true);
+        }
+        // Work with buttons
+        else if (menuId==="4") {
+            window.scrollTo(0,document.body.scrollHeight);
+        }
+    }
     // Hide color picker
     hideSidebar();
 }));
 
-document.querySelector('#page-preview-body').addEventListener('click',hideMenus,false);
+// Hide all menus and color picker when user clicks on frame container.
+window.onload=function(){
+    iframe.contentWindow.document.querySelector('#HTML-Content').addEventListener('click',hideMenus,false);
+}
 
 function hideMenus() {
     for (let i = 1; i <= uiUIenusLength; i++) {
@@ -83,6 +105,7 @@ function hideSidebar() {
     document.querySelector("#myModal").classList.remove("show-sidebar");
     document.querySelector("#myModal").scrollTo(0, 0); // scrolls to top of sidebar
 }
+
 
 /* ================ DIALOG BOXES =================== */
 
@@ -284,7 +307,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             // Ignore this click
             return;
         }
-        console.log('Proper click detected');
+        // console.log('Proper click detected');
         const rbs = document.querySelectorAll("input[name='picker-radio']");
         let color_code;
     
@@ -527,7 +550,7 @@ function doColOrderDesktop() {
             break;
         }
     }
-    console.log("selectedValue: "+selectedValue);
+    // console.log("selectedValue: "+selectedValue);
 
     if (selectedValue==="col-visual-right") {
         iframe.contentWindow.document.querySelector("section").classList.remove("split-image-left");
