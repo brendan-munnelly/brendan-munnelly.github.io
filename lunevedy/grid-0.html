@@ -153,9 +153,9 @@
                         <div class="dialog-box">
 
                             <div class="input-group">
-                                <label for="cb_upperLabelOn">Upper Label <span>&lt;div&gt;</span></label>
+                                <label for="cb_upperLabel">Upper Label <span>&lt;div&gt;</span></label>
                                 <!-- <form id="cb_upperLabel"> -->
-                                    <input id="cb_upperLabelOn" type="checkbox" class="switch">
+                                    <input id="cb_upperLabel" type="checkbox" class="switch">
                                     &nbsp; &nbsp; &nbsp;
                                     <button id="btn_upper_label" class="btn_style">
                                         <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;
@@ -171,17 +171,18 @@
                             </div><!-- /.input-group -->
 
                             <div class="input-group">
-                                <label for="cb_H3On">Sub-Heading <span>&lt;h3&gt;</span></label>
-                                <input id="cb_H3On" type="checkbox" class="switch" />
+                                <label for="cb_standfirst">Standfirst / Deckhead</label>
+                                <input id="cb_standfirst" type="checkbox" class="switch" />
+                            </div><!-- /input-group -->
+
+
+                            <div class="input-group">
+                                <label for="cb_H3">Sub-Heading <span>&lt;h3&gt;</span></label>
+                                <input id="cb_H3" type="checkbox" class="switch" />
                                 &nbsp; &nbsp; &nbsp;
                                 <button id="btn_subhead" class="btn_style">
                                     <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;
                                 </button>
-                            </div><!-- /input-group -->
-
-                            <div class="input-group">
-                                <label for="cb_standfirstOn">Standfirst / Deckhead</label>
-                                <input id="cb_standfirstOn" type="checkbox" class="switch" />
                             </div><!-- /input-group -->
 
                             <div class="input-group">
@@ -425,24 +426,18 @@
                                     <h4 style="margin-bottom: 3px">PROPERTIES</h4>
                                     <div class="input-group-vertical" style="margin-bottom:10px">
                                         <label for="cb_img_shadows" style="margin-top: 0">Shadows</label>
-                                        <form id="cb_img_shadows">
-                                            <input id="cb_img_shadowsOn" type="checkbox" class="switch">
-                                        </form>
+                                        <input id="cb_img_shadows" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
                                                     
                                     <div class="input-group-vertical" style="margin-bottom: 34px">
                                         <label for="cb_img_corners" style="margin-top: 0">Soft Corners</label>
-                                        <form id="cb_img_corners">
-                                            <input id="cb_img_cornersOn" type="checkbox" class="switch">
-                                        </form>
+                                        <input id="cb_img_corners" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
                                     <hr>
                                     <h4 style="margin-top: -2px; margin-bottom: 3px">&nbsp;</h4>
                                     <div class="input-group-vertical" style="margin-top: -6px">
                                         <label for="cb_vid_shadows" style="margin-top: 0">Shadows</label>
-                                        <form id="cb_vid_shadows">
-                                            <input id="cb_vid_shadowsOn" type="checkbox" class="switch">
-                                        </form>
+                                        <input id="cb_vid_shadows" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
         
                                 </div><!-- /first-child -->
@@ -2098,11 +2093,17 @@
           </div><!-- / Modal -->
           
     </div><!-- / Modal content -->
-          
+    <script>
+        /* After frame content loads */
+        function onFrameLoaded() {
+            loadGrid0();
+        } 
+        </script>
+    <script src="assets/js/grid-0.js"></script>
+    
     <div class="page-preview-body" id="page-preview-body">
         <iframe src="grid-0-embed.html" style="border:0" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
     </div>
-
 
     <div class="lower-left">
 
@@ -2217,11 +2218,11 @@
             document.getElementById("dd_text_slide").value="0";
 
             // Text menu
-            document.getElementById("cb_upperLabelOn").checked = false;
+            document.getElementById("cb_upperLabel").checked = false;
             document.getElementById("btn_upper_label").disabled=true;
-            document.getElementById("cb_H3On").checked = false;
+            document.getElementById("cb_H3").checked = false;
             document.getElementById("btn_subhead").disabled=true;
-            document.getElementById("cb_standfirstOn").checked=false;
+            document.getElementById("cb_standfirst").checked=false;
             document.getElementById("rb-section-list-none").checked=true;
 
             // Buttons menu
@@ -2283,14 +2284,14 @@
             document.getElementById("vis_type_4").disabled=true;
 
             // Image properties and labels
-            document.getElementById("cb_img_cornersOn").disabled=true;
-            document.getElementById("cb_img_cornersOn").checked=false;
-            document.getElementById("cb_img_shadowsOn").disabled=true;
-            document.getElementById("cb_img_shadowsOn").checked=false;
+            document.getElementById("cb_img_corners").disabled=true;
+            document.getElementById("cb_img_corners").checked=false;
+            document.getElementById("cb_img_shadows").disabled=true;
+            document.getElementById("cb_img_shadows").checked=false;
             
             // Video properties and labels
-            document.getElementById("cb_vid_shadowsOn").disabled=true;
-            document.getElementById("cb_vid_shadowsOn").checked=false;
+            document.getElementById("cb_vid_shadows").disabled=true;
+            document.getElementById("cb_vid_shadows").checked=false;
             document.getElementById("btn-copy-css").disabled=true;
             document.getElementById("color-transparent").style.display="none";
             document.getElementById("btn-copy-css").disabled=true;
@@ -2300,13 +2301,13 @@
         let HTML_Content="";
         
         /* Text Content Assets */
-        const assets_header_h3 ="\n\t<h3>Nice sub-heading here<\/h3>\n";
+        const assets_header_h3 ="<h3>Nice sub-heading here<\/h3>\n\t\t";
 
-        const assets_para_last = "\n\n\t\t<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Bring to the table win-win survival strategies to ensure proactive domination.<\/p>\n";
+        const assets_para_last = "\n\n\t\t<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Bring to the table win-win survival strategies to ensure proactive domination.<\/p>";
 
-        const assets_ul_short = "\n\t<ul>\n\t\t<li>AI-powered<\/li>\n\t\t<li>Future-proof<\/li>\n\t\t<li>Customer-centric<\/li>\n\t<\/ul>";
+        const assets_ul_short = "\n\n\t\t<ul>\n\t\t\t<li>AI-powered<\/li>\n\t\t\t<li>Future-proof<\/li>\n\t\t\t<li>Customer-centric<\/li>\n\t\t<\/ul>";
 
-        const assets_ul_long = "\n\t<ul>\n\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t<\/ul>";
+        const assets_ul_long = "\n\n\t\t<ul>\n\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t<\/ul>";
 
         const assets_section_buttons_one = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-primary\"><span>Start free trial<\/span><i class=\"fas fa-arrow-right\"></i></a>\n\t</div>";
 
@@ -2316,7 +2317,7 @@
 
     </script>
 
-    <script src="assets/js/grid-0.js"></script>
+   
     
 </body>
 </html>
