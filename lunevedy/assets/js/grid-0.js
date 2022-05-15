@@ -1,4 +1,4 @@
-function loadGrid0() {
+function loadApp() {
 
     // *** Global variables
     // Number of dropdown menus on Lunevery navbar
