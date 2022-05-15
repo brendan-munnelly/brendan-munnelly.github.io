@@ -1657,8 +1657,27 @@ section > .col-1 { width: 100% }
 
 /* Upper label heading */
 section > .container-upper-label { width: 100%; font-weight: 600 }
-@media (min-width: 768px) { section > .container-upper-label { margin-bottom: 48px } }
-@media (max-width: 767px) { section > .container-upper-label { margin-bottom: 32px } }
+
+@media (min-width: 1025px) { 
+    section > .container-upper-label { 
+        margin-top: -24px;
+        margin-bottom: 48px; 
+    } 
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    section > .container-upper-label { 
+        margin-top: -4px;
+        margin-bottom: 32px; 
+    } 
+}
+
+@media (max-width: 767px) { 
+    section > .container-upper-label { 
+        margin-top: -12px;
+        margin-bottom: 32px; 
+    } 
+}
 
 section > .container-upper-label span {
     font-weight: 600; /* padding: 2px 10px 2px 10px; */
@@ -1667,13 +1686,25 @@ section > .container-upper-label span {
 }
 
 section > h2 {
-	font-size: calc(28px + (42 - 28) * ((100vw - 320px) / (1140 - 320)));
+    font-size: calc(28px + (48 - 28) * ((100vw - 320px) / (1140 - 320)));
 	line-height: 1.2; 
 	letter-spacing: -1px;
+    padding: 0 !important;
     width: 100%;
+    margin-bottom: 14px;
 }
-@media (min-width: 768px) { section > h2 { margin-bottom: 24px } }
-@media (max-width: 767px) { section > h2 { margin-bottom: 12px } }
+
+@media (min-width: 1025px) { 
+    section > h2 { margin-top: -24px; margin-bottom: 24px } 
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    section > h2 { margin-top: -6px; margin-bottom: 24px } 
+}
+
+@media (max-width: 767px) { 
+    section > h2 { margin-top: -12px; margin-bottom: 12px } 
+}
 
 section > h3 {
 	font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
@@ -1686,7 +1717,7 @@ section > h3 {
 
 /* Paragraphs AND lists */
 section > p, section > ul > li { 
-	font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1140 - 320)));
+	font-size: calc(17px + (21 - 17) * ((100vw - 320px) / (1140 - 320)));
 }
 
 section > p { line-height: 1.6; margin-bottom: 16px }
@@ -1697,7 +1728,7 @@ section > p.standfirst {
     font-weight: 500;
 }
 
-section ul {margin-top: 6px; margin-bottom: 18px }
+section ul { margin-bottom: 18px }
 section > ul > li { margin-left: 19px; padding-left: 9px; margin-bottom: 14px }
 
 @media (min-width: 768px) { section > ul > li { margin-left: 20px; padding-left: 10px } }
@@ -1798,9 +1829,20 @@ section > .container-btn a.btn {
 }
 
 /* Images */
-section > figure { margin-top: 20px; margin-bottom: 32px }
+section > figure { margin-top: 20px; margin-bottom: 28px; width: 100% }
 
-p + figure, ul + figure { margin-top: 4px }
+@media (min-width: 768px) { section > figure { margin-bottom: 28px } }
+@media (max-width: 767px) { section > figure { margin-bottom: 16px } }
+
+section.fig-shadow > figure { width: 97% }
+
+@media (min-width: 768px) {
+    p + figure, ul + figure { margin-top: 12px }
+}
+
+@media (max-width: 767px) {
+    p + figure, ul + figure { margin-top: 4px }
+}
 
 section.text-center-desktop > figure,
 section.text-center-mobile  > figure { margin-left: auto; margin-right: auto }
@@ -1808,8 +1850,10 @@ section.text-center-mobile  > figure { margin-left: auto; margin-right: auto }
 /* == 50% text for widths 811px and wider == */
 @media (min-width: 811px) {
     /* Narrow (50%-wide) text: left-aligned */
-    section > .figure-width-50 { width: 50% } 
-    section > .figure-width-80 { width: 80% } 
+    section > .figure-width-50,
+    section.fig-shadow > .figure-width-50 { width: 50% } 
+    section > .figure-width-80, 
+    section.fig-shadow > .figure-width-80 { width: 80% } 
 }
 
 /* ============= SECTIONS: FLEXBOX-BASED  ============ */
@@ -2480,8 +2524,28 @@ section.fig-shadow .col-2 figure,
 section.fig-shadow .col-3 figure,
 section.fig-shadow .col-4 figure {
     filter: drop-shadow(8px 8px 10px var(--drop-shadow));
-    width: 98%; height: auto;
+    filter: drop-shadow(4px 4px 10px var(--drop-shadow));
 }
+
+@media (min-width: 768px) {
+    section.fig-shadow figure,
+    section.fig-shadow .col-2 figure,
+    section.fig-shadow .col-3 figure,
+    section.fig-shadow .col-4 figure {
+        filter: drop-shadow(8px 8px 10px var(--drop-shadow));
+    }
+}
+
+@media (max-width: 767px) {
+    section.fig-shadow figure,
+    section.fig-shadow .col-2 figure,
+    section.fig-shadow .col-3 figure,
+    section.fig-shadow .col-4 figure {
+        filter: drop-shadow(4px 4px 10px var(--drop-shadow));
+    }
+}
+
+
 
 .img-rotate-clock  figure img { transform: rotate(1deg) }
 .img-rotate-cclock figure img { transform: rotate(-1deg) }
