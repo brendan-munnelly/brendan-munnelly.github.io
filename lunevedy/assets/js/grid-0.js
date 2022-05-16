@@ -282,7 +282,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             // Ignore this click
             return;
         }
-        console.log('Proper click detected');
+        // console.log('Proper click detected');
         const rbs = document.querySelectorAll("input[name='picker-radio']");
         let color_code;
     
@@ -292,7 +292,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
                 break;
             }
         }
-        console.log('color_code: '+color_code);
+        // console.log('color_code: '+color_code);
 
         if (iframe.contentWindow.document.querySelector("section.theme-light")) {
             section_theme = "section.theme-light."+section_class;
@@ -340,6 +340,20 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else if (btn_id === "btn_text") {
             newStyle = section_theme+ " p { color: var("+color_code+") } \n"+section_theme+" li { color: var("+color_code+") } \n"; 
             sub_string = "p { color";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Hyperlink in text: passive */
+        else if (btn_id === "btn_text_link_passive") {
+            newStyle = section_theme+ " a:not(.btn):link, "+section_theme+ " a:not(.btn):visited { color: var("+color_code+") } \n"; 
+            sub_string = "a:not(.btn):link";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Hyperlink in text: active */
+        else if (btn_id === "btn_text_link_active") {
+            newStyle = section_theme+ " a:not(.btn):focus, "+section_theme+ " a:not(.btn):hover, "+section_theme+ " a:not(.btn):active { color: var("+color_code+") } \n"; 
+            sub_string = "a:not(.btn):focus";
             doUpdateArray(sub_string,newStyle);
         }
 
@@ -1393,15 +1407,11 @@ function doImgCorners() {
 document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
 
 function doVidShadows() {
-    console.log("got to function");
-
     if (!document.getElementById("cb_vid_shadows").checked) {
         iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-        console.log("remove shadows");
     }
     else {
         iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
-        console.log("add shadows");
     }
 }
 

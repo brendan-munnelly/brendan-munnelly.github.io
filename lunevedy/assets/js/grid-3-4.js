@@ -367,6 +367,13 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             sub_string = col_no+" p {";
             doUpdateArray(sub_string,newStyle); 
         }
+
+        /* List marker */
+        else if (btn_id === "btn_list_marker") {
+            newStyle = section_theme+ " "+col_no+" li::marker, "+section_theme+ " " +col_no+" ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+            sub_string = "li::marker";
+            doUpdateArray(sub_string,newStyle); 
+        }
         
         /* Column background */
         else if (btn_id === "btn_col_background") {
@@ -1037,6 +1044,9 @@ function doText() {
                 el_col.innerHTML = content_list[i];
             }
         }
+        document.getElementById("dd_list_marker").disabled=false;
+        document.getElementById("dd_list_marker").value="0";
+        document.getElementById("btn_list_marker").disabled=false;
     }
 }
 
@@ -1055,6 +1065,41 @@ function removeText() {
     }
     iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll("\t\n\t\t<\/div>", "<\/div>");
     enableColButtons();
+    document.getElementById("dd_list_marker").disabled=true;
+    document.getElementById("dd_list_marker").value="0";
+    document.getElementById("btn_list_marker").disabled=true;
+}
+
+/*
+//////////////// COLUMN LIST MARKERS ////////////////////
+*/
+
+document.querySelector("#dd_list_marker").addEventListener("change", doListMarker);
+
+function doListMarker() {
+
+    let opt = document.querySelector("#dd_list_marker").value;
+    let elSection = iframe.contentWindow.document.querySelector("section").innerHTML;
+    
+    // Regular
+    if (opt==="0") {
+        // Test for Font Awesome list
+        if ( iframe.contentWindow.document.querySelector("section > "+col_no+" > ul.fa-ul") ) {
+            elSection = elSection.replaceAll("<ul class=\"fa-ul\">", "<ul>") 
+            elSection = elSection.replaceAll("<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>", "<li>");
+            iframe.contentWindow.document.querySelector("section").innerHTML = elSection;
+        }
+    }
+
+    else if (opt==="1") {
+        // Test for regular list
+        if ( iframe.contentWindow.document.querySelector("section > "+col_no+" > ul:not(.fa-ul)") ) {
+
+            elSection = elSection.replaceAll("<ul>", "<ul class=\"fa-ul\">") 
+            elSection = elSection.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
+            iframe.contentWindow.document.querySelector("section").innerHTML = elSection;
+        }
+    }
 }
 
 /*
