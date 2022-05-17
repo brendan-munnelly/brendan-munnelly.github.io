@@ -686,6 +686,9 @@ function removeUpperH2() {
         if (iframe.contentWindow.document.querySelector('section .col-1')) {
             iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
         }
+        if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
+            removeUpperBlock();
+        }
     }
 }
 
@@ -728,9 +731,9 @@ function removeUpperH3() {
     if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/h2>\n\t\t\t', '<\/h2>');
     }
-    // if (document.querySelector('section .col-1')) {
-    //     document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
-    // }
+    if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
+        removeUpperBlock();
+    }
 }
 
 /*
@@ -914,6 +917,8 @@ function doColH3() {
                 el_col.innerHTML = content_h3[n];
             }
         }
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false; 
     }
 }
 
@@ -925,6 +930,12 @@ function removeColH3() {
             elH3[i].remove();
         }
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>');  
+        
+        // If no H3 and no text or lists
+        if ( (!iframe.contentWindow.document.querySelector(col_no+" h3")) && (!iframe.contentWindow.document.querySelector(col_no+" p")) && (!iframe.contentWindow.document.querySelector(col_no+" ul"))) {
+            document.getElementById("cb_col_shadows").disabled=true; 
+            document.getElementById("cb_col_shadows").checked=false; 
+        }   
     }
 }
 
@@ -997,6 +1008,8 @@ function doText() {
                 el_col.innerHTML = content_paras[i];
             }
         }
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false; 
     }
 
     else if (opt==="2") {
@@ -1014,7 +1027,7 @@ function doText() {
             for (let i = 0; i < col_count; i++) {
                 el_h3 = objH3[i]; 
                 el_h3.insertAdjacentHTML("afterend", content_list[i]);
-           }
+           }       
         }
         
         // Test for figures (images or icons)
@@ -1025,7 +1038,7 @@ function doText() {
             for (let i = 0; i < col_count; i++) {
                 el_fig = objFig[i];
                 el_fig.insertAdjacentHTML("afterend", content_list[i]);
-           }
+           }  
         }
 
         // Test for h3 column headings
@@ -1036,7 +1049,7 @@ function doText() {
             for (let i = 0; i < col_count; i++) {
                 el_h3 = objH3[i];
                 el_h3.insertAdjacentHTML("afterend", content_list[i]);
-            }
+            }      
         }
 
         // No pics, icons, h3 headings
@@ -1047,11 +1060,13 @@ function doText() {
             for (let i = 0; i < col_count; i++) {
                 el_col = objCol[i];
                 el_col.innerHTML = content_list[i];
-            }
+            }      
         }
         document.getElementById("dd_list_marker").disabled=false;
         document.getElementById("dd_list_marker").value="0";
         document.getElementById("btn_list_marker").disabled=false;
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false;         
     }
 }
 
@@ -1072,6 +1087,12 @@ function removeText() {
     enableColButtons();
     document.getElementById("dd_list_marker").disabled=true;
     document.getElementById("btn_list_marker").disabled=true;
+
+    // If no H3 and no text or lists
+    if ( (!iframe.contentWindow.document.querySelector(col_no+" h3")) && (!iframe.contentWindow.document.querySelector(col_no+" p")) && (!iframe.contentWindow.document.querySelector(col_no+" ul"))) {
+        document.getElementById("cb_col_shadows").disabled=true; 
+        document.getElementById("cb_col_shadows").checked=false; 
+    }  
 }
 
 /*
@@ -1137,8 +1158,8 @@ function doColShadows() {
         // Disable corner and border options
         document.getElementById("cb_col_borders").disabled=true;
         document.getElementById("cb_col_borders").checked=false;
-        document.getElementById("cb_col_corners").disabled=true; 
-        document.getElementById("cb_col_corners").checked=false;
+        document.getElementById("cb_col_corners").disabled=false; 
+        document.getElementById("cb_col_corners").checked=true;
     }
 }
 

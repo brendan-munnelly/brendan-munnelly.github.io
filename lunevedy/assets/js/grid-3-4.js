@@ -686,6 +686,9 @@ function removeUpperH2() {
         if (iframe.contentWindow.document.querySelector('section .col-1')) {
             iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
         }
+        if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
+            removeUpperBlock();
+        }
     }
 }
 
@@ -728,9 +731,9 @@ function removeUpperH3() {
     if (iframe.contentWindow.document.querySelector('.col-1 h2')) {
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/h2>\n\t\t\t', '<\/h2>');
     }
-    // if (document.querySelector('section .col-1')) {
-    //     document.querySelector('section').innerHTML = document.querySelector('section').innerHTML.replace('<div class=\"col-1\">\n\t\t\t', '<div class=\"col-1\">');
-    // }
+    if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
+        removeUpperBlock();
+    }
 }
 
 /*
@@ -752,6 +755,7 @@ function doUpperBlock() {
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<div class="col-1 text-center">', '\n\n\t\t<div class="col-1 text-center">');
         // Enable properties
         document.getElementById("cb_upper_block").checked=true;
+        document.getElementById("dd_upper_block_width").disabled=false;
         document.getElementById("rb_upper_align_left").disabled=false;
         document.getElementById("rb_upper_align_left").checked=false;
         document.getElementById("rb_upper_align_center").disabled=false;
@@ -873,6 +877,8 @@ function doColH3() {
                 el_fig = objFig[i]; 
                 el_fig.insertAdjacentHTML("afterend", content_h3[i]);
             }
+            document.getElementById("cb_col_shadows").disabled=false; 
+            document.getElementById("cb_col_shadows").checked=false; 
         }
             
         // Test for paragraphs
@@ -885,6 +891,8 @@ function doColH3() {
                 el_para = objPara[i]; 
                 el_para.insertAdjacentHTML("beforebegin", content_h3[i]);
             }
+            document.getElementById("cb_col_shadows").disabled=false; 
+            document.getElementById("cb_col_shadows").checked=false; 
         }
 
         // Test for lists
@@ -896,6 +904,8 @@ function doColH3() {
                 el_li = objUL[i]; 
                 el_li.insertAdjacentHTML("beforebegin", content_h3[i]);
             }
+            document.getElementById("cb_col_shadows").disabled=false; 
+            document.getElementById("cb_col_shadows").checked=false; 
         }
 
         // No pics, icons, paras, lists
@@ -908,6 +918,8 @@ function doColH3() {
                 el_col.innerHTML = content_h3[i];
             }
         }
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false; 
     }
 }
 
@@ -919,7 +931,13 @@ function removeColH3() {
         for (let i = 0 ; i < elH3.length ; i++) {
             elH3[i].remove();
         }
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>');  
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>'); 
+
+        // If no H3 and no text or lists
+        if ( (!iframe.contentWindow.document.querySelector(col_no+" h3")) && (!iframe.contentWindow.document.querySelector(col_no+" p")) && (!iframe.contentWindow.document.querySelector(col_no+" ul"))) {
+            document.getElementById("cb_col_shadows").disabled=true; 
+            document.getElementById("cb_col_shadows").checked=false; 
+        }    
     }
 }
 
@@ -992,6 +1010,8 @@ function doText() {
                 el_col.innerHTML = content_paras[i];
             }
         }
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false; 
     }
 
     else if (opt==="2") {
@@ -1047,6 +1067,8 @@ function doText() {
         document.getElementById("dd_list_marker").disabled=false;
         document.getElementById("dd_list_marker").value="0";
         document.getElementById("btn_list_marker").disabled=false;
+        document.getElementById("cb_col_shadows").disabled=false; 
+        document.getElementById("cb_col_shadows").checked=false; 
     }
 }
 
@@ -1068,6 +1090,12 @@ function removeText() {
     document.getElementById("dd_list_marker").disabled=true;
     document.getElementById("dd_list_marker").value="0";
     document.getElementById("btn_list_marker").disabled=true;
+    
+    // If no H3 and no text
+    if ( (!iframe.contentWindow.document.querySelector(col_no+" h3")) && (!iframe.contentWindow.document.querySelector(col_no+" p")) && (!iframe.contentWindow.document.querySelector(col_no+" ul"))) {
+        document.getElementById("cb_col_shadows").disabled=true; 
+        document.getElementById("cb_col_shadows").checked=false; 
+    }
 }
 
 /*
@@ -1132,8 +1160,8 @@ function doColShadows() {
         // Disable corner and border options
         document.getElementById("cb_col_borders").disabled=true;
         document.getElementById("cb_col_borders").checked=false;
-        document.getElementById("cb_col_corners").disabled=true; 
-        document.getElementById("cb_col_corners").checked=false;
+        document.getElementById("cb_col_corners").disabled=false; 
+        document.getElementById("cb_col_corners").checked=true;
     }
 }
 
