@@ -843,7 +843,6 @@ const tabButton = document.querySelectorAll(".tab-button");
       
 tabs.onclick = e => {
 const id = e.target.id;
-console.log("id: "+id)
 if (id) {
     // tabs
     tabButton.forEach(btn => {
@@ -859,7 +858,6 @@ if (id) {
 
     // Active content tab
     const element = "content_"+id[id.length-1];
-    console.log("Active tab: "+element);
     document.getElementById(element).classList.add("active");
     document.getElementById(element).style.display="block";
     }
@@ -909,8 +907,6 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
         document.getElementById("cb_col_buttons_width").disabled=false;
         document.getElementById("cb_col_buttons_shadow").disabled=false;
         document.getElementById("cb_col_buttons_uppercase").disabled=false;
-        document.getElementById("switch-btns-icons-position_1").disabled=false;
-        // document.getElementById("rd-btns-icons-left").checked=true;
 
         document.getElementById("rb_btn_align_desktop_left").disabled=false;
         document.getElementById("rb_btn_align_desktop_left").checked=true;
@@ -928,6 +924,9 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
         document.getElementById("cb_col_buttons_shadow").checked=false;
         document.getElementById("cb_col_buttons_uppercase").disabled=false;
         document.getElementById("cb_col_buttons_uppercase").checked=false;
+
+        document.getElementById("rd_btns_icons_left_1").checked=true;
+        document.getElementById("rd_btns_icons_left_2").checked=true;        
     }
 
     function addButtons_12() {
@@ -939,8 +938,6 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
         document.getElementById("cb_col_buttons_width").disabled=false;
         document.getElementById("cb_col_buttons_shadow").disabled=false;
         document.getElementById("cb_col_buttons_uppercase").disabled=false;
-        document.getElementById("switch-btns-icons-position_1").disabled=false;
-        document.getElementById("rd-btns-icons-left_1").checked=true;
         document.getElementById("rb_btn_align_desktop_left").disabled=false;
         document.getElementById("rb_btn_align_desktop_left").checked=true;
         document.getElementById("rb_btn_align_desktop_center").disabled=false;
@@ -956,6 +953,8 @@ document.querySelector("#dd_buttons_split").addEventListener("change", doButtons
         document.getElementById("cb_col_buttons_shadow").checked=false;
         document.getElementById("cb_col_buttons_uppercase").disabled=false;
         document.getElementById("cb_col_buttons_uppercase").checked=false;
+        document.getElementById("rd_btns_icons_left_1").checked=true;
+        document.getElementById("rd_btns_icons_left_2").checked=true;
     }
 
     function removeButtonsSplit() {
@@ -1199,14 +1198,14 @@ function doBtnUCase() {
 }
 
 /*
-//////////////// BUTTONS: ICON POSITION ////////////////////
+//////////////// BUTTON 1: ICON POSITION ////////////////////
 */
 
-// document.querySelector("#switch-btns-icons-position").addEventListener("change", swapButtonIcons);
+document.querySelector("#switch_btns_icons_position_1").addEventListener("change", swapButtonIcons_1);
 
-function swapButtonIcons() {
+function swapButtonIcons_1() {
 
-    const rbs = document.querySelectorAll("input[name='btns-icons-position']");
+    const rbs = document.querySelectorAll("input[name='btns_icons_position_1']");
     let selectedValue;
     
     for (const rb of rbs) {
@@ -1216,58 +1215,69 @@ function swapButtonIcons() {
         }
     }
 
-    // Verify at least primary button exists
-    if (iframe.contentWindow.document.querySelector("a.btn")) {      
-        // Set up button icon and text content;
-        const icon_left_primary  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
-        const icon_left_secondary  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
-        const icon_right_primary ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
-        const icon_right_secondary ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
-    
-        if (selectedValue==="btns-icons-left") {
-            // Icon at left. Text at right.
-            if (iframe.contentWindow.document.querySelector("a.btn-secondary")) {
-                const el_btn_1 = iframe.contentWindow.document.querySelector("a.btn-primary");
-                el_btn_1.innerHTML = icon_left_primary;
-                const el_btn_2 = iframe.contentWindow.document.querySelector("a.btn-secondary");
-                el_btn_2.innerHTML = icon_left_secondary;
-            }
-            else {
-                const el_btn = iframe.contentWindow.document.querySelector("a.btn-primary");
-                el_btn.innerHTML = "<i class=\"fas fa-arrow-right\"></i><span>Start free trial<\/span>";
-            }
-        }
-    
-        else if (selectedValue==="btns-icons-right") {
-            if (iframe.contentWindow.document.querySelector("a.btn-secondary")) {
-                const el_btn_1 = iframe.contentWindow.document.querySelector("a.btn-primary");
-                el_btn_1.innerHTML = icon_right_primary;
-                const el_btn_2 = iframe.contentWindow.document.querySelector("a.btn-secondary");
-                el_btn_2.innerHTML = icon_right_secondary;
-            }
-            else {
-                const el_btn = iframe.contentWindow.document.querySelector("a.btn-primary");
-                el_btn.innerHTML = "<span>Start free trial<\/span><i class=\"fas fa-arrow-right\"><\/i>";
-            }
-        }
-    
-        else if (selectedValue==="btns-icons-none") {
-            // Only text, No icons.
-            if (iframe.contentWindow.document.querySelector("a.btn-primary")) {
-                const el_btn = iframe.contentWindow.document.querySelector("a.btn-primary");
-                const btn_content = "<span>Order now</span>";
-                el_btn.innerHTML = btn_content;
-            }
-    
-            if (iframe.contentWindow.document.querySelector("a.btn-secondary")) {
-                const el_btn = iframe.contentWindow.document.querySelector("a.btn-secondary");
-                const btn_content = "<span>Learn more</span>";
-                el_btn.innerHTML = btn_content;
-            }       
-        }
+    // Set up button icon and text content
+    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(1)");
 
+    const icon_left  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
+    const icon_right ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
+    const icon_none = "<span>Order now</span>";
+
+    if (selectedValue==="left") {
+        // Icon at left. Text at right.
+        el_btn.innerHTML = icon_left;
+    }
+    
+    else if (selectedValue==="right") {
+        // Text left. Icon at right.
+        el_btn.innerHTML = icon_right;
+    }
+    
+    else if (selectedValue==="none") {
+        // Only text, No icons.
+        el_btn.innerHTML = icon_none;
     }
 }
+
+/*
+//////////////// BUTTON 2: ICON POSITION ////////////////////
+*/
+
+document.querySelector("#switch_btns_icons_position_2").addEventListener("change", swapButtonIcons_2);
+
+function swapButtonIcons_2() {
+
+    const rbs = document.querySelectorAll("input[name='btns_icons_position_2']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    // Set up button icon and text content
+    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(2)");
+    const icon_left  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
+    const icon_right ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+    const icon_none = "<span>Learn more</span>";
+    
+    if (selectedValue==="left") {
+        // Icon at left. Text at right.
+        el_btn.innerHTML = icon_left;
+    }
+    
+    else if (selectedValue==="right") {
+        // Text left. Icon at right.
+        el_btn.innerHTML = icon_right;
+    }
+    
+    else if (selectedValue==="none") {
+        // Only text, No icons.
+        el_btn.innerHTML = icon_none;
+    }
+}
+
 
 /*
 //////////////// VISUAL ELEMENT INSIDE SINGLE-COLOUMN LAYOUT ///////////////
