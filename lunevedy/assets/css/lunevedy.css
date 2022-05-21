@@ -1558,7 +1558,7 @@ section {
 
 .theme-light { background-color: var(--slate-050) } 
 .theme-light { background-color: var(--white-000) } 
-.theme-light .container-upper-label { color: var(--slate-700) }
+.theme-light .container-upper-label { color: var(--black-000) }
 .theme-light h1, .theme-light h2, .theme-light h3, 
 .theme-light p, .theme-light li { color: var(--slate-900) }
 
@@ -2014,15 +2014,15 @@ section > .col-1 h3 {
 /* =================== TYPOGRAPHY  ================== */
 
 @media (min-width: 1025px) {
-    .col-2 h3 { font-size: 32px }
-    .col-2 p  { font-size: 22px }
-    .col-2 li { font-size: 21px; margin-bottom: 16px }
+    .col-2 h3 { font-size: 28px }
+    .col-2 p  { font-size: 20px }
+    .col-2 li { font-size: 20px; margin-bottom: 16px }
 }
 
 @media (min-width: 801px) and (max-width: 1024px) {
     .col-2 h3 { font-size: 26px }
-    .col-2 p  { font-size: 20px }
-    .col-2 li { font-size: 19px; margin-bottom: 12px }    
+    .col-2 p  { font-size: 19px }
+    .col-2 li { font-size: 18px; margin-bottom: 12px }    
 }
 
 @media (min-width: 768px) and (max-width: 800px) {
@@ -2130,34 +2130,50 @@ section .col-2 ul.fa-ul > li { margin-bottom: 14px }
 }
 
 /* Upper label */
-.cols-2-split .col-2 .container-upper-label {
+.cols-2-split .col-2 .container-upper-label,
+.cols-2-half  .col-2 .container-upper-label {
     font-weight: 600; display: inline-block; margin-left: 0;
-    font-size: calc(17px + (20 - 17) * (100vw - 320px) / (1140 - 320));
+    font-size: calc(15px + (18 - 15) * (100vw - 320px) / (1140 - 320));
 }
 
-@media (min-width: 768px) { .cols-2-split .container-upper-label { margin-bottom: 32px } }
-@media (max-width: 767px) { .cols-2-split .container-upper-label { margin-bottom: 20px } }
+@media (min-width: 768px) { 
+    .cols-2-split .container-upper-label,
+    .cols-2-half .container-upper-label { margin-bottom: 32px } 
+}
+
+@media (max-width: 767px) { 
+    .cols-2-split .container-upper-label,
+    .cols-2-half  .container-upper-label{ margin-bottom: 20px } 
+}
 
 /* Column headings */
-.cols-2-split .col-2 h2 {
-    font-size: calc(24px + (32 - 24) * ((100vw - 320px) / (1140 - 320)));
+.cols-2-split .col-2 h2,
+.cols-2-half  .col-2 h2 {
+    font-size: calc(24px + (40 - 24) * ((100vw - 320px) / (1140 - 320)));
     font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+    letter-spacing: -1px;
 }
 
 /* Column sub-headings */
-.cols-2-split .col-2 h3 {
+.cols-2-split .col-2 h3,
+.cols-2-half  .col-2 h3 {
     font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1140 - 320)));
     font-weight: 600; line-height: 1.15; margin-bottom: 6px; margin-top: 12px;
 }
 
 /* Paragraphs and Lists */
-.cols-2-split .col-2 p, .cols-2-split .col-2 li {
+.cols-2-split .col-2 p,
+.cols-2-half  .col-2 p,
+.cols-2-split .col-2 li,
+.cols-2-half  .col-2 li {
     font-size: calc(17px + (19 - 17) * ((100vw - 320px) / (1140 - 320)));
 }
 
-.cols-2-split .col-2 p { margin-bottom: 16px }
+.cols-2-split .col-2 p,
+.cols-2-half  .col-2 p { margin-bottom: 16px }
 
-.cols-2-split .col-2 li { 
+.cols-2-split .col-2 li,
+.cols-2-half  .col-2 li { 
     line-height: 1.4; margin-bottom: 10px; 
     margin-left: 20px; padding-left: 12px; 
 }
@@ -2166,31 +2182,33 @@ section .col-2 ul.fa-ul > li { margin-bottom: 14px }
 
 /* Desktops */
 @media (min-width: 1200px) {
-    .cols-2-split .container-btn { margin-top: 12px; padding-left: 0; width: 100% }
+    .cols-2-split .container-btn, 
+    .cols-2-half .container-btn { margin-top: 0; padding-left: 0; width: 100% }
+    .cols-2-split .container-btn a.btn,
     .cols-2-split .container-btn a.btn { display: inline-block }
-    .cols-2-split .container-btn a:nth-child(2) { margin-left: 32px }
-    .cols-2-split .container-btn a.btn { 
-        font-size: calc(16px + (18 - 16) * ((100vw - 320px)/(1920 - 320)));
-        padding: 14px 24px 17px 24px
-    }
+    .cols-2-split .container-btn a:nth-child(2),
+    .cols-2-half .container-btn a:nth-child(2) { margin-left: 32px }
 }
 
 /* Mobiles */
 @media (max-width: 1199px) {
-    .cols-2-split .container-btn {
+    .cols-2-split .container-btn,
+    .cols-2-half .container-btn {
         margin-top: 6px; 
         flex-direction: column;
         align-self: flex-start;
         padding-left: 0;
     }
-    .cols-2-split .container-btn a:first-child { margin-bottom: 30px }
+    .cols-2-split .container-btn a:first-child,
+    .cols-2-half .container-btn a:first-child { margin-bottom: 30px }
     /* .cols-2-split .container-btn a:last-child { margin-bottom: 32px !important } */
 }
 
 
 /* MOBILES */
 @media (max-width: 1199px) {
-    .cols-2-split .container-btn { 
+    .cols-2-split .container-btn,
+    .cols-2-half .container-btn { 
         /* margin-top: 42px;  */
         margin-top: 20px;
         display: flex; 
@@ -2198,10 +2216,13 @@ section .col-2 ul.fa-ul > li { margin-bottom: 14px }
         align-self: flex-start
     }
 
-    .cols-2-split .container-btn a:first-child { margin-bottom: 32px }
-    .cols-2-split .container-btn a:last-child  { margin-bottom: 0 }
+    .cols-2-split .container-btn a:first-child,
+    .cols-2-half .container-btn a:first-child { margin-bottom: 32px }
+    .cols-2-split .container-btn a:last-child,
+    .cols-2-half .container-btn a:last-child  { margin-bottom: 0 }
 
-    .cols-2-split .container-btn a.btn {
+    .cols-2-split .container-btn a.btn,
+    .cols-2-half .container-btn a.btn {
         flex-direction: column;
         align-self: flex-start;
     }
@@ -2209,7 +2230,8 @@ section .col-2 ul.fa-ul > li { margin-bottom: 14px }
 
 /* Figures */
 @media (max-width: 767px) { 
-    .cols-2-split .col-2 figure { margin-bottom: 42px !important }
+    .cols-2-split .col-2 figure,
+    .cols-2-half .col-2 figure { margin-bottom: 42px !important }
 }
 
 
@@ -2602,7 +2624,7 @@ section.fig-corners-soft .col-4 figure img {
     section.fig-shadow .col-2 figure,
     section.fig-shadow .col-3 figure,
     section.fig-shadow .col-4 figure {
-        filter: drop-shadow(10px 10px 4px rgb(160, 174, 192, 0.45)) 
+        filter: drop-shadow(10px 10px 4px rgb(160, 174, 192, 0.45));
     }
 }
 
@@ -2808,9 +2830,9 @@ a.btn-secondary:active {
 /* 3 and 4 multi-column layouts */
 .col-2 a.btn, .col-3 a.btn, .col-4 a.btn { display: inline-block; width: fit-content }
 
-.col-2 a.btn { margin-top: 16px }
-.col-3 a.btn { margin-top: 12px }
-.col-4 a.btn { margin-top: 8px }
+.col-2 a.btn:nth-child(2) { margin-top: 16px }
+.col-3 a.btn:nth-child(2) { margin-top: 12px }
+.col-4 a.btn:nth-child(2) { margin-top: 8px }
 
 /* Button sizes */ 
 a.btn { 
@@ -2829,10 +2851,15 @@ a.btn-large { padding: 14px 26px; font-size: 18px; font-weight: 600 }
 a.btn-large > *:nth-child(2), 
 button.btn-large > *:nth-child(2) { margin-left: 16px; margin-right: 0 } 
 
-.btn-block { display: block; width: 98% !important; text-align: center; margin-right: 4px !important }
+.btn-block { 
+    display: block; width: 98% !important; 
+    text-align: center; margin-right: 4px !important;
+    margin-left: 0 !important
+ }
 
-.btn-shadow { 
+a.btn-shadow { 
     box-shadow: 3.6px 3.6px 5.3px hsl(0deg 0% 0% / 0.42);
+    margin-bottom: 8px !important
 }
 
 .btn-uppercase { text-transform: uppercase; letter-spacing: 1.5px }
