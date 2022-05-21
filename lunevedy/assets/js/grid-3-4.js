@@ -18,7 +18,10 @@ sessionStorage.setItem('col-count', col_count);
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
+
+Need option to enable UI elements on frame load
 */
+
 
 // Hide all menus - except currently selected one.
 let divs = document.querySelectorAll('.dropbtn');
@@ -156,6 +159,9 @@ function dragElement(elmnt) {
 
 /*
 //////////////// SECTION: THEME  ///////////////
+
+First non-IU object of section
+
 */
 
 document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
@@ -318,7 +324,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
                 break;
             }
         }
-
+        // Test chckbox instead, limits to UI elements rather than section
         if (iframe.contentWindow.document.querySelector("section.theme-light")) {
             section_theme = "section.theme-light."+section_class;
         }
@@ -564,21 +570,21 @@ function doUpperBlockWidth() {
     let opt = document.querySelector("#dd_upper_block_width").value;
 
     if (opt==="0") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-960px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.add("col-1-width-800px");
     }
 
     else if (opt==="1") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-1140px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-960px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.add("col-1-width-960px");
     }
 
     else if (opt==="2") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-800px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.remove("col-1-width-960px");
-        iframe.contentWindow.document.querySelector("#HTML-Content section .col-1").classList.add("col-1-width-1140px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-800px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.remove("col-1-width-960px");
+        iframe.contentWindow.document.querySelector("section .col-1").classList.add("col-1-width-1140px");
     }    
 }
 
@@ -615,6 +621,8 @@ function doUpperBlockAlign() {
 document.querySelector("#cb_upper_label").addEventListener("change", doUpperLabel);
 
 function doUpperLabel() {
+
+    // innerText of 'CATEGORY'
 
     if (iframe.contentWindow.document.querySelector("section .col-1")) {
         if (!document.getElementById("cb_upper_label").checked) {
@@ -656,6 +664,8 @@ if (document.querySelector("#cb_upper_h2")) {
 }
 
 function doUpperH2() {
+
+    // Node text of 'Nice section heading'
     if (!document.getElementById("cb_upper_h2").checked) {
         removeUpperH2();
     }
@@ -697,6 +707,8 @@ function removeUpperH2() {
 */
 
 document.querySelector("#cb_upper_h3").addEventListener("change", doUpperH3);
+
+//  Node h3 text of 'Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.'
 
 function doUpperH3() {
     if (!document.getElementById("cb_upper_h3").checked) {
@@ -741,6 +753,8 @@ function removeUpperH3() {
 */
 
 document.querySelector("#cb_upper_block").addEventListener("change", doUpperBlock);
+
+// Node text h2 and h3 texts
 
 function doUpperBlock() {
     if (!document.getElementById("cb_upper_block").checked) {
@@ -1245,6 +1259,9 @@ function doColButtons() {
 }
 
 function addColButtons(el_cols,btn_class) {
+    
+    //  Button text and icons
+    
     const el_btn = document.createElement('a');
     el_btn.setAttribute("href", "#");
     el_btn.setAttribute("class", "btn "+btn_class);
@@ -1282,6 +1299,9 @@ function removeColButtons() {
 document.querySelector("#switch-btns-icons-position").addEventListener("change", swapButtonIcons);
 
 function swapButtonIcons() {
+
+    //  Button text and icons
+
     const rbs = document.querySelectorAll("input[name='btns-icons-position']");
     let selectedValue;
     
@@ -1462,48 +1482,6 @@ function doBtnWidth() {
             el_btn.classList.add("btn-block");
         }
     }
-}
-
-/*
-//////////////// BUTTONS: STYLE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsSize);
-
-function doButtonsSize() {
-    let opt = document.querySelector("#dd_buttons_size").value;
-    const col_count = parseInt(sessionStorage.getItem('col-count'));
-    const obj_btn = iframe.contentWindow.document.querySelectorAll('section > '+col_no+' > a.btn');
-    let el_btn;
-    
-    // Small
-    if (opt==="0") { 
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-large");
-            el_btn.classList.add("btn-small");
-        }
-    }
-    // Regular
-    else if (opt==="1") { 
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-small");
-            el_btn.classList.remove("btn-large");
-        }
-    }
-    
-    // Large
-    else if (opt==="2") { 
-        // Loop through buttons
-        for (let i = 0; i < col_count; i++) {        
-            el_btn = obj_btn[i];
-            el_btn.classList.remove("btn-small");
-            el_btn.classList.add("btn-large");
-        }
-    }    
 }
 
 /*

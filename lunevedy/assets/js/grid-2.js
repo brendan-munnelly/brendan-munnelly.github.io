@@ -34,12 +34,12 @@ divs.forEach(el => el.addEventListener('click', event => {
     elItem_show.classList.remove("dropdown-hidden"); 
     
     if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        // // Work with upper block
-        // if (menuId==="2") {
-        //     window.scrollTo(0,0);
-        // }
+        // Work with upper block
+        if (menuId==="2") {
+            window.scrollTo(0,0);
+        }
         // Work with columns
-        if (menuId==="3") {
+        else if (menuId==="3") {
             let el = iframe.contentWindow.document.querySelector(col_no);
             el.scrollIntoView(true);
         }
