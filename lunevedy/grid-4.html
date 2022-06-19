@@ -4,168 +4,175 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4-Column Layout | Lunevedy UI | Brendan Munnelly</title>
-    <meta name="description" content="A JavaScript app for creating 4-column HTML5 web page snippets. By Brendan Munnelly.">
+    <title>4-Column Layout | Lunevedy UI Builder | Brendan Munnelly</title>
+    <meta name="description" content="Quickly create 4-column web page layouts with this free online app. By Brendan Munnelly.">
 
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/controls-general.css" />
-    <link rel="stylesheet" href="assets/css/controls-grid-3-4.css" />
-    <link rel="stylesheet" href="assets/css/lunevedy.css">
+    <link rel="stylesheet" href="assets/css/controls-grid-2-3-4.css" />
         
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
     <link rel="manifest" href="assets/img/site.webmanifest">
-
+    
     <style>
+
     </style>    
+
+    <script>
+        sessionStorage.clear();
+        sessionStorage.setItem('col-count', 4);
+        sessionStorage.setItem('col-no', '.col-4');
+        sessionStorage.setItem('col-background', 'default');
+        sessionStorage.setItem('section-selector', 'section-selector-1');
+        sessionStorage.setItem('section-theme', 'section.theme-light.section-selector-1'); 
+        let col_no = '.col-4'; let col_count = 4;
+    </script>
 
 </head>
 
 
 <body>
 
-            <div class="controls-top ui-dark">
+<div class="controls-top">
 
-                <nav id="control-menu">
-                    <div>
-                        <a href="index.html"><img src="assets/img/website-logo.png"></a>
-                        <a href="index.html" id="back">&lt; &nbsp;Back</a>
+    <nav id="control-menu">
+        <div>
+            <a href="index.html"><img src="assets/img/website-logo.png"></a>
+            <a href="index.html" id="back">&lt; &nbsp;Back</a>
+        </div>
+            
+        <ul id="ui-menus">
+            
+            <li class="dropdown">
+                <span id="menu-1" class="dropbtn">Section</span>
+                <div id="content-1" class="dropdown-content dropdown-hidden">
+            
+                    <div class="dialog-box-header">
+                        <span class="text">
+                            <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">SECTION OPTIONS
+                        </span>
+                        <span class="close-x">&times;</span>
                     </div>
-        
-                    <ul id="ui-menus">
-        
-                        <li class="dropdown">
-                            <span id="menu-1" class="dropbtn">Section</span>
-                            <div id="content-1" class="dropdown-content dropdown-hidden">
-        
-                                <div class="dialog-box-header">
-                                    <span class="text">
-                                        <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">SECTION MAIN OPTIONS
-                                    </span>
-                                    <span class="close-x">&times;</span>
-                                </div>
                                 
-                                <div class="dialog-box">
-        
-                                    <div class="input-group">
-                                        <label>Section Class</label>
-                                        <select id="dd_className" style="width:164px; letter-spacing: 0.5px">
-                                            <option value="0" selected="selected">section-selector-1</option>
-                                            <option value="1">selector-selector-2</option>
-                                            <option value="2">selector-selector-3</option>
-                                            <option value="3">selector-selector-4</option>
-                                            <option value="4">selector-selector-5</option>
-                                            <option value="5">selector-selector-6</option>
-                                        </select>
-                                    </div>
-        
-                                    <div class="input-group">
-                                        <label>Max. Width</label>
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><g id="surface1">
-                                        <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></g></svg>
-                                        <select id="dd_text_width" style="width: 132px">
-                                            <option value="3" selected="selected">1140px</option>
-                                            <option value="4">1320px</option>
-                                            <option value="5">1536px</option>
-                                        </select>
-        
-                                    </div>
-        
-                                    <div class="input-group">
-                                        <label>Background</label>
-                                        <div><button id="btn_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button></div>
-                                    </div>
-        
-                                </div>
-                            </div><!-- /dropdown-content -->
-                        </li>
-        
-                        <li class="dropdown">
-                            <span id="menu-2" class="dropbtn">Upper Block</span>
-                            <div id="content-2" class="dropdown-content dropdown-hidden">
-        
-                                <div class="dialog-box-header">
-                                    <span class="text">
-                                        <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">UPPER BLOCK OPTIONS
-                                    </span>
-                                    <span class="close-x">&times;</span>
-                                </div>
-                                
-                                <div class="dialog-box">
-        
-                                    <div class="input-group">
-                                        <label for="cb_upper_block" class="off">Upper Block</label>
-                                        <input id="cb_upper_block" type="checkbox" class="switch" style="margin-top:8px">
-
-                                        <label style="margin-left: 20px;min-width: 60px">Align</label>
-                                        <form id="switch-upper-block-align" class="switch-field">
-                                            <input type="radio" id="rb_upper_align_left" name="upper-block-align" value="left" />
-                                            <label for="rb_upper_align_left">
-                                                <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
-                                            </label>
-                                            <input type="radio" id="rb_upper_align_center" name="upper-block-align" value="center" checked />
-                                            <label for="rb_upper_align_center">
-                                                <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
-                                            </label>
-                                        </form>
-
-                                    </div><!-- /input-group -->
-                                    <hr>
-        
-                                    <div class="input-group">
-        
-                                        <label style="min-width: 112px">Width</label><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><g id="surface2">
-                                            <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></g></svg>
-        
-                                        <select id="dd_upper_block_width" style="min-width: 120px">
-                                            <option value="0" selected="selected">800px</option>
-                                            <option value="1">960px</option>
-                                            <option value="2">1140px</option>
-                                        </select>
-        
-                                    </div><!-- /.input-group -->
-        
-                                   <hr>
-                                    <div class="input-group">
-                                        <label for="cb_upper_label" class="off">Label</label>
-                                        <form id="cb_upperLabel">
-                                            <input id="cb_upper_label" type="checkbox" class="switch">
-                                            &nbsp; &nbsp; &nbsp;
-                                            <button id="btn_upper_label" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 02.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
-                                        </form>
-                                    </div><!-- /input-group -->
-        
-                                    <div class="input-group">
-                                        <label for="cb_upper_h2">Heading</label>
-                                        <form id="cb_upperH2">
-                                            <input id="cb_upper_h2" type="checkbox" class="switch" checked>
-                                            &nbsp; &nbsp; &nbsp;
-                                            <button id="btn_upper_head" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
-                                        </form>
-                                    </div><!-- /input-group -->
-        
-                                    <div class="input-group">
-                                        <label for="cb_upper_h3">Sub-Heading</label>
-                                        <form id="cb_upperH3">
-                                            <input id="cb_upper_h3" type="checkbox" class="switch" checked>
-                                            &nbsp; &nbsp; &nbsp;
-                                            <button id="btn_upper_subhead" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
-                                        </form>
-                                    </div><!-- /input-group -->
+                    <div class="dialog-box">
                         
-                                </div>
-                            </div><!-- /dropdown-content -->
-                        </li>
+                        <div class="input-group">
+                            <label>Section Class Name</label>
+                            <select id="dd_class_name">
+                                <option value="0" selected="selected">section-selector-1</option>
+                                <option value="1">section-selector-2</option>
+                                <option value="2">section-selector-3</option>
+                                <option value="3">section-selector-4</option>
+                                <option value="4">section-selector-5</option>
+                                <option value="5">section-selector-6</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>Max. Width</label>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop">
+                            <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></svg>
+                            <select id="dd_section_width">
+                                <option value="2">1024px</option>
+                                <option value="3" selected="selected">1140px</option>
+                                <option value="4">1320px</option>
+                                <option value="5">1536px</option>
+
+                            </select>
+                        </div>
+                
+                        <div class="input-group">
+                            <label>Background</label>
+                            <div><button id="btn_section_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button></div>
+                        </div>
+                    </div>
+                </div><!-- /dropdown-content -->
+            </li>
+        
+            <li class="dropdown">
+                <span id="menu-2" class="dropbtn">Upper Block</span>
+                <div id="content-2" class="dropdown-content dropdown-hidden">
+        
+                    <div class="dialog-box-header">
+                        <span class="text">
+                            <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">UPPER BLOCK OPTIONS
+                        </span>
+                        <span class="close-x">&times;</span>
+                    </div>
+                                
+                    <div class="dialog-box">
+        
+                        <div class="input-group">
+                            <label for="cb_col_1" class="off">Upper Block</label>
+                            <input id="cb_col_1" type="checkbox" class="switch">
+                            <label id="label-align">Align</label>
+
+                            <form id="form_col_1_align" name="form_col_1_align" class="switch-field">
+                                <input type="radio" id="rb_col_1_align_left" name="col_1_align" value="left" />
+                                <label for="rb_col_1_align_left">
+                                    <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+                                <input type="radio" id="rb_col_1_align_center" name="col_1_align" value="center" checked />
+                                <label for="rb_col_1_align_center">
+                                    <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+                            </form>
+
+                        </div><!-- /input-group -->
+                        <hr>
+        
+                        <div class="input-group">
+        
+                            <label>Max. Width</label>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></svg>
+        
+                            <select id="dd_col_1_width">
+                                <option value="0" selected="selected">800px</option>
+                                <option value="1">960px</option>
+                                <option value="2">1140px</option>
+                            </select>
+        
+                        </div><!-- /.input-group -->
+        
+                        <hr>
+                        <div class="input-group">
+                            <label for="cb_col_1_label" class="off">Label</label>
+                            <input id="cb_col_1_label" type="checkbox" class="switch">
+                            &nbsp; &nbsp; &nbsp;
+                            <button id="btn_col_1_label_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 02.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                        </div><!-- /input-group -->
+        
+                        <div class="input-group">
+                            <label for="cb_col_1_h2">Heading</label>
+                            <input id="cb_col_1_h2" type="checkbox" class="switch" checked>
+                            &nbsp; &nbsp; &nbsp;
+                            <button id="btn_col_1_h2_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                        </div><!-- /input-group -->
+        
+                        <div class="input-group">
+                            <label for="cb_col_1_h3">Sub-Heading</label>
+                            <input id="cb_col_1_h3" type="checkbox" class="switch" checked>
+                            &nbsp; &nbsp; &nbsp;
+                            <button id="btn_col_1_h3_text" class="btn_style">
+                                <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;
+                            </button>
+                        </div><!-- /input-group -->
+                        
+                    </div>
+                </div><!-- /dropdown-content -->
+            </li>
+
                   
                         <li class="dropdown">
                             <span id="menu-3" class="dropbtn">Columns</span>
                             <div id="content-3" class="dropdown-content dropdown-hidden">
                                 <div class="dialog-box-header">
                                     <span class="text">
-                                        <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLUMN OPTIONS
+                                        <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLUMNS OPTIONS
                                     </span>
                                     <span class="close-x">&times;</span>
                                 </div>
@@ -175,13 +182,13 @@
                                     <div class="input-group">
                                         
                                         <label style="min-width: 60px">Align &nbsp;</label>
-                                        <form id="switch-col-align" class="switch-field">
-                                            <input type="radio" id="rd_col_align_left" name="col-align" value="left" />
-                                            <label for="rd_col_align_left">
+                                        <form id="form-cols-align" name="form-cols-align" class="switch-field">
+                                            <input type="radio" id="rb_cols_align_left" name="cols-align" value="left" />
+                                            <label for="rb_cols_align_left">
                                                 <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                             </label>
-                                            <input type="radio" id="rd_col_align_center" name="col-align" value="center" checked />
-                                            <label for="rd_col_align_center">
+                                            <input type="radio" id="rb_cols_align_center" name="cols-align" value="center" checked />
+                                            <label for="rb_cols_align_center">
                                                 <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                             </label>
                                         </form>
@@ -198,50 +205,50 @@
                                     <hr style="margin-top: 0">
         
                                     <div class="input-group">
-                                        <label for="cb_h3">Sub-headings</label>
-                                        <input id="cb_h3" type="checkbox" class="switch" checked style="margin-right: 36px">
-                                        <button id="btn_col_subhead" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                                        <label for="cb_cols_h3">Sub-headings</label>
+                                        <input id="cb_cols_h3" type="checkbox" class="switch" checked style="margin-right: 36px">
+                                        <button id="btn_cols_h3" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                                     </div><!-- /input-group -->                            
         
                                     <div class="input-group">
                                         <label style="min-width: 70px">Text</label>
-                                        <select id="dd_text" style="width: 134px">
+                                        <select id="dd_cols_text" style="width: 134px">
                                             <option value="0">None</option>
                                             <option value="1" selected="selected">Paragraphs</option>
                                             <option value="2">Lists</option>
                                         </select>
-                                        <button id="btn_col_text" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                                        <button id="btn_cols_text" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                                     </div>            
         
                                     <div class="input-group">
                                         <label style="min-width: 70px">Marker</label>
-                                        <select id="dd_list_marker" style="width: 134px" disabled>
+                                        <select id="dd_cols_list_marker" style="width: 134px" disabled>
                                             <option value="0" selected="selected">Regular</option>
                                             <option value="1">Font Awesome</option>
                                         </select>
-                                        <button id="btn_list_marker" class="btn_style" style="margin-left: 22px" disabled><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                                        <button id="btn_cols_list_marker" class="btn_style" style="margin-left: 22px" disabled><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                                     </div> 
 
                                     <hr style="margin-top: 0">
         
                                     <div class="input-group" style="margin-top: 24px">
                                         <label style="min-width: 110px">Background</label>
-                                        <button id="btn_col_background" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button>
+                                        <button id="btn_cols_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button>
                                     </div>
                                     
                                     <div class="input-group">
-                                        <label for="cb_col_shadows" style="min-width: 110px">Shadows</label>
-                                        <input id="cb_col_shadows" type="checkbox" class="switch">
+                                        <label for="cb_cols_shadows" style="min-width: 110px">Shadows</label>
+                                        <input id="cb_cols_shadows" type="checkbox" class="switch">
         
-                                        <label for="cb_col_corners" style="margin-left: 32px; min-width: 100px">Soft Corners</label>
-                                        <input id="cb_col_corners" type="checkbox" class="switch">
+                                        <label for="cb_cols_corners_soft" style="margin-left: 32px; min-width: 100px">Soft Corners</label>
+                                        <input id="cb_cols_corners_soft" type="checkbox" class="switch">
                                     </div><!-- /input-group -->  
                                     
                                     <div class="input-group">
                                         <label for="cb_col_borders" style="min-width: 110px">Borders</label>
                                         <input id="cb_col_borders" type="checkbox" class="switch">
                                         
-                                        <button id="btn_col_border_color" class="btn_style" style="margin-left: 30px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                                        <button id="btn_cols_border_color" class="btn_style" style="margin-left: 30px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                                     </div><!-- /input-group -->
         
                                 </div>
@@ -262,25 +269,26 @@
                         <div class="dialog-box">
 
                             <div class="input-group">
-                                <label for="cb_colButtons" style="width:84px; min-width:84px">Buttons</label>
-                                <input id="cb_colButtons" type="checkbox" class="switch">
+                                <label for="cb_btns" style="width:84px; min-width:84px">Buttons</label>
+                                <input id="cb_btns" type="checkbox" class="switch">
 
                                 <label for="dd_buttons_type" style="margin-left: 90px; width: 64px; min-width:64px">Type</label>
                                 <select id="dd_buttons_type" style="letter-spacing: 0.5px">
-                                    <option value="0">Solid</option>
-                                    <option value="1" selected="selected">Outline</option>
+                                    <option value="0" selected="selected">Solid</option>
+                                    <option value="1">Outline</option>
+                                    <option value="2">Link</option>
                                 </select>
                             </div><!-- /input-group -->
     
                             <div class="input-group">
                                 <label for="dd_buttons_size" style="width:84px; min-width:84px">Size</label>
                                 <select id="dd_buttons_size" style="letter-spacing: 0.5px">
-                                    <option value="0"  selected="selected">Small</option>
-                                    <option value="1">Regular</option>
+                                    <option value="0">Small</option>
+                                    <option value="1" selected="selected">Regular</option>
                                     <option value="2">Large</option>
                                 </select>
                                 <label class="shape" style="margin-left: 50px; width: 65px; min-width:65px">Shape</label>
-                                <select id="dd_buttons_style" style="letter-spacing: 0.5px">
+                                <select id="dd_buttons_shape" style="letter-spacing: 0.5px">
                                     <option value="0" selected="selected">Corner</option>
                                     <option value="1">Soft</option>
                                     <option value="2">Pill</option>
@@ -288,43 +296,42 @@
                             </div><!-- /input-group -->
 
                             <div class="input-group" style="margin-top: 8px">
-                                <label for="switch-btns-icons-position" style="width:84px; min-width:84px">Icon</label>
-                                <form id="switch-btns-icons-position" class="switch-field">
-                                    <input type="radio" id="rd-btns-icons-left" name="btns-icons-position" value="btns-icons-left" />
+                                <label for="form-btns-icons" style="width:84px; min-width:84px">Icon</label>
+                                <form id="form-btns-icons" name="form-btns-icons" class="switch-field">
+                                    <input type="radio" id="rb_btns_icons_left" name="btns-icons" value="left" />
 
-                                    <label for="rd-btns-icons-left" style="width: 36px">
+                                    <label for="rb_btns_icons_left" style="width: 36px">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 0 12 16" version="1.1">  
                                         <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg> 
                                     </label>
         
-                                    <input type="radio" id="rd-btns-icons-right" name="btns-icons-position" value="btns-icons-right" />
-                                    <label for="rd-btns-icons-right" style="width: 36px">
+                                    <input type="radio" id="rb_btns_icons_right" name="btns-icons" value="right" />
+                                    <label for="rb_btns_icons_right" style="width: 36px">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 0 16 16" version="1.1" style="display: block; transform: scale(-1,1)">
                                         <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg>
                                     </label>
           
-                                    <input type="radio" id="rd-btns-icons-none" name="btns-icons-position" value="btns-icons-none" />
+                                    <input type="radio" id="rd-btns-icons-none" name="btns-icons" value="none" />
 
                                     <label for="rd-btns-icons-none" style="width: 40px">  
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="18"><g transform="matrix(0.03805497 0 0 0.03805497 3.0000007 -0)"><path d="M324.285 215.015L324.285 128L344.285 128L344.285 38L245.901 38L245.901 0L132.669 0L132.669 38L34.285 38L34.285 128L54.285 128L54.285 433L215.808 433C 239.386 457.635 272.574 473 309.285 473C 380.653 473 438.715 414.938 438.715 343.57C 438.715 277.276 388.612 222.474 324.285 215.015zM294.285 215.015C 276.233 217.108 259.303 222.926 244.285 231.684L244.285 231.684L244.285 128L294.285 128L294.285 215.015zM162.669 30L215.901 30L215.901 38L162.669 38L162.669 30zM64.285 68L314.285 68L314.285 98L64.285 98L64.285 68zM84.285 128L134.285 128L134.285 403L84.285 403L84.285 128zM164.285 403L164.285 128L214.285 128L214.285 255.768C 192.929 278.857 179.856 309.714 179.856 343.57C 179.856 364.98102 185.087 385.19202 194.33101 403L194.33101 403L164.285 403zM309.285 443C 254.459 443 209.856 398.396 209.856 343.57C 209.856 288.74402 254.46 244.141 309.285 244.141C 364.11 244.141 408.715 288.745 408.715 343.57C 408.715 398.39502 364.111 443 309.285 443z" stroke="none" fill-rule="nonzero" /><path d="M342.248 289.395L309.285 322.358L276.323 289.395L255.11 310.608L288.073 343.571L255.11 376.533L276.323 397.746L309.285 364.783L342.248 397.746L363.461 376.533L330.498 343.571L363.461 310.608L342.248 289.395" stroke="none" fill-rule="nonzero" /></g></svg>
                                     </label>
                                 </form>
 
-                                <label for="cb_col_buttons_width" style="margin-left: 30px; width:100px;min-width:100px">Full Width</label>
-                                <input id="cb_col_buttons_width" type="checkbox" class="switch" disabled>
+                                <label for="cb_buttons_width" style="margin-left: 30px; width:100px;min-width:100px">Full Width</label>
+                                <input id="cb_buttons_width" type="checkbox" class="switch" disabled>
+                                
                             </div>                                
                             
-
                             <div class="input-group" style="margin-top: 8px">
                                 
-                                <label for="cb_col_buttons_shadow" style="width:84px;min-width:84px">Shadow</label>
-                                <input id="cb_col_buttons_shadow" type="checkbox" class="switch" disabled>
+                                <label for="cb_buttons_shadow" style="width:84px;min-width:84px">Shadow</label>
+                                <input id="cb_buttons_shadow" type="checkbox" class="switch" disabled>
                                 
-                                <label for="cb_col_buttons_uppercase" style="margin-left: 90px; width:100px;min-width:100px">UPPERCASE</label>
-                                <input id="cb_col_buttons_uppercase" type="checkbox" class="switch" disabled>
+                                <label for="cb_buttons_uppercase" style="margin-left: 90px; width:100px;min-width:100px">UPPERCASE</label>
+                                <input id="cb_buttons_uppercase" type="checkbox" class="switch" disabled>
 
                             </div>
-
 
                             <hr>
 
@@ -335,13 +342,13 @@
                                 <div class="column column-wider">
                                     <label>Text</label>
                                     <div>
-                                        <button id="btn_a_primary_passive_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+                                        <button id="btn_cols_text_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
                                     </div>
                                 </div>
 
                                 <div class="column">
                                     <div style="padding-top:1px">
-                                        <button id="btn_a_primary_active_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
+                                        <button id="btn_cols_text_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
                                     </div>
                                 </div>
                             </div><!-- /input-group two-col -->
@@ -351,13 +358,13 @@
                                 <div class="column column-wider">
                                     <label>Background</label>
                                     <div>
-                                        <button id="btn_a_primary_passive_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Passive&#8230;</button>
+                                        <button id="btn_cols_bg_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Passive&#8230;</button>
                                     </div>
                                 </div>
 
                                 <div class="column">
                                     <div style="padding-top:2px">
-                                        <button id="btn_a_primary_active_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Active&#8230;</button>
+                                        <button id="btn_cols_bg_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Active&#8230;</button>
                                     </div>
                                 </div>
                             </div><!-- /input-group two-col -->
@@ -366,13 +373,13 @@
                                 <div class="column column-wider">
                                     <label>Border</label>
                                     <div>
-                                        <button id="btn_a_primary_passive_border" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+                                        <button id="btn_cols_border_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
                                     </div>
                                 </div>
                                     
                                 <div class="column">
                                     <div style="padding-top:2px">
-                                        <button id="btn_a_primary_active_border" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
+                                        <button id="btn_cols_border_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
                                     </div>
                                 </div>
                             </div><!-- /input-group two-col -->
@@ -394,28 +401,38 @@
                         <div class="dialog-box">
                             <div class="flex-two-col">
                                 <div><!-- first-child -->
-                                    <form id="vis-types-all" name="vis-types-all">
+                                    <form id="form_vis_types" name="form_vis_types">
                                         
                                         <h4>TYPE</h4>
                 
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_0" name="visual_options" value="none">
+                                            <input type="radio" id="rb_vis_type_0" name="vis_type" value="none">
                                             <label for="rb_vis_type_0">None</label>
                                         </div><!-- /input-group -->
 
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_1" name="visual_options" value="pictures" checked>
+                                            <input type="radio" id="rb_vis_type_1" name="vis_type" value="pictures" checked>
                                             <label for="rb_vis_type_1">Pictures</label>
                                         </div><!-- /input-group -->
 
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_2" name="visual_options" value="transparent">
+                                            <input type="radio" id="rb_vis_type_2" name="vis_type" value="transparent">
                                             <label for="rb_vis_type_2">Transparent</label>
                                         </div><!-- /input-group -->
 
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_3" name="visual_options" value="illustrations">
+                                            <input type="radio" id="rb_vis_type_3" name="vis_type" value="illustrations">
                                             <label for="rb_vis_type_3">Drawings</label>
+                                        </div><!-- /input-group -->
+
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_6" name="vis_type" value="vid_file">
+                                            <label for="rb_vis_type_6">Video (File)</label>
+                                        </div><!-- /input-group -->
+
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_7" name="vis_type" value="vid_yt">
+                                            <label for="rb_vis_type_7">Video (YouTube)</label>
                                         </div><!-- /input-group -->
                                         
                                         <hr>
@@ -423,12 +440,12 @@
                                         <h4 style="margin-top: 18px">ICONS</h4>
                                         
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_4" name="visual_options" value="icons-fa">
+                                            <input type="radio" id="rb_vis_type_4" name="vis_type" value="icons-fa">
                                             <label for="rb_vis_type_4">Font Awesome</label>
                                         </div><!-- /input-group -->
                                                 
                                         <div class="input-group-vertical">
-                                            <input type="radio" id="rb_vis_type_5" name="visual_options" value="icons-la">
+                                            <input type="radio" id="rb_vis_type_5" name="vis_type" value="icons-la">
                                             <label for="rb_vis_type_5">Line Awesome</label>
                                         </div><!-- /input-group -->
                                     </form>
@@ -439,49 +456,49 @@
                                     <h4 style="margin-bottom: 5px">PROPERTIES</h4>
                                 
                                     <div class="input-group-vertical" style="margin-bottom:10px">
-                                        <label for="cb_img_shadowsOn" style="margin-top: 0; width: 100px">Shadows</label>
-                                        <input id="cb_img_shadowsOn" type="checkbox" class="switch">
+                                        <label for="cb_img_shadows" style="margin-top: 0; width: 100px">Shadows</label>
+                                        <input id="cb_img_shadows" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
                                                                 
                                     <div class="input-group-vertical" style="margin-bottom: 68px">
-                                        <label for="cb_img_cornersOn" style="margin-top: 0; width: 100px">Soft Corners</label>
-                                        <input id="cb_img_cornersOn" type="checkbox" class="switch">
+                                        <label for="cb_img_corners_soft" style="margin-top: 0; width: 100px">Soft Corners</label>
+                                        <input id="cb_img_corners_soft" type="checkbox" class="switch">
                                     </div><!-- /input-group -->
                                                 
                                     <hr style="margin-bottom: 24px">
 
                                     <div class="input-group-vertical">
-                                        <label for="switch-icon-align" style="margin-top: 0; min-width: 60px">Align</label>
+                                        <label for="form_icons_align" style="margin-top: 0; min-width: 60px">Align</label>
         
-                                        <form id="switch-icon-align" class="switch-field">
+                                        <form id="form_icons_align" name="form_icons_align" class="switch-field">
 
-                                            <input type="radio" id="radio-icon-align-left" name="radio-icon-align" value="left" />
-                                            <label for="radio-icon-align-left">
+                                            <input type="radio" id="rb_icon_align_left" name="icons_align" value="left" />
+                                            <label for="rb_icon_align_left">
                                                 <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                             </label>
                                             
-                                            <input type="radio" id="radio-icon-align-center" name="radio-icon-align" value="center" checked />
-                                            <label for="radio-icon-align-center">
+                                            <input type="radio" id="rb_icon_align_center" name="icons_align" value="center" checked />
+                                            <label for="rb_icon_align_center">
                                                 <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                             </label>
                                         </form>
                                     </div><!-- /input-group -->
                                     
                                     <div class="input-group-vertical">
-                                        <label for="switch-icon-size" style="margin-top: 0; min-width: 60px">Size</label>
+                                        <label for="form_icon_size" style="margin-top: 0; min-width: 60px">Size</label>
         
-                                        <form id="switch-icon-size" class="switch-field">
+                                        <form id="form_icon_size" name="form_icon_size" class="switch-field">
 
-                                            <input type="radio" id="cb-icon-size-plus" name="icon-size" value="icon-plus" />
-                                            <label for="cb-icon-size-plus">
+                                            <input type="radio" id="cb_icon_size_plus" name="icon-size" value="icon-plus" />
+                                            <label for="cb_icon_size_plus">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="16" height="16" viewbox="0 0 16 16">
                                                 <g transform="matrix(0.6666667 0 0 0.6666667 0 0)">
                                                 <path transform="matrix(-1 1.5099579E-07 -1.5099579E-07 -1 24 23.999998)" d="M0 0L24 0L24 24L0 24z" stroke="none" fill="none" />
                                                 <path d="M19 11L13 11L13 5C 13 4.4477153 12.552284 4 12 4C 11.447715 4 11 4.4477153 11 5L11 5L11 11L5 11C 4.4477153 11 4 11.447716 4 12C 4 12.552285 4.4477153 13 5 13L5 13L11 13L11 19C 11 19.552284 11.447716 20 12 20C 12.552285 20 13 19.552284 13 19L13 19L13 13L19 13C 19.552284 13 20 12.552284 20 12C 20 11.447715 19.552284 11 19 11z" stroke="none" fill-rule="nonzero" /></g></svg>
                                             </label>
                                             
-                                            <input type="radio" id="cb-icon-size-minus" name="icon-size" value="icon-minus" checked />
-                                            <label for="cb-icon-size-minus">
+                                            <input type="radio" id="cb_icon_size_minus" name="icon-size" value="icon-minus" checked />
+                                            <label for="cb_icon_size_minus">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16" >
                                                 <g transform="matrix(0.01953125 0 0 0.01953125 0 0)">
                                                 <path d="M872 474L152 474C 147.6 474 144 477.6 144 482L144 482L144 542C 144 546.4 147.6 550 152 550L152 550L872 550C 876.4 550 880 546.4 880 542L880 542L880 482C 880 477.6 876.4 474 872 474z" stroke="none" fill-rule="nonzero" />
@@ -2158,18 +2175,6 @@
           </div><!-- / Modal -->
           
     </div><!-- / Modal content -->
-          
-    <script>
-        function onFrameLoaded() {
-            loadApp();
-        } 
-    </script>
-
-    <script src="assets/js/grid-3-4.js"></script>
-
-    <div class="page-preview-body" id="page-preview-body">
-        <iframe src="grid-4-embed.html" style="border:none" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
-    </div>
 
     <div class="lower-left">
 
@@ -2260,169 +2265,142 @@
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 14" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.5 2.5 L 2.5 15 L 6.875 15 L 6.875 13.75 L 3.75 13.75 L 3.75 3.75 L 11.25 3.75 L 11.25 4.375 L 12.5 4.375 L 12.5 2.5 Z M 7.5 5 L 7.5 17.5 L 17.5 17.5 L 17.5 5 Z M 8.75 6.25 L 16.25 6.25 L 16.25 16.25 L 8.75 16.25 Z M 8.75 6.25 "/></svg><span>CSS</span>
         </button>
     </div>
+    <div class="loading">
+        <div>
+            <img src="assets/img/lunevedy-logo-small.png" alt="Lunevedy page loading image">
+        </div>
+        <div>
+            <p>Loading&#8230;</p>
+        </div>
+    </div>
 
+    <div class="page-preview-body" id="page-preview-body">
+        <iframe src="grid-4-embed.html" style="border:none" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
+    </div>
 
     </main>
 
     <script>
-
-    sessionStorage.clear();
-    sessionStorage.setItem('col-background', 'default');
-    let col_no = ".col-4";
-
-    function getResolution() {
-        const realWidth = window.screen.width * window.devicePixelRatio;
-        const realHeight = window.screen.height * window.devicePixelRatio;
-        // console.log(`Your screen resolution is: ${realWidth} x ${realHeight}`);
-    }
-
-    getResolution();
-
-    const iframe = document.getElementById('livePreviewFrame');
-
-	// Inital resets
-	document.addEventListener("DOMContentLoaded", resetMenuOptions);
-
-    // Get these from object in lunevedy.js 
-	function resetMenuOptions() {
-        // Section theme
-        document.getElementById("rb_theme_light").checked = true;
-        document.getElementById("cb_outlines").checked = false;
-
-        // Sections
-        document.getElementById("dd_className").value="0";
-        document.getElementById("dd_text_width").value = "3";
-
-        // Upper block
-        document.getElementById("cb_upper_block").checked = true;
-        document.getElementById("rb_upper_align_center").checked = true;
-        document.getElementById("dd_upper_block_width").value = "0";
-        document.getElementById("cb_upper_label").checked = false;
-        document.getElementById("cb_upper_h2").checked = true;
-        document.getElementById("cb_upper_h3").checked = true;
-        document.getElementById("btn_upper_label").disabled=true;
-            
-        // Columns
-        document.getElementById("rd_col_align_left").checked = true;
-        document.getElementById("cb_col_shadows").disabled=false;
-        document.getElementById("cb_col_shadows").checked=false;
-        document.getElementById("btn_col_background").disabled=false;
-
-        document.getElementById("cb_col_borders").checked=false;
-        document.getElementById("cb_col_borders").disabled=false;    
-        document.getElementById("btn_col_border_color").disabled=true;
-        document.getElementById("cb_col_corners").disabled=true; 
-        document.getElementById("cb_col_corners").checked=false; 
-        document.getElementById("dd_cols_mobile").value="1";
-
-        // Text
-        document.getElementById("cb_h3").checked=true;
-        document.getElementById("dd_text").value="1";
-        document.getElementById("dd_list_marker").disabled=true;
-        document.getElementById("btn_list_marker").disabled=true;
-
-
-        // Buttons
-        document.getElementById("cb_colButtons").checked=false;
-        document.getElementById("dd_buttons_type").disabled=true;
-        document.getElementById("dd_buttons_type").value="0";
-        document.getElementById("dd_buttons_style").value="0";
-        document.getElementById("switch-btns-icons-position").disabled=true;
-        document.getElementById("rd-btns-icons-left").checked=false;
-        document.getElementById("rd-btns-icons-left").disabled=true;
-        document.getElementById("rd-btns-icons-right").disabled=true;
-        document.getElementById("rd-btns-icons-none").disabled=true;
-        document.getElementById("dd_buttons_style").disabled=true;
-        document.getElementById("dd_buttons_size").disabled=true;
-        document.getElementById("dd_buttons_size").value="0";
-        document.getElementById("cb_col_buttons_width").disabled=true;
-        document.getElementById("cb_col_buttons_width").checked=false;
-        document.getElementById("cb_col_buttons_shadow").disabled=true;
-        document.getElementById("cb_col_buttons_shadow").checked=false;
-        document.getElementById("cb_col_buttons_uppercase").disabled=true;
-        document.getElementById("cb_col_buttons_uppercase").checked=false;
-
-        document.getElementById("btn_a_primary_passive_text").disabled=true;
-        document.getElementById("btn_a_primary_active_text").disabled=true;
-        document.getElementById("btn_a_primary_passive_bg").disabled=true;
-        document.getElementById("btn_a_primary_active_bg").disabled=true;
-        document.getElementById("btn_a_primary_passive_border").disabled=true;
-        document.getElementById("btn_a_primary_active_border").disabled=true;
-
-        // Illustrations
-        document.getElementById("rb_vis_type_0").checked=false;
-        document.getElementById("rb_vis_type_1").checked=true;
-        document.getElementById("rb_vis_type_2").checked=false;
-        document.getElementById("rb_vis_type_3").checked=false;
-        document.getElementById("rb_vis_type_4").checked=false;
-        document.getElementById("rb_vis_type_5").checked=false;
-
-        document.getElementById("cb_img_cornersOn").checked=false;
-        document.getElementById("cb_img_shadowsOn").checked=false;
-
-        document.getElementById("cb-icon-size-plus").checked=false;
-        document.getElementById("cb-icon-size-minus").checked=false;
-        document.getElementById("cb-icon-size-plus").disabled=true;
-        document.getElementById("cb-icon-size-minus").disabled=true;
-       
-        document.getElementById("radio-icon-align-left").disabled=true;
-        document.getElementById("radio-icon-align-center").disabled=true;
-        document.getElementById("radio-icon-align-left").checked=false;
-        document.getElementById("radio-icon-align-center").checked=false;
-        document.getElementById("btn_icon_color").disabled=true;
-
-        document.getElementById("btn-copy-css").disabled=true;
-
-        document.getElementById("color-transparent").style.display="none";
-	}
-
-    // Initial page content load
-    let HTML_Content="";
-
-    const content_h3 = ["\n\t\t\t<h3>Snazzy Bakery<\/h3>", "\n\t\t\t<h3>Snazzy Fashion<\/h3>", "\n\t\t\t<h3>Learn JavaScript today<\/h3>", "\n\t\t\t<h3>Visit Lisbon<\/h3>"];
-
-    const content_paras = ["\n\t\t\t<p>Our friendly baristas are waiting to serve you. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship all over Europe quickly and reliably.<\/p>", "\n\t\t\t<p>Supercharge your web design career with this <i>JavaScript for Beginners<\/i> course that covers all the important concepts.<\/p>", 
-    "\n\t\t\t<p>Portugal's hilly, coastal capital city. Enjoy the pastel-coloured buildings, the cobbled streets, and the custard tarts.<\/p>"];
-
-    const content_list = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and will not be beaten on price.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and will not be beaten on price.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and will not be beaten on price.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and will not be beaten on price.<\/li>\n\t\t\t<\/ul>"];
-
-    let arrPic = [];
-    arrPic[0]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrPic[1]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-fashion-yellow.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrPic[2]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-student.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrPic[3]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-
-    let arrTrans = [];
-    arrTrans[0]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-couple-coffee.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrTrans[1]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-woman-smiling.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrTrans[2]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-man-laptop.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrTrans[3]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-lisbon.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-
-    let arrIllus = [];  
-    arrIllus[0]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-couple-dining.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrIllus[1]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-shopping.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-    arrIllus[2]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-education.png\" alt=\"Placeholder image\"><\/figure>";
-    arrIllus[3]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"https:\/\/munnelly.com/lunadoge/assets\/img\/460x300-drawing-work-chat.png\" alt=\"Work chat\">\n\t\t\t<\/figure>";
-
-    let arrIconFA = [];             
-    arrIconFA[0]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-solid fa-user-group\"></i>\n\t\t\t\<\/figure>";
-    arrIconFA[1]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-regular fa-comments\"></i>\n\t\t\t\<\/figure>";
-    arrIconFA[2]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-regular fa-lightbulb\">\n\t\t\t</i><\/figure>";
-    arrIconFA[3]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-solid fa-rocket\"></i>\n\t\t\t\<\/figure>";
-
-    let arrIconLA = [];             
-    arrIconLA[0]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-user-friends\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[1]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-comments\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[2]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-lightbulb\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[3]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-rocket\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[4]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-globe\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[5]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-shopping-cart\"><\/i>\n\t\t\t<\/figure>";   
-    arrIconLA[6]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-briefcase\"><\/i>\n\t\t\t<\/figure>";
-    arrIconLA[7]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-book-reader\"><\/i>\n\t\t\t<\/figure>"; 
-
+        const iframe = document.getElementById("livePreviewFrame");
+        let HTML_Content="";
+        function onFrameLoaded() {
+            document.querySelector('.loading').style.display='none';
+            document.querySelector('.controls-top').style.display='block';
+            document.querySelector('.lower-left').style.display='flex';
+            document.querySelector('.page-preview-options').style.display='inline-block';
+            document.querySelector('.copy-code-btns').style.display='flex';
+            document.querySelector('.page-preview-body').style.display='block';
+        }
+        // function getResolution() {
+        //  const realWidth = window.screen.width * window.devicePixelRatio;
+        //  const realHeight = window.screen.height * window.devicePixelRatio;
+        //  console.log(`Your screen resolution is: ${realWidth} x ${realHeight}`);
+        // }
+        // getResolution();
     </script>
 
-    <script src="assets/js/grid-3-4.js"></script>
+    <script>
+        // Inital resets
+        document.addEventListener("DOMContentLoaded", resetMenuOptions);
+
+        function resetMenuOptions() {
+
+            // UI
+            document.getElementById("btn_icon_color").disabled=true;
+            document.getElementById("btn-copy-css").disabled=true;
+            document.getElementById("color-transparent").style.display="none";
+
+            // Section theme
+            document.getElementById("rb_theme_light").checked = true;
+            document.getElementById("cb_outlines").checked = false;
+
+            // Sections
+            document.getElementById("dd_class_name").value="0";
+            document.getElementById("dd_section_width").value = "3";
+
+            // Upper block
+            document.getElementById("cb_col_1").checked = true;
+            document.getElementById("rb_col_1_align_center").checked = true;
+            document.getElementById("dd_col_1_width").value = "0";
+            document.getElementById("cb_col_1_label").checked = false;
+            document.getElementById("cb_col_1_h2").checked = true;
+            document.getElementById("cb_col_1_h3").checked = true;
+            document.getElementById("btn_col_1_label_text").disabled=true;
+                
+            // Columns
+            document.getElementById("rb_cols_align_left").checked = true;
+            document.getElementById("cb_cols_shadows").disabled=false;
+            document.getElementById("cb_cols_shadows").checked=false;
+            document.getElementById("btn_cols_bg").disabled=false;
+
+            document.getElementById("cb_col_borders").checked=false;
+            document.getElementById("cb_col_borders").disabled=false;    
+            document.getElementById("btn_cols_border_color").disabled=true;
+            document.getElementById("cb_cols_corners_soft").disabled=true; 
+            document.getElementById("cb_cols_corners_soft").checked=false; 
+            document.getElementById("dd_cols_mobile").value="1";
+
+            // Text
+            document.getElementById("cb_cols_h3").checked=true;
+            document.getElementById("dd_cols_text").value="1";
+            document.getElementById("dd_cols_list_marker").disabled=true;
+            document.getElementById("btn_cols_list_marker").disabled=true;
+
+            // Buttons
+            document.getElementById("cb_btns").checked=false;
+            document.getElementById("dd_buttons_type").disabled=true;
+            document.getElementById("dd_buttons_type").value="0";
+            document.getElementById("dd_buttons_shape").value="0";
+            document.getElementById("form-btns-icons").disabled=true;
+            document.getElementById("rb_btns_icons_left").disabled=true;
+            document.getElementById("rb_btns_icons_left").checked=false;
+            document.getElementById("rb_btns_icons_right").disabled=true;
+            document.getElementById("rb_btns_icons_right").checked=false;
+            document.getElementById("rd-btns-icons-none").disabled=true;
+            document.getElementById("dd_buttons_shape").disabled=true;
+            document.getElementById("dd_buttons_size").disabled=true;
+            document.getElementById("dd_buttons_size").value="1";
+            document.getElementById("cb_buttons_width").disabled=true;
+            document.getElementById("cb_buttons_width").checked=false;
+            document.getElementById("cb_buttons_shadow").disabled=true;
+            document.getElementById("cb_buttons_shadow").checked=false;
+            document.getElementById("cb_buttons_uppercase").disabled=true;
+            document.getElementById("cb_buttons_uppercase").checked=false;
+            document.getElementById("btn_cols_text_passive").disabled=true;
+            document.getElementById("btn_cols_text_active").disabled=true;
+            document.getElementById("btn_cols_bg_passive").disabled=true;
+            document.getElementById("btn_cols_bg_active").disabled=true;
+            document.getElementById("btn_cols_border_passive").disabled=true;
+            document.getElementById("btn_cols_border_active").disabled=true;
+
+
+            // Illustrations
+            document.getElementById("rb_vis_type_0").checked=false;
+            document.getElementById("rb_vis_type_1").checked=true;
+            document.getElementById("rb_vis_type_2").checked=false;
+            document.getElementById("rb_vis_type_3").checked=false;
+            document.getElementById("rb_vis_type_4").checked=false;
+            document.getElementById("rb_vis_type_5").checked=false;
+
+            document.getElementById("cb_img_corners_soft").checked=false;
+            document.getElementById("cb_img_shadows").checked=false;
+
+            document.getElementById("cb_icon_size_plus").checked=false;
+            document.getElementById("cb_icon_size_minus").checked=false;
+            document.getElementById("cb_icon_size_plus").disabled=true;
+            document.getElementById("cb_icon_size_minus").disabled=true;
+        
+            document.getElementById("rb_icon_align_left").disabled=true;
+            document.getElementById("rb_icon_align_center").disabled=true;
+            document.getElementById("rb_icon_align_left").checked=false;
+            document.getElementById("rb_icon_align_center").checked=false;
+        }
+    </script>
+
+    <script src="assets/js/grid-3-4-ui.js"></script>
+    <script type="module" src="assets/js/grid-1.js"></script>
+    <script type="module" src="assets/js/grid-3-4.js"></script>
+    <script type="module" src="assets/js/grid-visual.js"></script>
 
 </body>
 </html>
