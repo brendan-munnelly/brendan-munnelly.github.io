@@ -1,8 +1,9 @@
-import {content_h3_col_2, content_paras_col_2, content_lists_col_2, content_buttons_one_icon, content_buttons_one_text, content_buttons_pair_icon_1, content_buttons_pair_text_1, content_buttons_pair_icon_2, content_buttons_pair_text_2} from '../js/arr-content.js';
+import {content_h3_col_2, content_h3_col_3, content_h3_col_4, content_paras_col_2, content_paras_col_3, content_paras_col_4, content_list_col_2, content_list_col_3, content_list_col_4} from '../js/arr-content.js';
 
 section_class = sessionStorage.getItem('section-selector');
 col_no = sessionStorage.getItem('col-no');
 col_count = sessionStorage.getItem('col-count');
+
 
 /*
 //////////////// COLUMNS ALIGN ///////////////
@@ -28,6 +29,26 @@ function doColsAlign() {
     }
 }
 
+/*
+//////////////// COLUMNS WIDTH ON MOBILES ///////////////
+*/
+
+if (document.querySelector("#dd_cols_mobile")) {
+    document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+}
+
+function doColMobileWidth() {
+    let opt = document.querySelector("#dd_cols_mobile").value;
+    const el_section = iframe.contentWindow.document.querySelector('.'+section_class)
+
+    if (opt==="0") {
+        el_section.classList.remove("mobile-col-2");
+    }
+
+    else if (opt==="1") {
+        el_section.classList.add("mobile-col-2");
+    }
+}
 
 /*
 //////////////// COLUMN SUB-HEADINGS ////////////////////
@@ -40,8 +61,22 @@ function doColH3() {
     let col_count = parseInt(sessionStorage.getItem('col-count'));
     // Number of columns to retieve relevant content
     const arrContent = []; 
-    for (let i = 0; i < content_h3_col_2.length; i++) {
-        arrContent[i] = content_h3_col_2[i];
+    let i;
+    
+    if (col_no===".col-2") {
+        for (i = 0; i < content_h3_col_2.length; i++) {
+            arrContent[i] = content_h3_col_2[i];
+        }
+    }
+    else if (col_no===".col-3") {
+        for (i = 0; i < content_h3_col_3.length; i++) {
+            arrContent[i] = content_h3_col_3[i];
+        }
+    }
+    else if (col_no===".col-4") {
+        for (i = 0; i < content_h3_col_4.length; i++) {
+            arrContent[i] = content_h3_col_4[i];
+        }
     }
 
     if (!document.getElementById("cb_cols_h3").checked) {
@@ -149,8 +184,20 @@ function doColsText() {
         document.querySelector("#btn_cols_text").disabled=false;
         removeText();
 
-        for (let i = 0; i < content_paras_col_2.length; i++) {
-            arrContent[i] = content_paras_col_2[i];
+        if (col_no===".col-2") {
+            for (i = 0; i < content_paras_col_2.length; i++) {
+                arrContent[i] = content_paras_col_2[i];
+            }
+        }
+        else if (col_no===".col-3") {
+            for (i = 0; i < content_paras_col_3.length; i++) {
+                arrContent[i] = content_paras_col_3[i];
+            }
+        }
+        else if (col_no===".col-4") {
+            for (i = 0; i < content_paras_col_4.length; i++) {
+                arrContent[i] = content_paras_col_4[i];
+            }
         }
 
         // Test for figures AND h3 column headings
@@ -207,8 +254,20 @@ function doColsText() {
         removeText();
         document.querySelector("#btn_cols_text").disabled=false;
 
-        for (let i = 0; i < content_lists_col_2.length; i++) {
-            arrContent[i] = content_lists_col_2[i];
+        if (col_no===".col-2") {
+            for (i = 0; i < content_list_col_2.length; i++) {
+                arrContent[i] = content_list_col_2[i];
+            }
+        }
+        else if (col_no===".col-3") {
+            for (i = 0; i < content_list_col_3.length; i++) {
+                arrContent[i] = content_list_col_3[i];
+            }
+        }
+        else if (col_no===".col-4") {
+            for (i = 0; i < content_list_col_4.length; i++) {
+                arrContent[i] = content_list_col_4[i];
+            }
         }
 
         // Test for figures AND h3 column headings
@@ -276,6 +335,7 @@ function removeText() {
         el_list[i].remove();
     }
     iframe.contentWindow.document.querySelector('.'+section_class).innerHTML = iframe.contentWindow.document.querySelector('.'+section_class).innerHTML.replaceAll("\t\n\t\t<\/div>", "<\/div>");
+    enableColButtons();
     document.getElementById("dd_cols_list_marker").disabled=true;
     document.getElementById("dd_cols_list_marker").value="0";
     document.getElementById("btn_cols_list_marker").disabled=true;
@@ -409,7 +469,6 @@ function doColCorners() {
 //////////////// BUTTONS ////////////////////
 */
 
-
 const tabs = document.querySelector(".buttonWrapper");
 const tabButton = document.querySelectorAll(".tab-button");
       
@@ -423,187 +482,148 @@ if (id) {
     document.getElementById(id).classList.add("active");
 
     // tab contents
-    document.getElementById("tab_content_1").classList.remove("active");
-    document.getElementById("tab_content_1").style.display="none";
-    document.getElementById("tab_content_2").classList.remove("active");
-    document.getElementById("tab_content_2").style.display="none";
+    document.getElementById("content_1").classList.remove("active");
+    document.getElementById("content_1").style.display="none";
+    document.getElementById("content_2").classList.remove("active");
+    document.getElementById("content_2").style.display="none";
 
     // Active content tab
-    const element = "tab_content_"+id[id.length-1];
+    const element = "content_"+id[id.length-1];
     document.getElementById(element).classList.add("active");
     document.getElementById(element).style.display="block";
     }
 }
 
-/*
-//////////////// LOAD INITIAL BUTTON ////////////////////
-*/
+document.querySelector("#dd_buttons_split").addEventListener("change", doButtonsSplit);
 
-document.querySelector("#cb_col_btns").addEventListener("change", loadBtnInitial);
+    function doButtonsSplit() {
+        let opt = document.querySelector("#dd_buttons_split").value;
 
-function loadBtnInitial() {
-    console.log("load initial button");
-
-    if (document.getElementById("cb_col_btns").checked) {
-        // create one button in two columns  
-        const btnDiv1 = document.createElement('div');
-        const btnDiv2 = document.createElement('div');
-        const iconBtn = content_buttons_one_icon;
-        const textBtn = content_buttons_one_text;
-        btnDiv1.classList.add('container-btn');
-        btnDiv2.classList.add('container-btn');
-        btnDiv1.innerHTML= "\n\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn+"<\/span>"+iconBtn+"</a>\n\t";
-        btnDiv2.innerHTML = btnDiv1.innerHTML
-        iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(1)').appendChild(btnDiv1);
-        iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(2)').appendChild(btnDiv2);
-
-        // enable dialog box settings for all buttons
-        document.getElementById("dd_buttons_pair").disabled=false;
-        document.getElementById("dd_buttons_pair").value="1";
-        document.getElementById("dd_buttons_size").disabled=false;
-        document.getElementById("dd_buttons_size").value="1";
-        document.getElementById("form_btn_align_desktop").disabled=false;
-        document.getElementById("rb_btn_align_desktop_left").disabled=false;
-        document.getElementById("rb_btn_align_desktop_left").checked = true;;
-        document.getElementById("rb_btn_align_desktop_center").disabled=false;
-        document.getElementById("form_btn_align_mobile").disabled=false;
-        document.getElementById("rb_btn_align_mobile_left").disabled=false;
-        document.getElementById("rb_btn_align_mobile_left").checked = true;;
-        document.getElementById("rb_btn_align_mobile_center").disabled=false;
-
-        // enable dialog box settings for buttons one
-        document.querySelector(".container-buttons-block").style.display="block";
-        document.getElementById("button_1").style.display="inline-block";
-        document.getElementById("button_2").style.display="none";
-        document.getElementById("dd_button_type_1").value="0";
-        document.getElementById("rd_btns_icons_left_1").disabled=false;
-        document.getElementById("rd_btns_icons_left_1").checked=true;
-        document.getElementById("dd_buttons_shape_1").disabled=false;
-        document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_col_buttons_shadow_1").disabled=false;
-        document.getElementById("cb_col_buttons_shadow_1").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_1").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase_1").checked=false;
-    }
-
-    // remove all buttons from two columns 
-    else {
-        console.log("remove all buttons")
-        const objBtn1 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(1) .container-btn');
-        objBtn1.remove();
-        const objBtn2 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(2) .container-btn');
-        objBtn2.remove();
-
-        // disable dialog box settings for all buttons
-        document.getElementById("dd_buttons_pair").disabled=true;
-        document.getElementById("dd_buttons_pair").value="1";
-        document.getElementById("dd_buttons_size").disabled=true;
-        document.getElementById("dd_buttons_size").value="1";
-        document.getElementById("form_btn_align_desktop").disabled=true;
-        document.getElementById("rb_btn_align_desktop_left").disabled=true;
-        document.getElementById("rb_btn_align_desktop_left").checked = false;
-        document.getElementById("rb_btn_align_desktop_center").disabled=true;
-        document.getElementById("form_btn_align_mobile").disabled=true;
-        document.getElementById("rb_btn_align_mobile_left").disabled=true;
-        document.getElementById("rb_btn_align_mobile_left").checked = false;
-        document.getElementById("rb_btn_align_mobile_center").disabled=true;
-
-        // disable, reset dialog box settings for buttons one
-        document.querySelector(".container-buttons-block").style.display="none";
-        document.getElementById("button_1").style.display="none";
-        document.getElementById("dd_button_type_1").value="0";
-        document.getElementById("rd_btns_icons_left_1").disabled=true;
-        document.getElementById("rd_btns_icons_left_1").checked=false;
-        document.getElementById("dd_buttons_shape_1").disabled=true;
-        document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_col_buttons_shadow_1").disabled=true;
-        document.getElementById("cb_col_buttons_shadow_1").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_1").disabled=true;
-        document.getElementById("cb_col_buttons_uppercase_1").checked=false;
-
-        // disable, reset dialog box settings for buttons two
-        document.getElementById("button_2").style.display="none";
-        document.getElementById("dd_button_type_2").value="0";
-        document.getElementById("rd_btns_icons_left_2").disabled=true;
-        document.getElementById("rd_btns_icons_left_2").checked=false;
-        document.getElementById("dd_buttons_shape_2").disabled=true;
-        document.getElementById("dd_buttons_shape_2").value="0";
-        document.getElementById("cb_col_buttons_shadow_2").disabled=true;
-        document.getElementById("cb_col_buttons_shadow_2").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_2").disabled=true;
-        document.getElementById("cb_col_buttons_uppercase_2").checked=false;
-    }
-}
-
-document.querySelector("#dd_buttons_pair").addEventListener("change", doButtonsPair);
-
-    function doButtonsPair() {
-        let opt = document.querySelector("#dd_buttons_pair").value;
-
-        if (opt==="1") {
-            // test for button two and remove
-            if (iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(2)')) {
-                console.log(" Found button 1");
-                const objBtn1 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(1) .container-btn a:nth-child(2)');
-                const objBtn2 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(2) .container-btn a:nth-child(2)');
-                objBtn1.remove();
-                objBtn2.remove();
-                // disable, reset dialog box settings for buttons two
-                document.getElementById("button_2").style.display="none";
-                document.getElementById("dd_button_type_2").value="0";
-                document.getElementById("rd_btns_icons_left_2").disabled=true;
-                document.getElementById("rd_btns_icons_left_2").checked=false;
-                document.getElementById("dd_buttons_shape_2").disabled=true;
-                document.getElementById("dd_buttons_shape_2").value="0";
-                document.getElementById("cb_col_buttons_shadow_2").disabled=true;
-                document.getElementById("cb_col_buttons_shadow_2").checked=false;
-                document.getElementById("cb_col_buttons_uppercase_2").disabled=true;
-                document.getElementById("cb_col_buttons_uppercase_2").checked=false;
+        // Hide both buttons
+        if (opt==="0") {
+            removeButtonsSplit();
+        }
+       
+        // Show one button
+        else if (opt==="1") {
+            removeButtonsSplit();
+            addOnlyButton_1();
+            if (iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul")) {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul").insertAdjacentHTML("afterend", content_button_one);            
+            }
+            else {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
             }
         }
-
+        // two buttons
         else if (opt==="2") {
-            // Add button two
-            const objDiv1 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(1) .container-btn');
-            const objDiv2 = iframe.contentWindow.document.querySelector('.flex-cols-2 .col-2:nth-child(2) .container-btn');
-            const objBtn1 = document.createElement('a');
-            const objBtn2 = document.createElement('a');
-            objBtn1.classList.add('btn');
-            objBtn2.classList.add('btn');
-            objBtn1.classList.add('btn-outline');
-            objBtn2.classList.add('btn-outline');
-            objBtn1.href = "#";
-            objBtn2.href = "#";
-            const iconBtn = content_buttons_pair_icon_2;
-            const textBtn = content_buttons_pair_text_2;
-            objBtn1.innerHTML= "<span>"+textBtn+"<\/span>"+iconBtn;
-            objBtn2.innerHTML= "<span>"+textBtn+"<\/span>"+iconBtn;
-            objDiv1.appendChild(objBtn1);
-            objDiv2.appendChild(objBtn2);
+            removeButtonsSplit();
+            addButtons_12();
 
-            // enable dialog box options for button two
-            document.getElementById("button_2").style.display="inline-block";
-            document.getElementById("dd_button_type_2").value="1";
-            document.getElementById("rd_btns_icons_left_2").disabled=false;
-            document.getElementById("rd_btns_icons_left_2").checked=true;
-            document.getElementById("dd_buttons_shape_2").disabled=false;
-            document.getElementById("dd_buttons_shape_2").value="0";
-            document.getElementById("cb_col_buttons_shadow_2").disabled=false;
-            document.getElementById("cb_col_buttons_shadow_2").checked=false;
-            document.getElementById("cb_col_buttons_uppercase_2").disabled=false;
-            document.getElementById("cb_col_buttons_uppercase_2").checked=false;
+            if (iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul")) {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul").insertAdjacentHTML("afterend", content_button_two);            
+            }
+            else {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
+            }
+        }
+    }
+
+    function addOnlyButton_1() {
+        document.querySelector(".container-buttons-block").style.display="block";
+        document.getElementById("button_1").style.display="block";
+        document.getElementById("button_2").style.display="none";
+        document.getElementById("dd_buttons_size").disabled=false;
+        document.getElementById("dd_buttons_size").value="1";
+        document.getElementById("cb_col_buttons_width").disabled=false;
+        document.getElementById("cb_col_buttons_shadow").disabled=false;
+        document.getElementById("cb_col_buttons_uppercase").disabled=false;
+
+        document.getElementById("rb_btn_align_desktop_left").disabled=false;
+        document.getElementById("rb_btn_align_desktop_left").checked=true;
+        document.getElementById("rb_btn_align_desktop_center").disabled=false;
+
+        document.getElementById("rb_btn_align_mobile_left").disabled=false;
+        document.getElementById("rb_btn_align_mobile_left").checked=true;
+        document.getElementById("rb_btn_align_mobile_center").disabled=false;
+        document.getElementById("dd_buttons_shape").disabled=false;
+        document.getElementById("dd_buttons_shape").value="0";
+        document.getElementById("cb_col_buttons_width").disabled=false;
+        document.getElementById("cb_col_buttons_width").checked=false;
+
+        document.getElementById("cb_col_buttons_shadow").disabled=false;
+        document.getElementById("cb_col_buttons_shadow").checked=false;
+        document.getElementById("cb_col_buttons_uppercase").disabled=false;
+        document.getElementById("cb_col_buttons_uppercase").checked=false;
+
+        document.getElementById("rd_btns_icons_left_1").checked=true;
+        document.getElementById("rd_btns_icons_left_2").checked=true;        
+    }
+
+    function addButtons_12() {
+        document.querySelector(".container-buttons-block").style.display="block";
+        document.getElementById("button_1").style.display="block";
+        document.getElementById("button_2").style.display="block";
+        document.getElementById("dd_buttons_size").disabled=false;
+        document.getElementById("dd_buttons_size").value="1";
+        document.getElementById("cb_col_buttons_width").disabled=false;
+        document.getElementById("cb_col_buttons_shadow").disabled=false;
+        document.getElementById("cb_col_buttons_uppercase").disabled=false;
+        document.getElementById("rb_btn_align_desktop_left").disabled=false;
+        document.getElementById("rb_btn_align_desktop_left").checked=true;
+        document.getElementById("rb_btn_align_desktop_center").disabled=false;
+        document.getElementById("rb_btn_align_mobile_left").disabled=false;
+        document.getElementById("rb_btn_align_mobile_left").checked=true;
+        document.getElementById("rb_btn_align_mobile_center").disabled=false;
+        document.getElementById("dd_buttons_shape").disabled=false;
+        document.getElementById("dd_buttons_shape").value="0";
+        document.getElementById("cb_col_buttons_width").disabled=false;
+        document.getElementById("cb_col_buttons_width").checked=false;
+
+        document.getElementById("cb_col_buttons_shadow").disabled=false;
+        document.getElementById("cb_col_buttons_shadow").checked=false;
+        document.getElementById("cb_col_buttons_uppercase").disabled=false;
+        document.getElementById("cb_col_buttons_uppercase").checked=false;
+        document.getElementById("rd_btns_icons_left_1").checked=true;
+        document.getElementById("rd_btns_icons_left_2").checked=true;
+    }
+
+    function removeButtonsSplit() {
+        if (iframe.contentWindow.document.querySelector("section .container-btn")) {
+            const elBtn = iframe.contentWindow.document.querySelector("section .container-btn");
+            elBtn.remove();
+            document.querySelector(".container-buttons-block").style.display="none";
+            document.getElementById("dd_buttons_size").disabled=true;
+            document.getElementById("dd_buttons_size").value="1";
+            document.getElementById("cb_col_buttons_width").disabled=true;
+            document.getElementById("switch_btn_align_desktop").disabled=true;
+            document.getElementById("switch_btn_align_mobile").disabled=true;
+            document.getElementById("rb_btn_align_desktop_left").disabled=true;
+            document.getElementById("rb_btn_align_desktop_left").checked=false;
+            document.getElementById("rb_btn_align_desktop_center").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").checked=false;
+            document.getElementById("rb_btn_align_mobile_center").disabled=true;
+            document.getElementById("dd_buttons_shape").disabled=true;
+            document.getElementById("dd_buttons_shape").value="0";
+            document.getElementById("cb_col_buttons_width").disabled=true;
+            document.getElementById("cb_col_buttons_width").checked=false;
+            document.getElementById("cb_col_buttons_shadow").disabled=true;
+            document.getElementById("cb_col_buttons_shadow").checked=false;
+            document.getElementById("cb_col_buttons_uppercase").disabled=true;
+            document.getElementById("cb_col_buttons_uppercase").checked=false;
         }
     }
   
 /*
-//////////////// BUTTONS COMMON: SIZE ////////////////////
+//////////////// BUTTONS: SIZE ////////////////////
 */
 
 document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsSize);
 
 function doButtonsSize() {
     let opt = document.querySelector("#dd_buttons_size").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
 
     // Small
     if (opt==="0") { 
@@ -633,10 +653,10 @@ function doButtonsSize() {
 }
 
 /*
-//////////////// BUTTONS COMMON: ALIGN DESKTOP  ////////////////////
+//////////////// BUTTONS: ALIGN DESKTOP  ////////////////////
 */
 
-document.querySelector("#form_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
+document.querySelector("#switch_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
 
 function doButtonsAlignDesktop() {
 
@@ -650,7 +670,7 @@ function doButtonsAlignDesktop() {
         }
     }
 
-    // Verify button container exists 
+    // Verify vutton container exists 
     if (iframe.contentWindow.document.querySelector(".container-btn")) {  
 
         let elBtns = iframe.contentWindow.document.querySelector(".container-btn");
@@ -666,10 +686,10 @@ function doButtonsAlignDesktop() {
 }
 
 /*
-//////////////// BUTTONS COMMON: ALIGN MOBILE  ////////////////////
+//////////////// BUTTONS: ALIGN MOBILE  ////////////////////
 */
 
-document.querySelector("#form_btn_align_mobile").addEventListener("change", doButtonsAlignMobile);
+document.querySelector("#switch_btn_align_mobile").addEventListener("change", doButtonsAlignMobile);
 
 function doButtonsAlignMobile() {
 
@@ -698,88 +718,185 @@ function doButtonsAlignMobile() {
 
 
 /*
-//////////////// BUTTON ONE: TYPE ////////////////////
+//////////////// BUTTONS: WIDTH  ////////////////////
+*/
+
+document.querySelector("#cb_col_buttons_width").addEventListener("change", doBtnWidth);
+
+function doBtnWidth() {
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+
+    if (!document.getElementById("cb_col_buttons_width").checked) {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-block");
+        });
+    }
+    else {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.add("btn-block");
+        });
+    }
+}
+
+/*
+//////////////// BUTTONS: SHAPE ////////////////////
+*/
+
+document.querySelector("#dd_buttons_shape").addEventListener("change", doButtonsShape);
+
+function doButtonsShape() {
+    let opt = document.querySelector("#dd_buttons_shape").value;
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+
+    // remove
+    if (opt==="0") {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-pill");
+            btn.classList.remove("btn-soft");
+        });
+        document.getElementById("dd_buttons_shape").disabled=false;
+        document.getElementById("dd_buttons_shape").value="0";
+    }
+
+    // soft
+    else if (opt==="1") {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-pill");
+            btn.classList.add("btn-soft");
+        });
+        document.getElementById("dd_buttons_shape").disabled=false;
+        document.getElementById("dd_buttons_shape").value="1";
+    }
+
+    // pill
+    else if (opt==="2") {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-soft");
+            btn.classList.add("btn-pill");
+        });
+        document.getElementById("dd_buttons_shape").disabled=false;
+        document.getElementById("dd_buttons_shape").value="2";
+    }
+}
+
+/*
+//////////////// BUTTONS: SHADOW ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_shadow").addEventListener("change", doBtnShadow);
+
+function doBtnShadow() {
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    if (!document.getElementById("cb_col_buttons_shadow").checked) {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-shadow");
+        });
+    }
+    else {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.add("btn-shadow");
+        });
+    }
+}
+
+/*
+//////////////// BUTTONS: UPPERCASE ///////////////
+*/
+
+document.querySelector("#cb_col_buttons_uppercase").addEventListener("change", doBtnUCase);
+
+function doBtnUCase() {
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    if (!document.getElementById("cb_col_buttons_uppercase").checked) {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.remove("btn-uppercase");
+        });
+    }
+    else {
+        // Loop through buttons
+        objBtns.forEach(btn => {
+            btn.classList.add("btn-uppercase");
+        });
+    }
+}
+
+/*
+//////////////// BUTTON 1: TYPE ////////////////////
 */
 
 document.querySelector("#dd_button_type_1").addEventListener("change", doButtonType1);
 
 function doButtonType1() {
     let opt = document.querySelector("#dd_button_type_1").value;
-
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
+    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(1)");
 
     // Solid
     if (opt==="0") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-outline");
-            btn.classList.remove("btn-plain");
-            btn.classList.add("btn-solid");            
-        });
+        el_btn.classList.remove("btn-outline");
+        el_btn.classList.remove("btn-link");
+        el_btn.classList.add("btn-solid");
     }
 
     // Outline
     else if (opt==="1") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-plain");
-            btn.classList.remove("btn-solid");
-            btn.classList.add("btn-outline");
-        });
+        el_btn.classList.remove("btn-solid");
+        el_btn.classList.remove("btn-link");
+        el_btn.classList.add("btn-outline");
     }
 
     // Link
     else if (opt==="2") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-outline");
-            btn.classList.remove("btn-solid");
-            btn.classList.add("btn-plain");
-        });
+        el_btn.classList.remove("btn-solid");
+        el_btn.classList.remove("btn-outline");
+        el_btn.classList.add("btn-link");
     }
 }
 
 /*
-//////////////// BUTTON TWO: TYPE ////////////////////
+//////////////// BUTTON 2: TYPE ////////////////////
 */
 
 document.querySelector("#dd_button_type_2").addEventListener("change", doButtonType2);
 
 function doButtonType2() {
     let opt = document.querySelector("#dd_button_type_2").value;
-
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
+    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(2)");
 
     // Solid
     if (opt==="0") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-outline");
-            btn.classList.remove("btn-plain");
-            btn.classList.add("btn-solid");            
-        });
+        el_btn.classList.remove("btn-outline");
+        el_btn.classList.remove("btn-link");
+        el_btn.classList.add("btn-solid");
     }
 
     // Outline
     else if (opt==="1") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-plain");
-            btn.classList.remove("btn-solid");
-            btn.classList.add("btn-outline");
-        });
+        el_btn.classList.remove("btn-solid");
+        el_btn.classList.remove("btn-link");
+        el_btn.classList.add("btn-outline");
     }
 
     // Link
     else if (opt==="2") {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-outline");
-            btn.classList.remove("btn-solid");
-            btn.classList.add("btn-plain");
-        });
+        el_btn.classList.remove("btn-solid");
+        el_btn.classList.remove("btn-outline");
+        el_btn.classList.add("btn-link");
     }
 }
 
 /*
-//////////////// BUTTON ONE: ICON POSITION ////////////////////
+//////////////// BUTTON 1: ICON POSITION ////////////////////
 */
 
-document.querySelector("#form_btns_icons_position_1").addEventListener("change", swapButtonIcons_1);
+document.querySelector("#switch_btns_icons_position_1").addEventListener("change", swapButtonIcons_1);
 
 function swapButtonIcons_1() {
 
@@ -817,10 +934,10 @@ function swapButtonIcons_1() {
 }
 
 /*
-//////////////// BUTTON TWO: ICON POSITION ////////////////////
+//////////////// BUTTON 2: ICON POSITION ////////////////////
 */
 
-document.querySelector("#form_btns_icons_position_2").addEventListener("change", swapButtonIcons_2);
+document.querySelector("#switch_btns_icons_position_2").addEventListener("change", swapButtonIcons_2);
 
 function swapButtonIcons_2() {
 
@@ -857,160 +974,4 @@ function swapButtonIcons_2() {
 }
 
 
-/*
-//////////////// BUTTONS ONE: SHAPE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_shape_1").addEventListener("change", doButtonsShape1);
-
-function doButtonsShape1() {
-    let opt = document.querySelector("#dd_buttons_shape_1").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
-    // remove
-    if (opt==="0") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.remove("btn-soft");
-        });
-    }
-
-    // soft
-    else if (opt==="1") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.add("btn-soft");
-        });
-    }
-
-    // pill
-    else if (opt==="2") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-soft");
-            btn.classList.add("btn-pill");
-        });
-    }
-}
-
-
-/*
-//////////////// BUTTONS TWO: SHAPE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_shape_2").addEventListener("change", doButtonsShape2);
-
-function doButtonsShape2() {
-    let opt = document.querySelector("#dd_buttons_shape_2").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
-
-    // remove
-    if (opt==="0") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.remove("btn-soft");
-        });
-    }
-
-    // soft
-    else if (opt==="1") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.add("btn-soft");
-        });
-    }
-
-    // pill
-    else if (opt==="2") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-soft");
-            btn.classList.add("btn-pill");
-        });
-    }
-}
-
-/*
-//////////////// BUTTONS ONE: SHADOW ///////////////
-*/
-
-document.querySelector("#cb_col_buttons_shadow_1").addEventListener("change", doBtnShadow1);
-
-function doBtnShadow1() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
-
-    if (!document.getElementById("cb_col_buttons_shadow_1").checked) {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-shadow");
-        });
-    }
-    else {
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-shadow");
-        });
-    }
-}
-
-document.querySelector("#cb_col_buttons_shadow_2").addEventListener("change", doBtnShadow2);
-
-function doBtnShadow2() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
-
-    if (!document.getElementById("cb_col_buttons_shadow_2").checked) {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-shadow");
-        });
-    }
-    else {
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-shadow");
-        });
-    }
-}
-
-/*
-//////////////// BUTTONS ONE: UPPERCASE ///////////////
-*/
-
-document.querySelector("#cb_col_buttons_uppercase_1").addEventListener("change", doBtnUCase1);
-
-function doBtnUCase1() {
-
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
-
-    if (!document.getElementById("cb_col_buttons_uppercase_1").checked) {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-uppercase");
-        });
-    }
-    else {
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-uppercase");
-        });
-    }
-}
-
-/*
-//////////////// BUTTONS ONE: UPPERCASE ///////////////
-*/
-
-document.querySelector("#cb_col_buttons_uppercase_2").addEventListener("change", doBtnUCase2);
-
-function doBtnUCase2() {
-
-    const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
-
-    if (!document.getElementById("cb_col_buttons_uppercase_2").checked) {
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-uppercase");
-        });
-    }
-    else {
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-uppercase");
-        });
-    }
-}
+// console.log("grid-2-3-4.js has loaded.")

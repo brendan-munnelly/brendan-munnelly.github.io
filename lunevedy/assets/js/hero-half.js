@@ -1,7 +1,7 @@
-import {content_para_col_2, content_list_col_2, content_buttons_one_icon, content_buttons_one_text, content_buttons_pair_icon_1, content_buttons_pair_text_1, content_buttons_pair_icon_2, content_buttons_pair_text_2} from '../js/arr-content.js';
+import {col_2_content_para, col_2_content_list } from '../js/arr-content.js';
 
 /*
-//////////////// SECTION: COLUMN ORDER ////////////////////
+//////////////// HEADER: COLUMN ORDER ////////////////////
 */
 
 /* Desktop: left and right */
@@ -18,7 +18,7 @@ function doColOrderDesktop() {
         }
     }
 
-    let flexparent = iframe.contentWindow.document.querySelector("section");
+    let flexparent = iframe.contentWindow.document.querySelector("header");
     if (selectedValue==="left") {
         flexparent.classList.add("flex-row-reverse");
     }
@@ -41,7 +41,7 @@ function doColOrderMobile() {
         }
     }
 
-    let flexparent = iframe.contentWindow.document.querySelector("section");
+    let flexparent = iframe.contentWindow.document.querySelector("header");
     if (selectedValue==="top") {
         flexparent.classList.remove("flex-column-reverse");
     }
@@ -59,7 +59,7 @@ document.querySelector("#dd_bleed_desktop").addEventListener("change", doVisualB
 function doVisualBleedDesktop() {
 
     let opt = document.querySelector("#dd_bleed_desktop").value;
-    let elColVis = iframe.contentWindow.document.querySelector('.'+section_class +" .col-2.col-visual");
+    let elColVis = iframe.contentWindow.document.querySelector("header .col-2.col-visual");
     
     // Regular
     if (opt==="0") {
@@ -83,7 +83,7 @@ document.querySelector("#dd_bleed_mobile").addEventListener("change", doVisualBl
 function doVisualBleedMobile() {
 
     let opt = document.querySelector("#dd_bleed_mobile").value;
-    let elColVis = iframe.contentWindow.document.querySelector('.'+section_class +" .col-2.col-visual");
+    let elColVis = iframe.contentWindow.document.querySelector("header .col-2.col-visual");
     
     // Regular
     if (opt==="0") {
@@ -140,7 +140,7 @@ function applyAnimation(animationType) {
 
         if (iframe.contentWindow.document.querySelector("section.split-image-right")) {
             // Image at right
-            iframe.contentWindow.document.querySelector("section figure").classList.add("slide-in-right");
+            iframe.contentWindow.document.querySelector("header figure").classList.add("slide-in-right");
             // All else at left
             if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
                 iframe.contentWindow.document.querySelector("section .container-upper-label").classList.add("slide-in-left");
@@ -157,14 +157,14 @@ function applyAnimation(animationType) {
             if (iframe.contentWindow.document.querySelector("section ul")) {
                 iframe.contentWindow.document.querySelector("section ul").classList.add("slide-in-left");
             }
-            if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-                iframe.contentWindow.document.querySelector("section .container-btn").classList.add("slide-in-left");
+            if (iframe.contentWindow.document.querySelector("header .container-btn")) {
+                iframe.contentWindow.document.querySelector("header .container-btn").classList.add("slide-in-left");
             }
         }
 
         else if (iframe.contentWindow.document.querySelector("section.split-image-left")) {
             // Image at left
-            iframe.contentWindow.document.querySelector("section figure").classList.add("slide-in-left");
+            iframe.contentWindow.document.querySelector("header figure").classList.add("slide-in-left");
             // All else at right
             if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
                 iframe.contentWindow.document.querySelector("section .container-upper-label").classList.add("slide-in-right");
@@ -180,8 +180,8 @@ function applyAnimation(animationType) {
             if (iframe.contentWindow.document.querySelector("section ul")) {
                 iframe.contentWindow.document.querySelector("section ul").classList.add("slide-in-right");
             }
-            if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-                iframe.contentWindow.document.querySelector("section .container-btn").classList.add("slide-in-right");
+            if (iframe.contentWindow.document.querySelector("header .container-btn")) {
+                iframe.contentWindow.document.querySelector("header .container-btn").classList.add("slide-in-right");
             }
         }
     }
@@ -207,12 +207,12 @@ function applyAnimation(animationType) {
             iframe.contentWindow.document.querySelector("section ul").classList.add(animationType);
         }
         
-        if (iframe.contentWindow.document.querySelector("section figure")) {
-            iframe.contentWindow.document.querySelector("section figure").classList.add(animationType);
+        if (iframe.contentWindow.document.querySelector("header figure")) {
+            iframe.contentWindow.document.querySelector("header figure").classList.add(animationType);
         }
         
-        if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-            iframe.contentWindow.document.querySelector("section .container-btn").classList.add(animationType);
+        if (iframe.contentWindow.document.querySelector("header .container-btn")) {
+            iframe.contentWindow.document.querySelector("header .container-btn").classList.add(animationType);
         }
     }
     document.querySelector("label[for='dd_text_slide']").style.color = "#fff";
@@ -223,7 +223,7 @@ function removeTextAnimation() {
         iframe.contentWindow.document.querySelector(".container-upper-label").removeAttribute("class");
     }
 
-    iframe.contentWindow.document.querySelector("section h2").removeAttribute("class");
+    iframe.contentWindow.document.querySelector("header .col-2.col-text h2").removeAttribute("class");
 
     if (iframe.contentWindow.document.querySelector("section h3")) {
         iframe.contentWindow.document.querySelector("section h3").removeAttribute("class");
@@ -238,16 +238,16 @@ function removeTextAnimation() {
         iframe.contentWindow.document.querySelector("section ul").removeAttribute("class");
     }
 
-    if (iframe.contentWindow.document.querySelector("section figure")) {
-        iframe.contentWindow.document.querySelector("section figure").removeAttribute("class");
+    if (iframe.contentWindow.document.querySelector("header figure")) {
+        iframe.contentWindow.document.querySelector("header figure").removeAttribute("class");
     }
 
-    if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-top");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-bottom");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-left");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-right");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("fade-in");
+    if (iframe.contentWindow.document.querySelector("header .container-btn")) {
+        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("slide-in-top");
+        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("slide-in-bottom");
+        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("slide-in-left");
+        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("slide-in-right");
+        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("fade-in");
     }
 }
 
@@ -264,7 +264,7 @@ function doCol2Label() {
     }
     else {
         removeCol2Label();
-        iframe.contentWindow.document.querySelector('.'+section_class+' .col-2 h2').insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
+        iframe.contentWindow.document.querySelector('header .col-2.col-text h2').insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t");
         document.getElementById("btn_col_2_label_text").disabled=false;
     }
 }
@@ -273,37 +273,9 @@ function removeCol2Label() {
     if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
     const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
         upperLabel.remove();
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\n\n", "");
+        iframe.contentWindow.document.querySelector('header').innerHTML = iframe.contentWindow.document.querySelector('header').innerHTML.replace("\t\n\n", "");
         document.getElementById("btn_col_2_label_text").disabled=true;
     }
-}
-
-/*
-//////////////// H3 SUB-HEADINGS ////////////////////
-*/
-
-document.querySelector("#cb_col_2_h3").addEventListener("change", doCol2H3);
-
-function doCol2H3() {
-
-    if (!document.getElementById("cb_col_2_h3").checked) {
-        removeCol2H3();
-    }
-
-    else {
-        if (!iframe.contentWindow.document.querySelector('section.cols-2-half .col-2.col-text h3')) {
-            iframe.contentWindow.document.querySelector('section .col-2.col-text p:nth-of-type(1)').insertAdjacentHTML("afterend", '<h3>Nice section sub-heading</h3>');
-            document.getElementById("btn_col_2_h3_text").disabled=false;
-        }
-        else {
-            return
-        }
-    }
-}
-
-function removeCol2H3() {
-    iframe.contentWindow.document.querySelector('section.cols-2-half .col-2.col-text h3').remove();
-    document.getElementById("btn_col_2_h3_text").disabled=true;
 }
 
 /*
@@ -319,21 +291,21 @@ function doColsText() {
     // paragraphs
     if (opt==="0") {
         // Remove list
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text ul') ) {
-            const elList = iframe.contentWindow.document.querySelector('section .col-2.col-text ul');
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text ul') ) {
+            const elList = iframe.contentWindow.document.querySelector('header .col-2.col-text ul');
             elList.remove();
         }
 
         // Test for h3 sub-heading
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text h3') ) {
-            const el_h3 = iframe.contentWindow.document.querySelector('section .col-2.col-text h3');
-            el_h3.insertAdjacentHTML("afterend", content_para_col_2);
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text h3') ) {
+            const el_h3 = iframe.contentWindow.document.querySelector('header .col-2.col-text h3');
+            el_h3.insertAdjacentHTML("afterend", col_2_content_para);
         }
         
         // No h3 sub-heading
-        else if (!iframe.contentWindow.document.querySelector('section .col-2.col-text h3')) {
-            const el_para_1 = iframe.contentWindow.document.querySelector('section .col-2.col-text p:nth-of-type(1)');
-            el_para_1.insertAdjacentHTML("afterend", content_para_col_2);
+        else if (!iframe.contentWindow.document.querySelector('header .col-2.col-text h3')) {
+            const el_para_1 = iframe.contentWindow.document.querySelector('header .col-2.col-text p:nth-of-type(1)');
+            el_para_1.insertAdjacentHTML("afterend", col_2_content_para);
         }
         document.getElementById("dd_cols_list_marker").disabled=true;
         document.getElementById("dd_cols_list_marker").value="0";
@@ -343,27 +315,27 @@ function doColsText() {
     // list
     else if (opt==="1") {
         // Remove second paragraph
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text p:nth-of-type(2)')) {
-            const elPara = iframe.contentWindow.document.querySelector('section .col-2.col-text p:nth-of-type(2)');
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text p:nth-of-type(2)')) {
+            const elPara = iframe.contentWindow.document.querySelector('header .col-2.col-text p:nth-of-type(2)');
             elPara.remove();
         }
 
         // Test for h3 sub-heading
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text h3') ) {
-            const el_h3 = iframe.contentWindow.document.querySelector('section .col-2.col-text h3');
-            el_h3.insertAdjacentHTML("afterend", content_list_col_2);
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text h3') ) {
+            const el_h3 = iframe.contentWindow.document.querySelector('header .col-2.col-text h3');
+            el_h3.insertAdjacentHTML("afterend", col_2_content_list);
         }
 
         // No h3 sub-heading
-        else if (!iframe.contentWindow.document.querySelector('section .col-2.col-text h3')) {
-            const el_para_1 = iframe.contentWindow.document.querySelector('section .col-2.col-text  p:nth-of-type(1)');
-            el_para_1.insertAdjacentHTML("afterend", content_list_col_2);
+        else if (!iframe.contentWindow.document.querySelector('header .col-2.col-text h3')) {
+            const el_para_1 = iframe.contentWindow.document.querySelector('header .col-2.col-text  p:nth-of-type(1)');
+            el_para_1.insertAdjacentHTML("afterend", col_2_content_list);
         }
 
         // Test for h3 sub-headings
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text h3') ) {
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text h3') ) {
             // Restore second paragraph after h3
-            iframe.contentWindow.document.querySelector('section .col-2.col-text h3').insertAdjacentHTML("afterend", content_paras_2);
+            iframe.contentWindow.document.querySelector('header .col-2.col-text h3').insertAdjacentHTML("afterend", content_paras_2);
         }
         document.getElementById("dd_cols_list_marker").disabled=false;
         document.getElementById("dd_cols_list_marker").value="0";
@@ -381,25 +353,25 @@ document.querySelector("#dd_cols_list_marker").addEventListener("change", doList
 function doListMarker() {
 
     let opt = document.querySelector("#dd_cols_list_marker").value;
-    let elSection = iframe.contentWindow.document.querySelector('.'+section_class).innerHTML;
+    let elHeader = iframe.contentWindow.document.querySelector('header').innerHTML;
     
     // Regular
     if (opt==="0") {
         // Test for Font Awesome list
-        if (iframe.contentWindow.document.querySelector('section .col-2.col-text ul.fa-ul') ) {
-            elSection =  elSection.replace("<ul class=\"fa-ul\">", "<ul>") 
-            elSection.replaceAll("<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>", "<li>");
+        if (iframe.contentWindow.document.querySelector('header .col-2.col-text ul.fa-ul') ) {
+            elHeader =  elHeader.replace("<ul class=\"fa-ul\">", "<ul>") 
+            elHeader.replaceAll("<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>", "<li>");
         }
     }
 
     else if (opt==="1") {
         // Test for regular list
-        if ( iframe.contentWindow.document.querySelector('section .col-2.col-text ul:not(.fa-ul)') ) {
-            elSection = elSection.replace("<ul>", "<ul class=\"fa-ul\">") 
-            elSection = elSection.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
+        if ( iframe.contentWindow.document.querySelector('header .col-2.col-text ul:not(.fa-ul)') ) {
+            elHeader = elHeader.replace("<ul>", "<ul class=\"fa-ul\">") 
+            elHeader = elHeader.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
         }
     }
-    iframe.contentWindow.document.querySelector('section').innerHTML = elSection;
+    iframe.contentWindow.document.querySelector('header').innerHTML = elHeader;
 }
 
 /*
@@ -431,41 +403,38 @@ if (id) {
     }
 }
 
-document.querySelector("#dd_buttons_pair").addEventListener("change", doButtonsPair);
+document.querySelector("#dd_buttons_split").addEventListener("change", doButtonsSplit);
 
-    function doButtonsPair() {
-        let opt = document.querySelector("#dd_buttons_pair").value;
+    function doButtonsSplit() {
+        let opt = document.querySelector("#dd_buttons_split").value;
 
         // Hide both buttons
         if (opt==="0") {
-            removeButtonsPair();
+            removeButtonsSplit();
         }
        
         // Show one button
         else if (opt==="1") {
-            removeButtonsPair();
+            removeButtonsSplit();
             addOnlyButton_1();
-            const btnDiv1 = document.createElement('div');
-            const iconBtn = content_buttons_one_icon;
-            const textBtn = content_buttons_one_text;
-            btnDiv1.classList.add('container-btn');
-            btnDiv1.innerHTML= "\n\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn+"<\/span>"+iconBtn+"</a>\n\t";
-            iframe.contentWindow.document.querySelector('.cols-2-half .col-text').appendChild(btnDiv1);
+            if (iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul")) {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul").insertAdjacentHTML("afterend", content_button_one);            
+            }
+            else {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_one);
+            }
         }
-
-        // Two buttons
+        // two buttons
         else if (opt==="2") {
-            removeButtonsPair();
+            removeButtonsSplit();
             addButtons_12();
-            const btnDiv1 = document.createElement('div');
-            const iconBtn1 = content_buttons_pair_icon_1;
-            const textBtn1 = content_buttons_pair_text_1;
-            const iconBtn2 = content_buttons_pair_icon_2;
-            const textBtn2 = content_buttons_pair_text_2;
 
-            btnDiv1.classList.add('container-btn');
-            btnDiv1.innerHTML= "\n\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn1+"<\/span>"+iconBtn1+"</a>\n\t\t<a href=\"#\" class=\"btn btn-outline\"><span>"+textBtn2+"<\/span>"+iconBtn2+"</a>\n\t";
-            iframe.contentWindow.document.querySelector('.cols-2-half .col-text').appendChild(btnDiv1);
+            if (iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul")) {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) ul").insertAdjacentHTML("afterend", content_button_two);            
+            }
+            else {
+                iframe.contentWindow.document.querySelector(".col-2:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", content_button_two);
+            }
         }
     }
 
@@ -528,9 +497,9 @@ document.querySelector("#dd_buttons_pair").addEventListener("change", doButtonsP
         document.getElementById("rd_btns_icons_left_2").checked=true;
     }
 
-    function removeButtonsPair() {
-        if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-            const elBtn = iframe.contentWindow.document.querySelector("section .container-btn");
+    function removeButtonsSplit() {
+        if (iframe.contentWindow.document.querySelector("header .container-btn")) {
+            const elBtn = iframe.contentWindow.document.querySelector("header .container-btn");
             elBtn.remove();
             document.querySelector(".container-buttons-block").style.display="none";
             document.getElementById("dd_buttons_size").disabled=true;
@@ -563,7 +532,7 @@ document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsS
 
 function doButtonsSize() {
     let opt = document.querySelector("#dd_buttons_size").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('header a.btn');
 
     // Small
     if (opt==="0") { 
@@ -664,7 +633,7 @@ function doButtonsAlignMobile() {
 document.querySelector("#cb_col_buttons_width").addEventListener("change", doBtnWidth);
 
 function doBtnWidth() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('header a.btn');
 
     if (!document.getElementById("cb_col_buttons_width").checked) {
         // Loop through buttons
@@ -688,7 +657,7 @@ document.querySelector("#dd_buttons_shape").addEventListener("change", doButtons
 
 function doButtonsShape() {
     let opt = document.querySelector("#dd_buttons_shape").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('header a.btn');
 
     // remove
     if (opt==="0") {
@@ -731,7 +700,7 @@ function doButtonsShape() {
 document.querySelector("#cb_col_buttons_shadow").addEventListener("change", doBtnShadow);
 
 function doBtnShadow() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('header a.btn');
     if (!document.getElementById("cb_col_buttons_shadow").checked) {
         // Loop through buttons
         objBtns.forEach(btn => {
@@ -753,7 +722,7 @@ function doBtnShadow() {
 document.querySelector("#cb_col_buttons_uppercase").addEventListener("change", doBtnUCase);
 
 function doBtnUCase() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('header a.btn');
     if (!document.getElementById("cb_col_buttons_uppercase").checked) {
         // Loop through buttons
         objBtns.forEach(btn => {
@@ -765,70 +734,6 @@ function doBtnUCase() {
         objBtns.forEach(btn => {
             btn.classList.add("btn-uppercase");
         });
-    }
-}
-
-/*
-//////////////// BUTTON 1: TYPE ////////////////////
-*/
-
-document.querySelector("#dd_button_type_1").addEventListener("change", doButtonType1);
-
-function doButtonType1() {
-    let opt = document.querySelector("#dd_button_type_1").value;
-    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(1)");
-
-    // Solid
-    if (opt==="0") {
-        el_btn.classList.remove("btn-outline");
-        el_btn.classList.remove("btn-link");
-        el_btn.classList.add("btn-solid");
-    }
-
-    // Outline
-    else if (opt==="1") {
-        el_btn.classList.remove("btn-solid");
-        el_btn.classList.remove("btn-link");
-        el_btn.classList.add("btn-outline");
-    }
-
-    // Link
-    else if (opt==="2") {
-        el_btn.classList.remove("btn-solid");
-        el_btn.classList.remove("btn-outline");
-        el_btn.classList.add("btn-link");
-    }
-}
-
-/*
-//////////////// BUTTON 2: TYPE ////////////////////
-*/
-
-document.querySelector("#dd_button_type_2").addEventListener("change", doButtonType2);
-
-function doButtonType2() {
-    let opt = document.querySelector("#dd_button_type_2").value;
-    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(2)");
-
-    // Solid
-    if (opt==="0") {
-        el_btn.classList.remove("btn-outline");
-        el_btn.classList.remove("btn-link");
-        el_btn.classList.add("btn-solid");
-    }
-
-    // Outline
-    else if (opt==="1") {
-        el_btn.classList.remove("btn-solid");
-        el_btn.classList.remove("btn-link");
-        el_btn.classList.add("btn-outline");
-    }
-
-    // Link
-    else if (opt==="2") {
-        el_btn.classList.remove("btn-solid");
-        el_btn.classList.remove("btn-outline");
-        el_btn.classList.add("btn-link");
     }
 }
 
@@ -931,7 +836,7 @@ function doVisType() {
         }
     }
     
-    let col_fig = iframe.contentWindow.document.querySelector('#HTML-Content section .col-2:nth-of-type(2)');
+    let col_fig = iframe.contentWindow.document.querySelector('#HTML-Content header .col-2:nth-of-type(2)');
 
     if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
         removeVisual();
@@ -996,11 +901,11 @@ document.querySelector("#cb_img_shadowsOn").addEventListener("change", doImgShad
 function doImgShadows() {
 
     if (!document.getElementById("cb_img_shadowsOn").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
+        iframe.contentWindow.document.querySelector('header').classList.remove("fig-shadow");
        
     }
     else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
+        iframe.contentWindow.document.querySelector('header').classList.add("fig-shadow");
     }
 }
 
@@ -1013,11 +918,11 @@ document.querySelector("#cb_img_cornersOn").addEventListener("change", doImgCorn
 function doImgCorners() {
 
     if (!document.getElementById("cb_img_cornersOn").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-corners-soft");
+        iframe.contentWindow.document.querySelector('header').classList.remove("fig-corners-soft");
        
     }
     else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-corners-soft");
+        iframe.contentWindow.document.querySelector('header').classList.add("fig-corners-soft");
     }
 }
 
@@ -1029,11 +934,11 @@ document.querySelector("#cb_vid_shadowsOn").addEventListener("change", doVidShad
 function doVidShadows() {
 
     if (!document.getElementById("cb_vid_shadowsOn").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
+        iframe.contentWindow.document.querySelector('header').classList.remove("fig-shadow");
        
     }
     else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
+        iframe.contentWindow.document.querySelector('header').classList.add("fig-shadow");
     }
 }
 
@@ -1068,15 +973,15 @@ function disableVidProps() {
     document.getElementById("cb_vid_shadowsOn").disabled=true;
     document.getElementById("cb_vid_shadowsOn").checked=false;
     document.querySelector("label[for='cb_vid_shadowsOn']").style.color = "var(--gray-500)";
-    iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-    iframe.contentWindow.document.querySelector('section').classList.remove("fig-corners-soft");
+    iframe.contentWindow.document.querySelector('header').classList.remove("fig-shadow");
+    iframe.contentWindow.document.querySelector('header').classList.remove("fig-corners-soft");
 }
 
 function removeVisual() {
-    if (iframe.contentWindow.document.querySelector('section figure')) {
+    if (iframe.contentWindow.document.querySelector('header figure')) {
         disableImgProps();
         disableVidProps();
-        iframe.contentWindow.document.querySelector('section figure').remove();
+        iframe.contentWindow.document.querySelector('header figure').remove();
     }
 }
 
@@ -1112,7 +1017,7 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,section/g, "section");
+    strCSS = strCSS.replace(/,header/g, "header");
     // strCSS = strCSS.replace(/..container/g, ".container");
     el_css.value = strCSS;
     document.body.appendChild(el_css);

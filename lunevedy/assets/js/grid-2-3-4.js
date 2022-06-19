@@ -1,8 +1,9 @@
-import {content_h3_col_3, content_h3_col_4, content_paras_col_3, content_paras_col_4, content_list_col_3, content_list_col_4} from '../js/arr-content.js';
+import {col_1_content_header_h2, content_h3_col_2, content_h3_col_3, content_h3_col_4, content_paras_col_2, content_paras_col_3, content_paras_col_4, content_list_col_2, content_list_col_3, content_list_col_4} from '../js/arr-content.js';
 
 section_class = sessionStorage.getItem('section-selector');
 col_no = sessionStorage.getItem('col-no');
 col_count = sessionStorage.getItem('col-count');
+
 
 /*
 //////////////// COLUMNS ALIGN ///////////////
@@ -62,7 +63,12 @@ function doColH3() {
     const arrContent = []; 
     let i;
     
-    if (col_no===".col-3") {
+    if (col_no===".col-2") {
+        for (i = 0; i < content_h3_col_2.length; i++) {
+            arrContent[i] = content_h3_col_2[i];
+        }
+    }
+    else if (col_no===".col-3") {
         for (i = 0; i < content_h3_col_3.length; i++) {
             arrContent[i] = content_h3_col_3[i];
         }
@@ -178,7 +184,12 @@ function doColsText() {
         document.querySelector("#btn_cols_text").disabled=false;
         removeText();
 
-        if (col_no===".col-3") {
+        if (col_no===".col-2") {
+            for (i = 0; i < content_paras_col_2.length; i++) {
+                arrContent[i] = content_paras_col_2[i];
+            }
+        }
+        else if (col_no===".col-3") {
             for (i = 0; i < content_paras_col_3.length; i++) {
                 arrContent[i] = content_paras_col_3[i];
             }
@@ -202,7 +213,7 @@ function doColsText() {
         
         // Test for figures (images or icons) and NO h3 column headings
         else if ( (iframe.contentWindow.document.querySelector('.'+section_class+' '+col_no+' figure')) && (!iframe.contentWindow.document.querySelector('.'+section_class+' '+col_no+' h3')) ) {
-            // console.log("figures and NO h3 column headings");
+            console.log("figures and NO h3 column headings");
             const objFig = iframe.contentWindow.document.querySelectorAll('.'+section_class+' '+col_no+' figure');
             let el_fig;
             // Loop through figures
@@ -225,7 +236,7 @@ function doColsText() {
 
         // No figures AND no column headings
         else if ( (!iframe.contentWindow.document.querySelector('.'+section_class+' '+col_no+' figure')) && (!iframe.contentWindow.document.querySelector('.'+section_class+' '+col_no+' h3')) ) {
-            // console.log("No figures AND no column headings");
+            console.log("No figures AND no column headings");
             const objCol = iframe.contentWindow.document.querySelectorAll('.'+section_class+' '+col_no);
             let el_col;
             // Loop through columns
@@ -243,7 +254,12 @@ function doColsText() {
         removeText();
         document.querySelector("#btn_cols_text").disabled=false;
 
-        if (col_no===".col-3") {
+        if (col_no===".col-2") {
+            for (i = 0; i < content_list_col_2.length; i++) {
+                arrContent[i] = content_list_col_2[i];
+            }
+        }
+        else if (col_no===".col-3") {
             for (i = 0; i < content_list_col_3.length; i++) {
                 arrContent[i] = content_list_col_3[i];
             }
@@ -491,7 +507,11 @@ function addColButtons(el_cols,btn_class) {
     if (col_no === '.col-4') {
         el_btn.classList.add("btn-small");
     }
-    el_btn.innerHTML = "<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+    const el_icon = document.createElement('i');
+    el_icon.setAttribute("class", "fas fa-shopping-cart");
+    el_btn.append(el_icon);
+    const btn_text = "<span>Order Now</span>";
+    el_icon.insertAdjacentHTML('afterend', btn_text);
     el_cols.append(el_btn);
 }
 
@@ -510,8 +530,8 @@ function removeColButtons() {
 
     iframe.contentWindow.document.querySelector('.'+section_class).innerHTML = iframe.contentWindow.document.querySelector('.'+section_class).innerHTML.replaceAll("\t\n\t\t<\/div>", "<\/div>");
     enableColButtons();
-    document.getElementById("dd_buttons_shape").disabled=true;
-    document.getElementById("dd_buttons_shape").value="0";
+    document.getElementById("dd_buttons_style").disabled=true;
+    document.getElementById("dd_buttons_style").value="0";
     disableColButtons();
 }
 
@@ -519,26 +539,22 @@ function removeColButtons() {
 /*
 //////////////// BUTTONS: TYPE ////////////////////
 */
-document.querySelector("#dd_buttons_type").addEventListener("change", doButtonsType);
+if (document.querySelector("#dd_buttons_type")) {
+    document.querySelector("#dd_buttons_type").addEventListener("change", doButtonsType);
+}
 
 function doButtonsType() {
     let opt = document.querySelector("#dd_buttons_type").value;
     const obj_btn = iframe.contentWindow.document.querySelectorAll("."+section_class +" "+col_no+' > a.btn');
+
     let el_btn;
+
     // Solid
     if (opt==="0") {
         removeButtonsType(obj_btn);        
         for (el_btn of obj_btn) { 
             el_btn.classList.add("btn-solid");
         }
-        // Update options
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("btn_cols_bg_passive").disabled=false;
-        document.getElementById("btn_cols_bg_active").disabled=false;
-        document.getElementById("btn_cols_border_passive").disabled=false;
-        document.getElementById("btn_cols_border_active").disabled=false;
-        document.getElementById("cb_buttons_width").disabled=false;
-        document.getElementById("cb_buttons_shadow").disabled=false;
     }
 
     // Outline
@@ -547,36 +563,13 @@ function doButtonsType() {
         for (el_btn of obj_btn) { 
             el_btn.classList.add("btn-outline");
         }
-        // Update options
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("btn_cols_bg_passive").disabled=true;
-        document.getElementById("btn_cols_bg_active").disabled=false;
-        document.getElementById("btn_cols_border_passive").disabled=false;
-        document.getElementById("btn_cols_border_active").disabled=false;
-        document.getElementById("cb_buttons_width").disabled=false;
-        document.getElementById("cb_buttons_shadow").disabled=false;
     }
 
     // Link
     else if (opt==="2") {
         removeButtonsType(obj_btn);        
         for (el_btn of obj_btn) { 
-            el_btn.classList.add("btn-plain");
-        }
-        // Update options
-        document.getElementById("dd_buttons_shape").disabled=true;
-        document.getElementById("dd_buttons_shape").value="0";
-        document.getElementById("btn_cols_bg_passive").disabled=true;
-        document.getElementById("btn_cols_bg_active").disabled=true;
-        document.getElementById("btn_cols_border_passive").disabled=true;
-        document.getElementById("btn_cols_border_active").disabled=true;
-        document.getElementById("cb_buttons_width").disabled=true;
-        document.getElementById("cb_buttons_shadow").disabled=true;
-        for (el_btn of obj_btn) { 
-            el_btn.classList.remove("btn-shadow");
-            el_btn.classList.remove("btn-block");
-            el_btn.classList.remove("btn-soft");
-            el_btn.classList.remove("btn-pill");
+            el_btn.classList.add("btn-link");
         }
     }
 }
@@ -586,7 +579,7 @@ function removeButtonsType(obj_btn) {
     for (el_btn of obj_btn) { 
         el_btn.classList.remove("btn-solid");
         el_btn.classList.remove("btn-outline");
-        el_btn.classList.remove("btn-plain");
+        el_btn.classList.remove("btn-link");
     }
 }
 
@@ -594,10 +587,12 @@ function removeButtonsType(obj_btn) {
 //////////////// BUTTONS: STYLE ////////////////////
 */
 
-document.querySelector("#dd_buttons_shape").addEventListener("change", doButtonsStyle);
+if (document.querySelector("#dd_buttons_style")) {
+    document.querySelector("#dd_buttons_style").addEventListener("change", doButtonsStyle);
+}
 
 function doButtonsStyle() {
-    let opt = document.querySelector("#dd_buttons_shape").value;
+    let opt = document.querySelector("#dd_buttons_style").value;
     const obj_btn = iframe.contentWindow.document.querySelectorAll("."+section_class +" "+col_no+' > a.btn');
     let el_btn;
     // remove
@@ -694,7 +689,7 @@ function swapButtonIcons() {
     if (iframe.contentWindow.document.querySelector(col_no+' > a.btn')) {
         const obj_btn = iframe.contentWindow.document.querySelectorAll("."+section_class +" "+col_no+' > a.btn');
         const icon_left  ="<i class=\"fas fa-shopping-cart\"><\/i><span>Order Now<\/span>";
-        const icon_right ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
+        const icon_right ="<span>Order Now<\/span><i class=\"fas fa-arrow-circle-right\"><\/i>";
         if (selectedValue==="left") {
             // Move text to right, icon to left
             for (el_btn of obj_btn) { 
@@ -721,7 +716,7 @@ function swapButtonIcons() {
             for (el_btn of obj_btn) { 
                 if (( btn_content = icon_right) || (btn_content = icon_right)) {
                     btn_content = el_btn.innerHTML;
-                    btn_content = "<span>Learn more</span>";
+                    btn_content = "<span>Order now</span>";
                     el_btn.innerHTML = btn_content;
                 }
             }
@@ -806,8 +801,8 @@ function enableColButtons() {
     document.getElementById("btn_cols_border_active").disabled=false;
     document.getElementById("dd_buttons_type").disabled=false;
     document.getElementById("dd_buttons_type").value="0";
-    document.getElementById("dd_buttons_shape").value="0";
-    document.getElementById("dd_buttons_shape").disabled=false;
+    document.getElementById("dd_buttons_style").value="0";
+    document.getElementById("dd_buttons_style").disabled=false;
     document.getElementById("dd_buttons_size").disabled=false;
     if (col_no === '.col-4') {
         document.getElementById("dd_buttons_size").value="0";
@@ -815,7 +810,7 @@ function enableColButtons() {
     else {
         document.getElementById("dd_buttons_size").value="1";
     }
-    document.getElementById("rb_btns_icons_right").checked=true;
+    document.getElementById("rb_btns_icons_left").checked=true;
     document.getElementById("rb_btns_icons_left").disabled=false;
     document.getElementById("rb_btns_icons_right").disabled=false;
     document.getElementById("rd-btns-icons-none").disabled=false;
@@ -842,8 +837,8 @@ function disableColButtons() {
     document.getElementById("rd-btns-icons-none").disabled=true;
     document.getElementById("dd_buttons_type").disabled=true;
     document.getElementById("dd_buttons_type").value="0";
-    document.getElementById("dd_buttons_shape").value="0";
-    document.getElementById("dd_buttons_shape").disabled=true;
+    document.getElementById("dd_buttons_style").value="0";
+    document.getElementById("dd_buttons_style").disabled=true;
     document.getElementById("dd_buttons_size").value="1";
     document.getElementById("dd_buttons_size").disabled=true;
     document.getElementById("cb_buttons_width").disabled=true;
@@ -854,3 +849,5 @@ function disableColButtons() {
     document.getElementById("cb_buttons_uppercase").checked=false;
 }
 
+
+// console.log("grid-2-3-4.js has loaded.")
