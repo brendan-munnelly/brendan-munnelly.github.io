@@ -1,151 +1,351 @@
-import {arrPic, arrTrans, arrIllus, arrVidFile, arrVidYT, arrIconFA, arrIconLA } from '../js/arr-content.js';
+import {arrPic, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA } from '../js/arr-content.js';
 
 section_class = sessionStorage.getItem('section-selector');
 col_no = sessionStorage.getItem('col-no');
 col_count = sessionStorage.getItem('col-count');
 
 /*
-////////////////////// VISUALS ///////////////////////
+////////////////////// VISUALS: FOUR TYPES ///////////////////////
 */
+
+document.querySelector("#cb_visual").addEventListener("change", doVis);
+
+function doVis() {
+    if (!document.getElementById("cb_visual").checked) {
+        removeVisual();
+        document.getElementById("rb_vis_type_1").disabled=true;
+        document.getElementById("rb_vis_type_2").disabled=true;
+        document.getElementById("rb_vis_type_3").disabled=true;
+        document.getElementById("rb_vis_type_4").disabled=true;
+        document.getElementById("rb_vis_type_5").disabled=true;
+
+        document.getElementById("form_vis_types").style.display = "none";
+        document.getElementById("properties-photos").style.display = "none";
+        // document.getElementById("properties-transparent").style.display = "none";
+        // document.getElementById("properties-drawings").style.display = "none";
+        document.getElementById("properties-icons").style.display = "none";
+        document.getElementById("properties-videos").style.display = "none";
+    }
+    else {
+        document.getElementById("properties-photos").style.display = "block";
+        doPhotos(1);
+    }
+}
 
 document.querySelector("#form_vis_types").addEventListener("click", doVisType);
 
 function doVisType() { 
     const rbs = document.querySelectorAll("#form_vis_types input[name='vis_type']");
     let selectedValue;
-    
     for (const rb of rbs) {
         if (rb.checked) {
             selectedValue = rb.value;
             break;
         }
     }
-  
-    const obj_col = iframe.contentWindow.document.querySelectorAll("."+section_class +" "+col_no);
-    let el_cols; // each child column block
-    let col_flex ="";
-    if (col_no===".col-3") {
-        col_flex=".flex-cols-3";
-
+    removeVisual();
+    if (selectedValue==="photos") {
+        doPhotos();
     }
-    else if (col_no===".col-4") {
-        col_flex=".flex-cols-4";
+    else if (selectedValue==="transparent") {
+        // doTransparent();
+    }    
+    else if (selectedValue==="drawings") {
+        doDrawings();
     }
-
-    if (selectedValue==="none") {
-        removeVisual();
+    else if (selectedValue==="icons") {
+        doIcons();
     }
-
-    else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") || (selectedValue==="vid_file") || (selectedValue==="vid_yt")  ) {
-        removeVisual();
-        for (let i = 1; i <= obj_col.length; i++) {
-            // Current content of each column block
-            el_cols = iframe.contentWindow.document.querySelector(col_flex+" "+col_no+":nth-child("+i+")");
-            // Add figure at end of current content
-            if (selectedValue==="pictures") {
-                el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-            }
-            else if (selectedValue==="transparent") {
-                el_cols.innerHTML = arrTrans[i-1] + el_cols.innerHTML; 
-            }
-            else if (selectedValue==="illustrations") {
-                el_cols.innerHTML = arrIllus[i-1] + el_cols.innerHTML; 
-            }
-            else if (selectedValue==="vid_file") {
-                el_cols.innerHTML = arrVidFile[i-1] + el_cols.innerHTML; 
-            }
-            else if (selectedValue==="vid_yt") {
-                el_cols.innerHTML = arrVidYT[i-1] + el_cols.innerHTML; 
-            }
-        }
-        // Enable image properties
-        enableImgProps();
-    }
-
-    else if ( (selectedValue==="icons-fa") || (selectedValue==="icons-la") ) {
-        removeVisual();
-        for (let i = 1; i <= obj_col.length; i++) {
-            el_cols = iframe.contentWindow.document.querySelector(col_flex+" "+col_no+":nth-child("+i+")");            
-            if (selectedValue==="icons-fa") {
-                el_cols.innerHTML = arrIconFA[i-1] + el_cols.innerHTML; 
-            }
-            else if (selectedValue==="icons-la") {
-                el_cols.innerHTML = arrIconLA[i-1] + el_cols.innerHTML; 
-            }
-        }
-        // Enables icon properties
-        document.getElementById("cb_icon_size_plus").checked=true;
-        document.getElementById("cb_icon_size_minus").checked=false;
-        document.getElementById("cb_icon_size_plus").disabled=false;
-        document.getElementById("cb_icon_size_minus").disabled=false;
-        document.getElementById("rb_icon_align_left").disabled=false;
-        document.getElementById("rb_icon_align_center").disabled=false;
-        document.getElementById("rb_icon_align_left").checked=false;
-        document.getElementById("rb_icon_align_center").checked=true;        
-        document.getElementById("btn_icon_color").disabled=false;
+    else if (selectedValue==="videos") {
+        doVideos();
     }
 }
 
-
 /*
-//////////////// VISUAL PROPERTIES: IMAGE CORNERS ///////////////
+//////////////// VISUALS: PHOTOS ///////////////
 */
 
-document.querySelector("#cb_img_corners_soft").addEventListener("change", doImgCorners);
+function doPhotos() {
+    removeVisual();
 
-function doImgCorners() {
+    // Visual types
+    document.getElementById("form_vis_types").style.display = "block";
+    document.getElementById("rb_vis_type_1").disabled=false;
+    document.getElementById("rb_vis_type_1").checked=true;
+    document.getElementById("rb_vis_type_2").disabled=false;
+    document.getElementById("rb_vis_type_3").disabled=false;
+    document.getElementById("rb_vis_type_4").disabled=false;
 
-    if (!document.getElementById("cb_img_corners_soft").checked) {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-corners-soft");
+    // Property containers
+    document.getElementById("properties-photos").style.display = "block";
+    // document.getElementById("properties-transparent").style.display = "none";
+    // document.getElementById("properties-drawings").style.display = "none";
+    document.getElementById("properties-icons").style.display = "none";
+    document.getElementById("properties-videos").style.display = "none";
+
+    // Property resets
+    resetIconProps();
+    // Set properties
+    document.getElementById("dd_photos_shape").value = "1";
+    doVisSubTypes(1);
+}
+
+document.querySelector("#dd_photos_shape").addEventListener("change", doPhotosType);
+
+function doPhotosType() {
+
+    let opt = document.querySelector("#dd_photos_shape").value;
+    removeVisual();
+    if (opt==="1") {
+        doVisSubTypes(1);    
+    }
+    else if (opt==="2") {
+        doVisSubTypes(2);    
+    }
+    else if (opt==="3") {
+        doVisSubTypes(3);    
+    }
+    else if (opt==="4") {
+        doVisSubTypes(4);    
+    }        
+    else if (opt==="5") {
+        doVisSubTypes(5);    
+    }    
+}
+
+/* photos: corners */
+
+document.querySelector("#cb_photos_corners_soft").addEventListener("change", doPhotosCorners);
+
+function doPhotosCorners() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_figs;
+
+    if (!document.getElementById("cb_photos_corners_soft").checked) {
+        for (let i = 0; i < objFigs.length; i++) {
+            el_figs = objFigs[i];
+            el_figs.classList.remove("fig-corners-soft");
+        }
     }
     else {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("fig-corners-soft");
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_figs = objFigs[i];
+            el_figs.classList.add("fig-corners-soft");
+        }
     }
 }
 
-/*
-//////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
-*/
+/* photos: shadows */
 
-/* Enable image shadows */
-document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
+document.querySelector("#cb_photos_shadows").addEventListener("change", doPhotosShadows);
 
+function doPhotosShadows() {
 
-function doImgShadows() {
-    if (!document.getElementById("cb_img_shadows").checked) {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-shadow");
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_figs;
+    
+    if (!document.getElementById("cb_photos_shadows").checked) {
+        for (let i = 0; i < objFigs.length; i++) {
+            el_figs = objFigs[i];
+            el_figs.classList.remove("fig-shadows-box");
+        }
     }
     else {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("fig-shadow");
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_figs = objFigs[i];
+            el_figs.classList.add("fig-shadows-box");
+        }
     }
 }
 
+/* photos: hyperlinks */
 
-// Image properties with labels
-function enableImgProps() {
-    document.getElementById("cb_img_corners_soft").disabled=false;
-    document.getElementById("cb_img_corners_soft").checked=false;
-    document.getElementById("cb_img_shadows").disabled=false;
-    document.getElementById("cb_img_shadows").checked=false;
-    document.querySelector("label[for='cb_img_corners_soft']").style.color = "#fff";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "#fff";
+document.querySelector("#cb_photos_hyperlinks").addEventListener("change", doPhotosHyperlinks);
+
+function doPhotosHyperlinks() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_fig;
+    let el_fig_content;
+
+    if (!document.getElementById("cb_photos_hyperlinks").checked) {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig_content = objFigs[i].innerHTML;
+            el_fig_content = el_fig_content.replace('<a href=\"#\">', '');
+            el_fig_content = el_fig_content.replace('</a>', '');
+            objFigs[i].innerHTML = el_fig_content;
+            el_fig = objFigs[i];
+            el_fig.classList.remove("zoom-photos");
+        }
+        document.getElementById("cb_photos_zoom").checked=false;
+        document.getElementById("cb_photos_zoom").disabled=true;
+        document.getElementById("cb_photos_brightness").checked=false;
+        document.getElementById("cb_photos_brightness").disabled=true;
+    }
+
+    else {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig_content = objFigs[i].innerHTML;
+            el_fig_content = '<a href=\"#\">'+el_fig_content+'</a>';
+            objFigs[i].innerHTML = el_fig_content;
+        }
+        document.getElementById("cb_photos_zoom").disabled=false;
+        document.getElementById("cb_photos_zoom").checked=false;
+        document.getElementById("cb_photos_brightness").checked=false;
+        document.getElementById("cb_photos_brightness").disabled=false;
+    }
 }
 
-function disableImgProps() {
-    document.getElementById("cb_img_corners_soft").disabled=true;
-    document.getElementById("cb_img_corners_soft").checked=false;
-    document.getElementById("cb_img_shadows").disabled=true;
-    document.getElementById("cb_img_shadows").checked=false;
-    document.querySelector("label[for='cb_img_corners_soft']").style.color = "var(--gray-500)";
-    document.querySelector("label[for='cb_img_shadows']").style.color = "var(--gray-500)";
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-shadow");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-corners-soft");
+/* photos: zoom */
+
+document.querySelector("#cb_photos_zoom").addEventListener("change", doPhotosZoom);
+
+function doPhotosZoom() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_fig;
+
+    if (!document.getElementById("cb_photos_zoom").checked) {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.remove("zoom-photos");
+            document.getElementById("cb_photos_shadows").disabled=false;
+            document.getElementById("cb_photos_shadows").checked=false;            
+        }
+    }
+
+    else {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.add("zoom-photos");
+            el_fig.classList.remove("fig-shadows-box");
+        }
+        document.getElementById("cb_photos_shadows").disabled=true;
+        document.getElementById("cb_photos_shadows").checked=false;
+    }
 }
+
+/* photos: brightness */
+
+document.querySelector("#cb_photos_brightness").addEventListener("change", doPhotosBrightness);
+
+function doPhotosBrightness() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_fig;
+
+    if (!document.getElementById("cb_photos_brightness").checked) {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.remove("zoom-photos-brightness");
+        }
+    }
+
+    else {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.add("zoom-photos-brightness");
+        }
+    }
+}
+
+function resetPhotoProps() {
+    document.getElementById("dd_photos_shape").value="1";
+    document.getElementById("cb_photos_shadows").checked=false;
+    document.getElementById("cb_photos_corners_soft").checked=false;
+    document.getElementById("cb_photos_hyperlinks").checked=false;
+    document.getElementById("cb_photos_zoom").disabled=true;
+    document.getElementById("cb_photos_zoom").checked=false;
+    document.getElementById("cb_photos_brightness").disabled=true;
+    document.getElementById("cb_photos_brightness").checked=false;
+}
+
+/*
+//////////////// VISUALS: TRANSPARENT ///////////////
+*/
+
 
 
 /*
-//////////////// ICON PROPERTIES: SIZE ///////////////
+//////////////// VISUALS: DRAWINGS ///////////////
 */
+
+function doDrawings() {
+    removeVisual();
+
+    // Visual types
+    document.getElementById("form_vis_types").style.display = "block";
+    document.getElementById("rb_vis_type_1").disabled=false;
+    document.getElementById("rb_vis_type_2").disabled=false;
+    document.getElementById("rb_vis_type_3").disabled=false;
+    document.getElementById("rb_vis_type_3").checked=true;
+    document.getElementById("rb_vis_type_4").disabled=false;
+    document.getElementById("rb_vis_type_4").disabled=false;
+
+    // Property containers
+    document.getElementById("properties-photos").style.display = "none";
+    // document.getElementById("properties-transparent").style.display = "none";
+    // document.getElementById("properties-drawings").style.display = "none";
+    document.getElementById("properties-icons").style.display = "none";
+    document.getElementById("properties-videos").style.display = "none";
+
+    // Reset properties
+    resetPhotoProps();
+    resetIconProps();
+
+    // Set properties
+    doVisSubTypes(6);
+}
+
+/*
+//////////////// VISUALS: ICONS ///////////////
+*/
+
+function doIcons() {
+    removeVisual();
+    
+    // Visual types
+    document.getElementById("form_vis_types").style.display = "block";
+    document.getElementById("rb_vis_type_1").disabled=false;
+    document.getElementById("rb_vis_type_2").disabled=false;
+    document.getElementById("rb_vis_type_3").disabled=false;
+    document.getElementById("rb_vis_type_4").checked=true;
+    document.getElementById("rb_vis_type_4").disabled=false;
+    document.getElementById("rb_vis_type_5").disabled=false;
+
+    // Property containers
+    document.getElementById("properties-photos").style.display = "none";
+    document.getElementById("properties-icons").style.display = "block";
+    document.getElementById("properties-videos").style.display = "none";
+
+    // Reset properties
+    resetPhotoProps()
+
+    // Set properties
+    document.getElementById("dd_icons_type").value = "0";
+    document.getElementById("rb_icon_align_center").checked = true;
+    document.getElementById("cb_icon_size_plus").checked = true;
+-    
+    doVisSubTypes(10);    
+}
+
+document.querySelector("#dd_icons_type").addEventListener("change", doIconsType);
+
+function doIconsType() {
+
+    let opt = document.querySelector("#dd_icons_type").value;
+    removeVisual();
+    if (opt==="0") {
+        doVisSubTypes(10);    
+    }
+    
+    else if (opt==="1") {
+        doVisSubTypes(11);    
+    }    
+}
+
+/* Icons: size */
 
 document.querySelector("#form_icon_size").addEventListener("change", doIconSize);
 
@@ -169,9 +369,7 @@ function doIconSize() {
     }
 }
 
-/*
-//////////////// ICON PROPERTIES: ALIGN ///////////////
-*/
+/* Icons: align */
 
 document.querySelector("#form_icons_align").addEventListener("change", doIconAlign);
 
@@ -198,6 +396,118 @@ function doIconAlign() {
 }
 
 
+function resetIconProps() {
+    document.getElementById("dd_icons_type").value="0";
+    document.getElementById("cb_icon_size_plus").checked=false;
+    document.getElementById("cb_icon_size_minus").checked=false;
+    document.getElementById("rb_icon_align_left").checked=true;
+    document.getElementById("rb_icon_align_center").checked=false;
+    document.getElementById("rb_icon_align_left").checked=false;
+    document.getElementById("rb_icon_align_center").checked=false;        
+}
+
+/*
+//////////////// VISUALS: VIDEOS ///////////////
+*/
+
+function doVideos() {
+
+    removeVisual();
+    
+    // Visual types
+    document.getElementById("form_vis_types").style.display = "block";
+    document.getElementById("rb_vis_type_1").disabled=false;
+    document.getElementById("rb_vis_type_2").disabled=false;
+    document.getElementById("rb_vis_type_3").disabled=false;
+    document.getElementById("rb_vis_type_4").disabled=false;
+    document.getElementById("rb_vis_type_5").checked=true;
+    document.getElementById("rb_vis_type_5").disabled=false;
+
+    // Property containers
+    document.getElementById("properties-photos").style.display = "none";
+    document.getElementById("properties-icons").style.display = "none";
+    document.getElementById("properties-videos").style.display = "block";
+
+    // Reset properties
+    resetPhotoProps();
+    resetIconProps();
+
+    // Set properties
+    document.getElementById("dd_videos_type").value = "0";
+-    
+    doVisSubTypes(20);    
+}
+
+document.querySelector("#dd_videos_type").addEventListener("change", doVideosType);
+
+function doVideosType() {
+
+    let opt = document.querySelector("#dd_videos_type").value;
+    removeVisual();
+    if (opt==="0") {
+        doVisSubTypes(20);    
+    }
+    
+    else if (opt==="1") {
+        doVisSubTypes(21);    
+    }
+    else if (opt==="2") {
+        doVisSubTypes(22);    
+    }
+}
+
+function doVisSubTypes(n) {
+    const obj_col = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] > div");
+    let el_cols;
+    for (let i = 1; i <= obj_col.length; i++) {
+        el_cols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] > div:nth-of-type("+i+")");
+        // photos: landscape
+        if (n===1) {
+            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
+        }
+        // photos: portrait
+        else if (n===2) {
+            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
+        }
+        // photos: square
+        else if (n===3) {
+            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
+        }
+        // photos: circle
+        else if (n===4) {
+            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
+        }        
+        // photos: small faces
+        else if (n===5) {
+            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
+        }
+        // drawings: landscape
+        else if (n===6) {
+            el_cols.innerHTML = arrIllus[i-1] + el_cols.innerHTML; 
+        }
+        // icons: Font Awesome
+        else if (n===10) {
+            el_cols.innerHTML = arrIconFA[i-1] + el_cols.innerHTML; 
+        }
+        // icons: Line Awesome
+        else if (n===11) {
+            el_cols.innerHTML = arrIconLA[i-1] + el_cols.innerHTML; 
+        }
+        // videos: file
+        else if (n===20) {
+            el_cols.innerHTML = arrVidFile[i-1] + el_cols.innerHTML; 
+        }
+        // videos: YT
+        else if (n===21) {
+            el_cols.innerHTML = arrVidYT[i-1] + el_cols.innerHTML; 
+        }
+        // videos: Rumble
+        else if (n===22) {
+            el_cols.innerHTML = arrVidRumble[i-1] + el_cols.innerHTML; 
+        }        
+    }
+}
+
 function removeVisual() {
     const parentNode = iframe.contentWindow.document.querySelector("#HTML-Content");
     var el_img = Array.prototype.slice.call(iframe.contentWindow.document.getElementsByTagName("figure"),0); 
@@ -209,18 +519,5 @@ function removeVisual() {
     // Remove any corner or shadow properties
     iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-corners-soft");
     iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-shadow");
-    // Disable image properties
-    disableImgProps();
-    // Disable icon properties
-    document.getElementById("cb_icon_size_plus").checked=false;
-    document.getElementById("cb_icon_size_minus").checked=false;
-    document.getElementById("cb_icon_size_plus").disabled=true;
-    document.getElementById("cb_icon_size_minus").disabled=true;
-    document.getElementById("rb_icon_align_left").disabled=true;
-    document.getElementById("rb_icon_align_center").disabled=true;
-    document.getElementById("rb_icon_align_left").checked=false;
-    document.getElementById("rb_icon_align_center").checked=false;        
-    document.getElementById("btn_icon_color").disabled=true;
 }
 
-// console.log("grid-visual.js has loaded.")
