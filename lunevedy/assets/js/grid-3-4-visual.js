@@ -1,9 +1,5 @@
 import {arrPic, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA } from '../js/arr-content.js';
 
-section_class = sessionStorage.getItem('section-selector');
-col_no = sessionStorage.getItem('col-no');
-col_count = sessionStorage.getItem('col-count');
-
 /*
 ////////////////////// VISUALS: FOUR TYPES ///////////////////////
 */
@@ -21,8 +17,8 @@ function doVis() {
 
         document.getElementById("form_vis_types").style.display = "none";
         document.getElementById("properties-photos").style.display = "none";
-        // document.getElementById("properties-transparent").style.display = "none";
-        // document.getElementById("properties-drawings").style.display = "none";
+        document.getElementById("properties-transparent").style.display = "none";
+        document.getElementById("properties-drawings").style.display = "none";
         document.getElementById("properties-icons").style.display = "none";
         document.getElementById("properties-videos").style.display = "none";
     }
@@ -48,7 +44,7 @@ function doVisType() {
         doPhotos();
     }
     else if (selectedValue==="transparent") {
-        // doTransparent();
+        doTransparent();
     }    
     else if (selectedValue==="drawings") {
         doDrawings();
@@ -78,13 +74,16 @@ function doPhotos() {
 
     // Property containers
     document.getElementById("properties-photos").style.display = "block";
-    // document.getElementById("properties-transparent").style.display = "none";
-    // document.getElementById("properties-drawings").style.display = "none";
+    document.getElementById("properties-transparent").style.display = "none";
+    document.getElementById("properties-drawings").style.display = "none";
     document.getElementById("properties-icons").style.display = "none";
     document.getElementById("properties-videos").style.display = "none";
 
     // Property resets
+    resetTransProps();
+    resetDrawingsProps();    
     resetIconProps();
+    resetVideoProps();
     // Set properties
     document.getElementById("dd_photos_shape").value = "1";
     doVisSubTypes(1);
@@ -137,7 +136,6 @@ function doPhotosCorners() {
 }
 
 /* photos: shadows */
-
 document.querySelector("#cb_photos_shadows").addEventListener("change", doPhotosShadows);
 
 function doPhotosShadows() {
@@ -160,7 +158,6 @@ function doPhotosShadows() {
 }
 
 /* photos: hyperlinks */
-
 document.querySelector("#cb_photos_hyperlinks").addEventListener("change", doPhotosHyperlinks);
 
 function doPhotosHyperlinks() {
@@ -265,7 +262,60 @@ function resetPhotoProps() {
 //////////////// VISUALS: TRANSPARENT ///////////////
 */
 
+function doTransparent() {
+    removeVisual();
 
+    // Visual types
+    document.getElementById("form_vis_types").style.display = "block";
+    document.getElementById("rb_vis_type_1").disabled=false;
+    document.getElementById("rb_vis_type_2").disabled=false;
+    document.getElementById("rb_vis_type_2").checcked=true;
+    document.getElementById("rb_vis_type_3").disabled=false;
+    document.getElementById("rb_vis_type_4").disabled=false;
+    document.getElementById("rb_vis_type_4").disabled=false;
+
+    // Property containers
+    document.getElementById("properties-photos").style.display = "none";
+    document.getElementById("properties-transparent").style.display = "block";
+    document.getElementById("properties-drawings").style.display = "none";
+    document.getElementById("properties-icons").style.display = "none";
+    document.getElementById("properties-videos").style.display = "none";
+
+    // Reset properties
+    resetPhotoProps();
+    resetDrawingsProps();
+    resetIconProps();
+    resetVideoProps();
+    // Set properties
+    document.getElementById("cb_trans_shadows").checked = false;
+    doVisSubTypes(6);
+}
+
+/* transparent: shadows */
+document.querySelector("#cb_trans_shadows").addEventListener("change", doTransShadows);
+
+function doTransShadows() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_figs;
+    
+    if (!document.getElementById("cb_trans_shadows").checked) {
+        for (let i = 0; i < objFigs.length; i++) {
+            el_figs = objFigs[i];
+            el_figs.classList.remove("fig-shadows-trans");
+        }
+    }
+    else {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_figs = objFigs[i];
+            el_figs.classList.add("fig-shadows-trans");
+        }
+    }
+}
+
+function resetTransProps() {
+    document.getElementById("cb_trans_shadows").checked = false;
+}
 
 /*
 //////////////// VISUALS: DRAWINGS ///////////////
@@ -285,17 +335,46 @@ function doDrawings() {
 
     // Property containers
     document.getElementById("properties-photos").style.display = "none";
-    // document.getElementById("properties-transparent").style.display = "none";
-    // document.getElementById("properties-drawings").style.display = "none";
+    document.getElementById("properties-transparent").style.display = "none";
+    document.getElementById("properties-drawings").style.display = "block";
     document.getElementById("properties-icons").style.display = "none";
     document.getElementById("properties-videos").style.display = "none";
 
     // Reset properties
     resetPhotoProps();
+    resetTransProps();
     resetIconProps();
+    resetVideoProps();
 
     // Set properties
-    doVisSubTypes(6);
+    document.getElementById("cb_drawings_shadows").checked = false;
+    doVisSubTypes(7);
+}
+
+/* drawings: shadows */
+document.querySelector("#cb_drawings_shadows").addEventListener("change", doDrawingsShadows);
+
+function doDrawingsShadows() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_figs;
+    
+    if (!document.getElementById("cb_drawings_shadows").checked) {
+        for (let i = 0; i < objFigs.length; i++) {
+            el_figs = objFigs[i];
+            el_figs.classList.remove("fig-shadows-trans");
+        }
+    }
+    else {
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_figs = objFigs[i];
+            el_figs.classList.add("fig-shadows-trans");
+        }
+    }
+}
+
+function resetDrawingsProps() {
+    document.getElementById("cb_drawings_shadows").checked = false;
 }
 
 /*
@@ -316,12 +395,16 @@ function doIcons() {
 
     // Property containers
     document.getElementById("properties-photos").style.display = "none";
+    document.getElementById("properties-transparent").style.display = "none";
+    document.getElementById("properties-drawings").style.display = "none";
     document.getElementById("properties-icons").style.display = "block";
     document.getElementById("properties-videos").style.display = "none";
 
     // Reset properties
-    resetPhotoProps()
-
+    resetPhotoProps();
+    resetTransProps();
+    resetDrawingsProps();
+    resetVideoProps();
     // Set properties
     document.getElementById("dd_icons_type").value = "0";
     document.getElementById("rb_icon_align_center").checked = true;
@@ -346,7 +429,6 @@ function doIconsType() {
 }
 
 /* Icons: size */
-
 document.querySelector("#form_icon_size").addEventListener("change", doIconSize);
 
 function doIconSize() {
@@ -360,17 +442,25 @@ function doIconSize() {
         }
     }
 
-    const el_section = iframe.contentWindow.document.querySelector('.'+section_class);
-    if (selectedValue==="icon-plus") {
-        el_section.classList.remove("icon-small");
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_fig;
+
+    if (selectedValue==="icon-plus") {    
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.remove("icon-small");
+        }
     }
+
     else if (selectedValue==="icon-minus") {
-        el_section.classList.add("icon-small");
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.add("icon-small");
+        }
     }
 }
 
 /* Icons: align */
-
 document.querySelector("#form_icons_align").addEventListener("change", doIconAlign);
 
 function doIconAlign() {
@@ -385,13 +475,21 @@ function doIconAlign() {
         }
     }
 
-    const el_section = iframe.contentWindow.document.querySelector('.'+section_class);
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_fig;
 
-    if (selectedValue==="left") {
-        el_section.classList.add("icon-left");
+    if (selectedValue==="left") {    
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.add("icon-left");
+        }
     }
+
     else if (selectedValue==="center") {
-        el_section.classList.remove("icon-left");
+        for (let i = 0; i < objFigs.length; i++) { 
+            el_fig = objFigs[i];
+            el_fig.classList.remove("icon-left");
+        }
     }
 }
 
@@ -425,16 +523,18 @@ function doVideos() {
 
     // Property containers
     document.getElementById("properties-photos").style.display = "none";
+    document.getElementById("properties-transparent").style.display = "none";
+    document.getElementById("properties-drawings").style.display = "none";
     document.getElementById("properties-icons").style.display = "none";
     document.getElementById("properties-videos").style.display = "block";
 
     // Reset properties
     resetPhotoProps();
+    resetDrawingsProps();
+    resetTransProps();
     resetIconProps();
-
     // Set properties
     document.getElementById("dd_videos_type").value = "0";
--    
     doVisSubTypes(20);    
 }
 
@@ -455,6 +555,11 @@ function doVideosType() {
         doVisSubTypes(22);    
     }
 }
+
+function resetVideoProps() {
+    document.querySelector("#dd_videos_type").value="0";
+}
+
 
 function doVisSubTypes(n) {
     const obj_col = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] > div");
@@ -481,10 +586,15 @@ function doVisSubTypes(n) {
         else if (n===5) {
             el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
         }
-        // drawings: landscape
+        // transparent: landscape
         else if (n===6) {
+            el_cols.innerHTML = arrTrans[i-1] + el_cols.innerHTML; 
+        }
+        // drawings: landscape
+        else if (n===7) {
             el_cols.innerHTML = arrIllus[i-1] + el_cols.innerHTML; 
         }
+
         // icons: Font Awesome
         else if (n===10) {
             el_cols.innerHTML = arrIconFA[i-1] + el_cols.innerHTML; 
@@ -504,20 +614,18 @@ function doVisSubTypes(n) {
         // videos: Rumble
         else if (n===22) {
             el_cols.innerHTML = arrVidRumble[i-1] + el_cols.innerHTML; 
-        }        
+        }
+        iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML.replaceAll("</figure>\t", "</figure>");
     }
 }
 
 function removeVisual() {
-    const parentNode = iframe.contentWindow.document.querySelector("#HTML-Content");
+    const parentNode = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
     var el_img = Array.prototype.slice.call(iframe.contentWindow.document.getElementsByTagName("figure"),0); 
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
-
-    iframe.contentWindow.document.querySelector('.'+section_class).innerHTML = iframe.contentWindow.document.querySelector('.'+section_class).innerHTML.replaceAll("<div class=\"col-3\">\n\t\t\t", "<div class=\"col-3\">");
-    // Remove any corner or shadow properties
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-corners-soft");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("fig-shadow");
+    parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-3\">\n\t\t\t", "<div class=\"col-3\">");
+    parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-4\">\n\t\t\t", "<div class=\"col-4\">");
 }
 

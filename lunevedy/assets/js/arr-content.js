@@ -67,14 +67,11 @@ export const content_paras_col_4 = ["\n\t\t\t<p>Our friendly baristas are waitin
 
 export const content_list_col_4 = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Best value<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>"];
 
-
-
-
 export const arrPic = [];
-arrPic[0]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-arrPic[1]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-fashion-yellow.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-arrPic[2]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-student.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-arrPic[3]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x280-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
+arrPic[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPic[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/460x280-fashion-yellow.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPic[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/460x280-student.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPic[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/460x280-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 
 export const arrTrans = [];
 arrTrans[0]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-couple-coffee.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
@@ -83,41 +80,41 @@ arrTrans[2]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-man
 arrTrans[3]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"assets\/img\/460x300-trans-lisbon.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
 
 export const arrIllus = [];  
-arrIllus[0]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-couple-dining.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-arrIllus[1]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-shopping.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
-arrIllus[2]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-education.png\" alt=\"Placeholder image\"><\/figure>";
-arrIllus[3]="\n\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-lisbon.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
+arrIllus[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-couple-dining.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrIllus[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-shopping.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrIllus[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-education.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrIllus[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"assets\/img\/500x340-drawing-lisbon.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 
 export const arrVidFile = [];  
-arrVidFile[0]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-coffee-cafe.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t<\/figure>";
-arrVidFile[1]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-fashion.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t<\/figure>";
-arrVidFile[2]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-software.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t<\/figure>";
-arrVidFile[3]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-lisbon.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t<\/figure>";
+arrVidFile[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-coffee-cafe.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t\t<\/figure>";
+arrVidFile[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-fashion.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t\t<\/figure>";
+arrVidFile[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-software.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t\t<\/figure>";
+arrVidFile[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"assets/videos/1280x720-lisbon.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t\t<\/figure>";
 
 export const arrVidYT = [];  
-arrVidYT[0]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/qPPlBpRkeAo\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidYT[1]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/MVNxViRQrF8\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidYT[2]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/u044iM9xsWU\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidYT[3]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/N8bHCHl8X_0\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
+arrVidYT[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/qPPlBpRkeAo\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidYT[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/MVNxViRQrF8\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidYT[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/u044iM9xsWU\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidYT[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/N8bHCHl8X_0\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
 
 export const arrVidRumble = [];  
-arrVidRumble[0]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidRumble[1]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidRumble[2]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://odysee.com/$/embed/did-google%E2%80%99s-a.i.-just-become-sentient/14d83b5976ae7f5a4b94e91ec1391bafc435e2ae?r=95Jvfn3aYo3zUzf6omjQZsMoi7ESTeyZ\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
-arrVidRumble[3]="\n\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t<\/figure>";
+arrVidRumble[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidRumble[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidRumble[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://odysee.com/$/embed/did-google%E2%80%99s-a.i.-just-become-sentient/14d83b5976ae7f5a4b94e91ec1391bafc435e2ae?r=95Jvfn3aYo3zUzf6omjQZsMoi7ESTeyZ\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+arrVidRumble[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
 
 export const arrIconFA = [];             
-arrIconFA[0]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-solid fa-user-group\"></i>\n\t\t\t\<\/figure>";
-arrIconFA[1]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-regular fa-comments\"></i>\n\t\t\t\<\/figure>";
-arrIconFA[2]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-regular fa-lightbulb\">\n\t\t\t</i><\/figure>";
-arrIconFA[3]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"fa-solid fa-plane-departure\"></i>\n\t\t\t\<\/figure>";
+arrIconFA[0]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-solid fa-user-group\"></i>\n\t\t\t\t<\/figure>";
+arrIconFA[1]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-regular fa-comments\"></i>\n\t\t\t\t<\/figure>";
+arrIconFA[2]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-regular fa-lightbulb\">\n\t\t\t\t</i><\/figure>";
+arrIconFA[3]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-solid fa-plane-departure\"></i>\n\t\t\t\t<\/figure>";
 
 export const arrIconLA = [];             
-arrIconLA[0]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-user-friends\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[1]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-comments\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[2]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-lightbulb\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[3]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-plane-departure\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[4]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-globe\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[5]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-shopping-cart\"><\/i>\n\t\t\t<\/figure>";   
-arrIconLA[6]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-briefcase\"><\/i>\n\t\t\t<\/figure>";
-arrIconLA[7]="\n\t\t\t<figure class=\"icon\">\n\t\t\t\t<i class=\"las la-book-reader\"><\/i>\n\t\t\t<\/figure>"; 
+arrIconLA[0]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-user-friends\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[1]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-comments\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[2]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-lightbulb\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[3]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-plane-departure\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[4]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-globe\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[5]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-shopping-cart\"><\/i>\n\t\t\t\t<\/figure>";   
+arrIconLA[6]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-briefcase\"><\/i>\n\t\t\t\t<\/figure>";
+arrIconLA[7]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-book-reader\"><\/i>\n\t\t\t\t<\/figure>"; 
