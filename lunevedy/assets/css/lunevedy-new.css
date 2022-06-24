@@ -486,11 +486,16 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
     .flex-cols-2, .flex-cols-3, .flex-cols-4 { flex-direction: row }
     .flex-cols-2 { gap: 5% }
     .flex-cols-3 { gap: 5% }
+    /* .flex-cols-3 { gap: 64px } */
+
     .flex-cols-4 { gap: 4% }
 
     .col-2, .col-3, .col-4 { flex-direction: column }
 
+    /* .col-3 { width: 25%; flex-grow: 1 } */
+
     .col-3 { width: 30% }
+
     .col-4 { width: 22% }
 
     .col-2:nth-child(n+3) { margin-top: 64px }
@@ -508,6 +513,7 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
     .col-2 figure { width: 100%; margin-bottom: 18px }
     .col-3 figure, .col-4 figure { width: 100%; margin-bottom: 26px }
+   
 }
 
 @media (min-width: 1201px) { .col-2 { width: 47.5% } }
@@ -551,7 +557,7 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
     div[class^="col-"] figure.icon i[class^='la'] { margin-top: 6px; margin-bottom: 18px }    
     
     /* 3 and 4 columns to 2 columns */
-    .mobile-col-2 .flex-cols-3, .mobile-col-2 .flex-cols-4 { 
+    .mobile-col-2.flex-cols-3, .mobile-col-2.flex-cols-4 { 
         display: flex; flex-direction: row; flex-wrap: wrap;
         justify-content: flex-start; align-content: flex-start; gap: 8%;
     }
@@ -596,48 +602,46 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
 
 /* Section: Light theme */
-
-.theme-light { background-color: var(--slate-050) } 
 .theme-light { background-color: var(--white-000) } 
 .theme-light .container-upper-label { color: var(--black-000) }
 .theme-light h1, .theme-light h2, .theme-light h3, 
 .theme-light .col-1 h3.in-col-1, 
-.theme-light p, .theme-light li { color: var(--slate-900) }
+.theme-light p, .theme-light li { color: var(--black-000) }
 .theme-light .col-1 h3 { color: var(--slate-700); }
 
 .theme-light .btn-solid:link, 
 .theme-light .btn-solid:visited {
-    color:            #fff;
-    background-color: #000;
-    border-color:     #000;
+    color:            var(--white-000);
+    background-color: var(--black-000);
+    border-color:     var(--black-000);
 } 
 
 .theme-light .btn-solid:focus, 
 .theme-light .btn-solid:hover, 
 .theme-light .btn-solid:active {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: var(--slate-700);
     border-color:     var(--slate-700);
 }
 
 .theme-light .btn-outline:link, 
 .theme-light .btn-outline:visited {
-    color:            #000;
+    color:            var(--black-000);
     background-color: transparent;
-    border-color:     #000;
+    border-color:     var(--black-000);
 }
 
 .theme-light .btn-outline:focus, 
 .theme-light .btn-outline:hover, 
 .theme-light .btn-outline:active {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: var(--slate-700);
     border-color:     var(--slate-700);
 }
 
 .theme-light .btn-plain:link, 
 .theme-light .btn-plain:visited {
-    color:            #000;
+    color:            var(--black-000);
     background-color: transparent;
 }
 
@@ -649,7 +653,6 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
 
 /* Section: Dark theme */
-
 .theme-dark { background-color: var(--black-000) }
 
 .theme-dark .container-upper-label { color: var(--slate-050) }
@@ -662,36 +665,36 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 .theme-dark .btn-solid:link, 
 .theme-dark .btn-solid:visited {
     color:            #000;
-    background-color: #fff;
-    border-color:     #fff;
+    background-color: var(--white-000);
+    border-color:     var(--white-000);
 } 
 
 .theme-dark .btn-solid:focus, 
 .theme-dark .btn-solid:hover, 
 .theme-dark .btn-solid:active {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: var(--slate-600);
     border-color:     var(--slate-600);
 }
 
 .theme-dark .btn-outline:link, 
 .theme-dark .btn-outline:visited {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: transparent;
-    border-color:     #fff;
+    border-color:     var(--white-000);
 } 
 
 .theme-dark .btn-outline:focus, 
 .theme-dark .btn-outline:hover, 
 .theme-dark .btn-outline:active {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: var(--slate-600);
     border-color:     var(--slate-600);
 }
 
 .theme-dark .btn-plain:link, 
 .theme-dark .btn-plain:visited {
-    color:            #fff;
+    color:            var(--white-000);
     background-color: transparent;
 }
 
@@ -701,9 +704,7 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
     color:            var(--slate-400);
 }
 
-
 section.theme-dark .container-upper-label { color: var(--slate-200) }
-
 
 /* ============= TWO COLUMN LAYOUT ============ */
 
@@ -1282,11 +1283,11 @@ section.theme-dark .container-upper-label { color: var(--slate-200) }
     border: solid 1px var(--gray-800);
 }
 
-.corners-soft div[class^='col-']:not(.col-1) {
+.cols-corners-soft div[class^='col-']:not(.col-1) {
     border-radius: 12px
 }
 
-.corners-soft div[class^='col-']:not(section) {
+.cols-corners-soft div[class^='col-']:not(section) {
     border-radius: 12px
 }
 
@@ -1299,7 +1300,7 @@ section.theme-dark .container-upper-label { color: var(--slate-200) }
     border: solid 2px var(--gray-700);
 }
 
-/* .corners-soft {
+/* .cols-corners-soft {
     border-radius: 15px;
 } */
 
@@ -1483,7 +1484,6 @@ a:not(.btn):focus, a:not(.btn):hover, a:not(.btn):active {
     }
 }
 
-
 div[class*='col-'] .btn-shadow { 
     box-shadow: 3.6px 3.6px 5.3px hsl(0deg 0% 0% / 0.42); 
     margin-bottom: 8px !important
@@ -1503,7 +1503,7 @@ div[class*='col-'] .btn-shadow {
 .btn-large.btn-plain { font-size: 20px }
 .btn-large > *:nth-child(2) { margin-left: 16px; margin-right: 0 } 
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
     .mobile-col-2 a.btn { padding: 10px 15px; font-size: 16px }
     .mobile-col-2 a.btn-small { padding: 6px 10px;  font-size: 14px}
     .mobile-col-2 a.btn-small i { font-size: 12px }
@@ -1553,12 +1553,6 @@ div[class*='col-'] .btn-shadow {
         margin-left: 16px; margin-right: 16px;
     }
 }
-
-
-
-
-
-
 
 /* ================== CONTACT FORM =============== */
 
