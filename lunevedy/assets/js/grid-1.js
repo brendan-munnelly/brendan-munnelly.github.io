@@ -1,8 +1,5 @@
 import {content_header_label_text_col_1, content_header_h2_text_col_1, content_header_h2_col_1, content_header_h3_text_col_2_3_4, content_header_upper_block_col_2_3_4} from '../js/arr-content.js';
 
-col_no = sessionStorage.getItem('col-no');
-col_count = sessionStorage.getItem('col-count');
-
 /*
 //////////////// COL-1: COLUMN WIDTH ///////////////
 */
@@ -67,22 +64,21 @@ function doColOneLabel() {
 
     // innerText of 'CATEGORY'
 
-    if (iframe.contentWindow.document.querySelector('.'+section_class+' .col-1')) {
-        if (!document.getElementById("cb_col_1_label").checked) {
-            removeColOneLabel();
-        }
-        else {
-            removeColOneLabel();
-            const newUpperLabelDiv = document.createElement("div");
-            const newUpperLabelSpan = document.createElement("span");
-            newUpperLabelDiv.appendChild(newUpperLabelSpan);
-            newUpperLabelDiv.classList.add("container-upper-label"); 
-            iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').prepend(newUpperLabelDiv);
-            iframe.contentWindow.document.querySelector('.'+section_class+' .col-1 .container-upper-label span').innerText = content_header_label_text_col_1;
-            iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML = iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML.replace("<div class=\"container-upper-label\">", "\n\t\t\t<div class=\"container-upper-label\">\n\t\t\t\t");
-            iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML = iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML.replace("<\/span>", "<\/span>\n\t\t\t");
-            document.getElementById("btn_col_1_label_text").disabled=false;
-        }
+    if (!document.getElementById("cb_col_1_label").checked) {
+        removeColOneLabel();
+    }
+    
+    else {
+        removeColOneLabel();
+        const newUpperLabelDiv = document.createElement("div");
+        const newUpperLabelSpan = document.createElement("span");
+        newUpperLabelDiv.appendChild(newUpperLabelSpan);
+        newUpperLabelDiv.classList.add("container-upper-label"); 
+        iframe.contentWindow.document.querySelector('.col-1').prepend(newUpperLabelDiv);
+        iframe.contentWindow.document.querySelector('.col-1 .container-upper-label span').innerText = content_header_label_text_col_1;
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<div class=\"container-upper-label\">", "\n\t\t\t<div class=\"container-upper-label\">\n\t\t\t\t");
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<\/span>", "<\/span>\n\t\t\t");
+        document.getElementById("btn_col_1_label_text").disabled=false;
     }
 }
 
@@ -90,11 +86,11 @@ function removeColOneLabel() {
     if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
         const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
         upperLabel.remove();
-        iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML = iframe.contentWindow.document.querySelector('.'+section_class+' .col-1').innerHTML.replace("\t\t\t\n", "");
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("\t\t\t\n", "");
 
         document.getElementById("btn_col_1_label_text").disabled=true;
 
-        if ( (!iframe.contentWindow.document.querySelector('.'+section_class+' .col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.'+section_class+' .col-1 > h3')) ) {
+        if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
             removeColOne();
         }
     }

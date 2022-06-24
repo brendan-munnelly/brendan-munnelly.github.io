@@ -1,10 +1,5 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
-// Used by color picker. Either 'theme-light' or 'theme-dark'.
-section_class = sessionStorage.getItem('section-selector');
-section_theme = sessionStorage.getItem('section-theme');
-col_no = sessionStorage.getItem('col-no');
-col_col_count = sessionStorage.getItem('col-count');
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -169,15 +164,15 @@ function doSectionTheme() {
     if (selectedValue==="light") {
         iframe.contentWindow.document.querySelector("section").classList.remove("theme-dark"); 
         iframe.contentWindow.document.querySelector("section").classList.add("theme-light"); 
-        // Update session storage;
-        sessionStorage.setItem('section-theme', 'section.theme-light.'+section_class); 
+        // Update global variable
+        sectionTheme = ".theme-light";
     }
         
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.remove("theme-light"); 
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
-        // Update session storage;
-        sessionStorage.setItem('section-theme', 'section.theme-dark.'+section_class); 
+        // Update global variable
+        sectionTheme = ".theme-dark";
     }
 
     // Check for outlines
@@ -191,8 +186,8 @@ function doSectionTheme() {
     }
     if (iframe.contentWindow.document.querySelector('.col-1') ) {
         document.getElementById("cb_cols_shadows").checked=false; 
-        document.getElementById("cb_col_borders").disabled=false; 
-        document.getElementById("cb_col_borders").checked=false; 
+        document.getElementById("cb_cols_borders").disabled=false; 
+        document.getElementById("cb_cols_borders").checked=false; 
         document.getElementById("cb_cols_corners_soft").disabled=true; 
         document.getElementById("cb_cols_corners_soft").checked=false; 
     }
@@ -213,32 +208,18 @@ document.querySelector("#dd_class_name").addEventListener("change", doClassName)
 
 function doClassName() {
     removeClassNames();
-    let opt = 1 + parseInt(document.querySelector("#dd_class_name").value);
-    section_class = "section-selector-"+opt;
+    let opt = document.querySelector("#dd_class_name").value;
     iframe.contentWindow.document.querySelector("section").classList.add("section-selector-"+opt);
-    // Update session storage;
-    sessionStorage.setItem('section-selector', 'section-selector-'+opt);
+    // Update global variable;
+    sectionClassName = ".section-selector-"+opt;
 }
 
 function removeClassNames() {
     const el_section = iframe.contentWindow.document.querySelector("section");
-    for (let i = 1; i <= uiMenusLength; i++) {
+    for (let i = 1; i <= 6; i++) {
         el_section.classList.remove("section-selector-"+[i]);
     }
 }
-
-function RemoveColsPadding() {
-    // Test for no border, no shadow and not default theme
-    if ((!iframe.contentWindow.document.querySelector("section.col-borders")) && (!iframe.contentWindow.document.querySelector("section.col-shadows") )  ) {
-        if (sessionStorage.getItem('col-background')) {
-            const sessData = sessionStorage.getItem('col-background');
-            if (sessData==="default") {
-                const el_section = iframe.contentWindow.document.querySelector("section");
-                el_section.classList.remove("col-padding");
-            }
-        }
-    }
-}  
 
 /*
 //////////////// SECTION: OUTLINES  ///////////////
@@ -279,28 +260,28 @@ function doWidthSectionDesktop() {
     deleteWidthSectionDesktop();
 
     if (opt==="1") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-960px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-960px");
     }
     else if (opt==="2") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1024px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1024px");
     }
     else if (opt==="3") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1140px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1140px");
     }
     else if (opt==="4") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1320px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1320px");
     }
     else if (opt==="5") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1536px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1536px");
     }
 }
 
 function deleteWidthSectionDesktop() {
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-960px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1024px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1140px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1320px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1536px");                
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-960px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1024px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1140px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1320px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1536px");                
 }
 
 /*
@@ -326,16 +307,6 @@ let newStyle; // full selector and style rule
 let sub_string; // style rule excerpt
 
 const arrCSS = []; // array for style rules to copy
-
-// newStyle = 'section.theme-light.section-selector-1 { background-color: var(--yellow-200) }\n';
-
-// arrCSS.push(newStyle);
-
-// style = document.createElement('style');
-// iframe.contentWindow.document.head.appendChild(style);
-// style.appendChild(document.createTextNode(newStyle));
-// enableCSS();
-
 
 // On click style button 
 let all_btns = document.querySelectorAll('.btn_style');
@@ -392,150 +363,76 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
                 break;
             }
         }
-        // Test checkbox instead, limits to UI elements rather than section
-        if (iframe.contentWindow.document.querySelector("section.theme-light")) {
-            section_theme = "section.theme-light."+section_class;
-        }
-        else if (iframe.contentWindow.document.querySelector("section.theme-dark")) {
-            section_theme = "section.theme-dark."+section_class;
-        }
-
-        // Get class(es) attached to column buttons
-        // const objColBtn = iframe.contentWindow.document.querySelector("."+section_class +" "+col_no+' a.btn');
-        // const classesColBtn = objColBtn.className;
-        // let classColBtn;
-        // if (classesColBtn.includes("btn-solid")) {
-        //     classColBtn = ".btn-solid";
-        // }
-
-        // else if (classesColBtn.includes("btn-outline")) {
-        //     classColBtn = ".btn-outline";
-        // }
-
-        // else if (classesColBtn.includes("btn-plain")) {
-        //      classColBtn = ".btn-plain";
-        // }
 
         /* Section background */
         if (btn_id === "btn_section_bg") {
-            newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
-            sub_string = section_theme+ " { background-color: ";
+            newStyle = sectionClassName+ " { background-color: var("+color_code+") }\n";
+            sub_string = sectionClassName+ " { background-color: ";
+            // Used for checking if cols-padding necessary
+            sectionBg = "var("+color_code+")";
+            console.log("New section background: "+sectionBg);
+            console.log("Current column background: "+colsBg);
+            console.log("sectionBg: "+sectionBg);
+            checkColorsPadding();
             doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 label text */
         else if (btn_id === "btn_col_1_label_text") {
-            newStyle = section_theme+ " .col-1 .container-upper-label { color: var("+color_code+") }\n";
+            newStyle = sectionClassName+ " .col-1 .container-upper-label { color: var("+color_code+") }\n";
             sub_string = "col-1 .container-upper-label";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 h2 main heading */
         else if (btn_id === "btn_col_1_h2_text") {
-            newStyle = section_theme+ " .col-1 h2 { color: var("+color_code+") }\n";
+            newStyle = sectionClassName+ " .col-1 h2 { color: var("+color_code+") }\n";
             sub_string = "col-1 h2";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 h3 sub heading */
         else if (btn_id === "btn_col_1_h3_text") {
-            newStyle = section_theme+ " .col-1 h3 { color: var("+color_code+") }\n";
+            newStyle = sectionClassName+ " .col-1 h3 { color: var("+color_code+") }\n";
             sub_string = "col-1 h3";
             doUpdateArray(sub_string,newStyle); 
         }
         
-        /* .col-1 text */
-        else if (btn_id === "btn_col_1_text") {
-             newStyle = section_theme+ " .col-1 p { color: var("+color_code+") }\n." +section_class+" .col-1 li { color: var("+color_code+") }\n"; 
-            sub_string = col_no+" p {";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* .col-2 h2 main heading */
-        else if (btn_id === "btn_col_2_h2_text") {
-            newStyle = section_theme+ " .col-2 h2 { color: var("+color_code+") }\n";
-            sub_string = "h2";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* .col-2 h3 main heading */
-        else if (btn_id === "btn_col_2_h3_text") {
-            newStyle = section_theme+ " .col-2 h3 { color: var("+color_code+") }\n";
-            sub_string = "h3";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* .col-2 text */
-        else if (btn_id === "btn_col_2_text") {
-            newStyle = section_theme+ " "+col_no+" p { color: var("+color_code+") }\n." +section_class+" "+col_no+" li { color: var("+color_code+") }\n"; 
-            sub_string = col_no+" p {";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-        /* Hyperlink in text: passive */
-        else if (btn_id === "btn_col_1_text_link_passive") {
-            newStyle = section_theme+ " a:not(.btn):link, "+section_theme+ " a:not(.btn):visited { color: var("+color_code+") } \n"; 
-            sub_string = "a:not(.btn):link";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Hyperlink in text: active */
-        else if (btn_id === "btn_col_1_text_link_active") {
-            newStyle = section_theme+ " a:not(.btn):focus, "+section_theme+ " a:not(.btn):hover, "+section_theme+ " a:not(.btn):active { color: var("+color_code+") } \n"; 
-            sub_string = "a:not(.btn):focus";
-            doUpdateArray(sub_string,newStyle);
-        }
-
         /* Column subheading */
         else if (btn_id === "btn_cols_h3") {
-            newStyle = section_theme+ " "+col_no+" h3 { color: var("+color_code+") }\n";
-            sub_string = section_class+" "+col_no+" h3";
+            newStyle = sectionClassName+ " "+col_no+" h3 { color: var("+color_code+") }\n";
+            sub_string = sectionClassName+" "+col_no+" h3";
             doUpdateArray(sub_string,newStyle);  
         }
         
         /* Column text */
         else if (btn_id === "btn_cols_text") {
-            newStyle = section_theme+ " "+col_no+" p { color: var("+color_code+") }\n." +section_class+" "+col_no+" li { color: var("+color_code+") }\n"; 
+            newStyle = sectionClassName+ " "+col_no+" p { color: var("+color_code+") }\n." +sectionClassName+" "+col_no+" li { color: var("+color_code+") }\n"; 
             sub_string = col_no+" p {";
             doUpdateArray(sub_string,newStyle); 
         }
 
         /* List marker */
         else if (btn_id === "btn_cols_list_marker") {
-            newStyle = section_theme+ " "+col_no+" li::marker, "+section_theme+ " " +col_no+" ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+            newStyle = sectionClassName+ " "+col_no+" li::marker, "+sectionClassName+ " " +col_no+" ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
             doUpdateArray(sub_string,newStyle); 
         }
         
         /* Column background */
         else if (btn_id === "btn_cols_bg") {
-            newStyle = section_theme+ " "+col_no+" { background-color: var("+color_code+") }\n";
+            newStyle = sectionClassName+ " "+col_no+" { background-color: var("+color_code+") }\n";
             sub_string = col_no+" { background-color";
+            // Used for checking if cols-padding necessary
+            colsBg = "var("+color_code+")";
+            console.log("colsBg: "+colsBg);
+            checkColorsPadding();
             doUpdateArray(sub_string,newStyle);
-
-            // Set session storage
-            if ( ((iframe.contentWindow.document.querySelector("section.theme-light")) && (color_code==="--white-000")) || ((iframe.contentWindow.document.querySelector("section.theme-dark")) && (color_code==="--slate-900")) ) {
-                sessionStorage.setItem('col-background', 'default');
-                RemoveColsPadding();
-            }
-            else {
-                sessionStorage.setItem('col-background', 'nondefault');
-                // Add cols-padding if not already present
-                if(!iframe.contentWindow.document.querySelector("section.cols-padding")) {
-                    const el_section = iframe.contentWindow.document.querySelector("section");
-                    el_section.classList.add("cols-padding");
-                }
-                // Enable col corners
-                if (iframe.contentWindow.document.querySelector('.col-1') ) {
-                    document.getElementById("cb_cols_corners_soft").disabled=false; 
-                    document.getElementById("cb_cols_corners_soft").checked=false; 
-                }
-            }
         }
         
         /* Column borders colour */
         else if (btn_id === "btn_cols_border_color") {
-            newStyle = section_theme+ ".cols-borders "+col_no+" { border-color: var("+color_code+") }\n";
+            newStyle = sectionClassName+ " .cols-borders "+col_no+" { border-color: var("+color_code+") }\n";
             sub_string = "cols-borders";
             doUpdateArray(sub_string,newStyle);
         }            
@@ -545,49 +442,49 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         /* Text colour: passive */
         else if (btn_id === "btn_cols_text_passive") {
             // Get class of buttons
-            newStyle = section_theme+" a.btn:link,\n"+section_theme+" a.btn:visited { color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Text colour: active */
         else if (btn_id === "btn_cols_text_active") {
-            newStyle = section_theme+" a.btn:focus,\n"+section_theme+" a.btn:hover,\n"+section_theme+" a.btn:active { color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: passive */
         else if (btn_id === "btn_cols_bg_passive") {
-            newStyle = section_theme+" a.btn:link,\n"+section_theme+" a.btn:visited { background-color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: active */
         else if (btn_id === "btn_cols_bg_active") {
-            newStyle = section_theme+" a.btn:focus,\n"+section_theme+" a.btn:hover,\n"+section_theme+" a.btn:active { background-color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: passive */
         else if (btn_id === "btn_cols_border_passive") {
-            newStyle = section_theme+" a.btn:link,\n"+section_theme+" a.btn:visited { border-color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: active */
         else if (btn_id === "btn_cols_border_active") {
-            newStyle = section_theme+" a.btn:focus,\n"+section_theme+" a.btn:hover,\n"+section_theme+" a.btn:active { border-color: var("+color_code+") }\n\n";
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Icons colour */
         else if (btn_id === "btn_icon_color") {
-            newStyle =  section_theme+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
+            newStyle =  sectionClassName+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
@@ -608,6 +505,19 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             arrCSS.push(newStyle);
         }
     }
+
+    function checkColorsPadding() {
+        // Test for no border, no shadow and column background != section background
+        if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-borders")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-shadows") ) ) {
+            if (sectionBg===colsBg) {
+                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.remove("cols-padding");
+            }
+            else {
+                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.add("cols-padding");
+            }
+        }
+    }
+
 
 /*
 //////////////// COPY TO CLIPBOARD ///////////////
@@ -641,7 +551,7 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,section/g, "section");
+    strCSS = strCSS.replace(/,.section/g, ".section");
     // strCSS = strCSS.replace(/..container/g, ".container");
     el_css.value = strCSS;
     document.body.appendChild(el_css);
