@@ -144,7 +144,7 @@ function dragElement(elmnt) {
 //////////////// SECTION: THEME  ///////////////
 */
 
-document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
+document.querySelector("#form_switch_section_theme").addEventListener("change", doSectionTheme);
 
 function doSectionTheme() {
     // hideMenus();
@@ -290,25 +290,8 @@ all_btns.forEach(el => el.addEventListener('click', event => {
     // get button id
     btn_id = event.target.id.toString();
     console.log("Button ID: "+btn_id);
-
-    if (!btn_id) {
-        document.querySelector("#box-msg").classList.add("is-visible");
-        document.querySelector("#box-msg").classList.remove("is-hidden");
-    }
-    else {
-        document.querySelector("#box-msg").classList.remove("is-visible");
-        document.querySelector("#box-msg").classList.add("is-hidden");
-        displayModal();
-    }
+    displayModal();
 }));
-
-/* Color picker error */
-document.querySelector(".close-box-msg").addEventListener('click', closeBoxMsg);
-
-function closeBoxMsg() {
-    document.querySelector("#box-msg").classList.remove("is-visible");
-    document.querySelector("#box-msg").classList.add("is-hidden");
-}
 
 function displayModal() {
     showSidebar();
@@ -363,6 +346,13 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else if (btn_id === "btn_col_1_h2_text") {
             newStyle = sectionClassName+ " .col-1 h2 { color: var("+color_code+") }\n";
             sub_string = "col-1 h2";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* .col-1 h2 main heading highlight text*/
+        else if (btn_id === "btn_col_1_h2_highlight") {
+            newStyle = sectionClassName+ " .col-1 h2 span.highlight { color: var("+color_code+") }\n";
+            sub_string = "col-1 h2 span.highlight";
             doUpdateArray(sub_string,newStyle);
         }
 
@@ -655,14 +645,12 @@ function resizeWidth() {
 
     if (document.getElementById("btn_resize_width").classList.contains('btn-lower-left-active')) {
         eleBtn.classList.remove('btn-lower-left-active');
-        document.getElementById("page-preview-options").style.display ="none";
         document.getElementById('page-preview-options').classList.remove("show-options");
         document.getElementById('page-preview-options').classList.add("hide-options");
     }
 
     else {
         eleBtn.classList.add('btn-lower-left-active');
-        document.getElementById("page-preview-options").style.display ="block";
         document.getElementById('page-preview-options').classList.add("show-options");
         document.getElementById('page-preview-options').classList.remove("hide-options");
     }
@@ -675,15 +663,6 @@ function showRespIcons() {
 function hideRespIcons() {
     document.getElementById('#page-preview-options').classList.remove("show-options");
 }
-
-
-
-
-
-
-
-
-
 
 /*
 //////////////// COPY TO CLIPBOARD ///////////////

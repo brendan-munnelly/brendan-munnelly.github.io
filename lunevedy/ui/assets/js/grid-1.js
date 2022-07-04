@@ -123,6 +123,7 @@ function doColOneH2() {
         else {
             iframe.contentWindow.document.querySelector('section'+' .col-1 .container-upper-label').insertAdjacentHTML('afterend', content_header_h2_col_1); 
         }
+        document.getElementById("text-highlight").style.display ="flex";
     }
 }
 
@@ -140,8 +141,34 @@ function removeColOneH2() {
         if ( (!iframe.contentWindow.document.querySelector('section'+' .col-1 h2')) && (!iframe.contentWindow.document.querySelector('section'+' .col-1 h3')) ) {
             removeColOne();
         }
+        document.getElementById("text-highlight").style.display ="none";
+        document.getElementById("cb_col_1_h2_highlight").checked = false;
     }
 }
+
+/*
+//////////////// COL-1: MAIN HEADING H2 HIGHLIGHT TEXT ///////////////
+*/
+
+document.querySelector("#cb_col_1_h2_highlight").addEventListener("change", doColOneH2Text);
+
+function doColOneH2Text() {
+
+    let elH2Content = iframe.contentWindow.document.querySelector('section .col-1 h2').innerHTML;
+
+    if (!document.getElementById("cb_col_1_h2_highlight").checked) {
+        elH2Content = elH2Content.replace(/<\/?span[^>]*>/g,"");
+        iframe.contentWindow.document.querySelector('section .col-1 h2').innerHTML = elH2Content;
+    }
+    else {
+        const i = elH2Content.indexOf(" ",1);
+        const j = elH2Content.lastIndexOf(" ");
+        elH2Content = elH2Content.replace(elH2Content.substring(i+1,j), "<span class=\"highlight\">"+elH2Content.substring(i+1,j)+"</span>");
+        iframe.contentWindow.document.querySelector('section .col-1 h2').innerHTML = elH2Content;  
+    }
+}
+
+
 
 /*
 //////////////// COL-1: H3 SUB-HEADING ////////////////////
@@ -223,6 +250,7 @@ function doColOne() {
         document.getElementById("btn_col_1_h2_text").disabled=false;
         document.getElementById("btn_col_1_h3_text").disabled=false;
         document.querySelector("#content-2 .svg-icon-desktop").classList.remove("icon-disabled");
+        document.getElementById("text-highlight").style.display ="flex";
     }
 }
 
@@ -252,5 +280,7 @@ function removeColOne() {
         document.getElementById("btn_col_1_h2_text").disabled=true;
         document.getElementById("btn_col_1_h3_text").disabled=true;
         col_no = "."+col_no; // Restore .col_no
+        document.getElementById("text-highlight").style.display ="none";
+        document.getElementById("cb_col_1_h2_highlight").checked = false;
     }
 }

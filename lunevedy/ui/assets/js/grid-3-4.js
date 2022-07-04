@@ -1,6 +1,36 @@
 import {content_h3_col_3, content_h3_col_4, content_paras_col_3, content_paras_col_4, content_list_col_3, content_list_col_4} from '../js/arr-content.js';
 
 /*
+//////////////// COLUMNS BLOCKS ///////////////
+*/
+
+document.querySelector("#form_switch_col_blocks").addEventListener("change", setColumnBlocks);
+
+function setColumnBlocks() {
+    const rbs = document.querySelectorAll("input[name='switch_col_blocks']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+    if (selectedValue==="row-one") {
+        let objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+        for (let i = 0; i < (objAllCols.length / 2); i++) {
+            objAllCols[i].remove();
+        }
+    }
+
+    else if (selectedValue==="row-two") {
+        let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+        objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
+        iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
+    }
+}
+
+/*
 //////////////// COLUMNS ALIGN ///////////////
 */
 
@@ -28,16 +58,24 @@ function doColsAlign() {
 //////////////// COLUMNS WIDTH ON MOBILES ///////////////
 */
 
-document.querySelector("#dd_cols_mobile").addEventListener("change", doColMobileWidth);
+document.querySelector("#form_cols_mobile").addEventListener("change", doColsMobileWidth);
 
-function doColMobileWidth() {
-    let opt = document.querySelector("#dd_cols_mobile").value;
-    
-    if (opt==="0") {
+function doColsMobileWidth() {
+    const rbs = document.querySelectorAll("input[name='switch_cols_mobile']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="cols-one") {
         iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.remove("mobile-col-2");
     }
 
-    else if (opt==="1") {
+    if (selectedValue==="cols-two") {
         iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.add("mobile-col-2");
     }
 }
@@ -156,6 +194,10 @@ function doColsText() {
     // remove
     if (opt==="0") {
         document.querySelector("#btn_cols_text").disabled=true;
+        document.getElementById("not-paragraphs").style.display ="none";
+        document.getElementById("fa-icons").style.display ="none";
+        document.getElementById("dd_cols_list_marker").value="0";
+        document.getElementById("fa-circle-check").checked=true;
         removeText();
     }
     
@@ -222,6 +264,10 @@ function doColsText() {
         }
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
+        document.getElementById("not-paragraphs").style.display ="none";
+        document.getElementById("fa-icons").style.display ="none";
+        document.getElementById("dd_cols_list_marker").value="0";
+        document.getElementById("fa-circle-check").checked=true;
     }
 
     // lists
@@ -288,6 +334,9 @@ function doColsText() {
         document.getElementById("btn_cols_list_marker").disabled=false;
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
+        document.getElementById("not-paragraphs").style.display ="flex";
+        document.getElementById("fa-icons").style.display ="none";
+        document.getElementById("fa-circle-check").checked=true;
     }
 }
 
@@ -339,6 +388,8 @@ function doListMarker() {
                 el_col.innerHTML = el_col.innerHTML.replaceAll("<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>", "<li>");
             }
         }
+        document.getElementById("fa-icons").style.display ="none";
+        document.getElementById("fa-circle-check").checked=true;
     }
 
     // Font Awesome
@@ -352,6 +403,36 @@ function doListMarker() {
                 el_col.innerHTML = el_col.innerHTML.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
             }
         }
+        document.getElementById("fa-icons").style.display ="flex";
+        document.getElementById("fa-circle-check").checked=true;
+    }
+}
+
+/*
+//////////////// COLUMN LIST MARKERS ////////////////////
+*/
+
+document.querySelector("#form_switch_fa_icons").addEventListener("change", chooseListMarker);
+
+function chooseListMarker() {
+    const rbs = document.querySelectorAll("input[name='switch_fa_icons']");
+    let objIcons = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] ul li span");
+    let node;   
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    for (let i = 0; i < objIcons.length; i++) {
+        objIcons[i].firstChild.remove();
+        node = document.createElement("i");
+        node.classList.add("fa-solid");
+        node.classList.add(selectedValue);
+        objIcons[i].appendChild(node);
     }
 }
 
