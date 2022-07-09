@@ -147,7 +147,6 @@ function dragElement(elmnt) {
 document.querySelector("#form_switch_section_theme").addEventListener("change", doSectionTheme);
 
 function doSectionTheme() {
-    // hideMenus();
     const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
     let selectedValue;
 
@@ -157,24 +156,13 @@ function doSectionTheme() {
             break;
         }
     }
-    // Remove all styles
-    var hs = iframe.contentWindow.document.querySelectorAll('style');
-    for (var i=0, max = hs.length; i < max; i++) {
-        hs[i].parentNode.removeChild(hs[i]);
-    }
 
     if (selectedValue==="light") {
         iframe.contentWindow.document.querySelector("section").classList.remove("theme-dark"); 
-        iframe.contentWindow.document.querySelector("section").classList.add("theme-light"); 
-        // Update global variable
-        sectionTheme = ".theme-light";
     }
         
     else if (selectedValue==="dark") {
-        iframe.contentWindow.document.querySelector("section").classList.remove("theme-light"); 
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
-        // Update global variable
-        sectionTheme = ".theme-dark";
     }
 
     // Check for outlines
@@ -335,12 +323,19 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 label text */
-        else if (btn_id === "btn_col_1_label_text") {
-            newStyle = sectionClassName+ " .col-1 .container-upper-label { color: var("+color_code+") }\n";
-            sub_string = "col-1 .container-upper-label";
+        /* .col-1 badge text */
+        else if (btn_id === "btn_col_1_badge_text") {
+            newStyle = sectionClassName+ " .col-1-badge { color: var("+color_code+") }\n";
+            sub_string = "col-1-badge { color";
             doUpdateArray(sub_string,newStyle);
         }
+
+        /* .col-1 badge background */
+        else if (btn_id === "btn_col_1_badge_bg") {
+            newStyle = sectionClassName+ " .col-1-badge { background-color: var("+color_code+") }\n";
+            sub_string = "col-1-badge { background-color";
+            doUpdateArray(sub_string,newStyle);
+        }        
 
         /* .col-1 h2 main heading */
         else if (btn_id === "btn_col_1_h2_text") {
@@ -372,7 +367,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         
         /* Column text */
         else if (btn_id === "btn_cols_text") {
-            newStyle = sectionClassName+ " "+col_no+" p { color: var("+color_code+") }\n." +sectionClassName+" "+col_no+" li { color: var("+color_code+") }\n"; 
+            newStyle = sectionClassName+ " "+col_no+" p { color: var("+color_code+") }\n" +sectionClassName+" "+col_no+" li { color: var("+color_code+") }\n"; 
             sub_string = col_no+" p {";
             doUpdateArray(sub_string,newStyle); 
         }
@@ -453,6 +448,22 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
+
+        /* Photos overlay textbox color */
+        else if (btn_id === "btn_cols_img_overlay_color_text") {
+            newStyle =  sectionClassName+" "+col_no+" figure .cols-img-textbox { color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Photos overlay textbox background color */
+        else if (btn_id === "btn_cols_img_overlay_color_bg") {
+            newStyle =  sectionClassName+" "+col_no+" figure .cols-img-textbox { background-color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
+        }        
+
+
         
         style = document.createElement('style');
         iframe.contentWindow.document.head.appendChild(style);

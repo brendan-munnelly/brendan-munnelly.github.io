@@ -1,4 +1,4 @@
-import {arrPic, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA } from '../js/arr-content.js';
+import {arrPic, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA, arrTextBox, arrH4Overlay} from '../js/arr-content.js';
 
 /*
 ////////////////////// VISUALS: FOUR TYPES ///////////////////////
@@ -17,6 +17,8 @@ function doVis() {
 
         document.getElementById("form_vis_types").style.display = "none";
         document.getElementById("properties-photos").style.display = "none";
+        document.getElementById("cb_img_textbox").checked=false;
+        document.getElementById("cb_img_h4").checked=false;
         document.getElementById("properties-transparent").style.display = "none";
         document.getElementById("properties-drawings").style.display = "none";
         document.getElementById("properties-icons").style.display = "none";
@@ -157,6 +159,100 @@ function doPhotosShadows() {
     }
 }
 
+/* photos: overlay textbox */
+
+document.querySelector("#cb_img_textbox").addEventListener("change", doColH3TextBox);
+
+function doColH3TextBox() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_TextBox;
+    let node;   
+    const arrContent = []; 
+
+    if (!document.querySelector("#cb_img_textbox").checked) {
+        // Remove div as child of figure
+        for (let i = 0; i < objFigs.length; i++) {
+            el_TextBox = iframe.contentWindow.document.querySelector("div[class^='col-'] figure .cols-img-textbox");
+            objFigs[i].removeChild(el_TextBox);
+        }
+        document.getElementById("show-textbox").style.display = "none";
+    }
+
+    else {
+        // Add overlay textbox as child of figure
+        for (let i = 0; i < objFigs.length; i++) { 
+            node = document.createElement("div");
+            node.innerText = arrTextBox[i];
+            node.classList.add("cols-img-textbox");
+            objFigs[i].appendChild(node);
+        }
+        document.getElementById("show-textbox").style.display = "block";
+    }
+}
+
+/* photos: soft corners */
+
+document.querySelector("#form_img_textbox_shape").addEventListener("change", doTextBoxShape);
+
+function doTextBoxShape() {
+
+    const objTextBoxes = iframe.contentWindow.document.querySelectorAll(".cols-img-textbox"); 
+    let el_TextBox
+    const rbs = document.querySelectorAll("input[name='switch_img_textbox_shape']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="square") {
+        for (el_TextBox of objTextBoxes) { 
+            el_TextBox.classList.remove("corners-soft");
+        }
+    }
+        
+    else if (selectedValue==="soft") {
+        for (el_TextBox of objTextBoxes) { 
+            el_TextBox.classList.add("corners-soft");
+        }
+    }
+}
+
+/* photos: overlay h4 sub-heading */
+
+document.querySelector("#cb_img_h4").addEventListener("change", doColH4Overlay);
+
+function doColH4Overlay() {
+
+    const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='col-'] figure");
+    let el_H4_overlay;
+    let node;   
+
+    if (!document.querySelector("#cb_img_h4").checked) {
+        // Remove div as child of figure
+        for (let i = 0; i < objFigs.length; i++) {
+            el_H4_overlay = iframe.contentWindow.document.querySelector("div[class^='col-'] figure .cols-img-h4");
+            objFigs[i].removeChild(el_H4_overlay);
+            objFigs[i].classList.remove("figure-overlay");
+        }
+    }
+
+    else {
+        // Add overlay textbox as child of figure
+        for (let i = 0; i < objFigs.length; i++) { 
+            node = document.createElement("div");
+            node.innerText = arrH4Overlay[i];
+            node.classList.add("cols-img-h4");
+            objFigs[i].appendChild(node);
+            objFigs[i].classList.add("figure-overlay");
+        }
+    }
+}
+
 /* photos: hyperlinks */
 document.querySelector("#cb_photos_hyperlinks").addEventListener("change", doPhotosHyperlinks);
 
@@ -173,12 +269,14 @@ function doPhotosHyperlinks() {
             el_fig_content = el_fig_content.replace('</a>', '');
             objFigs[i].innerHTML = el_fig_content;
             el_fig = objFigs[i];
-            el_fig.classList.remove("zoom-photos");
+            el_fig.classList.remove("photos-zoom");
+            el_fig.classList.remove("photos-brightness");
         }
         document.getElementById("cb_photos_zoom").checked=false;
         document.getElementById("cb_photos_zoom").disabled=true;
         document.getElementById("cb_photos_brightness").checked=false;
         document.getElementById("cb_photos_brightness").disabled=true;
+        document.getElementById("visible-hyperlinks").style.display="none";
     }
 
     else {
@@ -191,6 +289,7 @@ function doPhotosHyperlinks() {
         document.getElementById("cb_photos_zoom").checked=false;
         document.getElementById("cb_photos_brightness").checked=false;
         document.getElementById("cb_photos_brightness").disabled=false;
+        document.getElementById("visible-hyperlinks").style.display="block";
     }
 }
 
@@ -206,7 +305,7 @@ function doPhotosZoom() {
     if (!document.getElementById("cb_photos_zoom").checked) {
         for (let i = 0; i < objFigs.length; i++) { 
             el_fig = objFigs[i];
-            el_fig.classList.remove("zoom-photos");
+            el_fig.classList.remove("photos-zoom");
             document.getElementById("cb_photos_shadows").disabled=false;
             document.getElementById("cb_photos_shadows").checked=false;            
         }
@@ -215,7 +314,7 @@ function doPhotosZoom() {
     else {
         for (let i = 0; i < objFigs.length; i++) { 
             el_fig = objFigs[i];
-            el_fig.classList.add("zoom-photos");
+            el_fig.classList.add("photos-zoom");
             el_fig.classList.remove("fig-shadows-box");
         }
         document.getElementById("cb_photos_shadows").disabled=true;
@@ -235,14 +334,14 @@ function doPhotosBrightness() {
     if (!document.getElementById("cb_photos_brightness").checked) {
         for (let i = 0; i < objFigs.length; i++) { 
             el_fig = objFigs[i];
-            el_fig.classList.remove("zoom-photos-brightness");
+            el_fig.classList.remove("photos-brightness");
         }
     }
 
     else {
         for (let i = 0; i < objFigs.length; i++) { 
             el_fig = objFigs[i];
-            el_fig.classList.add("zoom-photos-brightness");
+            el_fig.classList.add("photos-brightness");
         }
     }
 }

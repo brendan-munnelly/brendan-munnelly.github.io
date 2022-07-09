@@ -58,41 +58,71 @@ function doColOneAlign() {
 //////////////// COL-1: CATEGORY LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#cb_col_1_label").addEventListener("change", doColOneLabel);
+document.querySelector("#cb_col_1_badge").addEventListener("change", doColOneLabel);
 
 function doColOneLabel() {
 
     // innerText of 'CATEGORY'
 
-    if (!document.getElementById("cb_col_1_label").checked) {
+    if (!document.getElementById("cb_col_1_badge").checked) {
         removeColOneLabel();
     }
     
     else {
         removeColOneLabel();
         const newUpperLabelDiv = document.createElement("div");
-        const newUpperLabelSpan = document.createElement("span");
-        newUpperLabelDiv.appendChild(newUpperLabelSpan);
-        newUpperLabelDiv.classList.add("container-upper-label"); 
+        // const newUpperLabelSpan = document.createElement("span");
+        // newUpperLabelDiv.appendChild(newUpperLabelSpan);
+        newUpperLabelDiv.classList.add("col-1-badge"); 
         iframe.contentWindow.document.querySelector('.col-1').prepend(newUpperLabelDiv);
-        iframe.contentWindow.document.querySelector('.col-1 .container-upper-label span').innerText = content_header_label_text_col_1;
-        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<div class=\"container-upper-label\">", "\n\t\t\t<div class=\"container-upper-label\">\n\t\t\t\t");
-        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<\/span>", "<\/span>\n\t\t\t");
-        document.getElementById("btn_col_1_label_text").disabled=false;
+        iframe.contentWindow.document.querySelector('.col-1 .col-1-badge').innerText = content_header_label_text_col_1;
+        iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<div class=\"col-1-badge\">", "\n\t\t\t<div class=\"col-1-badge\">");
+        document.getElementById("show-col-1-badge").style.display="flex";
     }
 }
 
+document.querySelector("#form_col_1_badge_shape").addEventListener("change", doCol1BadgeShape);
+
+function doCol1BadgeShape() {
+
+    const objTextBoxes = iframe.contentWindow.document.querySelectorAll(".col-1-badge"); 
+    let el_TextBox
+    const rbs = document.querySelectorAll("input[name='switch_col_1_badge_shape']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="square") {
+        for (el_TextBox of objTextBoxes) { 
+            el_TextBox.classList.remove("corners-soft");
+        }
+    }
+        
+    else if (selectedValue==="soft") {
+        for (el_TextBox of objTextBoxes) { 
+            el_TextBox.classList.add("corners-soft");
+        }
+    }
+}
+
+
+
+
 function removeColOneLabel() {
-    if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
-        const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
+    if (iframe.contentWindow.document.querySelector('.col-1-badge')) {
+        const upperLabel = iframe.contentWindow.document.querySelector('.col-1-badge');
         upperLabel.remove();
         iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("\t\t\t\n", "");
-
-        document.getElementById("btn_col_1_label_text").disabled=true;
 
         if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) ) {
             removeColOne();
         }
+        document.getElementById("show-col-1-badge").style.display="none";        
     }
 }
 
@@ -117,11 +147,11 @@ function doColOneH2() {
         const newContent = iframe.contentWindow.document.createTextNode(content_header_h2_text_col_1);
         newH2.appendChild(newContent);
         const currentDiv = iframe.contentWindow.document.querySelector('section .col-1');
-        if (!iframe.contentWindow.document.querySelector('section'+' .col-1 .container-upper-label')) {
+        if (!iframe.contentWindow.document.querySelector('section'+' .col-1 .col-1-badge')) {
             currentDiv.prepend(newH2);
         }
         else {
-            iframe.contentWindow.document.querySelector('section'+' .col-1 .container-upper-label').insertAdjacentHTML('afterend', content_header_h2_col_1); 
+            iframe.contentWindow.document.querySelector('section'+' .col-1 .col-1-badge').insertAdjacentHTML('afterend', content_header_h2_col_1); 
         }
         document.getElementById("text-highlight").style.display ="flex";
     }
@@ -240,13 +270,13 @@ function doColOne() {
         document.getElementById("rb_col_1_align_center").disabled=false;
         document.getElementById("rb_col_1_align_center").checked=true;
 
-        document.getElementById("cb_col_1_label").disabled=false;
-        document.getElementById("cb_col_1_label").checked=false;
+        document.getElementById("cb_col_1_badge").disabled=false;
+        document.getElementById("cb_col_1_badge").checked=false;
         document.getElementById("cb_col_1_h2").disabled=false;
         document.getElementById("cb_col_1_h2").checked=true;
         document.getElementById("cb_col_1_h3").disabled=false;
         document.getElementById("cb_col_1_h3").checked=true;
-        document.getElementById("btn_col_1_label_text").disabled=true;
+        document.getElementById("btn_col_1_badge_text").disabled=true;
         document.getElementById("btn_col_1_h2_text").disabled=false;
         document.getElementById("btn_col_1_h3_text").disabled=false;
         document.querySelector("#content-2 .svg-icon-desktop").classList.remove("icon-disabled");
@@ -270,13 +300,13 @@ function removeColOne() {
         document.getElementById("rb_col_1_align_center").checked=false;
         document.getElementById("dd_col_1_width").disabled=true;
         document.querySelector("#content-2 .svg-icon-desktop").classList.add("icon-disabled");
-        document.getElementById("cb_col_1_label").disabled=true;
-        document.getElementById("cb_col_1_label").checked=false;
+        document.getElementById("cb_col_1_badge").disabled=true;
+        document.getElementById("cb_col_1_badge").checked=false;
         document.getElementById("cb_col_1_h2").disabled=true;
         document.getElementById("cb_col_1_h2").checked=false;
         document.getElementById("cb_col_1_h3").disabled=true;
         document.getElementById("cb_col_1_h3").checked=false;
-        document.getElementById("btn_col_1_label_text").disabled=true;
+        document.getElementById("btn_col_1_badge_text").disabled=true;
         document.getElementById("btn_col_1_h2_text").disabled=true;
         document.getElementById("btn_col_1_h3_text").disabled=true;
         col_no = "."+col_no; // Restore .col_no

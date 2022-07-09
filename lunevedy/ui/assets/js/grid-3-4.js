@@ -87,19 +87,7 @@ function doColsMobileWidth() {
 document.querySelector("#cb_cols_h3").addEventListener("change", doColH3);
 
 function doColH3() {
-    const arrContent = []; 
-    
 
-    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
-        for (let i = 0; i < content_h3_col_3.length; i++) {
-            arrContent[i] = content_h3_col_3[i];
-        }
-    }
-    else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
-        for (let i = 0; i < content_h3_col_4.length; i++) {
-            arrContent[i] = content_h3_col_4[i];
-        }
-    }
     if (!document.getElementById("cb_cols_h3").checked) {
         removeColH3();
     }
@@ -107,6 +95,20 @@ function doColH3() {
     else {
         removeColH3();
         document.getElementById("btn_cols_h3").disabled=false;
+
+        const arrContent = []; 
+    
+        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
+            for (let i = 0; i < content_h3_col_3.length; i++) {
+                arrContent[i] = content_h3_col_3[i];
+            }
+        }
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
+            for (let i = 0; i < content_h3_col_4.length; i++) {
+                arrContent[i] = content_h3_col_4[i];
+            }
+        }
+
         // Test for figures (images or icons)
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) {
             const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure")
@@ -144,7 +146,6 @@ function doColH3() {
             }
             document.getElementById("cb_cols_shadows").disabled=false; 
             document.getElementById("cb_cols_shadows").checked=false; 
-            console.log("No figures, but lists");
         }
 
         // No pics, icons, paras, lists
@@ -159,16 +160,27 @@ function doColH3() {
         }
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
+        document.getElementById("cb_cols_links_h3").disabled=false;
+        document.getElementById("cb_cols_links_h3").checked=false;
+        document.getElementById("hyperlinks-h3-one").style.display="flex";
     }
 }
 
 function removeColH3() {
-    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
+    if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) {
         document.getElementById("btn_cols_h3").disabled=true;
-        const elH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        let objH3;
+        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        }
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
+        }
+        else (objH3 = "");        
+        
         // Loop through H3 sub-headings in columns
-        for (let i = 0; i < elH3.length; i++) {
-            elH3[i].remove();
+        for (let i = 0; i < objH3.length; i++) {
+            objH3[i].remove();
         }
         iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML.replaceAll('</figure>\n\t\t\t', '</figure>'); 
 
@@ -176,8 +188,69 @@ function removeColH3() {
         if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] p")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] ul"))) {
             document.getElementById("cb_cols_shadows").disabled=true; 
             document.getElementById("cb_cols_shadows").checked=false; 
-        }    
+        }
+        document.getElementById("hyperlinks-h3-one").style.display="none";
+        document.getElementById("hyperlinks-h3-two").style.display="none";
+        document.getElementById("hyperlinks-h3-three").style.display="none";
+        document.getElementById("cb_cols_links_h3").disabled=true;
+        document.getElementById("cb_cols_links_h3").checked=false;
     }
+}
+
+/*
+//////////////// COLUMN H3 HYPERLINKS ////////////////////
+*/
+
+document.querySelector("#cb_cols_links_h3").addEventListener("change", doColH3Hyperlink);
+
+function doColH3Hyperlink() {
+
+    const objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+    let target;
+    let col_no;
+
+    if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+        col_no = "col-3-h3";
+    }
+
+    else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+        col_no = "col-4-h3";
+    }
+
+    if (!document.querySelector("#cb_cols_links_h3").checked) {
+        document.getElementById("hyperlinks-h3-two").style.display="none";
+        document.getElementById("hyperlinks-h3-three").style.display="none";
+        document.getElementById("btn_cols_h3").disabled=false;
+
+        for (let i = 0; i < (objAllCols.length); i++) {
+            target = objAllCols[i].innerHTML;
+
+            if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+                objAllCols[i].innerHTML = target.replace(/(<a class=\"col-3-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
+            }
+            else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+                objAllCols[i].innerHTML = target.replace(/(<a class=\"col-4-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
+            }
+        }
+    }
+
+    else {
+        document.getElementById("hyperlinks-h3-two").style.display="flex";
+        document.getElementById("hyperlinks-h3-three").style.display="flex";
+        document.getElementById("btn_cols_h3").disabled=true;
+       
+        for (let i = 0; i < (objAllCols.length); i++) {
+            target = objAllCols[i].innerHTML;
+
+            if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-3-h3\">').replace(/<\/h3>/igm, '<\/a>');
+            }
+
+            else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-4-h3\">').replace(/<\/h3>/igm, '<\/a>');
+            }
+        }
+     }
 }
 
 /*
@@ -217,9 +290,18 @@ function doColsText() {
             }
         }
 
-        // Test for figures AND h3 column headings
-        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) ) {
-            const objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        let objH3;
+        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        }
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
+        }
+        else (objH3 = "");
+
+        // Test for figures AND (h3 column headings or hyperlinks)
+        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
+            
             let el_h3;
             // Loop through h3 sub-headings
             for (let i = 0; i < objH3.length; i++) {
@@ -228,9 +310,8 @@ function doColsText() {
             }
         }
         
-        // Test for figures (images or icons) and NO h3 column headings
-        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) ) {
-            // console.log("figures and NO h3 column headings");
+        // Test for figures (images or icons) and NO (h3 column headings or hyperlinks)
+        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']") ) ) {
             const objFig = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure");
             let el_fig;
             // Loop through figures
@@ -240,9 +321,9 @@ function doColsText() {
             }
         }
 
-        // Test for h3 column headings and NO figures
-        else if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) ) {
-            const objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        // Test for (h3 column headings or hyperlinks) and NO figures
+        else if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
+
             let el_h3;
             // Loop through H3 sub-headings
             for (let i = 0; i < objH3.length; i++) {
@@ -251,14 +332,13 @@ function doColsText() {
            }
         }
 
-        // No figures AND no column headings
-        else if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) ) {
-            // console.log("No figures AND no column headings");
+        // No pics, icons, h3 headings or hyperlinks
+        else {
             const objCol = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
             let el_col;
             // Loop through columns
             for (let i = 0; i < objCol.length; i++) {
-                el_col = objCol[i]; 
+                el_col = objCol[i];
                 el_col.innerHTML = arrContent[i];
             }
         }
@@ -286,9 +366,17 @@ function doColsText() {
             }
         }
 
-        // Test for figures AND h3 column headings
-        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) ) {
-            const objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        let objH3;
+        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        }
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
+            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
+        }
+        else (objH3 = "");
+
+        // Test for figures AND (h3 column headings or hyperlinks)
+        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
             let el_h3;
             // Loop through H3 sub-headings
             for (let i = 0; i < objH3.length; i++) {
@@ -308,9 +396,8 @@ function doColsText() {
            }
         }
 
-        // Test for h3 column headings
-        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
-            const objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+        // Test for (h3 column headings or hyperlinks)
+        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) {
             let el_h3;
             // Loop through H3s in columns
             for (let i = 0; i < objH3.length; i++) {
@@ -319,7 +406,7 @@ function doColsText() {
             }
         }
 
-        // No pics, icons, h3 headings
+        // No pics, icons, h3 headings or hyperlinks
         else {
             const objCol = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
             let el_col;
@@ -381,12 +468,22 @@ function doListMarker() {
     if (opt==="0") {
         // Test for Font Awesome
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] ul.fa-ul") ) {
-            // Loop through columns
-            for (let i = 0; i < objCols.length; i++) {
-                el_col = objCols[i];
-                el_col.innerHTML = el_col.innerHTML.replaceAll("<ul class=\"fa-ul\">", "<ul>");
-                el_col.innerHTML = el_col.innerHTML.replaceAll("<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>", "<li>");
+            // Loop through spans in list items and remove italic nodes
+            let objListSpans = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] ul li span");
+
+            for (let i = 0; i < objListSpans.length; i++) {
+                objListSpans[i].firstChild.remove();
             }
+            // Loop through list items and remove spans
+            let objListItems = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] ul li");
+
+            for (let i = 0; i < objListItems.length; i++) {
+                objListItems[i].firstChild.remove();
+            }
+
+            let objAllCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+
+            objAllCols.innerHTML = objAllCols.innerHTML.replaceAll("<ul class=\"fa-ul\">", "<ul>");
         }
         document.getElementById("fa-icons").style.display ="none";
         document.getElementById("fa-circle-check").checked=true;
@@ -538,14 +635,11 @@ function checkColsPadding() {
     }
 }
 
-
 /*
 //////////////// BUTTONS ////////////////////
 */
 
-if (document.querySelector("#cb_btns")) {
-    document.querySelector("#cb_btns").addEventListener("change", doColButtons);
-}
+document.querySelector("#cb_btns").addEventListener("change", doColButtons);
 
 function doColButtons() {
     let el_col;
@@ -597,7 +691,6 @@ function removeColButtons() {
     document.getElementById("dd_buttons_shape").value="0";
     disableColButtons();
 }
-
 
 /*
 //////////////// BUTTONS: TYPE ////////////////////
@@ -713,7 +806,6 @@ function removeButtonsStyle(obj_btn) {
     }
 }
 
-
 /*
 //////////////// BUTTONS: SIZE ////////////////////
 */
@@ -812,13 +904,11 @@ function swapButtonIcons() {
     }
 }
 
-
 /*
 //////////////// BUTTONS: WIDTH ///////////////
 */
-if (document.querySelector("#cb_buttons_width")) {
-    document.querySelector("#cb_buttons_width").addEventListener("change", doBtnWidth);
-}
+
+document.querySelector("#cb_buttons_width").addEventListener("change", doBtnWidth);
 
 function doBtnWidth() {
     const obj_btn = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] > a.btn");
@@ -838,9 +928,8 @@ function doBtnWidth() {
 /*
 //////////////// BUTTONS: SHADOW ///////////////
 */
-if (document.querySelector("#cb_buttons_shadow")) {
-    document.querySelector("#cb_buttons_shadow").addEventListener("change", doBtnShadow);
-}
+
+document.querySelector("#cb_buttons_shadow").addEventListener("change", doBtnShadow);
 
 function doBtnShadow() {
     const obj_btn = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] > a.btn");
@@ -860,9 +949,8 @@ function doBtnShadow() {
 /*
 //////////////// BUTTONS: UPPERCASE ///////////////
 */
-if (document.querySelector("#cb_buttons_uppercase")) {
-    document.querySelector("#cb_buttons_uppercase").addEventListener("change", doBtnUCase);
-}
+
+document.querySelector("#cb_buttons_uppercase").addEventListener("change", doBtnUCase);
 
 function doBtnUCase() {
     const obj_btn = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] > a.btn");

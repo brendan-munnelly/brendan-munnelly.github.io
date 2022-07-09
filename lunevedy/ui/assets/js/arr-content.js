@@ -23,21 +23,21 @@ export const content_para_last_col_1 = "\n\n\t\t<p>Collaboratively administrate 
 
 export const content_ul_short_col_1 = "\n\n\t\t<ul>\n\t\t\t<li>AI-powered<\/li>\n\t\t\t<li>Future-proof<\/li>\n\t\t\t<li>Customer-centric<\/li>\n\t\t<\/ul>";
 
-export const content_ul_long_col_1 = "\n\n\t\t<ul>\n\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t<\/ul>";
+export const content_ul_long_col_1 = "\n\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>";
 
 export const content_caption_col_1 = "<figcaption><i>Above<\/i>: Some text describing the image or video.</figcaption>";
 
 /* 2 column layouts */
 export const content_h3_col_2 = ["\n\t\t\t<h3>Lunevedy Cafe Bakery<\/h3>", "\n\t\t\t<h3>Lunevedy Fashion Store<\/h3>"];
 
-export const content_lists_col_2 = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably to almost everywhere using only the best and fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>"];
+export const content_lists_col_2 = ["\n\t\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably to almost everywhere using only the best and fastest delivery services.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably all over Europe using only the best and fastest delivery services.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>"];
 
 export const content_paras_col_2 = ["\n\t\t\t<p>Lunevedy&#8219;s is a lively landmark city cafe bar, with great food and drink served in a unique atmosphere.</p>\n\t\t\t<p>Our friendly baristas are waiting to pour your favourite beverage. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Shop our collection of luxury women&#8219;s clothing, exquisite labels, real fit, individuality and personal service.</p>\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere quickly and reliably.</p>"];
 
 /* 2 column split layouts */
 export const content_para_col_2 ="<p>Further the overall value proposition. Organically grow the holistic world view of disruptive innovation. Identify a ballpark value added activity to beta test.</p>";
 
-export const content_list_col_2 = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably to almost everywhere using only the best and fastest delivery services.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>"];
+export const content_list_col_2 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship reliably to almost everywhere using only the best and fastest delivery services.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>"];
 
 
 /* buttons for single-column, 2 column, and 2-column split layouts */
@@ -50,7 +50,6 @@ export const content_buttons_pair_text_1 = "Shop now";
 export const content_buttons_pair_icon_2 = "<i class=\"fas fa-arrow-right\"></i>";
 export const content_buttons_pair_text_2 = "View details";
 
-
 export const content_buttons_pair = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-solid\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-outline\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>";
 
 /* 3 column layouts */
@@ -58,14 +57,14 @@ export const content_h3_col_3 = ["\n\t\t\t<h3>Lunevedy Cafe Bakery<\/h3>", "\n\t
 
 export const content_paras_col_3 = ["\n\t\t\t<p>Our friendly baristas are waiting to pour your favourite beverage. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere quickly and reliably.<\/p>", "\n\t\t\t<p>Supercharge your web design career with this <i>JavaScript for Beginners<\/i> training course that covers all the important concepts.<\/p>"];
 
-export const content_list_col_3 = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t<\/ul>"];
+export const content_list_col_3 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\t\n\t\t\t<\/ul>"];
 
 /* 4 column layouts */
 export const content_h3_col_4 = ["\n\t\t\t<h3>Lunevedy Cafe<\/h3>", "\n\t\t\t<h3>Lunevedy Fashion<\/h3>", "\n\t\t\t<h3>Learn JavaScript<\/h3>", "\n\t\t\t<h3>Visit Portugal<\/h3>"];
 
 export const content_paras_col_4 = ["\n\t\t\t<p>Our friendly baristas are waiting to serve you. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere.<\/p>", "\n\t\t\t<p>Supercharge your web design career with this <i>JavaScript for Beginners</i> course that covers all the important concepts.<\/p>", "\n\t\t\t<p>Portugal's hilly, coastal capital city. Enjoy the pastel-coloured buildings, the cobbled streets, and the custard tarts.<\/p>"];
 
-export const content_list_col_4 = ["\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Best value<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>", "\n\t\t\t<ul>\n\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t<\/ul>"];
+export const content_list_col_4 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Best value<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>"];
 
 export const arrPic = [];
 arrPic[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
@@ -118,3 +117,23 @@ arrIconLA[4]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-glo
 arrIconLA[5]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-shopping-cart\"><\/i>\n\t\t\t\t<\/figure>";   
 arrIconLA[6]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-briefcase\"><\/i>\n\t\t\t\t<\/figure>";
 arrIconLA[7]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-book-reader\"><\/i>\n\t\t\t\t<\/figure>"; 
+
+export const arrTextBox = [];
+// arrTextBox[0] = "FOOD & DRINK";
+// arrTextBox[1] = "FASHION";
+// arrTextBox[2] = "EDUCATION";
+// arrTextBox[3] = "TRAVEL";
+
+arrTextBox[0] = "MOST POPULAR";
+arrTextBox[1] = "NEW ARRIVALS";
+arrTextBox[2] = "BEST SELLER";
+arrTextBox[3] = "TRAVEL";
+
+export const arrH4Overlay = [];
+
+arrH4Overlay[0] = "Tasty breads fresh from the oven. Delicious coffee."
+arrH4Overlay[1] = "Online bargains to help you look great and feel fantastic"
+arrH4Overlay[2] = "Invest your time in learning something new"
+arrH4Overlay[3] = "A holiday to remember at a price you can afford"
+
+
