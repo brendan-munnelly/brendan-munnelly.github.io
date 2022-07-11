@@ -122,6 +122,13 @@ function dragElement(elmnt) {
 
     function elementDrag(e) {
         e = e || window.event;
+
+        const elSlider = document.getElementById("slider-gap");
+        if(event.target == elSlider) {
+            elmnt.draggable = false; 
+        }
+        else {
+
         // e.preventDefault();
         // calculate the new cursor position:
         pos1 = pos3 - e.clientX;
@@ -131,6 +138,7 @@ function dragElement(elmnt) {
         // set the element's new position:
         elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
     }
 
     function closeDragElement() {
@@ -387,16 +395,41 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             colsBg = "var("+color_code+")";
             console.log("colsBg: "+colsBg);
             checkColorsPadding();
+            // Enable soft corners
+            document.getElementById("cb_cols_corners_soft").disabled = false;
+            document.getElementById("cb_cols_corners_soft").checked = false;
             doUpdateArray(sub_string,newStyle);
         }
         
-        /* Column borders colour */
-        else if (btn_id === "btn_cols_border_color") {
-            newStyle = sectionClassName+ " .cols-borders "+col_no+" { border-color: var("+color_code+") }\n";
-            sub_string = "cols-borders";
+        /* Column borders: colour */
+        else if (btn_id === "btn_cols_borders_color") { 
+            newStyle = sectionTheme+sectionClassName+" div[class*=\"cols-borders-width-\"] " +col_no+" { border-color: var("+color_code+") }\n";
+            console.log("newStyle: "+newStyle);
+            sub_string = "cols-borders { border-color:"
             doUpdateArray(sub_string,newStyle);
         }            
         
+
+        /* Column shadows: colour */
+        else if (btn_id === "btn_cols_shadows_color") { 
+            // get value of color code
+            const styles = getComputedStyle(document.documentElement);
+            const colorValue = styles.getPropertyValue(color_code);
+            console.log("color_code:" +color_code);
+            console.log("colorValue:" +colorValue);
+
+            const hex2rgba = (hex, alpha = 1) => {
+                const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+                return `rgba(${r},${g},${b},${alpha})`;
+            };
+
+            const strRGB = hex2rgba(colorValue, .4);
+            console.log("strRGB:" +strRGB);
+            newStyle = sectionClassName+" .cols-shadows " +col_no+" { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
+            sub_string = "cols-shadows";
+            doUpdateArray(sub_string,newStyle);
+        }
+
         /* === Buttons === */
 
         /* Text colour: passive */
@@ -462,9 +495,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }        
-
-
-        
+      
         style = document.createElement('style');
         iframe.contentWindow.document.head.appendChild(style);
         style.appendChild(document.createTextNode(newStyle));

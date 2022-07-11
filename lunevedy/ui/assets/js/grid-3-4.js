@@ -31,6 +31,33 @@ function setColumnBlocks() {
 }
 
 /*
+//////////////// COLUMNS GAP ///////////////
+*/
+
+document.querySelector("#slider-gap").addEventListener("change", setColumnGap);
+
+function setColumnGap() {
+    let selectedValue = document.getElementById("slider-gap").value
+    console.log("selectedValue:" +selectedValue);
+
+    const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+    objCols.classList.remove("cols-gap-0");
+    objCols.classList.remove("cols-gap-1");
+    objCols.classList.remove("cols-gap-2");
+    objCols.classList.remove("cols-gap-3");
+    objCols.classList.remove("cols-gap-4");
+    objCols.classList.remove("cols-gap-5");
+    objCols.classList.remove("cols-gap-6");
+    objCols.classList.remove("cols-gap-7");
+    objCols.classList.remove("cols-gap-8");
+    objCols.classList.remove("cols-gap-9");
+    objCols.classList.remove("cols-gap-10");
+    objCols.classList.add("cols-gap-"+selectedValue);
+   
+}
+
+
+/*
 //////////////// COLUMNS ALIGN ///////////////
 */
 
@@ -162,7 +189,8 @@ function doColH3() {
         document.getElementById("cb_cols_shadows").checked=false; 
         document.getElementById("cb_cols_links_h3").disabled=false;
         document.getElementById("cb_cols_links_h3").checked=false;
-        document.getElementById("hyperlinks-h3-one").style.display="flex";
+        document.getElementById("hyperlinks-h3").style.display="flex";
+        document.getElementById("hyperlinks-h3-underline").style.display="flex";
     }
 }
 
@@ -189,9 +217,8 @@ function removeColH3() {
             document.getElementById("cb_cols_shadows").disabled=true; 
             document.getElementById("cb_cols_shadows").checked=false; 
         }
-        document.getElementById("hyperlinks-h3-one").style.display="none";
-        document.getElementById("hyperlinks-h3-two").style.display="none";
-        document.getElementById("hyperlinks-h3-three").style.display="none";
+        document.getElementById("hyperlinks-h3").style.display="none";
+        document.getElementById("hyperlinks-h3-underline").style.display="none";
         document.getElementById("cb_cols_links_h3").disabled=true;
         document.getElementById("cb_cols_links_h3").checked=false;
     }
@@ -218,8 +245,8 @@ function doColH3Hyperlink() {
     }
 
     if (!document.querySelector("#cb_cols_links_h3").checked) {
-        document.getElementById("hyperlinks-h3-two").style.display="none";
-        document.getElementById("hyperlinks-h3-three").style.display="none";
+        document.getElementById("hyperlinks-h3").style.display="none";
+        document.getElementById("hyperlinks-h3-underline").style.display="none";
         document.getElementById("btn_cols_h3").disabled=false;
 
         for (let i = 0; i < (objAllCols.length); i++) {
@@ -235,8 +262,8 @@ function doColH3Hyperlink() {
     }
 
     else {
-        document.getElementById("hyperlinks-h3-two").style.display="flex";
-        document.getElementById("hyperlinks-h3-three").style.display="flex";
+        document.getElementById("hyperlinks-h3").style.display="flex";
+        document.getElementById("hyperlinks-h3-underline").style.display="flex";
         document.getElementById("btn_cols_h3").disabled=true;
        
         for (let i = 0; i < (objAllCols.length); i++) {
@@ -557,6 +584,9 @@ function doColShadows() {
         else {
             document.getElementById("cb_cols_corners_soft").disabled=false; 
         }
+        document.getElementById("btn_cols_shadows_color").disabled=true;
+        document.getElementById("btn_cols_shadows_color").checked=false;
+
         checkColsPadding();        
     }
 
@@ -569,6 +599,9 @@ function doColShadows() {
         document.getElementById("cb_cols_borders").checked=false;
         document.getElementById("cb_cols_corners_soft").disabled=false; 
         document.getElementById("cb_cols_corners_soft").checked=true;
+        document.getElementById("btn_cols_shadows_color").disabled=false;
+        document.getElementById("btn_cols_shadows_color").checked=false;
+
     }
 }
 
@@ -582,28 +615,95 @@ function doColBorders() {
     const el_cols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']")
 
     if (!document.getElementById("cb_cols_borders").checked) {
-        el_cols.classList.remove("cols-borders");
+        // el_cols.classList.remove("cols-borders");
         el_cols.classList.remove("cols-corners-soft");
+
+        el_cols.classList.remove("cols-borders-width-1");
+        el_cols.classList.remove("cols-borders-width-2");
+        el_cols.classList.remove("cols-borders-width-3");
+        el_cols.classList.remove("cols-borders-width-4");
+
         document.getElementById("cb_cols_corners_soft").disabled=true; 
         document.getElementById("cb_cols_corners_soft").checked=false;
         document.getElementById("cb_cols_borders").disabled=false;
-        document.getElementById("btn_cols_border_color").disabled=true;
+        // document.getElementById("btn_cols_border_color").disabled=true;
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
+        document.getElementById("cols-borders-width-1").disabled=true; 
+        document.getElementById("cols-borders-width-2").disabled=true; 
+        document.getElementById("cols-borders-width-3").disabled=true; 
+        document.getElementById("cols-borders-width-4").disabled=true; 
+        document.getElementById("cols-borders-width-1").checked=false; 
+        document.getElementById("cols-borders-width-2").checked=false; 
+        document.getElementById("cols-borders-width-3").checked=false; 
+        document.getElementById("cols-borders-width-4").checked=false; 
+        document.getElementById("btn_cols_borders_color").disabled=true; 
+
         checkColsPadding();
     }
 
     else {
         el_cols.classList.add("cols-padding");
-        el_cols.classList.add("cols-borders");
+        // el_cols.classList.add("cols-borders");
+        el_cols.classList.add("cols-borders-width-1");
         document.getElementById("cb_cols_corners_soft").disabled=false; 
         document.getElementById("cb_cols_corners_soft").checked;
         document.getElementById("cb_cols_borders").disabled=false;
-        document.getElementById("btn_cols_border_color").disabled=false;
+        // document.getElementById("btn_cols_border_color").disabled=false;
         document.getElementById("cb_cols_shadows").disabled=true; 
         document.getElementById("cb_cols_shadows").checked=false; 
+        document.getElementById("cols-borders-width-1").disabled=false; 
+        document.getElementById("cols-borders-width-1").checked=true; 
+        document.getElementById("cols-borders-width-2").disabled=false; 
+        document.getElementById("cols-borders-width-3").disabled=false; 
+        document.getElementById("cols-borders-width-4").disabled=false; 
+        document.getElementById("btn_cols_borders_color").disabled=false; 
     }
 }
+
+/*
+//////////////// COLUMNS BORDERS WIDTH ///////////////
+*/
+
+document.querySelector("#form-cols-borders-width").addEventListener("change", doColBordersWidth);
+
+function doColBordersWidth() {
+
+    const rbs = document.querySelectorAll("input[name='cols-borders-width']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    console.log("selectedValue:" +selectedValue);
+    const objAllCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+
+    objAllCols.classList.remove("cols-borders-width-1");
+    objAllCols.classList.remove("cols-borders-width-2");
+    objAllCols.classList.remove("cols-borders-width-3");
+    objAllCols.classList.remove("cols-borders-width-4");
+    
+    if (selectedValue==="1") {
+        objAllCols.classList.add("cols-borders-width-1");
+    }
+
+    else if (selectedValue==="2") {
+        objAllCols.classList.add("cols-borders-width-2");
+    }
+
+    else if (selectedValue==="3") {
+        objAllCols.classList.add("cols-borders-width-3");
+    }
+    
+    else if (selectedValue==="4") {
+        objAllCols.classList.add("cols-borders-width-4");
+    }
+}
+
 
 /*
 //////////////// COLUMNS BORDER CORNERS ///////////////
@@ -1024,4 +1124,3 @@ function disableColButtons() {
     document.getElementById("cb_buttons_uppercase").disabled=true;
     document.getElementById("cb_buttons_uppercase").checked=false;
 }
-
