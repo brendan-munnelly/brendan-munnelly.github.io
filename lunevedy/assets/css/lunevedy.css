@@ -498,13 +498,21 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
     .flex-cols-4 { gap: 4% }
 
-    .col-2, .col-3, .col-4 { flex-direction: column }
+    .col-2, .col-3, .col-4 { flex-direction: column; flex: 1 }
+    .col-3 { min-width: 28% }
 
-    /* .col-3 { width: 25%; flex-grow: 1 } */
-
-    .col-3 { width: 30% }
-
-    .col-4 { width: 22% }
+    div[class*="flex-cols-"].cols-gap-0 { gap: 0% } 
+    div[class*="flex-cols-"].cols-gap-1 { gap: 1% } 
+    div[class*="flex-cols-"].cols-gap-2 { gap: 2% } 
+    div[class*="flex-cols-"].cols-gap-3 { gap: 3% } 
+    div[class*="flex-cols-"].cols-gap-4 { gap: 4% } 
+    div[class*="flex-cols-"].cols-gap-5 { gap: 5% } 
+    div[class*="flex-cols-"].cols-gap-6 { gap: 6% } 
+    div[class*="flex-cols-"].cols-gap-7 { gap: 7% } 
+    div[class*="flex-cols-"].cols-gap-8 { gap: 8% } 
+    div[class*="flex-cols-"].cols-gap-9 { gap: 9% } 
+    div[class*="flex-cols-"].cols-gap-10 { gap: 10% } 
+    
 
     .col-2:nth-child(n+3) { margin-top: 64px }
     .col-3:nth-child(n+4), .col-4:nth-child(n+5) { margin-top: 48px } 
@@ -1288,23 +1296,22 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
 
 /* Column effects */
-.cols-shadows div[class^='col-']:not(.col-1) {
-    border: solid #D3D3D3 1px;
-    /* box-shadow: rgba(160,160,160,0.8) 4px 4px 20px; */
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 16px 0px
+.cols-shadows div[class^='col-'] {    
+    border: solid var(--gray-400) 1px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 8px 16px 0
 }
 
-.cols-borders .col-2, .cols-borders .col-3, .cols-borders .col-4 {
-    border: solid 1px var(--gray-800);
-}
+div[class*="cols-borders-width-"] > div[class^="col-"] { border-style: solid }
+.theme-light div[class*="cols-borders-width-"] > div[class^="col-"] { border-color: #000 }
+.theme-dark  div[class*="cols-borders-width-"] > div[class^="col-"] { border-color: #fff }
 
-.cols-corners-soft div[class^='col-']:not(.col-1) {
-    border-radius: 12px
-}
+.cols-borders-width-1 div[class^='col-'] { border-width: 1px }
+.cols-borders-width-2 div[class^='col-'] { border-width: 2px }
+.cols-borders-width-3 div[class^='col-'] { border-width: 3px }
+.cols-borders-width-4 div[class^='col-'] { border-width: 4px }
 
-.cols-corners-soft div[class^='col-']:not(section) {
-    border-radius: 12px
-}
+.cols-corners-soft div[class^='col-']:not(.col-1) { border-radius: 18px }
+.cols-corners-soft div[class^='col-']:not(section) { border-radius: 18px }
 
 /* Fancy Image Effects */
 .figure-shadow, .img-shadow {
