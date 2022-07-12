@@ -352,10 +352,17 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 h2 main heading highlight text*/
+        /* .col-1 h2 main heading highlight text */
         else if (btn_id === "btn_col_1_h2_highlight") {
             newStyle = sectionClassName+ " .col-1 h2 span.highlight { color: var("+color_code+") }\n";
             sub_string = "col-1 h2 span.highlight";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* .col-1 h2 main heading bottom border */
+        else if (btn_id === "btn_col_1_h2_border") {
+            newStyle = sectionClassName+ " .col-1 h2.heading-underline::after { background-color: var("+color_code+") }\n";
+            sub_string = "heading-underline";
             doUpdateArray(sub_string,newStyle);
         }
 
