@@ -16,44 +16,100 @@ function setColumnBlocks() {
             break;
         }
     }
+
+    let objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+    console.log("Number of cols: " +objAllCols.length);
+
     if (selectedValue==="row-one") {
-        let objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
-        for (let i = 0; i < (objAllCols.length / 2); i++) {
-            objAllCols[i].remove();
+        if (objAllCols.length === 6) {
+            for (let i = 0; i < 3; i++) {
+                objAllCols[i].remove();
+            }
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")            
         }
+        else if (objAllCols.length === 9) {
+            for (let i = 0; i < 6; i++) {
+                objAllCols[i].remove();
+            }
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
+        }        
     }
 
     else if (selectedValue==="row-two") {
-        let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
-        objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
-        iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
+        // 3 to 6. Double current content
+        if (objAllCols.length === 3) {
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
+        }
+
+        // 9 to 6. Remove 3.
+        else if (objAllCols.length === 9) {
+
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+            
+            for (let i = 0; i < 3; i++) {
+                objAllCols[i].remove();
+            }
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")   
+        }
+    }
+
+    else if (selectedValue==="row-three") {
+
+        // 3 to 9. Treble current content
+        if (objAllCols.length === 3) {
+            console.log("got here 3 cols")
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML + objRowOne.innerHTML;
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
+        }
+
+        // 6 to 9. Double and remove 3.
+        if (objAllCols.length === 6) {
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
+            for (let i = 0; i < 3; i++) {
+                objRowOne.firstElementChild.remove();
+            }
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")           
+        }
     }
 }
 
 /*
-//////////////// COLUMNS GAP ///////////////
+//////////////// COLUMNS AND ROWS GAP ///////////////
 */
 
-document.querySelector("#slider-gap").addEventListener("change", setColumnGap);
+document.querySelector("#slider-gap-column").addEventListener("change", setColumnGap);
 
 function setColumnGap() {
-    let selectedValue = document.getElementById("slider-gap").value
+    let selectedValue = document.getElementById("slider-gap-column").value
     console.log("selectedValue:" +selectedValue);
 
     const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
-    objCols.classList.remove("cols-gap-0");
-    objCols.classList.remove("cols-gap-1");
-    objCols.classList.remove("cols-gap-2");
-    objCols.classList.remove("cols-gap-3");
-    objCols.classList.remove("cols-gap-4");
-    objCols.classList.remove("cols-gap-5");
-    objCols.classList.remove("cols-gap-6");
-    objCols.classList.remove("cols-gap-7");
-    objCols.classList.remove("cols-gap-8");
-    objCols.classList.remove("cols-gap-9");
-    objCols.classList.remove("cols-gap-10");
+
+    for (let i = 0; i <= 10; i++) {
+        objCols.classList.remove("cols-gap-"+i);
+    }
     objCols.classList.add("cols-gap-"+selectedValue);
-   
+}
+
+document.querySelector("#slider-gap-row").addEventListener("change", setRowGap);
+
+function setRowGap() {
+    let selectedValue = document.getElementById("slider-gap-row").value
+    console.log("selectedValue:" +selectedValue);
+
+    const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+
+    for (let i = 0; i <= 90; i+= 10) {
+        objCols.classList.remove("row-gap-"+i);
+    }
+    objCols.classList.add("row-gap-"+selectedValue);
 }
 
 

@@ -123,8 +123,11 @@ function dragElement(elmnt) {
     function elementDrag(e) {
         e = e || window.event;
 
-        const elSlider = document.getElementById("slider-gap");
-        if(event.target == elSlider) {
+        const elSliderColumn = document.getElementById("slider-gap-column");
+        const elSliderRow = document.getElementById("slider-gap-row");
+
+        if((e.target == elSliderColumn) || (e.target == elSliderRow)) {
+            // Do nothing
             elmnt.draggable = false; 
         }
         else {
