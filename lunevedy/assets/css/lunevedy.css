@@ -13,7 +13,7 @@ img { width: 100%; height: auto; display: block }
 nav, header, section, footer { width: 100%; position: relative; display: block; overflow: hidden }
 /* Last element at bottom of section or footer */
 section *:last-child, footer *:last-child { margin-bottom: 0 !important }
-div[class^='col-'] { background-color: inherit; overflow: visible }
+div[class^='col-'] { overflow: visible }
 
 /* ============ CUSTOM PROPERTIES ============  */
 
@@ -21,13 +21,7 @@ div[class^='col-'] { background-color: inherit; overflow: visible }
     /* Nicer than default sans-serif font */
     --font-sans: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
     --font-serif: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
-    --font-georgia: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
-    --font-garamond: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif;
-    --font-helvetica: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-verdana: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
-    --font-trebuchet: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
-    --font-mono: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
-    --font-georgia: "Georgia";
+    --font-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --global-font: var(--font-sans);
 
     /* Color variables */
@@ -275,7 +269,7 @@ body { font-family: var(--global-font) }
     .w-960px  { padding: 5% calc((100% - 960px)/2)  } 
     .w-800px  { padding: 5% calc((100% - 800px)/2)  }   
 }
-@media (min-width: 1340px) and (max-width: 1399px) { 
+@media (min-width: 1367px) and (max-width: 1399px) { 
     .w-1536px { padding: 5% calc((100% - 1320px)/2) } 
     .w-1320px { padding: 5% calc((100% - 1320px)/2) } 
     .w-1140px { padding: 5% calc((100% - 1140px)/2) }
@@ -283,7 +277,7 @@ body { font-family: var(--global-font) }
     .w-960px  { padding: 5% calc((100% - 960px)/2)  }
     .w-800px  { padding: 5% calc((100% - 800px)/2)  }
 }
-@media (min-width: 1200px) and (max-width: 1339px) { 
+@media (min-width: 1200px) and (max-width: 1366px) { 
     .w-1536px, 
     .w-1320px, 
     .w-1140px { padding: 5% calc((100% - 1140px)/2) }
@@ -355,8 +349,11 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 }
 
 .col-1-badge.corners-soft { border-radius: 16px; padding-left: 14px; padding-right: 14px }
+.badge.corners-soft { border-radius: 18px; padding-left: 14px; padding-right: 14px }
 
 .col-1.text-center .col-1-badge { margin-left: auto; margin-right: auto }
+div[class*="flex-cols-"].text-center .badge { margin-left: auto; margin-right: auto }
+
 
 @media (min-width: 768px) { .col-1-badge { margin-bottom: 32px } } 
 @media (max-width: 767px) { .col-1-badge { margin-bottom: 24px } } 
@@ -492,30 +489,41 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
         display: flex; flex-wrap: wrap; justify-content: flex-start; align-content: flex-start; 
     }   
     .flex-cols-2, .flex-cols-3, .flex-cols-4 { flex-direction: row }
-    .flex-cols-2 { gap: 5% }
-    .flex-cols-3 { gap: 5% }
-    /* .flex-cols-3 { gap: 64px } */
-
-    .flex-cols-4 { gap: 4% }
+    .flex-cols-2 { column-gap: 5% }
+    .flex-cols-2 { row-gap: 70px }
+    .flex-cols-3 { column-gap: 5% }
+    .flex-cols-3 { row-gap: 60px }
+    .flex-cols-4 { column-gap: 4% }
+    .flex-cols-4 { row-gap: 50px }
 
     .col-2, .col-3, .col-4 { flex-direction: column; flex: 1 }
     .col-3 { min-width: 26% }
 
-    div[class*="flex-cols-"].cols-gap-0 { gap: 0% } 
-    div[class*="flex-cols-"].cols-gap-1 { gap: 1% } 
-    div[class*="flex-cols-"].cols-gap-2 { gap: 2% } 
-    div[class*="flex-cols-"].cols-gap-3 { gap: 3% } 
-    div[class*="flex-cols-"].cols-gap-4 { gap: 4% } 
-    div[class*="flex-cols-"].cols-gap-5 { gap: 5% } 
-    div[class*="flex-cols-"].cols-gap-6 { gap: 6% } 
-    div[class*="flex-cols-"].cols-gap-7 { gap: 7% } 
-    div[class*="flex-cols-"].cols-gap-8 { gap: 8% } 
-    div[class*="flex-cols-"].cols-gap-9 { gap: 9% } 
-    div[class*="flex-cols-"].cols-gap-10 { gap: 10% } 
-    
+    div[class*="flex-cols-"].cols-gap-0 { column-gap: 0% } 
+    div[class*="flex-cols-"].cols-gap-1 { column-gap: 1% } 
+    div[class*="flex-cols-"].cols-gap-2 { column-gap: 2% } 
+    div[class*="flex-cols-"].cols-gap-3 { column-gap: 3% } 
+    div[class*="flex-cols-"].cols-gap-4 { column-gap: 4% } 
+    div[class*="flex-cols-"].cols-gap-5 { column-gap: 5% } 
+    div[class*="flex-cols-"].cols-gap-6 { column-gap: 6% } 
+    div[class*="flex-cols-"].cols-gap-7 { column-gap: 7% } 
+    div[class*="flex-cols-"].cols-gap-8 { column-gap: 8% } 
+    div[class*="flex-cols-"].cols-gap-9 { column-gap: 9% } 
+    div[class*="flex-cols-"].cols-gap-10 { column-gap: 10% } 
 
-    .col-2:nth-child(n+3) { margin-top: 64px }
-    .col-3:nth-child(n+4), .col-4:nth-child(n+5) { margin-top: 48px } 
+    div[class*="flex-cols-"].row-gap-0 { row-gap: 0 } 
+    div[class*="flex-cols-"].row-gap-10 { row-gap: 10px } 
+    div[class*="flex-cols-"].row-gap-20 { row-gap: 20px } 
+    div[class*="flex-cols-"].row-gap-30 { row-gap: 30px } 
+    div[class*="flex-cols-"].row-gap-40 { row-gap: 40px } 
+    div[class*="flex-cols-"].row-gap-50 { row-gap: 50px } 
+    div[class*="flex-cols-"].row-gap-60 { row-gap: 60px } 
+    div[class*="flex-cols-"].row-gap-70 { row-gap: 70px } 
+    div[class*="flex-cols-"].row-gap-80 { row-gap: 80px } 
+    div[class*="flex-cols-"].row-gap-90 { row-gap: 90px } 
+
+    /* .col-2:nth-child(n+3) { margin-top: 64px }
+    .col-3:nth-child(n+4), .col-4:nth-child(n+5) { margin-top: 48px }  */
 
     .col-2 p, .col-2 ul, 
     .col-3 p, .col-3 ul, .col-4 p, .col-4 ul { flex-grow: 1 }
@@ -792,7 +800,8 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 /* ============= THREE COLUMN LAYOUT ============ */
 
 /* Desktops */
-@media (min-width: 1025px) {
+
+@media (min-width: 1600px) {
     .col-3 h3, .col-3 a.col-3-h3 { font-size: 24px }
     .col-3 p, .col-3 li { font-size: 19px }
     .col-3 li { margin-left: 16px; padding-left: 12px }
@@ -810,6 +819,22 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
         font-size: calc(21px + (34 - 21) * ((100vw - 1025px) / (1536 - 1025))) }
     .w-1536px .col-3 p, 
     .w-1536px .col-3 li { font-size: calc(17px + (24 - 17) * ((100vw - 1025px) / (1536 - 1025))) }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1599px) {
+    .col-3 h3, .col-3 a.col-3-h3 { font-size: 24px }
+    .col-3 p, .col-3 li { font-size: 19px }
+    .col-3 li { margin-left: 16px; padding-left: 12px }
+    .col-3 ul.fa-ul li { margin-left: 20px; padding-left: 10px } 
+    .col-3 ul.fa-ul li span.fa-li { transform: translateY(2px) } 
+    .cols-padding .col-3 { padding: 22px 22px 28px 22px }
+    .cols-padding .col-3 figure {
+        margin-top: -22px;
+        width: calc(100% + 44px);
+        margin-left: calc(-22px);
+        margin-right: calc(-22px);
+    }
 }
 
 /* Tablets */
@@ -1416,18 +1441,17 @@ div[class^='col-'] figure.icon-left {
 
 /* ========== COLUMN BADGES ============= */
 
-.flex-cols-3 .col-3 .badge { 
+div[class*="flex-cols-"] div[class^='col-'] .badge { 
     margin-bottom: 14px;
     font-weight: 700;
     letter-spacing: 2px;
     font-size: 90%;
     padding: 4px 14px;
     width: fit-content;
-    border-radius: 20px;
 }
 
-.theme-light .flex-cols-3 .col-3 .badge { color: #fff; background-color: #000 }
-.theme-dark  .flex-cols-3 .col-3 .badge { color: #000; background-color: #fff }
+.theme-light .badge { color: #fff; background-color: #000 }
+.theme-dark  .badge { color: #000; background-color: #fff }
 
 /* =========== COLUMN IMAGE OVERLAYS ============ */
 .col-3 figure.figure-overlay { position: relative; }
