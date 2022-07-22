@@ -126,7 +126,7 @@ function dragElement(elmnt) {
         const elSliderColumn = document.getElementById("slider-gap-column");
         const elSliderRow = document.getElementById("slider-gap-row");
 
-        if((e.target == elSliderColumn) || (e.target == elSliderRow)) {
+        if((e.target == elSliderColumn) || (e.target == elSliderRow) ) {
             // Do nothing
             elmnt.draggable = false; 
         }
@@ -369,6 +369,22 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             doUpdateArray(sub_string,newStyle);
         }
 
+        else if (btn_id === "btn_cols_badge_text") {
+            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
+            sub_string = ".badge { color: ";
+            doUpdateArray(sub_string,newStyle); 
+        }
+        
+        else if (btn_id === "btn_cols_badge_bg") {
+            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
+            sub_string = ".badge { background-color: ";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+
+
+
+        
         /* .col-1 h3 sub heading */
         else if (btn_id === "btn_col_1_h3_text") {
             newStyle = sectionClassName+ " .col-1 h3 { color: var("+color_code+") }\n";
@@ -534,7 +550,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             }
         }
     }
-
 
 /*
 //////////////// UI THEME SELECTOR  ///////////////

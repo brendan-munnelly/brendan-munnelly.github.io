@@ -55,7 +55,7 @@ function doColOneAlign() {
 }
 
 /*
-//////////////// COL-1: CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// COL-1: CATEGORY BADGE ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_col_1_badge").addEventListener("change", doColOneLabel);

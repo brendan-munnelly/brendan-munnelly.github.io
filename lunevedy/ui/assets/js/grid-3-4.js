@@ -1,4 +1,4 @@
-import {content_h3_col_3, content_h3_col_4, content_paras_col_3, content_paras_col_4, content_list_col_3, content_list_col_4} from '../js/arr-content.js';
+import {content_h3_col_3, content_h3_col_4, content_paras_col_3, content_paras_col_4, content_list_col_3, content_list_col_4, arrColBadge} from '../js/arr-content.js';
 
 /*
 //////////////// COLUMNS BLOCKS ///////////////
@@ -18,20 +18,20 @@ function setColumnBlocks() {
     }
 
     let objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
-    console.log("Number of cols: " +objAllCols.length);
-
+    
+    // Reduce to three
     if (selectedValue==="row-one") {
+        // from six to three
         if (objAllCols.length === 6) {
             for (let i = 0; i < 3; i++) {
                 objAllCols[i].remove();
             }
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")            
         }
+        // from nine to three
         else if (objAllCols.length === 9) {
             for (let i = 0; i < 6; i++) {
                 objAllCols[i].remove();
             }
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
         }        
     }
 
@@ -41,30 +41,23 @@ function setColumnBlocks() {
             let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
             iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
         }
 
         // 9 to 6. Remove 3.
         else if (objAllCols.length === 9) {
-
             objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
-            
             for (let i = 0; i < 3; i++) {
                 objAllCols[i].remove();
             }
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")   
         }
     }
 
     else if (selectedValue==="row-three") {
-
         // 3 to 9. Treble current content
         if (objAllCols.length === 3) {
-            console.log("got here 3 cols")
             let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML + objRowOne.innerHTML;
             iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")
         }
 
         // 6 to 9. Double and remove 3.
@@ -74,8 +67,7 @@ function setColumnBlocks() {
             for (let i = 0; i < 3; i++) {
                 objRowOne.firstElementChild.remove();
             }
-            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
-            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']")           
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;     
         }
     }
 }
@@ -88,10 +80,7 @@ document.querySelector("#slider-gap-column").addEventListener("change", setColum
 
 function setColumnGap() {
     let selectedValue = document.getElementById("slider-gap-column").value
-    console.log("selectedValue:" +selectedValue);
-
     const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
-
     for (let i = 0; i <= 10; i++) {
         objCols.classList.remove("cols-gap-"+i);
     }
@@ -102,10 +91,7 @@ document.querySelector("#slider-gap-row").addEventListener("change", setRowGap);
 
 function setRowGap() {
     let selectedValue = document.getElementById("slider-gap-row").value
-    console.log("selectedValue:" +selectedValue);
-
     const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
-
     for (let i = 0; i <= 90; i+= 10) {
         objCols.classList.remove("row-gap-"+i);
     }
@@ -164,6 +150,151 @@ function doColsMobileWidth() {
 }
 
 /*
+//////////////// COLUMN BADGES ////////////////////
+*/
+
+document.querySelector("#cb_cols_badge").addEventListener("change", doColsBadge);
+
+function doColsBadge() {
+
+    if (!document.getElementById("cb_cols_badge").checked) {
+        removeColsBadge();
+    }
+
+    else {
+        // count column blocks
+        const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+    
+        let arrColBadgeLoop = [];
+
+        if (objCols.length === 3) {
+            for (let i = 0; i < (arrColBadge.length-1); i++) {
+                arrColBadgeLoop[i] = arrColBadge[i];
+            }
+        }
+
+        else if (objCols.length === 6) {
+            const arrColBadgeTemp = [];
+            for (let i = 0; i < (arrColBadge.length-1); i++) {
+                arrColBadgeTemp[i] = arrColBadge[i];
+            }
+            arrColBadgeLoop = [].concat(...Array(2).fill(arrColBadgeTemp));
+        }
+
+        else if (objCols.length === 9) {
+            const arrColBadgeTemp = [];
+            for (let i = 0; i < (arrColBadge.length-1); i++) {
+                arrColBadgeTemp[i] = arrColBadge[i];
+            }
+            arrColBadgeLoop = [].concat(...Array(3).fill(arrColBadgeTemp));
+        }
+    
+        // Test for figures
+        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) {
+            const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure")
+            let el_fig;
+            // Loop through figures
+            for (let i = 0; i < objFigs.length; i++) {
+                el_fig = objFigs[i]; 
+                el_fig.insertAdjacentHTML("afterend", arrColBadgeLoop[i]);
+            }
+            document.getElementById("show-cols-badge").style.display="flex";        
+        } 
+
+        // Test for sub-headings
+        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']") ))  {
+            let objH3;
+            if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
+                objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
+            }
+            else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
+                objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
+            }
+            let el_h3;
+            // Loop through h3 sub-headings
+            for (let i = 0; i < objH3.length; i++) {
+                el_h3 = objH3[i]; 
+                el_h3.insertAdjacentHTML("beforebegin", arrColBadgeLoop[i]);
+            }
+            document.getElementById("show-cols-badge").style.display="flex";
+        }
+
+        // Test for paragraphs
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] p")) {
+            const objParas = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] p");
+            let el_para;
+            // Loop through paragraphs
+            for (let i = 0; i < objParas.length; i++) {
+                el_para = objParas[i]; 
+                el_para.insertAdjacentHTML("beforebegin", arrColBadgeLoop[i]);
+            }
+            document.getElementById("show-cols-badge").style.display="flex";
+        }
+    
+        // Test for lists
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] ul")) {
+            const objULs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] ul")
+            let el_li;
+            // Loop through lists
+            for (let i = 0; i < objULs.length; i++) {
+                el_li = objULs[i]; 
+                el_li.insertAdjacentHTML("beforebegin", arrColBadgeLoop[i]);
+            }
+            document.getElementById("show-cols-badge").style.display="flex";
+        }
+    
+        else {
+            const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+            let el_col;
+            // Loop through columns
+            for (let i = 0; i < objCols.length; i++) {
+                el_col = objCols[i]; 
+                el_col.innerHTML = arrColBadgeLoop[i];
+            }
+        }
+    }
+}
+
+document.querySelector("#form_cols_badge_shape").addEventListener("change", doColsBadgeShape);
+
+function doColsBadgeShape() {
+
+    const objBadges = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .badge"); 
+    let elBadge
+    const rbs = document.querySelectorAll("input[name='switch_cols_badge_shape']");
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if (selectedValue==="square") {
+        for (elBadge of objBadges) { 
+            elBadge.classList.remove("corners-soft");
+        }
+    }
+        
+    else if (selectedValue==="soft") {
+        for (elBadge of objBadges) { 
+            elBadge.classList.add("corners-soft");
+        }
+    }
+}
+
+function removeColsBadge() {
+    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] .badge")) {
+        const colsBadge = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] .badge");
+        for (let i = 0; i < colsBadge.length; i++) {
+            colsBadge[i].remove();
+        }
+        document.getElementById("show-cols-badge").style.display="none";        
+    }
+}
+
+/*
 //////////////// COLUMN SUB-HEADINGS ////////////////////
 */
 
@@ -178,9 +309,10 @@ function doColH3() {
     else {
         removeColH3();
         document.getElementById("btn_cols_h3").disabled=false;
+        // count column blocks
+        const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+        let arrContent = [];
 
-        const arrContent = []; 
-    
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
             for (let i = 0; i < content_h3_col_3.length; i++) {
                 arrContent[i] = content_h3_col_3[i];
@@ -192,19 +324,57 @@ function doColH3() {
             }
         }
 
-        // Test for figures (images or icons)
-        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) {
+        let arrContentLoop = [];
+
+        if (objCols.length === 3) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
+            }
+        }
+
+        else if (objCols.length === 6) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+        }
+
+        else if (objCols.length === 9) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+        }
+
+        // Test for figures (images or icons) and NO badge
+        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] .badge") ) ) {
             const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure")
             let el_fig;
             // Loop through figures
             for (let i = 0; i < objFigs.length; i++) {
                 el_fig = objFigs[i]; 
-                el_fig.insertAdjacentHTML("afterend", arrContent[i]);
+                el_fig.insertAdjacentHTML("afterend", arrContentLoop[i]);
+            }
+            document.getElementById("cb_cols_shadows").disabled=false; 
+            document.getElementById("cb_cols_shadows").checked=false; 
+        }       
+
+        // Test for column badges
+        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] .badge")) {
+            
+            const objBadges = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] .badge");
+            let el_badge;
+            // Loop through badges
+            for (let i = 0; i < objBadges.length; i++) {
+                el_badge = objBadges[i]; 
+                el_badge.insertAdjacentHTML("afterend", arrContentLoop[i]);
             }
             document.getElementById("cb_cols_shadows").disabled=false; 
             document.getElementById("cb_cols_shadows").checked=false; 
         }
-            
+
         // Test for paragraphs
         else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] p")) {
             const objParas = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] p");
@@ -212,7 +382,7 @@ function doColH3() {
             // Loop through paragraphs
             for (let i = 0; i < objParas.length; i++) {
                 el_para = objParas[i]; 
-                el_para.insertAdjacentHTML("beforebegin", arrContent[i]);
+                el_para.insertAdjacentHTML("beforebegin", arrContentLoop[i]);
             }
             document.getElementById("cb_cols_shadows").disabled=false; 
             document.getElementById("cb_cols_shadows").checked=false; 
@@ -225,7 +395,7 @@ function doColH3() {
             // Loop through lists
             for (let i = 0; i < objULs.length; i++) {
                 el_li = objULs[i]; 
-                el_li.insertAdjacentHTML("beforebegin", arrContent[i]);
+                el_li.insertAdjacentHTML("beforebegin", arrContentLoop[i]);
             }
             document.getElementById("cb_cols_shadows").disabled=false; 
             document.getElementById("cb_cols_shadows").checked=false; 
@@ -238,15 +408,13 @@ function doColH3() {
             // Loop through columns
             for (let i = 0; i < objCols.length; i++) {
                 el_col = objCols[i]; 
-                el_col.innerHTML = arrContent[i];
+                el_col.innerHTML = arrContentLoop[i];
             }
         }
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
         document.getElementById("cb_cols_links_h3").disabled=false;
         document.getElementById("cb_cols_links_h3").checked=false;
-        document.getElementById("hyperlinks-h3").style.display="flex";
-        document.getElementById("hyperlinks-h3-underline").style.display="flex";
     }
 }
 
@@ -362,6 +530,9 @@ function doColsText() {
         document.querySelector("#btn_cols_text").disabled=false;
         removeText();
 
+        // count column blocks
+        const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
             for (let i = 0; i < content_paras_col_3.length; i++) {
                 arrContent[i] = content_paras_col_3[i];
@@ -373,58 +544,51 @@ function doColsText() {
             }
         }
 
-        let objH3;
-        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
-            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
-        }
-        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
-            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
-        }
-        else (objH3 = "");
+        let arrContentLoop = [];
 
-        // Test for figures AND (h3 column headings or hyperlinks)
-        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
-            
-            let el_h3;
-            // Loop through h3 sub-headings
-            for (let i = 0; i < objH3.length; i++) {
-                el_h3 = objH3[i]; 
-                el_h3.insertAdjacentHTML("afterend", arrContent[i]);
-            }
-        }
-        
-        // Test for figures (images or icons) and NO (h3 column headings or hyperlinks)
-        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']") ) ) {
-            const objFig = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure");
-            let el_fig;
-            // Loop through figures
-            for (let i = 0; i < objFig.length; i++) {
-                el_fig = objFig[i]; 
-                el_fig.insertAdjacentHTML("afterend", arrContent[i]);
+        if (objCols.length === 3) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
             }
         }
 
-        // Test for (h3 column headings or hyperlinks) and NO figures
-        else if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
-
-            let el_h3;
-            // Loop through H3 sub-headings
-            for (let i = 0; i < objH3.length; i++) {
-                el_h3 = objH3[i]; 
-                el_h3.insertAdjacentHTML("afterend", arrContent[i]);
-           }
+        else if (objCols.length === 6) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
         }
 
-        // No pics, icons, h3 headings or hyperlinks
-        else {
-            const objCol = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+        else if (objCols.length === 9) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+        }
+
+        // No bullets
+        if (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a.btn")) {
+            const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
             let el_col;
-            // Loop through columns
-            for (let i = 0; i < objCol.length; i++) {
-                el_col = objCol[i];
-                el_col.innerHTML = arrContent[i];
+            let el_col_temp;
+            for (let i = 0; i < objCols.length; i++) {
+                el_col = objCols[i]; 
+                el_col_temp = arrContentLoop[i];
+                el_col.innerHTML = el_col.innerHTML + el_col_temp;
             }
         }
+        else {
+        // Bullets
+            let objButtons = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a.btn");
+            let el_button;
+            for (let i = 0; i < objButtons.length; i++) {
+                el_button = objButtons[i]; 
+                el_button.insertAdjacentHTML("beforebegin", arrContentLoop[i]);
+            }
+        }
+
         document.getElementById("cb_cols_shadows").disabled=false; 
         document.getElementById("cb_cols_shadows").checked=false; 
         document.getElementById("not-paragraphs").style.display ="none";
@@ -438,6 +602,10 @@ function doColsText() {
         removeText();
         document.querySelector("#btn_cols_text").disabled=false;
 
+
+        // count column blocks
+        const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
             for (let i = 0; i < content_list_col_3.length; i++) {
                 arrContent[i] = content_list_col_3[i];
@@ -449,56 +617,51 @@ function doColsText() {
             }
         }
 
-        let objH3;
-        if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) {
-            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] h3");
-        }
-        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) {
-            objH3 = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']");
-        }
-        else (objH3 = "");
+        let arrContentLoop = [];
 
-        // Test for figures AND (h3 column headings or hyperlinks)
-        if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) ) {
-            let el_h3;
-            // Loop through H3 sub-headings
-            for (let i = 0; i < objH3.length; i++) {
-                el_h3 = objH3[i]; 
-                el_h3.insertAdjacentHTML("afterend", arrContent[i]);
-           }
-        }
-        
-        // Test for figures (images or icons)
-        else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) {
-            const objFig = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure");
-            // Loop through figures
-            let el_fig;
-            for (let i = 0; i < objFig.length; i++) {
-                el_fig = objFig[i];
-                el_fig.insertAdjacentHTML("afterend", arrContent[i]);
-           }
-        }
-
-        // Test for (h3 column headings or hyperlinks)
-        else if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] h3")) || (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a[class^='col-']")) ) {
-            let el_h3;
-            // Loop through H3s in columns
-            for (let i = 0; i < objH3.length; i++) {
-                el_h3 = objH3[i];
-                el_h3.insertAdjacentHTML("afterend", arrContent[i]);
+        if (objCols.length === 3) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
             }
         }
 
-        // No pics, icons, h3 headings or hyperlinks
-        else {
-            const objCol = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+        else if (objCols.length === 6) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+        }
+
+        else if (objCols.length === 9) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+        }
+
+        // No bullets
+        if (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a.btn")) {
+            const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
             let el_col;
-            // Loop through columns
-            for (let i = 0; i < objCol.length; i++) {
-                el_col = objCol[i];
-                el_col.innerHTML = arrContent[i];
+            let el_col_temp;
+            for (let i = 0; i < objCols.length; i++) {
+                el_col = objCols[i]; 
+                el_col_temp = arrContentLoop[i];
+                el_col.innerHTML = el_col.innerHTML + el_col_temp;
             }
         }
+        else {
+        // Bullets
+            let objButtons = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] a.btn");
+            let el_button;
+            for (let i = 0; i < objButtons.length; i++) {
+                el_button = objButtons[i]; 
+                el_button.insertAdjacentHTML("beforebegin", arrContentLoop[i]);
+            }
+        }
+
         document.getElementById("dd_cols_list_marker").disabled=false;
         document.getElementById("dd_cols_list_marker").value="0";
         document.getElementById("btn_cols_list_marker").disabled=false;

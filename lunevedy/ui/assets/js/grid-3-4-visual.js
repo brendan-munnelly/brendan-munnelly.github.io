@@ -17,12 +17,15 @@ function doVis() {
 
         document.getElementById("form_vis_types").style.display = "none";
         document.getElementById("properties-photos").style.display = "none";
+        document.getElementById("cb_photos_hyperlinks").checked=false;
         document.getElementById("cb_img_textbox").checked=false;
         document.getElementById("cb_img_h4").checked=false;
         document.getElementById("properties-transparent").style.display = "none";
         document.getElementById("properties-drawings").style.display = "none";
         document.getElementById("properties-icons").style.display = "none";
         document.getElementById("properties-videos").style.display = "none";
+        document.getElementById("show-textbox").style.display = "none";
+        document.getElementById("visible-hyperlinks").style.display = "none";
     }
     else {
         document.getElementById("properties-photos").style.display = "block";
@@ -73,6 +76,7 @@ function doPhotos() {
     document.getElementById("rb_vis_type_2").disabled=false;
     document.getElementById("rb_vis_type_3").disabled=false;
     document.getElementById("rb_vis_type_4").disabled=false;
+    document.getElementById("rb_vis_type_5").disabled=false;
 
     // Property containers
     document.getElementById("properties-photos").style.display = "block";
@@ -355,6 +359,10 @@ function resetPhotoProps() {
     document.getElementById("cb_photos_zoom").checked=false;
     document.getElementById("cb_photos_brightness").disabled=true;
     document.getElementById("cb_photos_brightness").checked=false;
+    document.getElementById("show-textbox").style.display = "none";
+    document.getElementById("visible-hyperlinks").style.display = "none";
+    document.getElementById("cb_img_textbox").checked=false;
+    document.getElementById("cb_img_h4").checked=false;
 }
 
 /*
@@ -617,7 +625,7 @@ function doVideos() {
     document.getElementById("rb_vis_type_2").disabled=false;
     document.getElementById("rb_vis_type_3").disabled=false;
     document.getElementById("rb_vis_type_4").disabled=false;
-    document.getElementById("rb_vis_type_5").checked=true;
+    // document.getElementById("rb_vis_type_5").checked=true;
     document.getElementById("rb_vis_type_5").disabled=false;
 
     // Property containers

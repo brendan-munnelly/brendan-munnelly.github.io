@@ -119,15 +119,16 @@ arrIconLA[6]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-bri
 arrIconLA[7]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"las la-book-reader\"><\/i>\n\t\t\t\t<\/figure>"; 
 
 export const arrTextBox = [];
-// arrTextBox[0] = "FOOD & DRINK";
-// arrTextBox[1] = "FASHION";
-// arrTextBox[2] = "EDUCATION";
-// arrTextBox[3] = "TRAVEL";
-
 arrTextBox[0] = "MOST POPULAR";
 arrTextBox[1] = "NEW ARRIVALS";
 arrTextBox[2] = "BEST SELLER";
 arrTextBox[3] = "TRAVEL";
+
+export const arrColBadge = [];
+arrColBadge[0] = "\n\t\t\t\t<div class=\"badge\">FOOD & DRINK<\/div>\n";
+arrColBadge[1] = "\n\t\t\t\t<div class=\"badge\">FASHION<\/div>\n";
+arrColBadge[2] = "\n\t\t\t\t<div class=\"badge\">EDUCATION<\/div>\n";
+arrColBadge[3] = "\n\t\t\t\t<div class=\"badge\">HOLIDAYS<\/div>\n";
 
 export const arrH4Overlay = [];
 
