@@ -98,7 +98,6 @@ function setRowGap() {
     objCols.classList.add("row-gap-"+selectedValue);
 }
 
-
 /*
 //////////////// COLUMNS ALIGN ///////////////
 */

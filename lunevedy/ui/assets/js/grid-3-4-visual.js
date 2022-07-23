@@ -113,9 +113,6 @@ function doPhotosType() {
     else if (opt==="4") {
         doVisSubTypes(4);    
     }        
-    else if (opt==="5") {
-        doVisSubTypes(5);    
-    }    
 }
 
 /* photos: corners */
@@ -395,7 +392,7 @@ function doTransparent() {
     resetVideoProps();
     // Set properties
     document.getElementById("cb_trans_shadows").checked = false;
-    doVisSubTypes(6);
+    doVisSubTypes(5);
 }
 
 /* transparent: shadows */
@@ -455,7 +452,7 @@ function doDrawings() {
 
     // Set properties
     document.getElementById("cb_drawings_shadows").checked = false;
-    doVisSubTypes(7);
+    doVisSubTypes(6);
 }
 
 /* drawings: shadows */
@@ -517,7 +514,7 @@ function doIcons() {
     document.getElementById("rb_icon_align_center").checked = true;
     document.getElementById("cb_icon_size_plus").checked = true;
 -    
-    doVisSubTypes(10);    
+    doVisSubTypes(7);    
 }
 
 document.querySelector("#dd_icons_type").addEventListener("change", doIconsType);
@@ -527,11 +524,11 @@ function doIconsType() {
     let opt = document.querySelector("#dd_icons_type").value;
     removeVisual();
     if (opt==="0") {
-        doVisSubTypes(10);    
+        doVisSubTypes(7);    
     }
     
     else if (opt==="1") {
-        doVisSubTypes(11);    
+        doVisSubTypes(8);    
     }    
 }
 
@@ -642,7 +639,7 @@ function doVideos() {
     resetIconProps();
     // Set properties
     document.getElementById("dd_videos_type").value = "0";
-    doVisSubTypes(20);    
+    doVisSubTypes(9);    
 }
 
 document.querySelector("#dd_videos_type").addEventListener("change", doVideosType);
@@ -652,14 +649,14 @@ function doVideosType() {
     let opt = document.querySelector("#dd_videos_type").value;
     removeVisual();
     if (opt==="0") {
-        doVisSubTypes(20);    
+        doVisSubTypes(9);    
     }
     
     else if (opt==="1") {
-        doVisSubTypes(21);    
+        doVisSubTypes(10);    
     }
     else if (opt==="2") {
-        doVisSubTypes(22);    
+        doVisSubTypes(11);    
     }
 }
 
@@ -669,61 +666,114 @@ function resetVideoProps() {
 
 
 function doVisSubTypes(n) {
-    const obj_col = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] > div");
-    let el_cols;
-    for (let i = 1; i <= obj_col.length; i++) {
-        el_cols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] > div:nth-of-type("+i+")");
-        // photos: landscape
-        if (n===1) {
-            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-        }
-        // photos: portrait
-        else if (n===2) {
-            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-        }
-        // photos: square
-        else if (n===3) {
-            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-        }
-        // photos: circle
-        else if (n===4) {
-            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-        }        
-        // photos: small faces
-        else if (n===5) {
-            el_cols.innerHTML = arrPic[i-1] + el_cols.innerHTML; 
-        }
-        // transparent: landscape
-        else if (n===6) {
-            el_cols.innerHTML = arrTrans[i-1] + el_cols.innerHTML; 
-        }
-        // drawings: landscape
-        else if (n===7) {
-            el_cols.innerHTML = arrIllus[i-1] + el_cols.innerHTML; 
-        }
+    const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
 
-        // icons: Font Awesome
-        else if (n===10) {
-            el_cols.innerHTML = arrIconFA[i-1] + el_cols.innerHTML; 
+    let el_col;
+    let arrContent = [];
+    let arrContentLoop = [];
+
+    // photos: landscape
+    if (n===1) {
+        for (let i = 0; i < (arrPic.length); i++) {
+            arrContent[i] = arrPic[i];
         }
-        // icons: Line Awesome
-        else if (n===11) {
-            el_cols.innerHTML = arrIconLA[i-1] + el_cols.innerHTML; 
-        }
-        // videos: file
-        else if (n===20) {
-            el_cols.innerHTML = arrVidFile[i-1] + el_cols.innerHTML; 
-        }
-        // videos: YT
-        else if (n===21) {
-            el_cols.innerHTML = arrVidYT[i-1] + el_cols.innerHTML; 
-        }
-        // videos: Rumble
-        else if (n===22) {
-            el_cols.innerHTML = arrVidRumble[i-1] + el_cols.innerHTML; 
-        }
-        iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML.replaceAll("</figure>\t", "</figure>");
     }
+    // photos: portrait
+    else if (n===2) {
+        for (let i = 0; i < (arrPic.length); i++) {
+            arrContent[i] = arrPic[i];
+        }
+    }
+    // photos: square
+    else if (n===3) {
+        for (let i = 0; i < (arrPic.length); i++) {
+            arrContent[i] = arrPic[i];
+        }
+    }
+    // photos: circle
+    else if (n===4) {
+        for (let i = 0; i < (arrPic.length); i++) {
+            arrContent[i] = arrPic[i];
+        }
+    }
+
+    // transparent: landscape
+    else if (n===5) {
+        for (let i = 0; i < (arrTrans.length); i++) {
+            arrContent[i] = arrTrans[i];
+        }
+    }
+
+    // drawings: landscape
+    else if (n===6) {
+        for (let i = 0; i < (arrIllus.length); i++) {
+            arrContent[i] = arrIllus[i];
+        }
+    }
+
+    // icons: Font Awesome
+    else if (n===7) {
+        for (let i = 0; i < (arrIconFA.length); i++) {
+            arrContent[i] = arrIconFA[i];
+        }
+    }
+
+    // icons: Line Awesome
+    else if (n===8) {
+        for (let i = 0; i < (arrIconLA.length); i++) {
+            arrContent[i] = arrIconLA[i];
+        }
+    }
+
+    // videos: file
+    else if (n===9) {
+        for (let i = 0; i < (arrVidFile.length); i++) {
+            arrContent[i] = arrVidFile[i];
+        }
+    }
+
+    else if (n===10) {
+        for (let i = 0; i < (arrVidYT.length); i++) {
+            arrContent[i] = arrVidYT[i];
+        }
+    }
+
+    else if (n===11) {
+        for (let i = 0; i < (arrVidRumble.length); i++) {
+            arrContent[i] = arrVidRumble[i];
+        }
+    }    
+
+    if (objCols.length === 3) {
+        for (let i = 0; i < (arrContent.length-1); i++) {
+            arrContentLoop[i] = arrContent[i];
+        }
+    }
+
+    else if (objCols.length === 6) {
+        const arrContentTemp = [];
+        for (let i = 0; i < (arrContent.length-1); i++) {
+            arrContentTemp[i] = arrContent[i];
+        }
+        arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+    }
+
+    else if (objCols.length === 9) {
+        const arrContentTemp = [];
+        for (let i = 0; i < (arrContent.length); i++) {
+            arrContentTemp[i] = arrContent[i];
+        }
+        arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+    }
+
+    // Loop through columns
+    for (let i = 0; i < objCols.length; i++) {
+        el_col = objCols[i]; 
+        el_col.innerHTML = arrContentLoop[i] + el_col.innerHTML; 
+    }
+
+    iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML.replaceAll("</figure>\t", "</figure>");
+
 }
 
 function removeVisual() {
