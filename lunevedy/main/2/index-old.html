@@ -4,37 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3-Column Layout | Lunevedy UI Builder | Brendan Munnelly</title>
-    <meta name="description" content="Quickly create 3-column web page layouts with this free online app. By Brendan Munnelly.">
+    <title>2-Column Layout | Lunevedy UI Builder | Brendan Munnelly</title>
+    <meta name="description" content="Quickly create 2-column web page layoutswith this free online app. By Brendan Munnelly.">
 
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../ui/assets/css/controls-general.css" />
+    <link rel="stylesheet" href="../../ui/assets/css/controls-general.css" /> 
+    <link rel="stylesheet" href="../../ui/assets/css/controls-grid-2.css" />
     <link rel="stylesheet" href="../../ui/assets/css/controls-grid-2-3-4.css" />
     <link rel="stylesheet" href="../../ui/assets/css/controls-themes.css" />
-    
+        
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon-16x16.png">
     <link rel="manifest" href="../../assets/img/site.webmanifest">
 
-	<!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
     <script>
-        // sessionStorage.clear();
+        sessionStorage.clear();
+        sessionStorage.setItem('col-count', 2);
+        sessionStorage.setItem('col-no', '.col-2');
         sessionStorage.setItem('col-background', 'default');
-        sessionStorage.setItem('section-theme', 'section.theme-light.section-selector-1'); 
-
-        let sectionClassName = ".section-selector-1";
-        let sectionTheme = ".theme-light";
-        let sectionBg = "var(--white-000)";
-        let colsBg = "var(--white-000)";
+        sessionStorage.setItem('section-selector', 'section-selector-1');
+        sessionStorage.setItem('section-theme', 'section.theme-light.section-selector-1');                
+        let col_no = '.col-2'; let col_count = 2;
     </script>
 
     <style>
+
     </style>    
 
 </head>
@@ -42,7 +40,7 @@
 
 <body>
 
-<div id ="controls-top" class="theme-ui-dark-blue">
+<div class="controls-top">
 
     <nav id="control-menu">
         <div>
@@ -62,6 +60,7 @@
                         </span>
                         <span class="close-x">&times;</span>
                     </div>
+
                                 
                     <div class="dialog-box">
                         
@@ -82,78 +81,21 @@
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop">
                             <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></svg>
                             <select id="dd_section_width">
+                                <option value="1">960px</option>
                                 <option value="2">1024px</option>
                                 <option value="3" selected="selected">1140px</option>
                                 <option value="4">1320px</option>
                                 <option value="5">1536px</option>
                             </select>
                         </div>
-
-                        <div class="input-group">
-
-                            <label>Default Colors</label>
-
-                            <form id="form_switch_section_theme" class="rb-switch" >
-                                <input type="radio" id="rb_theme_light" name="switch_section_light_dark" value="light" checked/>                
-                                <label for="rb_theme_light" style="width: 36px">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewbox="-4 0 22 16" version="1.1">
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1" d="M 14.417969 10 C 14.417969 12.441406 12.441406 14.417969 10 14.417969 C 7.558594 14.417969 5.582031 12.441406 5.582031 10 C 5.582031 7.558594 7.558594 5.582031 10 5.582031 C 12.441406 5.582031 14.417969 7.558594 14.417969 10 Z M 14.417969 10 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 10 15.140625 C 7.164062 15.140625 4.859375 12.835938 4.859375 10 C 4.859375 7.164062 7.164062 4.859375 10 4.859375 C 12.835938 4.859375 15.140625 7.164062 15.140625 10 C 15.140625 12.835938 12.835938 15.140625 10 15.140625 Z M 10 6.304688 C 7.960938 6.304688 6.304688 7.960938 6.304688 10 C 6.304688 12.039062 7.960938 13.695312 10 13.695312 C 12.039062 13.695312 13.695312 12.039062 13.695312 10 C 13.695312 7.960938 12.039062 6.304688 10 6.304688 Z M 10 6.304688 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 10 3.792969 C 9.601562 3.792969 9.277344 3.46875 9.277344 3.070312 L 9.277344 0.722656 C 9.277344 0.324219 9.601562 0 10 0 C 10.398438 0 10.722656 0.324219 10.722656 0.722656 L 10.722656 3.070312 C 10.722656 3.46875 10.398438 3.792969 10 3.792969 Z M 10 3.792969 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 10 20 C 9.601562 20 9.277344 19.675781 9.277344 19.277344 L 9.277344 16.929688 C 9.277344 16.53125 9.601562 16.207031 10 16.207031 C 10.398438 16.207031 10.722656 16.53125 10.722656 16.929688 L 10.722656 19.277344 C 10.722656 19.675781 10.398438 20 10 20 Z M 10 20 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 19.277344 10.722656 L 16.929688 10.722656 C 16.53125 10.722656 16.207031 10.398438 16.207031 10 C 16.207031 9.601562 16.53125 9.277344 16.929688 9.277344 L 19.277344 9.277344 C 19.675781 9.277344 20 9.601562 20 10 C 20 10.398438 19.675781 10.722656 19.277344 10.722656 Z M 19.277344 10.722656 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.070312 10.722656 L 0.722656 10.722656 C 0.324219 10.722656 0 10.398438 0 10 C 0 9.601562 0.324219 9.277344 0.722656 9.277344 L 3.070312 9.277344 C 3.46875 9.277344 3.792969 9.601562 3.792969 10 C 3.792969 10.398438 3.46875 10.722656 3.070312 10.722656 Z M 3.070312 10.722656 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 14.898438 5.824219 C 14.714844 5.824219 14.53125 5.753906 14.386719 5.613281 C 14.105469 5.328125 14.105469 4.871094 14.386719 4.589844 L 16.050781 2.929688 C 16.332031 2.648438 16.789062 2.648438 17.070312 2.929688 C 17.351562 3.210938 17.351562 3.667969 17.070312 3.949219 L 15.410156 5.613281 C 15.269531 5.753906 15.085938 5.824219 14.898438 5.824219 Z M 14.898438 5.824219 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.441406 17.28125 C 3.253906 17.28125 3.070312 17.210938 2.929688 17.070312 C 2.648438 16.789062 2.648438 16.332031 2.929688 16.050781 L 4.589844 14.386719 C 4.871094 14.105469 5.328125 14.105469 5.613281 14.386719 C 5.894531 14.671875 5.894531 15.128906 5.613281 15.410156 L 3.949219 17.070312 C 3.808594 17.210938 3.625 17.28125 3.441406 17.28125 Z M 3.441406 17.28125 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 16.558594 17.28125 C 16.375 17.28125 16.191406 17.210938 16.050781 17.070312 L 14.386719 15.410156 C 14.105469 15.128906 14.105469 14.671875 14.386719 14.386719 C 14.671875 14.105469 15.128906 14.105469 15.410156 14.386719 L 17.070312 16.050781 C 17.351562 16.332031 17.351562 16.789062 17.070312 17.070312 C 16.929688 17.210938 16.746094 17.28125 16.558594 17.28125 Z M 16.558594 17.28125 "/>
-                                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 5.101562 5.824219 C 4.914062 5.824219 4.730469 5.753906 4.589844 5.613281 L 2.929688 3.949219 C 2.648438 3.667969 2.648438 3.210938 2.929688 2.929688 C 3.210938 2.648438 3.667969 2.648438 3.949219 2.929688 L 5.613281 4.589844 C 5.894531 4.871094 5.894531 5.328125 5.613281 5.613281 C 5.46875 5.753906 5.285156 5.824219 5.101562 5.824219 Z M 5.101562 5.824219 "/></svg>
-                                </label>
                 
-                                <input type="radio" id="rb_theme_dark" name="switch_section_light_dark" value="dark" />
-                                <label for="rb_theme_dark" style="width: 36px">
-                                    <svg width="16" height="16" viewbox="-3 1 26 18" xmlns="http://www.w3.org/2000/svg"><path d="M20.026 17.001c-2.762 4.784-8.879 6.423-13.663 3.661A9.965 9.965 0 0 1 3.13 17.68a.75.75 0 0 1 .365-1.132c3.767-1.348 5.785-2.91 6.956-5.146 1.232-2.353 1.551-4.93.689-8.463a.75.75 0 0 1 .769-.927 9.961 9.961 0 0 1 4.457 1.327c4.784 2.762 6.423 8.879 3.66 13.662Z" /></svg>
-                                </label>
-                            </form>
-                        </div>
-
                         <div class="input-group">
                             <label>Background</label>
-                            <button id="btn_section_bg" class="btn_style btn_small"><svg width="22" height="22" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg></button>
-                        </div>                        
-
-                        <div class="input-group">
-
-                            <label>Column blocks</label>
-
-                            <form id="form_switch_col_blocks" class="rb-switch">
-                                <input type="radio" id="rb_row_one" name="switch_col_blocks" value="row-one" checked/>                
-                                <label for="rb_row_one" style="width: 36px"><span>3</span></label>
-                
-                                <input type="radio" id="rb_row_two" name="switch_col_blocks" value="row-two" />
-                                <label for="rb_row_two" style="width: 36px"><span>6</span></label>
-
-                                <input type="radio" id="rb_row_three" name="switch_col_blocks" value="row-three" />
-                                <label for="rb_row_three" style="width: 36px"><span>9</span></label>
-
-                            </form>
+                            <div><button id="btn_section_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button></div>
                         </div>
-
-                        <div class="input-group">
-                            <label>Column Gap</label>
-                            <input id="slider-gap-column" type="range" min="0" max="10" oninput="num_column.value = this.value" style="width: 100px; display: inline-block; margin-right: 15px">
-                            <output id="num_column" style="display: inline-block; color: #fff">5</output><span style="color:#fff">%</span>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Row Gap</label>
-                            <input id="slider-gap-row" type="range" min="0" max="120" step="10" oninput="num_row.value = this.value" style="width: 100px; display: inline-block; margin-right: 15px">
-                            <output id="num_row" style="display: inline-block; color: #fff">60</output><span style="color:#fff">px</span>
-                        </div>
-
                     </div>
                 </div><!-- /dropdown-content -->
             </li>
-        
         
             <li class="dropdown">
                 <span id="menu-2" class="dropbtn">Upper Block</span>
@@ -169,11 +111,11 @@
                     <div class="dialog-box">
         
                         <div class="input-group">
-                            <label for="cb_col_1" class="cb-switch">Upper Block</label>
-                            <input id="cb_col_1" type="checkbox" class="cb-switch">
+                            <label for="cb_col_1" class="off">Upper Block</label>
+                            <input id="cb_col_1" type="checkbox" class="switch">
                             <label id="label-align">Align</label>
 
-                            <form id="form_col_1_align" name="form_col_1_align" class="rb-switch">
+                            <form id="form_col_1_align" name="form_col_1_align" class="switch-field">
                                 <input type="radio" id="rb_col_1_align_left" name="col_1_align" value="left" />
                                 <label for="rb_col_1_align_left">
                                     <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
@@ -185,11 +127,12 @@
                             </form>
 
                         </div><!-- /input-group -->
+                        <hr>
         
                         <div class="input-group">
         
                             <label>Max. Width</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/></svg>
         
                             <select id="dd_col_1_width">
                                 <option value="0" selected="selected">800px</option>
@@ -201,76 +144,31 @@
         
                         <hr>
                         <div class="input-group">
-                            <label for="cb_col_1_badge" class="cb-switch">Badge</label>
-                            <input id="cb_col_1_badge" type="checkbox" class="cb-switch">
+                            <label for="cb_col_1_label" class="off">Label</label>
+                            <input id="cb_col_1_label" type="checkbox" class="switch">
                             &nbsp; &nbsp; &nbsp;
+                            <button id="btn_col_1_label_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 02.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                         </div><!-- /input-group -->
-
-                        <div class="input-group" id="show-col-1-badge">
-                            <label style="width: 60px; min-width: 60px">Colors</label>
-                            <button id="btn_col_1_badge_text" class="btn_style btn_small">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg>
-                            </button>
-                            <button id="btn_col_1_badge_bg" class="btn_style btn_small"><svg width="22" height="22" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg></button>
-
-                            <label style="width: 60px; min-width: 60px">Shape</label>
-
-                            <form id="form_col_1_badge_shape" class="rb-switch">
-                                <input type="radio" id="rb_col_1_badge_square" name="switch_col_1_badge_shape" value="square" checked/>                
-                                <label for="rb_col_1_badge_square" style="width: 36px" class="ui-small-shape">
-                                    <svg width="20px" height="20px" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M10 4V2H4v20h6v-2H6V4zm4 16v2h6V2h-6v2h4v16z"/></svg>
-                                </label>
-                
-                                <input type="radio" id="rb_col_1_badge_soft" name="switch_col_1_badge_shape" value="soft" />
-                                <label for="rb_col_1_badge_soft" style="width: 36px" class="ui-small-shape">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 22 22" version="1.1">
-                                    <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.75 12 C 3.75 17.464844 7 19.523438 7.140625 19.609375 C 7.492188 19.824219 7.605469 20.285156 7.390625 20.636719 C 7.179688 20.992188 6.71875 21.105469 6.363281 20.894531 C 6.195312 20.792969 2.25 18.351562 2.25 12 C 2.25 5.648438 6.195312 3.207031 6.363281 3.105469 C 6.71875 2.894531 7.179688 3.007812 7.394531 3.363281 C 7.605469 3.71875 7.492188 4.179688 7.136719 4.390625 C 6.988281 4.484375 3.75 6.546875 3.75 12 Z M 17.636719 3.105469 C 17.28125 2.894531 16.824219 3.011719 16.609375 3.363281 C 16.394531 3.71875 16.507812 4.175781 16.859375 4.390625 C 17 4.476562 20.25 6.535156 20.25 12 C 20.25 17.464844 17 19.523438 16.863281 19.605469 C 16.507812 19.820312 16.394531 20.28125 16.605469 20.636719 C 16.820312 20.992188 17.28125 21.105469 17.636719 20.894531 C 17.804688 20.792969 21.75 18.351562 21.75 12 C 21.75 5.648438 17.804688 3.207031 17.636719 3.105469 Z M 17.636719 3.105469 "/>
-                                    </svg>
-                                </label>
-
-                            </form>
-                        </div>
-
-                        <hr>
-
+        
                         <div class="input-group">
                             <label for="cb_col_1_h2">Heading</label>
-                            <input id="cb_col_1_h2" type="checkbox" class="cb-switch" checked>
+                            <input id="cb_col_1_h2" type="checkbox" class="switch" checked>
                             &nbsp; &nbsp; &nbsp;
-                            <button id="btn_col_1_h2_text" class="btn_style btn_small"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg></button>
+                            <button id="btn_col_1_h2_text" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                         </div><!-- /input-group -->
-                        <div id="text-highlight">
-
-                            <div class="input-group">
-                                <label for="cb_col_1_h2_highlight" class="cb-switch">Highlight Text</label>
-                                <input id="cb_col_1_h2_highlight" type="checkbox" class="cb-switch">
-                                &nbsp; &nbsp; &nbsp;
-                                <button id="btn_col_1_h2_highlight" class="btn_style btn_small"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg></button>
-                            </div><!-- /input-group -->
-
-                            <div class="input-group">
-                                <label for="cb_col_1_h2_border" class="cb-switch">Bottom Border</label>
-                                <input id="cb_col_1_h2_border" type="checkbox" class="cb-switch">
-                                &nbsp; &nbsp; &nbsp;
-                                <button id="btn_col_1_h2_border" class="btn_style btn_small"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg></button>
-                            </div><!-- /input-group -->
-
-                        </div>
-                        <hr style="margin-top: 20px">
         
                         <div class="input-group">
                             <label for="cb_col_1_h3">Sub-Heading</label>
-                            <input id="cb_col_1_h3" type="checkbox" class="cb-switch" checked>
+                            <input id="cb_col_1_h3" type="checkbox" class="switch" checked>
                             &nbsp; &nbsp; &nbsp;
-                            <button id="btn_col_1_h3_text" class="btn_style btn_small">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg>
+                            <button id="btn_col_1_h3_text" class="btn_style">
+                                <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;
                             </button>
                         </div><!-- /input-group -->
                         
                     </div>
                 </div><!-- /dropdown-content -->
             </li>
-
                   
             <li class="dropdown">
                 <span id="menu-3" class="dropbtn">Columns</span>
@@ -282,320 +180,332 @@
                         <span class="close-x">&times;</span>
                     </div>
         
-                    <div class="dialog-box" style="width: 460px">
+                    <div class="dialog-box">
         
                         <div class="input-group">
                                         
                             <label style="min-width: 60px">Align &nbsp;</label>
-                            <form id="form-cols-align" name="form-cols-align" class="rb-switch" style="margin-right: 70px">
-                                <input type="radio" id="rb_cols_align_left" name="cols-align" value="left" checked />
+                            <form id="form-cols-align" name="form-cols-align" class="switch-field">
+                                <input type="radio" id="rb_cols_align_left" name="cols-align" value="left" />
                                 <label for="rb_cols_align_left">
                                     <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                 </label>
-                                <input type="radio" id="rb_cols_align_center" name="cols-align" value="center" />
+                                <input type="radio" id="rb_cols_align_center" name="cols-align" value="center" checked />
                                 <label for="rb_cols_align_center">
                                     <svg width="16" height="16" viewbox="0 0 16 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
                                 </label>
                             </form>
 
-                            <label style="margin-left: 20px; min-width: 70px">Columns</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-mobile"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 14.003906 0 L 5.996094 0 C 4.894531 0 4 0.894531 4 1.996094 L 4 18.003906 C 4 19.105469 4.894531 20 5.996094 20 L 14.003906 20 C 15.105469 20 16 19.105469 16 18.003906 L 16 1.996094 C 16 0.894531 15.105469 0 14.003906 0 Z M 10 19 C 9.308594 19 8.75 18.554688 8.75 18 C 8.75 17.445312 9.308594 17 10 17 C 10.691406 17 11.25 17.445312 11.25 18 C 11.25 18.554688 10.691406 19 10 19 Z M 14 16 L 6 16 L 6 2 L 14 2 Z M 14 16 "/></svg>
-
-                            <form id="form_cols_mobile" class="rb-switch">
-                                <input type="radio" id="rb_cols_one" name="switch_cols_mobile" value="cols-one" checked> 
-                                <label for="rb_cols_one" style="width: 36px"><span>1</span></label>
-                                <input type="radio" id="rb_cols_two" name="switch_cols_mobile" value="cols-two" />
-                                <label for="rb_cols_two" style="width: 36px"><span>2</span></label>
-                            </form>                                        
-
-                        </div>
-
-                        <hr style="margin-bottom: 14px">
-
-
-                        <div class="input-group">
-                            <label for="cb_cols_badge" class="cb-switch" style="width:110px; min-width:110px">Badge</label>
-                            <input id="cb_cols_badge" type="checkbox" class="cb-switch">
-                            &nbsp; &nbsp; &nbsp;
                         </div><!-- /input-group -->
-
-                        <div class="input-group" id="show-cols-badge">
-                            <label style="width:110px; min-width:110px">Colors</label>
-                            <button id="btn_cols_badge_text" class="btn_style btn_small">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg>
-                            </button>
-                            <button id="btn_cols_badge_bg" class="btn_style btn_small"><svg width="22" height="22" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg></button>
-
-                            <label style="width: 60px; min-width: 60px">Shape</label>
-
-                            <form id="form_cols_badge_shape" class="rb-switch">
-                                <input type="radio" id="rb_cols_badge_square" name="switch_cols_badge_shape" value="square" checked/>                
-                                <label for="rb_cols_badge_square" style="width: 36px" class="ui-small-shape">
-                                    <svg width="20px" height="20px" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M10 4V2H4v20h6v-2H6V4zm4 16v2h6V2h-6v2h4v16z"/></svg>
-                                </label>
-                
-                                <input type="radio" id="rb_cols_badge_soft" name="switch_cols_badge_shape" value="soft" />
-                                <label for="rb_cols_badge_soft" style="width: 36px" class="ui-small-shape">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 22 22" version="1.1">
-                                    <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.75 12 C 3.75 17.464844 7 19.523438 7.140625 19.609375 C 7.492188 19.824219 7.605469 20.285156 7.390625 20.636719 C 7.179688 20.992188 6.71875 21.105469 6.363281 20.894531 C 6.195312 20.792969 2.25 18.351562 2.25 12 C 2.25 5.648438 6.195312 3.207031 6.363281 3.105469 C 6.71875 2.894531 7.179688 3.007812 7.394531 3.363281 C 7.605469 3.71875 7.492188 4.179688 7.136719 4.390625 C 6.988281 4.484375 3.75 6.546875 3.75 12 Z M 17.636719 3.105469 C 17.28125 2.894531 16.824219 3.011719 16.609375 3.363281 C 16.394531 3.71875 16.507812 4.175781 16.859375 4.390625 C 17 4.476562 20.25 6.535156 20.25 12 C 20.25 17.464844 17 19.523438 16.863281 19.605469 C 16.507812 19.820312 16.394531 20.28125 16.605469 20.636719 C 16.820312 20.992188 17.28125 21.105469 17.636719 20.894531 C 17.804688 20.792969 21.75 18.351562 21.75 12 C 21.75 5.648438 17.804688 3.207031 17.636719 3.105469 Z M 17.636719 3.105469 "/>
-                                    </svg>
-                                </label>
-                            </form>
-                        </div>
-                        
-
-                        <hr style="margin-bottom: 14px">
+                                    
+                        <hr style="margin-top: 0">
         
-                        <div class="input-group" style="margin-bottom: 12px">
-                            <label for="cb_cols_h3" style="width:110px; min-width:110px">Sub-headings</label>
-                            <input id="cb_cols_h3" type="checkbox" class="cb-switch" checked style="margin-right: 36px">
-                            <button id="btn_cols_h3" class="btn_style" style="margin-left: -12px"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg></button>
-                            
-                            <label for="cb_cols_links_h3" style="margin-left:40px; width:90px;min-width:90px">Hyperlinks</label>
-                            <input type="checkbox" class="cb-switch" id="cb_cols_links_h3">
-
-                        </div>
-                                    
-                        <div class="input-group" id="hyperlinks-h3" style="margin-bottom: 16px; margin-top: 18px">
-                            <label style="width:110px; min-width:110px">Colors</label>
-                            
-                            <button id="cb_cols_links_h3_text_passive" class="btn_style" style="padding-left: 6px; padding-right: 6px;letter-spacing: 0;min-width: 60px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
-
-                            <button id="cb_cols_links_h3_text_active" class="btn_style" style="margin-left: 32px; padding-left: 10px; padding-right: 10px; min-width: 60px; letter-spacing:0"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
-                        </div>
-
-                        <div class="input-group" id="hyperlinks-h3-underline">
-                            <label style="width:110px; min-width:110px">Underlines</label>
-                            <input id="cb_cols_links_h3_underline_passive" type="checkbox" class="cb-switch" style="margin-right: 90px">
-                            <input id="cb_cols_links_h3_underline_active" type="checkbox" class="cb-switch">
-                        </div>
-                                    
-                        <hr style="margin-top: 16px; margin-bottom:20px">
-
                         <div class="input-group">
-                            <label style="min-width: 110px">Text</label>
-                            <select id="dd_cols_text" style="width: 144px">
+                            <label for="cb_cols_h3">Sub-headings</label>
+                            <input id="cb_cols_h3" type="checkbox" class="switch" checked style="margin-right: 36px">
+                            <button id="btn_cols_h3" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                        </div><!-- /input-group -->                            
+        
+                        <div class="input-group">
+                            <label style="min-width: 70px">Text</label>
+                            <select id="dd_cols_text" style="width: 134px">
                                 <option value="0">None</option>
                                 <option value="1" selected="selected">Paragraphs</option>
                                 <option value="2">Lists</option>
                             </select>
-                                        
-                            <button id="btn_cols_text" class="btn_style" style="margin-left: 22px"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg></button>
+                            <button id="btn_cols_text" class="btn_style" style="margin-left: 22px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                         </div>            
         
-                        <div class="input-group" id="not-paragraphs">
-                            <label style="min-width: 110px">Icon</label>
-                            <select id="dd_cols_list_marker" style="width: 144px" disabled>
+                        <div class="input-group">
+                            <label style="min-width: 70px">Marker</label>
+                            <select id="dd_cols_list_marker" style="width: 134px" disabled>
                                 <option value="0" selected="selected">Regular</option>
                                 <option value="1">Font Awesome</option>
                             </select>
-                            <button id="btn_cols_list_marker" class="btn_style" style="margin-left: 22px" disabled><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg></button>
+                            <button id="btn_cols_list_marker" class="btn_style" style="margin-left: 22px" disabled><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
                         </div> 
-
-                        <div class="input-group" id="fa-icons">
-
-                            <form id="form_switch_fa_icons" class="rb-switch" style="margin-left: 110px">
-
-                                <input type="radio" id="rb_fa_check" name="switch_fa_icons" value="fa-check" /> 
-                                <label for="rb_fa_check"><span><i class="fa-solid fa-check"></i></span></label>
-
-                                <input type="radio" id="fa-circle-check" name="switch_fa_icons" value="fa-circle-check" checked /> 
-                                <label for="fa-circle-check"><span><i class="fa-solid fa-circle-check"></i></span></label>
-                                         
-                                <input type="radio" id="fa-square-check" name="switch_fa_icons" value="fa-square-check" /> 
-                                <label for="fa-square-check"><span><i class="fa-solid fa-square-check"></i></span></label>
-                                    
-                                <input type="radio" id="fa-arrow-right" name="switch_fa_icons" value="fa-arrow-right" /> 
-                                <label for="fa-arrow-right"><span><i class="fa-solid fa-arrow-right"></i></span></label>
-                                    
-                                <input type="radio" id="fa-circle-arrow-right" name="switch_fa_icons" value="fa-circle-arrow-right" /> 
-                                <label for="fa-circle-arrow-right"><span><i class="fa-solid fa-circle-arrow-right"></i></span></label>
-
-                                <input type="radio" id="fa-chevron-right" name="switch_fa_icons" value="fa-chevron-right" /> 
-                                <label for="fa-chevron-right"><span><i class="fa-solid fa-chevron-right"></i></span></label>
-
-                                <input type="radio" id="fa-circle-chevron-right" name="switch_fa_icons" value="fa-circle-chevron-right" /> 
-                                <label for="fa-circle-chevron-right"><span><i class="fa-solid fa-circle-chevron-right"></i></span></label>
-                            </form>
-                        </div>
 
                         <hr style="margin-top: 0">
         
-                            <div class="input-group" style="margin-top: 20px">
-                                <label style="min-width: 110px">Background</label>
-                                <button id="btn_cols_bg" class="btn_style" style="margin-right: 84px"><svg width="22" height="22" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg></button>
-
-                            </div>
+                        <div class="input-group" style="margin-top: 24px">
+                            <label style="min-width: 110px">Background</label>
+                            <button id="btn_cols_bg" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Color&#8230;</button>
+                        </div>
                                     
-                            <div class="input-group">
-                                <label for="cb_cols_shadows" style="min-width: 110px">Shadows</label>
-                                <input id="cb_cols_shadows" type="checkbox" class="cb-switch">
-
-                                <button id="btn_cols_shadows_color" class="btn_style" style="margin-left: 24px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg></button>
-                            </div>
+                        <div class="input-group">
+                            <label for="cb_cols_shadows" style="min-width: 110px">Shadows</label>
+                            <input id="cb_cols_shadows" type="checkbox" class="switch">
+                            <label for="cb_cols_corners_soft" style="margin-left: 32px; min-width: 100px">Soft Corners</label>
+                            <input id="cb_cols_corners_soft" type="checkbox" class="switch">
+                        </div><!-- /input-group -->  
                                     
-                            <div class="input-group">
-
-                                <label for="cb_cols_borders" style="min-width: 110px">Borders</label>
-                                <input id="cb_cols_borders" type="checkbox" class="cb-switch">
-
-                                <button id="btn_cols_borders_color" class="btn_style" style="margin-left: 24px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg></button>
-
-                                <form id="form-cols-borders-width" name="form-cols-borders-width" class="rb-switch" style="margin-left: 24px">
-
-                                    <input type="radio" id="cols-borders-width-1" name="cols-borders-width" value="1" />
-                                    <label for="cols-borders-width-1"><span>1</span></label>
-                
-                                    <input type="radio" id="cols-borders-width-2" name="cols-borders-width" value="2" />
-                                    <label for="cols-borders-width-2"><span>2</span></label>
-
-                                    <input type="radio" id="cols-borders-width-3" name="cols-borders-width" value="3" />
-                                    <label for="cols-borders-width-3"><span>3</span></label>                                            
-                  
-                                    <input type="radio" id="cols-borders-width-4" name="cols-borders-width" value="4" />
-                                    <label for="cols-borders-width-4"><span>4</span></label>
-                                </form>
-                            </div>
-
-                            <div class="input-group">
-                                <label for="cb_cols_corners_soft" style="min-width: 110px">Soft Corners</label>
-                                <input id="cb_cols_corners_soft" type="checkbox" class="cb-switch">
-                            </div>
+                        <div class="input-group">
+                            <label for="cb_col_borders" style="min-width: 110px">Borders</label>
+                            <input id="cb_col_borders" type="checkbox" class="switch">
+                            <button id="btn_cols_border_color" class="btn_style" style="margin-left: 30px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Color&#8230;</button>
+                        </div><!-- /input-group -->
         
-                        </div><!-- /dialog box -->
-                    </div><!-- /dropdown-content -->
-                </li>
+                    </div>
+                </div><!-- /dropdown-content -->
+            </li>
         
-                <li class="dropdown">
-                    <span id="menu-4" class="dropbtn">Buttons</span>
-                    <div id="content-4" class="dropdown-content dropdown-hidden">
+            <li class="dropdown">
+                <span id="menu-4" class="dropbtn">Buttons</span>
+                <div id="content-4" class="dropdown-content dropdown-hidden">
+                    <div class="dialog-box-header">
+                        <span class="text">
+                            <img src="../../ui/assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">SECTION BUTTONS
+                        </span>
+                        <span class="close-x">&times;</span>
+                    </div>
         
-                        <div class="dialog-box-header">
-                            <span class="text">
-                                <img src="../../ui/assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLUMN BUTTONS
-                            </span>
-                            <span class="close-x">&times;</span>
+                    <div class="dialog-box" style="padding-left: 22px">
+
+                        <div class="input-group" style="padding-left: 0">
+
+                            <label for="cb_col_btns" style="width:96px; min-width:96px">Buttons</label>
+                            <input id="cb_col_btns" type="checkbox" class="switch">
+
+                            <select id="dd_buttons_pair" style="margin-left: 30px">
+                                <option value="1" selected="selected">1</option>
+                                <option value="2">2</option>
+                            </select>
+        
+                            <label for="dd_buttons_size" style="margin-left: 48px; width: 48px">Size</label>
+                            <select id="dd_buttons_size" style="letter-spacing: 0.5px">
+                                <option value="0">Small</option>
+                                <option value="1" selected="selected">Regular</option>
+                                <option value="2">Large</option>
+                            </select>
+        
                         </div>
         
-                        <div class="dialog-box">
+                        <div class="input-group" style="padding-left: 0; margin-top: 12px">
 
-                            <div class="input-group">
-                                <label for="cb_btns" style="width:84px; min-width:84px">Buttons</label>
-                                <input id="cb_btns" type="checkbox" class="cb-switch">
-
-                                <label for="dd_buttons_type" style="margin-left: 110px; width: 65px; min-width:64px">Type</label>
-                                <select id="dd_buttons_type" style="letter-spacing: 0.5px">
-                                    <option value="0" selected="selected">Solid</option>
-                                    <option value="1">Outline</option>
-                                    <option value="2">Link</option>
-                                </select>
-                            </div><!-- /input-group -->
-    
-                            <div class="input-group">
-                                <label for="dd_buttons_size" style="width:84px; min-width:84px">Size</label>
-                                <select id="dd_buttons_size" style="letter-spacing: 0.5px">
-                                    <option value="0">Small</option>
-                                    <option value="1" selected="selected">Regular</option>
-                                    <option value="2">Large</option>
-                                </select>
-                                <label class="shape" style="margin-left: 70px; width: 65px; min-width:65px">Shape</label>
-                                <select id="dd_buttons_shape" style="letter-spacing: 0.5px">
-                                    <option value="0" selected="selected">Corner</option>
-                                    <option value="1">Soft</option>
-                                    <option value="2">Pill</option>
-                                </select>
-                            </div><!-- /input-group -->
-
-                            <div class="input-group" style="margin-top: 8px">
-                                <label for="form-btns-icons" style="width:84px; min-width:84px">Icon</label>
-                                <form id="form-btns-icons" name="form-btns-icons" class="rb-switch">
-                                    <input type="radio" id="rb_btns_icons_left" name="btns-icons" value="left" />
-
-                                    <label for="rb_btns_icons_left" style="width: 36px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 0 12 16" version="1.1">  
-                                        <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg> 
-                                    </label>
-        
-                                    <input type="radio" id="rb_btns_icons_right" name="btns-icons" value="right" />
-                                    <label for="rb_btns_icons_right" style="width: 36px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="3 -2 12 16" version="1.1" style="display: block; transform: scale(-1,1)">
-                                        <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg>
-                                    </label>
-          
-                                    <input type="radio" id="rd-btns-icons-none" name="btns-icons" value="none" />
-
-                                    <label for="rd-btns-icons-none" style="width: 40px">  
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="18"><g transform="matrix(0.03805497 0 0 0.03805497 3.0000007 -0)"><path d="M324.285 215.015L324.285 128L344.285 128L344.285 38L245.901 38L245.901 0L132.669 0L132.669 38L34.285 38L34.285 128L54.285 128L54.285 433L215.808 433C 239.386 457.635 272.574 473 309.285 473C 380.653 473 438.715 414.938 438.715 343.57C 438.715 277.276 388.612 222.474 324.285 215.015zM294.285 215.015C 276.233 217.108 259.303 222.926 244.285 231.684L244.285 231.684L244.285 128L294.285 128L294.285 215.015zM162.669 30L215.901 30L215.901 38L162.669 38L162.669 30zM64.285 68L314.285 68L314.285 98L64.285 98L64.285 68zM84.285 128L134.285 128L134.285 403L84.285 403L84.285 128zM164.285 403L164.285 128L214.285 128L214.285 255.768C 192.929 278.857 179.856 309.714 179.856 343.57C 179.856 364.98102 185.087 385.19202 194.33101 403L194.33101 403L164.285 403zM309.285 443C 254.459 443 209.856 398.396 209.856 343.57C 209.856 288.74402 254.46 244.141 309.285 244.141C 364.11 244.141 408.715 288.745 408.715 343.57C 408.715 398.39502 364.111 443 309.285 443z" stroke="none" fill-rule="nonzero" /><path d="M342.248 289.395L309.285 322.358L276.323 289.395L255.11 310.608L288.073 343.571L255.11 376.533L276.323 397.746L309.285 364.783L342.248 397.746L363.461 376.533L330.498 343.571L363.461 310.608L342.248 289.395" stroke="none" fill-rule="nonzero" /></g></svg>
-                                    </label>
-                                </form>
-
-                                <label for="cb_buttons_width" style="margin-left: 46px; width:100px;min-width:100px">Full Width</label>
-                                <input id="cb_buttons_width" type="checkbox" class="cb-switch" disabled>
-                            </div>                                
-                            
-                            <div class="input-group" style="margin-top: 8px">
-                                
-                                <label for="cb_buttons_shadow" style="width:84px;min-width:84px">Shadow</label>
-                                <input id="cb_buttons_shadow" type="checkbox" class="cb-switch" disabled>
-                                
-                                <label for="cb_buttons_uppercase" style="margin-left: 110px; width: 100px">UPPERCASE</label>
-                                <input id="cb_buttons_uppercase" type="checkbox" class="cb-switch" disabled>
-
-                            </div>
-
-                            <hr>
-
-                            <h4 style="margin-top:20px">BUTTON &nbsp;COLORS</h4>
-                                
-                            <div class="input-group two-col">
-
-                                <div class="column column-wider">
-                                    <label>Text</label>
-                                    <div>
-                                        <button id="btn_cols_text_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
-                                    </div>
-                                </div>
-
-                                <div class="column">
-                                    <div style="padding-top:1px">
-                                        <button id="btn_cols_text_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
-                                    </div>
-                                </div>
-                            </div><!-- /input-group two-col -->
+                            <label style="width: 96px">Align</label>
+                            <!-- icon desktop -->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-desktop"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 18.332031 1.109375 L 1.667969 1.109375 C 0.746094 1.109375 0 1.855469 0 2.777344 L 0 13.886719 C 0 14.808594 0.746094 15.554688 1.667969 15.554688 L 8.332031 15.554688 L 7.777344 17.222656 L 5.277344 17.222656 C 4.816406 17.222656 4.445312 17.59375 4.445312 18.054688 C 4.445312 18.515625 4.816406 18.886719 5.277344 18.886719 L 14.722656 18.886719 C 15.179688 18.886719 15.554688 18.515625 15.554688 18.054688 C 15.554688 17.59375 15.179688 17.222656 14.722656 17.222656 L 12.222656 17.222656 L 11.664062 15.554688 L 18.332031 15.554688 C 19.25 15.554688 20 14.808594 20 13.890625 L 20 2.777344 C 20 1.855469 19.253906 1.109375 18.332031 1.109375 Z M 17.777344 13.332031 L 2.222656 13.332031 L 2.222656 3.332031 L 17.777344 3.332031 Z M 17.777344 13.332031 "/>
+                            </svg><!-- icon desktop -->
+                            &nbsp;&nbsp;
+                            <form id="form_btn_align_desktop" class="switch-field">
                                                 
-                            <div class="input-group two-col">
+                                <!-- radio button desktop left -->
+                                <input type="radio" id="rb_btn_align_desktop_left" name="rb_btn_align_desktop" value="left" disabled />
+                                <!-- /radio button desktop left -->
+        
+                                <!-- label and icon desktop left -->
+                                <label for="rb_btn_align_desktop_left" style="width: 32px">
+                                <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+                                <!-- /label and icon desktop left -->
+        
+                                <!-- radio button desktop center -->
+                                <input type="radio" id="rb_btn_align_desktop_center" name="rb_btn_align_desktop" value="center" />
+                                <!-- /radio button desktop center -->
+        
+                                <!-- label and icon desktop center -->
+                                <label for="rb_btn_align_desktop_center" style="width: 32px">
+                                <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+                                <!-- /label and icon desktop center -->
+                                        
+                            </form> <!-- / desktop button align -->
+        
+                            <!-- icon mobile -->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 20 20" version="1.1" class="svg-icon-mobile" style="margin-left: 18px"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 14.003906 0 L 5.996094 0 C 4.894531 0 4 0.894531 4 1.996094 L 4 18.003906 C 4 19.105469 4.894531 20 5.996094 20 L 14.003906 20 C 15.105469 20 16 19.105469 16 18.003906 L 16 1.996094 C 16 0.894531 15.105469 0 14.003906 0 Z M 10 19 C 9.308594 19 8.75 18.554688 8.75 18 C 8.75 17.445312 9.308594 17 10 17 C 10.691406 17 11.25 17.445312 11.25 18 C 11.25 18.554688 10.691406 19 10 19 Z M 14 16 L 6 16 L 6 2 L 14 2 Z M 14 16 "/></svg>
+                            <!-- / icon mobile -->
+                            &nbsp;
 
-                                <div class="column column-wider">
-                                    <label>Background</label>
-                                    <div>
-                                        <button id="btn_cols_bg_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Passive&#8230;</button>
-                                    </div>
-                                </div>
+                            <form id="form_btn_align_mobile" class="switch-field">
+                                <input type="radio" id="rb_btn_align_mobile_left" name="rb_btn_align_mobile" value="left" disabled />
+                                <label for="rb_btn_align_mobile_left" style="width: 32px">
+                                    <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+                                              
+                                <input type="radio" id="rb_btn_align_mobile_center" name="rb_btn_align_mobile" value="center" disabled />
+                                <label for="rb_btn_align_mobile_center" style="width: 32px">
+                                    <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                </label>
+        
+                            </form> <!-- / mobile button align -->
+                        
+                       </div><!-- /.input-group -->
+        
+                       
+        <!-- Button tabs -->
+        
+        <div class="container-buttons-block">
+            <div class="buttonWrapper">
+                <button class="tab-button active" style="border-top-left-radius: 5px;" id="button_1">BUTTON 1</button>
+                <button class="tab-button" id="button_2" style="border-top-right-radius: 5px">BUTTON 2</button>
+            </div>
+            
+            <div class="contentWrapper">
+                <div class="tab-content active" id="tab_content_1">
 
-                                <div class="column">
-                                    <div style="padding-top:2px">
-                                        <button id="btn_cols_bg_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Active&#8230;</button>
-                                    </div>
-                                </div>
-                            </div><!-- /input-group two-col -->
+                    <div class="input-group">
+        
+                        <label for="dd_button_type_1" style="width: 60px">Type</label>
+                        <select id="dd_button_type_1" style="width: 84px; letter-spacing: 0.5px">
+                            <option value="0" selected="selected">Solid</option>
+                            <option value="1">Outline</option>
+                            <option value="2">Link</option>
+                        </select>
+        
+                        <label for="form_btns_icons_position_1" style="margin-left: 24px; width: 40px">Icon</label>
+        
+                        <form id="form_btns_icons_position_1" class="switch-field">
+        
+                            <input type="radio" id="rd_btns_icons_left_1" name="btns_icons_position_1" value="left" />
+        
+                            <label for="rd_btns_icons_left_1" style="width: 36px">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 -1 14 16" version="1.1">  
+                                <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg> 
+                            </label>
+        
+                            <input type="radio" id="rd_btns_icons_right_1" name="btns_icons_position_1" value="right" />
+                            
+                            <label for="rd_btns_icons_right_1" style="width: 36px">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 -1 14 16" version="1.1" style="display: block; transform: scale(-1,1)">
+                                <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg>
+                            </label>
+        
+                            <input type="radio" id="rd_btns_icons_none_1" name="btns_icons_position_1" value="none" />
+        
+                            <label for="rd_btns_icons_none_1" style="width: 40px">  
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="18"><g transform="matrix(0.03805497 0 0 0.03805497 3.0000007 -0)"><path d="M324.285 215.015L324.285 128L344.285 128L344.285 38L245.901 38L245.901 0L132.669 0L132.669 38L34.285 38L34.285 128L54.285 128L54.285 433L215.808 433C 239.386 457.635 272.574 473 309.285 473C 380.653 473 438.715 414.938 438.715 343.57C 438.715 277.276 388.612 222.474 324.285 215.015zM294.285 215.015C 276.233 217.108 259.303 222.926 244.285 231.684L244.285 231.684L244.285 128L294.285 128L294.285 215.015zM162.669 30L215.901 30L215.901 38L162.669 38L162.669 30zM64.285 68L314.285 68L314.285 98L64.285 98L64.285 68zM84.285 128L134.285 128L134.285 403L84.285 403L84.285 128zM164.285 403L164.285 128L214.285 128L214.285 255.768C 192.929 278.857 179.856 309.714 179.856 343.57C 179.856 364.98102 185.087 385.19202 194.33101 403L194.33101 403L164.285 403zM309.285 443C 254.459 443 209.856 398.396 209.856 343.57C 209.856 288.74402 254.46 244.141 309.285 244.141C 364.11 244.141 408.715 288.745 408.715 343.57C 408.715 398.39502 364.111 443 309.285 443z" stroke="none" fill-rule="nonzero" /><path d="M342.248 289.395L309.285 322.358L276.323 289.395L255.11 310.608L288.073 343.571L255.11 376.533L276.323 397.746L309.285 364.783L342.248 397.746L363.461 376.533L330.498 343.571L363.461 310.608L342.248 289.395" stroke="none" fill-rule="nonzero" /></g></svg>
+                            </label>
+                        </form>
+                    </div>
 
-                            <div class="input-group two-col">
-                                <div class="column column-wider">
-                                    <label>Border</label>
-                                    <div>
-                                        <button id="btn_cols_border_passive" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
-                                    </div>
-                                </div>
-                                    
-                                <div class="column">
-                                    <div style="padding-top:2px">
-                                        <button id="btn_cols_border_active" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
-                                    </div>
-                                </div>
-                            </div><!-- /input-group two-col -->
-                        </div><!-- /dialog-box -->
-                    </div><!-- /#content-4 -->
-                </li><!-- /.dropdown -->
+                    <div class="input-group" style="margin-top: 12px">
+
+                        <label for="dd_buttons_shape_1" style="width: 60px">Shape</label>
+                        <select id="dd_buttons_shape_1" style="letter-spacing: 0.5px; width: 84px">
+                            <option value="0" selected="selected">Corner</option>
+                            <option value="1">Soft</option>
+                            <option value="2">Pill</option>
+                        </select>
+
+                        <label for="cb_col_buttons_shadow_1" style="margin-left: 24px; width: 72px">Shadow</label>
+                        <input id="cb_col_buttons_shadow_1" type="checkbox" class="switch" disabled>
+
+
+                        <label for="cb_col_buttons_uppercase_1" style="margin-left: 22px;width: 60px">UCASE</label>
+                        <input id="cb_col_buttons_uppercase_1" type="checkbox" class="switch" disabled>                        
+
+                    </div><!-- /input group -->
+                       
+        
+                    <div class="input-group" style="margin-top: 12px">
+                        
+                        <label style="width: 120px">Text</label>
+                        <button id="btn_cols_passive_text_1" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_text_1" class="btn_style">
+                        <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;
+                        </button>
+                    </div>
+        
+                    <div class="input-group two-col">
+                        <label style="width: 120px">Background</label>
+                        <button id="btn_cols_passive_bg_1" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_bg_1" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Active&#8230;</button>
+                    </div>
+        
+                    <div class="input-group">
+                        <label style="width: 120px">Border</label>
+                        <button id="btn_cols_passive_border_1" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_border_1" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
+                    </div>
+                </div> <!-- tab 1 content -->
+        
+                <div class="tab-content" id="tab_content_2">
+                    <div class="input-group">
+        
+                        <label for="dd_button_type_2" style="width: 60px">Type</label>
+                        <select id="dd_button_type_2" style="width: 84px; letter-spacing: 0.5px">
+                            <option value="0" selected="selected">Solid</option>
+                            <option value="1">Outline</option>
+                            <option value="2">Link</option>
+                        </select>
+                        
+                        <label for="form_btns_icons_position_2" style="margin-left: 24px; width: 40px">Icon</label>
+        
+                        <form id="form_btns_icons_position_2" class="switch-field">
+        
+                            <input type="radio" id="rd_btns_icons_left_2" name="btns_icons_position_2" value="left" />
+        
+                            <label for="rd_btns_icons_left_2" style="width: 36px">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 -1 14 16" version="1.1">  
+                                <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg> 
+                            </label>
+        
+                            <input type="radio" id="rd_btns_icons_right_2" name="btns_icons_position_2" value="right" />
+                            
+                            <label for="rd_btns_icons_right_2" style="width: 36px">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="18px" viewbox="2 -1 14 16" version="1.1" style="display: block; transform: scale(-1,1)">
+                                <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 2.25 9 L 7.875 3.375 L 9 4.5 L 6.046875 7.453125 L 5.0625 8.296875 L 7.3125 8.15625 L 15.75 8.15625 L 15.75 9.84375 L 7.3125 9.84375 L 5.0625 9.703125 L 6.046875 10.546875 L 9 13.5 L 7.875 14.625 Z M 2.25 9 "/></svg>
+                            </label>
+        
+                            <input type="radio" id="rd_btns_icons_none_2" name="btns_icons_position_2" value="none" />
+        
+                            <label for="rd_btns_icons_none_2" style="width: 40px">  
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="18"><g transform="matrix(0.03805497 0 0 0.03805497 3.0000007 -0)"><path d="M324.285 215.015L324.285 128L344.285 128L344.285 38L245.901 38L245.901 0L132.669 0L132.669 38L34.285 38L34.285 128L54.285 128L54.285 433L215.808 433C 239.386 457.635 272.574 473 309.285 473C 380.653 473 438.715 414.938 438.715 343.57C 438.715 277.276 388.612 222.474 324.285 215.015zM294.285 215.015C 276.233 217.108 259.303 222.926 244.285 231.684L244.285 231.684L244.285 128L294.285 128L294.285 215.015zM162.669 30L215.901 30L215.901 38L162.669 38L162.669 30zM64.285 68L314.285 68L314.285 98L64.285 98L64.285 68zM84.285 128L134.285 128L134.285 403L84.285 403L84.285 128zM164.285 403L164.285 128L214.285 128L214.285 255.768C 192.929 278.857 179.856 309.714 179.856 343.57C 179.856 364.98102 185.087 385.19202 194.33101 403L194.33101 403L164.285 403zM309.285 443C 254.459 443 209.856 398.396 209.856 343.57C 209.856 288.74402 254.46 244.141 309.285 244.141C 364.11 244.141 408.715 288.745 408.715 343.57C 408.715 398.39502 364.111 443 309.285 443z" stroke="none" fill-rule="nonzero" /><path d="M342.248 289.395L309.285 322.358L276.323 289.395L255.11 310.608L288.073 343.571L255.11 376.533L276.323 397.746L309.285 364.783L342.248 397.746L363.461 376.533L330.498 343.571L363.461 310.608L342.248 289.395" stroke="none" fill-rule="nonzero" /></g></svg>
+                            </label>
+                        </form>
+                    </div>
+                        
+
+                    <div class="input-group" style="margin-top: 12px">
+
+                        <label for="dd_buttons_shape_2" style="width: 60px">Shape</label>
+                        <select id="dd_buttons_shape_2" style="letter-spacing: 0.5px; width: 84px">
+                            <option value="0" selected="selected">Corner</option>
+                            <option value="1">Soft</option>
+                            <option value="2">Pill</option>
+                        </select>
+
+                        <label for="cb_col_buttons_shadow_2" style="margin-left: 24px; width: 72px">Shadow</label>
+                        <input id="cb_col_buttons_shadow_2" type="checkbox" class="switch" disabled>
+
+                        <label for="cb_col_buttons_uppercase_2" style="margin-left: 22px;width: 60px">UCASE</label>
+                        <input id="cb_col_buttons_uppercase_2" type="checkbox" class="switch" disabled>                        
+
+                    </div><!-- /input group -->
+
+                    <div class="input-group" style="margin-top: 12px">
+        
+                        <label style="width: 120px">Text</label>
+                        <button id="btn_cols_passive_text_2" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_text_2" class="btn_style">
+                        <svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
+                    </div>
+        
+                    <div class="input-group">
+                        <label style="width: 120px">Background</label>
+                        <button id="btn_cols_passive_bg_2" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_bg_2" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg>Active&#8230;</button>
+                    </div>
+        
+                    <div class="input-group">
+                        <label style="width: 120px">Border</label>
+                        <button id="btn_cols_passive_border_2" class="btn_style" style="margin-right:28px"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Passive&#8230;</button>
+        
+                        <button id="btn_cols_active_border_2" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12.5 2v3.252a.75.75 0 0 0 1.5 0V2h1v4.251a.75.75 0 0 0 1.5 0V2h1.75a.75.75 0 0 1 .75.75V11H5V2.75A.75.75 0 0 1 5.75 2h6.75ZM5 12.5v1.752a2.25 2.25 0 0 0 2.25 2.25H10V20a2 2 0 1 0 4 0v-3.498h2.75a2.25 2.25 0 0 0 2.25-2.25V12.5H5Z" /></svg>Active&#8230;</button>
+                    </div>
+                </div><!-- /col 2 content -->
+        
+            </div><!-- /contentWrapper -->
+        </div><!-- /wrapper -->
+        
+                               </div><!-- /dialog-box -->
+                            </div><!-- /#content-4 -->
+                        </li><!-- /.dropdown -->
             
             <li class="dropdown">
                 <span id="menu-5" class="dropbtn">Illustrations</span>
@@ -603,232 +513,130 @@
                         
                         <div class="dialog-box-header">
                             <span class="text">
-                                <img src="../../ui/assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLUMN ILLUSTRATIONS
+                                <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLUMN ILLUSTRATIONS
                             </span>
                             <span class="close-x">&times;</span>
                         </div>
 
                         <div class="dialog-box">
-
                             <div class="flex-two-col">
-
-                                <div><!-- first-child child column -->
-
-                                    <div class="input-group controls-illustrations">
-                                        <label for="cb_visual" class="off">Illustrations</label>
-                                        <input id="cb_visual" type="checkbox" class="cb-switch">
-                                    </div>
-
-                                   <form id="form_vis_types" name="form_vis_types">
-
-                                        <div class="input-group">
-                                            <input type="radio" id="rb_vis_type_1" name="vis_type" value="photos" checked>
-                                            <label for="rb_vis_type_1">Photos</label>
+                                <div><!-- first-child -->
+                                    <form id="form_vis_types" name="form_vis_types">
+                                        
+                                        <h4>TYPE</h4>
+                
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_0" name="vis_type" value="none">
+                                            <label for="rb_vis_type_0">None</label>
                                         </div><!-- /input-group -->
 
-                                        <div class="input-group">
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_1" name="vis_type" value="pictures" checked>
+                                            <label for="rb_vis_type_1">Pictures</label>
+                                        </div><!-- /input-group -->
+
+                                        <div class="input-group-vertical">
                                             <input type="radio" id="rb_vis_type_2" name="vis_type" value="transparent">
                                             <label for="rb_vis_type_2">Transparent</label>
                                         </div><!-- /input-group -->
 
-                                        <div class="input-group">
-                                            <input type="radio" id="rb_vis_type_3" name="vis_type" value="drawings">
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_3" name="vis_type" value="illustrations">
                                             <label for="rb_vis_type_3">Drawings</label>
                                         </div><!-- /input-group -->
 
-                                        <div class="input-group">
-                                            <input type="radio" id="rb_vis_type_4" name="vis_type" value="icons">
-                                            <label for="rb_vis_type_4">Icons</label>
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_6" name="vis_type" value="vid_file">
+                                            <label for="rb_vis_type_6">Video (File)</label>
                                         </div><!-- /input-group -->
 
-                                        <div class="input-group">
-                                            <input type="radio" id="rb_vis_type_5" name="vis_type" value="videos">
-                                            <label for="rb_vis_type_5">Videos</label>
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_7" name="vis_type" value="vid_yt">
+                                            <label for="rb_vis_type_7">Video (YouTube)</label>
                                         </div><!-- /input-group -->
+
+                                        <hr>
                                         
+                                        <h4 style="margin-top: 18px">ICONS</h4>
+                                        
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_4" name="vis_type" value="icons-fa">
+                                            <label for="rb_vis_type_4">Font Awesome</label>
+                                        </div><!-- /input-group -->
+                                                
+                                        <div class="input-group-vertical">
+                                            <input type="radio" id="rb_vis_type_5" name="vis_type" value="icons-la">
+                                            <label for="rb_vis_type_5">Line Awesome</label>
+                                        </div><!-- /input-group -->
                                     </form>
 
-                                </div><!-- /first-child column -->
+                                </div><!-- /first-child -->
                                 
-                                <div><!--second-child column -->
-
-                                    <div id="outer-properties">
-                                        <h4>PROPERTIES</h4>
-
-                                            <div id="properties-photos">
-
-                                                <div class="input-group">
-                                                    <label for="dd_photos_shape" style="width: 90px">Shape</label>
-                                                    <select id="dd_photos_shape" style="letter-spacing: 1px">
-                                                        <option value="1" selected="selected">Landscape</option>
-                                                        <option value="2">Portrait</option>
-                                                        <option value="3">Square</option>
-                                                        <option value="4">Circle</option>
-                                                    </select>
-                                                </div><!-- /input-group -->
-
-                                                <div class="input-group">
-                                                    <label for="cb_photos_shadows">Shadows</label>
-                                                    <input id="cb_photos_shadows" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-                                                                            
-                                                <div class="input-group">
-                                                    <label for="cb_photos_corners_soft">Soft Corners</label>
-                                                    <input id="cb_photos_corners_soft" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-
-                                                <div class="input-group">
-                                                    <label for="cb_img_textbox">Text Box</label>
-                                                    <input id="cb_img_textbox" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-
-                                                <div id="show-textbox">
-
-                                                <div class="input-group" style="margin-bottom: 8px">
-                                                    <label>Colors</label>
-                                                    <button id="btn_cols_img_overlay_color_text" class="btn_style">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewbox="0 0 22 22" version="1.1"><path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.5 22.167969 L 24.5 22.167969 L 24.5 25.667969 L 3.5 25.667969 Z M 18.457031 19.832031 L 22.449219 19.832031 L 16.332031 3.5 L 11.667969 3.5 L 5.550781 19.832031 L 9.542969 19.832031 L 10.789062 15.75 L 17.210938 15.75 Z M 16.179688 12.832031 L 11.828125 12.832031 L 14.007812 6.152344 Z M 16.179688 12.832031 "/></svg>
-                                                    </button>
-                                                        
-                                                    <button id="btn_cols_img_overlay_color_bg" class="btn_style btn-ui-small-bg"><svg width="22" height="22" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg></button>
-
-                                                </div><!-- /input-group -->
-
-                                                <div class="input-group">
-                                                    <label style="width: 124px">Shape</label>
-
-                                                    <form id="form_img_textbox_shape" class="rb-switch">
-                                                        <input type="radio" id="rb_img_textbox_square" name="switch_img_textbox_shape" value="square" checked/>                
-                                                        <label for="rb_img_textbox_square" style="width: 36px" class="ui-small-shape">
-                                                            <svg width="20px" height="20px" viewbox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M10 4V2H4v20h6v-2H6V4zm4 16v2h6V2h-6v2h4v16z"/></svg>
-                                                        </label>
-                                        
-                                                        <input type="radio" id="rb_img_textbox_soft" name="switch_img_textbox_shape" value="soft" />
-                                                        <label for="rb_img_textbox_soft" style="width: 36px" class="ui-small-shape">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewbox="0 0 22 22" version="1.1">
-                                                            <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 3.75 12 C 3.75 17.464844 7 19.523438 7.140625 19.609375 C 7.492188 19.824219 7.605469 20.285156 7.390625 20.636719 C 7.179688 20.992188 6.71875 21.105469 6.363281 20.894531 C 6.195312 20.792969 2.25 18.351562 2.25 12 C 2.25 5.648438 6.195312 3.207031 6.363281 3.105469 C 6.71875 2.894531 7.179688 3.007812 7.394531 3.363281 C 7.605469 3.71875 7.492188 4.179688 7.136719 4.390625 C 6.988281 4.484375 3.75 6.546875 3.75 12 Z M 17.636719 3.105469 C 17.28125 2.894531 16.824219 3.011719 16.609375 3.363281 C 16.394531 3.71875 16.507812 4.175781 16.859375 4.390625 C 17 4.476562 20.25 6.535156 20.25 12 C 20.25 17.464844 17 19.523438 16.863281 19.605469 C 16.507812 19.820312 16.394531 20.28125 16.605469 20.636719 C 16.820312 20.992188 17.28125 21.105469 17.636719 20.894531 C 17.804688 20.792969 21.75 18.351562 21.75 12 C 21.75 5.648438 17.804688 3.207031 17.636719 3.105469 Z M 17.636719 3.105469 "/>
-                                                            </svg>
-                                                        </label>
-                                                    </form>
-
-                                                </div><!-- /input-group -->
-                                            </div>
-
-                                                <div class="input-group">
-                                                    <label for="cb_img_h4">Sub-heading</label>
-                                                    <input id="cb_img_h4" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-
-                                                <div class="input-group">
-                                                    <label for="cb_photos_hyperlinks">Hyperlinks</label>
-                                                    <input id="cb_photos_hyperlinks" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
+                                <div><!--second-child -->
+                                    <h4 style="margin-bottom: 5px">PROPERTIES</h4>
+                                
+                                    <div class="input-group-vertical" style="margin-bottom:10px">
+                                        <label for="cb_img_shadows" style="margin-top: 0; width: 100px">Shadows</label>
+                                        <input id="cb_img_shadows" type="checkbox" class="switch">
+                                    </div><!-- /input-group -->
+                                                                
+                                    <div class="input-group-vertical" style="margin-bottom: 68px">
+                                        <label for="cb_img_corners_soft" style="margin-top: 0; width: 100px">Soft Corners</label>
+                                        <input id="cb_img_corners_soft" type="checkbox" class="switch">
+                                    </div><!-- /input-group -->
                                                 
-                                                <div id="visible-hyperlinks">
+                                    <hr style="margin-bottom: 24px">
 
-                                                    <div class="input-group">
-                                                        <label for="cb_photos_zoom">Zoom</label>
-                                                        <input id="cb_photos_zoom" type="checkbox" class="cb-switch">
-                                                    </div><!-- /input-group -->
+                                    <div class="input-group-vertical">
+                                        <label for="form_icons_align" style="margin-top: 0; min-width: 60px">Align</label>
+        
+                                        <form id="form_icons_align" name="form_icons_align" class="switch-field">
 
-                                                    <div class="input-group">
-                                                        <label for="cb_photos_brightness">Brightness</label>
-                                                        <input id="cb_photos_brightness" type="checkbox" class="cb-switch">
-                                                    </div><!-- /input-group -->
-                                                </div>
-
-                                            </div><!-- /properties-photos -->
-
-                                            <div id="properties-transparent">
-
-                                                <div class="input-group">
-                                                    <label for="cb_trans_shadows" style="width: 150px">Shadows</label>
-                                                    <input id="cb_trans_shadows" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-
-                                            </div>
-
-                                            <div id="properties-drawings">
-
-                                                <div class="input-group">
-                                                    <label for="cb_drawings_shadows" style="width: 150px">Shadows</label>
-                                                    <input id="cb_drawings_shadows" type="checkbox" class="cb-switch">
-                                                </div><!-- /input-group -->
-
-                                            </div>                                            
-
-                                            <div id="properties-icons">
-
-                                                <div class="input-group">
-                                                    <label for="dd_icons_type" style="min-width: 60px">Type</label>
-                                                    <select id="dd_icons_type" style="min-width: 120px">
-                                                        <option value="0" selected="selected">Font Awesome</option>
-                                                        <option value="1">Line Awesome</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="input-group">
-
-                                                    <label for="form_icons_align" style="min-width: 60px">Align</label>
-                    
-                                                    <form id="form_icons_align" name="form_icons_align" class="rb-switch">
-
-                                                        <input type="radio" id="rb_icon_align_left" name="icons_align" value="left" />
-                                                        <label for="rb_icon_align_left">
-                                                            <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
-                                                        </label>
-                                                        
-                                                        <input type="radio" id="rb_icon_align_center" name="icons_align" value="center" checked />
-                                                        <label for="rb_icon_align_center">
-                                                            <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
-                                                        </label>
-                                                    </form>
-                                                </div><!-- /input-group -->
+                                            <input type="radio" id="rb_icon_align_left" name="icons_align" value="left" />
+                                            <label for="rb_icon_align_left">
+                                                <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 18a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                            </label>
                                             
-                                                <div class="input-group">
+                                            <input type="radio" id="rb_icon_align_center" name="icons_align" value="center" checked />
+                                            <label for="rb_icon_align_center">
+                                                <svg width="16" height="16" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1ZM6 18a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM3 11a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H3Z" /></svg>
+                                            </label>
+                                        </form>
+                                    </div><!-- /input-group -->
+                                    
+                                    <div class="input-group-vertical">
+                                        <label for="form_icon_size" style="margin-top: 0; min-width: 60px">Size</label>
+        
+                                        <form id="form_icon_size" name="form_icon_size" class="switch-field">
 
-                                                    <label for="form_icon_size" style="min-width: 60px">Size</label>
-                    
-                                                    <form id="form_icon_size" name="form_icon_size" class="rb-switch">
+                                            <input type="radio" id="cb_icon_size_plus" name="icon-size" value="icon-plus" />
+                                            <label for="cb_icon_size_plus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="16" height="16" viewbox="0 0 16 16">
+                                                <g transform="matrix(0.6666667 0 0 0.6666667 0 0)">
+                                                <path transform="matrix(-1 1.5099579E-07 -1.5099579E-07 -1 24 23.999998)" d="M0 0L24 0L24 24L0 24z" stroke="none" fill="none" />
+                                                <path d="M19 11L13 11L13 5C 13 4.4477153 12.552284 4 12 4C 11.447715 4 11 4.4477153 11 5L11 5L11 11L5 11C 4.4477153 11 4 11.447716 4 12C 4 12.552285 4.4477153 13 5 13L5 13L11 13L11 19C 11 19.552284 11.447716 20 12 20C 12.552285 20 13 19.552284 13 19L13 19L13 13L19 13C 19.552284 13 20 12.552284 20 12C 20 11.447715 19.552284 11 19 11z" stroke="none" fill-rule="nonzero" /></g></svg>
+                                            </label>
+                                            
+                                            <input type="radio" id="cb_icon_size_minus" name="icon-size" value="icon-minus" checked />
+                                            <label for="cb_icon_size_minus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16" >
+                                                <g transform="matrix(0.01953125 0 0 0.01953125 0 0)">
+                                                <path d="M872 474L152 474C 147.6 474 144 477.6 144 482L144 482L144 542C 144 546.4 147.6 550 152 550L152 550L872 550C 876.4 550 880 546.4 880 542L880 542L880 482C 880 477.6 876.4 474 872 474z" stroke="none" fill-rule="nonzero" />
+                                                </g></svg>
+                                            </label>
+                                        </form>
+                                    </div><!-- /input-group -->
+        
+                                    <div class="input-group" style="margin-top: 4px">
 
-                                                        <input type="radio" id="cb_icon_size_plus" name="icon-size" value="icon-plus" />
-                                                        <label for="cb_icon_size_plus">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="-2 -3 16 16">
-                                                                <g transform="matrix(0.6666667 0 0 0.6666667 0 0)">
-                                                                <path transform="matrix(-1 1.5099579E-07 -1.5099579E-07 -1 24 23.999998)" d="M0 0L24 0L24 24L0 24z" stroke="none" fill="none" />
-                                                                <path d="M19 11L13 11L13 5C 13 4.4477153 12.552284 4 12 4C 11.447715 4 11 4.4477153 11 5L11 5L11 11L5 11C 4.4477153 11 4 11.447716 4 12C 4 12.552285 4.4477153 13 5 13L5 13L11 13L11 19C 11 19.552284 11.447716 20 12 20C 12.552285 20 13 19.552284 13 19L13 19L13 13L19 13C 19.552284 13 20 12.552284 20 12C 20 11.447715 19.552284 11 19 11z" stroke="none" fill-rule="nonzero" /></g></svg>
-                
-                                                        </label>
-                                                        
-                                                        <input type="radio" id="cb_icon_size_minus" name="icon-size" value="icon-minus" checked />
-                                                        <label for="cb_icon_size_minus">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16" >
-                                                            <g transform="matrix(0.01953125 0 0 0.01953125 0 0)">
-                                                            <path d="M872 474L152 474C 147.6 474 144 477.6 144 482L144 482L144 542C 144 546.4 147.6 550 152 550L152 550L872 550C 876.4 550 880 546.4 880 542L880 542L880 482C 880 477.6 876.4 474 872 474z" stroke="none" fill-rule="nonzero" />
-                                                            </g></svg>
-                                                        </label>
-                                                    </form>
-                                                </div><!-- /input-group -->
-                    
-                                                <div class="input-group">
+                                        <label style="margin-top: 0; min-width: 60px">Color</label>
 
-                                                    <label style="min-width: 60px">Color</label>
-                                                        <button id="btn_icon_color" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg> Choose&#8230;</button>
-                                                </div><!-- /input-group -->
-                                            </div><!-- /properties icons -->
-
-                                            <div id="properties-videos">
-                                                <div class="input-group">
-                                                    <label for="dd_videos_type" style="min-width: 60px">Type</label>
-                                                    <select id="dd_videos_type" style="min-width: 120px">
-                                                        <option value="0" selected="selected">File</option>
-                                                        <option value="1">YouTube</option>
-                                                        <option value="2">Rumble</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                    </div><!-- /outer-properties -->
+                                        <div style="display: inline-block">
+                                                
+                                            <button id="btn_icon_color" class="btn_style"><svg width="24" height="24" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="ui-icon-paint-svg"><path d="M12 2.25a.75.75 0 0 0-1.5 0V3.5a2.24 2.24 0 0 0-.841.53L2.78 10.91a2.25 2.25 0 0 0 0 3.182L7.66 18.97a2.25 2.25 0 0 0 3.182 0l6.879-6.879a2.25 2.25 0 0 0 0-3.182L12.84 4.03A2.24 2.24 0 0 0 12 3.5V2.25Zm-1.5 3.06v1.44a.75.75 0 0 0 1.5 0V5.31l4.659 4.66a.75.75 0 0 1 0 1.06l-.97.97H3.812l.029-.03L10.5 5.31ZM19.521 13.602a.874.874 0 0 0-1.542 0l-2.008 3.766C14.85 19.466 16.372 22 18.75 22s3.898-2.534 2.78-4.632l-2.009-3.766Z" /></svg> Color&#8230;</button>
+                                        </div>
+                                    </div><!-- /input-group -->
+                                                
                                 </div><!-- /second-child -->
 
                             </div><!--/flex-two-col -->
@@ -842,6 +650,15 @@
 
 <main>
 
+    <div id="box-msg" class="is-hidden">
+        <span class="close-box-msg">x</span>
+        <h3><i class="fas fa-exclamation-circle"></i> &nbsp;Ooops</h3>
+        <p>A browser error has occured.</p>
+        <ul class="fa-ul">
+            <li><span class="fa-li"><i class="fas fa-check"></i></span> Please try again to select a colour.</li>
+        </ul>
+    </div>
+
     <!-- The Modal -->
     <div id="myModal" class="modal hide-sidebar">
 
@@ -850,11 +667,11 @@
 
             <div class="dialog-box-header">
                 <span class="text">
-                    <img src="../../ui/assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLOR PICKER
+                    <img src="assets/img/lunevedy-dialog-box.png" alt="Lunevedy Icon" class="lunevedy-dialog-box">COLOR PICKER
                 </span>
                 <span class="close-modal">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewbox="0 0 16 16" version="1.1">
-                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 15.78125 7.320312 C 15.78125 6.757812 15.328125 6.296875 14.761719 6.296875 L 6.300781 6.296875 L 9.890625 2.707031 C 10.285156 2.3125 10.285156 1.664062 9.890625 1.261719 L 8.925781 0.296875 C 8.53125 -0.0976562 7.882812 -0.0976562 7.480469 0.296875 L 0.503906 7.273438 C 0.304688 7.46875 0.203125 7.730469 0.203125 7.992188 C 0.203125 8.253906 0.304688 8.515625 0.503906 8.714844 L 7.480469 15.6875 C 7.875 16.085938 8.523438 16.085938 8.925781 15.6875 L 9.890625 14.726562 C 10.285156 14.328125 10.285156 13.683594 9.890625 13.277344 L 6.300781 9.699219 L 14.757812 9.699219 C 15.320312 9.699219 15.777344 9.242188 15.777344 8.679688 Z M 15.78125 7.320312"/></svg>
+                    <path style="stroke:none;fill-rule:nonzero;fill-opacity:1;" d="M 15.78125 7.320312 C 15.78125 6.757812 15.328125 6.296875 14.761719 6.296875 L 6.300781 6.296875 L 9.890625 2.707031 C 10.285156 2.3125 10.285156 1.664062 9.890625 1.261719 L 8.925781 0.296875 C 8.53125 -0.0976562 7.882812 -0.0976562 7.480469 0.296875 L 0.503906 7.273438 C 0.304688 7.46875 0.203125 7.730469 0.203125 7.992188 C 0.203125 8.253906 0.304688 8.515625 0.503906 8.714844 L 7.480469 15.6875 C 7.875 16.085938 8.523438 16.085938 8.925781 15.6875 L 9.890625 14.726562 C 10.285156 14.328125 10.285156 13.683594 9.890625 13.277344 L 6.300781 9.699219 L 14.757812 9.699219 C 15.320312 9.699219 15.777344 9.242188 15.777344 8.679688 Z M 15.78125 7.320312 fill: #fff"/></svg>
                 </span>
             </div>
               
@@ -2588,7 +2405,7 @@
     </div>
 
     <div class="page-preview-body" id="page-preview-body">
-        <iframe src="grid-3-embed.html" style="border:none" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
+        <iframe src="grid-2-embed.html" style="border:none" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
     </div>
 
     </main>
@@ -2598,9 +2415,10 @@
         let HTML_Content="";
         function onFrameLoaded() {
             document.querySelector('.loading').style.display='none';
-            document.querySelector('#controls-top').style.display='block';
-            document.querySelector('#lower-left').style.display='flex';
-            document.querySelector('#copy-code-btns').style.display='flex';
+            document.querySelector('.controls-top').style.display='block';
+            document.querySelector('.lower-left').style.display='flex';
+            document.querySelector('.page-preview-options').style.display='inline-block';
+            document.querySelector('.copy-code-btns').style.display='flex';
             document.querySelector('.page-preview-body').style.display='block';
         }
         // function getResolution() {
@@ -2618,136 +2436,88 @@
         function resetMenuOptions() {
 
             // UI
-            // Check for UI theme
-            if (!sessionStorage.getItem('ui-theme')) {
-                console.log("No UI theme set")
-                sessionStorage.setItem('ui-theme', 'theme-ui-dark-blue'); 
-                document.getElementById("dd_ui_theme").value="2";
-            }
-            else {
-                console.log("UI already theme set")
-            }
+            document.getElementById("btn_icon_color").disabled=true;
             document.getElementById("btn-copy-css").disabled=true;
             document.getElementById("color-transparent").style.display="none";
+
+            // Section theme
+            document.getElementById("rb_theme_light").checked = true;
+            document.getElementById("cb_outlines").checked = false;
 
             // Sections
             document.getElementById("dd_class_name").value="1";
             document.getElementById("dd_section_width").value = "3";
-            document.getElementById("rb_theme_light").checked = true;
-            document.getElementById("rb_row_one").checked = true;
 
             // Upper block
             document.getElementById("cb_col_1").checked = true;
             document.getElementById("rb_col_1_align_center").checked = true;
             document.getElementById("dd_col_1_width").value = "0";
-
-            document.getElementById("cb_col_1_badge").checked = false;
-            document.getElementById("show-col-1-badge").style.display="none";
-
+            document.getElementById("cb_col_1_label").checked = false;
             document.getElementById("cb_col_1_h2").checked = true;
-            document.querySelector("#text-highlight .input-group:nth-child(1)").style.display ="flex";
-            document.querySelector("#text-highlight .input-group:nth-child(2)").style.display ="flex";
-            document.getElementById("btn_col_1_h2_highlight").disabled = false;            
-            document.getElementById("btn_col_1_h2_highlight").checked = false;
-            document.getElementById("btn_col_1_h2_border").disabled = false;            
-            document.getElementById("btn_col_1_h2_border").checked = false;
             document.getElementById("cb_col_1_h3").checked = true;
-                            
+            document.getElementById("btn_col_1_label_text").disabled=true;
+                
             // Columns
             document.getElementById("rb_cols_align_left").checked = true;
-            document.getElementById("rb_cols_one").checked = true;
-            document.getElementById("cb_cols_badge").checked = false;
-            document.getElementById("show-cols-badge").style.display="none";
-
-
             document.getElementById("cb_cols_shadows").disabled=false;
             document.getElementById("cb_cols_shadows").checked=false;
             document.getElementById("btn_cols_bg").disabled=false;
-            document.getElementById("cb_cols_borders").checked=false;
-            document.getElementById("cb_cols_borders").disabled=false;    
-            // document.getElementById("btn_cols_border_color").disabled=true;
+
+            document.getElementById("cb_col_borders").checked=false;
+            document.getElementById("cb_col_borders").disabled=false;    
+            document.getElementById("btn_cols_border_color").disabled=true;
             document.getElementById("cb_cols_corners_soft").disabled=true; 
             document.getElementById("cb_cols_corners_soft").checked=false; 
 
-            document.getElementById("btn_cols_borders_color").disabled=true; 
-
-            document.getElementById("cols-borders-width-1").disabled=true; 
-            document.getElementById("cols-borders-width-2").disabled=true; 
-            document.getElementById("cols-borders-width-3").disabled=true; 
-            document.getElementById("cols-borders-width-4").disabled=true; 
-            document.getElementById("cols-borders-width-1").checked=false; 
-            document.getElementById("cols-borders-width-2").checked=false; 
-            document.getElementById("cols-borders-width-3").checked=false; 
-            document.getElementById("cols-borders-width-4").checked=false; 
-
             // Text
-            document.getElementById("show-cols-badge").style.display ="none";
             document.getElementById("cb_cols_h3").checked=true;
-            document.getElementById("not-paragraphs").style.display ="none";
-            document.getElementById("fa-icons").style.display ="none";
             document.getElementById("dd_cols_text").value="1";
             document.getElementById("dd_cols_list_marker").disabled=true;
             document.getElementById("btn_cols_list_marker").disabled=true;
-            document.getElementById("fa-circle-check").checked=true;
-            document.getElementById("hyperlinks-h3").style.display ="none";
-            document.getElementById("hyperlinks-h3-underline").style.display ="none";     
-            document.getElementById("cb_cols_links_h3").checked=false;
-
-            document.getElementById("btn_cols_shadows_color").checked=false;
-            document.getElementById("btn_cols_shadows_color").disabled=true;
 
             // Buttons
-            document.getElementById("cb_btns").checked=false;
-            document.getElementById("dd_buttons_type").disabled=true;
-            document.getElementById("dd_buttons_type").value="0";
-            document.getElementById("dd_buttons_shape").value="0";
-            document.getElementById("form-btns-icons").disabled=true;
-            document.getElementById("rb_btns_icons_left").disabled=true;
-            document.getElementById("rb_btns_icons_left").checked=false;
-            document.getElementById("rb_btns_icons_right").disabled=true;
-            document.getElementById("rb_btns_icons_right").checked=false;
-            document.getElementById("rd-btns-icons-none").disabled=true;
-            document.getElementById("dd_buttons_shape").disabled=true;
+            document.getElementById("cb_col_btns").checked=false;
+            document.getElementById("dd_buttons_pair").disabled=true;
+            document.getElementById("dd_buttons_pair").value="1";
             document.getElementById("dd_buttons_size").disabled=true;
             document.getElementById("dd_buttons_size").value="1";
-            document.getElementById("cb_buttons_width").disabled=true;
-            document.getElementById("cb_buttons_width").checked=false;
-            document.getElementById("cb_buttons_shadow").disabled=true;
-            document.getElementById("cb_buttons_shadow").checked=false;
-            document.getElementById("cb_buttons_uppercase").disabled=true;
-            document.getElementById("cb_buttons_uppercase").checked=false;
-            document.getElementById("btn_cols_text_passive").disabled=true;
-            document.getElementById("btn_cols_text_active").disabled=true;
-            document.getElementById("btn_cols_bg_passive").disabled=true;
-            document.getElementById("btn_cols_bg_active").disabled=true;
-            document.getElementById("btn_cols_border_passive").disabled=true;
-            document.getElementById("btn_cols_border_active").disabled=true;
+            document.getElementById("form_btn_align_desktop").disabled=true;
+
+            document.getElementById("rb_btn_align_desktop_left").disabled=true;
+            document.getElementById("rb_btn_align_desktop_left").checked=false;
+            document.getElementById("rb_btn_align_desktop_center").disabled=true;
+            document.getElementById("rb_btn_align_desktop_center").checked=false;
+            document.getElementById("form_btn_align_mobile").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").checked=false;
+            document.getElementById("rb_btn_align_mobile_center").disabled=true;
+            document.getElementById("rb_btn_align_mobile_center").checked=false;
+            document.querySelector(".container-buttons-block").style.display="none";
 
             // Illustrations
-            document.getElementById("cb_visual").checked=true;
+            document.getElementById("rb_vis_type_0").checked=false;
             document.getElementById("rb_vis_type_1").checked=true;
             document.getElementById("rb_vis_type_2").checked=false;
             document.getElementById("rb_vis_type_3").checked=false;
             document.getElementById("rb_vis_type_4").checked=false;
+            document.getElementById("rb_vis_type_5").checked=false;
 
-            document.getElementById("properties-photos").style.display = "block";
-            document.getElementById("cb_img_textbox").checked=false;
-            document.getElementById("cb_img_h4").checked=false;
+            document.getElementById("cb_img_corners_soft").checked=false;
+            document.getElementById("cb_img_shadows").checked=false;
 
-            document.getElementById("show-textbox").style.display = "none";
-
-            document.getElementById("visible-hyperlinks").style.display="none";
-            document.getElementById("cb_photos_hyperlinks").checked=false;
-            document.getElementById("cb_photos_zoom").disabled=true;
-            document.getElementById("cb_photos_brightness").disabled=true;
-
-            document.getElementById("properties-drawings").style.display = "none";
-            document.getElementById("properties-transparent").style.display = "none";
-            document.getElementById("properties-icons").style.display = "none";
-            document.getElementById("properties-videos").style.display = "none";
+            document.getElementById("cb_icon_size_plus").checked=false;
+            document.getElementById("cb_icon_size_minus").checked=false;
+            document.getElementById("cb_icon_size_plus").disabled=true;
+            document.getElementById("cb_icon_size_minus").disabled=true;
+        
+            document.getElementById("rb_icon_align_left").disabled=true;
+            document.getElementById("rb_icon_align_center").disabled=true;
+            document.getElementById("rb_icon_align_left").checked=false;
+            document.getElementById("rb_icon_align_center").checked=false;
         }
     </script>
 
+    <script src="../../ui/assets/js/grid-2-ui.js"></script>
     <script src="../../ui/assets/js/grid-3-4-ui.js"></script>
     <script type="module" src="../../ui/assets/js/grid-1.js"></script>
     <script type="module" src="../../ui/assets/js/grid-3-4.js"></script>
