@@ -19,6 +19,7 @@ function setColumnBlocks() {
 
     let objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
     
+    console.log("objAllCols: "+objAllCols.length);
     // Reduce to three
     if (selectedValue==="row-one") {
         // from six to three
@@ -27,9 +28,24 @@ function setColumnBlocks() {
                 objAllCols[i].remove();
             }
         }
+
         // from nine to three
         else if (objAllCols.length === 9) {
             for (let i = 0; i < 6; i++) {
+                objAllCols[i].remove();
+            }
+        }
+
+        // from eight to four
+        else if (objAllCols.length === 8) {
+            for (let i = 0; i < 4; i++) {
+                objAllCols[i].remove();
+            }
+        }
+        
+        // from 12 to 4 
+        else if (objAllCols.length === 12) {
+            for (let i = 0; i < 12; i++) {
                 objAllCols[i].remove();
             }
         }        
@@ -47,6 +63,21 @@ function setColumnBlocks() {
         else if (objAllCols.length === 9) {
             objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
             for (let i = 0; i < 3; i++) {
+                objAllCols[i].remove();
+            }
+        }
+
+        // 4 to 8. Double current content
+        if (objAllCols.length === 4) {
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML; 
+        }
+
+        // 12 to 8. Remove 4.
+        else if (objAllCols.length === 12) {
+            objAllCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
+            for (let i = 0; i < 4; i++) {
                 objAllCols[i].remove();
             }
         }
@@ -69,6 +100,23 @@ function setColumnBlocks() {
             }
             iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;     
         }
+
+        // 4 to 12. Treble current content
+        if (objAllCols.length === 4) {
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML + objRowOne.innerHTML;
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;
+        }
+
+        // 8 to 12. Double and remove 4.
+        if (objAllCols.length === 8) {
+            let objRowOne = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+            objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
+            for (let i = 0; i < 4; i++) {
+                objRowOne.firstElementChild.remove();
+            }
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").innerHTML = objRowOne.innerHTML;     
+        }
     }
 }
 
@@ -81,6 +129,7 @@ document.querySelector("#slider-gap-column").addEventListener("change", setColum
 function setColumnGap() {
     let selectedValue = document.getElementById("slider-gap-column").value
     const objCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
+    
     for (let i = 0; i <= 10; i++) {
         objCols.classList.remove("cols-gap-"+i);
     }
@@ -188,6 +237,28 @@ function doColsBadge() {
             arrColBadgeLoop = [].concat(...Array(3).fill(arrColBadgeTemp));
         }
     
+        else if (objCols.length === 4) {
+            for (let i = 0; i < (arrColBadge.length); i++) {
+                arrColBadgeLoop[i] = arrColBadge[i];
+            }
+        }
+
+        else if (objCols.length === 8) {
+            const arrColBadgeTemp = [];
+            for (let i = 0; i < (arrColBadge.length); i++) {
+                arrColBadgeTemp[i] = arrColBadge[i];
+            }
+            arrColBadgeLoop = [].concat(...Array(2).fill(arrColBadgeTemp));
+        }
+
+        else if (objCols.length === 12) {
+            const arrColBadgeTemp = [];
+            for (let i = 0; i < (arrColBadge.length-1); i++) {
+                arrColBadgeTemp[i] = arrColBadge[i];
+            }
+            arrColBadgeLoop = [].concat(...Array(4).fill(arrColBadgeTemp));
+        }
+
         // Test for figures
         if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) {
             const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure")
@@ -347,6 +418,28 @@ function doColH3() {
             arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
         }
 
+        else if (objCols.length === 4) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
+            }
+        }
+
+        else if (objCols.length === 8) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+        }
+
+        else if (objCols.length === 12) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(4).fill(arrContentTemp));
+        }
+
         // Test for figures (images or icons) and NO badge
         if ( (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] figure")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] .badge") ) ) {
             const objFigs = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] figure")
@@ -459,14 +552,15 @@ function doColH3Hyperlink() {
     let target;
     let col_no;
 
-    if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
         col_no = "col-3-h3";
     }
 
-    else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+    else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
         col_no = "col-4-h3";
     }
 
+    console.log("col_no: " + col_no);
     if (!document.querySelector("#cb_cols_links_h3").checked) {
         document.getElementById("hyperlinks-h3").style.display="none";
         document.getElementById("hyperlinks-h3-underline").style.display="none";
@@ -475,10 +569,10 @@ function doColH3Hyperlink() {
         for (let i = 0; i < (objAllCols.length); i++) {
             target = objAllCols[i].innerHTML;
 
-            if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+            if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
                 objAllCols[i].innerHTML = target.replace(/(<a class=\"col-3-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
             }
-            else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+            else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
                 objAllCols[i].innerHTML = target.replace(/(<a class=\"col-4-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
             }
         }
@@ -492,11 +586,11 @@ function doColH3Hyperlink() {
         for (let i = 0; i < (objAllCols.length); i++) {
             target = objAllCols[i].innerHTML;
 
-            if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-3")) {
+            if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
                 objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-3-h3\">').replace(/<\/h3>/igm, '<\/a>');
             }
 
-            else if (iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] .col-4")) {
+            else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
                 objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-4-h3\">').replace(/<\/h3>/igm, '<\/a>');
             }
         }
@@ -567,6 +661,28 @@ function doColsText() {
             arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
         }
 
+        if (objCols.length === 4) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
+            }
+        }
+
+        else if (objCols.length === 8) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+        }
+
+        else if (objCols.length === 12) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(4).fill(arrContentTemp));
+        }
+
         // No bullets
         if (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] a.btn")) {
             const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
@@ -600,7 +716,6 @@ function doColsText() {
     else if (opt==="2") {
         removeText();
         document.querySelector("#btn_cols_text").disabled=false;
-
 
         // count column blocks
         const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
@@ -638,6 +753,28 @@ function doColsText() {
                 arrContentTemp[i] = arrContent[i];
             }
             arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+        }
+
+        if (objCols.length === 4) {
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentLoop[i] = arrContent[i];
+            }
+        }
+
+        else if (objCols.length === 8) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+        }
+
+        else if (objCols.length === 12) {
+            const arrContentTemp = [];
+            for (let i = 0; i < (arrContent.length); i++) {
+                arrContentTemp[i] = arrContent[i];
+            }
+            arrContentLoop = [].concat(...Array(4).fill(arrContentTemp));
         }
 
         // No bullets
@@ -804,7 +941,6 @@ function doColShadows() {
         }
         document.getElementById("btn_cols_shadows_color").disabled=true;
         document.getElementById("btn_cols_shadows_color").checked=false;
-
         checkColsPadding();        
     }
 
@@ -819,7 +955,6 @@ function doColShadows() {
         document.getElementById("cb_cols_corners_soft").checked=true;
         document.getElementById("btn_cols_shadows_color").disabled=false;
         document.getElementById("btn_cols_shadows_color").checked=false;
-
     }
 }
 
@@ -1184,7 +1319,7 @@ function swapButtonIcons() {
         }
     }
 
-    if (iframe.contentWindow.document.querySelector(col_no+' > a.btn')) {
+    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] div[class^='col-'] > a.btn")) {
         const obj_btn = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-'] > a.btn");
         const icon_left  ="<i class=\"fas fa-shopping-cart\"><\/i><span>Order Now<\/span>";
         const icon_right ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
@@ -1298,7 +1433,7 @@ function enableColButtons() {
     document.getElementById("dd_buttons_shape").value="0";
     document.getElementById("dd_buttons_shape").disabled=false;
     document.getElementById("dd_buttons_size").disabled=false;
-    if (col_no === '.col-4') {
+    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
         document.getElementById("dd_buttons_size").value="0";
     }
     else {

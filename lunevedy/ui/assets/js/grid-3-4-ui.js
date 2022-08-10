@@ -25,8 +25,7 @@ divs.forEach(el => el.addEventListener('click', event => {
         }
         // Work with columns
         else if (menuId==="3") {
-            let el = iframe.contentWindow.document.querySelector(col_no);
-            el.scrollIntoView(true);
+            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").scrollIntoView(true);
         }
         // Work with buttons
         else if (menuId==="4") {
@@ -88,7 +87,6 @@ function hideSidebar() {
     document.querySelector("#myModal").classList.remove("show-sidebar");
     document.querySelector("#myModal").scrollTo(0, 0); // scrolls to top of sidebar
 }
-
 
 /* ================ DIALOG BOXES =================== */
 
@@ -176,15 +174,6 @@ function doSectionTheme() {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
     }
 
-    // Check for outlines
-    // if (document.querySelector("#cb_outlines").checked) {
-    //     const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-    //     head_checked = document.head || iframe.contentWindow.document.getElementsByTagName('head')[0],
-    //     style_checked = iframe.contentWindow.document.createElement('style');
-    //     head_checked.appendChild(style_checked);
-    //     style_checked.type = 'text/css';
-    //     style_checked.appendChild(document.createTextNode(css_checked));
-    // }
     if (iframe.contentWindow.document.querySelector('.col-1') ) {
         document.getElementById("cb_cols_shadows").checked=false; 
         document.getElementById("cb_cols_borders").disabled=false; 
@@ -196,7 +185,7 @@ function doSectionTheme() {
     if (iframe.contentWindow.document.querySelector('.col-1') ) {
         el_section.classList.remove("cols-padding");
         el_section.classList.remove("cols-shadows");
-        el_section.classList.remove("col-corners");
+        el_section.classList.remove("cols-corners");
     }
     disableCSS();
 }
@@ -351,7 +340,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         /* .col-1 h2 main heading */
         else if (btn_id === "btn_col_1_h2_text") {
             newStyle = sectionClassName+ " .col-1 h2 { color: var("+color_code+") }\n";
-            sub_string = "col-1 h2";
+            sub_string = "col-1 h2 { color:"
             doUpdateArray(sub_string,newStyle);
         }
 
@@ -369,54 +358,52 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             doUpdateArray(sub_string,newStyle);
         }
 
-        else if (btn_id === "btn_cols_badge_text") {
-            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
-            sub_string = ".badge { color: ";
-            doUpdateArray(sub_string,newStyle); 
-        }
-        
-        else if (btn_id === "btn_cols_badge_bg") {
-            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
-            sub_string = ".badge { background-color: ";
-            doUpdateArray(sub_string,newStyle); 
-        }
-
-
-
-
-        
         /* .col-1 h3 sub heading */
         else if (btn_id === "btn_col_1_h3_text") {
             newStyle = sectionClassName+ " .col-1 h3 { color: var("+color_code+") }\n";
             sub_string = "col-1 h3";
             doUpdateArray(sub_string,newStyle); 
         }
+
+        /* Columns badges: text */
+        else if (btn_id === "btn_cols_badge_text") {
+            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
+            sub_string = ".badge { color: ";
+            doUpdateArray(sub_string,newStyle); 
+        }
         
-        /* Column subheading */
+        /* Columns badges: background */
+        else if (btn_id === "btn_cols_badge_bg") {
+            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
+            sub_string = ".badge { background-color: ";
+            doUpdateArray(sub_string,newStyle); 
+        }
+        
+        /* Columns subheading */
         else if (btn_id === "btn_cols_h3") {
-            newStyle = sectionClassName+ " "+col_no+" h3 { color: var("+color_code+") }\n";
-            sub_string = sectionClassName+" "+col_no+" h3";
+            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] h3 { color: var("+color_code+") }\n";
+            sub_string = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] h3";
             doUpdateArray(sub_string,newStyle);  
         }
         
         /* Column text */
         else if (btn_id === "btn_cols_text") {
-            newStyle = sectionClassName+ " "+col_no+" p { color: var("+color_code+") }\n" +sectionClassName+" "+col_no+" li { color: var("+color_code+") }\n"; 
-            sub_string = col_no+" p {";
+            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] p { color: var("+color_code+") }\n" +sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] li { color: var("+color_code+") }\n"; 
+            sub_string = "div[class^='flex-cols-'] div[class^='col-'] p {";
             doUpdateArray(sub_string,newStyle); 
         }
 
         /* List marker */
         else if (btn_id === "btn_cols_list_marker") {
-            newStyle = sectionClassName+ " "+col_no+" li::marker, "+sectionClassName+ " " +col_no+" ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li::marker, "+sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
             doUpdateArray(sub_string,newStyle); 
         }
         
         /* Column background */
         else if (btn_id === "btn_cols_bg") {
-            newStyle = sectionClassName+ " "+col_no+" { background-color: var("+color_code+") }\n";
-            sub_string = col_no+" { background-color";
+            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] { background-color: var("+color_code+") }\n";
+            sub_string = "div[class^='flex-cols-'] div[class^='col-'] { background-color";
             // Used for checking if cols-padding necessary
             colsBg = "var("+color_code+")";
             console.log("colsBg: "+colsBg);
@@ -429,13 +416,12 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         
         /* Column borders: colour */
         else if (btn_id === "btn_cols_borders_color") { 
-            newStyle = sectionTheme+sectionClassName+" div[class*=\"cols-borders-width-\"] " +col_no+" { border-color: var("+color_code+") }\n";
+            newStyle = sectionTheme+sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] { border-color: var("+color_code+") }\n";
             console.log("newStyle: "+newStyle);
             sub_string = "cols-borders { border-color:"
             doUpdateArray(sub_string,newStyle);
         }            
         
-
         /* Column shadows: colour */
         else if (btn_id === "btn_cols_shadows_color") { 
             // get value of color code
@@ -451,7 +437,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
 
             const strRGB = hex2rgba(colorValue, .4);
             console.log("strRGB:" +strRGB);
-            newStyle = sectionClassName+" .cols-shadows " +col_no+" { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
+            newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
             sub_string = "cols-shadows";
             doUpdateArray(sub_string,newStyle);
         }
@@ -503,21 +489,21 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
 
         /* Icons colour */
         else if (btn_id === "btn_icon_color") {
-            newStyle =  sectionClassName+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure.icon { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox color */
         else if (btn_id === "btn_cols_img_overlay_color_text") {
-            newStyle =  sectionClassName+" "+col_no+" figure .cols-img-textbox { color: var("+color_code+") }\n";
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox background color */
         else if (btn_id === "btn_cols_img_overlay_color_bg") {
-            newStyle =  sectionClassName+" "+col_no+" figure .cols-img-textbox { background-color: var("+color_code+") }\n";
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }        
@@ -702,6 +688,7 @@ function doOutlines() {
     }
 }
 
+/* Resize frame width */
 document.querySelector("#btn_resize_width").addEventListener("click", resizeWidth);
 
 function resizeWidth() {
@@ -732,71 +719,6 @@ function hideRespIcons() {
 }
 
 /*
-//////////////// COPY TO CLIPBOARD ///////////////
-*/
-
-document.querySelector("#btn-copy").addEventListener("click", copyHTML);
-
-function enableCSS() {
-    document.getElementById("btn-copy-css").disabled=false;
-}
-
-function disableCSS() {
-    document.getElementById("btn-copy-css").disabled=true;
-}
-
-function copyHTML() {
-    let HTML_Content = iframe.contentWindow.document.getElementById("HTML-Content").innerHTML;
-    const el = document.createElement('textarea');
-    el.value = HTML_Content;
-    hideMenus();
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el); 
-}
-
-document.querySelector("#btn-copy-css").addEventListener("click", copyCSS);
-
-function copyCSS() {
-    hideMenus();
-    const el_css = document.createElement('textarea');
-    let aLength = arrCSS.length;
-    let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,.section/g, ".section");
-    // strCSS = strCSS.replace(/..container/g, ".container");
-    el_css.value = strCSS;
-    document.body.appendChild(el_css);
-    el_css.select();
-    document.execCommand('copy');
-    document.body.removeChild(el_css);  
-}
-
-/*
-//////////////// REMOVE LEFTOVER NODES  ///////////////
-*/
-
-function removeEmptyNodes() {
-    const HTML_Content = document.querySelector("#HTML-Content");
-    var treeWalker = document.createTreeWalker(HTML_Content, NodeFilter.SHOW_ELEMENT);
-    var currentNode = treeWalker.currentNode
-    var emptyNodes = []
-
-    // test if a node has no text, regardless of whitespaces
-    var isNodeEmpty = node => !node.textContent.trim()
-
-    // find all empty nodes
-    while(currentNode) {
-        isNodeEmpty(currentNode) && emptyNodes.push(currentNode)
-        currentNode = treeWalker.nextNode()
-    }
-
-    // remove found empty nodes
-    emptyNodes.forEach(node => node.parentNode.removeChild(node))
-    return;
-}
-
-/*
 //////////////// Responsive resizing icons in navbar ///////////////
 */
 
@@ -817,7 +739,6 @@ function doResizeWidth() {
        hideRespIcons();
    }
 }
-
 
 const iconsResponsive = document.querySelectorAll('.icon_resize_respon');
 
@@ -875,3 +796,45 @@ function resetResponsive() {
     document.querySelector("#respMobileSmall img").src = "../../ui/assets/img/icons/icon-resize-mobile-small-selected.png";  
 }
 
+/*
+//////////////// COPY TO CLIPBOARD ///////////////
+*/
+
+document.querySelector("#btn-copy").addEventListener("click", copyHTML);
+
+function enableCSS() {
+    document.getElementById("btn-copy-css").disabled=false;
+}
+
+function disableCSS() {
+    document.getElementById("btn-copy-css").disabled=true;
+}
+
+function copyHTML() {
+    let HTML_Content = iframe.contentWindow.document.getElementById("HTML-Content").innerHTML;
+    const el = document.createElement('textarea');
+    el.value = HTML_Content;
+    hideMenus();
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el); 
+}
+
+document.querySelector("#btn-copy-css").addEventListener("click", copyCSS);
+
+function copyCSS() {
+    hideMenus();
+    const el_css = document.createElement('textarea');
+    let aLength = arrCSS.length;
+    let strCSS  = arrCSS.join(",");
+    strCSS = strCSS.replace(/,.theme/g, ".theme");
+    strCSS = strCSS.replace(/,.section/g, ".section");
+    strCSS = strCSS.replaceAll(",.theme", ".theme");
+    strCSS = strCSS.replaceAll(",.section", ".section");
+    el_css.value = strCSS;
+    document.body.appendChild(el_css);
+    el_css.select();
+    document.execCommand('copy');
+    document.body.removeChild(el_css);  
+}

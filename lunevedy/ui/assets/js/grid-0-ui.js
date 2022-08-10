@@ -18,20 +18,6 @@ divs.forEach(el => el.addEventListener('click', event => {
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
     
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        // Work with upper block
-        if (menuId==="2") {
-            window.scrollTo(0,0);
-        }
-        // Work with columns
-        else if (menuId==="3") {
-            iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").scrollIntoView(true);
-        }
-        // Work with buttons
-        else if (menuId==="4") {
-            window.scrollTo(0,document.body.scrollHeight);
-        }
-    }
     // Hide color picker
     hideSidebar();
 }));
@@ -120,16 +106,6 @@ function dragElement(elmnt) {
 
     function elementDrag(e) {
         e = e || window.event;
-
-        const elSliderColumn = document.getElementById("slider-gap-column");
-        const elSliderRow = document.getElementById("slider-gap-row");
-
-        if((e.target == elSliderColumn) || (e.target == elSliderRow) ) {
-            // Do nothing
-            elmnt.draggable = false; 
-        }
-        else {
-
         // e.preventDefault();
         // calculate the new cursor position:
         pos1 = pos3 - e.clientX;
@@ -147,7 +123,6 @@ function dragElement(elmnt) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
-}
 
 /*
 //////////////// SECTION: THEME  ///////////////
@@ -173,20 +148,6 @@ function doSectionTheme() {
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
     }
-
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        document.getElementById("cb_cols_shadows").checked=false; 
-        document.getElementById("cb_cols_borders").disabled=false; 
-        document.getElementById("cb_cols_borders").checked=false; 
-        document.getElementById("cb_cols_corners_soft").disabled=true; 
-        document.getElementById("cb_cols_corners_soft").checked=false; 
-    }
-    const el_section = iframe.contentWindow.document.querySelector("section");
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        el_section.classList.remove("cols-padding");
-        el_section.classList.remove("cols-shadows");
-        el_section.classList.remove("cols-corners");
-    }
     disableCSS();
 }
 
@@ -206,10 +167,11 @@ function doClassName() {
 
 function removeClassNames() {
     const el_section = iframe.contentWindow.document.querySelector("section");
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= uiMenusLength; i++) {
         el_section.classList.remove("section-selector-"+[i]);
     }
 }
+
 
 /*
 //////////////// SECTION WIDTH ///////////////
@@ -222,7 +184,10 @@ function doWidthSectionDesktop() {
     let opt = document.querySelector("#dd_section_width").value;
     deleteWidthSectionDesktop();
 
-    if (opt==="1") {
+    if (opt==="0") {
+        iframe.contentWindow.document.querySelector("section").classList.add("w-800px");
+    }
+    else if (opt==="1") {
         iframe.contentWindow.document.querySelector("section").classList.add("w-960px");
     }
     else if (opt==="2") {
@@ -231,20 +196,13 @@ function doWidthSectionDesktop() {
     else if (opt==="3") {
         iframe.contentWindow.document.querySelector("section").classList.add("w-1140px");
     }
-    else if (opt==="4") {
-        iframe.contentWindow.document.querySelector("section").classList.add("w-1320px");
-    }
-    else if (opt==="5") {
-        iframe.contentWindow.document.querySelector("section").classList.add("w-1536px");
-    }
 }
 
 function deleteWidthSectionDesktop() {
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-800px");
     iframe.contentWindow.document.querySelector("section").classList.remove("w-960px");
     iframe.contentWindow.document.querySelector("section").classList.remove("w-1024px");
     iframe.contentWindow.document.querySelector("section").classList.remove("w-1140px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("w-1320px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("w-1536px");                
 }
 
 /*
@@ -319,128 +277,73 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             console.log("New section background: "+sectionBg);
             console.log("Current column background: "+colsBg);
             console.log("sectionBg: "+sectionBg);
-            checkColorsPadding();
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 badge text */
-        else if (btn_id === "btn_col_1_badge_text") {
-            newStyle = sectionClassName+ " .col-1-badge { color: var("+color_code+") }\n";
-            sub_string = "col-1-badge { color";
+        /* badge text */
+        else if (btn_id === "btn_badge_text") {
+            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
+            sub_string = ".badge { color";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 badge background */
-        else if (btn_id === "btn_col_1_badge_bg") {
-            newStyle = sectionClassName+ " .col-1-badge { background-color: var("+color_code+") }\n";
-            sub_string = "col-1-badge { background-color";
+        /* badge background */
+        else if (btn_id === "btn_badge_bg") {
+            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
+            sub_string = ".badge { background-color";
             doUpdateArray(sub_string,newStyle);
         }        
 
-        /* .col-1 h2 main heading */
-        else if (btn_id === "btn_col_1_h2_text") {
-            newStyle = sectionClassName+ " .col-1 h2 { color: var("+color_code+") }\n";
-            sub_string = "col-1 h2 { color:"
+        /* h2 main heading */
+        else if (btn_id === "btn_h2_text") {
+            newStyle = sectionClassName+ " > h2 { color: var("+color_code+") }\n";
+            sub_string = "h2 { color:"
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 h2 main heading highlight text */
-        else if (btn_id === "btn_col_1_h2_highlight") {
-            newStyle = sectionClassName+ " .col-1 h2 span.highlight { color: var("+color_code+") }\n";
-            sub_string = "col-1 h2 span.highlight";
+        /* h2 main heading highlight text */
+        else if (btn_id === "btn_h2_highlight") {
+            newStyle = sectionClassName+ " > h2 span.highlight { color: var("+color_code+") }\n";
+            sub_string = "h2 span.highlight";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 h2 main heading bottom border */
-        else if (btn_id === "btn_col_1_h2_border") {
-            newStyle = sectionClassName+ " .col-1 h2.heading-underline::after { background-color: var("+color_code+") }\n";
-            sub_string = "heading-underline";
+        /* h2 main heading bottom border */
+        else if (btn_id === "btn_h2_border") {
+            newStyle = sectionClassName+ " > h2.heading-underline::after { background-color: var("+color_code+") }\n";
+            sub_string = "h2.heading-underline";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-1 h3 sub heading */
-        else if (btn_id === "btn_col_1_h3_text") {
-            newStyle = sectionClassName+ " .col-1 h3 { color: var("+color_code+") }\n";
-            sub_string = "col-1 h3";
+        /* h3 sub heading */
+        else if (btn_id === "btn_h3_text") {
+            newStyle = sectionClassName+ " h3 { color: var("+color_code+") }\n";
+            sub_string = " h3 {";
             doUpdateArray(sub_string,newStyle); 
         }
 
-        /* Columns badges: text */
-        else if (btn_id === "btn_cols_badge_text") {
-            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
-            sub_string = ".badge { color: ";
+        /* Section paragraphs text */
+        else if (btn_id === "btn_para_text") {
+            newStyle = sectionClassName+ " p { color: var("+color_code+") }\n"; 
+            sub_string = " p {";
             doUpdateArray(sub_string,newStyle); 
         }
-        
-        /* Columns badges: background */
-        else if (btn_id === "btn_cols_badge_bg") {
-            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
-            sub_string = ".badge { background-color: ";
+
+        /* Section paragraphs text */
+        else if (btn_id === "btn_list_text") {
+            newStyle = sectionClassName+ " ul li { color: var("+color_code+") }\n"; 
+            sub_string = " ul li {";
             doUpdateArray(sub_string,newStyle); 
         }
-        
-        /* Columns subheading */
-        else if (btn_id === "btn_cols_h3") {
-            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] h3 { color: var("+color_code+") }\n";
-            sub_string = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] h3";
-            doUpdateArray(sub_string,newStyle);  
-        }
-        
-        /* Column text */
-        else if (btn_id === "btn_cols_text") {
-            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] p { color: var("+color_code+") }\n" +sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] li { color: var("+color_code+") }\n"; 
-            sub_string = "div[class^='flex-cols-'] div[class^='col-'] p {";
-            doUpdateArray(sub_string,newStyle); 
-        }
+
 
         /* List marker */
-        else if (btn_id === "btn_cols_list_marker") {
-            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li::marker, "+sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+        else if (btn_id === "btn_list_marker") {
+            newStyle = sectionClassName+ " li::marker, "+sectionClassName+ " ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
             doUpdateArray(sub_string,newStyle); 
         }
         
-        /* Column background */
-        else if (btn_id === "btn_cols_bg") {
-            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] { background-color: var("+color_code+") }\n";
-            sub_string = "div[class^='flex-cols-'] div[class^='col-'] { background-color";
-            // Used for checking if cols-padding necessary
-            colsBg = "var("+color_code+")";
-            console.log("colsBg: "+colsBg);
-            checkColorsPadding();
-            // Enable soft corners
-            document.getElementById("cb_cols_corners_soft").disabled = false;
-            document.getElementById("cb_cols_corners_soft").checked = false;
-            doUpdateArray(sub_string,newStyle);
-        }
-        
-        /* Column borders: colour */
-        else if (btn_id === "btn_cols_borders_color") { 
-            newStyle = sectionTheme+sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] { border-color: var("+color_code+") }\n";
-            console.log("newStyle: "+newStyle);
-            sub_string = "cols-borders { border-color:"
-            doUpdateArray(sub_string,newStyle);
-        }            
-        
-        /* Column shadows: colour */
-        else if (btn_id === "btn_cols_shadows_color") { 
-            // get value of color code
-            const styles = getComputedStyle(document.documentElement);
-            const colorValue = styles.getPropertyValue(color_code);
-            console.log("color_code:" +color_code);
-            console.log("colorValue:" +colorValue);
-
-            const hex2rgba = (hex, alpha = 1) => {
-                const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
-                return `rgba(${r},${g},${b},${alpha})`;
-            };
-
-            const strRGB = hex2rgba(colorValue, .4);
-            console.log("strRGB:" +strRGB);
-            newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
-            sub_string = "cols-shadows";
-            doUpdateArray(sub_string,newStyle);
-        }
 
         /* === Buttons === */
 
@@ -525,17 +428,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         }
     }
 
-    function checkColorsPadding() {
-        // Test for no border, no shadow and column background != section background
-        if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-borders")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-shadows") ) ) {
-            if (sectionBg===colsBg) {
-                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.remove("cols-padding");
-            }
-            else {
-                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.add("cols-padding");
-            }
-        }
-    }
 
 /*
 //////////////// UI THEME SELECTOR  ///////////////

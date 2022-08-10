@@ -52,10 +52,14 @@ export const content_buttons_pair_text_2 = "View details";
 
 export const content_buttons_pair = "\n\n\t<div class=\"container-btn\">\n\t\t<a href=\"#\" class=\"btn btn-solid\"><i class=\"fas fa-shopping-cart\"></i><span>Order now<\/span></a>\n\t\t<a href=\"#\" class=\"btn btn-outline\"><i class=\"fas fa-arrow-right\"></i><span>Learn more<\/span></a>\n\t</div>";
 
+/* 0 column layouts */
+export const content_h3 = ["\n\t\t\t<h3>Nice sub-heading here<\/h3>"]
 /* 3 column layouts */
 export const content_h3_col_3 = ["\n\t\t\t<h3>Lunevedy Cafe Bakery<\/h3>", "\n\t\t\t<h3>Lunevedy Fashion Store<\/h3>", "\n\t\t\t<h3>Learn JavaScript today<\/h3>"];
 
 export const content_paras_col_3 = ["\n\t\t\t<p>Our friendly baristas are waiting to pour your favourite beverage. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere quickly and reliably.<\/p>", "\n\t\t\t<p>Supercharge your web design career with this <i>JavaScript for Beginners<\/i> training course that covers all the important concepts.<\/p>"];
+
+export const content_list = ["\n\t\t<ul>\n\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t<\/ul>"];
 
 export const content_list_col_3 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere quickly and reliably.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We shine on product quality and we will not be beaten on product prices.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help our clients reinvent their brands, products, and culture for a changing world.<\/li>\t\n\t\t\t<\/ul>"];
 
@@ -65,6 +69,20 @@ export const content_h3_col_4 = ["\n\t\t\t<h3>Lunevedy Cafe<\/h3>", "\n\t\t\t<h3
 export const content_paras_col_4 = ["\n\t\t\t<p>Our friendly baristas are waiting to serve you. We use only hand roasted coffee and expertly selected tea leaves.<\/p>", "\n\t\t\t<p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere.<\/p>", "\n\t\t\t<p>Supercharge your web design career with this <i>JavaScript for Beginners</i> course that covers all the important concepts.<\/p>", "\n\t\t\t<p>Portugal's hilly, coastal capital city. Enjoy the pastel-coloured buildings, the cobbled streets, and the custard tarts.<\/p>"];
 
 export const content_list_col_4 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Best value<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>"];
+
+export const content_photo_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/1024x618-cafe.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+export const content_photo_square_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/1024x618-cafe.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+export const content_trans_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/800x480-trainers.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+export const content_drawing_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/800x480-teamwork.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+
+
+export const content_vid_file_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-file\"><video controls=\"\"><source src=\"..\/..\/ui\/assets\/videos/1280x720-coffee-cafe.mp4\" type=\"video\/mp4\"><\/video><\/div>\n\t\t\t\t<\/figure>";
+export const content_vid_yt_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://www.youtube.com/embed/qPPlBpRkeAo\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+export const content_vid_rumble_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
+
+export const content_textbox_section = "FRIENDLY SERVICE";
+export const content_H4Overlay_section = "Tasty breads fresh from the oven. Delicious coffee.";
+
 
 export const arrPic = [];
 arrPic[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
@@ -131,7 +149,6 @@ arrColBadge[2] = "\n\t\t\t\t<div class=\"badge\">EDUCATION<\/div>\n";
 arrColBadge[3] = "\n\t\t\t\t<div class=\"badge\">HOLIDAYS<\/div>\n";
 
 export const arrH4Overlay = [];
-
 arrH4Overlay[0] = "Tasty breads fresh from the oven. Delicious coffee."
 arrH4Overlay[1] = "Online bargains to help you look great and feel fantastic"
 arrH4Overlay[2] = "Invest your time in learning something new"

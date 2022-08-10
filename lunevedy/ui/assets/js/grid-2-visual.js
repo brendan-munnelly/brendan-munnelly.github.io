@@ -674,84 +674,84 @@ function doVisSubTypes(n) {
 
     // photos: landscape
     if (n===1) {
-        for (let i = 0; i < (arrPic.length); i++) {
+        for (let i = 0; i < (arrPic.length-1); i++) {
             arrContent[i] = arrPic[i];
         }
     }
     // photos: portrait
     else if (n===2) {
-        for (let i = 0; i < (arrPic.length); i++) {
+        for (let i = 0; i < (arrPic.length-1); i++) {
             arrContent[i] = arrPic[i];
         }
     }
     // photos: square
     else if (n===3) {
-        for (let i = 0; i < (arrPic.length); i++) {
+        for (let i = 0; i < (arrPic.length-1); i++) {
             arrContent[i] = arrPic[i];
         }
     }
     // photos: circle
     else if (n===4) {
-        for (let i = 0; i < (arrPic.length); i++) {
+        for (let i = 0; i < (arrPic.length-1); i++) {
             arrContent[i] = arrPic[i];
         }
     }
 
     // transparent: landscape
     else if (n===5) {
-        for (let i = 0; i < (arrTrans.length); i++) {
+        for (let i = 0; i < (arrTrans.length-1); i++) {
             arrContent[i] = arrTrans[i];
         }
     }
 
     // drawings: landscape
     else if (n===6) {
-        for (let i = 0; i < (arrIllus.length); i++) {
+        for (let i = 0; i < (arrIllus.length-1); i++) {
             arrContent[i] = arrIllus[i];
         }
     }
 
     // icons: Font Awesome
     else if (n===7) {
-        for (let i = 0; i < (arrIconFA.length); i++) {
+        for (let i = 0; i < (arrIconFA.length-1); i++) {
             arrContent[i] = arrIconFA[i];
         }
     }
 
     // icons: Line Awesome
     else if (n===8) {
-        for (let i = 0; i < (arrIconLA.length); i++) {
+        for (let i = 0; i < (arrIconLA.length-1); i++) {
             arrContent[i] = arrIconLA[i];
         }
     }
 
     // videos: file
     else if (n===9) {
-        for (let i = 0; i < (arrVidFile.length); i++) {
+        for (let i = 0; i < (arrVidFile.length-1); i++) {
             arrContent[i] = arrVidFile[i];
         }
     }
 
     else if (n===10) {
-        for (let i = 0; i < (arrVidYT.length); i++) {
+        for (let i = 0; i < (arrVidYT.length-1); i++) {
             arrContent[i] = arrVidYT[i];
         }
     }
 
     else if (n===11) {
-        for (let i = 0; i < (arrVidRumble.length); i++) {
+        for (let i = 0; i < (arrVidRumble.length-1); i++) {
             arrContent[i] = arrVidRumble[i];
         }
     }    
 
 
-    if (objCols.length === 3) {
+    if (objCols.length === 2) {
         for (let i = 0; i < (arrContent.length-1); i++) {
             arrContentLoop[i] = arrContent[i];
         }
     }
 
-    else if (objCols.length === 6) {
+    else if (objCols.length === 4) {
         const arrContentTemp = [];
         for (let i = 0; i < (arrContent.length-1); i++) {
             arrContentTemp[i] = arrContent[i];
@@ -759,35 +759,14 @@ function doVisSubTypes(n) {
         arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
     }
 
-    else if (objCols.length === 9) {
+    else if (objCols.length === 6) {
         const arrContentTemp = [];
-        for (let i = 0; i < (arrContent.length); i++) {
+        for (let i = 0; i < (arrContent.length-1); i++) {
             arrContentTemp[i] = arrContent[i];
         }
         arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
     }
 
-    if (objCols.length === 4) {
-        for (let i = 0; i < (arrContent.length); i++) {
-            arrContentLoop[i] = arrContent[i];
-        }
-    }
-
-    else if (objCols.length === 8) {
-        const arrContentTemp = [];
-        for (let i = 0; i < (arrContent.length); i++) {
-            arrContentTemp[i] = arrContent[i];
-        }
-        arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
-    }
-
-    else if (objCols.length === 12) {
-        const arrContentTemp = [];
-        for (let i = 0; i < (arrContent.length); i++) {
-            arrContentTemp[i] = arrContent[i];
-        }
-        arrContentLoop = [].concat(...Array(4).fill(arrContentTemp));
-    }
 
     // Loop through columns
     for (let i = 0; i < objCols.length; i++) {

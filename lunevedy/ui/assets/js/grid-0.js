@@ -1,47 +1,11 @@
-import { col_1_content_header_h3, col_1_content_para_last, col_1_content_ul_short, col_1_content_ul_long, col_1_content_buttons_one, col_1_content_buttons_pair, col_1_content_caption } from '../js/arr-content.js';
+// import { col_1_content_header_h3, col_1_content_para_last, col_1_content_ul_short, col_1_content_ul_long, col_1_content_buttons_one, col_1_content_buttons_pair, col_1_content_caption } from '../js/arr-content.js';
 
-section_class = sessionStorage.getItem('section-selector');
-col_no = sessionStorage.getItem('col-no');
-col_count = sessionStorage.getItem('col-count');
-
+import { content_header_label_text_col_1, content_h3, content_list, content_textbox_section, content_H4Overlay_section } from '../js/arr-content.js';
 
 /*
-//////////////// SECTION WIDTH ///////////////
+//////////////// ALIGN SECTION ///////////////
 */
-
-document.querySelector("#dd_section_width").addEventListener("change", doWidthSectionDesktop);
-
-function doWidthSectionDesktop() {
-
-    let opt = document.querySelector("#dd_section_width").value;
-    deleteWidthSectionDesktop();
-
-    if (opt==="0") {
-        iframe.contentWindow.document.querySelector("section").classList.add("section-width-800px");
-    }
-
-    else if (opt==="1") {
-        iframe.contentWindow.document.querySelector("section").classList.add("section-width-960px");
-    }
-    else if (opt==="2") {
-        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1024px");
-    }
-    else if (opt==="3") {
-        iframe.contentWindow.document.querySelector("section").classList.add("section-width-1140px");
-    }
-}
-
-function deleteWidthSectionDesktop() {
-    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-800px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-960px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1024px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("section-width-1140px");
-}
-
-/*
-//////////////// ALIGN ENTIRE SECTION ///////////////
-*/
-
+      
 document.querySelector("#form_align_desktop").addEventListener("change", doAlignSectionDesktop);
 
 function doAlignSectionDesktop() {
@@ -92,94 +56,35 @@ function doAlignSectionMobile() {
         document.getElementById("dd_align_desktop_btns").disabled=true;
     }
 }
-            
-
 
 /*
-//////////////// UPPER CATEGORY LABEL ABOVE H2 ///////////////
+//////////////// LABEL ABOVE H2 ///////////////
 */
 
-document.querySelector("#cb_col_1_label").addEventListener("change", doUpperLabel);
+document.querySelector("#cb_badge").addEventListener("change", doBadge);
 
-function doUpperLabel() {
+function doBadge() {
 
-    // Single column
-    if (!document.getElementById("cb_col_1_label").checked) {
-        removeUpperLabel();
+    if (!document.getElementById("cb_badge").checked) {
+        removeBadge();
     }
+    
     else {
-        iframe.contentWindow.document.querySelector("section h2").insertAdjacentHTML("beforebegin", "<div class=\"container-upper-label\"><span>CATEGORY<\/span><\/div>\n\n\t\t");
-        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\n\n\t\t<h2>", "<h2>");
-        document.getElementById("btn_col_1_label_text").disabled=false;
+        removeBadge();
+        const newUpperLabelDiv = document.createElement("div");
+        newUpperLabelDiv.classList.add("badge"); 
+        iframe.contentWindow.document.querySelector('section').prepend(newUpperLabelDiv);
+        iframe.contentWindow.document.querySelector('section .badge').innerText = content_header_label_text_col_1;
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("<div class=\"badge\">", "\n\t\t\t<div class=\"badge\">");
+        document.getElementById("show-badge").style.display="flex";
     }
 }
 
-function removeUpperLabel() {
-    if (iframe.contentWindow.document.querySelector('.container-upper-label')) {
-    const upperLabel = iframe.contentWindow.document.querySelector('.container-upper-label');
-        upperLabel.remove();
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('\n\t\t\t<h2>Section heading<\/h2>', '<h2>Section heading<\/h2>');
-        document.getElementById("btn_col_1_label_text").disabled=true;
-    }
-}
+document.querySelector("#form_badge_shape").addEventListener("change", doBadgeShape);
 
-/*
-//////////////// STANDFIRST ///////////////
-*/
-
-document.querySelector("#cb_stand_first").addEventListener("change", doStandFirst);
-
-function doStandFirst() {
-    if (!document.getElementById("cb_stand_first").checked) {
-        iframe.contentWindow.document.querySelector("section p").classList.remove("standfirst");
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<p class=\"\">', '<p>');
-    }
-    else {
-        document.querySelector("label[for='cb_stand_first']").style.color = "#fff";
-        iframe.contentWindow.document.querySelector("section p").classList.add("standfirst");
-    }
-}
-
-/*
-//////////////// H3 SUB-HEADINGS ////////////////////
-*/
-
-document.querySelector("#cb_col_1_h3").addEventListener("change", doColH3);
-
-function doColH3() {
-
-    if (!document.getElementById("cb_col_1_h3").checked) {
-        removeH3();
-    }
-
-    else {
-        if (!iframe.contentWindow.document.querySelector("section h3")) {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(2)").insertAdjacentHTML("beforebegin", col_1_content_header_h3);
-            // iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('</h3>\n\n', '</h3>\n');
-            iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("empowerment.</p>\n\n\t", "empowerment.</p>\n\n");
-            document.getElementById("btn_col_1_h3_text").disabled=false;
-        }
-        else {
-            return
-        }
-    }
-}
-
-function removeH3() {
-    iframe.contentWindow.document.querySelector("section h3").remove();
-    iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/p>\n\n', '<\/p>\n');
-    document.getElementById("btn_col_1_h3_text").disabled=true;
-}
-
-
-/*
-//////////////// SECTION TEXT: LISTS  ///////////////
-*/
-
-document.querySelector("#switch-section-list").addEventListener("change", doLists);
-
-function doLists() {
-    const rbs = document.querySelectorAll("input[name='section-list-type']");
+function doBadgeShape() {
+    const objTextBox = iframe.contentWindow.document.querySelector("section > .badge"); 
+    const rbs = document.querySelectorAll("input[name='switch_badge_shape']");
     let selectedValue;
 
     for (const rb of rbs) {
@@ -188,32 +93,156 @@ function doLists() {
             break;
         }
     }
-    
-    if (selectedValue==="list-none") {
-        removeList();
+
+    if (selectedValue==="square") {
+        objTextBox.classList.remove("corners-soft");
+    }
+        
+    else if (selectedValue==="soft") {
+        objTextBox.classList.add("corners-soft");
+    }
+}
+
+function removeBadge() {
+    if (iframe.contentWindow.document.querySelector('.badge')) {
+        const upperLabel = iframe.contentWindow.document.querySelector('.badge');
+        upperLabel.remove();
+        document.getElementById("show-badge").style.display="none";        
+    }
+}
+
+/*
+//////////////// MAIN HEADING H2 HIGHLIGHT TEXT ///////////////
+*/
+
+document.querySelector("#cb_h2_highlight").addEventListener("change", doH2Text);
+
+function doH2Text() {
+
+    let elH2Content = iframe.contentWindow.document.querySelector('section > h2').innerHTML;
+
+    if (!document.getElementById("cb_h2_highlight").checked) {
+        elH2Content = elH2Content.replace(/<\/?span[^>]*>/g,"");
+        iframe.contentWindow.document.querySelector('section > h2').innerHTML = elH2Content;
+        document.getElementById("btn_h2_highlight").disabled = true;            
+        document.getElementById("btn_h2_highlight").checked = false;
+        // document.getElementById("btn_col_1_border").disabled = true;            
+        // document.getElementById("btn_col_1_border").checked = false;
+    }
+    else {
+        const i = elH2Content.indexOf(" ",1);
+        const j = elH2Content.lastIndexOf(" ");
+        elH2Content = elH2Content.replace(elH2Content.substring(i+1,j), "<span class=\"highlight\">"+elH2Content.substring(i+1,j)+"</span>");
+        iframe.contentWindow.document.querySelector('section > h2').innerHTML = elH2Content;  
+        document.getElementById("btn_h2_highlight").disabled = false;            
+        document.getElementById("btn_h2_highlight").checked = false;
+        document.getElementById("btn_h2_border").disabled = false;            
+        document.getElementById("btn_h2_border").checked = false;
+    }
+}
+
+/*
+//////////////// MAIN HEADING H2 BOTTOM BORDER ///////////////
+*/
+
+document.querySelector("#cb_h2_border").addEventListener("change", doH2Border);
+
+function doH2Border() {
+
+    const objH2 = iframe.contentWindow.document.querySelector('section > h2');
+
+    if (!document.getElementById("cb_h2_border").checked) {
+        objH2.classList.remove("heading-underline");
+    }
+    else {
+        objH2.classList.add("heading-underline");
+    }
+}
+
+/*
+//////////////// DECKHEAD ///////////////
+*/
+
+document.querySelector("#cb_deckhead").addEventListener("change", doDeckhead);
+
+function doDeckhead() {
+    if (!document.getElementById("cb_deckhead").checked) {
+        iframe.contentWindow.document.querySelector("section p").classList.remove("deckhead");
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<p class=\"\">', '<p>');
+    }
+    else {
+        document.querySelector("label[for='cb_deckhead']").style.color = "#fff";
+        iframe.contentWindow.document.querySelector("section p").classList.add("deckhead");
+    }
+}
+
+/*
+//////////////// H3 SUB-HEADINGS ////////////////////
+*/
+
+document.querySelector("#cb_h3").addEventListener("change", doH3);
+
+function doH3() {
+
+    if (!document.getElementById("cb_h3").checked) {
+        removeH3();
     }
 
-    else if (selectedValue==="list-short") {
+    else {
+        if (!iframe.contentWindow.document.querySelector("section h3")) {
+            const objParas = iframe.contentWindow.document.querySelectorAll("section p");
+            let el_para;
+            // Loop through paragraphs
+            for (let i = 1; i < objParas.length; i++) {
+                el_para = objParas[i]; 
+                el_para.insertAdjacentHTML("beforebegin", content_h3);
+            }
+            document.getElementById("btn_h3_text").disabled=false;
+        }
+    }
+}
+
+function removeH3() {
+    const objH3 = iframe.contentWindow.document.querySelectorAll("section h3");
+    let el_h3;
+    // Loop through paragraphs
+    for (let i = 0; i < objH3.length; i++) {
+        objH3[i].remove();
+    }
+    document.getElementById("btn_h3_text").disabled=true;
+}
+
+
+/*
+//////////////// SECTION TEXT: LISTS  ///////////////
+*/
+
+document.querySelector("#cb_list").addEventListener("change", doList);
+
+function doList() {
+    if (!document.getElementById("cb_list").checked) {
         removeList();
-        iframe.contentWindow.document.querySelector('section p:last-of-type').remove();
-        iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", col_1_content_ul_short);
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<\/p>\t', '<\/p>');
+        document.getElementById("btn_list_text").disabled = true;
+        document.getElementById("list-options").style.display = "none";
+        document.getElementById("dd_list_marker").value = "0";
     }
 
-    else if (selectedValue==="list-long") {
+    else {
         removeList();
-        iframe.contentWindow.document.querySelector('section p:last-of-type').remove();
-        iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", col_1_content_ul_long);
+        document.getElementById("btn_list_text").disabled = false;
+        document.getElementById("list-options").style.display = "flex";
+
+        iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", content_list);
         iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<\/p>\t', '<\/p>');
+        document.getElementById("dd_list_marker").value = "0";
     }
+
 }
 
 function removeList() {
     if (iframe.contentWindow.document.querySelector("section > ul")) {
         const elUL = iframe.contentWindow.document.querySelector("section > ul");
         elUL.remove();
-        // Restore third paragraph
-        iframe.contentWindow.document.querySelector("section p:last-of-type").insertAdjacentHTML("afterend", col_1_content_para_last);
     }
     iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace('<\/p>\n\n\t\t\n\n', '<\/p>');
 
@@ -229,388 +258,65 @@ function removeList() {
 }
 
 /*
-//////////////// SECTION: BUTTONS ///////////////
+//////////////// SECTION LIST MARKER: REGULAR OR FONT AWESOME ////////////////////
 */
 
+document.querySelector("#dd_list_marker").addEventListener("change", doListMarker);
 
-/*
-//////////////// BUTTONS ////////////////////
-*/
+function doListMarker() {
 
-/*
-//////////////// BUTTONS ////////////////////
-*/
+    let opt = document.querySelector("#dd_list_marker").value;
 
-const tabs = document.querySelector(".buttonWrapper");
-const tabButton = document.querySelectorAll(".tab-button");
-      
-tabs.onclick = e => {
-const id = e.target.id;
-if (id) {
-    // tabs
-    tabButton.forEach(btn => {
-        btn.classList.remove("active");
-    });
-    document.getElementById(id).classList.add("active");
-
-    // tab contents
-    document.getElementById("content_1").classList.remove("active");
-    document.getElementById("content_1").style.display="none";
-    document.getElementById("content_2").classList.remove("active");
-    document.getElementById("content_2").style.display="none";
-
-    // Active content tab
-    const element = "content_"+id[id.length-1];
-    document.getElementById(element).classList.add("active");
-    document.getElementById(element).style.display="block";
-    }
-}
-
-document.querySelector("#dd_buttons_split").addEventListener("change", doButtonsSplit);
-
-    function doButtonsSplit() {
-        let opt = document.querySelector("#dd_buttons_split").value;
-
-        // Hide both buttons
-        if (opt==="0") {
-            removeButtonsSplit();
-        }
-       
-        // Show one button
-        else if (opt==="1") {
-            removeButtonsSplit();
-            addOnlyButton_1();
-            if (iframe.contentWindow.document.querySelector(".col-1:nth-child(1) ul")) {
-                iframe.contentWindow.document.querySelector(".col-1:nth-child(1) ul").insertAdjacentHTML("afterend", col_1_content_buttons_one);            
-            }
-            else {
-                iframe.contentWindow.document.querySelector(".col-1:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", col_1_content_buttons_one);
-            }
-        }
-        // two buttons
-        else if (opt==="2") {
-            removeButtonsSplit();
-            addButtons_12();
-
-            if (iframe.contentWindow.document.querySelector(".col-1:nth-child(1) ul")) {
-                iframe.contentWindow.document.querySelector(".col-1:nth-child(1) ul").insertAdjacentHTML("afterend", col_1_content_buttons_pair);            
-            }
-            else {
-                iframe.contentWindow.document.querySelector(".col-1:nth-child(1) p:last-of-type").insertAdjacentHTML("afterend", col_1_content_buttons_pair);
-            }
-        }
-    }
-
-    function addOnlyButton_1() {
-        document.querySelector(".container-buttons-block").style.display="block";
-        document.getElementById("button_1").style.display="block";
-        document.getElementById("button_2").style.display="none";
-        document.getElementById("dd_buttons_size").disabled=false;
-        document.getElementById("dd_buttons_size").value="1";
-        document.getElementById("cb_col_buttons_width").disabled=false;
-        document.getElementById("cb_col_buttons_shadow").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase").disabled=false;
-
-        document.getElementById("rb_btn_align_desktop_left").disabled=false;
-        document.getElementById("rb_btn_align_desktop_left").checked=true;
-        document.getElementById("rb_btn_align_desktop_center").disabled=false;
-
-        document.getElementById("rb_btn_align_mobile_left").disabled=false;
-        document.getElementById("rb_btn_align_mobile_left").checked=true;
-        document.getElementById("rb_btn_align_mobile_center").disabled=false;
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("dd_buttons_shape").value="0";
-        document.getElementById("cb_col_buttons_width").disabled=false;
-        document.getElementById("cb_col_buttons_width").checked=false;
-
-        document.getElementById("cb_col_buttons_shadow").disabled=false;
-        document.getElementById("cb_col_buttons_shadow").checked=false;
-        document.getElementById("cb_col_buttons_uppercase").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase").checked=false;
-
-        document.getElementById("rd_btns_icons_left_1").checked=true;
-        document.getElementById("rd_btns_icons_left_2").checked=true;        
-    }
-
-    function addButtons_12() {
-        document.querySelector(".container-buttons-block").style.display="block";
-        document.getElementById("button_1").style.display="block";
-        document.getElementById("button_2").style.display="block";
-        document.getElementById("dd_buttons_size").disabled=false;
-        document.getElementById("dd_buttons_size").value="1";
-        document.getElementById("cb_col_buttons_width").disabled=false;
-        document.getElementById("cb_col_buttons_shadow").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase").disabled=false;
-        document.getElementById("rb_btn_align_desktop_left").disabled=false;
-        document.getElementById("rb_btn_align_desktop_left").checked=true;
-        document.getElementById("rb_btn_align_desktop_center").disabled=false;
-        document.getElementById("rb_btn_align_mobile_left").disabled=false;
-        document.getElementById("rb_btn_align_mobile_left").checked=true;
-        document.getElementById("rb_btn_align_mobile_center").disabled=false;
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("dd_buttons_shape").value="0";
-        document.getElementById("cb_col_buttons_width").disabled=false;
-        document.getElementById("cb_col_buttons_width").checked=false;
-
-        document.getElementById("cb_col_buttons_shadow").disabled=false;
-        document.getElementById("cb_col_buttons_shadow").checked=false;
-        document.getElementById("cb_col_buttons_uppercase").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase").checked=false;
-        document.getElementById("rd_btns_icons_left_1").checked=true;
-        document.getElementById("rd_btns_icons_left_2").checked=true;
-    }
-
-    function removeButtonsSplit() {
-        if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-            const elBtn = iframe.contentWindow.document.querySelector("section .container-btn");
-            elBtn.remove();
-            document.querySelector(".container-buttons-block").style.display="none";
-            document.getElementById("dd_buttons_size").disabled=true;
-            document.getElementById("dd_buttons_size").value="1";
-            document.getElementById("cb_col_buttons_width").disabled=true;
-            document.getElementById("switch_btn_align_desktop").disabled=true;
-            document.getElementById("switch_btn_align_mobile").disabled=true;
-            document.getElementById("rb_btn_align_desktop_left").disabled=true;
-            document.getElementById("rb_btn_align_desktop_left").checked=false;
-            document.getElementById("rb_btn_align_desktop_center").disabled=true;
-            document.getElementById("rb_btn_align_mobile_left").disabled=true;
-            document.getElementById("rb_btn_align_mobile_left").checked=false;
-            document.getElementById("rb_btn_align_mobile_center").disabled=true;
-            document.getElementById("dd_buttons_shape").disabled=true;
-            document.getElementById("dd_buttons_shape").value="0";
-            document.getElementById("cb_col_buttons_width").disabled=true;
-            document.getElementById("cb_col_buttons_width").checked=false;
-            document.getElementById("cb_col_buttons_shadow").disabled=true;
-            document.getElementById("cb_col_buttons_shadow").checked=false;
-            document.getElementById("cb_col_buttons_uppercase").disabled=true;
-            document.getElementById("cb_col_buttons_uppercase").checked=false;
-        }
-    }
-  
-/*
-//////////////// BUTTONS: SIZE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsSize);
-
-function doButtonsSize() {
-    let opt = document.querySelector("#dd_buttons_size").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
-
-    // Small
-    if (opt==="0") { 
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-large");
-            btn.classList.add("btn-small");
-        });
-    }
     // Regular
-    else if (opt==="1") { 
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-small");
-            btn.classList.remove("btn-large");
-        });
-    }
-    
-    // Large
-    else if (opt==="2") { 
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-small");
-            btn.classList.add("btn-large");
-        });
-    }    
-}
-
-/*
-//////////////// BUTTONS: ALIGN DESKTOP  ////////////////////
-*/
-
-document.querySelector("#switch_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
-
-function doButtonsAlignDesktop() {
-
-    const rbs = document.querySelectorAll("input[name='rb_btn_align_desktop']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    // Verify vutton container exists 
-    if (iframe.contentWindow.document.querySelector(".container-btn")) {  
-
-        let elBtns = iframe.contentWindow.document.querySelector(".container-btn");
-
-        if (selectedValue==="left") {
-            elBtns.classList.remove("text-center-desktop");
-        }
-
-        else if (selectedValue==="center") {
-            elBtns.classList.add("text-center-desktop");
-        }
-    }
-}
-
-/*
-//////////////// BUTTONS: ALIGN MOBILE  ////////////////////
-*/
-
-document.querySelector("#switch_btn_align_mobile").addEventListener("change", doButtonsAlignMobile);
-
-function doButtonsAlignMobile() {
-
-    const rbs = document.querySelectorAll("input[name='rb_btn_align_mobile']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    // Verify vutton container exists 
-    if (iframe.contentWindow.document.querySelector(".container-btn")) {      
-        let elBtns = iframe.contentWindow.document.querySelector(".container-btn");
-        if (selectedValue==="left") {
-            elBtns.classList.remove("text-center-mobile");
-        }
-
-        else if (selectedValue==="center") {
-            elBtns.classList.add("text-center-mobile");
-        }
-    }
-}
-
-
-/*
-//////////////// BUTTONS: WIDTH  ////////////////////
-*/
-
-document.querySelector("#cb_col_buttons_width").addEventListener("change", doBtnWidth);
-
-function doBtnWidth() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
-
-    if (!document.getElementById("cb_col_buttons_width").checked) {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-block");
-        });
-    }
-    else {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-block");
-        });
-    }
-}
-
-/*
-//////////////// BUTTONS: SHAPE ////////////////////
-*/
-
-document.querySelector("#dd_buttons_shape").addEventListener("change", doButtonsShape);
-
-function doButtonsShape() {
-    let opt = document.querySelector("#dd_buttons_shape").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
-
-    // remove
     if (opt==="0") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.remove("btn-soft");
-        });
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("dd_buttons_shape").value="0";
+        // Test for Font Awesome
+        if (iframe.contentWindow.document.querySelector("section ul.fa-ul") ) {
+            // Loop through spans in list items and remove italic nodes
+            let objListSpans = iframe.contentWindow.document.querySelectorAll("section ul li span");
+
+            for (let i = 0; i < objListSpans.length; i++) {
+                objListSpans[i].firstChild.remove();
+            }
+            // Loop through list items and remove spans
+            let objListItems = iframe.contentWindow.document.querySelectorAll("section ul li");
+
+            for (let i = 0; i < objListItems.length; i++) {
+                objListItems[i].firstChild.remove();
+            }
+
+            let objAllCols = iframe.contentWindow.document.querySelector("section");
+
+            objAllCols.innerHTML = objAllCols.innerHTML.replaceAll("<ul class=\"fa-ul\">", "<ul>");
+        }
+        document.getElementById("dd_list_marker").value = "0";
+        document.getElementById("fa-icons").style.display ="none";
+        document.getElementById("fa-circle-check").checked=true;
     }
 
-    // soft
+    // Font Awesome
     else if (opt==="1") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-pill");
-            btn.classList.add("btn-soft");
-        });
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("dd_buttons_shape").value="1";
-    }
-
-    // pill
-    else if (opt==="2") {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-soft");
-            btn.classList.add("btn-pill");
-        });
-        document.getElementById("dd_buttons_shape").disabled=false;
-        document.getElementById("dd_buttons_shape").value="2";
+        if (iframe.contentWindow.document.querySelector("section ul:not(.fa-ul)") ) {
+            console.log("Got this far in Font Awesome");
+            let objSection = iframe.contentWindow.document.querySelector("section");           objSection.innerHTML = objSection.innerHTML.replaceAll("<ul>", "<ul class=\"fa-ul\">");
+            objSection.innerHTML = objSection.innerHTML.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
+        }
+        document.getElementById("fa-icons").style.display ="flex";
+        document.getElementById("fa-circle-check").checked=true;
     }
 }
 
 /*
-//////////////// BUTTONS: SHADOW ///////////////
+//////////////// SECTION LIST MARKER: FONT AWESOME CHARACTER ////////////////////
 */
 
-document.querySelector("#cb_col_buttons_shadow").addEventListener("change", doBtnShadow);
+document.querySelector("#form_switch_fa_icons").addEventListener("change", chooseListMarker);
 
-function doBtnShadow() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
-    if (!document.getElementById("cb_col_buttons_shadow").checked) {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-shadow");
-        });
-    }
-    else {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-shadow");
-        });
-    }
-}
-
-/*
-//////////////// BUTTONS: UPPERCASE ///////////////
-*/
-
-document.querySelector("#cb_col_buttons_uppercase").addEventListener("change", doBtnUCase);
-
-function doBtnUCase() {
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section a.btn');
-    if (!document.getElementById("cb_col_buttons_uppercase").checked) {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.remove("btn-uppercase");
-        });
-    }
-    else {
-        // Loop through buttons
-        objBtns.forEach(btn => {
-            btn.classList.add("btn-uppercase");
-        });
-    }
-}
-
-/*
-//////////////// BUTTON 1: ICON POSITION ////////////////////
-*/
-
-document.querySelector("#switch_btns_icons_position_1").addEventListener("change", swapButtonIcons_1);
-
-function swapButtonIcons_1() {
-
-    const rbs = document.querySelectorAll("input[name='btns_icons_position_1']");
+function chooseListMarker() {
+    const rbs = document.querySelectorAll("input[name='switch_fa_icons']");
+    let objIcons = iframe.contentWindow.document.querySelectorAll("section ul li span");
+    let node;   
     let selectedValue;
-    
+
     for (const rb of rbs) {
         if (rb.checked) {
             selectedValue = rb.value;
@@ -618,80 +324,49 @@ function swapButtonIcons_1() {
         }
     }
 
-    // Set up button icon and text content
-    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(1)");
-
-    const icon_left  ="<i class=\"fas fa-shopping-cart\"></i><span>Order now</span>";
-    const icon_right ="<span>Order Now</span><i class=\"fas fa-shopping-cart\"></i>";
-    const icon_none = "<span>Order now</span>";
-
-    if (selectedValue==="left") {
-        // Icon at left. Text at right.
-        el_btn.innerHTML = icon_left;
-    }
-    
-    else if (selectedValue==="right") {
-        // Text left. Icon at right.
-        el_btn.innerHTML = icon_right;
-    }
-    
-    else if (selectedValue==="none") {
-        // Only text, No icons.
-        el_btn.innerHTML = icon_none;
+    for (let i = 0; i < objIcons.length; i++) {
+        objIcons[i].firstChild.remove();
+        node = document.createElement("i");
+        node.classList.add("fa-solid");
+        node.classList.add(selectedValue);
+        objIcons[i].appendChild(node);
     }
 }
 
 /*
-//////////////// BUTTON 2: ICON POSITION ////////////////////
+//////////////// HYPERLINKS ///////////////
 */
 
-document.querySelector("#switch_btns_icons_position_2").addEventListener("change", swapButtonIcons_2);
+document.querySelector("#cb_hyperlinks").addEventListener("change", doHyperlinks);
 
-function swapButtonIcons_2() {
+function doHyperlinks() {
+    if (!document.getElementById("cb_hyperlinks").checked) {
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<a href=\"#\">corporate strategy\</a>', 'corporate strategy');
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<a href=\"#\">new normal<\/a>', 'new normal');
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('<a href=\"#\">convergence<\/a>', 'convergence');
 
-    const rbs = document.querySelectorAll("input[name='btns_icons_position_2']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
+        document.getElementById("hyperlinks-colors").style.display ="none";
+        document.getElementById("hyperlinks-underlines").style.display ="none";  
     }
-
-    // Set up button icon and text content
-    const el_btn = iframe.contentWindow.document.querySelector("a.btn:nth-child(2)");
-    const icon_left  ="<i class=\"fas fa-arrow-right\"></i><span>Learn more</span>";
-    const icon_right ="<span>Learn more</span><i class=\"fas fa-arrow-right\"></i>";
-    const icon_none = "<span>Learn more</span>";
-    
-    if (selectedValue==="left") {
-        // Icon at left. Text at right.
-        el_btn.innerHTML = icon_left;
-    }
-    
-    else if (selectedValue==="right") {
-        // Text left. Icon at right.
-        el_btn.innerHTML = icon_right;
-    }
-    
-    else if (selectedValue==="none") {
-        // Only text, No icons.
-        el_btn.innerHTML = icon_none;
+    else {
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('corporate strategy', '<a href=\"#\">corporate strategy\</a>');
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('new normal', '<a href=\"#\">new normal<\/a>');
+        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replaceAll('convergence', '<a href=\"#\">convergence<\/a>');
+        document.getElementById("hyperlinks-colors").style.display ="flex";
+        document.getElementById("hyperlinks-underlines").style.display ="flex";  
     }
 }
-
 
 /*
 //////////////// VISUAL ELEMENT INSIDE SINGLE-COLUMN LAYOUT ///////////////
 */
 
 /* Enable visual */
-document.querySelector("#cb_visual").addEventListener("change",checkVis);
+document.querySelector("#cb_visual").addEventListener("change", checkVis);
 
 function checkVis() {
 
-    if (!document.getElementById("cb_visualOn").checked) {
+    if (!document.getElementById("cb_visual").checked) {
         removeVisual();
     }
     else {
@@ -710,7 +385,7 @@ function checkVis() {
 }
 
 
-document.querySelector("#vis-types-all").addEventListener("click", doVisType);
+// document.querySelector("#vis-types-all").addEventListener("click", doVisType);
 
 function doVisType() { 
     const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
@@ -787,7 +462,7 @@ function doVisType() {
 //////////////// ILLUSTRATIONS: ALIGN ON DESKTOP  ////////////////////
 */
 
-document.querySelector("#switch-section-desktop-figure-align").addEventListener("change", doAlignDesktopFig);
+// document.querySelector("#switch-section-desktop-figure-align").addEventListener("change", doAlignDesktopFig);
     
 function doAlignDesktopFig() {
 
@@ -813,7 +488,7 @@ function doAlignDesktopFig() {
 //////////////// VISUAL ELEMENT WIDTH (600px AND ABOVE ) ///////////////
 */
 
-document.querySelector("#switch_section_vis_width_desktop").addEventListener("change", doFigWidthDesktop);
+// document.querySelector("#switch_section_vis_width_desktop").addEventListener("change", doFigWidthDesktop);
 
 function doFigWidthDesktop() {
     const rbs = document.querySelectorAll("input[name='section-vis-width-desktop']");
@@ -843,6 +518,12 @@ function doFigWidthDesktop() {
         el_section_fig.classList.add("figure-width-50");
         enableVisualAlign();        
     }
+
+    else if (selectedValue==="full") {
+        el_section_fig.classList.remove("figure-width-50");
+        el_section_fig.classList.remove("figure-width-80");
+        enableVisualAlign();        
+    }
 }
 
 /*
@@ -850,7 +531,7 @@ function doFigWidthDesktop() {
 */
 
 /* Enable image shadows */
-document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
+// document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
 
 function doImgShadows() {
 
@@ -866,7 +547,7 @@ function doImgShadows() {
 //////////////// VISUAL PROPERTIES: CORNERS ///////////////
 */
 
-document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
+// document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
 
 function doImgCorners() {
 
@@ -883,7 +564,7 @@ function doImgCorners() {
 */
 
 /* Enable video shadows */
-document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
+// document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
 
 function doVidShadows() {
     if (!document.getElementById("cb_vid_shadows").checked) {
@@ -1002,14 +683,10 @@ function resetVisual() {
 }
 
 function removeVisual() {
-    if (iframe.contentWindow.document.querySelector('section')) {
-        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("</figure>", "</figure>\n\n\t");
-        let el_content = iframe.contentWindow.document.querySelector('section');
-        let el_fig = iframe.contentWindow.document.querySelector('section figure');
-        el_content.removeChild(el_fig);
-
-        iframe.contentWindow.document.querySelector('section').innerHTML = iframe.contentWindow.document.querySelector('section').innerHTML.replace("empowerment.</p>\n\n\t", "empowerment.</p>\n\n");
-    }
+    iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("</figure>", "</figure>\n\n\t");
+    let el_content = iframe.contentWindow.document.querySelector('section');
+    let el_fig = iframe.contentWindow.document.querySelector('section figure');
+    el_content.removeChild(el_fig);
 
     disableRBs();
     disableVisualWidth();

@@ -207,7 +207,7 @@ function doColOneH2Text() {
 }
 
 /*
-//////////////// COL-1: MAIN HEADING H2 HIGHLIGHT TEXT ///////////////
+//////////////// COL-1: MAIN HEADING H2 BOTTOM BORDER  ///////////////
 */
 
 document.querySelector("#cb_col_1_h2_border").addEventListener("change", doColOneH2Border);
@@ -313,9 +313,6 @@ function removeColOne() {
     if (iframe.contentWindow.document.querySelector('section .col-1')) {
         const elCol1 = iframe.contentWindow.document.querySelector('section .col-1');
         elCol1.remove();
-        col_no = col_no.slice(1);
-        iframe.contentWindow.document.querySelector('section').innerHTML = 
-        iframe.contentWindow.document.querySelector('section').innerHTML.replace("\n\n\t\t<div class=\""+col_no+"\">", "<div class=\""+col_no+"\">");
 
         // Disable properties
         document.getElementById("cb_col_1").checked=false;
@@ -333,7 +330,6 @@ function removeColOne() {
         document.getElementById("cb_col_1_h3").checked=false;
         document.getElementById("btn_col_1_h2_text").disabled=true;
         document.getElementById("btn_col_1_h3_text").disabled=true;
-        col_no = "."+col_no; // Restore .col_no
         document.querySelector("#text-highlight .input-group:nth-child(1)").style.display ="none";
         document.querySelector("#text-highlight .input-group:nth-child(2)").style.display ="none";
         document.getElementById("cb_col_1_h2_highlight").checked = false;

@@ -231,20 +231,12 @@ function doWidthSectionDesktop() {
     else if (opt==="3") {
         iframe.contentWindow.document.querySelector("section").classList.add("w-1140px");
     }
-    else if (opt==="4") {
-        iframe.contentWindow.document.querySelector("section").classList.add("w-1320px");
-    }
-    else if (opt==="5") {
-        iframe.contentWindow.document.querySelector("section").classList.add("w-1536px");
-    }
 }
 
 function deleteWidthSectionDesktop() {
     iframe.contentWindow.document.querySelector("section").classList.remove("w-960px");
     iframe.contentWindow.document.querySelector("section").classList.remove("w-1024px");
     iframe.contentWindow.document.querySelector("section").classList.remove("w-1140px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("w-1320px");
-    iframe.contentWindow.document.querySelector("section").classList.remove("w-1536px");                
 }
 
 /*
