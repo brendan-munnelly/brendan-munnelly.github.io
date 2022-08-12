@@ -36,7 +36,7 @@ if (id) {
 document.querySelector("#cb_section_btns").addEventListener("change", loadBtnInitial);
 
 function loadBtnInitial() {
-    const objSection = iframe.contentWindow.document.querySelector("section ");
+    const objSection = iframe.contentWindow.document.querySelector("section .col-2.col-text");
     
     // Create single button in all cols
     if (document.getElementById("cb_section_btns").checked) {
@@ -79,7 +79,7 @@ function loadBtnInitial() {
 
     // remove all buttons from columns 
     else {
-        const objAllBtns = iframe.contentWindow.document.querySelector("section .container-btn");
+        const objAllBtns = iframe.contentWindow.document.querySelector("section .col-2.col-text .container-btn");
         objAllBtns.remove();
 
         // disable dialog box settings for all buttons
@@ -140,8 +140,8 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
         }
 
         // count cols
-        const objSection = iframe.contentWindow.document.querySelector("section ");
-        const objAllBtns = iframe.contentWindow.document.querySelector("section  .container-btn");
+        const objSection = iframe.contentWindow.document.querySelector("section .col-2.col-text");
+        const objAllBtns = iframe.contentWindow.document.querySelector("section .col-2.col-text .container-btn");
         let el_btn_col;
 
         if (selectedValue==="btn-one") {
@@ -222,7 +222,7 @@ document.querySelector("#dd_buttons_size").addEventListener("change", doButtonsS
 
 function doButtonsSize() {
     let opt = document.querySelector("#dd_buttons_size").value;
-    const objBtns = iframe.contentWindow.document.querySelectorAll('section  .container-btn a.btn');
+    const objBtns = iframe.contentWindow.document.querySelectorAll('section .container-btn a.btn');
 
     // Small
     if (opt==="0") { 
@@ -270,9 +270,9 @@ function doButtonsAlignDesktop() {
     }
 
     // Verify button container exists 
-    if (iframe.contentWindow.document.querySelector(".container-btn")) {  
+    if (iframe.contentWindow.document.querySelector("section .container-btn")) {  
 
-        let el_btn = iframe.contentWindow.document.querySelector(".container-btn");
+        let el_btn = iframe.contentWindow.document.querySelector("section .container-btn");
 
         if (selectedValue==="left") {
             el_btn.classList.remove("text-center-desktop");
@@ -303,8 +303,8 @@ function doButtonsAlignMobile() {
     }
 
     // Verify vutton container exists 
-    if (iframe.contentWindow.document.querySelector(".container-btn")) {      
-        let el_btn = iframe.contentWindow.document.querySelector(".container-btn");
+    if (iframe.contentWindow.document.querySelector("section .container-btn")) {      
+        let el_btn = iframe.contentWindow.document.querySelector("section .container-btn");
         if (selectedValue==="left") {
             el_btn.classList.remove("text-center-mobile");
         }
@@ -325,7 +325,7 @@ document.querySelector("#dd_button_type_1").addEventListener("change", doButtonT
 function doButtonType1() {
     let opt = document.querySelector("#dd_button_type_1").value;
 
-    const el_btn = iframe.contentWindow.document.querySelector('section  .container-btn a.btn:nth-child(1)');
+    const el_btn = iframe.contentWindow.document.querySelector('section .container-btn a.btn:nth-child(1)');
 
     // Solid
     if (opt==="0") {

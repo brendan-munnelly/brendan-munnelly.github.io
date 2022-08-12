@@ -1,10 +1,5 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
-// Used by color picker. Either 'theme-light' or 'theme-dark'.
-section_class = sessionStorage.getItem('section-selector');
-section_theme = sessionStorage.getItem('section-theme');
-col_no = sessionStorage.getItem('col-no');
-col_col_count = sessionStorage.getItem('col-count');
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -23,21 +18,6 @@ divs.forEach(el => el.addEventListener('click', event => {
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
     
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        // Work with upper block
-        if (menuId==="2") {
-            window.scrollTo(0,0);
-        }
-        // Work with columns
-        else if (menuId==="3") {
-            let el = iframe.contentWindow.document.querySelector('.col-2');
-            el.scrollIntoView(true);
-        }
-        // Work with buttons
-        else if (menuId==="4") {
-            window.scrollTo(0,document.body.scrollHeight);
-        }
-    }
     // Hide color picker
     hideSidebar();
 }));
@@ -52,6 +32,8 @@ function hideMenus() {
         document.querySelector("#content-"+i).classList.add("dropdown-hidden");
     }
     hideSidebar();
+    document.getElementById("ui-admin-select").style.display ="none";
+    document.getElementById("btn_gears").classList.remove('btn-lower-left-active');
 }
 
 // Hide menus when users presses Esc key.
@@ -78,7 +60,6 @@ function hideDialogBox() {
         document.querySelector(`#content-${[i]}`).classList.add("dropdown-hidden"); 
     }
     hideSidebar();
-    disableTransColCode();
 } 
 
 /* Show/hide color picker */
@@ -92,7 +73,6 @@ function hideSidebar() {
     document.querySelector("#myModal").classList.remove("show-sidebar");
     document.querySelector("#myModal").scrollTo(0, 0); // scrolls to top of sidebar
 }
-
 
 /* ================ DIALOG BOXES =================== */
 
@@ -135,6 +115,7 @@ function dragElement(elmnt) {
         // set the element's new position:
         elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
     }
 
     function closeDragElement() {
@@ -142,16 +123,14 @@ function dragElement(elmnt) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
-}
 
 /*
 //////////////// SECTION: THEME  ///////////////
 */
 
-document.querySelector("#switch_section_theme").addEventListener("change", doSectionTheme);
+document.querySelector("#form_switch_section_theme").addEventListener("change", doSectionTheme);
 
 function doSectionTheme() {
-    hideMenus();
     const rbs = document.querySelectorAll("input[name='switch_section_light_dark']");
     let selectedValue;
 
@@ -161,47 +140,13 @@ function doSectionTheme() {
             break;
         }
     }
-    // Remove all styles
-    var hs = iframe.contentWindow.document.querySelectorAll('style');
-    for (var i=0, max = hs.length; i < max; i++) {
-        hs[i].parentNode.removeChild(hs[i]);
-    }
 
     if (selectedValue==="light") {
         iframe.contentWindow.document.querySelector("section").classList.remove("theme-dark"); 
-        iframe.contentWindow.document.querySelector("section").classList.add("theme-light"); 
-        // Update session storage;
-        sessionStorage.setItem('section-theme', 'section.theme-light.'+section_class); 
     }
         
     else if (selectedValue==="dark") {
-        iframe.contentWindow.document.querySelector("section").classList.remove("theme-light"); 
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
-        // Update session storage;
-        sessionStorage.setItem('section-theme', 'section.theme-dark.'+section_class); 
-    }
-
-    // Check for outlines
-    if (document.querySelector("#cb_outlines").checked) {
-        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = document.head || iframe.contentWindow.document.getElementsByTagName('head')[0],
-        style_checked = iframe.contentWindow.document.createElement('style');
-        head_checked.appendChild(style_checked);
-        style_checked.type = 'text/css';
-        style_checked.appendChild(document.createTextNode(css_checked));
-    }
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        document.getElementById("cb_cols_shadows").checked=false; 
-        document.getElementById("cb_col_borders").disabled=false; 
-        document.getElementById("cb_col_borders").checked=false; 
-        document.getElementById("cb_cols_corners_soft").disabled=true; 
-        document.getElementById("cb_cols_corners_soft").checked=false; 
-    }
-    const el_section = iframe.contentWindow.document.querySelector("section");
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        el_section.classList.remove("cols-padding");
-        el_section.classList.remove("cols-shadows");
-        el_section.classList.remove("col-corners");
     }
     disableCSS();
 }
@@ -214,11 +159,10 @@ document.querySelector("#dd_class_name").addEventListener("change", doClassName)
 
 function doClassName() {
     removeClassNames();
-    let opt = 1 + parseInt(document.querySelector("#dd_class_name").value);
-    section_class = "section-selector-"+opt;
+    let opt = document.querySelector("#dd_class_name").value;
     iframe.contentWindow.document.querySelector("section").classList.add("section-selector-"+opt);
-    // Update session storage;
-    sessionStorage.setItem('section-selector', 'section-selector-'+opt);
+    // Update global variable;
+    sectionClassName = ".section-selector-"+opt;
 }
 
 function removeClassNames() {
@@ -228,45 +172,6 @@ function removeClassNames() {
     }
 }
 
-function RemoveColsPadding() {
-    // Test for no border, no shadow and not default theme
-    if ((!iframe.contentWindow.document.querySelector("section.col-borders")) && (!iframe.contentWindow.document.querySelector("section.col-shadows") )  ) {
-        if (sessionStorage.getItem('col-background')) {
-            const sessData = sessionStorage.getItem('col-background');
-            if (sessData==="default") {
-                const el_section = iframe.contentWindow.document.querySelector("section");
-                el_section.classList.remove("col-padding");
-            }
-        }
-    }
-}  
-
-/*
-//////////////// SECTION: OUTLINES  ///////////////
-*/
-
-document.querySelector("#cb_outlines").addEventListener("change", toggleOutlines);
-
-function toggleOutlines() {
-    
-    if (document.querySelector("#cb_outlines").checked) {
-        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
-        head_checked = iframe.contentWindow.document.getElementsByTagName('head')[0],
-        style_checked = iframe.contentWindow.document.createElement('style');
-        head_checked.appendChild(style_checked);
-        style_checked.type = 'text/css';
-        style_checked.appendChild(iframe.contentWindow.document.createTextNode(css_checked));
-    }
-
-    else {
-        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
-        head_unchecked = iframe.contentWindow.document.getElementsByTagName('head')[0],
-        style_unchecked = iframe.contentWindow.document.createElement('style');
-        head_unchecked.appendChild(style_unchecked);
-        style_unchecked.type = 'text/css';
-        style_unchecked.appendChild(iframe.contentWindow.document.createTextNode(css_unchecked));
-    }
-}    
 
 /*
 //////////////// SECTION WIDTH ///////////////
@@ -279,29 +184,25 @@ function doWidthSectionDesktop() {
     let opt = document.querySelector("#dd_section_width").value;
     deleteWidthSectionDesktop();
 
-    if (opt==="1") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-960px");
+    if (opt==="0") {
+        iframe.contentWindow.document.querySelector("section").classList.add("w-800px");
+    }
+    else if (opt==="1") {
+        iframe.contentWindow.document.querySelector("section").classList.add("w-960px");
     }
     else if (opt==="2") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1024px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1024px");
     }
     else if (opt==="3") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1140px");
-    }
-    else if (opt==="4") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1320px");
-    }
-    else if (opt==="5") {
-        iframe.contentWindow.document.querySelector('.'+section_class).classList.add("w-1536px");
+        iframe.contentWindow.document.querySelector("section").classList.add("w-1140px");
     }
 }
 
 function deleteWidthSectionDesktop() {
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-960px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1024px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1140px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1320px");
-    iframe.contentWindow.document.querySelector('.'+section_class).classList.remove("w-1536px");                
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-800px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-960px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1024px");
+    iframe.contentWindow.document.querySelector("section").classList.remove("w-1140px");
 }
 
 /*
@@ -313,14 +214,12 @@ const modal = document.getElementById("myModal");
 const span = document.querySelector('#myModal .close-modal')
 span.onclick = function() {
     hideSidebar();
-    disableTransColCode();
 }
     
 // When the user clicks anywhere outside the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         hideSidebar();
-        disableTransColCode();
     }
 }
 
@@ -330,16 +229,6 @@ let sub_string; // style rule excerpt
 
 const arrCSS = []; // array for style rules to copy
 
-// newStyle = 'section.theme-light.section-selector-1 { background-color: var(--yellow-200) }\n';
-
-// arrCSS.push(newStyle);
-
-// style = document.createElement('style');
-// iframe.contentWindow.document.head.appendChild(style);
-// style.appendChild(document.createTextNode(newStyle));
-// enableCSS();
-
-
 // On click style button 
 let all_btns = document.querySelectorAll('.btn_style');
 all_btns.forEach(el => el.addEventListener('click', event => {
@@ -347,30 +236,10 @@ all_btns.forEach(el => el.addEventListener('click', event => {
     // get button id
     btn_id = event.target.id.toString();
     console.log("Button ID: "+btn_id);
-
-    if (!btn_id) {
-        document.querySelector("#box-msg").classList.add("is-visible");
-        document.querySelector("#box-msg").classList.remove("is-hidden");
-    }
-    else {
-        document.querySelector("#box-msg").classList.remove("is-visible");
-        document.querySelector("#box-msg").classList.add("is-hidden");
-        displayModal();
-    }
+    displayModal();
 }));
 
-/* Color picker error */
-document.querySelector(".close-box-msg").addEventListener('click', closeBoxMsg);
-
-function closeBoxMsg() {
-    document.querySelector("#box-msg").classList.remove("is-visible");
-    document.querySelector("#box-msg").classList.add("is-hidden");
-}
-
 function displayModal() {
-    if ((btn_id === "btn_solid_bg_passive") || (btn_id === "btn_solid_bg_active") ||(btn_id === "btn_solid_border_passive") || (btn_id === "btn_solid_border_active") || (btn_id === "btn_secondary_passive_bg") || (btn_id === "btn_secondary_bg_active") ||(btn_id === "btn_secondary_border_passive") || (btn_id === "btn_secondary_active_border") ) {
-        enableTransColCode();
-    }
     showSidebar();
     event.preventDefault();
 }
@@ -398,119 +267,150 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
                 break;
             }
         }
-        // Test checkbox instead, limits to UI elements rather than section
-        if (iframe.contentWindow.document.querySelector("section.theme-light")) {
-            section_theme = "section.theme-light."+section_class;
-        }
-        else if (iframe.contentWindow.document.querySelector("section.theme-dark")) {
-            section_theme = "section.theme-dark."+section_class;
-        }
 
         /* Section background */
         if (btn_id === "btn_section_bg") {
-            newStyle = section_theme+ " { background-color: var("+color_code+") }\n";
-            sub_string = section_theme+ " { background-color: ";
+            newStyle = sectionClassName+ " { background-color: var("+color_code+") }\n";
+            sub_string = sectionClassName+ " { background-color: ";
+            // Used for checking if cols-padding necessary
+            sectionBg = "var("+color_code+")";
+            console.log("New section background: "+sectionBg);
+            console.log("Current column background: "+colsBg);
+            console.log("sectionBg: "+sectionBg);
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-2 label text */
-        else if (btn_id === "btn_col_label_text") {
-            newStyle = section_theme+ " .container-upper-label { color: var("+color_code+") }\n";
-            sub_string = " .col-2 .container-upper-label";
+        /* badge text */
+        else if (btn_id === "btn_badge_text") {
+            newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
+            sub_string = ".badge { color";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-2 h2 main heading */
-        else if (btn_id === "btn_col_h2_text") {
-            newStyle = section_theme+ " .col-2 h2 { color: var("+color_code+") }\n";
-            sub_string = ".col-2 h2";
+        /* badge background */
+        else if (btn_id === "btn_badge_bg") {
+            newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
+            sub_string = ".badge { background-color";
+            doUpdateArray(sub_string,newStyle);
+        }        
+
+        /* h2 main heading */
+        else if (btn_id === "btn_h2_text") {
+            newStyle = sectionClassName+ " > h2 { color: var("+color_code+") }\n";
+            sub_string = "h2 { color:"
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-2 h3 main heading */
-        else if (btn_id === "btn_col_h3_text") {
-            newStyle = section_theme+ " .col-2 h3 { color: var("+color_code+") }\n";
-            sub_string = ".col-2 h3";
+        /* h2 main heading highlight text */
+        else if (btn_id === "btn_h2_highlight") {
+            newStyle = sectionClassName+ " > h2 span.highlight { color: var("+color_code+") }\n";
+            sub_string = "h2 span.highlight";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .col-2 text */
-        else if (btn_id === "btn_col_text") {
-            newStyle = section_theme+ " .col-2 p { color: var("+color_code+") }\n." +section_class+" .col-2 li { color: var("+color_code+") }\n"; 
-            sub_string = ".col-2 p {";
+        /* h2 main heading bottom border */
+        else if (btn_id === "btn_h2_border") {
+            newStyle = sectionClassName+ " > h2.heading-underline::after { background-color: var("+color_code+") }\n";
+            sub_string = "h2.heading-underline";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* h3 sub heading */
+        else if (btn_id === "btn_h3_text") {
+            newStyle = sectionClassName+ " h3 { color: var("+color_code+") }\n";
+            sub_string = " h3 {";
             doUpdateArray(sub_string,newStyle); 
         }
 
+        /* Section paragraphs text */
+        else if (btn_id === "btn_para_text") {
+            newStyle = sectionClassName+ " p { color: var("+color_code+") }\n"; 
+            sub_string = " p {";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+        /* Section paragraphs text */
+        else if (btn_id === "btn_list_text") {
+            newStyle = sectionClassName+ " ul li { color: var("+color_code+") }\n"; 
+            sub_string = " ul li {";
+            doUpdateArray(sub_string,newStyle); 
+        }
+
+
         /* List marker */
-        else if (btn_id === "btn_col_list_marker") {
-            newStyle = section_theme+ " .col-2 li::marker, "+section_theme+ " .col-2 ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+        else if (btn_id === "btn_list_marker") {
+            newStyle = sectionClassName+ " li::marker, "+sectionClassName+ " ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
             doUpdateArray(sub_string,newStyle); 
         }
         
+
         /* === Buttons === */
 
         /* Text colour: passive */
-        else if (btn_id === "btn_solid_text_passive") {
-            newStyle = section_theme+" .btn-solid:link,\n"+section_theme+" .btn-solid:visited { color: var("+color_code+") }\n\n";
-            sub_string = ".btn-solid:visited { color";
+        else if (btn_id === "btn_cols_text_passive") {
+            // Get class of buttons
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Text colour: active */
-        else if (btn_id === "btn_solid_text_active") {
-            newStyle = section_theme+" .btn-solid:focus,\n"+section_theme+" .btn-solid:hover,\n"+section_theme+" .btn-solid:active { color: var("+color_code+") }\n\n";
-            sub_string = ".btn-solid:active { color";
+        else if (btn_id === "btn_cols_text_active") {
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: passive */
-        else if (btn_id === "btn_solid_bg_passive") {
-            newStyle = section_theme+" .btn-solid:link,\n"+section_theme+" .btn-solid:visited { background-color: var("+color_code+") }\n\n";
-            sub_string = ".btn-solid:visited { background-color";
+        else if (btn_id === "btn_cols_bg_passive") {
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: active */
-        else if (btn_id === "btn_solid_bg_active") {
-            newStyle = section_theme+" .btn-solid:focus,\n"+section_theme+" .btn-solid:hover,\n"+section_theme+" .btn-solid:active { background-color: var("+color_code+") }\n\n";
-            sub_string = ".btn-solid:active { background-color";
+        else if (btn_id === "btn_cols_bg_active") {
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: passive */
-        else if (btn_id === "btn_solid_border_passive") {
-            newStyle = section_theme+" .btn-solid:link,\n"+section_theme+" .btn-solid:visited { border-color: var("+color_code+") }\n\n";
-            sub_string = ".btn-primary:visited { border-color";
+        else if (btn_id === "btn_cols_border_passive") {
+            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: active */
-        else if (btn_id === "btn_solid_border_active") {
-            newStyle = section_theme+" .btn-solid:focus,\n"+section_theme+" .btn-solid:hover,\n"+section_theme+" .btn-solid:active { border-color: var("+color_code+") }\n\n";
-            sub_string = "btn-primary:active { border-color";
+        else if (btn_id === "btn_cols_border_active") {
+            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        
         /* Icons colour */
         else if (btn_id === "btn_icon_color") {
-            newStyle =  section_theme+" "+col_no+" figure.icon { color: var("+color_code+") }\n";
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure.icon { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
-        
+
+        /* Photos overlay textbox color */
+        else if (btn_id === "btn_cols_img_overlay_color_text") {
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
+        }
+
+        /* Photos overlay textbox background color */
+        else if (btn_id === "btn_cols_img_overlay_color_bg") {
+            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
+        }        
+      
         style = document.createElement('style');
         iframe.contentWindow.document.head.appendChild(style);
         style.appendChild(document.createTextNode(newStyle));
@@ -528,16 +428,264 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         }
     }
 
+
 /*
-//////////////// COLORS: TRANSPARENT OPTION ////////////////////
+//////////////// UI THEME SELECTOR  ///////////////
 */
 
-function enableTransColCode() {
-    document.getElementById("color-transparent").style.display="block";
+document.querySelector("#btn_gears").addEventListener("click", doUIThemeBtn);
+
+function doUIThemeBtn() {
+    const eleBtn = document.getElementById("btn_gears");
+
+    if (eleBtn.classList.contains('btn-lower-left-active')) {
+        eleBtn.classList.remove('btn-lower-left-active');
+        document.getElementById("ui-admin-select").style.display ="none";
+    }
+    else {
+        eleBtn.classList.add('btn-lower-left-active');
+        document.getElementById("ui-admin-select").style.display ="block";
+    }
 }
 
-function disableTransColCode() {
-    document.getElementById("color-transparent").style.display="none";
+document.querySelector("#dd_ui_theme").addEventListener("click", doUIThemeSelect);
+
+function doUIThemeSelect() {
+    deleteUITheme();
+
+    let opt = document.querySelector("#dd_ui_theme").value;
+    const elControl = document.getElementById("controls-top");
+    const elLowerLeft = document.getElementById("lower-left");
+    const elLowerRight = document.getElementById("copy-code-btns");
+
+    if (opt==="1") {
+        elControl.classList.add("theme-ui-dark-contrast");
+        elLowerLeft.classList.add("theme-ui-dark-contrast"); 
+        elLowerRight.classList.add("theme-ui-dark-contrast"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-dark-contrast'); 
+    }
+    else if (opt==="2") {
+        elControl.classList.add("theme-ui-dark-blue");
+        elLowerLeft.classList.add("theme-ui-dark-blue"); 
+        elLowerRight.classList.add("theme-ui-dark-blue"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-dark-blue'); 
+    }
+    else if (opt==="3") {
+        elControl.classList.add("theme-ui-dark-green");
+        elLowerLeft.classList.add("theme-ui-dark-green"); 
+        elLowerRight.classList.add("theme-ui-dark-green"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-dark-green'); 
+    }
+    else if (opt==="4") {
+        elControl.classList.add("theme-ui-dark-pink");
+        elLowerLeft.classList.add("theme-ui-dark-pink"); 
+        elLowerRight.classList.add("theme-ui-dark-pink"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-dark-pink'); 
+    }
+
+    else if (opt==="5") {
+        elControl.classList.add("theme-ui-light");
+        elLowerLeft.classList.add("theme-ui-light"); 
+        elLowerRight.classList.add("theme-ui-light"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-light'); 
+    }
+    else if (opt==="6") {
+        elControl.classList.add("theme-ui-tiffany");
+        elLowerLeft.classList.add("theme-ui-tiffany"); 
+        elLowerRight.classList.add("theme-ui-tiffany"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-tiffany'); 
+    }
+    else if (opt==="7") {
+        elControl.classList.add("theme-ui-pistachio");
+        elLowerLeft.classList.add("theme-ui-pistachio"); 
+        elLowerRight.classList.add("theme-ui-pistachio"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-pistachio'); 
+    }
+    else if (opt==="8") {
+        elControl.classList.add("theme-ui-girlboss");
+        elLowerLeft.classList.add("theme-ui-girlboss"); 
+        elLowerRight.classList.add("theme-ui-girlboss"); 
+        sessionStorage.setItem('ui-theme', 'theme-ui-girlboss'); 
+    }
+}
+
+function deleteUITheme() {
+    const elControl = document.getElementById("controls-top");
+    const elLowerLeft = document.getElementById("lower-left");
+    const elLowerRight = document.getElementById("copy-code-btns");
+
+    elControl.classList.remove("theme-ui-dark-contrast");
+    elLowerLeft.classList.remove("theme-ui-dark-contrast"); 
+    elLowerRight.classList.remove("theme-ui-dark-contrast"); 
+
+    elControl.classList.remove("theme-ui-dark-blue");
+    elLowerLeft.classList.remove("theme-ui-dark-blue");
+    elLowerRight.classList.remove("theme-ui-dark-blue"); 
+
+    elControl.classList.remove("theme-ui-dark-green");
+    elLowerLeft.classList.remove("theme-ui-dark-green"); 
+    elLowerRight.classList.remove("theme-ui-dark-green"); 
+
+    elControl.classList.remove("theme-ui-dark-pink");
+    elLowerLeft.classList.remove("theme-ui-dark-pink"); 
+    elLowerRight.classList.remove("theme-ui-dark-pink"); 
+
+    elControl.classList.remove("theme-ui-light");
+    elLowerLeft.classList.remove("theme-ui-light"); 
+    elLowerRight.classList.remove("theme-ui-light"); 
+
+    elControl.classList.remove("theme-ui-tiffany");
+    elLowerLeft.classList.remove("theme-ui-tiffany"); 
+    elLowerRight.classList.remove("theme-ui-tiffany"); 
+
+    elControl.classList.remove("theme-ui-pistachio");
+    elLowerLeft.classList.remove("theme-ui-pistachio"); 
+    elLowerRight.classList.remove("theme-ui-pistachio"); 
+    
+    elControl.classList.remove("theme-ui-girlboss");
+    elLowerLeft.classList.remove("theme-ui-girlboss"); 
+    elLowerRight.classList.remove("theme-ui-girlboss"); 
+}
+
+
+/*
+//////////////// UI GRID OUTLINES ///////////////
+*/
+
+document.querySelector("#btn_outlines").addEventListener("click", doOutlines);
+
+function doOutlines() {
+    document.getElementById("ui-admin-select").style.display ="none";
+    document.getElementById("btn_gears").classList.remove('btn-lower-left-active');
+
+    const eleBtn = document.getElementById("btn_outlines");
+
+    if (eleBtn.classList.contains('btn-lower-left-active')) {
+        eleBtn.classList.remove('btn-lower-left-active');
+        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
+        head_unchecked = iframe.contentWindow.document.getElementsByTagName('head')[0],
+        style_unchecked = iframe.contentWindow.document.createElement('style');
+        head_unchecked.appendChild(style_unchecked);
+        style_unchecked.type = 'text/css';
+        style_unchecked.appendChild(iframe.contentWindow.document.createTextNode(css_unchecked));
+    }
+    else {
+        eleBtn.classList.add('btn-lower-left-active');
+        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        head_checked = iframe.contentWindow.document.getElementsByTagName('head')[0],
+        style_checked = iframe.contentWindow.document.createElement('style');
+        head_checked.appendChild(style_checked);
+        style_checked.type = 'text/css';
+        style_checked.appendChild(iframe.contentWindow.document.createTextNode(css_checked));
+    }
+}
+
+/* Resize frame width */
+document.querySelector("#btn_resize_width").addEventListener("click", resizeWidth);
+
+function resizeWidth() {
+
+    document.getElementById("ui-admin-select").style.display ="none";
+    document.getElementById("btn_gears").classList.remove('btn-lower-left-active');
+    const eleBtn = document.getElementById("btn_resize_width");
+
+    if (document.getElementById("btn_resize_width").classList.contains('btn-lower-left-active')) {
+        eleBtn.classList.remove('btn-lower-left-active');
+        document.getElementById('page-preview-options').classList.remove("show-options");
+        document.getElementById('page-preview-options').classList.add("hide-options");
+    }
+
+    else {
+        eleBtn.classList.add('btn-lower-left-active');
+        document.getElementById('page-preview-options').classList.add("show-options");
+        document.getElementById('page-preview-options').classList.remove("hide-options");
+    }
+}
+
+function showRespIcons() {
+    document.getElementById('page-preview-options').classList.add("show-options");
+}
+
+function hideRespIcons() {
+    document.getElementById('#page-preview-options').classList.remove("show-options");
+}
+
+/*
+//////////////// Responsive resizing icons in navbar ///////////////
+*/
+
+document.querySelector("#container-icon-resize-width").addEventListener("click", doResizeWidth);
+
+function doResizeWidth() {
+    let img = document.getElementById('img-icon-resize-width').src;
+
+    // Not currently selected
+    if (img.indexOf('assets/img/icons/icon-resize-unselected.png')!=-1) {
+        document.getElementById('img-icon-resize-width').src = '../../ui/assets/img/icons/icon-resize-selected.png';
+        showRespIcons();
+    }
+
+    // Is currently selected
+    else {
+       document.getElementById('img-icon-resize-width').src = '../../ui/assets/img/icons/icon-resize-unselected.png';
+       hideRespIcons();
+   }
+}
+
+const iconsResponsive = document.querySelectorAll('.icon_resize_respon');
+
+iconsResponsive.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+        // Get current icon id
+        const iconId = e.currentTarget.id.toString();
+        document.getElementById(iconId).classList.add("selected");
+        resetResponsive();
+
+        if (iconId==="respDesktopLarge") {
+            document.getElementById("page-preview-body").classList.add("resp-desktop-large");
+            document.querySelector("#respDesktopLarge img").src = "../../ui/assets/img/icons/icon-resize-desktop-large.png";
+        }
+
+        else if (iconId==="respDesktopSmall") {
+            document.getElementById("page-preview-body").classList.add("resp-desktop-small");
+            document.querySelector("#respDesktopSmall img").src = "../../ui/assets/img/icons/icon-resize-desktop-small.png";
+        }
+
+        else if (iconId==="respTabletLandscape") {
+            document.getElementById("page-preview-body").classList.add("resp-tablet-landscape");
+            document.querySelector("#respTabletLandscape img").src = "../../ui/assets/img/icons/icon-resize-tablet-landscape.png";
+        }
+        else if (iconId==="respTabletPortrait") {
+            document.getElementById("page-preview-body").classList.add("resp-tablet-portrait");
+            document.querySelector("#respTabletPortrait img").src = "../../ui/assets/img/icons/icon-resize-tablet-portrait.png";
+        }        
+        
+        else if (iconId==="respMobileLarge") {
+            document.getElementById("page-preview-body").classList.add("resp-mobile-large");
+            document.querySelector("#respMobileLarge img").src = "../../ui/assets/img/icons/icon-resize-mobile-large.png";
+        }        
+
+        else if (iconId==="respMobileSmall") {
+            document.getElementById("page-preview-body").classList.add("resp-mobile-small")
+            document.querySelector("#respMobileSmall img").src = "../../ui/assets/img/icons/icon-resize-mobile-small.png";           
+        }        
+    });
+});
+
+function resetResponsive() {
+    document.getElementById("page-preview-body").classList.remove("resp-desktop-large");
+    document.getElementById("page-preview-body").classList.remove("resp-desktop-small");
+    document.getElementById("page-preview-body").classList.remove("resp-tablet-landscape");
+    document.getElementById("page-preview-body").classList.remove("resp-tablet-portrait");
+    document.getElementById("page-preview-body").classList.remove("resp-mobile-large");
+    document.getElementById("page-preview-body").classList.remove("resp-mobile-small");
+
+    document.querySelector("#respDesktopLarge img").src = "../../ui/assets/img/icons/icon-resize-desktop-large-selected.png";
+    document.querySelector("#respDesktopSmall img").src = "../../ui/assets/img/icons/icon-resize-desktop-small-selected.png";
+    document.querySelector("#respTabletLandscape img").src = "../../ui/assets/img/icons/icon-resize-tablet-landscape-selected.png";
+    document.querySelector("#respTabletPortrait img").src = "../../ui/assets/img/icons/icon-resize-tablet-portrait-selected.png";
+    document.querySelector("#respMobileLarge img").src = "../../ui/assets/img/icons/icon-resize-mobile-large-selected.png";  
+    document.querySelector("#respMobileSmall img").src = "../../ui/assets/img/icons/icon-resize-mobile-small-selected.png";  
 }
 
 /*
@@ -572,122 +720,13 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,section/g, "section");
-    // strCSS = strCSS.replace(/..container/g, ".container");
+    strCSS = strCSS.replace(/,.theme/g, ".theme");
+    strCSS = strCSS.replace(/,.section/g, ".section");
+    strCSS = strCSS.replaceAll(",.theme", ".theme");
+    strCSS = strCSS.replaceAll(",.section", ".section");
     el_css.value = strCSS;
     document.body.appendChild(el_css);
     el_css.select();
     document.execCommand('copy');
     document.body.removeChild(el_css);  
 }
-
-/*
-//////////////// REMOVE LEFTOVER NODES  ///////////////
-*/
-
-function removeEmptyNodes() {
-    const HTML_Content = document.querySelector("#HTML-Content");
-    var treeWalker = document.createTreeWalker(HTML_Content, NodeFilter.SHOW_ELEMENT);
-    var currentNode = treeWalker.currentNode
-    var emptyNodes = []
-
-    // test if a node has no text, regardless of whitespaces
-    var isNodeEmpty = node => !node.textContent.trim()
-
-    // find all empty nodes
-    while(currentNode) {
-        isNodeEmpty(currentNode) && emptyNodes.push(currentNode)
-        currentNode = treeWalker.nextNode()
-    }
-
-    // remove found empty nodes
-    emptyNodes.forEach(node => node.parentNode.removeChild(node))
-    return;
-}
-
-/*
-//////////////// Responsive resizing icons in navbar ///////////////
-*/
-
-document.querySelector("#container-icon-resize-width").addEventListener("click", doResizeWidth);
-
-function doResizeWidth() {
-    let img = document.getElementById('img-icon-resize-width').src;
-
-    // Not currently selected
-    if (img.indexOf('assets/img/icons/icon-resize-unselected.png')!=-1) {
-        document.getElementById('img-icon-resize-width').src = 'assets/img/icons/icon-resize-selected.png';
-        showRespIcons();
-    }
-
-    // Is currently selected
-    else {
-       document.getElementById('img-icon-resize-width').src = 'assets/img/icons/icon-resize-unselected.png';
-       hideRespIcons();
-   }
-}
-
-function showRespIcons() {
-    document.querySelector('.page-preview-options').classList.add("show-options");
-}
-
-function hideRespIcons() {
-    document.querySelector('.page-preview-options').classList.remove("show-options");
-}
-
-const iconsResponsive = document.querySelectorAll('.icon_resize_respon');
-
-iconsResponsive.forEach(icon => {
-    icon.addEventListener('click', (e) => {
-        // Get current icon id
-        const iconId = e.currentTarget.id.toString();
-        document.getElementById(iconId).classList.add("selected");
-        resetResponsive();
-
-        if (iconId==="respDesktopLarge") {
-            document.getElementById("page-preview-body").classList.add("resp-desktop-large");
-            document.querySelector("#respDesktopLarge img").src = "assets/img/icons/icon-resize-desktop-large.png";
-        }
-
-        else if (iconId==="respDesktopSmall") {
-            document.getElementById("page-preview-body").classList.add("resp-desktop-small");
-            document.querySelector("#respDesktopSmall img").src = "assets/img/icons/icon-resize-desktop-small.png";
-        }
-
-        else if (iconId==="respTabletLandscape") {
-            document.getElementById("page-preview-body").classList.add("resp-tablet-landscape");
-            document.querySelector("#respTabletLandscape img").src = "assets/img/icons/icon-resize-tablet-landscape.png";
-        }
-        else if (iconId==="respTabletPortrait") {
-            document.getElementById("page-preview-body").classList.add("resp-tablet-portrait");
-            document.querySelector("#respTabletPortrait img").src = "assets/img/icons/icon-resize-tablet-portrait.png";
-        }        
-        
-        else if (iconId==="respMobileLarge") {
-            document.getElementById("page-preview-body").classList.add("resp-mobile-large");
-            document.querySelector("#respMobileLarge img").src = "assets/img/icons/icon-resize-mobile-large.png";
-        }        
-
-        else if (iconId==="respMobileSmall") {
-            document.getElementById("page-preview-body").classList.add("resp-mobile-small")
-            document.querySelector("#respMobileSmall img").src = "assets/img/icons/icon-resize-mobile-small.png";           
-        }        
-    });
-});
-
-function resetResponsive() {
-    document.getElementById("page-preview-body").classList.remove("resp-desktop-large");
-    document.getElementById("page-preview-body").classList.remove("resp-desktop-small");
-    document.getElementById("page-preview-body").classList.remove("resp-tablet-landscape");
-    document.getElementById("page-preview-body").classList.remove("resp-tablet-portrait");
-    document.getElementById("page-preview-body").classList.remove("resp-mobile-large");
-    document.getElementById("page-preview-body").classList.remove("resp-mobile-small");
-
-    document.querySelector("#respDesktopLarge img").src = "assets/img/icons/icon-resize-desktop-large-selected.png";
-    document.querySelector("#respDesktopSmall img").src = "assets/img/icons/icon-resize-desktop-small-selected.png";
-    document.querySelector("#respTabletLandscape img").src = "assets/img/icons/icon-resize-tablet-landscape-selected.png";
-    document.querySelector("#respTabletPortrait img").src = "assets/img/icons/icon-resize-tablet-portrait-selected.png";
-    document.querySelector("#respMobileLarge img").src = "assets/img/icons/icon-resize-mobile-large-selected.png";  
-    document.querySelector("#respMobileSmall img").src = "assets/img/icons/icon-resize-mobile-small-selected.png";  
-}
-

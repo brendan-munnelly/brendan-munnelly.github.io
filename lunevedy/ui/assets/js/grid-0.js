@@ -290,7 +290,7 @@ function doListMarker() {
         }
         document.getElementById("dd_list_marker").value = "0";
         document.getElementById("fa-icons").style.display ="none";
-        document.getElementById("fa-circle-check").checked=true;
+        document.getElementById("rb-fa-circle-check").checked=true;
     }
 
     // Font Awesome
@@ -301,7 +301,7 @@ function doListMarker() {
             objSection.innerHTML = objSection.innerHTML.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
         }
         document.getElementById("fa-icons").style.display ="flex";
-        document.getElementById("fa-circle-check").checked=true;
+        document.getElementById("rb-fa-circle-check").checked=true;
     }
 }
 
