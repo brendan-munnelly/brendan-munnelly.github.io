@@ -153,9 +153,11 @@ function doH2Border() {
 
     if (!document.getElementById("cb_h2_border").checked) {
         objH2.classList.remove("heading-underline");
+        document.getElementById("btn_h2_border").disabled = true;    
     }
     else {
         objH2.classList.add("heading-underline");
+        document.getElementById("btn_h2_border").disabled = false    
     }
 }
 

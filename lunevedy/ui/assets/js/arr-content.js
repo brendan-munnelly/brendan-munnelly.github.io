@@ -1,5 +1,8 @@
 /* Text Content Assets */
 
+/* H2 sub-heading in header hero block */
+export const content_header_h2_text ="A sub-heading that motivates visitors to continue reading.";
+
 /* Label in single-column layout */
 export const content_header_label_text_col_1 ="PRODUCTS";
 

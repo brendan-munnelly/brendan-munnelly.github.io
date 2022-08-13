@@ -5,7 +5,7 @@ import {content_header_label_text_col_1, content_h3, content_list} from '../js/a
 */
 
 /* Desktop: left and right */
-// document.querySelector("#form_col_visual_desktop").addEventListener("change", doColOrderDesktop);
+document.querySelector("#form_col_visual_desktop").addEventListener("change", doColOrderDesktop);
 
 function doColOrderDesktop() {
     const rbs = document.querySelectorAll("input[name='col_visual_desktop']");
@@ -28,7 +28,7 @@ function doColOrderDesktop() {
 }
 
 /* Mobile: top and bottom */
-// document.querySelector("#form_col_visual_mobile").addEventListener("change", doColOrderMobile);
+document.querySelector("#form_col_visual_mobile").addEventListener("change", doColOrderMobile);
 
 function doColOrderMobile() {
     const rbs = document.querySelectorAll("input[name='col_visual_mobile']");
@@ -54,12 +54,12 @@ function doColOrderMobile() {
 //////////////// VISUAL BLEED ///////////////
 */
 
-// document.querySelector("#dd_bleed_desktop").addEventListener("change", doVisualBleedDesktop);
+document.querySelector("#dd_bleed_desktop").addEventListener("change", doVisualBleedDesktop);
 
 function doVisualBleedDesktop() {
 
     let opt = document.querySelector("#dd_bleed_desktop").value;
-    let elColVis = iframe.contentWindow.document.querySelector('.'+section_class +" .col-2.col-visual");
+    let elColVis = iframe.contentWindow.document.querySelector("section .col-2.col-visual");
     
     // Regular
     if (opt==="0") {
@@ -78,12 +78,12 @@ function doVisualBleedDesktop() {
     }
 }
 
-// document.querySelector("#dd_bleed_mobile").addEventListener("change", doVisualBleedMobile);
+document.querySelector("#dd_bleed_mobile").addEventListener("change", doVisualBleedMobile);
 
 function doVisualBleedMobile() {
 
     let opt = document.querySelector("#dd_bleed_mobile").value;
-    let elColVis = iframe.contentWindow.document.querySelector('.'+section_class +" .col-2.col-visual");
+    let elColVis = iframe.contentWindow.document.querySelector("section .col-2.col-visual");
     
     // Regular
     if (opt==="0") {
