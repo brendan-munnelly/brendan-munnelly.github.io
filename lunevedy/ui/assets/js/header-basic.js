@@ -12,24 +12,16 @@ function doWidthTextDesktop() {
     deleteWidthTextDesktop();
 
     if (opt==="0") {
-        iframe.contentWindow.document.querySelector("header").classList.add("w-800px");
+        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-80");
     }
     else if (opt==="1") {
-        iframe.contentWindow.document.querySelector("header").classList.add("w-960px");
-    }
-    else if (opt==="2") {
-        iframe.contentWindow.document.querySelector("header").classList.add("w-1024px");
-    }
-    else if (opt==="3") {
-        iframe.contentWindow.document.querySelector("header").classList.add("w-1140px");
+        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-60");
     }
 }
 
 function deleteWidthTextDesktop() {
-    iframe.contentWindow.document.querySelector("header").classList.remove("w-800px");
-    iframe.contentWindow.document.querySelector("header").classList.remove("w-960px");
-    iframe.contentWindow.document.querySelector("header").classList.remove("w-1024px");
-    iframe.contentWindow.document.querySelector("header").classList.remove("w-1140px");
+    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-80");
+    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-60");
 }
 
 /*

@@ -17,7 +17,6 @@ function doVis() {
         document.getElementById("form_vis_types").style.display = "none";
         document.getElementById("properties-photos").style.display = "none";
         document.getElementById("cb_img_textbox").checked=false;
-        document.getElementById("cb_img_h4").checked=false;
         document.getElementById("properties-transparent").style.display = "none";
         document.getElementById("properties-drawings").style.display = "none";
         document.getElementById("properties-videos").style.display = "none";
@@ -111,7 +110,7 @@ document.querySelector("#cb_photos_corners_soft").addEventListener("change", doP
 
 function doPhotosCorners() {
 
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_fig = iframe.contentWindow.document.querySelector("header figure");
 
     if (!document.getElementById("cb_photos_corners_soft").checked) {
         el_fig.classList.remove("fig-corners-soft");
@@ -126,7 +125,7 @@ document.querySelector("#cb_photos_shadows").addEventListener("change", doPhotos
 
 function doPhotosShadows() {
 
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_fig = iframe.contentWindow.document.querySelector("header figure");
     
     if (!document.getElementById("cb_photos_shadows").checked) {
         el_fig.classList.remove("fig-shadows-box");
@@ -142,14 +141,14 @@ document.querySelector("#cb_img_textbox").addEventListener("change", doColH3Text
 
 function doColH3TextBox() {
 
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_fig = iframe.contentWindow.document.querySelector("header figure");
     let el_TextBox;
     let node;   
     const arrContent = []; 
 
     if (!document.querySelector("#cb_img_textbox").checked) {
         // Remove div as child of figure
-        el_TextBox = iframe.contentWindow.document.querySelector("section figure .cols-img-textbox");
+        el_TextBox = iframe.contentWindow.document.querySelector("header figure .cols-img-textbox");
         el_fig.removeChild(el_TextBox);
         document.getElementById("show-textbox").style.display = "none";
     }
@@ -190,40 +189,12 @@ function doTextBoxShape() {
     }
 }
 
-/* photos: overlay h4 sub-heading */
-
-document.querySelector("#cb_img_h4").addEventListener("change", doColH4Overlay);
-
-function doColH4Overlay() {
-
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
-    let el_H4_overlay;
-    let node;   
-
-    if (!document.querySelector("#cb_img_h4").checked) {
-        // Remove div as child of figure
-        el_H4_overlay = iframe.contentWindow.document.querySelector("section figure .cols-img-h4");
-        el_fig.removeChild(el_H4_overlay);
-        el_fig.classList.remove("figure-overlay");
-    }
-
-    else {
-        // Add overlay textbox as child of figure
-        node = document.createElement("div");
-        node.innerText = content_H4Overlay_section;
-        node.classList.add("cols-img-h4");
-        el_fig.appendChild(node);
-        el_fig.classList.add("figure-overlay");
-    }
-}
-
 function resetPhotoProps() {
     document.getElementById("dd_photos_shape").value="1";
     document.getElementById("cb_photos_shadows").checked=false;
     document.getElementById("cb_photos_corners_soft").checked=false;
     document.getElementById("show-textbox").style.display = "none";
     document.getElementById("cb_img_textbox").checked=false;
-    document.getElementById("cb_img_h4").checked=false;
 }
 
 /*
@@ -261,7 +232,7 @@ document.querySelector("#cb_trans_shadows").addEventListener("change", doTransSh
 
 function doTransShadows() {
 
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_fig = iframe.contentWindow.document.querySelector("header figure");
 
     if (!document.getElementById("cb_trans_shadows").checked) {
         el_fig.classList.remove("fig-shadows-trans");
@@ -310,7 +281,7 @@ document.querySelector("#cb_drawings_shadows").addEventListener("change", doDraw
 
 function doDrawingsShadows() {
 
-    const el_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_fig = iframe.contentWindow.document.querySelector("header figure");
     
     if (!document.getElementById("cb_drawings_shadows").checked) {
         el_fig.classList.remove("fig-shadows-trans");
@@ -325,41 +296,94 @@ function resetDrawingsProps() {
 }
 
 /*
-//////////////// VISUAL ELEMENT WIDTH (600px AND ABOVE ) ///////////////
+//////////////// VISUAL ELEMENT WIDTH ///////////////
 */
 
-document.querySelector("#dd_switch_section_vis_width").addEventListener("change", doFigWidth);
+document.querySelector("#dd_switch_header_vis_width").addEventListener("change", doFigWidthPhoto);
 
-function doFigWidth() {
-    let opt = document.querySelector("#dd_switch_section_vis_width").value;
-    const el_section_fig = iframe.contentWindow.document.querySelector("section figure");
+function doFigWidthPhoto() {
+    let opt = document.querySelector("#dd_switch_header_vis_width").value;
+    const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
 
     if (opt==="100") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.remove("figure-width-80");
-        el_section_fig.classList.remove("figure-width-full");
-        // disableVisualAlign();
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-80");
+    }
+
+    else if (opt==="60") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.add("w-60");
     }
 
     else if (opt==="80") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.remove("figure-width-full");
-        el_section_fig.classList.add("figure-width-80");
-        // enableVisualAlign();
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.add("w-80");
+    }
+}
+
+document.querySelector("#dd_switch_header_trans_width").addEventListener("change", doFigWidthTrans);
+
+function doFigWidthTrans() {
+    let opt = document.querySelector("#dd_switch_header_trans_width").value;
+    const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
+
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-80");
     }
 
-    else if (opt==="50") {
-        el_section_fig.classList.remove("figure-width-80");
-        el_section_fig.classList.remove("figure-width-full");
-        el_section_fig.classList.add("figure-width-50");
-        // enableVisualAlign();        
+    else if (opt==="60") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.add("w-60");
     }
 
-    else if (opt==="full") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.remove("figure-width-80");
-        el_section_fig.classList.add("figure-width-full");
-        // enableVisualAlign();        
+    else if (opt==="80") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.add("w-80");
+    }
+}
+
+document.querySelector("#dd_switch_header_drawings_width").addEventListener("change", doFigWidthDrawings);
+
+function doFigWidthDrawings() {
+    let opt = document.querySelector("#dd_switch_header_drawings_width").value;
+    const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
+
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-80");
+    }
+
+    else if (opt==="60") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.add("w-60");
+    }
+
+    else if (opt==="80") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.add("w-80");
+    }
+}
+
+document.querySelector("#dd_switch_header_vids_width").addEventListener("change", doFigWidthVids);
+
+function doFigWidthVids() {
+    let opt = document.querySelector("#dd_switch_header_vids_width").value;
+    const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
+
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-80");
+    }
+
+    else if (opt==="60") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.add("w-60");
+    }
+
+    else if (opt==="80") {
+        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.add("w-80");
     }
 }
 
@@ -417,7 +441,7 @@ function resetVideoProps() {
 
 function doVisSubTypes(n) {
 
-    const objSection = iframe.contentWindow.document.querySelector("section");
+    const objHeader = iframe.contentWindow.document.querySelector("header");
     let el_visual;
 
     // photos: landscape
@@ -457,19 +481,14 @@ function doVisSubTypes(n) {
     else if (n===8) {
         el_visual = content_vid_rumble_section;
     }    
-    objSection.innerHTML = el_visual + objSection.innerHTML; 
+    objHeader.innerHTML = objHeader.innerHTML + el_visual; 
 }
 
 function removeVisual() {
-    const parentNode = iframe.contentWindow.document.querySelector("section");
+    const parentNode = iframe.contentWindow.document.querySelector("header");
     var el_img = Array.prototype.slice.call(iframe.contentWindow.document.getElementsByTagName("figure"),0); 
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
-
-    // let el_img = iframe.contentWindow.document.querySelector("figure"); 
-    // console.log("el_img: "+el_img);
-    // console.log("el_img innerHTML: "+el_img.innerHTML);
-    // el_img.remove();
 }
 
