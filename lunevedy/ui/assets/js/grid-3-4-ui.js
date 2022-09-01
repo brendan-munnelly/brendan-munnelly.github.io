@@ -1,5 +1,10 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
+let btn_id; // item to be coloured
+let newStyle; // full selector and style rule
+let sub_string; // style rule excerpt for arrCSS
+let color_code;
+const arrCSS = []; // array for style rules to copy
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -129,7 +134,6 @@ function dragElement(elmnt) {
             elmnt.draggable = false; 
         }
         else {
-
         // e.preventDefault();
         // calculate the new cursor position:
         pos1 = pos3 - e.clientX;
@@ -173,26 +177,15 @@ function doSectionTheme() {
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
     }
-
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        document.getElementById("cb_cols_shadows").checked=false; 
-        document.getElementById("cb_cols_borders").disabled=false; 
-        document.getElementById("cb_cols_borders").checked=false; 
-        document.getElementById("cb_cols_corners_soft").disabled=true; 
-        document.getElementById("cb_cols_corners_soft").checked=false; 
-    }
-    const el_section = iframe.contentWindow.document.querySelector("section");
-    if (iframe.contentWindow.document.querySelector('.col-1') ) {
-        el_section.classList.remove("cols-padding");
-        el_section.classList.remove("cols-shadows");
-        el_section.classList.remove("cols-corners");
-    }
-    disableCSS();
+    clearCSSTags();
 }
 
 /*
 //////////////// SECTION: CLASS NAMES ///////////////
 */
+
+let sectionClassName = ".section-selector-1";
+let sectionTheme = ".theme-light";
 
 document.querySelector("#dd_class_name").addEventListener("change", doClassName);
 
@@ -265,12 +258,6 @@ window.onclick = function(event) {
     }
 }
 
-let btn_id; // item to be coloured
-let newStyle; // full selector and style rule
-let sub_string; // style rule excerpt
-
-const arrCSS = []; // array for style rules to copy
-
 // On click style button 
 let all_btns = document.querySelectorAll('.btn_style');
 all_btns.forEach(el => el.addEventListener('click', event => {
@@ -288,7 +275,7 @@ function displayModal() {
 
 document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
     
-    function handleLabelClick(event) {
+   function handleLabelClick(event) {
         event.stopPropagation();
         const label = event.target.closest("label");
         if (label && this.contains(label)) {
@@ -301,8 +288,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             return;
         }
         const rbs = document.querySelectorAll("input[name='picker-radio']");
-        let color_code;
-    
+            
         for (const rb of rbs) {
             if (rb.checked) {
                 color_code = rb.value;
@@ -314,104 +300,79 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         if (btn_id === "btn_section_bg") {
             newStyle = sectionClassName+ " { background-color: var("+color_code+") }\n";
             sub_string = sectionClassName+ " { background-color: ";
-            // Used for checking if cols-padding necessary
-            sectionBg = "var("+color_code+")";
-            console.log("New section background: "+sectionBg);
-            console.log("Current column background: "+colsBg);
-            console.log("sectionBg: "+sectionBg);
-            checkColorsPadding();
-            doUpdateArray(sub_string,newStyle);
+            console.log("clicked section bg color");
         }
 
         /* .col-1 badge text */
         else if (btn_id === "btn_col_1_badge_text") {
             newStyle = sectionClassName+ " .col-1-badge { color: var("+color_code+") }\n";
             sub_string = "col-1-badge { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 badge background */
         else if (btn_id === "btn_col_1_badge_bg") {
             newStyle = sectionClassName+ " .col-1-badge { background-color: var("+color_code+") }\n";
             sub_string = "col-1-badge { background-color";
-            doUpdateArray(sub_string,newStyle);
         }        
 
         /* .col-1 h2 main heading */
         else if (btn_id === "btn_col_1_h2_text") {
             newStyle = sectionClassName+ " .col-1 h2 { color: var("+color_code+") }\n";
             sub_string = "col-1 h2 { color:"
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 h2 main heading highlight text */
         else if (btn_id === "btn_col_1_h2_highlight") {
             newStyle = sectionClassName+ " .col-1 h2 span.highlight { color: var("+color_code+") }\n";
             sub_string = "col-1 h2 span.highlight";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 h2 main heading bottom border */
         else if (btn_id === "btn_col_1_h2_border") {
             newStyle = sectionClassName+ " .col-1 h2.heading-underline::after { background-color: var("+color_code+") }\n";
             sub_string = "heading-underline";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* .col-1 h3 sub heading */
         else if (btn_id === "btn_col_1_h3_text") {
             newStyle = sectionClassName+ " .col-1 h3 { color: var("+color_code+") }\n";
             sub_string = "col-1 h3";
-            doUpdateArray(sub_string,newStyle); 
         }
 
         /* Columns badges: text */
         else if (btn_id === "btn_cols_badge_text") {
             newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
             sub_string = ".badge { color: ";
-            doUpdateArray(sub_string,newStyle); 
         }
         
         /* Columns badges: background */
         else if (btn_id === "btn_cols_badge_bg") {
             newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
             sub_string = ".badge { background-color: ";
-            doUpdateArray(sub_string,newStyle); 
         }
         
         /* Columns subheading */
         else if (btn_id === "btn_cols_h3") {
             newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] h3 { color: var("+color_code+") }\n";
             sub_string = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] h3";
-            doUpdateArray(sub_string,newStyle);  
         }
         
         /* Column text */
         else if (btn_id === "btn_cols_text") {
             newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] p { color: var("+color_code+") }\n" +sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] li { color: var("+color_code+") }\n"; 
             sub_string = "div[class^='flex-cols-'] div[class^='col-'] p {";
-            doUpdateArray(sub_string,newStyle); 
         }
 
         /* List marker */
         else if (btn_id === "btn_cols_list_marker") {
-            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li::marker, "+sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
+            newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li::marker,\n"+sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
-            doUpdateArray(sub_string,newStyle); 
         }
         
         /* Column background */
         else if (btn_id === "btn_cols_bg") {
             newStyle = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] { background-color: var("+color_code+") }\n";
             sub_string = "div[class^='flex-cols-'] div[class^='col-'] { background-color";
-            // Used for checking if cols-padding necessary
-            colsBg = "var("+color_code+")";
-            console.log("colsBg: "+colsBg);
-            checkColorsPadding();
-            // Enable soft corners
-            document.getElementById("cb_cols_corners_soft").disabled = false;
-            document.getElementById("cb_cols_corners_soft").checked = false;
-            doUpdateArray(sub_string,newStyle);
         }
         
         /* Column borders: colour */
@@ -419,7 +380,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             newStyle = sectionTheme+sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] { border-color: var("+color_code+") }\n";
             console.log("newStyle: "+newStyle);
             sub_string = "cols-borders { border-color:"
-            doUpdateArray(sub_string,newStyle);
         }            
         
         /* Column shadows: colour */
@@ -427,19 +387,22 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             // get value of color code
             const styles = getComputedStyle(document.documentElement);
             const colorValue = styles.getPropertyValue(color_code);
-            console.log("color_code:" +color_code);
-            console.log("colorValue:" +colorValue);
-
-            const hex2rgba = (hex, alpha = 1) => {
-                const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
-                return `rgba(${r},${g},${b},${alpha})`;
-            };
-
-            const strRGB = hex2rgba(colorValue, .4);
-            console.log("strRGB:" +strRGB);
-            newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
             sub_string = "cols-shadows";
-            doUpdateArray(sub_string,newStyle);
+            let strRGB;
+            if (color_code ==="--black-000") {
+                strRGB = "rgba(0,0,0,0.4)";
+            }
+            else if (color_code ==="--white-000") {
+                strRGB = "rgba(255,255,255,0.4)";
+            }
+
+            else {
+                const hex2rgba = (hex, alpha = 1) => {
+                    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+                    return `rgba(${r},${g},${b},${alpha})`;
+                };
+                strRGB = hex2rgba(colorValue, .4);
+            }
         }
 
         /* === Buttons === */
@@ -449,69 +412,56 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             // Get class of buttons
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Text colour: active */
         else if (btn_id === "btn_cols_text_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: passive */
         else if (btn_id === "btn_cols_bg_passive") {
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { background-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: active */
         else if (btn_id === "btn_cols_bg_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { background-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: passive */
         else if (btn_id === "btn_cols_border_passive") {
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { border-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: active */
         else if (btn_id === "btn_cols_border_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { border-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Icons colour */
         else if (btn_id === "btn_icon_color") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure.icon { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox color */
         else if (btn_id === "btn_cols_img_overlay_color_text") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox background color */
         else if (btn_id === "btn_cols_img_overlay_color_bg") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
-        }        
-      
-        style = document.createElement('style');
-        iframe.contentWindow.document.head.appendChild(style);
-        style.appendChild(document.createTextNode(newStyle));
-        enableCSS();
+        }  
+        doUpdateArray(sub_string,newStyle);      
     }
 
     function doUpdateArray(sub_string,newStyle) {
@@ -523,20 +473,79 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else {
             arrCSS.push(newStyle);
         }
+        updateCSSTagPair();
     }
 
-    function checkColorsPadding() {
-        // Test for no border, no shadow and column background != section background
-        if ( (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-borders")) && (!iframe.contentWindow.document.querySelector("div[class^='flex-cols-'].cols-shadows") ) ) {
-            if (sectionBg===colsBg) {
-                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.remove("cols-padding");
+    function updateCSSTagPair() {
+        let strCSS = arrCSS.toString();
+        strCSS = strCSS.replaceAll(",.theme", ".theme");
+        strCSS = strCSS.replaceAll(",.section", ".section");
+        if (iframe.contentWindow.document.head.innerHTML.includes("<style>")) {
+            var st = iframe.contentWindow.document.getElementsByTagName('style');            
+            for(let i = 0 ; i < st.length ; i++){
+                st[i].parentNode.removeChild(st[i]);
             }
-            else {
-                iframe.contentWindow.document.querySelector("div[class^='flex-cols-']").classList.add("cols-padding");
-            }
+        }
+        styleTagPair = iframe.contentWindow.document.createElement("style");
+        iframe.contentWindow.document.head.appendChild(styleTagPair);
+        styleTagPair.append(strCSS);
+        if (arrCSS.length > 0) {
+            enableCSS();
+        }
+        else {
+            disableCSS();
         }
     }
 
+    // Remove all style rules
+    function clearCSSTags() {
+        if (iframe.contentWindow.document.head.innerHTML.includes("<style>")) {
+            var st = iframe.contentWindow.document.getElementsByTagName('style');            
+            for(let i = 0 ; i < st.length ; i++){
+                st[i].parentNode.removeChild(st[i]);
+            }
+        }
+        disableCSS();
+    }
+
+    // Remove selected style rules only
+    function removeCSSTagPairs(...args) {
+
+        console.log(`number of args: ${args.length}`);
+
+        // remove from CSS array
+        for (const arg of args) {
+            console.log("An arg content: "+arg);
+            const arrPos = arrCSS.findIndex(e => e.includes(arg)); 
+            console.log("arrPos: "+arrPos);
+            if (arrPos != "-1") {
+                // remove from CSS array
+                arrCSS.splice(arrPos, 1);
+            }
+        }
+
+        // remove current <style> from head
+        let strCSS = arrCSS.toString();
+        strCSS = strCSS.replaceAll(",.theme", ".theme");
+        strCSS = strCSS.replaceAll(",.section", ".section");
+        var st = iframe.contentWindow.document.getElementsByTagName('style');            
+        for(let i = 0 ; i < st.length ; i++){
+            st[i].parentNode.removeChild(st[i]);
+        }
+        // recreate new <style> in head
+        styleTagPair = iframe.contentWindow.document.createElement("style");
+        iframe.contentWindow.document.head.appendChild(styleTagPair);
+        // Add CSS rules without deleted rules to <style> in head
+        styleTagPair.append(strCSS);
+
+        if (arrCSS.length > 0) {
+            enableCSS();
+        }
+        else {
+            disableCSS();
+        }
+    }
+   
 /*
 //////////////// UI THEME SELECTOR  ///////////////
 */
@@ -828,8 +837,6 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,.theme/g, ".theme");
-    strCSS = strCSS.replace(/,.section/g, ".section");
     strCSS = strCSS.replaceAll(",.theme", ".theme");
     strCSS = strCSS.replaceAll(",.section", ".section");
     el_css.value = strCSS;

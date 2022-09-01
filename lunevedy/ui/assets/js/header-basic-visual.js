@@ -305,19 +305,32 @@ function doFigWidthPhoto() {
     let opt = document.querySelector("#dd_switch_header_vis_width").value;
     const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
 
-    if (opt==="100") {
-        el_header_fig.classList.remove("w-60");
+    if (opt==="120") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.add("w-120");
     }
 
-    else if (opt==="60") {
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
-        el_header_fig.classList.add("w-60");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-100");
     }
 
     else if (opt==="80") {
-        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-50");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
         el_header_fig.classList.add("w-80");
+    }
+
+    else if (opt==="50") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-50");
     }
 }
 
@@ -327,19 +340,32 @@ function doFigWidthTrans() {
     let opt = document.querySelector("#dd_switch_header_trans_width").value;
     const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
 
-    if (opt==="100") {
-        el_header_fig.classList.remove("w-60");
+    if (opt==="120") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.add("w-120");
     }
 
-    else if (opt==="60") {
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
-        el_header_fig.classList.add("w-60");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-100");
     }
 
     else if (opt==="80") {
-        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-50");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
         el_header_fig.classList.add("w-80");
+    }
+
+    else if (opt==="50") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-50");
     }
 }
 
@@ -349,19 +375,32 @@ function doFigWidthDrawings() {
     let opt = document.querySelector("#dd_switch_header_drawings_width").value;
     const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
 
-    if (opt==="100") {
-        el_header_fig.classList.remove("w-60");
+    if (opt==="120") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.add("w-120");
     }
 
-    else if (opt==="60") {
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
-        el_header_fig.classList.add("w-60");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-100");
     }
 
     else if (opt==="80") {
-        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-50");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
         el_header_fig.classList.add("w-80");
+    }
+
+    else if (opt==="50") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-50");
     }
 }
 
@@ -371,19 +410,32 @@ function doFigWidthVids() {
     let opt = document.querySelector("#dd_switch_header_vids_width").value;
     const el_header_fig = iframe.contentWindow.document.querySelector("header figure");
 
-    if (opt==="100") {
-        el_header_fig.classList.remove("w-60");
+    if (opt==="120") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.add("w-120");
     }
 
-    else if (opt==="60") {
+    if (opt==="100") {
+        el_header_fig.classList.remove("w-50");
         el_header_fig.classList.remove("w-80");
-        el_header_fig.classList.add("w-60");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-100");
     }
 
     else if (opt==="80") {
-        el_header_fig.classList.remove("w-60");
+        el_header_fig.classList.remove("w-50");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
         el_header_fig.classList.add("w-80");
+    }
+
+    else if (opt==="50") {
+        el_header_fig.classList.remove("w-80");
+        el_header_fig.classList.remove("w-100");
+        el_header_fig.classList.remove("w-120");
+        el_header_fig.classList.add("w-50");
     }
 }
 

@@ -33,13 +33,13 @@ if (id) {
 //////////////// LOAD INITIAL BUTTON ////////////////////
 */
 
-document.querySelector("#cb_header_btns").addEventListener("change", loadBtnInitial);
+document.querySelector("#cb_section_btns").addEventListener("change", loadBtnInitial);
 
 function loadBtnInitial() {
     const objText = iframe.contentWindow.document.querySelector("header .container-text");
     
     // Add two button
-    if (document.getElementById("cb_header_btns").checked) {
+    if (document.getElementById("cb_section_btns").checked) {
         const btnDiv = document.createElement('div');
         const iconBtn1 = content_buttons_pair_icon_1;
         const textBtn1 = content_buttons_pair_text_1;
@@ -59,6 +59,14 @@ function loadBtnInitial() {
                 document.getElementById("rb_btn_two").disabled=false;
                 document.getElementById("dd_buttons_size").disabled=false;
                 document.getElementById("dd_buttons_size").value="1";
+                document.getElementById("form_btn_align_desktop").disabled=false;
+                document.getElementById("rb_btn_align_desktop_left").disabled=false;
+                document.getElementById("rb_btn_align_desktop_left").checked = true;;
+                document.getElementById("rb_btn_align_desktop_center").disabled=false;
+                document.getElementById("form_btn_align_mobile").disabled=false;
+                document.getElementById("rb_btn_align_mobile_left").disabled=false;
+                document.getElementById("rb_btn_align_mobile_left").checked = true;;
+                document.getElementById("rb_btn_align_mobile_center").disabled=false;
         
                 // enable dialog box settings for buttons one
                 document.querySelector(".container-buttons-block").style.display="block";
@@ -89,6 +97,14 @@ function loadBtnInitial() {
 
         document.getElementById("dd_buttons_size").disabled=true;
         document.getElementById("dd_buttons_size").value="1";
+        document.getElementById("form_btn_align_desktop").disabled=true;
+        document.getElementById("rb_btn_align_desktop_left").disabled=true;
+        document.getElementById("rb_btn_align_desktop_left").checked = false;
+        document.getElementById("rb_btn_align_desktop_center").disabled=true;
+        document.getElementById("form_btn_align_mobile").disabled=true;
+        document.getElementById("rb_btn_align_mobile_left").disabled=true;
+        document.getElementById("rb_btn_align_mobile_left").checked = false;
+        document.getElementById("rb_btn_align_mobile_center").disabled=true;
 
         // disable, reset dialog box settings for buttons one
         document.querySelector(".container-buttons-block").style.display="none";
@@ -151,6 +167,14 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             document.getElementById("rb_btn_two").disabled=false;
             document.getElementById("dd_buttons_size").disabled=false;
             document.getElementById("dd_buttons_size").value="1";
+            document.getElementById("form_btn_align_desktop").disabled=false;
+            document.getElementById("rb_btn_align_desktop_left").disabled=false;
+            document.getElementById("rb_btn_align_desktop_left").checked = true;;
+            document.getElementById("rb_btn_align_desktop_center").disabled=false;
+            document.getElementById("form_btn_align_mobile").disabled=false;
+            document.getElementById("rb_btn_align_mobile_left").disabled=false;
+            document.getElementById("rb_btn_align_mobile_left").checked = true;;
+            document.getElementById("rb_btn_align_mobile_center").disabled=false;
     
             // enable dialog box settings for buttons one
             document.querySelector(".container-buttons-block").style.display="block";
@@ -232,6 +256,71 @@ function doButtonsSize() {
         });
     }    
 }
+
+/*
+//////////////// BUTTONS COMMON: ALIGN DESKTOP  ////////////////////
+*/
+
+document.querySelector("#form_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
+
+function doButtonsAlignDesktop() {
+
+    const rbs = document.querySelectorAll("input[name='rb_btn_align_desktop']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    // Verify button container exists 
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {  
+
+        let el_btn = iframe.contentWindow.document.querySelector(".container-btn");
+
+        if (selectedValue==="left") {
+            el_btn.classList.remove("text-center-desktop");
+        }
+
+        else if (selectedValue==="center") {
+            el_btn.classList.add("text-center-desktop");
+        }
+    }
+}
+
+/*
+//////////////// BUTTONS COMMON: ALIGN MOBILE  ////////////////////
+*/
+
+document.querySelector("#form_btn_align_mobile").addEventListener("change", doButtonsAlignMobile);
+
+function doButtonsAlignMobile() {
+
+    const rbs = document.querySelectorAll("input[name='rb_btn_align_mobile']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    // Verify vutton container exists 
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {      
+        let el_btn = iframe.contentWindow.document.querySelector(".container-btn");
+        if (selectedValue==="left") {
+            el_btn.classList.remove("text-center-mobile");
+        }
+
+        else if (selectedValue==="center") {
+            el_btn.classList.add("text-center-mobile");
+        }
+    }
+}
+
 
 /*
 //////////////// BUTTON ONE: TYPE ////////////////////

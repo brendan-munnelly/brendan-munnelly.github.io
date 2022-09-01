@@ -123,6 +123,15 @@ arrVidRumble[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"
 arrVidRumble[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://odysee.com/$/embed/did-google%E2%80%99s-a.i.-just-become-sentient/14d83b5976ae7f5a4b94e91ec1391bafc435e2ae?r=95Jvfn3aYo3zUzf6omjQZsMoi7ESTeyZ\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
 arrVidRumble[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<div class=\"container-video-yt\"><iframe src=\"https://rumble.com/embed/v168c2l/?pub=4\" title=\"Rumble video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\" width=\"560\" height=\"315\" frameborder=\"0\"><\/iframe><\/div>\n\t\t\t\t<\/figure>";
 
+export const assets_poster_focal_center = "..\/..\/ui\/assets\/videos\/poster-focal-center.jpg";
+export const assets_video_focal_center = "..\/..\/ui\/assets\/videos\/video-focal-center.mp4";
+
+export const assets_poster_focal_left = "..\/..\/ui\/assets\/videos\/poster-focal-left.jpg";
+export const assets_video_focal_left = "..\/..\/ui\/assets\/videos\/video-focal-left.mp4";
+
+export const assets_poster_focal_right = "..\/..\/ui\/assets\/videos\/poster-focal-right.jpg";
+export const assets_video_focal_right = "..\/..\/ui\/assets\/videos\/video-focal-right.mp4";
+
 export const arrIconFA = [];             
 arrIconFA[0]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-solid fa-user-group\"></i>\n\t\t\t\t<\/figure>";
 arrIconFA[1]="\n\t\t\t\t<figure class=\"icon\">\n\t\t\t\t\t<i class=\"fa-regular fa-comments\"></i>\n\t\t\t\t<\/figure>";

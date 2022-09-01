@@ -1,7 +1,6 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
 
-
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
 */
@@ -107,15 +106,23 @@ function dragElement(elmnt) {
 
     function elementDrag(e) {
         e = e || window.event;
-        // e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+        const elSliderColumn = document.getElementById("slider-thumb");
+
+        if(e.target == elSliderColumn) {
+            // Do nothing
+            elmnt.draggable = false; 
+        }
+        else {
+            // e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
         }
     }
 
@@ -124,36 +131,6 @@ function dragElement(elmnt) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
-
-/*
-//////////////// SECTION: THEME  ///////////////
-*/
-
-document.querySelector("#form_switch_header_theme").addEventListener("change", doHeaderTheme);
-
-function doHeaderTheme() {
-    const rbs = document.querySelectorAll("input[name='switch_header_light_dark']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    if (selectedValue==="light") {
-        iframe.contentWindow.document.querySelector("header").classList.remove("theme-dark"); 
-        iframe.contentWindow.document.querySelector("header").classList.add("theme-light"); 
-        headerTheme = ".theme-light";
-    }
-        
-    else if (selectedValue==="dark") {
-        iframe.contentWindow.document.querySelector("header").classList.add("theme-dark"); 
-        iframe.contentWindow.document.querySelector("header").classList.remove("theme-light"); 
-        headerTheme = ".theme-dark";
-    }
-    disableCSS();
 }
 
 /*
@@ -219,53 +196,56 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             }
         }
 
-        /* header background */
-        if (btn_id === "btn_header_bg") {
-            newStyle = "header"+headerTheme+" { background-color: var("+color_code+") }\n";
-            sub_string = "header"+headerTheme+" { background-color: ";
-            console.log("New header background: "+headerBg);
-            console.log("sub_string: "+sub_string);
+        /* Section background */
+        if (btn_id === "btn_section_bg") {
+            newStyle = "header.hero-block  { background-color: var("+color_code+") }\n";
+            sub_string = "header.hero-block { background-color: ";
+            // Used for checking if cols-padding necessary
+            sectionBg = "var("+color_code+")";
+            console.log("New section background: "+sectionBg);
+            console.log("Current column background: "+colsBg);
+            console.log("sectionBg: "+sectionBg);
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* .container-text .badge text */
+        /* badge text */
         else if (btn_id === "btn_badge_text") {
-            newStyle = "header"+headerTheme+" .container-text .badge { color: var("+color_code+") }\n";
+            newStyle = "header.hero-block .badge { color: var("+color_code+") }\n";
             sub_string = ".badge { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* badge background */
         else if (btn_id === "btn_badge_bg") {
-            newStyle = "header"+headerTheme+" .container-text .badge { background-color: var("+color_code+") }\n";
+            newStyle = "header.hero-block .badge { background-color: var("+color_code+") }\n";
             sub_string = ".badge { background-color";
             doUpdateArray(sub_string,newStyle);
         }        
 
         /* h1 main heading */
         else if (btn_id === "btn_h1_text") {
-            newStyle = "header"+headerTheme+" h1 { color: var("+color_code+") }\n";
+            newStyle = "header.hero-block h1 { color: var("+color_code+") }\n";
             sub_string = "h1 { color:"
             doUpdateArray(sub_string,newStyle);
         }
 
         /* h1 main heading highlight text */
         else if (btn_id === "btn_h1_highlight") {
-            newStyle = "header"+headerTheme+" h1 span.highlight { color: var("+color_code+") }\n";
+            newStyle = "header.hero-block h1 span.highlight { color: var("+color_code+") }\n";
             sub_string = "h1 span.highlight";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* h1 main heading bottom border */
         else if (btn_id === "btn_h1_border") {
-            newStyle = "header"+headerTheme+" h1.heading-underline::after { background-color: var("+color_code+") }\n";
+            newStyle = "header.hero-block h1.heading-underline::after { background-color: var("+color_code+") }\n";
             sub_string = "h1.heading-underline";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* h2 sub-heading */
         else if (btn_id === "btn_h2_text") {
-            newStyle = "header"+headerTheme+" h2 { color: var("+color_code+") }\n";
+            newStyle = "header.hero-block h2 { color: var("+color_code+") }\n";
             sub_string = "h2 { color:"
             doUpdateArray(sub_string,newStyle);
         }
@@ -273,109 +253,67 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         /* === Buttons === */
 
         /* Text colour: passive */
-        else if (btn_id === "btn_passive_text_1") {
+        else if (btn_id === "btn_cols_text_passive") {
             // Get class of buttons
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(1):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(1):visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(1):visited { color";
+            newStyle = ".container-btn a.btn:link,\n"+".container-btn a.btn:visited { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Text colour: active */
-        else if (btn_id === "btn_active_text_1") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(1):focus,\n"+"header"+headerTheme+".container-btn a.btn:nth-child(1):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(1):active { color: var("+color_code+") }\n\n";
-            console.log(newStyle);
-            sub_string = "a.btn:nth-child(2):active { color";
+        else if (btn_id === "btn_cols_text_active") {
+            newStyle = ".container-btn a.btn:focus,\n"+".container-btn a.btn:hover,\n"+".container-btn a.btn:active { color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: passive */
-        else if (btn_id === "btn_passive_bg_1") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(1):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(1):visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):visited { background-color";
+        else if (btn_id === "btn_cols_bg_passive") {
+            newStyle = ".container-btn a.btn:link,\n"+".container-btn a.btn:visited { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: active */
-        else if (btn_id === "btn_bg_active_1") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):focus,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):active { background-color";
-            console.log(newStyle);
+        else if (btn_id === "btn_cols_bg_active") {
+            newStyle = ".container-btn a.btn:focus,\n"+".container-btn a.btn:hover,\n"+".container-btn a.btn:active { background-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { background-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: passive */
-        else if (btn_id === "btn_border_passive_1") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):visited { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):visited { border-color";
+        else if (btn_id === "btn_cols_border_passive") {
+            newStyle = ".container-btn a.btn:link,\n"+".container-btn a.btn:visited { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:visited { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: active */
-        else if (btn_id === "btn_border_active_1") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):focus,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):active { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):active { border-color";
+        else if (btn_id === "btn_cols_border_active") {
+            newStyle = ".container-btn a.btn:focus,\n"+".container-btn a.btn:hover,\n"+".container-btn a.btn:active { border-color: var("+color_code+") }\n\n";
+            sub_string = "a.btn:active { border-color";
             doUpdateArray(sub_string,newStyle);
         }
 
-        /* Text colour: passive */
-        else if (btn_id === "btn_passive_text_2") {
-            // Get class of buttons
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):visited { color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Text colour: active */
-        else if (btn_id === "btn_active_text_2") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):focus,\n"+"header"+headerTheme+" a.btn:nth-child(2):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):active { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):active { color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Background colour: passive */
-        else if (btn_id === "btn_bg_passive_2") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):visited { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Background colour: active */
-        else if (btn_id === "btn_bg_active_2") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):focus,\n"+"header"+headerTheme+" a.btn:nth-child(2):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):active { background-color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Border colour: passive */
-        else if (btn_id === "btn_border_passive_2") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):link,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):visited { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):visited { border-color";
-            doUpdateArray(sub_string,newStyle);
-        }
-
-        /* Border colour: active */
-        else if (btn_id === "btn_border_active_2") {
-            newStyle = "header"+headerTheme+" .container-btn a.btn:nth-child(2):focus,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):hover,\n"+"header"+headerTheme+" .container-btn a.btn:nth-child(2):active { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:nth-child(2):active { border-color";
+        /* Icons colour */
+        else if (btn_id === "btn_icon_color") {
+            newStyle =  ".container-btn div[class^='flex-cols-'] div[class^='col-'] figure.icon { color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox color */
-        else if (btn_id === "btn_img_overlay_color_text") {
-            newStyle = "header"+headerTheme+" figure .cols-img-textbox { color: var("+color_code+") }\n";
-            sub_string = "figure .cols-img-textbox { color:";
-            console.log("clicked");
-            console.log("sub_string: "+sub_string);
+        else if (btn_id === "btn_cols_img_overlay_color_text") {
+            newStyle =  ".container-btn div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
             doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox background color */
-        else if (btn_id === "btn_img_overlay_color_bg") {
-            newStyle = "header"+headerTheme+" figure .cols-img-textbox { background-color: var("+color_code+") }\n";
-            sub_string = "figure .cols-img-textbox { background-color:";
-            console.log("clicked");
-            console.log("sub_string: "+sub_string);
-             doUpdateArray(sub_string,newStyle);
+        else if (btn_id === "btn_cols_img_overlay_color_bg") {
+            newStyle =  ".container-btn div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
+            sub_string = "figure.icon";
+            doUpdateArray(sub_string,newStyle);
         }        
       
         style = document.createElement('style');
@@ -394,6 +332,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             arrCSS.push(newStyle);
         }
     }
+
 
 /*
 //////////////// UI THEME SELECTOR  ///////////////
@@ -528,7 +467,7 @@ function doOutlines() {
 
     if (eleBtn.classList.contains('btn-lower-left-active')) {
         eleBtn.classList.remove('btn-lower-left-active');
-        const css_unchecked = "#HTML-Content header, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
+        const css_unchecked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px transparent }";
         head_unchecked = iframe.contentWindow.document.getElementsByTagName('head')[0],
         style_unchecked = iframe.contentWindow.document.createElement('style');
         head_unchecked.appendChild(style_unchecked);
@@ -537,7 +476,7 @@ function doOutlines() {
     }
     else {
         eleBtn.classList.add('btn-lower-left-active');
-        const css_checked = "#HTML-Content header, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
+        const css_checked = "#HTML-Content section, #HTML-Content div, #HTML-Content figure, #HTML-Content img, #HTML-Content h2, #HTML-Content h3, #HTML-Content h2, #HTML-Content p, #HTML-Content h2, #HTML-Content ul { outline: solid 1px red }";
         head_checked = iframe.contentWindow.document.getElementsByTagName('head')[0],
         style_checked = iframe.contentWindow.document.createElement('style');
         head_checked.appendChild(style_checked);
@@ -686,9 +625,10 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replaceAll(",.header", "header");
-    strCSS = strCSS.replaceAll(",header", "header");
-
+    strCSS = strCSS.replace(/,.theme/g, ".theme");
+    strCSS = strCSS.replace(/,.section/g, ".section");
+    strCSS = strCSS.replaceAll(",.theme", ".theme");
+    strCSS = strCSS.replaceAll(",.section", ".section");
     el_css.value = strCSS;
     document.body.appendChild(el_css);
     el_css.select();

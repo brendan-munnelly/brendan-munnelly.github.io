@@ -178,6 +178,9 @@ function doColH3TextBox() {
             objFigs[i].removeChild(el_TextBox);
         }
         document.getElementById("show-textbox").style.display = "none";
+        const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color:";
+        const arg2 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color:";
+        removeCSSTagPairs(arg1,arg2);
     }
 
     else {
@@ -807,5 +810,7 @@ function removeVisual() {
     }
     parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-3\">\n\t\t\t", "<div class=\"col-3\">");
     parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-4\">\n\t\t\t", "<div class=\"col-4\">");
+    const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure.icon { color:";
+    removeCSSTagPairs(arg1);
 }
 

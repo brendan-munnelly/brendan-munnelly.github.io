@@ -1,5 +1,10 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
+let btn_id; // item to be coloured
+let newStyle; // full selector and style rule
+let sub_string; // style rule excerpt for arrCSS
+let color_code;
+const arrCSS = []; // array for style rules to copy
 
 /*
 //////////////// MENUS AND DROPDOWNS ///////////////
@@ -148,6 +153,22 @@ function doSectionTheme() {
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
     }
+    // if (iframe.contentWindow.document.querySelector('.col-1') ) {
+    //     document.getElementById("cb_cols_shadows").checked=false; 
+    //     document.getElementById("cb_cols_borders").disabled=false; 
+    //     document.getElementById("cb_cols_borders").checked=false; 
+    //     document.getElementById("cb_cols_corners_soft").disabled=true; 
+    //     document.getElementById("cb_cols_corners_soft").checked=false; 
+    // }
+    // const el_section = iframe.contentWindow.document.querySelector("section");
+    // if (iframe.contentWindow.document.querySelector('.col-1') ) {
+    //     el_section.classList.remove("cols-padding");
+    //     el_section.classList.remove("cols-shadows");
+    //     el_section.classList.remove("cols-corners");
+    // }
+
+
+
     disableCSS();
 }
 
@@ -223,12 +244,6 @@ window.onclick = function(event) {
     }
 }
 
-let btn_id; // item to be coloured
-let newStyle; // full selector and style rule
-let sub_string; // style rule excerpt
-
-const arrCSS = []; // array for style rules to copy
-
 // On click style button 
 let all_btns = document.querySelectorAll('.btn_style');
 all_btns.forEach(el => el.addEventListener('click', event => {
@@ -259,7 +274,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             return;
         }
         const rbs = document.querySelectorAll("input[name='picker-radio']");
-        let color_code;
     
         for (const rb of rbs) {
             if (rb.checked) {
@@ -277,74 +291,62 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             console.log("New section background: "+sectionBg);
             console.log("Current column background: "+colsBg);
             console.log("sectionBg: "+sectionBg);
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* badge text */
         else if (btn_id === "btn_badge_text") {
             newStyle = sectionClassName+ " .badge { color: var("+color_code+") }\n";
             sub_string = ".badge { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* badge background */
         else if (btn_id === "btn_badge_bg") {
             newStyle = sectionClassName+ " .badge { background-color: var("+color_code+") }\n";
             sub_string = ".badge { background-color";
-            doUpdateArray(sub_string,newStyle);
         }        
 
         /* h2 main heading */
         else if (btn_id === "btn_h2_text") {
             newStyle = sectionClassName+ " > h2 { color: var("+color_code+") }\n";
             sub_string = "h2 { color:"
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* h2 main heading highlight text */
         else if (btn_id === "btn_h2_highlight") {
             newStyle = sectionClassName+ " > h2 span.highlight { color: var("+color_code+") }\n";
             sub_string = "h2 span.highlight";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* h2 main heading bottom border */
         else if (btn_id === "btn_h2_border") {
             newStyle = sectionClassName+ " > h2.heading-underline::after { background-color: var("+color_code+") }\n";
             sub_string = "h2.heading-underline";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* h3 sub heading */
         else if (btn_id === "btn_h3_text") {
             newStyle = sectionClassName+ " h3 { color: var("+color_code+") }\n";
             sub_string = " h3 {";
-            doUpdateArray(sub_string,newStyle); 
         }
 
         /* Section paragraphs text */
         else if (btn_id === "btn_para_text") {
             newStyle = sectionClassName+ " p { color: var("+color_code+") }\n"; 
             sub_string = " p {";
-            doUpdateArray(sub_string,newStyle); 
         }
 
         /* Section paragraphs text */
         else if (btn_id === "btn_list_text") {
             newStyle = sectionClassName+ " ul li { color: var("+color_code+") }\n"; 
             sub_string = " ul li {";
-            doUpdateArray(sub_string,newStyle); 
         }
-
 
         /* List marker */
         else if (btn_id === "btn_list_marker") {
             newStyle = sectionClassName+ " li::marker, "+sectionClassName+ " ul.fa-ul li span.fa-li i { color: var("+color_code+") }\n"; 
             sub_string = "li::marker";
-            doUpdateArray(sub_string,newStyle); 
         }
         
-
         /* === Buttons === */
 
         /* Text colour: passive */
@@ -352,69 +354,56 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             // Get class of buttons
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Text colour: active */
         else if (btn_id === "btn_cols_text_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: passive */
         else if (btn_id === "btn_cols_bg_passive") {
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { background-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Background colour: active */
         else if (btn_id === "btn_cols_bg_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { background-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { background-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: passive */
         else if (btn_id === "btn_cols_border_passive") {
             newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:visited { border-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Border colour: active */
         else if (btn_id === "btn_cols_border_active") {
             newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { border-color: var("+color_code+") }\n\n";
             sub_string = "a.btn:active { border-color";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Icons colour */
         else if (btn_id === "btn_icon_color") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure.icon { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox color */
         else if (btn_id === "btn_cols_img_overlay_color_text") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
         }
 
         /* Photos overlay textbox background color */
         else if (btn_id === "btn_cols_img_overlay_color_bg") {
             newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-            doUpdateArray(sub_string,newStyle);
         }        
-      
-        style = document.createElement('style');
-        iframe.contentWindow.document.head.appendChild(style);
-        style.appendChild(document.createTextNode(newStyle));
-        enableCSS();
+        doUpdateArray(sub_string,newStyle);      
     }
 
     function doUpdateArray(sub_string,newStyle) {
@@ -426,8 +415,77 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else {
             arrCSS.push(newStyle);
         }
+        updateCSSTagPair();
     }
 
+    function updateCSSTagPair() {
+        let strCSS = arrCSS.toString();
+        strCSS = strCSS.replaceAll(",.theme", ".theme");
+        strCSS = strCSS.replaceAll(",.section", ".section");
+        if (iframe.contentWindow.document.head.innerHTML.includes("<style>")) {
+            var st = iframe.contentWindow.document.getElementsByTagName('style');            
+            for(let i = 0 ; i < st.length ; i++){
+                st[i].parentNode.removeChild(st[i]);
+            }
+        }
+        styleTagPair = iframe.contentWindow.document.createElement("style");
+        iframe.contentWindow.document.head.appendChild(styleTagPair);
+        styleTagPair.append(strCSS);
+        if (arrCSS.length > 0) {
+            enableCSS();
+        }
+        else {
+            disableCSS();
+        }
+    }
+
+    // Remove all style rules
+    function clearCSSTags() {
+        if (iframe.contentWindow.document.head.innerHTML.includes("<style>")) {
+            var st = iframe.contentWindow.document.getElementsByTagName('style');            
+            for(let i = 0 ; i < st.length ; i++){
+                st[i].parentNode.removeChild(st[i]);
+            }
+        }
+        disableCSS();
+    }
+
+    // Remove selected style rules only
+    function removeCSSTagPairs(...args) {
+        console.log(`number of args: ${args.length}`);
+
+        // remove from CSS array
+        for (const arg of args) {
+            console.log("An arg content: "+arg);
+            const arrPos = arrCSS.findIndex(e => e.includes(arg)); 
+            console.log("arrPos: "+arrPos);
+            if (arrPos != "-1") {
+                // remove from CSS array
+                arrCSS.splice(arrPos, 1);
+            }
+        }
+
+        // remove current <style> from head
+        let strCSS = arrCSS.toString();
+        strCSS = strCSS.replaceAll(",.theme", ".theme");
+        strCSS = strCSS.replaceAll(",.section", ".section");
+        var st = iframe.contentWindow.document.getElementsByTagName('style');            
+        for(let i = 0 ; i < st.length ; i++){
+            st[i].parentNode.removeChild(st[i]);
+        }
+        // recreate new <style> in head
+        styleTagPair = iframe.contentWindow.document.createElement("style");
+        iframe.contentWindow.document.head.appendChild(styleTagPair);
+        // Add CSS rules without deleted rules to <style> in head
+        styleTagPair.append(strCSS);
+
+        if (arrCSS.length > 0) {
+            enableCSS();
+        }
+        else {
+            disableCSS();
+        }
+    }
 
 /*
 //////////////// UI THEME SELECTOR  ///////////////
@@ -546,7 +604,6 @@ function deleteUITheme() {
     elLowerLeft.classList.remove("theme-ui-girlboss"); 
     elLowerRight.classList.remove("theme-ui-girlboss"); 
 }
-
 
 /*
 //////////////// UI GRID OUTLINES ///////////////
@@ -720,8 +777,6 @@ function copyCSS() {
     const el_css = document.createElement('textarea');
     let aLength = arrCSS.length;
     let strCSS  = arrCSS.join(",");
-    strCSS = strCSS.replace(/,.theme/g, ".theme");
-    strCSS = strCSS.replace(/,.section/g, ".section");
     strCSS = strCSS.replaceAll(",.theme", ".theme");
     strCSS = strCSS.replaceAll(",.section", ".section");
     el_css.value = strCSS;

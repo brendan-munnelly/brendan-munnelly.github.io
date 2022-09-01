@@ -12,16 +12,24 @@ function doWidthTextDesktop() {
     deleteWidthTextDesktop();
 
     if (opt==="0") {
-        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-80");
+        iframe.contentWindow.document.querySelector(".container-text").classList.remove("w-50");
+        if (iframe.contentWindow.document.querySelector(".container-btn")) {
+            iframe.contentWindow.document.querySelector(".container-btn").classList.remove("w-50");
+        }
     }
     else if (opt==="1") {
-        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-60");
+        iframe.contentWindow.document.querySelector(".container-text").classList.add("w-50");
+        if (iframe.contentWindow.document.querySelector(".container-btn")) {
+            iframe.contentWindow.document.querySelector(".container-btn").classList.add("w-50");
+        }
     }
 }
 
 function deleteWidthTextDesktop() {
-    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-80");
-    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-60");
+    iframe.contentWindow.document.querySelector(".container-text").classList.remove("w-50");
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("w-50");
+    }
 }
 
 /*
@@ -41,15 +49,10 @@ function doAlignTextDesktop() {
         }
     }
     if (selectedValue==="left") {
-        iframe.contentWindow.document.querySelector("#HTML-Content header").classList.remove("text-center-desktop");
-        // document.getElementById("dd_align_desktop_btns").disabled=false;
-        // document.getElementById("dd_align_desktop_btns").value="0";
-
+        iframe.contentWindow.document.querySelector("header").classList.remove("text-center-desktop");
     }
     else if (selectedValue==="center") {
-        iframe.contentWindow.document.querySelector("#HTML-Content header").classList.add("text-center-desktop"); 
-        // document.getElementById("dd_align_desktop_btns").value="1";
-        // document.getElementById("dd_align_desktop_btns").disabled=true;
+        iframe.contentWindow.document.querySelector("header").classList.add("text-center-desktop"); 
     }
 }
 
@@ -68,14 +71,9 @@ function doAlignTextMobile() {
     }
     if (selectedValue==="left") {
         iframe.contentWindow.document.querySelector("header").classList.remove("text-center-mobile");
-        // document.getElementById("dd_align_desktop_btns").disabled=false;
-        // document.getElementById("dd_align_desktop_btns").value="0";
-
     }
     else if (selectedValue==="center") {
         iframe.contentWindow.document.querySelector("header").classList.add("text-center-mobile"); 
-        // document.getElementById("dd_align_desktop_btns").value="1";
-        // document.getElementById("dd_align_desktop_btns").disabled=true;
     }
 }
 
@@ -96,7 +94,7 @@ function doBadge() {
         const newUpperLabelDiv = document.createElement("div");
         newUpperLabelDiv.classList.add("badge"); 
         iframe.contentWindow.document.querySelector('.container-text').prepend(newUpperLabelDiv);
-        iframe.contentWindow.document.querySelector('.container-text .badge').innerText = content_header_label_text_col_1;
+        iframe.contentWindow.document.querySelector('.badge').innerText = content_header_label_text_col_1;
         iframe.contentWindow.document.querySelector('.container-text').innerHTML = iframe.contentWindow.document.querySelector('.container-text').innerHTML.replace("<div class=\"badge\">", "\n\t\t\t<div class=\"badge\">");
         document.getElementById("show-badge").style.display="flex";
     }
@@ -105,7 +103,7 @@ function doBadge() {
 document.querySelector("#form_badge_shape").addEventListener("change", doBadgeShape);
 
 function doBadgeShape() {
-    const objTextBox = iframe.contentWindow.document.querySelector(".container-text > .badge"); 
+    const objTextBox = iframe.contentWindow.document.querySelector(".badge"); 
     const rbs = document.querySelectorAll("input[name='switch_badge_shape']");
     let selectedValue;
 
@@ -141,25 +139,21 @@ document.querySelector("#cb_h1_highlight").addEventListener("change", doH1Text);
 
 function doH1Text() {
 
-    let elH2Content = iframe.contentWindow.document.querySelector('.container-text > h1').innerHTML;
+    let elH2Content = iframe.contentWindow.document.querySelector('.container-text h1').innerHTML;
 
     if (!document.getElementById("cb_h1_highlight").checked) {
         elH2Content = elH2Content.replace(/<\/?span[^>]*>/g,"");
-        iframe.contentWindow.document.querySelector('.container-text > h1').innerHTML = elH2Content;
+        iframe.contentWindow.document.querySelector('.container-text h1').innerHTML = elH2Content;
         document.getElementById("btn_h1_highlight").disabled = true;            
         document.getElementById("btn_h1_highlight").checked = false;
-        document.getElementById("btn_col_1_border").disabled = true;            
-        document.getElementById("btn_col_1_border").checked = false;
     }
     else {
         const i = elH2Content.indexOf(" ",1);
         const j = elH2Content.lastIndexOf(" ");
         elH2Content = elH2Content.replace(elH2Content.substring(i+1,j), "<span class=\"highlight\">"+elH2Content.substring(i+1,j)+"</span>");
-        iframe.contentWindow.document.querySelector('.container-text > h1').innerHTML = elH2Content;  
+        iframe.contentWindow.document.querySelector('.container-text h1').innerHTML = elH2Content;  
         document.getElementById("btn_h1_highlight").disabled = false;            
         document.getElementById("btn_h1_highlight").checked = false;
-        document.getElementById("btn_h1_border").disabled = false;            
-        document.getElementById("btn_h1_border").checked = false;
     }
 }
 
@@ -171,7 +165,7 @@ document.querySelector("#cb_h1_border").addEventListener("change", doH1Border);
 
 function doH1Border() {
 
-    const objH1 = iframe.contentWindow.document.querySelector('.container-text > h1');
+    const objH1 = iframe.contentWindow.document.querySelector('.container-text h1');
 
     if (!document.getElementById("cb_h1_border").checked) {
         objH1.classList.remove("heading-underline");
@@ -260,67 +254,42 @@ function doTextAnimation() {
 
 function applyAnimation(animationType) {
     document.querySelector("label[for='dd_text_slide']").style.color = "#fff";
-    if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
-        iframe.contentWindow.document.querySelector("section .container-upper-label").classList.add(animationType);
+    if (iframe.contentWindow.document.querySelector(".badge")) {
+        iframe.contentWindow.document.querySelector(".badge").classList.add(animationType);
     }
 
-    iframe.contentWindow.document.querySelector("section h2").classList.add(animationType);
+    iframe.contentWindow.document.querySelector(".container-text h2").classList.add(animationType);
 
-    if (iframe.contentWindow.document.querySelector("section h3")) {
-        iframe.contentWindow.document.querySelector("section h3").classList.add(animationType);
-    }
-
-    let paras = iframe.contentWindow.document.querySelectorAll("section p");
-    for (i = 0; i < paras.length; ++i) {
-        paras[i].classList.add(animationType)
-    }
-
-    if (iframe.contentWindow.document.querySelector("section ul")) {
-        iframe.contentWindow.document.querySelector("section ul").classList.add(animationType);
+    
+    if (iframe.contentWindow.document.querySelector("header figure")) {
+        iframe.contentWindow.document.querySelector("header figure").classList.add(animationType);
     }
     
-    if (iframe.contentWindow.document.querySelector("section figure")) {
-        iframe.contentWindow.document.querySelector("section figure").classList.add(animationType);
-    }
-    
-    if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.add(animationType);
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {
+        iframe.contentWindow.document.querySelector(".container-btn").classList.add(animationType);
     }
 }
 
 function removeTextAnimation() {
     document.querySelector("label[for='dd_text_slide']").style.color = "var(--gray-500)";
     // Has .container-upper-label
-    if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
-        iframe.contentWindow.document.querySelector("section .container-upper-label").removeAttribute("class");
+    if (iframe.contentWindow.document.querySelector(".badge")) {
+        iframe.contentWindow.document.querySelector(".badge").removeAttribute("class");
     }
 
-    iframe.contentWindow.document.querySelector("section h2").removeAttribute("class");
+    iframe.contentWindow.document.querySelector("header h2").removeAttribute("class");
     
-    // Has h3 sub-heading
-    if (iframe.contentWindow.document.querySelector("section h3")) {
-        iframe.contentWindow.document.querySelector("section h3").removeAttribute("class");
-    }
-
-    let paras = iframe.contentWindow.document.querySelectorAll("section p");
-    for (i = 0; i < paras.length; ++i) {
-        paras[i].removeAttribute("class");
-    }
-    // Has ul list
-    if (iframe.contentWindow.document.querySelector("section ul")) {
-        iframe.contentWindow.document.querySelector("section ul").removeAttribute("class");
-    }
     // Has figure
-    if (iframe.contentWindow.document.querySelector("section figure")) {
-        iframe.contentWindow.document.querySelector("section figure").removeAttribute("class");
+    if (iframe.contentWindow.document.querySelector("header figure")) {
+        iframe.contentWindow.document.querySelector("header figure").removeAttribute("class");
     }
     // Has .container-btn
-    if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-top");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-bottom");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-left");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-right");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("fade-in");
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("slide-in-top");
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("slide-in-bottom");
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("slide-in-left");
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("slide-in-right");
+        iframe.contentWindow.document.querySelector(".container-btn").classList.remove("fade-in");
     }
 }
 

@@ -1,7 +1,5 @@
 import {content_h3_col_3, content_h3_col_4, content_paras_col_3, content_paras_col_4, content_list_col_3, content_list_col_4, arrColBadge} from '../js/arr-content.js';
 
-
-
 /*
 //////////////// COLUMNS BLOCKS ///////////////
 */
@@ -29,6 +27,7 @@ function setColumnBlocks() {
             for (let i = 0; i < 2; i++) {
                 objAllCols[i].remove();
             }
+            document.getElementById("slider-gap-row").disabled = true;
         }
 
         // from six to two
@@ -36,17 +35,17 @@ function setColumnBlocks() {
             for (let i = 0; i < 4; i++) {
                 objAllCols[i].remove();
             }
+            document.getElementById("slider-gap-row").disabled = true;
         }
-        
     }
 
     else if (selectedValue==="row-two") {
         // 2 to 4. Double current content
         if (objAllCols.length === 2) {
-            console.log("this branch");
             let objRowOne = iframe.contentWindow.document.querySelector(".flex-cols-2");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
             iframe.contentWindow.document.querySelector(".flex-cols-2").innerHTML = objRowOne.innerHTML; 
+            document.getElementById("slider-gap-row").disabled = false;
         }
 
         // 6 tp 4.
@@ -55,6 +54,7 @@ function setColumnBlocks() {
             for (let i = 0; i < 2; i++) {
                 objAllCols[i].remove();
             }
+            document.getElementById("slider-gap-row").disabled = false;
         }
     }
 
@@ -64,6 +64,7 @@ function setColumnBlocks() {
             let objRowOne = iframe.contentWindow.document.querySelector(".flex-cols-2");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML + objRowOne.innerHTML;
             iframe.contentWindow.document.querySelector(".flex-cols-2").innerHTML = objRowOne.innerHTML;
+            document.getElementById("slider-gap-row").disabled = false;
         }
 
         // 4 to 6. Double and remove 2.
@@ -73,7 +74,8 @@ function setColumnBlocks() {
             for (let i = 0; i < 2; i++) {
                 objRowOne.firstElementChild.remove();
             }
-            iframe.contentWindow.document.querySelector(".flex-cols-2").innerHTML = objRowOne.innerHTML;     
+            iframe.contentWindow.document.querySelector(".flex-cols-2").innerHTML = objRowOne.innerHTML;
+            document.getElementById("slider-gap-row").disabled = false;
         }
     }
 }
@@ -297,7 +299,10 @@ function removeColsBadge() {
         for (let i = 0; i < colsBadge.length; i++) {
             colsBadge[i].remove();
         }
-        document.getElementById("show-cols-badge").style.display="none";        
+        document.getElementById("show-cols-badge").style.display="none";
+        const arg1 = sectionClassName+ " .badge { color:";
+        const arg2 = sectionClassName+ " .badge { background-color:";
+        removeCSSTagPairs(arg1,arg2);     
     }
 }
 
@@ -445,6 +450,9 @@ function removeColH3() {
         document.getElementById("hyperlinks-h3-underline").style.display="none";
         document.getElementById("cb_cols_links_h3").disabled=true;
         document.getElementById("cb_cols_links_h3").checked=false;
+
+        const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] h3 { color:";
+        removeCSSTagPairs(arg1);
     }
 }
 
@@ -662,6 +670,10 @@ function removeText() {
         document.getElementById("cb_cols_shadows").disabled=true; 
         document.getElementById("cb_cols_shadows").checked=false; 
     }
+    const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] p { color:";
+    const arg2 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li { color:";
+    const arg3 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] li::marker";
+    removeCSSTagPairs(arg1,arg2,arg3);
 }
 
 /*
@@ -742,6 +754,44 @@ function chooseListMarker() {
         node.classList.add("fa-solid");
         node.classList.add(selectedValue);
         objIcons[i].appendChild(node);
+    }
+}
+
+
+/*
+//////////////// COLUMNS BACKGROUND ///////////////
+*/
+
+document.querySelector("#cb_cols_bg").addEventListener("change", doColBg);
+
+function doColBg() {
+
+    const el_cols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']")
+
+    if (!document.getElementById("cb_cols_bg").checked) {
+        el_cols.classList.remove("cols-background");
+        document.getElementById("btn_cols_bg").disabled=true;
+
+        // remove padding if also no shadows AND no borders
+        if ( (!document.getElementById("cb_cols_shadows").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
+            el_cols.classList.remove("cols-padding");
+        }
+
+        // remove soft corners if also no shadows AND no borders
+        if ( (!document.getElementById("cb_cols_shadows").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
+            el_cols.classList.remove("cb_cols_corners_soft");
+            document.getElementById("cb_cols_corners_soft").disabled=true;
+            document.getElementById("cb_cols_corners_soft").checked=false;
+        }
+        const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] { background-color:";
+        removeCSSTagPairs(arg1);
+    }
+
+    else {
+        el_cols.classList.add("cols-background");
+        el_cols.classList.add("cols-padding");
+        document.getElementById("btn_cols_bg").disabled=false;
+        document.getElementById("cb_cols_corners_soft").disabled=false;
     }
 }
 

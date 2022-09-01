@@ -12,42 +12,17 @@ function doWidthTextDesktop() {
     deleteWidthTextDesktop();
 
     if (opt==="0") {
-        iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-50");
-        iframe.contentWindow.document.querySelector("header .container-btn").classList.remove("w-50");
-        iframe.contentWindow.document.getElementById("dd_text_start").disabled=true;
+        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-80");
     }
     else if (opt==="1") {
-        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-50");
-        enableTextStart();
+        iframe.contentWindow.document.querySelector("header .container-text").classList.add("w-60");
     }
 }
 
 function deleteWidthTextDesktop() {
-    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-50");
+    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-80");
+    iframe.contentWindow.document.querySelector("header .container-text").classList.remove("w-60");
 }
-
-function enableTextStart() {
-    const elHero = iframe.contentWindow.document.querySelector("header .container-text");
-    const elText = iframe.contentWindow.document.querySelector(".container-text");
-
-    if ((elText.classList.contains('w-50')) && (!elHero.classList.contains('text-center-desktop'))) {
-        document.getElementById("dd_text_start").disabled=false;
-    }
-}
-
-document.querySelector("#dd_text_start").addEventListener("change", doTextStart);
-    
-function doTextStart() {
-
-    let opt = document.querySelector("#dd_text_start").value;
-    if (opt==="0") {
-        iframe.contentWindow.document.querySelector(".hero-block").classList.remove("text-start-center");
-    }
-    else if (opt==="1") {
-        iframe.contentWindow.document.querySelector(".hero-block").classList.add("text-start-center");
-    }
-}
-
 
 /*
 //////////////// ALIGN TEXT IN HEADER ///////////////

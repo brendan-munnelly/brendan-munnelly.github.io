@@ -58,23 +58,23 @@ function doColOneAlign() {
 //////////////// COL-1: CATEGORY BADGE ABOVE H2 ///////////////
 */
 
-document.querySelector("#cb_col_1_badge").addEventListener("change", doColOneLabel);
+document.querySelector("#cb_col_1_badge").addEventListener("change", doColOneBadge);
 
-function doColOneLabel() {
+function doColOneBadge() {
 
     // innerText of 'CATEGORY'
 
     if (!document.getElementById("cb_col_1_badge").checked) {
-        removeColOneLabel();
+        removeColOneBadge();
     }
     
     else {
-        removeColOneLabel();
-        const newUpperLabelDiv = document.createElement("div");
-        // const newUpperLabelSpan = document.createElement("span");
-        // newUpperLabelDiv.appendChild(newUpperLabelSpan);
-        newUpperLabelDiv.classList.add("col-1-badge"); 
-        iframe.contentWindow.document.querySelector('.col-1').prepend(newUpperLabelDiv);
+        removeColOneBadge();
+        const newupperBadgeDiv = document.createElement("div");
+        // const newupperBadgeSpan = document.createElement("span");
+        // newupperBadgeDiv.appendChild(newupperBadgeSpan);
+        newupperBadgeDiv.classList.add("col-1-badge"); 
+        iframe.contentWindow.document.querySelector('.col-1').prepend(newupperBadgeDiv);
         iframe.contentWindow.document.querySelector('.col-1 .col-1-badge').innerText = content_header_label_text_col_1;
         iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("<div class=\"col-1-badge\">", "\n\t\t\t<div class=\"col-1-badge\">");
         document.getElementById("show-col-1-badge").style.display="flex";
@@ -110,16 +110,21 @@ function doCol1BadgeShape() {
     }
 }
 
-function removeColOneLabel() {
+function removeColOneBadge() {
     if (iframe.contentWindow.document.querySelector('.col-1-badge')) {
-        const upperLabel = iframe.contentWindow.document.querySelector('.col-1-badge');
-        upperLabel.remove();
+        const upperBadge = iframe.contentWindow.document.querySelector('.col-1-badge');
+        upperBadge.remove();
         iframe.contentWindow.document.querySelector('.col-1').innerHTML = iframe.contentWindow.document.querySelector('.col-1').innerHTML.replace("\t\t\t\n", "");
 
         if ( (!iframe.contentWindow.document.querySelector('.col-1 > h2')) && (!iframe.contentWindow.document.querySelector('.col-1 > h3')) && (!iframe.contentWindow.document.querySelector('.col-1-badge')) ) {
             removeColOne();
         }
-        document.getElementById("show-col-1-badge").style.display="none";        
+        document.getElementById("show-col-1-badge").style.display="none"; 
+
+        const arg1 = sectionClassName+ " .col-1-badge { color:";
+        const arg2 = sectionClassName+ " .col-1-badge { background-color:";
+
+        removeCSSTagPairs(arg1, arg2);
     }
 }
 
@@ -174,6 +179,10 @@ function removeColOneH2() {
         document.getElementById("cb_col_1_h2_highlight").checked = false;
         document.getElementById("cb_col_1_h2_border").checked = false;
     }
+    const arg1 = sectionClassName+ " .col-1 h2 { color:";
+    const arg2 = sectionClassName+ " .col-1 h2 span.highlight {";
+    const arg3 = sectionClassName+ " .col-1 h2.heading-underline::after {";
+    removeCSSTagPairs(arg1,arg2,arg3);
 }
 
 /*
@@ -191,8 +200,8 @@ function doColOneH2Text() {
         iframe.contentWindow.document.querySelector('section .col-1 h2').innerHTML = elH2Content;
         document.getElementById("btn_col_1_h2_highlight").disabled = true;            
         document.getElementById("btn_col_1_h2_highlight").checked = false;
-        // document.getElementById("btn_col_1_border").disabled = true;            
-        // document.getElementById("btn_col_1_border").checked = false;
+        const arg1 = sectionClassName+ " .col-1 h2 span.highlight { color:";
+        removeCSSTagPairs(arg1);
     }
     else {
         const i = elH2Content.indexOf(" ",1);
@@ -200,9 +209,7 @@ function doColOneH2Text() {
         elH2Content = elH2Content.replace(elH2Content.substring(i+1,j), "<span class=\"highlight\">"+elH2Content.substring(i+1,j)+"</span>");
         iframe.contentWindow.document.querySelector('section .col-1 h2').innerHTML = elH2Content;  
         document.getElementById("btn_col_1_h2_highlight").disabled = false;            
-        document.getElementById("btn_col_1_h2_highlight").checked = false;
-        document.getElementById("btn_col_1_h2_border").disabled = false;            
-        document.getElementById("btn_col_1_h2_border").checked = false;
+        document.getElementById("btn_col_1_h2_highlight").checked = true;
     }
 }
 
@@ -218,12 +225,17 @@ function doColOneH2Border() {
 
     if (!document.getElementById("cb_col_1_h2_border").checked) {
         objH2.classList.remove("heading-underline");
+        document.getElementById("btn_col_1_h2_border").disabled = true;
+        document.getElementById("btn_col_1_h2_border").checked = false;
+        const arg1 = sectionClassName+ " .col-1 h2.heading-underline::after { background-color:";
+        removeCSSTagPairs(arg1);
     }
     else {
         objH2.classList.add("heading-underline");
+        document.getElementById("btn_col_1_h2_border").disabled = false;
+        document.getElementById("btn_col_1_h2_border").checked = true;
     }
 }
-
 
 /*
 //////////////// COL-1: H3 SUB-HEADING ////////////////////
@@ -266,6 +278,9 @@ function removeColOneH3() {
     if ( (!iframe.contentWindow.document.querySelector('section'+' .col-1 h2')) && (!iframe.contentWindow.document.querySelector('section'+'.col-1 h3')) && (!iframe.contentWindow.document.querySelector('section'+' .col-1-badge')) ) {
         removeColOne();
     }
+  
+    const arg1 = sectionClassName+ " .col-1 h3 { color:";
+    removeCSSTagPairs(arg1);
 }
 
 /*
@@ -334,5 +349,12 @@ function removeColOne() {
         document.querySelector("#text-highlight .input-group:nth-child(2)").style.display ="none";
         document.getElementById("cb_col_1_h2_highlight").checked = false;
         document.getElementById("cb_col_1_h2_border").checked = false;
+
+        const arg1 = sectionClassName+ " .col-1-badge { color:";
+        const arg2 = sectionClassName+ " .col-1-badge { background-color:";
+        const arg3 = sectionClassName+ " .col-1 h2 { color:";
+        const arg4 = sectionClassName+ " .col-1 h2 span.highlight { color:";
+        const arg5 = sectionClassName+ " .col-1 h2.heading-underline::after { background-color:";   
+        removeCSSTagPairs(arg1,arg2,arg3,arg4,arg5);
     }
 }
