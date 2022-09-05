@@ -332,13 +332,43 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 
 .container-text, .container-btn { position: relative } 
 
+/* ================== BUTTON PAIRS ================ */ 
+header > .container-btn, section > .container-btn { margin-bottom: 20px }
+    
+header > .container-btn, section > .container-btn { 
+    display: flex; flex-direction: row; flex-wrap: wrap; row-gap: 30px
+}
+
+header > .container-btn a.btn, 
+section > .container-btn a.btn { 
+    margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0 !important
+}
+
+@media (min-width: 768px) {
+    header > .container-btn, section > .container-btn { column-gap: 48px }
+}
+
+@media (max-width: 767px) {
+    header > .container-btn, section > .container-btn { column-gap: 30px }
+}
+
+/* Buttons: left-aligned */
+header:not(.text-center-desktop)  > .container-btn,
+section:not(.text-center-desktop) > .container-btn { justify-content: flex-start }
+
+/* Buttons: center-aligned */
+header.text-center-desktop  > .container-btn,
+section.text-center-desktop > .container-btn { 
+    justify-content: center; margin-left: auto; margin-right: auto }
+
+
 
 /* ================ HEADER 'HERO BLOCK' ================ */
 
 header { display: flex; flex-direction: column; justify-content: space-around }
 
-@media (min-width: 768px) { header .container-btn { margin-top: 48px } }
-@media (max-width: 767px) { header .container-btn { margin-top: 48px } }
+@media (min-width: 768px) { header > .container-btn { margin-top: 48px } }
+@media (max-width: 767px) { header > .container-btn { margin-top: 48px } }
 
 header .container-text .badge {
     font-weight: 700; display: block; padding: 4px 20px;
@@ -356,29 +386,25 @@ header .container-text .badge.corners-soft { border-radius: 16px}
 
 /* ELEMENTS: Headings */
 @media (min-width: 768px) { 
-    header:not(.text-center-desktop) .container-text,
-    header:not(.text-center-desktop) .container-btn { 
+    header:not(.text-center-desktop) .container-text { 
         margin-left: 0; margin-right: 0;
     }
-    header.text-center-desktop .container-text,
-    header.text-center-desktop .container-btn {
+    header.text-center-desktop .container-text {
         margin-left: auto; margin-right: auto; text-align: center
     }
     header:not(.text-center-desktop) .container-text .badge {
         margin-left: 0; margin-right: 0;
     }
-    header .container-btn { margin-bottom: -32px }
+    header > .container-btn { margin-bottom: -32px }
     header .container-text.w-50 { width: 50% }
     header .container-btn.w-50 { width: 50% }
 }
 
-@media (max-width: 767px) { 
-    header:not(.text-center-mobile) .container-text,
-    header:not(.text-center-mobile) .container-btn { 
+@media (max-width: 767px) {   
+    header:not(.text-center-mobile) .container-text { 
         margin-left: 0; margin-right: 0;
     }
-    header.text-center-mobile .container-text,
-    header.text-center-mobile .container-btn { 
+    header.text-center-mobile .container-text { 
         margin-left: auto; margin-right: auto; text-align: center
     }
     header .container-text .badge { 
@@ -523,7 +549,7 @@ header .text-long h2  {
 @media (min-width: 811px) {
     .hero-block.text-start-center .badge { margin-left: 49.25% }
     .hero-block.text-start-center .container-text,
-    .hero-block.text-start-center .container-btn { margin-left: 50% }
+    .hero-block.text-start-center > .container-btn { margin-left: 50% }
 }
 
 header .container-text h1 span.highlight { color: var(--gray-600); }
@@ -544,7 +570,6 @@ header .container-text h1 span.highlight { color: var(--gray-600); }
         width: 130%; margin-left: -15%; margin-right: -15%
     }
 }
-
 
 @media (min-width: 768px) { 
     header:not(.text-center-desktop) figure { 
@@ -663,7 +688,6 @@ header .container-media * {
 .hero-bg h1 { font-size: calc(var(--hero-h1-full) * 1.2); line-height: 1.1 }
 .hero-bg h2 { font-size: calc(var(--hero-h2-full) * 1.1); font-weight: 400; line-height: 1.3 }
 
-.hero-bg .container-btn { margin-bottom: 0; width: 100%; margin-left: auto; margin-right: auto }
 /* Overlay BEHIND text and IN FRONT of full-width image */
 .hero-bg .container-overlay {
     position: absolute; z-index: 2;
@@ -685,10 +709,6 @@ header .container-media * {
 }
 */
 
-
-
-
-
 /* =============  SINGLE COLUMN LAYOUT ============ */
 
 /* Badge */
@@ -700,21 +720,22 @@ section > .badge {
 }
 
 @media (min-width: 768px) {
+    section > .container-btn { margin-top: 40px }
     section.text-center-desktop > .badge {
        margin-left: auto; margin-right: auto
     }
 }
 
 @media (max-width: 767px) {
+    section > .container-btn { margin-top: 20px }
     section.text-center-desktop > .badge {
         margin-left: auto; margin-right: auto
     }
 }
 
-
 section > .badge.corners-soft { border-radius: 16px; padding-left: 14px; padding-right: 14px }
 section.text-center > .badge { margin-left: auto; margin-right: auto }
-@media (min-width: 768px) { section > .badge { margin-bottom: 32px } } 
+@media (min-width: 768px) { section > .badge { margin-bottom: 48px } } 
 @media (max-width: 767px) { section > .badge { margin-bottom: 24px } } 
 
 /* Heading */
@@ -2167,65 +2188,6 @@ div[class*='col-'] .btn-shadow {
 .text-center.flex-cols-4 .col-4 a.btn {
     text-align: center; margin-left: auto; margin-right: auto
 }
-
-/* Multiple buttons */
-.container-btn {
-    display: flex; flex-direction: row; flex-wrap: wrap;
-    width: 100%; margin-bottom: 20px;
-}
-
-@media (min-width: 1024px ) { 
-    header > .container-btn, 
-    section > .container-btn { margin-top: 32px; margin-bottom: -32px !important } 
-    header > .container-btn a.btn,
-    section > .container-btn a.btn { 
-        margin-top: 10px; margin-bottom: 18px !important; margin-right: 48px 
-    } 
-}
-
-@media (max-width: 1023px) { 
-    header > .container-btn, 
-    section > .container-btn { margin-top: 20px; margin-bottom: -20px !important } 
-    header > .container-btn a.btn,
-    section > .container-btn a.btn {
-        margin-top: 10px; margin-bottom: 14px; margin-right: 30px 
-    } 
-}
-
-.container-btn a.btn:last-child { margin-right: 0 } 
-
-/* Buttons left-aligned */
-@media (min-width: 768px ) { 
-    header.text-center-desktop > .container-btn, 
-    section.text-center-desktop > .container-btn { justify-content: center } 
-}
-
-@media (max-width: 767px ) { 
-    header.text-center-mobile > .container-btn, 
-    section.text-center-mobile > .container-btn { justify-content: center } 
-    header.text-center-mobile > .container-btn a.btn { 
-        margin-left: 15px; margin-right: 15px }
-} 
-
-/* Buttons centered */
-.col-1.text-center-desktop > .container-btn,
-.col-1 .container-btn.text-center-desktop { justify-content: center }
-
-/* @media (min-width: 768px) {
-    .text-center-desktop > .container-btn a.btn,
-    .container-btn.text-center-desktop a.btn { 
-        margin-left: 24px; margin-right: 24px;
-    }
-}
-
-@media (max-width: 767px) {
-    .text-center-mobile > .container-btn a.btn,
-    .container-btn.text-center-mobile a.btn { 
-        margin-left: 16px; margin-right: 16px;
-    }
-} */
-
-
 
 /* ================== CONTACT FORM =============== */
 
