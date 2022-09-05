@@ -153,23 +153,7 @@ function doSectionTheme() {
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
     }
-    // if (iframe.contentWindow.document.querySelector('.col-1') ) {
-    //     document.getElementById("cb_cols_shadows").checked=false; 
-    //     document.getElementById("cb_cols_borders").disabled=false; 
-    //     document.getElementById("cb_cols_borders").checked=false; 
-    //     document.getElementById("cb_cols_corners_soft").disabled=true; 
-    //     document.getElementById("cb_cols_corners_soft").checked=false; 
-    // }
-    // const el_section = iframe.contentWindow.document.querySelector("section");
-    // if (iframe.contentWindow.document.querySelector('.col-1') ) {
-    //     el_section.classList.remove("cols-padding");
-    //     el_section.classList.remove("cols-shadows");
-    //     el_section.classList.remove("cols-corners");
-    // }
-
-
-
-    disableCSS();
+    clearCSSTags();
 }
 
 /*
@@ -286,11 +270,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         if (btn_id === "btn_section_bg") {
             newStyle = sectionClassName+ " { background-color: var("+color_code+") }\n";
             sub_string = sectionClassName+ " { background-color: ";
-            // Used for checking if cols-padding necessary
-            sectionBg = "var("+color_code+")";
-            console.log("New section background: "+sectionBg);
-            console.log("Current column background: "+colsBg);
-            console.log("sectionBg: "+sectionBg);
         }
 
         /* badge text */

@@ -71,8 +71,6 @@ function doColOneBadge() {
     else {
         removeColOneBadge();
         const newupperBadgeDiv = document.createElement("div");
-        // const newupperBadgeSpan = document.createElement("span");
-        // newupperBadgeDiv.appendChild(newupperBadgeSpan);
         newupperBadgeDiv.classList.add("col-1-badge"); 
         iframe.contentWindow.document.querySelector('.col-1').prepend(newupperBadgeDiv);
         iframe.contentWindow.document.querySelector('.col-1 .col-1-badge').innerText = content_header_label_text_col_1;

@@ -195,7 +195,7 @@ function doColH3TextBox() {
     }
 }
 
-/* photos: soft corners */
+/* photos: text box shape */
 
 document.querySelector("#form_img_textbox_shape").addEventListener("change", doTextBoxShape);
 
@@ -516,7 +516,7 @@ function doIcons() {
     document.getElementById("dd_icons_type").value = "0";
     document.getElementById("rb_icon_align_center").checked = true;
     document.getElementById("cb_icon_size_plus").checked = true;
--    
+    
     doVisSubTypes(7);    
 }
 
@@ -600,7 +600,6 @@ function doIconAlign() {
     }
 }
 
-
 function resetIconProps() {
     document.getElementById("dd_icons_type").value="0";
     document.getElementById("cb_icon_size_plus").checked=false;
@@ -625,7 +624,6 @@ function doVideos() {
     document.getElementById("rb_vis_type_2").disabled=false;
     document.getElementById("rb_vis_type_3").disabled=false;
     document.getElementById("rb_vis_type_4").disabled=false;
-    // document.getElementById("rb_vis_type_5").checked=true;
     document.getElementById("rb_vis_type_5").disabled=false;
 
     // Property containers

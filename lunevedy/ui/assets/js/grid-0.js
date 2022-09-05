@@ -1,5 +1,3 @@
-// import { col_1_content_header_h3, col_1_content_para_last, col_1_content_ul_short, col_1_content_ul_long, col_1_content_buttons_one, col_1_content_buttons_pair, col_1_content_caption } from '../js/arr-content.js';
-
 import { content_header_label_text_col_1, content_h3, content_list, content_textbox_section, content_H4Overlay_section } from '../js/arr-content.js';
 
 /*
@@ -19,15 +17,10 @@ function doAlignSectionDesktop() {
         }
     }
     if (selectedValue==="left") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section").classList.remove("text-center-desktop");
-        document.getElementById("dd_align_desktop_btns").disabled=false;
-        document.getElementById("dd_align_desktop_btns").value="0";
-
+        iframe.contentWindow.document.querySelector("section").classList.remove("text-center-desktop");
     }
     else if (selectedValue==="center") {
-        iframe.contentWindow.document.querySelector("#HTML-Content section").classList.add("text-center-desktop"); 
-        document.getElementById("dd_align_desktop_btns").value="1";
-        document.getElementById("dd_align_desktop_btns").disabled=true;
+        iframe.contentWindow.document.querySelector("section").classList.add("text-center-desktop"); 
     }
 }
 
@@ -46,19 +39,14 @@ function doAlignSectionMobile() {
     }
     if (selectedValue==="left") {
         iframe.contentWindow.document.querySelector("section").classList.remove("text-center-mobile");
-        document.getElementById("dd_align_desktop_btns").disabled=false;
-        document.getElementById("dd_align_desktop_btns").value="0";
-
     }
     else if (selectedValue==="center") {
         iframe.contentWindow.document.querySelector("section").classList.add("text-center-mobile"); 
-        document.getElementById("dd_align_desktop_btns").value="1";
-        document.getElementById("dd_align_desktop_btns").disabled=true;
     }
 }
 
 /*
-//////////////// LABEL ABOVE H2 ///////////////
+//////////////// CATEGORY BADGE ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_badge").addEventListener("change", doBadge);
@@ -71,6 +59,7 @@ function doBadge() {
     
     else {
         removeBadge();
+        console.log("Top of section")
         const newUpperLabelDiv = document.createElement("div");
         newUpperLabelDiv.classList.add("badge"); 
         iframe.contentWindow.document.querySelector('section').prepend(newUpperLabelDiv);
@@ -109,6 +98,11 @@ function removeBadge() {
         upperLabel.remove();
         document.getElementById("show-badge").style.display="none";        
     }
+
+    const arg1 = sectionClassName+ " .badge { color:";
+    const arg2 = sectionClassName+ " .badge { background-color:";
+
+    removeCSSTagPairs(arg1, arg2);
 }
 
 /*
@@ -126,8 +120,8 @@ function doH2Text() {
         iframe.contentWindow.document.querySelector('section > h2').innerHTML = elH2Content;
         document.getElementById("btn_h2_highlight").disabled = true;            
         document.getElementById("btn_h2_highlight").checked = false;
-        // document.getElementById("btn_col_1_border").disabled = true;            
-        // document.getElementById("btn_col_1_border").checked = false;
+        const arg1 = sectionClassName+ " > h2 span.highlight { color:";
+        removeCSSTagPairs(arg1);
     }
     else {
         const i = elH2Content.indexOf(" ",1);
@@ -136,8 +130,6 @@ function doH2Text() {
         iframe.contentWindow.document.querySelector('section > h2').innerHTML = elH2Content;  
         document.getElementById("btn_h2_highlight").disabled = false;            
         document.getElementById("btn_h2_highlight").checked = false;
-        document.getElementById("btn_h2_border").disabled = false;            
-        document.getElementById("btn_h2_border").checked = false;
     }
 }
 
@@ -154,10 +146,14 @@ function doH2Border() {
     if (!document.getElementById("cb_h2_border").checked) {
         objH2.classList.remove("heading-underline");
         document.getElementById("btn_h2_border").disabled = true;    
+        document.getElementById("btn_h2_border").checked = false;
+        const arg1 = sectionClassName+ " > h2.heading-underline::after { background-color:";
+        removeCSSTagPairs(arg1);
     }
     else {
         objH2.classList.add("heading-underline");
-        document.getElementById("btn_h2_border").disabled = false    
+        document.getElementById("btn_h2_border").disabled = false;
+        document.getElementById("btn_h2_border").checked = true;
     }
 }
 
@@ -357,347 +353,6 @@ function doHyperlinks() {
         document.getElementById("hyperlinks-colors").style.display ="flex";
         document.getElementById("hyperlinks-underlines").style.display ="flex";  
     }
-}
-
-/*
-//////////////// VISUAL ELEMENT INSIDE SINGLE-COLUMN LAYOUT ///////////////
-*/
-
-/* Enable visual */
-document.querySelector("#cb_visual").addEventListener("change", checkVis);
-
-function checkVis() {
-
-    if (!document.getElementById("cb_visual").checked) {
-        removeVisual();
-    }
-    else {
-        enableRBs();
-        enableVisualWidth();
-        enableImgProps();
-        disableVidProps();
-        disableVisualAlign();
-
-        // Select first (picture) radio button
-        document.getElementById("vis_type_0").checked=true;
-
-        // Add picture
-        iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-restaurant.jpg\" alt=\"Placeholder image\">\n\t\t<\/figure>");
-    }
-}
-
-
-// document.querySelector("#vis-types-all").addEventListener("click", doVisType);
-
-function doVisType() { 
-    const rbs = document.querySelectorAll("#vis-types-all input[name='dd_visual']");
-    let selectedValue;
-    
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    if (selectedValue==="none") {
-        removeVisual();
-        disableRBs();
-        disableVisualWidth()
-        disableVisualAlign();
-        disableImgProps();
-    }
-
-    else if ( (selectedValue==="pictures") || (selectedValue==="transparent") || (selectedValue==="illustrations") ) {
-        resetVisual();
-        enableRBs();
-        enableVisualWidth();
-        enableImgProps();
-        disableVidProps();
-        disableVisualAlign();
-        if (selectedValue==="pictures") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-restaurant.jpg\" alt=\"Placeholder image\">\n\t\t<\/figure>");        
-            document.getElementById("vis_type_0").checked=true;
-
-        }
-    
-        else if (selectedValue==="transparent") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-office.png\" alt=\"Placeholder image\">\n\t\t<\/figure>"); 
-            document.getElementById("vis_type_1").checked=true;
-            document.getElementById("cb_img_corners").disabled=true;
-            document.getElementById("cb_img_corners").checked=false;
-        }
-
-        else if (selectedValue==="illustrations") {
-            iframe.contentWindow.document.querySelector("section p:nth-of-type(1)").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<img src=\"assets\/img\/800x480-teamwork.png\" alt=\"Placeholder image\">\n\t\t<\/figure>"); 
-            document.getElementById("vis_type_2").checked=true;
-            document.getElementById("cb_img_corners").disabled=true;
-            document.getElementById("cb_img_corners").checked=false;            
-        }
-        
-    iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\t\n\n", "");
-
-    } // Ends pics branch
-
-    else if ( (selectedValue==="vid-file") || (selectedValue==="vid-yt") ) {
-        resetVisual();
-        enableRBs();
-        enableVisualWidth();
-        disableImgProps();
-        enableVidProps();
-        disableVisualAlign();
-        if (selectedValue==="vid-file") {
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<div class=\"container-video-file\">\n\t\t\t\t<video controls>\n\t\t\t\t\t<source src=\"assets/videos/video-focal-center.mp4\" type=\"video\/mp4\">\n\t\t\t\t<\/video>\n\t\t\t</div>\n\t\t</figure>");
-            document.getElementById("vis_type_3").checked=true;
-        }
-
-        else if (selectedValue==="vid-yt") {
-            iframe.contentWindow.document.querySelector("section p").insertAdjacentHTML("afterend", "\n\n\t\t<figure>\n\t\t\t<div class=\"container-video-yt\">\n\t\t\t\t<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RNKWoqDlbxc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n\t\t\t\t<\/iframe>\n\t\t\t<\/div>\n\t\t</figure>");
-            document.getElementById("vis_type_4").checked=true;
-        }
-        iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("\t\t\n\n", "");
-     
-    } // Ends video branch
-}
-
-/*
-//////////////// ILLUSTRATIONS: ALIGN ON DESKTOP  ////////////////////
-*/
-
-// document.querySelector("#switch-section-desktop-figure-align").addEventListener("change", doAlignDesktopFig);
-    
-function doAlignDesktopFig() {
-
-    const rbs = document.querySelectorAll("input[name='section-desktop-figure-align']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    if (selectedValue==="fig-left") {
-        iframe.contentWindow.document.querySelector("section figure").classList.remove("text-center-desktop");
-    }
-    else if (selectedValue==="fig-center") {
-        iframe.contentWindow.document.querySelector("section figure").classList.add("text-center-desktop");   
-    }
-}
-
-/*
-//////////////// VISUAL ELEMENT WIDTH (600px AND ABOVE ) ///////////////
-*/
-
-// document.querySelector("#switch_section_vis_width_desktop").addEventListener("change", doFigWidthDesktop);
-
-function doFigWidthDesktop() {
-    const rbs = document.querySelectorAll("input[name='section-vis-width-desktop']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    const el_section_fig = iframe.contentWindow.document.querySelector("section figure");
-    if (selectedValue==="100") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.remove("figure-width-80");
-        disableVisualAlign();
-    }
-
-    else if (selectedValue==="80") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.add("figure-width-80");
-        enableVisualAlign();
-    }
-
-    else if (selectedValue==="50") {
-        el_section_fig.classList.remove("figure-width-80");
-        el_section_fig.classList.add("figure-width-50");
-        enableVisualAlign();        
-    }
-
-    else if (selectedValue==="full") {
-        el_section_fig.classList.remove("figure-width-50");
-        el_section_fig.classList.remove("figure-width-80");
-        enableVisualAlign();        
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: IMAGE SHADOWS ///////////////
-*/
-
-/* Enable image shadows */
-// document.querySelector("#cb_img_shadows").addEventListener("change", doImgShadows);
-
-function doImgShadows() {
-
-    if (!document.getElementById("cb_img_shadows").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-    }
-    else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: CORNERS ///////////////
-*/
-
-// document.querySelector("#cb_img_corners").addEventListener("change", doImgCorners);
-
-function doImgCorners() {
-
-    if (!document.getElementById("cb_img_corners").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-corners-soft");
-    }
-    else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-corners-soft");
-    }
-}
-
-/*
-//////////////// VISUAL PROPERTIES: VIDEO SHADOWS ///////////////
-*/
-
-/* Enable video shadows */
-// document.querySelector("#cb_vid_shadows").addEventListener("change", doVidShadows);
-
-function doVidShadows() {
-    if (!document.getElementById("cb_vid_shadows").checked) {
-        iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-    }
-    else {
-        iframe.contentWindow.document.querySelector('section').classList.add("fig-shadow");
-    }
-}
-
-/* ================ VISUAL PROPERTIES ================= */
-
-// All radio buttons
-function enableRBs() {
-    document.getElementById("vis_type_0").checked=false;
-    document.getElementById("vis_type_1").checked=false;
-    document.getElementById("vis_type_2").checked=false;
-    document.getElementById("vis_type_3").checked=false;
-    document.getElementById("vis_type_4").checked=false;
-    document.getElementById("vis_type_0").disabled=false;
-    document.getElementById("vis_type_1").disabled=false;
-    document.getElementById("vis_type_2").disabled=false;
-    document.getElementById("vis_type_3").disabled=false;
-    document.getElementById("vis_type_4").disabled=false;
-}
-
-function disableRBs() {
-    document.getElementById("vis_type_0").checked=false;
-    document.getElementById("vis_type_1").checked=false;
-    document.getElementById("vis_type_2").checked=false;
-    document.getElementById("vis_type_3").checked=false;
-    document.getElementById("vis_type_4").checked=false;
-    document.getElementById("vis_type_0").disabled=true;
-    document.getElementById("vis_type_1").disabled=true;
-    document.getElementById("vis_type_2").disabled=true;
-    document.getElementById("vis_type_3").disabled=true;
-    document.getElementById("vis_type_4").disabled=true;
-}
-
-
-// Visual width
-function enableVisualWidth() {
-    document.getElementById("rb_vis_width_desktop_100").disabled=false;
-    document.getElementById("rb_vis_width_desktop_80").disabled=false;
-    document.getElementById("rb_vis_width_desktop_50").disabled=false;
-    document.getElementById("rb_vis_width_desktop_100").checked=true;
-}
-
-function disableVisualWidth() {
-    document.getElementById("rb_vis_width_desktop_100").disabled=true;
-    document.getElementById("rb_vis_width_desktop_80").disabled=true;
-    document.getElementById("rb_vis_width_desktop_50").disabled=true;
-    document.getElementById("rb_vis_width_desktop_100").checked=false;
-    document.getElementById("rb_vis_width_desktop_80").checked=false;
-    document.getElementById("rb_vis_width_desktop_50").checked=false;
-}
-
-// Visual align
-function enableVisualAlign() {
-    document.getElementById("rb_desktop_figure_align_left").disabled=false;
-    document.getElementById("rb_desktop_figure_align_left").checked=true;
-    document.getElementById("rb_desktop_figure_align_center").disabled=false;
-}
-
-function disableVisualAlign() {
-    document.getElementById("rb_desktop_figure_align_left").disabled=true;
-    document.getElementById("rb_desktop_figure_align_left").checked=false;
-    document.getElementById("rb_desktop_figure_align_center").disabled=true;
-    document.getElementById("rb_desktop_figure_align_center").checked=false;
-}
-
-// Image properties with labels
-function enableImgProps() {
-    document.getElementById("cb_img_corners").disabled=false;
-    document.getElementById("cb_img_corners").checked=false;
-    document.getElementById("cb_img_shadows").disabled=false;
-    document.getElementById("cb_img_shadows").checked=false;
-}
-
-function disableImgProps() {
-    document.getElementById("cb_img_corners").disabled=true;
-    document.getElementById("cb_img_corners").checked=false;
-    document.getElementById("cb_img_shadows").disabled=true;
-    document.getElementById("cb_img_shadows").checked=false;
-    iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-}
-
-// Video properties with labels
-function enableVidProps() {
-    document.getElementById("cb_vid_shadows").disabled=false;
-    document.getElementById("cb_vid_shadows").checked=false;
-}
-
-function disableVidProps() {
-    document.getElementById("cb_vid_shadows").disabled=true;
-    document.getElementById("cb_vid_shadows").checked=false;
-    iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-}
-
-function resetVisual() {
-    if (iframe.contentWindow.document.querySelector('section figure')) {
-        let el_content = iframe.contentWindow.document.querySelector('section');
-        let el_fig = iframe.contentWindow.document.querySelector('section figure');
-        el_content.removeChild(el_fig);
-    }
-
-    // Uncheck and disable all radio buttons
-    document.getElementById("vis_type_0").checked=false;
-    document.getElementById("vis_type_1").checked=false;
-    document.getElementById("vis_type_2").checked=false;
-    document.getElementById("vis_type_3").checked=false;
-    document.getElementById("vis_type_4").checked=false;
-    iframe.contentWindow.document.querySelector('section').classList.remove("fig-shadow");
-    disableImgProps();
-    disableVidProps();
-}
-
-function removeVisual() {
-    iframe.contentWindow.document.querySelector('section').innerHTML =iframe.contentWindow.document.querySelector('section').innerHTML.replace("</figure>", "</figure>\n\n\t");
-    let el_content = iframe.contentWindow.document.querySelector('section');
-    let el_fig = iframe.contentWindow.document.querySelector('section figure');
-    el_content.removeChild(el_fig);
-
-    disableRBs();
-    disableVisualWidth();
-    disableVisualAlign();
-    disableImgProps();
-    disableVidProps();
-    let HTML_Content = iframe.contentWindow.document.getElementById("HTML-Content").innerHTML;
-    HTML_Content = HTML_Content.replace(/\t\n\n/g, "");
-    iframe.contentWindow.document.getElementById("HTML-Content").innerHTML = HTML_Content;
 }
 
 /*

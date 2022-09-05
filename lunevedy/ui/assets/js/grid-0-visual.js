@@ -164,7 +164,7 @@ function doColH3TextBox() {
     }
 }
 
-/* photos: soft corners */
+/* photos: text box */
 
 document.querySelector("#form_img_textbox_shape").addEventListener("change", doTextBoxShape);
 
@@ -416,8 +416,6 @@ function resetVideoProps() {
 }
 
 function doVisSubTypes(n) {
-
-    const objSection = iframe.contentWindow.document.querySelector("section");
     let el_visual;
 
     // photos: landscape
@@ -456,8 +454,10 @@ function doVisSubTypes(n) {
     // videos: Rumble
     else if (n===8) {
         el_visual = content_vid_rumble_section;
-    }    
-    objSection.innerHTML = el_visual + objSection.innerHTML; 
+    }
+
+    const objH2 = iframe.contentWindow.document.querySelector("section > h2");
+    objH2.insertAdjacentHTML('beforebegin', el_visual);
 }
 
 function removeVisual() {
@@ -466,10 +466,5 @@ function removeVisual() {
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
-
-    // let el_img = iframe.contentWindow.document.querySelector("figure"); 
-    // console.log("el_img: "+el_img);
-    // console.log("el_img innerHTML: "+el_img.innerHTML);
-    // el_img.remove();
 }
 

@@ -300,7 +300,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         if (btn_id === "btn_section_bg") {
             newStyle = sectionClassName+ " { background-color: var("+color_code+") }\n";
             sub_string = sectionClassName+ " { background-color: ";
-            console.log("clicked section bg color");
         }
 
         /* .col-1 badge text */
@@ -663,7 +662,6 @@ function deleteUITheme() {
     elLowerLeft.classList.remove("theme-ui-girlboss"); 
     elLowerRight.classList.remove("theme-ui-girlboss"); 
 }
-
 
 /*
 //////////////// UI GRID OUTLINES ///////////////
