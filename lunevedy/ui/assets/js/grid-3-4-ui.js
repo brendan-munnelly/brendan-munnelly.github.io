@@ -1,5 +1,7 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
+let sectionClassName = ".section-selector-1";
+let sectionTheme = ".theme-light";
 let btn_id; // item to be coloured
 let newStyle; // full selector and style rule
 let sub_string; // style rule excerpt for arrCSS
@@ -183,9 +185,6 @@ function doSectionTheme() {
 /*
 //////////////// SECTION: CLASS NAMES ///////////////
 */
-
-let sectionClassName = ".section-selector-1";
-let sectionTheme = ".theme-light";
 
 document.querySelector("#dd_class_name").addEventListener("change", doClassName);
 

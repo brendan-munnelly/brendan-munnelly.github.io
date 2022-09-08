@@ -53,6 +53,14 @@ function loadBtnInitial() {
         document.getElementById("rb_btn_two").disabled=false;
         document.getElementById("dd_buttons_size").disabled=false;
         document.getElementById("dd_buttons_size").value="1";
+        document.getElementById("form_btn_align_desktop").disabled=false;
+        document.getElementById("rb_btn_align_desktop_left").disabled=false;
+        document.getElementById("rb_btn_align_desktop_left").checked = true;;
+        document.getElementById("rb_btn_align_desktop_center").disabled=false;
+        document.getElementById("form_btn_align_mobile").disabled=false;
+        document.getElementById("rb_btn_align_mobile_left").disabled=false;
+        document.getElementById("rb_btn_align_mobile_left").checked = true;;
+        document.getElementById("rb_btn_align_mobile_center").disabled=false;
 
         // enable dialog box settings for buttons one
         document.querySelector(".container-buttons-block").style.display="block";
@@ -79,6 +87,14 @@ function loadBtnInitial() {
         document.getElementById("rb_btn_one").checked=false;
         document.getElementById("rb_btn_two").disabled=true;
         document.getElementById("rb_btn_two").checked=false;
+        document.getElementById("form_btn_align_desktop").disabled=true;
+        document.getElementById("rb_btn_align_desktop_left").disabled=true;
+        document.getElementById("rb_btn_align_desktop_left").checked = false;
+        document.getElementById("rb_btn_align_desktop_center").disabled=true;
+        document.getElementById("form_btn_align_mobile").disabled=true;
+        document.getElementById("rb_btn_align_mobile_left").disabled=true;
+        document.getElementById("rb_btn_align_mobile_left").checked = false;
+        document.getElementById("rb_btn_align_mobile_center").disabled=true;
 
         document.getElementById("dd_buttons_size").disabled=true;
         document.getElementById("dd_buttons_size").value="1";
@@ -187,8 +203,70 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             document.getElementById("cb_buttons_shadow_2").checked=false;
             document.getElementById("cb_buttons_uppercase_2").disabled=false;
             document.getElementById("cb_buttons_uppercase_2").checked=false;
+            document.getElementById("btn_cols_bg_passive_2").disabled=true;
         }
     }
+
+/*
+//////////////// BUTTONS COMMON: ALIGN DESKTOP  ////////////////////
+*/
+
+document.querySelector("#form_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
+
+function doButtonsAlignDesktop() {
+
+    const rbs = document.querySelectorAll("input[name='rb_btn_align_desktop']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    // Verify button container exists 
+    if (iframe.contentWindow.document.querySelectorAll(".container-btn")) {  
+
+        let elBtns = iframe.contentWindow.document.querySelector(".container-btn");
+        if (selectedValue==="left") {
+            elBtns.classList.remove("text-center-desktop");
+        }
+        else if (selectedValue==="center") {
+            elBtns.classList.add("text-center-desktop");
+        }
+    }
+}
+
+/*
+//////////////// BUTTONS COMMON: ALIGN MOBILE  ////////////////////
+*/
+
+document.querySelector("#form_btn_align_mobile").addEventListener("change", doButtonsAlignMobile);
+
+function doButtonsAlignMobile() {
+
+    const rbs = document.querySelectorAll("input[name='rb_btn_align_mobile']");
+    let selectedValue;
+    
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    // Verify button container exists 
+    if (iframe.contentWindow.document.querySelector(".container-btn")) {      
+        let elBtns = iframe.contentWindow.document.querySelector(".container-btn");
+        if (selectedValue==="left") {
+            elBtns.classList.remove("text-center-mobile");
+        }
+        else if (selectedValue==="center") {
+            elBtns.classList.add("text-center-mobile");
+        }
+    }
+}
 
 /*
 //////////////// BUTTONS COMMON: SIZE ////////////////////
@@ -242,7 +320,14 @@ function doButtonType1() {
     if (opt==="0") {
         el_btn.classList.remove("btn-outline");
         el_btn.classList.remove("btn-plain");
-        el_btn.classList.add("btn-solid");            
+        el_btn.classList.add("btn-solid"); 
+        document.getElementById("cb_buttons_shadow_1").disabled=false;
+        document.getElementById("dd_button_type_1").disabled=false;
+        document.getElementById("btn_cols_bg_passive_1").disabled=false;
+        document.getElementById("btn_cols_border_passive_1").disabled=false;
+        document.getElementById("btn_cols_bg_active_1").disabled=false;
+        document.getElementById("btn_cols_border_active_1").disabled=false; 
+        document.getElementById("btn_cols_bg_passive_1").disabled=false; 
     }
 
     // Outline
@@ -250,6 +335,12 @@ function doButtonType1() {
         el_btn.classList.remove("btn-plain");
         el_btn.classList.remove("btn-solid");
         el_btn.classList.add("btn-outline");
+        document.getElementById("cb_buttons_shadow_1").disabled=false;
+        document.getElementById("dd_button_type_1").disabled=false;
+        document.getElementById("btn_cols_bg_passive_1").disabled=true;
+        document.getElementById("btn_cols_border_passive_1").disabled=false;
+        document.getElementById("btn_cols_bg_active_1").disabled=false;
+        document.getElementById("btn_cols_border_active_1").disabled=false;
     }
 
     // Link
@@ -257,6 +348,12 @@ function doButtonType1() {
         el_btn.classList.remove("btn-outline");
         el_btn.classList.remove("btn-solid");
         el_btn.classList.add("btn-plain");
+        document.getElementById("cb_buttons_shadow_1").disabled=true;
+        document.getElementById("dd_buttons_shape_1").disabled=true;
+        document.getElementById("btn_cols_bg_passive_1").disabled=true;
+        document.getElementById("btn_cols_border_passive_1").disabled=true;
+        document.getElementById("btn_cols_bg_active_1").disabled=true;
+        document.getElementById("btn_cols_border_active_1").disabled=true;
     }
 }
 
@@ -275,7 +372,13 @@ function doButtonType2() {
     if (opt==="0") {
         el_btn.classList.remove("btn-outline");
         el_btn.classList.remove("btn-plain");
-        el_btn.classList.add("btn-solid");            
+        el_btn.classList.add("btn-solid");
+        document.getElementById("cb_buttons_shadow_2").disabled=false;
+        document.getElementById("dd_buttons_shape_2").disabled=false;
+        document.getElementById("btn_cols_bg_passive_2").disabled=false;
+        document.getElementById("btn_cols_border_passive_2").disabled=false;
+        document.getElementById("btn_cols_bg_active_2").disabled=false;
+        document.getElementById("btn_cols_border_active_2").disabled=false;       
     }
 
     // Outline
@@ -283,6 +386,12 @@ function doButtonType2() {
         el_btn.classList.remove("btn-plain");
         el_btn.classList.remove("btn-solid");
         el_btn.classList.add("btn-outline");
+        document.getElementById("cb_buttons_shadow_2").disabled=false;
+        document.getElementById("dd_buttons_shape_2").disabled=false;
+        document.getElementById("btn_cols_bg_passive_2").disabled=true;
+        document.getElementById("btn_cols_border_passive_2").disabled=false;
+        document.getElementById("btn_cols_bg_active_2").disabled=false;
+        document.getElementById("btn_cols_border_active_2").disabled=false;
     }
 
     // Link
@@ -290,6 +399,12 @@ function doButtonType2() {
         el_btn.classList.remove("btn-outline");
         el_btn.classList.remove("btn-solid");
         el_btn.classList.add("btn-plain");
+        document.getElementById("cb_buttons_shadow_2").disabled=true;
+        document.getElementById("dd_buttons_shape_2").disabled=true;
+        document.getElementById("btn_cols_bg_passive_2").disabled=true;
+        document.getElementById("btn_cols_border_passive_2").disabled=true;
+        document.getElementById("btn_cols_bg_active_2").disabled=true;
+        document.getElementById("btn_cols_border_active_2").disabled=true;
     }
 }
 

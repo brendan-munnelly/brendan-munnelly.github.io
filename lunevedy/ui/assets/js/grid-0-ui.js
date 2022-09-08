@@ -1,5 +1,7 @@
 // Number of dropdown menus on Lunevery navbar
 let uiMenusLength = document.querySelectorAll("#ui-menus li").length;
+let sectionClassName = ".section-selector-1";
+let sectionTheme = ".theme-light";
 let btn_id; // item to be coloured
 let newStyle; // full selector and style rule
 let sub_string; // style rule excerpt for arrCSS
@@ -177,7 +179,6 @@ function removeClassNames() {
     }
 }
 
-
 /*
 //////////////// SECTION WIDTH ///////////////
 */
@@ -329,40 +330,77 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         /* === Buttons === */
 
         /* Text colour: passive */
-        else if (btn_id === "btn_cols_text_passive") {
+        else if (btn_id === "btn_cols_text_passive_1") {
             // Get class of buttons
-            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:visited { color";
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):visited { color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):visited { color";
         }
 
         /* Text colour: active */
-        else if (btn_id === "btn_cols_text_active") {
-            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:active { color";
+        else if (btn_id === "btn_cols_text_active_1") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):hover,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):active { color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):active { color";
         }
 
         /* Background colour: passive */
-        else if (btn_id === "btn_cols_bg_passive") {
-            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:visited { background-color";
+        else if (btn_id === "btn_cols_bg_passive_1") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):visited { background-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):visited { background-color";
         }
 
         /* Background colour: active */
-        else if (btn_id === "btn_cols_bg_active") {
-            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { background-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:active { background-color";
+        else if (btn_id === "btn_cols_bg_active_1") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):hover,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):active { background-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):active { background-color";
         }
 
         /* Border colour: passive */
-        else if (btn_id === "btn_cols_border_passive") {
-            newStyle = sectionClassName+" a.btn:link,\n"+sectionClassName+" a.btn:visited { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:visited { border-color";
+        else if (btn_id === "btn_cols_border_passive_1") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):visited { border-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):visited { border-color";
         }
 
         /* Border colour: active */
-        else if (btn_id === "btn_cols_border_active") {
-            newStyle = sectionClassName+" a.btn:focus,\n"+sectionClassName+" a.btn:hover,\n"+sectionClassName+" a.btn:active { border-color: var("+color_code+") }\n\n";
-            sub_string = "a.btn:active { border-color";
+        else if (btn_id === "btn_cols_border_active_1") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(1):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):hover,\n"+sectionClassName+" .container-btn a.btn:nth-child(1):active .container-btn { border-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(1):active { border-color";
+        }
+
+        /* Text colour: passive */
+        else if (btn_id === "btn_cols_text_passive_2") {
+            // Get class of buttons
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):visited { color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):visited { color";
+        }
+
+        /* Text colour: active */
+        else if (btn_id === "btn_cols_text_active_2") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):hover,\n"+sectionClassName+" a.btn:nth-child(2):active { color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):active { color";
+        }
+
+        /* Background colour: passive */
+        else if (btn_id === "btn_cols_bg_passive_2") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):visited { background-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):visited { background-color";
+        }
+
+        /* Background colour: active */
+        else if (btn_id === "btn_cols_bg_active_2") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):hover,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):active { background-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):active { background-color";
+        }
+
+        /* Border colour: passive */
+        else if (btn_id === "btn_cols_border_passive_2") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):link,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):visited { border-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):visited { border-color";
+        }
+
+        /* Border colour: active */
+        else if (btn_id === "btn_cols_border_active_2") {
+            newStyle = sectionClassName+" .container-btn a.btn:nth-child(2):focus,\n"+sectionClassName+" .container-btn a.btn:nth-child(2):hover,\n"+sectionClassName+" a.btn:nth-child(2):active .container-btn { border-color: var("+color_code+") }\n\n";
+            sub_string = ".container-btn a.btn:nth-child(2):active { border-color";
         }
 
         /* Icons colour */
@@ -373,15 +411,17 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
 
         /* Photos overlay textbox color */
         else if (btn_id === "btn_cols_img_overlay_color_text") {
-            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
+            newStyle = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color: var("+color_code+") }\n";
             sub_string = "figure.icon";
         }
 
         /* Photos overlay textbox background color */
         else if (btn_id === "btn_cols_img_overlay_color_bg") {
-            newStyle =  sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
+            newStyle = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-        }        
+        }
+        // console.log(sub_string);
+        console.log(newStyle);
         doUpdateArray(sub_string,newStyle);      
     }
 
