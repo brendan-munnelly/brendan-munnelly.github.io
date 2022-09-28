@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>3: Objects, Properties and Methods | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Writing Your First JS Code: A front-end development tutorial from Brendan Munnelly">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../frontend/assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="../../frontend/assets/img/brendan-munnelly-dorset-college-dublin.jpg" alt="Brendan Munnelly, Lecturer in Front End Development">
+						<p id="myEmail">brendan.munnelly@dorset.ie</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Objects, Properties, and Methods</h1>
+					<h2>Exploring the navigator (web browser) object, the window object, the location (web address) object, and the document (web page) object.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript Course</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#objects-properties-methods">Objects, properties and methods</a></p>
+				<p><a href="#navigator-object">The web browser <span class="syn-js">navigator</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-1">Exercise 2.1: Displaying your web browser properties</a></p>
+				<p class="toc-indent"><a href="#object-property-notation">About <span class="syn-js">objectname.propertyname</span> notation</a></p>
+				<p><a href="#browser-sniffing">Web browser sniffing</a></p>
+				<p><a href="#window-object">The <span class="syn-js">window</span> object of the web browser</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-2">Exercise 2.1 (continued): Displaying your viewport dimensions</a></p>
+				<p class="toc-indent"><a href="#literals">Displaying literals with <span class="syn-js">document.write()</span></a></p>
+				<p><a href="#location-object">The web page <span class="syn-js">location</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-3">Exercise 2.1 (continued): Displaying the web page URL</a></p>
+				<p><a href="#document-object">The web page <span class="syn-js">document</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-4">Exercise 2.1 (continued): Displaying your web page details</a></p>
+				<p><a href="#objects-methods">About objects and methods</a></p>
+				<p><a href="#github-upload">Uploading your JavaScript exercise file to GitHub</a></p>
+				<p><a href="#lesson-summary">Lesson summary</a></p>	
+			</aside>
+	
+	<article>
+	
+<section id="learning-goals">
+	
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson, you will be able to:</p>
+	<div class="box-goals">
+		<ul>
+			<li>Display in a web page the values of properties stored in four JavaScript objects: the <span class="syn-js">navigator</span> (web browser) object, the <span class="syn-js">window</span> object, the <span class="syn-js">location</span> (web address) object, and the <span class="syn-js">document</span> (web page) object.</li>
+		</ul>
+	</div>
+
+</section>
+
+<section>
+
+	<p>In this Lesson you will meet the following JavaScript terms:</p>
+
+	<ul>
+		<li>JavaScript Property</li>
+		<li>JavaScript Object</li>
+	</ul>
+
+	<h3>Exercise file</h3>
+	<p>In this Lesson you will work with this sample web page:</p>
+
+	<p>&#128196; &nbsp;&nbsp;<a href="exercises/2/exercise-2-1.html" target="_blank">exercise-2-1.html</a></p>
+
+	<p>You will find this file in your  📁 <b>/javascript/exercises/2/</b> sub-folder.</p>
+</section>
+
+<section id="objects-properties-methods">
+
+	<h2>About objects, properties and methods</h2>
+
+	<p>Objects, properties and methods are three important concepts in JavaScript.</p>
+	
+	<table class="table-geo-one">
+		<tbody>
+			<tr>
+				<td width="18%"><p><b>object</b></p></td>
+				<td><p>A <i>container</i> for holding properties. Many objects contain other objects, which are said to be <i>nested</i> inside them.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr /></td>
+			</tr>
+			<tr>
+				<td width="18%"><p><b>property</b></p></td>
+				<td><p>A <i>feature</i> of an object with a name and a value. All values of a property can be read by JavaScript code, and some values can be changed.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr /></td>
+			</tr>
+			<tr>
+				<td width="18%"><p><b>method</b></p></td>
+				<td><p>An <i>action</i> that JavaScript code can perform on an object or its properties. Method names end with a parenthesis ().</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<p>This Lesson will focus on four important objects in JavaScript:</p>
+
+	<ul>
+		<li>The <span class="syn-js">navigator</span> object (web browser used to display web page).</li>
+		<li>The <span class="syn-js">window</span> object (screen area filled by web browser).</li>
+		<li>The <span class="syn-js">location</span> object (full web address of web page).</li>
+		<li>The <span class="syn-js">document</span> object (web page and all its content).</li>
+	</ul>
+
+	<p>In the sample screenshot below, you can see the home page of Ireland&#8217;s <a href="https://growremote.ie/" target="_blank">Grow Remote</a> website with these four JavaScript objects highlighted.</p>
+
+	<img src="assets/img/screenshot.png" class="zoom" alt="JavaScript">
+
+	<p class="defhead">JavaScript Object</p>
+	<p class="deftext">A container of information (pairs of property names and values). Examples include the <b>navigator</b>, <b>window</b>, <b>location</b> and <b>document</b> objects. Many objects contain other objects <i>nested</i> inside them. JavaScript code can read values of all properties of an object, and some values it can change.</p>
+
+</section>
+
+
+
+<section id="navigator-object">
+
+	<h2>The web browser <span>navigator</span> object</h2>
+	<p>JavaScript refers to the web browser as the <span class="syn-js">navigator</span> object. The name comes from Netscape Navigator, the browser for which JavaScript was developed. Netscape Navigator later evolved into the Mozilla Firebox browser.</p>
+	
+	<p>One property of the <span class="syn-js">navigator</span> object is called <span class="syn-js">userAgent</span>. See the table below.</p>
+
+	<table class="table-js">
+		<thead>
+			<tr>
+				 <th width="16%"><p><b>Object</b></p></th>
+				 <th width="22%"><p><b>Property Name</b></p></th>
+				 <th width="62%"><p><b>Description</b></p></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td><p>navigator</p></td>
+				<td><p>userAgent</p></td>
+				<td><p>Contains the product name, version and platform (operating system) of the web browser.</p></td>
+			</tr>
+		 </tbody>
+	</table>
+
+
+	<p>In Exercise 2.1 you will use this property to display information about your web browser.</p>
+
+	<h4 id="ex-2-1-1">Exercise 2.1: Displaying your web browser properties</h4>
+
+	<p>To begin, use Windows Explorer (Microsoft Windows 10) or Finder (Apple Mac) to display the sub-folder &#128193; on your computer which contains your JavaScript exercise files.</p>
+	
+	<p>The sub-folder is named <b>javascript/exercises/2/</b>.</p>
+	
+	<p>Next, follow these steps:</p>
+
+	<ol>
+		<li>Open the following web page file in Visual Studio Code and your web browser:
+		<span class="inside-ol">&nbsp;</span>
+		&#128196;  &nbsp;&nbsp;<a href="exercises/2/exercise-2-1.html" target="_blank">exercise-2-1.html</a></li>
+
+		<li>Near the top of the web page you can see an HTML <span class="syn-html">&lt;h2&gt;</span> &#8230; <span class="syn-html">&lt;h2&gt;</span> sub-heading that contains the text &#8220;OS platform and web browser.&#8221;
+		<span class="inside-ol">&nbsp;</span>
+		Under this sub-heading is an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+
+		<li>Copy-and-paste the following line of JavaScript code inside these tags.
+
+<pre class="language-js">
+ document.write("&lt;p&gt;&lt;b&gt;"+navigator.userAgent+"&lt;\/b&gt;&lt;\/p&gt;");
+</pre>
+
+	Your VS Code should now look as follows.
+
+	<img src="assets/img/vs-code-1.png" alt="JavaScript"></li>
+
+	<li>In VS Code, save the web page file. And then reload the page in your web browser.</li>
+</ol>
+
+	<p>On Microsoft Windows 10, for various web browsers, the results should look as shown below.</p>
+
+	<h5 style="margin-bottom:-26px; font-style:italic">Mozilla Firefox</h5>
+	<img src="assets/img/browser-ff.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-26px; font-style:italic">Google Chrome</h5>
+	<img src="assets/img/browser-chrome.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-26px; font-style:italic">Microsoft Edge</h5>
+	<img src="assets/img/browser-edge.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-26px; font-style:italic">Opera</h5>
+	<img src="assets/img/browser-opera.png" alt="JavaScript">
+
+	<p>Leave the &#128196; <b>exercise-2-1.html</b> file open in VS Code and your web browser. You will update it three more times in this Lesson.</p>
+
+</section>
+
+
+
+<section id="browser-sniffing">
+
+	<h2>Web browser-sniffing</h2>
+
+	<p>When a web browser sends a request to a webserver to display a web page, it sends along with the request information about itself from the <span class="syn-js">userAgent</span> property of its <span class="syn-js">navigator</span> object.</p>
+
+	<img src="assets/img/client-server-1.png" alt="JavaScript">
+
+	<p>It can be important for a webserver to know which web browser, browser version and operating system a website visitor is using. With this information, the webserver can deliver the appropriate version of its web pages to the user.</p>
+
+	<img src="assets/img/client-server-2.png" alt="JavaScript">
+
+	<!--
+	<p>New HTML formating tags and CSS styles, and new font, image and video formats, are continualy being developed. When viewed in the latest version of a modern browser, the result will be a richer user experience for the website visitor.</p>
+	
+	<p>On an out-of-date web browser, or even on an older version of a modern browser, however, web pages built with the latest design features will simply look &#8216;broken&#8217;.</p>
+
+	<p>Web developers rely on sites such as <a href="https://caniuse.com/" target="_blank">Can I Use</a> to discover which features are supported (if at all) by which versions of which web browsers.</p>
+
+	-->
+
+	<p>As you can see from Exercise 2-1, the information stored in the <span class="syn-js">userAgent</span> can be a misleading. For example, almost all web browsers display as &#8216;Mozilla&#8217;. And both the 32-bit and 64-bit versions of Microsoft Windows display as &#8216;Win-64&#8217;.</p>
+
+	<p>JavaScript developers use browser detection or &#8216;browser sniffing&#8217; programs to analyse the content of the <span class="syn-js">userAgent</span> property for tell-tale signs of which browser is actually is sending the web page request.</p>
+
+
+	<p class="defhead">JavaScript Object Property</p>
+
+	<p class="deftext">A feature or characteristic of an object that can be accessed or set using JavaScript methods. Some properties are scriptable; others are read-only.</p>
+
+
+
+
+	<h3 id="literals">Displaying literals with <span>document.write()</span></h3>
+
+	<p>When typing <span class="syn-js">document.write()</span> statements, only enclose within quotes those items that you want interpreted <i>literally</i>.</p>
+	
+	
+	<p>For example, the following statement in VSCode will display the language version of your web browser.</p>
+
+<pre class="language-js">
+document.write("Web browser language: "+navigator.language);
+</pre>
+
+	<p>It will produce an output such as the following.</p>
+
+	<img src="assets/img/browser-language.png" alt="JavaScript">
+
+	<p>What would happen if you did enclose <i>everything</i> inside the parenthesis () within quotes?</p>
+	
+<pre class="language-js">
+document.write("Web browser language: +navigator.language");
+</pre>
+
+	<p>The result will look as shown below.</p>
+	
+	<img src="assets/img/browser-language-literal.png" alt="JavaScript">
+
+	<p>This is not an error or a &#8216;bug&#8217;. The above JavaScript code will run perfectly. But the result is probably not what you want!</p>
+
+	<p>You don&#8217;t want the text &#8220;navigator.language&#8221; displayed on the web page. What you want is the <i>value</i> of that object property. That is why the object property is not enclosed within quotes.</p>
+
+</section>
+
+<section id="window-object">
+
+	<h2>The <span>window</span> object of the web browser</h2>
+	<p>The <span class="syn-js">window</span> object represents the user&#8217;s screen area in the web browser.</p>
+
+	<p>The area of the web browser window that displays web page content is called the <i>viewport</i>. The viewport excludes any menubar, tab names and web address bar at the top of the window, and also any scrollbars at the right or along the bottom.</p>
+	
+	<p>The properties of the <span class="syn-js">window</span> object of particular interest to JavaScript programmers are shown in the table below.</p>
+
+	<table class="table-js">
+		<thead>
+			<tr>
+				 <th width="14%"><p><b>Object</b></p></th>
+				 <th width="24%"><p><b>Property Name</b></p></th>
+				 <th width="60%"><p><b>Description</b></p></th>
+			</tr>
+		 </thead>
+		<tbody>
+			 <tr>
+				<td><p>&nbsp;</p></td>
+				<td><p>innerWidth</p></td>
+				<td><p>The width of the browser viewport in pixels.</p></td>
+			</tr>
+			<tr>
+				 <td><p>&nbsp;</p></td>
+				 <td><p>innerHeight</p></td>
+				 <td><p>The height of the browser viewport in pixels.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="ex-2-1-2">Exercise 2.1 (continued): Displaying your viewport dimensions</h4>
+	<p>Let&#8217;s use these two properties to display the dimensions of your web browser viewport.</p>
+
+	<ol>
+		<li>In your &#128196; <b>exercise-2-1.html</b> file in VS Code, you can see a second sub-heading of &#8220;Web browser viewport&#8221; and under it an empty pair of opening and closing pair of <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following four lines of JavaScript code inside these tags.
+
+<pre class="language-js">
+document.write("&lt;p&gt;Viewport width: &lt;b&gt;"+window.innerWidth+"px&lt;\/b&gt;&lt;br&gt;"); 
+document.write("Viewport height: &lt;b&gt;"+window.innerHeight+"px&lt;\/b&gt;&lt;\/p&gt;"); 
+</pre>
+		Your VS Code should now look as follows.
+
+		<img src="assets/img/vs-code-2.png" class="wider-110" alt="JavaScript"></li>
+
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
+
+		<img src="assets/img/window-viewport.png" alt="JavaScript"></li>
+
+	</ol>
+
+	<p>Leave the &#128196; <b>exercise-2-1.html</b> file open in VS Code and your web browser. You will make two more updates to it.</p>
+
+</section>
+
+
+
+<section id="location-object">
+
+	<h2>The <span style="letter-spacing: -3px">location</span> object of the web page</h2>
+
+	<p>The history object is part of the window object and is accessed through the window.history property.</p>
+
+	<p>The <span class="syn-js">location</span> object contains the Uniform Resource Locator (URL) of the currently displayed web page. It can be accessed by JavaScript code through either the <span class="syn-js">window.location</span> or <span class="syn-js">document.location</span> object properties.</p>
+
+	<p>One of its properties are shown in the table below.</p>
+
+	<table class="table-js">
+		<thead>
+			<tr>
+				 <th width="24%"><p><b>Object</b></p></th>
+				 <th width="20%"><p><b>Property Name</b></p></th>
+				 <th width="54%"><p><b>Description</b></p></th>
+			</tr>
+		 </thead>
+		<tbody>
+			<tr>
+				 <td><p>window.location or document.location</p></td>
+				 <td><p>href</p></td>
+				 <td><p>The full URL of the web page. For example, <b>https://www.website.com/products/shoes/index.html</b> or <b>https://mysite.github.io/contact/index.html</b>.</p></td>
+			 </tr>
+		</tbody>
+	</table>
+
+	<h4 id="ex-2-1-3">Exercise 2.1 (continued): Displaying your web page URL</h4>
+	<p>Let&#8217;s update the exercise web page to display its address.</p>
+
+	<ol>
+		<li>In your &#128196; <b>exercise-2-1.html</b> file in VS Code, you can see a third sub-heading of &#8220;Web page URL&#8221; and under it an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following line of JavaScript code inside these tags.
+
+<pre class="language-js">
+ document.write("&lt;p&gt;&lt;b&gt;"+window.location.href+"&lt;\/b&gt&lt;\/p&gt;");
+</pre>
+		Your VS Code should now look as follows.
+
+		<img src="assets/img/vs-code-3.png" alt="JavaScript"></li>
+
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
+
+		<img src="assets/img/window-location.png" alt="JavaScript"></li>
+
+	</ol>
+
+	<p>Leave the &#128196; <b>exercise-2-1.html</b> file open in VS Code and your web browser. You will make one more update to it.</p>
+
+
+	<h3 id="object-property-notation">About <span style="letter-spacing:-3px">object</span><span style="letter-spacing:0">name</span>.<span style="letter-spacing:-3px">property</span><span style="letter-spacing:0">name</span> notation</h3>
+	<p>In JavaScript code, the standard format for writing the name of an object and one of its properties is as follows.</p>
+
+<pre class="language-js">
+objectname.propertyname
+</pre>
+	<p>Note that a full stop (<b>.</b>) is used to separate the name of the property from the name of the object. Below are some examples of JavaScript statements that display a property value of a particular object. The first one you already used in Exercise 2.1.</p>
+	
+<pre class="language-js">
+document.write(navigator.userAgent);
+document.write(window.innerWidth);
+document.write(document.title);
+</pre>
+
+
+</section>
+
+
+
+<section id="document-object">
+
+	<h2>The web page <span>document</span> object</h2>
+
+	<p>In web development generally, the term &#8216;HTML file.&#8217; is used for what most Internet users refer to simply as a &#8216;web page.&#8217; In JavaScript programming, however, a web page is known as a &#8216;document&#8217;.</p>
+	
+	<p>Details of the web page displayed in the web browser window are stored in what is called the <span class="syn-js">document</span> object. The following table lists three of this object&#8217;s properties.</p>
+
+	<table class="table-js">
+	<thead>
+		<tr>
+			<th width="16%"><p><b>Object</b></p></th>
+			<th width="24%"><p><b>Property Name</b></p></th>
+			<th width="60%"><p><b>Description</b></p></th>
+		</tr>
+	 </thead>
+
+	 <tbody>
+		<tr>
+			<td><p>document</p></td>
+			<td><p>title</p></td>
+			<td><p>The title of the web page, as contained within the pair of <span class="syn-html">&lt;title&gt;</span> &#8230; <span class="syn-html">&lt;/title&gt;</span> HTML tags in the head of the page.</p></td>
+		</tr>
+		<tr>
+			<td><p>&nbsp;</p></td>
+			<td><p>lastModified</p></td>
+			<td><p>The date and time when the web page was created, in the user's local time zone. And if the page was since changed, the date and time when the most recent update was made.</p>
+			<p>Dates are shown in the US format of MM/DD/YYYY.</p>
+			<p>Times are shown in 24-hour format.</p></td>
+		</tr>
+		<tr>
+			<td><p>&nbsp;</p></td>
+			<td><p>referrer</p></td>
+			<td><p>The URL of the web page from which the user arrived at the current page. This will be empty if the current web page was not opened through a hyperlink. For example, through a bookmark.</p></td>
+		</tr>
+	 </tbody>
+	</table>
+
+	<h4 id="ex-2-1-4">Exercise 2.1 (continued): Displaying your web page details</h4>
+
+	<p>Let&#8217;s use these properties to display details about your <b>exercise 2-1.html</b> web page.</p>
+
+	<ol>
+		<li>In your &#128196; <b>exercise-2-1.html</b> file in VS Code, you can see a fourth sub-heading of &#8220;Web page details&#8221; and under it an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following three lines of JavaScript code inside these tags.
+
+<pre class="language-js">
+ document.write("&lt;p&gt;Title: &lt;b&gt;"+document.title+"&lt;\/b&gt;&lt;\/p&gt;");
+ document.write("&lt;p&gt;Last Updated: &lt;b&gt;"+document.lastModified+"&lt;\/b&gt;&lt;\/p&gt;");  
+ document.write("&lt;p&gt;Referrer: &lt;b&gt;"+document.referrer+"&lt;\/b&gt;&lt;\/p&gt;");  
+</pre>
+
+		Your VS Code should now look as follows.
+		<img src="assets/img/vs-code-4.png" class="wider-115" alt="JavaScript"></li>
+
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
+		<img src="assets/img/document-details.png" alt="JavaScript"></li>
+	</ol>
+
+	<p>You have now finished working with your &#128196; <b>exercise-2-1.html</b> file. You can close it in VS Code and your web browser.</p>
+
+</section>
+
+
+
+
+
+<section id="objects-methods">
+
+
+	<h2>About objects and methods</h2>
+	<p>In these first two Lessons you have been using the <span class="syn-js">document.write()</span> statements to display output on screen.</p>
+	
+	<p>More exactly, you have been using the <span class="syn-js">write()</span> method of the <span class="syn-js">document</span> object to input content to an HTML file.</p>
+
+	<p>In JavaScript, the name of a method  ends in a pair of brackets, called a <i>parenthesis</i>. In some methods, the parenthesis contains some content. For example:</p>
+
+<pre class="language-js">
+ document.write("This is a sample string.");
+ window.confirm("Did you enjoy this web page?");
+</pre>
+
+	<p>In other methods the parenthesis can be empty. The following code closes the currently open window. Or, to use JavaScript terminology, it applies the <span class="syn-js">close()</span> method to the <span class="syn-js">window</span> object.</p>
+
+<pre class="language-js">
+window.close();
+</pre>
+
+
+
+	<p class="defhead">JavaScript Method</p>
+
+	<p class="deftext">An action performed by JavaScript code on an object. Method names end with a parenthesis <b>()</b>. For example, the <b>document</b> object has a <b>write()</b> method, and the <b>window</b> object has <b>alert()</b>, <b>confirm()</b> and <b>close()</b> methods.</p>
+
+
+</section>
+
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise file to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁  <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded file is published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/2/exercise-2-1.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+<section id="lesson-summary">
+
+	<h2>Lesson summary</h2>
+
+	<p>in JavaScript, an <i>object</i> is a container for a wide range of information. Examples of objects include the <span class="syn-js">navigator</span> (web browser), <span class="syn-js">window</span> and <span class="syn-js">document</span> (web page) objects. Objects can be accessed and acted on by <i>methods</i> in JavaScript code.</p>
+
+	<p>The two following statements use the <span class="syn-js">write()</span> method of the document object and the <span class="syn-js">alert()</span> method of the window object.</p>
+<pre class="language-js">
+document.write("Every day I\'m getting better at &lt;b&gt;JavaScript&lt;\/b&gt;");
+window.alert("Thank you for visiting my web page");
+</pre>
+	<p>Objects in JavaScript have <i>properties</i>. For example, the <span class="syn-js">document.title</span> property is the title of the web page, and <span class="syn-js">window.innerHeight</span> is the height of the screen area in pixels. Some objects properties are <i>scriptable</i>. That is, they can be updated by JavaScript code. Other properties can only be read by JavaScript and not changed. The standard JavaScript format an object and one of its properties is as follows.</p>
+
+<pre class="language-js">
+objectname.propertyname
+</pre>
+
+	<p>When typing  <span class="syn-js">document.write()</span> statements only enclose within quotes those items that you want interpreted <i>literally</i>. The following statement displays the width of the screen area.</p>
+
+<pre class="language-js">
+document.write("Screen Width: "+"window.innerWidth");
+</pre>
+
+	<p>You don't want the text &#8216;window.innerWidth&#8217; displayed. What you do want is the <i>value</i> of that object property. That is why the object property is not surrounded by double or single quotes.</p>
+
+
+		<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+	<p>&nbsp;</p>
+</section>
+
+
+
+</article>
+</main>
+</body>
+</html>
