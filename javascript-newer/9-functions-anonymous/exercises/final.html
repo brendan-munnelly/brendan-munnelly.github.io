@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Anonymous Functions - Exercises</title>
+        <style>
+
+* {margin: 0;padding: 0;border: none }*, *::before, *::after {box-sizing: border-box }html {height: 100%;font-size: 100%;font: inherit;vertical-align: baseline;scroll-behavior: smooth;scroll-padding-top: 20px }body {line-height: 1.5;margin-left: auto;margin-right: auto;min-height: 100vh;text-rendering: optimizeSpeed }img {width: 100%;height: auto;display: block }header, section, footer {width: 100% }section *:last-child, footer *:last-child {margin-bottom: 0 !important }body {font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif }.font-mono {font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }header {background-color: #f7df1e;margin: 0 auto;box-shadow: 0 2px 6px 0 rgba(0,0,0,.12), inset 0 -1px 0 0 #dadce0;}@media (min-width:1200px) {header {padding: 3% calc((100% - 1024px)/ 2) 2% calc((100% - 1024px)/ 2) }section {padding: 2% calc((100% - 960px)/ 2) 3% calc((100% - 1024px)/ 2) }}@media (min-width:1025px) and (max-width:1199px) {header, section {padding: 3% 14% 4% 14% }}@media (min-width:768px) and (max-width:1024px) {header, section {padding: 3% 8% 4% 8% }}@media (max-width:767px) {header, section {padding: 6% 13% 9% 13% }}header h1 {font-size: calc(28px + (52 - 28) * ((100vw - 320px) / (1920 - 320)));letter-spacing: -1px;line-height: 1.1;margin-bottom: 16px }header h1 span {color:#888 }section h2 {font-size: calc(22px + (38 - 22) * ((100vw - 320px) / (1920 - 320)));letter-spacing: -1px;line-height: 1.1;margin-bottom: 16px }section h3 {font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1920 - 320)));line-height: 1.1;margin-top: 32px;margin-bottom: 8px;font-weight: 600;}p, li {font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1140 - 320))) }p {line-height: 1.5 }li {line-height: 1.4 }@media (min-width: 768px) {p, ul {margin-bottom: 18px }ul li {line-height: 1.4;margin-left: 20px;margin-bottom: 14px;padding-left: 14px }}@media (max-width: 767px) {p, ul {margin-bottom: 16px }ul {margin-left: 0;margin-bottom: 16px }ul li {margin-left: 16px;margin-bottom: 10px;padding-left: 8px }}kbd {display: inline-block;background-color: #eee;border-radius: 5px;border: 1px solid #b4b4b4;box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;color: #555;font-weight: 600;line-height: 1;padding: 4px 7px;white-space: nowrap;cursor: default;user-select: none;font-family: 'Roboto Mono', monospace;letter-spacing: -0.5px;margin: 0 2px;font-size: 80%;}.js-box {border: solid 1px yellow;padding: 20px;background-color: lightyellow;margin-bottom: 20px;font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1140 - 320)));}button {display: block;padding: 10px 22px;color: #fff;background-color: green;border-radius: 5px;border: none;font-size: 18px;outline: 0;margin: 32px 0;transition: all 0.2s linear;}button:focus, button:hover, button:active {background-color: red;}footer {background: #0C4A6E }@media (min-width: 1200px) {footer {padding: 3.5% calc((100% - 800px)/2) 4% calc((100% - 800px)/2);margin: 0 auto;}}@media (min-width: 1025px) and (max-width: 1199px ) {footer {padding: 3% 14% 3% 14% }}@media (min-width: 768px) and (max-width: 1024px) {footer {padding: 5% 12% }}@media (max-width: 767px) {footer {padding: 5% }}
+
+h3 b { font-weight: 700; color: #444 }
+h3 { font-weight: 500; color: #222 }
+h3 span { 
+background-color: #222; color: #fff; 
+font-family: 'Courier New', Courier, monospace;
+padding: 2px 12px;
+font-size: 90%;
+font-weight: 600;
+letter-spacing: 1px;
+}
+
+.js-box {
+border: solid 1px yellow;
+padding: 20px;
+background-color: lightyellow;
+margin-bottom: 48px;
+}
+
+.js-box .js-box-inner { display: flex; flex-wrap: wrap; font-size: 18px }
+.js-box-inner div:nth-child(even) { border-radius: 4px }
+
+
+@media (min-width: 768px) {
+.js-box .js-box-inner { flex-direction: row }
+.js-box-inner div:nth-child(odd) { width: 30% }
+.js-box-inner div:nth-child(even) { width: 60% }
+.js-box-inner div { margin-top: 12px; margin-bottom: 12px }
+}
+
+@media (max-width: 767px) {
+.js-box .js-box-inner { flex-direction: column }
+.js-box-inner div:nth-child(odd) { width: 100% }
+.js-box-inner div:nth-child(even) { width: 100%; margin-bottom: 20px }
+.js-box-inner div { margin-top: 4px; margin-bottom: 4px }
+}
+
+.js-box-inner div:nth-child(even) { 
+border: solid 1px #000;
+padding: 6px 8px;
+font-size: 18px;
+background-color: #fff
+}
+
+#fullName {
+border: solid 1px green;
+height: 40px;
+background-color: #E7FFE7;
+/* width: 280px; */
+padding: 3px 12px;
+}
+
+.wrapper {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: -28px;
+}
+.form-row {
+    display: flex;
+    justify-content: flex-end;
+}
+.form-row > label {
+    padding: .5em 1em .5em 0;
+    width: 16%;
+    min-width: 280px;
+    font-size: 18px
+}
+.form-row > input {
+    width: 80%;
+    min-width: 580px;
+    font-size: 18px;
+    border: solid 1px #000;
+    border-radius: 5px;
+    font-weight: 400;
+    background-color: #fff;
+}
+.form-row > input { padding: .5em }
+#fullNameOutput { background-color: #E7FFE7; border-color: green }
+
+
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <h1>Anonymous Functions: <span>Exercises</span></h1>
+        <p>Display this web page in <a href="https://www.brave.com" target="_blank" rel="noopener">Brave</a> or other, lesser web browsers.</p>
+
+        <p>Also open the page in a code editor. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>, <a href="https://vscode.dev/" target="_blank" rel="noopener">VS Code Online</a> or <a href="https://www.sublimetext.com/" target="_blank" rel="noopener"> Sublime Text</a> are all are good choices.</p>
+
+        <p>Follow the exercises in the online Lesson: <a href="../index.html">Anonymous Functions</a></p>
+
+        <p>✅  &nbsp;Happy coding.</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Sample heading</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid, distinctio ipsa pariatur exercitationem voluptate illo accusamus in sint voluptas quia alias odit! Nesciunt expedita libero accusantium sed quibusdam magni!</p>
+
+            <div class="js-box" style="margin-top: 42px">
+    
+                <div class="js-box-inner">
+    
+                    <form>
+                        <ul class="wrapper">
+                          <li class="form-row">
+                            <label for="fNameInput">First Name:</label>
+                            <input type="text" id="fNameInput" value="Gilles" disabled>
+                          </li>
+                          <li class="form-row">
+                            <label for="lNameInput">Last Name:</label>
+                            <input type="text" id="lNameInput" value="Escoffier" disabled>
+                          </li>
+                          <li class="form-row green">
+                            <label for="fullNameOutput">Full Name:</label>
+                            <input type="text" id="fullNameOutput" disabled>
+                          </li>
+                          <li class="form-row" style="margin-top: 32px">
+                            <label for="numRandom">Random Number (100-999):</label>
+                            <input type="text" id="numRandom" disabled>
+                          </li>
+
+
+                        </ul>
+                      </form>
+                </div>
+            </div>
+    
+            <h3>Exercise 9.1: Displaying a message</h3>
+            <p>Rewrite the function declaration that displays a short message as an anonymous function. Verify that the anonymous function is <i>not<i> hoisted by calling the function before creating it.</p>
+
+            <h3>Exercise 9.2: Joining two strings</h3>
+            <p>Rewrite the function declaration that joins the two strings as an anonymous function.</p>            
+
+            <h3>Exercise 9.3: Pass an argument when calling a function</h3>
+            <p>Rewrite the function declaration that passes a number as an anonymous function.</p>
+                
+            <h3>Exercise 9.4: Return a value from a called function</h3>
+            <p>Rewrite the function declaration that calls a random number generator function as an anonymous function.</p>     
+
+            <h3>Exercise 9.5: Create an immediately invoked function</h3>
+            <p>Copy the function in exercise 9-1, rename it, and req-write it as an immediately invoked anonymous function.</p>     
+
+
+        </section>
+
+    </main>
+
+        <!-- JavaScript code snippets start below -->
+        <script>
+
+        console.log("\%c=== EXERCISE 9.1 ===", "color: white; background-color: green; padding: 2px");
+
+        // displays Hello, World! when called        
+        const displayGreeting = function () {
+            console.log("Hello, world!");
+        };
+
+        displayGreeting(); // calls the function and displays the message string
+
+
+        console.log("\n\%c=== EXERCISE 9.2 ===", "color: white; background-color: green; padding: 2px");
+
+        const joinStrings = function () {
+            // Create two variables (can use 'const') to capture the text in input fields
+            const firstNameInput = document.querySelector("#fNameInput").value;
+            const lastNameInput  = document.querySelector("#lNameInput").value;
+
+            // Join two strings and display result in web page input field
+            document.querySelector("#fullNameOutput").value = `${firstNameInput} ${lastNameInput}`;
+            console.log(`Full Name: ${firstNameInput} ${lastNameInput}`);
+        };
+
+        joinStrings();
+
+        console.log("\n\%c=== EXERCISE 9.3 ===", "color: white; background-color: green; padding: 2px");
+
+        const showNumber = function (num)  {
+            console.log(`Number passed to function is: ${num}`);
+        };
+
+        showNumber(21);
+
+
+        function showRandomNumber() {
+            const resultNum = getRandomInt(100, 999);
+            document.getElementById("numRandom").value = resultNum;
+        }
+
+        showRandomNumber();
+
+        // Generate random integer between supplied range inclusively
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+
+        console.log("\n\%c=== EXERCISE 9.5 ===", "color: white; background-color: green; padding: 2px");
+
+        // displays Hello, World! immediately without being called
+        const displayNewGreeting = function () {
+            console.log("Hello again, world!");
+        }();
+
+
+        // displays Hello, World! immediately without being called
+        const displayGreeting = function () {
+            console.log("Hello, world!");
+        }();
+
+
+
+    </script>
+    <footer>
+>
+    </footer>
+
+    </body>
+</html>
