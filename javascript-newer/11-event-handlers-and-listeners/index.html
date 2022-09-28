@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Event Handlers and Listeners | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Writing Your First JS Code: A front-end development tutorial from Brendan Munnelly">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../frontend/assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="../../frontend/assets/img/brendan-munnelly-dorset-college-dublin.jpg" alt="Brendan Munnelly, Lecturer in Front End Development">
+						<p id="myEmail">brendan.munnelly@dorset.ie</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Event Handlers and Listeners</h1>
+					<h2>Adding JavaScript code to a web page, creating pop-up dialog boxes, and using a web browser&#8219;s JavaScript Developer Console.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JavaScript Course</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-functions">About functions</a></p>
+				<p class="toc-indent"><a href="#function-names">Function names</a></p>
+				<p class="toc-indent"><a href="#function-code-blocks">Functions and code blocks</a></p>
+				<p><a href="#function-declarations">Function declarations</a></p>
+				<p class="toc-indent"><a href="#function-coding styles">Function declarations and coding styles</a></p>
+				<p class="toc-indent"><a href="#function-declarations-hoisted">Function declarations are <i>hoisted</i></a></p>
+				<p><a href="#function-expressions">Function expressions</a></p>
+				<p class="toc-indent"><a href="#function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></a></p>
+				<p><a href="#function-anonymous">Anonymous function expressions</a></p>
+				<p><a href="#function-arrow">Arrow function expressions</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			
+			</aside>
+	
+	<article>
+	
+	<section id="learning-goals">
+
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<div class="box-goals">
+	<ul>
+		<li>Invoke (&#8216;call&#8217;) functions using <i>event handlers</i> in a web page.</li>
+		<li>Invoke functions using <i>event listeners</i> in JavaScript code.</li>
+	</ul>
+</div>
+
+</section>
+
+
+<section>
+
+<div class="code-snippets">
+	<p>Introduction to Functions: <a href="code-snippets/code-snippets-functions-download.html" target="_blank">JS Code Snippets</a></p>
+</div>
+
+
+<section id="about-events">
+
+	<h2>About functions in JavaScript</h2>
+
+	<p>In JavaScript as in other programming languages, a function is a block of code that performs a particular task.</p>
+	
+<p>Below is an example of a function that adds two numbers and displays the result in the JavaScript Console.</p>
+
+<pre class="language-js">
+/* Perform calculation with two numbers */
+function addTwoNumbers() {
+   let firstNumber= 12;
+   let secondNumber= 36;
+   let SumTotal = firstNumber + secondNumber;
+   console.log(sumTotal);
+}</pre>
+
+	<p>JavaScript functions are commonly placed at the bottom of a web page, just before the closing <span class="syn-js">&lt;/body&gt</span> tag.</p>
+	
+	<p>Scattering lots of JavaScript functions at various locations in a web page, where they are mixed in with HTML tags and page content, results in a web page that is difficult to read and update.</p>
+
+</section>
+
+<section>
+
+	<h2 id="functions-calling">How functions are invoked</h2>
+
+	<p>Typically, functions do not run as soon as the web page loads in the visitor's web browser. Instead, most functions wait until they are <i>invoked</i> (&#8216;called&#8217; or &#8216;fired&#8217;) by some user action. Here are two types of <i>events</i> that can call functions:</p>
+		
+	<ul>
+		<li><b>Event handlers</b>: These are statements positioned within the HTML of the web page.</li>
+		<li><b>Event listeners</b>: These are statements located within the JavaScript code that is loaded with the web page.</li>
+	</ul>
+
+	<p>A typical sequence would be as follows:</p>
+
+	<ul>
+		<li>The visitor loads the web page that includes the HTML tags, the content, and the one or more JavaScript functions.
+		<span class="inside-ol">&nbsp;</span>
+		But the functions do not perform any action. <i>They just wait passively until they are called.</i></li>
+
+		<li>The visitor clicks a button somewhere on the page that has an event handler or event listener attached to it.</li>
+
+		<li>The event handler or listener calls the function.</li>
+
+		<li>The function then carries out a particular task, such as calculating the sale price of an item or changing the content of the web page.</li>
+	</ul>
+
+
+	<h3 id="ex-10-1">Exercise 10.1: Creating a simple function declaration</h3>
+
+	<p>Let's create a simple function declaration.</p>
+	
+	<p>In your <b>/javascript/exercises/4/</b> sub-folder, open the following file in your VS Code and web browser:</p>
+
+	<p><a href="exercises/4/exercise-4-1.html" target="_blank">exercise-4-1.html</a></p>
+
+	<p>In the empty <span class="syn">&lt;script&gt;</span> &#8230; <span class="syn">&lt;/script&gt;</span> tag pair at the bottom of the web page, just before the closing <span class="syn">&lt;/body&gt</span> tag. copy-and-paste the following code.</p>
+
+<pre class="language-js">
+function sayHello() {
+    document.getElementById.innerText("Welcome to my web page.");
+}
+</pre>
+
+	<p>Save and reload your web page.</p>
+	
+	<p>Notice that the greeting does not display on screen.</p>
+	
+	<p>Is there an error in your function?</p>
+	
+	<p>No.</p>
+	
+	<p>Your function is code is valid. But it has no effect on the web page because the function has not been <i>invoked</i> (&#8216;called&#8217; or &#8216;fired&#8217;).</p>
+
+	<p>In the next section, you will add an <i>event handler</i> to your function.</p>
+</section>
+
+
+<section  id="event-handlers">
+
+<h2>Working with event handlers</h2>
+
+<p>One way to call a function is to use an <i>event handler.</i> The user activates the event handler, and the event handler calls the function into action.</p>
+
+<p>Three common events handlers are set out in the following table.</p>
+
+<table class="table-js-methods">
+	<tbody>
+	<tr>
+		<td width="22%"><p><b>Event Handler</b></p></td>
+		<td><p><b>Description</b></p></td>
+	</tr>
+	<tr>
+		<td width="22%"><p><b>onclick</b></p></td>
+		<td><p>This calls a function when the page visitor clicks once on an HTML element such as a button, image or item of text.</p></td>
+	</tr>
+	<tr>
+		<td width="22%"><p><b>ondblclick</b></p></td>
+		<td><p>This calls a function when the page visitor clicks twice on an HTML element such as a button, image or item of text.</p></td>
+	</tr>
+	<tr>
+		<td width="22%"><p><b>onmouseover</b></p></td>
+		<td><p>This calls a function when the page visitor holds the mouse pointer over an HTML element such as a button, image or item of text.</p></td>
+	</tr>
+	</tbody>
+</table>
+
+<p>Event handlers are usually attached to buttons, but you can also link an event handler with an image or some text.</p>
+
+
+<p class="defhead">Event Handler</p>
+
+<p class="deftext">An HTML command in a web page that calls of triggers a function into action whenever a specific type of event is performed in or with the web page.</p>
+
+<p>Let's add an event handler for your <b>sayHello()</b> function.</p>
+
+<p>In the exercise file, under the function, enter the HTML code and content for a button element.</p>
+
+<pre class="language-js">
+ &lt;button&gt;Click to display greeting&lt;/button&gt;
+</pre>
+
+<p>Note that this is not JavaScript. It's just HTML. It should look as shown below,</p>
+
+<p>Save the file. Reload it in your web browser. It should look similar to that below.</p>
+
+<img src="assets/img/4-1.png" alt="JavaScript">
+
+<p>Click the button. Does anything happen?</p>
+
+<p>No.</p>
+
+<p>You need to attach the button to your function with an event handler.</p>
+
+<p>Update the button as shown below. And then save and reload the web page.</p>
+
+<img src="assets/img/vs-code-4.png" alt="JavaScript">
+
+<p>Your button, when clicked, will now call the <b>sayHello</b> JavaScript function. Success!</p>
+
+<p>Note events handlers are <i>not</i> the recommended way to invoke events. For the result is that JavaScript code is mixed up with the HTML of a web page.</p>
+		
+</section>
+
+
+<section  id="event-listeners">
+
+<h2>Working with event listeners</h2>
+<p>An advantage of <i>event listeners</i> is that they too can be located tidily at the bottom of a web page (or in a seperate JavaScript file) rather than mixed in with the page content and HTML tags.</p>
+
+<p>Before you can use an event listener, you give a unique ID to the button or other web page element that will call the function. The next exercise provides an example.</p>
+
+<h3 id="ex-4-2">Exercise 11.2: Creating a simple event listener</h3>
+<p>In VS Code, open the file you worked on in the first exercise and save it with the new name of <b>exercise-4-2.html</b>.</p>
+
+<p>Also display the new file in your web browser.</p>
+
+<p>In the <span class="syn">div</span> with a class name of <span class="syn">js-box</span>, replace the current line with this new one.</p>
+
+<pre class="language-js">
+&lt;button id="btnGreeting"&gt;Click to display greeting&lt;/button&gt;  
+</pre>
+
+<p>As you can see, you have removed the event handler named "sayHello()". You have also given a unique ID to the button of <b>btnGreeting</b>.</p>
+
+<p>Next, in VS Code, scroll down the bottom of the web page and enter the following new line just above the function.</p>
+
+<pre class="language-js">
+document.getElementById("btnGreeting").addEventListener("click", sayHello);
+</pre>
+
+<p>This is called an <i>event listener</i>, and 'connects' the button in the web page with the function that will be called when the button is clicked.</p>
+
+<p>The complete code should look as follows.</p>
+<img src="assets/img/intro-functions/vs-code-5.png" alt="JavaScript">
+
+<p>Save your file, reload it in your web browser, and click the button to verify that your JavaScript code works.</p>
+
+</section>
+
+
+
+<section id="github-upload" class="wrapper-content bg-white">
+	<h2>Uploading your JavaScript exercise file to GitHub</h2>
+
+	<p>Follow these steps below to upload your <i>entire</i> 📁 <b>/javascript</b> sub-folder to your website on GitHub.</p>
+
+	<ol>
+
+		<li>Sign in to Github and click the name of the repository (&#8216;repo&#8217;) that holds your web pages.</li>
+
+		<li>On the next GitHub screen displayed, click the <b>Add file</b> button near the right of the screen and then choose <b>Upload files</b> from the dropdown list. 
+		<img src="assets/img/introduction/github-btn-add-file-dropdown.png" alt="github-upload-portfolio"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), select your entire  📁 <b>/javascript</b> sub-folder, and drag-and-drop it to your repository on GitHub. 
+		
+		<img src="assets/img/introduction/github-upload-drag-drop.png" alt="Introduction to Images"></li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.
+
+		<span class="inside-ol">&nbsp;</span>
+
+		Finally, click the green <b>Commit changes</b> button to upload your entire 📁 <b>/javascript</b> sub-folder and all the exercise files it contains.</li>
+
+	</ol>
+
+	<p>Your uploaded files are published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+	<p><b>https://username.github.io/javascript/exercises/4/exercise-4-1.html<br>
+	https://username.github.io/javascript/exercises/4/exercise-4-2.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+</section>
+
+
+<section id="lesson-summary">
+
+
+<h2>Lesson summary</h2>
+
+<p>A <i>function</i> is a named script that performs a particular action when called or <i>invoked</i>.</p>
+
+<p>Function names begin with the word 'function', must be unique in the web page, are case-sensitive and may not contain spaces. You can combine upper and lowercase letters in a function name to make it easier to read. Like methods, function names always end with a parenthesis. </p>
+
+<p>Statements within a function are enclosed with curly braces { }, and are usually indented from the left to make them easier to read. A simple function is shown below.</p>
+
+<pre class="language-js">
+// Display an alert box with some welcome text
+function sayThankYou() {
+    window.alert("Thanks for visiting my web page.");
+}
+</pre>
+
+<p>JavaScript functions are commonly placed at the bottom of a web page, just before the closing <span class="syn">&lt;/body&gt</span> tag.</p>
+
+<p>Functions can be called by <i>event handlers</i> positioned within a button or web page element. The event handler contains both the name of the function and type of user action or event that will call it. For example:</p> 
+<pre class="language-js">
+&lt;button onclick="sayHello()"&gt;Click to display greeting&lt;/button&gt;
+</pre>
+
+<p>A better, more modern approach is to call functions with <i>event listeners</i>, which can be located with functions at the bottom of a web page.</p>
+
+<p>A button or other element that calls a function in this way contains an ID that links the calling element with the function. In the example below, clicking the button with an ID of 'btnGreeting' will call the function named 'sayHello()'.</p>
+
+<pre class="language-js">
+document.getElementById("btnGreeting").addEventListener("click", sayHello);
+</pre>
+
+
+		<p><br>Return to <a href="../index.html">Contents</a>.</p>
+
+
+</section>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+</article>
+</main>
+</body>
+</html>
