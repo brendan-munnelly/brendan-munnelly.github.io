@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with Numbers | JavaScript Tutorials</title>
+	<meta name="description" content="Declaring and testing for numeric variables, performing arithmetic, and using various Math object methods for manipulating integers and floats, finding maximum and minimum values, and generating random numbers.">
+
+
+    <!-- Stylesheet-->
+
+    <link rel="stylesheet" href="../../frontend/assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Working with Numbers</h1>
+					<h2>Declaring and testing for numeric variables, performing arithmetic, and using various Math object methods for manipulating integers and floats, finding maximum and minimum values, and generating random numbers.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#numbers-introduction">Introducing numbers in JavaScript</a></p>
+				<p class="toc-indent"><a href="#numbers-assign">Assigning numbers to variables</a></p>
+				<p class="toc-indent"><a href="#numbers-typeof">The <code>typeof</code> operator</a></p>
+				<p class="toc-indent"><a href="#numbers-isNaN">Testing for numbers with <code>isNaN(n)</code></a></p>
+				<p><a href="#math-object">The <code>Math</code> object</a></p>
+				<p class="toc-indent"><a href="#math-syntax">Syntax of the <code>Math</code> object</a></p>
+				<p><a href="#math-positive-negative">Positive and negative numbers</a></p>
+				<p><a href="#math-integers-floats">Integer and floats</a></p>
+				<p><a href="#math-max-min">Maximum and minimum values</a></p>
+				<p><a href="#math-random-numbers">Generating random numbers</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Declare numeric variables in JavaScript.</li>
+			<li>Use <span class="syn-js">typeof</span> and <span class="syn-js">IsNaN()</span> to test that a variable contains a number which can be used in calculations.</li>
+			<li>Perform addition, subtraction, multiplication, and division on numeric variables.</li>
+			<li>Use various methods of the <span class="syn-js">Math</span> object to manipulate positive and negative numbers, convert between integers and floats, find maximum and minimum values, and generate random numbers.</li>
+		</ul>
+
+	</section>
+
+	<div class="code-snippets">
+		<p>Working with Numbers: <a href="code-snippets/code-snippets-numbers-download.html" target="_blank">JS Code Snippets</a></p>
+	</div>
+
+	<section id="numbers-introduction">
+
+        <h2 id="introduction">Introducing numbers in JavaScript</h2>
+        <p>Unlike other programming languages, JavaScript only has one number <i>data type</i>. This can store <i>integers</i> (positive or negative whole numbers) or <i>floats</i> (floating-point numbers with a decimal point).</p>
+
+		<h3 id="numbers-assign">Assigning numbers to variables</h3>
+		<p>To assign a number to a variable, do not wrap the value in single or double quotes.</p>
+<pre>const myVar1 =   1234; <span class="comment">// JavaScript treats myVar1 as a number</span>
+const myVar2 = "1234"; <span class="comment">// JavaScript treats myVar2 as a string</span>
+const myVar3 = '1234'; <span class="comment">// JavaScript treats myVar3 as a string</span></pre>
+
+		<p>JavaScript decides which type of variable you want to create by the way that you first assign a value to it.</p>
+		
+		<ul>
+			<li>When you enclose the assigned value within quotes, JavaScript gives the variable a data type of <i>string</i>.</li>
+			<li>When you omit the quotes, JavaScript gives the variable a data type of <i>number</i>.</li>
+		</ul>
+
+		<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre>let Temperature = -6.3456 <span class="comment">// Valid number</span> 
+let errorRare = .2727 <span class="comment">// Valid number</span> </pre>
+
+<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre>let userIncome = 34,000; <span class="comment">// Error. Contains a comma </span>
+let product ID = 645w29; <span class="comment">// Error. Contains a letter character </span></pre>
+
+<p>In fact, they are not even valid variable assignments because JavaScript cannot understand what type of data type you want to create. Each line will throw an error.</p>
+
+		<h3 id="numbers-typeof">The <code>typof</code> operator</h3>
+		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
+		
+<pre>let someVar;
+<span class="comment">// declare empty variable </span>
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns undefined </span> 
+someVar = "12";
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns string</span> 
+someVar = 12;
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns number</span> 
+someVar = "12";
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns string</span> </pre>
+
+		<p>If the variable contains a number, <span class="syn-js">typeof</span> returns the string "number".</p>
+
+		<h3 id="numbers-isNaN">Testing for numbers with <code>isNaN(n)</code></h3>
+		<p>To test that a variable contains a number, another option is to use the global variable <span class="syn-js">isNaN(n)</span>. NaN stands for 'Not a Number'. See below.</p>
+
+		<pre>const stringVar = "Some text";
+<span class="comment">// declare string variable </span>
+console.log(`Is this not a number ("Some text"): ${isNaN(stringVar)}`);
+<span class="comment">// returns true </span> 
+const numVar = 42;			
+console.log(`Is this not a number ("42"): ${isNaN(numVar)}`);
+<span class="comment">// returns false</span>  </pre>
+		
+		<p>Automatic <i>variable type conversion</i> is a powerful feature of JavaScript. But its very power can result in scripting errors or in scripts that produce unexpected results.</p>
+
+		<p>To check that a variable contains a number before using that variable in a calculation, you could test it in either of two ways as follows.</p>
+
+<pre>const varPossibleNumber = 2;
+if (typeof varPossibleNumber === 'number') {
+  <span class="comment">// safe to continue with calculation</span>
+}
+if (!isNaN(varPossibleNumber)) {
+  <span class="comment">// also safe to continue with calculation</span>
+}</pre>
+
+		<p>Numbers that are never used in calculations can be correctly assigned to strings. For example, users&#8217; telephone numbers. You will never want to divide a telephone number by two or deduct 10% from such a number.</p>
+			
+<pre>let userTelNo = "088 123 456678"; <span class="comment">// number as string</span></pre>
+
+		<p>But never assign a number to a string variable if you intend using that number in a calculation.</p>
+
+	</section>
+
+	<section id="number-arithmetic">
+		<h2>Arithmetic operations</h2>
+		<p>You can perform arithmetic with numeric variables using the arithmetic operators set out in the table below.</p>
+
+		<table class="table-js-arithmetic">
+			<thead>
+			<tr>
+				<td><p><b>Operator</b></p></td>
+				<td><p><b>Operator Key Used</b></p></td>
+				<td><p><b>Description</b></p></td>
+			</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p><b>x + y</b></p></td>
+					<td><p>The plus key</p></td>
+					<td><p>Adds the value of <b>x</b> and the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x - y</b></p></td>
+					<td><p>The dash key</p></td>
+					<td><p>Subtracts the value of <b>y</b> from the value of <b>x</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x * y</b></p></td>
+					<td><p>The asterisk key</p></td>
+					<td><p>Multiplies the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x / y</b></p></td>
+					<td><p>The forward slash key</p></td>
+					<td><p>Divides the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+			</tbody>
+			</table>		
+		
+	<p>See the simple examples below.</p>
+
+<pre>const firstNum = 12;
+const secondNum = 8;
+console.log(`Addition (12+8): ${12 + 8}`); <span class="comment">// returns 20</span>
+console.log(`Subtraction (12-8): ${12 - 8}`); <span class="comment">// returns 4</span>
+console.log(`Multiplication (12*8): ${12 * 8}`); <span class="comment">// returns 96</span>  
+console.log(`Division (12/8): ${12 / 8}`); <span class="comment">// returns 1.5</span></pre>
+
+
+		<h3>Operator precedence</h3>
+
+		<p>JavaScript follows the rules of arithmetic when working with numeric variables and numbers:</p>
+		<ul>
+			<li>Division first, followed by multiplication, then addition and finally subtraction.</li>
+		</ul>
+			
+		<p>For example, the following series of statements gives a result of <b>11</b> because JavaScript first multiplies <b>2</b> by <b>3</b> (resulting in <b>6</b>) and then adds <b>5</b>.</p>
+
+<pre>console.log(`5 + 2 * 3: ${5 + 2 * 3}`); // <span class="comment">returns 11 </span></pre>
+
+		<p>You can force JavaScript to perform calculations in a particular order by using parentheses <span class="syn-js">()</span>.</p>
+
+		<p>For example, the following calculation gives a result of <b>21</b>. JavaScript first adds <b>5</b> and <b>2</b>, because they are within <span class="syn-js">()</span>. And only then multiplies that result by <b>3</b> to give <b>21</b>.</p>
+
+<pre>console.log(`(5 + 2) * 3: ${(5 + 2) * 3}`); // <span class="comment">returns 21 </span></pre>
+
+		<p>For example, </p>
+
+<pre>function convertToFahrenheit(celsius) {
+   varFahrenheit = ((9/5) * celsius) + 32;
+   console.log(`${celsius} Celsius:  = ${varFahrenheit} Fahrenheit`);
+}
+
+convertToFahrenheit(20);</pre>
+
+	</section>
+
+
+<section>
+
+	<h2>Increment and decrement operators</h2>
+	<p>JavaScript supports increment <span class="syn-js">++</span> and decrement <span class="syn-js">--</span> prefix operators that increase or reduce the numerical value of a variable by one. They cannot be applied to literal values; only to numeric variables.</p>
+	
+	<p>See the sample code below.</p>
+<pre>let myNum1 = 7;
+let myNum2 = 24; 	
+console.log(`myNum1 is 7`); 
+console.log(`Increment operator (++myNum1) is ${++myNum1}`);
+<span class="comment">// returns 8</span>
+console.log(`myNum2 is 24`); 
+console.log(`Decrement operator (--myNum2) is ${--myNum2}`);
+<span class="comment">// returns 23</span></pre>
+
+
+</section>
+
+        <section id="math-object">
+            <h2>The <code>Math</code> object</h2>
+
+            <p>The JavaScript <span class="syn-js">Math</span> object offers lots of methods and properties for working with numbers. For example, rounding numbers, finding minimum and maximum values, and generating random numbers.</p>
+
+            <h3 id="math-syntax">Syntax of the <code>Math</code> object</h3>
+            <p>Unlike <span class="syn-js">Date</span>, another a built-in JavaScript object, the <span class="syn-js">Math</span> object is not a constructor and does not require the <span class="syn-js">New</span> keyword. Each <span class="syn-js">Math</span> object you use is automatically created by the JavaScript interpreter. </p>
+
+            <p>Below are some examples of code that uses the <span class="syn-js">Math</span> object.</p>
+<pre>${Math.round(9.75)}; <span class="comment">// returns 10</span>
+${Math.max(1, 2, 3)};  <span class="comment">// returns 3</span></pre>            
+
+            </section>
+
+            
+        <section id="math-positive-negative">
+            <h2>Positive and negative numbers</h2>
+			
+			<p>JavaScript offers two methods for working with positive and negative numbers.</p>
+
+            <table class="table-js-methods">
+                <tbody>
+                    <tr>
+                        <td style="min-width: 12%"><p><span class="syn-js">Math.abs(n)</span></p></td>
+                        <td><p>Returns the absolute value of <b>n</b>.</p></td>
+                    </tr>
+                    <tr>
+                        <td><p><span class="syn-js">Math.sign(n)</span></p></td>
+                        <td><p>Returns <b>1</b> if <b>n</b> is positive, <b>-1</b> if negative, or <b>0</b> if zero.</p></td>
+                    </tr>
+
+                </tbody>
+            </table>                    
+            
+            <p>You can see some sample code below.</p>
+
+<pre>console.log(`Positive or negative number (19.99)? ${Math.sign(19.99)}`);
+<span class="comment">// returns 1</span>
+console.log(`Positive or negative number (-5)? ${Math.sign(-5)}`);
+<span class="comment">// returns -1</span>
+console.log(`Positive or negative number (0)? ${Math.sign(0)}`);
+<span class="comment">// returns 0</span></pre>
+
+                </section>
+                
+
+                <section id="math-integers-floats">
+                    <h2>Integers and floats</h2>
+
+					<p>Here are two common methods for working with integers and <i>floats</i> (floating-point numbers or decimals).</p>
+
+                    <table class="table-js-methods">
+                    <tbody>
+
+                    <tr>
+                        <td style="width: 12%"><p><span class="syn-js">Math.round(n)</span></p>
+                        <td><p>Returns the value of <b>n</b> rounded (up or down) to the nearest integer.</p>
+						
+						<p>For example, <b>6.25</b> is rounded down to <b>6</b> and <b>7.75</b> becomes <b>8</b>.</p>
+					
+						<p>If <b>n</b> is a negative number, the return value is rounded upwards towards zero. <b>-8.25</b> becomes <b>-8</b>.</p></td>
+					</td>
+                    </tr>
+
+                    <tr>
+                        <td><p><span class="syn-js">Math.trunc(n)</span></p></td>
+                        <td><p>Returns only the integer part of <b>n</b>.</p>
+						<p>All numbers after the decimal point <span class="syn-js">.</span> are discarded. No rounding is performed.</p>
+						<p>For example, <b>3.14159</b> simply returns <b>3</b>.</p></td>
+                    </tr>                    
+
+                </tbody>
+            </table> 
+			
+			<p>Two related methods are the following.</p>
+                    
+                    <table class="table-js-methods">
+						<tbody>					
+                    <tr>
+                        <td><p><span class="syn-js">Math.ceil(n)</span></p></td>
+                        <td><p>Rounds <b>n</b> up to the next largest integer.</p>
+							<p>For example, <b>3.5</b> becomes <b>4</b>, <b>-5.7</b> becomes <b>-5</b> (because <b>-5</b> is greater than <b>-6</b>).</p></td>
+                    </tr>
+    
+                    <tr>
+                        <td><p><span class="syn-js">Math.floor(n)</span></p></td>
+                        <td><p>Returns the largest integer less than or equal to <b>n</b>.</p>
+							<p>For example, <b>3.5</b> becomes <b>3</b>, <b>-5.7</b> becomes <b>-6</b> (because <b>-6</b> is lesser than <b>-5</b>).</p></td>
+                    </tr>
+
+                </tbody>
+            </table>                    
+
+        <p>You can see some sample code below.</p>
+
+<pre>console.log(Math.ceil(.95));    <span class="comment">// returns 1</span>
+console.log(Math.ceil(4));      <span class="comment">// returns 4</span>
+console.log(Math.ceil(7.004));  <span class="comment">// returns 8</span>
+console.log(Math.ceil(-7.004)); <span class="comment">// returns -7</span></pre>
+
+<pre>console.log(Math.floor(45.95));  <span class="comment">// returns 45</span>
+console.log(Math.floor(45.05));  <span class="comment">// returns 45</span>
+console.log(Math.floor(4));      <span class="comment">// returns 4</span>
+console.log(Math.floor(-45.05)); <span class="comment">// returns -46</span>
+console.log(Math.floor(-45.95)); <span class="comment">// returns -46</span></pre>
+
+			<p>Note the difference between these two methods and <span class="syn-js">Math.round(n)</span>:</p>
+
+			<ul>
+				<li><span class="syn-js">Math.ceil(n)</span>: Rounds <b>n</b> <i>upward</i> towards the next integer value.
+				<span class="inside-ul">&nbsp;</span>
+				So <b>5.01</b> becomes <b>6</b> and <b>14.275</b> becomes <b>15</b>.</li>
+				<li><span class="syn-js">Math.floor(n)</span>: Rounds <b>n</b> <i>downward</i> towards the next smallest integer value.
+				<span class="inside-ul">&nbsp;</span>
+				So <b>5.99</b> becomes <b>5</b> and <b>14.9999</b> becomes <b>14</b>.</li>
+				<li><span class="syn-js">Math.round(n)</span>: Rounds <b>n</b> <i>upward or downward</i> to the nearest integer.
+				<span class="inside-ul">&nbsp;</span>
+				So <b>5.25</b> becomes <b>5</b> and <b>14.75</b> becomes <b>15</b>.</li>
+			</ul>
+
+			<p>These two methods are commonly used to transform the output of the <span class="syn-js">Math.random()</span> method from floats to more usable integer values.</p>
+
+        </section>
+
+        <section>
+            <h2 id="math-max-min">Maximum and minimum values</h2>
+
+            <p>For when you want to find the largest or smallest number in a range of numeric values, use one of the following methods.</p>
+
+
+            <table class="table-js-methods">
+            <tbody>
+
+            <tr>
+                <td><p><span class="syn-js">Math.max(x,y,z)</span></p></td>
+                <td><p>Returns the highest number in a supplied range numeric parameters.</p></td>
+            </tr>
+
+            <tr>
+                <td><p><span class="syn-js">Math.min(x,y,z)</span></p></td>
+                <td><p>Returns the lowest number in a supplied range numeric parameters.</p></td>
+            </tr>
+        </tbody>
+    </table>                    
+
+        <p>Here are some code samples.</p>
+
+<pre>console.log(Math.max(1, 2, 3));    <span class="comment">// returns 3</span>
+console.log(Math.max(-1, -2, -3)); <span class="comment">// returns: -1</span></pre>
+<pre>console.log(Math.min(1, 2, 3));    <span class="comment">// returns 1</span>
+console.log(Math.min(-1, -2, -3)); <span class="comment">// returns -3</span></pre>
+
+
+        </section>
+
+        <section id="math-random-numbers">
+
+        <h2>Generating random numbers</h2>
+        <p>For when you want to generate a random value for a numeric variable, JavaScript offers the method below.</p>
+
+            <table class="table-js-methods">
+                <tbody>
+                    <tr>
+                        <td><p><span class="syn-js">Math.random()</span></p></td>
+                        <td><p>Returns a pseudo-random floating-point number in the range from <b>0</b> inclusive up to but not including <b>1</b>.</p></td>
+                    </tr>                    
+                </tbody>
+            </table>    
+
+        <p>Here is the code in its simplest form.</p>
+
+<pre>console.log(Math.random()); <span class="comment">// returns a number from 0 to less than 1</span></pre>            
+
+            <p>Typcially, you will want your random number to be an integer rather than a floot. A simple solution is to:</p>
+			<ul>
+				<li>Use the <span class="syn-js">Math.floor()</span> method to find the largest integer less than or equal to randomly-generated float.</li>
+				<li>Multply the output of the <span class="syn-js">Math.floor()</span> method by your choosen integer.</li>
+			</ul>
+			<p>See the examples below.</p>
+
+<pre>console.log(Math.floor(Math.random() * 3)); 
+<span class="comment">// returns 0, 1 or 2 (never 3)</span>
+console.log(Math.floor(Math.random() * 6));
+<span class="comment">// returns 0, 1, 2, 4 or 5 (never 6)</span>  </pre>		
+		
+        	<p>If you want a random integer between zero and one less than some supplied integer <span class="syn-js">max</span>, you could use the following solution:</p>
+
+<pre><span class="comment">// Function to generate random integer one less than supplied parameter</span>
+function getRandomIntUpper(max) {
+   return Math.floor(Math.random() * max);
+}
+                 
+console.log(getRandomIntUpper(5)); <span class="comment">// returns: 0, 1, 2, 3 or 4</span>
+console.log(getRandomIntUpper(6)); <span class="comment">// returns 0, 1, 2, 4 or 5</span> </pre>
+
+	<p>The function below accepts as parameters two integers that will specify the smallest and largest possible random output inclusively.</p>
+
+<pre><span class="comment">// Generate random integer between supplied range inclusively</span>
+function getRandomInt(min, max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+   return Math.floor(Math.random() * (max - min + 1) + min); 
+}
+
+<span class="comment">// Both the min and max arguments are inclusive</span>
+console.log(getRandomInt(1, 9));  <span class="comment">// returns 1, 2, 3, 4, 5, 6, 7, 8 or 9</span>
+console.log(getRandomInt(20, 24));<span class="comment">// returns 20, 21, 22, 23 or 24</span></pre>
+
+        </section>
+
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+
+
+
+</body>
+</html>
