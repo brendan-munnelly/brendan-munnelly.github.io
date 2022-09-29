@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>1: Adding JavaScript to a Web Page | JavaScript Tutorials</title>
+	<meta name="description" content="Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>1: Adding JavaScript to a Web Page</h1>
+					<h2>Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#script-tag">JavaScript and the &lt;script&gt; tag</a></p>
+				<p class="toc-indent"><a href="#external-files">External JavaScript files</a></p>
+				<p><a href="#dev-tools">Working with web browser DevTools</a></p>
+				<p class="toc-indent"><a href="#dev-tools-position">Changing the DevTools position</a></p>
+				<p class="toc-indent"><a href="#dev-tools-font-size">Changing the DevTools font size</a></p>
+				<p><a href="#dev-tools-working">Working with the JavaScript Console</a></p>
+	
+			</aside>
+	
+	<article>
+	
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+		<div class="box-goals">
+			<ul>
+				<li>Use the <span class="syn-js">&lt;script&gt;</span> tag to include JavaScript code in a HTML file and to link to external JavaScript files.</li>
+				<li>Ensure that JavaScript code is <i>non-blocking</i> &#8212; it does not delay the loading of the HTML content.</li>
+				<li>Ensure that JavaScript code does not attempt to access the HTML content until the HTML has been fully loaded.</li>
+				<li>Open and use the JavaScript Console in your web browser&#8217;s DevTools.</li>
+			</ul>
+		</div>
+	</section>
+
+
+
+<section>
+
+	<h2 id="script-tag">JavaScript and the <span>&lt;script&gt;</span> tag</h2>
+	<p>The most efficient ways to add JavaScript to a web page are as follows:</p>
+
+	<div class="flex-50">
+		<img src="assets/img/load-script-page-bottom.png" alt="JavaScript">
+		<div><p>If your JS code is in the HTML file, add it to the bottom before <span class="syn-js">&lt;/body&gt;</span> tag. Script loads <i>after</i> web page has been fully loaded.</p></div>
+	</div>
+
+
+	<div class="flex-50">
+		<img src="assets/img/load-script-page-top-defer.png" alt="JavaScript">
+		<div><p>Add external JS file(s) to the <span class="syn-js">head</span> with <span class="syn-js">defer</span> attribute. Files load &#8216;in the background&#8217; in order placed. Only run <i>after</i> web page is fully loaded.</p></div>
+
+	</div>
+
+
+	<p>Both methods are:</p>
+	
+	<ul>
+		<li><b>Non-blocking</b>: Loading the JS code does not delay rendering of the HTML. So users experience faster page load time. And you should see fewer audit messages like this on Google's <a href="https://web.dev/" target="_blank">web.dev</a> site.
+		<img src="assets/img/render-blocking.png" alt="JavaScript"></li>
+		<li><b>Access to HTML elements</b>: The JS code will try to access elements in the HTML file only <i>after</i> the file is loaded. So you should not see errors like this in the JavaScript Console.
+		<img src="assets/img/console-error-message.png" alt="JavaScript">
+		</li>
+	</ul>
+
+	<h3 id="external-files">External JavaScript files</h3>
+
+		<p>Here are the benefits of using external JavaScript files:</p>
+		
+		<ul>
+			<li>They separate HTML and JavaScript code.</li>
+			<li>They make the HTML and JavaScript easier to read and maintain</li>
+			<li>On multi-page web sites, cached JavaScript files can speed up page loads.</li>
+		</ul>
+		
+		<p>Do not include <span class="syn-js">&lt;script&gt;</span> tags in external JavaScript files. But it is recommended to begin all such files with this directive:</p>
+		
+		<img src="assets/img/user-strict.png" alt="JavaScript" style="max-width: 500px">
+		
+		<p>This directive helps you to write cleaner code, such as preventing the use of undeclared variables.</p>
+	
+		
+		
+	</section>
+
+<section>
+
+	<h2 id="dev-tools">Working with web browser DevTools</h2>
+
+	<p>Your web browser&#8217;s Developer Tools (also known as DevTools) includes a JavaScript Console. To display this:</p>
+
+	<ul>
+		<li><b>Windows (all browsers)</b>: Click the three dots icon at the top-right of your browser window. From the dropdown menu displayed, click <b>More tools</b> to display a second menu. On that menu, click the last option, <b>Developer tools</b>.
+		<img src="assets/img/browser-devtools-icon-chrome.png" alt="JavaScript" style="margin-bottom:0">
+		Alternatively, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd></li>
+		<li><b>Mac (Safari browser)</b>: Choose <b>Safari | Preferences</b>, click <b>Advanced</b>, then select <b>Show Develop menu in menu bar</b>.
+		<span class="inside-ol">&nbsp;</span>
+		Alternatively, press <kbd> &#8984; </kbd> + <kbd> &#8997; </kbd> + <kbd>I</kbd>.</li>
+	</ul>
+
+	<h3 id="dev-tools-position">Changing the DevTools position</h3>
+	<p>To position or &#8216;dock&#8217; the DevTools window:</p>
+	<ol>
+		<li>Open the DevTools window.</li>
+		<li>Near the top-right of the DevTools window, click the ellipses (three dots) icon.
+		<img src="assets/img/docking-1.png" alt="JavaScript">
+		</li>
+		<li>Click the docking position you want for the DevTools window.</li>
+	</ol>
+
+	<p>Below is an example of the DevTools window docked on the right.</p>
+
+	<img src="assets/img/devtools-right.png" alt="JavaScript">
+
+	<p>And here is an example of the DevTools window docked along the bottom.</p>
+
+	<img src="assets/img/devtools-bottom.png" alt="JavaScript">
+
+
+	<h3 id="dev-tools-font-size">Changing the DevTools font size</h3>
+	<p>To change the font size in the DevTools window, select the window, and then press the <b>Ctrl</b> key followed by the plus (<b>+</b>) or minus (<b>-</b>) key. To reset, press <b>Ctrl</b> and <b>0</b>.</p>
+
+	<h3 id="dev-tools-working">Working with the JavaScript Console</h3>
+	<p>Of the various tabs shown across the top of DevTools window, click <b>Console</b> to display the JavaScript Console.</p>
+
+	<img src="assets/img/console-tab.png" alt="JavaSript">
+
+	<p>You can use the Console to display or &#8216;log&#8217; information as part of your JavaScript coding process.</p>
+
+	<ul>
+		<li>Any coding errors will appear in the Console, along with the line number and a short explanatory message.</li>
+		<li>In your code, you can use <span class="syn-js">console.log()</span> statements to inspect the values of variables and properties of objects.</li>
+	</ul>
+
+
+		<p>In summary, the JavaScript Console provides an environment similar to a terminal shell interface to try out JavaScript code in real-time.</p>
+
+
+</section>
+
+</article>
+
+	</main>
+
+	<footer>
+		<!--Footer content goes here -->
+	</footer>
+
+
+
+</body>
+</html>
+
