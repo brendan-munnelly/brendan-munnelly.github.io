@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with the DOM | JavaScript Tutorials</title>
+	<meta name="description" content="Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.">
+
+    <meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+</head>
+
+
+<body id="top">
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Working with the DOM</h1>
+                <h2>Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+
+        <aside>
+            <h3>JavaScript Course</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-the-DOM">About the DOM</a></p>
+
+            <p class="toc-indent"><a href="#DOM-tree">The DOM tree and nodes</a></p>
+            <p class="toc-indent"><a href="#node-types">Node types</a></p>
+            <p class="toc-indent"><a href="#DOM-terms">DOM terminology</a></p>
+
+            <p><a href="#element-by-id">Selecting an element with a unique id</a></p>
+
+            <p class="toc-indent"><a href="#element-content">Accessing the content of an element</a</p>
+
+            <p><a href="#element-no-id">Selecting an element without a unique id</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+            <p>&nbsp;</p>
+        </aside>
+
+
+<article>
+
+<section id="learning-goals">
+    <h2>Learning Goals</h2>
+    <p>At the end of this Lesson you will be able to:</p>
+    <div class="box-goals">
+        <ul>
+            <li>Understand the basic concept of the Document Object Model (DOM).</li>
+            <li>Use the <b>document.getElementByID()</b> method to access elements in a web page that have a unique ID.</li>
+            <li>Use the <b>document.getElementsByTagName()</b> and <b>document.querySelector()</b> methods to access elements in a web page that have do not have a unique ID.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section>
+
+    <p>In this Lesson, you will meet the following term:</p>
+
+    <ul>
+        <li>DOM</li>
+    </ul>
+
+		<div class="code-snippets">
+			<p>In your <b>javascript/exercises</b> folder, create a new sub-folder named <b>4</b>.
+				
+			<p>Save the exercise file below to this new <b>javascript/exercises/4</b> sub-folder.</p>
+			<p><a href="exercises/index.html" target="_blank"><b>Working with the DOM: Exercises</b></a></p>
+		</div>	
+</section>
+
+
+<section>
+
+    <h2 id="about-the-DOM">About the DOM</h2>
+    <p>When a web browser accesses a web page &#8211; also known as an <i>HTML document</i> &#8211; it performs two operations. It:</p>
+
+    <ul>
+        <li>Displays (<i>renders</i>) the web page in the browser, using any links in the page to CSS, image, video font and other files.</li>
+        <li>Creates a Document Object Model (DOM) of the web page that enables the page's content to be accessed and modified by JavaScript code. In effect, the DOM is an <i>application programming interface</i> (API).</li>
+    </ul>
+
+    <img src="assets/img/11-1.png" alt="JavaScript">
+
+    <p>Except in the following two instances, the HTML source code of a web page and the contents of its DOM will be the same:</p>
+
+    <ul>
+        <li>The browser has found HTML errors in the web page and has automatically fixed them when creating the DOM.</li>
+        <li>The DOM has been modified by JavaScript, typically as the result of some user action such as clicking/tapping a button.</li>
+    </ul>
+        
+
+    <h3 id="DOM-tree">The DOM tree and nodes</h3>
+    <p>Like the HTML web page it represents, a DOM has a tree-like structure. All items in the DOM are defined as <i>nodes</i>. </p>
+    
+    <img src="assets/img/dom-tree.png" style="max-width:500px" alt="DOM">
+
+    
+
+    <h3 id="node-types">Node types</h3>
+    <p>Every node in a DOM has a <i>node type</i>, accessed through the nodeType property. Three of the most common node types are as follows:</p>
+
+    <ul>
+        <li><b>Document node</b>: The web page itself, which is the root or parent of all other nodes in the HTML file.</li>
+        <li><b>Element node</b>: An HTML element in a web page. Examples of element nodes would include <span class="csyn">&lt;h1&gt;Main Heading&lt;/h1&gt;</span> and <span class="csyn">&lt;p&gt;Hello world&lt;/p&gt;</span>.</li>
+        <li><b>Text nodes</b>: A text string. Typically, a text node is a child of a parent element node, such as the text nodes <span class="csyn">Main Heading</span> and <span class="csyn">Hello world</span>above. However, a text node can also exist outside an element node.</li>
+    </ul>    
+        
+        <p>All DOM nodes, including the document node, have a <span class="syn-js">nodeType</span> property with a numeric value. See the table below.</p>
+
+        <table class="table-js">
+            <thead>
+                <tr>
+                     <th width="50%"><p><b>Node</b></p></th>
+                     <th width="50%"><p><b>Node Type</b></p></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <tr>
+                    <td><p>document</p></td>
+                    <td><p>9</p></td>
+                </tr>
+                <tr>
+                    <td><p>element</p></td>
+                    <td><p>3</p></td>
+                </tr>
+                <tr>                    <td><p>attribute</p></td>
+                    <td><p>2</p></td>
+                </tr>
+                <tr>
+                    <td><p>text</p></td>
+                    <td><p>1</p></td>
+                </tr>
+             </tbody>
+        </table>
+
+    <p>You can see a full list of node types on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType" target="_blank">MDN</a> website.</p>
+
+
+    <h3 id="DOM-terms">DOM terminology</h3>
+    <p>To work with the DOM using JavaScript, it is important to understand a few key terms. Consider the HTML code below.</p>
+
+<pre class="language=html">&lt;p&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/p;&gt;</pre>
+
+    <ul>
+        <li><span class="csyn">&lt;p&gt;</span> ... <span class="csyn">&lt;/p&gt;</span> is the <strong>element</strong></li>
+        <li><span class="csyn">a</span> is the <strong>tag</strong></li>
+        <li><span class="csyn">href</span> is the <strong>attribute</strong></li>
+        <li><span class="csyn">index.html</span> is the <strong>attribute value</strong></li>
+        <li><span class="csyn">Home</span> is the <strong>text</strong>.</li>
+    </ul>
+
+    <p class="defhead">HTML element</p>
+    <p class="deftext">Content in a web page that is marked up with an HTML tag. Most HTML elements (such as body, div, h1 and p) begin and end with an opening and closing tag pair. Others, such as link and img, are said to be self-closing. HTML elements may contain attributes with values.</p>
+    <p>A typical web page will contain many levels of elements nested inside one another in a <i>parent-child</i> relationship. Elements at the same level in a web page are said to be <i>siblings</i>.</p>
+
+    </section>
+
+    <section>
+        
+        <h2 id="element-by-id">Selecting an element with a unique id</h2>
+
+        <p>Before you can work with an HTML element in JavaScript, you have to select it from the web page (document object) that contains it.s</p>
+
+        <p>JavaScript gives you two options to select a single element in a web page with a unique id:</p>
+
+    <ul>
+        <li><span class="syn-js">document.getElementById(ID)</span>. For example:
+<pre class="language-js">   document.getElementById('userFirstName');</pre></li>
+        <li><span class="syn-js">document.querySelector(#ID)</span>: For example:
+<pre class="language-js">   document.querySelector('#userLastName');</pre></li>         
+    </ul>
+
+    <p>Both the method syntax and the target id are <i>case-sensitive</i>. Note that, with this second method, you must include a hash (#) character before the element id. </p>
+
+    <p>If there is more than one element with the same id in the web page (which there should not be!), the above two methods return the first element found. A null value is returned if no element with the target id exists in the web page.</p>
+
+    <h3 id="element-content">Accessing the content of an element</h3>
+    <p>After selecting an element in a web page, you can then access its content. Your two options are:</p>
+
+    <ul>
+        <li><span class="syn-js">innerText</span>: This returns only the text content of the element, and <i>excludes</i> any HTML tags it may contain. </li>
+        <li><span class="syn-js">innerHTML</span>: This returns both the text content <i>and</i> any HTML tags within it.</li>         
+    </ul>
+
+    <p>If the target HTML element is an input field, you can access the field content with the <span class="syn-js">value</span> property:</p>
+
+
+    <h4 id="ex-4-1">Exercise 4.1: Accessing DIV elements</h4>
+    <p>Write JS code that captures the string values in two DIVs and outputs the result to the web page and JavaScript Console.</p>
+
+    <p>The result should look as shown below.</p>
+    <img src="assets/img/exercise-4-1.png" alt="sample screen" style="width: 500px">
+
+    <h4 id="ex-4-2">Exercise 4.2: Accessing form input elements</h4>
+    <p>Write JS code that captures the string values in two forn input fields and outputs the result to the web page and JavaScript Console.</p>
+
+    <p>The result should look as shown below.</p>
+
+    <img src="assets/img/exercise-4-2.png" alt="sample screen" style="width: 500px">
+
+</section>
+
+
+<section>
+
+    <h2 id="element-no-id">Selecting an element without a unique id</h2>
+
+    <p>Not every element you want to access in a web page will have a unique id. JavaScript offers three other options in this situation:</p>
+
+    <ul>
+        <li><span class="syn-js">document.getElementsByTagName(index)</span>. For example:
+<pre class="language-js">   document.getElementsByTagName('h3')[2];</pre>
+Note that the index numbers begin with 0.</li>
+        <li><span class="syn-js">document.querySelector(.class:nth-of-type(index)</span>: For example:
+<pre class="language-js">   document.querySelector('.dark-text:nth-of-type(2)');</pre>
+Note that the index numbers begin with 1.</li>         
+    </ul>
+
+
+    <h4 id="ex-4-3">Exercise 4.3: Accessing elements by tag index</h4>
+
+    <p>Within the <b>page-content</b> DIV of the exercises web page, select the third <b>h3</b> heading and output the result to the JavaScript Console.</p>
+
+    <p>The result should look as shown below.</p>
+
+    <img src="assets/img/exercise-4-3.png" alt="sample screen">
+
+
+    <h4 id="ex-4-4">Exercise 4.4: Accessing elements by CSS class and indexed pseudo-class</h4>
+
+    <p>Within the <b>page-content</b> DIV of the exercises web page, select the second <b>p</b> paragraph of text and output the result to the JavaScript Console.</p>
+
+    <p>The result should look as shown below.</p>
+
+    <img src="assets/img/exercise-4-4.png" alt="sample screen">
+
+    <p>&nbsp;</p>
+    <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+    </section>
+
+
+
+</article>
+</main>
+<footer></footer>
+</body>
+</html>
