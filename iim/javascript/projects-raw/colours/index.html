@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Data Tables Project | Mary Smith | Front-end Developer | </title>
-    <meta name="description" content="Populates an HTML table with data stored in an array. Includes the option to remove data items.">
+    <title>JavaScript Random Colour Generator Project | Joe Bloggs | Front-end Developer | </title>
+    <meta name="description" content="Uses an array of hexadecimal values to randomly generate a background colour for the web page.">
+
+	<!-- Stylesheets -->
 
 
     <style>
@@ -19,16 +21,17 @@
 
         /* Main Colours */
         .theme-js { 
-            background-image:#ff0000; background-image:  
+            background-image:#ff0000;background-image:
             radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0, transparent 50%),  
             radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0, transparent 50%),  
             radial-gradient(at 0% 50%, hsla(355,85%,93%,1) 0, transparent 50%),  
             radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0, transparent 50%),  
             radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0, transparent 50%),  
             radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0, transparent 50%),  
-            radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0, transparent 50%);
-        }
+            radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0, transparent 50%); 
+        } 
 
+        main { min-height: 50vh} 
         .theme-js .col-2 { background-color: var(--green-100) }
         .theme-js h3 { color: #222 }
         .theme-js p { color: #222 }
@@ -40,76 +43,43 @@
         }
 
         /* Button Colours: active state */
-        /* .theme-js a.btn:hover { background-color: darkblue }
+        .theme-js a.btn:hover { background-color: darkblue }
 
         .theme-js a.btn { background-image: linear-gradient(to right,#e052a0,#f15c41) } 
-        .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) }  */
+        .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) } 
 
-        /* ========= ENDS CUSTOM CSS FOR WEB PAGE ======= */
+        /* ===== END PAGE CUSTOM COLOURS ==========*/
+        
+        /* ===== THIS PROJECT ONLY ==========*/
 
-        
-        .theme-js { text-align: center}
-        .container-table { margin: 0 auto;}
+        .theme-js { background-color:#dbf4e4; text-align: center }
 
-        @media (min-width: 768px) { 
-            .container-table { 
-                padding-top: 4%; 
-                padding-bottom: 4% 
-            }
-        }      
-        
-        @media (max-width: 767px) { 
-            .container-table { 
-                padding: 5% 10% 
-            } 
-        }
-        
-        /* All tables */
-        .data-table {
-            border-collapse: collapse;
-            font-size: 18px;
-            width: 100%;
-            overflow: scroll;
-            margin-bottom: 56px;
-            border: solid 1px #888;
-            box-shadow: 8px 8px 8px #888;  
+        .theme-js h2 { 
+            text-align: center; margin: 0 auto;
+            font-size: 26px;
+            color: #fff; background-color: #000; 
+            display: inline-block; 
+            padding: 20px; line-height: 2; 
         }
 
-        .data-table td, .data-table th { padding: 8px 18px; text-align: left }
+        #color-display { background-color: green; font-weight: 400; padding: 6px 10px  }
 
-        /* Tables with light theme */
-        .table-theme-light thead tr th { background-color: lightgray }
-        .table-theme-light tr:nth-child(odd)  { background-color: #fff }
-        .table-theme-light tr:nth-child(even) { background-color: #E1E4E7 }
-
-        /* Delete button */
-        .theme-js .table-theme-light td a.btn {
+        .theme-js p { width: 100% }
+        #btn-color { 
+            display: block;
+            text-align: center;
+            margin: 20px auto 0 auto;
+            padding: 20px 28px;
+            border: 1px none #000;
             background-color: blue;
-            color:#fff;
-            padding: 4px 12px;
-            font-size: 90%;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .theme-js .table-theme-light td a.btn:hover {
-            background-color: darkblue;
-        }
-
-        .table-theme-light td a.btn i { margin-right: 12px }
-
-        .table-theme-light td a.btn > * { pointer-events: none; }
-
-        button.add-row {
-            padding: 10px 22px; 
-            background-color: red;
-            color:#fff;
-            font-size: 20px;
+            transition: all 350ms ease;
+            color: #fff;
+            font-size: 18px;
+            line-height: 1;
             border-radius: 50px;
-            margin-bottom: 48px;
         }
-
-        button.add-row i { margin-left: 8px }
+        #btn-color:hover {background-color: darkblue }
+        #btn-color i { margin-right: 10px }
 
     </style>
 
@@ -121,13 +91,13 @@
 
 <body>
 
-
+    <!-- navigation menu -->
         
     <!-- header hero block -->
     <header class="hero-block hero-block-js">
         <div class="hero-text-container">
-            <h1>Data Tables <span>JavaScript Project</span></h1>
-            <h2>Populates an HTML table with data stored in an array. Includes the option to remove data items.</h2>
+            <h1>Random Colour Generator <span>JavaScript Project</span></h1>
+            <h2>Uses an array of hexadecimal values to randomly generate a background colour for the web page.</h2>
         </div>
     </header>
 
@@ -136,74 +106,18 @@
         
         <section class="container-flex theme-js">
 
-            <div class="container-table">
-
-
-                <table class="data-table table-theme-light" id="myTable">
-                  <thead>
-                      <tr>
-                          <th>Student ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Action</th>
-                      </tr>
-                  </thead>
-                  <tbody id= "studentData"></tbody>
-                </table>
-      
-                <p><button class="add-row" id="btn_populate" onclick="populateTable()">Populate Table <i class="fa-solid fa-circle-plus"></i></button></p>
-      
-              </div>
+            <h2>Background Colour: &nbsp;<span id="color-display">#dbf4e4</span></h2>
+            <p>&nbsp;</p>
+            <button class="btn" id="btn-color">
+                <i class="fa-solid fa-paint-roller"></i> Click me
+            </button>
 
         </section>
 
     </main>
 
     <script>
-  let all_btns = document.querySelectorAll('#myTable .btn');
-
-// Joe Bloggs, JavaScript Developer
-all_btns.forEach(el => el.addEventListener('click', event => {
-    event.preventDefault();
-    // get button id
-    btn_id = event.currentTarget.id;
-    deleteRow(btn_id);
-}));
-
-
-function deleteRow(btn_id) {
-    console.log(btn_id);
-    console.log("Clicked button: "+btn_id);
-    const rows = document.querySelectorAll("#myTable tr");
-    for (let i = rows.length; i--;) {
-        if(rows[i].innerHTML.includes(btn_id)) {
-            rows[i].parentNode.removeChild(rows[i]);
-        }
-    }
-}
-
-const arrStudentData = [
-    {id: "1224", firstname: "John", lastname: "Smith"},
-    {id: "5678", firstname: "Jane", lastname: "Higgins"},
-    {id: "1717", firstname: "Frank", lastname: "Jones"},
-    {id: "2121", firstname: "Mary", lastname: "Dwyer"}
-];
-
-function populateTable(){
-    var tableContent = "";
-    let delBtn = "<a class=\"btn\" onclick=\"deleteRow(this)\"><i class=\"fa-solid fa-trash-can\"></i>Delete</a>";
-    for(var i in arrStudentData){
-        tableContent += "<tr>";
-        tableContent += "<td>" + arrStudentData[i].id +"</td>" 
-            + "<td>" + arrStudentData[i].firstname +"</td>" 
-            + "<td>" + arrStudentData[i].lastname +"</td>" 
-            + "<td><a class=\"btn\" onclick=\"deleteRow("+arrStudentData[i].id+")\"><i class=\"fa-solid fa-trash-can\"></i>Delete</a></td>";
-            tableContent += "</tr>";
-    }
- 
-    document.getElementById("studentData").innerHTML = tableContent;
-    document.getElementById("btn_populate").innerHTML = "Refresh Table <i class=\"fa-solid fa-circle-plus\"></i>";
-}
+        
     </script>
 
     
@@ -212,7 +126,7 @@ function populateTable(){
 
 
 
-       
+        
     </footer>
 
 

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Random Colour Generator | JavaScript Project | Brendan Munnelly</title>
+	<meta name="description" content="Uses an array of hexadecimal values to randomly generate a background colour for the web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<img src="https://www.munnelly.com/webdesign/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, Lecturer in Web Design">
+						<p id="myEmail">brendan@munnelly.com</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Random Colour Generator</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>Uses an array of hexadecimal values to randomly generate a background colour for the web page.</p>
+
+
+	</section>
+
+    <section id="tables-html">
+
+
+		<h2>Setting up the base web page</h2>
+
+        <p>Your first task is to set up the base web page.</p>
+
+        <ol>
+            <li>In your <b>portfolio/js</b> folder, create a new sub-folder named <b>colours</b>.</li>
+            <li>Download the following file to this new <b>portfolio/js/colours</b> folder.
+                <span class="inside-ol">&nbsp;</span>
+               	<a href="https://munnelly.com/javascript/2022-js/portfolio/js/colours/index.html">index.html</a></li>
+            <li>Give it the filename <b>index.html</b>.</li>
+            <li>Update the website logo, favicon, <span class="syn">&lt;title&gt;</span> tag and the <span class="syn">&lt;footer&gt;</span> with your own details.</li>
+        </ol>
+		
+        <p>This file contains all the necessary HTML and CSS for this project.</p>
+
+		<div class="box-warning">
+			<p><b>Note</b>: Ensure the file is linked to the <b>lunadoge.min.css</b> stylesheet, and not the older <b>lunadoge.css</b> version.</p>
+		</div>
+
+	</section>		
+
+	<section>
+
+		<h2 id="tables-css">Adding the JavaScript code</h2>
+
+		<p>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, add the following JavaScript code within a <span class="syn">&lt;script&gt;</span> tag.</p>
+<pre>
+const arrHex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+const btnColor = document.querySelector("#btn-color");
+const strColorDisplay = document.querySelector("#color-display");
+
+btnColor.addEventListener("click", function () {
+   let strHexColor = "#";
+   for (let i = 0; i &lt; 6; i++) {
+      strHexColor = strHexColor + arrHex[getRandomNumber()];
+   }
+   strColorDisplay.textContent = strHexColor;
+   document.querySelector(".theme-js").style.backgroundColor = strHexColor;
+});
+
+// Generate number in range 0 - 15
+   function getRandomNumber() {
+   return Math.floor(Math.random() * arrHex.length);
+}</pre>
+
+	<p>Save your finished file and verify it works correctly.</p>
+
+	<p>Upload the <b>colours</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
