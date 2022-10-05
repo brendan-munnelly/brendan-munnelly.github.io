@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>16: Working with Arrays | JavaScript Tutorials</title>
+	<meta name="description" content="Creating arrays in JavaScript, populating them with elements, and reading and updating array elements">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+
+	<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>16: Working with Arrays</h1>
+					<h2>Creating arrays in JavaScript, populating them with elements, and reading and updating array elements.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#arrays-about">Arrays: When variables are not enough</a></p>
+				<p><a href="#arrays-naming">Naming your arrays</a></p>
+				<p class="toc-indent"><a href="#arrays-naming-conventions">Array naming conventions</a></p>
+
+				<p><a href="#arrays-creating">Creating an array</a></p>
+				<p><a href="#arrays-populating">Populating an array</a></p>
+
+				<p class="toc-indent"><a href="#arrays-multiple-data-types">One array: multiple data types</a></p>
+
+				<p class="toc-indent"><a href="#arrays-length">The length of an array</a></p>
+				<p><a href="#arrays-reading">Reading array contents</a></p>
+
+				<p><a href="#arrays-updating">Updating array values</a></p>
+
+				<p class="toc-indent"><a href="#arrays-modifying">Modifying array values</a></p>
+				<p class="toc-indent"><a href="#arrays-deleting">Deleting array values</a></p>
+
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create and populate an array.</li>
+			<li>Find the length of an array.</li>
+			<li>Use array indexes to read and modify values in an array.</li>
+		</ul>
+
+	</section>
+
+	<div class="code-snippets">
+		<p>Working with Arrays: <a href="code-snippets/arrays-introduction-code-snippets-download.html" target="_blank">JS Code Snippets</a></p>
+	</div>
+
+    <section id="arrays-about">
+
+        <h2>Arrays: when variables are not enough</h2>
+        <p>A variable, as you have learnt, can store a value. Think of a variable as a &#8216;box&#8217; in which you can place a <i>single</i> value. See below.</p>
+
+        <img src="assets/img/array-not-single-value.png" alt="Variable with a single value">
+    
+        <p>But suppose you want to store <i>several</i> values in a &#8216;box&#8217;? You need a different kind of variable; you need an <i>array</i>. </p>
+
+		<p>Below you can see an array or multi-compartment &#8216;box&#8217; that contains four values or <i>elements</i> (also called <i>items</i>).</p>
+    
+		<img src="assets/img/array-multiple-values.png" alt="Array with multiple values">
+		
+		<p>Each array element has an identifying integer (whole number) known as an <i>index</i>. Indexes begin at zero and the number is written inside square brackets <span class="syn-js">[]</span>.</p>
+		
+		<img src="assets/img/array-indexes.png" alt="Array indexes">
+
+		<p>For example, an array with four elements has the following indexes: <b>[0]</b>, <b>[1]</b>, <b>[2]</b> and <b>[3]</b>. JavaScript arrays are said to be <i>zero-indexed</i>.</p>
+
+		<p>Arrays in JavaScript are not primitives but a special type of object. The <span class="syn-js">typeof</span> operator when applied an array will return "object".</p>
+
+        <p class="defhead">Array</p>
+        <p class="deftext">The Array object enables a collection of mutable items to be stored and manipulated with a single variable name. Arrays are iterable (can be looped through), resizable (elements can be added/removed), can contain a mix of different data types, and are zero-indexed. An array with n elements is indexed from 0 to n-1.</p>
+
+		<p>The benefit of using arrays is that you can work with <i>datasets</i> with just a single name and an index number. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+
+	</section>
+
+
+	<section id="arrays-naming">
+
+		<h2>Naming your arrays</h2>
+
+        <p>As with variable names, there are rules for naming arrays.</p>
+    
+        <ul>
+            <li>Do <i>not</i> use the same name for two different arrays within the same scope.</li>
+            <li>Do <i>not</i> insert spaces within array names.</li>
+            <li>Make long array names easier to read by using <i>camelCase</i>.</li>
+            <li>Remember that array names are case-sensitive: <b>bestArrayEver</b> is <i>not</i> the same as <b>bestarrayEver</b>.</li>
+        </ul>
+
+		<h3 id="arrays-naming-conventions">Array naming conventions</h3>
+		<p>There are a number of coding conventions (&#8216;soft rules&#8217;) for naming arrays:</p>
+		<ul>
+			<li>It is common to pluralize array names, such as <b>products</b> rather that <b>product</b> and <b>users</b> rather than <b>user</b>.</li>
+			<li>Some developers begin array names with <b>arr</b>, such as <b>arrStudents</b> and <b>arrEmployees</b>.</li>
+			<li>In the <a href="https://google.github.io/styleguide/jsguide.html" target="_blank">Google Style Guide</a> you will see arrays with names such as <b>moduleLocalArray</b> and <b>exportedArray</b>.</li>
+		</ul>
+		
+		<p>Your JavaScript code will be easier to read if you name your arrays in a diferent way to regular (single-value) variables.</p>
+
+		
+	</section>
+
+
+	<section id="arrays-creating">
+
+		<h2>Creating an array</h2>
+
+		<p>You can create an array in either of two ways</p>
+
+		<ul>
+			<li><b>Array literal</b>: This is the <i>recommended</i> method. See sample below.
+<pre class="language-js">
+ const users = ["Bridget","Carol","Christine","Deborah"];  </pre></li>
+			<li><b>Array constructor</b>: See below. This is <i>not</i> recommended.
+<pre class="language-js">
+ const users = new Array ("Bridget","Carol","Christine","Deborah");  </pre></li>
+		</ul>
+
+		<p>Both methods create exactly the same array and both use the square bracket <span class="syn-js">[]</span> syntax.</p>
+		
+		<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This prevents you from accidentally overwriting an array with the same name that might already exist elsewhere in the same scope. If you do, JavaScript will throw on error.</p>
+
+		<img src="assets/img/array-message-name=already-declared.png" alt="Array name already declared">
+		<p>Using the <span class="syn-js">const</span> keyword does <i>not</i> prevent your code from modifying elements in an array as needed. Array elements are always <i>mutable</i>. It just means the array name cannot be reassigned in the same scope of your program.</p>
+
+	</section>
+		
+	<section id="arrays-populating">
+
+		<h2>Populating an array</h2>
+
+		<p>With regular (single-value) variables, you can <i>declare</i> (create) them in one statement and later <i>initialise</i> (assign a value) to them in another statement.See below.</p>
+
+<pre class="language-js">
+ let varFood;
+ console.log(varFood);
+ // returns nothing to console</pre>
+
+<pre class="language-js">
+ varFood = "cheese";
+ console.log(varFood);
+ // returns "cheese"</pre>
+
+	<p>Alternatively, you can both declare and initialise a variable in a single statement.</p>
+
+<pre class="language-js">
+ const varDrink = "green tea";
+ console.log(varDrink);
+ // returns "green tea"</pre>
+
+	<p>The same is true with declaring array variables. The following statement creates an empty array.</p>
+	
+<pre class="language-js">
+ // create empty array
+ const arrMeals[];
+ console.log(arrMeals);
+ // returns nothing to console</pre>
+
+	<p>Here are two examples of declaring and assigning values to an array in a single statement. Initialising an array is called <i>populating</i> the array.</p>	
+
+<pre class="language-js">
+ const arrPrices = [11.99, 24.50, 34.25, 49.99];
+ const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford"];</pre>
+
+	<p>Individual <i>array elements</i> are separated by commas. Strings are typically wrapped with double <span class="syn-js">""</span> rather than single quotes <span class="syn-js">''</span>.</p>
+
+	<p>Optionally, for extra readability, spaces may be included along with commas. For the same readability reason, you may sometimes see array declarations written over multiple lines as follows.</p>
+<pre class="language-js">
+ const arrUserIDs = [
+   4032,
+   5229,
+   6317,
+ ];</pre>
+	<p>As you can see above, there is a &#8216;trailing comma&#8217; <span class="syn-js">,</span> after the final element <b>6317</b>. Developers sometimes add an optional trailing comma to the final element of an array or object. This makes all lines look alike and can make it easier to insert/remove elements later.</p>
+
+	<h3 id="arrays-multiple-data-types">One array: multiple data types</h3>
+	<p>In JavaScript elements in an array need not to be same data type. See below.</p>
+	
+<pre class="language-js">
+ const arrMixed = ["Movie title", 15.99, 2012, null, true];</pre>
+		
+	<p>An array can contain strings, numbers, functions, objects &#8211; even other arrays. An array that contains another array is called a <i>multi-dimensional</i> array.</p>
+
+	<p>Unless you have a very good reason to do so, it is not recommended to mix multiple data types in your arrays.</p>
+
+	<h3 id="arrays-length">The length of an array</h3>
+
+	<p>Every array has a <span class="syn-js">length</span> property that reveals the number of elements in the array. The syntax is as follows.</p>
+<pre class="language-js"> <i>array_name</i>.length</pre>
+
+<p>The following example will output an array length of <b>5</b> to the console.</p>
+
+<pre class="language-js"> const arrFruits = ["Apple","Banana","Blueberry","Pear","Lemon"];
+ console.log("Number of items in arrFruits: "+arrFruits.length);
+ // returns 5</pre>
+    
+	<p>Remember: the length of an array is always <i>one number greater</i> than the array's highest index number.</p>
+</section>
+
+	<section id="arrays-reading">
+
+		<h2>Reading array contents</h2>
+
+		<p>How do you read what&#8217;s stored in an array? There are two situations when you want to access or &#8216;get at&#8217; array values:</p>
+    
+        <ul>
+            <li>When you want to write the values to the JavaScript Console, perhaps with a <span class="syn-js">console.write()</span> statement.
+            <span class="inside-ol">&nbsp;</span>
+            The following example writes the 34th index value from the array named <b>email_addr</b> to the browser window.
+<pre class="language-js">
+console.log(`Email Address: ${email_addr[34]}"&lt;br&gt;`);
+</pre></li>
+            
+            <li>To copy an element&#8217;s value to regular (single-value) variable, use an assignment statement such as the one shown below. 
+<pre class="language-js">
+  let customer21_id = customer_ids[21];
+</pre>
+        In the above example, the value of the 21st element in the array named <b>customer_ids</b> is copied to the variable named <b>customer_21</b>. The array remains unchanged.</li>
+    </ul>
+
+	<p>Here is the syntax for reading the last element in an array.</p>
+
+<pre class="language-js">
+console.log("Last element:"+ fruits[fruits.length - 1]);</pre>
+
+
+	</section>
+   
+    
+    <section id="arrays-updating">
+    
+        <h2>Updating array values</h2>
+    
+        <p>Up to now, you have populated array elements only at the time you created the array. But you can insert values into an array at any stage. The general syntax is as follows.</p>
+    
+<pre class="language-js"><i>array_name</i>[index_number] = element_value;</pre>
+    
+        <p>The following code assigns the number 34 to the 20th index position of the array named <b>myArray</b>.</p>
+    
+<pre class="language-js">myArray[20] = 34;</pre>
+    
+        <p>You don't need to populate array elements in consecutive order, as in <b>[0]</b>, <b>[1]</b>, <b>[2]</b>, <b>[3]</b>, <b>[4]</b> and so on.</p>
+        
+        <p>Imagine that you have an array called <b>userNames</b>. It contains 10 elements, indexed from <b>[0]</b> to <b>[9]</b>. The following three statements are all valid.</p>
+    
+<pre class="language-js">userNames[10] = "Murphy";
+userNames[11] = "Jones";
+userNames[20] = "Collins";</pre>
+    
+        <p>In other words, JavaScript allows you to have &#8216;gaps&#8217; or unfilled elements in an array. An array with such <i>non-contiguous</i> values is said to be <i>sparsely populated</i>. JavaScript treats the value of an unfilled array element as <i>undefined</i>.</p>
+    
+        <h3 id="arrays-modifying">Modifying array values</h3>
+    
+        <p>You change the value of an array element in exactly the same way as you first assign a value to that element. If your <b>userNames</b> array currently has values at index locations <b>[8]</b>, <b>[9]</b> and <b>[56]</b>, the following statements overwrite those values with the new ones.</p>
+    
+<pre class="language-js">userNames[8] = "Harper";
+userNames[9] = "Wallace";
+userNames[56] = "Johnson";</pre>
+    
+    
+        <h3 id="arrays-deleting">Deleting array values</h3>
+        <p>You can remove the contents of an array element with the <span class="syn-js">delete</span> method.</p>
+    
+<pre class="language-js">delete userNames[67];</pre>
+    
+        <p>This does <i>not</i> actually delete the element from the array; it just sets its value as <i>undefined</i>. The <span class="syn-js">length</span> property of the array is unaffected.</p>
+
+		<p>This way of deleting an element from an array is <i>not recommended</i>.</p>
+
+		<p>&nbsp;</p>
+		<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+	
+    </section>
+
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>
