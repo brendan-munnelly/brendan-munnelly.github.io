@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Arrays and Loops - Exercises</title>
+        <style>
+
+* {margin: 0;padding: 0;border: none }*, *::before, *::after {box-sizing: border-box }html {height: 100%;font-size: 100%;font: inherit;vertical-align: baseline;scroll-behavior: smooth;scroll-padding-top: 20px }body {line-height: 1.5;margin-left: auto;margin-right: auto;min-height: 100vh;text-rendering: optimizeSpeed }img {width: 100%;height: auto;display: block }header, section, footer {width: 100% }section *:last-child, footer *:last-child {margin-bottom: 0 !important }body {font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif }.font-mono {font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }header {background-color: #f7df1e;margin: 0 auto;box-shadow: 0 2px 6px 0 rgba(0,0,0,.12), inset 0 -1px 0 0 #dadce0;}@media (min-width:1200px) {header {padding: 3% calc((100% - 1024px)/ 2) 2% calc((100% - 1024px)/ 2) }section {padding: 2% calc((100% - 960px)/ 2) 3% calc((100% - 1024px)/ 2) }}@media (min-width:1025px) and (max-width:1199px) {header, section {padding: 3% 14% 4% 14% }}@media (min-width:768px) and (max-width:1024px) {header, section {padding: 3% 8% 4% 8% }}@media (max-width:767px) {header, section {padding: 6% 13% 9% 13% }}header h1 {font-size: calc(28px + (52 - 28) * ((100vw - 320px) / (1920 - 320)));letter-spacing: -1px;line-height: 1.1;margin-bottom: 16px }header h1 span {color:#888 }section h2 {font-size: calc(22px + (38 - 22) * ((100vw - 320px) / (1920 - 320)));letter-spacing: -1px;line-height: 1.1;margin-bottom: 16px }section h3 {font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1920 - 320)));line-height: 1.1;margin-top: 32px;margin-bottom: 8px;font-weight: 600;}p, li {font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1140 - 320))) }p {line-height: 1.5 }li {line-height: 1.4 }@media (min-width: 768px) {p, ul {margin-bottom: 18px }ul li {line-height: 1.4;margin-left: 20px;margin-bottom: 14px;padding-left: 14px }}@media (max-width: 767px) {p, ul {margin-bottom: 16px }ul {margin-left: 0;margin-bottom: 16px }ul li {margin-left: 16px;margin-bottom: 10px;padding-left: 8px }}kbd {display: inline-block;background-color: #eee;border-radius: 5px;border: 1px solid #b4b4b4;box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;color: #555;font-weight: 600;line-height: 1;padding: 4px 7px;white-space: nowrap;cursor: default;user-select: none;font-family: 'Roboto Mono', monospace;letter-spacing: -0.5px;margin: 0 2px;font-size: 80%;}.js-box {border: solid 1px yellow;padding: 20px;background-color: lightyellow;margin-bottom: 20px;font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1140 - 320)));}button {display: block;padding: 10px 22px;color: #fff;background-color: green;border-radius: 5px;border: none;font-size: 18px;outline: 0;margin: 32px 0;transition: all 0.2s linear;}button:focus, button:hover, button:active {background-color: red;}footer {background: #0C4A6E }@media (min-width: 1200px) {footer {padding: 3.5% calc((100% - 800px)/2) 4% calc((100% - 800px)/2);margin: 0 auto;}}@media (min-width: 1025px) and (max-width: 1199px ) {footer {padding: 3% 14% 3% 14% }}@media (min-width: 768px) and (max-width: 1024px) {footer {padding: 5% 12% }}@media (max-width: 767px) {footer {padding: 5% }}
+
+h3 b { font-weight: 700; color: #444 }
+h3 { font-weight: 500; color: #222 }
+h3 span { 
+    background-color: #222; color: #fff; 
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2px 12px;
+    font-size: 90%;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.js-box {
+    border: solid 1px yellow;
+    padding: 32px 60px;
+    background-color: lightyellow;
+    margin-bottom: 48px;
+}
+
+@media (max-width: 767px) {
+    .js-box { padding: 20px 20px }
+}
+
+.container-flex div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.container-flex > div:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.container-flex div label {
+    font-size: 18px;
+    padding: 8px 8px 8px 0;
+    font-weight: 400;
+}
+
+.container-flex > div > label {
+    flex: 1 0 120px;
+    max-width: 220px;
+}
+
+.container-flex > div > label + * {
+    flex: 1 0 220px;
+}
+
+.container-flex div input {
+    padding: 15px;
+    font-size: 18px;
+    border: solid 1px #000;
+    border-radius: 5px;
+    font-weight: 400;
+    background-color: #fff;
+}
+
+.container-flex div select {
+    padding: 8px 4px;
+    font-size: 18px;
+    border: solid 1px #000;
+    border-radius: 5px;
+    font-weight: 400;
+    background-color: #fff;
+}
+
+.container-flex div input { padding: 8px }
+.container-flex div label { padding-left: 0 } 
+
+.container-flex div button {
+    margin-left: auto;
+    padding: 8px 16px;
+    border: none;
+    background: green;
+    color: #f2f2f2;
+    letter-spacing: .09em;
+    border-radius: 2px;
+}
+
+.container-flex div button:hover {
+    background: lightgreen;
+    color: #222;
+}
+
+.container-flex div label { font-size: 22px }
+
+/* Error message */
+    #errorMsg {
+        padding: 2px 12px;
+        border: solid 1px red;
+        background-color: lightpink;
+        color: #000;
+        display: none;
+    }
+
+#resultBox  { 
+    background-color: lightgreen;
+    padding: 20px;
+    margin-top: 32px;
+    display: none;
+
+}
+
+
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <h1>Arrays and Loops: <span>Exercises</span></h1>
+        <p>Display this web page in <a href="https://www.brave.com" target="_blank" rel="noopener">Brave</a> or other, lesser web browsers.</p>
+
+        <p>Also open the page in a code editor. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>, <a href="https://vscode.dev/" target="_blank" rel="noopener">VS Code Online</a> or <a href="https://www.sublimetext.com/" target="_blank" rel="noopener"> Sublime Text</a> are all are good choices.</p>
+
+        <p>Follow the exercises in the online Lesson: <a href="../index.html">Arrays and Loops</a></p>
+
+        <p>✅  &nbsp;Happy coding.</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Sample heading</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid, distinctio ipsa pariatur exercitationem voluptate illo accusamus in sint voluptas quia alias odit! Nesciunt expedita libero accusantium sed quibusdam magni!</p>
+
+
+            <h3 class="myH3">Exercise: 17:1: Reading array element values for loop</h3>
+             
+            <div class="js-box" style="margin-top: 42px">
+                <script>
+                    arrF1Teams = [
+                        "Red Bull",
+                        "Ferrari",
+                        "Mercedes",
+                        "McLaren",
+                        "Alpine",
+                        "Alpha Romeo"
+                    ]
+                    for (let i = 0; i < arrF1Teams.length; i++) {
+                        console.log(`This is loop step number: <b>${i}</b>.<br>`);
+                    }
+                </script>
+            </div>
+    
+            <h3 class="myH3">Exercise 15.2: Building a user-controlled for loop</h3>
+            <div class="js-box" style="margin-top: 42px">
+
+                  <div class="container-flex">
+
+                    <div>
+                        <label for="loopSteps">Loop Iterations</label>
+                       <input type="text" id="loopSteps" maxlength="2" style="max-width: 60px; margin-right: 20px">(1-50)
+                    </div>
+                    <div>
+                        <div id="errorMsg">Please enter a number between 1 and 50.</div>
+                    </div>
+  
+                    <div>
+                      <button type="submit" id="btn_1">Do Loop</button>
+                    </div>
+                  </div>
+
+                  <div id="resultBox">
+
+
+
+                  </div>
+            </div>
+
+            <p><a href="final.html">See solution -&gt;</a></p>
+
+        </section>
+
+    </main>
+
+        <!-- JavaScript code starts below -->
+        <script>
+
+console.log("%c=== 17:1 Reading array element values for loop ===", "color: white; background-color: green; padding: 2px");
+
+        arrF1Teams = [
+            "Red Bull",
+            "Ferrari",
+            "Mercedes",
+            "McLaren",
+            "Alpine",
+            "Alpha Romeo"
+        ]       
+
+
+        console.log("Loop with for");
+ 
+    </script>
+    <!-- JavaScript code ends here -->
+
+
+    <footer>
+
+    </footer>
+
+    </body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>17: Arrays and Loops | JavaScript Tutorials</title>
+
+	<meta name="description" content="Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.">
+
+    <meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+ 
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet"> 
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>17: Arrays and Loops</h1>
+					<h2>Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#javascript-loops">Going on and on &#8212; until it stops: a JavaScript loop</a></p>
+
+				<p class="toc-indent"><a href="#about-for-loop">The for loop</a></p>
+		
+		
+				<p class="toc-indent"><a href="#loop-conditions">About loop conditions</a></p>
+		
+				<p class="toc-indent"><a href="#increment-decrement">About the increment and decrement operators</a></p>
+		
+				<p><a href="#for-loop-structure">The for loop structure</a></p>
+		
+		
+				<p class="toc-indent"><a href="#more-for-loops">More about for loops</a></p>
+		
+		
+		
+				<p><a href="#interrupt">Interrupting loops with <span class="syn-js">break</span> and <span class="syn-js">continue</span></a></p>
+				<p class="toc-indent"><a href="#break-command">About the break command</a></p>
+				<p class="toc-indent"><a href="#continue-command">About the continue command</a></p>
+		
+				<p>&nbsp;</p>
+			</aside>
+	
+	
+	<article>
+	
+
+		<section id="learning-goals">
+			<h2>Learning Goals</h2>
+
+	<p>In this Lesson, you will learn how to:</p>
+	<div class="box-goals">
+	<ul>
+		<li>Create a <span class="syn-js">for</span> loop with a counter variable, a starting value, a loop condition and an increment (<span class="syn-js"><b>++</b></span>) or decrement operator (<span class="syn-js"><b>--</b></span>)</li>
+
+		<li>Create a <span class="syn-js">while</span> loop with a counter variable that runs only when a tested condition is satisfied</li>
+		<li>Create a <span class="syn-js">do&#8230;<span style="color:transparent;font-family:sans-serif">i</span>while</span> loop that runs once, and runs again only when a tested condition is satisfied</li>
+		<li>Interrupt any loop type with a <span class="syn-js">break</span> command that, when the counter variable reaches a specified value, tells JavaScript to exit the loop</li>
+		<li>Interrupt any loop type with a <span class="syn-js">continue</span> command that, when the counter variable reaches a specified value, tells JavaScript to return to the top of the loop as if all the statements have been performed.</li>
+
+	</ul>
+	</div>
+</section>
+	<section>
+	<p>In this Lesson, you will meet the following terms:</p>
+	<ul>
+		<li>JavaScript loop</li>
+		<li>Iteration</li>
+		<li>Loop counter variable</li>
+	</ul>
+
+</section>
+	
+<section>
+
+	<div class="code-snippets">
+		<p>In your <b>javascript/exercises</b> folder, create a new sub-folder named <b>17</b>.
+			
+		<p>Save the exercise file below to this new <b>javascript/exercises/16</b> sub-folder.</p>
+		<p><a href="exercises/index.html" target="_blank"><b>Arrays and Loops</b></a></p>
+	</div>	
+
+</section>
+
+<section id="arrays-reading">
+
+	<h2>About loops and arrays</h2>
+
+	<p>JavaScript <span class="syn-js">for</span> and similar loops are commonly used for traversing (moving through) the elements of an array, either to read the array elements values or to modify them in some way.</p>
+
+	<p>Suppose your code contains an array named <b>teamsF1Teams</b> with six elements.</p>
+	
+<pre class="language-js">arrF1Teams = [
+   "Red Bull",
+   "Ferrari",
+   "Mercedes",
+   "McLaren",
+   "Alpine",
+   "Alpha Romeo"
+]</pre>
+	
+	You could write the values of the array&#8216;s six elements to the JavaScript console with six separate <span class="syn-js">console.log()</span> statements as shown below.</p>
+
+<pre class="language-js">console.log(`Array element 0: arrF1Teams[0]`);
+console.log(`Array element 1: arrF1Teams[1]`);
+console.log(`Array element 2: arrF1Teams[2]`);
+console.log(`Array element 3: arrF1Teams[3]`);
+console.log(`Array element 4: arrF1Teams[4]`);
+console.log(`Array element 5: arrF1Teams[5]`);</pre>
+	
+	<p>That's a lot of typing.</p>
+
+	<p>There is an easier way: use a <span class="syn-js">for</span> loop.</p>
+
+	<h3>Exercise: 17:1: Reading array element values <span>for</span> loop</h3>
+
+<pre class="language-js">for (i = 0; i &lt;= 5; i++) {
+   console.log(`Array element [i]: arrF1Teams[i]`);
+}</pre>
+
+	<p>As you can see, there are six elements in the array. However, the initial value of the <i>counter variable</i> <b>i</b> is set to <b>0</b> and the upper value is set to <b>5</b>.</p>
+	
+	<p>This is because the array's index numbering runs from <b>[0]</b> to <b>[5]</b> and <i>not</i> from <b>[1]</b> to <b>[6]</b>.</p>
+
+	<p>To use a <span class="syn-js">for</span> loop to access all the values from an array, follow this simple rule:</p>
+	
+	<p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+	
+	<p>That way a <span class="syn-js">console.log()</span> statement is performed for each individual array element.</p>
+	
+	<p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+
+	<p>The solution is to use the array <span class="syn-js">length</span> property as the upper limit of a <span class="syn-js">for</span> loop as follows.</p>
+
+<pre class="language-js">for (i = 0; i &lt; fruits.length; i++) {
+     console.log("Looping with for: "+fruits[i]);
+}</pre>
+
+	<p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<span class="syn-js"><b>&lt;</b></span>) and not 'less than or equal to' (<span class="syn-js"><b>&lt;=</b></span>).</p> 
+		
+	<p>Why?</p>
+
+	<p>Because the array <span class="syn-js">length</span> is always one greater than the index number of the highest array element.</p>
+		
+	<p>For example, When an array has six elements, its index numbers run from <b>[0]</b> to <b>[5]</b>, and its <span class="syn-js">length</span> property contains the value of <b>6</b>.</p>
+
+	
+
+	<h3 id="arrays-looping-forNext">Looping through an array with <code>forEach</code></h3>
+	<p>A second option is to use the  <span class="syn-js">forEach</span> loop. See the example below.</p>
+
+	<pre class="language-js">arrCars.forEach(element =&gt; console.log(element));</pre>		
+
+
+</section>
+
+
+
+    <p>&nbsp;</p>
+    <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+</section>
+
+</article>
+</main>
+</body>
+</html>
