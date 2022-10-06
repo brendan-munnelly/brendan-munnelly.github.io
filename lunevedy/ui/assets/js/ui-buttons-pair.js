@@ -9,6 +9,11 @@ const tabButton = document.querySelectorAll(".tab-button");
       
 tabs.onclick = e => {
 const id = e.target.id;
+
+console.log("tabs: "+tabs);
+console.log("tabButton: "+tabButton);
+console.log("Tab ID: "+id);
+
 if (id) {
     // tabs
     tabButton.forEach(btn => {
@@ -33,96 +38,81 @@ if (id) {
 //////////////// LOAD INITIAL BUTTON ////////////////////
 */
 
-document.querySelector("#cb_col_btns").addEventListener("change", loadBtnInitial);
+document.querySelector("#cb_btns").addEventListener("change", loadBtnInitial);
 
 function loadBtnInitial() {
-    const objSection = iframe.contentWindow.document.querySelector("section ");
+    // Enable 1/2 button switch
+    document.getElementById("rb_btn_one").disabled=false;
+    document.getElementById("rb_btn_two").disabled=false;
     
-    // Create single button in all cols
-    if (document.getElementById("cb_col_btns").checked) {
-        const btnDiv = document.createElement('div');
-        const iconBtn = content_buttons_one_icon;
-        const textBtn = content_buttons_one_text;
-        btnDiv.classList.add('container-btn');
-        objSection.innerHTML = objSection.innerHTML += 
-            "<div class=\"container-btn\">\n\t\t\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn+"<\/span>"+iconBtn+"</a>\n\t\t\t</div>"; 
+    // Get outer column/section/column container
+    let objContainer = getBtnContainer();
 
-        // enable dialog box settings for all buttons
-        document.getElementById("rb_btn_one").disabled=false;
+    // Add button container DIV at end of column/section/header container
+    const btnDiv = document.createElement('div');
+    btnDiv.classList.add('container-btn');
+    objContainer.append(btnDiv);
+    
+    // Create single button in container
+    if (document.getElementById("cb_btns").checked) {
+        const btnNum = 1;
+        console.log("Create initial new buttton")
+        // createBtn(objContainer, btnNum);
+
+        const el_btn = document.createElement('a');
+        el_btn.setAttribute("href", "#");
+        el_btn.setAttribute("class", "btn btn-solid");
+        el_btn.innerHTML = "<span>"+content_buttons_one_text+"</span>"+ content_buttons_one_icon;
+        btnDiv.append(el_btn);
+
+        // Reformat HTML
+        objContainer.innerHTML = objContainer.innerHTML.replaceAll("<div class=\"container-btn\">", "\t<div class=\"container-btn\">");
+
+        // Highlight 1-button switch
         document.getElementById("rb_btn_one").checked=true;
-        document.getElementById("rb_btn_two").disabled=false;
+        document.getElementById("rb_btn_two").checked=false;
+
+        // Set defaults for button size
         document.getElementById("dd_buttons_size").disabled=false;
         document.getElementById("dd_buttons_size").value="1";
+        
+        // Set defaults for button alignment (desktop and mobile)
         document.getElementById("form_btn_align_desktop").disabled=false;
         document.getElementById("rb_btn_align_desktop_left").disabled=false;
         document.getElementById("rb_btn_align_desktop_left").checked = true;;
         document.getElementById("rb_btn_align_desktop_center").disabled=false;
+        
         document.getElementById("form_btn_align_mobile").disabled=false;
         document.getElementById("rb_btn_align_mobile_left").disabled=false;
         document.getElementById("rb_btn_align_mobile_left").checked = true;;
         document.getElementById("rb_btn_align_mobile_center").disabled=false;
 
-        // enable dialog box settings for buttons one
+        // Display containers for tabs and settings
         document.querySelector(".container-buttons-block").style.display="block";
+
+        // Show and highlight button 1. Hide button 2
         document.getElementById("button_1").style.display="inline-block";
+        document.getElementById("tab_content_1").classList.add("active");
         document.getElementById("button_2").style.display="none";
+
+        // Set defaults for three button of tab 1            
         document.getElementById("dd_button_type_1").value="0";
-        document.getElementById("rd_btns_icons_left_1").disabled=false;
+        // document.getElementById("rd_btns_icons_left_1").disabled=false;
         document.getElementById("rd_btns_icons_left_1").checked=true;
-        document.getElementById("dd_buttons_shape_1").disabled=false;
+        // document.getElementById("dd_buttons_shape_1").disabled=false;
         document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_buttons_shadow_1").disabled=false;
+        // document.getElementById("cb_buttons_shadow_1").disabled=false;
         document.getElementById("cb_buttons_shadow_1").checked=false;
-        document.getElementById("cb_buttons_uppercase_1").disabled=false;
+        // document.getElementById("cb_buttons_uppercase_1").disabled=false;
         document.getElementById("cb_buttons_uppercase_1").checked=false;
+
+
+
     }
 
-    // remove all buttons from columns 
+    // remove all buttons
     else {
-        const objAllBtns = iframe.contentWindow.document.querySelector("section .container-btn");
-        objAllBtns.remove();
-
-        // disable dialog box settings for all buttons
-        document.getElementById("rb_btn_one").disabled=true;
-        document.getElementById("rb_btn_one").checked=false;
-        document.getElementById("rb_btn_two").disabled=true;
-        document.getElementById("rb_btn_two").checked=false;
-        document.getElementById("form_btn_align_desktop").disabled=true;
-        document.getElementById("rb_btn_align_desktop_left").disabled=true;
-        document.getElementById("rb_btn_align_desktop_left").checked = false;
-        document.getElementById("rb_btn_align_desktop_center").disabled=true;
-        document.getElementById("form_btn_align_mobile").disabled=true;
-        document.getElementById("rb_btn_align_mobile_left").disabled=true;
-        document.getElementById("rb_btn_align_mobile_left").checked = false;
-        document.getElementById("rb_btn_align_mobile_center").disabled=true;
-
-        document.getElementById("dd_buttons_size").disabled=true;
-        document.getElementById("dd_buttons_size").value="1";
-
-        // disable, reset dialog box settings for buttons one
-        document.querySelector(".container-buttons-block").style.display="none";
-        document.getElementById("button_1").style.display="none";
-        document.getElementById("dd_button_type_1").value="0";
-        document.getElementById("rd_btns_icons_left_1").disabled=true;
-        document.getElementById("rd_btns_icons_left_1").checked=false;
-        document.getElementById("dd_buttons_shape_1").disabled=true;
-        document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_buttons_shadow_1").disabled=true;
-        document.getElementById("cb_buttons_shadow_1").checked=false;
-        document.getElementById("cb_buttons_uppercase_1").disabled=true;
-        document.getElementById("cb_buttons_uppercase_1").checked=false;
-
-        // disable, reset dialog box settings for buttons two
-        document.getElementById("button_2").style.display="none";
-        document.getElementById("dd_button_type_2").value="0";
-        document.getElementById("rd_btns_icons_left_2").disabled=true;
-        document.getElementById("rd_btns_icons_left_2").checked=false;
-        document.getElementById("dd_buttons_shape_2").disabled=true;
-        document.getElementById("dd_buttons_shape_2").value="0";
-        document.getElementById("cb_buttons_shadow_2").disabled=true;
-        document.getElementById("cb_buttons_shadow_2").checked=false;
-        document.getElementById("cb_buttons_uppercase_2").disabled=true;
-        document.getElementById("cb_buttons_uppercase_2").checked=false;
+        removeBtnsAll();
     }
 }
 
@@ -139,76 +129,258 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             }
         }
 
-        // count cols
-        const objSection = iframe.contentWindow.document.querySelector("section ");
-        const objAllBtns = iframe.contentWindow.document.querySelector("section .container-btn");
-        let el_btn_col;
+        // get button(s) container
+        const objContainer = getBtnContainer();
 
         if (selectedValue==="btn-one") {
-            // test for button(s) and remove
-            objAllBtns.remove();
-            // Add one button
-            const btnDiv = document.createElement('div');
-            const iconBtn = content_buttons_one_icon;
-            const textBtn = content_buttons_one_text;
-            btnDiv.classList.add('container-btn');
-            objSection.innerHTML = objSection.innerHTML += 
-                "<div class=\"container-btn\">\n\t\t\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn+"<\/span>"+iconBtn+"</a>\n\t\t\t</div>"; 
-       
-            // enable dialog box settings for all buttons
-            document.getElementById("rb_btn_one").disabled=false;
-            document.getElementById("rb_btn_one").checked=true;
-            document.getElementById("rb_btn_two").disabled=false;
-            document.getElementById("dd_buttons_size").disabled=false;
-            document.getElementById("dd_buttons_size").value="1";
-    
-            // enable dialog box settings for buttons one
-            document.querySelector(".container-buttons-block").style.display="block";
-            document.getElementById("button_1").style.display="inline-block";
-            document.getElementById("button_2").style.display="none";
-            document.getElementById("dd_button_type_1").value="0";
-            document.getElementById("rd_btns_icons_left_1").disabled=false;
-            document.getElementById("rd_btns_icons_left_1").checked=true;
-            document.getElementById("dd_buttons_shape_1").disabled=false;
-            document.getElementById("dd_buttons_shape_1").value="0";
-            document.getElementById("cb_buttons_shadow_1").disabled=false;
-            document.getElementById("cb_buttons_shadow_1").checked=false;
-            document.getElementById("cb_buttons_uppercase_1").disabled=false;
-            document.getElementById("cb_buttons_uppercase_1").checked=false;
+            // removeBtnsAll();
+            const btnNum = 1;
+            createBtn(objContainer, btnNum);
         }
 
         else if (selectedValue==="btn-two") {
             // test for button(s) and remove
-            objAllBtns.remove();
-            // Add two buttons
-            const btnDiv = document.createElement('div');
+            // removeBtnsAll();
+            const btnNum = 2;
+            createBtn(objContainer, btnNum);
+        }
+    }
+
+    function getBtnContainer() {
+        let objContainer;
+        // main section 0 cols 
+        if ( (iframe.contentWindow.document.querySelector("section")) && (!iframe.contentWindow.document.querySelector("section .col-2.col-text")) ) {
+            objContainer = iframe.contentWindow.document.querySelector("section");
+        }
+    
+        // main section 2-cols 
+        else if (iframe.contentWindow.document.querySelector("section .col-2.col-text")) {
+            objContainer = iframe.contentWindow.document.querySelector("section .col-2.col-text");
+        }
+    
+        // header 0 cols 
+        else if ( (iframe.contentWindow.document.querySelector("header")) && (!iframe.contentWindow.document.querySelector("header .col-2.col-text")) ) {
+            objContainer = iframe.contentWindow.document.querySelector("header");
+       }
+    
+        // header 2-cols 
+        else if (iframe.contentWindow.document.querySelector("header .col-2.col-text")) {
+            objContainer = iframe.contentWindow.document.querySelector("header .col-2.col-text");
+        }
+        return objContainer;
+    }
+    
+    function createBtn(objContainer,btnNum) {
+
+        // Add button container DIV at end of column/section/header container
+        const btnDiv = document.createElement('div');
+        btnDiv.classList.add('container-btn');
+
+
+        console.log("btnNum: "+btnNum);
+        if (btnNum == "1") {
+            // Create content for button DIV
+
+
+            const el_btn = document.createElement('a');
+            el_btn.setAttribute("href", "#");
+            el_btn.setAttribute("class", "btn btn-solid");
+            el_btn.innerHTML = "<span>"+content_buttons_one_text+"</span>"+ content_buttons_one_icon;
+            btnDiv.append(el_btn);
+
+            // Reformat HTML
+            objContainer.innerHTML = objContainer.innerHTML.replaceAll("<div class=\"container-btn\">", "\t<div class=\"container-btn\">");
+
+            // Highlight 1-button switch
+            document.getElementById("rb_btn_one").checked=true;
+            document.getElementById("rb_btn_two").checked=false;
+
+            // Set defaults for button size
+            document.getElementById("dd_buttons_size").disabled=false;
+            document.getElementById("dd_buttons_size").value="1";
+            
+            // Set defaults for button alignment (desktop and mobile)
+            document.getElementById("form_btn_align_desktop").disabled=false;
+            document.getElementById("rb_btn_align_desktop_left").disabled=false;
+            document.getElementById("rb_btn_align_desktop_left").checked = true;;
+            document.getElementById("rb_btn_align_desktop_center").disabled=false;
+            
+            document.getElementById("form_btn_align_mobile").disabled=false;
+            document.getElementById("rb_btn_align_mobile_left").disabled=false;
+            document.getElementById("rb_btn_align_mobile_left").checked = true;;
+            document.getElementById("rb_btn_align_mobile_center").disabled=false;
+
+            // Display containers for tabs and settings
+            document.querySelector(".container-buttons-block").style.display="block";
+
+            // Show and highlight button 1. Hide button 2
+            document.getElementById("button_1").style.display="inline-block";
+            document.getElementById("tab_content_1").classList.add("active");
+            document.getElementById("button_2").style.display="none";
+
+            // Set defaults for three button of tab 1            
+            document.getElementById("dd_button_type_1").value="0";
+            // document.getElementById("rd_btns_icons_left_1").disabled=false;
+            document.getElementById("rd_btns_icons_left_1").checked=true;
+            // document.getElementById("dd_buttons_shape_1").disabled=false;
+            document.getElementById("dd_buttons_shape_1").value="0";
+            // document.getElementById("cb_buttons_shadow_1").disabled=false;
+            document.getElementById("cb_buttons_shadow_1").checked=false;
+            // document.getElementById("cb_buttons_uppercase_1").disabled=false;
+            document.getElementById("cb_buttons_uppercase_1").checked=false;
+
+        }
+
+        else if (btnNum =="2") {
+            // Add second button
             const iconBtn1 = content_buttons_pair_icon_1;
             const textBtn1 = content_buttons_pair_text_1;
             const iconBtn2 = content_buttons_pair_icon_2;
             const textBtn2 = content_buttons_pair_text_2;
-            btnDiv.classList.add('container-btn');
-            objSection.innerHTML = objSection.innerHTML += 
-                "<div class=\"container-btn\">\n<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn1+"</span>"+iconBtn1+"<\/a>\n<a class=\"btn btn-outline\" href=\"#\"><span>"+textBtn2+"</span>"+iconBtn2+"</a></div>"; 
-            // enable dialog box options for button two
+
+            const el_btn1 = document.createElement('a');
+            el_btn1.setAttribute("href", "#");
+            el_btn1.setAttribute("class", "btn btn-solid");
+            el_btn1.innerHTML = "<span>"+content_buttons_pair_text_1+"</span>"+ content_buttons_pair_icon_1;
+
+            const el_btn2 = document.createElement('a');
+            el_btn2.setAttribute("href", "#");
+            el_btn2.setAttribute("class", "btn btn-outline");
+            el_btn2.innerHTML = "<span>"+content_buttons_pair_text_2+"</span>"+ content_buttons_pair_icon_2;
+
+            btnDiv.append(el_btn1);
+            btnDiv.append(el_btn2);
+
+            // One button or two?
             document.getElementById("rb_btn_one").disabled=false;
             document.getElementById("rb_btn_two").disabled=false;
             document.getElementById("rb_btn_two").checked=true;
-            document.getElementById("button_2").style.display="inline-block";
-            document.getElementById("dd_button_type_2").value="1";
-            document.getElementById("rd_btns_icons_left_2").disabled=false;
+
+            // enable top dialog box settings for 1 or 2 buttons:
+            // Button size and alignment (desktop and mobile)
+            // document.getElementById("dd_buttons_size").disabled=false;
+            // document.getElementById("dd_buttons_size").value="1";
+            
+            // document.getElementById("form_btn_align_desktop").disabled=false;
+            // document.getElementById("rb_btn_align_desktop_left").disabled=false;
+            // document.getElementById("rb_btn_align_desktop_left").checked = true;;
+            // document.getElementById("rb_btn_align_desktop_center").disabled=false;
+            
+            // document.getElementById("form_btn_align_mobile").disabled=false;
+            // document.getElementById("rb_btn_align_mobile_left").disabled=false;
+            // document.getElementById("rb_btn_align_mobile_left").checked = true;;
+            // document.getElementById("rb_btn_align_mobile_center").disabled=false;
+
+            // display containers for tabs and settings
+            // document.querySelector(".container-buttons-block").style.display="block";
+
+            // // highlight tab 1
+            // document.getElementById("tab_content_1").classList.add("active");
+            // document.getElementById("tab_content_2").classList.remove("active");
+
+            // // show tab 1 and tab 2
+            // document.getElementById("button_1").style.display="inline-block";
+            // document.getElementById("button_2").style.display="inline-block";
+
+            // Three button options for tab 1            
+            // document.getElementById("dd_button_type_1").value="0";
+            // document.getElementById("rd_btns_icons_left_1").disabled=false;
+            // document.getElementById("rd_btns_icons_left_1").checked=true;
+            // document.getElementById("dd_buttons_shape_1").disabled=false;
+            // document.getElementById("dd_buttons_shape_1").value="0";
+            // document.getElementById("cb_buttons_shadow_1").disabled=false;
+            // document.getElementById("cb_buttons_shadow_1").checked=false;
+            // document.getElementById("cb_buttons_uppercase_1").disabled=false;
+            // document.getElementById("cb_buttons_uppercase_1").checked=false;
+            // document.getElementById("btn_cols_bg_passive_1").disabled=false;
+
+             // Three button options for tab 2    
+            document.getElementById("dd_button_type_2").value="0";
+            // document.getElementById("rd_btns_icons_left_2").disabled=false;
             document.getElementById("rd_btns_icons_left_2").checked=true;
-            document.getElementById("dd_buttons_shape_2").disabled=false;
+            // document.getElementById("dd_buttons_shape_2").disabled=false;
             document.getElementById("dd_buttons_shape_2").value="0";
-            document.getElementById("cb_buttons_shadow_2").disabled=false;
+            // document.getElementById("cb_buttons_shadow_2").disabled=false;
             document.getElementById("cb_buttons_shadow_2").checked=false;
-            document.getElementById("cb_buttons_uppercase_2").disabled=false;
+            // document.getElementById("cb_buttons_uppercase_2").disabled=false;
             document.getElementById("cb_buttons_uppercase_2").checked=false;
-            document.getElementById("btn_cols_bg_passive_2").disabled=true;
+            document.getElementById("btn_cols_bg_passive_1").disabled=false;
+        }
+
+        // Reformat HTML
+        objContainer.innerHTML = objContainer.innerHTML.replaceAll("<div class=\"container-btn\">", "<div class=\"container-btn\">\n\t\t\t\t");
+        objContainer.innerHTML = objContainer.innerHTML.replaceAll("\t\t<a href", "\t<a href");
+        objContainer.innerHTML = objContainer.innerHTML.replaceAll("<\/a><\/div>", "<\/a>\n\t\t<\/div>\n\n");
+    }
+
+    function removeBtnsAll() {
+
+        if (iframe.contentWindow.document.querySelector(".container-btn")) {
+          
+            // Disable 1/2 button switch 
+            document.getElementById("rb_btn_one").disabled=true;
+            document.getElementById("rb_btn_two").disabled=true;
+            const objAllBtns = iframe.contentWindow.document.querySelectorAll(".container-btn");
+            
+            for (let i = 0; i < objAllBtns.length; i++) {
+                objAllBtns[i].remove();
+            }
+
+            // disable/uncheck dialog box settings for all buttons
+            document.getElementById("rb_btn_one").disabled=true;
+            document.getElementById("rb_btn_one").checked=false;
+            document.getElementById("rb_btn_two").disabled=true;
+            document.getElementById("rb_btn_two").checked=false;
+
+            document.getElementById("form_btn_align_desktop").disabled=true;
+            document.getElementById("rb_btn_align_desktop_left").disabled=true;
+            document.getElementById("rb_btn_align_desktop_left").checked = false;
+            document.getElementById("rb_btn_align_desktop_center").disabled=true;
+            document.getElementById("form_btn_align_mobile").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").disabled=true;
+            document.getElementById("rb_btn_align_mobile_left").checked = false;
+            document.getElementById("rb_btn_align_mobile_center").disabled=true;       
+            document.getElementById("dd_buttons_size").value="1";
+
+            // disable, reset dialog box settings for buttons one
+            document.querySelector(".container-buttons-block").style.display="none";
+
+            document.getElementById("button_1").style.display="none";
+            document.getElementById("button_2").style.display="none";
+
+            document.getElementById("dd_button_type_1").value="0";
+            document.getElementById("rd_btns_icons_left_1").checked=true;
+            document.getElementById("rd_btns_icons_right_1").checked=false;
+
+            document.getElementById("dd_buttons_shape_1").value="0";
+            document.getElementById("cb_buttons_shadow_1").checked=false;
+            document.getElementById("cb_buttons_uppercase_1").checked=false;
+            document.getElementById("btn_cols_bg_passive_1").disabled=false;
+
+
+            // disable, reset dialog box settings for buttons two
+            document.getElementById("button_1").style.display="none";
+            document.getElementById("button_2").style.display="none";
+
+            document.getElementById("dd_button_type_2").value="0";
+            document.getElementById("rd_btns_icons_left_2").checked=true;
+            document.getElementById("rd_btns_icons_right_2").checked=false;
+
+            document.getElementById("dd_buttons_shape_2").value="0";
+            document.getElementById("cb_buttons_shadow_2").checked=false;
+            document.getElementById("cb_buttons_uppercase_2").checked=false;
+            document.getElementById("btn_cols_bg_passive_2").disabled=false;
+
+
+            const objContainer = getBtnContainer();
+            objContainer.innerHTML = objContainer.innerHTML.replaceAll("    \t\n", "");
+            objContainer.innerHTML = objContainer.innerHTML.replaceAll("\t\n\n<\/section>", "\t</section>");
+            objContainer.innerHTML = objContainer.innerHTML.replaceAll("<\/section>", "\t</section>");
         }
     }
 
 /*
-//////////////// BUTTONS COMMON: ALIGN DESKTOP  ////////////////////
+//////////////// BUTTONS COMMON: ALIGN DESKTOP ////////////////////
 */
 
 document.querySelector("#form_btn_align_desktop").addEventListener("change", doButtonsAlignDesktop);
@@ -322,7 +494,7 @@ function doButtonType1() {
         el_btn.classList.remove("btn-plain");
         el_btn.classList.add("btn-solid"); 
         document.getElementById("cb_buttons_shadow_1").disabled=false;
-        document.getElementById("dd_button_type_1").disabled=false;
+        document.getElementById("dd_buttons_shape_1").disabled=false;
         document.getElementById("btn_cols_bg_passive_1").disabled=false;
         document.getElementById("btn_cols_border_passive_1").disabled=false;
         document.getElementById("btn_cols_bg_active_1").disabled=false;
@@ -336,7 +508,7 @@ function doButtonType1() {
         el_btn.classList.remove("btn-solid");
         el_btn.classList.add("btn-outline");
         document.getElementById("cb_buttons_shadow_1").disabled=false;
-        document.getElementById("dd_button_type_1").disabled=false;
+        document.getElementById("dd_buttons_shape_1").disabled=false;
         document.getElementById("btn_cols_bg_passive_1").disabled=true;
         document.getElementById("btn_cols_border_passive_1").disabled=false;
         document.getElementById("btn_cols_bg_active_1").disabled=false;

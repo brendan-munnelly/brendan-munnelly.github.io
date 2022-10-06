@@ -35,10 +35,30 @@ if (id) {
 
 document.querySelector("#cb_header_btns").addEventListener("change", loadBtnInitial);
 
-function loadBtnInitial() {
-    const objText = iframe.contentWindow.document.querySelector("header .container-text");
-    
-    // Add two button
+function loadBtnInitial() { // Add two buttons
+    // Get button container
+    let objContainer;
+
+    // main section 2-cols 
+    if (iframe.contentWindow.document.querySelector("section .col-2.col-text")) {
+        objContainer = iframe.contentWindow.document.querySelector("section .col-2.col-text");
+    }
+
+    // main section 0 cols 
+    else if ( (iframe.contentWindow.document.querySelector("section")) && (!iframe.contentWindow.document.querySelector("section .col-2.col-text")) ) {
+        objContainer = iframe.contentWindow.document.querySelector("section");
+    }
+
+    // header 2-cols 
+    if (iframe.contentWindow.document.querySelector("header .col-2.col-text")) {
+        objContainer = iframe.contentWindow.document.querySelector("header .col-2.col-text");
+    }
+
+    // header 0 cols with background
+    else if ( iframe.contentWindow.document.querySelector("header .container-text")) {
+        objContainer = iframe.contentWindow.document.querySelector("header .container-text");
+    }
+
     if (document.getElementById("cb_header_btns").checked) {
         const btnDiv = document.createElement('div');
         const iconBtn1 = content_buttons_pair_icon_1;
@@ -47,33 +67,33 @@ function loadBtnInitial() {
         const textBtn2 = content_buttons_pair_text_2;
         btnDiv.classList.add('container-btn');
 
-        objText.innerHTML = objText.outerHTML += 
+        objContainer.innerHTML = objContainer.outerHTML += 
         "\n\t\t<div class=\"container-btn\">\n<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn1+"</span>"+iconBtn1+"<\/a>\n<a class=\"btn btn-outline\" href=\"#\"><span>"+textBtn2+"</span>"+iconBtn2+"</a></div>"; 
 
         document.getElementById("dd_buttons_size").disabled=false;
         document.getElementById("dd_buttons_size").value="1";
     
-                // enable dialog box settings for all buttons
-                document.getElementById("rb_btn_one").disabled=false;
-                document.getElementById("rb_btn_one").checked=true;
-                document.getElementById("rb_btn_two").disabled=false;
-                document.getElementById("dd_buttons_size").disabled=false;
-                document.getElementById("dd_buttons_size").value="1";
+                
+        // enable dialog box settings for all buttons
+        document.getElementById("rb_btn_one").disabled=false;
+        document.getElementById("rb_btn_one").checked=true;
+        document.getElementById("rb_btn_two").disabled=false;
+        document.getElementById("dd_buttons_size").disabled=false;
+        document.getElementById("dd_buttons_size").value="1";
         
-                // enable dialog box settings for buttons one
-                document.querySelector(".container-buttons-block").style.display="block";
-                document.getElementById("button_1").style.display="inline-block";
-                document.getElementById("button_2").style.display="none";
-                document.getElementById("dd_button_type_1").value="0";
-                document.getElementById("rd_btns_icons_left_1").disabled=false;
-                document.getElementById("rd_btns_icons_left_1").checked=true;
-                document.getElementById("dd_buttons_shape_1").disabled=false;
-                document.getElementById("dd_buttons_shape_1").value="0";
-                document.getElementById("cb_buttons_shadow_1").disabled=false;
-                document.getElementById("cb_buttons_shadow_1").checked=false;
-                document.getElementById("cb_buttons_uppercase_1").disabled=false;
-                document.getElementById("cb_buttons_uppercase_1").checked=false;
-    
+        // enable dialog box settings for buttons one
+        document.querySelector(".container-buttons-block").style.display="block";
+        document.getElementById("button_1").style.display="inline-block";
+        document.getElementById("button_2").style.display="none";
+        document.getElementById("dd_button_type_1").value="0";
+        document.getElementById("rd_btns_icons_left_1").disabled=false;
+        document.getElementById("rd_btns_icons_left_1").checked=true;
+        document.getElementById("dd_buttons_shape_1").disabled=false;
+        document.getElementById("dd_buttons_shape_1").value="0";
+        document.getElementById("cb_buttons_shadow_1").disabled=false;
+        document.getElementById("cb_buttons_shadow_1").checked=false;
+        document.getElementById("cb_buttons_uppercase_1").disabled=false;
+        document.getElementById("cb_buttons_uppercase_1").checked=false;
     }
 
     // remove all buttons
@@ -130,7 +150,7 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             }
         }
 
-        const objText = iframe.contentWindow.document.querySelector("header .container-text");
+        const objContainer = iframe.contentWindow.document.querySelector("header .container-text");
         const objAllBtns = iframe.contentWindow.document.querySelector("header .container-btn");
 
         if (selectedValue==="btn-one") {
@@ -142,7 +162,7 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             const textBtn = content_buttons_one_text;
             btnDiv.classList.add('container-btn');
 
-            objText.innerHTML = objText.outerHTML += 
+            objContainer.innerHTML = objContainer.outerHTML += 
                 "\n\t\t<div class=\"container-btn\">\n\t\t\t\t<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn+"<\/span>"+iconBtn+"</a>\n\t\t\t</div>"; 
        
             // enable dialog box settings for all buttons
@@ -177,7 +197,7 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             const iconBtn2 = content_buttons_pair_icon_2;
             const textBtn2 = content_buttons_pair_text_2;
             btnDiv.classList.add('container-btn');
-            objText.innerHTML = objText.outerHTML += 
+            objContainer.innerHTML = objContainer.outerHTML += 
                 "\n\t\t<div class=\"container-btn\">\n<a href=\"#\" class=\"btn btn-solid\"><span>"+textBtn1+"</span>"+iconBtn1+"<\/a>\n<a class=\"btn btn-outline\" href=\"#\"><span>"+textBtn2+"</span>"+iconBtn2+"</a></div>"; 
             // enable dialog box options for button two
             document.getElementById("rb_btn_one").disabled=false;

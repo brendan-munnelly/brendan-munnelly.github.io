@@ -467,4 +467,3 @@ function removeVisual() {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
 }
-

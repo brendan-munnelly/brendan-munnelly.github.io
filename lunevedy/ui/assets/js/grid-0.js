@@ -1,49 +1,5 @@
 import { content_header_label_text_col_1, content_h3, content_list, content_textbox_section, content_H4Overlay_section } from '../js/arr-content.js';
 
-/*
-//////////////// ALIGN SECTION ///////////////
-*/
-      
-document.querySelector("#form_align_desktop").addEventListener("change", doAlignSectionDesktop);
-
-function doAlignSectionDesktop() {
-    const rbs = document.querySelectorAll("input[name='align_desktop']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    if (selectedValue==="left") {
-        iframe.contentWindow.document.querySelector("section").classList.remove("text-center-desktop");
-    }
-    else if (selectedValue==="center") {
-        iframe.contentWindow.document.querySelector("section").classList.add("text-center-desktop"); 
-    }
-}
-
-document.querySelector("#form_align_mobile").addEventListener("change", doAlignSectionMobile);
-
-function doAlignSectionMobile() {
-
-    const rbs = document.querySelectorAll("input[name='align_mobile']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-    if (selectedValue==="left") {
-        iframe.contentWindow.document.querySelector("section").classList.remove("text-center-mobile");
-    }
-    else if (selectedValue==="center") {
-        iframe.contentWindow.document.querySelector("section").classList.add("text-center-mobile"); 
-    }
-}
 
 /*
 //////////////// CATEGORY BADGE ABOVE H2 ///////////////

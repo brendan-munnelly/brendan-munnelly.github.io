@@ -26,6 +26,9 @@ if (id) {
     const element = "tab_content_"+id[id.length-1];
     document.getElementById(element).classList.add("active");
     document.getElementById(element).style.display="block";
+
+
+    console.log("Tab ID: "+id);    
     }
 }
 

@@ -75,10 +75,10 @@ function loadBtnInitial() {
         document.getElementById("rd_btns_icons_left_1").checked=true;
         document.getElementById("dd_buttons_shape_1").disabled=false;
         document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_col_buttons_shadow_1").disabled=false;
-        document.getElementById("cb_col_buttons_shadow_1").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_1").disabled=false;
-        document.getElementById("cb_col_buttons_uppercase_1").checked=false;
+        document.getElementById("cb_buttons_shadow_1").disabled=false;
+        document.getElementById("cb_buttons_shadow_1").checked=false;
+        document.getElementById("cb_buttons_uppercase_1").disabled=false;
+        document.getElementById("cb_buttons_uppercase_1").checked=false;
     }
 
     // remove all buttons from columns 
@@ -115,10 +115,10 @@ function loadBtnInitial() {
         document.getElementById("rd_btns_icons_left_1").checked=false;
         document.getElementById("dd_buttons_shape_1").disabled=true;
         document.getElementById("dd_buttons_shape_1").value="0";
-        document.getElementById("cb_col_buttons_shadow_1").disabled=true;
-        document.getElementById("cb_col_buttons_shadow_1").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_1").disabled=true;
-        document.getElementById("cb_col_buttons_uppercase_1").checked=false;
+        document.getElementById("cb_buttons_shadow_1").disabled=true;
+        document.getElementById("cb_buttons_shadow_1").checked=false;
+        document.getElementById("cb_buttons_uppercase_1").disabled=true;
+        document.getElementById("cb_buttons_uppercase_1").checked=false;
 
         // disable, reset dialog box settings for buttons two
         document.getElementById("button_2").style.display="none";
@@ -127,10 +127,10 @@ function loadBtnInitial() {
         document.getElementById("rd_btns_icons_left_2").checked=false;
         document.getElementById("dd_buttons_shape_2").disabled=true;
         document.getElementById("dd_buttons_shape_2").value="0";
-        document.getElementById("cb_col_buttons_shadow_2").disabled=true;
-        document.getElementById("cb_col_buttons_shadow_2").checked=false;
-        document.getElementById("cb_col_buttons_uppercase_2").disabled=true;
-        document.getElementById("cb_col_buttons_uppercase_2").checked=false;
+        document.getElementById("cb_buttons_shadow_2").disabled=true;
+        document.getElementById("cb_buttons_shadow_2").checked=false;
+        document.getElementById("cb_buttons_uppercase_2").disabled=true;
+        document.getElementById("cb_buttons_uppercase_2").checked=false;
     }
 }
 
@@ -147,7 +147,7 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             }
         }
 
-        // count cols
+        // checks cols
         const objAllCols = iframe.contentWindow.document.querySelectorAll(".flex-cols-2 .col-2");
         const objAllBtns = iframe.contentWindow.document.querySelectorAll(".flex-cols-2 .col-2 .container-btn");
         let el_btn_col;
@@ -192,10 +192,10 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             document.getElementById("rd_btns_icons_left_1").checked=true;
             document.getElementById("dd_buttons_shape_1").disabled=false;
             document.getElementById("dd_buttons_shape_1").value="0";
-            document.getElementById("cb_col_buttons_shadow_1").disabled=false;
-            document.getElementById("cb_col_buttons_shadow_1").checked=false;
-            document.getElementById("cb_col_buttons_uppercase_1").disabled=false;
-            document.getElementById("cb_col_buttons_uppercase_1").checked=false;
+            document.getElementById("cb_buttons_shadow_1").disabled=false;
+            document.getElementById("cb_buttons_shadow_1").checked=false;
+            document.getElementById("cb_buttons_uppercase_1").disabled=false;
+            document.getElementById("cb_buttons_uppercase_1").checked=false;
         }
 
         else if (selectedValue==="btn-two") {
@@ -233,10 +233,10 @@ document.querySelector("#form_buttons_pair").addEventListener("change", doButton
             document.getElementById("rd_btns_icons_left_2").checked=true;
             document.getElementById("dd_buttons_shape_2").disabled=false;
             document.getElementById("dd_buttons_shape_2").value="0";
-            document.getElementById("cb_col_buttons_shadow_2").disabled=false;
-            document.getElementById("cb_col_buttons_shadow_2").checked=false;
-            document.getElementById("cb_col_buttons_uppercase_2").disabled=false;
-            document.getElementById("cb_col_buttons_uppercase_2").checked=false;
+            document.getElementById("cb_buttons_shadow_2").disabled=false;
+            document.getElementById("cb_buttons_shadow_2").checked=false;
+            document.getElementById("cb_buttons_uppercase_2").disabled=false;
+            document.getElementById("cb_buttons_uppercase_2").checked=false;
             document.getElementById("btn_cols_bg_passive_2").disabled=true;
         }
     }
@@ -347,7 +347,6 @@ function doButtonsAlignMobile() {
     }
 }
 
-
 /*
 //////////////// BUTTON ONE: TYPE ////////////////////
 */
@@ -365,7 +364,7 @@ function doButtonType1() {
             btn.classList.remove("btn-outline");
             btn.classList.remove("btn-plain");
             btn.classList.add("btn-solid");
-            document.getElementById("cb_col_buttons_shadow_1").disabled=false;
+            document.getElementById("cb_buttons_shadow_1").disabled=false;
             document.getElementById("dd_button_type_1").disabled=false;
             document.getElementById("btn_cols_bg_passive_1").disabled=false;
             document.getElementById("btn_cols_border_passive_1").disabled=false;
@@ -380,7 +379,7 @@ function doButtonType1() {
             btn.classList.remove("btn-plain");
             btn.classList.remove("btn-solid");
             btn.classList.add("btn-outline");
-            document.getElementById("cb_col_buttons_shadow_1").disabled=false;
+            document.getElementById("cb_buttons_shadow_1").disabled=false;
             document.getElementById("dd_buttons_shape_1").disabled=false;
             document.getElementById("btn_cols_bg_passive_1").disabled=true;
             document.getElementById("btn_cols_border_passive_1").disabled=false;
@@ -395,7 +394,7 @@ function doButtonType1() {
             btn.classList.remove("btn-outline");
             btn.classList.remove("btn-solid");
             btn.classList.add("btn-plain");
-            document.getElementById("cb_col_buttons_shadow_1").disabled=true;
+            document.getElementById("cb_buttons_shadow_1").disabled=true;
             document.getElementById("dd_buttons_shape_1").disabled=true;
             document.getElementById("btn_cols_bg_passive_1").disabled=true;
             document.getElementById("btn_cols_border_passive_1").disabled=true;
@@ -422,7 +421,7 @@ function doButtonType2() {
             btn.classList.remove("btn-outline");
             btn.classList.remove("btn-plain");
             btn.classList.add("btn-solid");
-            document.getElementById("cb_col_buttons_shadow_2").disabled=false;
+            document.getElementById("cb_buttons_shadow_2").disabled=false;
             document.getElementById("dd_buttons_shape_2").disabled=false;
             document.getElementById("btn_cols_bg_passive_2").disabled=false;
             document.getElementById("btn_cols_border_passive_2").disabled=false;
@@ -437,7 +436,7 @@ function doButtonType2() {
             btn.classList.remove("btn-plain");
             btn.classList.remove("btn-solid");
             btn.classList.add("btn-outline");
-            document.getElementById("cb_col_buttons_shadow_2").disabled=false;
+            document.getElementById("cb_buttons_shadow_2").disabled=false;
             document.getElementById("dd_buttons_shape_2").disabled=false;
             document.getElementById("btn_cols_bg_passive_2").disabled=true;
             document.getElementById("btn_cols_border_passive_2").disabled=false;
@@ -452,7 +451,7 @@ function doButtonType2() {
             btn.classList.remove("btn-outline");
             btn.classList.remove("btn-solid");
             btn.classList.add("btn-plain");
-            document.getElementById("cb_col_buttons_shadow_2").disabled=true;
+            document.getElementById("cb_buttons_shadow_2").disabled=true;
             document.getElementById("dd_buttons_shape_2").disabled=true;
             document.getElementById("btn_cols_bg_passive_2").disabled=true;
             document.getElementById("btn_cols_border_passive_2").disabled=true;
@@ -543,7 +542,6 @@ function swapButtonIcons_2() {
     }
 }
 
-
 /*
 //////////////// BUTTONS ONE: SHAPE ////////////////////
 */
@@ -624,12 +622,12 @@ function doButtonsShape2() {
 //////////////// BUTTONS ONE: SHADOW ///////////////
 */
 
-document.querySelector("#cb_col_buttons_shadow_1").addEventListener("change", doBtnShadow1);
+document.querySelector("#cb_buttons_shadow_1").addEventListener("change", doBtnShadow1);
 
 function doBtnShadow1() {
     const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
 
-    if (!document.getElementById("cb_col_buttons_shadow_1").checked) {
+    if (!document.getElementById("cb_buttons_shadow_1").checked) {
         objBtns.forEach(btn => {
             btn.classList.remove("btn-shadow");
         });
@@ -641,12 +639,12 @@ function doBtnShadow1() {
     }
 }
 
-document.querySelector("#cb_col_buttons_shadow_2").addEventListener("change", doBtnShadow2);
+document.querySelector("#cb_buttons_shadow_2").addEventListener("change", doBtnShadow2);
 
 function doBtnShadow2() {
     const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
 
-    if (!document.getElementById("cb_col_buttons_shadow_2").checked) {
+    if (!document.getElementById("cb_buttons_shadow_2").checked) {
         objBtns.forEach(btn => {
             btn.classList.remove("btn-shadow");
         });
@@ -662,13 +660,13 @@ function doBtnShadow2() {
 //////////////// BUTTONS ONE: UPPERCASE ///////////////
 */
 
-document.querySelector("#cb_col_buttons_uppercase_1").addEventListener("change", doBtnUCase1);
+document.querySelector("#cb_buttons_uppercase_1").addEventListener("change", doBtnUCase1);
 
 function doBtnUCase1() {
 
     const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(1)');
 
-    if (!document.getElementById("cb_col_buttons_uppercase_1").checked) {
+    if (!document.getElementById("cb_buttons_uppercase_1").checked) {
         objBtns.forEach(btn => {
             btn.classList.remove("btn-uppercase");
         });
@@ -684,13 +682,13 @@ function doBtnUCase1() {
 //////////////// BUTTONS ONE: UPPERCASE ///////////////
 */
 
-document.querySelector("#cb_col_buttons_uppercase_2").addEventListener("change", doBtnUCase2);
+document.querySelector("#cb_buttons_uppercase_2").addEventListener("change", doBtnUCase2);
 
 function doBtnUCase2() {
 
     const objBtns = iframe.contentWindow.document.querySelectorAll('.flex-cols-2 .container-btn a.btn:nth-child(2)');
 
-    if (!document.getElementById("cb_col_buttons_uppercase_2").checked) {
+    if (!document.getElementById("cb_buttons_uppercase_2").checked) {
         objBtns.forEach(btn => {
             btn.classList.remove("btn-uppercase");
         });

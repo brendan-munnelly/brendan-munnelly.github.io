@@ -253,7 +253,7 @@ function removeTextAnimation() {
 
 
 /*
-//////////////// LABEL ABOVE H2 ///////////////
+//////////////// BADGE ABOVE H2 ///////////////
 */
 
 document.querySelector("#cb_badge").addEventListener("change", doBadge);
@@ -300,9 +300,13 @@ function doBadgeShape() {
 
 function removeBadge() {
     if (iframe.contentWindow.document.querySelector('section .col-2.col-text .badge')) {
-        const upperLabel = iframe.contentWindow.document.querySelector('section .col-2.col-text .badge');
-        upperLabel.remove();
-        document.getElementById("show-badge").style.display="none";        
+        const colBadge = iframe.contentWindow.document.querySelector('section .col-2.col-text .badge');
+        colBadge.remove();
+        document.getElementById("show-badge").style.display="none"; 
+        
+        const arg1 = sectionClassName+ " .badge { color:";
+        const arg2 = sectionClassName+ " .badge { background-color:";
+        removeCSSTagPairs(arg1,arg2);  
     }
 }
 
@@ -321,6 +325,8 @@ function doH2Text() {
         iframe.contentWindow.document.querySelector('section .col-2.col-text h2').innerHTML = elH2Content;
         document.getElementById("btn_h2_highlight").disabled = true;            
         document.getElementById("btn_h2_highlight").checked = false;
+        const arg1 = sectionClassName+ " h2 span.highlight {";
+        removeCSSTagPairs(arg1);
     }
     else {
         const i = elH2Content.indexOf(" ",1);
@@ -346,9 +352,15 @@ function doH2Border() {
 
     if (!document.getElementById("cb_h2_border").checked) {
         objH2.classList.remove("heading-underline");
+        document.getElementById("btn_h2_border").disabled = true;            
+        document.getElementById("btn_h2_border").checked = false;
+        const arg1 = sectionClassName+ " .col-2.col-text h2.heading-underline::after { background-color: {";
+        removeCSSTagPairs(arg1);
     }
     else {
         objH2.classList.add("heading-underline");
+        document.getElementById("btn_h2_border").disabled = false;
+        document.getElementById("btn_h2_border").checked = true;
     }
 }
 
@@ -379,6 +391,8 @@ function removeH3() {
     const el_h3 = iframe.contentWindow.document.querySelector("section.cols-2-half .col-2.col-text h3");
     el_h3.remove();
     document.getElementById("btn_h3_text").disabled=true;
+    const arg1 = sectionClassName+ " .col-2.col-text h3 { color:";
+    removeCSSTagPairs(arg1);
 }
 
 /*
@@ -408,6 +422,8 @@ function removeList() {
     if (iframe.contentWindow.document.querySelector("section .col-2.col-text ul")) {
         const elUL = iframe.contentWindow.document.querySelector("section .col-2.col-text ul");
         elUL.remove();
+        const arg1 = sectionClassName+ " .col-2.col-text ul li { color:";
+        removeCSSTagPairs(arg1);
     }
 }
 
