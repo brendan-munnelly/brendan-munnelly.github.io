@@ -333,34 +333,44 @@ div[class^='col-'] li:last-child { margin-bottom: 0 }
 .container-text, .container-btn { position: relative } 
 
 /* ================== BUTTON PAIRS ================ */ 
-header > .container-btn, section > .container-btn { margin-bottom: 20px }
-    
-header > .container-btn, section > .container-btn { 
-    display: flex; flex-direction: row; flex-wrap: wrap; row-gap: 30px
+
+header > .container-btn, section > .container-btn, 
+section .col-2.col-text .container-btn { 
+    display: flex; flex-direction: row; flex-wrap: wrap; 
+    row-gap: 30px; margin-bottom: 20px;
 }
 
 header > .container-btn a.btn, 
-section > .container-btn a.btn { 
+section > .container-btn a.btn,
+section .col-2.col-text .container-btn { 
     margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0 !important
 }
 
 @media (min-width: 768px) {
-    header > .container-btn, section > .container-btn { column-gap: 48px }
+    header > .container-btn, section > .container-btn,
+    section .col-2.col-text .container-btn { column-gap: 48px }
 }
 
 @media (max-width: 767px) {
-    header > .container-btn, section > .container-btn { column-gap: 30px }
+    header > .container-btn, section > .container-btn,
+    section .col-2.col-text .container-btn { column-gap: 30px }
 }
 
 /* Buttons: left-aligned */
-header:not(.text-center-desktop)  > .container-btn,
-section:not(.text-center-desktop) > .container-btn { justify-content: flex-start }
+header:not(.text-center-desktop) .container-btn:not(.text-center-desktop) .container-btn,
+section:not(.text-center-mobile) .container-btn:not(.text-center-mobile) .container-btn { justify-content: flex-start }
 
 /* Buttons: center-aligned */
-header.text-center-desktop  > .container-btn,
-section.text-center-desktop > .container-btn { 
-    justify-content: center; margin-left: auto; margin-right: auto }
+header.text-center-desktop .container-btn,
+header .container-btn.text-center-desktop,
+header.text-center-mobile .container-btn,
+header .container-btn.text-center-mobile,
 
+section.text-center-desktop .container-btn,
+section .container-btn.text-center-desktop,
+section.text-center-mobile .container-btn,
+section .container-btn.text-center-mobile { 
+    justify-content: center; margin-left: auto; margin-right: auto }
 
 
 /* ================ HEADER 'HERO BLOCK' ================ */
@@ -721,16 +731,12 @@ section > .badge {
 
 @media (min-width: 768px) {
     section > .container-btn { margin-top: 40px }
-    section.text-center-desktop > .badge {
-       margin-left: auto; margin-right: auto
-    }
+    section.text-center-desktop > .badge { margin-left: auto; margin-right: auto }
 }
 
 @media (max-width: 767px) {
-    section > .container-btn { margin-top: 20px }
-    section.text-center-desktop > .badge {
-        margin-left: auto; margin-right: auto
-    }
+    section > .container-btn { margin-top: 32px }
+    section.text-center-desktop > .badge { margin-left: auto; margin-right: auto }
 }
 
 section > .badge.corners-soft { border-radius: 16px; padding-left: 14px; padding-right: 14px }
@@ -798,7 +804,7 @@ figure { position: relative }
     }
 }
 
-section > figure { margin-top: 20px; width: 100% }
+section > figure { width: 100% }
 @media (min-width: 768px) { section > figure { margin-bottom: 38px } }
 @media (max-width: 767px) { section > figure { margin-bottom: 18px } }
 
@@ -875,7 +881,8 @@ section.text-center-mobile > figure { margin-left: auto; margin-right: auto }
 /* .col-1: content inside */
 .col-1-badge {
     font-weight: 700; display: block; padding: 2px 10px;
-    font-size: 100%; letter-spacing: 2px;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px)/(1920 - 320)));
+    letter-spacing: 2px;
     width: fit-content;
 }
 
@@ -1052,7 +1059,15 @@ div[class*="flex-cols-"].text-center .badge { margin-left: auto; margin-right: a
 @media (min-width: 768px) and (max-width: 1200px) { .col-2 { width: 44% } }
 @media (min-width: 768px) and (max-width: 1024px) { .flex-cols-4 { gap: 3% } }
 
-/* Tables */
+@media (min-width: 768px) {
+    section .col-2.col-text .container-btn { margin-top: 40px }
+}
+
+@media (max-width: 767px) {
+    section .col-2.col-text .container-btn { margin-top: 32px }
+}
+
+/* Tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
     .col-3 figure, .col-4 figure { margin-bottom: 18px }
 }
@@ -1064,6 +1079,8 @@ div[class*="flex-cols-"].text-center .badge { margin-left: auto; margin-right: a
         margin-left: auto; margin-right: auto; 
         margin-bottom: 42px;
     }
+
+    .col-2.col-text { margin-bottom: 0 }
     .cols-padding div[class^="col-"] { padding: 18px 18px 22px 18px }
     .cols-padding div[class^="col-"] figure {
         margin-top: -18px;
@@ -1075,6 +1092,7 @@ div[class*="flex-cols-"].text-center .badge { margin-left: auto; margin-right: a
     /* Sub-heading for section */
     .col-2 h2, .cols-2-half .col-2 h2, 
     .col-3 h2, .col-4 h2 { font-size: calc(28px + 0.390625vw) }
+    .col-2 h2 { line-height: 1.2 }
     
     /* Sub-heading withn text */
     .col-1 h3.in-col-1, .col-2 h3, .cols-2-half .col-2 h3, 
@@ -1175,8 +1193,29 @@ section figure.figure-overlay::after {
     background-color: var(--gray-800);
 }
 
-/* ========= SECTIONS: GLOBAL SETTINGS ======== */
+/* 2-column: button pairs */
+.flex-cols-2 .col-2 > .container-btn { 
+    display: flex; flex-direction: row; flex-wrap: wrap; 
+    row-gap: 30px; margin-bottom: 20px
+}
 
+.flex-cols-2 .col-2 > .container-btn > a.btn { 
+    margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0 !important
+}
+
+@media (min-width: 768px) { 
+    .flex-cols-2 .col-2 > .container-btn { 
+        margin-top: 20px; column-gap: 48px
+    } 
+}
+
+@media (max-width: 767px) { 
+    .flex-cols-2 .col-2 > .container-btn { 
+        margin-top: 32px; column-gap: 30px 
+    } 
+}
+
+/* ========= SECTIONS: GLOBAL SETTINGS ======== */
 
 /* Section: Light theme */
 .theme-light { background-color: var(--white-000) } 
@@ -1291,7 +1330,7 @@ section figure.figure-overlay::after {
     .col-2 li {  margin-left: 18px; padding-left: 12px }
     .col-2 ul.fa-ul li { margin-left: 22px; padding-left: 10px } 
     .col-2 ul.fa-ul li span.fa-li { transform: translateY(2px) } 
-    .col-2 figure { margin-bottom: 20px }
+    .col-2 figure { margin-bottom: 32px }
     .cols-padding .col-2 { padding: 20px 22px 28px 22px }
     .cols-padding .col-2 figure {
         margin-top: -20px;
@@ -1299,8 +1338,7 @@ section figure.figure-overlay::after {
         margin-left: calc(-22px);
         margin-right: calc(-22px);
     }
-
-    /* .col-2 .container-btn { margin-bottom: -20px !important} */
+    .col-2 .container-btn { margin-top: 24px }
 }
 
 /* Tablets */
@@ -1319,6 +1357,11 @@ section figure.figure-overlay::after {
         margin-right: calc(-22px);
     }
     .col-2 .container-btn { margin-bottom: -20px !important}
+    .col-2 .container-btn { margin-top: 24px }
+}
+
+@media (max-width: 767px) {
+    .col-2 .container-btn { margin-top: 32px }
 }
 
 /* Font Awesome: Larger and smaller icons */
@@ -1364,7 +1407,6 @@ section figure.figure-overlay::after {
     .w-1536px .col-3 p, 
     .w-1536px .col-3 li { font-size: calc(17px + (24 - 17) * ((100vw - 1025px) / (1536 - 1025))) }
 }
-
 
 @media (min-width: 1025px) and (max-width: 1599px) {
     .col-3 h3, .col-3 a.col-3-h3 { font-size: 24px }
@@ -1514,10 +1556,10 @@ section figure.figure-overlay::after {
 /* Upper label */
 .cols-2-half .col-2.col-text .badge {
     font-weight: 700; display: block; padding: 2px 10px;
-    font-size: 100%; letter-spacing: 2px;
+    font-size: 100%; letter-spacing: 2px; 
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px)/(1920 - 320)));
     width: fit-content;
 }
-
 
 .cols-2-half .col-2.col-text .badge.corners-soft { border-radius: 16px; padding-left: 14px; padding-right: 14px }
 
@@ -1615,7 +1657,7 @@ section figure.figure-overlay::after {
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
-        /* section */
+  /* section */
 	section.cols-2-half { 
         display: flex; flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0
     }
@@ -1989,7 +2031,8 @@ div[class^='col-'] figure.icon-left {
 
 /* ========== COLUMN BADGES ============= */
 
-div[class*="flex-cols-"] div[class^='col-'] .badge { 
+div[class*="flex-cols-"] div[class^='col-'] .badge,
+.col-2.col-text .badge {
     margin-bottom: 14px;
     font-weight: 700;
     letter-spacing: 2px;
