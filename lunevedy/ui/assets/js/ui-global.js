@@ -16,12 +16,12 @@ const arrCSS = []; // array for style rules to copy
 let divs = document.querySelectorAll('.dropbtn');
 divs.forEach(el => el.addEventListener('click', event => {
     for (let i = 1; i <= uiMenusLength; i++) {
-        document.querySelector("#content-"+i).classList.add("dropdown-hidden");
+        document.getElementById("content-"+i).classList.add("dropdown-hidden");
     }
     // Get current menu id
     const strMenu = event.currentTarget.id.toString();
     const menuId = strMenu.charAt(strMenu.length-1);
-    const elItem_show = document.querySelector("#content-"+menuId);
+    const elItem_show = document.getElementById("content-"+menuId);
     // Unhide current menu
     elItem_show.classList.remove("dropdown-hidden"); 
     
@@ -45,12 +45,12 @@ divs.forEach(el => el.addEventListener('click', event => {
 
 // Hide all menus and color picker when user clicks on frame container.
 window.onload=function(){
-    iframe.contentWindow.document.querySelector('#HTML-Content').addEventListener('click',hideMenus,false);
+    iframe.contentWindow.document.getElementById('HTML-Content').addEventListener('click',hideMenus,false);
 }
 
 function hideMenus() {
     for (let i = 1; i <= uiMenusLength; i++) {
-        document.querySelector("#content-"+i).classList.add("dropdown-hidden");
+        document.getElementById("content-"+i).classList.add("dropdown-hidden");
     }
     hideSidebar();
     document.getElementById("ui-admin-select").style.display ="none";
@@ -85,14 +85,14 @@ function hideDialogBox() {
 
 /* Show/hide color picker */
 function showSidebar() {
-    document.querySelector("#myModal").classList.add("display-sidebar");
-    document.querySelector("#myModal").classList.remove("hide-sidebar");
+    document.getElementById("myModal").classList.add("display-sidebar");
+    document.getElementById("myModal").classList.remove("hide-sidebar");
 }
 
 function hideSidebar() {
-    document.querySelector("#myModal").classList.add("hide-sidebar");
-    document.querySelector("#myModal").classList.remove("show-sidebar");
-    document.querySelector("#myModal").scrollTo(0, 0); // scrolls to top of sidebar
+    document.getElementById("myModal").classList.add("hide-sidebar");
+    document.getElementById("myModal").classList.remove("show-sidebar");
+    document.getElementById("myModal").scrollTo(0, 0); // scrolls to top of sidebar
 }
 
 /* ================ DIALOG BOXES =================== */
