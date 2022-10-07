@@ -1,7 +1,6 @@
-
 document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
     
-   function handleLabelClick(event) {
+    function handleLabelClick(event) {
         event.stopPropagation();
         const label = event.target.closest("label");
         if (label && this.contains(label)) {
@@ -14,7 +13,7 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
             return;
         }
         const rbs = document.querySelectorAll("input[name='picker-radio']");
-            
+    
         for (const rb of rbs) {
             if (rb.checked) {
                 color_code = rb.value;
@@ -111,23 +110,30 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else if (btn_id === "btn_cols_shadows_color") { 
             // get value of color code
             const styles = getComputedStyle(document.documentElement);
-            const colorValue = styles.getPropertyValue(color_code);
-            sub_string = "cols-shadows";
-            let strRGB;
-            if (color_code ==="--black-000") {
-                strRGB = "rgba(0,0,0,0.4)";
-            }
-            else if (color_code ==="--white-000") {
-                strRGB = "rgba(255,255,255,0.4)";
+            let colorValue = styles.getPropertyValue(color_code);
+            if (colorValue==="#000") { colorValue="#000000"}
+            if (colorValue==="#fff") { colorValue="#ffffff"}
+            console.log("color_code:" +color_code);
+            console.log("colorValue:" +colorValue);
+
+            const hex2rgba = (hex, alpha = 1) => {
+                const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+                return `rgba(${r},${g},${b},${alpha})`;
+            };
+
+            const strRGB = hex2rgba(colorValue, .4);
+            console.log("strRGB:" +strRGB);
+
+            sectionTheme = sessionStorage.getItem("sectionTheme");
+
+            if (sectionTheme ===".theme-light") {
+                newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { box-shadow: "+strRGB+" 4px 10px 16px 0 }\n";
             }
 
-            else {
-                const hex2rgba = (hex, alpha = 1) => {
-                    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
-                    return `rgba(${r},${g},${b},${alpha})`;
-                };
-                strRGB = hex2rgba(colorValue, .4);
+            else if (sectionTheme ===".theme-dark") {
+                newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { box-shadow: "+strRGB+" 10px 10px 16px 0 }\n";
             }
+            sub_string = "cols-shadows";
         }
 
         /* === Buttons === */
@@ -185,6 +191,6 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         else if (btn_id === "btn_cols_img_overlay_color_bg") {
             newStyle = sectionClassName+" div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color: var("+color_code+") }\n";
             sub_string = "figure.icon";
-        }  
-        doUpdateArray(sub_string,newStyle);      
+        }
+        doUpdateArray(sub_string,newStyle);        
     }

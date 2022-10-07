@@ -954,14 +954,12 @@ function doColBg() {
         el_cols.classList.remove("cols-background");
         document.getElementById("btn_cols_bg").disabled=true;
 
-        // remove padding if also no shadows AND no borders
+        // if no shadows AND also border
         if ( (!document.getElementById("cb_cols_shadows").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
+            // remove padding 
             el_cols.classList.remove("cols-padding");
-        }
-
-        // remove soft corners if also no shadows AND no borders
-        if ( (!document.getElementById("cb_cols_shadows").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
-            el_cols.classList.remove("cb_cols_corners_soft");
+            // remove and disable soft corners
+            el_cols.classList.remove("cols-corners-soft");
             document.getElementById("cb_cols_corners_soft").disabled=true;
             document.getElementById("cb_cols_corners_soft").checked=false;
         }
@@ -972,7 +970,9 @@ function doColBg() {
     else {
         el_cols.classList.add("cols-background");
         el_cols.classList.add("cols-padding");
+        // background color paintbrush button enabled
         document.getElementById("btn_cols_bg").disabled=false;
+        // soft corners enabled
         document.getElementById("cb_cols_corners_soft").disabled=false;
     }
 }
@@ -992,20 +992,13 @@ function doColShadows() {
         document.getElementById("btn_cols_shadows_color").disabled=true;
         document.getElementById("btn_cols_shadows_color").checked=false;
 
-        // Enable corner and border options
-        // document.getElementById("cb_cols_borders").disabled=false;
-        // document.getElementById("cb_cols_borders").checked=false;
-        // document.getElementById("cb_cols_corners_soft").checked=false;
-        // document.getElementById("cb_cols_shadows").checked=false; 
-
-        // remove padding if also no background AND no borders
+        // if no background AND also no border
+        
         if ( (!document.getElementById("cb_cols_bg").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
+            // remove padding
             el_cols.classList.remove("cols-padding");
-        }
-
-        // remove soft corners if also no background AND no borders
-        if ( (!document.getElementById("cb_cols_bg").checked) && (!document.getElementById("cb_cols_borders").checked) ) {
-            el_cols.classList.remove("cb_cols_corners_soft");
+            // remove and disable soft corners
+            el_cols.classList.remove("cols-corners-soft");
             document.getElementById("cb_cols_corners_soft").disabled=true;
             document.getElementById("cb_cols_corners_soft").checked=false;
         }
@@ -1015,9 +1008,6 @@ function doColShadows() {
         el_cols.classList.add("cols-padding");
         el_cols.classList.add("cols-shadows");
         el_cols.classList.add("cols-corners-soft");
-        document.getElementById("cb_cols_borders").disabled=false;
-        document.getElementById("cb_cols_borders").checked=false;
-
         document.getElementById("cb_cols_corners_soft").disabled=false; 
         document.getElementById("cb_cols_corners_soft").checked=true;
         document.getElementById("btn_cols_shadows_color").disabled=false;
@@ -1048,14 +1038,12 @@ function doColBorders() {
         document.getElementById("cols-borders-width-3").checked=false; 
         document.getElementById("cols-borders-width-4").checked=false; 
 
-        // remove padding if also no background AND no shadows
+        // if no background AND also no shadows
         if ( (!document.getElementById("cb_cols_bg").checked) && (!document.getElementById("cb_cols_shadows").checked) ) {
+            // remove padding 
             el_cols.classList.remove("cols-padding");
-        }
-
-        // remove soft corners if also no background AND no shadows
-        if ( (!document.getElementById("cb_cols_bg").checked) && (!document.getElementById("cb_cols_shadows").checked) ) {
-            el_cols.classList.remove("cb_cols_corners_soft");
+            // remove and disable soft corners
+            el_cols.classList.remove("cols-corners-soft");
             document.getElementById("cb_cols_corners_soft").disabled=true;
             document.getElementById("cb_cols_corners_soft").checked=false;
         }
@@ -1067,8 +1055,6 @@ function doColBorders() {
         document.getElementById("cb_cols_corners_soft").disabled=false; 
         document.getElementById("cb_cols_corners_soft").checked;
         document.getElementById("cb_cols_borders").disabled=false;
-        document.getElementById("cb_cols_shadows").disabled=true; 
-        document.getElementById("cb_cols_shadows").checked=false; 
         document.getElementById("cols-borders-width-1").disabled=false; 
         document.getElementById("cols-borders-width-1").checked=true; 
         document.getElementById("cols-borders-width-2").disabled=false; 
@@ -1076,7 +1062,6 @@ function doColBorders() {
         document.getElementById("cols-borders-width-4").disabled=false; 
         document.getElementById("btn_cols_borders_color").disabled=false; 
     }
-   
 }
 
 /*
@@ -1138,4 +1123,61 @@ function doColCorners() {
     else {
         el_cols.classList.add("cols-corners-soft");
     }
+}
+
+function enableColButtons() {
+    document.getElementById("btn_cols_text_passive").disabled=false;
+    document.getElementById("btn_cols_text_active").disabled=false;
+    document.getElementById("btn_cols_bg_passive").disabled=false;
+    document.getElementById("btn_cols_bg_active").disabled=false;
+    document.getElementById("btn_cols_border_passive").disabled=false;
+    document.getElementById("btn_cols_border_active").disabled=false;
+    document.getElementById("dd_buttons_type").disabled=false;
+    document.getElementById("dd_buttons_type").value="0";
+    document.getElementById("dd_buttons_shape").value="0";
+    document.getElementById("dd_buttons_shape").disabled=false;
+    document.getElementById("dd_buttons_size").disabled=false;
+    if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
+        document.getElementById("dd_buttons_size").value="0";
+    }
+    else {
+        document.getElementById("dd_buttons_size").value="1";
+    }
+    document.getElementById("rb_btns_icons_right").checked=true;
+    document.getElementById("rb_btns_icons_left").disabled=false;
+    document.getElementById("rb_btns_icons_right").disabled=false;
+    document.getElementById("rd-btns-icons-none").disabled=false;
+    document.getElementById("cb_buttons_width").disabled=false;
+    document.getElementById("cb_buttons_width").checked=false;
+    document.getElementById("cb_buttons_shadow").disabled=false;
+    document.getElementById("cb_buttons_shadow").checked=false;
+    document.getElementById("cb_buttons_uppercase").disabled=false;
+    document.getElementById("cb_buttons_uppercase").checked=false;
+}
+
+function disableColButtons() {
+    document.getElementById("btn_cols_text_passive").disabled=true;
+    document.getElementById("btn_cols_text_active").disabled=true;
+    document.getElementById("btn_cols_bg_passive").disabled=true;
+    document.getElementById("btn_cols_bg_active").disabled=true;
+    document.getElementById("btn_cols_border_passive").disabled=true;
+    document.getElementById("btn_cols_border_active").disabled=true;
+    document.getElementById("rb_btns_icons_left").checked=false;
+    document.getElementById("rb_btns_icons_right").checked=false;
+    document.getElementById("rd-btns-icons-none").checked=false;
+    document.getElementById("rb_btns_icons_left").disabled=true;
+    document.getElementById("rb_btns_icons_right").disabled=true;
+    document.getElementById("rd-btns-icons-none").disabled=true;
+    document.getElementById("dd_buttons_type").disabled=true;
+    document.getElementById("dd_buttons_type").value="0";
+    document.getElementById("dd_buttons_shape").value="0";
+    document.getElementById("dd_buttons_shape").disabled=true;
+    document.getElementById("dd_buttons_size").value="1";
+    document.getElementById("dd_buttons_size").disabled=true;
+    document.getElementById("cb_buttons_width").disabled=true;
+    document.getElementById("cb_buttons_width").checked=false;
+    document.getElementById("cb_buttons_shadow").disabled=true;
+    document.getElementById("cb_buttons_shadow").checked=false;
+    document.getElementById("cb_buttons_uppercase").disabled=true;
+    document.getElementById("cb_buttons_uppercase").checked=false;
 }

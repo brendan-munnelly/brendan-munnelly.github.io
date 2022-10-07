@@ -207,10 +207,12 @@ function doSectionTheme() {
 
     if (selectedValue==="light") {
         iframe.contentWindow.document.querySelector("section").classList.remove("theme-dark"); 
+        sessionStorage.setItem("sectionTheme", ".theme-light");
     }
         
     else if (selectedValue==="dark") {
         iframe.contentWindow.document.querySelector("section").classList.add("theme-dark"); 
+        sessionStorage.setItem("sectionTheme", ".theme-dark");
     }
     clearCSSTags();
 }

@@ -1,4 +1,3 @@
-
 document.querySelector("#picker-box").addEventListener('click', handleLabelClick);
     
     function handleLabelClick(event) {
@@ -113,8 +112,11 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
         /* Column shadows: colour */
         else if (btn_id === "btn_cols_shadows_color") { 
             // get value of color code
+            // get value of color code
             const styles = getComputedStyle(document.documentElement);
-            const colorValue = styles.getPropertyValue(color_code);
+            let colorValue = styles.getPropertyValue(color_code);
+            if (colorValue==="#000") { colorValue="#000000"}
+            if (colorValue==="#fff") { colorValue="#ffffff"}
             console.log("color_code:" +color_code);
             console.log("colorValue:" +colorValue);
 
@@ -125,7 +127,16 @@ document.querySelector("#picker-box").addEventListener('click', handleLabelClick
 
             const strRGB = hex2rgba(colorValue, .4);
             console.log("strRGB:" +strRGB);
-            newStyle = sectionClassName+" div[class^='flex-cols-'].cols-shadows div[class^='col-'] { border-color: var("+color_code+"); box-shadow: "+strRGB+" 0 8px 16px 0 }\n";
+
+            sectionTheme = sessionStorage.getItem("sectionTheme");
+
+            if (sectionTheme ===".theme-light") {
+                newStyle = sectionClassName+" div.flex-cols-2.cols-shadows div.col-2 { box-shadow: "+strRGB+" 12px 16px 16px 0 }\n";
+            }
+
+            else if (sectionTheme ===".theme-dark") {
+                newStyle = sectionClassName+" div.flex-cols-2.cols-shadows div.col-2 { box-shadow: "+strRGB+" 14px 16px 16px 0 }\n";
+            }
             sub_string = "cols-shadows";
         }
 
