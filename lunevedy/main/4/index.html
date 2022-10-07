@@ -22,6 +22,10 @@
 	<!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <script defer src="../../ui/assets/js/ui-global.js"></script>
+    <script defer src="../../ui/assets/js/grid-3-4-ui.js"></script>
+    <script type="module" src="../../ui/assets/js/arr-content.js"></script>
+
     <style>
     </style>    
 
@@ -2574,7 +2578,7 @@
         </button>
     </div>
     
-    <div class="loading">
+    <div id="loading">
         <div>
             <img src="../../ui/assets/img/lunevedy-logo-small.png" alt="Lunevedy page loading image">
         </div>
@@ -2583,35 +2587,40 @@
         </div>
     </div>
 
-    <div class="page-preview-body" id="page-preview-body">
-        <iframe src="grid-4-embed.html" style="border:none" id="livePreviewFrame" onload="onFrameLoaded()"></iframe>
+    <div id="page-preview-body">
+        <iframe id="livePreviewFrame" src="grid-4-embed.html" style="border:none"></iframe>
     </div>
 
-    </main>
+</main>    
 
     <script>
         const iframe = document.getElementById("livePreviewFrame");
-        let HTML_Content="";
-        function onFrameLoaded() {
-            document.querySelector('.loading').style.display='none';
-            document.querySelector('#controls-top').style.display='block';
-            document.querySelector('#lower-left').style.display='flex';
-            document.querySelector('#copy-code-btns').style.display='flex';
-            document.querySelector('.page-preview-body').style.display='block';
-        }
-        // function getResolution() {
-        //  const realWidth = window.screen.width * window.devicePixelRatio;
-        //  const realHeight = window.screen.height * window.devicePixelRatio;
-        //  console.log(`Your screen resolution is: ${realWidth} x ${realHeight}`);
-        // }
-        // getResolution();
-    </script>
+        iframe.addEventListener("load", function() {
+            let HTML_Content="";
+            document.getElementById('loading').style.display='none';
+            document.getElementById('controls-top').style.display='block';
+            document.getElementById('lower-left').style.display='flex';
+            document.getElementById('copy-code-btns').style.display='flex';
+            document.getElementById('page-preview-body').style.display='block';
 
-    <script>
-        // Inital resets
-        document.addEventListener("DOMContentLoaded", resetMenuOptions);
+            // require imports from arr-content.js
+            const js_1 = document.createElement("script");
+            const js_2 = document.createElement("script");
+            const js_3 = document.createElement("script");
+            const js_4 = document.createElement("script");
+            js_1.type = "module";
+            js_2.type = "module";
+            js_3.type = "module";
+            js_4.type = "module";
+            js_1.src = "../../ui/assets/js/grid-3-4-upper.js";
+            js_2.src = "../../ui/assets/js/grid-3-4.js";
+            js_3.src = "../../ui/assets/js/grid-3-4-buttons.js";
+            js_4.src = "../../ui/assets/js/grid-3-4-visual.js";
+            document.body.appendChild(js_1);
+            document.body.appendChild(js_2);
+            document.body.appendChild(js_3);
+            document.body.appendChild(js_4);
 
-        function resetMenuOptions() {
             // UI
             // Check for UI theme
             if (!sessionStorage.getItem('ui-theme')) {
@@ -2745,14 +2754,11 @@
             document.getElementById("properties-transparent").style.display = "none";
             document.getElementById("properties-icons").style.display = "none";
             document.getElementById("properties-videos").style.display = "none";
-        }
-    </script>
 
-    <script src="../../ui/assets/js/grid-3-4-ui.js"></script>
-    <script type="module" src="../../ui/assets/js/grid-1.js"></script>
-    <script type="module" src="../../ui/assets/js/grid-3-4.js"></script>
-    <script type="module" src="../../ui/assets/js/grid-3-4-buttons.js"></script>
-    <script type="module" src="../../ui/assets/js/grid-3-4-visual.js"></script>
+        });
+
+
+    </script>
 
 </body>
 </html>
