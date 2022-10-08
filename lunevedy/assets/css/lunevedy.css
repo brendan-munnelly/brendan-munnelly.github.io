@@ -750,6 +750,10 @@ section > h2 {
     font-size: calc(28px + (48 - 28) * ((100vw - 320px) / (1140 - 320)));
 }
 
+@media (min-width: 768px) { section > h2 { margin-bottom: 42px } }
+
+@media (max-width: 767px) { section > h2 { margin-bottom: 14px } }
+
 section > h2 span.highlight { color: var(--gray-600); }
 
 /* Sub-heading */
@@ -2633,26 +2637,15 @@ figure.photos-brightness:hover img {
     filter: brightness(105%);
 }
 
+/* H1 heading underlines */
 h1.heading-underline,
-h2.heading-underline,
-.col-2.col-text h2.heading-underline,
-.col-1 h2.heading-underline {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 54px;
-}
-
-h1.heading-underline::after,
-h2.heading-underline::after,
-.col-2.col-text h2.heading-underline::after,
-.col-1 h2.heading-underline::after {
-    content:'';
-    position:absolute; top: 100%; left:0; right:0; 
-    width: 40%; height: 6px; background-color: var(--gray-600);
-}
+h2.heading-underline { position: relative; display: inline-block }
 
 h1.heading-underline { margin-bottom: 64px }
 h1.heading-underline::after { height: 10px; margin-top: 22px }
+
+@media (min-width: 768px) { h1.heading-underline { margin-bottom: 72px } }
+@media (max-width: 768px) { h1.heading-underline { margin-bottom: 54px } }
 
 header.text-center-desktop h1.heading-underline::after,
 header.text-center-mobile  h1.heading-underline::after { 
@@ -2661,16 +2654,61 @@ header.text-center-mobile  h1.heading-underline::after {
 
 header:not(.text-center-desktop) h1.heading-underline::after,
 header:not(.text-center-mobile)  h1.heading-underline::after { 
-    margin-left: 0; margin-right: 0
+    margin-left: 0; margin-right: 0;
 }
 
-.col-2.col-text h2.heading-underline::after { width: 30% }
+/* H2 heading underlines */
+h2.heading-underline::after {
+    content:'';
+    position:absolute; top: 100%; left:0; right:0; 
+    width: 40%; height: 6px; background-color: var(--gray-600);
+}
 
-.text-center h2.heading-underline::after,
-.col-1.text-center h2.heading-underline::after { margin: 24px auto 24px auto }
+/* Single column - H2 heading underlines */
+@media (min-width: 768px) {
+    section > h2.heading-underline { margin: 0 0 72px 0 }
+    section:not(.text-center-desktop) > h2.heading-underline::after, 
+    section:not(.text-center-mobile) > h2.heading-underline::after { margin: 24px 0 24px 0 }
+    section.text-center-desktop > h2.heading-underline::after{ margin: 24px auto 24px auto }
+}
 
-section:not(.text-center) h2.heading-underline::after,
-.col-2.col-text h2.heading-underline::after,
-.col-1:not(.text-center) h2.heading-underline::after { margin: 24px 0 24px 0 }
+@media (max-width: 767px) {
+    section > h2.heading-underline { margin: 0 0 52px 0 }
+    section:not(.text-center-desktop) h2.heading-underline::after, 
+    section:not(.text-center-mobile) h2.heading-underline::after { margin: 24px 0 24px 0 }
+    section.text-center-mobile > h2.heading-underline::after { margin: 24px auto 24px auto } 
+}
 
-.col-2.col-text h2.heading-underline::after { margin: 16px 0 24px 0 }
+/* Column 2-half - H2 heading underlines (no centering) */
+@media (min-width: 768px) {
+    .col-2.col-text h2.heading-underline { margin: 0 0 52px 0 }
+    .col-2.col-text h2.heading-underline::after { width: 32% }
+    .col-2.col-text h2.heading-underline::after { margin: 18px 0 12px 0 }
+}
+
+@media (max-width: 767px) {
+    .col-2.col-text h2.heading-underline { margin: 0 0 52px 0 }
+    .col-2.col-text h2.heading-underline::after { width: 40% }    
+    .col-2.col-text h2.heading-underline::after { margin: 18px 0 12px 0 }
+}
+
+/* Column 2/3/4 - H2 heading underlines */
+@media (min-width: 768px) {
+    .col-1:not(.text-center) > h2.heading-underline { margin: 0 0 12px 0 }
+    .col-1.text-center > h2.heading-underline { margin: 0 auto 12px auto }
+    .col-1:not(.text-center) > h2.heading-underline::after { margin: 24px 0 60px 0 }
+    .col-1.text-center > h2.heading-underline::after { margin: 24px auto 60px auto }
+    /* Col 3 under H2 bottom border */
+    .col-1 h2.heading-underline + h3 { margin-top: 42px }
+}
+
+@media (max-width: 767px) {
+    .col-1:not(.text-center) > h2.heading-underline { margin: 0 0 12px 0 }
+    .col-1.text-center > h2.heading-underline { margin: 0 auto 12px auto }
+    .col-1:not(.text-center) > h2.heading-underline::after { margin: 24px 0 72px 0 }
+    .col-1.text-center > h2.heading-underline::after { margin: 24px auto 72px auto }
+    /* Col 3 under H2 bottom border */
+    .col-1 h2.heading-underline + h3 { margin-top: 42px }
+}
+
+  
