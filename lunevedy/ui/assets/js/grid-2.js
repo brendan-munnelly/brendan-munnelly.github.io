@@ -131,31 +131,6 @@ function doColsAlign() {
     }
 }
 
-/*
-//////////////// COLUMNS WIDTH ON MOBILES ///////////////
-*/
-
-document.querySelector("#form_cols_mobile").addEventListener("change", doColsMobileWidth);
-
-function doColsMobileWidth() {
-    const rbs = document.querySelectorAll("input[name='switch_cols_mobile']");
-    let selectedValue;
-
-    for (const rb of rbs) {
-        if (rb.checked) {
-            selectedValue = rb.value;
-            break;
-        }
-    }
-
-    if (selectedValue==="cols-one") {
-        iframe.contentWindow.document.querySelector(".flex-cols-2").classList.remove("mobile-col-2");
-    }
-
-    if (selectedValue==="cols-two") {
-        iframe.contentWindow.document.querySelector(".flex-cols-2").classList.add("mobile-col-2");
-    }
-}
 
 /*
 //////////////// COLUMN BADGES ////////////////////
