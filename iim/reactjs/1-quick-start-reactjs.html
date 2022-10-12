@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>1: React Quick Start | React Tutorials</title>
+	<meta name="description" content="Running React code using libraries imported from a CDN and viewing the output with the VSCode Live Server extension.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>1: React Quick Start</h1>
+					<h2>Running React code using libraries imported from a CDN and viewing the output with the VSCode Live Server extension.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#quick-setup">React: Quick setup</a></p>
+				<p class="toc-indent"><a href="#react-dom">About DOM elements and React elements</a></p>
+				<p class="toc-indent"><a href="#root-node">About the root node</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Use the React <span class="syn-js">render()</span> method to update the HTML content of a web page.</li>
+		</ul>
+
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>Create a new folder named <b>react</b> with a sub-folder named <b>exercises</b>.</p>
+			<p>In your new <b>react/exercises</b> folder, create a new sub-folder named <b>1</b>.
+				
+			<p>Save the file below to this new <b>react/exercises/1</b> sub-folder and unzip it.</p>
+			<p>📄  &nbsp;<a href="exercises/1/1.zip" target="_blank"><b>1.zip</b></a></p>
+		</div>
+	</section>		
+
+	<section id="quick-setup">
+
+        <h2>React: Quick setup</h2>
+        <p>The fastest way to get started with React is to:</p>
+
+		<ul>
+			<li>Import the React (version 18) libraries and Babel transformer from a CDN.</li>
+			<li>View your React-powered web pages with the VSCode Live Server extension.</li>
+		</ul>
+
+		<p>Your <b>index.html</b> from the downloaded exercises file should look as shown below.</p>
+
+		<img src="exercises/1/assets/img/reactjs-1.png" alt="ReactJS sample screen">
+
+		<p>Your local <b>index.js</b> file is empty. Note that the link to this file from <b>index.html</b> has an attribute of <b>type="text/babel"</b>.</p>
+
+		<h4 id="ex-1-1">Exercise 1.1: Displaying a message</h4>
+		<p>Follow these steps to use React to display a message in your web page.</p>
+
+		<ol>
+			<li>In VS Code, open the <b>index.html</b> and <b>index.js</b> files. Display the <b>index.html</b> file with Live Server in your web browser.</li>
+			<li>In your <b>index.html</b> file, you can see a single <span class="syn-js">div</span> tag with an ID of <b>root</b>.
+<pre class="language-javascript">
+&lt;div id="root"&gt;&lt;/div&gt;</pre></li>
+			<li>In your <b>index.js</b> file, enter the following:
+<pre class="language-javascript">
+const root = ReactDOM.createRoot(document.getElementById('root'))  
+root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;)</pre></li>
+			<li>Save both files. You should now see the message in your web browser.</li>
+		</ol>
+
+		<p>The imported React library gives you access to the <span class="syn-js">ReactDOM</span> global variable. This has a method named <span class="syn-js">render()</span> that means 'display in web page'.</p>
+
+		<p>The two lines of code specify:</p>
+		<ul>
+			<li><b>Where</b>: The location or 'container' where the element is to be inserted.</li>
+			<li><b>What</b>: The element to be inserted in the web page.</li>
+		</ul>
+
+		<img src="exercises/1/assets/img/reactjs-2.png" alt="ReactJS sample screen">
+
+		<h3 id="react-dom">About DOM elements and React elements</h3>
+		<p>In the web browser DOM, elements are nodes that are similar to but not fully objects.</p>
+<pre class="language-javascript">
+&lt;h1&gt;Hello, world!&lt;/h1&gt;</pre>
+
+		<p>In React, however, elements are fully objects.</p>
+				
+		<p>React will update the DOM nodes (of the web page) to match the React elements (of the React code).</p>
+
+		<p>Elements are the building blocks of React <a href="2-work-with-components.html">components</a>.</p>
+			
+		<h3 id="root-node">About the root node</h3>
+		<p>In the above simple example, the HTML DOM contains a single <span class="syn-js">div</span> with an ID of <b>root</b> that is updated by React.</p>
+		
+<pre class="language-javascript">
+&lt;div id="root"&gt;&lt;/div&gt;</pre>
+
+		<p>Typically, apps built with React just have just a single root DOM node.</p>
+		
+		<p>However, you may have as many React-controlled DOM nodes as you like.</p>
+<pre class="language-javascript">
+&lt;div id="root"&gt;&lt;/div&gt;
+&lt;div id="something"&gt;&lt;/div&gt;
+&lt;div id="anotherthing"&gt;&lt;/div&gt;</pre>
+
+		<h4 id="ex-1-2">Exercise 1.2: Rendering multiple elements</h4>
+		<p>Let's try to use React to render two elements on our web page.</p>
+
+		<ol>
+			<li>In <b>index.js</b>, update the second React statement as follows:
+<pre class="language-javascript">
+root.render(
+   &lt;h1&gt;Hello, world!&lt;/h1&gt;
+   &lt;p&gt;Hope you are well.&lt;/p&gt;
+)</pre>
+This will not work! The <span class="syn-js">render()</span> method can display only <i>one</i> element &#8211; but this can a parent element with multiple child elements.</li>
+	<li>Rewrite your code by wrapping the two elements inside a single <span class="syn-js">span</span> tag as shown below.
+<pre class="language-javascript">
+root.render(
+   &lt;span&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;p&gt;Hope you are well.&lt;/p&gt;
+   &lt;/span&gt;
+)</pre></li></ol>
+<p>Your new, updated message should now display correctly.</p>
+
+		<h4 id="ex-1-3">Exercise 1.3: Rendering elements with classes</h4>
+		<p>Often the elements you will want to display with <span class="syn-js">render()</span> will contain CSS classes.</p>
+
+
+		<p>However, in JavaScript code <span class="syn-js">class</span> is a reserved keyword used for defining classes. When rendering HTML classes, React uses the term <span class="syn-js">className</span> instead. See the exercise below.</p>
+
+		<ol>
+		<li>In <b>index.js</b>, update the React <span class="syn-js">render()</span> statement as follows:
+<pre class="language-javascript">
+root.render(
+   &lt;div className="yellow-box"&gt;	
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;p&gt;Hope you are well.&lt;/p&gt;
+   &lt;/div&gt;
+)</pre></li>
+</ol>
+
+	<p>The CSS-styled output should display correctly in your web page.</p>
+
+	<h4 id="ex-1-4">Exercise 1.4: Rendering elements and closing tags</h4>
+	<p>React is a lot stricter when dealing with syntax than are web browsers when displaying HTML. See this exercise.</p>
+
+	<ol>
+		<li>In <b>index.html</b>, add the following new <span class="syn-js">div</span> container.
+<pre class="language-javascript">
+&lt;div id="main"&gt;&lt;/div&gt;</pre></li>
+		<li>In <b>index.js</b>, add this React statement that will create a variable named <b>main</b>.
+<pre class="language-javascript">const main = ReactDOM.createRoot(document.getElementById('main'))</pre></li>
+		<li>Next, add a new <span class="syn-js">render()</span> statement with the element to be displayed on the web page.
+<pre class="language-javascript">
+main.render(&lt;section className="theme-light w-800px"&gt;
+   &lt;figure&gt;&lt;img src="https://lunevedy.netlify.app/ui/assets/img/1024x618-cafe.jpg" alt="sample image"&gt;&lt;/figure&gt;
+   &lt;h2&gt;Nice section heading&lt;/h2&gt;
+   &lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;  
+   &lt;p&gt;At the end of the day, going forward, a new paradigm that has evolved from generation X is on the runway heading towards a streamlined cloud solution.&lt;/p&gt;&lt;/section&gt;
+)</pre>
+In this example, the various elements to be rendered are wrapped inside a parent <span class="syn-js">&lt;section&gt;</span> container.
+<span class="inside-ol">&nbsp;</span>
+Also, you are using <span class="syn-js">document.querySelector()</span> rather than <span class="syn-js">document.getElementById()</span> to specify the target container of the web page.
+<span class="inside-ol">&nbsp;</span>
+But the code does not run!</li>
+		<li>The reason is that the <span class="syn-js">img</span> tag has no closing forward slash <span class="syn-js">/></span>. Update the tag as follows.
+			<img src="exercises/1/assets/img/reactjs-3.png" alt="ReactJS sample screen" style="max-width: 400px">
+			Your code will now run correctly.</li>
+	</ol>
+
+	<p></p>
+
+	<section>
+		<div class="code-snippets">
+			<p>📄  &nbsp;<a href="exercises/1/final.html" target="_blank"><b>Exercises solution</b></a></p>
+		</div>
+	</section>		
+
+
+
+
+	<p>&nbsp;</p>
+	<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>

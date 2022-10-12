@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>2: Working with Components | ReactJS Tutorials</title>
+	<meta name="description" content="Creating arrow functions, passing values to them, and writing short-hand single-statement arrow functions with implicit returns to the calling program.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>2: Working with Components</h1>
+					<h2>Creating arrow functions, passing values to them, and writing short-hand single-statement arrow functions with implicit returns to the calling code.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#function-arrow">About arrow functions</a></p>
+				<p><a href="#parameters-arguments">Parameters and arguments</a></p>
+				<p><a href="#single-statement">Single-statement arrow functions</a></p>
+				<p><a href="#functions-return-values">Arrow functions and return values</a></p>
+				<p class="toc-indent"><a href="#arrow-functions-explicit-returns">Explicit returns</a></p>
+				<p class="toc-indent"><a href="#arrow-functions-implicit-returns">Implicit returns</a></p>
+				<p><a href="#immediate">Immediately-invoked arrow functions</a></p>
+				<p><a href="#arrow-function-syntax">Arrow function syntax</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create and call <i>arrow functions</i>.</li>
+			<li>Use arguments and parameters to pass values to an arrow function.</li>
+			<li>Write short-hand single-statement arrow functions with implicit returns.</li>
+		</ul>
+
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>In your new <b>react/exercises</b> folder, create a new sub-folder named <b>2</b>.
+			<p>Save the file below to this new <b>react/exercises/2</b> sub-folder and unzip it.</p>
+			<p>📄  &nbsp;<a href="exercises/1/1.zip" target="_blank"><b>2.zip</b></a></p>
+		</div>
+	</section>		
+
+
+	<section id="function-arrow">
+
+        <h2>Components in React</h2>
+        <p>The fastest way to get started with ReactJS is to:</p>
+
+		<ul>
+			<li>Import the ReactJS libraries and Babel transpiler from a CDN.</li>
+			<li>View your ReactJS-powered web pages with the VSCode Live Server extension.</li>
+		</ul>
+
+		<p>Your <b>index.html</b> should look as shown below.</p>
+
+		<img src="exercises/1/assets/img/reactjs-1.png" alt="ReactJS sample screen">
+
+		<p>Your local <b>index.js</b> file is empty. Note that the link to this file has an attribute of <b>type="text/babel"</b>.</p>
+
+		<h4 id="ex-5-1">Exercise 5.1: Creating a basic app</h4>
+		<p>Let's begin by rendering some HTML content in a web page without using components. You will use this as a basis for adding componnets in the next few exercises.</p>
+
+		<ol>
+			<li>In VS Code, open the <b>index.html</b> and <b>index.js</b> files. Display the <b>index.html</b> file with Live Server in your web browser.</li>
+			<li>Into your <b>index.html</b> file, copy-and-paste the two <span class="syn-js">div</span> tags with IDs of <b>header</b> and <b>main</b> as shown below.
+<pre class="language-javascript">
+&lt;div id="header"&gt;&lt;/div&gt;
+&lt;div id="main"&gt;&lt;/div&gt;</pre></li>
+<li>Into your <b>index.js</b> file,  copy-and-paste the following two statements that will create variables.
+<pre class="language-javascript">const header = ReactDOM.createRoot(document.getElementById('header'))  
+const main = ReactDOM.createRoot(document.getElementById('main'))</pre><li> 
+	<li>Next, enter these two <span class="syn-js">render()</span> statements.
+<pre class="language-javascript">
+header.render(&lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;)
+main.render(&lt;main&gt;&lt;section&gt;&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section&gt;&lt;/main&gt;)  </pre></li>
+
+			<li>Save your two files and verify that the output displays correctly in your browser.</li>
+
+</ol>
+
+	<p>As in the previous <a href="1-quick-start-reactjs.html">Tutorial</a> you are rendering elements from React to the web browser.</p>
+
+	<h4 id="ex-2-2">Exercise 2.2: Rendering HTML content with components</h4>
+	<p>Let's update the code in Exercise 2.1 to use functional components.</p>
+
+<ol>
+
+	<li>In your <b>index.js</b> file, add the following two <span class="syn-js">render()</span> statements. You will use each one to display a component in a <span class="syn-js">div</span> of your web page.
+<pre class="language-javascript">header.render(
+   &lt;HeaderContent /&gt;
+)
+
+main.render(
+   &lt;MainContent /&gt;
+)</pre></li>
+
+	<li>Next, enter the following two JavaScript functions with the <span class="syn-js">return</span> keywords:
+<pre class="language-javascript">function HeaderContent () {
+   return (
+   )
+}</pre>
+<pre class="language-javascript">function MainContent () {
+   return (
+   )
+}</pre>
+
+Note that each function name matches the name of a component.
+<img src="exercises/2/assets/img/reactjs-1.png" alt="screenshot"></li>
+
+<li>Update the first function code block with the element from the first React <span class="syn-js">render()</span> statement at the top of your <b>index.js</b> file.
+<pre class="language-javascript">function HeaderContent () {
+   return (
+      &lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;
+   )
+}</pre></li>
+
+		<li>And update the second function code block with the element from the second React <span class="syn-js">render()</span> statement.
+<pre class="language-javascript">function MainContent () {
+   return (
+      &lt;main&gt;&lt;section&gt;&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section&gt;&lt;/main&gt;  
+   )
+}</pre></li>
+
+	<li>Delete or comment out the two original React <span class="syn-js">render()</span> statements from <b>index.js</b> and save the file.
+<img src="exercises/2/assets/img/reactjs-2.png" alt="screenshot"></li>
+
+	<li>Save <b>index.js</b> and verify both components display correctly in your web browser.</li>
+</ol>
+
+<h4 id="ex-2-3">Exercise 2.3: Tidying up the component code</h4>
+<p>Your code from the previous exercise uses two <span class="syn-js">render()</span> statements in React to update two <span class="syn-js">div</span> containers in the HTML file. Let's simplify this.</p>
+
+<ol>
+	<li>In <b>index.html</b>, delete or comment out the two current <span class="syn-js">div</span> tags and enter a new one with an ID of <b>root</b>.
+<img src="exercises/2/assets/img/reactjs-3.png" alt="screenshot" style="max-width: 500px"></li>
+	<li>In <b>index.js</b>, delete or comment out the <b>header</b> and <b>main</b> variables at the top of the file, and define a new <b>root</b> variable. 
+<img src="exercises/2/assets/img/reactjs-4.png" alt="screenshot"></li>
+	<li>Also, replace the two <span class="syn-js">render()</span> statements with one that outputs to the <b>root</b> container in the web page.
+<img src="exercises/2/assets/img/reactjs-5.png" alt="screenshot"></li>
+	<li>Save your work and verify the components display correctly.</li>
+</ol>
+
+
+
+		<h3>React components are compostible</h3>
+		<p>In the web browser DOM, elements are nodes that are like but not fully objects.</p>
+<pre class="language-javascript">
+&lt;h1&gt;Hello, world!&lt;/h1&gt;</pre>
+		
+		<p>In React, however, elements are fully objects.</p>
+				
+		<p>React will update the DOM nodes (of the web page) to match the React elements (of the React code).</p>
+
+		<p>Elements are the building blocks of React components.</p>
+			
+		<pre class="language-javascript">
+			&lt;div id="root"&gt;&lt;/div&gt;
+			&lt;div id="something"&gt;&lt;/div&gt;
+			&lt;div id="anotherthing"&gt;&lt;/div&gt;</pre>
+			
+
+		<h4 id="ex-1-2">Exercise 2.4: Nesting components</h4>
+		<p>In the final exercise of this Tutorial, you will nest a new component inside an existing one. Here are the steps.</p>
+
+		<ol>
+			<li>In <b>index.js</b>, add a function that will return the content of a new component named <b>ImgContent</b> as follows.
+<pre class="language-javascript">function ImgContent () {
+   return (
+      &lt;figure&gt;&lt;img src="https://lunevedy.netlify.app/ui/assets/img/1024x618-cafe.jpg" alt="sample image"/&gt;&lt;/figure&gt;
+   )
+}</pre></li>
+	<li>Update the function that returns the content of the <b>MainContent</b> component as shown bwlow
+<pre class="language-javascript">function MainContent () {
+   return (
+      &lt;div&gt;
+	&lt;ImgContent /&gt;
+         &lt;main&gt;&lt;section&gt;&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section>&lt;/main&gt;   
+      &lt;/div&gt;
+    )
+}</pre>
+Your new, updated components should now display correctly.</li>
+		</ol>
+
+
+		<section>
+			<div class="code-snippets">
+				<p>📄  &nbsp;<a href="exercises/2/final.html" target="_blank"><b>Exercises solution</b></a></p>
+			</div>
+		</section>		
+	
+	
+
+	<p>&nbsp;</p>
+	<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>3: Working with JSX | React Tutorials</title>
+	<meta name="description" content="Understand JSX syntax and how it extends JavaScript to simplify the creation of components in React.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>3: Working with JSX</h1>
+					<h2>Understand JSX syntax and how it extends JavaScript to simplify the creation of components in React.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-jsx">About JSX</a></p>
+				<p><a href="#js-objects">React elements as JavaScript objects</a></p>
+				<p><a href="#styles">Declarative and imperative programming</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Understand JSX syntax and how it extends JavaScript to simplify the creation of components in React.</li>
+		</ul>
+
+	</section>
+
+<section>
+	<div class="code-snippets">
+		<p>In your <b>react/exercises</b> folder, create a new sub-folder named <b>3</b>.
+			
+		<p>📄  &nbsp;Save the exercise file below to this new <b>react/exercises/3</b> sub-folder.</p>
+		<p><a href="exercises/3/index.html" target="_blank"><b>index.html</b></a></p>
+	</div>
+</section>		
+
+	<section id="about-jsx">
+
+        <h2>About JSX</h2>
+        <p>JSX is syntax extension to JavaScript that makes is easier to build UI components with React.</p>
+
+		<p>Consider the React statement below.</p>
+
+<pre class="language-javascript">root.render(
+   &lt;h1&gt;Hello, world!&lt;/h1&gt;
+)</pre>
+
+<p>The part within parenthesis <span class="syn-js">()</span> is JSX. It looks like plain HTML that is written inside JavaScript.</p>
+
+<p>JSX can accept variables, written inside curly braces <span class="syn-js">{ }</span>. For example:</p>
+
+<pre class="language-javascript">
+const firstName = 'John';
+root.render(
+   &lt;h1&gt;Hello, {firstName}&lt;/h1&gt;
+)</pre>
+
+<p>In fact, you can put any valid JavaScript expression inside the curly braces in JSX. For example, <span class="syn-js">2 + 2</span>, <span class="syn-js">user.firstName</span>, <span class="syn-js">formatName(user)</span> &#8211; even loops and conditional <span class="syn-js">if</span> statements.</p>
+
+	<p>However, because JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process. </p>
+
+	<p>Finally, one important thing to know about JSX is that it must return only a single element. This one parent element would wrap all of the other levels of nested elements.</p>
+
+	</section>
+
+
+	<section id="js-objects">
+
+		<h2>React elements as JavaScript objects</h2>
+
+		<p>The Babel transpiler compiles JSX down to <span class="syn-js">React.createElement()</span> calls that JavaScript objects with properties.</p>
+
+		<h4 id="ex-10-3">Exercise 3.1: Viewing DOM and React elements</h4>
+		<p>Follow these steps</p>
+
+
+			<ol>
+				<li>Open the <b>index.html</b> file. This contains a single <span class="syn-js">div</span> tag as shown below.
+<pre class="language-javascript">&lt;div id="root"&gt;&lt;/div&gt;</pre></li>
+				<li>Within the &lt;script&gt; tags, enter the following JavaScript code.
+<pre class="language-javascript"><span class="comment">// JavaScript</span>
+const h1 = document.createElement("h1");
+h1.innerText = "Hello, JavaScript";
+h1.className = "header";
+document.body.append(h1)
+console.log(h1);
+console.log(h1.innerText);</pre></li>
+				<li>And now enter some lines that combine plain JavaScript with JSX as follows.
+<pre class="language-javascript"><span class="comment">// JSX</span>
+const root = ReactDOM.createRoot(document.getElementById('root'))
+const element = (
+   &lt;h1 className="header"&gt;Hello, JSX&lt;/h1&gt;
+)
+console.log(element)
+root.render(
+   element
+)</pre></li>
+				<li>Save the <b>index.html</b> file and verify that both messages display correctly.</li>
+			</ol>
+
+	<p>Now, let's look at the output from the file in the JavaScript console.</p>
+
+<img src="exercises/3/assets/img/console.png" alt="ReactJS sample screen">
+
+	<p>As you can see, what React is creating with JSX are JavaScript objects with properties (props) that describe the object. Text is a child object.</p>
+
+
+	<p>You can think of JSX as like a function that, when it's run, returns objects that React can interpret and use to create elements that are rendered on the web pages.</p>
+
+</section>
+	<section>
+
+		<h2 id="styles">Declarative and imperative programming</h2>
+
+       <p>Prograamming languages can be divied into two broad categories:</p>
+
+		<ol>
+			<li><b>Declarative</b>: What should be done? <i>"Just tell me what to do and I will worry about how to get it done"</i>.</li>
+			<li><b>Imperative:</b> How should it be done? <i>"Describe to me every step on how to do something, aand I will do it."</i></li>
+		</ol>
+
+		<p>In the example below, you can see all the steps needed with JavaScript to output some content to a container on a web page. This is very imperative - and a lot of typing for the developer.</p>
+
+<pre class="language-javascript"><span class="comment">// JavaScript</span>
+<span class="comment">// create element</span>
+const h1 = document.createElement("h1");
+<span class="comment">// give element some text content</span>		
+h1.innerText = "Hello, JavaScript";
+<span class="comment">// add CSS class to element</span>	
+h1.className = "header";
+<span class="comment">// append element as aa child of web page</span>	
+document.body.append(h1);</pre>	
+
+	<p>With React, this can be achieved in a much more eclarative way.</p>
+
+
+<pre class="language-javascript"><span class="comment">// JSX</span>
+const root = ReactDOM.createRoot(document.getElementById('root'))
+const element = (
+   &lt;h1 className="header"&gt;Hello, JSX&lt;/h1&gt;
+)
+root.render(
+   element
+)</pre>
+
+		<p>&nbsp;</p>
+		<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>
