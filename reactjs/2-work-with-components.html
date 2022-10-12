@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>2: Working with Components | ReactJS Tutorials</title>
-	<meta name="description" content="Creating arrow functions, passing values to them, and writing short-hand single-statement arrow functions with implicit returns to the calling program.">
+	<meta name="description" content="Understand React component syntax, create and render functional components, and compose them in parent-child relationships.">
 
 	<meta name="robots" CONTENT="noindex">
 
@@ -32,7 +32,7 @@
 		
 				<div class="content">
 					<h1>2: Working with Components</h1>
-					<h2>Creating arrow functions, passing values to them, and writing short-hand single-statement arrow functions with implicit returns to the calling code.</h2>
+					<h2>Understand React component syntax, create and render functional components, and compose them in parent-child relationships.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -40,20 +40,15 @@
 		<main>
 
 			<aside>
-				<h3>JAVASCRIPT COURSE</h3>
+				<h3>REACT COURSE</h3>
 	
 				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#function-arrow">About arrow functions</a></p>
-				<p><a href="#parameters-arguments">Parameters and arguments</a></p>
-				<p><a href="#single-statement">Single-statement arrow functions</a></p>
-				<p><a href="#functions-return-values">Arrow functions and return values</a></p>
-				<p class="toc-indent"><a href="#arrow-functions-explicit-returns">Explicit returns</a></p>
-				<p class="toc-indent"><a href="#arrow-functions-implicit-returns">Implicit returns</a></p>
-				<p><a href="#immediate">Immediately-invoked arrow functions</a></p>
-				<p><a href="#arrow-function-syntax">Arrow function syntax</a></p>
+				<p><a href="#functional-components">Components in React</a></p>
+				<p class="toc-indent"><a href="#functional-components">Functional components</a></p>
+				<p><a href="#compostible">React components are compostible</a></p>
 			</aside>
 	
 	<article>
@@ -69,46 +64,53 @@
 
 	</section>
 
+	<section>
+		<div class="code-snippets">
+			<p>In your new <b>react/exercises</b> folder, create a new sub-folder named <b>2</b>.
+			<p>Save the file below to this new <b>react/exercises/2</b> sub-folder and unzip it.</p>
+			<p>📄  &nbsp;<a href="exercises/2/2.zip" target="_blank"><b>2.zip</b></a></p>
+		</div>
+	</section>		
 
 
-	<section id="function-arrow">
+	<section id="functional-components">
 
-        <h2>ReactJS: Quick setup</h2>
-        <p>The fatest way to get started with ReactJS is to:</p>
+        <h2>Components in React</h2>
+        <p>Components are the core of React. Components let you split the UI into independent, reusable pieces, and think about each piece in isolation.</p>
+		
+		<p>React components are the core building blocks of React applications so it's important to become very familiar with writing them.</p>
+		
+				
+		<h3>Functional components</h3>
+		<p>A component created With a JavaScript function is called a <i>stateless functional component</i>. It can receive data and render it, but cannot manage or track changes to that data.</p>
 
-		<ul>
-			<li>Import the ReactJS libraries and Babel transpiler from a CDN.</li>
-			<li>View your ReactJS-powered web pages with the VSCode Live Server extension.</li>
-		</ul>
+		<p>To create a component with a function, you simply write a JavaScript function that returns either JSX or null.</p>
+		
+		<p>Note that component names are written in PascalCase rather than JavaScript-style camelCase. Below is an example of a stateless functional component that returns some HTML.</p>
 
+<pre class="language-javascript">function HeaderContent () {
+   return (
+      &lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;
+   )
+}</pre>
 
-		<section>
-			<div class="code-snippets">
-				<p>In your <b>javascript/exercises</b> folder, create a new sub-folder named <b>10</b>.
-					
-				<p>📄  &nbsp;Save the exercise file below to this new <b>javascript/exercises/10</b> sub-folder.</p>
-				<p><a href="exercises/index.html" target="_blank"><b>Arrow Functions: Exercises</b></a></p>
-			</div>
-		</section>		
+	<p>You could then display this component to a container named <b>header</b> in a web page with the React <span class="syn-js">render()</span> method. For example.</p>
 
+<pre class="language-javascript">header.render(
+   &lt;HeaderContent /&gt;
+)
+</pre>	
 
-		<p>Your <b>index.html</b> should look as shown below.</p>
-
-		<img src="exercises/1/assets/img/reactjs-1.png" alt="ReactJS sample screen">
-
-		<p>Your local <b>index.js</b> file is empty. Note that the link to this file has an attribute of <b>type="text/babel"</b>.</p>
-
-
-		<h4 id="ex-1-1">Exercise 2.1: Creating functional components</h4>
-		<p>Follow these steps:</p>
+		<h4 id="ex-2-1">Exercise 2.1: Rendering HTML content without components</h4>
+		<p>Let's begin by rendering some HTML content in a web page without using components. You will use this as a basis for adding components in the next few exercises.</p>
 
 		<ol>
 			<li>In VS Code, open the <b>index.html</b> and <b>index.js</b> files. Display the <b>index.html</b> file with Live Server in your web browser.</li>
-			<li>Into your <b>index.html</b> file, copy-and-paste the two <span class="syn-js">div</span> tags with IDs of <b>header</b> and <b>main</b>.
+			<li>Into your <b>index.html</b> file, copy-and-paste the two <span class="syn-js">div</span> tags with IDs of <b>header</b> and <b>main</b> as shown below.
 <pre class="language-javascript">
 &lt;div id="header"&gt;&lt;/div&gt;
 &lt;div id="main"&gt;&lt;/div&gt;</pre></li>
-<li>Into your <b>index.js</b> file,  copy-and-paste the following two statemets that wil create variables.
+<li>Into your <b>index.js</b> file,  copy-and-paste the following two statements that will create variables.
 <pre class="language-javascript">const header = ReactDOM.createRoot(document.getElementById('header'))  
 const main = ReactDOM.createRoot(document.getElementById('main'))</pre><li> 
 	<li>Next, enter these two <span class="syn-js">render()</span> statements.
@@ -120,11 +122,14 @@ main.render(&lt;main&gt;&lt;section&gt;&lt;p&gt;Leverage agile frameworks to pro
 
 </ol>
 
-	<p>As in the previous <a href="1-quick-start-reactjs.html">Tutorial</a> you are rendering elements from React to the web browser. Let's update this code to use functional components.</p>
+	<p>As in the previous <a href="1-quick-start-reactjs.html">Tutorial</a> you are rendering elements from React to the web browser.</p>
+
+	<h4 id="ex-2-2">Exercise 2.2: Rendering HTML content with components</h4>
+	<p>Let's update the code in Exercise 2.1 to use functional components.</p>
 
 <ol>
 
-	<li>In your <b>index.js</b> file, statements, each of which will display a component in a <span class="syn-js">div</span> of the web page.
+	<li>In your <b>index.js</b> file, add the following two <span class="syn-js">render()</span> statements. You will use each one to display a component in a <span class="syn-js">div</span> of your web page.
 <pre class="language-javascript">header.render(
    &lt;HeaderContent /&gt;
 )
@@ -142,8 +147,11 @@ main.render(
    return (
    )
 }</pre>
-Note that each function name matches the name of a component.</li>
-			<li>Update the first function code block with the element from the first React <span class="syn-js">render()</span> statement at the top of your <b>index.js</b> file.
+
+Note that each function name matches the name of a component.
+<img src="exercises/2/assets/img/reactjs-1.png" alt="screenshot"></li>
+
+<li>Update the first function code block with the element from the first React <span class="syn-js">render()</span> statement at the top of your <b>index.js</b> file.
 <pre class="language-javascript">function HeaderContent () {
    return (
       &lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;
@@ -157,107 +165,81 @@ Note that each function name matches the name of a component.</li>
    )
 }</pre></li>
 
-	<li>Delete the two original React <span class="syn-js">render()</span> statements from <b>index.js</b> and save the file.</li>
-		<li>In your <b>index.html</b> file, add the following two lines.
-<pre class="language-javascript">&lt;HeaderContent /&gt;
-&lt;MainContent /&gt;</pre></li>
+	<li>Delete or comment out the two original React <span class="syn-js">render()</span> statements from <b>index.js</b> and save the file.
+<img src="exercises/2/assets/img/reactjs-2.png" alt="screenshot"></li>
 
-	<li>Save <b>index.html</b> and verify both components display correctly in your web browser.</li>
+	<li>Save <b>index.js</b> and verify both components display correctly in your web browser.</li>
 </ol>
 
+<h4 id="ex-2-3">Exercise 2.3: Tidying up the component code</h4>
+<p>Your code from the previous exercise uses two <span class="syn-js">render()</span> statements in React to update two <span class="syn-js">div</span> containers in the HTML file. Let's simplify this.</p>
 
-		<h3>About DOM elements and React elements</h3>
-		<p>In the web browser DOM, elements are nodes that are like but not fully objects.</p>
-<pre class="language-javascript">
-&lt;h1&gt;Hello, world!&lt;/h1&gt;</pre>
-		
-		<p>In React, however, elements are fully objects.</p>
-				
-		<p>React will update the DOM nodes (of the web page) to match the React elements (of the React code).</p>
+<ol>
+	<li>In <b>index.html</b>, delete or comment out the two current <span class="syn-js">div</span> tags and enter a new one with an ID of <b>root</b>.
+<img src="exercises/2/assets/img/reactjs-3.png" alt="screenshot" style="max-width: 500px"></li>
+	<li>In <b>index.js</b>, delete or comment out the <b>header</b> and <b>main</b> variables at the top of the file, and define a new <b>root</b> variable. 
+<img src="exercises/2/assets/img/reactjs-4.png" alt="screenshot"></li>
+	<li>Also, replace the two <span class="syn-js">render()</span> statements with one that outputs to the <b>root</b> container in the web page.
+<img src="exercises/2/assets/img/reactjs-5.png" alt="screenshot"></li>
+	<li>Save your work and verify the components display correctly.</li>
+</ol>
 
-		<p>Elements are the building blocks of React components.</p>
-			
-		<h3>About the root node</h3>
-		<p>In the above simple example, the HTML DOM contains a single <span class="syn-js">div</span> with an ID of <b>root</b> that is updated by React.</p>
-		
-<pre class="language-javascript">
-&lt;div id="root"&gt;&lt;/div&gt;</pre>
+<section>
 
-		<p>Typically, apps built with React just have just a single root DOM node.</p>
-		
-		<p>However, you may have as many React-controlled DOM nodes as you like.</p>
-<pre class="language-javascript">
-&lt;div id="root"&gt;&lt;/div&gt;
-&lt;div id="something"&gt;&lt;/div&gt;
-&lt;div id="anotherthing"&gt;&lt;/div&gt;</pre>
+	<section id="compostible">
 
-		<p>create element, create some text, create class, append to document</p>
+		<h2>React components are compostible</h2>
 
-		<h4 id="ex-1-2">Exercise 1.2: Rendering multiple elements</h4>
-		<p>Let's try to use React to render two elements on our web page.</p>
+		<p>React enables you to 'compose' multiple components together in parent-child relationships.</p>
+
+		<p>Imagine you are building an app and have created three components: a Navbar, Dashboard, and Footer.</p>
+
+		<p>To compose these components together, you could create an App parent component which renders each of these three components as children. To render a component as a child in a React component, you include the component name written as a custom HTML tag in the JSX. For example, in the <span class="syn-js">render()</span> method you could write:</p>
+<pre class="language-javascript">return (
+   &lt;App&gt;
+      &lt;Navbar /&gt;
+      &lt;Dashboard /&gt;
+      &lt;Footer /&gt;
+   &lt;/App&gt;
+)</pre>
+	
+	<p>When React encounters a custom HTML tag that references another component (a component name wrapped in <span class="syn-js">&lt; /&gt;</span> like in this example, it renders the markup for that component in the location of the tag. </p>
+
+
+	<p>Cmponent composition is one of React's powerful features. When you work with React, it is important to start thinking about your user interface in terms of components like the App example in the last challenge. You break down your UI into its basic building blocks, and those pieces become the components. This helps to separate the code responsible for the UI from the code responsible for handling your application logic. It can greatly simplify the development and maintenance of complex projects.	</p>
+
+
+
+		<h4 id="ex-1-2">Exercise 2.4: Nesting components</h4>
+		<p>In the final exercise of this Tutorial, you will nest a new component inside an existing one. Here are the steps.</p>
 
 		<ol>
-			<li>In <b>index.js</b>, update the React statement as follows:
-<pre class="language-javascript">
-ReactDOM.render(
-    &lt;h1&gt;Hello, world!&lt;/h1&gt;
-    &lt;p&gt;Hope you are well.&lt;/p&gt;,
-    document.getElementById("root")
-)</pre>
-This will not work! The <span class="syn-js">render()</span> method an display one element - but this can a parent element with multiple child elements.</li>
-	<li>Rewrite your code by wrapping the two elements inside a single <span class="syn-js">span</span> tag as shown below.
-<pre class="language-javascript">
-ReactDOM.render(
-   &lt;span&gt;
-      &lt;h1&gt;Hello, world!&lt;/h1&gt;
-      &lt;p&gt;Hope you are well.&lt;/p&gt;,
-   &lt;/span&gt;,
-document.getElementById("root")
-)</pre>
-Your new, updated message should now display correctly.</li>
+			<li>In <b>index.js</b>, add a function that will return the content of a new component named <b>ImgContent</b> as follows.
+<pre class="language-javascript">function ImgContent () {
+   return (
+      &lt;figure&gt;&lt;img src="https://lunevedy.netlify.app/ui/assets/img/1024x618-cafe.jpg" alt="sample image"/&gt;&lt;/figure&gt;
+   )
+}</pre></li>
+	<li>Update the function that returns the content of the <b>MainContent</b> component as shown below.
+<pre class="language-javascript">function MainContent () {
+   return (
+      &lt;div&gt;
+	&lt;ImgContent /&gt;
+         &lt;main&gt;&lt;section&gt;&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section>&lt;/main&gt;   
+      &lt;/div&gt;
+    )
+}</pre>
+Your new, updated components should now display correctly.</li>
 		</ol>
 
-		<h4 id="ex-1-3">Exercise 1.3: Rendering elements with classes</h4>
-		<p>Often the elements you will want to render will contain CSS classes.</p>
 
-		<ol>
-		<li>In <b>index.js</b>, update the React statement as follows:
-<pre class="language-javascript">
-ReactDOM.render(
-   &lt;div class="yellow-box"&gt;	
-	  &lt;h1&gt;Hello, world!&lt;/h1&gt;
-	  &lt;p&gt;Hope you are well.&lt;/p&gt;
-   &lt;/div&gt;,
-document.getElementById("root")
-)</pre></li>
-</ol>
-
-	<p>The CSS-styled output should display correctly in your web page.</p>
-
-	<h4 id="ex-1-4">Exercise 1.4: Rendering elements with images</h4>
-	<p>Rewrite the anonymous declaration that joins the two strings as an arrow function.</p>
-
-	<ol>
-		<li>In <b>index.html</b>, add the following new div container.
-<pre class="language-javascript">
-&lt;div id="main"&gt;&lt;/div&gt;</pre></li>
-		<li>In <b>index.js</b>, add a second React statement that will update this new container:
-
-<pre class="language-javascript">
-ReactDOM.render(&lt;section class="theme-light w-800px"&gt;
-   &lt;figure&gt;&lt;img src="https://lunevedy.com/ui/assets/img/1024x618-cafe.jpg" alt="sample image"&gt;&lt;/figure&gt;
-   &lt;h2&gt;Nice section heading&lt;/h2&gt;
-   &lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;  
-   &lt;p&gt;At the end of the day, going forward, a new paradigm that has evolved from generation X is on the runway heading towards a streamlined cloud solution.&lt;/p&gt;
-   &lt;/section&gt;,
-document.querySelector("#main"))</pre>
-In this example, the various elements to be rendered are wrapped inside a parent <span class="syn-js">&lt;section&gt;</span> containter. Also the <span class="syn-js">document.querySelector()</span> method rather than <span class="syn-js">document.getElementById()</span> is used to specify the target container of the web page. But the code does not run!</li>
-		<li>The reason is that the <span class="syn-js">img</span> tag has no closing <span class="syn-js">/></span> tag. Update this tag has follows.
-			<img src="exercises/1/assets/img/reactjs-3.png" alt="ReactJS sample screen" style="max-width: 400px">
-		</li>
-	</ol>
-
-	<p>Your code will now run correctly.</p>
+		<section>
+			<div class="code-snippets">
+				<p>📄  &nbsp;<a href="exercises/2/final.html" target="_blank"><b>Exercises solution</b></a></p>
+			</div>
+		</section>		
+	
+	
 
 	<p>&nbsp;</p>
 	<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
