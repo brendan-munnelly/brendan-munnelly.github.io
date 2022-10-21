@@ -1,4 +1,4 @@
-import {arrPic, arrPicSquare, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA, arrTextBox, arrH4Overlay} from '../js/arr-content.js';
+import {arrPic, arrPicSquare, arrPicPortrait, arrTrans, arrIllus, arrVidFile, arrVidYT, arrVidRumble, arrIconFA, arrIconLA, arrTextBox, arrH4Overlay} from '../js/arr-content.js';
 
 /*
 ////////////////////// VISUALS: FOUR TYPES ///////////////////////
@@ -97,12 +97,12 @@ function doPhotos() {
 
 document.querySelector("#dd_photos_shape").addEventListener("change", doPhotosType);
 
-document.querySelector("#dd_photos_shape").addEventListener("change", doPhotosType);
-
 function doPhotosType() {
 
     let opt = document.querySelector("#dd_photos_shape").value;
     removeVisual();
+    document.getElementById("cb_img_textbox").checked = false;
+    
     if (opt==="1") {
         doVisSubTypes(1);    
     }
@@ -180,6 +180,9 @@ function doColH3TextBox() {
             objFigs[i].removeChild(el_TextBox);
         }
         document.getElementById("show-textbox").style.display = "none";
+        const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { color:";
+        const arg2 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure .cols-img-textbox { background-color:";
+        removeCSSTagPairs(arg1,arg2);
     }
 
     else {
@@ -194,7 +197,7 @@ function doColH3TextBox() {
     }
 }
 
-/* photos: soft corners */
+/* photos: text box shape */
 
 document.querySelector("#form_img_textbox_shape").addEventListener("change", doTextBoxShape);
 
@@ -275,6 +278,7 @@ function doPhotosHyperlinks() {
             el_fig.classList.remove("photos-zoom");
             el_fig.classList.remove("photos-brightness");
         }
+
         document.getElementById("cb_photos_zoom").checked=false;
         document.getElementById("cb_photos_zoom").disabled=true;
         document.getElementById("cb_photos_brightness").checked=false;
@@ -290,6 +294,12 @@ function doPhotosHyperlinks() {
         }
         document.getElementById("cb_photos_zoom").disabled=false;
         document.getElementById("cb_photos_zoom").checked=false;
+
+        if (iframe.contentWindow.document.querySelector('.img-circle'))  {
+            document.getElementById("cb_photos_zoom").checked=false;
+            document.getElementById("cb_photos_zoom").disabled=true;
+        }
+
         document.getElementById("cb_photos_brightness").checked=false;
         document.getElementById("cb_photos_brightness").disabled=false;
         document.getElementById("visible-hyperlinks").style.display="block";
@@ -423,6 +433,22 @@ function resetTransProps() {
     document.getElementById("cb_trans_shadows").checked = false;
 }
 
+
+function resetImgCircle() {
+    const objImgs = iframe.contentWindow.document.querySelectorAll("div[class^='col-']");
+    let el_img;
+    for (let i = 0; i < objImgs.length; i++) {
+        el_img = objImgs[i];
+        el_img.classList.remove("img-circle");
+    }
+    document.getElementById("cb_photos_corners_soft").disabled=false;
+    document.getElementById("cb_photos_shadows").disabled=false;
+    document.getElementById("cb_photos_zoom").disabled=false;
+    document.getElementById("cb_img_textbox").disabled=false;
+    document.getElementById("cb_img_h4").disabled=false;
+    document.getElementById("cb_photos_zoom").disabled=false;
+}
+
 /*
 //////////////// VISUALS: DRAWINGS ///////////////
 */
@@ -515,7 +541,7 @@ function doIcons() {
     document.getElementById("dd_icons_type").value = "0";
     document.getElementById("rb_icon_align_center").checked = true;
     document.getElementById("cb_icon_size_plus").checked = true;
--    
+    
     doVisSubTypes(7);    
 }
 
@@ -599,7 +625,6 @@ function doIconAlign() {
     }
 }
 
-
 function resetIconProps() {
     document.getElementById("dd_icons_type").value="0";
     document.getElementById("cb_icon_size_plus").checked=false;
@@ -624,7 +649,6 @@ function doVideos() {
     document.getElementById("rb_vis_type_2").disabled=false;
     document.getElementById("rb_vis_type_3").disabled=false;
     document.getElementById("rb_vis_type_4").disabled=false;
-    // document.getElementById("rb_vis_type_5").checked=true;
     document.getElementById("rb_vis_type_5").disabled=false;
 
     // Property containers
@@ -666,6 +690,16 @@ function resetVideoProps() {
     document.querySelector("#dd_videos_type").value="0";
 }
 
+function resetHyperlinks() {
+    document.getElementById("cb_photos_hyperlinks").checked=false;
+    document.getElementById("visible-hyperlinks").style.display="none";
+    document.getElementById("cb_photos_zoom").checked=false;
+    document.getElementById("cb_photos_zoom").disabled=true;
+    document.getElementById("cb_photos_brightness").checked=false;
+    document.getElementById("cb_photos_brightness").disabled=true;
+    document.getElementById("visible-hyperlinks").style.display="none";
+}
+
 
 function doVisSubTypes(n) {
     const objCols = iframe.contentWindow.document.querySelectorAll("div[class^='flex-cols-'] div[class^='col-']");
@@ -682,8 +716,8 @@ function doVisSubTypes(n) {
     }
     // photos: portrait
     else if (n===2) {
-        for (let i = 0; i < (arrPic.length); i++) {
-            arrContent[i] = arrPic[i];
+        for (let i = 0; i < (arrPicPortrait.length); i++) {
+            arrContent[i] = arrPicPortrait[i];
         }
     }
     // photos: square
@@ -748,7 +782,6 @@ function doVisSubTypes(n) {
     }    
 
     // Number of column blocks
-
     if (objCols.length === 2) {
         for (let i = 0; i < (arrContent.length-1); i++) {
             arrContentLoop[i] = arrContent[i];
@@ -774,9 +807,32 @@ function doVisSubTypes(n) {
         for (let i = 0; i < (arrContent.length-1); i++) {
             arrContentTemp[i] = arrContent[i];
         }
+        arrContentLoop = [].concat(...Array(2).fill(arrContentTemp));
+    }
+
+    else if (objCols.length === 8) {
+        const arrContentTemp = [];
+        for (let i = 0; i < (arrContent.length); i++) {
+            arrContentTemp[i] = arrContent[i];
+        }
         arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
     }
 
+    else if (objCols.length === 9) {
+        const arrContentTemp = [];
+        for (let i = 0; i < (arrContent.length); i++) {
+            arrContentTemp[i] = arrContent[i];
+        }
+        arrContentLoop = [].concat(...Array(3).fill(arrContentTemp));
+    }
+
+    else if (objCols.length === 12) {
+        const arrContentTemp = [];
+        for (let i = 0; i < (arrContent.length); i++) {
+            arrContentTemp[i] = arrContent[i];
+        }
+        arrContentLoop = [].concat(...Array(4).fill(arrContentTemp));
+    }
 
     // Loop through columns
     for (let i = 0; i < objCols.length; i++) {
@@ -803,6 +859,8 @@ function doImgCircle() {
 }
 
 function removeVisual() {
+    resetImgCircle();
+    resetHyperlinks();
     const parentNode = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
     var el_img = Array.prototype.slice.call(iframe.contentWindow.document.getElementsByTagName("figure"),0); 
     for (let i = 0; i < el_img.length; i++) {
@@ -810,5 +868,7 @@ function removeVisual() {
     }
     parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-3\">\n\t\t\t", "<div class=\"col-3\">");
     parentNode.innerHTML = parentNode.innerHTML.replaceAll("<div class=\"col-4\">\n\t\t\t", "<div class=\"col-4\">");
+    const arg1 = sectionClassName+ " div[class^='flex-cols-'] div[class^='col-'] figure.icon { color:";
+    removeCSSTagPairs(arg1);
 }
 

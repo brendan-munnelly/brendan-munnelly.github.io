@@ -1,6 +1,5 @@
 import { content_header_label_text_col_1, content_h3, content_list, content_textbox_section, content_H4Overlay_section } from '../js/arr-content.js';
 
-
 /*
 //////////////// CATEGORY BADGE ABOVE H2 ///////////////
 */
@@ -15,7 +14,6 @@ function doBadge() {
     
     else {
         removeBadge();
-        console.log("Top of section")
         const newUpperLabelDiv = document.createElement("div");
         newUpperLabelDiv.classList.add("badge"); 
         iframe.contentWindow.document.querySelector('section').prepend(newUpperLabelDiv);
@@ -250,7 +248,6 @@ function doListMarker() {
     // Font Awesome
     else if (opt==="1") {
         if (iframe.contentWindow.document.querySelector("section ul:not(.fa-ul)") ) {
-            console.log("Got this far in Font Awesome");
             let objSection = iframe.contentWindow.document.querySelector("section");           objSection.innerHTML = objSection.innerHTML.replaceAll("<ul>", "<ul class=\"fa-ul\">");
             objSection.innerHTML = objSection.innerHTML.replaceAll("<li>", "<li><span class=\"fa-li\"><i class=\"fa-solid fa-circle-check\"><\/i><\/span>");
         }
@@ -311,113 +308,4 @@ function doHyperlinks() {
     }
 }
 
-/*
-//////////////// SECTION TEXT: ANIMATION ///////////////
-*/
-
-document.querySelector("#dd_text_slide").addEventListener("change", doTextAnimation);
-    
-function doTextAnimation() {
-    let opt = document.querySelector("#dd_text_slide").value;
-    if (opt==="0") {
-        removeTextAnimation();
-    }
-    let animationType;
-
-    if (opt==="1") { 
-        removeTextAnimation();
-        animationType = "slide-in-top"; 
-        applyAnimation(animationType);
-    }
-
-    if (opt==="2") {
-        removeTextAnimation();
-        animationType = "slide-in-left"; 
-        applyAnimation(animationType);
-    }
-
-    if (opt==="3") {
-        removeTextAnimation();
-        animationType = "slide-in-right"; 
-        applyAnimation(animationType);
-    }
-
-    if (opt==="4") {
-        removeTextAnimation();
-        animationType = "slide-in-bottom"; 
-        applyAnimation(animationType);
-    }
-
-    if (opt==="5") {
-        removeTextAnimation();
-        animationType = "fade-in"; 
-        applyAnimation(animationType);
-    }
-}
-
-function applyAnimation(animationType) {
-    document.querySelector("label[for='dd_text_slide']").style.color = "#fff";
-    if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
-        iframe.contentWindow.document.querySelector("section .container-upper-label").classList.add(animationType);
-    }
-
-    iframe.contentWindow.document.querySelector("section h2").classList.add(animationType);
-
-    if (iframe.contentWindow.document.querySelector("section h3")) {
-        iframe.contentWindow.document.querySelector("section h3").classList.add(animationType);
-    }
-
-    let paras = iframe.contentWindow.document.querySelectorAll("section p");
-    for (i = 0; i < paras.length; ++i) {
-        paras[i].classList.add(animationType)
-    }
-
-    if (iframe.contentWindow.document.querySelector("section ul")) {
-        iframe.contentWindow.document.querySelector("section ul").classList.add(animationType);
-    }
-    
-    if (iframe.contentWindow.document.querySelector("section figure")) {
-        iframe.contentWindow.document.querySelector("section figure").classList.add(animationType);
-    }
-    
-    if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.add(animationType);
-    }
-}
-
-function removeTextAnimation() {
-    document.querySelector("label[for='dd_text_slide']").style.color = "var(--gray-500)";
-    // Has .container-upper-label
-    if (iframe.contentWindow.document.querySelector("section .container-upper-label")) {
-        iframe.contentWindow.document.querySelector("section .container-upper-label").removeAttribute("class");
-    }
-
-    iframe.contentWindow.document.querySelector("section h2").removeAttribute("class");
-    
-    // Has h3 sub-heading
-    if (iframe.contentWindow.document.querySelector("section h3")) {
-        iframe.contentWindow.document.querySelector("section h3").removeAttribute("class");
-    }
-
-    let paras = iframe.contentWindow.document.querySelectorAll("section p");
-    for (i = 0; i < paras.length; ++i) {
-        paras[i].removeAttribute("class");
-    }
-    // Has ul list
-    if (iframe.contentWindow.document.querySelector("section ul")) {
-        iframe.contentWindow.document.querySelector("section ul").removeAttribute("class");
-    }
-    // Has figure
-    if (iframe.contentWindow.document.querySelector("section figure")) {
-        iframe.contentWindow.document.querySelector("section figure").removeAttribute("class");
-    }
-    // Has .container-btn
-    if (iframe.contentWindow.document.querySelector("section .container-btn")) {
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-top");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-bottom");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-left");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("slide-in-right");
-        iframe.contentWindow.document.querySelector("section .container-btn").classList.remove("fade-in");
-    }
-}
 

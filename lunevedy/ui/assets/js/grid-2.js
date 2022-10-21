@@ -451,7 +451,7 @@ function doColH3Hyperlink() {
 
         for (let i = 0; i < (objAllCols.length); i++) {
             target = objAllCols[i].innerHTML;
-            objAllCols[i].innerHTML = target.replace(/(<a class=\"col-2-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
+            objAllCols[i].innerHTML = target.replace(/(<a href=\"#\" class=\"col-2-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
         }
     }
 
@@ -462,8 +462,7 @@ function doColH3Hyperlink() {
        
         for (let i = 0; i < (objAllCols.length); i++) {
             target = objAllCols[i].innerHTML;
-            objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-2-h3\">').replace(/<\/h3>/igm, '<\/a>');
-
+            objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a href=\"#\" class=\"col-2-h3\">').replace(/<\/h3>/igm, '<\/a>');
         }
     }
 }

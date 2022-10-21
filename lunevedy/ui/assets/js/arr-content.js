@@ -74,7 +74,7 @@ export const content_paras_col_4 = ["\n\t\t\t<p>Our friendly baristas are waitin
 export const content_list_col_4 = ["\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Best value<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>", "\n\t\t\t\t<ul>\n\t\t\t\t\t<li><b>Fast delivery<\/b>: We ship to almost everywhere.<\/li>\n\t\t\t\t\t<li><b>Lowest prices<\/b>: We will not be beaten on price.<\/li>\n\t\t\t\t\t<li><b>Our mission<\/b>: We help client reinvent their brands.<\/li>\n\t\t\t\t<\/ul>"];
 
 export const content_photo_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/1024x618-cafe.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
-export const content_photo_square_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/1024x618-cafe.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+export const content_photo_square_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/1024x1024-business-woman.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 export const content_trans_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/800x480-trainers.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 export const content_drawing_landscape_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/800x480-teamwork.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 
@@ -86,12 +86,23 @@ export const content_vid_rumble_section ="\n\t\t\t\t<figure>\n\t\t\t\t\t<div cla
 export const content_textbox_section = "FRIENDLY SERVICE";
 export const content_H4Overlay_section = "Tasty breads fresh from the oven. Delicious coffee.";
 
-
 export const arrPic = [];
 arrPic[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-bakery.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 arrPic[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-fashion-yellow.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 arrPic[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-student.png\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 arrPic[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x280-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+
+export const arrPicSquare = [];
+arrPicSquare[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x400-coffee.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicSquare[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x400-footwear.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicSquare[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x400-laptop.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicSquare[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x400-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+
+export const arrPicPortrait = [];
+arrPicPortrait[0]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x600-biscuits.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicPortrait[1]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x600-fashion.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicPortrait[2]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x600-laptop.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
+arrPicPortrait[3]="\n\t\t\t\t<figure>\n\t\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/400x600-lisbon.jpg\" alt=\"Placeholder image\">\n\t\t\t\t<\/figure>";
 
 export const arrTrans = [];
 arrTrans[0]="\n\t\t\t<figure>\n\t\t\t\t<img src=\"..\/..\/ui\/assets\/img\/460x300-trans-couple-coffee.png\" alt=\"Placeholder image\">\n\t\t\t<\/figure>";
@@ -161,9 +172,13 @@ arrColBadge[2] = "\n\t\t\t\t<div class=\"badge\">EDUCATION<\/div>\n";
 arrColBadge[3] = "\n\t\t\t\t<div class=\"badge\">HOLIDAYS<\/div>\n";
 
 export const arrH4Overlay = [];
-arrH4Overlay[0] = "Tasty breads fresh from the oven. Delicious coffee."
-arrH4Overlay[1] = "Online bargains to help you look great and feel fantastic"
-arrH4Overlay[2] = "Invest your time in learning something new"
-arrH4Overlay[3] = "A holiday to remember at a price you can afford"
+// arrH4Overlay[0] = "Tasty breads fresh from the oven. Delicious coffee."
+// arrH4Overlay[1] = "Online bargains to help you look great and feel fantastic"
+// arrH4Overlay[2] = "Invest your time in learning something new"
+// arrH4Overlay[3] = "A holiday to remember at a price you can afford"
 
+arrH4Overlay[0] = "Tasty breads. Delicious coffee."
+arrH4Overlay[1] = "Look great. Feel fantastic"
+arrH4Overlay[2] = "Learn something new"
+arrH4Overlay[3] = "A holiday to remember"
 

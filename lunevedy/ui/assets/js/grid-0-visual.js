@@ -4,6 +4,8 @@ import {content_photo_landscape_section, content_photo_square_section, content_t
 ////////////////////// VISUALS: FOUR TYPES ///////////////////////
 */
 
+// global figure
+
 document.querySelector("#cb_visual").addEventListener("change", doVis);
 
 function doVis() {
@@ -24,6 +26,7 @@ function doVis() {
         document.getElementById("show-textbox").style.display = "none";
     }
     else {
+        document.getElementById("dd_switch_section_vis_width").value = "100";
         document.getElementById("properties-photos").style.display = "block";
         doPhotos(1);
     }
@@ -41,6 +44,8 @@ function doVisType() {
         }
     }
     removeVisual();
+    document.getElementById("dd_switch_section_vis_width").value = "100";
+
     if (selectedValue==="photos") {
         doPhotos();
     }
@@ -61,7 +66,6 @@ function doVisType() {
 
 function doPhotos() {
     removeVisual();
-
     // Visual types
     document.getElementById("form_vis_types").style.display = "block";
     document.getElementById("rb_vis_type_1").disabled=false;
@@ -91,18 +95,23 @@ function doPhotosType() {
 
     let opt = document.querySelector("#dd_photos_shape").value;
     removeVisual();
+    document.getElementById("dd_switch_section_vis_width").value = "100";
     if (opt==="1") {
-        doVisSubTypes(1);    
+        doVisSubTypes(1); 
+        document.getElementById("cb_photos_round").checked = false;
+        document.getElementById("cb_photos_round").disabled = true;
     }
     else if (opt==="2") {
         doVisSubTypes(2);    
+        document.getElementById("cb_photos_round").checked = false;
+        document.getElementById("cb_photos_round").disabled = false;
     }
-    else if (opt==="3") {
-        doVisSubTypes(3);    
-    }
-    else if (opt==="4") {
-        doVisSubTypes(4);    
-    }        
+    // else if (opt==="3") {
+    //     doVisSubTypes(3);    
+    // }
+    // else if (opt==="4") {
+    //     doVisSubTypes(4);    
+    // }        
 }
 
 /* photos: corners */
@@ -118,6 +127,32 @@ function doPhotosCorners() {
     }
     else {
         el_fig.classList.add("fig-corners-soft");
+    }
+}
+
+/* photos: round */
+document.querySelector("#cb_photos_round").addEventListener("change", doPhotosRound);
+
+function doPhotosRound() {
+    const el_fig = iframe.contentWindow.document.querySelector("section figure img");
+    
+    if (!document.getElementById("cb_photos_round").checked) {
+        el_fig.classList.remove("img-rounded");
+        document.getElementById("cb_photos_corners_soft").checked = false;
+        document.getElementById("cb_photos_corners_soft").disabled = false;
+        document.getElementById("cb_img_textbox").checked = false;
+        document.getElementById("cb_img_textbox").disabled = false;
+        document.getElementById("cb_img_h4").checked = false;
+        document.getElementById("cb_img_h4").disabled = false;
+    }
+    else {
+        el_fig.classList.add("img-rounded");
+        document.getElementById("cb_photos_corners_soft").checked = false;
+        document.getElementById("cb_photos_corners_soft").disabled = true;
+        document.getElementById("cb_img_textbox").checked = false;
+        document.getElementById("cb_img_textbox").disabled = true;
+        document.getElementById("cb_img_h4").checked = false;
+        document.getElementById("cb_img_h4").disabled = true;
     }
 }
 
@@ -333,18 +368,20 @@ document.querySelector("#dd_switch_section_vis_width").addEventListener("change"
 function doFigWidth() {
     let opt = document.querySelector("#dd_switch_section_vis_width").value;
     const el_section_fig = iframe.contentWindow.document.querySelector("section figure");
+    const el_section_fig_img = iframe.contentWindow.document.querySelector("section figure img");
 
     if (opt==="100") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.remove("figure-width-80");
         el_section_fig.classList.remove("figure-width-full");
-        // disableVisualAlign();
+        document.getElementById("figure-animate").disabled = false;
     }
 
     else if (opt==="80") {
         el_section_fig.classList.remove("figure-width-50");
         el_section_fig.classList.remove("figure-width-full");
         el_section_fig.classList.add("figure-width-80");
+        document.getElementById("figure-animate").disabled = false;
         // enableVisualAlign();
     }
 
@@ -352,6 +389,7 @@ function doFigWidth() {
         el_section_fig.classList.remove("figure-width-80");
         el_section_fig.classList.remove("figure-width-full");
         el_section_fig.classList.add("figure-width-50");
+        document.getElementById("figure-animate").disabled = false;
         // enableVisualAlign();        
     }
 
@@ -360,6 +398,12 @@ function doFigWidth() {
         el_section_fig.classList.remove("figure-width-80");
         el_section_fig.classList.add("figure-width-full");
         // enableVisualAlign();        
+        el_section_fig_img.classList.remove("img-rounded");
+        document.getElementById("cb_photos_round").checked = false;
+        document.getElementById("cb_photos_round").disabled = true;
+        document.getElementById("figure-animate").disabled = true;
+        document.getElementById("figure-animate").value = "0";
+        removePlaceHolderContent();
     }
 }
 
@@ -461,9 +505,96 @@ function doVisSubTypes(n) {
 }
 
 function removeVisual() {
+    document.getElementById("dd_switch_section_vis_width").value = "100";
     const parentNode = iframe.contentWindow.document.querySelector("section");
     var el_img = Array.prototype.slice.call(iframe.contentWindow.document.getElementsByTagName("figure"),0); 
     for (let i = 0; i < el_img.length; i++) {
         el_img[i].parentNode.removeChild(el_img[i]);
     }
 }
+
+
+/*
+//////////////// ANIMATE VISUAL ///////////////
+*/
+
+document.querySelector("#figure-animate").addEventListener("change", doFigureAnimate);
+
+function doFigureAnimate() {
+
+    let opt = document.getElementById("figure-animate").value;
+
+    if (opt==="0") {
+        removeFigureAnimate();
+    }
+
+    else if (opt==="2") {
+        removeFigureAnimate();
+        iframe.contentWindow.document.querySelector("section > figure").classList.add("reveal-slide-up");
+        // doFigureReveal(2);
+        addPlaceHolderContent();
+    }
+
+    else if (opt==="3") {
+        removeFigureAnimate();
+        iframe.contentWindow.document.querySelector("section > figure").classList.add("reveal-slide-from-left");
+        // doFigureReveal(3);
+        addPlaceHolderContent();
+    }
+
+    else if (opt==="4") {
+        removeFigureAnimate();
+        iframe.contentWindow.document.querySelector("section > figure").classList.add("reveal-slide-from-right");
+        // doFigureReveal(4);
+        addPlaceHolderContent();
+    }
+
+    else if (opt==="5") {
+        removeFigureAnimate();
+        iframe.contentWindow.document.querySelector("section > figure").classList.add("reveal-fade-in");
+        // doFigureReveal(4);
+        addPlaceHolderContent();
+    }
+
+    else if (opt==="6") {
+        removeFigureAnimate();
+        iframe.contentWindow.document.querySelector("section > figure").classList.add("reveal-scale-in");
+        // doFigureReveal(4);
+        addPlaceHolderContent();
+    }
+}
+
+function removeFigureAnimate() {
+    removePlaceHolderContent();
+    iframe.contentWindow.document.querySelector("section > figure").classList.remove("reveal-slide-up");
+    iframe.contentWindow.document.querySelector("section > figure").classList.remove("reveal-slide-from-left");
+    iframe.contentWindow.document.querySelector("section > figure").classList.remove("reveal-slide-from-right");
+    iframe.contentWindow.document.querySelector("section > figure").classList.remove("reveal-fade-in");
+    iframe.contentWindow.document.querySelector("section > figure").classList.remove("reveal-scale-in");
+}
+
+
+function addPlaceHolderContent() {
+    const strContent = "<section><div class='col-1 text-center'><h2>Some placeholder text</h2><h3>Leverage agile frameworks to provide a robust synopsis for high level overviews to foster collaborative thinking.</h3></div><div class='flex-cols-3'><div class='col-3'><figure><img src='../../ui/assets/img/460x280-bakery.png' alt='Placeholder image'></figure><h3>Lunevedy Cafe Bakery</h3><p>Our friendly baristas are waiting to pour your favourite beverage. We use only hand roasted coffee and expertly selected tea leaves.</p></div><div class='col-3'><figure><img src='../../ui/assets/img/460x280-fashion-yellow.png' alt='Placeholder image'></figure><h3>Lunevedy Fashion Store</h3><p>Level up your look with our ever-changing selection of on-trend brands. We ship to almost everywhere quickly and reliably.</p></div><div class='col-3'><figure><img src='../../ui/assets/img/460x280-student.png' alt='Placeholder image'></figure><h3>Learn JavaScript today</h3><p>Supercharge your web design career with the <i>Lunevedy: JavaScript for Beginners</i> training course. All important topics covered.</p></div></div></section>";
+
+    const placeHolderSection = document.createElement('section');
+    placeHolderSection.classList.add('placeholder');
+    placeHolderSection.style.backgroundColor ='#eceff1';
+    placeHolderSection.style.filter = 'blur(1px)';
+    placeHolderSection.style.paddingTop = '1%';
+    placeHolderSection.style.paddingBottom = '1%';
+    placeHolderSection.innerHTML=strContent;
+    const HTMLContent = iframe.contentWindow.document.getElementById('HTML-Content');
+    const currentSection = iframe.contentWindow.document.querySelector('section');
+    HTMLContent.insertBefore(placeHolderSection, currentSection);        
+    document.getElementById("HTML-Content").scrollIntoView();
+    iframe.contentWindow.document.querySelector('section').scrollIntoView();
+}
+
+function removePlaceHolderContent() {
+    if (iframe.contentWindow.document.querySelector('section.placeholder')) {
+        let placeHolderSection = iframe.contentWindow.document.querySelector('section.placeholder');
+        placeHolderSection.remove();
+    }
+}
+

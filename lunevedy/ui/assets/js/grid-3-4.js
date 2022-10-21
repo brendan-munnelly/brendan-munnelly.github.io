@@ -590,10 +590,10 @@ function doColH3Hyperlink() {
             target = objAllCols[i].innerHTML;
 
             if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
-                objAllCols[i].innerHTML = target.replace(/(<a class=\"col-3-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
+                objAllCols[i].innerHTML = target.replace(/(<a href=\"#\" class=\"col-3-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
             }
             else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
-                objAllCols[i].innerHTML = target.replace(/(<a class=\"col-4-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
+                objAllCols[i].innerHTML = target.replace(/(<a href=\"#\" class=\"col-4-h3\">)/igm, '<h3>').replace(/<\/a>/igm, '<\/h3>');
             }
         }
     }
@@ -607,11 +607,11 @@ function doColH3Hyperlink() {
             target = objAllCols[i].innerHTML;
 
             if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-3")) {
-                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-3-h3\">').replace(/<\/h3>/igm, '<\/a>');
+                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a href=\"#\" class=\"col-3-h3\">').replace(/<\/h3>/igm, '<\/a>');
             }
 
             else if (iframe.contentWindow.document.querySelector("div[class^='flex-cols-'] .col-4")) {
-                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a class=\"col-4-h3\">').replace(/<\/h3>/igm, '<\/a>');
+                objAllCols[i].innerHTML = target.replace(/(<h3>)/igm, '<a href=\"#\" class=\"col-4-h3\">').replace(/<\/h3>/igm, '<\/a>');
             }
         }
      }
