@@ -19,10 +19,8 @@ function setColumnBlocks() {
 
     let objAllCols = iframe.contentWindow.document.querySelectorAll(".flex-cols-2 .col-2");
     
-    console.log("objAllCols: "+objAllCols.length);
-    // Reduce to two
     if (selectedValue==="row-one") {
-        // from four to two
+        // reduce from 4 to 2
         if (objAllCols.length === 4) {
             for (let i = 0; i < 2; i++) {
                 objAllCols[i].remove();
@@ -30,7 +28,7 @@ function setColumnBlocks() {
             document.getElementById("slider-gap-row").disabled = true;
         }
 
-        // from six to two
+        // reduce from 6 to 2
         else if (objAllCols.length === 6) {
             for (let i = 0; i < 4; i++) {
                 objAllCols[i].remove();
@@ -40,7 +38,7 @@ function setColumnBlocks() {
     }
 
     else if (selectedValue==="row-two") {
-        // 2 to 4. Double current content
+        // increase from 2 to 4
         if (objAllCols.length === 2) {
             let objRowOne = iframe.contentWindow.document.querySelector(".flex-cols-2");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
@@ -48,7 +46,7 @@ function setColumnBlocks() {
             document.getElementById("slider-gap-row").disabled = false;
         }
 
-        // 6 tp 4.
+        // reduce from 6 to 4.
         else if (objAllCols.length === 6) {
             objAllCols = iframe.contentWindow.document.querySelectorAll(".flex-cols-2 .col-2");
             for (let i = 0; i < 2; i++) {
@@ -59,7 +57,7 @@ function setColumnBlocks() {
     }
 
     else if (selectedValue==="row-three") {
-        // 2 to 6. Treble current content
+        // increase from 2 to 6
         if (objAllCols.length === 2) {
             let objRowOne = iframe.contentWindow.document.querySelector(".flex-cols-2");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML + objRowOne.innerHTML;
@@ -67,8 +65,9 @@ function setColumnBlocks() {
             document.getElementById("slider-gap-row").disabled = false;
         }
 
-        // 4 to 6. Double and remove 2.
-        if (objAllCols.length === 6) {
+        // increase from 4 to 6. 
+        // Double and remove 2.
+        if (objAllCols.length === 4) {
             let objRowOne = iframe.contentWindow.document.querySelector(".flex-cols-2");
             objRowOne.innerHTML = objRowOne.innerHTML + objRowOne.innerHTML;
             for (let i = 0; i < 2; i++) {
@@ -443,7 +442,7 @@ function doColH3Hyperlink() {
     let target;
     let col_no = "col-2-h3";
 
-    console.log("col_no: " + col_no);
+    // console.log("col_no: " + col_no);
     if (!document.querySelector("#cb_cols_links_h3").checked) {
         document.getElementById("hyperlinks-h3").style.display="none";
         document.getElementById("hyperlinks-h3-underline").style.display="none";
@@ -874,7 +873,7 @@ function doColBordersWidth() {
         }
     }
 
-    console.log("selectedValue:" +selectedValue);
+    // console.log("selectedValue:" +selectedValue);
     const objAllCols = iframe.contentWindow.document.querySelector("div[class^='flex-cols-']");
 
     objAllCols.classList.remove("cols-borders-width-1");
