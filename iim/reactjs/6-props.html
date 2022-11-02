@@ -14,7 +14,7 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6 icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,9 +29,9 @@
 					<div><p>&nbsp;</p>
 					</div>
 				</div>
-		
+
 				<div class="content">
-					<h1>6: Props, State, and Hooks</h1>
+					<h1>6: Props and Components</h1>
 					<h2>About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
 				</div>
 			</div><!-- /wrapper -->
@@ -41,9 +41,9 @@
 
 			<aside>
 				<h3>REACT COURSE</h3>
-	
+
 				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
-	
+
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#props-about">About props in React</a></p>
@@ -53,7 +53,7 @@
 				<p><a href="#props-state-hooks">Props, state, and hooks</a></p>
 
 			</aside>
-	
+
 	<article>
 	<section id="learning-goals">
 		<h2>Learning Goals</h2>
@@ -77,7 +77,7 @@
 
 		<img src="exercises/6/assets/img/props-intro-1.png" >
 
-		<p>And in your parent component you pass pass arguemtns to that child component as follows.</p>
+		<p>And in your parent component you pass pass arguments to that child component as follows.</p>
 
 		<img src="exercises/6/assets/img/props-intro-2.png" >
 
@@ -93,7 +93,7 @@
 			<img src="exercises/6/assets/img/terminal-app-start.png" alt="React screenshot"></li>
 
 			<li>From the <span class="syn-js">/src</span> folder of your app, open the <b>Main.js</b> component file.</li>
-			
+
 			<li>Near the start of the text paragraph, add the prop <span class="syn-js">{companyName}</span> prop as shown below.
 			<img src="exercises/6/assets/img/prop-1.png" alt="React screenshot"></li>
 
@@ -162,22 +162,69 @@
 
    	</section>
 
+	   <section id="props-read-only">
+
+		<h2>Props are Read-Only</h2>
+
+		<p>In React, a functional component can never modify its own props. Consider this JavaScript sum function:</p>
+
+<pre class="language-javascript">function sum(a, b) {
+    return a + b;
+}</pre>
+
+		<p>Such functions are called <i>pure</i> because they do not attempt to change their inputs, and always return the same result for the same inputs.</p>
+
+		<p>In contrast, this function is <i>iumpure</i> because it changes its own input:</p>
+
+<pre class="language-javascript">function updatePrice(amount) {
+    amount = amount * 0.15;
+    return amount;
+}</pre>
+
+  		<p>All React components must act like pure functions with respect to their props.</p>
+
+		<p>The following example will still output whatever value is passed down to it from its parent component instead of “Mark”:</p>
+
+<img src="exercises/6/assets/img/prop-7.png" alt="">
+
+
+	   </section>
+
+
+
+
 	<section id="props-state-hooks">
-	
+
 		<h2>Props, state, and hooks</h2>
 		<p>Props are immutable. Their value cannot be changed.</p>
 
 		<p>But what if you need variables that might change later? For example, in response to user actions or server responses?</p>
 
-		<p>This is where <i>state</i> and <i>hooks</i> come in.</p>
-				
-		<p>States are data that is first set (initialized) and later managed by a component. Here’s how you define a function component state:</p>
+		<p>To handle application UIs that are dynamic and change over time, React uses the concepts of <i>state</i> and <i>hooks</i>.</p>
+
+		<p>The state is a built-in React object that is used to contain data or information about a component. A few points about state:</p>
+
+		<ul>
+			<li>A component&#8217;s state can be modified based on user actions, network changes or whatever.</li>
+			<li>Every time the state of an object changes, React re-renders the component to the browser.</li>
+			<li>The state object must be initialised.</li>
+			<li>The state object can store multiple properties.</li>
+			<li>The <span class="syn-js">setState()</span> method is used to change the value of the state object in response to event handlers, server responses, or prop changes. It also instructs React to re-render the component (and any children) with the new, updated state.</li>
+		</ul>
+
+		<p>Here are the fundamental differences between state and props: </p>
+		<img src="exercises/6/assets/img/props-state.png" alt="">
+
+		<p>In summary, props are inputs passed down from a parent component to its child component. On the other hand, states are variables defined and managed within the component.</p>
+
+
+		<p>States are data that is first set (initialized) and later managed by a component. Here&#8217;s how you define a function component state:</p>
 
 <pre class="language-javascript">import React, {useState} from React
 function ParentComponent() {
    const [name, setName] = React.useState("John");
    const [count, setCount] = React.useState(0);
-   const [age, setAge] = React.useState(42); 
+   const [age, setAge] = React.useState(42);
 }</pre>
 
 <p>The convention is to name the two state variables like this: <span class="syn-js">[something, setSomething]</span>.</p>
@@ -221,7 +268,7 @@ export default function Counter() {
    function handleClick() {
       setCount(count + 1);
    }
-	
+
    return (
       &lt;button onClick={handleClick}&gt;
          You pressed me {count} times

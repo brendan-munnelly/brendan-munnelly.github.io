@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>7: State and Hooks | ReactJS Tutorials</title>
+	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>7: State and Hooks</h1>
+					<h2>About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#cra-about">About Create React App (CRA)</a></p>
+				<p><a href="#cra-sample">Building your first app with CRA</a></p>
+				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#immediate"><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#immediate"><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#immediate"><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+
+			</aside>
+
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="props-state-hooks">
+
+		<h2>State and hooks</h2>
+		<p>In the previous <a href="6-props.html">Tutorial</a>, you saw that React props are immutable. Their value cannot be changed.</p>
+
+		<p>But what if you need variables that might change later? For example, in response to user actions or server responses?</p>
+
+		<p>To handle application UIs that are dynamic and change over time, React uses the concepts of <i>state</i> and <i>hooks</i>.</p>
+
+		<p>The state is a built-in React object that is used to contain data or information about a component. A few points about state:</p>
+
+		<ul>
+			<li>A component&#8217;s state can be modified based on user actions, network changes or whatever.</li>
+			<li>Every time the state of an object changes, React re-renders the component to the browser.</li>
+			<li>The state object must be initialised.</li>
+			<li>The state object can store multiple properties.</li>
+			<li>For functional components, the <span class="syn-js">useState()</span> method is used to change the value of the state object in response to event handlers, server responses, or prop changes. It also instructs React to re-render the component (and any children) with the new, updated state.</li>
+			<li>The equivalent method for class-based components is called <span class="syn-js">setState()</span>.</li>
+		</ul>
+
+		<p>Here are the fundamental differences between state and props: </p>
+		<img src="exercises/6/assets/img/props-state.png" alt="">
+
+		<p>In summary, props are inputs passed down from a parent component to its child component. On the other hand, states are variables defined and managed within the component.</p>
+
+        <p>In React, a component should never change its own props directly. Only a parent component can change them by passing down different arguments from a higher level.</p>
+
+        <p>A component, however, can change its state at any time.</p>
+
+        <p>In React, a <i>stateful component</i> is a component that holds some state. Such components are often called <i>Container</i> or <i>Smart</i> components.</p>
+
+        <p><i>Stateless components</i>, by contrast, have no state. They simply return what is given to them via props. They sar also called <i>Presentational</i> or <i>Dumb</i> components.</p>
+
+        <p>Reactjs.org says <i>"A common pattern is to create several stateless components that just render data, and have a stateful component above them in the hierarchy that passes its state to its children via props. The stateful component encapsulates all of the interaction logic, while the stateless components take care of rendering data in a declarative way."</i> </p>
+
+        <p>A component's state is very similar to a locally declared variable in a JavaScript function. The state containing the properties of the component can only be modified inside of the component. The content of the state is changed by the components event handlers to trigger updates to the user interface. When the state's content changes the component re-renders. </p>
+
+    </section>
+
+
+    <section>
+
+    <h2>The <code>useState()</code> method and array destructuring</h2>
+
+
+		<p>Here&#8217;s how you define a function component state:</p>
+
+<pre class="language-javascript">import React, {useState} from React</pre>
+
+<pre class="language-javascript">function ParentComponent() {
+   <span class="comment">// Declare and initialise three new state variables</span>
+   const [name, setName] = useState("John");
+   const [count, setCount] = useState(0);
+   const [age, setAge] = useState(42);
+}</pre>
+
+<p>Calling the <span class="syn-js">useState()</span> method returns two items of any array.</p>
+
+
+<p><span class="syn-js">const [something, setSomething] = useState(&lt;initial value&gt;)</span></p>
+
+<p>The two items of this <i>array destructuring</i> statement are:</p>
+
+<ul>
+	<li><span class="syn-js">something</span>: The state variable. You set this to the initial state on the RHS of the statement.</li>
+	<li><span class="syn-js">setSomething</span>: The update function can change <span class="syn-js">something</span> to another value, according to user interaction or network update.</li>
+</ul>
+
+<p>For example:</p>
+<pre class="language-javascript">function handleClick() {
+   setName('Paul');
+}</pre>
+
+<p>Or</p>
+<pre class="language-javascript">function handleClick() {
+    setCount(42);
+ }</pre>
+
+	<p>The <span class="syn-js">useState</span> function is an example of what is called in React a 'hook'. These functions let you use React's state feature in functional components.</p>
+
+	<p>You can pass both state (<span class="syn-js">something</span>) and its update function (<span class="syn-js">setSomething</span>) into any child component as a prop:</p>
+
+<pre class="language-javascript">import React, {useState} from React
+function ParentComponent() {
+   const [name, setName] = useState("John");
+   return &lt;ChildComponent name={name} setName={setName} /&gt;;
+}</pre>
+
+<p>React will store the <i>next</i> state, render your component again with the new value(s), and update the UI.</p>
+
+<p>When a child component needs the state to change, you can do so by calling on the <span class="syn-js">setName</span> function. In the following example, a button changes the value of <span class="syn-js">name</span> when it is clicked:</p>
+
+<img src="exercises/6/assets/img/state-fig.png" alt="React screenhot">
+
+</section>
+
+
+<section>
+
+    <h2>Working with a Stateful Component</h2>
+
+    <p>Follow these steps to build a basic stateful component in React with the <span class="syn-js">useState()</span> hook.</p>
+
+    <ol>
+        <li>In your <b>minimal-app</b>, add a new component file called <b>HookCounter.js</b> in the <span class="syn-js">/src</span> folder.</li>
+        <li>Enter the following in the file:
+<pre class="language-javascript">import { useState } from 'react'
+export default function HookCounter () {
+   // Declare and initialise state variable
+   const [count, setCount] = useState(0);
+   return (
+   &lt;&gt;
+     &lt;section&gt;
+     &lt;p&gt;You clicked {count} times&lt;/p&gt;
+     &lt;button className = "btn btn-solid" onClick={ () =&gt; setCount(count + 1) }>Click me&lt;/button&gt;
+     &lt;/section&gt;
+    &lt;/&gt;
+    )
+}</pre></li>
+        <li>Update your <b>App.js</b> file with the <span class="syn-js">import</span> statment below.
+<pre class="language-javascript">import HookCounter from './HookCounter';</pre></li>
+
+        <li>Add this component as the last child component:
+<pre class="language-javascript">&lt;HookCounter /&gt;</pre></li>
+</ol>
+
+<p>The web browser output should look as shown below.</p>
+
+<img src="exercises/7/assets/img/counter-output.png" alt="">
+
+<p>In this example, clicking the button increments the number in the <span class="syn-js">count</span> state variable.</p>
+
+<p>The example uses an inline arrow function, with the following general format:</p>
+
+<pre class="language-javascript">&lt;button onClick={() => { <span class="comment">/* some action */</span> }} /&gt;
+&lt;button onClick={() => { <span class="comment">/* another action */</span> }} /&gt;</pre>
+
+<p>In this next example, the text state variable holds a string. When you type,<span class="syn-js">handleChange</span> reads the latest input value from the browser input DOM element, and calls <span class="syn-js">setText</span> to update the state. This allows you to display the current text below.</p>
+
+<pre class="language-javascript">import { useState } from 'react';
+
+export default function MyInput() {
+   const [text, setText] = useState('hello');
+
+   function handleChange(e) {
+      setText(e.target.value);
+   }
+
+   return (
+   &lt;&gt;
+      &lt;input value={text} onChange={handleChange} /&gt;
+      &lt;p>You typed: {text}&lt;/p&gt;
+      &lt;button onClick={() => setText('hello')}&gt;
+        Reset
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+}</pre>
+
+<p>You can put objects and arrays into state. In React, state is considered read-only, so you should replace it rather than mutate your existing objects. For example, if you have a form object in state, don’t update it like this:</p>
+
+<pre class="language-javascript">// Don't mutate an object in state like this:
+form.firstName = 'Taylor';</pre>
+
+<p>Instead, replace the whole object by creating a new one:</p>
+<pre class="language-javascript">// Replace state with a new object
+setForm({
+   ...form,
+   firstName: 'Taylor'
+});</pre>
+
+
+	</section>
+
+
+
+	<p>&nbsp;</p>
+	<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>
