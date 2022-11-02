@@ -50,7 +50,7 @@
 				<p><a href="#props-parameters">Adding props as parameters to components</a></p>
 				<p><a href="#props-arguments">Passing arguments to props</a></p>
 				<p><a href="#props-data-types">Props and data types</a></p>
-				<p><a href="#props-state-hooks">Props, state, and hooks</a></p>
+
 
 			</aside>
 
@@ -77,7 +77,7 @@
 
 		<img src="exercises/6/assets/img/props-intro-1.png" >
 
-		<p>And in your parent component you pass pass arguments to that child component as follows.</p>
+		<p>And in your parent component you pass arguments to that child component as follows.</p>
 
 		<img src="exercises/6/assets/img/props-intro-2.png" >
 
@@ -156,7 +156,7 @@
    <p>You should see the following output on the web page.</p>
    <img src="exercises/6/assets/img/prop-5.png" style="max-width: 600px" alt="React screenshot">
 
-   <p>In real-world apps, the child component often renders conditionally depending on whether on the props are passed to into it. See below.</p>
+   <p>In real-world apps, the child component often renders conditionally depending on whether on the props are passed into it. See below.</p>
 
    <img src="exercises/6/assets/img/prop-6.png" style="max-width: 600px" alt="React screenshot">
 
@@ -174,7 +174,7 @@
 
 		<p>Such functions are called <i>pure</i> because they do not attempt to change their inputs, and always return the same result for the same inputs.</p>
 
-		<p>In contrast, this function is <i>iumpure</i> because it changes its own input:</p>
+		<p>In contrast, this function is <i>impure</i> because it changes its own input:</p>
 
 <pre class="language-javascript">function updatePrice(amount) {
     amount = amount * 0.15;
@@ -186,134 +186,6 @@
 		<p>The following example will still output whatever value is passed down to it from its parent component instead of “Mark”:</p>
 
 <img src="exercises/6/assets/img/prop-7.png" alt="">
-
-
-	   </section>
-
-
-
-
-	<section id="props-state-hooks">
-
-		<h2>Props, state, and hooks</h2>
-		<p>Props are immutable. Their value cannot be changed.</p>
-
-		<p>But what if you need variables that might change later? For example, in response to user actions or server responses?</p>
-
-		<p>To handle application UIs that are dynamic and change over time, React uses the concepts of <i>state</i> and <i>hooks</i>.</p>
-
-		<p>The state is a built-in React object that is used to contain data or information about a component. A few points about state:</p>
-
-		<ul>
-			<li>A component&#8217;s state can be modified based on user actions, network changes or whatever.</li>
-			<li>Every time the state of an object changes, React re-renders the component to the browser.</li>
-			<li>The state object must be initialised.</li>
-			<li>The state object can store multiple properties.</li>
-			<li>The <span class="syn-js">setState()</span> method is used to change the value of the state object in response to event handlers, server responses, or prop changes. It also instructs React to re-render the component (and any children) with the new, updated state.</li>
-		</ul>
-
-		<p>Here are the fundamental differences between state and props: </p>
-		<img src="exercises/6/assets/img/props-state.png" alt="">
-
-		<p>In summary, props are inputs passed down from a parent component to its child component. On the other hand, states are variables defined and managed within the component.</p>
-
-
-		<p>States are data that is first set (initialized) and later managed by a component. Here&#8217;s how you define a function component state:</p>
-
-<pre class="language-javascript">import React, {useState} from React
-function ParentComponent() {
-   const [name, setName] = React.useState("John");
-   const [count, setCount] = React.useState(0);
-   const [age, setAge] = React.useState(42);
-}</pre>
-
-<p>The convention is to name the two state variables like this: <span class="syn-js">[something, setSomething]</span>.</p>
-
-<p>The left-hand-side of this <i>array destructuring</i> statement is an array with two items:</p>
-
-<ul>
-	<li>The current value of the state variable <span class="syn-js">something</span>. This is set to the initial state you provided.</li>
-	<li>The <span class="syn-js">setSomething</span> function can change <span class="syn-js">something</span> to another value, according to user interaction or network update.</li>
-</ul>
-
-<p>For example:</p>
-<pre class="language-javascript">function handleClick() {
-	setName('Paul'}
-}</pre>
-	<p>The <span class="syn-js">useState</span> function is an example of what is called in React a 'hook'. These functions let you use React's state feature in functional components.</p>
-
-	<p>You can pass both state and its update function into any child component as a prop when required:</p>
-
-<pre class="language-javascript">import React, {useState} from React
-function ParentComponent() {
-   const [name, setName] = React.useState("John");
-   return <ChildComponent name={name} setName={setName} />;
-}</pre>
-
-<p>React will store the <i>next</i> state, render your component again with the new value(s), and update the UI.</p>
-
-<p>When a child component needs the state to change, you can do so by calling on the setName function. In the following example, a button changes the value of <span class="syn-js">name</span> when it gets clicked:</p>
-
-<img src="exercises/6/assets/img/state-fig.png" alt="React screenhot">
-
-<p>Here are some examples you can add to your <b>Apps.js</b> component.</p>
-
-<p>In this example, clicking the button increments the number in the count state variable.</p>
-
-<pre class="language-javascript">import { useState } from 'react';
-
-export default function Counter() {
-   const [count, setCount] = useState(0);
-
-   function handleClick() {
-      setCount(count + 1);
-   }
-
-   return (
-      &lt;button onClick={handleClick}&gt;
-         You pressed me {count} times
-      &lt;/button&gt;
-   );
-}
-</pre>
-
-<p>In this example, the text state variable holds a string. When you type,<span class="syn-js">handleChange</span> reads the latest input value from the browser input DOM element, and calls <span class="syn-js">setText</span> to update the state. This allows you to display the current text below.</p>
-
-<pre class="language-javascript">import { useState } from 'react';
-
-export default function MyInput() {
-   const [text, setText] = useState('hello');
-
-   function handleChange(e) {
-      setText(e.target.value);
-   }
-
-   return (
-   &lt;&gt;
-      &lt;input value={text} onChange={handleChange} /&gt;
-      &lt;p>You typed: {text}&lt;/p&gt;
-      &lt;button onClick={() => setText('hello')}&gt;
-        Reset
-      &lt;/button&gt;
-    &lt;/&gt;
-  );
-}</pre>
-
-<p>You can put objects and arrays into state. In React, state is considered read-only, so you should replace it rather than mutate your existing objects. For example, if you have a form object in state, don’t update it like this:</p>
-
-<pre class="language-javascript">// Don't mutate an object in state like this:
-form.firstName = 'Taylor';</pre>
-
-<p>Instead, replace the whole object by creating a new one:</p>
-<pre class="language-javascript">// Replace state with a new object
-setForm({
-   ...form,
-   firstName: 'Taylor'
-});</pre>
-
-
-	</section>
-
 
 
 	<p>&nbsp;</p>

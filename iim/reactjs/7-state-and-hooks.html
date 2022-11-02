@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>7: State and Hooks | ReactJS Tutorials</title>
-	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+	<meta name="description" content="How React handles dynamic data with the concepts of state and hooks.s">
 
 	<meta name="robots" CONTENT="noindex">
 
@@ -32,7 +32,7 @@
 
 				<div class="content">
 					<h1>7: State and Hooks</h1>
-					<h2>About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
+					<h2>How React handles dynamic data with the concepts of state and hooks.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -46,21 +46,10 @@
 
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#cra-about">About Create React App (CRA)</a></p>
-				<p><a href="#cra-sample">Building your first app with CRA</a></p>
-				<p><a href="#cra-folders-files">React folders and files</a></p>
-				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
-				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
-				<p><a href="#immediate"><a href="#app-starting">Starting your app</a></p>
-
-				<p><a href="#immediate"><a href="#app-customising">Customising your app</a></p>
-
-				<p><a href="#immediate"><a href="#components">Adding functional components</a></p>
-
-				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
-
-				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
-
+				<p><a href="#state-hooks">State and hooks</a></p>
+				<p><a href="#useState">The useState() method and array destructuring</a></p>
+				<p><a href="#stateful-components">Working with a Stateful Component</a></p>
+				<p><a href="#useEffect">Hooks and the useEffect() method</a></p>
 			</aside>
 
 	<article>
@@ -69,16 +58,17 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
-			<li>Customise the template files according to your requirements.</li>
-			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+			<li>Understand that React components cannot change the values of their props.</li>
+			<li>Understand the difference between <i>stateful</i> (Container) functions and <i>stateless</i> (Presentational) in React.</li>
+			<li>Understand the roles of <i>state</i> and <i>hooks</i> in responding to user interactions and network updates.</li>
+			<li>Use the <span class="syn-js">useState</span> and <span class="syn-js">useEffect</span> hooks in a basic React app.</li>
 		</ul>
 
 	</section>
 
 
 
-	<section id="props-state-hooks">
+	<section id="state-hooks">
 
 		<h2>State and hooks</h2>
 		<p>In the previous <a href="6-props.html">Tutorial</a>, you saw that React props are immutable. Their value cannot be changed.</p>
@@ -109,7 +99,7 @@
 
         <p>In React, a <i>stateful component</i> is a component that holds some state. Such components are often called <i>Container</i> or <i>Smart</i> components.</p>
 
-        <p><i>Stateless components</i>, by contrast, have no state. They simply return what is given to them via props. They sar also called <i>Presentational</i> or <i>Dumb</i> components.</p>
+        <p><i>Stateless components</i>, by contrast, have no state. They simply return what is given to them via props. They are also called <i>Presentational</i> or <i>Dumb</i> components.</p>
 
         <p>Reactjs.org says <i>"A common pattern is to create several stateless components that just render data, and have a stateful component above them in the hierarchy that passes its state to its children via props. The stateful component encapsulates all of the interaction logic, while the stateless components take care of rendering data in a declarative way."</i> </p>
 
@@ -118,7 +108,7 @@
     </section>
 
 
-    <section>
+    <section id="useState">
 
     <h2>The <code>useState()</code> method and array destructuring</h2>
 
@@ -175,7 +165,7 @@ function ParentComponent() {
 </section>
 
 
-<section>
+<section id="stateful-components">
 
     <h2>Working with a Stateful Component</h2>
 
@@ -186,7 +176,7 @@ function ParentComponent() {
         <li>Enter the following in the file:
 <pre class="language-javascript">import { useState } from 'react'
 export default function HookCounter () {
-   // Declare and initialise state variable
+   <span class="comment">// Declare and initialise state variable</span>
    const [count, setCount] = useState(0);
    return (
    &lt;&gt;
@@ -197,7 +187,7 @@ export default function HookCounter () {
     &lt;/&gt;
     )
 }</pre></li>
-        <li>Update your <b>App.js</b> file with the <span class="syn-js">import</span> statment below.
+        <li>Update your <b>App.js</b> file with the <span class="syn-js">import</span> statement below.
 <pre class="language-javascript">import HookCounter from './HookCounter';</pre></li>
 
         <li>Add this component as the last child component:
@@ -215,7 +205,34 @@ export default function HookCounter () {
 <pre class="language-javascript">&lt;button onClick={() => { <span class="comment">/* some action */</span> }} /&gt;
 &lt;button onClick={() => { <span class="comment">/* another action */</span> }} /&gt;</pre>
 
-<p>In this next example, the text state variable holds a string. When you type,<span class="syn-js">handleChange</span> reads the latest input value from the browser input DOM element, and calls <span class="syn-js">setText</span> to update the state. This allows you to display the current text below.</p>
+
+</section>
+
+<section id="useEffect">
+
+	<h2>Hooks and the <code>useEffect()</code> method</h2>
+
+	<p>The <span class="syn-js">useEffect</span> hook lets you perform side effects in function components. In the example below, we added a new feature to our counter: we set the document title to a custom message that includes the number of clicks.</p>
+
+<pre class="language-javascript">import { useState } from 'react'
+export default function HookCounter () {
+   <span class="comment">// Declare and initialise state variable</span>
+   const [count, setCount] = useState(0);
+   <span class="comment">// Update the document title using the browser API</span>
+   useEffect(() => { document.title = `You clicked ${count} times`; });
+
+   return (
+   &lt;&gt;
+     &lt;section&gt;
+     &lt;p&gt;You clicked {count} times&lt;/p&gt;
+     &lt;button className = "btn btn-solid" onClick={ () =&gt; setCount(count + 1) }>Click me&lt;/button&gt;
+     &lt;/section&gt;
+    &lt;/&gt;
+    )
+}</pre>
+
+
+<!-- <p>In this next example, the text state variable holds a string. When you type,<span class="syn-js">handleChange</span> reads the latest input value from the browser input DOM element, and calls <span class="syn-js">setText</span> to update the state. This allows you to display the current text below.</p>
 
 <pre class="language-javascript">import { useState } from 'react';
 
@@ -247,7 +264,7 @@ form.firstName = 'Taylor';</pre>
 setForm({
    ...form,
    firstName: 'Taylor'
-});</pre>
+});</pre> -->
 
 
 	</section>
