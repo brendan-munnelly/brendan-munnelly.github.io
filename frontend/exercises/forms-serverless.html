@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Serverless Forms | Web Design & Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Use forms on GitHub Pages by registering with a third-party online form processing service.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/front-end-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+	<header>
+		<div class="wrapper">
+	  <div class="sidebar">
+				<div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+
+			<div class="content">
+				<h1>Serverless Forms</h1>
+                <h2>Registering to use the online form processing service from Formspree and adding a unique form ID to your forms.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	  </header>
+
+
+    <main>
+
+		<aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#about-html-forms">About HTML forms and GitHub Pages</a></p>
+			<p><a href="#about-serverless">About serverless forms</a></p>
+            <p><a href="#register-formspree">Registering with Formspree</a></p>
+            <p><a href="#edit-form">Creating a Project and Form</a></p>
+            <p><a href="#buttons-add">Updating the endpoint of your forms</a></p>
+			<p><a href="#email-validation">Email address validation</a></p>
+			<p><a href="#mandatory-fields">Making a form field mandatory</a></p><!--
+			<p><a href="#user-feedback">Providing user feedback on form submission</a></p>
+            <p><a href="#upload-github">Uploading files to GitHub</a></p> -->
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+			<section id="learning-goals">
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                  <li>Use forms on GitHub Pages by registering with a third-party online form processing service.</li>
+                </ul>
+
+      </section>
+
+	  <section id="about-html-forms" class="wrapper-content">
+        <h2>About HTML forms and GitHub Pages</h2>
+        <p>What are called <i>forms</i> in HTML enable users to submit information to websites for processing. A typical example of a form is shown below.</p>
+
+		<img src="assets/img/forms-serverless/contact-sample-form.png" alt="Project Contact">
+
+
+	    <p>It includes three entry areas or <i>form fields</i> into which a user can input information: <b>Your Name</b>, <b>Your Email</b> and <b>Your Message</b>.</p>
+
+        <p>At the bottom of the form is a <i>submit</i> button named <b>Send</b>. When clicked or tapped, this button submits the information entered in the form fields to the website.</p>
+
+      </section>
+
+
+	  <section id="about-serverless">
+
+		<h2>About serverless forms</h2>
+
+		<p>Your web hosting account on GitHub cannot run the type of server-side program that is needed to process information entered by users into HTML forms.</p>
+
+        <p>As a result, you need to use an external online service to collect the information entered to an HTML form by users of your website.</p>
+
+		<p>Four such popular email-processing services that offer a free tier are the following:</p>
+			<ul>
+				<li><a href="https://tally.so" target="_blank">Tally.so</a></li>
+				<li><a href="https://JamForm.com" target="_blank">Jamform</a></li>
+				<li><a href="https://liveformhq.com/" target="_blank">LiveForm</a></li>
+				<li><a href="https://formspree.io" target="_blank">Formspree</a></li>
+			</ul>
+			<p>This Tutorial takes you through the steps of registering with and using the Formspree service.</p>
+		</section>
+
+      <section id="register-formspree">
+
+      <h2>Registering with Formspree</h2>
+
+	<p>For your website to use Formspree, you first need to register with this free online service and receive a unique code for adding to your HTML form.</p>
+
+	<p>Here are the steps:</p>
+
+	<ol>
+		<li>In your web browser, got to the <a href="https://formspree.io" target="_blank">formspree.io</a> website.
+
+		<img src="assets/img/forms-serverless/formspree-1.png" alt="fa-icons-copy">
+
+		At the top-right of the home page, click the <b>Get Started</b> button.</li>
+		<li>On the ‘Register for Formspree’ screen now displayed, enter the Email address you want to use with Formspree.
+		<span class="inside-ol">&nbsp;</span>
+		With Formspree, information entered to your website forms will be forwarded to you by email. The free plan available with Formspree gives you the option to use up two email addresses. The email you enter here will become one of those two addresses to which you can choose form-entered information to be forwarded.
+		<span class="inside-ol">&nbsp;</span>
+		Next, choose a Password for your Formspree account, accept the Terms of Service and Privacy Policy, and click the <b>Register</b> button.</li>
+	</ol>
+
+	<p>That’s it. You are now registered with Formspree. In future, you can sign into Formspree by clicking the <b>Sign In</b> button on the home page, and entering your Email and Password.</p>
+
+
+</section>
+
+
+<section id="formspree-project" class="wrapper-content">
+	<h2>Creating a Project and Form in Formspree</h2>
+
+	<p>In Formspree, a <i>Project</i> is a way of organising different forms – located on the same or different websites – together in a single group. So, before you can create a form, you must first create a Project to store that form. Follow these steps:</p>
+
+	<ol>
+		<li>Sign in to Formspree, and, on the so-called Dashboard screen, click the <b>+ New Project</b> button.</li>
+
+		<li>You are now shown a pop-up-window in which you can enter the following details:
+		<ul>
+		<li><b>Project name</b>: Enter the name you want to give to your project. This is for your own information only. It will <i>not</i> be displayed on the web page of your website that will contain your HTML form.</li>
+		<li><b>Project type</b>: Accept the default option of ‘Dashboard Project’.
+		<img src="assets/img/forms-serverless/formspree-project.png" alt="fa-icons-copy"></li>
+		</ul>
+
+		When finished, click the <b>Create Project</b> button.</li>
+		<li>You are returned to the Formspree Dashboard screen. Click the <b>+ New Form</b> button.</li>
+		<li>In the pop-up-window displayed, enter the <b>Form Name</b>.
+		<img src="assets/img/forms-serverless/formspree-form.png" alt="fa-icons-copy">
+
+		As with the <b>Project Name</b>, the <b>Form Name</b> is for your own information only. It will <i>not</i> be displayed on the web page of your website that will contain your HTML form.
+		<span class="inside-ol">&nbsp;</span>
+		If you have created more than one Project in Formspree, the <b>Project</b> option becomes a drop-down list from which you can select the Project in which you want your new form to be grouped.
+		<span class="inside-ol">&nbsp;</span>
+
+		When finished, click the <b>Create Form</b> button.</li>
+
+		<li>You are now shown the ‘Form Details’ screen. You can see an example below.
+
+		<img src="assets/img/forms-serverless/formspree-endpoint.png" alt="fa-icons-copy">
+		It displays the so-called <i>endpoint</i> – the value you will enter in the <b>action</b> attribute of the form you want to create in a web page or pages of your website.</li>
+	</ol>
+
+	<p>You will copy-and-paste this endpoint in the <a href="#edit-form">Updating the HTML of your form</a> section below.</p>
+
+	<p>In Formspree, if you click the <b>Forms</b> option near the top-right of the screen you will be returned to the ‘Forms’ screen where you can see your new form listed along with any others you have may have created.</p>
+	<img src="assets/img/forms-serverless/formspree-forms.png" alt="fa-icons-copy">
+
+	<p>You do <i>not</i> need to create more than one form endpoint for the various forms you will create on your personal portfolio website. <i>You can simply re-use the same endpoint on every form.</i></p>
+
+	<p>In future, when you want to access your endpoint details from to use in your forms:</p>
+
+	<ol>
+		<li>Sign in to your account on Formspree.</li>
+		<li>On the ‘Your Forms’ screen, click the name of the form whose endpoint code you want to use.
+		<img src="assets/img/forms-serverless/formspree-select-form.png" alt="fa-icons-copy"></li>
+		<li>On the ‘Forms Details’ screen now displayed, click the <b>Integration</b> tab.
+		<img src="assets/img/forms-serverless/formspree-integration.png" alt="fa-icons-copy"></li>
+		<li>You can now view the endpoint you need to copy-and-paste into any forms on the web pages of your website.
+		<img src="assets/img/forms-serverless/formspree-final.png" alt="fa-icons-copy"></li>
+
+	</ol>
+
+</section>
+
+<section id="edit-form" class="wrapper-content bg-white">
+
+	<h2>Updating the endpoint of your form</h2>
+	<p>Your final step is to update your template form with the endpoint code you received from the Formspree website.</p>
+
+	<ol>
+		<li>In VS Code, display your web page that contains a form.</li>
+		<li>Update the form's <b>action</b> value by copying-and-pasting the endpoint value from Formspree. See the example shown below.
+		<img src="assets/img/forms-serverless/update-endpoint.png" alt="github-signin"></li>
+		<li>Save your <b>forms.html</b> file.</li>
+	</ol>
+
+	<p>That’s it. You have now completed this Tutorial.</p>
+
+	<p>And you now have a functional email contact form ready to use on your website.</p>
+
+	<p>You can check your sign up form is working by entering an email address and clicking the <b>Subscribe</b> button.</p>
+
+</section>
+
+<section id="email-validation">
+
+	<h2>Email address validation</h2>
+
+	<p>The email field in your sample form is one example of the several types of fields you may include in a form. Here are some other common examples:</p>
+
+	<ul>
+		<li>&lt;input type="date"&gt;</li>
+		<li>&lt;input type="file"&gt;</li>
+		<li>&lt;input type="number"&gt;</li>
+		<li>&lt;input type="password"&gt;</li>
+		<li>&lt;input type="tel"&gt;</li>
+		<li>&lt;input type="text"&gt;</li>
+	</ul>
+
+	<p>For a complete list of form input types with an explanation of each one, see the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank">MDN Web Docs</a>.</p>
+
+	<p>A form field of the email type checks that the text entered by the user is actually an email address. If it is not, the form will display an error as shown below.</p>
+
+	<img src="assets/img/forms-serverless/validation-browser.png" style="max-width:580px" alt="Formspree">
+
+	<p>Note that:</p>
+	<ul>
+		<li>The form field <i>only</i> checks that the entered text follows the rules for a correct email address format.</li>
+		<li>The form field does <i>not</i> check that the email address actually exists.</li>
+	</ul>
+
+</section>
+
+
+<section id="mandatory-fields">
+
+	<h2>Making a form field mandatory</h2>
+
+	<p>In HTML forms, a mandatory field is one that the user <i>must</i> complete for the form to be accepted for processing.</p>
+
+	<p>Follow the simple steps below to make the email address field of your sign-up form a mandatory field.</p>
+
+	<ol>
+		<li>In VS Code, display the <b>forms.html</b> web page.</li>
+		<li>At the end of the attributes for the email field, type the word <b>required</b>.
+		<img src="assets/img/forms-serverless/required.png" alt="Formspree" class="wider-110"></li>
+		<li>Save the file.</li>
+
+	</ol>
+
+	<p>Test your form by clicking the <b>Subscribe</b> button without entering a value in the email field. You should the error message shown in the example below.</p>
+
+	<img src="assets/img/forms-serverless/mandatory-browser.png" style="max-width:580px" alt="Formspree">
+
+</section>
+
+<!--
+<section id="user-feedback">
+	<h2>Providing user feedback on form submission</h2>
+	<p>The next step is to provide the user with feedback that the form has been successfully submitted.</p>
+
+	<ol>
+ 		<li>In VS Code, display the form.html file.</li>
+ 		<li>Update the <span class="syn">button</span> element by giving it a unique ID.  For example, <b>my-form-button</b>.
+		<img src="assets/img/forms-serverless/my-form-button.png" alt="Formspree" class="wider-110"></li>
+ 		<li>Directly under the <span class="syn">button</span>, and before the closing <span class="syn">&lt;/form&gt;</span> tag, type the following new, empty <span class="syn">&lt;div&gt;</span> element.
+		<span class="inside-ol">&nbsp;</span>
+		The <span class="syn">&lt;div&gt;</span> has an ID of <b>form-status</b>.
+		<img src="assets/img/forms-serverless/form-status.png" alt="Formspree" class="wider-110">
+	</li>
+
+		<li>At the bottom of the web page, just before the closing tab <span class="syn">&lt;/body&gt;</span> tag, copy-and-paste the following JavaScript code:
+<pre class="language-css">
+&lt;script&gt;
+var form = document.getElementById("email-form");
+
+async function handleSubmit(event) {
+  event.preventDefault();
+  const status = document.getElementById("form-status");
+  const data = new FormData(event.target);
+  fetch(event.target.action, {
+	method: form.method,
+	body: data,
+	headers: {
+		'Accept': 'application/json'
+	}
+  }).then(response =&gt; {
+	document.getElementById("form-status").style.display="block";
+	status.innerHTML = "Thanks for your submission!";
+	form.reset();
+	setTimeout(function() {
+		const msg = document.getElementById("form-status");
+		msg.style.transition = '.5s';
+		msg.style.opacity = '0';
+		msg.style.visibility = 'hidden';
+		msg.style.display = 'none';
+	}, 1250);
+
+  }).catch(error =&gt; {
+	document.getElementById("form-status").style.display="block";
+	status.innerHTML = "Oops! There was a problem submitting your form."
+	setTimeout(function() {
+		const msg = document.getElementById("form-status");
+		msg.style.transition = '.5s';
+		msg.style.opacity = '0';
+		msg.style.visibility = 'hidden';
+		msg.style.display = 'none';
+	}, 1250);
+  });
+}
+form.addEventListener("submit", handleSubmit)
+
+&lt;/script&gt;</pre></li>
+
+		<li>Save the <b>forms.html</b> web page.</li>
+		<li>In VS Code, display the <b>forms.css</b> stylesheet</li>
+		<li>At the end of the /* FORMS */ section, copy-and-paste the following.
+<pre class="language-css"><span class="token class">.container-form #form-status</span> {
+    <span class="token property">background-color</span>: <span class="token number">#e4f5e8</span>;
+    <span class="token property">border</span>: <span class="token value-text">solid</span> <span class="token number">1px</span> <span class="token value-text">green</span>;
+    <span class="token property">padding</span>: <span class="token number">10px</span>;
+    <span class="token property">line-height</span>: <span class="token number">1</span>;
+    <span class="token property">font-size</span>: <span class="token number">18px</span>;
+    <span class="token property">color</span>: <span class="token number">#000</span>;
+    <span class="token property">display</span>: <span class="token value-text">none</span>;
+    <span class="token property">font-family</span>: <span class="token value-text">sans-serif</span>;
+    <span class="token property">margin-top</span>: <span class="token number">12px</span>;
+    <span class="token property">max-width</span>: <span class="token number">320px</span>;
+}</pre></li>
+ 		 <li>Save the <b>forms.css</b> file</li>
+	</ol>
+
+	<p>Test your sample form and you can see that a feedback message is briefly displayed after the form is successfully submitted.</p>
+
+	<img src="assets/img/forms-serverless/user-feedback.png" style="max-width:580px" alt="Formspree">
+
+	<p>Click <a href="final-foms/after/forms-3.html" target="_blank">here</a> to view a finished sample of this web page in a new tab of your web browser.</p>
+
+</section>
+
+-->
+
+<!--
+
+<section id="upload-github">
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>After finishing your web page and stylesheet, you are now ready to upload them to your account on GitHub.</p>
+
+	<ol>
+
+		<li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.
+		<img src="assets/img/hero-block-text/github-signin.png" alt="github-signin"></li>
+
+		<li>On your GitHub home page, click the &#8216;repo&#8217; that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+		<span class="inside-ol">&nbsp;</span>
+		<b>username.github.io</b>
+
+		<img src="assets/img/hero-block-text/github-repo-select.png" alt="github-signin"></li>
+
+		<li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+		<img src="assets/img/hero-block-text/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+
+		<li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+
+		<img src="assets/img/hero-block-text/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+
+		<li>In File Explorer (Windows 10) or Finder (Apple Mac), drag-and-drop your <b>index.html</b> file and your 📁 <b>exercises</b> sub-folder to upload them to your repository on GitHub.
+		<img src="assets/img/hero-block-text/github-upload-folder-files.png"  alt="Introduction to HTML">
+		</li>
+
+		<li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+
+		<li>Finally, click the green <b>Commit changes</b> button to upload your files.
+		<img src="assets/img/hero-block-text/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+	</ol>
+
+	<p>Your updated home page and sample web page are now published on GitHub at web addresses similar to the following:</p>
+
+	<p><b>https://username.github.io/index.html<br>
+	https://username.github.io/exercises/forms.html</b></p>
+
+	<p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+</section>
+-->
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail);
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail);
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
