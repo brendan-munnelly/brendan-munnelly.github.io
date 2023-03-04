@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Introduction to Media Queries | Web Design & Development Tutorials | Brendan Munnelly</title>
+    <title>Introduction to Media Queries | Web Design &amp; Development Tutorials | Brendan Munnelly</title>
     <meta name="description" content="Adding media queries to a CSS file so that web page elements resize according to the viewport width.">
 
     <meta name="author" content="Brendan Munnelly">
@@ -73,6 +73,8 @@
             <p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#rwd-about">About Responsive Web Design (RWD)</a></p>
             <p><a href="#media-query-about">About media queries</a></p>
+            <p><a href="#add-css">Updating your stylesheets with media queries</a></p>
+
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
         </aside>
@@ -98,7 +100,7 @@
 
 			<p>The term <i>viewport</i> is used to describe that area of a screen that displays a web page&#8217;s content. It excludes any menus, web address bars, bookmark bars, scroll bars or other similar elements.</p>
 
-			<p>Creating web pages that respond or &#8216;scale&#8216; appropriately to the viewport size of a user&#8217;s device is called Responsive Web Design (RWD). Responsive web pages adjust the layout, placement, and size of their elements so that the page looks good no matter what screen it&#8217;s being viewed displayed on.</p>
+			<p>Creating web pages that respond or &#8216;scale&#8216; appropriately to the viewport size of a user&#8217;s device is called Responsive Web Design (RWD). Responsive web pages adjust the layout, placement, and size of their elements so that the page looks good no matter what screen it&#8217;s being viewed on.</p>
 
 			<h3>About screen resolution</h3>
 			<p>Screen resolution refers to the number of pixels displayed on a monitor screen. It is typically expressed as (horizontal pixels) x (vertical pixels).</p>
@@ -163,51 +165,26 @@
 
 		<section id="media-query-about">
             <h2>About media queries</h2>
-			<p>When used with breakpoints, <i>media queries</i> enable web designers to create <i>conditional</i> style rules in CSS.</p>
+			<p>When combined with breakpoints, <i>media queries</i> use the <b>@media</b> rule to create <i>conditional</i> style rules in CSS. In other words, a block of CSS properties will be applied to the linked web page only if a certain condition is true.</p>
 
-            <p>That is: style rules that apply <i>only when certain conditions are met</i>. Media queries are most commonly used to adjust the horizontal and vertical spacing on a web page according to the viewport width.</p>
+            <p>Media queries are most commonly used to adjust the horizontal and vertical spacing on a web page according to the viewport width.</p>
 
 			<p>For example, suppose you wanted &#8216;white space&#8217; at the left and right of the web page content.</p>
 			<ul>
-				<li>On &#8216;big screens&#8216;, you might want the web page content to fill only 60% of the viewport width.</li>
+				<li>On &#8216;big screens&#8216; (<b>768px</b> or wide), you might want the web page content to fill only 60% of the viewport width.</li>
 
-				<li>On &#8216;small screens&#8216;, however, you might want the web page content to fill 90% of the viewport width.</li>
+				<li>On &#8216;small screens&#8216; (up to <b>767px</b> width), however, you might want the web page content to fill 90% of the viewport width.</li>
 			</ul>
 
             <img src="assets/img/rwd-media-queries/page-wrapper-mockup.png" style="max-width:700px" alt="Intoduction to Media Queries">
 
 
 			<p>To achieve this, you would enter the following two media queries in your stylesheet.</p>
-<pre class="language-css">
-<span class="token comment">/* Desktops */</span>
-<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
-   <span class="token class">body</span> {
-       <span class="token property">padding-left</span>: <span class="token value-text">20%</span>;
-       <span class="token property">padding-right</span>: <span class="token value-text">20%</span>;
-    }
-}
 
-<span class="token comment">/* Mobiles */</span>
-<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
-    <span class="token class">body</span> {
-        <span class="token property">padding-left</span>: <span class="token value-text">5%</span>;
-        <span class="token property">padding-right</span>: <span class="token value-text">5%</span>;
-    }
-}</pre>
+            <img src="assets/img/rwd-media-queries/breakpoint-768.png"  alt="Intoduction to Media Queries">
 
-            <p>In your <b>global.css</b>, <b>style-1.css</b> and <b>style-2.css</b> stylsheets, replace the CSS <b>padding</b> property on the <span class="syn">body</span> selector with the above two media queries.</p>
 
-            <p>In your <b>style-3.css</b> stylsheet, replace the CSS <b>padding</b> property on the <span class="syn">section</span> selector with the relevant two media queries.</p>
-
-            <p>In simple terms, you have:</p>
-
-            <ul>
-                <li>Entered both style rules in the same CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;small&#8217; screens.</li>
-
-                <li>Included with each style rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is <b>less than</b> or <b>greater than</b> a certain width.</li>
-            </ul>
-
-            <img src="assets/img/rwd-media-queries/media-query-1.png"  alt="Intoduction to Media Queries">
+            <p>In the above example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
 
             <p>Note that all media queries have both a <i>start point</i> and an <i>end point</i>. </p>
 
@@ -215,15 +192,12 @@
 
             <p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines long  &#8211; will be controlled by the unclosed media query.</p>
 
-            <p>In this example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
-
-            <img src="assets/img/rwd-media-queries/breakpoint-768.png"  alt="Intoduction to Media Queries">
 
             <p>Below are two media queries, but with the style rule for the <span class="csyn">h1</span> selectors written on a single line.</p>
             <img src="assets/img/rwd-media-queries/media-query-3.png"  alt="Intoduction to Media Queries">
 
 
-            <p>Note that there are <i>two pairs</i> of curly braces:</p>
+            <p>Note the <i>two pairs</i> of curly braces:</p>
             <ul>
                 <li>An inner pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <span class="csyn">h1</span>.</li>
 
@@ -233,11 +207,111 @@
             <p>It is a good idea to use the <kbd class="tutorial-key">Tab</kbd> key along wth VS Code&#8217;s <i>indentation guides</i> (thin vertical lines) to ensure you do not forget the add the correct number of opening and closing braces when working with media queries in your stylesheets.</p>
             <img src="assets/img/rwd-media-queries/page-wrapper-2.png"  alt="Intoduction to Media Queries">
 
+        </section>
 
 
+        <section>
 
+
+            <h2 id="add-css">Updating your stylesheets with media queries</h2>
+            <p>Follow the steps below to make your web pages responsive by adding media queries to their stylesheets.</p>
+
+            <ol>
+
+                <li>In VS Code, open your <b>global.css</b>, <b>style-1.css</b> and <b>style-2.css</b> stylesheet files.</li>
+                <li>Replace the current CSS padding style rule with the following, and save your CSS files when finished.
+<pre class="language-css"><span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+   <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token value-text">4% 20%</span> }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token value-text">8% 5%</span> }
+}</pre>The upper part of your three CSS files should now look as shown below.
+<img src="assets/img/rwd-media-queries/css-body-after.png" alt="">
+</li>
+            <li>In VS Code, open your <b>style-3.css</b> stylesheet file, replace the current CSS padding style rule with the following, and save your CSS file when finished.
+<pre class="language-css"><span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+   <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token value-text">4% 20%</span> }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token value-text">5% 5%</span> }
+}</pre></li>
+
+            </ol>
+
+
+            <p>In simple terms, you have:</p>
+
+            <ul>
+                <li>Entered two style rules in the same CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;small&#8217; screens.</li>
+
+                <li>Included with each style rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is <b>less than</b> or <b>greater than</b> a certain width.</li>
+            </ul>
+
+            <img src="assets/img/rwd-media-queries/media-query-1.png"  alt="Intoduction to Media Queries">
+
+            <p>All your four web pages now display responsively on mobile and desktop or laptop screens.</p>
 
         </section>
+
+
+
+    <section id="upload-github">
+        <h2>Uploading your files to GitHub</h2>
+
+        <p>Your final task is to upload your web pages and stylesheets to your account on GitHub.</p>
+
+        <ol>
+
+            <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.
+            <img src="assets/img/rwd-media-queries/github-signin.png" alt="github-signin"></li>
+
+            <li>On your GitHub home page, click the name of the repository (‘repo’) that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+            <span class="inside-ol">&nbsp;</span>
+            <b>username.github.io</b>
+
+            <img src="assets/img/rwd-media-queries/github-repo-select.png" alt="github-signin"></li>
+
+            <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+            <img src="assets/img/rwd-media-queries/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+
+            <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+
+            <img src="assets/img/rwd-media-queries/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+
+            <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your <b>index.html</b> file and your 📁 <b>assets</b> and 📁 <b>exercises</b> sub-folders to upload them to your repository on GitHub.
+            <img src="assets/img/rwd-media-queries/github-upload-folder-files.png" alt="Introduction to HTML">
+            </li>
+
+            <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+
+            <li>Finally, click the green <b>Commit changes</b> button to upload your entire <b>exercises</b> sub-folder and all the files it contains.
+            <img src="assets/img/rwd-media-queries/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+
+        </ol>
+
+        <p>Your web pages are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+        <p><b>https://username.github.io/index.html</b><br>
+            &#8211; or simply &#8211;<br>
+        <b>https://username.github.io</b><br>
+        <b>https://username.github.io/exercises/page-1.html</b><br>
+        <b>https://username.github.io/exercises/page-2.html</b><br>
+        <b>https://username.github.io/exercises/page-3.html</b>
+        </p>
+
+
+        <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+        </section>
+
+
+
 
         </article>
     </main>
@@ -247,7 +321,7 @@
         <div class="item-3">
             <h4>Site Map</h4>
             <p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/ibat/">Home</a></p>
-            <p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy & Legal</a></p>
+            <p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy &amp; Legal</a></p>
 
         </div>
 
