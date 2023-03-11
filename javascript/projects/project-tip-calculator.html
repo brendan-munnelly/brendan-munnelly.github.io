@@ -69,24 +69,21 @@
 	<section id="learning-goals">
 		<h2>Project Description</h2>
 		<p>Calculates the tip for a restaurant bill based on the level of service and the number of customers.</p>
+	</section>
 
-
+	<section>
+		<p>You can view a completed version of the project <a href="projects-final/tip-calculator/index.html" target="_blank">here</a>.</p>
 	</section>
 
     <section id="tables-html">
 
 
-		<h2>Working with the base web page</h2>
+		<h2>Your project folder</h2>
 
-        <p>Your first task is to open base web page in VS Code.</p>
+        <p>In your <b>portfolio/js</b> folder is a folder named <b>tip-calculator</b> that contains all the files you need for this JavaScript project.</p>
+		<img src="assets/img/tip-calculator/folder-tip-calculator.png" alt="">
 
-        <ol>
-            <li>In your <b>portfolio/js/tip-calculator</b> sub-folder, open the <b>index.html</b> file.</li>
-            <li>Update the website logo, favicon, <span class="syn">&lt;title&gt;</span> tag and the <span class="syn">&lt;footer&gt;</span> with your own details.</li>
-        </ol>
-
-        <p>This file contains all the necessary HTML and CSS for this project.</p>
-
+		<p>In VS Code, open the project&#8217;s <b>index.html</b> web page and ensure the hyperlinks and personal details have been correctly updated.</p>
 
 
 	</section>
@@ -96,35 +93,38 @@
 
 		<h2 id="tables-css">Adding the JavaScript code</h2>
 
-		<p>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, add the following JavaScript code within a <span class="syn">&lt;script&gt;</span> tag.</p>
+		<p>Follow the steps below to add the JavaScript code to the <b>index.html</b> file.</p>
 
-<pre>//Hide the tip amount on load
+		<ol>
+			<li>Scroll down the web page until you see an empty pair of opening <span class="syn">&lt;script&gt;</span> and closing <span class="syn">&lt;/script&gt;</span> tags.</li>
+			<li>Click inside the empty pair of tags and paste the JavaScript code below.
+<pre><span class="comment">//Hide the tip amount on load</span>
 document.getElementById("tipDisplayBox").style.display = "none";
 document.getElementById("numOfPeople").value = 1;
 
-//Calculate Tip
+<span class="comment">// Calculate tip</span>
 function calculateTip() {
    let billAmount = document.getElementById("billAmount").value;
    let serviceQuality = document.getElementById("serviceQuality").value;
    let numOfPeople = document.getElementById("numOfPeople").value;
 
-   //validate input
+   <span class="comment">// Validate input</span>
     if (billAmount === "" || serviceQuality == 0) {
       alert("Please enter values");
       return;
    }
 
-   // Calculate tip
+   <span class="comment">// Calculate tip</span>
    let tipTotal = (billAmount * serviceQuality);
-   // round to two decimal places
+   <span class="comment">// round to two decimal places</span>
    tipTotal = Math.round(tipTotal * 100) / 100;
-   // next line allows us to always have two digits after decimal point
+   <span class="comment">// next line allows us to always have two digits after decimal point</span>
    tipTotal = tipTotal.toFixed(2);
-   // Display the tip
+   <span class="comment">// Display the tip</span>
    document.getElementById("tipDisplayBox").style.display = "block";
    document.getElementById("tipTotal").innerHTML = tipTotal;
-   // Check to see if this input is empty or less than or equal to 1
-   if (numOfPeople === "" || parseInt(numOfPeople) <= 1)  {
+   <span class="comment">// Check to see if this input is empty or less than or equal to 1</span>
+   if (numOfPeople === "" || parseInt(numOfPeople) &lt;= 1)  {
       numOfPeople = 1;
       document.getElementById("numOfPeople").value = 1;
       tipEach = tipTotal;
@@ -132,13 +132,20 @@ function calculateTip() {
   document.getElementById("tipEach").innerHTML = (tipTotal / numOfPeople).toFixed(2);
 }
 
-//click to call function
-document.getElementById("calculate").onclick = () => calculateTip();
-</pre>
+<span class="comment">// click to call function</span>
+document.getElementById("calculate").onclick = () =&gt; calculateTip();</pre></li>
+<li>Save your <b>index.html</b> file.</li>
+<li>Display the file in a web browser and verify it works correctly.</li>
+</ol>
 
 <p>Save your file and verify it works correctly.</p>
 
-<p>Upload the <b>tip-calculator</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+
+<section>
+	<h2>Uploading your project to GitHub</h2>
+	<p>Upload the <b>tip-calculator</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
 </section>
 
 
