@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with mumbers | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Testing for numbers with isNaN, using the increment and decrement operators, and performing arithmetic with correct operator precedence.">
+
+	
+	<link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+    <meta name="robots" CONTENT="noindex">
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Working with numbers</h1>
+					<h2>Testing for numbers with isNaN, using the increment and decrement operators, and performing arithmetic with correct operator precedence.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#numbers-introduction">Introducing numbers in JavaScript</a></p>
+				<p class="toc-indent"><a href="#numbers-assign">Assigning numbers to variables</a></p>
+				<p class="toc-indent"><a href="#numbers-typeof">The <code>typeof</code> operator</a></p>
+				<p class="toc-indent"><a href="#numbers-isNaN">Testing for numbers with <code>isNaN(n)</code></a></p>
+
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Declare numeric variables in JavaScript.</li>
+			<li>Use <span class="syn-js">typeof</span> and <span class="syn-js">IsNaN()</span> to test that a variable contains a number which can be used in calculations.</li>
+			<li>Perform addition, subtraction, multiplication, and division on numeric variables.</li>
+		</ul>
+
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>There is no exercise file for this Tutorial.</p>
+		</div>	
+	</section>
+
+
+	<section id="numbers-introduction">
+
+        <h2 id="introduction">Introducing numbers in JavaScript</h2>
+        <p>Unlike other programming languages, JavaScript only has one number <i>data type</i>. This can store <i>integers</i> (positive or negative whole numbers) or <i>floats</i> (floating-point numbers with a decimal point).</p>
+
+		<h3 id="increment-decrement">About the increment and decrement operators</h3>
+
+	<p>In programming, the word 'increment' means 'make larger by one' and its converse of 'decrement' means 'make smaller by one'. You have met only one type of assignment operator so far, an example of which is shown below. </p>
+
+<pre class="language-js">myvar = 42;
+</pre>
+
+	<p>As you can see, it has two terms, one on each side of the equals (=) sign. Below are examples of the increment and decrement operators. These contain only a single term and do not require an equals sign.</p>
+
+<pre class="language-js">// This has the same effect as writing firstNumber = firstNumber + 1
+firstNumber++;
+
+// This has the same effect as writing firstNumber = firstNumber - 1 */
+secondNumber--;
+</pre>
+
+	<p>These operators work only with numeric variables and are really just a convenient shorthand notation. </p>
+
+		<h3 id="numbers-assign">Assigning numbers to variables</h3>
+		<p>To assign a number to a variable, do not wrap the value in single or double quotes.</p>
+<pre>const myVar1 =  1234; <span class="comment">// JavaScript treats myVar1 as a number</span>
+const myVar2 = "1234"; <span class="comment">// JavaScript treats myVar2 as a string</span>
+const myVar3 = '1234'; <span class="comment">// JavaScript treats myVar3 as a string</span></pre>
+
+		<p>JavaScript decides which type of variable you want to create by the way that you first assign a value to it.</p>
+		
+		<ul>
+			<li>When you enclose the assigned value within quotes, JavaScript gives the variable a data type of <i>string</i>.</li>
+			<li>When you omit the quotes, JavaScript gives the variable a data type of <i>number</i>.</li>
+		</ul>
+
+		<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre>let Temperature = -6.3456 <span class="comment">// Valid number</span> 
+let errorRare = .2727 <span class="comment">// Valid number</span> </pre>
+
+<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre>let userIncome = 34,000; <span class="comment">// Error. Contains a comma </span>
+let product ID = 645w29; <span class="comment">// Error. Contains a letter character </span></pre>
+
+<p>In fact, they are not even valid variable assignments because JavaScript cannot understand what type of data type you want to create. Each line will throw an error.</p>
+
+		<h3 id="numbers-typeof">The <code>typof</code> operator</h3>
+		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
+		
+<pre>let someVar;
+<span class="comment">// declare empty variable </span>
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns undefined </span> 
+someVar = "12";
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns string</span> 
+someVar = 12;
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns number</span> 
+someVar = "12";
+console.log(`Data type of someVar: ${typeof someVar}`);
+<span class="comment">// returns string</span> </pre>
+
+		<p>If the variable contains a number, <span class="syn-js">typeof</span> returns the string "number".</p>
+
+		<h3 id="numbers-isNaN">Testing for numbers with <code>isNaN(n)</code></h3>
+		<p>To test that a variable contains a number, another option is to use the global variable <span class="syn-js">isNaN(n)</span>. NaN stands for 'Not a Number'. See below.</p>
+
+		<pre>const stringVar = "Some text";
+<span class="comment">// declare string variable </span>
+console.log(`Is this not a number ("Some text"): ${isNaN(stringVar)}`);
+<span class="comment">// returns true </span> 
+const numVar = 42;			
+console.log(`Is this not a number ("42"): ${isNaN(numVar)}`);
+<span class="comment">// returns false</span>  </pre>
+		
+		<p>Automatic <i>variable type conversion</i> is a powerful feature of JavaScript. But its very power can result in scripting errors or in scripts that produce unexpected results.</p>
+
+		<p>To check that a variable contains a number before using that variable in a calculation, you could test it in either of two ways as follows.</p>
+
+<pre>const varPossibleNumber = 2;
+if (typeof varPossibleNumber === 'number') {
+  <span class="comment">// safe to continue with calculation</span>
+}
+if (!isNaN(varPossibleNumber)) {
+  <span class="comment">// also safe to continue with calculation</span>
+}</pre>
+
+		<p>Numbers that are never used in calculations can be correctly assigned to strings. For example, users&#8217; telephone numbers. You will never want to divide a telephone number by two or deduct 10% from such a number.</p>
+			
+<pre>let userTelNo = "088 123 456678"; <span class="comment">// number as string</span></pre>
+
+		<p>But never assign a number to a string variable if you intend using that number in a calculation.</p>
+
+	</section>
+
+	<section id="number-arithmetic">
+		<h2>Arithmetic operations</h2>
+		<p>You can perform arithmetic with numeric variables using the arithmetic operators set out in the table below.</p>
+
+		<table class="table-js-arithmetic">
+			<thead>
+			<tr>
+				<td><p><b>Operator</b></p></td>
+				<td><p><b>Operator Key Used</b></p></td>
+				<td><p><b>Description</b></p></td>
+			</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p><b>x + y</b></p></td>
+					<td><p>The plus key</p></td>
+					<td><p>Adds the value of <b>x</b> and the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x - y</b></p></td>
+					<td><p>The dash key</p></td>
+					<td><p>Subtracts the value of <b>y</b> from the value of <b>x</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x * y</b></p></td>
+					<td><p>The asterisk key</p></td>
+					<td><p>Multiplies the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x / y</b></p></td>
+					<td><p>The forward slash key</p></td>
+					<td><p>Divides the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+			</tbody>
+			</table>		
+		
+	<p>See the simple examples below.</p>
+
+<pre>const firstNum = 12;
+const secondNum = 8;
+console.log(`Addition (12+8): ${12 + 8}`); <span class="comment">// returns 20</span>
+console.log(`Subtraction (12-8): ${12 - 8}`); <span class="comment">// returns 4</span>
+console.log(`Multiplication (12*8): ${12 * 8}`); <span class="comment">// returns 96</span>  
+console.log(`Division (12/8): ${12 / 8}`); <span class="comment">// returns 1.5</span></pre>
+
+
+		<h3>Operator precedence</h3>
+
+		<p>JavaScript follows the rules of arithmetic when working with numeric variables and numbers:</p>
+		<ul>
+			<li>Division first, followed by multiplication, then addition and finally subtraction.</li>
+		</ul>
+			
+		<p>For example, the following series of statements gives a result of <b>11</b> because JavaScript first multiplies <b>2</b> by <b>3</b> (resulting in <b>6</b>) and then adds <b>5</b>.</p>
+
+<pre>console.log(`5 + 2 * 3: ${5 + 2 * 3}`); // <span class="comment">returns 11 </span></pre>
+
+		<p>You can force JavaScript to perform calculations in a particular order by using parentheses <span class="syn-js">()</span>.</p>
+
+		<p>For example, the following calculation gives a result of <b>21</b>. JavaScript first adds <b>5</b> and <b>2</b>, because they are within <span class="syn-js">()</span>. And only then multiplies that result by <b>3</b> to give <b>21</b>.</p>
+
+<pre>console.log(`(5 + 2) * 3: ${(5 + 2) * 3}`); // <span class="comment">returns 21 </span></pre>
+
+		<p>For example, </p>
+
+<pre>function convertToFahrenheit(celsius) {
+   varFahrenheit = ((9/5) * celsius) + 32;
+   console.log(`${celsius} Celsius:  = ${varFahrenheit} Fahrenheit`);
+}
+
+convertToFahrenheit(20);</pre>
+
+	</section>
+
+
+<section>
+
+	<h2>Increment and decrement operators</h2>
+	<p>JavaScript supports increment <span class="syn-js">++</span> and decrement <span class="syn-js">--</span> prefix operators that increase or reduce the numerical value of a variable by one. They cannot be applied to literal values; only to numeric variables.</p>
+	
+	<p>See the sample code below.</p>
+<pre>let myNum1 = 7;
+let myNum2 = 24; 	
+console.log(`myNum1 is 7`); 
+console.log(`Increment operator (++myNum1) is ${++myNum1}`);
+<span class="comment">// returns 8</span>
+console.log(`myNum2 is 24`); 
+console.log(`Decrement operator (--myNum2) is ${--myNum2}`);
+<span class="comment">// returns 23</span></pre>
+
+
+</section>
+
+  
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+
+
+
+</body>
+</html>
