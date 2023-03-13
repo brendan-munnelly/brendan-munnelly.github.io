@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>9: Anonymous Functions | JavaScript Tutorials</title>
+	<meta name="description" content="Creating function declarations and function expressions. And working with anonymous and arrow functions.">
+
+	<meta name="robots" CONTENT="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>9: Anonymous Functions</h1>
+					<h2>Creating a function expression whose value is stored in a variable. And working with a type of an function expression called an anonymous function.</li>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#function-expressions">Function expressions</a></p>
+				<p class="toc-indent"><a href="#function-expressions-not-hoisted">Function expressions are not hoisted</a></p>
+				<p><a href="#function-anonymous">Anonymous function expressions</a></p>
+				<p><a href="#parameters-arguments">Parameters and arguments</a></p>
+				<p class="toc-indent"><a href="#functions-return-values">Functions and return values</a></p>
+				<p><a href="#functions-immediate">Immediately-invoked function expressions</a></p>
+				<p><a href="#anonymous-function-syntax">Anonymous function syntax</a></p>
+
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a <i>function expression</i> whose value is stored in a variable.</li>
+			<li>Create an <i>anonymous function</i> based on a function expression.</li>
+			<li>Recognise that, unlike function declarations, function expressions are <i>not</i> hoisted.</li>
+			<li>Use arguments and parameters to pass values to an anonymous function.</li>
+			<li>Return a value from an anonymous function.</li>
+		</ul>
+
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>In your <b>javascript/exercises</b> folder, create a new sub-folder named <b>9</b>.
+				
+			<p>📄  &nbsp;Save the exercise file below to this new <b>javascript/exercises/9</b> sub-folder.</p>
+			<p><a href="exercises/index.html" target="_blank"><b>Anonymous Functions: Exercises</b></a></p>
+		</div>	
+	</section>
+
+<section  id="function-expressions">
+
+	<h2>Function expressions</h2>
+	<p>A second way to create a function is with a <i>function expression</i>. See the example below:</p>
+
+<pre class="language-js">
+<span class="comment">// Function expression</span>
+<span class="blue-dark">const</span> <span class="blue-light">greeting</span> = (<span class="blue-dark">function</span> <span class="yellow">displayGreeting</span>() {
+   <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="brown">"Hello, world!"</span>);
+});	
+</pre>
+
+	<p>A function expression is stored inside a regular JavaScript variable.</p> 
+
+	<p>The syntax of a function expression as follows:</p>
+        
+	<ul>
+		<li>Begin by writing a function declaration as shown below<img src="assets/img/function-expression-1.png" alt="JavaScript function expression variable" style="max-width: 580px; margin-top: 6px"></li>
+		<li>Enclose the function declaration inside a pair of parenthesis <span class="syn-js">()</span> .<img src="assets/img/function-expression-2a.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>
+		<li>Add a semi-colon statement terminator <span class="syn-js">;</span> at the end.
+		<img src="assets/img/function-expression-2.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
+		A function expression ends with a semi-colon because it is a part of an executable statement.
+		</li>
+		<li>Begin the code with an equals <span class="syn-js">=</span> sign to make it the RHS of an assignment statement.<img src="assets/img/function-expression-3.png" alt="JavaScript function expression parenthesis" style="max-width: 580px; margin-top: 6px"></li>   
+		<li>On the LHS, write the variable <i>keyword</i> and the name of the variable that will store the function.<img src="assets/img/function-expression-4.png" alt="JavaScript function expression code block" style="max-width: 580px; margin-top: 6px; margin-bottom: 12px !important">
+		Developers typically use the <span class="syn-js">const</span> variable type to store a function expression. This is to ensure the function is not accidentally changed or overwritten elsewhere in the program.</li>   
+	   
+	</ul>
+
+	<p>Note the following:</p>
+
+	<ul>
+		<li>A function declaration begins with the <span class="syn-js">function</span> keyword.</li>
+		<li>A function expression includes the <span class="syn-js">function</span> keyword, but begins with a variable declaration.</li>
+		<li>A function expression includes the <span class="syn-js">function</span> keyword, but begins with a variable declaration.</li>
+	</ul>
+
+	<p>Strictly speaking, a function expression is not stored inside a JavaScript variable. Only the <i>value</i> that the function expression evaluates to is stored in the variable.</p>
+
+	<h3 id="function-expressions-not-hoisted">Function expressions are <i>not hoisted</i></h3>
+
+	<p>You call a function expression in a similar way to how you call a function declaration. The difference is that you type the variable name rather than the function name. As with calling a function declaration, you follow this, without a space, with a pair of parenthesis <span class="syn-js">()</span>. See the example below.</p>
+	<img src="assets/img/function-expression-5.png" alt="JavaScript function expression calling" style="max-width: 580px">
+
+	<p>Here are two important differences between function declarations and function expressions:</p>
+
+	<ul>
+		<li>Unlike a function declaration, a function expression does not create a function variable (which is <i>hoisted</i>).</li>
+		<li>Instead, the function is stored inside a regular variable (which is <i>not hoisted</i>).</li>
+	</ul>
+
+	<p>As a result, you can call a function expression only after you have created it &#8211; and never before.</p>
+
+	<img src="assets/img/function-expression-not-hoisted.png" alt="JavaScript function expression not hoisted" class="wider-115">
+
+	<p>In other words, you must treat a variable that stores a function expression in the same way as any other variable &#8211; first declare it, and only then use it.</p>
+
+	
+
+	</section>
+
+	<section id="function-anonymous">
+
+        <h2>Anonymous function expressions</h2>
+        <p>Consider the sample function expression below.</p>
+		
+		<img src="assets/img/functions-anonymous-1.png" alt="JavaScript anonymous function expression" style="max-width: 600px">
+		
+		<p>You can see that the function contains <i>two</i> names:</p>
+		<ul>
+			<li><b>A variable name</b>: In this example, <span class="syn-js">greeting</span>.</li>
+			<li><b>A function name</b>: In this example, <span class="syn-js">displayGreeting</span>.</li>
+		</ul>
+
+		<p>But only one name is needed to call the function elsewhere in the program &#8211; the variable name.</p>
+		
+		<p>So: do we need the function name at all?</p>
+			
+		<p>Answer: 'No'.</p>
+
+		<p>You can convert a <i>named function expression</i> to an unnamed or <i>anonymous function expression</i> as follows:</p>
+
+		<ul>
+			<li>Remove the function name. But leave the parenthesis <span class="syn-js">()</span> after the keyword <span class="syn-js">function</span>.
+			<img src="assets/img/functions-anonymous-2.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
+			<li>Remove the outer parenthesis <span class="syn-js">()</span> that encloses the RHS of the assignment statement.
+			<img src="assets/img/functions-anonymous-3.png" alt="JavaScript anonymous function expression" style="max-width: 600px"></li>
+		</ul>
+		<p>That's it. You have now created an anonymous function.</p>
+
+		<h4 id="ex-9-1">Exercise 9.1: Displaying a message</h4>
+		<p>Rewrite the function declaration that displays a short message as an anonymous function. Verify that the anonymous function is <i>not</i> hoisted by calling the function before creating it.</p>
+			
+		<h4 id="ex-9-2">Exercise 9.2: Joining two strings</h4>
+		<p>Rewrite the function declaration that joins the two strings as an anonymous function.</p>          
+
+	</section>
+
+
+
+<section id="parameters-arguments">
+
+	<h2>Parameters and arguments</h2>
+
+	<p>As with function declarations, you can pass values to an anonymous function. See the example below.</p>
+
+	<img src="assets/img/function-pass-values-1.png" alt="sample screen" style="max-width: 500px">
+
+	<h4 id="ex-9-3">Exercise 9.3: Pass an argument when calling a function</h4>
+	<p>Rewrite the function declaration that passes a number as an anonymous function.</p>
+
+	<h3 id="functions-return-values">Functions and return values</h3>
+
+	<p>Anonymous functions can also return values back to the program that called them.</p>
+
+<pre class="language-js"><span class="comment">// Anonymous function expression with parameters</span>		
+<span class="blue-light">const</span> <span class="yellow">addNumbers</span> = <span class="blue-light">function</span> (<span class="blue-light">a</span>, <span class="blue-light">b</span>) {
+    <span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="orange">`Output:</span> <span class="blue-dark">$</span>{<span class="blue-light">a</span> + <span class="blue-light">b</span><span class="blue-dark">}</span><span class="orange">`</span>);
+    <span class="purple">return</span> (<span class="blue-light">a</span> + <span class="blue-light">b</span>);
+}
+			
+<span class="comment">// Function call with arguments</span>
+<span class="comment">// Includes variable to access the function's returned value</span>
+<span class="blue-dark">let</span> <span class="blue-light">result</span> = <span class="yellow">AddNums</span>(<span class="green-light">1</span>, <span class="green-light">2</span>);
+<span class="blue-light">console</span>.<span class="yellow">log</span>(<span class="orange">`Returned result:</span> <span class="blue-dark">${</span><span class="blue-light">result</span><span class="blue-dark">}</span>`</span>);</pre>
+
+		<h4 id="ex-9-4">Exercise 9.4: Return a value from a called function</h4>
+		<p>Rewrite the function declaration that calls a random number generator function as an anonymous function.</p>     
+
+	</section>
+
+	<section id="functions-immediate">
+
+		<h2>Immediately-invoked function expressions</h2>
+		<p>You can amend the syntax of a function expression, including an anonymous function, so that it is run without being called from elsewhere in the program. Such a function is said to be immediately-invoked.</p>
+
+		<p>Note that function declarations cannot be immediately-invoked. Only function expressions.</p>
+
+		<p>To invoke a function immediately, add a parenthesis <span class="syn-js">()</span> at the end of the function, just before the semi-colon. See the example below. </p>
+
+		<img src="assets/img/immediate.png" alt="sample image">
+
+		<h4 id="ex-9-5">Exercise 9.5: Create an immediately invoked function</h4>
+		<p>Copy the function in exercise 9-1, rename it, and rewrite it as an immediately invoked anonymous function.</p>     
+
+	</section>
+
+<section id="anonymous-function-syntax">
+	<h2>Anonymous function syntax</h2>
+	<p>In the examples and exercises in this Tutorial, you have placed the anonymous functions on the right-hand side (RHS) of assignment statements. Strictly speaking, in such cases, only the RHS contains the actual anonymous function syntax. See the examples below.</p>
+
+	<img src="assets/img/syntax-anonymous.png" alt="JavaScript" style="max-width:600px">
+	
+
+		<p>&nbsp;</p>
+		<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+	</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>
