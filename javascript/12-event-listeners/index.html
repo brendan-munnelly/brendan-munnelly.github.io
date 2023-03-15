@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>12: Event Listeners | JavaScript Tutorials</title>
+	<meta name="description" content="Invoking functions with event listeners, using external function declarations or internal anonymous or arrow functions.">
+
+    <meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<body>
+
+<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+				<div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+	
+			<div class="content">
+				<h1>12: Event Listeners</h1>
+				<h2>Invoking functions with <i>event listeners</i>, using external function declarations or internal anonymous or arrow functions.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+<main>
+
+	<aside>
+		<h3>JAVASCRIPT COURSE</h3>
+		<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+		<h3>THIS TUTORIAL</h3>
+		<p><a href="#learning-goals">Learning Goals</a></p>
+		<p><a href="#event-listeners">About event listeners</a></p>
+
+	</aside>
+
+<article>
+
+<section id="learning-goals">
+
+	<h2>Learning Goals</h2>
+	<p>At the end of this Lesson you will be able to:</p>
+	<div class="box-goals">
+		<ul>
+			<li>Invoke functions with event listeners, using external function declarations.</li>
+			<li>Invoking functions with event listeners, using internal anonymous or arrow functions.</li>
+		</ul>
+	</div>
+
+</section>
+
+
+<section>
+	<div class="code-snippets">
+		<p>In your <b>javascript/exercises</b> folder, create a new sub-folder named <b>12</b>.</p>
+			
+		<p>Save the exercise file below to this new <b>javascript/exercises/12</b> sub-folder.</p>
+		<p><a href="exercises/index.html" target="_blank"><b>Event Listeners: Exercises</b></a></p>
+	</div>	
+
+</section>
+
+
+<section  id="event-listeners">
+
+	<h2>About event listeners</h2>
+
+	<p>Event listeners are the recommended way to invoke functions within modern JavaScript code. The syntax takes two possible forms:</p>
+
+	<ul>
+		<li><b>External function declaration</b>: An event listener can call a stand-alone function located anywhere in the JavaScript program.</li>
+		<li><b>Internal anonymous or arrow functions</b>: Alternatively, the code fired by the event listener can positioned inside the event listener itself.</li>
+	</ul>
+
+	<p>An advantage of <i>event listeners</i> is that they are always located in the JavaScript code, rather than mixed in with the page content and HTML tags.</p>
+
+
+</section>
+
+
+<section>
+
+	<h2>External, anonymous and arrow functions</h2>
+
+	<p>You can work with JavaScript events with any one of three types of functions:  external functions, anonymous functis, and arrow functions.</p>
+
+	<p>In the example below, a function named <b>showBtnClick()</b> that is <i>external</i> to the click event, is used to process the event.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach external function without parenthesis ()</span>
+button.addEventListener('click', showBtnClick);
+
+<span class="comment">// external function</span>
+function showBtnClick() {
+    console.log("You clicked button_1")
+}</pre>
+
+<p>Another approach is to create an anonymous function internal to the click event. See below.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach and create anonymous function with parenthesis ()</span>
+button.addEventListener('click', function() {
+   console.log("You clicked button_1")
+});</pre>
+
+<p>And finally, you can shorten the anonymous function by writing it with the arrow function syntax. See below.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach and create anonymous arrow function with parenthesis ()</span>
+button.addEventListener('click', () =&gt; {
+    console.log("You clicked button_1")
+});</pre>
+
+
+</section>
+
+
+<section>
+
+	<h2>The JavaScript <code>event</code> object </h2>
+	<p>In JavaScript, an event object is an object that contains information about an event that has occurred, such as a mouse click, keypress, or touch. The event object is automatically passed to an event handler function when the event occurs, and it contains properties and methods that allow you to access and manipulate information about the event.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach and create anonymous arrow function with parenthesis ()</span>
+button.addEventListener('click', function (event) {
+    console.log("You clicked the button with an ID of "+event.target.id);
+    console.log("The clicked button has a class of " +event.target.className);
+});</pre>
+		
+
+	<p>In this example, the <span class="syn-js">addEventListener()</span> method is used to attach a click event listener to a button element with an id of <b>button_1</b>. The event listener function is passed the event object as a parameter, which can then be used to access information about the event.</p>
+	
+
+<p>Here is the samee example using an arrow function.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach and create anonymous arrow function with parenthesis ()</span>
+button.addEventListener('click', (event) =&gt; {
+    console.log("You clicked the button with an ID of "+event.target.id);
+    console.log("The clicked button has a class of " +event.target.className);
+});</pre>
+
+
+<p>The most common properties of a button or other clicked object you will want to access are the <b>id</b> and <b>className</b>.</p>	
+
+
+<p>Often, the event object is represented simply by the letter e. See below.</p>
+
+<pre>const button = document.getElementById('button_1');
+button.addEventListener('click', function(e) {
+   console.log(e);
+});</pre>
+
+<p>And here is the most concise way of writing the previous arrow function.</p>
+
+<pre><span class="comment">// get button</span>
+const button = document.getElementById('button_1');
+<span class="comment">// attach and create anonymous arrow function with parenthesis ()</span>
+button.addEventListener('click', e =&gt; {
+    console.log("You clicked the button with an ID of "+e.target.id);
+    console.log("The clicked button has a class of " +e.target.className);
+});</pre>
+
+
+<p>Here is a second example.</p>
+
+<pre>document.addEventListener('keypress', function(event) {
+    if (event.key === 'r') {
+	  document.body.style.backgroundColor = 'red';
+    } else if (event.key === 'g') {
+	  document.body.style.backgroundColor = 'green';
+    } else if (event.key === 'b') {
+	  document.body.style.backgroundColor = 'blue';
+    }
+});</pre>
+
+<p>In this example, the <span class="syn-js">addEventListener()</span> method is used to attach a keypress event listener to the document object. In this case, the event.key property is used to determine which key was pressed, and the background color of the page is changed accordingly.</p>
+
+
+
+
+</section>
+
+
+
+
+
+<script>
+	// const button = document.getElementById('button_1');
+
+	// button.addEventListener('click', showBtnClick);
+
+	// function showBtnClick() {
+	// 	console.log("You clicked button_1")
+	// }
+
+// get button
+// const button = document.getElementById('button_1');
+// // attach and create anonymous function with parenthesis ()
+// button.addEventListener('click', () => {
+//    console.log("You clicked button_1 boo")
+// });
+
+// const button = document.getElementById('button_1');
+// button.addEventListener('click', e => {
+//    console.log("You clicked booo button with an ID of " + e.target.id);
+//    console.log("The clicked button has a class of " + e.target.className);
+// });
+
+	// button.addEventListener('click', function(event) {
+	// 	console.log(event);
+	// 	console.log("You clicked button_1")
+	// });
+</script>
+
+</article>
+</main>
+
+<footer>
+	
+</footer>
+
+
+</body>
+</html>
