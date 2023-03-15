@@ -279,6 +279,44 @@ container.addEventListener('click', function(event) {
    }
 });</pre>
 
+</section>
+
+<section>
+
+	<h2>Preventing default events</h2>
+
+	<p>In JavaScript, the <span class="syn-js">event.preventDefault()</span> method is used to prevent the default behavior of an event from occurring. This method can be called inside an event listener function to prevent the default action of an event, such as submitting a form or following a link.</p>
+
+	<p>Here's an example of using <span class="syn-js">event.preventDefault()</span> to prevent the default behavior of a link:</p>
+
+<pre>const link = document.querySelector('a');
+
+link.addEventListener('click', function(event) {
+    event.preventDefault(); // prevent link from being followed
+    console.log('Link was clicked');
+});</pre>
+
+<p>In this example, we've attached a click event listener to a link element using addEventListener. When the link is clicked, the event listener function is triggered, and we use event.preventDefault() to prevent the link from being followed and the page from navigating away.</p>
+
+	<p>Instead, we log a message to the console indicating that the link was clicked. This way, we can handle the click event in a custom way without affecting the default behavior of the link.</p>
+
+	<p>The <span class="syn-js">event.preventDefault()</span> method is typically used to prevent the default behavior of form submissions, which is to submit the form to a server and reload the web page.</p>
+
+	<p>Here's an example of using thos method to prevent a form from submitting:</p>
+
+<pre>const form = document.querySelector('form');
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent form from submitting
+    const formData = new FormData(event.target);
+    console.log(formData.get('username'));
+});</pre>
+
+<p>In this example, we've attached a submit event listener to a form element using <span class="syn-js">addEventListener</span>. When the form is submitted, the event listener function is triggered, and we use <span class="syn-js">event.preventDefault()</span> to prevent the form from submitting and reloading the page.</p>
+
+<p>Instead, we create a FormData object using the event.target (i.e., the form element that was submitted), and log the value of the "username" field to the console using the formData.get() method.</p>
+	
+<p>By preventing the default behavior of the form, we can handle the form data ourselves using JavaScript and create a more seamless and dynamic user experience. This can be particularly useful when working with single-page applications or other types of web applications that require dynamic form handling.</p>
 
 
 </section>
