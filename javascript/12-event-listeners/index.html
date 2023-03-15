@@ -200,14 +200,88 @@ button.addEventListener('click', e =&gt; {
 
 <p>In this example, the <span class="syn-js">addEventListener()</span> method is used to attach a keypress event listener to the document object. In this case, the event.key property is used to determine which key was pressed, and the background color of the page is changed accordingly.</p>
 
+</section>
+
+<section>
+	<h2>Event capture and bubbling</h2>
+	<p>In JavaScript, event capture and bubbling refer to two different ways that events are <i>propagated</i> ('travel') through the DOM (Document Object Model) from the event target to its parent (above) and ancestor (below)elements.</p>
+
+	<h3>Event capture</h3>
+
+	<p>Event capture occurs first and propagates from the top of the DOM tree (the window object) down to the target element. Once the event reaches the target element, it triggers the event listener function that is attached to the target.</p>
+		
+	<h3>Event bubbling</h3>
+	<p>Bubbling, on the other hand, occurs after the event listener function has been triggered and propagates from the target element back up through the DOM tree to the window object. During the bubbling phase, each parent element of the target element also triggers its own event listener function, if one is attached.</p>
+
+	<p>Here's an example to illustrate event capture and bubbling:</p>
+
+<pre>&lt;body
+   &lt;div id="outer"&gt;
+      &lt;div id="inner"&gt;&lt;/div&gt;
+   &lt;/div&gt;
+  
+	&lt;script&gt;
+	  const outer = document.querySelector('#outer');
+	  const inner = document.querySelector('#inner');
+  
+	  outer.addEventListener('click', function() {
+		console.log('Outer clicked');
+	  }, true); // use capture
+  
+	  inner.addEventListener('click', function() {
+		console.log('Inner clicked');
+	  }, false); // use bubbling
+	&lt;/script&gt;
+  &lt;/body&gt;</pre>
+
+
+<p>In this example, we have an outer div and an inner div element nested inside it. We've attached a click event listener to each element, using the third parameter of the <span class="syn-js">addEventListener()</span> method to specify whether to use event capture or bubbling.</p>
+
+	<p>When you click on the inner div element, the event first travels down the DOM tree from the window object to the target element, triggering the outer event listener function ("Outer clicked") along the way because we've used event capture. Then, the event reaches the inner div element and triggers its own event listener function ("Inner clicked"). Finally, the event travels back up the DOM tree from the target element to the window object, triggering the outer event listener function ("Outer clicked") again, but this time because we've used event bubbling.</p>
+
+	<h3>Preventing event propagation</h3>
+	<p>To prevent event propagation (either event capture or event bubbling) on a button in JavaScript, you can use the <span class="syn-js">event.stopPropagation()</span> method in the event listener function that is attached to the button.</p>
+
+	<p>Here's an example of how to use <span class="syn-js">event.stopPropagation()</span> to prevent event bubbling when a button is clicked:</p>
+
+<pre>const button = document.querySelector('button');
+
+button.addEventListener('click', function(event) {
+   event.stopPropagation(); <span class="comment">// prevent event from bubbling up</span>
+   console.log('Button clicked');
+});
+	
+document.addEventListener('click', function() {
+  console.log('Document clicked');
+});</pre>
+
+<p>In this example, we've attached a click event listener to a button element and used <span class="syn-js">event.stopPropagation()</span> to prevent the click event from bubbling up the DOM tree and triggering the click event listener attached to the document object.</p>
+
+<p>Without <span class="syn-js">event.stopPropagation()</span>, when the button is clicked, both the button event listener function ("Button clicked") and the document event listener function ("Document clicked") would be triggered. But now only the button event listener function is triggered and the document event listener function is prevented from being triggered.</p>
+
+</section>
+
+<section>
+	<h2>Event delegation</h2>
+
+	<p>Event delegation is a technique in JavaScript that allows you to attach a single event listener to a parent element, which can handle events that are triggered by its child elements. This can be useful when you have many child elements that need event listeners attached to them, as it can reduce the amount of event listeners you need to write and manage.</p>
+
+	<p>Here's an example of using event delegation to handle button clicks based on the button ids:</p>
+
+<pre>const container = document.querySelector('#container');
+
+container.addEventListener('click', function(event) {
+   if (event.target.id === 'btn_1') {
+      console.log('Button btn_1 clicked');
+   }
+   else if (event.target.id === 'btn_2') {
+	console.log('Button btn_2 clicked');
+   }
+});</pre>
 
 
 
 </section>
-
-
-
-
 
 <script>
 	// const button = document.getElementById('button_1');
