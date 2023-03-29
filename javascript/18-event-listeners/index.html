@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>18: Event Listeners | JavaScript Tutorials</title>
+	<meta name="description" content="Invoking functions with event listeners, using external function or internal anonymous or arrow functions within the event listener.">
+
+    <meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		
+	</style>
+
+</head>
+
+
+<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+				<div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+	
+			<div class="content">
+				<h1>18: Event Listeners</h1>
+				<h2>Invoking functions with event listeners, using external functions or internal anonymous or arrow functions within the event listener.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+<main>
+
+	<aside>
+		<h3>JAVASCRIPT COURSE</h3>
+		<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+		<h3>THIS TUTORIAL</h3>
+		<p><a href="#learning-goals">Learning Goals</a></p>
+		<p><a href="#event-listeners">About event listeners</a></p>
+		<p><a href="#external">Events that call an external function</a></p>		
+		<p><a href="#internal">Events that call an internal function</a></p>		
+
+
+	</aside>
+
+<article>
+
+	<section id="learning-goals">
+
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson you will be able to:</p>
+		<div class="box-goals">
+			<ul>
+				<li>Attach an <span class="syn-js">addEventListener()</span> method to a web page element that calls an external function located elsewhere in the code.</li>
+				<li>Include an anonymous or arrow function within the body of the <span class="syn-js">addEventListener()</span> that responds to the web page event.</li>
+			</ul>
+		</div>
+
+	</section>
+
+	<section id="event-listeners">
+
+		<h2>About event listeners</h2>
+
+		<p>Event listeners are the recommended way to invoke functions within modern JavaScript code. You implement an event listener by attaching the <span class="syn-js">addEventListener()</span> method to a button or other element in a web page.</p>
+			
+		<p>Event listeners have two main advantages over <a href="../17-event-handlers/index.html">Event handlers</a>:</p>
+		
+		<ul>
+			<li>They are located in the JavaScript code, rather than mixed in with the web page content and HTML tags.</li>
+			<li>They can handle the response within the event listener itself, using an anonymous or arrow function. Or they can call external functions located elsewhere in the code.</li>
+		</ul>
+
+	</section>
+
+
+	<section id="external">
+
+		<h2>Events that call an external function</h2>
+
+		<p>Sometimes you will want an event to call a function located somewhere else in the code. In the example below, a web page contains a <span class="syn">button</span> element with an <b>id</b> of <b>btn_1</b>.</p>
+		
+<pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1"><span class="comment">&lt;!-- Button with id and class</span> --&gt;
+&lt;button id="btn_1"&gt;Click me&lt;/button&gt;</code></pre>		
+
+		
+<p>You could capture a user click on this button with the <span class="syn-js">addEventlistener()</span> method and an external function named <b>showBtnClick()</b> as follows.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2"><span class="comment">// Get button from web page</span>
+const btn_1 = document.<span class="yellow">getElementById(</span>'btn_1'<span class="yellow">)</span>;
+
+<span class="comment">// Attach external function declaration to listen to button.
+// Function is called when btn_1 has 'click' event.
+// NOTE: No parenthesis () after function name.</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">showBtnClick</span><span class="yellow">)</span>;
+
+<span class="comment">// External function called by 'click' event.</span>
+function <span class="highlight">showBtnClick()</span> {
+    console.log(`You clicked the button.`);
+}</code></pre>
+
+		<p>Responding to an event with an external function is a good choice when the event triggers many lines of code. This makes your JavaScript easier to maintain because the response code is separate from the event capture code.</p>
+
+	</section>
+
+	<section id="internal">
+
+		<h2>Events that call an internal function</h2>
+		<p>If the response to a button click or other event requires only one or a few lines of code, you might decide that it is unnecessary to create a separate function to process it.</p>
+		
+		<p>Instead, you can include an anonymous <span class="syn-js">function</span> with a code block <span class="syn-js"><b>{...}</b></span> inside the parenthesis <span class="syn-js"><b>()</b></span> of the event listener. See below.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy code<i class="fa-brands fa-square-js"></i></button><code id="strCode-3"><span class="comment">// Create anonymous function inside 'click' event listener</span>
+<span class="comment">// NOTE: Anonymous function keyword includes parenthesis ()</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">function()</span> {
+    console.log(`You clicked the button.`);
+}<span class="yellow">)</span>;
+<span class="comment">// } closes anonymous function</span>
+<span class="comment">// ); closes statement containing listener method</span>
+</code></pre>
+
+		<p>You can shorten the anonymous function by writing it in arrow function syntax. See below.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy code<i class="fa-brands fa-square-js"></i></button><code id="strCode-4"><span class="comment">// Attach 'click' listener arrow function to button</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">() =&gt;</span> {
+    console.log(`You clicked the button.`);
+}<span class="yellow">)</span>;</code></pre>
+
+		<p>You do not actually need to create a JavaScript variable <b>btn_1</b> for the button in the web page. Below is the most concise version of this complete code sample.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5"><span class="comment">// Get button and attach 'click' listener arrowfunction to it.</span>
+document.<span class="yellow">getElementById(</span>'btn_1'<span class="yellow">)</span>.<span class="yellow">addEventListener(</span>'click', <span class="highlight">() =&gt;</span> {
+    console.log(`You clicked the button.`);
+}<span class="yellow">)</span>;</code></pre>
+
+
+
+	</section>
+
+
+
+	<script src="../assets/js/utils.js"></script>
+
+</article>
+</main>
+
+<footer>
+	
+</footer>
+
+
+</body>
+</html>

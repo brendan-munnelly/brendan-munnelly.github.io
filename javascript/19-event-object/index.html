@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>19: Working wth the Event object | JavaScript Tutorials</title>
+	<meta name="description" content="Using the event object to identify which web page object or keyboard character the user has interacted with.">
+
+    <meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		
+	</style>
+
+</head>
+
+
+<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+				<div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+	
+			<div class="content">
+				<h1>19: Working wth the Event object</h1>
+				<h2>Using the event object to identify which web page object or keyboard character the user has interacted with.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+<main>
+
+	<aside>
+		<h3>JAVASCRIPT COURSE</h3>
+		<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+		<h3>THIS TUTORIAL</h3>
+		<p><a href="#learning-goals">Learning Goals</a></p>
+		<p><a href="#event-object">About the <code>event(e)</code> object</a></p>
+		<p><a href="#multiple-buttons">Multiple buttons, a single event listener</a></p>
+		<p><a href="#external-functions">Passing event details to an external function</a></p>
+		<p><a href="#events-classes">Working with classes of web page elements</a></p>
+		<p><a href="#events-keypress">Working with <code>keypress</code> events</a></p>
+
+	</aside>
+
+<article>
+
+	<section id="learning-goals">
+
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson you will be able to:</p>
+		<div class="box-goals">
+			<ul>
+				<li>Invoke functions with event listeners, using external function declarations.</li>
+				<li>Invoking functions with event listeners, using internal anonymous or arrow functions.</li>
+			</ul>
+		</div>
+
+	</section>
+
+	<section id="event-object">
+
+		<h2>About the <code>event(e)</code> object</h2>
+
+		<p>Sometimes you will want to know information about the button or other web page element the user has interacted with. In particular, you will want to know:</p>
+
+		<ul>
+			<li>The <b>id</b> of the element.</li>
+			<li>The <b>class</b> of the element.</li>
+		</ul>
+
+		<p>In the example below, you can see that the HTML button element has both an <b>id</b> and a <b>class</b>.</p>
+
+<pre class="html"><button class="copy-code" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1"><span class="comment">&lt;!-- Button with id and class</span> --&gt;
+&lt;button id="myBtn" class="btn-green"&gt;Click me&lt;/button&gt;</code></pre>		
+
+	
+		<p>You could capture a user click on this button with the <span class="syn-js">addEventlistener()</span> method as follows.</p>
+		
+<pre><button class="copy-code" id="btn-2">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2"><span class="comment">// Get button from web page</span>
+const btn_1 = document.<span class="yellow">getElementById(</span>'myBtn'<span class="yellow">)</span>;
+			
+<span class="comment">// Attach 'click' listener arrow function to button</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">() =&gt;</span> {
+    console.log(`You clicked a button`);
+}<span class="yellow">)</span>;</code></pre>
+
+
+		<p>To discover details about the button clicked, you can use the built-in <span class="syn-js">event</span> object as follows.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3"><span class="comment">// Attach 'click' listener arrow function to button</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">(event) =&gt;</span> {
+    console.log(`You clicked the button with an id of: <span class="highlight">${event.target.id}</span>`);
+    console.log(`You clicked the button with a class of: <span class="highlight">${event.target.className}</span>`);
+}<span class="yellow">)</span>;</code></pre>
+		
+		<p>In modern JavaScript the <span class="syn-js">event</span> object is usually represented by the single letter <span class="syn-js">e</span> See below.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4"><span class="comment">// Attach 'click' listener arrow function to button</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">(e) =&gt;</span> {
+    console.log(`You clicked the button with an id of: <span class="highlight">${e.target.id}</span>`);
+    console.log(`You clicked the button with a class of: <span class="highlight">${e.target.className}</span>`);
+}<span class="yellow">)</span>;</code></pre>
+
+		<p>And finally, because <span class="syn-js">e</span> is the <i>only</i> parameter of the arrow function, you need not type the parenthesis <span class="syn-js">()</span>.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5"><span class="comment">// Attach 'click' listener arrow function to button</span>
+btn_1.<span class="yellow">addEventListener(</span>'click', <span class="highlight">e =&gt;</span> {
+    console.log(`You clicked the button with an id of: <span class="highlight">${e.target.id}</span>`);
+    console.log(`You clicked the button with a class of: <span class="highlight">${e.target.className}</span>`);
+}<span class="yellow">)</span>;</code></pre>
+
+	</section>
+
+
+	<section id="multiple-buttons">
+
+		<h2>Multiple buttons, a single event listener</h2>
+
+		<p>You can use the <span class="syn-js">event</span> object to process multiple buttons on a web page with just a <i>single</i> event listener.</p>
+
+		<p>Consider the example of the four HTML buttons below on a web page. (Assume the web page contains no other buttons.) There are also two elements to hold the inputs and one to display the result.</p>
+
+<pre class="html"><button class="copy-html" id="btn-6">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-6"><span class="comment">&lt;!-- Two input numbers --&gt;</span>
+&lt;p&gt;First Number &lt;span id="num_1"&gt;10&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Second Number &lt;span id="num_2"&gt;4&lt;/span&gt;&lt;/p&gt;
+
+<span class="comment">&lt;!-- Four buttons to perform arithmetic --&gt;</span>
+&lt;button id="btn_1"&gt;+&lt;/button&gt;
+&lt;button id="btn_2"&gt;-&lt;/button&gt;
+&lt;button id="btn_3"&gt;*&lt;/button&gt;
+&lt;button id="btn_4"&gt;/&lt;/button&gt;
+
+<span class="comment">&lt;!-- Calculation result --&gt;</span>
+&lt;p&gt;Result: &lt;span id="num_result"&gt;&lt;/span&gt;&lt;/p&gt;</code></pre>
+
+
+		<p>Follow these steps to process all four buttons with just one event listener.</p>
+
+		<ol>
+			<li>Select all four buttons with the <span class="syn-js">getElementsByTagName()</span> method.
+<pre><code><span class="comment">// Get all web page buttons and place in a nodelist</span>
+const nodeListButtons = document.<span class="yellow">getElementsByTagName(</span>'button'<span class="yellow">)</span>;</code></pre>
+			<span class="inside-ol" style="margin-top: -32px">&nbsp;</span>
+			JavaScript places all four buttons in a nodelist which is similar to an array.</li>
+			
+			<li>Convert the nodelist to an array.
+<pre><code><span class="comment">// Convert nodelist to an array</span>
+const arrButtons = Array.from(nodeListButtons);</code></pre></li>
+			
+<li>Loop through the array with the <span class="syn-js">forEach()</span> method.
+
+<pre><code><span class="comment">// Loop through array </span>
+arrButtons.<span class="yellow">forEach(</span>button <span class="highlight">=&gt;</span> {
+   ...	
+}<span class="yellow">)</span>; <span class="comment">// ends forEach loop</span></code></pre></li>
+
+			<li>On each loop iteration, attach an event lister with an arrow function that responds to button click event.
+<pre><code><span class="comment">Attach 'click' listener to each button</span>
+button.<span class="yellow">addEventListener(</span>'click', <span class="highlight">e =&gt;</span> {
+    <span class="comment">// Arrow function that responds to click event</span>
+    console.log(`You clicked the button with an id of: <span class="highlight">${e.target.id}</span>`);
+}<span class="yellow">)</span>; <span class="comment">// ends adding listeners with arrow function</span></code></pre></li>
+</ol>
+		
+		<p>That's it.</p>
+		<p>Here is the complete code</p>
+
+<pre><button class="copy-code" id="btn-7">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7"><span class="comment">// Get all web page buttons and place in a nodelist</span>
+const nodeListButtons = document.<span class="yellow">getElementsByTagName(</span>'button'<span class="yellow">)</span>;
+
+<span class="comment">// Convert nodelist to an array</span>
+const arrButtons = Array.from(nodeListButtons);
+
+<span class="comment">// Loop through array </span>
+arrButtons.<span class="yellow">forEach(</span>button <span class="highlight">=&gt;</span> {
+    <span class="comment">// Attach 'click' listener to each button</span>
+    button.<span class="yellow">addEventListener(</span>'click', <span class="highlight">e =&gt;</span> {
+        <span class="comment">// Arrow function that responds to click event</span>
+        console.log(`You clicked the button with an id of: <span class="highlight">${e.target.id}</span>`);
+    }<span class="yellow">) <span class="comment">// ends adding listeners with arrow function</span>
+}<span class="yellow">)</span>; <span class="comment">// ends forEach loop</span></code></pre>
+
+
+</section>
+
+<section id="external-functions">
+
+		<h2>Passing event details to an external function</h2>
+		<p>You can now pass the <b>id</b> of the clicked button from the event listener as an argument to an external function that will perform the arithmetic.</p>
+
+		<p>In your code replace the <span class="syn-js">console.log</span> statement with a function call as follows.</p>
+
+<pre><button class="copy-code" id="btn-8">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8"><span class="comment">// External function called by 'click' event.</span>
+<span class="highlight">doOperation(</span>e.target.id<span class="highlight">);</span></code></pre>
+
+
+<p>Now create a function declaration with four branches that accepts an input parameter named <b>op</b>.</p>
+
+<pre><button class="copy-code" id="btn-9">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9"><span class="comment">// Function to perform arithmetic and display result.</span>
+function <span class="highlight">doOperation(</span>op<span class="highlight">)</span> {
+    <span class="comment">// Get numbers from web page and convert string to integer</span>
+    const num_1 = <span class="yellow">parseInt(</span>document.<span class="yellow">getElementById(</span>'num_1'<span class="yellow">)</span>.textContent<span class="yellow">)</span>;
+    const num_2 = <span class="yellow">parseInt(</span>document.<span class="yellow">getElementById(</span>'num_2'<span class="yellow">)</span>.textContent<span class="yellow">)</span>;
+    let num_result;
+    <span class="comment">//  Get only number character from string passed as argument</span>	
+    op = op.replace("btn_", "");
+    <span class="comment">//  Convert number character to numeric variable</span>
+    op = parseInt(op);
+
+    <span class="comment">//  Branch according to passed argument with strict equality operator</span>	
+    if (op === 1) { num_result = num_1 + num_2 } 
+    else if (op === 2) { num_result = num_1 - num_2 } 
+    else if (op === 3) { num_result = num_1 * num_2 } 
+    else if (op === 4) { num_result = num_1 / num_2 }
+
+    <span class="comment">//  Display result</span>	
+    document.<span class="yellow">getElementById(</span>'num_result'<span class="yellow">)</span>.textContent = num_result;
+}</code></pre>
+
+</section>
+
+<section id="events-classes">
+
+	<h2>Working with classes of web page elements</h2>
+
+	<p>In the next example you will work with the <b>className</b> instead of the <b>id</b> property of the <span class="syn-js">event</span> object. The captured <b>className</b> to determine which branch the response code will follow.</p>
+
+	<p>Begin by copying the following to your web page.</p>
+
+<pre class="html"><button class="copy-html" id="btn-10">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-10"><span class="comment">&lt;!-- Increment and decrement elements --&gt;</span>
+&lt;p&gt;&lt;a href="#" class="btn-link link-increment"&gt;Increase&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#" class="btn-link link-decrement"&gt;Decrease&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Output: &lt;span id="output"&gt;0&lt;/span&gt;&lt;/p&gt;</code></pre>
+
+	<p>You can see that both hyperlinks have two class names:</p>
+	<ul>
+		<li>Both hyperlinks share the same classs name of <b>btn-link</b>.</li>
+		<li>The first hyperlink also has a class name of <b>link-increment</b>.</li>
+		<li>The second hyperlink also has a class name of <b>link-decrement</b>.</li>
+	</ul>
+
+
+	<p>Start your JavaScript code by capturing all the hyperlinks on the web page with a class of <b>btn-link</b> and then converting the nodelist to an array.</p>
+
+<pre><button class="copy-code" id="btn-11">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11"><span class="comment">// Get all hyperkinks with this class name</span>
+const nodeListLinks = document.querySelectorAll('.btn-link');
+
+<span class="comment">// Convert nodelist to an array</span>
+const arrLinks = Array.from(nodeListLinks);</code></pre>
+
+<p>Next, add code that loops through the array and branches according to the <b>classList</b> property.</p>
+
+<pre><button class="copy-code" id="btn-12">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-12"><span class="comment">// Loop through array</span>
+arrLinks.<span class="yellow">forEach(</span>link =&gt; {
+    <span class="comment">// Attach 'click' listener to each link</span>
+    link.<span class="yellow">addEventListener(</span>'click', e =&gt; {
+        <span class="comment">// Arrow function that responds to click event</span>
+        if (e.target.className.<span class="yellow">includes(</span>"increment"<span class="yellow">)</span>) {
+            document.getElementById('output').textContent = parseInt(document.getElementById('output').textContent) + 1;
+        } 
+        else if (e.target.className.<span class="yellow">includes(</span>"decrement"<span class="yellow">)</span>) {
+            document.getElementById('output').textContent = parseInt(document.getElementById('output').textContent) - 1;
+        }
+    }<span class="yellow">)</span>; <span class="comment">// ends adding listeners with arrow function</span>
+}<span class="yellow">)</span>; // <span class="comment">ends forEach loop</span></code></pre>
+
+		<p>The <span class="syn-js">includes()</span> method determines whether a string includes a certain substring among its entries, returning true or false as appropriate.</p>
+
+		</section>
+
+
+		<section id="events-keypress">
+			<h2>Working with <code>keypress</code> events</h2>
+
+			<p>You can capture user keyboard actions with the following two-step process:</p>
+
+			<ul>
+				<li>Use the <span class="syn-js">addEventListener()</span> method with the <b>keypress</b> event to capture the user action.</li>
+				<li>Find the key pressed from the <b>key</b> property of the <span class="syn-js">event</span> object.</li>
+			</ul>
+
+			<p>Here is a simple example.</p>
+
+<pre><button class="copy-code" id="btn-13">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-13"><span class="comment">// Listen for any key being pressed</span>
+document.<span class="yellow">addEventListener(</span>'keypress', <span class="highlight">e =&gt; {</span>
+if (event.key === 'r') {
+    document.body.style.backgroundColor = 'red';
+    } else if (event.key === 'g') {
+        document.body.style.backgroundColor = 'green';
+    } else if (event.key === 'b') {
+        document.body.style.backgroundColor = 'blue';
+    }
+<span class="highlight">}</span><span class="yellow">)</span>;</code></pre>
+	
+		<p>In this the <b>event.key</b> property identifies which key was pressed, and the background color of the page is changed accordingly.</p>
+				
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+	
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
