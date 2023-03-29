@@ -1,12 +1,12 @@
 
 // Copy code sample to clipboard
 
-    const btns = document.querySelectorAll('main .copy-code');
-    const btnsArr = Array.from(btns);
+    const btnsJS = document.querySelectorAll('main .copy-code');
+    const btnsArrJS = Array.from(btnsJS);
     let btnJSid;
 
-    btnsArr.forEach(btn => {
-        btn.addEventListener("click", e => {
+    btnsArrJS.forEach(btnJS => {
+        btnJS.addEventListener("click", e => {
             e.stopPropagation();
             btnJSid = e.target.id;
             console.log("You clicked button: "+btnJSid);
@@ -15,6 +15,22 @@
             doCopyCode(btnJSid);
         });
     });
+
+    const btnsHTML = document.querySelectorAll('main .copy-html');
+    const btnsArrHTML = Array.from(btnsHTML);
+    let btnHTMLID;
+
+    btnsArrHTML.forEach(btnHTML => {
+        btnHTML.addEventListener("click", e => {
+            e.stopPropagation();
+            btnHTMLID = e.target.id;
+            console.log("You clicked button: "+btnHTMLID);
+            // remove 'btn-' from ID
+            btnHTMLID = btnHTMLID.replace('btn-', '');
+            doCopyHTML(btnHTMLID);
+        });
+    });
+
 
     async function doCopyCode(id) {
         const strCode = document.getElementById('strCode-'+id).textContent;
@@ -25,8 +41,22 @@
         setTimeout(function() {
             document.getElementById("btn-"+id).style.color= "";
             document.getElementById("btn-"+id).style.borderColor= "";
-            document.getElementById("btn-"+id).innerHTML = "Copy <i class=\"fa-solid fa-copy\"><\/i>";
+            document.getElementById("btn-"+id).innerHTML = "Copy Code <i class=\"fa-brands fa-square-js\"><\/i>";
             document.getElementById("btn-"+id).classList.add('copy-code');	
+        }, 1500);
+    }
+
+    async function doCopyHTML(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "";
+            document.getElementById("btn-"+id).style.borderColor= "";
+            document.getElementById("btn-"+id).innerHTML = "Copy HTML <i class=\"fa-solid fa-code\"><\/i>";
+            document.getElementById("btn-"+id).classList.add('copy-html');	
         }, 1500);
     }
 
