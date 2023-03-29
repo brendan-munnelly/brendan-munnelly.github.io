@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>20: Event bubbling and capture | JavaScript Tutorials</title>
+	<meta name="description" content="Understanding how events are propagated downwards (capture) and then back upwards (bubbling) through the Document Object Model.">
+
+    <meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		main pre { position: relative } 
+		button.copy-code { 
+			position: absolute; top: 6px; right: 8px;
+			z-index: 2;
+			color: #fff;
+			border: solid 2px #fff;
+			background-color: transparent;
+			padding: 8px 12px 10px 12px;
+			font-size: 16px;
+			border-radius: 4px;
+			line-height: 1;
+			display: inline-block;
+			-webkit-appearance: none;
+			appearance: none;
+			text-decoration: none;
+			cursor: pointer;
+  			vertical-align: bottom;
+			min-width: 110px
+		}
+
+		button.copy-code:hover, button.copy-code:active { 
+			border: solid 2px lightskyblue;
+			color: lightskyblue;
+		}
+
+		button.copy-code i { margin-left: 8px; color: inherit }
+
+		main pre span.highlight {
+			color: deeppink; font-weight: 700; 
+			color: rgb(255, 121, 198)
+		}
+
+		main pre span.yellow {
+			color: yellow; font-weight: 700; 
+			color: rgb(241, 250, 140)
+		}
+
+		main pre span.blue {
+			color: yellow; font-weight: 700; 
+			color: rgb(73, 148, 255)
+		}
+
+		
+	</style>
+
+</head>
+
+
+<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+				<div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+	
+			<div class="content">
+				<h1>20: Event bubbling and capture</h1>
+				<h2>Understanding how events are propagated downwards (capture) and then back upwards (bubbling) through the Document Object Model.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+<main>
+
+	<aside>
+		<h3>JAVASCRIPT COURSE</h3>
+		<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+		<h3>THIS TUTORIAL</h3>
+		<p><a href="#learning-goals">Learning Goals</a></p>
+		<p><a href="#event-listeners">About event listeners</a></p>
+
+	</aside>
+
+<article>
+
+	<section id="learning-goals">
+
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson, you will be able to:</p>
+		<div class="box-goals">
+			<ul>
+				<li>Invoke functions with event listeners, using external function declarations.</li>
+				<li>Invoking functions with event listeners, using internal anonymous or arrow functions.</li>
+			</ul>
+		</div>
+
+	</section>
+
+	<section id="event-listeners">
+
+
+	<section>
+		<h2>Event capture and bubbling</h2>
+		<p>In JavaScript, event capture and bubbling refer to two different ways that events are <i>propagated</i> ('travel') through the DOM (Document Object Model) from the event target to its parent (above) and ancestor (below)elements.</p>
+
+		<h3>Event capture</h3>
+
+		<p>Event capture occurs first and propagates from the top of the DOM tree (the <span class="syn-js">window</span> and <span class="syn-js">document</span> objects) down to the target element, such as the button that has been clicked.</p>
+		
+		<p>Once the event reaches the target element, the event capture phase is now complete. The event does not travel further down the DOM tree.</p>
+		
+		<p>By default, the event on the target element is not triggered during this capture phase.</p>
+			
+		<h3>Event bubbling</h3>
+		<p>Bubbling, on the other hand, occurs when the event has reached the target element. By default, the event is then triggered.</p>
+		
+		<p>After that happens, the event travels from the target element back up to the top of the DOM tree.</p>
+		
+		<p>During the bubbling phase, the event might meet a parent parent that has also an event listener attached. If that happens, that event is also triggered and its associated function is also called.</p>
+
+		<p>Here's an example to illustrate event capture and bubbling:</p>
+
+<pre><code>&lt;h2&gt;Some heading here&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium explicabo similique optio neque, ipsum ducimus minima cumque eos molestiae laboriosam debitis. Amet ea cum praesentium quia pariatur doloremque atque quod!&lt;/p&gt;
+&lt;div id="outerDIV"&gt;
+    &lt;button id="bigBtn"&gt;Change background to Green&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+
+		<p>In this example, we have an outer div and an inner div element nested inside it. We've attached a click event listener to each element, using the third parameter of the <span class="syn-js">addEventListener()</span> method to specify whether to use event capture or bubbling.</p>
+
+		<p>When you click on the inner div element, the event first travels down the DOM tree from the window object to the target element, triggering the outer event listener function ("Outer clicked") along the way because we've used event capture. Then, the event reaches the inner div element and triggers its own event listener function ("Inner clicked"). Finally, the event travels back up the DOM tree from the target element to the window object, triggering the outer event listener function ("Outer clicked") again, but this time because we've used event bubbling.</p>
+
+<pre><code>
+
+
+</code></pre>
+
+
+<pre><code>const outerDIV = document.getElementById('outerDIV')
+const bigBtn = document.getElementById("bigBtn");
+
+// Event listener executed during the capturing (first, down) phase.
+outerDIV.addEventListener('click', () => {
+    console.log(`Capture phase: click event on outer div - but action executed`);
+    document.body.style.backgroundColor= 'red';
+});
+
+// Event listener executed during the bubble (second, up) phase.
+outerDIV.addEventListener('click', () => {
+    console.log(`Capture phase: click event on outer div - but action executed`);
+    document.body.style.backgroundColor= 'red';
+});
+
+// Event listener executed during the bubbling (second, up) phase.
+bigBtn.addEventListener('click', (e) => {
+    console.log('Capture phase: click event on button - but action executed');
+    console.log('Bubble phase:  action now executed');
+    // e.stopPropagation();
+    document.body.style.backgroundColor= 'green';
+},false);</code></pre>
+
+
+
+		<h3>Preventing event propagation</h3>
+		<p>To prevent event propagation (either event capture or event bubbling) on a button in JavaScript, you can use the <span class="syn-js">event.stopPropagation()</span> method in the event listener function that is attached to the button.</p>
+
+		<p>Here's an example of how to use <span class="syn-js">event.stopPropagation()</span> to prevent event bubbling when a button is clicked:</p>
+
+		<pre>const button = document.querySelector('button');
+
+		button.addEventListener('click', function(event) {
+		event.stopPropagation(); <span class="comment">// prevent event from bubbling up</span>
+		console.log('Button clicked');
+		});
+			
+		document.addEventListener('click', function() {
+		console.log('Document clicked');
+		});</pre>
+
+		<p>In this example, we've attached a click event listener to a button element and used <span class="syn-js">event.stopPropagation()</span> to prevent the click event from bubbling up the DOM tree and triggering the click event listener attached to the document object.</p>
+
+		<p>Without <span class="syn-js">event.stopPropagation()</span>, when the button is clicked, both the button event listener function ("Button clicked") and the document event listener function ("Document clicked") would be triggered. But now only the button event listener function is triggered and the document event listener function is prevented from being triggered.</p>
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+	
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
