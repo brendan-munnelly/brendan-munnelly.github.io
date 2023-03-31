@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>26: Promises | JavaScript Tutorials</title>
+	<meta name="description" content="Creating promise objects to manage functions that may take a long or indefinite time to complete.">
+
+	<meta name="robots" content="noindex">
+
+	<!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+</head>
+
+<body id="top">
+
+	<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p></div>
+				</div>
+
+				<div class="content">
+					<h1>26: Working with Promises</h1>
+					<h2>Creating promise objects to manage functions that may take a long or indefinite time to complete.</h2>
+				</div>
+			</div><!-- /wrapper -->
+	</header>
+
+	<main>
+
+		<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#promises-about">About the promise object</a></p>
+				<p><a href="#promises-creating">Creating a promise</a></p>
+				<p><a href="#promises-consuming">Consuming a promise</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+		</aside>
+
+		<article>
+			<section id="learning-goals">
+				<h2>Learning Goals</h2>
+				<p>At the end of this Tutorial, you will be able to:</p>
+
+				<ul>
+					<li>Create a new Promise object with an <i>executor function</i>.</li>
+					<li>Consume the response from a Promise by calling the correct handler functions.</li>
+				</ul>
+
+		</section>
+
+		<section>
+			<div class="code-snippets">
+				<p>In your 📁 <b>javascript/exercises</b> folder, create a new sub-folder named <b>promises</b>.</p>
+					
+				<p>📄 &nbsp;In this sub-folder, create a new HTML file named <b>exercises-promises.html</b>.</p>
+			</div>
+		</section>
+
+
+		<section id="promises-about">
+
+			<h2>About the Promise object</h2>
+
+				<p>The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value. As a JavaScript developer, you will likely spend more time consuming promises than creating them, as it is usually asynchronous Web APIs that return a promise for the developer to consume.</p>
+				
+				<p>Promises provides a simpler alternative to executing, composing and managing asynchronous operation compared to the traditional callback-bases approach.</p>
+
+	</section>			
+			
+		<section id="promises-creating">
+			
+				
+			<h2>Creating a promise</h2>
+				
+			<p>You create a Promise object and assign it to a variable with the <span class="syn-js">new</span> keyword as shown below.</p>
+
+
+<pre><code><span class="comment">// Create a promise</span>
+const myPromise = new Promise(function(myResolve, myReject) {
+<span class="comment">// Code to communicate to remote server goes here. May take some time.</span>
+    myResolve(); <span class="comment">// function to handle successful completion</span>
+    myReject();  <span class="comment">// function to handle error</span>
+});</code></pre>
+
+			<p>Or, in simpler format.</p>
+
+<pre><code>const myPromise = new Promise(function(resolve, reject) { } );</code></pre>
+
+			<p>Note that, on creating a Promise object, you pass to it a function that has two parameters. These resolve and reject parameters are callback functions that handle the success and failure of the operation. These two callbacks are provided by JavaScript itself.</p>
+
+			<p>So, as a developer, the only code you are creating is in the function you pass to the new Promise object.</p>
+	
+			<p>The function passed to a Promise is called the <i>executor</i>. When new Promise is created, the executor function you provide is run automatically. Your executor contains the code - such as a request to a remote server - that should eventually produce the desired result.</p>
+
+<pre><code>const myPromise promise = new Promise(function(resolve, reject) {
+    <span class="comment">// executor (request to remote server)</span>
+});</code></pre>
+
+			<p>A promise can have three possible states as listed below.</p>
+
+			<table class="table-js-methods">
+				<tbody>
+					<tr>
+					   <td style="min-width: 30%"><p><span class="syn-js">pending</span></p></td>
+					   <td><p>The request's initial state. At this point, the value returned is <i>undefined</i>.</p></td>
+					</tr>
+					<tr>
+					   <td style="min-width: 30%"><p><span class="syn-js">fulfilled</span></p></td>
+					   <td><p>The request has completed successfully and a value is returned.</p></td>
+					</tr>
+					<tr>
+						<td style="min-width: 30%"><p><span class="syn-js">rejected</span></p></td>
+						<td><p>The request has failed and a reason (error) is returned.</p></td>
+					 </tr>                
+				</tbody>
+			</table>    
+
+			<p>When the executor function runs, it will sooner or later, move the Promise object from the state of <i>pending</i> to a state of either <i>fulfilled</i> or <i>rejected</i>.</p>
+
+			<p>A promise is said to be <i>settled</i> or <i>resolved</i> if it is either fulfilled or rejected, but not pending.</p>
+
+
+
+		</section>
+
+		<section id="promises-consuming">
+		
+			<h2>Consuming a Promise</h2>
+
+			<p>Your code can consume a Promise object by using its <span class="syn-js">then()</span> method. This can take two arguments: a callback function for success and another for failure. Both are optional, so you can add a callback for success or failure only.</p>
+
+<pre><code>myPromise.<span class="yellow">then</span>(
+    function(value) { <span class="comment">// code if successful</span> },
+    function(error) { <span class="comment">// code if some error</span> }
+);</code></pre>
+			
+		<p>The order is important. The first argument of <span class="syn-js">then()</span> is a function that runs when the promise is resolved and receives the result. The second argument is a function that runs when the promise is rejected and receives the error.</p>
+
+		<p>You can think of the <span class="syn-js">then()</span> method as the link between the Promise object (which contains the executor code that calls the remote server) and the rest of the code that will use that data to perform other tasks.</p>
+
+		<p>Copy the following code into your <b>exercises-promises.html</b> file.</p>
+			
+<pre><button class="copy-code" id="btn-1">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1">const myPromise = new Promise(function(myResolve, myReject) {
+    const x = 0;
+	
+    <span class="comment">// The code that may take some time</span>
+    if (x === 0) {
+        myResolve("Yay. Success.");
+    } else {
+        myReject("Oh, no. An error has occurred");
+    }
+});
+	
+myPromise.then(
+    function(value) {console.log(value) },
+    function(error) { console.log(error) }
+);</code></pre>
+
+<p>You should see the following output:</p>
+					
+<pre><code>Yay. Success.</code></pre>
+
+
+		<p>Next update your executor function to add a delay that will emulate a response from a remote server.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">const myPromise = new Promise(function(myResolve, myReject) {
+	const x = 0;
+
+	<span class="comment">// The code that may take some time</span>
+	setTimeout( () =&gt; {
+		if (x !== 0) {
+			myResolve("Yay. Success.");
+		} else {
+			myReject("Oh, no. An error has occurred");
+		}
+	}, 5000);
+});
+			
+myPromise.then(
+    function(value) {console.log(value) },
+    function(error) { console.log(error) }
+);</code></pre>
+
+		<p>After a delay of 5 seconds, you should see the following output:</p>		
+<pre><code>Oh, no. An error has occurred.</code></pre>
+
+		</section>
+
+		<!--
+		<section>
+
+			<h2>Consuming a Promise</h2>
+				
+			<p>The promise in the last section has fulfilled with a value, but you also want to be able to access the value. Promises have a method called <span class="syn-js">then()</span> that will run after a promise reaches resolve in the code. then will return the promise’s value as a parameter.</p>
+				
+			<p>This is how you would return and log the value of the example promise:</p>
+				
+<pre><code>promise.then((response) =&gt; {
+    console.log(response)
+})</code></pre>
+				
+			<p>The promise you created had a [[PromiseValue]] of We did it!. This value is what will be passed into the anonymous function as response:</p>
+				
+<pre><code>Output
+We did it!</code></pre>
+				
+			<p>So far, the example you created did not involve an asynchronous Web API—it only explained how to create, resolve, and consume a native JavaScript promise. Using setTimeout, you can test out an asynchronous request.</p>
+				
+			<p>The following code simulates data returned from an asynchronous request as a promise:</p>
+				
+<pre><code>const promise = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; resolve('Resolving an asynchronous request!'), 2000)
+})
+				
+<span class="comment">// Log the result</span>
+promise.then((response) =&gt; {
+    console.log(response)
+})</code></pre>
+				
+			<p>Using the then syntax ensures that the response will be logged only when the setTimeout operation is completed after 2000 milliseconds. All this is done without nesting callbacks.</p>
+				
+			<p>Now after two seconds, it will resolve the promise value and it will get logged in then:</p>
+				
+<pre><code>Output
+Resolving an asynchronous request!</code></pre>
+				
+			<p>Promises can also be chained to pass along data to more than one asynchronous operation. If a value is returned in then, another then can be added that will fulfill with the return value of the previous then:</p>
+				
+<pre><code><span class="comment">// Chain a promise</span>
+promise
+    .then((firstResponse) =&gt; {
+        <span class="comment">// Return a new value for the next then</span>
+	    return firstResponse + ' And chaining!'
+    })
+    .then((secondResponse) =&gt; {
+        console.log(secondResponse)
+    })</code></pre>
+				
+			<p>The fulfilled response in the second then will log the return value:</p>
+				
+<pre><code>Output
+Resolving an asynchronous request! And chaining!</code></pre>
+				
+			<p>Since then can be chained, it allows the consumption of promises to appear more synchronous than callbacks, as they do not need to be nested. This will allow for more readable code that can be maintained and verified easier.</p>
+		</section>
+
+		<section>
+			
+			<h2>Error Handling</h2>
+				
+			<p>So far, you have only handled a promise with a successful resolve, which puts the promise in a fulfilled state. But frequently with an asynchronous request you also have to handle an error—if the API is down, or a malformed or unauthorized request is sent. A promise should be able to handle both cases. In this section, you will create a function to test out both the success and error case of creating and consuming a promise.</p>
+				
+			<p>This getUsers function will pass a flag to a promise, and return the promise:</p>
+				
+<pre><code>function getUsers(onSuccess) {
+return new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        // Handle resolve and reject in the asynchronous API
+        }, 1000)
+	})
+}</code></pre>
+				
+			<p>Set up the code so that if onSuccess is true, the timeout will fulfill with some data. If false, the function will reject with an error:</p>
+				
+<pre><code>function getUsers(onSuccess) {
+return new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+    <span class="comment">// Handle resolve and reject in the asynchronous API</span>
+    if (onSuccess) {
+        resolve([
+	{id: 1, name: 'Jerry'},
+	{id: 2, name: 'Elaine'},
+	{id: 3, name: 'George'},
+])
+    } else {
+        reject('Failed to fetch data!')
+    }
+    }, 1000)
+    })
+}</code></pre>
+				
+			<p>For the successful result, you return JavaScript objects that represent sample user data.</p>
+				
+			<p>In order to handle the error, you will use the catch instance method. This will give you a failure callback with the error as a parameter.</p>
+				
+			<p>Run the getUser() command with onSuccess set to false, using the then method for the success case and the catch method for the error:</p>
+				
+<pre><code>// Run the getUsers() function with the false flag to trigger an error
+getUsers(false)
+    .then((response) =&gt; {
+        console.log(response)
+    })
+    .catch((error) =&gt; {
+        console.error(error)
+})</code></pre>
+				
+			<p>Since the error was triggered, the then will be skipped and the catch will handle the error:</p>
+				
+<pre><code>Output
+Failed to fetch data!</code></pre>
+				
+			<p>If you switch the flag and resolve instead, the catch will be ignored, and the data will return instead:</p>
+				
+<pre><code><span class="comment">// Run the getUsers() function with the true flag to resolve successfully</span>
+getUsers(true)
+    .then((response) =&gt; {
+        console.log(response)
+    })
+    .catch((error) =&gt; {
+        console.error(error)
+    })</code></pre>
+				
+			<p>This will yield the user data:</p>
+				
+<pre><code>Output
+(3) [{…}, {…}, {…}]
+0: {id: 1, name: "Jerry"}
+1: {id: 2, name: "Elaine"}
+3: {id: 3, name: "George"}</code></pre>
+				
+			<p>For reference, here is a table with the handler methods on Promise objects:</p>
+
+
+			<table class="table-js-methods">
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					   <td style="min-width: 30%"><p><span class="syn-js">then()</span></p></td>
+					   <td><p>Handles a resolve. Returns a promise, and calls onFulfilled() function asynchronously</p></td>
+					</tr>
+					<tr>
+					   <td style="min-width: 30%"><p><span class="syn-js">catch()</span></p></td>
+					   <td><p>Handles a reject. Returns a promise, and calls onRejected() function asynchronously.</p></td>
+					</tr>
+					<tr>
+						<td style="min-width: 30%"><p><span class="syn-js">finally()</span></p></td>
+						<td><p>Called when a promise is settled. Returns a promise, and calls onFinally() function asynchronously.</p></td>
+					 </tr>                
+				</tbody>
+			</table>   
+
+			<p>Promises can be confusing, both for new developers and experienced programmers that have never worked in an asynchronous environment before. However as mentioned, it is much more common to consume promises than create them. Usually, a browser’s Web API or third party library will be providing the promise, and you only need to consume it.</p>
+				
+			<p>In the final promise section, this tutorial will cite a common use case of a Web API that returns promises: the Fetch API.</p>
+
+		</section>				-->
+				
+		</article>
+		</main>
+		
+		<footer>
+			
+		</footer>
+		
+		<script src="../assets/js/utils.js"></script>
+		</body>
+		</html>
