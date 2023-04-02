@@ -19,8 +19,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome 5 icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 	<!-- Styles for Cookie Consent Popup Message  -->
 	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
@@ -91,26 +92,53 @@
 
 	<section>
 
-		<h2 id="tables-css">Re-creating the table with JavaScript</h2>
+		<h2 id="tables-css">Creating the table with JavaScript</h2>
 
-		<p>Your first task is to transform the table from static HTML into a table that is created by JavaScript. You need only to re-create the table rows in JavaScript and not the full table. Here are the steps.</p>
+		<p>Your first task is to write some JavaScript code that will create the <span class="syn">&lt;tbody&gt;</span> part of the table element in the provided web page. Here are the steps.</p>
 
 		<ol>
-			<li>In your <b>portfolio/js/weather</b> folder, create a new empty file named <b>app.js</b>.</li>
-			<li>In this <b>app.js</b> file, add the following function.
-<pre>function populatetableRows() {
+			<li>In your <b>portfolio/js/weather</b> folder are the following two files: 
+			<span class="inside-ol">&nbsp;</span><b>index.html</b> and <b>app.js</b>
+			<span class="inside-ol">&nbsp;</span>
+			Open both files in VS Code or other editor.</li>
+			<li>In the <b>index.html</b> file, you can see a static HTML table with a <span class="syn">&lt;tbody&gt;</span> element. But the <span class="syn">&lt;tbody&gt;</span> has no <span class="syn">&lt;tr&gt;</span> rows and <span class="syn">&lt;td&gt;</span> cells. 
+			<img src="assets/img/weather/weather-empty-table.png" alt="">
+			You will generate these rows and cells with JavaScript.
+			<span class="inside-ol">&nbsp;</span>
+			At the bottom of the <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, you can see that it is linked to the <b>app.js</b> file.
+			<span class="inside-ol">&nbsp;</span>
+			When you display the <b>index.html</b> web page in a browser, table element currently looks as shown below. 
+			<img src="assets/img/weather/weather-photo-empty.png" alt=""></li>
+			<li>In the <b>app.js</b> file, add the following function.
 
-)</pre></li>
-			<li>At the bottom of your <b>index.html</b> web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, link to this <b>app.js</b> file.</li>
-			<li>In the <b>index.html</b> web page, select and cut the table rows as shown below.
-			<img src="assets/img/weather/weather-1.png" alt="weather pic">
-			Save the web page.</li>
-			<li>In the app.js file, add a new variable <b>strTableRows</b>, paste in the table rows and enclose the pasted text inside a pair of back ticks <span class="syn-js">`</span> as shown below.
-			<img src="assets/img/weather/weather-2.png" alt="weather pic" style="max-width: 600px"></li>
-			<li>Assign the <b>strTableRows</b> to the table rows in the web page as follows.
-			<img src="assets/img/weather/weather-3.png" alt="weather pic" class="wider-115"></li>
-
+<pre><button class="copy-code" id="btn-1">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1">function populateTableRows() {
+    let strTableRows = `&lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Summary&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Temperature&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 2, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Humidity&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 3, Cell 2&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Pressure&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 4, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;`;
+}</code></pre>
+			<span class="inside-ol"></span>
+			This function creates four table rows with two cells inside each row.</li>
+			
+			<li>Just before the end of the <span class="syn-js">populateTableRows()</span> function, before the closing curly brace <span class="syn-js">}</span>, add the new line shown below.
+			<img src="assets/img/weather/weather-3.png" alt="weather pic" class="wider-115">
+			This assigns the content of the <b>strTableRows</b> string variable to the table rows in the web page.</li>
+		
+			<li>Save your <b>app.js</b> file and reload your <b>index.html</b> web page,</li>
 		</ol>
+			<p>You can see that the web page has not been updated. That is because you have not yet called the <span class="syn-js">populateTableRows()</span> function in <b>app.js</b>.</p>
 	</section>
 
 
@@ -118,8 +146,7 @@
 
 	<h2 id="tables-css2">Running the function when the web page loads</h2>
 
-
-		<p>You want your <span class="syn-js">populatetableRows()</span> function to run as soon as the web page loads. You have two options.</p>
+		<p>You want your <span class="syn-js">populateTableRows()</span> function to run as soon as the web page loads. You have two options.</p>
 
 		<h3>Immediately-invoked Function Expression (IIFE)</h3>
 		<p>In JavaScript an IIFE (pronounced iffy) is a function that runs without needing to be invoked or called from elsewhere in the program. It has the following syntax.</p>
@@ -135,20 +162,56 @@
 
 		<p>IIFEs are very useful because they enable code to be run immediately - but do not add variables to the global object.</p>
 
-		<p>Transform your <span class="syn-js">populatetableRows()</span> function into an IIFE as shown below.</p>
+		<p>Transform your <span class="syn-js">populateTableRows()</span> function into an IIFE as shown below.</p>
 
-		<img src="assets/img/weather/weather-4.png" alt="weather pic" class="wider-115">
+		<img src="assets/img/weather/weather-4.png" alt="weather pic" style="max-width: 580px">
 
 		<p>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. The code should now run and the table rows should be created.</p>
 
+		<p>In JavaScript an IIFE (pronounced iffy) is a function that runs without needing to be invoked or called from elsewhere in the program. It has the following syntax.</p>
+<pre>(function doSomething() {
+<span class="comment">/* function body */</span>
+})()</pre>
+		<p>Note that:</p>
+
+		<ul>
+			<li>The entire function is enclosed within parentheseis <span class="syn-js">( )</span>.</li>
+			<li>At the end, after the closing parentheseis <span class="syn-js">)</span> is a pair of parentheseis <span class="syn-js">()</span>.</li>
+		</ul>
+
+		<p>IIFEs are very useful because they enable code to be run immediately - but do not add variables to the global object.</p>
+
+		<p>Transform your <span class="syn-js">populateTableRows()</span> function into an IIFE as shown below.</p>
+
+		<img src="assets/img/weather/weather-4.png" alt="weather pic" style="max-width: 600px">
+
+		<p>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. The code should now run and the table rows should be created. See the screenshot below.</p>
+
+		<img src="assets/img/weather/weather-photo-placeholders.png" alt="">
 
 		<h3>Adding an event listener to the web page</h3>
 		<p>A second option for running a JavaScript function when a web page loads is to add an event listener for the web page. The syntax is as follows.</p>
 <pre>document.addEventListener("DOMContentLoaded", doSomething);</pre>
 
-		<p>Try this second option by removing the IIFE syntax from your <span class="syn-js">populatetableRows()</span> and adding the following before or after it in the <b>app.js</b> file.</p>
+		<p>Just in case the <span class="syn-js">DOMContentLoaded</span> event fires before your script has a chance to run, it is wise to check before adding the listener. See below.</p>
 
-		<img src="assets/img/weather/weather-5.png" alt="weather pic">
+<pre><code>if (document.readyState === "loading") {
+    <span class="comment">// Loading hasn't finished yet</span>
+    document.addEventListener("DOMContentLoaded", doSomething);
+} else {
+    <span class="comment">// DOMContentLoaded has already fired</span>
+    doSomething();
+}</code></pre>	
+
+		<p>Try this second option by removing the IIFE syntax from your <span class="syn-js">populateTableRows()</span> function and adding the following before it at the top of the <b>app.js</b> file.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">if (document.readyState === "loading") {
+<span class="comment">// Loading hasn't finished yet</span>
+    document.addEventListener("DOMContentLoaded", populateTableRows);
+} else {
+    <span class="comment">// DOMContentLoaded has already fired</span>
+    populateTableRows();
+}</code></pre>	
 
 		<p>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. Once again, the code should now run and the table rows should be created.</p>
 
@@ -165,6 +228,8 @@
 		<ol>
 			<li>Open a new tab in your web browser and enter the following web address with an API end-point.
 <pre>https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0  </pre>
+Your web browser should display a screen similar to the following.
+<img src="assets/img/weather/weather-api-raw.png" alt="">
 You can see that the link contains a city name <b>Paris</b> and a country code <b>fr</b>.
 These two parameters are not case-sensitive. For example, you could enter them as <b>paris</b> and a <b>FR</b>. See below.
 <pre>https://api.openweathermap.org/data/2.5/weather?q=paris,FR&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0   </pre></li>
@@ -208,18 +273,76 @@ These two parameters are not case-sensitive. For example, you could enter them a
       });
 }</pre>
 
-	<p>Let's include this API code within the <span class="syn-js">populatetableRows()</span>.</p>
-
+	<p>Follow these steps to add the Fetch API to your JavaScript code.</p>
 	<ol>
-		<li>Open the <b>app.js</b> file and add the Fetch API code as shown below.
-		<img src="assets/img/weather/weather-7.png" alt="weather pic" class="wider-115"></li>
+		<li>In the <b>app.js</b> file, update the <span class="syn-js">populateTableRows()</span> function as follows.
+
+<pre><button class="copy-code" id="btn-3">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">async function populatetableRows() { 
+    await fetch('https://api.openweathermap.org/data/2.5/weather?q=dublin,ie&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0')
+
+      .then(response =&gt; {
+        if (response.status !== 200) {
+          console.log('Error Status Code: ' + response.status);
+          return;
+      }
+      response.json().then((data) =&gt; {	
+        <span class="comment">// Test if data is being received</span>
+        console.log(data);
+        let strTableRows = `&lt;tr&gt;
+            &lt;td&gt;&lt;span&gt;Summary&lt;/span&gt;&lt;/td&gt;
+            &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;span&gt;Temperature&lt;/span&gt;&lt;/td&gt;
+            &lt;td&gt;Row 2, Cell 2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;span&gt;Humidity&lt;/span&gt;&lt;/td&gt;
+             &lt;td&gt;Row 3, Cell 2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;span&gt;Pressure&lt;/span&gt;&lt;/td&gt;
+            &lt;td&gt;Row 4, Cell 2&lt;/td&gt;
+        &lt;/tr&gt;`;
+        document.querySelector("#table-weather-dublin tbody").innerHTML = strTableRows;
+      });
+           
+    })
+    .catch(error =&gt; {
+        <span class="comment">// handle any error</span>
+    });
+}</code></pre></li>
 		<li>Save your <b>app.js</b> script and view the web page in your browser. It should look as shown before.</li>
-		<li>Open your browser console and verify that the data is being obtained in JSON format from the weather feed.</li>
+		<li>Open your browser console and verify that the data is being obtained in JSON format from the weather feed.
+
+			<img src="assets/img/weather/weather-console.log.png" alt="" class="wider-115">
+
+		</li>
 		<li>In the JavaScript code, update the four table cells as follows.
-		<img src="assets/img/weather/weather-8.png" alt="weather pic" style="max-width: 500px">
+
+<pre><button class="copy-code" id="btn-4">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Summary&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["weather"][0][description]}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-5">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Temperature&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["temp"] + "&degC"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-6">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Humidity&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["humidity"] + " %"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-7">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Pressure&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["pressure"] + " Pa"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
 		You can now remove the <span class="syn-js">console.log</span> statement.</li>
-		<li>At the top of the <b>app.js</b> file, add this new function.
-<pre>const capitalize = s =&gt; s && s[0].toUpperCase() + s.slice(1)</pre></li>
+		<li>Just before the <span class="syn-js">populateTableRows()</span> function the <b>app.js</b> file, add this new arrow function.
+<pre><button class="copy-code" id="btn-8">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">capitalize = s =&gt; s && s[0].toUpperCase() + s.slice(1)</code></pre></li>
 
 		<li>Apply this function to the first item of weather data as follows.
 			<img src="assets/img/weather/weather-9.png" alt="weather pic" style="max-width: 600px"></li>
@@ -235,7 +358,16 @@ These two parameters are not case-sensitive. For example, you could enter them a
 
 	<p>As a final step, add the following function to <b>app.js</b> that will change the background image according to the time of day.</p>
 
-	<img src="assets/img/weather/weather-10.png" alt="weather pic" class="wider-115">
+<pre><button class="copy-code" id="btn-9">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9">function change_background() {
+    let d = new Date();
+    let n = d.getHours();
+    if (n &gt; 23 || n &lt;= 6) {
+        document.querySelector(".theme-js").style.backgroundImage  ="url('assets/img/dublin-night.jpg')";
+    } else {
+        document.querySelector(".theme-js").style.backgroundImage  ="url('assets/img/dublin-day.jpg')";
+    }
+}
+change_background();</code></pre>
 
 </section>
 
@@ -273,19 +405,7 @@ window.cookieconsent.initialise({
 });
 </script>
 
-<script>
-	document.querySelector("#myEmail").addEventListener("click", copyEmail);
-	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail);
-
-	function copyEmail() {
-		document.execCommand("copy");
-		const email_id   = document.querySelector("#myEmail");
-		const email_text = document.querySelector("#myEmail").innerText;
-		email_id.classList.remove("emailAnimation");
-		void email_id.offsetWidth;
-		email_id.classList.add("emailAnimation");
-	}
-</script>
+<script src="../assets/js/utils.js"></script>
 
 </body>
 </html>
