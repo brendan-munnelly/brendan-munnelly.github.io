@@ -112,6 +112,7 @@ async function fetchRandomNumQuotes() {
             const upperNum = lowerNum + 9;
             let html_block = "";
             for (i= lowerNum; i &lt; upperNum; i++) {
+               if (!data[i].author) { data[i].author = "Anonymous";}
                html_block = html_block + `&lt;div class="col-3"&gt;&lt;p&gt;&lt;span&gt;&#8220;&lt;/span&gt;${data[i].text}&lt;span&gt;&#8221;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;${data[i].author}&lt;/h3&gt;&lt;/div&gt;`;
                document.getElementById("quotes-box").innerHTML = html_block;
             }
