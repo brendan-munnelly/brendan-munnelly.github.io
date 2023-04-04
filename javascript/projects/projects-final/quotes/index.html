@@ -163,8 +163,9 @@
                     const upperNum = lowerNum + 9;
                     let html_block = "";
                     for (i= lowerNum; i < upperNum; i++) {
-                    html_block = html_block + `<div class="col-3"><p><span>“</span>${data[i].text}<span>”</span></p><h3>${data[i].author}</h3></div>`;
-                    document.getElementById("quotes-box").innerHTML = html_block;
+                        if (!data[i].author) { data[i].author = "Anonymous" }
+                        html_block = html_block + `<div class="col-3"><p><span>“</span>${data[i].text}<span>”</span></p><h3>${data[i].author}</h3></div>`;
+                        document.getElementById("quotes-box").innerHTML = html_block;
                     }
                 });
             })
