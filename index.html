@@ -386,10 +386,25 @@ $(".dropdown-toggle").click(function(){$header=$(this),$content=$header.next(),$
 
 <a href="#" class="back-to-top" style="color:#fff"><i class="ion-android-arrow-up" style="color:#fff"></i></a>
 
+<script>
+	// Affix portfolio options submenu to top on page scroll and control Back to Top button
+	$(window).bind("scroll",function(){$(window).scrollTop()>50?($(".navbar").css("background-color","rgba(248,248,248, 0.7)"),$(".block-portfolio").addClass("fixed")):($(".navbar").css("background-color","transparent"),$(".block-portfolio").removeClass("fixed"))});var e=220,o=500;jQuery(window).scroll(function(){jQuery(this).scrollTop()>e?jQuery(".back-to-top").fadeIn(o):jQuery(".back-to-top").fadeOut(o)}),jQuery(".back-to-top").click(function(a){return a.preventDefault(),jQuery("html, body").animate({scrollTop:0},o),!1});
+</script>
 
-<!--
-<a href="#" class="cd-top text-replace js-cd-top">Top</a>
--->
+<script>
+	$(function(){ 
+		$(window).scroll( function(){
+			$('.fading').each( function(i){
+				var bottom_of_object = $(this).position().top + $(this).outerHeight();
+				var bottom_of_window = $(window).scrollTop() + $(window).height();
+				if( bottom_of_window > bottom_of_object ){
+					$(this).animate({'opacity':'1'},600);
+				}
+			}); 
+		});
+	});
+</script>
+
 
 </body>
 </html>
