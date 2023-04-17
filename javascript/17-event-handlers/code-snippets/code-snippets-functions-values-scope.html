@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Functions: values and scope: JS Code Snippets</title>
+        <style>@media (min-width:1200px){header{padding:2% calc((100% - 800px)/ 2) 3% calc((100% - 800px)/ 2);margin:0 auto}}@media (min-width:1025px) and (max-width:1199px){header{padding:3% 14% 4% 14%}}@media (min-width:768px) and (max-width:1024px){header{padding:3% 8% 4% 8%}}@media (max-width:767px){header{padding:6% 13% 9% 13%}}h1 .font-mono{color:#888}body{font-family:sans-serif}li,p{font-size:18px;line-height:1.5}li{margin-bottom:12px}</style>
+    </head>
+    <body>
+    <header>
+        <h1>Functions: values and scope: <span class="font-mono">JS Code Snippets</span></h1>
+        <p>See the online Lesson: <a href="https://www.munnelly.com/javascript/functions/functions-values-scope.html">Functions: values and scope</a></p>
+        <p>View the JavaScript output in your web browser by pressing the following keys and selecting the <b>Console</b> tab:</p>
+        <ul>
+            <li><b>Ctrl</b> + <b>Shift</b> + <b>i</b> (Windows)</li>
+            <li><b>⌘ Command</b> + <b>Shift</b> + <b>i</b> (Mac).</li>
+        </ul>
+    </header>
+
+    <!-- JavaScript code snippets start below -->
+    <script>
+
+        console.log("%c=== PASSING AN ARGUMENT TO A FUNCTION PARAMETER ===", "color: white; background-color: green; padding: 2px");
+
+        // Create anonymous function with parameter named age
+        const displayAge = function (age) {
+            console.log(`Your age is: ${age}`);
+        }
+
+        // Call function and pass argument of 21
+        displayAge(21); // function whatever argument is passed to it
+
+
+        // Create shorter arrow function version
+        const displayAgeArrow = age =&gt; console.log(`Your age is: ${age}`);
+
+        // Call arrow function and pass argument of 21.5
+        displayAgeArrow(21.5); // function whatever argument is passed to it
+
+
+        console.log("\n%c=== FUNCTIONS AND RETURN VALUES ===", "color: white; background-color: green; padding: 2px");
+
+        // Create variables to store values to be returned by functions
+        let resultA;
+        let resultB;
+        let resultC;
+
+        // Function declaration with parameters		
+        function sumA(a, b) {
+            console.log(`Output A: ${a + b}`);
+            return (a + b);
+        }
+
+        // Function call with arguments
+        // Includes variable to access the function's returned value
+        resultA = sumA(1, 2);
+        console.log(`Returned result A: ${resultA}`);
+
+        // Anonymous function expression with parameters	
+        const sumB = function (a, b) {
+            console.log(`Output B: ${a + b}`);
+            return (a + b);
+        };
+
+        // Function call with arguments
+        // Includes variable to access the function's returned value
+        resultB = sumB(3, 4);
+        console.log(`Returned result B: ${resultB}`);
+
+
+        // Arrow function with parameters	
+        const sumC = (a, b) =&gt; { 
+            console.log(`Output C: ${a + b}`); 
+            return (a + b);
+        }
+
+        // Function call with arguments
+        // Includes variable to access the function's returned value
+        resultC = sumC(5, 6);
+        console.log(`Returned result C: ${resultC}`);
+
+        console.log("\n%c=== ARROW FUNCTIONS AND RETURN VALUES ===", "color: white; background-color: green; padding: 2px");
+
+        // Single-line arrow function
+        // Code block contains return keyword
+        const squareNum = num =&gt; { return num * num; }
+        // console.log(`Number squared is: ${squareNum(num)} - explicit return value`);
+
+        console.log(`Five squared is: ${squareNum(5)} - explicit return value`);
+
+        // Single-line arrow function. No return keyword.
+        const doubleNum = num =&gt; num * 2;
+        console.log(`Number doubled is : ${doubleNum(8)} - implicit return value`);
+
+        doubleNum(8);
+
+        console.log("\n%c=== DEFAULT FUNCTION PARAMETER VALES ===", "color: white; background-color: green; padding: 2px");
+
+        function showGreeting1(message) {
+            console.log(message);
+        }
+
+        showGreeting1(); // Returns undefined
+
+        function showGreeting2(message='Hello, world!') {
+            console.log(message);
+        }
+        showGreeting2(); // Outputs 'Hello, world!'
+        showGreeting2('Hi, there'); // Outputs 'hi, there!'
+
+
+        averageThreeNums = (x,y,z) =&gt; {
+            let result = (x + y + z)/3;
+            console.log(`Average of three numbers is: ${result}`);
+        }
+
+        averageThreeNums(1,2,3,4,5,6); // ignores 4, 5, 6
+        averageThreeNums(1,2,3,4,5); // ignores 4, 5
+        averageThreeNums(1,2,3,4); // ignores 4
+        averageThreeNums(1,2,3); // result is always '2', the expected value
+
+    </script>
+    <!-- End of code snippets -->
+
+    </body>
+</html>

@@ -147,29 +147,23 @@
 
 		<p>When you click on the inner div element, the event first travels down the DOM tree from the window object to the target element, triggering the outer event listener function ("Outer clicked") along the way because we've used event capture. Then, the event reaches the inner div element and triggers its own event listener function ("Inner clicked"). Finally, the event travels back up the DOM tree from the target element to the window object, triggering the outer event listener function ("Outer clicked") again, but this time because we've used event bubbling.</p>
 
-<pre><code>
-
-
-</code></pre>
-
-
 <pre><code>const outerDIV = document.getElementById('outerDIV')
 const bigBtn = document.getElementById("bigBtn");
 
 // Event listener executed during the capturing (first, down) phase.
-outerDIV.addEventListener('click', () => {
+outerDIV.addEventListener('click', () =&gt; {
     console.log(`Capture phase: click event on outer div - but action executed`);
     document.body.style.backgroundColor= 'red';
 });
 
 // Event listener executed during the bubble (second, up) phase.
-outerDIV.addEventListener('click', () => {
+outerDIV.addEventListener('click', () =&gt; {
     console.log(`Capture phase: click event on outer div - but action executed`);
     document.body.style.backgroundColor= 'red';
 });
 
 // Event listener executed during the bubbling (second, up) phase.
-bigBtn.addEventListener('click', (e) => {
+bigBtn.addEventListener('click', (e) =&gt; {
     console.log('Capture phase: click event on button - but action executed');
     console.log('Bubble phase:  action now executed');
     // e.stopPropagation();
