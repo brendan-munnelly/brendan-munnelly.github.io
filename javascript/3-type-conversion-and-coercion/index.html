@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>3: Type conversion and coercion | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with string, numeric and boolean variables, assigning values with the const and let keywords, and using the typeof opertor to investigate a variable’s type.">
+
+    <!-- Stylesheet-->
+    
+	<link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>3: Type conversion and coercion</h1>
+					<h2>Working with string, numeric and boolean variables, assigning values with the const and let keywords, and using the typeof opertor to investigate a variable&#8217;s type.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+		<main>
+
+			<aside>
+				<h3>JavaScript Course</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#js-variables">About variables in JavaScript</a></p>
+				<p class="toc-indent"><a href="#variable-names">Variable names</a></p>
+				<p class="toc-indent"><a href="#string-variables">About string variables</a></p>
+				<p class="toc-indent"><a href="#numeric-variables">About numeric variables</a></p>
+				<p><a href="#assignment-operator">About the assignment (=) operator</a></p>
+				<p><a href="#variable-retyping">Automatic variable retyping</a></p>
+				<p class="toc-indent"><a href="#typeof-operator">The <span>typeof</span> operator</a></p>
+			
+			</aside>
+	
+	<article>
+	
+
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson you will be able to:</p>
+		<div class="box-goals">
+		<ul>
+			<li>Declare string and numeric variables and assign values to them with the <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords.</li>
+			<li>Apply the correct variable naming standards</li>
+			<li>Reveal a variable's type using the <span class="syn-js">typeof</span> operator.</li>
+		</ul>
+	</div>
+
+	</section>
+
+	<section>
+	<p>In this Lesson you will meet the following terms:</p>
+	
+	<ul>
+		<li>Variable</li>
+		<li>Assignment statement</li>
+		<li>String variable</li>
+		<li>Numeric variable</li>
+		<li>Boolean variable</li>
+	</ul>
+
+	<div class="code-snippets">
+		<p>Exercise File: <a href="exercises/index.html" target="_blank">Variable Types</a></p>
+	</div>
+
+</section>
+
+
+<section id="js-variables">
+
+	<h2>About variables in JavaScript</h2>
+
+	<p>You can think of a variable as a <i>container</i> or &#8216;storage box&#8217; for a value that may be different each time the JavaScript code is run.</p>
+	
+	<p>Consider the example of a website login page that asks for a user's First Name.</p>
+
+	<img src="assets/img/first-name.png" alt="JavaScript">
+
+	<p>The value entered might be 'Mary' or 'John' or whatever. But in the JavaScript code that stores the value, the variable will always have the same name of, for example, <b>userFirstName</b>.</p>
+
+	<p>In JavaScript the first thing you do with a variable is <i>declare</i> it. The following code declares the variable named <b>userFirstName</b>.</p>
+
+<pre>
+var userFirstName;</pre>
+
+	<p>The declaration begins with the word <span class="syn-js">var</span>. This so-called keyword allocates memory storage space for new data and tells JavaScript that a new variable name is in use.</p>
+
+	<p>The more modern version of JavaScript uses the keywords <span class="syn-js">const</span> or <span class="syn-js">let</span> to declare a variable. For example:</p>
+
+<pre>
+let userFirstName;</pre>
+
+
+
+	<h3 id="variable-names">Variable names</h3>
+
+	<p>Here are a few points to remember about variable names:</p>
+
+	<ul>
+		<li><b>Uniqueness</b>: Don't use the same name for two different variables within the same JavaScript code.</li>
+
+		<li><b>No spaces</b>: Variable names cannot contain spaces. &#8216;Credit Limit&#8217; and &#8216;Sub Total&#8217; are invalid variable names.</li>
+
+		<li><b>Mixed character case</b>: You can combine upper and lowercase letters in a variable name to make it easier to read. For example, &#8216;PostCode&#8217; and &#8216;AccountStatus'.</li>
+
+		<li><b>Case sensitivity</b>: Variable names are case-sensitive. &#8216;Fname&#8217; is not the same as &#8216;fName'.</li>
+	</ul>
+
+</section>
+
+	<section id="assignment-operator">
+
+		<h2>About the assignment (=) operator</h2>
+	
+		<p>Putting a value into a variable is known as assignment, and is achieved through the use of the <i>assignment operator</i> (<b>=</b>). The following four statements declare two variables and then assign values to them.</p>
+
+<pre>
+let userFirstName;
+userFirstName = "Sheila";
+let userRegion;
+userRegion = "Australia";</pre>
+	
+		<p>When declare a variable you will typically also want to assign data to it.</p>
+		
+		<p>You can minimise typing by declaring a variable and assigning a value to it in the same statement on the same line. Here's two examples.</p>
+		
+<pre>let userLastName = "Smith";
+let Password = "banana42";</pre>
+		
+		<p>In JavaScript the equals sign does <i>not</i> mean 'equal to' as it does in arithmetic or algebra. It means as follows:</p> 
+		
+		<p><i>&#8216;Take whatever is on the right of the equals sign and place it in variable on the left hand side.'</i></p>
+		
+		<p>Sometimes you may want to change a variable's value by a fixed amount. The following would make no sense if it where algebra.</p>
+	
+<pre>productPrice = productPrice + 20;</pre>
+	
+		<p>But in JavaScript it means &#8216;increase the product price by a fixed amount of 20.</p>
+
+		<p>If you wanted to increase the product price by 20 percent, you would write:</p>
+
+<pre>productPrice = productPrice + (productPrice * .20);</pre>		
+	
+		<p class="defhead">Assignment statement</p>
+		
+		<p class="deftext">A JavaScript statement in which a variable or object property on the left of the equal sign (=) is given the value of whatever is on the right of the equals sign.</p>
+	
+	
+</section>
+
+<section>
+
+	<h2>Variables types</h2>
+
+	<p>Three of the most comon types of variables you will meet in JavaScript are string, numner and Boolean variables.</p>
+
+		<h3 id="string-variables">About string variables</h3>
+
+		<p>A string variable holds letters, numbers, white (blank) spaces or punctuation symbols. </p>
+
+		<p>When you enclose the value in quotes JavaScript assumes that you want to create a string variable. For example:</p>
+
+<pre>
+let FirstName = "Peter";
+let StreetAddress = "42 Green Avenue";</pre>
+
+		<h3 id="numeric-variables">About numeric variables</h3>
+
+		<p>This variable type is for storing a number that you can perform arithmetic on.</p>
+
+		<p>When you omit the quotes around the value, JavaScript makes the variable a numeric variable. For example.</p>
+
+<pre>let OrderQty = 4;
+let productPrice = 9.9;</pre>
+
+		<p>Unlike most programming languages JavaScript does not have different types of numeric variables for different types of numbers. All numbers, whether integers (whole numbers) or floating-point numbers (numbers with decimal places) are all stored within the one type of numeric variable type. Numeric variables may store ether positive or negative numbers.</p>
+
+		<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre>let Temperature = -6.3456 <span class="comment">// Negative decimal number. This is fine.</span>
+let errorRare = .2727 <span class="comment">// Negative decimal fraction. This is fine.</span>
+</pre>
+
+		<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre>let userIncome = 34,000 <span class="comment">// Error. Contains a comma.</span>
+let product ID = 645w29 <span class="comment">// Error. Contains a letter character.</span>
+</pre>
+
+	<p>When creating a variable you don't need to tell JavaScript whether the variable is to be string, numeric or Boolean. JavaScript decides the type of variable you want according to whether or not you entered its value within quotes (string variable) or not (numeric variable).</p>
+
+
+	<h3>About Boolean variables</h3>
+	<p>A third type of variable in JavaScript is the Boolean variable. This may have one of only two possible values: <span class="syn-js">true</span> or <span class="syn-js">false</span>.</p>
+
+	<p>Developers typically give Boolean variables names such as <b>isCustomer</b>, <b>isLoggedIn</b>, <b>isSelected</b>, and so on.</p>
+
+	
+	<p class="defhead">Variable</p>
+
+	<p class="deftext">A container that can store a changing value. A variable may contain strings, numbers or true/false values. Variable names must be unique, are case sensitive and cannot contain spaces.</p>
+
+
+
+
+
+
+
+	<p>In Exercise 3.1 you will declare two variables, assign values to them, and then display the variable names and values in the web page.</p>
+
+	<h3 id="ex-3-1">Exercise 3.1: Displaying string variables</h3>
+
+	<p>In the first <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>
+
+<pre>
+let FirstName = "Eddie";
+let Surname = "Hamilton"
+document.write("&lt;i&gt;First Name:&lt;\/i&gt; "+FirstName+"&lt;br&gt;");
+document.write("&lt;i&gt;Surname:&lt;\/i&gt; "+Surname);
+</pre>
+
+	<p>Save and reload your web page. The result should look as shown below.</p>
+
+	<img src="assets/img/3-1.png" alt="JavaScript">
+
+	<p>In Exercise 3.2 you will declare three variables, assign numeric values to the first two, add the values together and assign the result to a third variable. Finally, you will then display all the numbers in the web page.</p>
+
+	<h3 id="ex-3-2">Exercise 3.2: Adding Numeric Variables</h3>
+
+	<p>In second <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>
+
+<pre>
+const firstNumber = 36;
+const secondNumber = 12;
+const sumResult = firstNumber + secondNumber;
+document.write("&lt;p&gt;First Number: "+firstNumber+"&lt;br&gt;");
+document.write("Second Number: "+secondNumber+"&lt;br&gt;");
+document.write("Result: &lt;b&gt;"+sumResult+"&lt;/b&gt;&lt;/p&gt;");
+</pre>
+
+
+	<p>Save and reload your web page. The result should look as shown below.</p>
+
+	<img src="assets/img/3-2.png" alt="JavaScript">
+
+	<p>Experiment with the file by changing the first and second number values, and by changing the arithmetic
+	operator. You can close the <b>exercise-3-2.html</b> file when finished.</p>
+
+</section>
+
+
+
+
+<section>
+
+<h2 id="variable-retyping">Automatic variable retyping</h2>
+
+<p>JavaScript, as you have learnt, decides which type of variable you want to create by the way that you first assign a value to it. When you enclose the value within quotes, JavaScript makes the variable a string variable; when you omit the quotes, JavaScript makes it a numeric variable.</p>
+
+<p>JavaScript can also change the type of a variable when you assign a value of a different type to that variable. It's called <i>automatic type conversion</i>. Consider the following two statements.</p>
+
+<pre>
+let myvar = "12.34";
+myvar = 12.34;
+</pre>
+
+<p>In the first statement JavaScript makes the variable named &#8216;myvar&#8217; a string variable. In the second statement JavaScript changes the variable type to numeric because a number was assigned to it.</p>
+
+<p>Automatic variable type conversion is a powerful feature of JavaScript, but its very power can result in scripting errors or in scripts that produce unexpected results. You need to be particularly careful with variables types when dealing with HTML forms that accept input from web page visitors. Because forms accept input as strings you need to convert such strings to numbers when you want to include them in arithmetic calculations.</p>
+
+<h3 id="typeof-operator">The <span>typeof</span> operator</h3>
+
+<p>When you are unsure about variable type at any some point in a script you can use the <span class="syn-js">typeof</span> operator to reveal the variable type. You insert the <span class="syn-js">typeof</span> operator directly before the variable. Here are three statements in which the <span class="syn-js">typeof</span> operator is used within a <span class="syn-js">document.write()</span> statement.</p>
+
+<pre>
+document.write(typeof SalesPrice);
+document.write(typeof x);
+document.write(typeof email_address);
+</pre>
+
+<p>Exercise 3.3 takes you through the steps setting, changing and displaying a variable's type.</p>
+
+<h3 id="ex-3-3">Exercise 3.3: Investigating a variable&#8217;s type</h3>
+
+
+<p>In third first <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>
+
+<pre>
+let firstVar;
+document.write("&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar);
+</pre>
+
+<p>Save and reload the web page. In the browser window you can see that the variable type is 'undefined'. This is because you have only declared the variable but not assigned a value to it.</p>
+
+<img src="assets/img/3-4.png" alt="JavaScript">
+
+<p>Next, replace everything within the <span class="syn-js">&lt;script&gt;</span> &#8230; <span class="syn-js">&lt;/script&gt;</span> tag pair with the following code.</p>
+
+
+<pre>
+let firstVar;
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+</pre>
+
+<p>Save and reload your web page. You can see the result of four <span class="syn-js">document.write()</span> statements, each one displayed on a separate line.</p>
+
+<img src="assets/img/3-5.png" alt="JavaScript">
+
+
+
+<p>Now, add three assignment statements to your block of code at the locations shown below.</p>
+
+<img src="assets/img/3-6.png" alt="JavaScript">
+
+
+<p>Save and reload your web page. It should now look as shown below.</p>
+
+<img src="assets/img/3-7.png" alt="JavaScript">
+
+<p>You can see how the variable's type changed during the script: from undefined (no type), to numeric, then to string, and finally back to numeric again.</p>
+
+
+<p>You can close the file when finished.</p>
+
+
+	<p>&nbsp;</p>
+<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+</section>
+
+</article>
+</main>
+
+
+<footer></footer>
+</body>
+</html>

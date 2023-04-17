@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>4: Working with strings | JavaScript Tutorials</title>
+	<meta name="description" content="Working with string index positions and length, joining and slicing strings, querying strings, and replacing characters.">
+
+
+    <!-- Stylesheet-->
+	
+	<link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+    <meta name="robots" content="noindex">
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>4: Working with strings</h1>
+					<h2>Working with string index positions and length, joining and slicing strings, querying strings, and replacing characters.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#strings-introduction">Introducing strings</a></p>
+				<p class="toc-indent"><a href="#strings-assign">Assigning strings to variables</a></p>
+				<p class="toc-indent"><a href="#strings-typeof">The typeof operator</a></p>
+				<p><a href="#strings-index">Strings and index position</a></p>
+				<p class="toc-indent"><a href="#strings-length">The length of a string</a></p>
+				<p class="toc-indent"><a href="#strings-whitespace">Trimming whitespace from a string</a></p>
+				<p class="toc-indent"><a href="#strings-case">Changing the case of string characters</a></p>
+				<p><a href="#strings-joining">Joining strings together</a></p>
+				<p><a href="#strings-slicing">Slicing strings apart</a></p>
+				<p><a href="#strings-query-index">Querying a string by index position(s)</a></p>
+				<p><a href="#strings-query-characters">Querying a string for character(s)</a></p>
+				<p><a href="#strings-search-replace">Searching and replacing character(s) in a string</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Declare string variables in JavaScript and use <span class="syn-js">typeof</span> to test that a variable contains a string.</li>
+			<li>Concatenate strings with the <span class="syn-js">+</span> operator and split them with the <span class="syn-js">slice()</span> method.</li>
+			<li>Use index position and the <span class="syn-js">.length</span> property to work with string characters.</li>
+
+			<li>Remove whitespace with <span class="syn-js">trim()</span> and change character case with <span class="syn-js">toUpperCase()</span> and <span class="syn-js">toLowerCase()</span>.</li>
+			<li>Use various methods to query a string by index position and character(s).</li>
+			<li>Search and replace string characters.</li>
+
+
+		</ul>
+
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>There is no exercise file for this Tutorial.</p>
+		</div>	
+	</section>
+
+
+	<section id="strings-introduction">
+
+        <h2>Introducing strings</h2>
+        <p>A <i>string</i> is a sequence of one or more characters &#8211; letters, numbers, or symbols. Each character in a string can be accessed by its position-based index number, beginning with zero. All strings have methods and properties available to them.</p>
+
+        <p>JavaScript offers two types of strings:</p>
+
+        <ul>
+            <li>String primitives</li>
+            <li>String objects</li>
+        </ul>
+
+        <p>This Lesson focuses only on the more commonly-used string primitives.</p>
+
+		<h3 id="strings-assign">Assigning strings to variables</h3>
+
+		<p>To assign a string to a variable, wrap the value in single or double quotes.</p>
+<pre>const myStr1 = "Hello"; <span class="comment">// JavaScript treats myStr1 as a string</span>
+const myStr2 = 'World'; <span class="comment">// JavaScript treats myStr2 as a string</span>
+const myStr3 = " ";     <span class="comment">// JavaScript treats myStr3 as a string</span></pre>		
+		<p>Note that a whitespace character is treated as a valid string. The <b>myStr3</b> variable is not empty.</p>
+
+		<p>With the <span class="syn-js">let</span> keyword, an empty string can be <i>declared</i> (created) in one statement and then <i>initialised</i> (first value assigned to it) in another.</p>
+<pre>let myStr4 = ""; <span class="comment">// Empty string</span></pre>
+<pre>myStr4 = "Some text here"; <span class="comment">// String now has a value</span></pre>
+		
+		<p>You cannot declare an empty string with <span class="syn-js">const</span>. An error will result.</p>
+
+		<img src="assets/img/const-error-1.png" alt="Error with empty const variable">
+
+		<p>A string declared with <span class="syn-js">let</span> (but not <span class="syn-js">const</span>) can be reassigned.</p>
+<pre>let myStr5 = "Things are looking good."; 
+myStr5 = "Things are looking even better."; <span class="comment">// New value assigned</span></pre>
+		
+		<p>Attempting to reassign a variable created with <span class="syn-js">const</span> throws an error as shown below.</p>
+
+		<img src="assets/img/const-error-2.png" alt="Error with empty const variable">
+
+
+		<h3 id="strings-typeof">The <code>typeof</code> operator</h3>
+		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
+
+<pre><span class="comment">// all statements returns string </span> 
+console.log(`Data type of myStr1: ${typeof myStr1}`);
+console.log(`Data type of myStr2: ${typeof myStr2}`);
+console.log(`Data type of myStr3: ${typeof myStr3}`);
+console.log(`Data type of myStr4: ${typeof myStr4}`);
+console.log(`Data type of myStr5: ${typeof myStr5}`);</pre>
+
+</section>
+
+
+
+<section>
+	<h2 id="strings-index">Strings and index position</h2>
+
+	<p>JavaScript assigns an <i>index number</i> to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. See below.</p>
+
+	<img src="assets/img/hello-world.png" alt="Sample string in JavaScript">
+
+    <p>See the sample code below.</p>
+
+<pre>let strHelloWorld = "Hello, World!";
+console.log(`Position [0]: ${strHelloWorld[0]};`)   <span class="comment">// returns H</span>
+console.log(`Position [5]: ${strHelloWorld[5]};`)   <span class="comment">// returns ,</span>
+console.log(`Position [6]: ${strHelloWorld[6]};`)   <span class="comment">// returns whitespace</span>
+console.log(`Position [7]: ${strHelloWorld[7]};`)   <span class="comment">// returns W</span>
+console.log(`Position [12]: ${strHelloWorld[12]};`) <span class="comment">// returns !</span></pre>
+
+   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>. The whitespace character also have an index, at <b>6</b>.</p>
+
+   <p>Being able to access every character in a string with the square bracket <span class="syn-js">[]</span> notation makes it easy to access and manipulate strings.</p>  
+
+
+	<h3 id="strings-length">The length of a string</h3>
+	<p>Every string has a <span class="syn-js">length</span> property that reveals the number of characters in the string. The syntax is as follows.</p>
+	<pre class="language-js"> <i>string_name</i>.length</pre>
+
+	<p>The following example will output a string length of <b>13</b> to the console.</p>
+
+<pre class="language-js">console.log(Number of chars in strHelloWorld: "+strHelloWorld.length); 
+<span class="comment">// returns 13</span></pre>
+    
+	<p>Remember: the length of a string is always <i>one number greater</i> than the string&#8217;s highest index number.</p>
+
+	<h3 id="strings-whitespace">Trimming whitespace from a string</h3>
+
+	<p>Users of online forms can enter unnecessary whitespace characters at the start or end of an input field. To remove these spaces, use the following JavaScript method. These spaces are called <i>padding</i>.</p>
+
+	<table class="table-js-methods">
+        <tbody>
+            <tr>
+               <td style="min-width: 20%"><p><span class="syn-js">.trim()</span></p></td>
+               <td><p>Returns a new string without any whitespace characters at the start and end of the string.</p></td>
+            </tr>
+        </tbody>
+    </table>                    
+
+	<p>This method will return a new string. This means the original string will be unchanged. So you will probably want to reassign the string variable to the new, trimmed value as follows.</p>
+
+	<p>See the sample code.</p>
+
+<pre>let strUserFirstName = "  Marie ";
+strUserFirstName = strUserFirstName.trim();
+console.log(`Trimmed string variable: ${strUserFirstName};`)
+<span class="comment">// returns Marie</span></pre>
+
+	<p>In addition to whitespaces, <span class="syn-js">trim()</span> also removes tab, no-break space and line terminator characters.</p>
+
+	<p>Note that <span class="syn-js">trim()</span> only works for characters at the start and end of a string. Any spaces between words are unaffected.</p>
+
+
+
+	<h3 id="strings-case">Changing the case of string characters</h3>
+
+	<p>You can use the following methods to change the case of a string.</p>
+	
+	
+	<p>Because each method actually creates a new string, you will typically want to reassign the converted values back to the original strings.</p>
+
+	<table class="table-js-methods">
+        <tbody>
+            <tr>
+               <td style="min-width: 30%"><p><span class="syn-js">.toUpperCase()</span></p></td>
+               <td><p>Returns a new string of all upper-case characters.</p></td>
+            </tr>
+            <tr>
+               <td style="min-width: 30%"><p><span class="syn-js">.toLowerCase()</span></p></td>
+               <td><p>Returns a new string of all lower-case characters.</p></td>
+            </tr>
+        </tbody>
+    </table>                    
+
+	<p>See the sample code below.</p>
+
+<pre>let strMakeUpper = "U2\'s First Album";
+let strMakeLower = "U2\'s Second Album";
+strMakeUpper = strMakeUpper.toUpperCase();
+console.log(`All Uppercase String One: ${strMakeUpper}`);
+<span class="comment">// returns U2's SECOND ALBUM</span>
+strMakeLower = strMakeLower.toLowerCase(); 
+console.log(`All Lowercase String Two: ${strMakeLower}`);
+<span class="comment">// returns u2's second album</span></pre>
+
+</section>
+
+<section id="strings-joining">
+	<h2>Joining strings together</h2>
+
+	<p>You can use the plus <span class="syn-js">+</span> operator to <i>concatenate</i> (join) strings together into one string. Often you will want to include a whitespace character before or after the <span class="syn-js">+</span> when joining strings.</p>
+	
+	<p>See the examples below.</p>
+
+<pre>console.log(`"John"+"Lennon": ${"John"+"Lennon"}`);
+<span class="comment">// returns JohnLennon</span>
+console.log(`"John "+"Lennon": ${"John "+"Lennon"}`);
+<span class="comment">// returns John Lennon</span>
+console.log(`"John" +" Lennon": ${"John" +" Lennon"}`);
+<span class="comment">// returns John Lennon</span></pre>
+
+	<p>JavaScript also offers a <span class="syn-js">concat(a,b)</span> method. But this is best avoided because it will throw an error if arguments passed are not string variables. The <span class="syn-js">+</span> operator will <i>coerce</i> any non-string values to strings.</p>
+
+
+</section>
+
+
+<section id="strings-slicing">
+	<h2>Slicing strings apart</h2>
+
+	<p>The opposite of concatenating strings is to <i>splice</i> a string. That is, to break a single string into two string variables. You can use the following method.</p>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td><p><span class="syn-js">.slice(start,end)</span></p></td>
+				<td><p>Returns a new string extracted at the specified <i>start</i> position from the original string.</p>
+				
+				<p>If the optional <b>end</b> argument is omitted, the new string will include every character of the original string up to the end.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See the examples below.</p>
+
+<pre>let strForSplicing = "A Long Day\'s Journey Into Night";
+console.log(`Splice at position [6] to end: ${strForSplicing.slice(6)}`);
+<span class="comment">// returns Day's Journey Into Night</span>
+console.log(`Splice from position [7] to [10]: ${strForSplicing.slice(7,10)}`);
+<span class="comment">// returns Day</span></pre>
+
+	<p>The original string is unchanged.</p>
+
+</section>
+
+<section id="strings-query-index">
+
+	<h2>Querying a string by index position(s)</h2>
+    
+	<p>Do you need to know what character(s) occur at particular index positions(s) in a string? JavaScript provides three methods to answer that question.</p>
+	
+	<p>All three methods below are case-sensitive and create a new string containing the returned result. The tested string is unchanged.</p>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td><p><span class="syn-js">.charAt(index)</span></p></td>
+				<td><p>Returns the character at the specified <i>index</i> position.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>Here are two simple examples.</p>
+
+<pre>const strMovieTitle = "The Man Who Shot Liberty Valence";
+console.log(`Character at position [0]: ${strMovieTitle.charAt(0)}`);
+<span class="comment">// returns T</span>
+console.log(`Character at position [17]: ${strMovieTitle.charAt(17)}`);
+<span class="comment">// returns l</span></pre>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td  style="width: 35%"><p><span class="syn-js">substring(start, end)</span></p></td>
+				<td><p>Returns the string character(s) between <b>start</b> and <b>end</b> index positions, but <i>not including</i> the <b>end</b> position.</p>
+				
+				<p>Omit the <b>end</b> argument to include all characters from the <b>start</b> to the end of the string.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See an examples below.</p>
+
+<pre>console.log(`Characters from position [0] to before position [3]: ${strMovieTitle.substring(0,3)}`);  
+<span class="comment">// returns The</span>
+console.log(`Characters from position [4] to string end: ${strMovieTitle.substring(4)}`);
+<span class="comment">// Man Who Shot Liberty Valence</span></pre>
+
+	<table class="table-js-methods">
+		<tbody>
+			<tr>
+				<td style="width: 35%"><p><span class="syn-js">substr(start, length)</span></p></td>
+				<td><p>Returns the string character(s) from the specified <b>start</b> position. The optional <b>length</b> parameter sets an ending index position.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>See an example below.</p>
+
+<pre>console.log(`3 Characters, beginning at position [0]: ${strMovieTitle.substr(0,3)}`);  
+<span class="comment">// returns The</span>
+console.log(`8 Characters, beginning at position [4]: ${strMovieTitle.substr(4,8)}`);  
+<span class="comment">// returns Man Who</span></pre>
+
+	<p>If you supply these methods with arguments that are out of range, JavaScript returns an empty string <span class="syn-js">""</span>.</p>
+</section>
+
+
+<section id="strings-query-characters">
+
+        <h2>Querying a string for character(s)</h2>
+
+        <p>Often you will want to know if a string contains particular character(s).</p>
+		
+		<p>In the two simplest cases, where the search-for characters(s) are at the start or the end of the string, you can use one of these methods.</p>
+		
+        <table class="table-js-methods">
+            <tbody>
+				<tr>
+                    <td style="width:40%"><p><span class="syn-js">.startsWith(searchString)</span></p></td>
+                    <td><p>Returns <span class="syn-js">true</span> if a string begins with specified character(s).</p></td>
+                </tr>
+                <tr>
+					<td style="width:40%"><p><span class="syn-js">.endsWith(searchString)</span></p></td>
+                    <td><p>Returns <span class="syn-js">true</span> if a string ends with specified character(s).</p></td>
+                </tr>
+            </tbody>
+        </table>
+
+		<p>See the code samples below.</p>
+
+<pre>
+console.log(`Does Movie Title begin with "Th": ${strMovieTitle.startsWith("Th")}`);
+<span class="comment">// returns true</span>
+console.log(`Does Movie Title end with "VALENCE": ${strMovieTitle.endsWith("VALENCE")}`);
+<span class="comment">// returns false. Search is case-sensitive</span></pre>		
+
+		<p>More generally, you can test if character(s) are located <i>anywhere</i> in a string with this method.</p>
+
+        <table class="table-js-methods">
+            <tbody>
+                <tr>
+                    <td style="width:35%"><p><span class="syn-js">.includes(searchString, position)</span></p></td>
+                    <td><p>Tests if the specified character(s) occur anywhere in a string.</p>
+					<p>The optional <span class="syn-js">position</span> parameter begins the search at a particular <i>index value</i>. Its default value is <b>0</b>.</p></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+		<p>Here are some examples.</p>
+
+<pre>console.log(`Does Movie Title include "Shot" anywhere? ${strMovieTitle.includes("Shot")}`);  
+<span class="comment"> // returns true</span>
+console.log(`Does Movie Title include "The" after position [4]: ${strMovieTitle.includes("The", 4)}`);  
+<span class="comment"> // returns true</span></pre>		
+
+		<p> This newer method is preferred over the older, slower <span class="syn-js">indexOf()</span> method.</p>
+
+</section>
+
+
+        <section id="strings-search-replace">
+
+            <h2>Searching and replacing character(s) in a string</h2>
+
+			<p>You can search a string for a value and replace it with a new value using the following method.</p>
+			
+                <table class="table-js-methods">
+                    <tbody>
+                        <tr>
+                            <td style="width: 35%"><p><span class="syn-js">.replace(searchValue, replaceValue)</span></p></td>
+                            <td><p>The first parameter is the value to be found. And the second parameter is the value you want to replace it with.</p></td>
+                        </tr>
+                       </tbody>
+                    </table>
+
+<p>See the example below.</p>					
+
+<pre>let strSearch = "It was the best of times. It was the worst of times.";
+console.log(`Replaces "times" with "years": ${strSearch.replace("times", "years")}`);
+<span class="comment"> // returns It was the best of years. It was the worst of times.</span></pre>
+
+	<p>By default, this method:</p>
+
+	<ul>
+		<li>Replaces only the first occurrence of the searched-for string.</li>
+		<li>Is case-sensitive.</li>
+	</ul>
+
+	<p>You can change this by using two regular expression parameters.</p>
+
+	<ul>
+		<li>Add the global parameter to replace <i>every</i> occurrences of the searched-for string.</li>
+		<li>Add the global parameter to replace <i>all</i> occurences, regardless of letter case.</li>
+	</ul>
+
+<p>See the examples below.</p>
+
+<pre>console.log(`Replaces "TiMeS" with "years": ${strSearch.replace("/times/gi", "years")}`);
+<span class="comment"> // returns It was the best of years. It was the worst of years.</span></pre>
+
+<p>&nbsp;</p>
+<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+
+            </section>
+</article>
+</main>
+
+<footer>
+
+   
+
+</footer>
+
+</body>
+</html>
