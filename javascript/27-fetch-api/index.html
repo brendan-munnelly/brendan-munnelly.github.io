@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>The Fetch API | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating function declarations and function expressions. And working with anonymous and arrow functions.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>The Fetch API</h1>
+					<h2>Using the Promise and Response objects of the Fetch API and get plain-text and JSON formatted data from remote web servers.</h2>
+				</div>
+			</div>
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#fetch-api">The Fetch API</a></p>
+				<p class="toc-indent"><a href="#request">Sending a Request</a></p>
+				<p class="toc-indent"><a href="#response-object">Working with the <i>Response</i> object</a></p>
+				<p class="toc-indent"><a href="#promise-object">Working with the <i>Promise</i> object</a></p>
+				<p><a href="#server-status">Handling server status codes</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Send a request to a web server with the Fetch API.</li>
+			<li>Work with the Response object.</li>
+            <li>Work with the Promise object for chaining multiple requests.</li>
+			<li>Handle server status codes.</li>
+		</ul>
+
+	</section>
+
+
+	<div class="code-snippets">
+		<p>The Fetch API: <a href="code-snippets/code-snippets-apis-download.html" target="_blank">JS Code Snippets</a></p>
+	</div>
+
+
+	<section class="theme-dark" id="fetch-api">
+
+        <h2>The Fetch API</h2>
+        <p>The Fetch API is a modern alternative to the older XMLHttpRequest API for making HTTP requests to web servers from web browsers. It uses the <span class="syn-js">Promise</span> object to provide more flexible features.</p>
+
+        <h3 id="request">Sending a Request</h3>
+
+        <p>You need to supply only a single argument to the <span class="syn-js">fetch()</span> method: the URL of the data that you want to fetch. This URL is known as an <i>endpoint</i>. See below.</p>
+
+<pre>let response = fetch(url);</pre>
+
+<p>The call to the requested resource by the <span class="syn-js">fetch()</span> method is <i>asynchronous</i>. That is, the time taken for the Fetch API to complete its task does not halt the execution of other instructions elsewhere in the web page.</p>
+
+<p>However, it is good practice to wrap a <span class="syn-js">fetch()</span> call inside a function declared with the <span class="syn-js">async</span> keyword and prefix the fetch call with the <span class="syn-js">await</span> keyword. See below.</p>
+
+<pre>
+async function getSomeData() {
+    let response = await fetch(url);
+}
+
+getSomeData();</pre>
+
+
+<h3 id="response-object">Working with the <code>Response</code> object</h3>
+
+<p>If the request completes successfully, the requested data is returned and wrapped inside <span class="syn-js">Response</span> object. This has a number of useful properties and methods for working with the response.</p>
+
+<table class="table-js-methods">
+    <tbody>
+        <tr>
+           <td style="min-width: 30%"><p><span class="syn-js">.text()</span></p></td>
+           <td><p>Use this when the <span class="syn-js">Response</span> object contains only 'raw' or 'plain' text.</p></td>
+        </tr>
+        <tr>
+           <td style="min-width: 30%"><p><span class="syn-js">.json()</span></p></td>
+           <td><p>Use this when the <span class="syn-js">Response</span> object contains only data in JSON format.</p></td>
+        </tr>
+    </tbody>
+</table>                    
+
+<p>Here is a smple example of fetching the contents of a raw text file.</p>
+
+<pre>async function fetchRawText() {
+    let response = await fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt'); 
+    let data = await response.text(); 
+    console.log(data);
+}
+
+fetchRawText()</pre>
+
+<p>To update the content of a &lt;div&gt; container with an <b>id</b> of "fetched-text" on the same web page, you could write this.</p>
+
+<pre>async function fetchRawText() {
+    let response = await fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt'); 
+    let data = await response.text(); 
+    document.querySelector(#fetched-text").innerText = data;
+}
+
+fetchRawText()</pre>
+
+<p>Here is a simple example of fetching some data in JSON format.</p>
+
+<pre>async function fetchJSONData() {
+    let response = await fetch('https://type.fit/api/quotes'); 
+    let data = await response.json(); 
+    console.log(data);
+}
+
+fetchJSONData()</pre>
+
+
+        <h3 id="promise-object">Working with the <code>Promise</code> object</h3>
+
+        <p>Before it returns a <span class="syn-js">Response</span> object, the <span class="syn-js">fetch()</span> method returns a <span class="syn-js">Promise</span> object that can have one of three possible properties:</p>
+        
+        <table class="table-js-methods">
+            <tbody>
+                <tr>
+                   <td style="min-width: 30%"><p><span class="syn-js">pending</span></p></td>
+                   <td><p>The request's initial state.</p></td>
+                </tr>
+                <tr>
+                   <td style="min-width: 30%"><p><span class="syn-js">fulfilled</span></p></td>
+                   <td><p>The request has completed successfully and a value is returned.</p></td>
+                </tr>
+                <tr>
+                    <td style="min-width: 30%"><p><span class="syn-js">rejected</span></p></td>
+                    <td><p>The request has failed and a reason (error) is returned.</p></td>
+                 </tr>                
+            </tbody>
+        </table>                    
+
+        <p>A <span class="syn-js">Promise</span> is said to be <i>settled</i> or <i>resolved</i> if it is either fulfilled or rejected, but not pending. When a Promise is fulfilled, you can use its <span class="syn-js">then()</span> and <span class="syn-js">catch()</span> methods to handle it.</p>
+       
+        <p>See the sample code below.</p>
+
+<pre>fetch(url)
+    .then(
+        function(response) {
+            <span class="comment">// handle the response</span>            
+        }
+    )
+    
+    .catch(
+        function(err) {
+            <span class="comment">// handle any error</span>
+        }
+    );</pre>
+
+<p>Or using modern arrow function syntax:</p>
+
+<pre>fetch(url)
+    .then(response =&gt; {
+        <span class="comment">// handle the response</span>
+    })
+
+    .catch(error =&gt; {
+        <span class="comment">// handle any error</span>
+    });</pre>
+
+    <p>Using the <span class="syn-js">Promise</span> object enables multiple response functions to be chained togother.</p>
+
+    </section>
+
+    <section>
+
+    <h2 id="server-status">Handling server status codes</h2>
+
+
+    <p>The <span class="syn-js">Response</span> object provides web server status code and status text through two properties <span class="syn-js">status</span> and <span class="syn-js">statusText</span> properties. When a request is successful, the status code is <b>200</b> and status text is <b>OK</b>.</p>
+
+    <p>Here is a complete example of the Fetch API with the <span class="syn-js">Promise</span> object that tests for a successful web server connection.</p>
+
+<pre>async function fetchWithServerCheck() { 
+
+await fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt')
+    .then(response =&gt; {
+
+        if (response.status !== 200) {
+            console.log('Error Status Code: ' + response.status);
+            return;
+        }
+
+        response.text().then((data) =&gt; {
+            console.log(data);
+        });
+    })
+
+    .catch(error =&gt; {
+        <span class="comment">// handle any error</span>
+    });
+
+}
+
+fetchWithServerCheck();</pre>
+
+
+
+
+	</section>
+
+	<section>
+
+		<h2>Using the Fetch API with Promises</h2>
+		
+		<p>One of the most useful and frequently used Web APIs that returns a promise is the Fetch API, which allows you to make an asynchronous resource request over a network. fetch is a two-part process, and therefore requires chaining then. This example demonstrates hitting the GitHub API to fetch a user’s data, while also handling any potential error:</p>
+		
+<pre><code><span class="comment">// Fetch a user from the GitHub API</span>
+fetch('https://api.github.com/users/octocat')
+    .then((response) =&gt; {
+        return response.json()
+    })
+    .then((data) =&gt; {
+        console.log(data)
+    })
+    .catch((error) =&gt; {
+        console.error(error)
+    })</code></pre>
+		
+		<p>The fetch request is sent to the https://api.github.com/users/octocat URL, which asynchronously waits for a response. The first then passes the response to an anonymous function that formats the response as JSON data, then passes the JSON to a second then that logs the data to the console. The catch statement logs any error to the console.</p>
+		
+		<p>Running this code will yield the following:</p>
+		
+<pre><code>Output
+login: "octocat",
+id: 583231,
+avatar_url: "https://avatars3.githubusercontent.com/u/583231?v=4"
+blog: "https://github.blog"
+company: "@github"
+followers: 3203
+...
+		
+This is the data requested from https://api.github.com/users/octocat, rendered in JSON format.</code></pre>
+		
+</section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+	<div class="item-3">
+		<h4>Site Map</h4>
+		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/javascript/">Home</a></p>
+		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy &amp; Legal</a></p>
+		
+	</div>
+
+	<div class="item-3">
+		<h4>JavaScript Course</h4>
+		<p>An online course that covers the fundamentals of modern JavaScript. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
+			
+	</div>
+
+	<div class="item-3">
+		<h4>Contact</h4>
+		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
+		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
+	</div>                
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail); 
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail); 
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>

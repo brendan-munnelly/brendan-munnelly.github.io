@@ -1,0 +1,183 @@
+     <!DOCTYPE html><html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Working with the Fetch API: JS Code Snippets</title>
+            <style>@media (min-width:1200px){header{padding:2% calc((100% - 800px)/ 2) 3% calc((100% - 800px)/ 2);margin:0 auto}}@media (min-width:1025px) and (max-width:1199px){header{padding:3% 14% 4% 14%}}@media (min-width:768px) and (max-width:1024px){header{padding:3% 8% 4% 8%}}@media (max-width:767px){header{padding:6% 13% 9% 13%}}h1 .font-mono{color:#888}body{font-family:sans-serif}li,p{font-size:18px;line-height:1.5}li{margin-bottom:12px}</style>
+        </head>
+        <body>
+        <header>
+            <h1>Working with the Fetch API: <span class="font-mono">JS Code Snippets</span></h1>
+            <p>See the online Lesson: <a href="https://www.munnelly.com/javascript/apis/fetch.html">The Fetch API</a></p>
+            <p>View the JavaScript output in your web browser by pressing the following keys and selecting the <b>Console</b> tab:</p>
+            <ul>
+                <li><b>Ctrl</b> + <b>Shift</b> + <b>i</b> (Windows)</li>
+                <li><b>⌘ Command</b> + <b>Shift</b> + <b>i</b> (Mac).</li>
+            </ul>
+        </header>
+        <main>
+
+        <!-- JavaScript code snippets start below -->
+        <script>
+        console.log("%c=== FETCH API: RAW TEXT FILE ===", "color: white; background-color: green; padding: 2px");
+
+        async function fetchRawText() {
+            let response = await fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt'); 
+            let data = await response.text(); 
+            console.log(data);
+        }
+            
+        // fetchRawText();
+
+        console.log("\n%c=== FETCH API: JSON DATA FILE ===", "color: white; background-color: green; padding: 2px");
+
+        async function fetchJSONData() {
+            let response = await fetch('https://type.fit/api/quotes'); 
+            let data = await response.json(); 
+            console.log(data);
+        }
+
+        // fetchJSONData();
+
+        console.log("\n%c=== FETCH API: USING THE PROMISE OBJECT METHODS ===", "color: white; background-color: green; padding: 2px");
+
+        async function fetchWithPromise() {        
+            fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt')
+                .then(response =&gt; {
+                    let data = response.text(); 
+                    // work with the data
+                    console.log(data);
+                })
+
+                .catch(error =&gt; {
+                    // handle any error
+                });
+        }
+
+        // fetchWithPromise();
+
+
+        console.log("\n%c=== FETCH API: CHECK SERVER STATUS CODE ===", "color: white; background-color: green; padding: 2px");
+
+        async function fetchWithServerCheck() { 
+
+            await fetch('https://www.w3.org/TR/PNG/iso_8859-1.txt')
+                .then(response =&gt; {
+
+                    if (response.status !== 200) {
+                        console.log('Error Status Code: ' + response.status);
+                        return;
+                    }
+
+                    response.text().then((data) =&gt; {
+                        console.log(data);
+                    });
+                })
+
+                .catch(error =&gt; {
+                    // handle any error
+                });
+
+        }
+
+        // fetchWithServerCheck();
+
+
+        console.log("\n%c=== FETCH API: FIRST TEN QUOTES ===", "color: white; background-color: green; padding: 2px");
+
+
+        async function fetchFirst10Quotes() { 
+            await fetch('https://type.fit/api/quotes')
+
+                .then(response =&gt; {
+                    if (response.status !== 200) {
+                        console.log('Error Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then((data) =&gt; {
+                        // Loop-through data
+                        for (i=0; i <= 10; i++) { 
+                            console.log(`${data[i].text} Source: ${data[i].author}`);
+                        }
+                    });
+
+                })
+
+                .catch(error =&gt; {
+                    // handle any error
+                });
+
+        }
+
+        // fetchFirst10Quotes();
+
+        console.log("\n%c=== FETCH API: RANDOM TEN QUOTES ===", "color: white; background-color: green; padding: 2px");
+
+
+        async function fetchRandomNumQuotes(num) { 
+            await fetch('https://type.fit/api/quotes')
+
+                .then(response =&gt; {
+                    if (response.status !== 200) {
+                        console.log('Error Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then((data) =&gt; {
+                        const lowerNum = getRandomInt(0, data.length-1);
+                        const upperNum = lowerNum + num; 
+                        for (i= lowerNum; i <= upperNum; i++) { 
+                            console.log(`${[i]}: ${data[i].text} Source: ${data[i].author}`);
+                        }
+                    });
+
+                })
+
+                .catch(error =&gt; {
+                    // handle any error
+                });
+
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+        // fetchRandomNumQuotes(10);
+
+
+        console.log("\n%c=== FETCH API: BLOG POSTS ===", "color: white; background-color: green; padding: 2px");
+
+
+        async function fetchBlogPosts() { 
+            await fetch('https://jsonplaceholder.typicode.com/posts/1')
+
+                .then(response =&gt; {
+                    if (response.status !== 200) {
+                        console.log('Error Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then((data) =&gt; {
+                            console.log(`Title: ${data.title} 
+                    Body: ${data.body}`);
+                    });
+
+                })
+
+                .catch(error =&gt; {
+                    // handle any error
+                });
+
+        }
+
+
+        fetchBlogPosts();
+
+
+
+       </script>
+       <!-- End of code snippets -->
+
+    </main>
+    </body>
+    </html>
