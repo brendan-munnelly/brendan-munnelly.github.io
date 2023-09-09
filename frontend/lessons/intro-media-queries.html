@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Introduction to Media Queries | Web Design &amp; Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Adding media queries to a CSS file so that web page elements resize according to the viewport width.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/front-end-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+	<!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Working with Negative Space</h1>
+                <h2>Using negative space between content elements to make your web pages easier and more inviting to read.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="/frontend/">Home</a></p>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#rwd-about">About Responsive Web Design (RWD)</a></p>
+            <p><a href="#media-query-about">About media queries</a></p>
+            <p><a href="#add-css">Updating your stylesheets with media queries</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Add media queries to a CSS file for the 768px breakpoint.</li>
+                    <li>Use media queries to create responsive layouts on a web page.</li>
+                </ul>
+
+            </section>
+
+
+        <section id="rwd-about">
+			<h2>About Responsive Web Design (RWD)</h2>
+			<p>As a web designer, you have no control over the size of the screen on which your web pages will be displayed.</p>
+
+            <img src="assets/img/rwd-media-queries/rwd-1.png" style="max-width:600px" alt="Intoduction to Media Queries">
+
+			<p>The term <i>viewport</i> is used to describe that area of a screen that displays a web page&#8217;s content. It excludes any menus, web address bars, bookmark bars, scroll bars or other similar elements.</p>
+
+			<p>Creating web pages that respond or &#8216;scale&#8216; appropriately to the viewport size of a user&#8217;s device is called Responsive Web Design (RWD). Responsive web pages adjust the layout, placement, and size of their elements so that the page looks good no matter what screen it&#8217;s being viewed on.</p>
+
+			<h3>About screen resolution</h3>
+			<p>Screen resolution refers to the number of pixels displayed on a monitor screen. It is typically expressed as (horizontal pixels) x (vertical pixels).</p>
+
+			<p>According to <a href="https://gs.statcounter.com/screen-resolution-stats/desktop/worldwide" target="_blank">StatCounter</a>, the most widely-used desktop/laptop screen resolutions are:</p>
+			<ul class="tight">
+				<li><b>1920x1080</b> (21.93%)</li>
+				<li><b>1366x768</b> (21.09%)</li>
+				<li><b>1536x864</b> (9.6%%)</li>
+				<li><b>1440x900</b> (6.7%)</li>
+				<li><b>1280x720</b> (5.31%)</li>
+			</ul>
+
+			<p>For mobiles phones, the figures are:</p>
+
+			<ul class="tight">
+				<li><b>360x640</b> (11.75%)</li>
+				<li><b>414x896</b> (7.91%)</li>
+				<li><b>375x667</b> (6.26%)</li>
+				<li><b>360x780</b> (6.06%)</li>
+				<li><b>360x760</b> (5.17%)</li>
+			</ul>
+
+			<p>And for tablet devices, the figures are:</p>
+			<ul class="tight">
+				<li><b>768x1024</b> (44.11%)</li>
+				<li><b>1280x800</b> (7.38%)</li>
+				<li><b>800x1280</b> (5.89%)</li>
+				<li><b>601x962</b> (4.96%)</li>
+				<li><b>962x601</b> (3.5%)</li>
+			</ul>
+
+			<p>For tablets and mobiles, it is important to take account of the device orientation, where <i>portrait</i> means &#8216;standing up&#8217; and landscape means &#8216;sideways&#8217;.</p>
+
+			<p>In summary, viewport widths can be grouped as follows:</p>
+			<ul class="tight">
+				<li><b>Mobiles</b>: About <b>360px</b> to <b>414px</b> (portrait)</li>
+				<li><b>Tablets</b>: About <b>601px</b> to <b>962px</b> (portrait)</li>
+				<li><b>Desktops/Laptops</b>: About <b>1280px</b> to <b>1920px</b></li>
+			</ul>
+
+			<h3>About breakpoints</h3>
+			<p>When designing for such a wide range of viewport sizes, web designers rely on what are called <i>breakpoints</i>. These are the viewport widths at which the page layout needs to change.</p>
+
+			<p>For example, a three-column layout may display nicely on larger screens &#8211; but on mobile devices it will necessary to transform the layout into just a single column.</p>
+
+			<p>For some complex layouts, it may be necessary to use several breakpoints. For most designs, however, it is sufficient to use just one breakpoint: <b>768px</b>.</p>
+
+			<p>This is the viewport width of an Apple iPad in portrait mode. So:</p>
+
+			<ul>
+                <li><b>Big viewports</b>: These are viewports that are 768 pixels wide <i> or wider</i>.
+                <span class="inside-ol">&nbsp;</span>
+                In other words, viewports with a <b>min-width</b> value of <b>768px</b>.</li>
+                <li><b>Small viewports</b>: These are viewports that are 767 pixels wide <i>or narrower</i>.
+                <span class="inside-ol">&nbsp;</span>
+                In other words, viewports with a <b>max-width</b> value of <b>767px</b>.</li>
+            </ul>
+
+
+		</section>
+
+		<section id="media-query-about">
+            <h2>About media queries</h2>
+			<p>When combined with breakpoints, <i>media queries</i> use the <b>@media</b> rule to create <i>conditional</i> style rules in CSS. In other words, a block of CSS properties will be applied to the linked web page only if a certain condition is true.</p>
+
+            <p>Media queries are most commonly used to adjust the horizontal and vertical spacing on a web page according to the viewport width.</p>
+
+			<p>For example, suppose you wanted &#8216;white space&#8217; at the left and right of the web page content.</p>
+			<ul>
+				<li>On &#8216;big screens&#8216; (<b>768px</b> or wide), you might want the web page content to fill only 60% of the viewport width.</li>
+
+				<li>On &#8216;small screens&#8216; (up to <b>767px</b> width), however, you might want the web page content to fill 90% of the viewport width.</li>
+			</ul>
+
+            <img src="assets/img/rwd-media-queries/page-wrapper-mockup.png" style="max-width:700px" alt="Intoduction to Media Queries">
+
+
+			<p>To achieve this, you would enter the following two media queries in your stylesheet.</p>
+
+            <img src="assets/img/rwd-media-queries/breakpoint-768.png"  alt="Intoduction to Media Queries">
+
+
+            <p>In the above example, the media query for desktop screens is entered first in the CSS file, followed by the media query for mobile screens. But the order in which media queries appear in a stylesheet does not matter.</p>
+
+            <p>Note that all media queries have both a <i>start point</i> and an <i>end point</i>. </p>
+
+            <p>It is not enough to &#8216;open&#8217; them. You must also &#8216;close&#8217; them.</p>
+
+            <p>If you fail to close a media query, all the style rules that follow it in the remainder of the CSS file &#8211; which could be many hundreds of lines long  &#8211; will be controlled by the unclosed media query.</p>
+
+
+            <p>Below are two media queries, but with the style rule for the <span class="csyn">h1</span> selectors written on a single line.</p>
+            <img src="assets/img/rwd-media-queries/media-query-3.png"  alt="Intoduction to Media Queries">
+
+
+            <p>Note the <i>two pairs</i> of curly braces:</p>
+            <ul>
+                <li>An inner pair of opening and closing curly braces encloses the style rules(s) for the CSS selector, in this case, <span class="csyn">h1</span>.</li>
+
+                <li>And an outer pair of opening and closing curly braces that encloses the media query.</li>
+            </ul>
+
+            <p>It is a good idea to use the <kbd class="tutorial-key">Tab</kbd> key along wth VS Code&#8217;s <i>indentation guides</i> (thin vertical lines) to ensure you do not forget the add the correct number of opening and closing braces when working with media queries in your stylesheets.</p>
+            <img src="assets/img/rwd-media-queries/page-wrapper-2.png"  alt="Intoduction to Media Queries">
+
+        </section>
+
+
+        <section>
+
+
+            <h2 id="add-css">Updating your stylesheets with media queries</h2>
+            <p>Follow the steps below to make your web pages responsive by adding media queries to their stylesheets.</p>
+
+            <ol>
+
+                <li>In VS Code, open your <b>global.css</b>, <b>style-1.css</b> and <b>style-2.css</b> stylesheet files.</li>
+                <li>Replace the current CSS padding style rule with the following, and save your CSS files when finished.
+<pre class="language-css"><span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+   <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token value-text">4% 20%</span> }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">body</span> { <span class="token property">padding</span>: <span class="token value-text">8% 5%</span> }
+}</pre>The upper part of your three CSS files should now look as shown below.
+<img src="assets/img/rwd-media-queries/css-body-after.png" alt="">
+</li>
+            <li>In VS Code, open your <b>style-3.css</b> stylesheet file, replace the current CSS padding style rule with the following, and save your CSS file when finished.
+<pre class="language-css"><span class="token comment">/* Desktops */</span>
+<span class="purple">@media</span> (<span class="token property">min-width</span>: <span class="token number">768px</span>) {
+   <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token value-text">4% 20%</span> }
+}
+
+<span class="token comment">/* Mobiles */</span>
+<span class="token purple">@media</span> (<span class="token property">max-width</span>: <span class="token number">767px</span>) {
+   <span class="token class">section</span> { <span class="token property">padding</span>: <span class="token value-text">5% 5%</span> }
+}</pre></li>
+
+            </ol>
+
+
+            <p>In simple terms, you have:</p>
+
+            <ul>
+                <li>Entered two style rules in the same CSS file: one rule for &#8216;big&#8217; screens, and the other rule for &#8216;small&#8217; screens.</li>
+
+                <li>Included with each style rule a <i>condition statement</i> that tells the web browser: only apply this style if the user&#8217;s viewport is <b>less than</b> or <b>greater than</b> a certain width.</li>
+            </ul>
+
+            <img src="assets/img/rwd-media-queries/media-query-1.png"  alt="Intoduction to Media Queries">
+
+            <p>All your four web pages now display responsively on mobile and desktop or laptop screens.</p>
+
+        </section>
+
+
+
+    <section id="upload-github">
+        <h2>Uploading your files to GitHub</h2>
+
+        <p>Your final task is to upload your web pages and stylesheets to your account on GitHub.</p>
+
+        <ol>
+
+            <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.
+            <img src="assets/img/rwd-media-queries/github-signin.png" alt="github-signin"></li>
+
+            <li>On your GitHub home page, click the name of the repository (‘repo’) that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+            <span class="inside-ol">&nbsp;</span>
+            <b>username.github.io</b>
+
+            <img src="assets/img/rwd-media-queries/github-repo-select.png" alt="github-signin"></li>
+
+            <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+            <img src="assets/img/rwd-media-queries/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+
+            <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+
+            <img src="assets/img/rwd-media-queries/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+
+            <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your <b>index.html</b> file and your 📁 <b>assets</b> and 📁 <b>exercises</b> sub-folders to upload them to your repository on GitHub.
+            <img src="assets/img/rwd-media-queries/github-upload-folder-files.png" alt="Introduction to HTML">
+            </li>
+
+            <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+
+            <li>Finally, click the green <b>Commit changes</b> button to upload your entire <b>exercises</b> sub-folder and all the files it contains.
+            <img src="assets/img/rwd-media-queries/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+
+        </ol>
+
+        <p>Your web pages are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+        <p><b>https://username.github.io/index.html</b><br>
+            &#8211; or simply &#8211;<br>
+        <b>https://username.github.io</b><br>
+        <b>https://username.github.io/exercises/page-1.html</b><br>
+        <b>https://username.github.io/exercises/page-2.html</b><br>
+        <b>https://username.github.io/exercises/page-3.html</b>
+        </p>
+
+
+        <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+        </section>
+
+
+
+
+        </article>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  	"palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+	  	"content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+    </script>
+
+</body>
+</html>
