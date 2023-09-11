@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with SELECT statements | Back-end Development Tutorials</title>
+    <meta name="description" content="Creating a sample database and table for working with the various features of the SQL SELECT statement.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/front-end-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+
+    main pre { position: relative } 
+    button.copy-code, button.copy-html { 
+        position: absolute; top: 6px; right: 8px;
+        z-index: 2;
+        color: #fff;
+        border: solid 2px #fff;
+        background-color: transparent;
+        padding: 8px 12px 10px 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        line-height: 1;
+        display: inline-block;
+        -webkit-appearance: none;
+        appearance: none;
+        text-decoration: none;
+        cursor: pointer;
+        vertical-align: bottom;
+        min-width: 90px
+    }
+
+    button.copy-code:hover, button.copy-code:active,
+    button.copy-html:hover, button.copy-html:active { 
+        border: solid 2px lightskyblue;
+        color: lightskyblue;
+        min-width: 90px
+    }
+
+    button.copy-code i,
+    button.copy-html i { margin-left: 8px; color: inherit }
+
+    main pre span.highlight {
+        color: deeppink; font-weight: 700; 
+        color: rgb(255, 121, 198)
+    }
+
+    main pre span.yellow {
+        color: yellow; font-weight: 700; 
+        color: rgb(241, 250, 140)
+    }
+
+    main pre span.blue {
+        color: yellow; font-weight: 700; 
+        color: rgb(73, 148, 255)
+    }
+
+    main article ol li pre code span {
+        display:inline-block;
+        color: #fff;
+        max-width: 500px
+    }
+
+
+    </style>
+
+
+
+</head>
+
+<body id="top">
+
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+
+            <div class="content">
+                <h1>Working with SELECT statements</h1>
+                <h2>Creating a sample database and table for working with the various features of the SQL SELECT statement.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+
+    <main>
+
+        <aside>
+            <h3>BACKEND DEVELOPMENT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-select">About the SELECT statement</a></p>
+            <p><a href="#sample-data">Creating a new database and table</a></p>
+            <p><a href="#select-statement">Working with the SELECT statement</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+            
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Use DB Browser to create a sample database and table.</li>
+                    <li>Read data from a table using the various features of the SQL SELECT statement.</li>
+                </ul>
+            </section>
+
+            <section id="about-select">
+                <h2>About the SELECT statement</h2>
+                <p>The SQL SELECT statement is used to retrieve data from one or more tables in a relational database. The data returned is stored in a result table, called the result-set.</p>
+
+                <p>To use the SELECT statement, you need a database with a table.</p>
+
+             </section>
+
+             <!--
+             <section id="install-windows">
+
+                <h2>Generating sample data with ChatGPT</h2>
+
+                <p>Follow the steps below:</p>
+
+                <ol>
+
+                    <li>Sign into your <a href="https://www.sqlite.org/download.html" target="_blank">ChatGPT</a> account.</li>
+                    
+                    <li>At the top-left of the screen, click the <b>+ New chat</b> button.</li>
+                    
+                    <li>Enter the following persona command text or similar to ChatGPT.
+
+
+<pre><button class="copy-code" id="btn-1" style="">Copy <i class="fa-solid fa-copy"></i></button><code id="strCode-1"><span>You are an expert instructor in relational databases who can <br>explain complex concepts and techniques to beginners in simple <br>language.</span></code></pre></li>
+
+
+                    <li>Next, enter this command.
+
+<pre><button class="copy-code" id="btn-2" style="">Copy <i class="fa-solid fa-copy"></i></button><code id="strCode-2"><span>I would like a list of 20 sample users in CSV. <br>For each user field, include the following three fields: <br>first_name, last_name, age.</span></code></pre>
+
+                    ChatGPT should provide a response similar to the following.
+                    <img src="assets/img/select/select-1.png" alt="select statement"></li>
+
+                    <li>Copy this output to a new plain-text file, and save the file as <b>users.csv</b> in your <b>C:\sqlite3</b> folder.
+                    <img src="assets/img/select/select-2.png" alt="select statement" style="max-width:660px">
+                    </li>
+                </ol>
+
+    
+            </section>
+
+        -->
+            <section id="sample-data">
+                <h2>Creating a new database and table</h2>
+
+                <p>Follow the steps below to create a new database and table with DB Browser.</p>
+
+                <ol>
+                    <li>In DB Browser, click the <b>New Database</b> tab near the top-left of the screen.
+                    <img src="assets/img/select/select-3.png" alt="select statements" style="max-width: 700px"></li>
+                    <li>Next, click the <b>Create Table</b> tab.
+                    <img src="assets/img/select/select-4.png" alt="select statements" style="max-width: 700px"></li>
+                    <li>In the <b>Edit table definition</b> dialog box, type <b>users</b> as the table name.
+                    <img src="assets/img/select/select-5.png" alt="select statements" style="max-width: 520px"></li>
+                    <li>In the <b>Fields</b> tab, use the <b>Add</b> button to create the four fields with names and properties shown below.
+                    <img src="assets/img/select/select-6.png" alt="select statements" style="max-width: 520px">
+                    As you can see, the DB Browser is creating an SQL statement in the lower part of the dialog box.
+                    <img src="assets/img/select/select-6a.png" alt="select statements" style="max-width: 520px">
+                    When finished, click <b>OK</b>.</li>
+                    <li>Click the <b>Execute SQL</b> tab.
+                    <img src="assets/img/select/select-6b.png" alt="select statements" style="max-width: 700px"></li>
+                    <li>In the blank space at the top of the tab, paste in the following.
+<pre><button class="copy-code" id="btn-3" style="">Copy <i class="fa-solid fa-copy"></i></button><code id="strCode-3"><span>INSERT INTO users (user_id, first_name, last_name, age) VALUES
+(1, 'Emily', 'Williams', 24),
+(2, 'John', 'Smith', 45),
+(3, 'Sarah', 'Johnson', 33),
+(4, 'Michael', 'Brown', 52),
+(5, 'Jessica', 'Jones', 29),
+(6, 'David', 'Davis', 39),
+(7, 'Laura', 'Garcia', 27),
+(8, 'Chris', 'Martinez', 43),
+(9, 'Sophia', 'Miller', 31),
+(10, 'Brian', 'Wilson', 50),
+(11, 'Nicole', 'Anderson', 35),
+(12, 'James', 'Thomas', 48),
+(13, 'Rachel', 'Taylor', 22),
+(14, 'Ethan', 'Moore', 54),
+(15, 'Grace', 'Jackson', 28),
+(16, 'Anthony', 'Harris', 36),
+(17, 'Megan', 'Martin', 40),
+(18, 'William', 'Thompson', 47),
+(19, 'Olivia', 'Garcia', 30),
+(20, 'Nathan', 'Lee', 21);</span></code></pre>
+Your screen should now look similar to the following.
+<img src="assets/img/select/select-6c.png" alt="select statements" style="max-width: 800px"></li>
+                    <li>Click the <b>Run</b> button to execute the SQL statement.
+                    <img src="assets/img/select/select-6d.png" alt="select statements" style="max-width: 800px">
+                    You should now see a message similar to the following.
+                    <img src="assets/img/select/select-6e.png" alt="select statements" style="max-width: 800px">
+                </li>    
+                <li>To view the data in your new <b>users</b> table, click the <b>Browse Data</b> tab.
+                <img src="assets/img/select/select-6f.png" alt="select statements" style="max-width: 700px"></li>
+            </ol>
+
+            <p>You now have a table with data to work with the SQL SELECT statement.</p>
+
+            </section>
+            
+            <section id="select-statement">
+
+                <h2>Working with the SELECT statement</h2>
+
+                <p>See the link below:</p>
+                <p><a href="https://www.w3schools.com/sql/sql_select.asp" target="_blank">The SELECT statement</a>.</p>
+
+            </section>
+    
+        </article>
+   
+
+    </main>
+
+	<footer>
+
+    </footer>
+
+<script>
+    
+// Copy code sample to clipboard
+
+const btnsJS = document.querySelectorAll('main .copy-code');
+    const btnsArrJS = Array.from(btnsJS);
+    let btnJSid;
+
+    btnsArrJS.forEach(btnJS => {
+        btnJS.addEventListener("click", e => {
+            e.stopPropagation();
+            btnJSid = e.target.id;
+            console.log("You clicked button: "+btnJSid);
+            // remove 'btn-' from ID
+            btnJSid = btnJSid.replace('btn-', '');
+            doCopyCode(btnJSid);
+        });
+    });
+
+    const btnsHTML = document.querySelectorAll('main .copy-html');
+    const btnsArrHTML = Array.from(btnsHTML);
+    let btnHTMLID;
+
+    btnsArrHTML.forEach(btnHTML => {
+        btnHTML.addEventListener("click", e => {
+            e.stopPropagation();
+            btnHTMLID = e.target.id;
+            console.log("You clicked button: "+btnHTMLID);
+            // remove 'btn-' from ID
+            btnHTMLID = btnHTMLID.replace('btn-', '');
+            doCopyHTML(btnHTMLID);
+        });
+    });
+
+
+    async function doCopyCode(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "";
+            document.getElementById("btn-"+id).style.borderColor= "";
+            document.getElementById("btn-"+id).innerHTML = "Copy <i class=\"fa-solid fa-copy\"><\/i>";
+            document.getElementById("btn-"+id).classList.add('copy-code');	
+        }, 1500);
+    }
+
+    async function doCopyHTML(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "";
+            document.getElementById("btn-"+id).style.borderColor= "";
+            document.getElementById("btn-"+id).innerHTML = "Copy <i class=\"fa-solid fa-copy\"><\/i>";
+            document.getElementById("btn-"+id).classList.add('copy-html');	
+        }, 1500);
+    }
+
+
+</script>
+
+
+</body>
+</html>
