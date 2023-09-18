@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with Node.js | Web Design & Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Installing the Nodejs Version Manager (nvm) and installing Nodejs.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body id="top">
+
+	<header>
+        <div class="wrapper">
+			<div class="sidebar">
+                <div>
+
+                </div>
+            </div>
+    
+            <div class="content">
+				<h1>Working with Node.js</h1>
+                <h2>Installing the Nodejs Version Manager (nvm) and installing Nodejs.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+   
+    <main>
+
+		<aside>
+            <h3>WEB DESIGN</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../../webdesign/index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#nvm-about">About the Node Version Manager (nvm)</a></p>
+            <p><a href="#installation">Installing nvm</a></p>
+            <p><a href="#install-nodejs">Installing Node.js</a></p>
+            <p><a href="#npm">About Node Package Manager (npm)</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                  <li>Install the Node Version Manager (nvm), Node.js and the Node Package Manager (npm) on your system.</li>
+                  <li>Work with package.json files.</li>
+                </ul>
+
+            </section>
+
+
+        <section id="nvm-about">
+
+            <h2>About the Node Version Manager (nvm)</h2>
+            <p>When working with projects based on Node.js, it is useful to have multiple versions installed on your system at any one time.</p>
+
+            <p>As the name suggests, the <a href="https://github.com/creationix/nvm">Node Version Manager (nvm)</a> enables you to switch between and work with different Node versions. </p>
+            
+            <p>The nvm provides a CLI (command-line interface) where, with a single command, you can:</p>
+            <ul>
+                <li>Install a particular Node.js version</li>
+                <li>Set a default Node.js version, and</li>
+                <li>Switch between versions as required</li>
+                <li>Safely upgrade as new versions of Node.js are released.</li>
+            </ul>
+            
+        </section>
+
+        <section id="installation">
+
+            <h2>Installing nvm</h2>
+            <p>How you install nvm depends on your operating system:</p>
+
+            <ul>
+                <li><b>macOS and Linux</b>: These two systems are directly supported by nvm.</li>
+                <li><b>Windows</b>: You will need a related (but separate and independent) project called <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> to work with multiple Node.js versions.</li>
+            </ul>
+
+            <p>The basic nvm commands are very similar across all three operating systems.</p>
+
+            <h3>Installing nvm on Windows</h3>
+
+            <p>Here are the steps for installing <b>nvm</b> on Microsoft Windows:</p>
+
+            <ol>
+                <li>Uninstall any existing versions of Node.js or nvm.
+                <span class="inside-ol">&nbsp;</span>
+                This requires deleting any existing Node.js installation folders (such as <code>C:\Program Files\nodejs</code>), and removing the existing npm install folder (such as <code>C:\Users\&lt;user&gt;\AppData\Roaming\npm</code>).</li>
+
+                <li>Open the <a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank">windows-nvm repository</a> in your web browser.</li>
+
+                <li>Download the <strong>nvm-setup.zip</strong> file for the most recent release.
+                
+                <img src="assets/img/node-js/download-setup.png" alt="NVM for Windows installation wizard"></li>
+
+                <li>Open the zip file, and then run the <strong>nvm-setup.exe</strong> file.</li>
+
+                <li>The Setup-NVM-for-Windows installation wizard will walk you through the setup steps, including choosing the directory where both nvm-windows and Node.js will be installed.
+
+                <img src="assets/img/node-js/install-nvm-for-windows-wizard.png" alt="NVM for Windows installation wizard" style="width:500px"></li>
+
+                </ol>
+
+                <p>nvm-windows runs in an Admin shell. So start Powershell or Command Prompt as Administrator to use nvm-windows.</p>
+
+                <p>Type the <code>nvm</code> command to verify the Node Version Manager has been installed correctly. You should see a screen similar to that below.</p>
+
+                <img src="assets/img/node-js/nvm-verify.png" alt="NVM for Windows installation wizard">
+                
+                <h3>Installing nvm on macOS/Linux</h3>
+                <p>With macOS and Linus, removing previous Node.js and npm installations is optional.</p>
+                
+                <p>(Here are instructions for removing Node.js from <a href="http://stackoverflow.com/q/11177954/1136887">macOS</a> systems and from <a href="http://stackoverflow.com/q/5650169/1136887">Linux</a> systems. To remove nvm from either environment, follow <a href="https://docs.npmjs.com/misc/removing-npm">these steps</a>.)</p>
+     
+                <p>Before installing, visit the <a href="https://github.com/creationix/nvm#install-script" target="_blank">project’s home page</a> to discover the latest version number. Currently, this is <code>v0.38.0</code>.</p>
+
+                <p>On your terminal, you can use <a href="https://curl.haxx.se/">cURL</a> or <a href="https://www.gnu.org/software/wget/">Wget</a> as follows.</p>
+                
+                <p>With cURL:</p>
+                
+                <pre tabindex="0" class=" language-bash"><code class="bash  language-bash"><span class="token function">curl</span> -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span>  </code></pre>
+        
+                <p>Alternatively, with Wget:</p>
+    
+                <pre tabindex="0" class=" language-bash"><code class="bash  language-bash"><span class="token function">wget</span> -qO- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span>  </code></pre>
+    
+                <p>Running either of the above commands downloads a script and runs it. The script clones the nvm repository to <code>~/.nvm</code> and makes the required changes to your bash profile, so that <code>nvm</code> is available from anywhere in your terminal.</p>
+        
+                <p>Reload (or restart) your terminal and nvm is ready for you to use.</p>
+        
+            </section>
+    
+
+            <section id="install-nodejs">
+
+                <h2>Installing Node.js</h2>
+                <p>After installing nvm, you are now ready to install Node.js. The latest 'stable' or LTS (Long-Term Support) version is <code>18.17.1</code>.</p>
+
+                <h3>Installing Node.js on Windows</h3>
+                <p>Follow the steps below.</p>
+                
+                <ol>
+                    <li>In Powershell or the Command Prompt as Administrator, run the <code>nvm ls</code> command to list all versions of Node.js currently installed on your system. The screen should look as follows.
+                    <img src="assets/img/node-js/nvm-ls.png" alt="NVM for Windows installation wizard" class="wider-110"></li>
+
+                    <li>Discover the current LTS version number of Node.js by typing <code>nvm list available</code>. 
+                    <img src="assets/img/node-js/nvm-available.png" alt="NVM for Windows installation wizard"></li>
+
+                    <li>Install version <code>18.17.1</code> by typing <code>nvm install 18.17.1</code>
+                    <img src="assets/img/node-js/nvm-install.png" alt="NVM for Windows installation wizard" style="max-width: 600px"></li>
+                    
+                </ol>
+
+                <p>That's it.</p>
+
+                <p>To run Node.js, type this command:</p>
+
+                <p><code>nvm use 18.17.1</code></p>
+
+                <p>To verify which version of the Node Package Manager (npm) installed, type:</p>
+  
+                <p><code>npm --version</code></p>
+
+                <img src="assets/img/node-js/nvm-npm.png" alt="NVM for Windows installation wizard">
+
+                <h3>Installing Node.js on macOS</h3>
+                <p>Download the <a href="https://nodejs.org/en/#home-downloadhead">macOS Installer</a> directly from the <a href="https://nodejs.org/">nodejs.org</a> web site.</p>
+
+<p><em>If you want to download the package with bash:</em></p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> <span class="token string">"https://nodejs.org/dist/latest/node-<span class="token variable">${VERSION<span class="token operator">:-</span>$(wget -qO- https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>nodejs.org<span class="token operator">/</span>dist<span class="token operator">/</span>latest<span class="token operator">/</span> | sed -nE 's|.*&gt;node-(.*)\.pkg&lt;<span class="token operator">/</span>a&gt;.*|\1|p')}</span>.pkg"</span> <span class="token operator">&gt;</span> <span class="token string">"<span class="token environment constant">$HOME</span>/Downloads/node-latest.pkg"</span> <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> installer -store -pkg <span class="token string">"<span class="token environment constant">$HOME</span>/Downloads/node-latest.pkg"</span> -target <span class="token string">"/"</span>  
+</code></pre>
+
+<p>An alternative is to use <a href="https://brew.sh/">Homebrew</a></strong>:</p>
+
+<pre class="language-bash"><code class="language-bash">brew <span class="token function">install</span> node
+</code></pre>
+
+
+                <p>That's it.</p>
+
+                <p>Ensire you have Node.js and npm installed by running simple commands to see what version of each is installed:</p>
+
+                <ul>
+                    <li><strong>Test Node.</strong> To see if Node is installed, type <code class="highlighter-rouge">node -v</code> in Terminal. This should print the version number so you’ll see something like this <code class="highlighter-rouge">v0.10.31</code>.</li>
+
+                    <li><strong>Test NPM.</strong> To see if NPM is installed, type <code class="highlighter-rouge">npm -v</code> in Terminal. This should print the version number so you’ll see something like this <code class="highlighter-rouge">1.4.27</code></li>
+                </ul>
+
+                <img src="assets/img/node-js/node-install1.png" alt="NVM for Windows installation wizard">
+
+                <h3>Ending Node.js</h3>
+                <p>To end the program running within the console, type <code>Ctrl + C</code>. This unbinds Node.js from any ports it is listening on.</p>
+    </section>    
+    
+
+    <section id="npm">
+        <h2>About Node Package Manager (npm)</h2>
+
+        <p>npm is the world's largest software registry that currently contains over 800,000 code packages. npm includes a CLI that you can use to download and install software:</p>
+
+        <p>On Windows:</p>
+
+<pre>
+C:\&gt;npm install &lt;package&gt;
+</pre>
+
+        <p>On macOS</p>
+
+<pre>
+&gtrdot;npm install &lt;package&gt;
+</pre>
+
+    <p>All npm packages are defined in files called <b>package.json</b>. Its contents must be written in JSON. At least two fields must be present in the definition file: name and version. For example:</p>
+
+<pre>
+{
+    "name" : "foo",
+    "version" : "1.2.3",
+    "description" : "A package for fooing things",
+    "main" : "foo.js",
+    "keywords" : ["foo", "fool", "foolish"],
+    "author" : "Mary Smith",
+    "licence" : "ISC"
+}</pre>
+
+<p>npm can manage dependencies, which are also defined in a <b>package.json</b>. npm can (in one command line) install all the dependencies required by a project.</p>
+
+<p>If a project has a <code class="language-text">package.json</code> file, run the following command to install everything the project needs:</p>
+<pre>
+npm install
+</pre>
+<p>It will install everything in the <b>node_modules</b> folder, creating it if it's not existing already.</p>
+
+<p>You can also install a specific package by running:</p>
+<pre>
+npm install &lt;package-name&gt;
+</pre>
+
+<h3>Global and local installs</h3>
+
+<p>When you install a package using <code class="language-text">npm</code> you can perform two types of installation:</p>
+<ul>
+<li>a local install</li>
+<li>a global install</li>
+</ul>
+<p>By default, when you type an <code class="language-text">npm install</code> command, like:</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> lodash</code></pre></div>
+<p>the package is installed in the current file tree, under the <code class="language-text">node_modules</code> subfolder.</p>
+<p>As this happens, <code class="language-text">npm</code> also adds the <code class="language-text">lodash</code> entry in the <code class="language-text">dependencies</code> property of the <code class="language-text">package.json</code> file present in the current folder.</p>
+<p>A global installation is performed using the <code class="language-text">-g</code> flag:</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> -g lodash</code></pre></div>
+<p>When this happens, npm won't install the package under the local folder, but instead, it will use a global location. Use the <code class="language-text">npm root -g</code> command to discover where that location is on your system.</p>
+
+<h3>Using a package installed with npm</h3>
+
+<p>When you install using <code class="language-text">npm</code> a package into your <code class="language-text">node_modules</code> folder, or also globally, how do you use it in your Node.js code?</p>
+<p>Say you install <code class="language-text">lodash</code>, the popular JavaScript utility library, using</p>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> lodash</code></pre></div>
+<p>This is going to install the package in the local <code class="language-text">node_modules</code> folder.</p>
+<p>To use it in your code, you just need to import it into your program using <code class="language-text">require</code>:</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> _ <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span></code></pre></div>
+<p>What if your package is an executable?</p>
+
+
+<h3>Publishing a package</h3>
+
+<p>You can publish any directory from your computer as long as it has a <b>package.json file</b>.</p>
+<p>Check if npm is installed:</p>
+<pre>
+C:\&gt;npm
+</pre>
+
+<p>Check if you are logged in:</p>
+<pre>
+C:\&gt;npm whoami
+</pre>
+
+<p>If not, log in:</p>
+<pre>
+C:\&gt;npm login<br>Username: &lt;your username&gt;<br>Password: &lt;your password&gt;
+</pre>
+
+<p>Navigate to your project and publish your project:</p>
+<pre>
+C:\Users\myuser&gt;cd myproject<br>
+C:\Users\myuser\myproject&gt;npm publish
+</pre>
+
+
+
+    </section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>
