@@ -81,7 +81,7 @@
 	<section id="cra-about">
 
         <h2>About Create React App (CRA)</h2>
-        <p>The fastest way to build a Single Page Application (SPA) with React is to use the official command-line utility called create-react-app.</p>
+        <p>One way to build a Single Page Application (SPA) with React is to use the official command-line utility called <b>create-react-app</b>.</p>
 
 		<p>It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimises your app for production.</p>
 
@@ -363,7 +363,33 @@ import './Minimal.css';</code></pre></li>
 		<img src="assets/img/create-react-app/output-4.png" alt="Sample React screen">
 	</section>
 
+	<section>
+		<h2>Building your React app</h2>
 
+		<p>The npm <b>build</b> script creates a build directory with a production build of your app.</p>
+
+		<p>Inside the <b>build/static</b> directory will be your JavaScript and CSS files. Each filename inside of <b>build/static</b> will contain a unique hash of the file contents. This hash in the file name enables long term caching techniques.</p>
+
+		<p>In a NodeJS environment, the easiest way to build your React App is to type the following command:</p>
+
+<pre>
+npm install -g serve
+</pre>
+
+	<p>This command will create an optimized production build for your project and will output what files it has generated and how large each file is.</p>
+
+	<p>The output is coming from the build tool Webpack. It helps to give us an idea of the size of our app files because the size of our .js files in particular can make a large impact on our app's performance.</p>
+		
+	<p>Each chunk includes a unique string or hash, which will change on every build to make sure any new deployment is not saved (cached) by the browser. If we did not have this cache-busting hash for each of our files, we likely couldn't see any changes we made to our app.</p>
+
+	<p>Finally, run the build React project locally option with the help of the npm package <b>serve</b> command. This is helpful to detect any errors we might have with the final version of our project before pushing live to the web.</p>
+		
+	<p>Like <b>create-react-app</b>, we can use npx to run serve without installing it globally on our computer.</p>
+
+<pre>npx serve -s build 4000</pre>
+
+	<p>Using <b>serve</b>, your app will start up on a different development port. In this case, localhost:4000.</p>
+	</section>
 
 	<p>&nbsp;</p>
 
