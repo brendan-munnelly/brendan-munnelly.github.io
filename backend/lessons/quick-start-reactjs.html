@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>React Quick Start | React Tutorials</title>
-	<meta name="description" content="Running React code using libraries imported from a CDN and viewing the output with the VSCode Live Server extension.">
+	<title>React.js Quick Start | React.js Tutorials</title>
+	<meta name="description" content="Running React.js code using libraries imported from a CDN and viewing the output on a local web server.">
 
 	<meta name="robots" content="noindex">
 
@@ -31,8 +31,8 @@
 				</div>
 
 				<div class="content">
-					<h1>React Quick Start</h1>
-					<h2>Running React code using libraries imported from a CDN and viewing the output with the VSCode Live Server extension.</h2>
+					<h1>React.js Quick Start</h1>
+					<h2>Running React code using libraries imported from a CDN and viewing the output on a local web server.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -40,14 +40,14 @@
 		<main>
 
 			<aside>
-				<h3>REACT COURSE</h3>
+				<h3>REACT.JS COURSE</h3>
 
 				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
 
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#quick-setup">React: Quick setup</a></p>
-				<p class="toc-indent"><a href="#ex-1-1">Displaying a message</a></p>
+				<p><a href="#quick-setup">React.js: Quick setup</a></p>
+				<p class="toc-indent"><a href="#ex-1-1">Displaying an HTML element</a></p>
 				<p><a href="#root-node">About the root node</a></p>
 				<p class="toc-indent"><a href="#ex-1-2">Rendering multiple elements</a></p>
 				<p class="toc-indent"><a href="#ex-1-3">Rendering elements with classes</a></p>
@@ -61,26 +61,58 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-			<li>Use the React <span class="syn-js">render()</span> method to update the HTML content of a web page.</li>
+			<li>Use the React <span class="syn-js">render()</span> method to update the HTML content of a web page on a local server.</li>
 		</ul>
 
 	</section>
 
 	<section id="quick-setup">
 
-        <h2>React: Quick setup</h2>
+        <h2>React.js: Quick setup</h2>
         <p>The fastest way to get started with React is to:</p>
 
 		<ul>
-			<li>Import the React (version 18) libraries and Babel transformer from a CDN.</li>
+			<li>Import the React.js (version 18) libraries and Babel transformer from a CDN.</li>
 			<li>View your React-powered web pages with the VSCode Live Server extension.</li>
 		</ul>
 
-		<p>Follow the steps below:</p>
+		<h3>Installing the local Node.js web server</h3>
+		<p>The NPM repository of packages includes a basic web server named <b>http-server</b> that is a good choice for running React.js apps on your local machine.  </p>
+
+		<p>To install the <b>http-server</b> package globally so that you can run it from any folder, use the Node Package Manager command line tool. Open a command prompt or terminal and enter the following:</p>
+
+<pre><code>npm install -g http-server</code></pre>
+
+		<h3>Running the local web server</h3>
+		<p>To start the http-server from a folder containing static website files, change to that directory. For example:</p>
+
+<pre><code>C:\react-stuff</code></pre>
+
+		<p>Next, in that directory, enter the following command:</p>
+
+<pre><code>C:\react-stuff\http-server</code></pre>		
+
+		<p>Your command prompt or terminal should respond as shown below.</p>
+
+<img src="assets/img/quick-start-react/http-server.png" alt="screenshot" style="max-width: 500px">
+
+		<p>You can access the web server on your machine in a browser at this address:</p>
+
+<pre><code>http://localhost:8080</code></pre>
+
+	</section>
+
+	<section>
+
+		<h3>Creating the static web files</h3>
+
+		<p>Follow these steps:</p>
 
 		<ol>
 
-			<li>Creare a new folder to store your ReactJS exercises files.</li>
+			<li>Open VS Code and, in the Explorer sidebar, create a new folder on your computer to store your React.js exercises files.
+				<img src="assets/img/quick-start-react/vscode-new-folder.png" alt="screenshot" style="max-width: 600px">
+			</li>
 
 			<li>In this new exercise folder, create a new, empty file and save it as <b>index.html</b>.</li>
 
@@ -89,12 +121,12 @@
 <pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
    &lt;head&gt;
-   &lt;title&gt;Sample ReactJS web page&lt;/title&gt;
+   &lt;title&gt;Sample React.js web page&lt;/title&gt;
 		
    <span class="comment">&lt;!-- CSS for this exercise --&gt;</span>
    &lt;link rel="stylesheet" href="index.css"&gt;
 		
-   <span class="comment">&lt;!-- import ReactJS from CDN --&gt;</span>
+   <span class="comment">&lt;!-- import React.js from CDN --&gt;</span>
    &lt;script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;
    &lt;script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
 		
@@ -111,7 +143,7 @@
 				
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-			Note that the link to this empty JavaScript file has an attribute of <b>type="text/babel"</b>.</li>
+			Note that the link to the yet uncreated <b>index.js</b> JavaScript file has an attribute of <b>type="text/babel"</b>.</li>
 		
 			<li>In the same folder, create a new, empty file and save it as <b>index.js</b>.</li>
 
@@ -121,16 +153,15 @@
 
 		</ol>
 				
-		<p>In the VS Code sidebar, you should see four files in your exercise folder as shown below.</p>
+		<p>In the VS Code Explorer sidebar, you should see four files in your exercise folder as shown below.</p>
 
 		<img src="assets/img/quick-start-react/vscode.png" alt="screenshot" style="max-width:400px">		
 
 
-		<h4 id="ex-1-1">Displaying a message</h4>
-		<p>Follow these steps to use React to display a message in your web page.</p>
+		<h2 id="ex-1-1">Displaying an HTML element</h2>
+		<p>Follow these steps to use React.js to display an HTML element in your web page.</p>
 
 		<ol>
-			<li>In VS Code, open the <b>index.html</b> and <b>index.js</b> files. Display the <b>index.html</b> file with Live Server in your web browser.</li>
 			<li>In your <b>index.html</b> file, you can see a single <span class="syn-js">div</span> tag with an ID of <b>root</b>.
 <pre>
 &lt;div id="root"&gt;&lt;/div&gt;</pre></li>
@@ -139,7 +170,8 @@
 <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;)</code></pre></li>
-			<li>Save both files. You should now see the message in your web browser.
+
+			<li>Save both files and run the local <b>http-server</b> for your exercises folder. You should now see the following in your web browser.
 			<img src="assets/img/quick-start-react/output-1.png" alt="screenshot"></li>
 		</ol>
 
@@ -167,7 +199,7 @@ root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;)</code></pre></li>
 &lt;div id="something"&gt;&lt;/div&gt;
 &lt;div id="anotherthing"&gt;&lt;/div&gt;</pre>
 
-		<h4 id="ex-1-2">Rendering multiple elements</h4>
+		<h2 id="ex-1-2">Rendering multiple elements</h2>
 		<p>Let's try to use React to render two elements on our web page.</p>
 
 		<ol>
@@ -186,7 +218,7 @@ root.render(
       &lt;p&gt;Hope you are well.&lt;/p&gt;
    &lt;/div&gt;
 )</pre></li></ol>
-<p>Your new, updated message should now display correctly.</p>
+<p>Your new, updated web page with two HTML elememts should now display correctly.</p>
 
 <img src="assets/img/quick-start-react/output-2.png" alt="screenshot">
 
@@ -203,7 +235,7 @@ root.render(
 )</pre>
 	<p>The fragment tag works only on an installed React app.</p>
 
-		<h4 id="ex-1-3">Rendering elements with classes</h4>
+		<h2 id="ex-1-3">Rendering elements with classes</h2>
 		<p>Often the elements you will want to display with <span class="syn-js">render()</span> will contain CSS classes.</p>
 
 
@@ -223,7 +255,7 @@ root.render(
 	<p>The CSS-styled output should display correctly in your web page.</p>
 	<img src="assets/img/quick-start-react/output-3.png" alt="screenshot">
 
-	<h4 id="ex-1-4">Rendering elements and closing tags</h4>
+	<h2 id="ex-1-4">Rendering elements and closing tags</h2>
 	<p>React is a lot stricter when dealing with syntax than are web browsers when displaying HTML. See this exercise.</p>
 
 	<ol>
