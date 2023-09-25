@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Destructuring in JavaScript | React.js Tutorials</title>
+	<meta name="description" content="Destructuring JavaScript objects and arrays to create more readable and concise code in React.js.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>Object and array destructuring</h1>
+					<h2>Object and array destructuring enables developers to unpack values from objects and arrays and assign them to variables in a more concise and readable manner.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+
+                <p><a href="#basic-object">Basic object destructuring</a></p>
+				<p class="toc-indent"><a href="#renaming-variables">Renaming Variables</a></p>
+				<p class="toc-indent"><a href="#objects-react">How it relates to React.js objects</a></p>
+
+
+                <p><a href="#basic-array">Basic array destructuring</a></p>
+				<p class="toc-indent"><a href="#skipping-array">Skipping items in an array</a></p>
+				<p><a href="#rest-array">Using the ... (rest) operator</a></p>
+			</aside>
+
+	<article>
+
+		<section id="learning-goals">
+			<h2>Learning Goals</h2>
+			<p>At the end of this Tutorial, you will be able to:</p>
+
+			<ul>
+				<li>Destructure an object.</li>
+				<li>Destructure an array.</li>
+				<li>Use the ... (rest) operator with arrays.</li>
+			</ul>
+
+		</section>
+
+
+		<section id="about-object">
+
+			<h2>About object destructuring</h2>
+			<p>Array destructuring enables developers to unpack values from arrays and assign them to variables in a more concise and readable manner.</p>
+
+            
+        </section>
+
+        <section>
+
+			<h2 id="basic-object">Basic object destructuring</h2>
+			<p>Consider the following object:</p>
+
+<pre><code>const person = {
+   name: "John",
+   age: 25,
+   location: "New York"
+};
+</code></pre>            
+
+            <p>Without destructuring, if you wanted to assign these properties to individual variables, you'd do:</p>
+
+<pre><code>const name = person.name;
+const age = person.age;
+const location = person.location;</code></pre>
+
+<p>With object destructuring, you can simplify this to:</p>
+
+<pre><code>const { name, age, location } = person;</code></pre>
+
+<p>Each variable will now hold the value from the corresponding property in the object.</p>
+
+</section>
+
+<section>
+
+            <h3 id="renaming-variables">Renaming variables</h3>
+
+            <p>Sometimes, you might want to assign properties to variables with different names. Object destructuring allows for renaming:</p>
+
+<pre><code>const { name: firstName, age: yearsOld } = person;</code></pre>
+
+        </section>
+
+        <section>
+           
+			<h3 id="objects-react">How it relates to React.js props</h3>
+
+			<p>In React.js, components often receive data via props. Object destructuring becomes particularly handy when working with function components and their props.</p>
+
+			<p>Consider the following function component/</p>
+	
+<pre><code>function Welcome(props) {
+   return &lt;h1&gt;htHello, &lcub;props.name&rcub;!&gt;/h1&gt;;
+}</code></pre>				
+
+			<p>Using object destructuring, you can simplify the function signature and directly extract the required props:</p>
+
+<pre><code>function Welcome({ name }) {
+  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}</code></pre>				
+
+            <p>This way, you don't have to repeatedly prefix with props. when accessing the properties. It makes the component more readable, especially when dealing with multiple props.</p>
+
+	</section>
+
+
+
+		<section id="about-array">
+
+			<h2>About array destructuring</h2>
+			<p>Array destructuring enables developers to unpack values from arrays and assign them to variables in a more concise and readable manner.</p>
+
+            <p>When working with hooks such as <b>useState</b> in React.js, array destructuring becomes especially handy. For example:</p>
+
+<pre><code>const [count, setCount] = useState(0);</code></pre>
+
+            <p>Here, <b>useState</b> returns an array where the first item is the current state (<b>count</b>) and the second item is a function to update that state (<b>setCount</b>). Using array destructuring enables you to  neatly assign these to variables in one line.</p>
+
+        </section>
+
+        <section>
+
+			<h2 id="basic-array">Basic array destructuring</h2>
+			<p>Suppose you have the following array:</p>
+
+<pre><code>const colors = ["red", "green", "blue"];</code></pre>            
+
+            <p>Without destructuring, if you wanted to assign these colors to individual variables, you would do:</p>
+
+<pre><code>const firstColor = colors[0];
+const secondColor = colors[1];
+const thirdColor = colors[2];</code></pre>
+
+<p>With array destructuring, this can be simplified to:</p>
+
+<pre><code>const [firstColor, secondColor, thirdColor] = colors;</code></pre>
+
+            <p>Here, <b>firstColor</b> will be "red", <b>secondColor</b> will be "green", and <b>thirdColor</b> will be "blue".</p>
+
+</section>
+
+<section>
+
+            <h3 id="skipping-array">Skipping items in an array</h3>
+
+            <p>You can skip items in the array if you're only interested in certain values:</p>
+
+<pre><code>const [firstColor, , thirdColor] = colors;</code></pre>
+
+        </section>
+
+        <section>
+            <h2 id="rest-array">Using the ... (rest) operator</h2>
+
+            <p>To gather the remaining items in an array, use the ... (rest) operator:</p>
+
+<pre><code>const colors = ["red", "green", "blue", "yellow"];
+const [firstColor, ...otherColors] = colors;</code></pre>            
+
+            <p>Here, <b>firstColor</b> will be "red", and <b>otherColors</b> will be an array containing ["green", "blue", "yellow"].</p>
+            
+            <p>This understanding of array destructuring is crucial in React, as it provides a clean and efficient way to manage and update component state.</p>
+
+			<p>When working with hooks such as <b>useState</b> in React.js, array destructuring becomes especially handy. For example:</p>
+
+<pre><code>const [count, setCount] = useState(0);</code></pre>
+
+            <p>Here, <b>useState</b> returns an array where the first item is the current state (<b>count</b>) and the second item is a function to update that state (<b>setCount</b>). Using array destructuring enables you to  neatly assign these to variables in one line.</p>
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+</body>
+</html>
