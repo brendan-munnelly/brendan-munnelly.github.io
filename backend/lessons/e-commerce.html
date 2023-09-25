@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>eCommerce App | ReactJS Tutorials</title>
+	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>eCommerce App</h1>
+					<h2>Exploring the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#cra-about">About Create React App (CRA)</a></p>
+				<p><a href="#cra-sample">Building your first app with CRA</a></p>
+				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="cra-about">
+
+        <h2>About eCommerce app</h2>
+        <p>In this app for an e-commerce store there are three different products with three separate product descriptions. The app will contain the following components:</p>
+
+        <ul>
+            <li>A top-level App component at the top of the hierarchy.</li>
+            <li>A lower-level Product component, which we will reuse three times. The Product component will be customised using props, passed downward from the Apps component.</li>
+            <li>And a still lower-level itemDescription component, also reused three times.</li>
+        </ul>
+
+	
+        <img src="assets/img/e-commerce/app-overview.png" alt="">
+
+	</section>
+
+
+	<section id="cra-sample">
+		<h2>Building with Create React App</h2>
+        <p>Follow these steps to buld the basic app structure with the <b>create-react-app</b> script.</p>
+
+		<ol>
+			<li>In VS Code, choose <b>Terminal | New terminal</b> and navigate to where you want React to create a folder for your app. For example:
+<pre class="language-js">C:\&gt; users\JohnSmith</pre>
+or
+<pre class="language-js">C:\&gt;</pre></li>
+<li>Type the following command that includes the name you want to call your new app.
+<pre class="language-js">C:\&gt; <span class="yellow">npx</span> ecommerce-reactjs</pre></li>
+		</ol>
+
+		<p>After you have created your app, you launch it by running the following command from inside your app folder.</p>
+	<pre class="language-js">C:\ecommerce-reactjs&gt; <span class="yellow">npm</span> start</pre>
+
+	<p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+
+	<p>You will see a screen similar to the following.</p>
+
+	<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+	</section>
+
+	<section id="app-customising">
+
+		<h2>Customising your app</h2>
+		<p>In this section, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your ecommerce app.</p>
+
+		<ol>
+
+
+		<ol>
+			<li>Open the <b>index.html</b> file in the top-level folder and replace all its content with the following.
+
+<pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
+   &lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="utf-8" /&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+      &lt;title&gt;eCommerce React App&lt;/title&gt;
+      &lt;meta name="description" content="eCommerce website created with React.js" /&gt;   
+      &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+   &lt;/head&gt;
+	 
+   &lt;body&gt;
+	 
+      &lt;div id="root"&gt;&lt;/div&gt;
+		   
+   &lt;/body&gt;
+ &lt;/html&gt;</code></pre></li>
+
+			<li>Open the <b>index.js</b> file in the <span class="syn-js">/src</span> folder and replace all its content with the following.
+
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+	
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+   &lt;React.StrictMode&gt;
+      &lt;App /&gt;
+   &lt;/React.StrictMode&gt;
+);</code></pre></li>
+
+
+		<li>Open the <b>App.js</b> file in the <span class="syn-js">/src</span> folder and replace its content with the following.
+                
+
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">	
+import React from 'react';
+import Product from './Product';
+
+function App() {
+   return (
+      &lt;div&gt;
+         &lt;h1&gt;Hello, World!&lt;/h1&gt;
+         &lt;Product
+         name="Google Home"
+         description="Your AI Assistant"
+         price="${59}"
+         /&gt;
+			  
+         &lt;Product
+         name="iPhone 15 Pro Max"
+         description="The best Apple iPhone ever"
+         price="${1200}"
+         /&gt;
+			
+         &lt;Product
+         name="Apple MacBook Pro"
+         description="A really nice laptop"
+         price="${2500}"
+         /&gt;
+
+      &lt;/div&gt;
+   );
+}
+
+</code></pre></li>
+
+            <li>In the <b>/src</b> folder, create a new, empty file named <b>Product.js</b> and enter the following content to it.
+
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">
+import React from 'react';
+
+function Product(props) {
+   return (
+      &lt;div&gt;
+      &lt;h1&gt;Hello, World!&lt;/h1&gt;
+	  &lt;h1&gt;{props.name}&lt;/h3&gt;
+	  &lt;h2&gt;{props.description}&lt;/h2&gt;
+	  &lt;h3&gt;${props.price}&lt;/h3&gt;
+      &lt;/div&gt;
+   );
+}	
+export default Product;</code></pre></li>
+
+	<li>Rewrite the function component to use object destructuring as follows:
+<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">
+function Product({ name, description, price }) {
+   return (
+      &lt;div&gt;
+	  &lt;h1&gt;{name}&lt;/h3&gt;
+	  &lt;h2&gt;{description}&lt;/h2&gt;
+	  &lt;h3&gt;${price}&lt;/h3&gt;
+      &lt;/div&gt;
+   );
+}</code></pre></li>	
+
+		<li>Inside this <b>Product</b> component, nest a new component named <b>ItemDescription</b> as shown below.
+
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">
+function Product({ name, description, price }) {
+   return (
+      &lt;div&gt;
+	  &lt;h1&gt;{name}&lt;/h3&gt;
+	  &lt;h2&gt;{description}&lt;/h2&gt;
+	  &lt;h3&gt;${price}&lt;/h3&gt;
+	  &lt;ItemDescription /&gt;
+      &lt;/div&gt;
+   );
+}</code></pre></li>	
+
+	<li>Add an <b>import</b> statement at the top of your <b>App.js</b> file.
+<pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">
+import ./ItemDescription
+</code></pre></li>	
+
+<li>In the <b>/src</b> folder, create a new, empty file named <b>ItemDescription.js</b> and enter the following content to it.
+
+<pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9">
+import React from 'react';
+	
+function ItemDescription( {name, description } ) {
+   return (
+      &lt;div&gt;
+      &lt;p&gt;{name}&lt;/p&gt;
+      &lt;p&gt;&lt;i&gt;{description}&lt;i&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    );
+}	
+export default ItemDescripton</code></pre></li>
+	
+<li>Return to the <b>Products.js</b> file and update the function as follows.
+
+<pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11">
+
+function Product({ name, description, price }) {
+   return (
+      &lt;div&gt;
+	  &lt;h1&gt;{name}&lt;/h3&gt;
+	  &lt;h2&gt;{description}&lt;/h2&gt;
+	  &lt;ItemDescription name="name" description ="description" &gt;
+	  &lt;h3&gt;${price}&lt;/h3&gt;
+
+      &lt;/div&gt;
+   );
+}</code></pre></li>	
+
+	</code></pre></li>
+
+	</ol>
+
+
+
+
+	</section>
+
+
+	<p>&nbsp;</p>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
