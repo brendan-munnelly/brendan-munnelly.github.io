@@ -50,7 +50,7 @@
 				<p><a href="#counter-sample">Creating your counter app with CRA</a></p>
 				<p><a href="#app-customising">Customising your app</a></p>
 
-				<p><a href="#component-stateful">Adding a stateful components</a></p>
+				<p><a href="#component-stateful">Adding a stateful component</a></p>
 
 				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
 
@@ -84,6 +84,8 @@
         <p>In ReactJS, data inside a function that is changed in some way by the function is called <i>state</i>. Furthermore, ReactJS provides special functions called <i>hooks</i> for managing state (data that can change) inside components.</p>
 		
 		<p>So if you want to change data in your app, you need to store that in state so that it properly re-rendered once the data actually changes.</p>
+
+		<p>The most commonly-used hook is called <b>useState</b>. It enables you to manage state (data that may change) inside a functional component. And when the data changes, the component will re-render the new data to the DOM.</p>
 
 		<p>Components that do not change the value of their props have no state - they are said to be <i>stateless</i> components.</p>
 
@@ -179,7 +181,7 @@ export default App;</code></pre></li>
 
 	<section id="component-stateful">
 
-      <h2>Adding a stateful components</h2>
+      <h2>Adding a stateful component</h2>
 	  <p>Next, you will add a counter component to your basic app.</p>
 
 	  <ol>
@@ -285,6 +287,14 @@ export default App;</code></pre></li>
 			In ReactJS, event names are written in camelCase (in this case as <b>onClick</b>) and not in JavaScript lowercase style (<b>onclick</b>).
 <pre><code>   &lt;button onClick= ... &gt;&lt;/button&gt;</code></pre></li>
             
+			<li>Another difference is that with JSX you pass a function as the event handler within curly braces <span class="syn-js">{}</span>, rather than a string between quotes <span class="syn-js">""</span>.
+	
+<pre><code><span class="comment">   // In JavaScript</span>
+&lt;button onclick="activateLasers()"&gt;Activate Lasers&lt;/button&gt;
+<span class="comment">// In JSX</span>
+&lt;button onClick={activateLasers}Activate Lasers&lt;/button&gt;</code></pre></li>
+
+
 			<li>In each case, the event handler is an arrow function that calls the <b>setCount</b> function to update the value in the <b>Count</b> state variable.
 <pre><code>   &lt;button onClick={ () =&gt; <span class="comment">// called function goes here</span> }&gt;+&lt;/button&gt;</code></pre>			
 			</li>
