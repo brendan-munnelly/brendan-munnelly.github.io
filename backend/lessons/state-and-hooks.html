@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>State and Hooks | ReactJS Tutorials</title>
+	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>State and Hooks</h1>
+					<h2>Exploring the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#cra-about">About Create React App (CRA)</a></p>
+				<p><a href="#cra-sample">Building your first app with CRA</a></p>
+				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="cra-about">
+
+        <h2>About state in ReactJS</h2>
+        <p>State is data inside of a component. State is what you need to actually rerender and update your application based on something the user has done. So if you want to change something in your application you need to store that in state so that it properly rerender once that actually changes.</p>
+
+		<p>Components that do not change the value of their props have no state - they are said to be <i>stateless</i> components.</p>
+
+		<p>In this Tutorial you will create a simple counter app to demonstrate how state works in ReactJS.</p>
+
+	</section>
+
+
+	<section id="cra-sample">
+		<h2>Creating your counter app with CRA</h2>
+        <p>Follow the steps below.</p>
+
+		<ol>
+			<li>In VS Code, choose <b>Terminal | New terminal</b> and navigate to the folder where you want ReactJS to create a folder for your app.</li>
+			<li>Type the following command that includes the name you want to call your new app. 
+<pre class="language-js"><span class="yellow">npx</span> create-react-app reactjs-hooks</pre></li>
+
+		<li>Wait few minutes for the app to be built.</li>
+
+		<li>In your command prompt or terminal, display the folder that contains your new app and enter the following
+<pre class="language-js"><span class="yellow">npm</span> start</pre></li>
+
+		</ol>
+
+	<p>A new browser window should display with your app running on the ReactJS local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+
+	<p>You will see a screen similar to the following.</p>
+
+	<img src="assets/img/state-hooks/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+	</section>
+
+	<section id="app-customising">
+
+		<h2>Customising your app</h2>
+		<p>Your next task is to customise the 'bolierplate' content provided by the <b>create-react-app</b> script.</p>
+
+		<ol>
+			<li>Open the <b>index.html</b> file in the top-level app folder and replace all its content with the following.
+
+<pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
+   &lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="utf-8" /&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+      &lt;title&gt;Minimal React App&lt;/title&gt;
+      &lt;meta name="description" content="Minimal website created using create-react-app" /&gt;   
+      &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+   &lt;/head&gt;
+	 
+   &lt;body&gt;
+	 
+      &lt;div id="root"&gt;&lt;/div&gt;
+		   
+   &lt;/body&gt;
+ &lt;/html&gt;</code></pre></li>
+
+			<li>Open the <b>index.js</b> file in the <span class="syn-js">/src</span> folder and replace all its content with the following.
+
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+	
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+   &lt;React.StrictMode&gt;
+      &lt;App /&gt;
+   &lt;/React.StrictMode&gt;
+);</code></pre></li>
+
+
+		<li>Open the <b>App.js</b> file in the <span class="syn-js">/src</span> folder and replace its content with the following.
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">function App() {
+   return (
+   &lt;&gt;
+      &lt;h1&gt;Hello, World!&lt;/h1&gt;
+      &lt;p&gt;Paragraph of text.&lt;/p&gt;
+   &lt;/&gt;
+   );
+}	
+export default App;</code></pre></li>
+
+		</ol>
+
+
+	<p>Your web page should now look as shown below.</p>
+
+
+	<img src="assets/img/state-hooks/output-1.png" alt="Sample React screen">
+
+	</section>
+
+	<section id="components">
+
+      <h2>Adding a stateful components</h2>
+	  <p>Next, you will add a counter component to your basic app.</p>
+
+	  <ol>
+		<li>In the <span class="syn-js">/src</span> folder, create an <b>IncrementDecrement.js</b> file with the following content.
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">
+import React, { useState } from 'react';
+	
+function IncrementDecrement() {
+   const [Count, setCount] = useState(0);
+      return (
+         &lt;div&gt;
+            &lt;button onClick={() =&gt; setCount(Count + 1)}&gt;+&lt;/button&gt;
+            {Count}
+            &lt;button onClick={() =&gt; setCount(Count - 1)}&gt;-&lt;/button&gt;
+         &lt;/div&gt;
+    )
+}
+	
+export default IncrementDecrement;</code></pre></li>
+
+<li>Also in the <span class="syn-js">/src</span> folder, update the <b>App.js</b> file with the following content.
+	<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">import React from 'react';
+import IncrementDecrement from './IncrementDecrement';
+		
+   function App () {
+      return (
+         &lt;IncrementDecrement&gt;&lt;/IncrementDecrement&gt;
+      )
+    }
+		
+export default App;</code></pre></li>
+	  </ol>
+
+	<p>Your web page should now look as shown below.</p>
+
+	<img src="assets/img/state-hooks/output-2.png" alt="Sample React screen">
+
+	</section> 
+
+
+	<section id="css-file">
+
+		<h3>Adding a CSS file</h3>
+
+		<p>See the steps below.</p>
+
+		<ol>
+			<li>Download the following file to your <span class="syn-js">/src</span> folder.
+			<span class="inside-ol">&nbsp;</span>
+			<a href="assets/downloads/Counter.css">Counter.css</a></li>
+			<li>Update your <b>Apps.js</b> file as follows.
+<pre><button class="copy-html" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">import React from 'react';
+import IncrementDecrement from './IncrementDecrement';
+import './Counter.css';
+		
+   function App () {
+      return (
+         &lt;div className="box-counter"&gt;
+         &lt;IncrementDecrement&gt;&lt;/IncrementDecrement&gt;
+         &lt;/div&gt;
+      )
+    }
+		
+export default App;</code></pre></li>
+		</ol>
+
+		<p>Your web page should now look as shown below.</p>
+
+		<img src="assets/img/state-hooks/output-3.png" alt="screenshot">
+	</section>
+
+	<p>&nbsp;</p>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
