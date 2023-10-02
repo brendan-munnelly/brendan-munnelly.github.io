@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>State and Hooks | ReactJS Tutorials</title>
-	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+	<meta name="description" content="Creating a stateful component that will rerender new data when the app updates">
 
 	<meta name="robots" content="noindex">
 
@@ -32,7 +32,7 @@
 		
 				<div class="content">
 					<h1>State and Hooks</h1>
-					<h2>Exploring the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.</h2>
+					<h2>Creating a stateful component that will rerender new data when the app updates.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -46,20 +46,17 @@
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#cra-about">About Create React App (CRA)</a></p>
-				<p><a href="#cra-sample">Building your first app with CRA</a></p>
-				<p><a href="#cra-folders-files">React folders and files</a></p>
-				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
-				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
-				<p><a href="#app-starting">Starting your app</a></p>
-
+				<p><a href="#state-about">About state in ReactJS</a></p>
+				<p><a href="#counter-sample">Creating your counter app with CRA</a></p>
 				<p><a href="#app-customising">Customising your app</a></p>
 
-				<p><a href="#components">Adding functional components</a></p>
+				<p><a href="#component-stateful">Adding a stateful components</a></p>
 
 				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
 
-				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><a href="#hook-explained">How state is updated with a hook</a></p>
+
+
 				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 			</aside>
 	
@@ -69,28 +66,33 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
-			<li>Customise the template files according to your requirements.</li>
-			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+			<li>Create a simple counter app to demonstrate how state works in ReactJS.</li>
 		</ul>
 
 	</section>
 
 
 
-	<section id="cra-about">
+	<section id="state-about">
 
         <h2>About state in ReactJS</h2>
-        <p>State is data inside of a component. State is what you need to actually rerender and update your application based on something the user has done. So if you want to change something in your application you need to store that in state so that it properly rerender once that actually changes.</p>
+
+		<p>As you learned in the <a href="working-with-props.html">Working with Props</a> Tutorial, data passed into a functional component as an argument cannot be changed by that component.</p>
+
+		<p>Often, however, the reason you create a function is in order for it to change data!</p>
+
+        <p>In ReactJS, data inside a function that is changed in some way by the function is called <i>state</i>. Furthermore, ReactJS provides special functions called <i>hooks</i> for managing state (data that can change) inside components.</p>
+		
+		<p>So if you want to change data in your app, you need to store that in state so that it properly re-rendered once the data actually changes.</p>
 
 		<p>Components that do not change the value of their props have no state - they are said to be <i>stateless</i> components.</p>
 
-		<p>In this Tutorial you will create a simple counter app to demonstrate how state works in ReactJS.</p>
+		<p>In this Tutorial, you will create a simple counter app to demonstrate how state works in ReactJS.</p>
 
 	</section>
 
 
-	<section id="cra-sample">
+	<section id="counter-sample">
 		<h2>Creating your counter app with CRA</h2>
         <p>Follow the steps below.</p>
 
@@ -120,7 +122,7 @@
 		<p>Your next task is to customise the 'bolierplate' content provided by the <b>create-react-app</b> script.</p>
 
 		<ol>
-			<li>Open the <b>index.html</b> file in the top-level app folder and replace all its content with the following.
+			<li>Open the <b>index.html</b> file in the <span class="syn-js">/public</span> folder and replace all its content with the following.
 
 <pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
    &lt;html lang="en"&gt;
@@ -175,7 +177,7 @@ export default App;</code></pre></li>
 
 	</section>
 
-	<section id="components">
+	<section id="component-stateful">
 
       <h2>Adding a stateful components</h2>
 	  <p>Next, you will add a counter component to your basic app.</p>
@@ -228,7 +230,7 @@ export default App;</code></pre></li>
 			<li>Download the following file to your <span class="syn-js">/src</span> folder.
 			<span class="inside-ol">&nbsp;</span>
 			<a href="assets/downloads/Counter.css">Counter.css</a></li>
-			<li>Update your <b>Apps.js</b> file as follows.
+			<li>Update your <b>App.js</b> file as follows.
 <pre><button class="copy-html" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">import React from 'react';
 import IncrementDecrement from './IncrementDecrement';
 import './Counter.css';
@@ -247,6 +249,52 @@ export default App;</code></pre></li>
 		<p>Your web page should now look as shown below.</p>
 
 		<img src="assets/img/state-hooks/output-3.png" alt="screenshot">
+	</section>
+
+
+	<section id="hook-explained">
+		<h2>How state is updated with a hook</h2>
+		<p>The following explains how state is updated inside the <b>IncrementDecrement.js</b> component.</p>
+		<ul>
+			<li>At the top of the component, the <b>useState</b> hook is imported as shown below:
+<pre><code>   import React, { useState } from 'react';</code></pre></li>
+			<li>Next is a functional component that contains the code that will perform the updating.
+<pre><code>   function IncrementDecrement() {
+    <span class="comment">// Code for updating state goes here</span>
+}
+</code></pre></li>				
+			<li>You will want this function to be available to the main or top-level <b>App.js</b> component. So you wiil add an <b>export default</b> instruction at the end of the file.
+<pre><code>  export default IncrementDecrement;</code></pre></li>	
+			
+			<li>The main work is performed inside the function with this line:
+<pre><code>   const [Count, setCount] = useState(0);</code></pre>	
+
+			This line does two things:
+			<ul>
+				<li>It declares a new state variable named <b>Count</b>.</li>
+				<li>It declares a function named <b>setCount</b> that, when called by the user's click action. will update the current value in the <b>Count</b> state variable.</li>
+
+			</ul>
+
+			The <b>useState</b> hook takes a single argument, which is the initial value of the state variable. In this case, the initial value is <b>0</b>.
+			<img src="assets/img/state-hooks/usestate-hook.jpg" alt="screenshot"></li>
+			
+			<li>Attached to each of the two buttons is an event handler that captures the user's click action.
+			<span class="inside-ol">&nbsp;</span>
+
+			In ReactJS, event names are written in camelCase (in this case as <b>onClick</b>) and not in JavaScript lowercase style (<b>onclick</b>).
+<pre><code>   &lt;button onClick= ... &gt;&lt;/button&gt;</code></pre></li>
+            
+			<li>In each case, the event handler is an arrow function that calls the <b>setCount</b> function to update the value in the <b>Count</b> state variable.
+<pre><code>   &lt;button onClick={ () =&gt; <span class="comment">// called function goes here</span> }&gt;+&lt;/button&gt;</code></pre>			
+			</li>
+			<li>Below is the syntax of the called arrow function.
+<pre><code>   =&gt; setCount(Count + 1)</code></pre></li>
+
+			<li>And finally, this displays the current value of the <b>Count</b> state. It will be updated and re-rendered every time <b>Count</b> is reset the <b>setCount()</b> updater function.
+<pre><code>   {Count}</code></pre>
+</li>
+		</ul>
 	</section>
 
 	<p>&nbsp;</p>
