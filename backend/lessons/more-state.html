@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>More about State | ReactJS Tutorials</title>
+	<meta name="description" content="Creating a stateful component that will rerender new data when the app updates">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>More about State</h1>
+					<h2>Creating further examples of stateful components with the useState hook.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#state-about">Adding stateful components</a></p>
+				<p><a href="#update-number">A component to update a number</a></p>
+				<p><a href="#update-text">A component to update text</a></p>
+				<p><a href="#update-object">A component to an object</a></p>
+			
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Add various components for updating numbers, strings and objects to a ReactJS app.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="state-about">
+
+        <h2>Adding stateful components</h2>
+
+		<p>In this Lesson you will add some more stateful components to the counter app you built in the previous <a href="state-and-hooks.html">State and Hooks</a> Lesson.</p>
+
+	</section>
+
+
+	<section id="update-number">
+		<h2>A component to update a number</h2>
+        <p>Follow the steps below.</p>
+
+		<ol>
+			<li>To your app from the previous Lesson, add a new component with the following code.
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1">
+import { useState } from 'react';
+	
+function DoubleNumber() {
+   const [number, setNumber] = useState(4);
+
+   function handleDoubleNumber() {
+      setNumber(number * 2);
+   }
+	
+   return (
+      &lt;&gt;
+         &lt;span&gt;{number}&lt;/span&gt;
+         &lt;button onClick={handleDoubleNumber}&lt;/button&gt;
+      &lt;/&gt;
+   );
+}
+	
+export default DoubleNumber;</code></pre></li>	
+
+		<li>Next, convert the function statement to an anonymous function.</li>
+		<li>Then, convert the anonymous function to an arrow function, and place it inline in the button event handler.</li>
+	</ol>
+
+
+	</section>
+
+	<section id="update-text">
+
+		<h2>A component to update text</h2>
+		<p>Follow the steps below.</p>
+	
+		<ol>
+				<li>To your app from the previous Lesson, add a new component with the following code.
+	<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">
+function TextUpdater() {
+   // Initialize state with a default value
+   const [text, setText] = useState('Initial text');
+
+   function HandleUpdateText() {
+      setText('Updated text');
+   }
+
+   return (
+      &lt;&gt;
+         &lt;span&gt;{text}&lt;/span;&gt;
+         &lt;button onClick={HandleUpdateText};&gt;Update Text&lt;/button;&gt;
+      &lt;/&gt;
+  );
+}
+
+export default TextUpdater;</code></pre></li>	
+
+			<li>Next, amend the component with an <span class="syn-js">if ... else</span> clause so that it can detect the current text value, and change it to the alternative.</li>
+
+			<li>Finally, rewrite the conditonal statement in the ternary operator syntax.</li>
+	
+		</ol>
+	
+	
+		</section>
+
+
+	<section id="update-object">
+
+		<h2>A component to update an object</h2>
+		<p>Follow the steps below.</p>
+		
+		<ol>
+			<li>To your app from the previous Lesson, add a new component with the following code. 
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">
+
+   function myCar() {
+      const [brand, setBrand] = useState("Ford");
+      const [model, setModel] = useState("Mustang");
+      const [year, setYear] = useState("1964");
+      const [color, setColor] = useState("red");
+	
+      return (
+         &lt;&gt;
+            &lt;h2&gt;My {brand}&gt;/h2&gt;
+            &lt;p&gt;It is a {color} {model} from {year}.&lt;/p&gt;
+         &lt;/&gt;
+      );
+   }
+	
+   export default MyCar;</code></pre></li>	
+
+   <li>Add a button with an inline arrow function to update the color property of the MyCar object to "blue".
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">
+
+   &lt;button onClick={() =&gt; setColor("blue")}&gt;Update Colour&lt;/button&gt;
+</code></pre></li>		
+	
+	
+	<li>Rewrite the code with object.property dot syntax as follows.  
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">
+   function MyCar() {
+      const [car, setCar] = useState({
+      brand: "Ford",
+      model: "Mustang",
+      year: "1964",
+      color: "red"
+   });
+	
+   const UpdateColor = () =&gt; {
+      setCar(previousState =&gt; {
+         return { ...previousState, color: "blue" }
+      });
+   }
+	
+   return (
+      &lt;&gt;
+	  &lt;h2&gt;My {car.brand} car&lt;/h2&gt;
+	  &lt;p&gt;It is a {car.color} {car.model} from {car.year}.&lt;/p&gt;
+	  &lt;p&gt;&lt;button onClick={UpdateColor}>Update Colour&lt;/button&gt;&lt;/p&gt;
+      &lt;&gt;
+   );
+}</code></pre></li>		
+	
+			</ol>
+		
+	</section> 
+
+	<p>&nbsp;</p>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
