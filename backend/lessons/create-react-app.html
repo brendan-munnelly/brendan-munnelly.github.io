@@ -48,10 +48,10 @@
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#cra-about">About Create React App (CRA)</a></p>
 				<p><a href="#cra-sample">Building your first app with CRA</a></p>
-				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p><a href="#cra-folders-files">ReactJS folders and files</a></p>
 				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
 				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
-				<p><a href="#app-starting">Starting your app</a></p>
+				<p><a href="#app-starting">Starting ReactJS your app</a></p>
 
 				<p><a href="#app-customising">Customising your app</a></p>
 
@@ -94,43 +94,73 @@
         <p>Follow these steps to work with create-react-app.</p>
 
 		<ol>
-			<li>In VS Code, choose <b>Terminal | New terminal</b> and navigate to where you want React to create a folder for your app. For example:
+			<li>In a Command Prompt window or inside a VS Code Terminal, navigate to where you want ReactJS to create a folder for your app. For example:
 <pre class="language-js">C:\&gt; users\JohnSmith</pre>
 or
 <pre class="language-js">C:\&gt;</pre></li>
-<li>Type the following command that includes the name you want to call your new app.
-<pre class="language-js">C:\&gt; <span class="yellow">npx</span> create-react-app hello-react</pre></li>
+			<li>Type the following command that includes the name you want to call your new app.
+<pre class="language-js"><span class="yellow">npx</span> create-react-app hello-react</pre></li>
 		</ol>
 
 	    <p>Over a few minutes, React will respond as shown below.</p>
 
 		<img src="https://cdn.jsdelivr.net/gh/facebook/create-react-app@27b42ac7efa018f2541153ab30d63180f5fa39e0/screencast.svg" alt="React app" />
 
-
 		<img src="assets/img/create-react-app/compiling.webp" alt="screenshot" style="max-width: 400px">
+
+		<p>When the process is complete, you will see the following message.</p>
+
+		<img src="assets/img/create-react-app/cra-final.png" alt="screenshot">
 	</section>
+
+
+
+	<section id="app-starting">
+
+		<h2>Starting your ReactJS app</h2>
+
+		<p>After you have created your app, you launch it by running the following command.</p>
+
+<pre class="language-js"><span class="yellow">npm</span> start</pre>
+
+		<p>You must run this command <i>from inside your new app folder</i>. For example: </p>
+
+<pre class="language-js">C:/Users/JohnSmith/hello-react&gt; <span class="yellow">npm</span> start</pre>
+
+		<p>You will see a number of messages that end as shown below.</p>
+
+		<img src="assets/img/create-react-app/cra-running.png"  style="max-width: 560px" alt="screenshot">
+
+		<p>A new browser window should display with your new app running on the React local development server. You will see a screen similar to the following.</p>
+
+		<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+		<p>If a new browser tab does not open automatically, open a new tab and enter <b>http://localhost:3000</b>.</p>
+
+	</section>
+
 
 
 	<section id="cra-folders-files">
 
 		
-		<h2>React folders and files</h2>
+		<h2>ReactJS folders and files</h2>
 		<p>React will create the following hierarchy of folders and files.</p>
-		<img src="assets/img/create-react-app/cra-initial-folder.png" style="max-width: 500px" alt="ReactJS sample screen" />
+		<img src="assets/img/create-react-app/cra-initial-folder.png" style="max-width: 780px" alt="ReactJS sample screen" />
 
-		<p>The items you need to know about for creating a simple app are as listed below.</p>
+		<p style="margin-bottom: 24px">The items you need to know about for creating a simple app are as listed below.</p>
 	
 		<h3 id="folder-public">The <code>/public</code> folder</h3>
 		<p>Your app's root folder that gets served up to the user.</p>
 
-		<table class="table-js-methods">
+		<table class="table-js-methods" style="margin-bottom: 44px">
 			<tbody>
 				<tr>
 					<td style="min-width: 30%"><p><span class="syn-js">index.html</span></p></td>
-					<td><p>The template web page is served when your app is run. It contains a <b>&lt;div id="root"&gt;&lt;/div&gt;</b> container into which <b>index.js</b> injects the top-level <b>&lt;App /&gt;</b> component.</p></td>
+					<td><p>The web page that is served when your app is run. It has a <b>&lt;div id="root"&gt;&lt;/div&gt;</b> container into which <b>index.js</b> injects the top-level or 'parent' <b>&lt;App /&gt;</b> component.</p></td>
 				 </tr>
-				</tbody>
-			</table>       
+			</tbody>
+		</table>       
 	
 
 		<h3 id="folder-src">The <code>/src</code> folder</h3>
@@ -149,44 +179,19 @@ or
 			</tbody>
 		</table>       
 
-		<p>Why are <i>two</i> JavaScript files needed?</p>
-		
-		
-		<p>They are not.</p>
-		
-		<p>Some developers delete <b>App.js</b> and combine the code into one <b>index.js</b> file.</p>
-
-		<p>However, here are the reasons for using two JavaScript files are 'entry points' into your app.</p>
-
-		<ul>
-			<li>React components are arranged in a hierarchy. And the role of <b>App.js</b> is to contain the <b>&lt;App /&gt;</b> component that is to be at the top or 'root' of this hierarchy.</li>
-			<li>The Webpack bundler relies on these two files when building a version of your app for distribution.</li>
-		</ul>
+		<p>Your <b>App.js</b> file may contain all the code for your ReactJS app. But more commonly, it acts as a 'parent' component that imports other, single-purpose 'child' components.</p>
+			
 	</section>
 
 
-	<section id="app-starting">
-
-		<h2>Starting your app</h2>
-
-		<p>After you have created your app, you launch it by running the following command from inside your app folder.</p>
-	<pre class="language-js">C:\hello-react&gt; <span class="yellow">npm</span> start</pre>
-
-	<p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
-
-	<p>You will see a screen similar to the following.</p>
-
-	<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
-
-	</section>
 
 	<section id="app-customising">
 
 		<h2>Customising your app</h2>
-		<p>In this section, you will customise the 'getting started' content provided by the create-react-app utility to design a very basic React app.</p>
+		<p>Next, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> utility to build a very basic React app.</p>
 
 		<ol>
-			<li>Open the <b>index.html</b> file in the top-level app folder and replace all its content with the following.
+			<li>Open the <b>index.html</b> file in the <span class="syn-js">/public</span> folder and replace all its content with the following.
 
 <pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
    &lt;html lang="en"&gt;
@@ -234,21 +239,25 @@ export default App;</code></pre></li>
 		</ol>
 
 
-	<p>Your web page should now look as shown below.</p>
+		<p>Your web page should now look as shown below.</p>
 
+		<img src="assets/img/create-react-app/output-1.png" alt="Sample React screen">
 
-	<img src="assets/img/create-react-app/output-1.png" alt="Sample React screen">
+		<p>In this basic app, you have added code directly to the <b>App.js</b> file. </p>
 
 	</section>
 
+
+
+
 	<section id="components">
 
-      <h2>Adding functional components</h2>
-	  <p>Next, you will add three components to your basic app.</p>
+      <h2>Adding child components</h2>
+	  <p>Next, you will add three components to your app. When finished, your <b>App.js</b> file will be the 'parent' component and three others will all be 'child' components.</p>
 
 	  <ol>
 		<li>In the <span class="syn-js">/src</span> folder, create a <b>Header.js</b> file with the following content.
-<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">function Header () {
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">function Header() {
    return (
       &lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;  
    )
@@ -257,7 +266,7 @@ export default App;</code></pre></li>
 export default Header;</code></pre></li>
 
 <li>Also in the <span class="syn-js">/src</span> folder, create a <b>Main.js</b> file with the following content.
-	<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">function Main () { 
+	<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">function Main() { 
    return (
       &lt;main&gt;&lt;section&gt;&lt;p&gt;We leverage agile frameworks to provide a robust synopsis for high-level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section&gt;&lt;/main&gt;  
     )
@@ -266,7 +275,7 @@ export default Header;</code></pre></li>
 export default Main;</code></pre></li>
 
 		<li>And finally in the <span class="syn-js">/src</span> folder, create a <b>Footer.js</b> file with the following content.
-<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">function Footer () {
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">function Footer() {
    return (
 	&lt;footer&gt;&lt;p&gt;ABC Corporation. Digital Consultants&lt;/p&gt;&lt;/footer&gt;  
    )
@@ -274,7 +283,7 @@ export default Main;</code></pre></li>
 	
 export default Footer;</code></pre></li>
 
-		<li>Finally, update your <b>App.js</b> file so that the App component is now at the top level of three functional components. See below.
+		<li>Now, update your <b>App.js</b> file so that it acts as the 'parent' to your three new components. See below.
 <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7">import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -292,10 +301,14 @@ function App() {
 export default App;</code></pre></li>
 	  </ol>
 
-	<p>Your web page should now look as shown below.</p>
+	<p>Your web page should now look similar to the following.</p>
 
 	<img src="assets/img/create-react-app/output-2.png" alt="Sample React screen">
 
+
+	<p>The parent-child relationships between the various files in your ReactJS app are illustrated below.</p>
+
+	<img src="assets/img/create-react-app/parent-child.png" alt="">
 	</section> 
 
 
@@ -346,7 +359,7 @@ import './Minimal.css';</code></pre></li>
 <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9">import corporateImg from './corporate.jpg';</code></pre></li>
 
 	<li>Now you can reference the image by its variable name. See below.
-<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10">function Main () { 
+<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10">function Main() { 
    return (
       &lt;main&gt;
          &lt;section&gt;
