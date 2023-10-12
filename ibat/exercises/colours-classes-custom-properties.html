@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Classes and Custom Properties | Front-end Development Tutorials</title>
-    <meta name="description" content="Create and use classes and custom properties in HTML and CSS.">
+    <title>Classes and Custom Properties | Web Design &amp; Development Tutorials</title>
+    <meta name="description" content="Creating and using classes and custom properties in HTML and CSS.">
 
     <!-- Stylesheet-->
     <link rel="stylesheet" href="assets/css/brendan-munnelly-web-design-tutorials.css" />
@@ -47,7 +47,7 @@
     
             <div class="content">
                 <h1>Classes and Custom Properties</h1>
-                <h2>Create and use classes and custom properties in HTML and CSS.</h2>
+                <h2>Creating and using classes and custom properties in HTML and CSS.</h2>
             </div>
         </div><!-- /wrapper -->
     </header>
@@ -64,7 +64,7 @@
             <p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#classes-colors">About classes and class names</a></p>
             <p><a href="#add-colors-style-3">Adding colours to your page-3.html web page</a></p>
-            <p><a href="#custom-properties">About custom properties</a></p>
+            <p><a href="#custom-properties">Colours and custom properties</a></p>
             <p><a href="#color-palette">Adding custom colours to style-3.css</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
@@ -87,11 +87,14 @@
 
                 <p>You will now assign different text and background colours to the content inside these various <span class="syn">&lt;section&gt;</span> elements.</p>
 
+                <img src="assets/img/colours-classes-properties/before-after.png" alt="screenshot">
+
+
                 <p>To assign different colours (or other styles) to the content with the same tag (such as <span class="syn">&lt;section&gt;</span>), you can use what are called <i>classes</i> of that tag.</p>
 
                 <p>You can think of classes as a <i>version</i> of an HTML tag.</p>
 
-                <p>In an HTML file, you assign a class to a <span class="syn">&lt;section&gt;</span> or other tag by giving it a <i>class name</i>. Below you can see some examples below of class names assigned to opening <span class="syn">&lt;section&gt;</span> tags.</p>
+                <p>In an HTML file, you assign a class to a <span class="syn">&lt;section&gt;</span> or other tag by giving it a <i>class name</i>. Below you can see some examples of class names assigned to opening <span class="syn">&lt;section&gt;</span> tags.</p>
 
                 <img src="assets/img/colours-classes-properties/classes-3.png" alt="Introduction to the Box Model" class="wider-115">
 
@@ -136,54 +139,39 @@
             </section>
 
             <section id="custom-properties">
-				<h2>About custom properties</h2>
+				<h2>Colours and custom properties</h2>
 
-                <p>Custom properties (sometimes referred to as CSS variables) are entities you can create in a CSS stylesheet and then reuse throughout that stylesheet.</p>
+                <p>The modern method of adding colours to web pages is a two-step process as follows:</p>
+                
+                <ol>
+                    <li>Add a list or palette of colours with easy-to-use and easy-to-understand names to the CSS stylesheet in the form of custom properties.
+                    <span class="inside-ol">&nbsp;</span> 
+                    Some typical examples are shown below.
+<pre class="language-css">
+<span class="blue-light">--red-050:</span> <span class="orange">#FEF2F2;</span>
+<span class="blue-light">--red-100:</span> <span class="orange">#fff5f5;</span>
+<span class="blue-light">--red-200:</span> <span class="orange">#fed7d7;</span>
+<span class="blue-light">--red-300:</span> <span class="orange">#feb2b2;</span>
+<span class="blue-light">--red-400:</span> <span class="orange">#fc8181;</span>
+<span class="blue-light">--red-500:</span> <span class="orange">#f56565;</span>
+<span class="blue-light">--red-600:</span> <span class="orange">#e53e3e;</span>
+<span class="blue-light">--red-700:</span> <span class="orange">#c53030;</span>
+<span class="blue-light">--red-800:</span> <span class="orange">#9b2c2c;</span>
+<span class="blue-light">--red-900:</span> <span class="orange">#742a2a; </span></pre>
 
-
-                <ul>
-                    <li>To create a custom property, give it a name as shown in the three examples below:
-<pre class="language-css">  &nbsp;<span class="blue-light">--max-content-width</span>: <span class="green-light">1920px</span>;
-<span class="blue-light">--spacing-small</span>: <span class="green-light">2.5%</span>;
-<span class="blue-light">--fade-transition-time</span>: <span class="green-light">700ms</span>;
-</pre>
-                        As you can see, every custom property name begins with two dashes <b>--</b>
-                    </li>
-                    <li>To use a custom property, enter the <b>var</b> keyword, followed by a parenthesis <b>()</b> containing the name of the custom property. See the examples below.
-<pre class="language-html">
-  <span class="yellow">body {</span> <span class="blue-light">max-width</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--max-content-width</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-<span class="yellow">header {</span> <span class="blue-light">margin-bottom</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--spacing-small</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-<span class="yellow">footer {</span> <span class="blue-light">transition-duration</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--fade-transition-time</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-</pre>
-
-                    </li>
-                </ul>
-
-                <p>You can limit the scope of a custom property so that it can apply only to a certain element in a linked HTML file. But, typically, you will want the custom properties you create to be available globally across your linked HTML file.</p>
-
-                <p>To do this, enclose your CSS custom properties within the <span class="csyn">:root</span> pseudo-class as shown below.</p>
+As you can see, every custom property name begins with two dashes <b>--</b></li>
+                    <li>Apply colours from the palette to elements in the web page as required.
+                        <span class="inside-ol">&nbsp;</span>
+    To use a custom property, enter the <b>var</b> keyword, followed by a parenthesis <b>()</b> containing the name of the custom property. See the examples below.
 
 <pre class="language-css">
-:<span class="yellow">root</span> {
-    <span class="blue-light">--max-content-width</span>: <span class="green-light">1920px</span>;
-    <span class="blue-light">--spacing-small</span>: <span class="green-light">2.5%</span>;
-    <span class="blue-light">--fade-transition-time</span>: <span class="green-light">700ms</span>;
-}</pre>
+<span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--yellow-500</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
+<span class="yellow">h2 {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--blue-700</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
+<span class="yellow">.section-4 p {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--gray-800</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span></pre></li>
+                </ol>
+                
 
-
-            <h3>Colours and custom properties</h3>
-
-            <p>In visual design, a <i>palette</i> is a collection of selected colours. Modern front-end frameworks typically include a CSS file containing a palette of ready-to-use colours defined as custom variables.</p>
-
-            <p>So, instead of entering this background colour in a CSS file:</p>
-
-<pre class="language-html"><span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="brown">#ecc94b</span><span class="white">;</span> <span class="yellow">}</span></pre>
-
-            <p>You would simply type this instead:</p>
-
-<pre class="language-html"><span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--yellow-500</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span></pre>
-
-            <p>You can see four examples of such frameworks and their palettes of CSS custom colour variables below.</p>
+<p>Modern front-end frameworks typically include a CSS file containing a palette of ready-to-use colours defined as custom variables. You can see four examples of such frameworks and their palettes of CSS custom colour variables below.</p>
 
             <div class="four-samples">
                 <div>
@@ -291,6 +279,27 @@
     </main>
 
 	<footer>
+
+        <div class="item-3">
+            <h4>Site Map</h4>
+            <p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/ibat/">Home</a></p>
+            <p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy &amp; Legal</a></p>
+    
+        </div>
+    
+        <div class="item-3">
+            <h4>Professional Diploma in Web Design</h4>
+            <p>A ten-week, part-time course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a> for <a href="https://www.ibat.ie" target="_blank">IBAT College</a>, Dublin. </p>
+    
+        </div>
+    
+        <div class="item-3">
+            <h4>Contact</h4>
+            <p><i class="fas fa-globe fa-fw"></i><a href="https://www.ibat.ie">www.ibat.ie</a></p>
+            <p><i class="fas fa-phone-square fa-fw"></i><a href="tel:018075055">01 807 5055</a></p>
+            <p><i class="fas fa-envelope fa-fw"></i><a href="mailto:enquiry@ibat.ie">enquiry@ibat.ie</a></p>
+        </div>
+
     </footer>
 
 
