@@ -56,9 +56,9 @@
             <h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#classes-colors">About classes and class names</a></p>
-            <p><a href="#add-colors-style-3">Adding colours to your second sample web page</a></p>
-            <p><a href="#custom-properties">About custom properties</a></p>
-            <p><a href="#color-palette">Adding a colour palette to style-3.css</a></p>
+            <p><a href="#add-colors-style-3">Adding colours to your page-3.html web page</a></p>
+            <p><a href="#custom-properties">Colours and custom properties</a></p>
+            <p><a href="#color-palette">Adding custom colours to style-3.css</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
         </aside>
@@ -79,6 +79,8 @@
                 <p>In the sample file <b>page-3.html</b>, you created a web page with a <span class="syn">&lt;main&gt;</span> container block and inside that six <span class="syn">&lt;section&gt;</span> containers.</p>
 
                 <p>You will now assign different text and background colours to the content inside these various <span class="syn">&lt;section&gt;</span> elements.</p>
+
+                <img src="assets/img/colours-classes-properties/before-after.png" alt="screenshot">
 
                 <p>To assign different colours (or other styles) to the content with the same tag (such as <span class="syn">&lt;section&gt;</span>), you can use what are called <i>classes</i> of that tag.</p>
 
@@ -108,7 +110,7 @@
             </section>
 
             <section id="add-colors-style-3">
-                <h2>Adding colours to your second sample web page</h2>
+                <h2>Adding colours to your <code>page-3.html</code> web page</h2>
                 <p>Follow the steps below,</p>
 
                 <ol>
@@ -122,61 +124,46 @@
                     <img src="assets/img/colours-classes-properties/contrast.png" alt="screenshot"></li>
                 </ol>
 
-            <p>Your final web page should shool similar to that below.</p>
+            <p>Your final web page should look similar to that below.</p>
 
             <img src="assets/img/colours-classes-properties/page-3-after-1.png" alt="screenshot">
 
             </section>
 
             <section id="custom-properties">
-				<h2>About custom properties</h2>
+				<h2>Colours and custom properties</h2>
 
-                <p>Custom properties (sometimes referred to as CSS variables) are entities you can create in a CSS stylesheet and then reuse throughout that stylesheet.</p>
+                <p>The modern method of adding colours to web pages is a two-step process as follows:</p>
+                
+                <ol>
+                    <li>Add a list or palette of colours with easy-to-use and easy-to-understand names to the CSS stylesheet in the form of custom properties.
+                    <span class="inside-ol">&nbsp;</span> 
+                    Some typical examples are shown below.
+<pre class="language-css">
+<span class="blue-light">--red-050:</span> <span class="orange">#FEF2F2;</span>
+<span class="blue-light">--red-100:</span> <span class="orange">#fff5f5;</span>
+<span class="blue-light">--red-200:</span> <span class="orange">#fed7d7;</span>
+<span class="blue-light">--red-300:</span> <span class="orange">#feb2b2;</span>
+<span class="blue-light">--red-400:</span> <span class="orange">#fc8181;</span>
+<span class="blue-light">--red-500:</span> <span class="orange">#f56565;</span>
+<span class="blue-light">--red-600:</span> <span class="orange">#e53e3e;</span>
+<span class="blue-light">--red-700:</span> <span class="orange">#c53030;</span>
+<span class="blue-light">--red-800:</span> <span class="orange">#9b2c2c;</span>
+<span class="blue-light">--red-900:</span> <span class="orange">#742a2a; </span></pre>
 
-
-                <ul>
-                    <li>To create a custom property, give it a name as shown in the three examples below:
-<pre class="language-css">  &nbsp;<span class="blue-light">--max-content-width</span>: <span class="green-light">1920px</span>;
-<span class="blue-light">--spacing-small</span>: <span class="green-light">2.5%</span>;
-<span class="blue-light">--fade-transition-time</span>: <span class="green-light">700ms</span>;
-</pre>
-                        As you can see, every custom property name begins with two dashes <b>--</b>
-                    </li>
-                    <li>To use a custom property, enter the <b>var</b> keyword, followed by a parenthesis <b>()</b> containing the name of the custom property. See the examples below.
-<pre class="language-html">
-  <span class="yellow">body {</span> <span class="blue-light">max-width</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--max-content-width</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-<span class="yellow">header {</span> <span class="blue-light">margin-bottom</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--spacing-small</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-<span class="yellow">footer {</span> <span class="blue-light">transition-duration</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--fade-transition-time</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
-</pre>
-
-                    </li>
-                </ul>
-
-                <p>You can limit the scope of a custom property so that it can apply only to a certain element in a linked HTML file. But, typically, you will want the custom properties you create to be available globally across your linked HTML file.</p>
-
-                <p>To do this, enclose your CSS custom properties within the <span class="csyn">:root</span> pseudo-class as shown below.</p>
+As you can see, every custom property name begins with two dashes <b>--</b></li>
+                    <li>Apply colours from the palette to elements in the web page as required.
+                        <span class="inside-ol">&nbsp;</span>
+    To use a custom property, enter the <b>var</b> keyword, followed by a parenthesis <b>()</b> containing the name of the custom property. See the examples below.
 
 <pre class="language-css">
-:<span class="yellow">root</span> {
-    <span class="blue-light">--max-content-width</span>: <span class="green-light">1920px</span>;
-    <span class="blue-light">--spacing-small</span>: <span class="green-light">2.5%</span>;
-    <span class="blue-light">--fade-transition-time</span>: <span class="green-light">700ms</span>;
-}</pre>
+<span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--yellow-500</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
+<span class="yellow">h2 {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--blue-700</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span>
+<span class="yellow">.section-4 p {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--gray-800</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span></pre></li>
+                </ol>
+                
 
-
-            <h3>Colours and custom properties</h3>
-
-            <p>In visual design, a <i>palette</i> is a collection of selected colours. Modern front-end frameworks typically include a CSS file containing a palette of ready-to-use colours defined as custom variables.</p>
-
-            <p>So, instead of entering this background colour in a CSS file:</p>
-
-<pre class="language-html"><span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="brown">#ecc94b</span><span class="white">;</span> <span class="yellow">}</span></pre>
-
-            <p>You would simply type this instead:</p>
-
-<pre class="language-html"><span class="yellow">section {</span> <span class="blue-light">background-color</span>: <span class="yellow">var</span><span class="purple">(</span><span class="blue-light">--yellow-500</span><span class="purple">)</span><span class="white">;</span> <span class="yellow">}</span></pre>
-
-            <p>You can see four examples of such frameworks and their palettes of CSS custom colour variables below.</p>
+<p>Modern front-end frameworks typically include a CSS file containing a palette of ready-to-use colours defined as custom variables. You can see four examples of such frameworks and their palettes of CSS custom colour variables below.</p>
 
             <div class="four-samples">
                 <div>
@@ -200,9 +187,10 @@
 
             </section>
 
+
             <section id="color-palette">
 
-                <h2>Adding a colour palette to style-3.css</h2>
+                <h2>Adding custom colours to <code>style-3.css</code></h2>
 
                 <p>In this next exercise you will add custom colours to your <b>style-3.css</b> file, and then use these to update the appearance of your <b>page-3.html</b> web page.</p>
 
@@ -258,7 +246,7 @@
 
                     <img src="assets/img/colours-classes-properties/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
 
-                    <li>In File Explorer (Windows 10) or Finder (Apple Mac), drag-and-drop your &#128193; <b>exercises</b> sub-folder to upload it to your repository on GitHub.
+                    <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your &#128193; <b>exercises</b> sub-folder to upload it to your repository on GitHub.
                     <img src="assets/img/colours-classes-properties/github-upload-folder-files.png"  alt="Introduction to HTML">
                     </li>
 
@@ -273,7 +261,6 @@
                 <p><b>https://username.github.io/index.html</b><br>
                     &#8211; or simply &#8211;<br>
                 <b>https://username.github.io</b><br>
-                <b>https://username.github.io/exercises/page-1.html</b><br>
                 <b>https://username.github.io/exercises/page-3.html</b>
                 </p>
 
