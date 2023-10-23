@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>To Do App | ReactJS Tutorials</title>
+	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+	<style>pre { padding: 0 } </style>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>To Do App</h1>
+					<h2>Creating a To do app.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#cra-about">About Create React App (CRA)</a></p>
+				<p><a href="#cra-sample">Building your first app with CRA</a></p>
+				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+        <!--
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+-->
+
+
+	<section id="cra-sample">
+		<h2>Building with Create React App</h2>
+        <p>Follow these steps to build the basic app structure with the <b>create-react-app</b> script.</p>
+
+		<ol>
+			<li>In VS Code, choose <b>Terminal | New terminal</b> and navigate to where you want React to create a folder for your app. For example:
+<pre class="language-js">C:\&gt; users\JohnSmith</pre>
+or
+<pre class="language-js">C:\&gt;</pre></li>
+<li>Type the following command that includes the name you want to call your new app.
+<pre class="language-js">C:\&gt; <span class="yellow">npx</span> todos</pre></li>
+		</ol>
+
+		<p>After you have created your app, you launch it by running the following command from inside your app folder.</p>
+	<pre class="language-js">C:\todos&gt; <span class="yellow">npm</span> start</pre>
+
+	<p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+
+	<p>You will see a screen similar to the following.</p>
+
+	<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+	</section>
+
+	<section id="app-customising">
+
+		<h2>Customising your app</h2>
+		<p>In this section, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your To Do app.</p>
+
+
+		<ol>
+			<li>Open the <b>index.html</b> file in the <span class="syn-js">/public</span>  folder and replace all its content with the following.
+
+<pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
+   &lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="utf-8" /&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+      &lt;title&gt;eCommerce React App&lt;/title&gt;
+      &lt;meta name="description" content="eCommerce website created with React.js" /&gt;   
+      &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+   &lt;/head&gt;
+	 
+   &lt;body&gt;
+	 
+      &lt;div id="root"&gt;&lt;/div&gt;
+		   
+   &lt;/body&gt;
+ &lt;/html&gt;</code></pre></li>
+
+			<li>Open the <b>index.js</b> file in the <span class="syn-js">/src</span> folder and replace all its content with the following.
+
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+	
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+   &lt;React.StrictMode&gt;
+      &lt;App /&gt;
+   &lt;/React.StrictMode&gt;
+);</code></pre></li>
+
+
+		<li>Open the <b>App.js</b> file in the <span class="syn-js">/src</span> folder and replace its content with the following.
+                
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">function App() {
+   return (
+      &lt;&gt;
+      &lt;h1&gt;Hello, World!&lt;/h1&gt;
+      &lt;p&gt;Paragraph of text.&lt;/p&gt;
+      &lt;/&gt;
+   );
+}	
+export default App;</code></pre></li>
+
+	</ol>
+
+    <p>Your web page should now look as shown below.</p>
+
+    <img src="assets/img/todos/output-1.png" alt="Sample React screen">
+
+	</section>
+
+
+    <section>
+        <h2>Creating the two UI elements</h2>
+        <p>The UI of the app will have two areas:</p>
+
+        <ul>
+            <li>An upper part to hold an user input field and a button.</li>
+            <li>A lower part to list tasks already entered by the user.</li>
+        </ul>
+
+    <p>Update the <b>App.js</b> function as follows.</p>
+<pre><code class="language-javascript atom-one-dark">function App() {
+   return (
+    { /* area for user input of tasks */ }
+    &lt;div className="addTask"&gt;
+       &lt;input /&gt;
+       &lt;button&gt;Add Task&lt;/button&gt; 
+    &lt;/div&gt;
+    
+    { /* area for listing existing tasks */ }
+    &lt;div className="list"&gt;&lt;/div&gt;
+   );
+}	
+export default App;</code></pre>
+
+</section>
+
+<section>
+    <h2>Add state to the app</h2>
+
+    <p>Next, create an array to hold the list of user-entered tasks. The list will update as new tasks are added and existing ones deleted.</p>
+
+    <p>On the first line of the <b>App()</b> function, add the following line:</p>
+
+<pre><code class="language-javascript atom-one-dark">const [todoList, setTodoList] = useState([]);</code></pre>
+
+    <p>And at the top of the file, add this import statement:</p>
+  
+    <pre><code class="language-javascript atom-one-dark">import { useState } from "react"</code></pre>
+
+    <ul>
+        <li>The <b>todoList</b> variable will hold the current task input by the user.</li>
+        <li>The <b>setTodoList</b> function will update the array with a new task.</li>
+        <li>The initial value of the <b>useState()</b> hook is <b>[]</b>, an empty array.</li>
+    </ul>
+    
+    <h3>Managing user input</h3>
+
+    <p>Create a second state to handle a new task entered by the user.</p>
+
+<pre><code class="language-javascript atom-one-dark">const [newTask, setNewTask] = useState("");</code></pre>
+
+<ul>
+    <li>The <b>newTask</b> variable represents the value in the input field.</li>
+    <li>The <b>setNewTask</b> function will add this current value to the array.</li>
+    <li>The initial value of the <b>useState()</b> hook is <b>""</b>, an empty string.</li>
+</ul>
+
+    <h3>Handling the Add Task button</h3>
+    <p>Update the input field as follows:</p>
+<pre><code class="language-javascript atom-one-dark">&lt;input onChange={handleChange} /&gt;</code></pre>
+
+    <p>And add the following function within the <b>App()</b> function to handle the change event.</p>
+<pre><code class="language-javascript atom-one-dark">const handleChange = (event) = &gt: {
+   setNewTask(event.target.value);
+}</code></pre>
+
+        <h3>Adding a new task to the array</h3>
+        <p>Capture a user's click on the Add Task button by adding the following event handler to the button.</p>
+
+<pre><code class="language-javascript atom-one-dark">&lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;</code></pre>
+
+        <p>And add the following function within the <b>App()</b> function to handle the button click event.</p>
+
+<pre><code class="language-javascript atom-one-dark">const addTask = () =&gt; {
+    setTodoList([...todoList, newTask]);
+}
+</code></pre>
+    <p>This function uses the spread operator to the new task to the tasks already in the array.</p>
+
+
+    <h3>Displaying the list of tasks</h3>
+    <p>Now you are ready to display the list of tasks in the array. Update the second <b>div</b> element as follows:</p>
+<pre><code class="language-javascript atom-one-dark">{ /* area for listing existing tasks */ }
+    &lt;div className="list"&gt;
+    {todoList.map(task =&gt; {
+        return &lt;div&gt;&lt;h1&gt;{task}&lt;/h1&gt;&lt;/div&gt;
+        })
+    }
+    &lt;/div&gt;</code></pre>
+
+</section>
+
+
+<section>
+    <h2>Add the option to delete tasks</h2>
+
+    <p>Update the lower part of the UI as follows:</p>
+<pre><code class="language-javascript atom-one-dark">{ /* area for listing and deleting existing tasks */ }
+&lt;div className="list"&gt;
+   {todoList.map(task =&gt; {
+      return (
+         &lt;div&gt;
+           &lt;h1&gt;{task}&lt;/h1&gt;
+           &lt;button onClick={() =&gt; deleteTask(task)}&gt; X &lt;/button&gt;
+         &lt;/div&gt;
+        )
+      })
+   }
+&lt;/div&gt; </code></pre>
+
+
+    <p>To the <b>App</b> function add this new event handler function:</p>
+
+<pre><code class="language-javascript atom-one-dark">const deleteTask = (taskName) =&gt; {
+    setTodoList(todoList.filter(task =&gt; task !== taskName));
+ }</code></pre>
+
+     <p>You can now delete tasks from the displayed list.</p>
+
+     <p>Unfortunately, if multiple tasks share the same name - they will <i>all</i> be deleted.</p>
+
+
+     <h3>Improving the task delete option</h3>
+     <p>The solution is to add a unique identifier or <b>id</b> to each task added to the list.</p>
+
+     <p>To do this, update the array that stores the tasks, named <b>todoList</b>, from an array of strings to an array of objects.</p>
+
+     <p>For each object in the array, you can now store both a <b>name</b> (which may not be unique) and an <b>id</b> (which will be unique). See below.</p>
+
+<pre><code class="language-javascript atom-one-dark">{
+    id: 1,
+    taskName: "Buy milk"
+} </code></pre>
+
+    <p>Currently, the <b>addtask()</b> function only adds a string and not an object.</p>
+<pre><code class="language-javascript atom-one-dark">const addTask = () =&gt; {
+    setTodoList([...todoList, newTask]);
+}</code></pre>
+
+    <p>Update this function as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">const addTask = () =&gt; {
+    const task = {
+        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+        taskName: newTask
+    };
+    setTodoList([...todoList, task]);
+};</code></pre>
+
+    <p>Update the UI as followsas follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">&lt;h1&gt;{task.taskName}&lt;/h1&gt;
+&lt;button onClick={ () =&gt; deleteTask(task.id) } &gt; X &lt;/button&gt;</code></pre>        
+
+    <p>Finally, update the delete function as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">const deleteTask = (id) =&gt; {
+   setTodoList(todoList.filter(task =&gt; task.id !== id));
+}</code></pre>            
+
+</section>
+
+<section>
+    <h2>Adding components and props</h2>
+
+    <p>Next we will reorganise the app by extracting the highighted UI block below into a separate component.</p>
+
+    <img src="assets/img/todos/output-3.png" alt="">
+
+    <p>First, create a new file named <b>Task.js</b> in the <b>/src</b> folder and add the following content to it.</p>
+
+<pre><code class="language-javascript atom-one-dark">export const Task = (props) =&gt; {
+    return (
+        &lt;div&gt;&lt;h1&gt;{props.taskName}&lt;/h1&gt;
+        &lt;button onClick={() =&gt; deleteTask(props.id)}&gt; X &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>            
+
+    <p>In the <b>App.js</b> file, update the lower UI as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">&lt;div className="list"&gt;
+   {todoList.map(task =&gt; {
+        return (
+            &lt;Task
+                id={task.id}
+                taskName={task.taskName}
+            /&gt;
+        )
+    })
+    }
+</code></pre>
+    <p>As you can see, you are passing the <b>id</b> and <b>taskName</b> props from the <b>App.js</b> parent component to the child <b>Task.js</b> component.</p>
+
+    <p>Add this import statement to <b>App.js</b>.</p>
+<pre><code class="language-javascript atom-one-dark">import { Task } from "./Task";</code></pre>
+
+<p>Next, we need to make the <b>deleteTask()</b> function in the <b>App.js</b> available to the <b>Task.js</b> component.</p>
+
+    <p>We can do this by passing the function as a prop to <b>Task.js</b>.</p>
+
+
+    <p>Update <b>Task.js</b> as follows:</p>
+
+    <pre><code class="language-javascript atom-one-dark">export const Task = (props) =&gt; {
+        return (
+            &lt;div&gt;&lt;h1&gt;{props.taskName}&lt;/h1&gt;
+            &lt;button onClick={() =&gt; props.deleteTask(props.id)}&gt; X &lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }</code></pre>            
+    
+    <p>In the <b>App.js</b> file, update the lower UI as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">&lt;div className="list"&gt;
+   {todoList.map(task =&gt; {
+        return (
+            &lt;Task
+                id={task.id}
+                taskName={task.taskName}
+                deleteTask = {deleteTask}
+            /&gt;
+        )
+    })
+    }
+</code></pre>
+
+</section>
+
+<section>
+    <h2>Adding a task status option</h2>
+
+    <p>Your final exercise is to add the ability to mark a displayed task as 'complete' and change its colour to green.</p>
+
+    <p>In the <b>App.js</b> file, add a third field named <b>completed</b> to the task object as follows:</p>
+
+
+<pre><code class="language-javascript atom-one-dark">const addTask = () =&gt; {
+    const task = {
+        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+        taskName: newTask,
+        completed: false
+    };
+    setTodoList([...todoList, task]);
+};</code></pre>
+
+    <p>Add this new function to <b>App.js</b>.</p>
+
+<pre><code class="language-javascript atom-one-dark">const completeTask = (id) =&gt; {
+    setTodoList(todoList.map(task =&gt; {
+        if (task.id === id) {
+            return { ...task, completed: true };
+        }
+        else {
+          return task;
+        }
+    }));
+}</code></pre>
+
+    <p>Pass this function and the new property as props to the <b>Task.js</b> component.</p>
+
+<pre><code class="language-javascript atom-one-dark">&lt;div className="list"&gt;
+   {todoList.map(task =&gt; {
+        return (
+            &lt;Task
+                id={task.id}
+                taskName={task.taskName}
+                completed = {task.completed}
+                deleteTask = {deleteTask}
+                completeTask = {completeTask}
+            /&gt;
+        )
+    })
+    }
+</code></pre>
+
+    <p>Update the <b>Task.js</b> components as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">export const Task = (props) =&gt; {
+return (
+    &lt;div 
+            className="Task"
+            style={ {backgroundColor: props.completed ? "green" : "white" } }&gt;
+            &lt;h1&gt;{props.taskName}&lt;/h1&gt;
+    
+            &lt;button onClick={() =&gt; props.completeTask(props.id)}&gt; Complete &lt;/button&gt;
+    
+            &lt;button onClick={() =&gt; props.deleteTask(props.id)}&gt; X &lt;/button&gt;
+    &lt;/div&gt;
+        );
+}</code></pre>
+
+
+</section>
+
+
+
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>

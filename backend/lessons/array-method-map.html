@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>The array.map() method | React.js Tutorials</title>
+	<meta name="description" content="Destructuring JavaScript objects and arrays to create more readable and concise code in React.js.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+	<style>pre { padding: 0 } </style>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>The array.map() method</h1>
+					<h2>Object and array destructuring enables developers to unpack values from objects and arrays and assign them to variables in a more concise and readable manner.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+
+                <p><a href="#basic-object">Basic object destructuring</a></p>
+				<p class="toc-indent"><a href="#renaming-variables">Renaming Variables</a></p>
+				<p class="toc-indent"><a href="#objects-react">How it relates to React.js objects</a></p>
+
+
+                <p><a href="#basic-array">Basic array destructuring</a></p>
+				<p class="toc-indent"><a href="#skipping-array">Skipping items in an array</a></p>
+				<p><a href="#rest-array">Using the ... (rest) operator</a></p>
+			</aside>
+
+	<article>
+
+		<section id="learning-goals">
+			<h2>Learning Goals</h2>
+			<p>At the end of this Tutorial, you will be able to:</p>
+
+			<ul>
+				<li>Destructure an object.</li>
+				<li>Destructure an array.</li>
+				<li>Use the ... (rest) operator with arrays.</li>
+			</ul>
+
+		</section>
+
+		<section>
+
+			<h2>The <code>array.map()</code> method</h2>
+
+			<p>Use the <span class="syn-js">array.map()</span> method to:</p>
+			
+			<ul>
+				<li>Make a copy of an array, and </li>
+				<li>Run a function on each item in the new, copied array.</li>
+			</ul>
+		
+		<p>	The original array is unaffected.</p>
+
+		<img src="assets/img/arrays-etc/array-map.png" alt="screenshot" style="max-width: 400px">
+
+		<p>The general syntax is a follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">const newArray = oldArray.map(arg)</code></pre>		
+
+		<p>The <span class="syn-js">arg</span> argument passed to the <span class="syn-js">.map()</span> method could be:</p>
+
+		<ul>
+			<li>A one-line arrow function. No <span class="syn-js">return</span> statment is needed.</li>
+			<li>A multi-line arrow function with code wrapped inside a <span class="syn-js">{}</span>. You need to include a <span class="syn-js">return</span> statement if you want the output to be used elsewhere in the code.</li>
+			<li>An external function declared elsewhere in the code.</li>
+		</ul>
+
+
+		<h3>Mapping arrays with one line-arrow functions</h3>
+		<p>See the following:</p>
+<pre><code class="language-javascript atom-one-dark">myArray = ['apple', 'banana', 'orange'];
+
+// Capitalise each item in the copied array
+const myList = myArray.map(item =&gt; item.toUpperCase());
+console.log(myList);
+// Outputs ['APPLE', 'BANANA', 'ORANGE']</code></pre>
+
+<p>In the first example below, each item in the copied array is doubled by the arrow function inside the loop. In the second example, each item in the copied array has the number three added to it.</p>
+<pre><code class="language-javascript atom-one-dark">const numbers = [1, 2, 3, 4, 5];
+
+// Multiply each item in the copied array by 2
+const doubled = numbers.map(number =&gt; number * 2);
+console.log(doubled);
+// Outputs [2, 4, 6, 8, 10]
+
+// Add 3 to each item in the copied array
+const plusThree = numbers.map(number =&gt; number + 3);
+console.log(plusThree);
+// Outputs [4, 5, 6, 7, 8]</code></pre>
+
+
+		<h3>Mapping arrays with multi-line arrow functions</h3>
+		<p>Use the multi-line format when the transformation logic inside the <span class="syn-js">.map()</span> loop is a bit more complex. See the following:</p>
+<pre><code class="language-javascript atom-one-dark">const celsiusTemps = [0, 25, 30, 100];
+
+const fahrenheitTemps = celsiusTemps.map(temp =&gt; {
+    // Assign each item of new array to a variable named temp
+    const fahrenheit = (temp * 9/5) + 32;
+    return `${temp}°C is ${fahrenheit}°F`;
+});
+    
+console.log(fahrenheitTemps);  
+// Outputs: ["0°C is 32°F", "25°C is 77°F", "30°C is 86°F", "100°C is 212°F"]</code></pre>
+
+		<p>Note that you're not re-declaring the <span class="syn-js">fahrenheit</span> variable in the same scope multiple times. On each iteration through <span class="syn-js">celsiusTemps</span> array, a new scope is created by the <span class="syn-js">{}</span>, allowing for a new <span class="syn-js">fahrenheit</span> variable to be declared without any conflicts with the previous one. In short, you're declaring the variable in different, unique scopes for each iteration of the loop. </p>
+
+		<h3>Mapping arrays with external functions</h3>
+		<p>When the transformation logic is complex or needs to be reused elsewhere in the code, it makes sense to place it in a separate function outside the <span class="syn-js">.map()</span> loop. This pattern can make your code more modular and readable.</p>
+
+		<p>See the example below.</p>
+<pre><code class="language-javascript atom-one-dark">// Original array of radius values
+const radii = [5, 10, 15];
+
+// Function to calculate the area of a circle
+function circleArea(radius) {
+   return Math.PI * radius * radius;
+}
+                
+// Apply the area calculation function to each item in the new array named radii
+const areas = radii.map(circleArea);
+console.log(`Circle 1 radius: ${radii[0]} Circle area: ${areas[0].toFixed(4)}`);  
+console.log(`Circle 2 radius: ${radii[1]} Circle area: ${areas[1].toFixed(4)}`);  
+console.log(`Circle 3 radius: ${radii[2]} Circle area: ${areas[2].toFixed(4)}`); 
+// Outputs:
+// Circle 1 radius: 5 Circle area: 78.5398
+// Circle 2 radius: 10 Circle area: 314.1593
+// Circle 3 radius: 15 Circle area: 706.8583</code></pre>
+
+<p>In this example, for each item in the array:</p>
+<ul>
+    <li>The <span class="syn-js">.map()</span> method calls the <span class="syn-js">circleArea()</span> function, and</li>
+    <li>Passes the array item as the input parameter to that function.</li>    
+</ul>
+
+<p>The function is not immediately invoked by <span class="syn-js">.map()</span> but is passed by reference to it as an argument and runs outside the <span class="syn-js">.map()</span> loop. The function's output is then returned to the loop.</p>
+
+<p>You could rewrite this as a one-line arrow function as follows:</p>
+<pre><code class="language-javascript atom-one-dark">const areas = radii.map(radii =&gt; { return Math.PI * radii * radii });</code></pre>
+
+<p>Or even more concisely as follows:</p>
+<pre><code class="language-javascript atom-one-dark">const areas2 = radii.map(radii =&gt; Math.PI * radii * radii);</code></pre>
+
+
+		<h3>Mapping arrays of objects</h3>
+		<p>You can use the <span class="syn-js">.map()</span> method with arrays of objects. See the two examples below.</p>
+
+<pre><code class="language-javascript atom-one-dark">const users = [
+   { firstName: "Susan", lastName: "Steward", age: 14, hobby: "Singing" },
+   { firstName: "Daniel", lastName: "Longbottom", age: 16, hobby: "Football" },
+   { firstName: "Jacob", lastName: "Black", age: 15, hobby: "Singing" }
+];
+
+// In the copied array the firstName and lastName item properties are output together 
+const fullNames = users.map(user =&gt; console.log(`${user.firstName} ${user.lastName}`));
+// Outputs:
+// Susan Steward
+// Daniel Longbottom
+// Jacob Black</code></pre>
+
+<pre><code class="language-javascript atom-one-dark">const products = [
+    { id: 1, name: 'Laptop', price: 1000 },
+    { id: 2, name: 'Mouse', price: 50 },
+    { id: 3, name: 'Keyboard', price: 70 }
+];
+
+// Apply 10% discount to each item in the copied array
+const specialOffers = products.map(product =&gt; {
+    console.log(`${product.name} (id: ${product.id}) Sale price! €${product.price * 0.9}`);
+});
+// Outputs:
+// Laptop (id: 1) Sale price! €900
+// Mouse (id: 2) Sale price! €45
+// Keyboard (id: 3) Sale price! €63</code></pre>
+
+
+        <h3>Mapping arrays with the ternary <code>:;</code> operator</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione dicta blanditiis amet veritatis sed commodi exercitationem deserunt eos nisi ipsam tempora, recusandae facilis mollitia quisquam nesciunt expedita. Obcaecati, totam repudiandae.</p>
+
+        <h3>Mapping arrays with the short-circuit <code>&&</code> operator</h3>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate cumque repudiandae consequatur totam, mollitia, temporibus rem sed expedita fugit ullam impedit aperiam minus id inventore, quas tenetur aspernatur assumenda natus.</p>
+
+    </section>
+
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+</body>
+</html>
