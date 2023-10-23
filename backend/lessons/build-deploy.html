@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Building and Deploying Apps | ReactJS Tutorials</title>
+	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+	<style>pre { padding: 0 } </style>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Building and Deploying Apps</h1>
+					<h2>Building apps and deploying them to GitHub Pages.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#cra-about">About Create React App (CRA)</a></p>
+				<p><a href="#cra-sample">Building your first app with CRA</a></p>
+				<p><a href="#cra-folders-files">React folders and files</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+        <!--
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+-->
+
+
+	<section id="cra-sample">
+		<h2>Building an app with Create React App</h2>
+        <p>The <b>create-react-app</b> script enables you to create a minimised,production-ready version of a ReactJS app.</p>
+
+<pre class="language-js">C:\myapps\todos-app&gt; npm run build</pre>
+        <p>This command will:</p>
+
+        <ul>
+            <li>Bundle your app using Webpack.</li>
+            <li>Optimize and minimize the code.</li>
+            <li>Create a <b>/build</b> directory in your project root containing all the production-ready files.</li>
+        </ul>
+
+        <p>This <b>/build</b> folder contains the following items:</p>
+        
+        <ul>
+            <li><b>static directory</b>: Contains all the CSS and JS files. Filenames will have a unique hash to ensure browser cache busting.</li>
+            <li><b>index.html</b>: The main HTML file.</li>
+            <li><b>manifest.json</b>: Provides metadata used when your web app is added to the homescreen on Android.</li>
+            <li>Other assets like images, icons, etc.</li>
+        </ul>
+
+    </section>
+
+    <section>
+
+        <h2>Testing your build version locally</h2>
+
+        <p>After you have built your app, you can test it locally by running the following command.</p>
+
+<pre class="language-js">npm install -g serve</pre>
+
+        <p>And then:</p>
+
+<pre class="language-js">serve -s build</pre>
+
+        <p>Now, you can open your browser and navigate to the provided local address to see your production-ready app running.</p>
+
+        <p>The <b>/build</b> directory contains all the files you need to deploy. Depending on your hosting provider or platform (like Vercel, Netlify, or a traditional web host), the deployment steps might vary. Generally, you'll be uploading or pointing to the build directory.</p>
+
+
+</section>
+
+
+<section>
+    <h2>Deploying to GitHub Pages</h2>
+
+    <p>Follow these steps:</p>
+
+    <ol>
+        <li>Navigate to your ReactJS project folder and install the gh-pages package. This package will allow you to push the build files to a gh-pages branch of your GitHub repository.
+
+<pre class="language-js">npm install gh-pages --save-dev</pre></li>
+
+        <li>Open your package.json file and make the following modifications:
+
+<pre class="language-js">"homepage": "https://[username].github.io/[repository-name]/"</pre></li>
+        <li>In the same file, add these two scripts:
+
+<pre class="language-js">"scripts": {
+    // ... other scripts
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }</pre>
+  After these additions, a section of your package.json should look something like this:
+
+<pre class="language-js">
+    {
+        "name": "my-react-app",
+        "version": "0.1.0",
+        "homepage": "https://[your-github-username].github.io/[repository-name]/",
+        "scripts": {
+          "start": "react-scripts start",
+          "predeploy": "npm run build",
+          "deploy": "gh-pages -d build",
+          "build": "react-scripts build",
+          // ... other scripts
+        },
+        // ... rest of package.json
+      }
+</pre></li>
+
+        <li>Now, you can deploy your app to GitHub Pages by running:
+<pre class="language-js">npm run deploy</pre>
+        This command wil build your React app in production mode (because of the predeploy script) and push the contents of the build directory to the gh-pages branch of your GitHub repository using the gh-pages package.</li>
+    </ol>
+
+    <p>You can now access your app at the following web address:</p>
+
+<pre class="language-js">https://[your-github-username].github.io/[repository-name]/</pre>
+
+        <p>Every time you make changes to your app and want to update the live version, you'll need to run <b>npm run deploy</b> again.</p>
+    </section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
