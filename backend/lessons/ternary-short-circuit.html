@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ternary and short-circuit operators | React.js Tutorials</title>
+	<meta name="description" content="Using a concise alternative to writing multi-line if...else statements in JavaScript.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+	<style>pre { padding: 0 } </style>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+
+</head>
+
+	<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+			<div><p>&nbsp;</p></div>
+			</div>
+
+			<div class="content">
+			        <h1>Ternary and short-circuit operators</h1>
+				<h2>Using a concise alternative to writing multi-line if...else statements in JavaScript.</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+	<main>
+
+			<aside>
+				<h3>REACT.JS COURSE</h3>
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+				<h3>THIS TUTORIAL</h3>
+
+
+                <p><a href="ternary-about">About the ternary ?: operator</a></p>
+	        <p class="toc-indent"><a href="#ternary-boolean">Testing Booleans with the ternary operator</a></p>
+	        <p class="toc-indent"><a href="#ternary-strings">Testing strings with the ternary operatorr</a></p>
+	        <p class="toc-indent"><a href="#ternary-numbers">Testing numbers with the ternary operator</a></p>
+
+                <p><a href="#ternary-chaining">Chaining and the ternary operator</a></p>
+		<p><a href="#ternary-problems">Testing for 'problem' values with the ternary operator</a></p>
+	</aside>
+
+	<article>
+
+		<section id="learning-goals">
+			<h2>Learning Goals</h2>
+			<p>At the end of this Tutorial, you will be able to:</p>
+
+			<ul>
+			        <li>Write basic statements that test Booleans, strings and numbers with the ternary operator.</li>
+                                <li>Chain multiple ternary expressions together.</li>
+                                <li>Use the ternary operator to test for undefined or NULL values, or for empty strings.</li>
+			</ul>
+		</section>
+
+                <section>
+                        <p><a href="ternary.js" target="_blank">Sample code file</a></p>
+                </section>
+
+		<section id="ternary-about">
+
+			<h2>About the ternary <code>?:</code> operator</h2>
+           
+            <p>The ternary operator provides a concise alternative to writing multi-line <span class="syn-js">if...else</span> statements in JavaScript. The syntax is as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">condition ? ifTrue : ifFalse</code></pre>		
+ 
+            <p>So instead of writing: </p>
+
+<pre><code class="language-javascript atom-one-dark">const age = 21;
+if (age &gt;= 18) {
+   console.log("You may purchase beer.")
+} else {
+   console.log("No beer for you.")
+}
+// Outputs: "You may purchase beer."</code></pre>		
+
+            <p>You could simply write:</p>
+
+<pre><code class="language-javascript atom-one-dark">const age = 21;
+age &gt;= 18 ? console.log("You may purchase beer.") : console.log("No beer for you.");
+// Outputs: "You may purchase beer."</code></pre>		
+        
+        <p>You could further shorten this code by declaring the tested variable on the same line as the ternary operator:</p>
+<pre><code class="language-javascript atom-one-dark">const age = 21 &gt;= 18 ? console.log("You may purchase beer.") : console.log("No beer for you.");
+// Outputs: "You may purchase beer."</code></pre>		
+
+    
+            <h3 id="ternary-boolean">Testing Booleans with the ternary operator</h3>
+            <p>The ternary operator is typically used to assign one of two possible values to a single variable depending on some condition.</p>
+            
+            <p>Below one of two possible greeting messages is displayed based on whether a user is logged in or not:</p>
+            
+<pre><code class="language-javascript atom-one-dark">const isLoggedIn = true;
+const greeting = isLoggedIn ? "Welcome, User!" : "Please log in to continue.";
+console.log(greeting);
+// Outputs "Welcome, User!"</code></pre>
+            
+            <p>And is this example the ternary operator provides a discounted price to members:</p>
+
+<pre><code class="language-javascript atom-one-dark">const isMember = true;
+const price = isMember ? €9.99 : €12.99;
+console.log(price);
+// Outputs: €9.99</code></pre>
+
+            <p>The test condition can include JavaScript's logical AND <span class="syn-js">&&</span>operator which requires that <i>both</i> conditions are true.</p>
+<pre><code class="language-javascript atom-one-dark">const isUserLoggedIn = true;
+const isAdmin = false;
+
+const accessLevel = isUserLoggedIn && isAdmin ? "Admin" : "Regular User";
+console.log("Access Level: " accessLevel);
+// Outputs: "Access Level: Regular user"</code></pre>
+
+
+            <h3 id="ternary-strings">Testing strings with the ternary operator</h3>            
+            <p>See the following example.</p>
+<pre><code class="language-javascript atom-one-dark">// Variable declared on separate line
+const weather = "rainy";
+weather === "sunny" ? console.log("Go out.") : console.log("Stay home.");
+// Outputs: "Stay home."</code></pre>
+
+            <p>Or more concisely:</p>
+
+<pre><code class="language-javascript atom-one-dark">// Variable declared and tested on same line
+const weather = "rainy" === "sunny" ? console.log("Go out.") : console.log("Stay home.");
+// Outputs: "Stay home."</code></pre>
+
+
+            <h3 id="ternary-numbers">Testing numbers with the ternary operator</h3>            
+            <p>Here is an example of the ternary operator determining the larger of two numbers:</p>
+            
+<pre><code class="language-javascript atom-one-dark">const num1 = 10;
+const num2 = 20;
+const largerNumber = num1 &gt; num2 ? num1 : num2;
+console.log("The larger number is:" +largerNumber);
+//Outputs 20</code></pre>
+
+        </section>
+
+        <section id="ternary-chaining">
+
+        <h2>Chaining and the ternary operator</h2>
+
+        <p>In the example below a second ternary expression is chained to the <span class="syn-js">false</span> branch of the first ternary expression:</p>
+
+<pre><code class="language-javascript atom-one-dark">const myNumber = 10;
+let testNum = myNumber === 0 ? "You have nothing" : myNumber &gt; 10 ? "You have a lot" : "You have a little"; 
+console.log(testNum);
+// Outputs: "You have a little"</code></pre>
+
+<p>To make this code easier to read, you could rewrite it over multiple lines as follows:</p>
+
+<pre><code class="language-javascript atom-one-dark">const myNumber = 10;
+let testNum = myNumber === 0 
+    ? "You have nothing" 
+    : myNumber &gt; 10 
+        ? "You have a lot"
+        : "You have a little"
+        
+console.log(testNum);
+// Outputs: "You have a little"</code></pre>    
+
+        <p>And here is a second example of chaining ternary operators.</p>
+
+
+<pre><code class="language-javascript atom-one-dark">const firstCheck = false;
+const secondCheck = false;   
+
+const grantAccess = firstCheck 
+    ? "Access denied" 
+    : secondCheck
+        ? "Access denied" 
+        : "Access granted";
+
+console.log(grantAccess);
+// Outputs: "Access denied"</code></pre>    
+
+        </section>
+
+        <section id="ternary-problems">
+
+        <h2>Testing for 'problem' values with the ternary operator</h2>            
+
+        <p>You can use the ternary operator to check for values that may generate errors in your code. Typically, these are undefined or NULL values, or empty strings.</p>
+
+        <p>The code below will evaluate to <span class="syn-js">true</span> because the tested variable contains a value:</p>
+
+<pre><code class="language-javascript atom-one-dark">let isThereSoup = "Tomato soup";
+let response = isThereSoup ? "Yes, we have soup": "No soup today."
+console.log(response);
+// Outputs: "Yes, we have soup"</code></pre>    
+
+        <p>However, if no value is assigned to the tested variable, the ternary expression will evaluate to <span class="syn-js">false</span>:</p>
+
+<pre><code class="language-javascript atom-one-dark">let isThereSoup;
+let response = isThereSoup ? "Yes, we have soup": "No soup today."
+console.log(response);
+// Outputs: "No soup today."</code></pre>    
+
+        <p>In such cases you may want to assign some default value to the undeclared variable. See below:</p>
+
+<pre><code class="language-javascript atom-one-dark">let isThereSoup;
+let response = isThereSoup ? "Yes, we have soup": "Default soup."
+console.log(response);
+// Outputs: "Default soup."</code></pre>    
+
+        <p>Below is an example of handling a NULL value:</p>
+<pre><code class="language-javascript atom-one-dark">const userInput = null;
+const result = userInput !== null ? userInput : "Some default value";
+console.log(result); // Output: "Some default value"</code></pre>        
+
+        <p>And here is an example of handling an empty string.</p>
+
+<pre><code class="language-javascript atom-one-dark">let userEmail = '';
+let response = userEmail ? userEmail: "No email supplied."
+console.log(response);
+// Outputs: "No email supplied."</code></pre>    
+    
+	
+
+<!--
+        <h3>Mapping arrays with the ternary <code>:;</code> operator</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione dicta blanditiis amet veritatis sed commodi exercitationem deserunt eos nisi ipsam tempora, recusandae facilis mollitia quisquam nesciunt expedita. Obcaecati, totam repudiandae.</p>
+
+        <h3>Mapping arrays with the short-circuit <code>&&</code> operator</h3>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate cumque repudiandae consequatur totam, mollitia, temporibus rem sed expedita fugit ullam impedit aperiam minus id inventore, quas tenetur aspernatur assumenda natus.</p>
+
+    </section>
+-->
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+</body>
+</html>
