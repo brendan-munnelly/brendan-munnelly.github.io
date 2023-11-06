@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>To Do App | ReactJS Tutorials</title>
+	<title>Creating a To Do App | ReactJS Tutorials</title>
 	<meta name="description" content="About the CRA folder and file structure, and creating a basic app with components and imported CSS and image files.">
 
 	<meta name="robots" content="noindex">
@@ -38,7 +38,7 @@
 				</div>
 		
 				<div class="content">
-					<h1>To Do App</h1>
+					<h1>Creating a To Do App</h1>
 					<h2>Creating a To do app.</h2>
 				</div>
 			</div><!-- /wrapper -->
@@ -47,7 +47,7 @@
 		<main>
 
 			<aside>
-				<h3>REACT.JS COURSE</h3>
+				<h3>React.JS COURSE</h3>
 	
 				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
 	
@@ -86,92 +86,132 @@
 
 -->
 
+<section id="props-about">
 
-	<section id="cra-sample">
-		<h2>Building with Create React App</h2>
-        <p>Follow these steps to build the basic app structure with the <b>create-react-app</b> script.</p>
+    <h2>About the To Do app</h2>
+    <p>At the centre of your To Do app is an array of objects named <b>todoList</b>. Each object represents a task with three properties:</p>
+    
+    <ul>
+        <li><b>id</b>:</li>
+        <li><b>taskName:</b></li>
+        <li><b>completed:</b></li>
+    </ul>
+    
+    <p>The third is a Boolean value.</p>
 
-		<ol>
-			<li>In VS Code, choose <b>Terminal | New terminal</b> and navigate to where you want React to create a folder for your app. For example:
-<pre class="language-js">C:\&gt; users\JohnSmith</pre>
-or
-<pre class="language-js">C:\&gt;</pre></li>
-<li>Type the following command that includes the name you want to call your new app.
-<pre class="language-js">C:\&gt; <span class="yellow">npx</span> todos</pre></li>
-		</ol>
+    <p>You will add functionality enabling users to:</p>
 
-		<p>After you have created your app, you launch it by running the following command from inside your app folder.</p>
-	<pre class="language-js">C:\todos&gt; <span class="yellow">npm</span> start</pre>
-
-	<p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
-
-	<p>You will see a screen similar to the following.</p>
-
-	<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
-
-	</section>
-
-	<section id="app-customising">
-
-		<h2>Customising your app</h2>
-		<p>In this section, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your To Do app.</p>
+    <ul>
+        <li>View all current tasks</li>
+        <li>Add new tasks</li>
+        <li>Delete tasks</li>
+        <li>Mark tasks as 'completed'.</li>
+    </ul>
 
 
-		<ol>
-			<li>Open the <b>index.html</b> file in the <span class="syn-js">/public</span>  folder and replace all its content with the following.
+</section>
+
+
+
+<section id="cra-start">
+    <h2>Starting with <code>create-react-app</code></h2>
+    <p>Follow these steps to create your basic app structure with the <b>create-react-app</b> script.</p>
+
+    <ol>
+        <li>Open a new Command prompt window or, in VS Code, a new Terminal.</li>
+        <li>Navigate to where you want ReactJS to create a folder for your app. For example:
+<pre class="language-js" style="padding: 10px 20px">C:\&gt; users\JohnSmith</pre></li>
+<li>Type the following command that includes the name you want to call your new app. For example, <b>todos</b>.
+<pre class="language-js" style="padding: 10px 20px">C:\&gt; <span class="yellow">npx</span> create-react-app todos</pre></li>
+    </ol>
+
+    <p>After you have created your app, you launch it by running the following command from inside your new app folder.</p>
+<pre class="language-js" style="padding: 10px 20px"><span class="yellow">npm</span> start</pre>
+
+<p>A new browser window should display with your new app running on the ReactJS local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+
+<p>You will see a screen similar to the following.</p>
+
+<img src="assets/img/todos/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+</section>
+
+<section id="cra-customising">
+
+    <h2>Customising your CRA-created content</h2>
+    <p>Now you will customise the 'boilerplate' content provided by the <b>create-react-app</b> (CRA) script.</p>
+
+    <h3 id="folder-public">The <code>/public</code> folder</h3>
+
+    <ol>
+        <li>In your app&#8217;s <span class="syn-js">/public</span> folder, open the <b>index.html</b> file and replace all its content with the following.
 
 <pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
-   &lt;html lang="en"&gt;
-   &lt;head&gt;
-      &lt;meta charset="utf-8" /&gt;
-      &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
-      &lt;title&gt;eCommerce React App&lt;/title&gt;
-      &lt;meta name="description" content="eCommerce website created with React.js" /&gt;   
-      &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
-   &lt;/head&gt;
-	 
-   &lt;body&gt;
-	 
-      &lt;div id="root"&gt;&lt;/div&gt;
-		   
-   &lt;/body&gt;
- &lt;/html&gt;</code></pre></li>
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+  &lt;title&gt;Single Page Application Blog App&lt;/title&gt;
+  &lt;meta name="description" content="An SPA blog app created with ReactJS" /&gt;   
+  &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+&lt;/head&gt;
+ 
+&lt;body&gt;
+ 
+  &lt;div id="root"&gt;&lt;/div&gt;
+       
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li>
 
-			<li>Open the <b>index.js</b> file in the <span class="syn-js">/src</span> folder and replace all its content with the following.
+    </ol>
+
+    <h3 id="folder-src">The <code>/src</code> folder</h3>
+
+    <ol>
+        <li>In the <span class="syn-js">/src</span> folder, open the <b>index.js</b> file and replace all its content with the following.
 
 <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-	
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-   &lt;React.StrictMode&gt;
-      &lt;App /&gt;
-   &lt;/React.StrictMode&gt;
+&lt;React.StrictMode&gt;
+  &lt;App /&gt;
+&lt;/React.StrictMode&gt;
 );</code></pre></li>
 
 
-		<li>Open the <b>App.js</b> file in the <span class="syn-js">/src</span> folder and replace its content with the following.
-                
+    <li>And again in the <span class="syn-js">/src</span> folder, open the <b>App.js</b> file and replace its content with the following.
+            
 <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">function App() {
-   return (
-      &lt;&gt;
-      &lt;h1&gt;Hello, World!&lt;/h1&gt;
-      &lt;p&gt;Paragraph of text.&lt;/p&gt;
-      &lt;/&gt;
-   );
+return (
+  &lt;&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;Paragraph of text.&lt;/p&gt;
+  &lt;/&gt;
+);
 }	
 export default App;</code></pre></li>
 
-	</ol>
+</ol>
 
-    <p>Your web page should now look as shown below.</p>
+<p>Your web page should now look as shown below.</p>
 
-    <img src="assets/img/todos/output-1.png" alt="Sample React screen">
+<img src="assets/img/todos/output-1.png" alt="Sample React screen">
 
-	</section>
+</section>
 
+
+    <section>
+
+        <h2>Download the CSS file.</h2>
+        <p>Download the file below to your <span class="syn-js">/src</span> folder, where it will overwrite the file of the same name created by the <b>create-react-app</b> script.</p>
+
+        <p><a href="scr-todo/App.css">App.css</a></p>
+
+    </section>
 
     <section>
         <h2>Creating the two UI elements</h2>
@@ -202,7 +242,7 @@ export default App;</code></pre>
 <section>
     <h2>Add state to the app</h2>
 
-    <p>Next, create an array to hold the list of user-entered tasks. The list will update as new tasks are added and existing ones deleted.</p>
+    <p>Next, create an array named <b>todoList</b> to hold the list of user-entered tasks. The list will update as new tasks are added and existing ones deleted or marked as 'completed'.</p>
 
     <p>On the first line of the <b>App()</b> function, add the following line:</p>
 
@@ -213,7 +253,7 @@ export default App;</code></pre>
     <pre><code class="language-javascript atom-one-dark">import { useState } from "react"</code></pre>
 
     <ul>
-        <li>The <b>todoList</b> variable will hold the current task input by the user.</li>
+        <li>The <b>todoList</b> variable will hold the current tasks in the array.</li>
         <li>The <b>setTodoList</b> function will update the array with a new task.</li>
         <li>The initial value of the <b>useState()</b> hook is <b>[]</b>, an empty array.</li>
     </ul>
@@ -226,7 +266,7 @@ export default App;</code></pre>
 
 <ul>
     <li>The <b>newTask</b> variable represents the value in the input field.</li>
-    <li>The <b>setNewTask</b> function will add this current value to the array.</li>
+    <li>The <b>setNewTask</b> function will add this user-entered task to the array.</li>
     <li>The initial value of the <b>useState()</b> hook is <b>""</b>, an empty string.</li>
 </ul>
 
@@ -322,7 +362,7 @@ export default App;</code></pre>
     setTodoList([...todoList, task]);
 };</code></pre>
 
-    <p>Update the UI as followsas follows:</p>
+    <p>Update the UI as follows:</p>
 
 <pre><code class="language-javascript atom-one-dark">&lt;h1&gt;{task.taskName}&lt;/h1&gt;
 &lt;button onClick={ () =&gt; deleteTask(task.id) } &gt; X &lt;/button&gt;</code></pre>        
@@ -338,7 +378,7 @@ export default App;</code></pre>
 <section>
     <h2>Adding components and props</h2>
 
-    <p>Next we will reorganise the app by extracting the highighted UI block below into a separate component.</p>
+    <p>Next we will reorganise the app by extracting the highlighted UI block below into a separate component.</p>
 
     <img src="assets/img/todos/output-3.png" alt="">
 
@@ -455,7 +495,7 @@ export default App;</code></pre>
 return (
     &lt;div 
             className="Task"
-            style={ {backgroundColor: props.completed ? "green" : "white" } }&gt;
+            style={ {backgroundColor: props.completed ? "transparent" : "pink" } }&gt;
             &lt;h1&gt;{props.taskName}&lt;/h1&gt;
     
             &lt;button onClick={() =&gt; props.completeTask(props.id)}&gt; Complete &lt;/button&gt;
