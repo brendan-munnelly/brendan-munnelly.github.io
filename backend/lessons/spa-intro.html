@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Introduction to SPA Apps | ReactJS Tutorials</title>
+	<meta name="description" content="Creating a Single Page Application (SPA) with  fixed navbar and footer components.">
+
+	<meta name="robots" content="noindex">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+	<style>
+        pre { padding: 0 } 
+        section h2 code { font-weight: 400 }
+    </style>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to SPA Apps</h1>
+					<h2>Creating a Single Page Application (SPA) with fixed navbar and footer components.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>ReactJS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+
+				<p><a href="#about-spa">About Single Page (SPA) Applications</a></p>
+				<p><a href="#cra-start">Starting with create-react-app</a></p>
+				<p><a href="#cra-customising">Customising your CRA-created content</a></p>
+				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
+				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#app-starting">Starting your app</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding functional components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+
+        <!-- <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Run the create-react-app utility and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section> -->
+
+    <section>
+        <h2 id="about-spa">About Single Page (SPA) Applications</h2>
+        <p>In a traditional multi-page website, each page is a different HTML file. Navigating to different pages causes a full page reload, fetching a new HTML document from the server. This is called Server-Side Rendering (SSR). Content is typically rendered on the server, and the complete HTML is sent to the client.</p>
+        
+        <p>In contrast, a React app dynamically updates the current page rather than loading entire new pages from the server. Content is loaded once, and new data is retrieved as needed without page reloads.</p>
+        
+        <p>This is called Client-Side Rendering (CSR). The server sends a single HTML page initially, and the content is then rendered on the client side using JavaScript. Such apps are known as Single Page Applications or SPAs.</p>
+
+        <img src="assets/img/spa-intro/spa.png" alt="">
+    </section>
+
+	<section id="cra-start">
+		<h2>Starting with <code>create-react-app</code></h2>
+        <p>Follow these steps to create your basic app structure with the <b>create-react-app</b> script.</p>
+
+		<ol>
+			<li>Open a new Command prompt window or, in VS Code, a new Terminal.</li>
+            <li>Navigate to where you want ReactJS to create a folder for your app. For example:
+<pre class="language-js" style="padding: 10px 20px">C:\&gt; users\JohnSmith</pre></li>
+<li>Type the following command that includes the name you want to call your new app. For example, <b>spa-blog</b>.
+<pre class="language-js" style="padding: 10px 20px">C:\&gt; <span class="yellow">npx</span> create-react-app spa</pre></li>
+		</ol>
+
+		<p>After you have created your app, you launch it by running the following command from inside your new app folder.</p>
+	<pre class="language-js" style="padding: 10px 20px"><span class="yellow">npm</span> start</pre>
+
+	<p>A new browser window should display with your new app running on the ReactJS local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+
+	<p>You will see a screen similar to the following.</p>
+
+	<img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+
+	</section>
+
+	<section id="cra-customising">
+
+		<h2>Customising your CRA-created content</h2>
+		<p>Now you will customise the 'boilerplate' content provided by the <b>create-react-app</b> (CRA) script.</p>
+
+        <h3 id="folder-public">The <code>/public</code> folder</h3>
+
+		<ol>
+			<li>In your app&#8217;s <span class="syn-js">/public</span> folder, open the <b>index.html</b> file and replace all its content with the following.
+
+<pre class="html"><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
+   &lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="utf-8" /&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+      &lt;title&gt;Single Page Application Blog App&lt;/title&gt;
+      &lt;meta name="description" content="An SPA blog app created with ReactJS" /&gt;   
+      &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+   &lt;/head&gt;
+	 
+   &lt;body&gt;
+	 
+      &lt;div id="root"&gt;&lt;/div&gt;
+		   
+   &lt;/body&gt;
+ &lt;/html&gt;</code></pre></li>
+
+        </ol>
+
+        <h3 id="folder-src">The <code>/src</code> folder</h3>
+
+        <ol>
+			<li>In the <span class="syn-js">/src</span> folder, open the <b>index.js</b> file and replace all its content with the following.
+
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+	
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+   &lt;React.StrictMode&gt;
+      &lt;App /&gt;
+   &lt;/React.StrictMode&gt;
+);</code></pre></li>
+
+
+		<li>And again in the <span class="syn-js">/src</span> folder, open the <b>App.js</b> file and replace its content with the following.
+                
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">function App() {
+   return (
+      &lt;&gt;
+      &lt;h1&gt;Hello, World!&lt;/h1&gt;
+      &lt;p&gt;Paragraph of text.&lt;/p&gt;
+      &lt;/&gt;
+   );
+}	
+export default App;</code></pre></li>
+
+	</ol>
+
+    <p>Your web page should now look as shown below.</p>
+
+    <img src="assets/img/spa-intro/output-1.png" alt="Sample React screen">
+
+	</section>
+
+
+    <section>
+
+
+        <h2 id="spa-install">Working with <code>react-router-<span style="letter-spacing: 0;">dom</span></code></h2>
+
+        <p>ReactJS does not natively support page routing. So you need to use NPM (Node Package Manager) to install a new package named <b>react-router-dom</b> for this purpose. You can then import and use that package in your app.</p>
+
+        <h3>Installing the <code>react-router-<span style="letter-spacing: 0;">dom</span></code> package</h3>
+
+        <ol>
+            <li>Open new Command prompt window or, in VS Code, a new Terminal.</li>
+
+            <li>Navigate to the folder that contains your app. For example:
+            <img src="assets/img/spa-intro/router-install-1.png" alt=""></li>
+
+            <li>Run the following command <i>inside your app folder</i>:
+<pre class="language-js" style="padding: 10px 20px"><span class="yellow">npm</span> install react-router-dom</pre>
+            For example: 
+            <img src="assets/img/spa-intro/router-install-2.png" alt=""></li>
+        </ol>
+
+        <h3>Importing <code>react-router-<span style="letter-spacing: 0;">dom</span></code> into your App component</h3>
+
+        <ol>
+
+            <li>At the top of your <b>App.js</b> component file, add the following <b>import</b> statement:
+<pre><code class="language-javascript atom-one-dark">import { BrowserRouter, Routes, Route } from "react-router-dom";</code></pre></li>
+
+            <li>Developers often shorten the name of the <b>BrowserRouter</b> function with the <b>Router</b> alias. See below:
+<pre><code class="language-javascript Androidstudio">import { BrowserRouter as Router, Routes, Route } from "react-router-dom";</code></pre></li>
+            </ol>
+
+            <p>Here is a summary of what these three imported named functions do:</p>
+
+            <table class="table-js-methods">
+                <tbody>
+                    <tr>
+                       <td style="min-width: 30%"><p><span class="syn-js">BrowserRouter</span></p></td>
+                       <td><p>Provides the routing functionality for your app.</p></td>
+                    </tr>
+                    <tr>
+                       <td style="min-width: 30%"><p><span class="syn-js">Routes</span></p></td>
+                       <td><p>Defines the routes for your app.</p></td>
+                    </tr>
+                    <tr>
+                        <td style="min-width: 30%"><p><span class="syn-js">Route</span></p></td>
+                        <td><p>Defines a single route.</p></td>
+                     </tr>
+                </tbody>
+            </table>                    
+        
+        </section>
+
+        <section id="spa-pages">
+
+            <h2>Adding the &#8216;pages&#8217; to your app</h2>
+            <p>Add pages (realy components) to an app is a three-step process:</p>
+
+            <ul>
+                <li>Create the component files that will be served as pages.</li>
+                <li>Import these component files into your main or &#8216;parent&#8217; App component.</li>
+                <li>Include page routes in your App component.</li>
+            </ul>
+
+            <h3>Creating your page components</h3>
+            <p>Each &#8216;page&#8217; in your SPA will be a component file, stored in a <span class="syn-js">/pages</span> sub-folder of your <span class="syn-js">/src</span> folder. Follow these steps:</p>
+
+            <ol>
+                <li>In your app&#8217;s <span class="syn-js">/src</span> folder, create a sub-folder named <span class="syn-js">/pages</span>.</li>
+                <li>Download the files below to your new <span class="syn-js">/src/pages</span> sub-folder.<br>
+                
+                    <a href="src-spa/Home.js">Home.js</a><br>
+                    <a href="src-spa/Products.js">Products.js</a><br>
+                    <a href="src-spa/Contact.js">Contact.js</a><br>
+                    <a href="src-spa/Navbar.js">Navbar.js</a><br>
+                    <a href="src-spa/Footer.js">Footer.js</a><br>
+                    <a href="src-spa/PageNotFound.js">PageNotFound.js</a><br>
+                    <a href="src-spa/App.css">App.css</a><br>
+                </li>
+            </ol>
+
+
+            <h3>Importing the page components to your App component</h3>
+            <p>At the top of the <b>App.js</b> file, after the <b>react-router-dom</b> imports, import your three page components:
+
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">import { Home } from "./pages/Home";
+import { Products } from "./pages/Products";
+import { Contact } from "./pages/Contact";
+import { PageNotFound } from "./pages/PageNotFound";</code></pre></p>
+                
+            <h3>Adding the page routes in your App component</h3>
+            <p>Now you will add routes to the main <b>App()</b> component to enable users to navigate between the pages of your SPA.</p>
+            
+            <p>Update the <b>App()</b> function as shown below. Each <b>Route</b> now has a <b>path</b> and an <b>element</b> prop:</p>
+            
+<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">function App() {
+   return (
+    &lt;Router&gt;
+        &lt;Routes&gt;
+            &lt;Route path="/" element = {&lt;Home /&gt;} /&gt;
+            &lt;Route path="/products" element = {&lt;Products /&gt;} /&gt;
+            &lt;Route path="/contact" element = {&lt;Contact /&gt;} /&gt;
+        &lt;/Routes&gt;
+    &lt;/Router&gt;
+   );
+}</code></pre>
+
+    <h3>Verifying your app&#8217;s URL paths</h3>
+
+    <p>In your web browser, verify that your three web pages display correctly by entering the following web addresses.</p>
+
+    <ul>
+        <li><b>http://localhost:3000</b></li>
+        <li><b>http://localhost:3000/products</b></li>
+        <li><b>http://localhost:3000/contact</b></li>
+    </ul>
+
+
+
+    <h3>Adding an error route</h3>
+
+    <p>It is good practice to create a page route to handle situations where the user enters the web address of a page that does not exist in your SPA. For example:</p>
+
+    <ul>
+        <li><b>http://localhost:3000/abc123</b></li>
+    </ul>
+
+    <p>You can do this with the wildcard asterisk <b>*</b> character as follows.</p>
+
+<pre class="theme-atom-one-dark" data-lang="js"><code>&lt;Route path="*" element = "Page does not exist." /&gt;</code></pre>    
+
+    <p>A better option would be to use a special web page for this purpose and add a route to it as follows:</p>
+
+<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">
+&lt;Route path="*" element = { &lt;PageNotFound /&gt; } /&gt;</code></pre>    
+    
+
+
+</section>
+
+<section>
+
+
+    <h2>Adding a navbar and footer to your app</h2>
+
+    <p>To add an element that you want to display on every 'page', include the relevant component:</p>
+
+    <ul>
+        <li>Import the relevant element at the top of the <b>App.js</b>. For example:
+<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7">
+import Navbar from "./pages/Navbar";
+import Footer from "./pages/Footer";</code></pre></li>
+        <li>Place the component <i>inside</i> the <b>&lt;Router&gt;</b> component</li>
+        <li>But <i>not</i> as an individual <b>&lt;Routes&gt;</b> component.</li>
+    </ul>
+
+    <p>See below.</p>
+
+<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">function App() {
+   return (
+    &lt;Router&gt;
+    &lt;Navbar&gt;
+        &lt;Routes&gt;
+            &lt;Route path="/" element = {&lt;Home /&gt;} /&gt;
+            &lt;Route path="/products" element = {&lt;Products /&gt;} /&gt;
+            &lt;Route path="/contact" element = {&lt;Contact /&gt;} /&gt;
+        &lt;/Routes&gt;
+    &lt;Footer&gt;
+    &lt;/Router&gt;
+   );
+}</code></pre>
+
+</section>
+
+
+
+
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
