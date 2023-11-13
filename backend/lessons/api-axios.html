@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>APIs with Axios | ReactJS Tutorials</title>
+	<meta name="description" content="Use the Axios API with parameters to retrieve data from a remote server.">
+
+	<meta name="robots" content="noindex">
+
+        <style>
+                h2 code, h3 code { font-weight: normal !important }
+                h3 code { letter-spacing: 0px !important }
+
+                span.grey { color: lightgray }
+                pre { padding: 0 12px 0 !important }
+        </style>
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>APIs with Axios</h1>
+					<h2>Use the Axios API with parameters to retrieve data from a remote server.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>React.JS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#axios-intro">Introduction to Axios</a></p>
+        <p><a href="#cra-start">Getting started with create-react-app</a></p>
+        <p><a href="#cra-customise">Customising the CRA boilerplate content</a></p>
+        <p><a href="#axios-fetch">Fetching data with Axios</a></p>
+        <p class="toc-indent"><a href="#1">1: Install the Axios package</a></p>
+        <p class="toc-indent"><a href="#2">2: Add a new component to fetch and display the data</a></p>
+        <p class="toc-indent"><a href="#3">3: Create the function to fetch the data</a></p>
+        <p class="toc-indent"><a href="#4">4: Remove duplicate API calls</a></p>
+        <p class="toc-indent"><a href="#5">5: View the response object</a></p>
+        <p class="toc-indent"><a href="#6">6: Add a button to display the data</a></p>
+        <p class="toc-indent"><a href="#7">7: Update the component with the useState hook</a></p>
+
+
+
+			</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+		        <li>Use the Axios API with parameters to retrieve data from a remote server.</li>
+		</ul>
+
+	</section>
+
+        <section id="axios-intro">
+            
+                <h2>Introduction to Axios</h2>
+                <p><a href="https://axios-http.com/" target="_blank">Axios</a> is a popular JavaScript library used to make HTTP requests. It works in both the browser and Node.js environments. Axios is often preferred over the native fetch API due to its simplicity and ability to handle requests and responses more conveniently.</p>
+            
+           
+        </section>
+
+        <section id="cra-start">
+            <h2>Getting started with <code>create-react-app</code></h2>
+
+            <p>Follow these steps to build the basic app structure with the <b>create-react-app</b> script.</p>
+            
+            <ol>
+                <li>Open a new Command Prompt or, in VS Code, a new Terminal.</li>
+                <li>Navigate to the folder where you want to create your app. For example:
+            <pre style="padding: 16px 22px !important">C:\&gt;myapps</pre></li>
+
+            <li>Type the following command that includes the name you want to call your new app.
+            <pre style="padding: 16px 22px !important">C:\&gt;myapps\&gt; <span class="yellow">npx</span> create-react-app react-axios</pre></li>
+        </ol>
+            
+        <p>After you have created your app, you launch it by running the following command from inside your app folder.</p>
+    
+<pre style="padding: 16px 22px !important">C:\&gt;myapps\&gt; <span class="yellow">npm</span> start</pre>
+            
+        <p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+            
+        <p>You will see a screen similar to the following.</p>
+            
+        <img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+            
+     </section>
+            
+     <section id="cra-customise">
+            
+        <h2>Customising the CRA boilerplate content</h2>
+        <p>In this section, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your To Do app.</p>
+            
+            
+        <ol>
+            <li>Open the <b>index.html</b> file in the <span class="syn-js">/public</span>  folder and replace all its content with the following.
+            
+<pre><button class="copy-html" id="btn-1">Copy HTML <i class="fa-solid fa-code"></i></button><code id="strCode-1">&lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+        &lt;title&gt;React AXIOS App&lt;/title&gt;
+        &lt;meta name="description" content="eCommerce website created with React.js" /&gt;   
+        &lt;link rel="manifest" href="%PUBLIC_URL%/manifest.json" /&gt;
+    &lt;/head&gt;
+                 
+    &lt;body&gt;
+        &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre></li>
+            
+        <li>Open the <b>index.js</b> file in the <span class="syn-js">/src</span> folder and replace all its content with the following.
+            
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+                
+const root = ReactDOM.createRoot(document.getElementById('root'));
+            
+root.render(
+    &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+    &lt;/React.StrictMode&gt;
+);</code></pre></li>
+            
+            
+        <li>Open the <b>App.js</b> file in the <span class="syn-js">/src</span> folder and replace its content with the following.
+                            
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">function App() {
+    return (
+        &lt;&gt;
+            &lt;h1&gt;Hello, World!&lt;/h1&gt;
+            &lt;p&gt;Paragraph of text.&lt;/p&gt;
+        &lt;/&gt;
+    );
+}	
+
+export default App;</code></pre></li>
+            
+        </ol>
+            
+        <p>Your web page should now look as shown below.</p>
+            
+        <img src="assets/img/todos/output-1.png" alt="Sample React screen">
+            
+    </section>
+
+    <section id="axios-fetch">
+
+        <h2>Fetching data with Axios</h2>
+        <p>This section lists the steps for fetching data with Axios. The example shows how to retrieve the first five items from a Todo list stored on a remote server.</p>
+
+        <h3 id="1">1: Install the Axios package</h3>
+        <p>Navigate your app's root folder and run the following command:</p>
+
+<pre style="padding: 16px 22px !important"><span class="yellow">npm</span> install axios</pre>
+
+        <h3 id="2">2: Add a new component to fetch and display the data</h3>
+        <ol>
+            <li>Create a new component file named <b>FetchData.js</b> in your app's <span class="syn-js">/src</span> folder.</li>
+            <li>At the top of this file, enter this <b>import</b> statement:
+<pre><code>import axios from 'axios';</code></pre></li>
+            <li>Add the following function to the component.
+
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">function FetchData() {
+
+}	
+
+export default FetchData;</code></pre></li>
+
+            <li>In your main <b>App.js</b> component, replace the JSX with FetchData component.
+<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">function App() {
+    &lt; FetchData /&gt;
+}</code></pre></li>
+
+            <li>Finally, import this component at the top of your <b>App.js</b> component
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">import FetchData from './FetchData';</code></pre></li>
+        </ol>
+
+        <h3 id="3">3: Create the function to fetch the data</h3>
+        <p>Follow the steps below:</p>
+
+        <ol>
+            <li>In your <b>FetchData.js</b> component, update the function as shown below.
+<pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7">
+function FetchData() {
+     axios.get("https://jsonplaceholder.typicode.com/todos", {
+        params: {
+            _limit: 5,
+        }
+     })
+     .then(response =&gt; {
+        console.log(response);
+     })
+     .catch(error =&gt; {
+        console.log(error);
+     })
+
+    return (
+        &lt;&gt;
+            <h1>Todo List</h1>
+        &lt;/&gt;
+    )
+}</code></pre></li>
+
+        </ol>
+
+        <h3 id="4">4: Remove duplicate API calls</h3>
+        <p>When you view the output in your console, you can see that the API has been called <i>twice</i>.</p>
+
+        <p>To resolve this, open the <b>index.js</b> file and delete the <b>&lt;React.StrictMode&gt;</b> wrapper around the <b>&lt;App /&gt;</b> component.</p>
+
+        <img src="assets/img/axios-apis/strict-mode.png" alt="" style="width:500px">
+
+        <h3 id="5">5: View the <code>response</code> object</h3>
+
+        <p>In the console, you can see that the Axios response object includes lots of status information in addition to the requested data.</p>
+        <img src="assets/img/axios-apis/axios-response.png" alt="screenshot">
+
+        <p>To work only with the data, update the <b>.then</b> promise as shown below.</p>
+
+        <img src="assets/img/axios-apis/response-data.png" alt="screenshot" style="max-width: 520px">
+
+        <p>Your console output should now look similar to that shown below.</p>
+
+        <img src="assets/img/axios-apis/response-data-console.png" alt="screenshot" class="wider-115">
+
+        <h3 id="6">6: Add a button to display the data</h3>
+
+        <p>Update the JSX part of the component as follows.</p>
+
+<pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">return (
+  &lt;&gt;
+    &lt;h1&gt;Todo List&lt;/h1&gt;
+    &lt;button onClick={getTodos}&gt;Get Todos&lt;/button&gt;
+    {todos.length &gt; 0 ? (
+      &lt;ul&gt;
+        {todos.map(todo =&gt; (
+          &lt;li key={todo.id}&gt;{todo.title}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    ) : (
+      &lt;p&gt;Click the button to get the todo items.&lt;/p&gt;
+    )}
+  &lt;/&gt;
+);</code></pre>
+
+        <h3 id="7">7: Update the component with the <code>useState</code> hook</h3>
+
+        <p>At the top of the file, add the following <b>import</b> statement.</p>
+
+<pre style="padding: 16px 22px !important">import{ useState } from 'react';</pre>
+
+          <p>Update the <b>FetchData()</b> function as follows:</p>
+
+<pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9">function FetchData() {
+  const [todos, setTodos] = useState([]);
+
+  const getTodos = () =&gt; {
+    axios.get("https://jsonplaceholder.typicode.com/todos", {
+      params: {
+          _limit: 5,
+      }
+   })
+      .then(response =&gt; {
+        setTodos(response.data);
+      })
+      .catch(error =&gt; {
+        console.error('Error fetching data: ', error);
+      });
+  };</code></pre>
+
+        <p>Your browser window should look as shown below.</p>
+
+        <img src="assets/img/axios-apis/todos-output.png" alt="">
+
+         </section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
