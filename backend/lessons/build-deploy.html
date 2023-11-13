@@ -67,6 +67,16 @@
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#app-build">The build option in create-react-app</a></p>
 
+                                <p><a href="#git-prep">Preparing to use GitHub Pages</a></p>
+
+                                <p class="toc-indent"><a href="#github-repo">Creating a GitHub repository</a></p>
+
+                                <p class="toc-indent"><a href="#github-pages">Installing the GitHub Pages package</a></p>
+
+                                <p><a href="#git-prep-app">Preparing to your app to use a sub-folder on GitHub Pages</a></p>
+
+                                <p><a href="#deploy-scripts">Adding deployment scripts to <code>package.json</code></a></p>
+
                                 <p><a href="#app-create">Creating your ‘build’ ReactJS app</a></p>
                                 <p class="toc-indent"><a href="#build-about">About the /build sub-folder</a></p>
                                 
@@ -74,8 +84,7 @@
 
                                 <p><a href="#app-deploy">Deploying your ‘build’ ReactJS app</a></p>
 
-                                        <p class="toc-indent"><a href="#git-prep">Preparing to use GitHub Pages</a></p>
-                                        <p class="toc-indent"><a href="#git-prep-app">Preparing to your app to use GitHub Pages</a></p>
+                             
                                         <p class="toc-indent"><a href="#git-add">Adding your app to Git version control</a></p>
                                         <p class="toc-indent"><a href="#git-deploy">Deploying your app to GitHub Pages</a></p>
 
@@ -151,14 +160,13 @@
 
 
 
-        <section id="app-deploy">
-                <h2>Deploying your &#8216;build&#8217; ReactJS app</h2>
+        <section id="git-prep">
+                <h2>Preparing to use GitHub Pages</h2>
             
-                <p>You will be deploying your app to a remote web server. This section takes you through the steps involved.</p>
-            
-            
-                <h3 id="git-prep">Preparing to use GitHub Pages</h3>
-                <p>Begin with these steps:</p>
+                <p>You will be deploying your app to the GitHub Pages remote web server. So you need to prepare your GitHub account to host your app.</p>
+
+                <h3 id="github-repo">Creating a GitHub repository</h3>
+                <p>Follow these steps:</p>
             
                 <ol>
             
@@ -168,17 +176,21 @@
             
                     Give your new repo a name. But <i>do not</i> initialise it with README, license, or .gitignore files. Your repo should be empty.
                     <img src="assets/img/build-deploy/serve-4.png" alt=""></li>
-            
-                    <li>You will be deploying your app&#8217;s build files to the <b>gh-pages</b> branch of your GitHub repo. So you need to install the package below in your app&#8217;s folder.
-            
-            <pre><span class="yellow">npm</span> install gh-pages <span class="grey">--save-dev</span></pre></li>
-            
-            
-            
+
                     </ol>
+
+                    <h3 id="github-pages">Installing the GitHub Pages package</h3>    
             
+                    <p>You will be deploying your app&#8217;s build files to the <b>gh-pages</b> branch of your GitHub repo. So you need to install the package below in your app&#8217;s folder.</p>
             
-                    <h3 id="git-prep-app">Preparing to your app to use GitHub Pages</h3>
+<pre><span class="yellow">npm</span> install gh-pages <span class="grey">--save-dev</span></pre>
+
+</section>
+
+<section id="git-prep-app">
+
+
+                    <h2>Preparing to your app to use a sub-folder on GitHub Pages</h2>
                     <p>By default, the <b>build</b> option of the <b>create-react-app</b> script produces a build that assumes your ReactJS app will hosted at the server root. On GitHub Pages the server root will be:</p>
                    
                     <p><b>https://username.github.io</b></p>  
@@ -193,39 +205,39 @@
                     https://johnsmith.github.io/<span class="grey">spa</span><br>
                     https://johnsmith.github.io/<span class="grey">blog</span></b></p>  
             
-                    <p>To override this default, follow these steps:</p>
+                    <p>To override this default, in VS Code, open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
             
-                
-                    <ol>
-                            <li>In VS Code, open your app&#8217;s <b>package.json</b> file and add the  following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:
-            
-            <pre>"homepage": "https://username.github.io/repo-name/",</pre>
+<pre>"homepage": "https://username.github.io/repo-name/",</pre>
                                     
-                            The top part of your <b>package.json</b> file should now look something like this:
+                      <p>The top part of your <b>package.json</b> file should now look something like this:</p>
             
                             <img src="assets/img/build-deploy/serve-5.png" alt="">
             
-                            This will ensure the <b>build</b> option within <b>create-react-app</b> correctly infers the root path to use in the generated <b>index.html</b> file inside your <span class="syn-js">/build</span> folder.</li>
+                        <p>This will ensure the <b>build</b> option within <b>create-react-app</b> correctly infers the root path to use in the generated <b>index.html</b> file inside your <span class="syn-js">/build</span> folder.</p>
+
+
+        </section>
+
+
+        <section id="deploy-scripts">
+                        
+                        <h2>Adding deployment scripts to <code>package.json</code></h2>
                                     
-                            <li>In the same file, add these two scripts to the end of the <b>scripts</b> section:
+                         <p>In VS Code, open your <b>package.json</b> file and add these two scripts to the end of the <b>scripts</b> section:</p>
                                     
-            <pre>"scripts": {
-            <span class="green">// ... other scripts here,</span>
-                "predeploy": "npm run build",
-                "deploy": "gh-pages -d build"
-            }</pre>
+<pre>"scripts": {
+    <span class="green">// ... other scripts here,</span>
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+}</pre>
             
-                            Your <b>scripts</b> section should now look something like this:
+                        <p>Your <b>scripts</b> section should now look something like this:</p>
             
-                            <img src="assets/img/build-deploy/serve-6.png" alt="" style="max-width: 620px"></li>
-                    </ol>                        
+                        <img src="assets/img/build-deploy/serve-6.png" alt="" style="max-width: 620px">
             
-            
+                        <p>These scripts will be used to deploy your app to GitHub Pages.</p>
 
-
-
-
-
+</section>
         
         <section>
 
@@ -280,7 +292,12 @@ You should now see a message like that below.
 
 </section>
 
+<section>
 
+
+        <h2>Deploying your ‘build’ ReactJS app</h2>
+
+        <p>You are now almost ready to deploy the ReactJS app from your local machine to GitHub Pages.</p>
 
         <h3 id="git-add">Adding your app to Git version control</h3>
 
@@ -356,3 +373,4 @@ You should now see a message like that below.
 
 </body>
 </html>
+
