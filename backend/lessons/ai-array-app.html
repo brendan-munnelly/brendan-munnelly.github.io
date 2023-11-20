@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>AI and arrays | ReactJS Tutorials</title>
+	<meta name="description" content="Using AI to populate arrays, and to create code for reading and filtering arrays.">
+
+	<meta name="robots" content="noindex">
+
+        <style>
+                h2 code, h3 code { font-weight: normal !important }
+                h3 code { letter-spacing: 0px !important }
+
+                span.grey { color: lightgray }
+                pre { padding: 0 12px 0 !important }
+        </style>
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/reactjs-tutorials.css" />
+
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>AI and arrays</h1>
+					<h2>Using AI to populate arrays, and to create code for reading and filtering arrays.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>React.JS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#intro">Introduction</a></p>
+        <p><a href="#cra-start">Getting started with create-react-app</a></p>
+        <p><a href="#cra-customise">Customising the CRA boilerplate content</a></p>
+        <p><a href="#arrays">Creating, populating and listing a basic array</a></p>
+
+
+        <p><a href="#array-objects">Working with arrays of objects</a></p>
+
+
+
+
+			</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+		        <li>Using ChatGPT to populate arrays, and to create code for reading and filtering arrays.</li>
+		</ul>
+
+	</section>
+
+    <section>
+      <h2 id="intro">Introduction</h2>  
+
+      <p>In this Tutorial, you will use ChatGPT to help you build a ReactJS app for listing the world's top 10 soccer players.</p>
+
+    </section>
+
+
+
+
+
+        <section id="cra-start">
+            <h2>Getting started with <code>create-react-app</code></h2>
+
+            <p>Follow these steps to build the basic app scaffolding with the <b>create-react-app</b> script.</p>
+            
+            <ol>
+                <li>Open a new Command Prompt or, in VS Code, a new Terminal.</li>
+                <li>Navigate to the folder where you want to create your app. For example:
+<pre style="padding: 16px 22px !important">C:\&gt;myapps</pre></li>
+
+            <li>Type the following command that includes the name you want to call your new app.
+<pre style="padding: 16px 22px !important"><span class="yellow">npx</span> create-react-app ai-array-app</pre></li>
+        </ol>
+            
+        <p>After the script has created your app, launch it by running the following command from inside your new app's root folder.</p>
+    
+<pre style="padding: 16px 22px !important"><span class="yellow">npm</span> start</pre>
+            
+        <p>A new browser window should display with your new app running on the React local development server. If not, open a new browser tab and enter <b>http://localhost:3000</b>.</p>
+            
+        <p>You will see a screen similar to the following.</p>
+            
+        <img src="assets/img/create-react-app/react-starter-screen.png" style="max-width: 700px" alt="ReactJS sample screen" />
+            
+     </section>
+            
+     <section id="cra-customise">
+            
+        <h2>Customising the CRA boilerplate content</h2>
+        <p>Next, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your app.</p>
+            
+        <ol>
+            <li>Download the NodeJS file below to the folder that contains your app.<br><br>
+
+              <a href="../replaceBoilerplate.js">replaceBoilerplate.js</a></li>
+
+            <li>Open a new Command prompt or VS Code Terminal, navigate to your app's root folder, and run the command below.
+
+<pre style="padding: 16px 22px !important"><span class="yellow">node</span> replaceBoilerplate.js</pre></li>
+          </ol>
+
+          <p>In the <span class="syn-js">/public</span> and <span class="syn-js">/src</span> folders of your app, this command updates the content of the core files and deletes unnecessary ones.</p>
+
+          <img src="assets/img/ai-array-app/app-folder.png" style="max-width:300px" alt="screensshot">
+
+          <p>In the <span class="syn-js">/public</span> folder of your new app, open the <b>index.html</b> file and update the <span class="syn">&lt;title&gt;</span> tag to "Top 10 Soccer Players".</p>
+            
+    </section>
+
+    <section id="arrays">
+
+        <h2>Creating, populating and listing a basic array</h2>
+        <p>Your app will work with data stored in arrays. You will use ChatGPT to create and populate a simple array as follows.</p>
+
+        <h3 id="1">1: Assign a persona and save a named chat session</h3>
+        <p>Here are the steps:</p>
+
+        <ol>
+          <li>Access <a href="https://chat.openai.com/" target="_blank">ChatGPT</a> and click the <b>New chat</b> icon.
+
+          <img src="assets/img/ai-array-app/new-chat.png" style="max-width: 500px" alt="screensshot"></li>
+          <li>Paste and run the prompt below.
+<div class="gpt"><button class="copy-gpt" id="btn-1">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-1">You are an expert developer and instructor in ReactJS. Your task is to help me generate data structures, functional components and code snippets that will form part of ReactJS apps. I have already built the basic scaffolding for an app with the "create-react-app" script. Please respond with "Read" to acknowledge.</code></div></li>
+
+          <li>ChatGPT should respond as shown below.
+<img src="assets/img/ai-array-app/gpt-response-read.png" style="max-width: 600px" alt="screensshot"></li>
+
+          <li>In the left sidebar, give this chat session a descriptive name. For example, <b>Arrays in ReactJS</b>.
+<img src="assets/img/ai-array-app/gpt-arrays-chat.png" style="max-width: 800px" alt="screensshot">       
+          </li>
+        </ol>
+
+        <h3 id="2">2: Create, import, and list the array</h3>
+        <p>You will now ask ChatGPT to create some data for your app to work with.</p>
+        <ol>
+            <li>Enter the prompt below.
+<div class="gpt"><button class="copy-gpt" id="btn-2">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-2">Please perform the following two tasks: <br><br>
+  
+1 - Create an array named "arrPlayers" that contains the first and last names of the 10 top soccer players. The array will be stored in a JavaScript file named "players.js" that will be located in the "src" folder of my ReactJS app.<br><br>
+
+2 - Create an "App.js" component that imports the above "players.js" file and displays the array in a list. Do not add any other import statements to this "App.js" component.</code></div></li>
+
+            <li>In the <span class="syn-js">/src</span> folder, create a new file named <b>players.js</b> and paste the first ChatGPT response into it. And then paste the second ChatGPT response into your <b>App.js</b> file. Your web browser output should now look similar to that shown below.
+<img src="assets/img/ai-array-app/1-browser.png" alt="screensshot"> </li>
+
+            </ol>
+
+       <h3>About keys, indexes, and the <code>array.map()</code> method</h3>     
+
+       <p>In ReactJS, the <b>array.map()</b> method is the standard way of iterating (looping) through arrays. In the above example, ChatGPT may have responded with a list performed by a single line of code as follows:</p>
+
+<pre><code>&lt;div&gt;
+    &lt;h1&gt;Soccer Players&lt;/h1&gt;
+    &lt;ul&gt;
+        {arrPlayers.map(player =&gt; &lt;li key={player}&gt;{player}&lt;/li&gt;)}
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>       
+
+       <p>The <b>key</b> is not displayed on screen - <i>but internally ReactJS requires the key for the loop to work.</i> If you remove the <b>key</b>, your web browser console will display an error.</p>
+
+       <p>No key, no loop.</p>
+
+       <p>In the above case, each data item (that is, each soccer player) is treated as its own key.</p>
+
+       <p>Alternatively, ChatGPT may have responded with the following loop code.</p>
+        
+<pre><code>{arrPlayers.map((player, index) =&gt; (
+    &lt;li key={index}&gt;{player}&lt;/li&gt;
+))}</code></pre>               
+
+      <p>This version uses the <b>index</b> position of each item (0-19) in the array as the key for the loop. The output is the same. But now you could display this <b>index</b> value in the web browser as follows:</p>
+
+<pre><code>{arrPlayers.map((player, index) =&gt; (
+    // Displaying both index and player name, 0 to 19.
+    &lt;li key={index}&gt;{index} - {player}&lt;/li&gt;
+))}</code></pre>
+
+      <p>Or, in a more user-friendly way:</p>
+
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">
+function App() {
+    return (
+        &lt;section className="w-820px"&gt;
+            &lt;h2&gt;Top 10 Soccer Players&lt;/h2&gt;
+            {arrPlayers.map((player, index) =&gt; (
+                &lt;p key={index}&gt;&lt;b&gt;{index + 1}&lt;/b&gt; - {player}&lt;/p&gt;
+            ))}
+        &lt;/section&gt;
+    );
+}</code></pre>
+
+    <p>The web browser output will now look as shown below.</p>
+
+    <img src="assets/img/ai-array-app/2-browser.png" alt="screensshot">
+
+    <p>Simple arrays where the individual data items do not have unique IDs limit the functionality that can applied in ReactJS.</p>
+
+    <ul>
+      <li><b>Data items as keys are a bad idea</b>: Multiple data items - such as user names or product titles - may be duplicates.</li>
+      <li><b>Array positions as keys are a bad idea</b>: The position of items in an array may change over time. Also, you may want to work with copies of an array that includes only some of the original items. In such cases, the index of an item in the copied array will be different to its index in the original array.</li>
+    </ul>
+
+    <p>In summary, for ReactJS to be able to select, filter, sort, update, create and delete data items, it needs data structures where individual data items have unique IDs.</p>
+
+</section>
+
+
+<section id="array-objects">
+
+      <h2>Working with arrays of objects</h2>
+
+      <p>Most commonly in ReactJS, the arrays you will work with will be <i>arrays of objects.</i>. See an example below.</p>
+
+      <img src="assets/img/ai-array-app/array-of-objects.png" style="max-width: 500px" alt="screensshot">
+
+      <p>Each object in the array has a unique identifier In the above example, this is the <b>id</b> property of each object.</p>
+
+     <h3>1: Recreate the data as an array of objects</h3>
+     <p>Follow the steps below:</p>
+
+     <ol>
+      <li>Enter the following prompt.
+<div class="gpt"><button class="copy-gpt" id="btn-4">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-4">
+Recreate the "players.js" file to make it an array of objects. Each each player will be an object. For each player, include the following properties:<br>
+
+<br>id: This will also be the rank position of the player
+<br>firstname:
+<br>lastname:
+<br>age:
+<br>club:
+<br>trophies:
+<br>nationality:
+<br>bio: A summary biography of each player of about 250-300 words in length
+<br>img: A hyperlink to a photograph of each player from Wikipedia Commons</code></div></li>
+      <li>You may need re-prompt ChatGPT a number of times as follows.
+<div class="gpt"><button class="copy-gpt" id="btn-5">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-5">Please continue</code></div></li>
+
+      <li>Next enter:
+
+<div class="gpt"><button class="copy-gpt" id="btn-6">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-6">Can you combine the data for the top 10 players into a single file</code></div>(This may not work.)</li>
+
+
+      <li>Copy the new data from ChatGPT into your <b>players.js</b> component file. Alternatively, download the file below into your <span class="syn-js">/src</span> folder to overwrite the older version of this file.
+      
+      <br><br>
+      <a href="assets/downloads/ai-array-app/players.js">players.js</a></li>
+      
+      <li>Enter this prompt into ChatGPT.
+<div class="gpt"><button class="copy-gpt" id="btn-7">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-7">
+Rewrite the "App.js" component to display the data from "players.js" as follows:<br><br>
+1 - Create a HTML table with a head and a body section.<br>
+2 - In the table head row, create cells to contain the titles of "Rank", "Name", "Trophies", "Club", "Nationality", and "Details".<br>
+3 - For row in the table body:<br>
+ * in cell 1, display "id"<br>
+ * in cell 2, display "firstname" and "lastname". Also display "age" in parenthesis.<br>
+ * in cell 3, display "trophies"<br>
+ * In cell 4, display "club"<br>
+ * In cell 5, display "nationality" <br>
+ * In cell 6, display a button element with the text "More..."</code></div></li>        
+
+       <li>Copy the response from ChatGPT into your <b>App.js</b> file. The web browser output should look as shown below.
+<img src="assets/img/ai-array-app/3-browser.png" alt="screensshot">      
+      
+      </li>
+     </ol>
+
+
+
+         </section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
