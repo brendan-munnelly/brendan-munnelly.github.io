@@ -1,5 +1,21 @@
 
-// Copy code sample to clipboard
+    // Copy prompt to clipboard
+    const btnsGPT = document.querySelectorAll('main .copy-gpt');
+    const btnsArrGPT = Array.from(btnsGPT);
+    let btnGPTid;
+
+    btnsArrGPT.forEach(btnGPT => {
+        btnGPT.addEventListener("click", e => {
+            e.stopPropagation();
+            btnGPTid = e.target.id;
+            console.log("You clicked button: "+btnGPTid);
+            // remove 'btn-' from ID
+            btnGPTid = btnGPTid.replace('btn-', '');
+            doCopyGPT(btnGPTid);
+        });
+    });
+
+
 
     const btnsJS = document.querySelectorAll('main .copy-code');
     const btnsArrJS = Array.from(btnsJS);
@@ -32,6 +48,36 @@
     });
 
 
+    const btnsCSS = document.querySelectorAll('main .copy-css');
+    const btnsArrCSS = Array.from(btnsCSS);
+    let btnCSSID;
+
+    btnsArrCSS.forEach(btnCSS => {
+        btnCSS.addEventListener("click", e => {
+            e.stopPropagation();
+            btnCSSID = e.target.id;
+            console.log("You clicked button: "+btnCSSID);
+            // remove 'btn-' from ID
+            btnCSSID = btnCSSID.replace('btn-', '');
+            doCopyCSS(btnCSSID);
+        });
+    });
+
+
+    async function doCopyGPT(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "";
+            document.getElementById("btn-"+id).style.borderColor= "";
+            document.getElementById("btn-"+id).innerHTML = "Copy Prompt <i class=\"fa-brands fa-react\"><\/i>";
+            document.getElementById("btn-"+id).classList.add('copy-gpt');	
+        }, 1500);
+    }
+
     async function doCopyCode(id) {
         const strCode = document.getElementById('strCode-'+id).textContent;
         await navigator.clipboard.writeText(strCode);
@@ -60,3 +106,16 @@
         }, 1500);
     }
 
+    async function doCopyCSS(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "";
+            document.getElementById("btn-"+id).style.borderColor= "";
+            document.getElementById("btn-"+id).innerHTML = "Copy CSS { }";
+            document.getElementById("btn-"+id).classList.add('copy-css');	
+        }, 1500);
+    }
