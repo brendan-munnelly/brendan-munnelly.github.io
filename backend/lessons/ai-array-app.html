@@ -61,15 +61,12 @@
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#intro">Introduction</a></p>
-        <p><a href="#cra-start">Getting started with create-react-app</a></p>
-        <p><a href="#cra-customise">Customising the CRA boilerplate content</a></p>
-        <p><a href="#arrays">Creating, populating and listing a basic array</a></p>
-
-
-        <p><a href="#array-objects">Working with arrays of objects</a></p>
-
-
-
+                <p><a href="#cra-start">Getting started with create-react-app</a></p>
+                <p><a href="#cra-customise">Customising the CRA boilerplate content</a></p>
+                <p><a href="#arrays">Creating, populating and listing a basic array</a></p>
+                <p><a href="#array-objects">Working with arrays of objects</a></p>
+                <p><a href="#child">Creating a child component</a></p>
+                <p><a href="#details">Displaying a player's details</a></p>
 
 			</aside>
 	
@@ -102,7 +99,7 @@
             <p>Follow these steps to build the basic app scaffolding with the <b>create-react-app</b> script.</p>
             
             <ol>
-                <li>Open a new Command Prompt or, in VS Code, a new Terminal.</li>
+                <li>Open a new Command Prompt or VS Code Terminal.</li>
                 <li>Navigate to the folder where you want to create your app. For example:
 <pre style="padding: 16px 22px !important">C:\&gt;myapps</pre></li>
 
@@ -125,19 +122,18 @@
      <section id="cra-customise">
             
         <h2>Customising the CRA boilerplate content</h2>
-        <p>Next, you will customise the 'boilerplate' content provided by the <b>create-react-app</b> script to design your app.</p>
+        <p>Next, you will customise the 'boilerplate' content and files generated  by the <b>create-react-app</b> script.</p>
             
         <ol>
-            <li>Download the NodeJS file below to the folder that contains your app.<br><br>
-
-              <a href="../replaceBoilerplate.js">replaceBoilerplate.js</a></li>
+            <li>Download the NodeJS file below to the folder that contains your app.<span class="inside-ol">&nbsp;</span>
+            <a href="../replaceBoilerplate.js">replaceBoilerplate.js</a></li>
 
             <li>Open a new Command prompt or VS Code Terminal, navigate to your app's root folder, and run the command below.
 
 <pre style="padding: 16px 22px !important"><span class="yellow">node</span> replaceBoilerplate.js</pre></li>
           </ol>
 
-          <p>In the <span class="syn-js">/public</span> and <span class="syn-js">/src</span> folders of your app, this command updates the content of the core files and deletes unnecessary ones.</p>
+          <p>In the <span class="syn-js">/public</span> and <span class="syn-js">/src</span> sub-folders of your app, you can see that this command updates the content of the core files and deletes unnecessary ones.</p>
 
           <img src="assets/img/ai-array-app/app-folder.png" style="max-width:300px" alt="screensshot">
 
@@ -169,7 +165,7 @@
         </ol>
 
         <h3 id="2">2: Create, import, and list the array</h3>
-        <p>You will now ask ChatGPT to create some data for your app to work with.</p>
+        <p>You will now ask ChatGPT to begin creating files and generating data for your new.</p>
         <ol>
             <li>Enter the prompt below.
 <div class="gpt"><button class="copy-gpt" id="btn-2">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-2">Please perform the following two tasks: <br><br>
@@ -194,9 +190,11 @@
     &lt;/ul&gt;
 &lt;/div&gt;</code></pre>       
 
-       <p>The <b>key</b> is not displayed on screen - <i>but internally ReactJS requires the key for the loop to work.</i> If you remove the <b>key</b>, your web browser console will display an error.</p>
+       <p>The <b>key</b> is not displayed on screen - <i>but internally ReactJS requires the key for the loop to work.</i> If you remove the <b>key</b>, your web browser console will display an error like that below.</p>
 
-       <p>No key, no loop.</p>
+        <img src="assets/img/ai-array-app/error-key.png" alt="" style="max-width: 700px">
+
+       <p>No <b>key</b>, no <b>map</b> loop.</p>
 
        <p>In the above case, each data item (that is, each soccer player) is treated as its own key.</p>
 
@@ -206,20 +204,20 @@
     &lt;li key={index}&gt;{player}&lt;/li&gt;
 ))}</code></pre>               
 
-      <p>This version uses the <b>index</b> position of each item (0-19) in the array as the key for the loop. The output is the same. But now you could display this <b>index</b> value in the web browser as follows:</p>
+      <p>This second version uses the <b>index</b> position of each item (0-19) in the array as the key for the loop. The output is the same. But now you could display this <b>index</b> value in the web browser as follows:</p>
 
 <pre><code>{arrPlayers.map((player, index) =&gt; (
     // Displaying both index and player name, 0 to 19.
     &lt;li key={index}&gt;{index} - {player}&lt;/li&gt;
 ))}</code></pre>
 
-      <p>Or, in a more user-friendly way:</p>
+      <p>Or, incrementing the <b>index</b> by <b>1</b> and displaying the data with  <span class="syn">&lt;p&gt;</span> paragraph tags rather than <span class="syn">&lt;ul&gt;</span> and <span class="syn">&lt;li&gt;</span> list tags:</p>
 
 <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">
 function App() {
     return (
         &lt;section className="w-820px"&gt;
-            &lt;h2&gt;Top 10 Soccer Players&lt;/h2&gt;
+            &lt;h2&gt;Top Soccer Players&lt;/h2&gt;
             {arrPlayers.map((player, index) =&gt; (
                 &lt;p key={index}&gt;&lt;b&gt;{index + 1}&lt;/b&gt; - {player}&lt;/p&gt;
             ))}
@@ -235,7 +233,7 @@ function App() {
 
     <ul>
       <li><b>Data items as keys are a bad idea</b>: Multiple data items - such as user names or product titles - may be duplicates.</li>
-      <li><b>Array positions as keys are a bad idea</b>: The position of items in an array may change over time. Also, you may want to work with copies of an array that includes only some of the original items. In such cases, the index of an item in the copied array will be different to its index in the original array.</li>
+      <li><b>Array positions as keys are a bad idea</b>: The position of items in an array may change over time. Also, you may want to work with copies of an array that includes only <i>some</i> of the original items. In such cases, the index of an item in the copied array will be different to its index in the original array.</li>
     </ul>
 
     <p>In summary, for ReactJS to be able to select, filter, sort, update, create and delete data items, it needs data structures where individual data items have unique IDs.</p>
@@ -247,11 +245,11 @@ function App() {
 
       <h2>Working with arrays of objects</h2>
 
-      <p>Most commonly in ReactJS, the arrays you will work with will be <i>arrays of objects.</i>. See an example below.</p>
+      <p>Most commonly in ReactJS, the arrays you will work with will be <i>arrays of objects</i>. See an example below.</p>
 
       <img src="assets/img/ai-array-app/array-of-objects.png" style="max-width: 500px" alt="screensshot">
 
-      <p>Each object in the array has a unique identifier In the above example, this is the <b>id</b> property of each object.</p>
+      <p>Each object in the array has a unique identifier. In the above example, this is the <b>id</b> property of each object.</p>
 
      <h3>1: Recreate the data as an array of objects</h3>
      <p>Follow the steps below:</p>
@@ -259,7 +257,7 @@ function App() {
      <ol>
       <li>Enter the following prompt.
 <div class="gpt"><button class="copy-gpt" id="btn-4">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-4">
-Recreate the "players.js" file to make it an array of objects. Each each player will be an object. For each player, include the following properties:<br>
+Recreate the "players.js" file to make it an array of objects. Each player will be an object. For each player, include the following properties:<br>
 
 <br>id: This will also be the rank position of the player
 <br>firstname:
@@ -268,25 +266,24 @@ Recreate the "players.js" file to make it an array of objects. Each each player 
 <br>club:
 <br>trophies:
 <br>nationality:
-<br>bio: A summary biography of each player of about 250-300 words in length
-<br>img: A hyperlink to a photograph of each player from Wikipedia Commons</code></div></li>
-      <li>You may need re-prompt ChatGPT a number of times as follows.
+<br>bio: A summary biography of each player of about 250-300 words in length</code></div></li>
+<li>You may need re-prompt ChatGPT a number of times as follows.
 <div class="gpt"><button class="copy-gpt" id="btn-5">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-5">Please continue</code></div></li>
 
-      <li>Next enter:
+      <li>Next, enter:
 
-<div class="gpt"><button class="copy-gpt" id="btn-6">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-6">Can you combine the data for the top 10 players into a single file</code></div>(This may not work.)</li>
-
+<div class="gpt"><button class="copy-gpt" id="btn-6">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-6">Can you combine the data for the top 10 players into a single file</code></div>
+<span class="inside-ol">&nbsp;</span>
+(This may not work.)</li>
 
       <li>Copy the new data from ChatGPT into your <b>players.js</b> component file. Alternatively, download the file below into your <span class="syn-js">/src</span> folder to overwrite the older version of this file.
-      
-      <br><br>
+      <span class="inside-ol">&nbsp;</span>
       <a href="assets/downloads/ai-array-app/players.js">players.js</a></li>
       
-      <li>Enter this prompt into ChatGPT.
+      <li>Enter this prompt into ChatGPT to update how the new array data is displayed.
 <div class="gpt"><button class="copy-gpt" id="btn-7">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-7">
 Rewrite the "App.js" component to display the data from "players.js" as follows:<br><br>
-1 - Create a HTML table with a head and a body section.<br>
+1 - Create an HTML table with a head and a body section.<br>
 2 - In the table head row, create cells to contain the titles of "Rank", "Name", "Trophies", "Club", "Nationality", and "Details".<br>
 3 - For row in the table body:<br>
  * in cell 1, display "id"<br>
@@ -304,16 +301,13 @@ Rewrite the "App.js" component to display the data from "players.js" as follows:
 
 
 
-      <h3>Update the CSS</h3>
-      <p>Follow these steps:</p>
+      <h3>2: Update the CSS</h3>
+      <p>Next, add some styling to how the data table is displayed. Follow these steps:</p>
 
       <ol>
-        <li>Update the HTML that wraps arond the table tag as shoen below.
-<img src="assets/img/ai-array-app/table-css.png" style="max-width: 500px" alt="screenshot">
-
-
-        </li>
-        <li>Copy the CSS below to the App.css stylesheet.
+        <li>Update the HTML that wraps around the <span>&lt;table&gt;</span> tag as shown below.
+<img src="assets/img/ai-array-app/table-css.png" style="max-width: 500px" alt="screenshot"></li>
+        <li>Copy the CSS below to the end of the <b>App.css</b> stylesheet.
   <pre><button class="copy-css" id="btn-8">Copy CSS { }</button><code id="strCode-8">/* Tables */
   .data-table {
       border-collapse: collapse;
@@ -359,44 +353,194 @@ Rewrite the "App.js" component to display the data from "players.js" as follows:
 
          </section>
 
-         <section>
+         <section id="child">
 
-            <h2>Creating child components</h2>
+            <h2>Creating a child component</h2>
 
-            <p>All the app's code should not be in the main <b>App.js</b> file. Add a new component as follows:</p>
+            <p>All the app's code should not be in the main <b>App.js</b> file. Add a new component file named <b>listplayers.js</b> as follows:</p>
 
             <ol>
                 <li>Enter the prompt below in ChatGPT.
 <div class="gpt"><button class="copy-gpt" id="btn-9">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-9">
-Please create a new component file named "listplayers.js that will be located in the /src folder. In this file create a function named ListPlayers to perform the data listing operation that is currently in the App.js component. Update the App.js component to import the new ListPlayers component as a child component.</code></div></li>
+Please create a new component file named "listplayers.js" that will be located in the /src folder. In this file create a function named ListPlayers to perform the data listing operation that is currently in the App.js component. Update the App.js component to import the new ListPlayers component as a child component.</code></div></li>
                 <li>Copy-and-paste the responses in your app. Preserve the HTML formatting</li>
             </ol>
+
+        <p>Your new <b>listplayers.js</b> file should look as follows.</p>
+
+<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10">
+import { players } from './players'; // Import players data
+        
+function ListPlayers() {
+    return (
+        &lt;section className="w-1140px"&gt; 
+            &lt;h2&gt;Top Soccer Players&lt;/h2&gt; 
+            &lt;table className="data-table"&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Rank&lt;/th&gt;
+                        &lt;th&gt;Name&lt;/th&gt;
+                        &lt;th&gt;Trophies&lt;/th&gt;
+                        &lt;th&gt;Club&lt;/th&gt;
+                        &lt;th&gt;Nationality&lt;/th&gt;
+                        &lt;th&gt;Details&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    {players.map(player =&gt; (
+                        &lt;tr key={player.id}&gt;
+                            &lt;td&gt;{player.id}&lt;/td&gt;
+                            &lt;td&gt;{player.firstname} {player.lastname} ({player.age})&lt;/td&gt;
+                            &lt;td&gt;{player.trophies}&lt;/td&gt;
+                            &lt;td&gt;{player.club}&lt;/td&gt;
+                            &lt;td&gt;{player.nationality}&lt;/td&gt;
+                            &lt;td&gt;&lt;button&gt;More...&lt;/button&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    ))}
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/section&gt;
+    );
+}
+        
+export default ListPlayers;</code></pre>   
+
+            <p>You could rewrite the above table output more concisely as follows.</p>
+
+            <img src="assets/img/ai-array-app/syntax-concise-1.png" style="max-width: 600px" alt="">
+
+            <p>And your refactored <b>app.js</b> file should look as follows.</p>
+
+<pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11">
+
+import ListPlayers from './ListPlayers'; // Import the ListPlayers component
+
+function App() {
+    return (
+        &lt;ListPlayers /&gt;
+    );
+}
+
+export default App;</code></pre>   
+
+            <p>This new parent-child structure follows the ReactJS principle of component-based architecture, making your app more modular and maintainable.</p>
+
          </section>
 
-        <section>
+        <section id="details">
 
             <h2>Displaying a player's details</h2>
-            <p>Follow these steps:</p>
+            <p>Your next task is to add functionality to the <b>More...</b> button in the displayed table. Here are steps:</p>
 
             <ol>
                 <li>Enter the following prompt in ChatGPT:
-<div class="gpt"><button class="copy-gpt" id="btn-10">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-10">
-Create a new component file named "displayplayer.js" that will be stored in the /src folder. In this file create a function named "DisplayPlayer" that will accept a played id as prop and then display the full details of that player from the players array. 
-    </code></div></li>
-                <li>Create <b>displayplayer.js</b> in your <span class="syn-js">/src</span> folder and copy the ChatGPT response into it.</li>
-                <li>Enter this prompt to link the listing of all players with the display of just one player's details.
+<div class="gpt"><button class="copy-gpt" id="btn-12">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-12">
+Create a new component file named "displayplayer.js" that will be stored in the /src folder. In this file create a function named DisplayPlayer that will accept a played id as a prop and then display the full details of that player from the players array. </code></div></li>
 
-<div class="gpt"><button class="copy-gpt" id="btn-11">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-11">
+                <li>Create <b>displayplayer.js</b> in your <span class="syn-js">/src</span> folder and copy the ChatGPT response into it. See below.
+                
+<pre><button class="copy-code" id="btn-13">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-13">
+import { players } from './players'; // Import the players array
 
-Update the ListPlayers component so that, when the user clicks the button in any row, the app then renders the ShowPlayer component 
-</code></div></li>
+function DisplayPlayer({ playerId }) {
+    // Find the player with the matching ID
+    const player = players.find(player =&gt; player.id === playerId);
 
-        <li>Copy the ChatGPT response into your <b>listplayers.js</b> component. You may need to wrap the JSX output inside a pair of &lt;&gt; &lt;/&gt; tags.</li>
+    // Render player details or a message if not found
+    return (
+        &lt;section className="w-1140px"&gt;
+            {player ? (
+                &lt;&gt;
+                    &lt;h2&gt;{player.firstname} {player.lastname} ({player.age})&lt;/h2&gt;
+                    &lt;p&gt;&lt;b&gt;Club&lt;/b&gt;: {player.club}&lt;/p&gt;
+                    &lt;p&gt;&lt;b&gt;Nationality&lt;/b&gt;: {player.nationality}&lt;/p&gt;
+                    &lt;p&gt;&lt;b&gt;Trophies&lt;/b&gt;: {player.trophies}&lt;/p&gt;
+                    &lt;p&gt;&lt;b&gt;Bio&lt;/b&gt;: {player.bio}&lt;/p&gt;
+                &lt;/&gt;
+            ) : (
+                &lt;p&gt;Player not found.&lt;/p&gt;
+            )}
+        &lt;/section&gt;
+    );
+}
+
+export default DisplayPlayer;</code></pre></li>
+
+</ol>
+
+        <p>The <span class="syn-js">array.find()</span> method returns the <i>first</i> element in the provided array that satisfies the test condition. Because we are dealing with unique <b>id</b> properties, this is fine.</p>
+
+<pre><code>const player = players.find(player =&gt; player.id === playerId);</code></pre>        
 
 
+        <p>Or, more concisely.</p>
 
-            </ol>
+<pre><code>const player = players.find(p =&gt; p.id === playerId);</code></pre>        
 
+        <p>If no object in the array satisfies the test condition, <span class="syn-js">array.find()</span> returns <i>undefined</i>.</p>
+        
+        <p>To deal with this situation, you could add an <span class="syn-js">if .. else</span> clause to display a message. This is an example of <i>conditional rendering</i>. </p>
+
+        <img src="assets/img/ai-array-app/conditional-rendering.png" alt="">
+
+        <p>However, this approach needs two <b>return</b> statements. A more concise syntax is available with the <span class="syn-js">? :</span> ternary operator.</p>
+
+
+        <h3>Adding an <code>onClick</code> event to the table button</h3>
+
+        <p>The next step is to add a function named <b>handleMoreClick()</b> or similar to the <b>More...</b> button that will be activated by a user click. This will accept the relevant <b>player.id</b> prop or argument. Something like this ...</p>
+
+        <img src="assets/img/ai-array-app/button-click-1.png" alt="" style="max-width: 760px">
+
+        <p>However, when you pass a prop to an <b>onClick</b> function, ReactJS requires that it includes an inline arrow function. See below.</p>
+
+        <img src="assets/img/ai-array-app/button-click-2.png" alt="" style="max-width: 760px">
+
+
+        <h3>Calling the DisplayPlayer component</h3>
+        <p>Your <b>handleMoreClick</b> function needs to call the <b>DisplayPlayer</b> component that will then show the complete details of the selected player. You could enter the following.</p>
+
+
+        <p>You could then define <b>handleMoreClick</b> as an anonymous function at the top of the <b>ListPlayers</b> function component. See below.</p>
+
+        <img src="assets/img/ai-array-app/button-click-3.png" alt="" style="max-width: 760px">
+
+        <p>This will not generate any errors - <i>but it will not change the output in the web browser</i>. To do that, you need to change state within <b>ListPlayers</b> with the <b>useState</b> hook.</p>
+
+        <p>Instead, add the following at the start of the <b>ListPlayers</b> function.</p>
+
+<pre><button class="copy-code" id="btn-14">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-14">        
+const [selectedPlayerId, setSelectedPlayerId] = useState(null);
+
+const handleMoreClick = (playerId) =&gt; {
+        setSelectedPlayerId(playerId);
+};</code></pre>
+
+        <p>And include this <b>import</b> statement at the top of the file.</p>
+
+<pre><button class="copy-code" id="btn-15">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-15">
+import { useState } from 'react';    
+</code></pre>
+
+        <p>After the closing <span class="syn">&lt;/table&gt;</span> tag in the JSX, add this new line to display the selected player.</p>
+
+<pre><button class="copy-code" id="btn-16">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-16">
+{&lt;DisplayPlayer playerId={selectedPlayerId} /&gt;}</code></pre>
+
+        <p>Your <b>ListPlayers</b> component will now look as shown below.</p>
+
+        <img src="assets/img/ai-array-app/button-click-4.png" alt="">
+
+        <p>Finally, add a condition so that the <b>DisplayPlayer</b> component is called only if a <b>selectedPlayerID</b> exists.</p>
+
+        <img src="assets/img/ai-array-app/button-click-5.png" alt="" style="max-width: 760px">        
+
+
+        <p>The above code should be generated by ChatGPT in response to the prompt below.</p>
+
+<div class="gpt" style="position: relative"><button class="copy-gpt" id="btn-17" style="top:12px">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-17">
+
+Update the ListPlayers component so that, when the user clicks the button in any row, the app then renders the DisplayPlayer component.</code></div>
 
         </section>
 
