@@ -364,7 +364,7 @@ section p a, section li a {
 	font-weight: 600;
 	text-decoration: underline solid; 
 	text-underline-position: under;
-	text-decoration-thickness: 2px;
+	text-decoration-thickness: 1.5px;
 }
 
 section p a:link, section li a:link,
@@ -1444,14 +1444,17 @@ section div.code-snippets ul > li::before {
 
 
 main pre { position: relative } 
-button.copy-code, button.copy-html, button.copy-css, button.copy-gpt { 
+
+button.copy-html, 
+button.copy-css, 
+button.copy-code,
+div.gpt button.copy-gpt { 
 	position: absolute; top: 10px; right: 12px;
 	z-index: 2;
-	color: #fff;
-	border: solid 2px #fff;
-	background-color: transparent;
 	padding: 8px 12px 10px 12px;
 	font-size: 16px;
+	border-width: 2px;
+	border-style: solid;
 	border-radius: 4px;
 	line-height: 1;
 	display: inline-block;
@@ -1459,21 +1462,51 @@ button.copy-code, button.copy-html, button.copy-css, button.copy-gpt {
 	appearance: none;
 	text-decoration: none;
 	cursor: pointer;
-	vertical-align: bottom;
-	min-width: 140px
-}
-
-button.copy-gpt:hover, button.copy-gpt:active,
-button.copy-code:hover, button.copy-code:active,
-button.copy-html:hover, button.copy-html:active { 
+	min-width: 140px;
+	background-color: transparent;
 	border: solid 2px lightskyblue;
 	color: lightskyblue;
-	min-width: 140px
+	background-color: transparent;
+}
+
+div.gpt button.copy-gpt { top: 56px; right: 16px }
+
+button.copy-html:link, button.copy-html:visited,
+button.copy-css:link, button.copy-css:visited,
+button.copy-code:link, button.copy-code:visited,
+div.gpt button.copy-gpt:link, div.gpt button.copy-gpt:visited { 
+	border: solid 2px lightskyblue;
+	color: lightskyblue;
+	background-color: transparent;
+}
+
+button.copy-html:focus, button.copy-html:hover, button.copy-html:active,
+button.copy-css:focus, button.copy-css:hover, button.copy-css:active,
+button.copy-code:focus, button.copy-code:hover, button.copy-code:active,
+div.gpt button.copy-gpt:focus, 
+div.gpt button.copy-gpt:hover, 
+div.gpt button.copy-gpt:active { 
+	border: solid 2px var(--yellow-200);
+	color: var(--yellow-200);
+	background-color: transparent;
 }
 
 button.copy-gpt i,
 button.copy-code i,
 button.copy-html i { margin-left: 8px; color: inherit }
+
+
+div.gpt {
+	margin-top: 12px;
+	padding: 72px 30px 20px 30px;
+	background-color: #343541;
+	color: #fff;
+	font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
+	border-radius: 4px;
+	font-family: sans-serif
+}
+
+
 
 main pre span.highlight {
 	color: deeppink; font-weight: 700; 
@@ -1494,31 +1527,3 @@ pre.html {
 }
 
 
-div.gpt {
-	margin-top: 12px;
-	padding: 72px 30px 20px 30px;
-	background-color: #343541;
-	color: #fff;
-	font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
-	border-radius: 4px;
-	font-family: sans-serif
-}
-
-div.gpt button.copy-gpt { 
-	position: absolute; top: 56px; right: 16px;
-	z-index: 2;
-	color: #7dd3fc;
-	border: solid 2px #7dd3fc;
-	background-color: transparent;
-	padding: 8px 12px 10px 12px;
-	font-size: 16px;
-	border-radius: 4px;
-	line-height: 1;
-	display: inline-block;
-	-webkit-appearance: none;
-	appearance: none;
-	text-decoration: none;
-	cursor: pointer;
-	vertical-align: bottom;
-	min-width: 140px
-}
