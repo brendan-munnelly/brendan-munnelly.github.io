@@ -522,10 +522,10 @@ section p i.fas { color: rgb(35, 12, 234) }
 }
 
 /* Section: unordered lists */
-section ul { list-style-position: inside }
+section ul, section ul.bad { list-style-position: inside }
 
 /* Bullet character */
-section ul > li:before { 
+section ul > li::before { 
 	display: inline-block;
 	color: #230cea;
 	transform: translateY(2px);
@@ -533,28 +533,41 @@ section ul > li:before {
 	font-size: 130%;
 }
 
+section ul.bad > li::before { 
+	display: inline-block;
+	color: red;
+	transform: translateY(-1px);
+	content: '\26A0';
+	font-size: 100%;
+	font-weight: bold
+}
+
+
 /* Desktops */
 @media (min-width: 768px) {
-	section ul { margin: 0 0 24px 0 }
-	section ul li { 
+	section ul, section ul.bad { margin: 0 0 24px 0 }
+	section ul li, section ul.bad li { 
 		padding-left: 20px ;
 		text-indent: -22px ;
 		margin: 0 0 6px 21px;
 		line-height: 1.5
 	}	
-	section ul li:before { margin-right: 20px }
+	section ul li:before, 
+	section ul.bad li:before { margin-right: 20px }
 }
 
 /* Mobiles */
 @media (max-width: 767px) {
-	section ul { margin: 0 0 12px 0 }
-	section ul li { 
+	section ul, section ul.bad { margin: 0 0 12px 0 }
+	section ul li,
+	section ul.bad li { 
 		line-height: 1.5;
 		padding-left: 18px;
 		text-indent: -20px;
 		margin: 0 0 12px 18px
 	}
-	section ul li:before { margin-right: 18px }	
+	section ul li:before,
+	section ul.bad li:before { margin-right: 18px }	
 }
 
 /* Unordered lists - tighter */
