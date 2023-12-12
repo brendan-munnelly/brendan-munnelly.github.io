@@ -73,7 +73,7 @@
 
                                 <p class="toc-indent"><a href="#github-pages">Installing the GitHub Pages package</a></p>
 
-                                <p><a href="#git-prep-app">Preparing to your app to use a sub-folder on GitHub Pages</a></p>
+                                <p><a href="#git-prep-app">Preparing your app to use a sub-folder on GitHub Pages</a></p>
 
                                 <p><a href="#deploy-scripts">Adding deployment scripts to <code>package.json</code></a></p>
 
@@ -84,9 +84,8 @@
 
                                 <p><a href="#app-deploy">Deploying your ‘build’ ReactJS app</a></p>
 
-                             
-                                        <p class="toc-indent"><a href="#git-add">Adding your app to Git version control</a></p>
-                                        <p class="toc-indent"><a href="#git-deploy">Deploying your app to GitHub Pages</a></p>
+                                <p class="toc-indent"><a href="#git-add">Adding your app to Git version control</a></p>
+                                <p class="toc-indent"><a href="#git-deploy">Deploying your app to GitHub Pages</a></p>
 
                                 <p><a href="#app-updating">Updating your deployed ReactJS app</a></p>
 
@@ -107,7 +106,7 @@
 
 	</section>
 
-        <section>
+        <!-- <section>
 
                 <h2>Hosting your ReactJS app on GitHub Pages</h2>
 
@@ -132,14 +131,14 @@
 
 
                 </ul>
-        </section>
+        </section> -->
 
 	<section id="app-build">
 		<h2>The <code>build</code> option in <code>create-react-app</code></h2>
 
                 <p>Creating a ReactJS app with the <b>create-react-app</b> script generates a huge number of files with a very large total file size.</p>
 
-                <img src="assets/img/build-deploy/pre-build.png" alt="">
+                <img src="assets/img/build-deploy/pre-build.png" alt="screenshot">
 
                 <p><i>Clearly, it would not be practical to deploy all these files to a remote web server.</i></p>
 
@@ -147,11 +146,23 @@
                 
                 <ul>
                         <li><i>Build</i> a minimal version of your app by bundling the modules and assets with <a href="https://webpack.js.org/" target="_blank">Webpack</a>, and optimising the code.</li>
-                        <li><i>Test</i> this minimal version on your local development web server.</li>
+                        <!-- <li><i>Test</i> this minimal version on your local development web server.</li> -->
                         <li><i>Deploy</i> the minimal version to a remote web server such as GitHub Pages.</li>
                 </ul>
 
                 <p>A typical &#8216;build&#8217; version of a ReactJS app might be about 500 KB in total file size.</p>
+
+
+                <div class="box-warning">
+                        <div>
+                            <img src="assets/img/build-deploy/warning-sign.png" alt="Warning sign">
+                        </div>
+                        <div>
+                            <p><span>DO NOT</span> deploy your app&#8217;s 39,000+ files from your local machine to your account on GitHub or other remote server. </p>
+                            <p><span>DO</span> use the <b>build</b> option in <b>create-react-app</b> to create a miminal (about 500KB) version of your app, and deploy that version to GitHub.</p>
+                        </div>
+                </div>
+
 
 
                 <p>Let&#8217;s look at these steps in more detail.</p>
@@ -159,45 +170,189 @@
         </section>                
 
 
+        <section>
+
+                <h2 id="app-create">1: Create a <code>test-deploy-app</code></h2>
+
+                <p>Begin by creating a simple app that you will deploy to GitHub. Here are the steps:</p>
+
+                <ol>
+                        <li>In a Command prompt or VS Code Terminal, navigate to where you want ReactJS to create a folder for your app. For example:
+<pre class="language-js">C:\&gt; react-stuff\apps</pre></li>
+                        <li>Type the following command that includes the name you want to call your new app. For example, <b>test-deploy-app</b>.
+<pre class="language-js"><span class="yellow">npx</span> create-react-app test-deploy-app</pre></li>
+
+                        <li>When the process completes, navigate to the folder that contains your new app. For example:
+<pre class="language-js">C:\&gt; react-stuff\apps\test-deploy-app</pre></li>
+
+                        <li>Enter this command:
+<pre class="language-js"><span class="yellow">npm</span> start</pre></li>
+
+                        <li>A new browser window should display with your new app running on the ReactJS local development server. You will see a screen similar to the following.
+                        <img src="assets/img/build-deploy/react-starter-screen.png" alt="screenshot"></li>
+
+                        <li>In the <b>/src</b> folder of your new app, open the <b>App.js</b> file and edit the text on about line 10 as follows.
+                        <img src="assets/img/build-deploy/app-new-text.png" alt="screenshot" style="max-width: 700px"></li>
+
+                        <li>In your web browser, the app should display as shown below.
+                        <img src="assets/img/build-deploy/react-starter-screen-1.png" alt="screenshot"></li>
+
+                </ol>
+                
+        </section>
+
+        <section>
+
+
+                <h2 id="new-repo">2: Create a new repo on GitHub</h2>
+
+        <p>On GitHub, your app will be stored in a new repo separate from all your other folders and files. Follow these steps:</p>
+    
+        <ol>
+    
+            <li>Sign into your GitHub account and create a new repo to host your app.
+    
+            <img src="assets/img/build-deploy/serve-3.png" alt="screenshot"></li>
+
+            <li>Give your new repo a name. For example, <b>test-deploy-app</b>
+                <img src="assets/img/build-deploy/github-new-app-2.png" alt="screenshot"></li>
+                        
+            <li><i>Do not</i> initialise the new repo with a description, README, license, or .gitignore files. 
+            <img src="assets/img/build-deploy/github-new-app-3.png" alt="screenshot" style="margin-bottom: 12px !important; max-width: 600px">
+            Your repo should be empty.</li>
+
+            <li>Click the green <b>Create repository</b> button</li>
+            
+            <li>GitHub displays a screen that includes instructions for setting up a local repo for your new app.
+
+                <img src="assets/img/build-deploy/github-new-app-4.png" alt="screenshot" style="max-width: 700px"></li>
+
+            </ol>
+
+
+        </section>
+
+        <section  id="new-repo-local">
+
+
+                <h2>3: Create a new repo on your local machine</h2>
+
+                <p>Leave the GitHub screen open in your web browser, and switch back to your Command prompt or VS Code Terminal.</p>
+
+<pre class="language-js">C:\&gt; react-stuff\apps\test-deploy-app</pre>
+                
+                <ol>
+                        <li>Enter the following command to place your app folder under Git version control.
+<pre><span class="yellow">git</span> init</pre></li>
+                        <li>Enter this command to add this folder&#8217;s contents to Git.
+<pre><span class="yellow">git</span> add .</pre></li>
+                        <li>Commit your app to Git with a descriptive message.
+<pre><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="green">"first commit"</span></pre></li>
+                         <li>Give your default branch a name. For example, <b>main</b>:
+<pre><span class="yellow">git</span> branch <span class="grey">-M</span> main</pre>
+                        An alternative name would be <b>master</b>.
+<pre><span class="yellow">git</span> branch <span class="grey">-M</span> master</pre>
+It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
+                </ol>
+
+                <p>You have now finished setting up the local and remote repos for your app.</p>
+        </section>
+
+        <section id="link-push">
+
+
+                <h2>4: Linking repos and pushing local to remote</h2>
+                <p>Next, you need to connect your local repo to your remote repo on GitHub. Once you have done that, you can &#8216;push&#8217; your app from your local machine to GitHub.</p>
+
+                <ol>
+
+                        <li>Link your local Git repo to your remote GitHub repo with a command in this syntax. 
+<pre><span class="yellow">git</span> remote add origin https://github.com/username/reponame.git</pre>
+                        Replace <b>username</b> with your GitHub username. And replace <b>reponame</b> with the name of your new repo. For example:
+<pre><span class="yellow">git</span> remote add origin https://github.com/mary-smith-100/test-deploy-app.git</pre></li>
+                        <li>Now, upload your local repo to the remote repo on GitHub. In the example below, the default branch has the name of <b>main</b>.
+<pre><span class="yellow">git</span> push <span class="grey">-u</span> origin main</pre></li>
+
+                        <li>You may receive a message stating you are not authenticated.
+<img src="assets/img/build-deploy/github-new-app-5.png" alt="screenshot" class="wider-115"></li>
+
+                </ol>
+
+                <p>If you see this message, you need to create a <b>personal access token</b> on GitHub.</p>
+
+        </section>
+
+
+
+        <section>
+
+
+                <h2 id="personal-access-token">5: Create a personal access token on GitHub</h2>
+                <p>To be completed.</p>
+
+        </section>
+
+
+
+        <section>
+
+                <h2 id="verify-push">6: Verify your app has been deployed</h2>
+
+                <p>To check your app has been deployed to GitHub, do the following.</p>
+
+                <ol>
+                        <li>In your browser, display your app&#8217;s GitHub repo. Ensure the <b>Code</b> tab is selected.</li>
+                        
+                        <li>You should see a screen similar to the following.
+
+                        <img src="assets/img/build-deploy/github-new-app-6.png" alt="screenshot" class="wider-115"></li>
+                        
+                </ol>
+
+                <h3>Where is the /node_modules folder?</h3>
+                <p>As you can see, Git has <i>not</i> pushed the <b>/node_modules</b> folder from your local machine to the GitHub repo.</p>
+                
+                <p>That is because the <b>create-react-app</b> script places the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
+                        
+                <h3>Your ReactJS app is deployed - <i>but not hosted</i></h3>
+
+                <p>Your app has been deployed or &#8216;pushed&#8217; to GitHub. The remote repo has all the files needed for anyone to download your app from GitHub and install it on their local machine.</p>
+
+                <p>But your app is not yet <i>hosted</i> on GitHub. It cannot run and display web pages as it can on a local machine. To host your ReactJS app on GitHub, you need to use GitHub Pages.</p>
+
+
+                <h3>ReactJS has added a README.md file</h3>
+
+                <p>By default, the <b>create-react-app</b> script adds a README.md file. You can edit this later.</p>
+
+        </section>
+
 
         <section id="git-prep">
-                <h2>Preparing to use GitHub Pages</h2>
-            
-                <p>You will be deploying your app to the GitHub Pages remote web server. So you need to prepare your GitHub account to host your app.</p>
 
-                <h3 id="github-repo">Creating a GitHub repository</h3>
-                <p>Follow these steps:</p>
-            
-                <ol>
-            
-                    <li>Sign into your account on GitHub and create a new repo to host your app.
-            
-                    <img src="assets/img/build-deploy/serve-3.png" alt="">
-            
-                    Give your new repo a name. But <i>do not</i> initialise it with README, license, or .gitignore files. Your repo should be empty.
-                    <img src="assets/img/build-deploy/serve-4.png" alt=""></li>
+                <h2>7: Set up the GitHub Pages branch for your app</h2>
 
-                    </ol>
+                <p>Your next step is to set up a <b>gh-pages</b> branch to which you will commit and deploy your app.</p>
 
-                    <h3 id="github-pages">Installing the GitHub Pages package</h3>    
-            
-                    <p>You will be deploying your app&#8217;s build files to the <b>gh-pages</b> branch of your GitHub repo. So you need to install the package below in your app&#8217;s folder.</p>
-            
-<pre><span class="yellow">npm</span> install gh-pages <span class="grey">--save-dev</span></pre>
+                <p>In a Command prompt or VS Code Terminal, enter the following command in your app folder:</p>
+                <pre><span class="yellow">npm</span> install gh-pages <span class="grey">--save-dev</span></pre>
 
-</section>
-
-<section id="git-prep-app">
+        </section>
 
 
-                    <h2>Preparing to your app to use a sub-folder on GitHub Pages</h2>
-                    <p>By default, the <b>build</b> option of the <b>create-react-app</b> script produces a build that assumes your ReactJS app will hosted at the server root. On GitHub Pages the server root will be:</p>
+        <section id="git-folder">
+
+
+                <h2>8: Set up a sub-folder for GitHub Pages</h2>
+                    <p>By default, the <b>create-react-app</b> script assumes your ReactJS app will hosted at the server root. On GitHub Pages, the server root will be:</p>
                    
                     <p><b>https://username.github.io</b></p>  
             
-                    <p>However, you will instead host your app in a sub-folder, where the sub-folder name is the name you have given to your GitHub repo. So the address of your app on GitHub Pages will be in this format:</p>
+                    <p>Typically, this is <i>not</i> what you want.</p>
+                    
+                    <p>Instead, you will want to host your app in a sub-folder. It's hosted web address will then be:</p>
             
-                    <p><b>https://username.github.io/<span class="gray">repo-name</span></b></p>  
+                    <p><b>https://username.github.io/<span class="gray">reponame</span></b></p>  
             
                     <p>For example:</p>
             
@@ -205,25 +360,23 @@
                     https://johnsmith.github.io/<span class="grey">spa</span><br>
                     https://johnsmith.github.io/<span class="grey">blog</span></b></p>  
             
-                    <p>To override this default, in VS Code, open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
+                    <p>To override this default, open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
             
-<pre>"homepage": "https://username.github.io/repo-name/",</pre>
+<pre>"homepage": "https://username.github.io/reponame/",</pre>
                                     
                       <p>The top part of your <b>package.json</b> file should now look something like this:</p>
             
-                            <img src="assets/img/build-deploy/serve-5.png" alt="">
+                        <img src="assets/img/build-deploy/serve-5.png" alt="screenshot" style="max-width: 640px">
             
-                        <p>This will ensure the <b>build</b> option within <b>create-react-app</b> correctly infers the root path to use in the generated <b>index.html</b> file inside your <span class="syn-js">/build</span> folder.</p>
-
 
         </section>
 
 
         <section id="deploy-scripts">
                         
-                        <h2>Adding deployment scripts to <code>package.json</code></h2>
+                <h2>9: Add two deploy scripts to <code>package.json</code></h2>
                                     
-                         <p>In VS Code, open your <b>package.json</b> file and add these two scripts to the end of the <b>scripts</b> section:</p>
+                <p>In the <b>scripts</b> section of the same <b>package.json</b> file, add these two lines:</p>
                                     
 <pre>"scripts": {
     <span class="green">// ... other scripts here,</span>
@@ -231,43 +384,35 @@
     "deploy": "gh-pages -d build"
 }</pre>
             
-                        <p>Your <b>scripts</b> section should now look something like this:</p>
+                <p>Your <b>scripts</b> section should now look something like this:</p>
             
-                        <img src="assets/img/build-deploy/serve-6.png" alt="" style="max-width: 620px">
+                <img src="assets/img/build-deploy/serve-6.png" alt="screenshot" style="max-width: 620px">
             
-                        <p>These scripts will be used to deploy your app to GitHub Pages.</p>
+                     
 
 </section>
         
         <section>
 
-                <h2 id="app-create">Creating your &#8216;build&#8217; ReactJS app</h2>
+                <h2 id="app-create-1">10: Create the <code>build</code> version of your app</h2>
                 
                 <p>Follow the steps below :</p>
 
                 <ol>
-                        <li>Open a new Command Prompt or, in VS Code, a new Terminal.</li>
-        
-                        <li>Navigate to the folder that contains your app. For example:
-        <pre>C:\myapps\todos-app&gt; </pre>
-                        </li>
-                        <li>In your app folder, run the command below.
-        <pre><span class="yellow">npm</span> run build</pre></li>
+                        <li>In a Command prompt or VS Code Terminal, enter the command below in your app folder:
+<pre><span class="yellow">npm</span> run build</pre></li>
         
                 <li>When the process completes, you should see a message similar to the following:
                 <img src="assets/img/build-deploy/build-1.png" alt="screenshot" style="max-width:600px"></li>
         
         </ol>
 
-        <p>You can leave this Command Prompt or Terminal open on your screen. You will be using it to complete further steps in the app deployment process.</p>
-
-                <h3 id="build-about">About the <code>/build</code> sub-folder</h3>
-
-                <p>Running the <b>build</b> script creates a new sub-folder named <span class="syn-js">/build</span> inside the folder that contains your ReactJS app. In this sub-folder are the files you will deploy to the remote web server. </p>
+      
+                <p>Running the <b>build</b> script creates a new sub-folder named <span class="syn-js">/build</span> inside your app folder. </p>
         
         </section>
 
-        <section>
+        <!-- <section>
         
                 <h2 id="app-test">Testing your &#8216;build&#8217; ReactJS app</h2>
 
@@ -290,74 +435,69 @@ You should now see a message like that below.
         <li>In your browser, navigate to the provided local address to verify the &#8216;build&#8217; version of your ReactJS app runs without errors.</li>
         </ol>
 
-</section>
-
-<section>
+</section> -->
 
 
-        <h2>Deploying your ‘build’ ReactJS app</h2>
+        <section>
 
-        <p>You are now almost ready to deploy the ReactJS app from your local machine to GitHub Pages.</p>
 
-        <h3 id="git-add">Adding your app to Git version control</h3>
+        <h2 id="app-deploy">11: Deploy your app for hosting</h2>
 
-        <p>You will be using Git to &#8216;push&#8217; your app&#8217;s build files to the remote server, in this case, GitHub Pages. So your app folder needs to be under Git version control, and its files need to be added and committed to Git.</p>
-
-        <p>Here are the steps:</p>
-
-        <ol>
-        <li>Initialise Git for the folder that contains your app.
-
-<pre><span class="yellow">git</span> init</pre></li>
-
-        <li>Git does not automatically track changes to the files in your app folder. You need to add them with this command:
-<pre><span class="yellow">git</span> add .</pre></li>
-
-        <li>Next, commit the latest version of your files to Git with a helpful message:
-<pre><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="green">"Initial commit"</span></pre></li>
-                
-        <li>Your final step before deploying is to link your local Git repo to your remote GitHub repo. Enter this command:
-
-<pre><span class="yellow">git</span> remote add origin https://github.com/username/repo-name.git&nbsp;</pre></li>
-
-</ol>
-
-        <h3 id="git-deploy">Deploying your app to GitHub Pages</h3>
-
-        <p>After completing all the above steps, run the command below from inside your app&#8217;s folder to deploy your app to GitHub Pages:</p>
+        <p>After completing all the above steps, run this command inside your app folder:</p>
 
 <pre><span class="yellow">npm</span> run deploy</pre>
 
+        <p>You should now see a message like that below.</p>
+
+        <img src="assets/img/build-deploy/app-hosted.png" alt="screenshot" style="max-width: 500px">
+
     <p>✅ &nbsp;Success!</p>
     
-    <p>You can now access your deployed ReactJS app at a web address similar to the following:</p>
+    <p>After a few minutes, you can now access your hosted ReactJS app at a web address in the following format:</p>
 
-        <p><b>https://username.github.io/repo-name</b></p>
+        <p><b>https://username.github.io/reponame</b></p>
 
-        <p>Every time you make changes to your app and want to update the live version, you'll need to run <b>npm run deploy</b> again.</p>
     </section>
 
 
     <section>
-        <h2 id="app-updating">Updating your deployed ReactJS app</h2>
 
-        <p>Over time, you may make changes to your app and wish to deploy the new verion to GitHub Pages. Here are the steps:</p>
+
+        <h2 id="app-view-branches">12: Verify both branches are uploaded</h2>
+
+        <p>When you view the GitHub repo of your app, with the <b>Code</b> tab selected, it should look similar to that below.</p>
+
+        <img src="assets/img/build-deploy/git-two-branches.png" alt="screenshot">
+        
+        <p>As you can see, your app has <i>two</i> branches:</p>
+        
+        <ul>
+                <li><b>main</b>: This is the default branch that contains the deployed code for your app. It is often named the <b>master</b> branch. If you wanted to download your app, this is the branch you would download from.</li>
+                <li><b>gh-pages</b>: This contains the extra files needed for your app to be hosted and run remotely on GitHub, just as it would on your local web server.</li>
+        </ul>
+
+    </section>
+
+
+
+    <section>
+        <h2 id="app-updating">Updating your deployed/hosted ReactJS app</h2>
+
+        <p>Over time, you may make changes to your app and wish to host the new version to GitHub Pages. Here are the steps:</p>
 
         <ol>
                 <li>Update and save your app on your local server.</li>
-                <li>From inside your app folder, update the &#8216;build&#8217; version of your app for deployment.
+                <li>From inside your app folder, update the <b>build</b> version of your app.
 <pre><span class="yellow">npm</span> run build</pre></li>
-                <li>Test the &#8216;build&#8217; version of your app locally.
-<pre><span class="yellow">serve</span> <span class="grey">-s</span> build</pre></li>                        
-                <li>If your app has new files, you will need to add them to Git version control.
+                <li>Add file updates and any new files to your local repo.
 <pre><span class="yellow">git</span> add .</pre></li>
-                <li>Commit the latest version of your files to Git with a helpful message.
-<pre><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"Added user authentication"</span></pre></li>
-                <li>Finally, deploy your updated app.
+                <li>Commit the latest version of app with a descriptive message.
+<pre><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"Fixed bugs and added cool new features."</span></pre></li>
+                <li>Finally, deploy your updated app for hosting.
 <pre><span class="yellow">npm</span> run deploy</pre>
 </li>
         </ol>
-        <p>✅ &nbsp;That&#8217;s it.</p>
+        <p>✅ &nbsp;That&#8217;s it. Both the <b>main</b> (or <b>master</b>) and <b>gh-pages</b> branches will be updated.</p>
     </section>
 
 </article>
