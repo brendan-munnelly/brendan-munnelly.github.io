@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Building and deploying apps | ReactJS Tutorials</title>
-	<meta name="description" content="Building a minimised, production-ready version of a ReactJS app and deploying it to GitHub Pages.">
+	<title>Deploying apps to GitHub and GitHub Pages | ReactJS Tutorials</title>
+	<meta name="description" content="Deploying your app code files to GitHub and a minimial, remotely working-version to GitHub Pages.">
 
 	<meta name="robots" content="noindex">
 
@@ -40,9 +40,12 @@
 
 
         <style>
+                .four-samples div { background-color: #f4f7a0; padding: 12px}
                 .four-samples div > img { margin-bottom: 12px !important }
+                .four-samples div > p { font-size: 16px}
+
                 .four-samples { margin-top: 12px; margin-bottom: 20px }
-                .four-samples a { font-weight: bold; font-size: 18px !important; text-underline-offset: 4px }
+                .four-samples a { font-weight: bold; font-size: 16px !important; text-underline-offset: 4px }
         </style>
 
 </head>
@@ -57,8 +60,8 @@
 				</div>
 		
 				<div class="content">
-					<h1>Building and deploying apps</h1>
-					<h2>Building a minimised, production-ready version of a ReactJS app and deploying it to GitHub Pages.</h2>
+					<h1>Deploying apps to GitHub and GitHub Pages</h1>
+					<h2>Deploying your app code files to GitHub and a minimial, remotely working-version to GitHub Pages.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -72,7 +75,8 @@
 	
 			<h3>THIS TUTORIAL</h3>
 			<p><a href="#learning-goals">Learning Goals</a></p>
-			<p><a href="#app-build-text">Introduction</a></p>
+			<p><a href="#app-githubs">One app &#8211; <i>but</i> two GitHubs!</a></p>
+                        <p><a href="#app-versions">One app &#8211; <i>but</i> two versions!</a></p>
 
                         <p><a href="#app-create">1: Create a test-deploy-app</a></p>
                         <p><a href="#new-repo-github">2: Create a new repo on GitHub</a></p>
@@ -118,7 +122,7 @@
 
 
         <section>
-                <h2>Introduction: One app &#8211; <i>but</i> two GitHubs!</h2>
+                <h2 id="app-githubs">One app &#8211; <i>but</i> two GitHubs!</h2>
 
                 <p>You create ReactJS apps on your local machine. But you will want your apps to be publicly accessible on a remote server for the world to admire and use.</p>
                 
@@ -126,30 +130,24 @@
                 <div class="four-samples">
                         <div>
                                 <img src="assets/img/build-deploy/airbnb-2.png" alt="screenshot" style="border: solid 1px #000">
-                                <a href="https://github.com/airbnb" target="_blank">https://github.com/airbnb</a>
+                                <p style="margin-bottom: 24px"><a href="https://github.com/airbnb" target="_blank">https://github.com/airbnb</a></p>
+
+                                <p>This is simply a list of GitHub repos. Typically, these are stored in a default branch named <b>main</b> or <b>master</b>. The GitHub web address looks like this:</p>
+                                <p><b>https://github.com/<span style="background: red; color:#fff;padding: 0 4px">username</span></b></p>
+                                <p>At this address, you can only view and download files.</p>
+
                         </div>
                         <div>
                                 <img src="assets/img/build-deploy/airbnb-1.png" alt="screenshot" style="border: solid 1px #888">
-                                <a href="https://airbnb.github.io" target="_blank">https://airbnb.github.io</a>
+                                <p style="margin-bottom: 24px"><a href="https://airbnb.github.io" target="_blank">https://airbnb.github.io</a></p>
 
+                                <p>In this second example, you can view web pages. You could also run an app created with ReactJS or other JavaScript framework.</p>
+                                <p>GitHub can make this possible with a special branch named <b>gh-pages</b>. The GitHub Pages web address looks like this:</p>
+                                
+                                <p><b>https://<span style="background: red; color:#fff;padding: 0 4px">username</span>.github.io</b></p>
+                                
                         </div>
                 </div>
-
-                <ul>
-
-                        <li>The first is simply a list of GitHub repos. Typically these are stored in a default branch named <b>main</b> or <b>master</b>. The GitHub web address looks like this:
-                        <span class="inside-ol">&nbsp;</span>
-                        <b>https://github.com/<span style="background: red; color:#fff;padding: 0 4px">username</span></b>
-                        <span class="inside-ol">&nbsp;</span>
-                        At this address, you can only view and download files.</li>
-                        <li>In the second example, you can view web pages. You could also run an app created with ReactJS or other JavaScript framework.
-                        <span class="inside-ol">&nbsp;</span>
-                        GitHub can make this possible with a special branch named <b>gh-pages</b>. The GitHub Pages web address looks like this:
-                        <span class="inside-ol">&nbsp;</span>
-                        <b>https://<span style="background: red; color:#fff;padding: 0 4px">username</span>.github.io</b></li>
-
-                </ul>
-
 
                 <p>You can host multiple apps on a single GitHub Pages account. Each app will have its own repo and  sub-folder web address. For example:</p>
 
@@ -171,68 +169,50 @@
         </section>
 
 
-        <!-- <section>
+        <section>
 
-                <h2>Hosting your ReactJS app on GitHub Pages</h2>
+                <h2 id="app-versions">One app &#8211; <i>but</i> two versions!</h2>
+                <p>When you create an app with <b>create-react-app</b>, the folders and files below are generated. One folder is named <b>/node_modules</b>.</p>
 
-                <p>You will use various features of Git to deploy your ReactJS app from your local machine to the GitHub Pages remote server, where your app can be publicly accessed.</p>
-
-                <p>Note that Git includes three different elements:</p>
-
-                <ul class="git-list">
-                        <li><b>Git</b>: The software you <a href="https://git-scm.com/downloads" target="_blank">download and install</a> on your local machine to track changes to your files. 
-                        <span class="inside-ol">&nbsp;</span>                                
-                        You organise your files in so-called &#8216;branches&#8217;. Mostly, you will be storing your files in the <b>main</b> branch.</li>
-                        <li><b>GitHub</b>: The &#8216;cloud&#8217; version of Git that runs of remote webservers.
-                        <span class="inside-ol">&nbsp;</span>                                
-                        The web address of your GitHub account will look like the following:<span class="inside-ol">&nbsp;</span>                                
-                        <b>https://github.com/username</b></li>
-                        <li><b>GitHub Pages</b>: A special branch named <b>gh-pages</b> that allows you use GitHub as a web hosting service.
-                        <span class="inside-ol">&nbsp;</span>                                                                
-                        You can view your hosted files on GitHub at a web address like the following:<span class="inside-ol">&nbsp;</span>                                
-                        <b>https://username.github.io</b>
-                        
-                        </li>
-
-
+                <ul>
+                        <li>The ReactJS code in <b>/node_modules</b> is needed for your app to run on your local machine.</li>
+                        <li>But <b>/node_modules</b> contains about 39,000 files with a total size of over 300 MB.</li>
                 </ul>
-        </section> -->
 
-	<section id="app-build-text">
-		<h2>The <code>build</code> option in <code>create-react-app</code></h2>
+                <img src="assets/img/build-deploy/node-modules.png" alt="screenshot" style="max-width: 700px">
+        
+                <p><i>Clearly, it would not be practical to deploy all these files to GitHub or other remote server.</i></p>
 
-                <p>Creating a ReactJS app with the <b>create-react-app</b> script generates a huge number of files with a very large total file size.</p>
+                <p>For this reason, the <b>create-react-app</b> script places the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
+                
+                <p>So when you deploy the <b>main</b> or <b>master</b> branch of your app to GitHub using commands such as the following...</p>
 
-                <img src="assets/img/build-deploy/pre-build.png" alt="screenshot">
+<pre><span class="yellow">git</span> add .
+<span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"descriptive message."</span>
+<span class="yellow">git</span> push origin main</pre>
+                        
+                <p>The <b>/node_modules</b> folder is not included in the upload.</p> 
 
-                <p><i>Clearly, it would not be practical to deploy all these files to a remote web server.</i></p>
+                <p>As a result, your app code is deployed to GitHub. <i>But your app does not run on GitHub as it does on your local machine.</i></p>
 
-                <p>The good news is that <b>create-react-app</b> includes options to:</p>
+                <p>Fortunately, the <b>create-react-app</b> script includes options to:</p>
                 
                 <ul>
-                        <li><i>Build</i> a minimal version of your app by bundling the modules and assets with <a href="https://webpack.js.org/" target="_blank">Webpack</a>, and optimising the code.</li>
-                        <!-- <li><i>Test</i> this minimal version on your local development web server.</li> -->
-                        <li><i>Deploy</i> the minimal version to a remote web server such as GitHub Pages.</li>
+                        <li><i>Build</i> a minimal version of your app by bundling the modules and assets with <a href="https://webpack.js.org/" target="_blank">Webpack</a>, and optimising the code.
+                        <span class="inside-ol">&nbsp;</span>
+                        This <b>build</b> option takes only the code it needs from the <b>/node_modules</b> folder and ignores the rest.</li>
+                        <li><i>Deploy</i> this minimal version to the <b>gh-pages</b> branch of GitHub known as GitHub Pages.</li>
                 </ul>
 
-                <p>A typical &#8216;build&#8217; version of a ReactJS app might be about 500 KB in total file size.</p>
+                <p>A typical <b>build</b> version of a ReactJS app might be about 500 KB in total file size.</p>
+
+                <p>Below are screenshots of a GitHub repo for a basic ReactJS app. As you can see, there are two branches and two versions of the code.</p>
+
+                <img src="assets/img/build-deploy/main-master.png" alt="screenshot">
+                <p>The remainder of this Tutorial takes you, step-by-step, through the process of deploying a sample app named <b>test-deploy-app</b> from your local machine to GitHub and GitHub Pages.</p>
+        </section>
 
 
-                <div class="box-warning">
-                        <div>
-                            <img src="assets/img/build-deploy/warning-sign.png" alt="Warning sign">
-                        </div>
-                        <div>
-                            <p><span>DO NOT</span> deploy your app&#8217;s 39,000+ files from your local machine to your account on GitHub or other remote server. </p>
-                            <p><span>DO</span> use the <b>build</b> option in <b>create-react-app</b> to create a minimal (about 500KB) version of your app, and deploy that version to GitHub.</p>
-                        </div>
-                </div>
-
-
-
-                <p>Let&#8217;s look at these steps in more detail.</p>
-
-        </section>                
 
 
         <section>
