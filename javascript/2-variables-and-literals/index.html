@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>2: Variables and literals | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with string, numeric and boolean variables, assigning values with the const and let keywords, and using the typeof operator to investigate a variable's type.">
+
+    <!-- Stylesheet-->
+	<link rel="stylesheet" href="../assets/css/javascript-tutorials-brendan-munnelly.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>2: Variables and Literals</h1>
+					<h2>Working with string, numeric and boolean variables, assigning values with the const and let keywords, and using the typeof operator to investigate a variable’s type.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>		
+	
+		<main>
+
+			<aside>
+				<h3>JavaScript Course</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#js-variables">About variables in JavaScript</a></p>
+				<p class="toc-indent"><a href="#variable-names">Variable names</a></p>
+				<p class="toc-indent"><a href="#ex-3-1">Exercise 2.1: Working with variables</a></p>
+				<p class="toc-indent"><a href="#string-variables">About string variables</a></p>
+				<p class="toc-indent"><a href="#numeric-variables">About numeric variables</a></p>
+				<p><a href="#arithmetic-operators">Arithmetic operators</a></p>
+				<p class="toc-indent"><a href="#ex-3-2">Exercise 2.2: Creating a simple arithmetic script</a></p>
+				<p><a href="#operator-precedence">Operator precedence</a></p>
+				<p class="toc-indent"><a href="#ex-3-3">Exercise 2.3: Using parentheses in calculations</a></p>
+				<p><a href="#assignment-operator">About the assignment (=) operator</a></p>
+				<p><a href="#variable-retyping">Automatic variable retyping</a></p>
+				<p class="toc-indent"><a href="#typeof-operator">The <span>typeof</span> operator</a></p>
+			
+			</aside>
+	
+	<article>
+	
+
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson you will be able to:</p>
+		<div class="box-goals">
+		<ul>
+			<li>Declare string, numeric and Boolean variables, and assign values to them with the <span class="syn-js">let</span> and <span class="syn-js">const</span> keywords.</li>
+			<li>Apply the correct variable naming standards</li>
+			<li>Apply the assignment operator correctly in statements that contain variables and values, and variables only.</li>
+			<li>Reveal a variable's type using the <span class="syn-js">typeof</span> operator.</li>
+
+		</ul>
+	</div>
+
+	</section>
+
+	<section>
+	<p>In this Lesson you will meet the following terms:</p>
+	
+	<ul>
+		<li>Variable</li>
+		<li>String variable</li>
+		<li>Numeric variable</li>
+		<li>Boolean variable</li>
+		<li>Assignment statement</li>
+	</ul>
+
+	<div class="code-snippets">
+		<h3 style="margin-top:0">Exercise Files</h3>
+
+		<p>To work with the exercise file in this and later Tutorials:</p>
+		<ul style="margin-bottom: 12px">
+			<li>Create a new folder named <b>javascript</b>.</li>
+			<li>In this, create a sub-folder named <b>exercises</b>.</li>
+		</ul>
+		<p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new sub-folder named <b>2</b>.
+			
+		</p><p>Save the exercise file below to this new <b>javascript/exercises/2</b> sub-folder.</p>
+		<p>📄  &nbsp;<a href="exercises/index.html" target="_blank"><b>index.html</b></a></p>
+	</div>
+
+
+	<p>In this Lesson you will work with the following web pages:</p>
+	
+	<ul>
+		<li><a href="exercises/3/exercise-3-1.html" target="_blank">exercise-3-1.html</a></li>
+		<li><a href="exercises/3/exercise-3-2.html" target="_blank">exercise-3-2.html</a></li>
+		<li><a href="exercises/3/exercise-3-3.html" target="_blank">exercise-3-3.html</a></li>
+		<li><a href="exercises/3/exercise-3-4.html" target="_blank">exercise-3-4.html</a></li>
+	</ul>
+
+	<p>You will find these files in your  📁 <b>/javascript/exercises/2/</b> sub-folder.</p>
+
+</section>
+
+
+<section id="js-variables">
+
+	<h2>About variables in JavaScript</h2>
+
+	<p>Update your <b>App.js</b> file to use <b>&lt;p&gt;</b> paragraph tags and display the <b>index</b> value (incremented by 1) for each player.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">
+let userName; // Declare variable
+userName = "Sheila Murphy"; // Assign value to variable
+	
+let userCountry; // Declare variable
+userCountry = "Ireland"; // Assign value to variable</code></pre>
+
+	<p>You can think of a variable as a <i>container</i> or &#8216;storage box&#8217; for a value that may be different each time the JavaScript code is run.</p>
+	
+	<p>Consider the example of a website login page that asks for a user's First Name.</p>
+
+	<p>The value entered might be 'Laurent' or 'John' or whatever. But in the JavaScript code that stores the value, the variable will always have the same name of, for example, <b>userFirstName</b>.</p>
+
+	<img src="assets/img/first-name.png" alt="JavaScript" style="max-width: 640px">
+
+
+	<p>In JavaScript the first thing you do with a variable is <i>declare</i> it. The following code declares the variable named userFirstName.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">var</span> <span class="blue-light">userFirstName</span>; <span class="comment">// Declares (creates) a new variable</span></pre>
+
+	<p>The variable declaration begins with the word <span class="syn-js">var</span>. This so-called keyword allocates memory storage space for new data and tells JavaScript that a new variable name is in use.</p>
+
+	<p>The more modern version of JavaScript uses the keywords <span class="syn-js">let</span> or <span class="syn-js">const</span> to declare a variable. For example:</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userFirstName</span>; <span class="comment">// Modern JavaScript variable naming</span></pre>
+
+		<table class="table-js-methods">
+			<tbody>
+				<tr>
+				<td style="min-width: 15%"><p><span class="syn-js">const</span></p></td>
+				<td><p>Use this for a variable where the value stored remains constant when the script is run.</p></td>
+				</tr>
+				<tr>
+					<td style="min-width: 15%"><p><span class="syn-js">let</span></p></td>
+					<td><p>Use this for a variable where the value stored may change during the running of the script, such as in a math calculation or a loop.</p></td>
+				</tr>
+			</tbody>
+		</table>
+
+	<h3 id="variable-names">Variable names</h3>
+
+	<p>Here are a few points to remember about variable names:</p>
+
+	<ul>
+		<li><b>Uniqueness</b>: Don't use the same name for two different variables within the same scope of JavaScript code.</li>
+
+		<li><b>No spaces</b>: Variable names cannot contain spaces. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">Product Name</span>; <span class="comment">// Invalid variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">Sub Total</span>; <span class="comment">// Also invalid variable name</span>
+</pre></li>
+
+		<li><b>Mixed character case</b>: You can combine upper and lowercase letters in a variable name to make it easier to read. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">postCode</span>; <span class="comment">// camel case variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">localCurrency</span>; <span class="comment">// Also camel case variable name</span>
+</pre></li>
+
+		<li><b>Case sensitivity</b>: Variable names are case-sensitive. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">firstName</span>; <span class="comment">// This is one variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">FirstName</span>; <span class="comment">// This is a DIFFERENT variable name</span></pre></li>
+	</ul>
+
+	<p>When you declare a variable you will often want to <i>assign</i> a value to it. See the example below.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userName</span>; <span class="comment">// Declare variable</span>
+<span class="blue-light" style="padding-left: 0 !important; margin-left:0">userName</span> = <span class="orange">"Sheila Murphy"</span>; <span class="comment">// Assign value to variable</span>
+
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userCountry</span>; <span class="comment">// Declare variable</span>
+<span class="blue-light" style="padding-left: 0 !important; margin-left:0">userCountry</span> = <span class="orange">"Ireland"</span>; <span class="comment">// Assign value to variable</span></pre>
+
+	<p>You can minimise typing by declaring a variable and assigning a value to it in the same statement on the same line. Here&#8217;s two examples.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userEmail</span> = <span class="orange">"Sheila Murphy"</span>;
+
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userPassword</span> = <span class="orange">"banana42%"</span>;</pre>
+
+	<p>When you declare a variable with <span class="syn-js">const</span>, you <i>must</i> assign a value to it at the time your declare it. For example:</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">const</span> <span class="blue-light">userLastName</span> = <span class="orange">"Murphy"</span>;</pre>
+
+	<p>If you simply declare a variable with <span class="syn-js">const</span>, you can see an error message in the JavaScript Console. For example:</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">const</span> <span class="blue-light">userLastName</span>; <span class="comment">// Error. New const variable is undefined (contains no assigned value)</span>   </pre>
+
+<img src="assets/img/error-message-const.png" alt="error message" style="max-width: 560px">
+
+	<h4 id="ex-3-1">Exercise 2.1: Working with variables</h4>
+
+	<p>In Exercise 2.1 you will declare two variables, assign values to them, and then display the variable names and values in the web page.</p>
+
+	<p>Open the following file in VS Code and web browser:</p>
+
+	<p><a href="exercises/3/exercise-3-1.html" target="_blank">exercise-3-1.html</a></p>
+
+	<p>In the empty <span class="syn-js">&lt;script&gt;</span> &#8230; <span class="syn-js">&lt;/script&gt;</span> tag pair in the web page insert the two variable declarations and assignments shown below, and follow them with two <span class="syn-js">document.write()</span> statements.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">const</span> <span class="blue-light">firstName</span> = <span class="orange">"Eddie"</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">const</span> <span class="blue-light">lastName</span> = <span class="orange">"Hamilton"</span>;
+<span class="comment">// Display using the plus (+) operator</span>
+<span class="blue-light" style="padding-left: 0 !important; margin-left:0">document</span>.<span class="yellow">write</span>(<span class="orange">"&lt;p&gt;&lt;i&gt;First Name&lt;/i&gt;: "</span>+<span class="blue-light">firstName</span>+<span class="orange">"&lt;/p&gt;"</span>);
+<span class="comment">// Display using template literals</span>
+<span class="blue-light" style="padding-left: 0 !important; margin-left:0">document</span>.<span class="yellow">write</span>(<span class="orange">`&lt;p&gt;&lt;i&gt;Last Name&lt;/i&gt;:</span> <span class="blue-light">${lastName}</span><span class="orange">&lt;/p&gt;`</span>);
+</pre>
+
+	<p>Save and reload your web page. It should look as shown.</p>
+
+	<img src="assets/img/3-1.png" alt="JavaScript">
+
+	<p>You can close the <b>exercise-3-1.html</b> file when finished.</p>
+
+	<h3 id="string-variables">About string variables</h3>
+
+	<p>The variables you have worked with so far have all been of one type: the <i>string variable</i>. This is a variable type that holds letters, numbers, blank spaces or punctuation symbols. </p>
+
+	<p>When you enclose the value in single quotes (<span class="syn-js">''</span>), double quotes (<span class="syn-js">""</span>) or backticks (<span class="syn-js">``</span>) JavaScript assumes that you want to create a string variable. For example:</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">const</span> <span class="blue-light">firstName</span> = <span class="orange">"Peter"</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">lastName</span> = <span class="orange">'Smith'</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">streetAddress</span> = <span class="orange">`42 Green Avenue`</span>;</pre>
+
+	<h3 id="numeric-variables">About numeric variables</h3>
+
+	<p>Another type of variable in JavaScript is the <i>numeric variable</i>, which stores a number that you can perform arithmetic operations on</p>
+
+	<p>When you omit the quotes around the value, JavaScript makes the variable a numeric variable. For example.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">orderQty</span> = <span class="orange">42</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">productPrice</span> = <span class="orange">9.99</span>;
+</pre>
+
+	<p>Unlike most programming languages JavaScript does not have different types of numeric variables for different types of numbers. All numbers, whether integers (whole numbers) or floating-point numbers (numbers with decimal places) are all stored within the one type of numeric variable type. Numeric variables may store ether positive or negative numbers.</p>
+
+	<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">Temperature</span> = <span class="orange">-6.3456</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">errorRate</span> = <span class="orange">.2727</span>;</pre>
+
+	<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">userIncome</span> = <span class="orange">34,000</span> <span class="comment">// Error. Contains a comma.</span>
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">product ID</span> = <span class="orange">645w29</span> <span class="comment">// Error. Contains a letter character.</span></pre>
+
+<p>In each case, the JavaScript Console will show the following error message.</p>
+<img src="assets/img/error-message-numeric.png" alt="error message" style="max-width: 500px">
+
+	<p>When declaring a variable you don&#8217;t need to tell JavaScript which type of variable you want to create. JavaScript decides the variable type according to the type of value you assign to it.</p>
+	
+	<p class="defhead">Variable</p>
+
+	<p class="deftext">A container that can store a changing value. A variable may contain strings or numbers. Variable names must be unique, are case sensitive and cannot contain spaces.</p>
+
+
+	<h4 id="ex-3-2">Exercise 2.2: Creating a simple arithmetic script</h4>
+	<p>In Exercise 2.2 you will declare three variables, assign numeric values to the first two, add the values together and assign the result to a third variable. Finally, you will then display all the numbers in the web page.</p>
+
+	<p>Open the following file in VS Code and  web browser:</p>
+
+	<p><a href="exercises/3/exercise-3-2.html" target="_blank">exercise-3-2.html</a></p>
+
+	<p>In the empty <span class="syn-js">&lt;script&gt;</span> &#8230; <span class="syn-js">&lt;/script&gt;</span> tag pair in the web page insert the variable declarations and assignments shown below, and follow them with the three <span class="syn-js">document.write()</span> statements.</p>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">num_1</span> = 36</span>;
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">num_2</span> = 12</span>;
+</pre>
+
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 0 !important; margin-left:0">let</span> <span class="blue-light">sumNums</span> = <span class="blue-light">num_1</span> + <span class="blue-light">num_2</span>;
+</pre>
+
+<pre class="language-js">
+document.write("&lt;p&gt;First Number</span>: "+num_1</span>+"&lt;br&gt;");
+document.write("Second Number: "+num_2</span>+"&lt;br&gt;");
+document.write("Result: &lt;b&gt;"+sumNums+"&lt;\/b&gt;&lt;\/p&gt;");
+</pre>
+
+
+	<p>Save your web page and reload your web browser. It should look as shown.</p>
+
+	<img src="assets/img/3-2.png" alt="JavaScript">
+
+	<p>Experiment with the file by changing the first and second number values, and by changing the arithmetic
+	operator. You can close the <b>exercise-3-2.html</b> file when finished.</p>
+
+</section>
+
+<section id="assignment-operator">
+
+	<h2>About the assignment (=) operator</h2>
+
+	<p>Putting a value into a variable is known as assignment, and is achieved through the use of the <i>assignment operator</i> (<b>=</b>). For example:</p>
+
+<pre class="language-js">
+fruit = "apple";
+</pre>
+
+	<p>This places the value of &#8216;apple&#8217; inside the variable named &#8216;fruit'. Switching around this assignment statement results in the value of &#8216;fruit&#8217; being placed inside the variable named &#8216;apple'.</p>
+
+<pre class="language-js">
+apple = "fruit";
+</pre>
+
+<p>In JavaScript the equals sign does <i>not</i> mean 'equal to' as it does in arithmetic or algebra. It means as follows:</p> 
+
+<p><i>&#8216;Take whatever is on the right of the equals sign and place it in variable on the left hand side.'</i></p>
+
+<p>JavaScript treats the left-hand side (LHS) as a variable, but the right-hand side (RHS) may be a value, another variable, or an object property. In the example below the RHS contains a value.</p>
+
+<pre class="language-js">
+country = "Bermuda";
+</pre>
+
+<p>Consider the next example. Here the RHS contains another variable. What this assignment does is copy whatever value is in the &#8216;cost&#8217; variable to the &#8216;price&#8217; variable.</p>
+
+<pre class="language-js">
+price = cost;
+</pre>
+
+<p>It's perfectly valid to place the <i>same</i> variable on both sides of the assignment operator. The following example puts the current content of the StreetAddress variable inside the StreetAddress variable. Nothing is changed as a result of this statement but no syntax rule is broken either.</p>
+
+<pre class="language-js">
+StreetAddress = StreetAddress;
+</pre>
+
+<p>Sometimes you may want to change a variable's value by a fixed amount. The following would make no sense if it where algebra.</p>
+
+<pre class="language-js">
+SalePrice = SalePrice + 20;
+</pre>
+
+<p>But in JavaScript it means &#8216;jack up the sale price by 20'. That is, insert in the sale price variable whatever is currently in that variable already plus 20.</p>
+
+<p>JavaScript does not accept an assignment statement with a value on <i>both</i> sides. The LHS must always be a variable or an object property. Running the following statement generates an error in the web browser window.</p>
+
+<pre class="language-js">
+32 = 32;
+</pre>
+
+
+<p class="defhead">Assignment statement</p>
+
+<p class="deftext">A JavaScript statement in which a variable or object property on the left of the equal sign (=) is given the value of 
+whatever is on the right of the equals sign.</p>
+
+</section>
+
+
+<section>
+
+<h2 id="typeof-operator">The <span>typeof</span> operator</h2>
+
+<p>When you are unsure about variable type at any some point in a script you can use the <span class="syn-js">typeof</span> operator to reveal the variable type. You insert the <span class="syn-js">typeof</span> operator directly before the variable. Here are three statements in which the <span class="syn-js">typeof</span> operator is used within a <span class="syn-js">document.write()</span> statement.</p>
+
+<pre class="language-js">
+document.write(typeof SalesPrice);
+document.write(typeof x);
+document.write(typeof email_address);
+</pre>
+
+<p>Exercise 2.4 takes you through the steps of setting, changing and displaying a variable's type.</p>
+
+<h3 id="ex-3-4">Exercise 2.4: Investigating a variable&#8217;s type</h3>
+
+<p>Open the following file in VS Code and  web browser:</p>
+
+<p><a href="exercises/3/exercise-3-4.html" target="_blank">exercise-3-4.html</a></p>
+
+<p>In the empty <span class="syn-js">&lt;script&gt;</span> &#8230; <span class="syn-js">&lt;/script&gt;</span> tag pair in the web page insert the following code.</p>
+
+<pre class="language-js">
+let firstVar;
+document.write("&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar);
+</pre>
+
+<p>Save and reload the web page. In the browser window you can see that the variable type is 'undefined'. This is because you have only declared the variable but not assigned a value to it.</p>
+
+<img src="assets/img/3-4.png" alt="JavaScript">
+
+<p>Next, replace everything within the <span class="syn-js">&lt;script&gt;</span> &#8230; <span class="syn-js">&lt;/script&gt;</span> tag pair with the following code.</p>
+
+
+<pre class="language-js">
+let firstVar;
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+document.write("&lt;p&gt;&lt;b&gt;Variable Type:&lt;\/b&gt; " + typeof firstVar+"&lt;\/p&gt;");
+</pre>
+
+<p>Save and reload your web page. You can see the result of four <span class="syn-js">document.write()</span> statements, each one displayed on a separate line.</p>
+
+<img src="assets/img/3-5.png" alt="JavaScript">
+
+
+
+<p>Now, add three assignment statements to your block of code at the locations shown below.</p>
+
+<img src="assets/img/3-6.png" alt="JavaScript">
+
+
+<p>Save and reload your web page. It should now look as shown below.</p>
+
+<img src="assets/img/3-7.png" alt="JavaScript">
+
+<p>You can see how the variable's type changed during the script: from undefined (no type), to numeric, then to string, and finally back to numeric again.</p>
+
+
+<p>You can close the <b>exercise-3-4.html</b> file when finished.</p>
+
+</section>
+
+
+
+</article>
+</main>
+
+<footer></footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+
+</body>
+</html>
