@@ -193,6 +193,52 @@ const mongoose = require('mongoose');</code></pre></li>
     </section>
 
 
+<section>
+
+    <h2>Connecting to MongoDB from Express</h2>
+
+    <p>Follow these steps below.</p>
+
+    <ol>
+        <li>In your app directory, run the following command.
+<pre class="no-syn"><span class="yellow">npm</span> i mongodb</pre></li>
+
+        <li>In your app directory, create a new text file, save it as <b>mongo.js</b>, and paste the following code into it.
+
+<pre><code class="hljs language-js">const { MongoClient, ServerApiVersion } = require("mongodb");
+// Replace the placeholder with your Atlas connection string
+const uri = "mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.vhzcxfj.mongodb.net/?retryWrites=true&w=majority";
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri,  {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    }
+);
+async function run() {
+    try {
+        // Connect the client to the server (optional starting in v4.7)
+        await client.connect();
+        // Send a ping to confirm a successful connection
+        await client.db("admin").command({ ping: 1 });
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+        // Ensures that the client will close when you finish/error
+        await client.close();
+    }
+}
+run().catch(console.dir);</code></pre>  </li>
+
+    <li>Enter the following to run this file:
+<pre class="no-syn"><span class="yellow">node</span> mongo</pre></li>
+
+    <li>You should see the following message in your terminal:
+<pre class="no-syn">Pinged your deployment. You successfully connected to MongoDB!</pre></li>
+    </ol>
+</section>
+
 </article>
 </main>
 
