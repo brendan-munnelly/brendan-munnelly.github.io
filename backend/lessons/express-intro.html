@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Introduction to Express | Brendan Munnelly</title>
+	<meta name="description" content="Deploying your app code files to GitHub and a minimial, remotely working-version to GitHub Pages.">
+
+	<meta name="robots" content="noindex">
+
+        <style>
+                h2 code, h3 code { font-weight: normal !important}
+                span.grey { color: lightgray }
+                span.green { color: green }
+
+                ul.git-list li { 
+                        margin-bottom: 12px;
+                        padding-bottom: 12px;
+                        border-bottom: solid 2px #000;
+                        
+                }
+                pre { padding: 0 12px 0 !important }
+                pre.no-syn { padding: 14px 20px !important}
+        </style>
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/reactjs-tutorials.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+        <style>
+                .four-samples div { background-color: #f4f7a0; padding: 12px}
+                .four-samples div > img { margin-bottom: 12px !important }
+                .four-samples div > p { font-size: 16px}
+
+                .four-samples { margin-top: 12px; margin-bottom: 20px }
+                .four-samples a { font-weight: bold; font-size: 16px !important; text-underline-offset: 4px }
+        </style>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to Express</h1>
+					<h2>Building a basic Express app that serves a response to a GET request.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>ReactJS COURSE</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+			<!-- <p><a href="#learning-goals">Learning Goals</a></p> -->
+			<p><a href="#about">About Express</a></p>
+            <p><a href="#basic-app">Creating a basic Express app</a></p>
+
+            <p><a href="#code-review">Reviewing the Express app code</a></p>
+		</aside>
+	
+	<article>
+
+        <!--
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+                        <li>Know the difference between <i>two</i> types of branches on GitHub: the <b>main</b> (or <b>master</b>) branch and the <b>gh-pages</b> branch.</li>
+                        
+                        <li>Create local and remote repos for a ReactJS app in the <b>main</b> (or <b>master</b>) branch, link the two repos, and push your app code from local to remote.</li>
+
+		        <li>Run the <b>build</b> option within the <b>create-react-app</b> script to create a minimal version of your ReactJS app, and commit it to the <b>gh-pages</b> branch.</li>  
+
+                        <li>Deploy the <b>build</b> version of an app to GitHub Pages, so that your app runs just as it does on your local machine.</li>
+		</ul>
+
+	</section>
+
+-->
+
+        <section>
+                <h2 id="about">About Express</h2>
+
+                <p>Express is a Node.js web application framework that makes it easier to write, update, and read APIs. Express can help with all client-server interactions, including:</p>
+                <ul>
+                        <li>Complex routing</li>
+                        <li>POST requests</li>
+                        <li>Server-side logic</li>
+                </ul>
+
+                <p>Using Node.js modules, an Express-powered app can interface with nearly any database. You may use any user authentication scheme you wish.</p>
+        </section>
+
+
+        <section>
+
+                <h2 id="basic-app">Creating a basic Express app</h2>
+
+                <p>Follow the steps below. You must have Node.js installed on your machine.</p>
+                
+                <ol>
+
+                        <li>Open a Command prompt or VS Code Terminal, create a directory to hold your Express-powered app, and make that your working directory. For example:
+<pre class="no-syn"><span class="yellow">mkdir</span> express-app-basic
+<span class="yellow">cd</span> express-app-basic</pre>                        
+</li>
+                        <li>Run the following command to create a <b>package.json</b> file for your app.
+<pre class="no-syn"><span class="yellow">npm</span> init</pre></li>
+                        <li>You will be prompted for a number of details, such as the name and version of your app. Press <b>Enter</b> to accept the default values. 
+                        <span class="inside-ol">&nbsp;</span>
+                        For the entry point, you will be offered a default value of <b>index.js</b>. Amend this to <b>app.js</b> as follows:
+<img src="assets/img/express-intro/app-js.png" alt="screenshot" style="max-width: 600px"></li>
+                        <li>Now install Express locally in your &lt;myapp&gt; directory:
+<pre class="no-syn"><span class="yellow">npm</span> i express</pre></li>
+                        <li>Open your <b>package.json</b> file and verify a "dependencies" section has been added that includes Express with its version number.
+<img src="assets/img/express-intro/dependencies.png" alt="screenshot" style="max-width: 500px"> 
+You will also see that a <b>node_modules</b> sub-directory with over 400 files has been created within your app directory. </li>
+
+                        <li>Create a new text file, paste in the following code, and save the file as <b>app.js</b> in your app directory:
+
+<pre><code class="hljs language-js">const express = require('express')
+
+const app = express()
+const port = 5000
+               
+app.get('/', async (req, res) =&gt; {
+    // Response sent to browser
+    res.send('Hello World!')
+})
+
+app.listen(port, () =&gt; {
+    // Outputs to terminal, not browser
+    console.log(`Express app listening on port ${port}`)
+})</code></pre></li>
+                        <li>In your app directory, run the <b>app.js</b> file:
+<pre class="no-syn"><span class="yellow">node</span> app</pre></li>
+
+                        <li>Verify you are receiving the message in your terminal and the response in your browser.</li>
+
+                        <li>In your app directory, stop the server and install nodemon as a dev dependency:
+<pre class="no-syn"><span class="yellow">npm</span> install --save-dev nodemon</pre></li>
+
+                        <li>Open your <b>package.json</b> file and update it so that it looks similar to the following: 
+<pre><code class="hljs language-js">{
+    "name": "express-app-basic",
+    "version": "1.0.0",
+    "description": "A very basic Express app",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "author": "&lt;Your name here&gt;",
+    "license": "ISC",
+    "dependencies": {
+       "express": "^4.18.2"
+    },
+    "devDependencies": {
+       "nodemon": "^3.0.3"
+    }
+}</code></pre></li>               
+                        <li>Finally, in your terminal, restart the server:
+<pre class="no-syn"><span class="yellow">npm</span> run dev</pre></li>
+                        </ol>
+        <p>Your terminal should look as follows:</p>                        
+
+<img src="assets/img/express-intro/terminal.png" alt="screenshot" style="max-width: 700px">        
+
+        </section>
+
+        <section>
+
+                <h2 id="code-review">Reviewing the Express app code</h2>
+                <p>Let's examine line-by-line the code for this basic Express app.</p>
+                
+                <p>In summary, you will be using various methods of the <b>app</b> object, where <b>app</b> your named instance of an Express application.</p>
+
+<pre class="no-syn">app.method(arguments)</pre>
+
+<p>The <b>app</b> object has various properties and methods for managing the server, routes, middleware, and more.</p>
+
+<p>Begin by importing the express function, which is a top-level function exported by the Express module. Assign this exported function to the variable named <b>express</b>.</p>
+
+<pre><code class="hljs language-js">const express = require('express')</code></pre>
+
+<p>Next, call the express function, which creates and returns an Express application object. This object is stored in the variable <b>app</b>.</p>
+
+<pre><code class="hljs language-js">const app = express()</code></pre>
+
+<p>To be able to use various methods of the <b>app</b> object, such as <b>.listen()</b>, <b>.get()</b>, and <b>.post</b>, you need to specify a port number. For example:</p>
+
+<pre><code class="hljs language-js">const port = 5000</code></pre>
+
+<p>The <b>.get()</b> method of <b>app</b> takes two arguments: the route and the callback function.</p>
+
+<pre><code class="hljs language-js">app.get(&lt;route&gt;, &lt;callback function(args)&gt;)</code></pre>
+
+<p>In this example, the route is the home page <b>'/'</b>.</p> 
+
+<pre><code class="hljs language-js">app.get('/', async function(args) {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+<p>You could rewrite the asynchronous callback function as an arrow function.</p>
+
+<pre><code class="hljs language-js">app.get('/', async (args) =&gt; {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+        <p>The callback function has access to the request (<b>req</b>) and response (<b>res</b>) objects, and can accept them as arguments.</p>
+        
+<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+<p>Express offers a <b>.send()</b> method to send a response to the browser. This method is not available in 'raw' Node.js. </p>
+
+<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
+    res.send('Hello World!')
+})</code></pre>
+
+<p>Express infers the content type and sets the content type header. Express also infers the status code.</p>
+
+<p>Use the <b>.listen()</b> method to listen to browser requests on port 5000.</p>
+<pre><code class="hljs language-js">app.listen(port);</code></pre>
+
+<p>Express assumes the server name is 'localhost' and protocol is 'http'. So there is no need to enter these details.</p>
+
+<p>Optionally, you can pass a callback function to the <b>.listen()</b> method. For example:</p>
+
+<pre><code class="hljs language-js">app.listen(port, () =&gt; {
+    console.log(`Example app listening on port ${port}!`)
+})</code></pre>
+
+<p>Now your <b>app</b> code is ready to handle requests with a specific method (such as GET) to a specific route (such as the home page).</p>
+
+
+</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+
