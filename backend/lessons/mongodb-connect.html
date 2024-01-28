@@ -75,10 +75,12 @@
 	
 			<h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
-			<p><a href="#about">About Express</a></p>
+			<p><a href="#about">About Express to MongoDB connections</a></p>
             <p><a href="#folders-app">Creating a folder structure</a></p>
-            <p><a href="#basic-app">Creating a basic Express app</a></p>
-            <p><a href="#code-review">Reviewing the Express app code</a></p>
+            <p><a href="#mongoose-install">Installing Mongoose</a></p>
+            <p><a href="#config-file">Creating a config.js file</a></p>
+            <p><a href="#app-update">Updating your app.js file</a></p>
+            <p><a href="#code-review">Reviewing the Express/MongoDB app code</a></p>
 		</aside>
 	
 	<article>
@@ -99,11 +101,16 @@
                 <p>You have two main options for connecting an Express app to a MongoDB database:</p>
 
                 <ul>
-                    <li><b>MongoDB client module</b>: This option allows for maximum flexiblity in writing your Express code because it does not require that you first create a schema before creating querIes.</li>
-                    <li><b>Mongoose module</b>: With thIs option, you must create anduse a schema when creating queries.</li>
+                    <li><b>Native MongoDB client module</b>: Because it does not require you to define a schema, this option offers more flexibility in working with different types of data.
+                    <span class="inside-ol">&nbsp;</span>
+                    However, you may end up writing more boilerplate code for CRUD operations and other common tasks. And the lack of built-in schema validation means you have to handle validation yourself.</li>
+
+                    <li><b>Mongoose module</b>: With its Object Data Modeling (ODM), this option makes it easier to work with MongoDB as an object-oriented database and simplifies complex query building.
+                    <span class="inside-ol">&nbsp;</span>
+                    Also Mongoose offers middleware and pre/post hooks for operations. And it provides a 'populate' feature that supports easy referencing between different documents (similar to JOIN in SQL databases).</li>
                 </ul>
 
-                <p>The Mongoose option is preferred </p>
+                <p>For the above reasons, the Mongoose option is used throughout these Tutorials.</p>
 
         </section>
 
@@ -121,9 +128,9 @@
         </section>
         <section>
 
-            <h2 id="basic-app">Installing Mongoose</h2>
+            <h2 id="mongoose-install">Installing Mongoose</h2>
 
-            <p>Before continiung, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
 
             <ol>
 
@@ -134,17 +141,15 @@
 <pre class="no-syn"><span class="yellow">npm</span> i mongoose</pre></li>
                 
                 <li>Open your <b>package.json</b> file and update it for your MongoDB app.
-<img src="assets/img/mongodb-connect/package-json.png" alt="screenshot" style="max-width: 480px">                
-                
-                </li>
-                <p>Because you have defined your app type as a module, you can use the <b>import</b> rather than <b>require()</b> syntax in your <b>app.js</b> file.</p>
+<img src="assets/img/mongodb-connect/package-json.png" alt="screenshot" style="max-width: 480px"></li>
+                <p>Because you have now defined your app type as a module, you can use the <b>import</b> rather than <b>require()</b> syntax in your <b>app.js</b> file.</p>
 
                 </ol>
 
             </section>
             
             <section>
-                <h2>Creating a <code>config.js</code> file</h2>
+                <h2 id="config-file">Creating a <code>config.js</code> file</h2>
                 <p>You will next create a file to hold some constant values for your app.</p>
                 <ol>
                      <li>Create a new text file, paste in the following code, and save the file as <b>config.js</b> in your app folder:
@@ -163,9 +168,9 @@ export const mongoDBUri = "&lt;your-connection-string&gt;;</code></pre></li>
 
         <section>
 
-            <h2>Updating your <code>app.js</code> file</h2>
+            <h2 id="app-update">Updating your <code>app.js</code> file</h2>
 
-            <p>Your final task is to update your Express app to connect it to MongoDB.</p>
+            <p>Your final task is to update your Express app to connect to MongoDB Atlas.</p>
 
             <ol>
                 <li>Open the basic Express <b>app.js</b> file you copied and pasted. It should look like that shown below.
@@ -184,7 +189,10 @@ app.get('/', async (req, res) =&gt; {
 
 async function connectToMongoDB() {
     try {
-        await mongoose.connect((mongoDBUri), { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect((mongoDBUri), { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true
+        });
         console.log('Express app connected to MongoDB');
         app.listen(PORT, () =&gt; {
             console.log(`Express app listening on port ${PORT}`)
@@ -212,69 +220,31 @@ connectToMongoDB();</code></pre></li>
 
         <section>
 
-                <h2 id="code-review">Reviewing the Express/MongoDB app code</h2>
-                <p>Let's examine line-by-line the code for this basic Express/MongoDB app.</p>
-                
-                <p>In summary, you will be using various methods of the <b>app</b> object, where <b>app</b> your named instance of an Express application.</p>
+            <h2 id="code-review">Reviewing the Express/MongoDB app code</h2>
+            <p>Let's examine the code for this basic Express/MongoDB app.</p>
 
-<pre class="no-syn">app.method(arguments)</pre>
-
-<p>The <b>app</b> object has various properties and methods for managing the server, routes, middleware, and more.</p>
-
-<p>Begin by importing the express function, which is a top-level function exported by the Express module. Assign this exported function to the variable named <b>express</b>.</p>
-
-<pre><code class="hljs language-js">const express = require('express')</code></pre>
-
-<p>Next, call the express function, which creates and returns an Express application object. This object is stored in the variable <b>app</b>.</p>
+            <p>As in a previous Tutorial, your Express application is stored in the <b>app</b> variable.</p>
 
 <pre><code class="hljs language-js">const app = express()</code></pre>
 
-<p>To be able to use various methods of the <b>app</b> object, such as <b>.listen()</b>, <b>.get()</b>, and <b>.post</b>, you need to specify a port number. For example:</p>
+            <p>Also as before, you have used the <b>app.get()</b> method to create a route that will respond to GET requests to your app's home page.</p>
 
-<pre><code class="hljs language-js">const port = 5000</code></pre>
-
-<p>The <b>.get()</b> method of <b>app</b> takes two arguments: the route and the callback function.</p>
-
-<pre><code class="hljs language-js">app.get(&lt;route&gt;, &lt;callback function(args)&gt;)</code></pre>
-
-<p>In this example, the route is the home page <b>'/'</b>.</p> 
-
-<pre><code class="hljs language-js">app.get('/', async function(args) {
-    <span class="comment">// Send a response to browser</span>
-})</code></pre>
-
-<p>You could rewrite the asynchronous callback function as an arrow function.</p>
-
-<pre><code class="hljs language-js">app.get('/', async (args) =&gt; {
-    <span class="comment">// Send a response to browser</span>
-})</code></pre>
-
-        <p>The callback function has access to the request (<b>req</b>) and response (<b>res</b>) objects, and can accept them as arguments.</p>
-        
-<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
-    <span class="comment">// Send a response to browser</span>
-})</code></pre>
-
-<p>Express offers a <b>.send()</b> method to send a response to the browser. This method is not available in 'raw' Node.js. </p>
-
-<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
+<pre><code class="hljs language-js">app.get('/', async (req, res) =&gt; {
+    // Response sent to browser
     res.send('Hello Web Browser!')
+})</code></pre>            
+            
+            <p>And again, your app is listening to requests on your chosen port.</p>
+
+<pre><code class="hljs language-js">app.listen(PORT, () =&gt; {
+    console.log(`Example app listening on port ${PORT}!`)
 })</code></pre>
 
-<p>Express infers the content type and sets the content type header. Express also infers the status code.</p>
-
-<p>Use the <b>.listen()</b> method to listen to browser requests on the chosen port.</p>
-<pre><code class="hljs language-js">app.listen(port);</code></pre>
-
-<p>Express assumes the server name is 'localhost' and protocol is 'http'. So there is no need to enter these details.</p>
-
-<p>Optionally, you can pass a callback function to the <b>.listen()</b> method. For example:</p>
-
-<pre><code class="hljs language-js">app.listen(port, () =&gt; {
-    console.log(`Example app listening on port ${port}!`)
-})</code></pre>
-
-<p>Now your <b>app</b> code is ready to handle requests with a specific method (such as GET) to a specific route (such as the home page).</p>
+            <p>This time, however:</p>
+            <ul>
+                <li>Your<b> app.listen()</b> method is wrapped inside a <b>try...catch</b> block, so that it runs only if a connection to the MongoDB has been successful.</li>
+                <li>This outer <b>try...catch</b> is wrapped inside a function that is called at the end of the <b>app.js</b> file.</li>
+            </ul>
 
 
 </section>
