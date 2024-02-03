@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Creating an Express/MongoDB app with routes | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Bullding the backend of an app that uses Express routes to perform CRUD operations on data stored on MongoDB Atlas.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Creating an Express/MongoDB app with routes</h1>
+					<h2>Bullding the backend of an app that uses Express routes to perform CRUD operations on data stored on MongoDB Atlas</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>FULL-STACK COURSE</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#folders-app">Creating a folder structure</a></p>
+            <p><a href="#cors-install">Installing CORS</a></p>
+            <p><a href="#json-update">Updating your package.json file</a></p>
+            <p><a href="#models-file">Creating your models file</a></p>
+            <p><a href="#routes-file">Creating your routes file</a></p>
+            <p><a href="#views">Creating views for your data</a></p>
+            <p><a href="#app-update">Updating your app.js file</a></p>
+            
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Create a schema for accessing MongoDB with Express.</li>
+            <li>Create routes in Express for accessing data stored on MongoDB.</li>
+            <li>Verify the middleware and backend code with basic web pages.</li>
+
+		</ul>
+
+	</section>
+
+
+
+        <section>
+            <h2 id="folders-app">Creating a folder structure</h2>
+
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+
+            <p>In a previous <a href="mongodb-connect.html">Tutorial</a>, you created the folder structure shown below for an Express/MongoDB app.</p>
+            <img src="assets/img/mongodb-app-routes/folders-1.png" alt="screenshot">
+
+            <p>Copy the <b>/app-mongodb-basic</b> folder and rename it to <b>/app-mongodb-routes</b>.</p>
+            <img src="assets/img/mongodb-app-routes/folders-2.png" alt="screenshot" style="max-width: 400px">            
+
+        </section>
+
+
+        <section>
+
+            <h2 id="cors-install">Installing CORS</h2>
+
+            <p>For your new app, you will need to install the CORS middleware module.</p>
+
+            <ol>
+
+                <li>Open a Command prompt or VS Code Terminal, and navigate to the folder that holds your app. For example:
+<pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-routes/server</pre></li>
+
+                <li>Install the CORS module locally as follows:
+<pre class="no-syn"><span class="yellow">npm</span> i cors</pre></li>
+
+                </ol>
+
+            <p>This will update the <b>package.json</b> file and the <b>node_modules</b> subfolder.</p>
+
+        </section>
+
+        <section>
+
+            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+
+            <p>Open your <b>package.json</b> file and update it for your new MongoDB app as shown below.
+<img src="assets/img/mongodb-app-routes/package-json.png" alt="screenshot" style="max-width: 480px"></p> 
+            
+        </section>
+            
+        <section>
+                <h2 id="models-file">Creating your <code>models.js</code> file</h2>
+                <p>Because your app connects to MongoDB Atlas with the <a href="mongodb-connect.html">mongoose</a> module, you will need to create a schema or 'model' for the data you want to work with.</p>
+                
+                <p>Follow these steps:</p>
+                <ol>
+                    <li>In your <b>/server</b> folder, create a subfolder named <b>/models</b>.</li>
+                    <li>Download the <a href="assets/downloads/models.js" target="_blank">models.js</a> file to this subfolder.</li>
+
+                </ol>
+
+                <p>This <b>models.js</b> file looks as shown below.</p>
+
+                <img src="assets/img/mongodb-app-routes/models.png" alt="screenshot" class="wider-115">
+
+        </section>
+            
+
+        <section>
+            <h2 id="routes-file">Creating your <code>routes.js</code> file</h2>
+            <p>Your next task is to create a file that lists the routes supported by your app. Follow these steps:</p>
+            <ol>
+                <li>In your <b>/server</b> folder, create a subfolder named <b>/routes</b>.</li>
+                <li>Download the <a href="assets/downloads/routes.js"  target="_blank">routes.js</a> file to this subfolder.</li>
+
+            </ol>
+
+    </section>
+
+
+    <section>
+            <h2>Creating views for your data</h2>
+
+            <p>To verify your routes are working correctly, create some basic web pages that will interact with your code.</p>
+        <ol>
+            <li>In your <b>/server</b> folder, create a subfolder named <b>/views</b>.</li>
+            <li>Download the <a href="assets/downloads/list.html"  target="_blank">list.html</a> and <a href="assets/downloads/add.html"  target="_blank">add.html</a> files to this subfolder.</li>
+
+        </ol>
+
+
+
+    </section>
+
+    <section>
+
+            <h2 id="app-update">Updating your <code>app.js</code> file</h2>
+
+            <p>Your final task is to update the main app.js file of your Express/MongoDB.</p>
+
+            <ol>
+                <li>Open the Express/MongoDB <b>app.js</b> file you copied and pasted. It should look like that shown below.
+                <img src="assets/img/mongodb-app-routes/app.png" alt="screenshot" style="max-width: 600px"></li>
+                <li>Update the app code as follows and save the file:
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+import express from 'express'
+import { PORT, mongoDBUri } from './config.js';
+import mongoose from 'mongoose';
+import cors from 'cors'
+import soccerPlayerRoutes from './routes/routes.js';
+    
+const app = express()
+app.use(cors())
+app.use(express.json());
+    
+app.use(soccerPlayerRoutes);
+    
+async function connectToMongoDB() {
+    try {
+        await mongoose.connect((mongoDBUri), { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true,
+            dbName: 'db_soccer_players'
+        });
+        console.log('Express app connected to MongoDB');
+        app.listen(PORT, () =&gt; {
+            console.log(`Express app listening on port ${PORT}`)
+        })            
+    } catch (error) {
+        console.error('Could not connect to MongoDB', error);
+    }
+}    
+    
+connectToMongoDB();</code></pre></li>
+
+
+               <li>Finally, in your terminal, start your new Express/MongoDB app:
+<pre class="no-syn"><span class="yellow">npm</span> run dev</pre></li>
+        </ol>
+        <p>Your terminal window should look as follows:</p>                        
+
+<img src="assets/img/mongodb-app-routes/terminal.png" alt="screenshot" class="wider-115">        
+
+            <p>Open the <b>list.html</b> file in your web browser. You should see a listing of all the soccer players.</p>
+
+
+            <p>Open the <b>add.html</b> file in your web browser. Verify you can add a new soccer player to the list.</p>
+</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+

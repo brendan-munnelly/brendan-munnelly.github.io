@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Introduction to Express | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Create a basic app with Node.js and the Express framework that can listen to browser requests and send a response to the browser.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to Express</h1>
+					<h2>Building a basic Express app runnng on a Node.js server that can serve a response to a GET request from a web browser.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>FULL-STACK COURSE</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../../index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#about">About Express</a></p>
+            <p><a href="#folders-app">Creating a folder structure</a></p>
+            <p><a href="#basic-app">Creating a basic Express app</a></p>
+            <p><a href="#code-review">Reviewing the Express app code</a></p>
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Create a basic app with Node.js and the Express framework that can listen to browser requests and send a response.</li>
+		</ul>
+
+	</section>
+
+        <section>
+                <h2 id="about">About Express</h2>
+
+                <p>Express is a Node.js web application framework that makes it easier to work with APIs. An Express can interface with nearly any database using any user authentication scheme.</p>
+        </section>
+
+
+        <section>
+            <h2 id="folders-app">Creating a folder structure</h2>
+
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+            <p>Create a folder structure for your Express-powered app. See below.</p>
+            <img src="assets/img/express-intro/folders.png" alt="screenshot" style="max-width: 700px">
+
+            <p>Some developers name the two folders for a full-stack app as <b>/frontend</b> and <b>/backend</b>. And sometimes the <b>/server</b> or <b>/backend</b> folder will be named <b>/api</b> or <b>/apis</b>.</p>
+
+
+        </section>
+        <section>
+
+                <h2 id="basic-app">Creating a basic Express app</h2>
+
+                <p>Follow the steps below. You must have Node.js installed on your machine.</p>
+                
+                <ol>
+
+                    <li>Open a Command prompt or VS Code Terminal, and navigate to the <b>/server</b> (or <b>/backend</b> or <b>/apis</b>) folder that will hold your app. For example:
+<pre class="no-syn"><span class="yellow">cd</span> apps-express/app-express-basic/server</pre></li>
+                    <li>Run the following command to create a <b>package.json</b> file for your new app.
+<pre class="no-syn"><span class="yellow">npm</span> init <span class="grey">-y</span></pre>
+                    Your <b>package.json</b> file will look as follows.
+                    <img src="assets/img/express-intro/express-1.png" alt="screenshot" style="max-width: 600px"></li>
+                    <li>Install the Express module locally:
+<pre class="no-syn"><span class="yellow">npm</span> i express</pre></li>
+                    <li>Next, install the nodemon module locally as a dev dependency:
+<pre class="no-syn"><span class="yellow">npm</span> i <span class="grey">--save-dev</span> nodemon</pre>
+                    You will now see that a <b>/node_modules</b> sub-folder with over 700 files has been created within your <b>/server</b> folder.
+                    <img src="assets/img/express-intro/node_modules.png" alt="screenshot" style="max-width: 380px"></li>
+                    <li>Open your <b>package.json</b> file. It should look similar to that shown on the left below. Update this file as shown below on the right, and save the file.
+                    <img src="assets/img/express-intro/express-2.png" alt="screenshot" class="wider-115"></li>
+
+ <li>Create a new text file, paste in the following code, and save the file as <b>app.js</b> in your app folder:
+
+
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">const express = require('express')
+    
+const app = express()
+const port = 5000
+                   
+app.get('/', async (req, res) =&gt; {
+    // Response sent to browser
+    res.send('Hello Web Browser!')
+})
+    
+app.listen(port, () =&gt; {
+    // Outputs to terminal
+    console.log(`Express app listening on port ${port}`)
+})</code></pre>
+
+In this example, the <b>port</b> number is 5000. But you can use any valid port number.</li>
+
+               <li>Finally, in your terminal, start your new Express server:
+<pre class="no-syn"><span class="yellow">npm</span> run dev</pre></li>
+        </ol>
+        <p>Your terminal window should look as follows:</p>                        
+
+<img src="assets/img/express-intro/terminal.png" alt="screenshot" style="max-width: 700px">        
+
+            <p>And you should see the following in your web browser for the chosen port number.</p>
+
+<img src="assets/img/express-intro/web-browser.png" alt="screenshot" style="max-width: 700px">     
+
+        </section>
+
+        <section>
+
+                <h2 id="code-review">Reviewing the Express app code</h2>
+                <p>Let's examine the code for this basic Express app line by line.</p>
+                
+                <p>In summary, you will be using various methods of the <b>app</b> object, where <b>app</b> is your named instance of an Express application.</p>
+
+<pre class="no-syn">app.method(arguments)</pre>
+
+<p>The <b>app</b> object has various properties and methods for managing the server, routes, middleware, and more.</p>
+
+<p>Begin by importing the express function, which is a top-level function exported by the Express module. Assign this exported function to the variable named <b>express</b>.</p>
+
+<pre><code class="hljs language-js">const express = require('express')</code></pre>
+
+<p>Next, call the express function, which creates and returns an Express application object. This object is stored in the variable <b>app</b>.</p>
+
+<pre><code class="hljs language-js">const app = express()</code></pre>
+
+<p>To be able to use various methods of the <b>app</b> object, such as <b>.listen()</b>, <b>.get()</b>, and <b>.post</b>, you need to specify a port number. For example:</p>
+
+<pre><code class="hljs language-js">const port = 5000</code></pre>
+
+<p>The <b>.get()</b> method of <b>app</b> can take two arguments: the route and a callback function.</p>
+
+<pre><code class="hljs language-js">app.get(&lt;route&gt;, &lt;callback function(args)&gt;)</code></pre>
+
+<p>In this example, the route is the home page <b>'/'</b>.</p> 
+
+<pre><code class="hljs language-js">app.get('/', async function(args) {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+<p>You could rewrite the asynchronous callback function as an arrow function.</p>
+
+<pre><code class="hljs language-js">app.get('/', async (args) =&gt; {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+        <p>The callback function has access to the request (<b>req</b>) and response (<b>res</b>) objects and can accept them as arguments.</p>
+        
+<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
+    <span class="comment">// Send a response to browser</span>
+})</code></pre>
+
+<p>Express offers a <b>.send()</b> method to send a response to the browser. This method is not available in 'raw' Node.js. </p>
+
+<pre><code class="hljs language-js">app.get('/', (req, res) =&gt; {
+    res.send('Hello Web Browser!')
+})</code></pre>
+
+<p>Express infers the content type and sets the content type header. Express also infers the status code.</p>
+
+<p>Use the <b>.listen()</b> method to listen to browser requests on the chosen port.</p>
+<pre><code class="hljs language-js">app.listen(port);</code></pre>
+
+<p>Express assumes the server name is 'localhost' and protocol is 'http'. So there is no need to enter these details.</p>
+
+<p>Optionally, you can pass a callback function to the <b>.listen()</b> method. For example:</p>
+
+<pre><code class="hljs language-js">app.listen(port, () =&gt; {
+    console.log(`Example app listening on port ${port}!`)
+})</code></pre>
+
+
+        <h3>Order of <code>app.get</code> and <code>app.listen</code> methods</h3>
+
+        <p>The order in which you enter the <b>app.listen()</b> method and route handlers such as <b>app.get()</b> does not affect the functionality of the app. When you define a route, Express simply registers the route internally. It is only when you call <b>app.listen()</b> that the server starts and begins to listen on the specified port for incoming requests.</p>
+
+        <p>However, it's common practice enter all the routes <i>before</i> the <b>app.listen()</b> call. This convention logically separates the setup phase (defining middleware, routes, etc.) from the action of starting the server.</p>
+
+    </section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+

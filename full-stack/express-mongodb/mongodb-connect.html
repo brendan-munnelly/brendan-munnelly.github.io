@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Connecting Express apps to MongoDB | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Using the provided connection string to connect an Express app to your account on MongoDB Atlas.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Connecting Express apps to MongoDB</h1>
+					<h2>Using the provided connection string to connect an Express app to your account on MongoDB Atlas.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>FULL-STACK COURSE</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#about">About Express to MongoDB connections</a></p>
+            <p><a href="#folders-app">Creating a folder structure</a></p>
+            <p><a href="#mongoose-install">Installing Mongoose</a></p>
+            <p><a href="#config-file">Creating a config.js file</a></p>
+            <p><a href="#app-update">Updating your app.js file</a></p>
+            <p><a href="#code-review">Reviewing the Express/MongoDB app code</a></p>
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Use a provided connection string to connect an Express app to your account on MongoDB Atlas.</li>
+		</ul>
+
+	</section>
+
+        <section>
+                <h2 id="about">About Express to MongoDB connections</h2>
+
+                <p>You have two main options for connecting an Express app to a MongoDB database:</p>
+
+                <ul>
+                    <li><b>Native MongoDB client module</b>: Because it does not require you to define a schema, this option offers more flexibility in working with different types of data.
+                    <span class="inside-ol">&nbsp;</span>
+                    However, you may end up writing more boilerplate code for CRUD operations and other common tasks. And the lack of built-in schema validation means you have to handle validation yourself.</li>
+
+                    <li><b>Mongoose module</b>: With its Object Data Modeling (ODM), this option makes it easier to work with MongoDB as an object-oriented database and simplifies complex query building.
+                    <span class="inside-ol">&nbsp;</span>
+                    Also Mongoose offers middleware and pre/post hooks for operations. And it provides a 'populate' feature that supports easy referencing between different documents (similar to JOIN in SQL databases).</li>
+                </ul>
+
+                <p>For the above reasons, the Mongoose option is used throughout these Tutorials.</p>
+
+        </section>
+
+
+        <section>
+            <h2 id="folders-app">Creating a folder structure</h2>
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+            <p>Create a folder structure for your Express-powered and MongoDB-connected app. See below.</p>
+            <img src="assets/img/mongodb-connect/folders-1.png" alt="screenshot">
+
+            <p>In the <b>/app-mongodb-basic</b> subfolder, copy and paste the <b>/client</b> and <b>/server</b> subfolders from your <b>/app-express-basic</b> project folder.</p>
+            <img src="assets/img/mongodb-connect/folders-2.png" alt="screenshot">            
+
+            <p>You may have named the two folders as <b>/frontend</b> and <b>/backend</b>. And the <b>/server</b> or <b>/backend</b> folder as <b>/api</b> or <b>/apis</b>.</p>
+
+        </section>
+
+
+        <section>
+
+            <h2 id="mongoose-install">Installing Mongoose</h2>
+
+            <p>Follow the steps below:</p>
+
+            <ol>
+
+                <li>Open a Command prompt or VS Code Terminal, and navigate to the folder that holds your app. For example:
+<pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-basic/server</pre></li>
+
+                <li>Install the Mongoose module locally as follows:
+<pre class="no-syn"><span class="yellow">npm</span> i mongoose</pre></li>
+                
+                <li>Open your <b>package.json</b> file and update it for your MongoDB app.
+<img src="assets/img/mongodb-connect/package-json.png" alt="screenshot" style="max-width: 480px"></li>
+                <p>Because you have now defined your app type as a module, you can use the <b>import</b> rather than <b>require()</b> syntax in your <b>app.js</b> file.</p>
+
+                </ol>
+
+            </section>
+            
+            <section>
+                <h2 id="config-file">Creating a <code>config.js</code> file</h2>
+                <p>You will next create a file to hold some constant values for your app.</p>
+                <ol>
+                     <li>Create a new text file, paste in the following code, and save the file as <b>config.js</b> in your app folder:
+<pre><code class="hljs language-js">export const PORT = 5000;
+
+export const mongoDBUri = "&lt;your-connection-string&gt;;</code></pre></li>
+
+                    <li>You may use any valid port number. Add your own connection string.</li>
+                </ol>
+
+                <p>You obtained your MongoDB connection string in the previous <a href="mongodb-register.html">Tutorial</a>. Note that the string does <i>not</i> specify a particular database.</p>
+
+        </section>
+            
+            
+
+        <section>
+
+            <h2 id="app-update">Updating your <code>app.js</code> file</h2>
+
+            <p>Your final task is to update your Express app to connect to MongoDB Atlas.</p>
+
+            <ol>
+                <li>Open the basic Express <b>app.js</b> file you copied and pasted. It should look like that shown below.
+                <img src="assets/img/mongodb-connect/express-app.png" alt="screnshot" style="max-width: 600px"></li>
+                <li>Update the app code as follows and save the file:
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">import express from 'express'
+import { PORT, mongoDBUri } from './config.js';
+import mongoose from 'mongoose';
+    
+const app = express()
+                   
+app.get('/', async (req, res) =&gt; {
+    // Response sent to browser
+    res.send('Hello Web Browser!')
+})
+
+async function connectToMongoDB() {
+    try {
+        await mongoose.connect((mongoDBUri), { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true
+        });
+        console.log('Express app connected to MongoDB');
+        app.listen(PORT, () =&gt; {
+            console.log(`Express app listening on port ${PORT}`)
+        })            
+    } catch (error) {
+        console.error('Could not connect to MongoDB', error);
+    }
+}    
+
+connectToMongoDB();</code></pre></li>
+
+
+               <li>Finally, in your terminal, start your new Express/MongoDB app:
+<pre class="no-syn"><span class="yellow">npm</span> run dev</pre></li>
+        </ol>
+        <p>Your terminal window should look as follows:</p>                        
+
+<img src="assets/img/mongodb-connect/terminal.png" alt="screenshot" class="wider-115">        
+
+            <p>And you should see the following in your web browser for your chosen port number.</p>
+
+<img src="assets/img/mongodb-connect/web-browser.png" alt="screenshot" style="max-width: 700px">     
+
+        </section>
+
+        <section>
+
+            <h2 id="code-review">Reviewing the Express/MongoDB app code</h2>
+            <p>Let's examine the code for this basic Express/MongoDB app.</p>
+
+            <p>As in a previous Tutorial, your Express application is stored in the <b>app</b> variable.</p>
+
+<pre><code class="hljs language-js">const app = express()</code></pre>
+
+            <p>Also as before, you have used the <b>app.get()</b> method to create a route that will respond to GET requests to your app's home page.</p>
+
+<pre><code class="hljs language-js">app.get('/', async (req, res) =&gt; {
+    // Response sent to browser
+    res.send('Hello Web Browser!')
+})</code></pre>            
+            
+            <p>And again, your app is listening to requests on your chosen port.</p>
+
+<pre><code class="hljs language-js">app.listen(PORT, () =&gt; {
+    console.log(`Example app listening on port ${PORT}!`)
+})</code></pre>
+
+            <p>This time, however:</p>
+            <ul>
+                <li>Your<b> app.listen()</b> method is wrapped inside a <b>try...catch</b> block, so that it runs only if a connection to the MongoDB has been successful.</li>
+                <li>This outer <b>try...catch</b> is wrapped inside a function that is called at the end of the <b>app.js</b> file.</li>
+            </ul>
+
+
+</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+
