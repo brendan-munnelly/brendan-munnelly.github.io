@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View a  Soccer Player</title>
+    <meta name="description" content="Viewing a selected by _id soccer player from MongoDB Atlas using a GET route set up in the routes.js file of an Express app.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+
+    <style>
+        body, header, section {background-color: #e8e7d5;}
+        header { padding: 2% 5% !important}
+        header h1 { font-size: var(--font-size-xl); letter-spacing: 0 }
+
+        header p button { padding: 8px 16px; font-size: calc(var(--font-size-sm) * 1.2 ); background-color: #4db33d;; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s }  
+
+        section { padding-top: 20px }
+
+        @media (min-width: 768px) { .data-table { padding-top: 4%; padding-bottom: 4% } }      
+        @media (max-width: 767px) { .data-table { padding: 5% 10% } }
+
+        .data-table {
+            margin-top: 0;
+            border-collapse: collapse;
+            font-size: 18px;
+            min-width: 60%;
+            max-width: 70%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: scroll; 
+            border: solid 1px #888;
+            box-shadow: rgba(0, 0, 0, 0.2) 14px 14px 14px 0;
+        }
+
+        .data-table th, .data-table td { padding: 8px 18px; text-align: left }
+        .data-table th { background-color: lightgrey;}
+        .data-table td, .data-table td { border-bottom: solid 1px #888; background-color: #fff;}
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <header class="text-center-desktop text-center-mobile">
+        <h1>View a Selected Soccer Player</h1>
+        <p><button onclick="returnToList()">Return to List of Players</button>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="updatePlayer()">Update this Player</button>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="deletePlayer()">Delete this Player</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="addNewPlayer()">Add a New Player</button></p>
+    </header>
+
+        <section>
+
+
+        <table id ="selected-player" class="data-table theme-light">
+
+            <tr>
+                <td><b>Rank</b></td>
+                <td id="rank">${player.rank}</td>
+            </tr>
+
+            <tr>
+                <td><b>First Name</b></td>
+                <td id="firstname">${player.firstname}</td>
+            </tr>
+
+            <tr>
+                <td><b>Last Name</b></td>
+                <td id="lastname">${player.lastname}</td>
+            </tr>
+
+            <tr>
+                <td><b>Age</b></td>
+                <td id="age">${player.age}</td>
+            </tr>
+
+            <tr>
+                <td><b>Club</b></td>
+                <td id="club">${player.club}</td>
+            </tr>
+
+            <tr>
+                <td><b>Trophies</b></td>
+                <td id="trophies">${player.trophies}</td>
+            </tr>
+
+            <tr>
+                <td><b>Nationality</b></td>
+                <td id="nationality">${player.nationality}</td>
+            </tr>
+
+            <tr>
+                <td><b>MongoDB _id</b></td>
+                <td id="m_id">${player._id}</td>
+            </tr>
+
+
+        </table>
+    </section>
+
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('id');
+        console.log(myParam);
+
+        async function fetchSelectedPlayer() {
+            // Get id from URL
+
+
+            try {
+                const response = await fetch('http://localhost:5000/soccer_players/view/'+myParam);
+
+                const data = await response.json();
+                // populate table
+                document.getElementById('rank').innerText = data.rank;
+                document.getElementById('firstname').innerText = data.firstname;
+                document.getElementById('lastname').innerText = data.lastname;
+                document.getElementById('age').innerText = data.age;
+                document.getElementById('club').innerText = data.club;
+                document.getElementById('trophies').innerText = data.trophies;
+                document.getElementById('nationality').innerText = data.nationality;
+                document.getElementById('m_id').innerText = data._id;
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        fetchSelectedPlayer();
+
+        function returnToList() {
+            window.location.href = 'list.html';
+        }
+
+        function addNewPlayer() {
+            window.location.href = 'add.html';
+        }
+
+        function updatePlayer() {
+            window.location.href = 'update.html?id='+myParam;
+        }
+
+        function deletePlayer() {
+            window.location.href = 'delete.html?id='+myParam;
+        }
+
+
+    </script>
+
+</body>
+</html>

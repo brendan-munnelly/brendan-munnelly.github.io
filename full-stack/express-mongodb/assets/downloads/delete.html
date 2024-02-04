@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete a Selected Soccer Player</title>
+    <meta name="description" content="Deleting a selected by _id soccer player from MongoDB Atlas using a DELETE route set up in the routes.js file of an Express app.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+
+
+</head>
+
+
+<body>
+
+
+    <script>
+        // Get id from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('id');
+        async function deleteSelectedPlayer() {
+            
+           try {
+                const response = await fetch('http://localhost:5000/soccer_players/delete/'+myParam, {
+                    method: 'DELETE'
+                });
+                console.log(response);
+                alert('Player deleted');
+                window.location.href = 'list.html';
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error deleting player');
+            }
+        }
+
+        deleteSelectedPlayer();
+
+
+    </script>
+
+</body>
+</html>

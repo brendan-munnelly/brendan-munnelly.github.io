@@ -3,18 +3,23 @@ const router = express.Router();
 
 import SoccerPlayerModel from '../models/models.js';
 
+// Home page with link
+router.get('/', async (req, res) => {
+    res.send('index.html');
+});
+
 // List all players
-router.get('/soccer_players', async (req, res) => {
+router.get('/soccer_players/list', async (req, res) => {
     try {
-        const players = await SoccerPlayerModel.find();
+        const players = await SoccerPlayerModel.find().sort( { "rank": 1 } );
         res.json(players);
     } catch (error) {
         res.status(500).send(error.message);
     }
 });
 
-// View one player by id
-router.get('/soccer_players/:id', async (req, res) => {
+// View selected player by id
+router.get('/soccer_players/view/:id', async (req, res) => {
     try {
         const player = await SoccerPlayerModel.findById(req.params.id);
         res.json(player);
@@ -23,8 +28,8 @@ router.get('/soccer_players/:id', async (req, res) => {
     }
 });
 
-// Add one new player
-router.post('/soccer_players', async (req, res) => {
+// Add a new player
+router.post('/soccer_players/add', async (req, res) => {
     try {
         const newPlayer = new SoccerPlayerModel(req.body);
         const savedPlayer = await newPlayer.save();
@@ -34,8 +39,8 @@ router.post('/soccer_players', async (req, res) => {
     }
 });
 
-// Update one player's document
-router.put('/soccer_players/:id', async (req, res) => {
+// Update a player selected by id 
+router.put('/soccer_players/update/:id', async (req, res) => {
     try {
         const updatedPlayer = await SoccerPlayerModel.findByIdAndUpdate(
             req.params.id,
@@ -48,8 +53,8 @@ router.put('/soccer_players/:id', async (req, res) => {
     }
 });
 
-// Delete one player's document
-router.delete('/soccer_players/:id', async (req, res) => {
+// Delete a player selected by id
+router.delete('/soccer_players/delete/:id', async (req, res) => {
     try {
         await SoccerPlayerModel.findByIdAndDelete(req.params.id);
         res.json({ message: 'Player deleted successfully' });

@@ -4,31 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Soccer Player</title>
+    <title>Add a new Soccer Player</title>
+    <meta name="description" content="Adding a new soccer player to MongoDB Atlas using a POST route set up in the routes.js file of an Express app.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+
+    <style>
+        body, header, section {background-color: #e8e7d5;}
+        header { padding: 2% 5% !important}
+        header h1 { font-size: var(--font-size-xl); letter-spacing: 0 }
+
+        header p button,
+        button#addPlayer { 
+            padding: 8px 16px; font-size: calc(var(--font-size-sm) * 1.2 ); background-color: #4db33d;; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s
+        }  
+
+        section { padding-top: 0px }
+
+        @media (min-width: 768px) { .wrapper { padding-top: 20px; padding-bottom: 4% } }      
+        @media (max-width: 767px) { .wrapper { padding: 5% 10% } }
+
+        .wrapper {
+            margin-top: 0;
+            border-collapse: collapse;
+            font-size: 18px;
+            min-width: 60%;
+            max-width: 70%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: scroll; 
+            border: solid 1px #888;
+            box-shadow: rgba(0, 0, 0, 0.2) 14px 14px 14px 0;
+            background-color: #fff;
+        }
+
+        .form-row { display: flex; justify-content: flex-end; padding: 12px 42px 12px 12px }
+
+        .form-row > label { padding: 10px 20px 10px 60px; flex: 1; text-align: left }
+        .form-row > input { flex: 2; padding: 10px 40px 10px 20px }
+
+    </style>
+
 </head>
+
+
 <body>
-    <h2>Add New Soccer Player</h2>
 
-    <form id="addPlayerForm">
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname" required><br><br>
+    <header class="text-center-desktop text-center-mobile">
+        <h1>Add a New Soccer Player</h1>
+        <p><button onclick="returnToList()">Return to List of Players</button> </p>
 
-        <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname" required><br><br>
+        <p><br><br>Please complete all fields.</p>
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required><br><br>
+    </header>
 
-        <label for="club">Club:</label>
-        <input type="text" id="club" name="club" required><br><br>
+    <section>
 
-        <label for="trophies">Trophies:</label>
-        <input type="number" id="trophies" name="trophies" required><br><br>
+        <form id="addPlayerForm" class="flex-form">
+            <div class="wrapper">
+                <div class="form-row">
+                    <label for="rank">Rank:</label>
+                    <input type="text" id="rank" name="rank" required>
+                </div>
 
-        <label for="nationality">Nationality:</label>
-        <input type="text" id="nationality" name="nationality" required><br><br>
+                <div class="form-row">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
 
-        <button type="submit">Add Player</button>
-    </form>
+                <div class="form-row">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="club">Club:</label>
+                    <input type="text" id="club" name="club" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="trophies">Trophies:</label>
+                    <input type="number" id="trophies" name="trophies" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="nationality">Nationality:</label>
+                    <input type="text" id="nationality" name="nationality" required>
+                </div>
+
+                <div class="form-row" style="padding-bottom: 0 ">
+                    <p>&nbsp;</p>
+                    <button type="submit" id="addPlayer">Add Player</button>
+                </div>
+            </div>
+
+        </form>
+
+    </section>
 
     <script>
 
@@ -36,6 +113,7 @@
             e.preventDefault();
 
             const formData = {
+                rank: document.getElementById('rank').value,
                 firstname: document.getElementById('firstname').value,
                 lastname: document.getElementById('lastname').value,
                 age: document.getElementById('age').value,
@@ -47,7 +125,7 @@
             console.log(JSON.stringify(formData));
 
             try {
-                const response = await fetch('http://localhost:5000/soccer_players', {
+                const response = await fetch('http://localhost:5000/soccer_players/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,11 +137,17 @@
                 console.log('Success:', data);
                 alert('Player added successfully!');
                 document.getElementById('addPlayerForm').reset();
+                window.location.href = 'list.html';
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error adding player');
             }
         });
+
+        
+        function returnToList() {
+            window.location.href = 'list.html';
+        }
 
     </script>
 
