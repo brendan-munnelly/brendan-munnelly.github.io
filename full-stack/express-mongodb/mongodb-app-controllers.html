@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Adding route controllers | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Refactoring the Express routes code to move the route handler functions to a separate controllers file.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Adding route controllers</h1>
+					<h2>Refactoring the Express routes code to move the route handler functions to a separate controllers file.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>Express and MongoDB</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about">About routes and controllers</a></p>
+            <p><a href="#folders-app">Creating a folder structure</a></p>
+            <p><a href="#async-install">Installing the express-async-handler</a></p>
+            <p><a href="#json-update">Updating your package.json file</a></p>
+            <p><a href="#file-download">Downloading your controllers.js file</a></p>
+            <p><a href="#routes-file">Refactoring your <code>routes.js</code> file</a></p>
+            <p><a href="#running-testing">Running and testing your app</a></p>
+            
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Create a <b>contollers.js</b> file to store the various router functions for your Express/MongoDB app.</li>
+            <li>Refactor the <b>routes.js</b> file so that the routes contain only the router functions names, not the actual function code.</li>
+            <li>Export the router functions from the <b>controllers.js</b> file and import them into the <b>router.js</b> file.</li>
+
+		</ul>
+
+	</section>
+
+
+        <section>
+            <h2 id="about">About routes and controllers</h2>
+
+            <p>In this Tutorial, you will refactor the Express routes code to move the route handler functions to a separate controllers file.</p>
+
+            <p>Below is shown one such route from the <b>routes.js</b> file of the Express/MongoDB app you created in the previous <a href="mongodb-app-routes.html">Tutorial</a>.</p>
+
+            <p>As you can see, the route includes the method <b>.get()</b>, the URL path, and, lastly, the JavaScript function that serves the HTML response back to the client.</p>
+
+            <img src="assets/img/mongodb-app-controllers/router-function-1.png" alt="screenshot" style="max-width: 700px">
+
+            <p>Your task in this Tutorial is to move the router handler function code out of each route and replace the code with just a function name. See the example below.</p>
+
+            <img src="assets/img/mongodb-app-controllers/router-function-2.png" alt="screenshot" style="max-width: 660px">           
+            
+            <p>The actual code for each router function will be stored in a <b>controllers.js</b> file. See a sample router function below.</p>
+
+            <img src="assets/img/mongodb-app-controllers/router-function-3.png" alt="screenshot" style="max-width: 700px"> 
+            
+            <p>The purpose of this code refactoring is to move your Express/MongoDB app closer to the Model-View-Controller design pattern.</p>
+
+            <img src="assets/img/mongodb-app-controllers/mvc_express.png" alt="screenshot" style="max-width:660px">
+
+        </section>
+
+
+
+        <section>
+            <h2 id="folders-app">Creating a folder structure</h2>
+
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+
+            <p>In a previous Tutorials, you created the folder structure shown below for two Express/MongoDB apps.</p>
+            <img src="assets/img/mongodb-app-controllers/folders-1.png" alt="screenshot">
+
+            <p>Copy the <b>/app-mongodb-routes</b> folder and rename it to <b>/app-mongodb-controllers</b>.</p>
+            <img src="assets/img/mongodb-app-controllers/folders-2.png" alt="screenshot">            
+
+        </section>
+
+
+        <section>
+
+            <h2 id="async-install">Installing the express-async-handler</h2>
+
+            <p>The route controllers in your app will use the <b>express-async-handler</b> middleware module. So, let's install it as follows:</p>
+            <ol>
+
+                <li>Open a Command prompt or VS Code Terminal, and navigate to the folder that holds your app. For example:
+<pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-controllers/server</pre></li>
+
+                <li>Install the module locally as follows:
+<pre class="no-syn"><span class="yellow">npm</span> i express-async-handler</pre></li>
+
+            </ol>
+
+            <p>This will update the <b>package.json</b> file and the <b>node_modules</b> subfolder.</p>
+
+        </section>
+
+
+
+        <section>
+
+            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+
+            <p>Open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
+<img src="assets/img/mongodb-app-controllers/package-json.png" alt="screenshot" style="max-width: 480px"> 
+            
+        </section>
+            
+        <section>
+            <h2 id="file-download">Downloading your <code>controllers.js</code> file</h2>
+            <p>Your next task is to create a file that will list the controllers for your app. </p>                
+            <ol>
+                <li>In your <b>/server</b> folder, create a subfolder named <b>/controllers</b>.</li>
+                <li>Download the <a href="assets/downloads/controllers.js">controllers.js</a> file to this subfolder.</li>
+            </ol>
+            <p>In VS Code, open the <b>controllers.js</b> file. The file begins by importing the <b>asyncHandler</b> module and your <b>models.js</b> file.</p>
+
+            <img src="assets/img/mongodb-app-controllers/controllers-2.png" alt="screenshot">
+
+            <p>In the screenshot above, each of the five controller functions are minimised for reasons of space.</p>
+            
+            <p>At the end of the file, the five controller functions are exported. These will be imported into your <b>routes.js</b> file.</p>
+
+        </section>
+            
+
+        <section>
+            <h2 id="routes-file">Refactoring your <code>routes.js</code> file</h2>
+            <p>Your next task is to update your <b>routes.js</b> file.</p>
+            <ol>
+                <li>Select and copy the code below.
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+import express from 'express'
+const router = express.Router();
+import { player_add, player_delete, player_get, player_update, players_index } from '../controllers/controllers.js';
+    
+// Home page with link
+router.get('/', async (req, res) =&gt; {
+    res.send('index.html');
+});
+    
+// List all players
+router.get('/soccer_players/list', players_index);
+    
+// View selected player by id
+router.get('/soccer_players/view/:id', player_get);
+    
+// Add a new player
+router.post('/soccer_players/add', player_add);
+    
+// Update a player selected by id 
+router.put('/soccer_players/update/:id', player_update);
+    
+// Delete a player selected by id
+router.delete('/soccer_players/delete/:id', player_delete);
+    
+export default router;</code></pre></li>
+             
+               <li>Open your <b>routes.js</b> file, paste in the copied code to overwrite the existing content, and save the file.</li>
+
+            </ol>
+
+            <p>You do not need to update your main <b>app.js</b> file.</p>
+
+    </section>
+
+
+    <section>
+        <h2 id="running-testing">Running and testing your app</h2>
+
+        <p>To verify your new controllers and updated routes are working correctly, follow these steps:</p>
+        <ol>
+
+            <li>In your terminal, start your Express/MongoDB app:
+<pre class="no-syn"><span class="yellow">npm</span> run dev</pre>
+            Your terminal window should look as follows:
+            <img src="assets/img/mongodb-app-controllers/terminal.png" alt="screenshot" class="wider-115"></li>
+            <li>In Windows Explorer or Finder, go to your <b>/views</b> subfolder and then open the <b>index.html</b> in a web browser. 
+            <img src="assets/img/mongodb-app-controllers/index-1.png" alt="screenshot" style="max-width: 500px"></li>
+            <li>On the Home screen, click the <b>List all soccer players </b>link.
+            <img src="assets/img/mongodb-app-controllers/list.png" alt="screenshot" style="max-width: 700px"></li>
+            <li>From this and linked web pages, perform some CRUD operations to verify that your updated backend code works correctly.</li>
+
+        </ol>
+                
+ 
+                
+</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+
