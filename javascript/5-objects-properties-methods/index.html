@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>5: Objects, properties, and methods | JavaScript Tutorials | Brendan Munnelly</title>
-	<meta name="description" content="Writing Your First JS Code: A front-end development tutorial from Brendan Munnelly">
+	<title>5: Objects, Properties, and Methods | JavaScript Tutorials</title>
+	<meta name="description" content="Adding JavaScript code to a web page, using JavaScript to display text with HTML formatting, and using your web browser&#8219;s JavaScript Developer Console.">
+
 
     <!-- Stylesheet-->
     <link rel="stylesheet" href="../assets/css/javascript-tutorials-brendan-munnelly.css" />
+
+	<!-- Stylesheet-->
+	<link rel="stylesheet" href="../assets/css/javascript-tutorials-brendan-munnelly.css" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,10 +25,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
+
 </head>
 
-	<body id="top">
 
+	<body id="top">
 
 		<header>
 			<div class="wrapper">
@@ -35,7 +40,7 @@
 				</div>
 		
 				<div class="content">
-					<h1>5: Objects, properties, and methods</h1>
+					<h1>5: Objects, Properties, and Methods</h1>
 					<h2>Exploring the navigator (web browser) object, the window object, the location (web address) object, and the document (web page) object.</h2>
 				</div>
 			</div><!-- /wrapper -->
@@ -50,16 +55,21 @@
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#objects-properties-methods">About objects, properties, and methods</a></p>
-				<p><a href="#navigator-object">The web browser navigator object</a></p>
+				<p><a href="#objects-properties-methods">Objects, properties and methods</a></p>
+				<p><a href="#navigator-object">The web browser <span class="syn-js">navigator</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-1">Exercise 2.1: Displaying your web browser properties</a></p>
+				<p class="toc-indent"><a href="#object-property-notation">About <span class="syn-js">objectname.propertyname</span> notation</a></p>
 				<p><a href="#browser-sniffing">Web browser sniffing</a></p>
-				<p class="toc-indent"><a href="#literals">Displaying literals with document.write()</a></p>
-				<p><a href="#window-object">The window object of the web browser</a></p>
-				<p><a href="#location-object">The location object of the web page</a></p>
-				<p class="toc-indent"><a href="#object-property-notation">About object.property syntax</a></p>
-				<p><a href="#document-object">The web page document object</a></p>
+				<p><a href="#window-object">The <span class="syn-js">window</span> object of the web browser</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-2">Exercise 2.1 (continued): Displaying your viewport dimensions</a></p>
+				<p class="toc-indent"><a href="#literals">Displaying literals with <span class="syn-js">document.write()</span></a></p>
+				<p><a href="#location-object">The web page <span class="syn-js">location</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-3">Exercise 2.1 (continued): Displaying the web page URL</a></p>
+				<p><a href="#document-object">The web page <span class="syn-js">document</span> object</a></p>
+				<p class="toc-indent"><a href="#ex-2-1-4">Exercise 2.1 (continued): Displaying your web page details</a></p>
 				<p><a href="#objects-methods">About objects and methods</a></p>
-
+				<p><a href="#github-upload">Uploading your JavaScript exercise file to GitHub</a></p>
+				<p><a href="#lesson-summary">Lesson summary</a></p>	
 			</aside>
 	
 	<article>
@@ -76,8 +86,20 @@
 
 </section>
 
-<section>
 
+<section>
+	<div class="code-snippets">
+		<h3 style="margin-top:0">Exercise Files</h3>
+
+		<p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new sub-folder named <b>5</b>.
+			
+		</p><p>Save the exercise file below to this new <b>javascript/exercises/5</b> sub-folder.</p>
+		<p>📄  &nbsp;<a href="exercises/index.html" target="_blank"><b>index.html</b></a></p>
+	</div>
+</section>
+
+
+<section>
 	<p>In this Lesson you will meet the following JavaScript terms:</p>
 
 	<ul>
@@ -87,51 +109,28 @@
 
 </section>
 
-<section>
-
-	<div class="code-snippets">
-		<p>To work with the exercise file in this and later Tutorials:</p>
-		<ul style="margin-bottom: 12px">
-			<li>Create a new folder named <b>javascript</b>.</li>
-			<li>In this, create a sub-folder named <b>exercises</b>.</li>
-		</ul>
-		<p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new sub-folder named <b>2</b>.</p>
-			
-		<p>Save the exercise file below to this new <b>javascript/exercises/2</b> sub-folder.</p>
-		<p>📄  &nbsp;<a href="exercises/index.html" target="_blank"><b>Objects, Properties, and Methods: Exercises</b></a></p>
-	</div>
-
-</section>
-
 <section id="objects-properties-methods">
 
-	<h2>About objects, properties, and methods</h2>
+	<h2>About objects, properties and methods</h2>
 
 	<p>Objects, properties and methods are three important concepts in JavaScript.</p>
 	
-	<table class="table-geo-one">
-		<tbody>
+	<table class="table-js-methods">
+        <tbody>
+            <tr>
+               <td style="min-width: 20%"><p><span class="syn-js">object</span></p></td>
+               <td><p>A <i>container</i> for holding properties. Many objects contain other objects, which are said to be <i>nested</i> inside them.</p></td>
+            </tr>
 			<tr>
-				<td width="18%"><p><b>object</b></p></td>
-				<td><p>A <i>container</i> for holding properties. Many objects contain other objects, which are said to be <i>nested</i> inside them.</p></td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr /></td>
-			</tr>
-			<tr>
-				<td width="18%"><p><b>property</b></p></td>
+				<td style="min-width: 20%"><p><span class="syn-js">property</span></p></td>
 				<td><p>A <i>feature</i> of an object with a name and a value. All values of a property can be read by JavaScript code, and some values can be changed.</p></td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr /></td>
-			</tr>
-			<tr>
-				<td width="18%"><p><b>method</b></p></td>
-				<td><p>An <i>action</i> that JavaScript code can perform on an object or its properties. Method names end with a parenthesis ().</p></td>
-			</tr>
-		</tbody>
-	</table>
-
+			 </tr>
+			 <tr>
+				<td style="min-width: 20%"><p><span class="syn-js">method</span></p></td>
+				<td><p>An <i>action</i> that JavaScript code can perform on an object or its properties. Method names end with a parenthesis <span class="syn-js">()</span>.</p></td>
+			 </tr>
+        </tbody>
+    </table>                    
 
 	<p>This Lesson will focus on four important objects in JavaScript:</p>
 
@@ -179,18 +178,47 @@
 	</table>
 
 
-	<p>In Exercise 2.1 you will use this property to display information about your web browser.</p>
+	<p>In Exercise 5.1 you will use this property to display information about your web browser.</p>
 
-	<h4 id="ex-2-1-1">Exercise 2.1: Displaying your web browser properties</h4>
+	<h4 id="ex-2-1-1">Exercise 5.1: Displaying your web browser properties</h4>
+	
+	<p>Follow these steps:</p>
 
-	<p>In the first <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>
+	<ol>
+		<li>Open the <b>index.html</b> file you saved to your <b>/exercises/5</b> folder.</li>
+
+		<li>Near the top of the web page you can see an HTML <span class="syn-html">&lt;h2&gt;</span> &#8230; <span class="syn-html">&lt;h2&gt;</span> sub-heading that contains the text &#8220;OS platform and web browser.&#8221;
+		<span class="inside-ol">&nbsp;</span>
+		Under this sub-heading is an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+
+		<li>Copy-and-paste the following line of JavaScript code inside these tags.
+
 <pre class="language-js">
- document.write(`&lt;p&gt;&lt;b&gt; ${navigator.userAgent} &lt;/b&gt;&lt;/p&gt;`);
+ document.write("&lt;p&gt;&lt;b&gt;"+navigator.userAgent+"&lt;\/b&gt;&lt;\/p&gt;");
 </pre>
 
-	<p>Save and reload your web page. The result should look similar to that below, depending on your browser and OS.</p>
+	Your VS Code should now look as follows.
 
+	<img src="assets/img/vs-code-1.png" alt="JavaScript"></li>
+
+	<li>In VS Code, save the web page file. And then reload the page in your web browser.</li>
+</ol>
+
+	<p>On Microsoft Windows, for various web browsers, the results should look as shown below.</p>
+
+	<h5 style="margin-bottom:-6px; font-style:italic">Mozilla Firefox</h5>
+	<img src="assets/img/browser-ff.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-6px; font-style:italic">Google Chrome</h5>
 	<img src="assets/img/browser-chrome.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-6px; font-style:italic">Microsoft Edge</h5>
+	<img src="assets/img/browser-edge.png" alt="JavaScript">
+
+	<h5 style="margin-bottom:-6px; font-style:italic">Opera</h5>
+	<img src="assets/img/browser-opera.png" alt="JavaScript">
+
+	<p>Leave the &#128196; <b>index.html</b> file open in VS Code and your web browser. You will update it three more times in this Lesson.</p>
 
 </section>
 
@@ -225,6 +253,8 @@
 	<p class="defhead">JavaScript Object Property</p>
 
 	<p class="deftext">A feature or characteristic of an object that can be accessed or set using JavaScript methods. Some properties are scriptable; others are read-only.</p>
+
+
 
 
 	<h3 id="literals">Displaying literals with <span>document.write()</span></h3>
@@ -289,18 +319,29 @@ document.write("Web browser language: +navigator.language");
 		</tbody>
 	</table>
 
-	<h4 id="ex-2-2">Exercise 2.2: Displaying your viewport dimensions</h4>
+	<h4 id="ex-2-1-2">Exercise 5.2: Displaying your viewport dimensions</h4>
 	<p>Let&#8217;s use these two properties to display the dimensions of your web browser viewport.</p>
 
-	<p>In the second <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>
+	<ol>
+		<li>In your <b>index.html</b> exercise file in VS Code, you can see a second sub-heading of &#8220;Web browser viewport&#8221; and under it an empty pair of opening and closing pair of <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following four lines of JavaScript code inside these tags.
+
 <pre class="language-js">
 document.write("&lt;p&gt;Viewport width: &lt;b&gt;"+window.innerWidth+"px&lt;\/b&gt;&lt;br&gt;"); 
 document.write("Viewport height: &lt;b&gt;"+window.innerHeight+"px&lt;\/b&gt;&lt;\/p&gt;"); 
 </pre>
+		Your VS Code should now look as follows.
 
-<p>Save and reload your web page. The result should look similar to that below.</p>
+		<img src="assets/img/vs-code-2.png" class="wider-110" alt="JavaScript"></li>
 
-		<img src="assets/img/window-viewport.png" alt="JavaScript">
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
+
+		<img src="assets/img/window-viewport.png" alt="JavaScript"></li>
+
+	</ol>
+
+	<p>Leave the &#128196; <b>index.html.html</b> file open in VS Code and your web browser. You will make two more updates to it.</p>
 
 </section>
 
@@ -333,26 +374,37 @@ document.write("Viewport height: &lt;b&gt;"+window.innerHeight+"px&lt;\/b&gt;&lt
 		</tbody>
 	</table>
 
-	<h4 id="ex-2-1-3">Exercise 2.3: Displaying your web page URL</h4>
+	<h4 id="ex-2-1-3">Exercise 5.3: Displaying your web page URL</h4>
 	<p>Let&#8217;s update the exercise web page to display its address.</p>
 
-	<p>In the third <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>	
+	<ol>
+		<li>In your &#128196; <b>index.html</b> file in VS Code, you can see a third sub-heading of &#8220;Web page URL&#8221; and under it an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following line of JavaScript code inside these tags.
 
 <pre class="language-js">
  document.write("&lt;p&gt;&lt;b&gt;"+window.location.href+"&lt;\/b&gt&lt;\/p&gt;");
 </pre>
+		Your VS Code should now look as follows.
 
-		<p>Save and reload your web page. The result should look similar to that below.</p>
+		<img src="assets/img/vs-code-3.png" alt="JavaScript"></li>
 
-		<img src="assets/img/window-location.png" alt="JavaScript">
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
 
-	<h3 id="object-property-notation">About <span>object.property</span> syntax</h3>
+		<img src="assets/img/window-location.png" alt="JavaScript"></li>
+
+	</ol>
+
+	<p>Leave the &#128196; <b>index.html</b> file open in VS Code and your web browser. You will make one more update to it.</p>
+
+
+	<h3 id="object-property-notation">About <span style="letter-spacing:-1px">object</span><span style="letter-spacing:0">name</span>.<span style="letter-spacing:-1px">property</span><span style="letter-spacing:0">name</span> notation</h3>
 	<p>In JavaScript code, the standard format for writing the name of an object and one of its properties is as follows.</p>
 
 <pre class="language-js">
 objectname.propertyname
 </pre>
-	<p>Note that a full stop (<b>.</b>) is used to separate the name of the property from the name of the object. Below are some examples of JavaScript statements that display a property value of a particular object. The first one you already used in Exercise 2.1.</p>
+	<p>Note that a full stop (<b>.</b>) is used to separate the name of the property from the name of the object. Below are some examples of JavaScript statements that display a property value of a particular object. The first one you already used in Exercise 5.1.</p>
 	
 <pre class="language-js">
 document.write(navigator.userAgent);
@@ -403,11 +455,14 @@ document.write(document.title);
 	 </tbody>
 	</table>
 
-	<h4 id="ex-2-1-4">Exercise 2.4: Displaying your web page details</h4>
+	<h4 id="ex-2-1-4">Exercise 5.4: Displaying your web page details</h4>
 
 	<p>Let&#8217;s use these properties to display details about your <b>exercise 2-1.html</b> web page.</p>
 
-	<p>In the fourth <b>js-box</b> DIV, enter the following statement inside the <span class="syn-js">&lt;script&gt;</span> tags:</p>	
+	<ol>
+		<li>In your &#128196; <b>index.html.html</b> file in VS Code, you can see a fourth sub-heading of &#8220;Web page details&#8221; and under it an empty pair of opening and closing <span class="syn-html">&lt;script&gt;</span> &#8230; <span class="syn-html">&lt;/script&gt;</span> HTML tags.</li>
+		
+		<li>Copy-and-paste the following three lines of JavaScript code inside these tags.
 
 <pre class="language-js">
  document.write("&lt;p&gt;Title: &lt;b&gt;"+document.title+"&lt;\/b&gt;&lt;\/p&gt;");
@@ -415,13 +470,18 @@ document.write(document.title);
  document.write("&lt;p&gt;Referrer: &lt;b&gt;"+document.referrer+"&lt;\/b&gt;&lt;\/p&gt;");  
 </pre>
 
+		Your VS Code should now look as follows.
+		<img src="assets/img/vs-code-4.png" class="wider-115" alt="JavaScript"></li>
 
-		<p>Save and reload your web page. The result should look similar to that below.</p>
-		<img src="assets/img/document-details.png" alt="JavaScript">
+		<li>Save your web page and reload your web browser. The result should look similar to that below.
+		<img src="assets/img/document-details.png" alt="JavaScript"></li>
+	</ol>
 
-	<p>You have now finished working with your exercise file. You can close it in VS Code and your web browser.</p>
+	<p>You have now finished working with your &#128196; <b>exercise-2-1.html</b> file. You can close it in VS Code and your web browser.</p>
 
 </section>
+
+
 
 
 
@@ -453,15 +513,13 @@ window.close();
 	<p class="deftext">An action performed by JavaScript code on an object. Method names end with a parenthesis <b>()</b>. For example, the <b>document</b> object has a <b>write()</b> method, and the <b>window</b> object has <b>alert()</b>, <b>confirm()</b> and <b>close()</b> methods.</p>
 
 
-	<p>&nbsp;</p>
-	<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
-
-
 </section>
+
 
 </article>
 </main>
 
 <footer></footer>
+
 </body>
 </html>
