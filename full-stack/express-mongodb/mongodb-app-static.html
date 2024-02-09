@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Adding .env and static files | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Adding an .env file to hide your login details. And using middleware to serve static files such as images and stylesheets.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Adding .env and static files</h1>
+					<h2>Adding an .env file to hide your login details. And using middleware to serve static files such as images and stylesheets.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>Express and MongoDB</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-env">About the .env file</a></p>
+            <p><a href="#about-static">About static files</a></p>
+            <p><a href="#folders">Creating your folder structure</a></p>
+            <p><a href="#env-create">Creating the .env file</a></p>
+            <p><a href="#json-update">Updating your package.json file</a></p>
+            <p><a href="#public-create">Creating a /public folder for static files</a></p>
+            <p><a href="#models-update">Updating your models.js file</a></p>
+            <p><a href="#collection-adding">Adding a new database collection</a></p>
+            <p><a href="#views-update">Updating your HTML views pages</a></p>
+            <p><a href="#middleware-add">Adding the middleware for static files</a></p>
+            
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Create a <b>contollers.js</b> file to store the various router functions for your Express/MongoDB app.</li>
+            <li>Refactor the <b>routes.js</b> file so that the routes contain only the router function names, not the actual function code.</li>
+            <li>Export the router functions from the <b>controllers.js</b> file and import them into the <b>router.js</b> file.</li>
+
+		</ul>
+
+	</section>
+
+
+        <section>
+            <h2 id="about-env">About the <code>.env</code> file</h2>
+
+            <p>So far, you have stored your MongoDB connection string in a plain-text file named <b>global.js</b>. A more secure solution is to store the string in a file with special properties named <b>.env</b>. Node.js offers a package named <b>dotenv</b> to manage your app's interaction with the values stored in the <b>.env</b> file.</p>
+
+            <p>You will <i>not</i> want to place your <b>.env</b> file under Git source control. So always include this file in your <b>.gitignore</b> file. Other items you would typically include in the <b>.env</b> file are port numbers and database names.</p>
+
+            <p>By placing such <i>environment variables</i> in a separate and secure file, you can run your app on any port on any machine without changing the code app code. You only need to modify the environment variables.</p>
+
+        </section>
+
+
+
+        <section>
+            <h2 id="about-static">About static files</h2>
+            <p>In Express apps, files such as web pages, images, stylesheets, and JavaScript files are referred to as <i>static files</i>. You manage them using the <b>express.static()</b> middleware.</p>
+
+            <p>By convention, such files are stored in a folder named <b>/public</b> or a subfolder of it. See the example below.</p>
+
+            <img src="assets/img/mongodb-app-static/static-example.png" alt="screenshot" style="max-width: 360px">
+
+	    </section>
+
+
+        <section>
+            <h2 id="folders">Creating your folder structure</h2>
+            <p>Before continuing, close any Node.js apps that may be running on your machine. Also close any open terminals.</p>
+            
+            <p>In a previous Tutorials, you created the folder structure shown below for three Express/MongoDB apps.</p>
+            <img src="assets/img/mongodb-app-static/folders-1.png" alt="screenshot">
+
+            <p>Copy the <b>/app-mongodb-controllers</b> folder and rename it to <b>/app-mongodb-static</b>.</p>
+            <img src="assets/img/mongodb-app-static/folders-2.png" alt="screenshot">            
+
+
+        </section>
+
+        <section>
+            <h2 id="env-create">Creating the <code>.env</code> file</h2>
+            <p>Your next task is to create the <b>.env</b> file for your new app. Follow these steps:</p>
+
+            <ol>
+
+                <li>In your <b>/server</b> folder, install the <b>dotenv</b> package: 
+<pre class="no-syn"> <span class="yellow">npm</span> i dotenv</pre></li>                
+                <li>Also in your <b>/server</b> folder, create a new text file and name it <b>.env</b>.</li>
+
+                <li>Open your <b>config.js</b> file. Its content should look similar to the following:
+                <img src="assets/img/mongodb-app-static/config.png" alt="screenshot"></li>
+                
+                <li>Copy this content to your <b>.env</b> file.</li>
+
+                <li>Edit the copied content to remove any JavaScript code, spaces, quotes or line-terminators. The format of your <b>.env</b> file should look <i>exactly</i> as follows:
+                <img src="assets/img/mongodb-app-static/env.png" alt="screenshot" class="wider-115"></li>
+
+                <li>You can now delete your <b>config.js</b> file.</li> 
+                <li>In your <b>/server</b> folder, create a new text file and name it <b>.gitignore</b>.</li>
+                <li>In the <b>.gitignore</b> enter the following, and save the file
+<pre class="no-syn">node_modules/
+.env</pre></li>                
+
+                <li>Open your <b>app.js</b> file and update the import statements at the top of the file as follows:
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config()
+const PORT = process.env.PORT;
+const mongoDBUri = process.env.mongoDBUri;
+const DBNAME = process.env.DBNAME;
+import mongoose from 'mongoose';
+import cors from 'cors'
+import soccerPlayerRoutes from './routes/routes.js';</code></pre></li>
+
+                <li>Also in your <b>app.js</b> file, update the <b>connectToMongoDB</b> function as follows.
+                <img src="assets/img/mongodb-app-static/async.png" alt="screenshot" style="max-width: 600px">
+
+                </li>
+
+                <li>Start your app and verify it connects to the MongoDB database.
+<pre class="no-syn"> <span class="yellow">npm</span> run dev</pre>
+
+                <img src="assets/img/mongodb-app-static/terminal.png" alt="screenshot" class="wider-115"></li>                
+            </ol>
+
+        </section>
+
+        <section>
+
+            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+
+            <p>Open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
+<img src="assets/img/mongodb-app-static/package-json.png" alt="screenshot" style="max-width: 640px"> 
+            
+        </section>
+            
+        <section>
+            <h2 id="public-create">Creating a <code>/public</code> folder for static files</h2>
+            <p>Your next task is to create a folder to hold the static files used by your app. Follow these steps: </p>                
+            <ol>
+                <li>In your <b>/server</b> folder, create a folder named <b>/public</b>.</li>
+                <li>Inside this folder, create a subfolder named <b>/images</b>.</li>
+                <li>Download and upzip the following images to this subfolder. 
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/images-soccer-players/soccer-player-images.zip" download="soccer-player-images.zip">soccer-player-images.zip</a>
+                <span class="inside-ol">&nbsp;</span>
+                You can delete the downloaded ZIP file when finished.</li>
+            </ol>
+
+            <p>Note that one image is named <b>generic.jpg</b>. For testing purposes, you will use this as a default image.</p>
+        </section>
+
+        <section>
+            <h2 id="models-update">Updating your <code>models.js</code> file</h2>
+            <p>Using VS Code, update the <b>soccerPlayerSchema</b> in the <b>models.js</b> file for your database collection as shown below.</p>
+
+            <img src="assets/img/mongodb-app-static/schema.png" alt="screenshot" style="max-width: 560px">
+
+        </section>
+
+        <section>
+            <h2 id="collection-adding">Adding a new database collection</h2>
+            <p>You will now create a new, separate collection in your MongoDB database for the soccer players with images. Follow these steps:</p>
+
+            <ol>
+                <li>Save the JSON file below to your local machine.
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/soccer_players_images.json" download="soccer-player-images.zip">soccer_players_images.json</a>
+                <span class="inside-ol">&nbsp;</span>
+                You can see that each player now has a field named <b>profile_image</b> that contains the name of a JPG file.
+                <img src="assets/img/mongodb-app-static/profile-image.png" alt="screenshot" style="max-width: 500px"></li>
+                <li>Launch <a href="mongodb-compass-data.html">MongoDB Compass</a> and connect with your <b>db_soccer_players</b> database.</li>
+                <li>Near the top-left of the screen, click the <b>Create Collection</b> button.
+                <img src="assets/img/mongodb-app-static/create-collection.png" alt="screenshot"></li>
+                
+                <li>Name the new collection <b>soccer_players_images</b>.
+                <img src="assets/img/mongodb-app-static/confirm-collection.png" alt="screenshot" style="max-width: 580px"></li>                    
+
+                <li>Click the dropdown arrow on the <b>ADD DATA</b> button, select <b>Import JSON or CSV file</b>, and import the <b>soccer_players_images.json</b> file.
+                <img src="assets/img/mongodb-app-static/add-data.png" alt="screenshot" style="max-width: 600px">
+                
+                The first two documents in your new collection should look as shown below.
+                <img src="assets/img/mongodb-app-static/new-docs.png" alt="screenshot">
+                You can now close the MongoDB Compass app.</li>
+                <li>In VS Code, open the <b>models.js</b> file and update the collection to be used by your <b>app.js</b> file as shown below.
+                <img src="assets/img/mongodb-app-static/new-collection-in-models.png" alt="screenshot"></li>
+            </ol>
+            <p>In your terminal, verify that the app still runs without errors and connects with MongoDB successfully.</p>
+
+        </section>
+
+        <section>
+            <h2 id="views-update">Updating your HTML views pages</h2>
+            <p>Download the three web pages below to your <b>/views</b> folder to overwrite the files already there:</p>
+            <p><a href="assets/downloads/views-new/add.html" download="add.html" style="font-weight:bold">add.html</a><br>
+            <a href="assets/downloads/views-new/list.html" download="list.html" style="font-weight:bold">list.html</a><br>
+            <a href="assets/downloads/views-new/view.html" download="view.html" style="font-weight:bold">view.html</a>
+            </p>
+          
+
+        </section>
+
+
+        <section>
+            <h2 id="middleware-add">Adding the middleware for static files</h2>
+            <p>Your final task is to add the middleware function in Express for handling static files.</p>
+            <p>Update your <b>app.js</b> file as follows.</p>
+            <img src="assets/img/mongodb-app-static/static-middleware.png" alt="screenshot" style="max-width: 440px">
+
+            <p>That's it.</p>
+
+            <p>In a terminal, verify the app runs without error and connects with MongoDB successfully.</p>
+
+            <p>In a web browser, from the <b>/views</b> folder, open <b>index.html</b> and follow the links to verify that images are now displayed.</p>
+
+    </section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+
