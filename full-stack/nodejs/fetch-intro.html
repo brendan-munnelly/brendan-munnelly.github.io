@@ -135,11 +135,17 @@
 
         <h2 id="sample-data">Working with sample data</h2>
 
-        <p>Here is a simple example of fetching the contents of a text file.</p>
+        <p>Let's work with a an example of fetching the contents of a text file.</p>
+
+        <p>Start by creating an HTML file with as pair of script tags.</p>
+        
+        <p>Paste the following server URIs with which you can use the <span class="syn-js">fetch()</span> method.</p>
 
 <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
 const URI_1 = "https://reqres.in/api/users";
 const URI_2 = "https://reqres.in/api/users/2";
+const_URI_3 = "https://jsonplaceholder.typicode.com/users";
+const_URI_4 = "https://pokeapi.co/api/v2/eevee";
 
 console.log(fetch(URI_1));</code></pre>
 
@@ -344,6 +350,79 @@ fetch('https://reqres.in/api/users', {
         </section>
     
 
+        <section>
+
+            <h2>The <code>async/await</code> syntax</h2>
+
+            <p>The Fetch API also provides an <span class="syn-js">async/await</span> syntax for writing asynchronous code. You may find this a better alternative to the promise chaining syntax.</p>
+
+            <p>Below is an example:</p>
+
+<pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8" class="hljs language-javascript">	
+async function fetchUserData() {
+  try {
+    const response = await fetch("https://reqres.in/api/users/2");
+    if (response.ok) {
+      console.log("Response success.");
+      const data = await response.json();
+      console.log(data);
+    } else {
+      console.log("Response error.");
+    }
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+}
+
+fetchUserData();</code></pre>
+
+        <p>In this async function:</p>
+        
+            <ol>
+                <li><b>await</b> is used to wait for the fetch call to resolve to a response.</li>
+                
+                <li>Then it checks if the response was successful.</li>
+                
+                <li>If so, it waits for the <b>.json()</b> method to resolve to a JavaScript object, which it then logs to the console.</li>
+                
+                <li>If the response is not successful (e.g., if the status code of the response is outside the 200-299 range), it logs "Response error." Any network errors are caught in the catch block and logged as an error.</li>
+
+            </ol>
+
+            <p>The async/await format is considered to be <i>syntactic sugar</i>, which is built on top of underlying promise chaining. In the async/await version, the flow of the code is linear and straightforward, which makes it easier to follow the logic and manage errors.</p>
+
+            <p>And here is the sample POST in async/await format:</p>
+
+<pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9" class="hljs language-javascript">	
+
+async function createUser() {
+  try {
+    const response = await fetch('https://reqres.in/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'User 1'
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log('ERROR', error);
+  }
+}
+
+createUser();</code></pre>
+                
+                
+
+        </section>
 
 </article>
 </main>
