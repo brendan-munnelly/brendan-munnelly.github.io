@@ -96,40 +96,55 @@
 			<li>Scroll down the web page until you see an empty pair of opening <span class="syn">&lt;script&gt;</span> and closing <span class="syn">&lt;/script&gt;</span> tags.</li>
 			<li>Click inside the empty pair of tags and paste the JavaScript code below.
 
-<pre>document.querySelector("#btn-quotes").addEventListener("click", fetchRandomNumQuotes);
-
+<pre><code>// Add a click event listener to the button with the ID "btn-quotes". 
+// When the button is clicked, the function fetchRandomNumQuotes will be executed.
+document.getElementById("btn-quotes").addEventListener("click", fetchRandomNumQuotes);
+	
+// Asynchronous function to fetch random quotes and display them on the page.
 async function fetchRandomNumQuotes() {
-   await fetch('https://type.fit/api/quotes')
-
-      .then(response =&gt; {
-         if (response.status !== 200) {
-            console.log('Error Status Code: ' + response.status);
-            return;
-         }
-         response.json().then((data) =&gt; {
-            console.log(data);
-            const lowerNum = getRandomInt(0, data.length-10);
-            const upperNum = lowerNum + 9;
-            let html_block = "";
-            for (i= lowerNum; i &lt; upperNum; i++) {
-               if (!data[i].author) { data[i].author = "Anonymous";}
-               html_block = html_block + `&lt;div class="col-3"&gt;&lt;p&gt;&lt;span&gt;&#8220;&lt;/span&gt;${data[i].text}&lt;span&gt;&#8221;&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;${data[i].author}&lt;/h3&gt;&lt;/div&gt;`;
-               document.getElementById("quotes-box").innerHTML = html_block;
-            }
-         });
-       })
-
-       .catch(error =&gt; {
-          // handle any error
-      });
-
-}
-
-function getRandomInt(min, max) {
-   min = Math.ceil(min);
-   max = Math.floor(max);
-   return Math.floor(Math.random() * (max - min + 1) + min);
-}</pre>
+	try {
+			// Await the response from the fetch request to the quotes API.
+			const response = await fetch('https://type.fit/api/quotes');
+	
+			// Check if the fetch request was not successful (status code not 200).
+			if (response.status !== 200) {
+				// Log the error status code to the console and exit the function early.
+				console.log('Error Status Code: ' + response.status);
+				return;
+			}
+	
+			// Await and parse the JSON response from the fetch request.
+			const data = await response.json();
+	
+			// Logging the raw data and its length for debugging or inspection purposes.
+			console.log(data);
+			console.log(data.length);
+	
+			// Initialize an empty string to accumulate HTML content.
+			let html_block = "";
+	
+			// Loop through the first 15 items of the data array.
+			for (let i = 0; i &lt; 15; i++) {
+				// Check if the current quote's author is not specified and set it to "Anonymous" if true.
+				if (!data[i].author) {
+					data[i].author = "Anonymous";
+				}
+	
+				// Remove ", type.fit" from the author's name if present.
+				data[i].author = data[i].author.replace(", type.fit", "");
+	 
+				// Append a formatted string containing the quote text and author to the HTML block.
+				// This uses template literals to insert variables directly into the string.
+				html_block += `&lt;div class="col-3"&gt;&lt;p&gt;&lt;span&gt;“&lt;/span&gt;${data[i].text}&lt;span&gt;”&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;${data[i].author}&lt;/h3&gt;&lt;/div&gt;`;
+			}
+	
+			// Insert the accumulated HTML content into the element with the ID "quotes-box".
+			document.getElementById("quotes-box").innerHTML = html_block;
+		} catch (error) {
+			// Log any errors that occur during the fetch operation.
+			console.log('Error fetching quotes:', error);
+		}
+	}</code></pre>
 </li>
 
 <!-- <li>Add some CSS styling in the <span class="syn">&lt;style&gt;</span> tag in the <span class="syn">&lt;head&gt;</span> of the web page</li> -->
