@@ -97,49 +97,75 @@
 		<ol>
 			<li>Scroll down the web page until you see an empty pair of opening <span class="syn">&lt;script&gt;</span> and closing <span class="syn">&lt;/script&gt;</span> tags.</li>
 			<li>Click inside the empty pair of tags and paste the JavaScript code below.
-<pre>const apiUrl = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1';
-const IMGPATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCHAPI =
-   "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
 
+
+
+<pre><code>// Define the URL for fetching popular movies from the MovieDB API.
+const apiUrl = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1';
+// Base path for movie poster images from The Movie Database.
+const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+// Define the URL for searching movies by a query string.
+const SEARCHAPI =
+"https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+	
+// Get references to the main container and the form in the document.
 const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
-
+	
+// Call showMovies function initially with the popular movies URL.
 showMovies(apiUrl);
-
-function showMovies(url){
-   fetch(url).then(res =&gt; res.json())
-      .then(function(data){
-         data.results.forEach(element =&gt; {
-         const el = document.createElement('div');
-         const image = document.createElement('img');
-         const text = document.createElement('h2');
-         text.innerHTML = truncateString(`${element.title}`, 20);
-         image.src = IMGPATH + element.poster_path;
-         el.appendChild(image);
-         el.appendChild(text);
-         main.appendChild(el);
-      });
-   });
+	
+// Asynchronous function to fetch movies and display them on the page.
+async function showMovies(url) {
+	try {
+		// Fetch the movie data from the API URL.
+		const res = await fetch(url);
+		// Convert the response to JSON.
+		const data = await res.json();
+	
+		// For each movie in the results, create and append elements to display it.
+		data.results.forEach(element =&gt; {
+			const el = document.createElement('div'); // Container for each movie.
+			const image = document.createElement('img'); // To display the movie poster.
+			const text = document.createElement('h2'); // To display the movie title.
+	
+			// If the title is too long, truncate it.
+			text.innerHTML = truncateString(`${element.title}`, 20);
+			// Set the source of the image to the full path including the base IMGPATH.
+			image.src = IMGPATH + element.poster_path;
+	
+			// Append the image and text to the movie container.
+			el.appendChild(image);
+			el.appendChild(text);
+			// Finally, append the movie container to the main content area.
+			main.appendChild(el);
+		});
+	} catch (error) {
+		// If an error occurs during fetch or processing, log it to the console.
+		console.log('Error fetching movies:', error);
+	}
 }
-
+	
+// Add an event listener to the form to handle movie searches.
 form.addEventListener("submit", (e) =&gt; {
-   e.preventDefault();
-   main.innerHTML = '';
-   const searchTerm = search.value;
-   if (searchTerm) {
-      showMovies(SEARCHAPI + searchTerm);
-      search.value = "";
-   }
+	e.preventDefault(); // Prevent the form from submitting in the traditional way.
+	main.innerHTML = ''; // Clear the main content area before displaying new results.
+	const searchTerm = search.value; // Get the search term from the input field.
+	if (searchTerm) {
+		showMovies(SEARCHAPI + searchTerm); // Fetch and display movies based on the search term.
+		search.value = ""; // Clear the search input field.
+	}
 });
-
+	
+// Utility function to truncate a string to a specified length.
 function truncateString(str, num) {
-   if (str.length &gt;= num) {
-      return str
-   }
-   return str.slice(0, num) + '...'
-}</pre></li>
+	if (str.length &gt; num) {
+		return str.slice(0, num) + '...'; // Truncate and add ellipsis.
+	}
+	return str; // Return the original string if it's shorter than the specified length.
+}</code></pre></li>
+
 <li>Save your <b>index.html</b> file.</li>
 <li>Display the file in a web browser and verify it works correctly.</li>
 </ol>
