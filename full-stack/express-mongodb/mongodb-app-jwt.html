@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Protecting routes with JWT | Full-stack Development Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Adding JWT-based protection to routes in Express so that only authorised users can access them.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Protecting routes with JWT</h1>
+					<h2>Adding JWT-based protection to routes in Express so that only authorised users can access them.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+		<aside>
+			<h3>Express and MongoDB</h3>
+	
+			<p><i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a></p>
+	
+			<h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#options">Three options for protecting routes</a></p>
+            <p><a href="#jwts">About JSON Web Tokens (JWTs)</a></p>
+            <p><a href="#implement">Implementing route protecting with JWTs</a></p>
+            <p><a href="#folders">Creating your folder structure</a></p>
+            <p><a href="#jwt-install">Installing the JWT packages</a></p>
+            <p><a href="#jwt-key">Adding the JWT key to your .env file</a></p>
+            <p><a href="#jwt-app">Adding JWT middleware to your app.js file</a></p>
+            <p><a href="#jwt-routes">Adding the verifyToken function to routes.js</a></p>
+            <p><a href="#json-update">Updating your package.json file</a></p>
+
+            
+		</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Securely store database connection strings and other environmental variables in an <b>.env</b> file.</li>
+            <li>Serve static files such as images and stylesheets from Express with the <b>express.static()</b> middleware function.</li>
+
+		</ul>
+
+	</section>
+
+
+        <section>
+            <h2 id="options">Three options for protecting routes</h2>
+            <ul>
+                <li><b>Basic authentication</b>: Quickest and easiest solution that prompts users for a username and password. But these are sent to the server in plain text, which isn't secure for sensitive data. Should be used only for apps used internally within an organisation such as admin panels.</li>
+                <li><b>Token-based authentication</b>: Options such as JSON Web Tokens (JWT) store user information in encrypted format. These are sent with each request, eliminating the need to store passwords on the server.</li>
+                <li><b>OAuth</b>: For integrating apps with existing social media platforms or third-party authentication services. Users can log in without creating separate accounts on your app.</li>
+        </ul>
+
+        </section>
+
+
+
+        <section>
+            <h2 id="jwts">About JSON Web Tokens (JWTs)</h2>
+            <p>A JWT (pronounced as "jot") is like a secure, encoded packet for containing user information. JWTs are compact, self-contained, and cryptographically signed.</p>
+
+            <p>With JWTs, you don't need to store passwords or maintain user sessions on the server. Note:</p>
+
+            <ul>
+                <li><b>Secure storage</b>: JWTs should be stored securely on the client-side, typically in HttpOnly browser cookies.</li>
+                <li><b>Token expiration</b>: You need to set appropriate expiration times to prevent misuse.</li>
+                <li><b>Refresh tokens</b>: You also need to implement mechanisms for renewing expiring tokens.</li>
+            </ul>
+
+	    </section>
+
+
+        <section>
+            <h2 id="implement">Implementing route protection with JWTs</h2>
+            <p>Here are the elements of a JWT-based authentication system in Express:</p>
+
+            <ol>
+
+                <li><b>User login</b>: User provides credentials (username/password) to a login form.</li>
+                <li><b>Authentication</b>: Server verifies credentials and generates a signed JWT containing user data, such as ID and permitted role(s).</li>
+                <li><b>Sending the JWT</b>: Server sends the JWT back to the user as part of the response.</li>
+                <li><b>Securing routes</b>: Subsequent requests to protected routes include the JWT in the authorisation header.</li>
+                <li><b>Validation</b>: Server verifies the JWT's signature and extracts user information.</li>
+                <li><b>Granting access</b>: If valid, access is granted based on the user's data in the JWT.</li>
+
+            </ol>
+
+        </section>
+
+
+        <section>
+         
+            <h2 id="folders">Creating your folder structure</h2>
+            <p>In a previous Tutorials, you created the folder structure shown below for four Express/MongoDB apps.</p>
+            <img src="assets/img/mongodb-app-jwt/folders-1.png" alt="screenshot">
+
+            <p>Copy the <b>/app-mongodb-static</b> folder and rename it to <b>/app-mongodb-jwt</b>.</p>
+            <img src="assets/img/mongodb-app-jwt/folders-2.png" alt="screenshot">            
+
+        </section>
+
+
+        <section>
+            <h2 id="jwt-install">Installing the JWT packages</h2>
+
+            <p>You need to install two new Express packages for your app:</p>
+            <ol>
+
+                <li>Open a Command prompt or VS Code Terminal, and navigate to the folder that contains your app. For example:
+<pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-jwt/server</pre></li>
+
+                <li>Install these two packages locally as follows:
+<pre class="no-syn"><span class="yellow">npm</span> i jsonwebtoken express-jwt</pre></li>
+
+            </ol>
+
+            <p>These will update the <b>package.json</b> file and the <b>node_modules</b> subfolder.</p>
+
+        </section>
+
+
+        <section>
+            <h2 id="env-jwt">Adding the JWT key to your <code>.env</code> file</h2>
+
+            <p>Add your <b>JWT_SECRET</b> key to the details already stored in your <b>.env</b> file:</p>
+
+            <img src="assets/img/mongodb-app-jwt/env.png" alt="screenshot">
+
+            <p>Choose a strong, hard-to-guess string of characters.</p>
+
+        </section>            
+    
+    
+        <section>        
+            <h2 id="jwt-app">Adding JWT middleware to your <code>app.js</code> file</h2>
+            
+            <p>Next, import the JWT_KEY into your <b>app.js</b> file and use it to build a middleware function named <b>verifyToken</b> that will manage access to protected routes.</p>
+            <ol>
+
+                <li>Add the new import statement as shown below: 
+                <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 600px">
+</li>                
+                <li>Add the following middleware function after the other <b>app.use()</b> middleware functions already present:
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+// Middleware function for verifying JWT    
+export function verifyToken(req, res, next) {
+    console.log("Verifying token...");
+    const authHeader = req.headers.authorization;
+    // JWT not present in header
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).send('Unauthorised access');
+    }
+      
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, config.secret);
+        req.user = decoded; // Add decoded user information to req object
+        next();
+        } catch (err) {
+        // JWT present in header but is invalid
+        res.status(403).send('Invalid token');
+    }
+}</code></pre>
+        You include the <b>export</b> keyword because you will import his function into your <b>routes.js</b> file.</li>
+            </ol>
+        <p>You now are finished updating your <b>app.js</b> file.</p>
+        </section>
+
+        <section>
+            <h2 id="jwt-routes">Adding the <code>verifyToken</code> function to <code>routes.js</code></h2>
+            <p>You will use the verifyToken() function from <b>app.js</b> to protect selected routes. Here are the steps:</p>
+
+            <ol>
+                <li>Open your <b>routes.js</b> file and add the new import statement below:
+                <img src="assets/img/mongodb-app-jwt/routes-import.png" alt="screenshot"></li>
+
+                <li>You can now add the <b>verifyToken</b> middleware as an argument to any route you wish to protect. As an example, add this function to the <b>// List all players</b> route:
+                <img src="assets/img/mongodb-app-jwt/route-protected-1.png" alt="screenshot" style="max-width: 660px"></li>
+                <li>Save your <b>routes.js</b> file and enter the following route in a web browser:
+<pre class="no-syn">http://localhost:5000/soccer_players/list</li>                
+                </li>
+                
+                <li>You should see the message below:
+                
+                <img src="assets/img/mongodb-app-jwt/browser-msg.png" alt="screenshot"></li>
+
+                <li>In your <b>routes.js</b> file, remove the <b>verifyToken</b> argument from the <b>// List all players</b> route. Add it instead to the routes for adding, updating and deleting players. See below:
+                <img src="assets/img/mongodb-app-jwt/route-protected-2.png" alt="screenshot" style="max-width: 700px"></li>
+
+
+                </ol>
+            
+        </section>
+
+        <section>
+
+
+            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+
+            <p>As a final step, open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
+<img src="assets/img/mongodb-app-jwt/package-json.png" alt="screenshot" style="max-width: 640px"> 
+            
+        </section>
+            
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
+
