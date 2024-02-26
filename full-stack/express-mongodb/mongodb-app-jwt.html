@@ -46,12 +46,18 @@
             <p><a href="#options">Three options for protecting routes</a></p>
             <p><a href="#jwts">About JSON Web Tokens (JWTs)</a></p>
             <p><a href="#implement">Implementing route protecting with JWTs</a></p>
+
             <p><a href="#folders">Creating your folder structure</a></p>
             <p><a href="#jwt-install">Installing the JWT packages</a></p>
+            <p><a href="#json-update">Updating your package.json file</a></p>
+
             <p><a href="#jwt-key">Adding the JWT key to your .env file</a></p>
             <p><a href="#jwt-app">Adding JWT middleware to your app.js file</a></p>
-            <p><a href="#jwt-routes">Adding the verifyToken function to routes.js</a></p>
-            <p><a href="#json-update">Updating your package.json file</a></p>
+
+            <p><a href="#files-updates">Updating your models, routes, and controllers files</a></p>
+            <p><a href="#new-users">Adding a new users database collection</a></p>
+
+            <p><a href="#jwt-routes">Applying the verifyToken function to routes</a></p>
 
             
 		</aside>
@@ -146,6 +152,15 @@
 
         </section>
 
+        <section>
+
+
+            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+
+            <p>As a final step, open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
+<img src="assets/img/mongodb-app-jwt/package-json.png" alt="screenshot" style="max-width: 640px"> 
+            
+        </section>
 
         <section>
             <h2 id="env-jwt">Adding the JWT key to your <code>.env</code> file</h2>
@@ -165,8 +180,8 @@
             <p>Next, import the JWT_KEY into your <b>app.js</b> file and use it to build a middleware function named <b>verifyToken</b> that will manage access to protected routes.</p>
             <ol>
 
-                <li>Add the new import statement as shown below: 
-                <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 600px">
+                <li>Add the two new statements as shown below: 
+                <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 500px">
 </li>                
                 <li>Add the following middleware function after the other <b>app.use()</b> middleware functions already present:
 <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
@@ -181,38 +196,99 @@ export function verifyToken(req, res, next) {
       
     const token = authHeader.split(' ')[1];
     try {
-        const decoded = jwt.verify(token, config.secret);
-        req.user = decoded; // Add decoded user information to req object
+        const decoded = jwt.verify(token, secret); 
+        // Add decoded user information to req object
+        req.user = decoded; 
         next();
         } catch (err) {
         // JWT present in header but is invalid
         res.status(403).send('Invalid token');
     }
 }</code></pre>
-        You include the <b>export</b> keyword because you will import his function into your <b>routes.js</b> file.</li>
+        You include the <b>export</b> keyword because you will import his function into your routes files.</li>
             </ol>
         <p>You now are finished updating your <b>app.js</b> file.</p>
         </section>
 
+
+
         <section>
-            <h2 id="jwt-routes">Adding the <code>verifyToken</code> function to <code>routes.js</code></h2>
+            <h2 id="files-updates">Updating your models, routes, and controllers files</h2>
+
+            <p>You will now be using <i>two</i> files for models, routes and controllers. One set for players and a second set for users. Follow these steps:</p>
+
+            <ol>
+                <li>Download these two files to your <b>/models</b> folder:
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/jwts/playerModel.js">playerModel.js</a><br>
+                <a href="assets/downloads/jwts/userModel.js">userModel.js</a></li>
+                <li>Download these two files to your <b>/routes</b> folder:
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/jwts/playersRoutes.js">playerRoutes.js</a><br>
+                <a href="assets/downloads/jwts/usersRoutes.js">userRoutes.js</a></li>
+                <li>Download these two files to your <b>/controllers</b> folder:
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/jwts/playersControllers.js">playersControllers.js</a><br>
+                <a href="assets/downloads/jwts/usersControllers.js">playersControllers.js</a>
+                <span class="inside-ol">&nbsp;</span>
+                You can delete the original files from the three folders.</li>
+                <li>Update your <b>app.js</b> file as shown below:
+                <img src="assets/img/mongodb-app-jwt/app-import-2.png" alt="screenshot" style="max-width: 640px">
+                <img src="assets/img/mongodb-app-jwt/app-import-3.png" alt="screenshot" style="max-width: 640px"></li>
+                <li></li>
+            </ol>
+
+
+        </section>
+
+
+        <section>
+            <h2 id="new-users">Adding a new <code>users</code> database collection</h2>
+            <p>You will now create a new, separate collection in your MongoDB database for users Follow these steps:</p>
+
+            <ol>
+                <li>Save the JSON file below to your local machine.
+                <span class="inside-ol">&nbsp;</span>
+                <a href="assets/downloads/jwts/users_sample.json">users_sample.json</a></li>
+                <li>Launch <a href="mongodb-compass-data.html">MongoDB Compass</a> and connect with your <b>db_soccer_players</b> database.</li>
+                <li>Near the top-left of the screen, click the <b>Create Collection</b> button.</li>
+                
+                <li>Name the new collection <b>users</b>.</li>                    
+
+                <li>Click the dropdown arrow on the <b>ADD DATA</b> button, select <b>Import JSON or CSV file</b>, and import the <b>users_sample.json</b> file.
+                <img src="assets/img/mongodb-app-jwt/add-data.png" alt="screenshot" style="max-width: 600px">
+                
+                The first two documents in your new collection should look as shown below.
+                <img src="assets/img/mongodb-app-jwt/compass-1.png" alt="screenshot" style="max-width: 600px">
+                You can now close the MongoDB Compass app.</li>
+            </ol>
+
+            <p>As you can see, the user passwords are currently stored in plain-text, unhashed format.</p>
+
+            <p>In your terminal, verify that the app still runs without errors and connects with MongoDB successfully.</p>
+
+
+        </section>
+
+
+        <section>
+            <h2 id="jwt-routes">Applying the <code>verifyToken</code> function to routes</h2>
             <p>You will use the verifyToken() function from <b>app.js</b> to protect selected routes. Here are the steps:</p>
 
             <ol>
-                <li>Open your <b>routes.js</b> file and add the new import statement below:
+                <li>Open your <b>PlayersRoutes.js</b> file and add the new import statement below:
                 <img src="assets/img/mongodb-app-jwt/routes-import.png" alt="screenshot"></li>
 
                 <li>You can now add the <b>verifyToken</b> middleware as an argument to any route you wish to protect. As an example, add this function to the <b>// List all players</b> route:
                 <img src="assets/img/mongodb-app-jwt/route-protected-1.png" alt="screenshot" style="max-width: 660px"></li>
-                <li>Save your <b>routes.js</b> file and enter the following route in a web browser:
-<pre class="no-syn">http://localhost:5000/soccer_players/list</li>                
-                </li>
+                <li>Save your <b>PlayersRoutes.js</b> file and enter the following route in a web browser:
+<pre class="no-syn">http://localhost:5000/soccer_players/list</pre></li>                
                 
                 <li>You should see the message below:
                 
                 <img src="assets/img/mongodb-app-jwt/browser-msg.png" alt="screenshot"></li>
 
-                <li>In your <b>routes.js</b> file, remove the <b>verifyToken</b> argument from the <b>// List all players</b> route. Add it instead to the routes for adding, updating and deleting players. See below:
+                <li>In your <b>PlayersRoutes.js</b> file, remove the <b>verifyToken</b> argument from the <b>// List all players</b> route. Add it instead to the routes for adding, updating and deleting players. See below:
                 <img src="assets/img/mongodb-app-jwt/route-protected-2.png" alt="screenshot" style="max-width: 700px"></li>
 
 
@@ -220,14 +296,37 @@ export function verifyToken(req, res, next) {
             
         </section>
 
+
         <section>
+            <h2>Testing players routes with Postman</h2>
 
+            <p>Download and install the (free version) of the Postman app for testing server requests and responses.</p>
 
-            <h2 id="json-update">Updating your <code>package.json</code> file</h2>
+            <p><a href="https://www.postman.com/downloads/">Postman</a></p>
 
-            <p>As a final step, open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
-<img src="assets/img/mongodb-app-jwt/package-json.png" alt="screenshot" style="max-width: 640px"> 
-            
+            <p>Begin by testing the routes for the soccer players. First, the list route for all players in the database collection.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-1.png" alt="screenshot">
+
+            <p>Next, verify the view route for a particular player.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-2.png" alt="screenshot">
+
+            <p>Finally, verify the update route for a particular player. Because this route is protected by the <b>verifyToken</b> function, access will be denied and a 401 error returned.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-3.png" alt="screenshot">
+
+        </section>
+
+        <section>
+            <h2>Testing user routes with Postman</h2>
+
+            <p>You have two routes and controllers for users: for adding new users, and one for verifying and logging in existing users.</p>
+
+            <p>Begin by testing the route for adding a new user. Use the JSON format for adding the request body. See the example below.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-4.png" alt="screenshot">
+
+            <p>As you can see, the user password is now stored in hashed format. In MongoDB Compass or with the MongoDB extension for VS Code, verify the users collection has been updated.</p>
+
+            <p>Next, verify that the new user can log in with their email and un-hashed password.</p>
+
         </section>
             
 
