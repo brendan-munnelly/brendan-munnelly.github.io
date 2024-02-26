@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List all Soccer Players</title>
+    <meta name="description" content="Listing all soccer players from MongoDB Atlas using a GET route set up in the routes.js file of an Express app.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+    
+    <style>
+    body, header, section {background-color: #e8e7d5;}
+    header { padding: 2% 5% !important}
+    header h1 { font-size: var(--font-size-xl); letter-spacing: 0 }
+
+    header p button { padding: 8px 16px; font-size: calc(var(--font-size-sm) * 1.2 ); background-color: #4db33d; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s }  
+
+    section { padding-top: 20px }
+
+    @media (min-width: 768px) { .data-table { padding-top: 4%; padding-bottom: 4% } }      
+    @media (max-width: 767px) { .data-table { padding: 5% 10% } }
+
+    .data-table {
+        margin-top: 0;
+        border-collapse: collapse;
+        font-size: 18px;
+        min-width: 80%;
+        max-width: 90%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: scroll; 
+        border: solid 1px #888;
+        box-shadow: rgba(0, 0, 0, 0.2) 14px 14px 14px 0;;  
+    }
+
+    .data-table th, .data-table td { padding: 8px 18px; text-align: left }
+    .data-table th { background-color: lightgrey;}
+    .data-table td, .data-table td { border-bottom: solid 1px #888; background-color: #fff;}
+ 
+    .theme-light a:not(.btn):link, .theme-light a:not(.btn):visited {
+          color: var(--blue-600);
+          text-decoration-thickness: 1.5px;}
+    </style>
+
+
+</head>
+
+
+<body>
+    <header class="text-center-desktop text-center-mobile">
+        <h1>List All Top Soccer Players</h1>
+        <p><button onclick="fetchSoccerPlayers()">Get Data</button></p>
+    </header>
+
+        <section>
+
+            
+
+        
+        <table id="playersTable" class="data-table theme-light">
+            <thead>
+                <tr>
+                    <th style="width: 20%">Image</th>
+                    <th style="width: 10%">Rank</th>
+                    <th style="width: 20%">Name</th>
+                    <th style="width: 10%">Age</th>
+                    <th style="width: 20%">Club</th>
+                    <th style="width: 10%">Trophies</th>
+                    <th style="width: 10%">Nationality</th>
+ 
+                </tr>
+            </thead>
+            <tbody id="players"></tbody>
+        </table>
+    </section>
+        <script>
+        async function fetchSoccerPlayers() {
+            try {
+                const response = await fetch('http://localhost:5000/soccer_players/list');
+                const data = await response.json();
+                const playersTable = document.getElementById('players');
+                let tableRows = '';
+
+                data.forEach(player => {
+                    tableRows += `<tr>
+                        <td style="max-height: 100px"><img src="../public/images/${player.profile_image}"></td>
+                        <td>${player.rank}</td>
+                        <td><a href="view.html?id=${player._id}">${player.firstname} ${player.lastname}</a></td>
+                        <td>${player.age}</td>
+                        <td>${player.club}</td>
+                        <td>${player.trophies}</td>
+                        <td>${player.nationality}</td>
+                    </tr>`;
+                });
+
+                playersTable.innerHTML = tableRows;
+            } catch (error) {
+                console.error(`Error: ${error}`);
+            }
+        }
+
+        
+    </script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login Form</title>
+    <meta name="description" content="User Login Form">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+
+    <style>
+        body, header, section {background-color: #e8e7d5;}
+        header { padding: 2% 5% !important}
+        header h1 { font-size: var(--font-size-xl); letter-spacing: 0 }
+
+
+        section { padding-top: 0px }
+
+        .labels-inline .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+    
+
+        .labels-inline .form-group label {
+            flex: 1;
+            margin-right: 10px;
+            font-size: var(--font-size-base);
+        }
+
+        .labels-inline .form-group input,
+        .form-group select,
+        .form-group textarea {
+            flex: 2;
+        }
+
+        .labels-block .form-group {
+           display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .labels-block .form-group label {
+            margin-bottom: 5px;
+        }
+
+        section form input[type="submit"] {
+            padding: 8px 16px; font-size: var(--font-size-base);
+            background-color: #4db33d;
+            border-color: #4db33d;
+            color: #fff; border-radius: 4px; cursor: pointer; 
+            max-width: 120px;
+        }  
+
+        #system-response p {
+            background-color: lightpink;
+            border-color: deeppink;
+            border-width: 1px;
+            color: #000;
+            font-size: var(--font-size-base);
+            padding: 12px 20px
+        }
+
+        #system-response-ok p {
+            background-color: lightgreen;
+            border-color: green;
+            border-width: 1px;
+            color: #000;
+            font-size: var(--font-size-base);
+            padding: 12px 20px
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <header class="text-center-desktop text-center-mobile">
+        <h1>User Login</h1>
+    </header>
+
+        <section class="w-820px">
+
+            <form id="login-form" class="labels-inline">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" id="pwd" name="pwd" required>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </section>
+
+        <section  id="system-response">
+ 
+
+        </section>
+
+    <script>
+
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value; 
+    const password = document.getElementById('pwd').value;
+
+    console.log(email, password);
+    document.getElementById('system-response').innerHTML = "";
+
+    try {
+        const response = await fetch('http://localhost:5000/soccer_players/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            console.error('Error Status:', response.status);
+            console.error('Error Text:', text);
+            document.getElementById('system-response').innerHTML = "<p>Incorrect Email or Password entered.</p>";
+            return;
+        }
+
+        const data = await response.json();
+        console.log('Success:', data);
+        const token = data.token; // Access the token from the response data
+        console.log('Token:', token);
+        // Store token in cookie
+        document.cookie = `token=${token}; max-age=3600`; // Set the cookie using document.cookie
+        // redirect to another page
+        document.getElementById('system-response').innerHTML = "<p>Logged in successfully as <b>"+email+"</b>.</p><p>Token: <b>"+token+"</b></p><p><a href='index.html'>View Home Page</a></p>";
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('system-response').innerHTML = "<p>Error message: "+error+".</p>";
+    }
+});
+</script>    
+    
+
+
+</body>
+</html>

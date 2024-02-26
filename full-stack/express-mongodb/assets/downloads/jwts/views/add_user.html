@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a User</title>
+    <meta name="description" content="Updating a selected by _id soccer player on MongoDB Atlas using a PUT route set up in the routes.js file of an Express app.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+
+    <style>
+        body, header, section {background-color: #e8e7d5;}
+        header { padding: 2% 5% !important}
+        header h1 { font-size: var(--font-size-xl); letter-spacing: 0 }
+
+        header p button,
+        button#addPlayer { 
+            padding: 8px 16px; font-size: calc(var(--font-size-sm) * 1.2 ); background-color: #4db33d;; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s
+        }  
+
+        section { padding-top: 0px }
+
+        @media (min-width: 768px) { .wrapper { padding-top: 20px; padding-bottom: 4% } }      
+        @media (max-width: 767px) { .wrapper { padding: 5% 10% } }
+
+        .wrapper {
+            margin-top: 0;
+            border-collapse: collapse;
+            font-size: 18px;
+            min-width: 60%;
+            max-width: 70%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: scroll; 
+            border: solid 1px #888;
+            box-shadow: rgba(0, 0, 0, 0.2) 14px 14px 14px 0;
+            background-color: #fff;
+        }
+
+        .form-row { display: flex; justify-content: flex-end; padding: 12px 42px 12px 12px }
+
+        .form-row > label { padding: 10px 20px 10px 60px; flex: 1; text-align: left }
+        .form-row > input { flex: 2; padding: 10px 40px 10px 20px }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <header class="text-center-desktop text-center-mobile">
+        <h1>Update a Selected Soccer Player</h1>
+        <p><button onclick="returnToList()">Return to List of Players</button></p>
+    </header>
+
+        <section>
+
+                <form id="login-form">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br>
+                    <label for="pwd">Password:</label><br>
+                    <input type="password" id="pwd" name="pwd"><br>
+                    <input type="submit" value="Submit">
+                </form>
+            
+        </section>
+
+    <script>
+
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value; 
+        const password = document.getElementById('pwd').value;
+
+        console.log(email, password);
+
+        try {
+            const response = await fetch('http://localhost:5000/soccer_players/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                console.error('Error Status:', response.status);
+                console.error('Error Text:', text);
+                return;
+            }
+            const data = await response.json();
+            console.log('Success:', data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>    
+    
+
+</body>
+</html>
