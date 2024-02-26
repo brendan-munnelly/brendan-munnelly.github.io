@@ -38,7 +38,9 @@ const user_login = asyncHandler(async (req, res) => {
             // Generate a token for the user
             const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
             // Send the token back to the client
-            res.json({ message: 'Success', token: token });        
+            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });     
+            res.json({ message: 'Success', token: token });   
+           
         } else {
             res.status(403).json({ message: 'Not Allowed' }); 
         }
