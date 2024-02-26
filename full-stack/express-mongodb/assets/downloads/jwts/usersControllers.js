@@ -1,8 +1,10 @@
 import asyncHandler from 'express-async-handler';
 import UserModel from '../models/userModel.js';
-const secret = process.env.JWT_SECRET; // Import secret from .env file
-import bcrypt from 'bcrypt';
+import dotenv from 'dotenv'
+dotenv.config()
 import jwt from 'jsonwebtoken';
+const secret = process.env.JWT_SECRET;
+import bcrypt from 'bcrypt';
 
 // Sign up user
 const user_add = asyncHandler(async (req, res) => {
@@ -23,12 +25,15 @@ const user_add = asyncHandler(async (req, res) => {
 
 // Login user
 const user_login = asyncHandler(async (req, res) => {
+    console.log("hello user login");
     try {
         const user = await UserModel.findOne({ email: req.body.email });
         if (!user) {
             return res.status(400).json({ message: 'Cannot find user' });
         }
         if (await bcrypt.compare(req.body.password, user.password)) {
+            console.log(`Secret: ${secret}`); // Log the secret
+            console.log(`User ID: ${user._id}`); // Log the user ID
             // User's email and password are correct
             // Generate a token for the user
             const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
