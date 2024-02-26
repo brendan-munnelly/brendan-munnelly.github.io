@@ -1,21 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import UserModel from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
 const secret = process.env.JWT_SECRET; // Import secret from .env file
-
 import bcrypt from 'bcrypt';
-
-// Sign up user
-// const user_add = asyncHandler(async (req, res) => {
-//     try {
-//         const newUser = new UserModel(req.body);
-//         const savedUser = await newUser.save(); 
-//         res.status(201).json(savedUser);
-//     } catch (error) {
-//         res.status(500).send(error.message);
-//     }
-// });
-
+import jwt from 'jsonwebtoken';
 
 // Sign up user
 const user_add = asyncHandler(async (req, res) => {
