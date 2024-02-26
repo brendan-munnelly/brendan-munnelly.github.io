@@ -7,13 +7,13 @@ import jwt from 'jsonwebtoken';
 // Sign up user
 const user_add = asyncHandler(async (req, res) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10); // 10 is the saltRounds, you can adjust it as needed
-
+        const hashedPassword = await bcrypt.hash(req.body.password, 10); // 10 is the saltRounds, you can adjust it as needed 
         const newUser = new UserModel({
             email: req.body.email,
             password: hashedPassword, // store the hashed password
+            firstName: req.body.firstName, // add this line
+            lastName: req.body.lastName, // add this line
         });
-
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
     } catch (error) {
