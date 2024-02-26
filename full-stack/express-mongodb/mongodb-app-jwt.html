@@ -144,7 +144,7 @@
 <pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-jwt/server</pre></li>
 
                 <li>Install these two packages locally as follows:
-<pre class="no-syn"><span class="yellow">npm</span> i jsonwebtoken cookie-parser</pre></li>
+<pre class="no-syn"><span class="yellow">npm</span> i jsonwebtoken bcrypt</pre></li>
 
             </ol>
 
@@ -158,7 +158,7 @@
             <h2 id="json-update">Updating your <code>package.json</code> file</h2>
 
             <p>As a final step, open your <b>package.json</b> file and update it for your new MongoDB app as shown below.</p>
-<img src="assets/img/mongodb-app-jwt/package-json.png" alt="screenshot" style="max-width: 640px"> 
+            <img src="assets/img/mongodb-app-jwt/package-json.png" alt="screenshot" style="max-width: 560px"> 
             
         </section>
 
@@ -181,7 +181,7 @@
             <ol>
 
                 <li>Add the two new statements as shown below: 
-                <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 500px">
+                <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 590px">
 </li>                
                 <li>Add the following middleware function after the other <b>app.use()</b> middleware functions already present:
 <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
@@ -235,7 +235,7 @@ export function verifyToken(req, res, next) {
                 <li>Update your <b>app.js</b> file as shown below:
                 <img src="assets/img/mongodb-app-jwt/app-import-2.png" alt="screenshot" style="max-width: 640px">
                 <img src="assets/img/mongodb-app-jwt/app-import-3.png" alt="screenshot" style="max-width: 640px"></li>
-                <li></li>
+ 
             </ol>
 
 
@@ -304,13 +304,13 @@ export function verifyToken(req, res, next) {
 
             <p><a href="https://www.postman.com/downloads/">Postman</a></p>
 
-            <p>Begin by testing the routes for the soccer players. First, the list route for all players in the database collection.</p>
+            <p>Let's begin by testing the routes for the soccer players. First, the <b>list</b> route for all players in the database collection.</p>
             <img src="assets/img/mongodb-app-jwt/postman-1.png" alt="screenshot">
 
-            <p>Next, verify the view route for a particular player.</p>
+            <p>Next, verify the <b>view</b> route for a particular player.</p>
             <img src="assets/img/mongodb-app-jwt/postman-2.png" alt="screenshot">
 
-            <p>Finally, verify the update route for a particular player. Because this route is protected by the <b>verifyToken</b> function, access will be denied and a 401 error returned.</p>
+            <p>Finally, verify the <b>update</b> route for a particular player. Because this route is protected by the <b>verifyToken</b> function, access will be denied and a 401 error returned.</p>
             <img src="assets/img/mongodb-app-jwt/postman-3.png" alt="screenshot">
 
         </section>
@@ -318,14 +318,41 @@ export function verifyToken(req, res, next) {
         <section>
             <h2>Testing user routes with Postman</h2>
 
-            <p>You have two routes and controllers for users: for adding new users, and one for verifying and logging in existing users.</p>
+            <p>You have two routes and controllers for users: </p>
+            
+            <ul>
+                <li>A <b>/soccer_players/users/login</b> route for verifying and logging in existing users.</li>
+                <li>And a <b>/soccer_players/users/add</b> route for adding new users.</li>
+            </ul>
 
-            <p>Begin by testing the route for adding a new user. Use the JSON format for adding the request body. See the example below.</p>
+            <p>In each case, you will need to send additional information to the server along with URL. For example, the user <b>email</b> and <b>password</b>.</p>
+
+            <p>Begin by testing the route for adding a new user.</p>
+
+            <p>In Postman, click the <b>Body</b> tab and select <b>Raw</b>. Next, click the <b>JSON</b> option and select <b>JSON</b> from the dropdown menu.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-5.png" alt="screenshot">
+            
+            
+            <p>Now, enter a new user's details in JSON format. See the example below.</p>
             <img src="assets/img/mongodb-app-jwt/postman-4.png" alt="screenshot">
 
-            <p>As you can see, the user password is now stored in hashed format. In MongoDB Compass or with the MongoDB extension for VS Code, verify the users collection has been updated.</p>
+            <p>And then select the POST method and enter the URL for adding a new user.</p>
+
+            <p>When you click <b>Send</b>, you can see that the user <b>password</b> is now stored in hashed format.</p>
+
+            <img src="assets/img/mongodb-app-jwt/postman-6.png" alt="screenshot">
+
+
+            <p>In MongoDB Compass or with the MongoDB extension for VS Code, verify the users collection has been updated with the new user.</p>
 
             <p>Next, verify that the new user can log in with their email and un-hashed password.</p>
+            <img src="assets/img/mongodb-app-jwt/postman-7.png" alt="screenshot">
+
+            <p>When you click <b>Send</b>, you can see that the user can successfully log in.</p>
+
+            <img src="assets/img/mongodb-app-jwt/postman-8.png" alt="screenshot">
+                      
+            <p>Also, the route returns an authorisation <b>token</b> to enable the user to access all protected routes for this session.</p>
 
         </section>
             
