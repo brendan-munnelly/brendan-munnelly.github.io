@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router();
 import { player_add, player_delete, player_get, player_update, players_index } from '../controllers/playersControllers.js';;
+import { verifyToken } from '../app.js';
 
 // Home page with link
 router.get('/', async (req, res) => {
