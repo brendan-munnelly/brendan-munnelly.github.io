@@ -69,8 +69,8 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-            <li>Securely store database connection strings and other environmental variables in an <b>.env</b> file.</li>
-            <li>Serve static files such as images and stylesheets from Express with the <b>express.static()</b> middleware function.</li>
+            <li>Add a middleware function to an Express app based on the <b>jsonwebtoken</b> and <b>bcrypt</b> packages, along with a secret key stored in your <b>.env</b> file.</li>
+            <li>Apply this function to protect selected routes in your app so that only users provided with an authorisation <b>token</b> can access them.</li>
 
 		</ul>
 
@@ -207,7 +207,7 @@ export function verifyToken(req, res, next) {
 }</code></pre>
         You include the <b>export</b> keyword because you will import his function into your routes files.</li>
             </ol>
-        <p>You now are finished updating your <b>app.js</b> file.</p>
+        <p>You are now finished updating your <b>app.js</b> file.</p>
         </section>
 
 
@@ -215,7 +215,7 @@ export function verifyToken(req, res, next) {
         <section>
             <h2 id="files-updates">Updating your models, routes, and controllers files</h2>
 
-            <p>You will now be using <i>two</i> files for models, routes and controllers. One set for players and a second set for users. Follow these steps:</p>
+            <p>You will now be using <i>two</i> files for models, routes and controllers. One set for players, and a second set for users. Follow these steps:</p>
 
             <ol>
                 <li>Download these two files to your <b>/models</b> folder:
@@ -244,7 +244,7 @@ export function verifyToken(req, res, next) {
 
         <section>
             <h2 id="new-users">Adding a new <code>users</code> database collection</h2>
-            <p>You will now create a new, separate collection in your MongoDB database for users Follow these steps:</p>
+            <p>You will now create a new, separate collection in your MongoDB database for users. Here are the steps:</p>
 
             <ol>
                 <li>Save the JSON file below to your local machine.
@@ -310,7 +310,7 @@ export function verifyToken(req, res, next) {
 
             <img src="assets/img/mongodb-app-jwt/postman-9.png" alt="screenshot" style="width: 640px">
 
-            <p>First, test the <b>list</b> route for all players in the database collection. See below.</p>
+            <p>Now, test the <b>list</b> route for all players in the database collection. See below.</p>
             <img src="assets/img/mongodb-app-jwt/postman-1.png" alt="screenshot">
 
             <p>Next, verify the <b>view</b> route for a particular player.</p>
@@ -333,7 +333,7 @@ export function verifyToken(req, res, next) {
 
             <p>In each case, you will need to send additional information in the request body to the server along with URL. For example, the user <b>email</b> and <b>password</b>.</p>
 
-            <h3>Tesing the add user route</h3>
+            <h3>Testing the add user route</h3>
 
             <p>Begin by testing the route for adding a new user.</p>
 
@@ -351,16 +351,16 @@ export function verifyToken(req, res, next) {
 
             <p>In MongoDB Compass or with the MongoDB extension for VS Code, verify the users collection has been updated with the new user.</p>
 
-            <h3>Tesing the user login route</h3>
+            <h3>Testing the user login route</h3>
 
-            <p>Next, test that the new user can log in with their <b>email</b> and <b>un-hashed</b> password.</p>
+            <p>Next, test that the new user can log in with their <b>email</b> and un-hashed <b>password</b>.</p>
             <img src="assets/img/mongodb-app-jwt/postman-7.png" alt="screenshot">
 
             <p>When you click <b>Send</b>, you can see that the user can successfully log in.</p>
 
             <img src="assets/img/mongodb-app-jwt/postman-8.png" alt="screenshot">
                       
-            <p>Also, the route returns to the client an authorisation <b>token</b>. The user can send this token to the server to enable the user to access all protected routes for a time-limited duration.</p>
+            <p>Also, the route returns to the client an authorisation <b>token</b>. The user can send this token to the server to enable access all protected routes for a time-limited duration.</p>
 
         </section>
             
