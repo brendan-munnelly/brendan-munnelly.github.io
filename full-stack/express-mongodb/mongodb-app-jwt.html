@@ -304,7 +304,13 @@ export function verifyToken(req, res, next) {
 
             <p><a href="https://www.postman.com/downloads/">Postman</a></p>
 
-            <p>Let's begin by testing the routes for the soccer players. First, the <b>list</b> route for all players in the database collection.</p>
+            <p>Let's begin by testing the routes for the soccer players.</p>
+
+            <p>In Postman, click the <b>Headers</b> tab and ensure the <b>Content-Type</b> is set to <b>application/json</b>.</p>
+
+            <img src="assets/img/mongodb-app-jwt/postman-9.png" alt="screenshot" style="width: 640px">
+
+            <p>First, test the <b>list</b> route for all players in the database collection. See below.</p>
             <img src="assets/img/mongodb-app-jwt/postman-1.png" alt="screenshot">
 
             <p>Next, verify the <b>view</b> route for a particular player.</p>
@@ -318,20 +324,21 @@ export function verifyToken(req, res, next) {
         <section>
             <h2>Testing user routes with Postman</h2>
 
-            <p>You have two routes and controllers for users: </p>
+            <p>You have two routes for users: </p>
             
             <ul>
-                <li>A <b>/soccer_players/users/login</b> route for verifying and logging in existing users.</li>
-                <li>And a <b>/soccer_players/users/add</b> route for adding new users.</li>
+                <li>The <b>/soccer_players/users/login</b> route for verifying and logging in existing users.</li>
+                <li>And the <b>/soccer_players/users/add</b> route for adding new users.</li>
             </ul>
 
-            <p>In each case, you will need to send additional information to the server along with URL. For example, the user <b>email</b> and <b>password</b>.</p>
+            <p>In each case, you will need to send additional information in the request body to the server along with URL. For example, the user <b>email</b> and <b>password</b>.</p>
+
+            <h3>Tesing the add user route</h3>
 
             <p>Begin by testing the route for adding a new user.</p>
 
             <p>In Postman, click the <b>Body</b> tab and select <b>Raw</b>. Next, click the <b>JSON</b> option and select <b>JSON</b> from the dropdown menu.</p>
             <img src="assets/img/mongodb-app-jwt/postman-5.png" alt="screenshot">
-            
             
             <p>Now, enter a new user's details in JSON format. See the example below.</p>
             <img src="assets/img/mongodb-app-jwt/postman-4.png" alt="screenshot">
@@ -345,6 +352,8 @@ export function verifyToken(req, res, next) {
 
             <p>In MongoDB Compass or with the MongoDB extension for VS Code, verify the users collection has been updated with the new user.</p>
 
+            <h3>Tesing the user login route</h3>
+
             <p>Next, verify that the new user can log in with their email and un-hashed password.</p>
             <img src="assets/img/mongodb-app-jwt/postman-7.png" alt="screenshot">
 
@@ -352,7 +361,7 @@ export function verifyToken(req, res, next) {
 
             <img src="assets/img/mongodb-app-jwt/postman-8.png" alt="screenshot">
                       
-            <p>Also, the route returns an authorisation <b>token</b> to enable the user to access all protected routes for this session.</p>
+            <p>Also, the route returns to the client an authorisation <b>token</b> to enable the user to access all protected routes for a time-limited duration.</p>
 
         </section>
             
