@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .btn_green {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Assessment Topics</h2>
+
+    <p id="para">Here is some text.</p>
+
+    <p><button onclick="handleBtnClick()">Click me!</button></p>
+
+    <p><button id="btn_1">Button 1</button></p>
+
+    <p><button id="btn_2"  class="btn_green">Button 2</button></p>
+
+    <script>
+
+        // PART ONE: VARIABLES, LITERALS, ARITHMETIC OPERATORS
+        
+        // 1. Declare a string variable and put some text in it
+
+        let firstName = "John";
+
+        // 2. Declare a numeric variable and put some number in it
+
+        const age = 25;
+
+         // 3. Declare three numeric variables. Put numbers in the first two. Add the first two variables and put the result in the third variable.
+
+        let num1 = 5;
+        let num2 = 10;
+        let num3 = num1 + num2;
+        console.log(num3);
+
+        // 4. Write two console.log statements that output some literal text and a variable. Use each of the two possible methods for doing this: concatenation (+) and template literals (``).
+
+        let lastName = "Doe";
+        console.log(`My last name is ${lastName}`);
+        console.log("My last name is " +lastName+".");
+
+        // PART TWO: THREE TYPES OF FUNCTIONS
+
+        // 1. Create a function declaration that takes two numbers as arguments, and adds them together. Call the function with two parameters, store the result in a variable, and display the result in a console.log() statement.
+
+        function addTwoNumbers(num1, num2) {
+            return num1 + num2;
+        }
+
+        let result = addTwoNumbers(7, 13);
+        console.log(`The sum of the two numbers is: ${result}`);
+
+        // 2. Create an anonymous function expression that takes two numbers as arguments, and multiplies them together. Call the function with two parameters, store the result in a variable, and display the result in a console.log() statement.
+
+        const multiplyTwoNumbers = function(num1, num2) {
+            return num1 * num2;
+        }
+
+        let product = multiplyTwoNumbers(5, 10);
+        console.log(`The product of the two numbers is: ${product}`);
+
+        // 3. Create an arrow function that takes two numbers as arguments, and divides one by the other. Call the function with two parameters, store the result in a variable, and display the result in a console.log() statement.
+
+        const divideTwoNumbers = (num1, num2) => {
+            return num1 / num2;
+        }
+
+        let quotient = divideTwoNumbers(5, 10);
+        console.log(`The quotient of two numbers is: ${quotient}`);
+
+
+        // PART THREE: THE DOCUMENT OBJECT MODEL
+
+        // 1. Create a variable and store in it a reference to the inner text of paragraph element with the id of "para".
+
+        // Output the variable to the console.
+
+        let paraText = document.getElementById("para").innerText;
+
+        console.log(`The text of paragraph is: ${paraText}`);
+
+        // 2. Update the inner text of the paragraph element with the id of "para".
+
+        document.getElementById("para").innerText = "This is the updated text of the paragraph.";
+
+        // 3. Update the inner HTML of the paragraph element with the id of "para".
+
+        document.getElementById("para").innerHTML = "This is the <i>updated</i> text of the <b>paragraph</b>.";
+
+        // 4. BUTTONS AND EVENTS
+
+        // 1. Write a function that is called by an event handler when the user clicks on the first button that does not have an ID. Output a message to the console when the button is clicked.
+
+        function handleBtnClick() {
+            console.log("The first button with no ID was clicked.");
+        }
+
+        // 2. Write a function that is called by an event listener when the user clicks on the button with an ID of btn_1. Output a message to the console when the button is clicked.
+
+        const btn_1 = document.getElementById("btn_1");
+        
+        // Same format at two object.method() examples below
+        // console.log("something");
+        // document.write("something else")
+
+        // In this case...
+        //  btn_1.addEventListener("event type, function to call when event happens");
+
+        // as anonymous function
+        btn_1.addEventListener("click", function() {
+            console.log("Button 1 was clicked.");
+        });
+
+        // as arrow function
+        btn_1.addEventListener("click", () => {
+            console.log("Button 1 was clicked.");
+        });
+        
+        // 3. Write a function that is called by an event listener when the user clicks on the button with an ID of btn_2. Output a message to the console when the button is clicked that shows the button ID and CSS class.
+
+        const btn_2 = document.getElementById("btn_2");
+        btn_2.addEventListener('click', (event) => {
+            console.log(`You clicked the button with an id of: ${event.target.id}`);
+            console.log(`You clicked the button with a class of: ${event.target.className}`);
+        });
+
+
+    </script>
+
+</body>
+</html>
