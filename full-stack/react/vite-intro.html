@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Scaffolding a React app with Vite | ReactJS Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Installing Vite and using it to build a basic ReactJS app with functional components, and CSS and image files.">
+
+	<!-- Stylesheet-->
+	<link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Scaffolding a React app with Vite</h1>
+					<h2>Installing Vite and using it to build a basic ReactJS app with functional components, and CSS and image files.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#vite-about">About Vite</a></p>
+				<p><a href="#vite-sample">Scaffolding your first app with Vite</a></p>
+				<p><a href="#folders-files">ReactJS folders and files</a></p>
+
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#components">Adding child components</a></p>
+
+				<p class="toc-indent"><a href="#css-file">About CSS files</a></p>
+
+				<p class="toc-indent"><a href="#img-file">Adding an image file</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Scaffold a ReactJS app with Vite and be familiar with its folder and file structure.</li>
+			<li>Customise the template files according to your requirements.</li>
+			<li>Build a basic app with functional components, and imported CSS and image files.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="vite-about">
+
+        <h2>About Vite</h2>
+        <p><a href="https://vitejs.dev" target="_blank">Vite</a> is a modern build tool that provides a streamlined workflow for building web applications, especially those using React. It has replaced the older utility called <a href="https://create-react-app.dev/" target="_blank">create-react-app</a>.</p>
+
+		<p>Here are the main features of Vite:</p>
+
+		<ul>
+			<li><b>Fast development server</b>: Leverages native ES modules and avoids bundling during development, leading to rapid startup and hot module replacement (HMR) for quicker feedback.</li>
+			<li><b>Efficient build process</b>: Uses Rollup for production builds, creating highly optimized static assets for deployment.</li>
+			<li><b>Out-of-the-box React support</b>: Offers built-in support for React and JSX, including automatic JSX transformation.</li>
+			<li><b>Simple configuration</b>: Provides a minimal and intuitive configuration, requiring minimal setup for most projects.</li>
+		</ul>
+
+	</section>
+
+
+	<section id="vite-sample">
+		<h2>Scaffolding your first app with Vite</h2>
+        <p>Follow these steps to build a basic ReactJS app with Vite:</p>
+
+		<ol>
+			<li>In a Command Prompt window or inside a VS Code Terminal, navigate to where you want Vite to create a folder for your app. For example:
+<pre class="no-syn">C:\&gt; users\react\apps</pre></li>
+
+			<li>Type the following command that includes the name you want to call your new app. In this example, the app is called <b>app-react-basic</b>.
+<pre class="no-syn"><span class="yellow">npm</span> create vite@latest app-react-basic <span class="grey">-- --template</span> react</pre></li>
+
+			<li>If you do not already have Vite installed, you will be prompted to install it.
+
+			<img src="assets/img/vite-intro/vite-1.png" alt="screenshot" class="wider-115"></li>
+
+			<li>When Vite completes the build process, you will see the message below.
+			<img src="assets/img/vite-intro/vite-2.png" alt="screenshot"></li>
+
+			<li>Follow these instructions to continue building your app, and then running it.
+			<img src="assets/img/vite-intro/vite-3.png" alt="screenshot" style="max-width: 700px"></li>
+		</ol>
+
+		<p>When you launch your new app in a browser, it should look as shown below.</p>
+
+		<img src="assets/img/vite-intro/vite-4.png" alt="screenshot" style="max-width: 700px">
+	</section>
+
+
+	<section id="folders-files">
+
+		
+		<h2>ReactJS folders and files</h2>
+		<p>Vite will create the following hierarchy of folders and files.</p>
+		<img src="assets/img/vite-intro/vite-5.png" style="max-width: 300px" alt="ReactJS sample screen" />
+
+		<p style="margin-bottom: 24px">The more important items are as listed below.</p>
+	
+		<table class="table-js-methods" style="margin-bottom: 44px">
+			<tbody>
+				<tr>
+					<td style=
+					"min-width: 30%"><p><span class="syn-js">index.html</span></p></td>
+					<td><p>The web page that is served when your app is run. It has a <b>&lt;div id="root"&gt;&lt;/div&gt;</b> container into which <b>main.jsx</b> injects the top-level or 'parent' <b>&lt;App /&gt;</b> component.</p></td>
+				 </tr>
+			</tbody>
+		</table>       
+	
+
+		<h3 id="folder-src">The <code>/src</code> folder</h3>
+		<p>This contains your app's components. All of the code you write will be located here.</p>
+
+		<table class="table-js-methods">
+			<tbody>
+				<tr>
+				   <td style="min-width: 30%"><p><span class="syn-js">main.jsx</span></p></td>
+				   <td><p>The main JavaScript file where your React app is initialized.</p></td>
+				</tr>
+				<tr>
+				   <td style="min-width: 30%"><p><span class="syn-js">App.jsx</span></p></td>
+				   <td><p>The root React component.</p></td>
+				</tr>
+				<tr>
+					<td style="min-width: 30%"><p><span class="syn-js">vite.config.js</span></p></td>
+					<td><p>The configuration file for Vite.</p></td>
+				 </tr>
+			</tbody>
+		</table>       
+
+		<p>Your <b>App.jsx</b> file may contain all the code for your ReactJS app. But more commonly, it acts as a 'parent' component that imports other, single-purpose 'child' components.</p>
+			
+		<p>As a test, add some new text to <b>App.jsx</b>, save the file, and verify that your app updates live in your web browser.</p>
+
+		<img src="assets/img/vite-intro/vite-6.png" style="max-width: 500px" alt="ReactJS sample screen" />
+
+	</section>
+
+
+
+	<section id="app-customising">
+
+		<h2>Customising your app</h2>
+		<p>Next, you will customise the 'boilerplate' content provided by Vite to build a very basic React app.</p>
+
+		<ol>
+
+			<li>Download the following stylesheet and save it to your app's <span class="syn-js">/src</span> folder.
+			<span class="inside-ol">&nbsp;</span>
+			<a href="assets/downloads/Petite.css" target="_blank">Petite.css</a></li>
+			<li>Open the <b>index.html</b> file in your main app folder and replace the <b>&lt;title&gt;</b> tag as shown below.
+			<img src="assets/img/vite-intro/vite-7.png" alt="screenshot"></li>
+
+			<li>In your <span class="syn-js">/src</span> folder, open the <b>main.jsx</b> file and update it as follows.
+			<img src="assets/img/vite-intro/vite-8.png" alt="screenshot" style="max-width: 600px"></li>
+
+			<li>Also in your <span class="syn-js">/src</span> folder, open the App.jsx and replace all its content with the content below.</li>
+
+<li><pre><button class="copy-code" id="btn-1">Copy Code</button><code id="strCode-1">import './Petite.css'
+
+function App() {
+  return (
+      &lt;&gt;
+         &lt;h1&gt;Hello, World!&lt;/h1&gt;
+         &lt;p&gt;Paragraph of text.&lt;/p&gt;
+      &lt;/&gt;
+  );
+}	
+
+export default App;</code></pre></li>
+
+		</ol>
+
+		<p>Your web page should now look as shown below.</p>
+
+		<img src="assets/img/vite-intro/output-1.png" alt="Sample React screen">
+
+		<p>In this basic app, you have added code directly to the <b>App.jsx</b> file. </p>
+
+	</section>
+
+
+
+	<section id="components">
+
+      <h2>Adding child components</h2>
+	  <p>Next, you will add three components to your app. When finished, your <b>App.jsx</b> file will be the <i>parent</i> component and three others will all be <i>child</i> components.</p>
+
+	  <ol>
+		<li>In the <span class="syn-js">/src</span> folder, create a <b>Header.jsx</b> file with the following content.
+<pre><button class="copy-code" id="btn-2">Copy Code</button><code id="strCode-2">function Header() {
+   return (
+      &lt;header&gt;&lt;h1&gt;Corporate strategy&lt;/h1&gt;&lt;/header&gt;  
+   )
+}
+	
+export default Header;</code></pre></li>
+
+<li>Also in the <span class="syn-js">/src</span> folder, create a <b>MainContent.jsx</b> file with the following content.
+<pre><button class="copy-code" id="btn-3">Copy Code</button><code id="strCode-3">function MainContent() { 
+   return (
+      &lt;main&gt;&lt;section&gt;&lt;p&gt;We leverage agile frameworks to provide a robust synopsis for high-level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;&lt;/section&gt;&lt;/main&gt;  
+    )
+}
+ 
+export default MainContent;</code></pre></li>
+
+		<li>And finally in the <span class="syn-js">/src</span> folder, create a <b>Footer.jsx</b> file with the following content.
+<pre><button class="copy-code" id="btn-4">Copy Code</button><code id="strCode-4">function Footer() {
+   return (
+	&lt;footer&gt;&lt;p&gt;ABC Corporation. Digital Consultants&lt;/p&gt;&lt;/footer&gt;  
+   )
+}
+	
+export default Footer;</code></pre></li>
+
+		<li>Now, update your <b>App.jsx</b> file so that it acts as the <i>parent</i> to your three new components. See below.
+<pre><button class="copy-code" id="btn-5">Copy Code</button><code id="strCode-5">import Header from './Header';
+import MainContent from './MainContent';
+import Footer from './Footer';
+import './Petite.css'
+	
+function App() {
+   return (
+   &lt;&gt;
+      &lt;Header /&gt;
+      &lt;MainContent /&gt;
+      &lt;Footer /&gt;
+   &lt;/&gt;
+   );
+}
+	
+export default App;</code></pre></li>
+	  </ol>
+
+	<p>Your web page should now look similar to the following.</p>
+
+	<img src="assets/img/vite-intro/output-3.png" alt="Sample React screen">
+
+
+	<p>The parent-child relationships between the various files in your ReactJS app are illustrated below.</p>
+
+	<img src="assets/img/vite-intro/parent-child.png" alt="">
+	</section> 
+
+
+	<section id="css-file">
+
+		<h3>About CSS files</h3>
+		<p>In non-ReactJS websites, you would typically add a CSS file by including a link to it in the <span class="syn-js">&lt;head&gt;</span>. For example.</p>
+
+		<img src="assets/img/vite-intro/css-link.png" alt="React sample screen">
+
+		<p>For a ReactJS app, however it is better to place your CSS file(s) and any images in your <span class="syn-js">/src</span> folder (or a sub-folder of it) and import them with JavaScript.</p>
+
+	</section>
+
+
+	<section id="img-file">
+
+		<h3>Adding an image file</h3>
+		<p>As with CSS files, it is best to add them from the <span class="syn-js">/src</span> folder with <span class="syn-js">import</span> statements.</p>
+
+		<p>The only exceptions might be for generic site-wide images which would be tedious to manually import multiple times into different component files. Or when the React app is only part of a larger website.</p>
+
+		<p>You can import an image into your sample app as follows.</p>
+
+		<ol>
+			<li>Download the following file to your <span class="syn-js">/src</span> folder.
+			<span class="inside-ol">&nbsp;</span>
+			<a href="assets/downloads/corporate.jpg" target="_blank">corporate.jpg</a></li>
+
+			<li>In your <b>MainContent.jsx</b> child component, add the following <span class="syn-js">import</span> statement at the top of the file.
+<pre><button class="copy-code" id="btn-6">Copy Code</button><code id="strCode-6">import corporateImg from './corporate.jpg';</code></pre></li>
+
+	<li>Now you can reference the image by its variable name. See below.
+<pre><button class="copy-code" id="btn-7">Copy Code </button><code id="strCode-7">function MainContent() { 
+   return (
+      &lt;main&gt;
+         &lt;section&gt;
+            &lt;img src={corporateImg} alt="Corporate" /&gt;
+            &lt;p&gt;We leverage agile frameworks to provide a robust synopsis for high-level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.&lt;/p&gt;  
+         &lt;/section&gt;
+      &lt;/main&gt;
+   )
+}
+
+export default MainContent;</code></pre></li>
+		</ol>
+
+		<p>Your web page should now look as shown below.</p>
+
+		<img src="assets/img/vite-intro/output-4.png" alt="Sample React screen">
+	</section>
+
+	<!--
+	<section>
+		<h2>Building your React app</h2>
+
+		<p>The npm <b>build</b> script creates a build directory with a production build of your app.</p>
+
+		<p>Inside the <b>build/static</b> directory will be your JavaScript and CSS files. Each filename inside of <b>build/static</b> will contain a unique hash of the file contents. This hash in the file name enables long term caching techniques.</p>
+
+		<p>In a NodeJS environment, the easiest way to build your React App is to type the following command:</p>
+
+<pre>
+npm install -g serve
+</pre>
+
+	<p>This command will create an optimized production build for your project and will output what files it has generated and how large each file is.</p>
+
+	<p>The output is coming from the build tool Webpack. It helps to give us an idea of the size of our app files because the size of our .js files in particular can make a large impact on our app's performance.</p>
+		
+	<p>Each chunk includes a unique string or hash, which will change on every build to make sure any new deployment is not saved (cached) by the browser. If we did not have this cache-busting hash for each of our files, we likely couldn't see any changes we made to our app.</p>
+
+	<p>Finally, run the build React project locally option with the help of the npm package <b>serve</b> command. This is helpful to detect any errors we might have with the final version of our project before pushing live to the web.</p>
+		
+	<p>Like <b>create-react-app</b>, we can use npx to run serve without installing it globally on our computer.</p>
+
+<pre>npx serve -s build 4000</pre>
+
+	<p>Using <b>serve</b>, your app will start up on a different development port. In this case, localhost:4000.</p>
+	</section>
+
+-->
+	<p>&nbsp;</p>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
