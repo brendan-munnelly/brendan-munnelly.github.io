@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>State and Hooks | ReactJS Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating a stateful component that will rerender new data when the app updates">
+
+	<!-- Stylesheet-->
+	<link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>State and Hooks</h1>
+					<h2>Creating a stateful component that will rerender new data when the app updates.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>REACT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#state-about">About state in ReactJS</a></p>
+				<p><a href="#counter-sample">Creating your counter app with CRA</a></p>
+				<p><a href="#app-customising">Customising your app</a></p>
+
+				<p><a href="#component-stateful">Adding a stateful component</a></p>
+
+				<p class="toc-indent"><a href="#css-file">Adding a CSS file</a></p>
+
+				<p><a href="#hook-explained">How state is updated with a hook</a></p>
+
+
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a simple counter app to demonstrate how state works in ReactJS.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="state-about">
+
+        <h2>About state in ReactJS</h2>
+
+		<p>As you learned in the <a href="working-with-props.html">Working with Props</a> Tutorial, data passed into a functional component as an argument cannot be changed by that component.</p>
+
+		<p>Often, however, the reason you create a function is in order for it to change data!</p>
+
+        <p>In ReactJS, data inside a function that is changed in some way by the function is called <i>state</i>. Furthermore, ReactJS provides special functions called <i>hooks</i> for managing state (data that can change) inside components.</p>
+		
+		<p>So if you want to change data in your app, you need to store that in state so that it properly re-rendered once the data actually changes.</p>
+
+		<p>The most commonly-used hook is called <b>useState</b>. It enables you to manage state (data that may change) inside a functional component. And when the data changes, the component will re-render the new data to the DOM.</p>
+
+		<p>Components that do not change the value of their props have no state - they are said to be <i>stateless</i> components.</p>
+
+		<p>In this Tutorial, you will create a simple counter app to demonstrate how state works in ReactJS.</p>
+
+	</section>
+
+
+	<section id="counter-sample">
+		<h2>Creating your counter app with CRA</h2>
+        <p>Follow the steps below.</p>
+
+		<ol>
+			<li>In a Command Prompt window or inside a VS Code Terminal, navigate to where you want Vite to create a folder for your app. For example:
+			<pre class="no-syn">C:\&gt; users\react\apps</pre></li>
+			<li>Type the following command that includes the name you want to call your new app. In this example, the app is called <b>reactjs-hooks</b>.</li>
+			<li>Type the following command that includes the name you want to call your new app. 
+			<pre class="no-syn"><span class="yellow">npm</span> create vite@latest reactjs-hooks <span class="grey">-- --template</span> react</pre></li>
+
+			<li>When Vite completes the build process, you will see the message below.
+			<img src="assets/img/state-hooks/build-1.png" alt="screenshot"></li>
+	
+			<li>Follow these instructions to continue building your app, and then running it.</li>
+	
+		</ol>
+
+		<p>When you launch your new app in a browser, it should look as shown below.</p>
+
+		<img src="assets/img/state-hooks/build-2.png" alt="screenshot" style="max-width: 700px">
+
+
+	</section>
+
+	<section id="app-customising">
+
+		<h2>Customising your app</h2>
+
+			<p>Next, you will customise the 'boilerplate' content provided by Vite.</p>
+	
+			<ol>
+	
+				<li>Download the following stylesheet and save it to your app's <span class="syn-js">/src</span> folder.
+				<span class="inside-ol">&nbsp;</span>
+				<a href="assets/downloads/Counter.css" target="_blcd ank">Counter.css</a></li>
+				<li>Open the <b>index.html</b> file in your main app folder and replace the <b>&lt;title&gt;</b> tag as shown below.
+				<img src="assets/img/state-hooks/title.png" alt="screenshot"></li>
+	
+				<li>In your <span class="syn-js">/src</span> folder, open the <b>main.jsx</b> file and update it as follows.
+				<img src="assets/img/state-hooks/css-delete.png" alt="screenshot" style="max-width: 600px"></li>
+	
+				<li>Also in your <span class="syn-js">/src</span> folder, open the <b>App.jsx</b> and replace all its content with the content below.</li>
+	
+	<li><pre><button class="copy-code" id="btn-1">Copy Code</button><code id="strCode-1">import './Counter.css'
+function App() {
+  return (
+	&lt;&gt;
+	  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+	  &lt;p&gt;Paragraph of text.&lt;/p&gt;
+	&lt;/&gt;
+   );
+}	
+	
+export default App;</code></pre></li>
+	
+			</ol>
+	
+	<p>Your web page should now look as shown below.</p>
+
+	<img src="assets/img/state-hooks/output-1.png" alt="Sample React screen">
+
+	</section>
+
+	<section id="component-stateful">
+
+      <h2>Adding a stateful component</h2>
+	  <p>Next, you will add a counter component to your basic app.</p>
+
+	  <ol>
+		<li>In the <span class="syn-js">/src</span> folder, create an <b>IncrementDecrement.jsx</b> file with the following content.
+<pre><button class="copy-code" id="btn-2">Copy Code</button><code id="strCode-2">
+import { useState } from 'react';
+	
+function IncrementDecrement() {
+   const [count, setCount] = useState(0);
+      return (
+         &lt;div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+&lt;/button&gt;
+            {count}
+            &lt;button onClick={() =&gt; setCount(count - 1)}&gt;-&lt;/button&gt;
+         &lt;/div&gt;
+    )
+}
+	
+export default IncrementDecrement;</code></pre></li>
+
+<li>Also in the <span class="syn-js">/src</span> folder, update the <b>App.jsx</b> file with the following content.
+<pre><button class="copy-code" id="btn-3">Copy Code</button><code id="strCode-3">
+import IncrementDecrement from './IncrementDecrement';
+import './Counter.css'
+
+function App() {
+  return (
+    &lt;div className="box-counter"&gt;
+      &lt;IncrementDecrement /&gt;
+    &lt;/div&gt;
+  )
+}
+		
+export default App;</code></pre></li>
+
+
+
+
+		</ol>
+
+		<p>Your web page should now look as shown below.</p>
+
+		<img src="assets/img/state-hooks/output-3.png" alt="screenshot">
+	</section>
+
+
+	<section id="hook-explained">
+		<h2>How state is updated with a hook</h2>
+		<p>The following explains how state is updated inside the <b>IncrementDecrement.js</b> component.</p>
+		<ul>
+			<li>At the top of the component, the <b>useState</b> hook is imported as shown below:
+<pre><code>   import React, { useState } from 'react';</code></pre></li>
+			<li>Next is a functional component that contains the code that will perform the updating.
+<pre><code>   function IncrementDecrement() {
+    <span class="comment">// Code for updating state goes here</span>
+}
+</code></pre></li>				
+			<li>You will want this function to be available to the main or top-level <b>App.js</b> component. So you wiil add an <b>export default</b> instruction at the end of the file.
+<pre><code>  export default IncrementDecrement;</code></pre></li>	
+			
+			<li>The main work is performed inside the function with this line:
+<pre><code>   const [count, setCount] = useState(0);</code></pre>	
+
+			This line does two things:
+			<ul>
+				<li>It declares a new state variable named <b>count</b>.</li>
+				<li>It declares a function named <b>setCount</b> that, when called by the user's click action. will update the current value in the <b>count</b> state variable.</li>
+
+			</ul>
+
+			The <b>useState</b> hook takes a single argument, which is the initial value of the state variable. In this case, the initial value is <b>0</b>.
+			<img src="assets/img/state-hooks/usestate-hook.jpg" alt="screenshot"></li>
+			
+			<li>Attached to each of the two buttons is an event handler that captures the user's click action.
+			<span class="inside-ol">&nbsp;</span>
+
+			In ReactJS, event names are written in camelCase (in this case as <b>onClick</b>) and not in JavaScript lowercase style (<b>onclick</b>).
+<pre><code>   &lt;button onClick= ... &gt;&lt;/button&gt;</code></pre></li>
+            
+			<li>Another difference is that with JSX you pass a function as the event handler within curly braces <span class="syn-js">{}</span>, rather than a string between quotes <span class="syn-js">""</span>.
+	
+<pre><code><span class="comment">   // In JavaScript</span>
+&lt;button onclick="activateLasers()"&gt;Activate Lasers&lt;/button&gt;
+<span class="comment">// In JSX</span>
+&lt;button onClick={activateLasers}Activate Lasers&lt;/button&gt;</code></pre></li>
+
+
+			<li>In each case, the event handler is an arrow function that calls the <b>setCount</b> function to update the value in the <b>count</b> state variable.
+<pre><code>   &lt;button onClick={ () =&gt; <span class="comment">// called function goes here</span> }&gt;+&lt;/button&gt;</code></pre>			
+			</li>
+			<li>Below is the syntax of the called arrow function.
+<pre><code>   =&gt; setCount(Count + 1)</code></pre></li>
+
+			<li>And finally, this displays the current value of the <b>count</b> state. It will be updated and re-rendered every time <b>count</b> is reset the <b>setCount()</b> updater function.
+<pre><code>   {count}</code></pre>
+</li>
+		</ul>
+	</section>
+
+	<p>&nbsp;</p>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+
+</body>
+</html>
