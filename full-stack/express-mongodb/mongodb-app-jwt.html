@@ -137,14 +137,14 @@
         <section>
             <h2 id="jwt-install">Installing the JWT packages</h2>
 
-            <p>You need to install two new Express packages for your app:</p>
+            <p>You need to install four new Express packages for your app:</p>
             <ol>
 
                 <li>Open a Command prompt or VS Code Terminal, and navigate to the folder that contains your app. For example:
 <pre class="no-syn"><span class="yellow">cd</span> apps-mongodb/app-mongodb-jwt/server</pre></li>
 
-                <li>Install these two packages locally as follows:
-<pre class="no-syn"><span class="yellow">npm</span> i jsonwebtoken bcrypt</pre></li>
+                <li>Install these four packages locally as follows:
+<pre class="no-syn"><span class="yellow">npm</span> i cookie-parser jsonwebtoken bcrypt express-jwt</pre></li>
 
             </ol>
 
@@ -180,34 +180,36 @@
             <p>Next, import the JWT_KEY into your <b>app.js</b> file and use it to build a middleware function named <b>verifyToken</b> that will manage access to protected routes.</p>
             <ol>
 
-                <li>Add the two new statements as shown below: 
+                <li>Add the new statements as shown below: 
                 <img src="assets/img/mongodb-app-jwt/app-import.png" alt="screenshot" style="max-width: 590px">
 </li>                
                 <li>Add the following middleware function after the other <b>app.use()</b> middleware functions already present:
 <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
-// Middleware function for verifying JWT    
 export function verifyToken(req, res, next) {
-    console.log("Verifying token...");
+    console.log("Checking for token present in request header.");
     const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
     // JWT not present in header
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!token) {
+        console.log("No token found. 401 error returned to client.");
         return res.status(401).send('Unauthorised access');
     }
-      
-    const token = authHeader.split(' ')[1];
     try {
-        const decoded = jwt.verify(token, secret); 
-        // Add decoded user information to req object
-        req.user = decoded; 
-        next();
-        } catch (err) {
-        // JWT present in header but is invalid
+      console.log("Now verifying token.");   
+      const decoded = jwt.verify(token, secret); 
+      // Add decoded user information to req object
+      req.user = decoded; 
+      console.log("Token verified.");   
+      next();
+    } catch (err) {
+        console.log("Token is invalid. 403 error returned to client.");   
+        // JWT present in cookies but is invalid
         res.status(403).send('Invalid token');
     }
-}</code></pre>
+};</code></pre>
         You include the <b>export</b> keyword because you will import his function into your routes files.</li>
             </ol>
-        <p>You are now finished updating your <b>app.js</b> file.</p>
+        
         </section>
 
 
@@ -233,8 +235,7 @@ export function verifyToken(req, res, next) {
                 <span class="inside-ol">&nbsp;</span>
                 You can delete the original files from the three folders.</li>
                 <li>Update your <b>app.js</b> file as shown below:
-                <img src="assets/img/mongodb-app-jwt/app-import-2.png" alt="screenshot" style="max-width: 640px">
-                <img src="assets/img/mongodb-app-jwt/app-import-3.png" alt="screenshot" style="max-width: 640px"></li>
+                <img src="assets/img/mongodb-app-jwt/app-import-2.png" alt="screenshot" style="max-width: 600px"></li>
  
             </ol>
 
@@ -296,7 +297,6 @@ export function verifyToken(req, res, next) {
             
         </section>
 
-
         <section>
             <h2>Testing players routes with Postman</h2>
 
@@ -318,6 +318,8 @@ export function verifyToken(req, res, next) {
 
             <p>Finally, verify the <b>update</b> route for a particular player. Because this route is protected by the <b>verifyToken</b> function, access will be denied and a 401 error returned.</p>
             <img src="assets/img/mongodb-app-jwt/postman-3.png" alt="screenshot">
+
+            <p>Repeat the above step for the <b>/soccer_players/add</b> and <b>/soccer_players/delete/&lt;id&gt;</b> routes. You should receive a 401 error message for these two protected routes.</p>
 
         </section>
 
@@ -372,11 +374,8 @@ export function verifyToken(req, res, next) {
 
             <p>Choose the <b>PUT</b> method, and enter the <b>update</b> route and the unique <b>_id</b> of a particular soccer player.</p>
 
-            <p>Click the <b>Authorisation</b> tab. For the <b>Type</b>, select <b>JWT Bearer</b>. For <b>Add JWT Token to</b>, select <b>Request Header</b>.</p>
+            <p>Click the <b>Authorisation</b> tab. For the <b>Type</b>, select <b>Bearer Token</b>. Postman should display the token value in the <b>Token</b> field. Click <b>Send</b>.</p> 
             
-            <p>At the right of the Postman screen, for <b>Algorithm</b>, select <b>HS256</b>. Paste your <b>Secret</b> token and click <b>Send</b>.</p>
-            
-
         </section>
             
 
