@@ -380,6 +380,87 @@ export function verifyToken(req, res, next) {
         </section>
             
 
+        <section>
+            <h2>Building the front-end</h2>
+            <p>Enter the following in ChatGPT:</p>
+
+            <p>I have created an Express app with a MongoDB backend. The database has two collections - players and users.</p>
+
+            <p>The app have routes for listing all players and viewing details of a particular player. See below:</p>
+                
+            <p>// List all players<br>
+            router.get('/soccer_players/list', players_index);</p>
+                
+            <p>// View selected player by id<br>
+            router.get('/soccer_players/view/:id', player_get);</p>
+                
+            <p>The app also has routes for creating a new player, editing a player's details, and deleting a player. See below:</p>
+                
+            <p>// Add a new player<br>
+            router.post('/soccer_players/add', verifyToken, player_add);</p>
+                
+            <p>// Update a player selected by id <br>
+            router.put('/soccer_players/update/:id', verifyToken, player_update);</p>
+                
+            <p>// Delete a player selected by id<br>
+            router.delete('/soccer_players/delete/:id', verifyToken, player_delete);</p>
+                
+            <p>In the Express app code, I have protected these last three routes: add, update, and delete. Access is only permitted to users who supply an authorization token in their requests. The relevant function is in the app.js file and is shown below:</p>
+                
+<pre><code>export function verifyToken(req, res, next) {
+    console.log("Checking for token present in request header.");
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
+    // JWT not present in header
+    if (!token) {
+        console.log("No token found. 401 error returned to client.");
+        return res.status(401).send('Unauthorised access');
+    }
+    try {
+        console.log("Now verifying token.");   
+        const decoded = jwt.verify(token, secret); 
+        // Add decoded user information to req object
+        req.user = decoded; 
+        console.log("Token verified.");   
+        next();
+        } catch (err) {
+            // JWT present in cookies but is invalid
+            console.log("Token is invalid.");   
+            res.status(403).send('Invalid token');
+    }
+};</code></pre>
+                
+            <p>In my users database collection is a list of users with details of firstName, lastName, Email and Password.</p>
+                
+            <p>Here is my Express app code for the user login form:</p>
+                
+<pre><code>// Login user
+const user_login = asyncHandler(async (req, res) =&gt; {
+console.log("hello user login");
+    try {
+        const user = await UserModel.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ message: 'Cannot find user' });
+        }
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            console.log(`Secret: ${secret}`); // Log the secret
+            console.log(`User ID: ${user._id}`); // Log the user ID
+            // User's email and password are correct
+            // Generate a token for the user
+            const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+            // Send the token back to the client
+            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });     
+            res.json({ message: 'Success', token: token });   
+        } else {
+            res.status(403).json({ message: 'Not Allowed' }); 
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});</code></pre>
+                
+                <p>I would like to build a single-page ReactJS app with routes for access the unprotected ist and view  routes, and the protected create, update and delete routes. Can you suggest the appropriate code?</p>
+        </section>
 
 </article>
 </main>
