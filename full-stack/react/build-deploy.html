@@ -67,20 +67,16 @@
 			<p><a href="#app-githubs">One app &#8211; <i>but</i> two GitHubs!</a></p>
                         <p><a href="#app-versions">One app &#8211; <i>but</i> two versions!</a></p>
 
-                        <p><a href="#app-create">1: Create a test-deploy-app</a></p>
-                        <p><a href="#new-repo-github">2: Create a new repo on GitHub</a></p>
-                        <p><a href="#new-repo-local">3: Create a new repo on your local machine</a></p>
-                        <p><a href="#link-repos">4: Link your local and remote repos</a></p>
-                        <p><a href="#push-repos">5: Push your local repo to your remote repo</a></p>
-                        <p><a href="#personal-access-token">6: Create a personal access token on GitHub</a></p>
-                        <p><a href="#verify-push">7: Verify your app has been deployed</a></p>
-                        <p><a href="#gh-pages">8: Set up the GitHub Pages branch for your app</a></p>
-                        <p><a href="#gh-subfolder">9: Set up a sub-folder for GitHub Pages</a></p>
-                        <p><a href="#gh-scripts">10: Add two deploy scripts to package.json</a></p>
-                        <p><a href="#app-build">11: Create the build version of your app</a></p>
-                        <p><a href="#app-deploy">12: Deploy your app for hosting</a></p>
-                        <p><a href="#verify-two-branches">13: Verify both branches are uploaded</a></p>
-                        <p><a href="#app-updating">Updating your deployed/hosted app</a></p>
+                        <p><a href="#new-repo-github">1: Create a new repo on GitHub</a></p>
+                        <p><a href="#new-repo-local">2: Create a new repo on your local machine</a></p>
+                        <p><a href="#push-repos">3: Push your local repo to your remote repo</a></p>
+                        <p><a href="#verify-push">4: Verify your app has been deployed</a></p>
+                        <p><a href="#vite-update">5: Update vite.config.js</a></p>
+                        <p><a href="#gh-pages">6: Set up the GitHub Pages branch</a></p>
+                        <p><a href="#gh-subfolder">7: Set up a sub-folder for GitHub Pages</a></p>
+                        <p><a href="#gh-scripts">8: Add build and deploy scripts to package.json</a></p>
+                        <p><a href="#app-deploy">9: Build and deploy your app for hosting</a></p>
+                        <p><a href="#verify-two-branches">10: Verify both branches are uploaded</a></p>
                         <p><a href="#update-readme">Updating your app README.md file</a></p>
 
                         <p>&nbsp;</p>
@@ -173,24 +169,14 @@
         
                 <p><i>Clearly, it would not be practical to deploy all these files to GitHub or other remote server.</i></p>
 
-                <p>For this reason, Vite places the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
+                <p>For this reason, Vite include the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
                 
-                <p>So when you deploy the <b>main</b> or <b>master</b> branch of your app to GitHub using commands such as the following...</p>
+                <p>As a result, when you deploy your app code to GitHub, <i>your app does not run on GitHub as it does on your local machine.</i></p>
 
-<pre class="no-syn"><span class="yellow">git</span> add .
-<span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"descriptive message."</span>
-<span class="yellow">git</span> push origin main</pre>
-                        
-                <p>The <b>/node_modules</b> folder is not included in the upload.</p> 
-
-                <p>As a result, your app code is deployed to GitHub. <i>But your app does not run on GitHub as it does on your local machine.</i></p>
-
-                <p>Fortunately, the <b>create-react-app</b> script includes options to:</p>
+                <p>Fortunately, Vite includes options to:</p>
                 
                 <ul>
-                        <li><i>Build</i> a minimal version of your app by bundling the modules and assets with <a href="https://webpack.js.org/" target="_blank">Webpack</a>, and optimising the code.
-                        <span class="inside-ol">&nbsp;</span>
-                        This <b>build</b> option takes only the code it needs from the <b>/node_modules</b> folder and ignores the rest.</li>
+                        <li><i>Build</i> a minimal version of your app by bundling the modules and assets, and optimising the code. This code is stored in a <b>/dist</b> sub-folder.</li>
                         <li><i>Deploy</i> this minimal version to the <b>gh-pages</b> branch of GitHub known as GitHub Pages.</li>
                 </ul>
 
@@ -199,7 +185,7 @@
                 <p>Below are screenshots of a GitHub repo for a basic ReactJS app. As you can see, there are two branches and two versions of the code.</p>
 
                 <img src="assets/img/build-deploy/main-master.png" alt="screenshot">
-                <p>The remainder of this Tutorial takes you, step-by-step, through the process of deploying a simple app named <a href="vite-intro.html">app-react-basic</a> from your local machine to GitHub and GitHub Pages.</p>
+                <p>The remainder of this Tutorial takes you, step-by-step, through the process of deploying a ReactJS app from your local machine to GitHub and GitHub Pages.</p>
         </section>
 
 
@@ -212,11 +198,11 @@
     
         <ol>
     
-            <li>Sign into your GitHub account and create a new repo to host your app.
+            <li>In your GitHub account create a new repo to host your app.
     
             <img src="assets/img/build-deploy/serve-3.png" alt="screenshot"></li>
 
-            <li>Give your new repo a name. For example, <b>test-deploy-app</b>
+            <li>Give your new repo a name.
         <img src="assets/img/build-deploy/github-new-app-2.png" alt="screenshot"></li>
                         
             <li><i>Do not</i> initialise the new repo with a description, README, license, or .gitignore files. 
@@ -243,41 +229,28 @@
 <pre class="no-syn">C:\&gt; react-stuff\apps\app-react-basic</pre>
                 
                 <ol>
-                        <li>Enter the following command to place your app folder under Git version control.
+                        <li>Place your app folder under Git version control.
 <pre class="no-syn"><span class="yellow">git</span> init</pre></li>
-                        <li>Enter this command to add this folder&#8217;s contents to Git.
+                        <li>Add the folder&#8217;s contents to Git.
 <pre class="no-syn"><span class="yellow">git</span> add .</pre></li>
                         <li>Commit your app to Git with a descriptive message.
 <pre class="no-syn"><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="green">"first commit"</span></pre></li>
                          <li>Give your default branch a name. For example, <b>main</b>:
-<pre class="no-syn"><span class="yellow">git</span> branch <span class="grey">-M</span> main</pre>
-                        An alternative name would be <b>master</b>.
-<pre class="no-syn"><span class="yellow">git</span> branch <span class="grey">-M</span> master</pre>
-It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
+<pre class="no-syn"><span class="yellow">git</span> branch <span class="grey">-M</span> main</pre></li>
+
+                <li>Link your local Git repo to your remote GitHub repo. 
+        <pre class="no-syn"><span class="yellow">git</span> remote add origin https://github.com/&lt;username&gt;/&lt;reponame&gt;.git</pre>
+                                Replace <b>&lt;username&gt;</b> with your GitHub username. And replace <b>&lt;reponame&gt;</b> with the name of your new repo.</li>
+        
                 </ol>
 
                 <p>You have now finished setting up the local and remote repos for your app.</p>
         </section>
 
-        <section id="link-repos">
-
-                <h2>3: Link your local and remote repos</h2>
-                <p>Next, you need to connect your local repo to your remote repo on GitHub. Once you have done that, you can &#8216;push&#8217; your app from your local machine to GitHub.</p>
-
-                <ol>
-
-                        <li>Link your local Git repo to your remote GitHub repo with a command in this syntax. 
-<pre class="no-syn"><span class="yellow">git</span> remote add origin https://github.com/&lt;username&gt;/&lt;reponame&gt;.git</pre>
-                        Replace <b>&lt;username&gt;</b> with your GitHub username. And replace <b>&lt;reponame&gt;</b> with the name of your new repo. For example:
-<pre class="no-syn"><span class="yellow">git</span> remote add origin https://github.com/mary-smith-100/test-deploy-app.git</pre></li>
-                </ol>
-
-
-        </section>
 
         <section id="push-repos">
 
-                <h2>4: Push your local repo to your remote repo</h2> 
+                <h2>3: Push your local repo to your remote repo</h2> 
                 <p>Now, upload your local repo to the remote repo on GitHub</p>               
 
                 <ol>
@@ -285,18 +258,18 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
                         <li>In the example below, the default branch has the name of <b>main</b>.
 <pre class="no-syn"><span class="yellow">git</span> push <span class="grey">-u</span> origin main</pre></li>
 
-                        <li>You may receive a message stating you are not authenticated.
-<img src="assets/img/build-deploy/github-new-app-5.png" alt="screenshot" class="wider-115"></li>
+                        <!-- <li>You may receive a message stating you are not authenticated.
+<img src="assets/img/build-deploy/github-new-app-5.png" alt="screenshot" class="wider-115"></li> -->
 
                 </ol>
 
-                <p>If you see this message, you need to create a <b>personal access token</b> on GitHub.</p>
+                <!-- <p>If you see this message, you need to create a <b>personal access token</b> on GitHub.</p> -->
 
         </section>
 
 
 
-        <section>
+        <!-- <section>
 
 
                 <h2 id="personal-access-token">5: Create a personal access token on GitHub</h2>
@@ -340,11 +313,11 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
                 <p>Note your Personal Access Token (classic) gives you access <i>every</i> repo in your GitHub account.</p>
         </section>
 
-
+ -->
 
         <section>
 
-                <h2 id="verify-push">6: Verify your app has been deployed</h2>
+                <h2 id="verify-push">4: Verify your app has been deployed</h2>
 
                 <p>To check your app has been deployed to GitHub, do the following.</p>
 
@@ -357,10 +330,7 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
                         
                 </ol>
 
-                <h3>Where is the /node_modules folder?</h3>
-                <p>As you can see, Git has <i>not</i> pushed the <b>/node_modules</b> folder from your local machine to the GitHub repo.</p>
                 
-                <p>That is because the Vite places the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
                         
                 <h3>Your ReactJS app is deployed - <i>but not hosted</i></h3>
 
@@ -368,25 +338,22 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
 
                 <p>But your app is not yet <i>hosted</i> on GitHub. It cannot run and display web pages as it can on a local machine. To host your ReactJS app on GitHub, you need to use GitHub Pages.</p>
 
-
-                <h3>ReactJS has added a README.md file</h3>
-
                 <p>By default, Vite adds a README.md file. You can edit this later.</p>
 
         </section>
 
 
-        <section>
-                <h2>7: Update <code>vite.config.js</code></h2>
+        <section id="vite-update">
+                <h2>5: Update <code>vite.config.js</code></h2>
                 <p>Add the base URL of your app in this file. For example, if your repository’s name is <b>app-react-basic</b>, set the <b>base</b> property as follows:</p>
 
-                <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 400px">
+                <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 500px">
         </section>
 
 
         <section id="gh-pages">
 
-                <h2>8: Set up the GitHub Pages branch for your app</h2>
+                <h2>6: Set up the GitHub Pages branch</h2>
 
                 <p>Your next step is to set up a <b>gh-pages</b> branch to which you will commit and deploy your app.</p>
 
@@ -399,26 +366,14 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
         <section id="gh-subfolder">
 
 
-                <h2>9: Set up a sub-folder for GitHub Pages</h2>
-                    <p>By default, GitHub Pages assumes your ReactJS app will hosted at the server root. For example:</p>
-                   
-                    <p><b>https://username.github.io</b></p>  
+                <h2>7: Set up a sub-folder for GitHub Pages</h2>            
+                    <p>Typically, you will want to host your app in a sub-folder with a URL such as:</p>
             
-                    <p>Typically, this is <i>not</i> what you want.</p>
-                    
-                    <p>Instead, you will want to host your app in a sub-folder. Its hosted web address will then be:</p>
+                    <p><b>https://&lt;username&gt;.github.io/<span class="gray">&lt;reponame&gt;</span></b></p>  
+                        
+                    <p>Open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
             
-                    <p><b>https://username.github.io/<span class="gray">reponame</span></b></p>  
-            
-                    <p>For example:</p>
-            
-                    <p><b>https://johnsmith.github.io/<span class="grey">todos</span><br>
-                    https://johnsmith.github.io/<span class="grey">spa</span><br>
-                    https://johnsmith.github.io/<span class="grey">blog</span></b></p>  
-            
-                    <p>To override this default, open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
-            
-<pre class="no-syn">"homepage": "https://username.github.io/reponame/",</pre>
+<pre class="no-syn">"homepage": "https://&lt;username&gt;.github.io/&lt;reponame&gt;/",</pre>
                                     
                       <p>Your <b>package.json</b> file should now look something like this:</p>
             
@@ -430,7 +385,7 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
 
         <section id="gh-scripts">
                         
-                <h2>10: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
+                <h2>8: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
                                     
                 <p>In the <b>scripts</b> section of the same <b>package.json</b> file, add these two lines:</p>
                                     
@@ -473,9 +428,15 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
 
          <section>
 
-                <h2 id="app-deploy">11: Build and deploy your app for hosting</h2>
+                <h2 id="app-deploy">9: Build and deploy your app for hosting</h2>
 
-                <p>After completing all the above steps, run this command inside your app folder:</p>
+                <p>After completing all the above steps, run these Git comamnds:</p>
+
+<pre class="no-syn"><span class="yellow">git</span> add .
+<span class="yellow">git</span> git commit -m "updated with gh-pages"
+<span class="yellow">git</span> push -u origin main</pre>
+
+        <p>Finally, run the Vite deploy script:</p>
 
 <pre class="no-syn"><span class="yellow">npm</span> run deploy</pre>
 
@@ -487,10 +448,10 @@ It&#8217;s just a name. Use one or the other. <i>But not both</i></li>
     
     <p>After a few minutes, you can now access your hosted ReactJS app at a web address in the following format:</p>
 
-        <p><b>https://username.github.io/reponame</b></p>
+        <p><b>https://&lt;username&gt;.github.io/<span class="gray">&lt;reponame&gt;</span></b></p>  
 
 
-        <p>If you are deploying to GitHub Pagesd with SSH, here are the commands.</p>
+        <p>If you are deploying to GitHub Pages with SSH, here are the commands.</p>
 
 <pre class="no-syn">
 npm run build
@@ -508,7 +469,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
     <section>
 
 
-        <h2 id="verify-two-branches">12: Verify both branches are uploaded</h2>
+        <h2 id="verify-two-branches">10: Verify both branches are uploaded</h2>
 
         <p>When you view the GitHub repo of your app, with the <b>Code</b> tab selected, it should look similar to that below.</p>
 
@@ -525,7 +486,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
 
 
 
-    <section>
+    <!-- <section>
         <h2 id="app-updating">Updating your deployed/hosted app</h2>
 
         <p>Over time, you may make changes to your app and wish to host the new version to GitHub Pages. Here are the steps:</p>
@@ -548,7 +509,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
         </ol>
         <p>✅ &nbsp;That&#8217;s it. Both the <b>main</b> (or <b>master</b>) and <b>gh-pages</b> branches will be updated.</p>
     </section>
-
+ -->
     <section>
         <h2 id="update-readme">Update your app README.md file</h2>
 
@@ -582,7 +543,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
 </footer>
 <script>hljs.highlightAll();</script>
 
-<script src="assets/js/utils.js"></script>
+<script src="../assets/js/utils.js"></script>
 
 </body>
 </html>
