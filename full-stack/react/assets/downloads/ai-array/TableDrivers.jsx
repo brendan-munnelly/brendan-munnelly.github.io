@@ -15,10 +15,13 @@ function TableDrivers() {
           </tr>
         </thead>
         <tbody>
+           {/* Begin .map() loop */}
             <tr>
-              {/* Add the data from the F1Drivers array in td cells */}  
-             <td></td>
+              {/* Display the array data below in <td>...</td> cells 
+              that match the <th>...</th> cells in the table <thead> */} 
+              <td>  </td>
             </tr>
+           {/* End .map() loop */}
         </tbody>
       </table>
     </div>
@@ -26,3 +29,6 @@ function TableDrivers() {
 }
 
 export default TableDrivers;
+
+
+

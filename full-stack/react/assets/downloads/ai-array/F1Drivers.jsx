@@ -1,4 +1,4 @@
-// f1.js
+// F1 Drivers data (not real data)
 const F1Drivers = [
     {
       "firstName": "Lewis",
