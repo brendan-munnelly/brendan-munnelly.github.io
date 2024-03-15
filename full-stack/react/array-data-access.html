@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Accessing array data | ReactJS Tutorials</title>
-	<meta name="description" content="Displaying data from an array in list and table format.">
+	<meta name="description" content="Displaying data from an array in list and table format with the array.map() method.">
 
 	<!-- Stylesheet-->
 	<link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
@@ -37,7 +37,7 @@
 		
 				<div class="content">
 					<h1>Accessing array data</h1>
-					<h2>Displaying data from an array in list and table format.</h2>
+					<h2>Displaying data from an array in list and table format with the array.map() method.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -52,20 +52,13 @@
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#intro">Introduction</a></p>
-                <p><a href="#cra-start">Getting started with Vite</a></p>
-                <p><a href="#cra-customise">Customising the CRA boilerplate content</a></p>
-                <p><a href="#arrays">Using ChatGPT to create content and code</a></p>
-                <p><a href="#array-objects">Working with arrays of objects</a></p>
-                <p><a href="#child">Creating a child component</a></p>
-                <p><a href="#details">Displaying a player's details</a></p>
-
-                <p class="toc-indent"><a href="#add-click">Adding an onClick event to the table button</a></p>
-                <p class="toc-indent"><a href="#call-component">Calling the DisplayPlayer component</a></p>
-
-                <p><a href="#delete-player">Deleting a player</a></p>
-                <p><a href="#toggle">Toggle the display of components</a></p>
-                <p><a href="#deploy-download">Deploying and downloading your app</a></p>
-
+                <p><a href="#vite-start">Starting with Vite</a></p>
+                <p><a href="#vite-customise">Customising your app content</a></p>
+                <p><a href="#download">Downloading the app components</a></p>
+                <p><a href="#update-main">Updating your main.jsx file</a></p>
+                <p><a href="#update-app">Updating your app.jsx file</a></p>
+                <p><a href="#update-list">Updating your ListDrivers.jsx component</a></p>
+                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p>
 
 			</aside>
 	
@@ -76,13 +69,13 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-		        <li>Using ChatGPT to populate arrays, and to create code for reading and filtering arrays.</li>
+		        <li>Use the <b>array.map()</b> method with the <b>key</b> property to display data in ReactJS in list and table format.</li>
 		</ul>
 
 	</section>
 
 
-      <section id="array-objects">
+      <section id="intro">
 
         <h2>Working with arrays of objects</h2>
   
@@ -102,7 +95,7 @@
  
          <img src="assets/img/ai-array-app/error-key.png" alt="screenshot" style="max-width: 700px">
 
-         <p>The <b>index</b> It represents the current index of the array being processed. It's <i>not</i> a property of an item object. Yoi could display the <b>key</b> inthe browser as follows:</p>
+         <p>The <b>index</b> represents the current index of the array being processed. It's <i>not</i> a property of an item object. You could display the <b>key</b> in the browser as follows:</p>
 
 <pre><code>&lt;ul&gt;
   { items.map((item, index) =&gt; (
@@ -120,42 +113,43 @@
     </section>
 
 
-	<section id="cra-start">
+	<section id="vite-start">
 		<h2>Starting with Vite</h2>
-        <p>Follow these steps to create your basic app structure with Vite.</p>
+        <p>Follow these steps to scaffold your app structure with Vite.</p>
 
 		<ol>
-			<li>Open a new Command prompt window or, in VS Code, a new Terminal.</li>
-            <li>Navigate to where you want ReactJS to create a folder for your app. For example:
-<pre class="no-syn">C:\&gt; react\apps</pre></li>
-<li>Type the following command that includes the name you want to call your new app. For example, <b>app-react-array-data</b>.
-<pre class="no-syn"><span class="yellow">npm</span> create vite@latest app-react-array-data -- --template react</pre></li>
-		</ol>
+			<li>In a terminal, navigate to where you want Vite to create a folder for your app. For example:
+<pre class="no-syn">C:\&gt; react-stuff\apps</pre></li>
+<li>Enter the following command that includes the name you want to call your new app.
+<pre class="no-syn"><span class="yellow">npx</span> create vite@latest <span class="red">app-react-awesome</span> -- --template react</pre></li>
 
-		<p>Follow the on-screen instructions to build and launch your new app.</p>
+		<li>Follow the on-screen instructions to build and launch your new app.
 
+    <img src="assets/img/ai-array-app/vite-create.png" alt="screenshot" style="max-width: 700px"></li>
+
+  </ol>
 
 	</section>
 
-	<section id="app-customising">
+	<section id="vite-customise">
 
-		<h2>Customising your app</h2>
-		<p>Next, you will customise the 'boilerplate' content provided by Vite to build a very basic React app.</p>
+		<h2>Customising your app content</h2>
+		<p>Next, customise the 'boilerplate' content provided by Vite.</p>
 
 		<ol>
 
-			<li>Download the following stylesheet and save it to your app's <span class="syn-js">/src</span> folder.
+			<li>Download the following file and save it to your app's <span class="syn-js">/src</span> folder.
 			<span class="inside-ol">&nbsp;</span>
 			<a href="assets/downloads/F1.css" target="_blank">F1.css</a></li>
-			<li>Open the <b>index.html</b> file in your main app folder and replace the <b>&lt;title&gt;</b> tag as shown below.
+			<li>Open <b>index.html</b> in your main app folder and replace the <b>&lt;title&gt;</b> tag as shown below.
 			<img src="assets/img/ai-array-app/vite-7.png" alt="screenshot"></li>
 
-			<li>In your <span class="syn-js">/src</span> folder, open the <b>main.jsx</b> file and update it as follows.
+			<li>In your <span class="syn-js">/src</span> folder, open <b>main.jsx</b> and delete the stylesheet link.
 			<img src="assets/img/ai-array-app/vite-8.png" alt="screenshot" style="max-width: 600px"></li>
 
 			<li>Also in your <span class="syn-js">/src</span> folder, open <b>App.jsx</b> and replace all its content with the content below.</li>
 
-<li><pre><button class="copy-code" id="btn-1">Copy Code</button><code id="strCode-1">import './F1.css'
+<li><pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1">import './F1.css'
 
 function App() {
   return (
@@ -170,7 +164,7 @@ export default App;</code></pre></li>
 
 		</ol>
 
-		<p>Your web page should now look as shown below.</p>
+		<p>In a browser your app&#8219;s default web page should now look as shown below.</p>
 
 		<img src="assets/img/spa-intro/output-1.png" alt="Sample React screen">
 
@@ -178,8 +172,8 @@ export default App;</code></pre></li>
 	</section>
 
 
-    <section>
-        <h2>Downloading components</h2>
+    <section id="download">
+        <h2>Downloading the app components</h2>
         <p>Create a <span class="syn-js">/pages</span> sub-folder in your <span class="syn-js">/src</span> folder. Then download the following files and save them to this sub-folder.</p>
         
         <p><a href="assets/downloads/ai-array/Header.jsx">Header.jsx</a><br>
@@ -197,52 +191,130 @@ export default App;</code></pre></li>
     </section>
 
 
-
-
-         <section id="child">
+    <section id="update-main">
             
-            <h2>Updating your <code>app.jsx</code></h2>
+      <h2>Updating your <code>main.jsx</code> file</h2>
+      <p>Update <b>main.jsx</b> with these components as follows.</p>
 
-            <p>Add the various componets to your <b>app.jsx</b> file as follows.</p>
-
-<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10">import Header from './pages/Header';
-import NavBar from './pages/Navbar';
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2">import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Header from './pages/Header';
+import Navbar from './pages/Navbar';
+import App from './App.jsx'
 import Footer from './pages/Footer';
-import ListDrivers from './pages/ListDrivers';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;&gt;
+    &lt;Header /&gt;
+    &lt;Navbar /&gt;
+    &lt;App /&gt;
+    &lt;Footer /&gt;
+  &lt;/&gt;
+)
+</code></pre>
+
+
+    </section>
+
+         <section id="update-app">
+            
+            <h2>Updating your <code>app.jsx</code> file</h2>
+
+            <p>Update <b>app.jsx</b> with these components as follows.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3">import ListDrivers from './pages/ListDrivers';
 import TableDrivers from './pages/TableDrivers';
     
 import './F1.css'
     
 function App() {
-    return (
-          &lt;&gt;
-            &lt;Header /&gt;
-            &lt;NavBar /&gt;
-            &lt;ListDrivers /&gt;
-            &lt;TableDrivers /&gt;
-            &lt;Footer /&gt;
-          &lt;/&gt;
-    );
+  return (
+    &lt;&gt;
+       &lt;ListDrivers /&gt;
+       &lt;TableDrivers /&gt;
+    &lt;/&gt;
+  );
 }	
     
-export default App</code></pre>   
+export default App;</code></pre>   
+
+</section>
 
 
-        <p>Next:</p>
-        <ul>
-            <li>Update your <b>ListDrivers.jsx</b> component to display the F1 drivers in the format of a bulleted list.</li>
-            <li>Update your <b>TableDrivers.jsx</b> component to display the F1 drivers in the format of cells and rows in a table</li>
-        </ul>
+<section id="update-list">
 
-        <p>Use the array <b>map()</b> function in each case. </p>
-        
-        <p>The browser output should look as shown below.</p>
+  <h2>Updating your <code>ListDrivers.jsx</code> component</h2>
 
-        <img src="assets/img/ai-array-app/final-browser.png" alt="screenshot">
+  <p>Add <b>array.map()</b> method code to this component to display the F1 drivers in the format of a bulleted list.</p>
 
+  <img src="assets/img/ai-array-app/ListDrivers-template.png" alt="screenshot" style="max-width:620px">
+
+  <p>For an array named <b>items</b> with <b>name</b> and <b>age</b> property names, the general syntax would be as follows:</p>
+
+  <pre><code>&lt;ul&gt;
+    { items.map((item, index) =&gt; (
+      // Displaying both index position and item properties.
+       &lt;li key={index}&gt; {index+1} {item.name} {item.age}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;</code></pre>
+
+  <h3>Adding some styling to the list</h3>
+
+  <p>Enclose the driver first and last names inside an HTML bold <b>&lt;b&gt;&lt;/b&gt;</b> tag pair.</p>
+
+  <img src="assets/img/ai-array-app/list-drivers-bold.png" alt="screenshot" style="max-width: 600px">
+
+  <p>Add a hyphen <b>-</b> character and two comma <b>,</b> characters as shown below.</p>
+
+  <img src="assets/img/ai-array-app/list-drivers-dash-commas.png" alt="screenshot" style="max-width: 600px">
+
+  <p>Add two non-breaking space <b>&amp;nbsp;</b> characters before the first name as shown below.</p>
+
+  <img src="assets/img/ai-array-app/list-drivers-spacing.png" alt="screenshot" style="max-width: 600px">
+
+  <p>And in the <b>F1.css</b> file, add the following line at the end to remove the bullet character.</p>
+
+  <img src="assets/img/ai-array-app/list-bullet-none.png" alt="screenshot"  style="max-width: 480px">
+
+  <p>Your web browser output from this component should now look similar to that below.</p>
+
+  <img src="assets/img/ai-array-app/list-output.png" alt="screemshot">
+
+    </section>
+
+  <section id="update-table">
+
+    <h2>Updating your <code>TableDrivers.jsx</code> component</h2>
+  
+    <p>Add <b>array.map()</b> method code to this component to display the F1 drivers in table format.</p>
+  
+    <img src="assets/img/ai-array-app/TableDrivers-template.png" alt="screenshot" style="max-width:660px">
+  
+    <p>For an array named <b>items</b> with <b>name</b> and <b>age</b> property names, the general syntax would be as follows:</p>
+  
+<pre><code>&lt;tbody&gt;
+    {items.map((item, index) =&gt; (
+      &lt;tr key={index}&gt;
+       &lt;td&gt;{index+1}&lt;/td&gt;
+       &lt;td&gt;{item.name}&lt;/td&gt;
+       &lt;td&gt;{item.age}&lt;/td&gt;
+      &lt;/tr&gt;
+    ))}
+ &lt;/tbody&gt;</code></pre>
+  
+    <p>The web browser output from this component should look similar to that below.</p>
+  
+    <img src="assets/img/ai-array-app/table-output.png" alt="screemshot">
+  
+  </section>
+
+
+
+  <section>
         <p>Re-write your app as a single page app with a Home Page, an error page, and pages for the list and table views.</p>
-        <p>When finished, deploy your app to GitHub Pages.</p>
-        </section>
+
+        <p>When finished, deploy your app to GitHub and GitHub Pages.</p>
+  </section>
 
 </article>
 </main>
