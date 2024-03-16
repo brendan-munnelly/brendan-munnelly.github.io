@@ -212,7 +212,7 @@
 
             <img src="assets/img/build-deploy/list-commands.png" alt="screenshot" style="max-width: 700px"></li>
 
-            <li>Select and copy the above commands, paste them to your terminal, and then run them.
+            <li>Select and copy the above commands, paste them in to your terminal, and then run them.
             <span class="inside-ol">&nbsp;</span>
             The command below assumes you are using SSH and have SSH keys set up in your GitHub account.
             <img src="assets/img/build-deploy/list-commands-ssh.png" alt="screenshot" style="max-width: 700px">
@@ -265,7 +265,7 @@
                 <p><b>https://<span style="background: red; color:#fff;padding: 0 4px">username</span>.github.io/<span style="background: red; color:#fff;padding: 0 4px">react-app-awesome</span></b></p>
                 <p>To do this, you need to update <i>two</i> files as follows:</p>
 
-                <ul>
+                <ol>
                         <li><span class="syn-js">vite.config.js</span>: Add a <b>base</b> property with your app's repo name.
                         <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 580px">
                         Your file should now look similar to that below.
@@ -276,7 +276,7 @@
 <pre class="no-syn">  "homepage": "https://<span class="red">username</span>.github.io/<span class="red">reponame</span>/",</pre>
 The first few lines of the file should now look something like this:
 <img src="assets/img/build-deploy/serve-5.png" alt="screenshot" style="max-width: 700px"></li>
-                </ul>
+                </ol>
 
         </section>
 
@@ -285,7 +285,7 @@ The first few lines of the file should now look something like this:
                         
                 <h2>5: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
                                     
-                <p>In the <b>scripts</b> section of the same <b>package.json</b> file, add these two lines:</p>
+                <p>In the <b>scripts</b> section of <b>package.json</b>, add these two lines:</p>
                                     
 <pre class="no-syn">"scripts": {
     <span class="comment">// ... other scripts here,</span>
@@ -300,58 +300,46 @@ The first few lines of the file should now look something like this:
 
 </section>
         
-        <!-- <section>
+<section>
 
-                <h2 id="app-build">11: Create the <code>build</code> version of your app</h2>
+        <h2 id="app-deploy">6: Build your app for GitHub Pages</h2>
+
+        <p>Just a few more steps to go:</p>
                 
-                <p>Follow the steps below :</p>
+        <ol>
 
-                <ol>
-                        <li>In a Command prompt or VS Code Terminal, enter the command below in your app folder:
-<pre class="no-syn"><span class="yellow">npm</span> run build</pre></li>
-        
-                <li>When the process completes, you should see a message similar to the following:
-                <img src="assets/img/build-deploy/build-1.png" alt="screenshot" style="max-width:600px"></li>
-        
-        </ol>
+                <li>Build your app by running this command:
 
-      
-                <p>Running the <b>build</b> script creates a new sub-folder named <span class="syn-js">/build</span> inside your app folder. </p>
-        
-        </section>
+                <pre class="no-syn"><span class="yellow">npm</span> run build</pre>
 
-        <section>
+                Vite should respond with a screen similar to that below.
 
- -->
+                <img src="assets/img/build-deploy/vite-build-response.png" alt="screenshot" style="max-width: 640px">
 
-         <section>
+                Vite creates a new <span class="syn-js">/dist</span> sub-folder and in its stores a minimised <i>build</i> version of your app that you can deploy to GitHub Pages.
+                <img src="assets/img/build-deploy/build-version.png" alt="screenshot" style="max-width: 500px">
+        </li>
+                        
+                <li>Switch to this <span class="syn-js">/dist</span> sub-folder:
+<pre class="no-syn"><span class="yellow">cd</span> dist</pre></li>
 
-                <h2 id="app-deploy">6: Build your app for GitHub Pages</h2>
-
-                <p>After completing all the above steps, run this Vite command:</p>
-
-<pre class="no-syn"><span class="yellow">npm</span> run build</pre>
-
-                <p>Vite creates a new <span class="syn-js">/dist</span> folder and in its stores a minimised <i>build</i> version of your app that you can deploy to GitHub Pages. Switch to this folder:</p>                
-<pre class="no-syn"><span class="yellow">cd</span> dist</pre>
-
-<p>Run these Git commands:</p>
+<li>Run these Git commands:
 
 <pre class="no-syn"><span class="yellow">git</span> init
 <span class="yellow">git</span> checkout -B main
 <span class="yellow">git</span> add -A
-<span class="yellow">git</span> commit -m 'deploy'</pre>
+<span class="yellow">git</span> commit -m <span class="comment">"deploy to GitHub Pages"</span></pre></li>
 
-        <p>And finally, deploy the <i>build</i> version of your app to GitHub Pages with SSH:</p>
+        <li>And finally, deploy the <i>build</i> version of your app to GitHub Pages with SSH:
 
 <pre class="no-syn"><span class="yellow">git</span> push -f git@github.com:<span class="red">username</span>/<span class="red">reponame</span>.git main:gh-pages</pre>
 
-        <p>If your GitHub account is not set up for SSH, try HTTPS URL instead:</p>
+        If your GitHub account is not set up for SSH, try HTTPS URL instead:
 
-<pre class="no-syn"><span class="yellow">git</span> push -f https://github.com/<span class="red">username</span>/<span class="red">reponame</span>.git main:gh-pages</pre>
+<pre class="no-syn"><span class="yellow">git</span> push -f https://github.com/<span class="red">username</span>/<span class="red">reponame</span>.git main:gh-pages</pre></li>
+                </ol>
 
     <p>✅ &nbsp;Finished!</p>
-
     </section>
 
 
