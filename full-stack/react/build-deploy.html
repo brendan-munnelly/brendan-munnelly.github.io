@@ -68,16 +68,13 @@
                         <p><a href="#app-versions">One app &#8211; <i>but</i> two versions!</a></p>
 
                         <p><a href="#new-repo-github">1: Create a new repo on GitHub</a></p>
-                        <p><a href="#new-repo-local">2: Create a new repo on your local machine</a></p>
-                        <p><a href="#push-repos">3: Push your local repo to your remote repo</a></p>
-                        <p><a href="#verify-push">4: Verify your app has been deployed</a></p>
-                        <p><a href="#vite-update">5: Update vite.config.js</a></p>
-                        <p><a href="#gh-pages">6: Set up the GitHub Pages branch</a></p>
-                        <p><a href="#gh-subfolder">7: Set up a sub-folder for GitHub Pages</a></p>
-                        <p><a href="#gh-scripts">8: Add build and deploy scripts to package.json</a></p>
-                        <p><a href="#app-deploy">9: Build and deploy your app for hosting</a></p>
-                        <p><a href="#verify-two-branches">10: Verify both branches are uploaded</a></p>
-                        <p><a href="#update-readme">Updating your app README.md file</a></p>
+                        <p><a href="#verify-push">2: Verify your app has been deployed</a></p>
+                        <p><a href="#gh-pages">3: Download the GitHub Pages package</a></p>
+
+                        <p><a href="#vite-update">4: Setting your GitHub Pages sub-folder</a></p>
+                        <p><a href="#gh-scripts">5: Add build and deploy scripts to package.json</a></p>
+                        <p><a href="#app-deploy">6: Build your app for GitHub Pages</a></p>
+                        <p><a href="#verify-two-branches">7: Verify both branches are uploaded</a></p>
 
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
@@ -169,11 +166,11 @@
         
                 <p><i>Clearly, it would not be practical to deploy all these files to GitHub or other remote server.</i></p>
 
-                <p>For this reason, Vite include the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
+                <p>For this reason, Vite includes the <b>/node_modules</b> folder in the <b>.gitignore</b> file.</p>
                 
-                <p>As a result, when you deploy your app code to GitHub, <i>your app does not run on GitHub as it does on your local machine.</i></p>
+                <p>As a result, <i>your deployed app does not run on GitHub as it does on your local machine.</i></p>
 
-                <p>Fortunately, Vite includes options to:</p>
+                <p>Fortunately, Vite includes scripts to:</p>
                 
                 <ul>
                         <li><i>Build</i> a minimal version of your app by bundling the modules and assets, and optimising the code. This code is stored in a <b>/dist</b> sub-folder.</li>
@@ -182,7 +179,7 @@
 
                 <p>A typical <b>build</b> version of a ReactJS app might be about 500 KB in total file size.</p>
 
-                <p>Below are screenshots of a GitHub repo for a basic ReactJS app. As you can see, there are two branches and two versions of the code.</p>
+                <p>Below are screenshots of a GitHub repo for a ReactJS app. As you can see, there are <i>two</i> branches.</p>
 
                 <img src="assets/img/build-deploy/main-master.png" alt="screenshot">
                 <p>The remainder of this Tutorial takes you, step-by-step, through the process of deploying a ReactJS app from your local machine to GitHub and GitHub Pages.</p>
@@ -192,7 +189,7 @@
         <section>
 
 
-        <h2 id="new-repo-github">1: Create a new repo on GitHub</h2>
+        <h2 id="new-repo-github">1: Create local and remote GitHub repos</h2>
 
         <p>On GitHub, your app will be stored in a new repo separate from all your other folders and files. Follow these steps:</p>
     
@@ -211,113 +208,26 @@
 
             <li>Click the green <b>Create repository</b> button</li>
             
-            <li>GitHub displays a screen that includes instructions for setting up a local repo for your new app.
+            <li>GitHub displays a screen that includes commands for setting up a local repo for your new app and then pushing your app files to the GitHub remote repo.
 
-                <img src="assets/img/build-deploy/github-new-app-4.png" alt="screenshot" style="max-width: 700px"></li>
+            <img src="assets/img/build-deploy/list-commands.png" alt="screenshot" style="max-width: 700px"></li>
 
-            </ol>
-
-        </section>
-
-        <section  id="new-repo-local">
-
-
-                <h2>2: Create a new repo on your local machine</h2>
-
-                <p>Leave the GitHub screen open in your web browser, and switch back to your Command prompt or VS Code Terminal.</p>
-
-<pre class="no-syn">C:\&gt; react-stuff\apps\app-react-basic</pre>
-                
-                <ol>
-                        <li>Place your app folder under Git version control.
-<pre class="no-syn"><span class="yellow">git</span> init</pre></li>
-                        <li>Add the folder&#8217;s contents to Git.
-<pre class="no-syn"><span class="yellow">git</span> add .</pre></li>
-                        <li>Commit your app to Git with a descriptive message.
-<pre class="no-syn"><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="green">"first commit"</span></pre></li>
-                         <li>Give your default branch a name. For example, <b>main</b>:
-<pre class="no-syn"><span class="yellow">git</span> branch <span class="grey">-M</span> main</pre></li>
-
-                <li>Link your local Git repo to your remote GitHub repo. 
-        <pre class="no-syn"><span class="yellow">git</span> remote add origin https://github.com/&lt;username&gt;/&lt;reponame&gt;.git</pre>
-                                Replace <b>&lt;username&gt;</b> with your GitHub username. And replace <b>&lt;reponame&gt;</b> with the name of your new repo.</li>
-        
-                </ol>
-
-                <p>You have now finished setting up the local and remote repos for your app.</p>
-        </section>
+            <li>Select and copy the above commands, paste them to your terminal, and then run them.
+            <span class="inside-ol">&nbsp;</span>
+            The command below assumes you are using SSH and have SSH keys set up in your GitHub account.
+            <img src="assets/img/build-deploy/list-commands-ssh.png" alt="screenshot" style="max-width: 700px">
+            
+            If are using HTTPS instead, the command syntax would be as follows:
+            <img src="assets/img/build-deploy/list-commands-https.png" alt="screenshot" style="max-width: 700px"></li>
 
 
-        <section id="push-repos">
-
-                <h2>3: Push your local repo to your remote repo</h2> 
-                <p>Now, upload your local repo to the remote repo on GitHub</p>               
-
-                <ol>
-
-                        <li>In the example below, the default branch has the name of <b>main</b>.
-<pre class="no-syn"><span class="yellow">git</span> push <span class="grey">-u</span> origin main</pre></li>
-
-                        <!-- <li>You may receive a message stating you are not authenticated.
-<img src="assets/img/build-deploy/github-new-app-5.png" alt="screenshot" class="wider-115"></li> -->
-
-                </ol>
-
-                <!-- <p>If you see this message, you need to create a <b>personal access token</b> on GitHub.</p> -->
+         </ol>
 
         </section>
-
-
-
-        <!-- <section>
-
-
-                <h2 id="personal-access-token">5: Create a personal access token on GitHub</h2>
-                <p>When using the Command Line Interface (CLI) with GitHub, a Username and Password are not sufficient. You need a third identifier, such as a Personal Access Token (PAT).</p>
-                
-                <p>Follow these steps to create a PAT:</p>
-
-                <ol>
-                        <li>On any Github screen, click your avatar in the top-right corner.</li>
-                        <li>From the dropdown menu, choose <b>Settings</b>.</li>
-                        <li>On the new screen, scroll down and, in the left sidebar, click <b>Developer settings</b>.
-                        <img src="assets/img/build-deploy/pat-1.png" alt="screenshot"></li>
-                        <li>On the next screen, in the left sidebar, click <b>Personal access tokens</b> and then <b>Tokens (classic)</b>.
-                        <img src="assets/img/build-deploy/pat-2.png" alt="screenshot"></li>                                
-                        <li>Next, at the top-right, click the <b>Generate new token</b> button and then click <b>Generate new token (classic)</b>.
-                        <img src="assets/img/build-deploy/pat-3.png" alt="screenshot"></li>  
-                        
-                        <li>You will see a screen like the following. Choose <b>Use your password</b>
-                        <img src="assets/img/build-deploy/pat-6.png" alt="screenshot" style="max-width: 300px"></li>
-
-
-                        <li>Next, confirm your <b>Password.</b>
-                        <img src="assets/img/build-deploy/pat-7.png" alt="screenshot" style="max-width: 300px; margin-bottom: 18px !important">
-                        GitHub now returns you to the screen for generating a new token. You will also receive a confirmation email.</li>
-        
-                        <li>You will be prompted to enter a <b>Note</b> (short description) and an <b>Expiration</b> date.
-                        <img src="assets/img/build-deploy/pat-4.png" alt="screenshot"></li>    
-                        <li>In the <b>Select scopes</b> list, you can choose all the options.</li>
-
-                        <li>At the bottom of the screen, click the green <b>Generate token</b> button.</li>
-
-                        <li>You will now see a screen similar to the following. (This is not a real token.)
-                        <img src="assets/img/build-deploy/pat-5.png" alt="screenshot" style="margin-bottom: 16px !important">
-                        Copy your token to a text file on your local machine, and save the file.</li>
-                </ol>
-
-                <p>All done. Now you can run the Git command below or any others. </p>
-
-<pre class="no-syn"><span class="yellow">git</span> push <span class="grey">-u</span> origin main</pre>
-
-                <p>Note your Personal Access Token (classic) gives you access <i>every</i> repo in your GitHub account.</p>
-        </section>
-
- -->
 
         <section>
 
-                <h2 id="verify-push">4: Verify your app has been deployed</h2>
+                <h2 id="verify-push">2: Verify your app has been deployed</h2>
 
                 <p>To check your app has been deployed to GitHub, do the following.</p>
 
@@ -329,68 +239,56 @@
                         <img src="assets/img/build-deploy/github-new-app-6.png" alt="screenshot" ></li>
                         
                 </ol>
-
-                
+               
                         
                 <h3>Your ReactJS app is deployed - <i>but not hosted</i></h3>
 
-                <p>Your app has been deployed or &#8216;pushed&#8217; to GitHub. The remote repo has all the files needed for anyone to download your app from GitHub and install it on their local machine.</p>
+                <p>Your app has been deployed or &#8216;pushed&#8217; to GitHub. But your app  cannot run and display web pages as it can on a local machine. To <i>host</i> your app on GitHub, you need to use GitHub Pages.</p>
 
-                <p>But your app is not yet <i>hosted</i> on GitHub. It cannot run and display web pages as it can on a local machine. To host your ReactJS app on GitHub, you need to use GitHub Pages.</p>
-
-                <p>By default, Vite adds a README.md file. You can edit this later.</p>
-
-        </section>
-
-
-        <section id="vite-update">
-                <h2>5: Update <code>vite.config.js</code></h2>
-                <p>Add the base URL of your app in this file. For example, if your repository’s name is <b>app-react-basic</b>, set the <b>base</b> property as follows:</p>
-
-                <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 500px">
         </section>
 
 
         <section id="gh-pages">
 
-                <h2>6: Set up the GitHub Pages branch</h2>
+                <h2>3: Download the GitHub Pages package</h2>
 
-                <p>Your next step is to set up a <b>gh-pages</b> branch to which you will commit and deploy your app.</p>
-
-                <p>In a Command prompt or VS Code Terminal, enter the following command in your app folder to install the <b>gh-pages</b> package as a dev dependency:</p>
+                <p>In a terminal, enter the following command in your app folder to install the <b>gh-pages</b> package as a dev dependency:</p>
                 <pre class="no-syn"><span class="yellow">npm</span> i gh-pages <span class="grey">--save-dev</span></pre>
 
         </section>
 
 
-        <section id="gh-subfolder">
+        <section id="vite-update">
+                <h2>4: Setting your GitHub Pages sub-folder</h2>
 
+                <p>You want your app to run on GitHub at a URL in the format below:</p>
+                <p><b>https://<span style="background: red; color:#fff;padding: 0 4px">username</span>.github.io/<span style="background: red; color:#fff;padding: 0 4px">react-app-awesome</span></b></p>
+                <p>To do this, you need to update <i>two</i> files as follows:</p>
 
-                <h2>7: Set up a sub-folder for GitHub Pages</h2>            
-                    <p>Typically, you will want to host your app in a sub-folder with a URL such as:</p>
+                <ul>
+                        <li><span class="syn-js">vite.config.js</span>: Add a <b>base</b> property with your app's repo name.
+                        <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 580px">
+                        Your file should now look similar to that below.
+                        <img src="assets/img/build-deploy/vita-base-1.png" alt="screenshot" style="max-width: 580px">
+                </li>
+                        <li><span class="syn-js">package.json</span>: Add the following line at the top of the file:
             
-                    <p><b>https://&lt;username&gt;.github.io/<span class="gray">&lt;reponame&gt;</span></b></p>  
-                        
-                    <p>Open your app&#8217;s <b>package.json</b> file and add the following line after the opening curly brace <span class="syn-js">{</span> at the top of the file:</p>
-            
-<pre class="no-syn">"homepage": "https://&lt;username&gt;.github.io/&lt;reponame&gt;/",</pre>
-                                    
-                      <p>Your <b>package.json</b> file should now look something like this:</p>
-            
-                        <img src="assets/img/build-deploy/serve-5.png" alt="screenshot">
-            
+<pre class="no-syn">  "homepage": "https://<span class="red">username</span>.github.io/<span class="red">reponame</span>/",</pre>
+The first few lines of the file should now look something like this:
+<img src="assets/img/build-deploy/serve-5.png" alt="screenshot" style="max-width: 700px"></li>
+                </ul>
 
         </section>
 
-
-        <section id="gh-scripts">
+                                    
+       <section id="gh-scripts">
                         
-                <h2>8: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
+                <h2>5: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
                                     
                 <p>In the <b>scripts</b> section of the same <b>package.json</b> file, add these two lines:</p>
                                     
 <pre class="no-syn">"scripts": {
-    <span class="green">// ... other scripts here,</span>
+    <span class="comment">// ... other scripts here,</span>
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
 }</pre>
@@ -428,40 +326,31 @@
 
          <section>
 
-                <h2 id="app-deploy">9: Build and deploy your app for hosting</h2>
+                <h2 id="app-deploy">6: Build your app for GitHub Pages</h2>
 
-                <p>After completing all the above steps, run these Git comamnds:</p>
+                <p>After completing all the above steps, run this Vite command:</p>
 
-<pre class="no-syn"><span class="yellow">git</span> add .
-<span class="yellow">git</span> git commit -m "updated with gh-pages"
-<span class="yellow">git</span> push -u origin main</pre>
+<pre class="no-syn"><span class="yellow">npm</span> run build</pre>
 
-        <p>Finally, run the Vite deploy script:</p>
+                <p>Vite creates a new <span class="syn-js">/dist</span> folder and in its stores a minimised <i>build</i> version of your app that you can deploy to GitHub Pages. Switch to this folder:</p>                
+<pre class="no-syn"><span class="yellow">cd</span> dist</pre>
 
-<pre class="no-syn"><span class="yellow">npm</span> run deploy</pre>
+<p>Run these Git commands:</p>
 
-        <p>You should now see a message like that below.</p>
+<pre class="no-syn"><span class="yellow">git</span> init
+<span class="yellow">git</span> checkout -B main
+<span class="yellow">git</span> add -A
+<span class="yellow">git</span> commit -m 'deploy'</pre>
 
-        <img src="assets/img/build-deploy/app-hosted.png" alt="screenshot" style="max-width: 500px">
+        <p>And finally, deploy the <i>build</i> version of your app to GitHub Pages:</p>
 
-    <p>✅ &nbsp;Success!</p>
-    
-    <p>After a few minutes, you can now access your hosted ReactJS app at a web address in the following format:</p>
+<pre class="no-syn"><span class="yellow">git</span> push -f git@github.com:<span class="red">username</span>/<span class="red">reponame</span>.git main:gh-pages</pre>
 
-        <p><b>https://&lt;username&gt;.github.io/<span class="gray">&lt;reponame&gt;</span></b></p>  
+        <p>If your repository is not set up for SSH, use the HTTPS URL instead:</p>
 
+<pre class="no-syn"><span class="yellow">git</span> push -f https://github.com/<span class="red">username</span>/<span class="red">reponame</span>.git main:gh-pages</pre>
 
-        <p>If you are deploying to GitHub Pages with SSH, here are the commands.</p>
-
-<pre class="no-syn">
-npm run build
-cd dist
-git init
-git checkout -B main
-git add -A
-git commit -m 'deploy'
-git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
-</pre>
+    <p>✅ &nbsp;Finished!</p>
 
     </section>
 
@@ -469,7 +358,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
     <section>
 
 
-        <h2 id="verify-two-branches">10: Verify both branches are uploaded</h2>
+        <h2 id="verify-two-branches">7: Verify both branches are uploaded</h2>
 
         <p>When you view the GitHub repo of your app, with the <b>Code</b> tab selected, it should look similar to that below.</p>
 
@@ -509,7 +398,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
         </ol>
         <p>✅ &nbsp;That&#8217;s it. Both the <b>main</b> (or <b>master</b>) and <b>gh-pages</b> branches will be updated.</p>
     </section>
- -->
+
     <section>
         <h2 id="update-readme">Update your app README.md file</h2>
 
@@ -532,7 +421,7 @@ git push -f git@github.com:&lt;username&gt;&lt;reponame&gt;.git main:gh-pages
 
         <p>Because your README.md file is <i>outside</i> your <b>/build</b> folder, the <b>npm run deploy</b> command will not deploy this file to GitHub. </p>
     </section>
-
+-->
 
 </article>
 </main>
