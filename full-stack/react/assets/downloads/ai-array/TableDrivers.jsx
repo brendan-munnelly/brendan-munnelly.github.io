@@ -16,7 +16,7 @@ function TableDrivers() {
         </thead>
         <tbody>
            {/* Begin .map() loop */}
-            <tr>
+            <tr key={index}>
               {/* Display the array data below in <td>...</td> cells 
               that match the <th>...</th> cells in the table <thead> */} 
               <td>  </td>

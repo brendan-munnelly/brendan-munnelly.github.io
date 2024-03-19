@@ -5,7 +5,7 @@ function ListDrivers() {
     <div className='main-content'>
       <ul>
           {/* Begin .map() loop */}
-          <li> { /* Display array data here */} </li>
+          <li key={index}> { /* Display array data here */} </li>
           {/* End .map() loop */}
       </ul>
     </div>
