@@ -67,11 +67,11 @@
 			<p><a href="#app-githubs">One app &#8211; <i>but</i> two GitHubs!</a></p>
                         <p><a href="#app-versions">One app &#8211; <i>but</i> two versions!</a></p>
 
-                        <p><a href="#new-repo-github">1: Create a new repo on GitHub</a></p>
+                        <p><a href="#new-repo-github">1: Create local and remote GitHub repos</a></p>
                         <p><a href="#verify-push">2: Verify your app has been deployed</a></p>
                         <p><a href="#gh-pages">3: Download the GitHub Pages package</a></p>
 
-                        <p><a href="#vite-update">4: Setting your GitHub Pages sub-folder</a></p>
+                        <p><a href="#vite-update">4: Set your sub-folder for GitHub Pages</a></p>
                         <p><a href="#gh-scripts">5: Add build and deploy scripts to package.json</a></p>
                         <p><a href="#app-deploy">6: Build your app for GitHub Pages</a></p>
                         <p><a href="#verify-two-branches">7: Verify both branches are uploaded</a></p>
@@ -210,14 +210,16 @@
             
             <li>GitHub displays a screen that includes commands for setting up a local repo for your new app and then pushing your app files to the GitHub remote repo.
 
-            <img src="assets/img/build-deploy/list-commands.png" alt="screenshot" style="max-width: 700px"></li>
+            <img src="assets/img/build-deploy/list-commands.png" alt="screenshot" style="max-width: 680px"></li>
 
-            <li>Select and copy the above commands, paste them in to your terminal, and then run them.
+            <li>Select and copy the above commands, and paste them into a text file.
             <span class="inside-ol">&nbsp;</span>
-            The command below assumes you are using SSH and have SSH keys set up in your GitHub account.
+            Include a <b>git add .</b> command as shown below, paste the commands in to your terminal, and then run them.
+            <img src="assets/img/build-deploy/git-add.png" alt="screenshot" style="max-width: 680px"></li>
+            <li>The <b>git remote add</b> assumes you are using SSH and have SSH keys set up in your GitHub account.
             <img src="assets/img/build-deploy/list-commands-ssh.png" alt="screenshot" style="max-width: 700px">
             
-            If are using HTTPS instead, the command syntax would be as follows:
+            If you are using HTTPS instead, the command syntax would be as follows:
             <img src="assets/img/build-deploy/list-commands-https.png" alt="screenshot" style="max-width: 700px"></li>
 
 
@@ -259,9 +261,9 @@
 
 
         <section id="vite-update">
-                <h2>4: Setting your GitHub Pages sub-folder</h2>
+                <h2>4: Set your sub-folder for GitHub Pages</h2>
 
-                <p>You want your app to run on GitHub at a URL in the format below:</p>
+                <p>You will want your app to run on GitHub Pages at a URL in the format below:</p>
                 <p><b>https://<span style="background: red; color:#fff;padding: 0 4px">username</span>.github.io/<span style="background: red; color:#fff;padding: 0 4px">react-app-awesome</span></b></p>
                 <p>To do this, you need to update <i>two</i> files as follows:</p>
 
@@ -269,12 +271,12 @@
                         <li><span class="syn-js">vite.config.js</span>: Add a <b>base</b> property with your app's repo name.
                         <img src="assets/img/build-deploy/vita-base.png" alt="screenshot" style="max-width: 580px">
                         Your file should now look similar to that below.
-                        <img src="assets/img/build-deploy/vita-base-1.png" alt="screenshot" style="max-width: 580px">
+                        <img src="assets/img/build-deploy/vita-base-1.png" alt="screenshot" style="max-width: 560px">
                 </li>
-                        <li><span class="syn-js">package.json</span>: Add the following line at the top of the file:
+                        <li><span class="syn-js">package.json</span>: Add the following line at the top of this file:
             
-<pre class="no-syn">  "homepage": "https://<span class="red">username</span>.github.io/<span class="red">reponame</span>/",</pre>
-The first few lines of the file should now look something like this:
+<pre class="no-syn">"homepage": "https://<span class="red">username</span>.github.io/<span class="red">reponame</span>/",</pre>
+The first few lines of the <b>package.json</b> should now look something like this:
 <img src="assets/img/build-deploy/serve-5.png" alt="screenshot" style="max-width: 700px"></li>
                 </ol>
 
@@ -285,8 +287,7 @@ The first few lines of the file should now look something like this:
                         
                 <h2>5: Add <code>build</code> and <code>deploy</code> scripts to <code>package.json</code></h2>
                                     
-                <p>In the <b>scripts</b> section of <b>package.json</b>, add these two lines:</p>
-                                    
+                <p>In the <b>scripts</b> section of <b>package.json</b>, add these two lines:</p>                                    
 <pre class="no-syn">"scripts": {
     <span class="comment">// ... other scripts here,</span>
     "predeploy": "npm run build",
@@ -295,7 +296,7 @@ The first few lines of the file should now look something like this:
             
                 <p>Your <b>scripts</b> section should now look something like this:</p>
             
-                <img src="assets/img/build-deploy/serve-6.png" alt="screenshot">
+                <img src="assets/img/build-deploy/serve-6.png" alt="screenshot" class="wider-110">
             
 
 </section>
@@ -420,7 +421,7 @@ The first few lines of the file should now look something like this:
 </footer>
 <script>hljs.highlightAll();</script>
 
-<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/utils-react.js"></script>
 
 </body>
 </html>

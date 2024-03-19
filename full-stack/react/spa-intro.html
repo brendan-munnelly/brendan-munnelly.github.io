@@ -52,29 +52,24 @@
 				<p><a href="#learning-goals">Learning Goals</a></p>
 
 				<p><a href="#about-spa">About Single Page (SPA) Applications</a></p>
-				<p><a href="#cra-start">Starting with Vite</a></p>
+				<p><a href="#vite-start">Starting with Vite</a></p>
 
-				<p><a href="#cra-customise">Customising your Vite-created content</a></p>
-				<p class="toc-indent"><a href="#folder-public">The /public folder</a></p>
-				<p class="toc-indent"><a href="#folder-src">The /src folder</a></p>
+				<p><a href="#vite-customise">Customising your app content</a></p>
 
-				<p><a href="#react-router-dom">Working with react-router-dom</a></p>
+				<p><a href="#react-router-dom">Installing react-router-dom</a></p>
 
-                <p class="toc-indent"><a href="#router-install">Installing the react-router-dom package</a></p>
-                <p class="toc-indent"><a href="#router-import">Importing react-router-dom into your App component</a></p>
 
-                <p><a href="#pages">Adding the ‘pages’ to your app</a></p>
-                <p class="toc-indent"><a href="#page-creating">Creating your page components</a></p>
-                <p class="toc-indent"><a href="#page-importing">Importing the page components to your App component</a></p>
-                <p class="toc-indent"><a href="#page-routes">Adding the page routes in your App component</a></p>
+                <p><a href="#pages-download">Downloading ‘page’ components</a></p>
+
+                <p><a href="#main-update">Updating your main.jsx file</a></p>
+
+                <p><a href="#routes-add">Adding routes to your app.jsx file</a></p>
+
                 <p class="toc-indent"><a href="#page-verify">Verifying your app’s URL paths</a></p>
-                <p class="toc-indent"><a href="#page-error">Adding an error route</a></p>
-
-                <p><a href="#css-add">Adding a CSS component to your app</a></p>
 
                 <p><a href="#navbar-footer">Adding a navbar and footer to your app</a></p>
 
-				<p><a href="#hyperlinks">Hyperlinks and ReactJS</a></p>
+                <p><a href="#hyperlinks">Hyperlinks and SPAs</a></p>
 
 
 			</aside>
@@ -104,42 +99,42 @@
 
     </section>
 
-	<section id="cra-start">
-		<h2>Starting with Vite</h2>
-        <p>Follow these steps to create your basic app structure with Vite.</p>
-
+	<section id="vite-start">
+		<h2>Scaffolding with Vite</h2>
+        <p>Follow these steps to scaffold your app structure with Vite.</p>
 		<ol>
-			<li>Open a new Command prompt window or, in VS Code, a new Terminal.</li>
-            <li>Navigate to where you want ReactJS to create a folder for your app. For example:
+			<li>In a terminal, navigate to where you want Vite to create a folder for your app.
 <pre class="no-syn">C:\&gt; react\apps</pre></li>
-<li>Type the following command that includes the name you want to call your new app. For example, <b>app-react-spa</b>.
-<pre class="no-syn"><span class="yellow">npm</span> create vite@latest app-react-spa -- --template react</pre></li>
-		</ol>
+<li>Enter the following command that includes the name you want to call your new app. For example, <b>app-react-spa</b>.
+<pre class="no-syn"><span class="yellow">npm</span> create vite@latest <span class="red">app-react-spa</span> -- --template react</pre>
 
-		<p>Follow the on-screen instructions to build and launch your new app.</p>
+		Follow the on-screen instructions to build and launch your new app.
 
+        <img src="assets/img/spa-intro/vite-create.png" alt="screenshot" style="max-width: 700px"></li>
+
+    </ol>
 
 	</section>
 
-	<section id="app-customising">
+	<section id="vite-customise">
 
-		<h2>Customising your app</h2>
-		<p>Next, you will customise the 'boilerplate' content provided by Vite to build a very basic React app.</p>
+		<h2>Customising your app content</h2>
+		<p>Next, customise the 'boilerplate' content provided by Vite.</p>
 
 		<ol>
 
 			<li>Download the following stylesheet and save it to your app's <span class="syn-js">/src</span> folder.
 			<span class="inside-ol">&nbsp;</span>
-			<a href="assets/downloads/Petite.css" target="_blank">Petite.css</a></li>
-			<li>Open the <b>index.html</b> file in your main app folder and replace the <b>&lt;title&gt;</b> tag as shown below.
+			<a href="assets/downloads/spa/Petite.css" target="_blank">Petite.css</a></li>
+			<li>Open the <b>index.html</b> file in your main app folder and replace the <b>&lt;title&gt;</b> tag content as shown below.
 			<img src="assets/img/spa-intro/vite-7.png" alt="screenshot"></li>
 
 			<li>In your <span class="syn-js">/src</span> folder, open the <b>main.jsx</b> file and update it as follows.
-			<img src="assets/img/spa-intro/vite-8.png" alt="screenshot" style="max-width: 600px"></li>
+			<img src="assets/img/spa-intro/vite-8.png" alt="screenshot" style="max-width: 560px"></li>
 
 			<li>Also in your <span class="syn-js">/src</span> folder, open <b>App.jsx</b> and replace all its content with the content below.</li>
 
-<li><pre><button class="copy-code" id="btn-1">Copy Code</button><code id="strCode-1">import './Petite.css'
+<li><pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1">import './Petite.css'
 
 function App() {
   return (
@@ -154,7 +149,7 @@ export default App;</code></pre></li>
 
 		</ol>
 
-		<p>Your web page should now look as shown below.</p>
+		<p>In a browser your app's default web page should now look as shown below.</p>
 
 		<img src="assets/img/spa-intro/output-1.png" alt="Sample React screen">
 
@@ -164,31 +159,63 @@ export default App;</code></pre></li>
 
     <section id="react-router-dom">
 
+        <h2>Installing <code>react-router-<span style="letter-spacing: 0;">dom</span></code></h2>
 
-        <h2>Working with <code>react-router-<span style="letter-spacing: 0;">dom</span></code></h2>
+        <p>ReactJS does not natively support page routing. So you need to install the following package in your root app folder.</p>
 
-        <p>ReactJS does not natively support page routing. So you need to use NPM (Node Package Manager) to install a new package named <b>react-router-dom</b> for this purpose. You can then import and use that package in your app.</p>
+        <pre class="no-syn"><span class="yellow">npm</span> i react-router-dom</pre>
 
-        <h3 id="router-install">Installing the <code>react-router-<span style="letter-spacing: 0;">dom</span></code> package</h3>
+    </section>
+    
+    <section id="pages-download">
+
+        <h2>Downloading ‘page’ components</h2>
+
+        <p>Each ‘page’ in your SPA will be a component file, stored in a /pages sub-folder of your /src folder. Follow these steps</p>
 
         <ol>
-            <li>In Command prompt window or VS Code Terminal, run the following command <i>inside your app folder</i>:
-<pre class="no-syn"><span class="yellow">npm</span> i react-router-dom</pre>
-</li>
+            <li>In your <span class="syn-js">/src</span> folder, create a sub-folder named <span class="syn-js">/pages</span>.</li>
+            <li>Download these page components to this sub-folder:<br>
+            <a href="assets/downloads/spa/Home.jsx">Home.jsx</a><br>
+            <a href="assets/downloads/spa/Products.jsx">Products.jsx</a><br>
+            <a href="assets/downloads/spa/Contact.jsx">Contact.jsx</a><br> 
+            <a href="assets/downloads/spa/PageNotFound.jsx">PageNotFound.jsx</a></li>
         </ol>
 
-        <h3 id="router-import">Importing <code>react-router-<span style="letter-spacing: 0;">dom</span></code> into your App component</h3>
+    </section>
+
+    <section id="main-update">
+
+        <h2>Updating your <code>main.jsx</code> file</h2>
+
+        <p>Here are the steps to add routes for your four 'pages'.</p>
 
         <ol>
+            <li>Near the top of your <b>main.jsx</b> file, after the first two <b>import</b> statements, add one more:
+<pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";</code></pre>
 
-            <li>At the top of your <b>App.jsx</b> component file, add the following <b>import</b> statement:
-<pre><code class="language-javascript atom-one-dark">import { BrowserRouter, Routes, Route } from "react-router-dom";</code></pre></li>
+            Developers often shorten the name of the <b>BrowserRouter</b> function with the <b>Router</b> alias. Also, you may find multi-line syntax easier to read. See below:
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2">import {
+    BrowserRouter as Router,
+    Routes, 
+    Route
+}
+from "react-router-dom";</code></pre></li>            
+            
+        <li>Inside the <b>&lt;React.StrictMode&gt;</b> tag pair, update the <b>&lt;App /&gt;</b> component with the following code:
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3">&lt;Router&gt;
+    &lt;Routes&gt;
+        {/* App component wraps around all the 'pages'. */}
+        &lt;Route path="*" element={&lt;App /&gt;} /&gt;
+    &lt;/Routes&gt;
+&lt;/Router&gt;    
+</code></pre>
 
-            <li>Developers often shorten the name of the <b>BrowserRouter</b> function with the <b>Router</b> alias. See below:
-<pre><code class="language-javascript Androidstudio">import { BrowserRouter as Router, Routes, Route } from "react-router-dom";</code></pre></li>
-            </ol>
+        <b>App.jsx</b> will now act as a <i>layout component</i> that wraps around all the 'pages' in the entire application.</li>
 
-            <p>Here is a summary of what these three imported named functions do:</p>
+        </ol>
+
+        <p>Here is a summary of what these three imported named functions do:</p>
 
             <table class="table-js-methods">
                 <tbody>
@@ -209,160 +236,119 @@ export default App;</code></pre></li>
         
         </section>
 
-        <section id="pages">
 
-            <h2>Adding the &#8216;pages&#8217; to your app</h2>
-            <p>Adding &#8216;page&#8217; (really components) to an app is a three-step process:</p>
+    <section id="routes-add">
 
-            <ul>
-                <li>Create the component files that will be served as &#8216;page&#8217;.</li>
-                <li>Import these component files into your main or &#8216;parent&#8217; App component.</li>
-                <li>Include page routes in your App component.</li>
-            </ul>
+        <h2>Adding routes to your <code>app.jsx</code> file</h2>
 
-            <h3 id="page-creating">Creating your page components</h3>
-            <p>Each &#8216;page&#8217; in your SPA will be a component file, stored in a <span class="syn-js">/pages</span> sub-folder of your <span class="syn-js">/src</span> folder. Follow these steps:</p>
+        <p>Now, update <b>app.jsx</b> as follows:</p>
 
-            <ol>
-                <li>In your app&#8217;s <span class="syn-js">/src</span> folder, create a sub-folder named <span class="syn-js">/pages</span>.</li>
-                <li>Download the files below to your new <span class="syn-js">/src/pages</span> sub-folder.<br>
-                
-                    <a href="assets/downloads/Home.jsx">Home.jsx</a><br>
-                    <a href="assets/downloads/Products.jsx">Products.jsx</a><br>
-                    <a href="assets/downloads/Contact.jsx">Contact.jsx</a><br> 
-                    <a href="assets/downloads/Navbar.jsx">Navbar.jsx</a><br>
-                    <a href="assets/downloads/Footer.jsx">Footer.jsx</a><br>
-                    <a href="assets/downloads/PageNotFound.jsx">PageNotFound.jsx</a>
-                </li>
+        <ol>
+            <li>Begin by importing your four 'page' components:
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4">import Home from './pages/Home';
+import Products from './pages/Products';
+import Contact from './pages/Contact';
+import PageNotFound from './pages/PageNotFound';</code></pre></li> 
 
-            </ol>
-        
-
-            <h3 id="page-importing">Importing the page components to your App component</h3>
-            <p>At the top of the <b>App.jsx</b> file, after the <b>react-router-dom</b> import, import your three page components:
-
-<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Contact from "./pages/Contact";</code></pre></p>
-                
-            <h3 id="page-routes">Adding the page routes in your App component</h3>
-            <p>Now you will add routes to the main <b>App()</b> component to enable users to navigate between the pages of your SPA.</p>
-            
-            <p>Update the <b>App()</b> function as shown below. Each <b>Route</b> now has a <b>path</b> and an <b>element</b> prop:</p>
-            
-<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">function App() {
+            <li>Next, import these two functions from <b>react-router-dom</b>:
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6">import { Routes, Route } from 'react-router-dom';</code></pre></li>
+    <li>Finally, update your <b>&lt;App&gt;</b> component as shown below. Each <b>Route</b> now has a <b>path</b> and an <b>element</b> prop:
+<pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-7">function App() {
    return (
-    &lt;Router&gt;
-        &lt;Routes&gt;
-            &lt;Route path="/" element = {&lt;Home /&gt;} /&gt;
-            &lt;Route path="/products" element = {&lt;Products /&gt;} /&gt;
-            &lt;Route path="/contact" element = {&lt;Contact /&gt;} /&gt;
-        &lt;/Routes&gt;
-    &lt;/Router&gt;
+      &lt;Routes&gt;
+        {/* Use Home component for the root path */}
+        &lt;Route index element={&lt;Home /&gt;} /&gt; 
+        &lt;Route path="products" element={&lt;Products /&gt;} /&gt;
+        &lt;Route path="contact" element={&lt;Contact /&gt;} /&gt;
+        &lt;Route path="*" element={&lt;PageNotFound /&gt;} /&gt;
+      &lt;/Routes&gt;
    );
-}</code></pre>
+}</code></pre></li>
+        </ol>
+
+        <h3 id="page-verify">Verifying your app&#8217;s URL paths</h3>
+
+        <p>In your web browser, verify your four web pages display correctly by entering the following URLs:</p>
+    
+        <ul>
+            <li><b>http://localhost:5173</b></li>
+            <li>http://localhost:5173/<b>products</b></li>
+            <li>http://localhost:5173/<b>contact</b></li>
+            <li>http://localhost:5173/<b>abcd1234</b></li>
+        </ul>
+    
+        <p>Each should display the content of the corresponding page component.</p>
+            
+    </section>
 
 
-    <h3>Hosting your SPA on GitHub Pages</h3>
+    <section id="navbar-footer">
+
+
+        <h2>Adding a navbar and footer to your app</h2>
+    
+        <p>Typically you will want <i>global</i> components such as a <b>&lt;Navbar /&gt;</b> and <b>&lt;Footer /&gt;</b> to display as part of every 'page' of your SPA. Follow these steps:</p>
+    
+        <ol>
+            <li>Download these two components to your <span class="syn-js">/pages</span> sub-folder:<br>
+            <a href="assets/downloads/spa/Navbar.jsx" target="_blank">Navbar.jsx</a><br>
+            <a href="assets/downloads/spa/Footer.jsx" target="_blank">Footer.jsx</a></li>
+            <li>Import the relevant component at the top of your <b>App.jsx</b> file:
+<pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-8">import Navbar from "./pages/Navbar";
+import Footer from "./pages/Footer";</code></pre></li>
+        <li>Update your App component to include the two new routes:
+<pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-9">function App() {
+  return (
+    &lt;&gt;
+      &lt;Navbar /&gt;
+      &lt;main&gt;
+      {/* Place non-global routes inside an HTML &lt;main&gt; tag */}
+      &lt;Routes&gt;
+          {/* Use Home component for the root path */}
+          &lt;Route index element={&lt;Home /&gt;} /&gt; 
+          &lt;Route path="products" element={&lt;Products /&gt;} /&gt;
+          &lt;Route path="contact" element={&lt;Contact /&gt;} /&gt;
+          &lt;Route path="*" element={&lt;PageNotFound /&gt;} /&gt;
+      &lt;/Routes&gt;
+      &lt;/main&gt;
+      &lt;Footer /&gt;
+    &lt;/&gt;
+  );
+}</code></pre></li>
+   </ol>
+    
+</section>
+    
+<section id="hyperlinks">
+        <h2>Hyperlinks and SPAs</h2>
+
+        <p>The HTML <b>&lt;a&gt;</b> tag enables hyperlinks between web pages, whether the destination web page is on the same or a different website. For example:</p>
+<pre><code>&lt;a href="page-4.html"&gt;Page 4&lt;/a&gt;</code></pre> 
+        
+        <p>Clicking/tapping a regular HTML hyperlink such as the above <i>loads the entire web page file from the web server</i>. This is an example of server-side rendering (SSR).</p>
+
+        <p>From hyperlinks within an SPA, ReactJS offers the <b>&lt;Link /&gt;</b> component that navigates between page components without accessing the server. This is called client-side rendering (CSR).</p>
+
+        <p>For example:</p>
+
+<pre><code>import { Link } from 'react-router-dom';
+
+<span class="green">// Changes the component being rendered without reloading the page file</span>    
+&lt;Link to="/products"&gt;View our Products&lt;/Link&gt;</code></pre>        
+
+</section>
+
+
+
+<!-- <section>
+    <h3>Hosting your SPA on GitHub Pages</h3> -->
 
     <!-- <p>if you plan to host your SPA on Github Pages, update the <b>&lt;Router&gt;</b> as follows</p> -->
 
 <!-- <pre class="theme-atom-one-dark" data-lang="js"><code>&lt;Router basename = {process.env.PUBLIC_URL} &gt;</code></pre>     -->
 
-    <h3 id="page-verify">Verifying your app&#8217;s URL paths</h3>
-
-    <p>In your web browser, verify that your three web pages display correctly by entering the following web addresses.</p>
-
-    <ul>
-        <li><b>http://localhost:3000</b></li>
-        <li><b>http://localhost:3000/products</b></li>
-        <li><b>http://localhost:3000/contact</b></li>
-    </ul>
-
-
-
-    <h3 id="page-error">Adding an error route</h3>
-
-    <p>It is good practice to create a page route to handle situations where the user enters the web address of a page that does not exist in your SPA. For example:</p>
-
-    <ul>
-        <li><b>http://localhost:3000/abc123</b></li>
-    </ul>
-
-    <p>You can do this with the wildcard asterisk <b>*</b> character as follows.</p>
-
-<pre class="theme-atom-one-dark" data-lang="js"><code>&lt;Route path="*" element = "Page does not exist." /&gt;</code></pre>    
-
-    <p>A better option would be to use a special web page for this purpose and add a route to it as follows:</p>
-
-<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">
-import PageNotFound from "./pages/PageNotFound";</code></pre>    
         
-
-<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7">
-&lt;Route path="*" element = { &lt;PageNotFound /&gt; } /&gt;</code></pre>    
-
-        <p>Note that this will work work if you host your SPA on GitHub Pages.</p>
-        
-</section>
-
-
-<section id="navbar-footer">
-
-
-    <h2>Adding a navbar and footer to your app</h2>
-
-    <p>To add an element that you want to display on every 'page', include the relevant component:</p>
-
-    <ul>
-        <li>Import the relevant component at the top of the <b>App.jsx</b>. For example:
-<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8">
-import Navbar from "./pages/Navbar";
-import Footer from "./pages/Footer";</code></pre></li>
-        <li>Place the component <i>inside</i> the <b>&lt;Router&gt;</b> component</li>
-        <li>But <i>not</i> as an individual <b>&lt;Routes&gt;</b> component.</li>
-    </ul>
-
-    <p>See below.</p>
-
-<pre class="theme-atom-one-dark" data-lang="js"><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9">function App() {
-   return (
-    &lt;Router&gt;
-    &lt;Navbar /&gt;
-        &lt;Routes&gt;
-            &lt;Route path="/" element = {&lt;Home /&gt;} /&gt;
-            &lt;Route path="/products" element = {&lt;Products /&gt;} /&gt;
-            &lt;Route path="/contact" element = {&lt;Contact /&gt;} /&gt;
-            &lt;Route path="*" element = { &lt;PageNotFound /&gt; } /&gt;            
-        &lt;/Routes&gt;
-    &lt;Footer /&gt;
-    &lt;/Router&gt;
-   );
-}</code></pre>
-
-</section>
-
-<section id="hyperlinks">
-        <h2>Hyperlinks and ReactJS</h2>
-
-        <p>The HTML <b>&lt;a&gt;</b> tag enables hyperlinks between web pages, whether the destination web page is on the same or a different website. For example:</p>
-<pre style="padding: 16px 22px !important">&lt;a href="page-4.html"&gt;Page 4&lt;/a&gt;</pre> 
-        
-        <p>Click a regular HTML hyperlink such as the above <i>loads the entire web page from the web server</i>.</p>
-
-        <p>From hyperlinks within an SPA, ReactJS offers the <b>Link</b> component that navigates between page components <i>without reloading the page</i>.</p>
-
-        <p>For example:</p>
-
-<pre style="padding: 16px 22px !important">import { Link } from 'react-router-dom';
-
-<span class="green">// Clicking this link changes the component being rendered without reloading the page</span>    
-&lt;Link to="/about"&gt;About Us&lt;/Link&gt;</pre>        
-
-</section>
-
-
-
+<!-- </section> -->
 
 
 
@@ -375,7 +361,7 @@ import Footer from "./pages/Footer";</code></pre></li>
 </footer>
 <script>hljs.highlightAll();</script>
 
-<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/utils-react.js"></script>
 
 </body>
 </html>
