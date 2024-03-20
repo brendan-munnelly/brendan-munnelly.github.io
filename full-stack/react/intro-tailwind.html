@@ -53,12 +53,12 @@
 				<p><a href="#learning-goals">Learning Goals</a></p>
 				<p><a href="#intro">Introduction</a></p>
                 <p><a href="#vite-start">Scaffolding with Vite</a></p>
-                <p><a href="#vite-customise">Customising your app content</a></p>
+                <!-- <p><a href="#vite-customise">Customising your app content</a></p>
                 <p><a href="#download">Downloading the app components</a></p>
                 <p><a href="#update-main">Updating your main.jsx file</a></p>
                 <p><a href="#update-app">Updating your app.jsx file</a></p>
                 <p><a href="#update-list">Updating your ListDrivers.jsx component</a></p>
-                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p>
+                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p> -->
 
 			</aside>
 	
@@ -69,7 +69,8 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-		        <li>Use the <b>array.map()</b> method with the <b>key</b> string attribute to display data in ReactJS in list and table formats.</li>
+		        <li>Install TailwindCSS for a ReactJS app</li>
+                <li>Use the grid layout and theming features.</li>
 		</ul>
 
 	</section>
@@ -108,7 +109,7 @@
 
     <pre><code>npx tailwindcss init -p</code></pre></li>
 
-<li>Update your <b></b> file as follows:
+<li>Update your <b>tailwind.config.cjs</b> file as follows:
 
 <pre><code>module.exports = {
     content: [
@@ -193,9 +194,65 @@ function App() {
 export default App;</code></pre></li>
         </ol>
 
+        <p>TailwindCSS resonsive breakpoints</p>
+        <img src="assets/img/intro-tw/breakpoints.png" alt="screenshot">
 
   </section>
 
+
+  <section>
+    <h2>Theming in TailwindCSS</h2>
+    <p>Theming in TailwindCSS allows you to define a consistent look and feel across your React application by customizing colors, fonts, and other design elements. </p>
+
+    <ol>
+        <li>Open <b>tailwind.config.js</b> and customize the theme by adding your own colors and fonts. Here, we'll add a custom primary color and a secondary color, as well as a custom font family:
+<pre><code>module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#4f46e5', // A shade of purple
+          secondary: '#fbbf24', // A shade of yellow
+        },
+        fontFamily: {
+          'body': ['"Open Sans"', 'sans-serif'],
+          'display': ['"Roboto"', 'sans-serif'],
+        },
+      },
+    },
+    plugins: [],
+  }
+  </code></pre>        
+        
+        </li>
+        <li>Now that we have our theme defined, let's use these custom styles in our React components. For example:
+
+<pre><code>// src/components/Button.jsx
+    const Button = ({ children }) =&gt; {
+      return (
+        &lt;button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded"&gt;
+          {children}
+        &lt;/button&gt;
+      );
+    };
+    
+export default Button;</code></pre></li>
+        <li>You can apply the custom font to your entire application by adding it to the index.css or directly in your component using Tailwind's fontFamily utility:
+<pre><code>/* src/index.css */
+body {
+    @apply font-body;
+}</code></pre>
+
+    Or, directly in a component:
+<pre><code>// Using the custom font in a React component
+const CustomText = ({ children }) =&gt; {
+   return &lt;p className="font-body"&gt;{children}&lt;/p&gt;;
+};</code></pre>
+        </li>
+    </ol>
+
+
+    <p>With your theme set up, ensure you use the defined colors and fonts consistently across your React application to maintain a unified look and feel. TailwindCSS's utility-first approach makes it easy to apply your theme by using the custom classes you've defined in the configuration.</p>
+  </section>
 </article>
 </main>
 
