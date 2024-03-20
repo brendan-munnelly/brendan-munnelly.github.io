@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Introduction to TailwindCSS | ReactJS Tutorials</title>
+	<meta name="description" content="Installing TailwindCSS for a ReactJS app and discovering the grid layout and theming features.">
+
+	<!-- Stylesheet-->
+	<link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
+
+        <style>
+                h2 code, h3 code { font-weight: normal !important }
+                h3 code { letter-spacing: 0px !important }
+
+                span.grey { color: lightgray }
+                pre { padding: 0 12px 0 !important }
+        </style>
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+	<body id="top">
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to TailwindCSS</h1>
+					<h2>Installing TailwindCSS for a ReactJS app and discovering the grid layout and theming features.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>ReactJS COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#intro">Introduction</a></p>
+                <p><a href="#vite-start">Scaffolding with Vite</a></p>
+                <p><a href="#vite-customise">Customising your app content</a></p>
+                <p><a href="#download">Downloading the app components</a></p>
+                <p><a href="#update-main">Updating your main.jsx file</a></p>
+                <p><a href="#update-app">Updating your app.jsx file</a></p>
+                <p><a href="#update-list">Updating your ListDrivers.jsx component</a></p>
+                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p>
+
+			</aside>
+	
+	<article>
+
+        <section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+		        <li>Use the <b>array.map()</b> method with the <b>key</b> string attribute to display data in ReactJS in list and table formats.</li>
+		</ul>
+
+	</section>
+
+
+
+	<section id="vite-start">
+		<h2>Scaffolding with Vite</h2>
+        <p>Follow these steps to scaffold your app structure with Vite.</p>
+
+		<ol>
+			<li>In a terminal, navigate to where you want Vite to create a folder for your app. For example:
+<pre class="no-syn">C:\&gt; react-stuff\apps</pre></li>
+<li>Enter the following command that includes the name you want to call your new app. For example, <b>app-react-tw</b>:
+<pre class="no-syn"><span class="yellow">npm</span> create-vite@latest <span class="red">app-react-tw</span> --template react</pre></li>
+
+		<li>Follow the on-screen instructions to build and launch your new app.
+
+    <img src="assets/img/ai-array-app/vite-create.png" alt="screenshot" style="max-width: 700px"></li>
+
+  </ol>
+
+	</section>
+
+	<section id="vite-customise">
+
+		<h2>Installing TailwindCSS</h2>
+		<p>Follow these steps:</p>
+
+		<ol>
+
+			<li>In a terminal, run this command:
+<pre><code>npm install -D tailwindcss postcss autoprefixer</code></pre></li>
+
+<li>Next, generate the configuration files:
+
+    <pre><code>npx tailwindcss init -p</code></pre></li>
+
+<li>Update your <b></b> file as follows:
+
+<pre><code>module.exports = {
+    content: [
+       "./src/**/*.{js,jsx,ts,tsx}", // Adjust this line to include any file types that might contain Tailwind classes
+       ],
+       theme: {
+         extend: {},
+       },
+    plugins: [],
+}</code></pre></li>
+<li>In your app <span class="syn-js">/src</span> folder, replace all the 
+<b>index.css</b> file content with the following:
+<pre><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;</code></pre></li>
+                
+            
+		</ol>
+
+        <p>Start your app. In a browser, your app&#8219;s default web page should now look as shown below.</p>
+
+		<img src="assets/img/intro-tw/tw-1.png" alt="screenshot" style="border: solid 2px gray">
+
+        <p>To ensure TailwindCSS is working, you can add a TailwindCSS utility class to an element in your <b>App.jsx</b> file. For example:</p>
+
+<pre><code>function App() {
+    return (
+      &lt;div className="App"&gt;
+        &lt;h1 className="text-3xl font-bold underline"&gt;
+          Hello, TailwindCSS!
+        &lt;/h1&gt;
+      &lt;/div&gt;
+    );
+}</code></pre>
+
+	</section>
+
+
+    <section id="download">
+        <h2>Creating a Grid Layout with TailwindCSS</h2>
+        <p>Follow these steps:</p>
+
+        <ol>
+            <li>Create a new component <b>GridExample.jsx</b> in the <span class="syn-js">/src</span> folder with a simple 3-column layout.
+            
+<pre><code>import React from 'react';
+
+const GridExample = () =&gt; {
+    return (
+        &lt;section className="grid grid-cols-3 gap-4 p-4"&gt;
+          &lt;div className="bg-blue-500 p-4 text-white"&gt;Column 1&lt;/div&gt;
+          &lt;div className="bg-red-500 p-4 text-white"&gt;Column 2&lt;/div&gt;
+          &lt;div className="bg-green-500 p-4 text-white"&gt;Column 3&lt;/div&gt;
+        &lt;/div&gt;
+      );
+};
+    
+export default GridExample;</code></pre>            
+            
+            </li>
+            <li>To make the grid response, update it as follows:
+<pre><code>&lt;section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4"&gt;</code></pre></li>
+            <li>Add this new component to <b>app.jsx</b>:
+
+<pre><code>import React from 'react';
+import './App.css';
+import GridExample from './GridExample';
+    
+function App() {
+      return (
+        &lt;div className="App"&gt;
+          &lt;header className="App-header"&gt;
+            &lt;p&gt;
+              TailwindCSS Grid Example in React
+            &lt;/p&gt;
+            &lt;GridExample /&gt;
+          &lt;/header&gt;
+        &lt;/div&gt;
+      );
+    }
+    
+export default App;</code></pre></li>
+        </ol>
+
+
+  </section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+<script>hljs.highlightAll();</script>
+
+<script src="../assets/js/utils.js"></script>
+
+</body>
+</html>
