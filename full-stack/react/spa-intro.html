@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Introduction to SPAs | ReactJS Tutorials</title>
-	<meta name="description" content="Creating a Single Page Application (SPA) with  fixed navbar and footer components.">
+	<title>Introduction to SPAs | ReactJS Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating a Single Page Application (SPA) with fixed navbar and footer components.">
 
 	<!-- Stylesheet-->
 	<link rel="stylesheet" href="../assets/css/full-stack-tutorials-brendan-munnelly.css" />
@@ -36,7 +36,7 @@
 		
 				<div class="content">
 					<h1>Introduction to SPAs</h1>
-					<h2>Creating a Single Page Application (SPA) with fixed navbar and footer components.</h2>
+					<h2>Creating and deploying a Single Page Application (SPA) with fixed navbar and footer components.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -52,7 +52,7 @@
 				<p><a href="#learning-goals">Learning Goals</a></p>
 
 				<p><a href="#about-spa">About Single Page (SPA) Applications</a></p>
-				<p><a href="#vite-start">Starting with Vite</a></p>
+				<p><a href="#vite-start">Scaffolding with Vite</a></p>
 
 				<p><a href="#vite-customise">Customising your app content</a></p>
 
@@ -71,6 +71,11 @@
 
                 <p><a href="#hyperlinks">Hyperlinks and SPAs</a></p>
 
+                <p><a href="#HashRouter">The HashRouter hack</a></p>
+
+
+
+
 
 			</aside>
 	
@@ -81,7 +86,7 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-			<li>Create a Single Page Application (SPA) with fixed navbar and footer components.</li>
+			<li>Create and deploy a Single Page Application (SPA) with fixed navbar and footer components.</li>
 		</ul>
 
 	</section>
@@ -176,10 +181,10 @@ export default App;</code></pre></li>
         <ol>
             <li>In your <span class="syn-js">/src</span> folder, create a sub-folder named <span class="syn-js">/pages</span>.</li>
             <li>Download these page components to this sub-folder:<br>
-            <a href="assets/downloads/spa/Home.jsx">Home.jsx</a><br>
-            <a href="assets/downloads/spa/Products.jsx">Products.jsx</a><br>
-            <a href="assets/downloads/spa/Contact.jsx">Contact.jsx</a><br> 
-            <a href="assets/downloads/spa/PageNotFound.jsx">PageNotFound.jsx</a></li>
+            <a href="assets/downloads/spa/Home.jsx" target="_blank">Home.jsx</a><br>
+            <a href="assets/downloads/spa/Products.jsx" target="_blank">Products.jsx</a><br>
+            <a href="assets/downloads/spa/Contact.jsx" target="_blank">Contact.jsx</a><br> 
+            <a href="assets/downloads/spa/PageNotFound.jsx" target="_blank">PageNotFound.jsx</a></li>
         </ol>
 
     </section>
@@ -339,7 +344,50 @@ import Footer from "./pages/Footer";</code></pre></li>
 </section>
 
 
+        <section id="hashrouter">
 
+            <h2>The <code>HashRouter</code> hack</h2>
+
+            <p>After you deploy your SPA to GitHub Pages, you can see that reloading any route other than the Home page displays a blank web page.</p>
+
+            <p>This is because GitHub Pages does not support the React <b>BrowserRouter</b> for client-side routing, which relies on the History API.</p>
+            
+            <p>A common workaround is to instead use the <b>HashRouter</b> from <b>react-router-dom</b>.</p>
+
+            <p>Here are the steps:</p>
+
+            <ol>
+                <li>In your <b>main.jsx </b>file, import <b>HashRouter</b> instead of <b>BrowserRouter:</b>
+                <img src="assets/img/spa-intro/hashrouter-1.png" alt="screenshot" style="max-width: 640px"></li>
+                                
+                
+                <li>In your app root folder, create a custom <b>404.html</b> file with a JavaScript snippet that redirects the user to the main application served from the root (/).
+
+<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-10">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Page Not Found&lt;/h1&gt;
+    &lt;script&gt;
+        window.location.href = "/";
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                </li>
+                <li>Re-build your app and deploy it to GitHub Pages.</li>
+            </ol>
+
+
+            <p>Note that, for your deployed app, the page routes are prefaced with the hash <b>#</b> character. For example:</p>
+
+            <p>https://username.github.io/app-react-spa/<b>#/products</b><br>
+            https://username.github.io/app-react-spa/<b>#/contact</b><br></p>
+
+        </section>
 <!-- <section>
     <h3>Hosting your SPA on GitHub Pages</h3> -->
 
