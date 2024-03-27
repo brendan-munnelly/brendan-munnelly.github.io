@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Layout with TailwindCSS | ReactJS Tutorials</title>
+    <meta
+      name="description"
+      content="Working with the container class and multi-column grid layouts."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <style>
+      h2 code,
+      h3 code {
+        font-weight: normal !important;
+      }
+      h3 code {
+        letter-spacing: 0px !important;
+      }
+
+      span.grey {
+        color: lightgray;
+      }
+      pre {
+        padding: 0 12px 0 !important;
+      }
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Layout with TailwindCSS</h1>
+          <h2>
+            Working with the container class and multi-column grid layouts.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>ReactJS COURSE</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#intro">Introduction</a></p>
+        <p><a href="#vite-start">Scaffolding with Vite</a></p>
+        <!-- <p><a href="#vite-customise">Customising your app content</a></p>
+                <p><a href="#download">Downloading the app components</a></p>
+                <p><a href="#update-main">Updating your main.jsx file</a></p>
+                <p><a href="#update-app">Updating your app.jsx file</a></p>
+                <p><a href="#update-list">Updating your ListDrivers.jsx component</a></p>
+                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p> -->
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>Apply the <b>container</b> class.</li>
+            <li>Use the grid layout.</li>
+          </ul>
+        </section>
+
+        <section id="vite-start">
+          <h2>Working with a sample page</h2>
+          <p>
+            In this Tutorial you experiment with layout features using the
+            ReactJS app you created in
+            <a href="intro-tailwind.html">Introduction to TailwindCSS</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>Responsive breakpoints</h2>
+          <p>
+            By default, Tailwind provides a number of responsive breakpoints.
+            These enable you to define specific screen sizes at which styles
+            should be applied differently.
+          </p>
+          <img src="assets/img/intro-tw/breakpoints.png" alt="screenshot" />
+
+          <p>
+            Each has a corresponding minimum width value. For example, the
+            <b>md</b> breakpoint targets screens with a minimum width of 768px.
+          </p>
+
+          <p>
+            To apply styles only at specific breakpoints and above, you prefix
+            utility classes with the breakpoint name followed by a colon (:).
+          </p>
+
+          <p>
+            For example, if you want a button to have a blue background on
+            medium screens and larger, you'd use the class bg-blue-500
+            md:bg-green-500. Here:
+          </p>
+          <ul>
+            <li>
+              <b>bg-blue-500</b> applies the blue background by default (on all
+              screens).
+            </li>
+            <li>
+              <b>md:bg-green-500</b> overrides the background color to green
+              specifically on medium screens (and larger) due to the md prefix.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>The <code>container</code> class</h2>
+
+          <p>
+            Tailwind provides a <b>container</b> class that links an HTML
+            element's width to the current breakpoint. This class sets the
+            <b>max-width</b> of an element to match the <b>min-width</b> of the
+            current breakpoint.
+          </p>
+
+          <!-- <p>Note that the <b>container</b> class:</p>
+
+          <ul>
+            <li>Does <i>not</i> center itself automatically</li>
+            <li>Does <i>not</i> have any built-in horizontal padding.</li>
+          </ul> -->
+
+          <p>Follow these steps:</p>
+
+          <ol>
+            <li>
+              Create a new sub-folder named <span class="syn-js">pages</span> in
+              your project <span class="syn-js">src</span> folder.
+            </li>
+            <li>
+              Create a new component <b>LayoutExample.jsx</b> in the
+              <span class="syn-js">/src/pages</span> sub-folder with this this
+              content.
+
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1">import React from 'react';
+import { BeakerIcon } from "@heroicons/react/24/solid";
+
+const LayoutExample = () =&gt; {
+   return (
+      &lt;&gt;
+      &lt;section className="container mx-auto my-16 bg-slate-200 p-6 py-6 text-left shadow-xl"&gt;
+        &lt;h2&gt;Tailwind container&lt;/h2&gt;
+        &lt;p&gt;
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+          commodi repellendus aliquam illo ut temporibus voluptatum totam iste
+          vitae doloremque ipsum officiis, autem dolore earum praesentium? Quae
+          voluptatum maxime at?
+        &lt;/p&gt;
+      &lt;/section&gt;
+
+      &lt;section className="container mx-auto my-16 bg-green-200 p-6 py-6 text-left shadow-lg  hover:shadow-green-500/40"&gt;
+        &lt;h2&gt;Tailwind container&lt;/h2&gt;
+        &lt;p&gt;
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+          commodi repellendus aliquam illo ut temporibus voluptatum totam iste
+          vitae doloremque ipsum officiis, autem dolore earum praesentium? Quae
+          voluptatum maxime at?
+        &lt;/p&gt;
+      &lt;/section&gt;
+
+      &lt;div className="container-bleed container mx-auto my-16 px-0 py-6"&gt;
+        &lt;p className="text-left text-white"&gt;
+          Horem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+          repudiandae adipisci dolores amet. Aspernatur accusantium similique
+          fugit esse enim maiores quis error distinctio consectetur asperiores?
+          Inventore praesentium error illo rem!
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;section className="container mx-auto my-6 grid grid-cols-4 gap-8 text-left"&gt;
+        &lt;div className="bg-blue-200 p-6 py-6"&gt;
+          &lt;p&gt;
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+            repudiandae adipisci dolores amet. Aspernatur accusantium similique
+            fugit esse enim maiores quis error distinctio consectetur
+            asperiores? Inventore praesentium error illo rem!
+          &lt;/p&gt;
+          &lt;button className="btn btn-blue"&gt;Button&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="bg-blue-200 p-6 py-6"&gt;
+          &lt;p&gt;
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+            repudiandae adipisci dolores amet. Aspernatur accusantium similique
+            fugit esse enim maiores quis error distinctio consectetur
+            asperiores? Inventore praesentium error illo rem!
+          &lt;/p&gt;
+          &lt;button className="btn btn-blue"&gt;Button&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="bg-blue-200 p-6 py-6"&gt;
+          &lt;p&gt;
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+            repudiandae adipisci dolores amet. Aspernatur accusantium similique
+            fugit esse enim maiores quis error distinctio consectetur
+            asperiores? Inventore praesentium error illo rem!
+          &lt;/p&gt;
+          &lt;button className="btn btn-blue"&gt;Button&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="bg-blue-200 p-6 py-6"&gt;
+          &lt;p&gt;
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+            repudiandae adipisci dolores amet. Aspernatur accusantium similique
+            fugit esse enim maiores quis error distinctio consectetur
+            asperiores? Inventore praesentium error illo rem!
+          &lt;/p&gt;
+
+          &lt;button className="btn btn-blue flex items-center"&gt;
+            Click me
+            &lt;BeakerIcon className="ml-2 h-6 w-6" /&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;/&gt;
+    );
+};
+    
+export default LayoutExample;</code></pre>
+            </li>
+
+            <li>
+              Add the following CSS to <b>index.css</b>:
+
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4">
+.container-bleed {
+    position: relative;
+  }
+  
+  .container-bleed:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100vw;
+    right: -100vw;
+    background: inherit;
+    @apply bg-blue-800;
+  }
+  
+  .btn {
+    @apply mt-4 rounded px-4 py-2 font-bold;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+</code></pre>
+            </li>
+            <li>
+              Add this new component to <b>app.jsx</b>:
+
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2">                
+import React from 'react';
+import './App.css';
+import LayoutExample from './pages/LayoutExample';
+
+function App() {
+   return (
+      &lt;div className="App"&gt;
+        &lt;h1 className="text-3xl text-red-600 font-bold underline"&gt;
+           Hello, TailwindCSS!
+        &lt;/h1&gt;
+        &lt;LayoutExample /&gt;
+      &lt;/div&gt;
+   );
+}
+    
+export default App;</code></pre>
+            </li>
+          </ol>
+        </section>
+
+        <section id="download">
+          <h2>Creating a Grid Layout with TailwindCSS</h2>
+          <p>Follow these steps:</p>
+
+          <ol>
+            <li>
+              In the <span class="syn-js">/pages</span>, crewte a new component
+              <b>GridExample.jsx</b> with a simple 3-column layout:
+
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3">import React from 'react';
+
+const GridExample = () =&gt; {
+    return (
+        &lt;section className="grid grid-cols-3 gap-4 p-4"&gt;
+            &lt;div className="bg-blue-500 p-4 text-white"&gt;Column 1&lt;/div&gt;
+            &lt;div className="bg-red-500 p-4 text-white"&gt;Column 2&lt;/div&gt;
+            &lt;div className="bg-green-500 p-4 text-white"&gt;Column 3&lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+        
+export default GridExample;</code></pre>
+            </li>
+
+            <li>Import this component into <b>app.jsx</b>.</li>
+            <li>
+              To make the grid response, update it as follows:
+              <pre><code>&lt;section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4"&gt;</code></pre>
+            </li>
+            <li>
+              Add this new component to <b>app.jsx</b>:
+
+              <pre><code>import React from 'react';
+    import './App.css';
+    import GridExample from './GridExample';
+        
+    function App() {
+          return (
+            &lt;div className="App"&gt;
+              &lt;header className="App-header"&gt;
+                &lt;p&gt;
+                  TailwindCSS Grid Example in React
+                &lt;/p&gt;
+                &lt;GridExample /&gt;
+              &lt;/header&gt;
+            &lt;/div&gt;
+          );
+        }
+        
+    export default App;</code></pre>
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Theming in TailwindCSS</h2>
+          <p>
+            Theming in TailwindCSS allows you to define a consistent look and
+            feel across your React application by customizing colors, fonts, and
+            other design elements.
+          </p>
+
+          <ol>
+            <li>
+              Open <b>tailwind.config.js</b> and customize the theme by adding
+              your own colors and fonts. Here, we'll add a custom primary color
+              and a secondary color, as well as a custom font family:
+              <pre><code>module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#4f46e5', // A shade of purple
+          secondary: '#fbbf24', // A shade of yellow
+        },
+        fontFamily: {
+          'body': ['"Open Sans"', 'sans-serif'],
+          'display': ['"Roboto"', 'sans-serif'],
+        },
+      },
+    },
+    plugins: [],
+  }
+  </code></pre>
+            </li>
+            <li>
+              Now that we have our theme defined, let's use these custom styles
+              in our React components. For example:
+
+              <pre><code>// src/components/Button.jsx
+    const Button = ({ children }) =&gt; {
+      return (
+        &lt;button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded"&gt;
+          {children}
+        &lt;/button&gt;
+      );
+    };
+    
+export default Button;</code></pre>
+            </li>
+            <li>
+              You can apply the custom font to your entire application by adding
+              it to the index.css or directly in your component using Tailwind's
+              fontFamily utility:
+              <pre><code>/* src/index.css */
+body {
+    @apply font-body;
+}</code></pre>
+
+              Or, directly in a component:
+              <pre><code>// Using the custom font in a React component
+const CustomText = ({ children }) =&gt; {
+   return &lt;p className="font-body"&gt;{children}&lt;/p&gt;;
+};</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            With your theme set up, ensure you use the defined colors and fonts
+            consistently across your React application to maintain a unified
+            look and feel. TailwindCSS's utility-first approach makes it easy to
+            apply your theme by using the custom classes you've defined in the
+            configuration.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
