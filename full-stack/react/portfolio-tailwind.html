@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Portfolio site with TailwindCSS and Flowbite</title>
+    <title>Portfolio website with TailwindCSS and Flowbite</title>
     <meta
       name="description"
       content="Building a single-page application for a personal portfolio website with ReactJS, TailwindCSS, and Flowbite."
@@ -57,7 +57,7 @@
         </div>
 
         <div class="content">
-          <h1>Portfolio site with TailwindCSS and Flowbite</h1>
+          <h1>Portfolio website with TailwindCSS and Flowbite</h1>
           <h2>
             Building a single-page application for a personal portfolio website
             with ReactJS, TailwindCSS, and Flowbite.
@@ -77,14 +77,27 @@
 
         <h3>THIS TUTORIAL</h3>
         <p><a href="#learning-goals">Learning Goals</a></p>
-        <p><a href="#intro">Introduction</a></p>
         <p><a href="#vite-start">Scaffolding with Vite</a></p>
-        <!-- <p><a href="#vite-customise">Customising your app content</a></p>
-                <p><a href="#download">Downloading the app components</a></p>
-                <p><a href="#update-main">Updating your main.jsx file</a></p>
-                <p><a href="#update-app">Updating your app.jsx file</a></p>
-                <p><a href="#update-list">Updating your ListDrivers.jsx component</a></p>
-                <p><a href="#update-table">Updating your TableDrivers.jsx component</a></p> -->
+        <p>
+          <a href="#install"
+            >Installing TailwindCSS and Flowbite Installing react-router-dom</a
+          >
+        </p>
+
+        <p>
+          <a href="#react-router-dom">Installing react-router-dom</a>
+        </p>
+
+        <p>
+          <a href="#pages-download">Downloading your ‘page’ components</a>
+        </p>
+        <p>
+          <a href="#images-download"> Downloading your image files </a>
+        </p>
+
+        <p><a href="#custom-404">Adding a custom 404.html file</a></p>
+        <p><a href="#main-update"> Updating your main.jsx file </a></p>
+        <p><a href="#app-update">Adding routes to your app.jsx file</a></p>
       </aside>
 
       <article>
@@ -93,9 +106,10 @@
           <p>At the end of this Tutorial, you will be able to:</p>
 
           <ul>
-            <li>Install TailwindCSS for ReactJS</li>
-            <li>Adding extensions for VS Code.</li>
-            <li>Installing the SVG Heroicons from Tailwind.</li>
+            <li>
+              Build and deploy a single-page application for a personal
+              portfolio website with ReactJS, TailwindCSS, and Flowbite.
+            </li>
           </ul>
         </section>
 
@@ -111,70 +125,49 @@
             </li>
             <li>
               Enter the following command that includes the name you want to
-              call your new app. For example, <b>app-react-tw</b>:
+              call your new app. For example, <b>app-react-portfolio-tw</b>:
               <pre
                 class="no-syn"
-              ><span class="yellow">npm</span> create vite@latest <span class="red">app-react-tw</span> -- --template react</pre>
+              ><span class="yellow">npm</span> create vite@latest <span class="red">app-react-portfolio-tw</span> -- --template react</pre>
             </li>
 
             <li>
-              Follow the on-screen instructions to build and launch your new
-              app.
+              Follow the on-screen instructions to build your new app.
 
               <img
-                src="assets/img/intro-tw/vite-create.png"
+                src="assets/img/portfolio-tw/vite-create.png"
                 alt="screenshot"
-                style="max-width: 700px"
+                style="max-width: 740px"
               />
             </li>
           </ol>
         </section>
 
-        <section id="vite-customise">
-          <h2>Installing TailwindCSS</h2>
+        <section id="install">
+          <h2>Installing TailwindCSS and Flowbite</h2>
           <p>Follow these steps:</p>
 
           <ol>
             <li>
-              In a terminal, run this command:
-              <pre
-                class="no-syn"
-              ><span class="yellow">npm</span> install -D tailwindcss postcss autoprefixer</pre>
+              <a href="intro-tailwind.html"
+                >Install TailwindCSS for your app.</a
+              >
             </li>
 
             <li>
-              Next, generate the configuration files:
-
-              <pre
-                class="no-syn"
-              ><span class="yellow">npx</span> tailwindcss init -p</pre>
-            </li>
-
-            <li>
-              Update your <b>tailwind.config.cjs</b> file as follows:
-
-              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1">module.exports = {
-    content: [
-       "./index.html",
-       "./src/**/*.{js,jsx,ts,tsx}", <span class="comment">// Adjust this line to include any file types that might contain Tailwind classes</span>
-       ],
-       theme: {
-         extend: {},
-       },
-    plugins: [],
-}</code></pre>
-            </li>
-
-            <li>
-              In your app <span class="syn-js">/src</span> folder, replace
-              <i>all</i> the content of <b>index.css</b> file with the
-              following:
-              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2">/* layers */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;</code></pre>
+              <a href="intro-flowbite.html">Install Flowbite for your app.</a>
             </li>
           </ol>
+
+          <p>
+            Your <b>tailwind.config.cjs</b> file should now look as follows:
+          </p>
+
+          <img
+            src="assets/img/portfolio-tw/config-1.png"
+            alt="screenshot"
+            style="max-width: 600px"
+          />
 
           <p>
             Start your app. In a browser, your app&#8219;s default web page
@@ -182,147 +175,209 @@
           </p>
 
           <img
-            src="assets/img/intro-tw/tw-1.png"
+            src="assets/img/portfolio-tw/tw-1.png"
             alt="screenshot"
             style="border: solid 2px gray"
           />
-
-          <p>
-            To check that TailwindCSS is working, update your
-            <b>App.jsx</b> file as follows:
-          </p>
-
-          <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3">function App() {
-    return (
-      &lt;div className="App"&gt;
-        &lt;h1 className="text-3xl text-red-600 font-bold underline"&gt;
-          Hello, TailwindCSS!
-        &lt;/h1&gt;
-      &lt;/div&gt;
-    );
-}</code></pre>
-
-          <p>Your browser should now display a screen like that below.</p>
-
-          <img src="assets/img/intro-tw/output-1.png" alt="screenshot" />
         </section>
 
-        <section>
-          <h2>Installing VS Code extensions</h2>
+        <section id="react-router-dom">
+          <h2>
+            Installing
+            <code>react-router-<span style="letter-spacing: 0">dom</span></code>
+          </h2>
 
           <p>
-            VS Code offers two extensions you will find helpful when working
-            with TailwindCSS:
+            ReactJS does not natively support page routing. So you need to
+            install the following package in your root app folder.
           </p>
 
-          <ul>
-            <li><b>Tailwind CSS IntelliSense</b></li>
-            <li><b>Prettier</b></li>
-          </ul>
-          <img src="assets/img/intro-tw/vscode-ext.png" alt="screenshot" />
+          <pre
+            class="no-syn"
+          ><span class="yellow">npm</span> i react-router-dom</pre>
+        </section>
 
-          <p>With Prettier installed for VS Code, now follow these steps:</p>
+        <section id="pages-download">
+          <h2>Downloading your ‘page’ components</h2>
+
+          <p>
+            Each ‘page’ in your portfolio website will be a component file,
+            stored in a <span class="syn-js">/pages</span> sub-folder of your
+            <span class="syn-js">/src</span> folder. Follow these steps
+          </p>
 
           <ol>
             <li>
-              Install Prettier as a dev-dependency for your project:
-              <pre
-                class="no-syn"
-              ><span class="yellow">npm</span> i --save-dev --save-exact prettier</pre>
+              In your <span class="syn-js">/src</span> folder, create a
+              sub-folder named <span class="syn-js">/pages</span>.
             </li>
             <li>
-              Install the
+              Download these page components to this sub-folder:<br />
+              <a href="assets/downloads/portfolio-tw/Home.jsx" target="_blank"
+                >Home.jsx</a
+              ><br />
               <a
-                href="https://tailwindcss.com/blog/automatic-class-sorting-with-prettier"
+                href="assets/downloads/portfolio-tw/Portfolio.jsx"
                 target="_blank"
-                >Prettier plugin for Tailwind CSS</a
-              >
-              as a dev-dependency for your project:
-              <pre
-                class="no-syn"
-              ><span class="yellow">npm</span> install -D prettier prettier-plugin-tailwindcss</pre>
+                >Portfolio.jsx</a
+              ><br />
+              <a
+                href="assets/downloads/portfolio-tw/Contact.jsx"
+                target="_blank"
+                >Contact.jsx</a
+              ><br />
+              <a
+                href="assets/downloads/portfolio-tw/Privacy.jsx"
+                target="_blank"
+                >Privacy.jsx</a
+              ><br />
             </li>
 
             <li>
-              In your root folder, create a new config file named
-              <b>.prettierrc</b> and add the content below it.
-              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4">{
-  "plugins": ["prettier-plugin-tailwindcss"]
-}</code></pre>
+              Next, download these two global components to the same sub-folder:
+              <br />
+              <a href="assets/downloads/portfolio-tw/Navbar.jsx" target="_blank"
+                >Navbar.jsx</a
+              ><br />
+              <a href="assets/downloads/portfolio-tw/Footer.jsx" target="_blank"
+                >Footer.jsx</a
+              ><br />
             </li>
           </ol>
+        </section>
 
-          <p>This plugin will sort TailwindCSS classes in a logical order.</p>
-          <p>
-            Verify Prettier is installed correctly by add some spacing to
-            <b>app.jsx</b> as shown below:
-          </p>
+        <section id="images-download">
+          <h2>Downloading your image files</h2>
 
-          <img
-            src="assets/img/intro-tw/prettier-1.png"
-            alt="screenshot"
-            style="max-width: 700px"
-          />
-
-          <p>Now run this command in your terminal:</p>
-          <pre
-            class="no-syn"
-          ><span class="yellow">npx</span> prettier --write app.jsx</pre>
-
-          <p>Prettier should now reformat your code correctly.</p>
-
-          <p>
-            To update VS Code so that it automatically reformats code after
-            every save, follow these steps:
-          </p>
+          <p>Follow these steps:</p>
 
           <ol>
-            <li>Restart VS Code.</li>
             <li>
-              In <b>Settings</b>, search for Prettier. In the
-              <b>Text Editor</b> section, choose
-              <b>Pretter - Code formatter</b>.
-              <img src="assets/img/intro-tw/prettier-2.png" alt="screenshot" />
+              In your <span class="syn-js">/public</span> folder, create a
+              sub-folder named <span class="syn-js">/images</span>.
             </li>
             <li>
-              Next, search for <b>formatonsave</b> and check the box as shown
-              below.
-              <img src="assets/img/intro-tw/prettier-3.png" alt="screenshot" />
+              Download and unzip the following image files to this
+              sub-folder:<br />
+              <a
+                href="assets/downloads/portfolio-tw/portfolio-images.zip"
+                target="_blank"
+                >portfolio-images.zip</a
+              ><br />
             </li>
           </ol>
-          <p>You can now close the <b>Settings</b> tab.</p>
         </section>
 
         <section>
-          <h2>Installing Heroicons</h2>
-
+          <h2 id="custom-404">Adding a custom <code>404.html</code> file</h2>
           <p>
-            Heroicons is a set of 288 SVG icons created by the makers of
-            Tailwind CSS. Install this icon set as follows:
-          </p>
-          <p>In a terminal, run this command:</p>
-
-          <pre
-            class="no-syn"
-          ><span class="yellow">npm</span> install @heroicons/react</pre>
-
-          <p>
-            Now you can import each icon individually as a React component. For
-            example:
+            In your app root folder, create a custom <b>404.html</b> file with a
+            JavaScript snippet that redirects the user to the main application
+            served from the root (/).
           </p>
 
-          <pre>
-  import { BeakerIcon } from '@heroicons/react/24/solid'
+          <pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-10" class="hljs language-xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>404 Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 
-  function MyComponent() {
-      return (
-        &lt;div&gt;
-          &lt;BeakerIcon className="h-6 w-6 text-blue-500" /&gt;
-          &lt;p&gt;...&lt;/p&gt;
-        &lt;/div&gt;
-     )
-  }</pre
-          >
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Page Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-string">"/"</span>;
+  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+        </section>
+
+        <section>
+          <h2 id="main-update">Updating your <code>main.jsx</code> file</h2>
+
+          <p>Here are the steps to add routes for your four 'pages'.</p>
+
+          <ol>
+            <li>
+              Near the top of your <b>main.jsx</b> file, after the first two
+              <b>import</b> statements, add one more:
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1" class="hljs language-javascript"><span class="hljs-keyword">import</span> {
+    <span class="hljs-title class_">HashRouter</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">Router</span>,
+    <span class="hljs-title class_">Routes</span>, 
+    <span class="hljs-title class_">Route</span>
+}
+<span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;</code></pre>
+            </li>
+
+            <li>
+              Inside the <b>&lt;React.StrictMode&gt;</b> tag pair, update the
+              <b>&lt;App /&gt;</b> component with the following code:
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2" class="hljs language-php-template"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+        {/* App component wraps around all the 'pages'. */}
+        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"*"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">App</span> /&gt;</span>} /&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>    
+</span></code></pre>
+
+              <b>App.jsx</b> will now act as a <i>layout component</i> that
+              wraps around all the 'pages' in the entire application.
+            </li>
+          </ol>
+        </section>
+
+        <section id="app-update">
+          <h2>Adding routes to your <code>app.jsx</code> file</h2>
+
+          <p>Now, update <b>app.jsx</b> as follows:</p>
+
+          <ol>
+            <li>
+              Import four 'page' and two global components:
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3" class="hljs language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Home</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./pages/Home'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Portfolio</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./pages/Portfolio'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Contact</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./pages/Contact'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Privacy</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./pages/Privacy'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Navbar</span> <span class="hljs-keyword">from</span> <span class="hljs-string">"./pages/Navbar"</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Footer</span> <span class="hljs-keyword">from</span> <span class="hljs-string">"./pages/Footer"</span>;</code></pre>
+            </li>
+
+            <li>
+              Next, import these two functions from <b>react-router-dom</b>:
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4" class="hljs language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Routes</span>, <span class="hljs-title class_">Route</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;</code></pre>
+            </li>
+
+            <li>
+              Remove this stylesheet import:
+
+              <img
+                src="assets/img/portfolio-tw/delete-css.png"
+                style="max-width: 500px"
+                alt="screeshot"
+              />
+            </li>
+            <li>
+              Finally, update your <b>&lt;App&gt;</b> component as shown below.
+              Each <b>Route</b> now has a <b>path</b> and an
+              <b>element</b> prop:
+              <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-9" class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Navbar</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+          {/* Use Home component for the root path */}
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">index</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">Home</span> /&gt;</span>} /&gt; 
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"portfolio"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">Portfolio</span> /&gt;</span>} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"contact"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">Contact</span> /&gt;</span>} /&gt;          
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"privacy"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">Privacy</span> /&gt;</span>} /&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Footer</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  );
+}</span></code></pre>
+            </li>
+          </ol>
         </section>
       </article>
     </main>
