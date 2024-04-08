@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Setting up Frontend and Backend Servers | Creating an E-commerce Website
+      with the MERN Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Setting up the frontend and backend servers with ReactJS and Express."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Setting up Frontend and Backend Servers</h1>
+          <h2>
+            Installing ReactJS, Express and various packages to build the
+            frontend and backend layers of a full-stack MERN app.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#node-compass">NodeJS and MongoDB Compass</a></p>
+        <p><a href="#vite">1: Scaffolding your frontend with Vite</a></p>
+        <p><a href="#express">2: Setting up your Express backend</a></p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Set up the frontend and backend layers of a full-stack MERN app.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="node-compass">NodeJS and MongoDB Compass</h2>
+          <p>
+            Before continuing, ensure you have the following two apps installed
+            on your local machine:
+          </p>
+          <ul>
+            <li><a href="../react/nodejs-intro.html">NodeJS</a></li>
+            <li><a href="mongodb-compass-intro.html">MongoDB Compass</a></li>
+          </ul>
+
+          <p>
+            You also need an account with
+            <a href="mongodb-register.html">MongoDB Atlas</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="vite">1: Scaffolding your frontend with Vite</h2>
+          <p>
+            <a href="https://vitejs.dev" target="_blank">Vite</a> is a modern
+            build tool that provides a streamlined workflow for building web
+            applications, especially those using React. It has replaced the
+            older utility called
+            <a href="https://create-react-app.dev/" target="_blank"
+              >create-react-app</a
+            >.
+          </p>
+
+          <p>Follow these steps to scaffold your app with Vite:</p>
+
+          <ol>
+            <li>
+              In a terminal, navigate to where you want to create the folder to
+              hold your MERN app, and then create the folder. For example:
+              <b>app-mern-ecommerce</b>:
+
+              <pre class="no-syn">C:\my-apps\app-mern-ecommerce&gt;</pre>
+            </li>
+
+            <li>
+              In this <b>app-mern-ecommerce</b> folder, type the following
+              command that includes the name you want to call the frontend layer
+              of your new app. In this example, let's name it <b>frontend</b>.
+              <pre
+                class="no-syn"
+              ><span class="yellow">npm</span> create vite@latest <span class="red">frontend</span> <span class="grey">-- --template</span> react</pre>
+
+              <img
+                src="assets/img/project-frontend-backend/folders-frontend.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              If you do not already have Vite installed, you will be prompted to
+              install it.
+
+              <img
+                src="assets/img/project-frontend-backend/vite-1.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+
+            <li>
+              When Vite completes the build process, you will see the message
+              below.
+              <img
+                src="assets/img/project-frontend-backend/vite-2.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              Follow these instructions to continue building your app, and then
+              running it.
+              <img
+                src="assets/img/project-frontend-backend/vite-3.png"
+                alt="screenshot"
+                style="max-width: 760px"
+              />
+            </li>
+          </ol>
+
+          <p>
+            When you launch your new app with <b>npm run dev</b>, it should look
+            as shown below in your browser.
+          </p>
+
+          <img
+            src="assets/img/project-frontend-backend/vite-4.png"
+            alt="screenshot"
+            style="max-width: 700px"
+          />
+
+          <h3>ReactJS folders and files</h3>
+          <p>Vite will create the following hierarchy of folders and files.</p>
+          <img
+            src="assets/img/project-frontend-backend/vite-5.png"
+            style="max-width: 320px"
+            alt="ReactJS sample screen"
+          />
+
+          <p>
+            Your <b>App.jsx</b> file may contain all the code for your ReactJS
+            app. But more commonly, it acts as a <i>parent</i> component that
+            imports other, single-purpose 'child' components.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="express">2: Setting up your Express backend</h2>
+
+          <p>Follow the steps below:</p>
+
+          <ol>
+            <li>
+              In your app folder (for example, <b>app-mern-ecommerce</b>),
+              create a sub-folder for the backend layer. Let's name this
+              sub-folder <b>server</b>:
+              <img
+                src="assets/img/project-frontend-backend/folders-backend.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+
+            <li>
+              In a terminal, navigate to this new sub-folder. For example:
+              <pre class="no-syn">
+C:\my-apps\app-mern-ecommerce\backend&gt;</pre
+              >
+            </li>
+            <li>
+              Run the following command to create an npm project for your
+              backend layer:
+              <pre
+                class="no-syn"
+              ><span class="yellow">npm</span> init <span class="grey">-y</span></pre>
+            </li>
+            <li>
+              Install the following modules locally:
+              <pre
+                class="no-syn"
+              ><span class="yellow">npm</span> i express mongoose cors dotenv</pre>
+            </li>
+
+            <li>
+              Next, install the nodemon module locally as a dev dependency:
+              <pre
+                class="no-syn"
+              ><span class="yellow">npm</span> i <span class="grey">--save-dev</span> nodemon</pre>
+            </li>
+
+            <li>
+              In your <b>/backend</b> folder, create a new text file and name it
+              <b>.env</b>.
+              <span class="inside-ol">&nbsp;</span>
+              Enter in this file a port number (for example, <b>5000</b>) and
+              your
+              <a href="mongodb-register.html">MongoDB Atlas</a> credentials.
+              <img
+                src="assets/img/project-frontend-backend/env.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+            <li></li>
+            <li>
+              In your <b>/backend</b> folder, open your
+              <b>package.json</b> file. It should look similar to that shown on
+              the left below. Update this file as shown below on the right, and
+              save the file.
+              <img
+                src="assets/img/project-frontend-backend/package-json.png"
+                alt="screenshot"
+                class="wider-115"
+              />
+            </li>
+
+            <li>
+              Create a new text file, paste in the following code, and save the
+              file as <b>index.js</b> in your <b>/backend</b> folder:
+
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config()
+const PORT = process.env.PORT;
+const mongoDBUri = process.env.mongoDBUri;
+import mongoose from 'mongoose';
+import cors from 'cors'
+
+const app = express()
+
+// Middleware for CORS
+app.use(cors())
+
+async function connectToMongoDB() {
+  try {
+      await mongoose.connect((mongoDBUri), { 
+          useNewUrlParser: true, 
+          useUnifiedTopology: true
+      });
+      console.log('Express app connected to MongoDB');
+      app.listen(PORT, () =&gt; {
+          console.log(`Express app listening on port ${PORT}`)
+      })            
+  } catch (error) {
+      console.error('Could not connect to MongoDB', error);
+  }
+}    
+
+connectToMongoDB();</code></pre>
+            </li>
+
+            <li>
+              Finally, in your terminal, start your new Express server:
+              <pre class="no-syn"><span class="yellow">npm</span> run dev</pre>
+            </li>
+          </ol>
+          <p>Your terminal window should look as follows:</p>
+
+          <img
+            src="assets/img/project-frontend-backend/terminal.png"
+            alt="screenshot"
+          />
+
+          <!-- <p>
+            And you should see the following in your web browser for the chosen
+            port number.
+          </p>
+
+          <img
+            src="assets/img/express-intro/web-browser.png"
+            alt="screenshot"
+            style="max-width: 700px"
+          /> -->
+
+          <p>
+            You are now ready to add a
+            <a href="project-data-paths.html">data model and paths</a> to your
+            MERN project.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
