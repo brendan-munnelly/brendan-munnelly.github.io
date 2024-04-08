@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Setting up the SPA | Creating an E-commerce Website with the MERN Stack |
+      Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Building a frontend single-page application with pages and components. "
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Setting up the SPA in ReactJS</h1>
+          <h2>
+            Building a frontend single-page application in ReactJS with pages
+            and components.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#about">Installing the frontend packages</a></p>
+        <p><a href="#folders-app">Updating your main.jsx file</a></p>
+        <p><a href="#basic-app">Creating your Home page</a></p>
+        <p>
+          <a href="#code-review">Updating your Home page to display data</a>
+        </p>
+        <p>
+          <a href="#code-review">Updating your Home page to display data</a>
+        </p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Create a single-page app in ReactJS to support multiple routes.
+            </li>
+            <li>Add pages and components to the app.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Installing the frontend packages</h2>
+          <p>
+            In this stage of your MERN full-stack project, you will set up a
+            single-page application (SPA) on the frontend.
+          </p>
+
+          <p>
+            Begin by installing the following packages in your
+            <b>/frontend</b> folder:
+          </p>
+
+          <pre
+            class="no-syn"
+          ><span class="yellow">npm</span> i react-router-dom axios @mui/material @emotion/react @emotion/styled</pre>
+        </section>
+
+        <section>
+          <h2 id="creating">Updating your <code>main.jsx</code> file</h2>
+
+          <p>Here are the steps to add routes for the 'pages' of your SPA.</p>
+
+          <ol>
+            <li>
+              Near the top of your <b>main.jsx</b> file, delete the import
+              <b>index.css</b> statement.
+            </li>
+            <li>
+              Add this new <b>import</b> statement:
+              <pre><code class="hljs language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HashRouter as Router</span>, <span class="hljs-title class_">Routes</span>, <span class="hljs-title class_">Route</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;</code></pre>
+            </li>
+
+            <li>
+              Inside the <b>&lt;React.StrictMode&gt;</b> tag pair, update the
+              <b>&lt;App /&gt;</b> component with the following code:
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3" class="hljs language-php-template"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+            {/* App component wraps around all the 'pages'. */}
+            <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"*"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">App</span> /&gt;</span>} /&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span></code></pre>
+
+              <b>App.jsx</b> will now act as a <i>layout component</i> that
+              wraps around all the 'pages' in the entire application.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Creating your Home page</h2>
+
+          <p>Follow these steps:</p>
+
+          <ol>
+            <li>
+              Inside the <b>/src</b> sub-folder of the <b>/frontend</b> folder,
+              create a new folder named <b>/pages</b>.
+            </li>
+
+            <li>
+              Inside the <b>/pages</b> folder, create a new file named
+              <b>HomePage.jsx</b>. This file will serve as our home page.
+            </li>
+
+            <li>
+              Add the following code to this file:
+
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">import React from "react";
+
+const HomePage = () =&gt; {
+    return (
+        &lt;&gt;
+            &lt;h1&gt;My HomePage&lt;/h1&gt;
+        &lt;/&gt;
+    );
+};
+    
+export default HomePage;</code></pre>
+            </li>
+
+            <li>
+              Update your <b>app.jsx</b> file as follows:
+
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
+//import Route and Routes from the React router library
+import { Route, Routes } from "react-router-dom";
+//import the HomePage 
+import HomePage from './pages/HomePage';
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+            {/* Use Home component for the root path */}
+            <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">index</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">HomePage</span> /&gt;</span>} /&gt; 
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span></span>
+    );
+}
+
+export default App;</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            If you run the frontend app now in your browser, it should look
+            similar to that below.
+          </p>
+
+          <img src="assets/img/project-spa/output-1.png" alt="screenshot" />
+
+          <p>Congratulations, you have created your first route!</p>
+        </section>
+
+        <section>
+          <h2>Updating your Home page to display data</h2>
+
+          <p>
+            Follow these steps to display data from MongoDB in your Home page:
+          </p>
+
+          <ol>
+            <li>
+              Update your <b>HomePage.jsx</b> file as follows:
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">                
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const HomePage = () =&gt; {
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() =&gt; {
+    getProduct();
+  }, []);
+
+  const getProduct = async () =&gt; {
+    try {
+      const response = await axios.get("http://localhost:5000/read");
+      setProductList(response.data);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    &lt;&gt;
+        &lt;h1&gt;My HomePage&lt;/h1&gt;
+        {productList.map((product, index) =&gt; (
+            &lt;div key={index}&gt;
+            &lt;p&gt;{product.title}&lt;/p&gt;
+            &lt;/div&gt;
+        ))}
+    &lt;/&gt;
+  );
+};
+
+export default HomePage;</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            If your Express app is running, your web browser should now display
+            a list of product titles from the MongoDB database.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
