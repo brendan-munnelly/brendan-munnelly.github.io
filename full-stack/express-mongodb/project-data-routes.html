@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Setting up Data Model and Routes | Creating an E-commerce Website with the
+      MERN Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Setting up the data model and routes for MERN ecommerce app."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Setting up the Data Model and Routes</h1>
+          <h2>
+            Importing sample dats, and setting up the data model and routes for
+            your MERN app.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#about">About Express</a></p>
+        <p><a href="#folders-app">Creating a folder structure</a></p>
+        <p><a href="#basic-app">Creating a basic Express app</a></p>
+        <p><a href="#code-review">Reviewing the Express app code</a></p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Create a basic app with Node.js and the Express framework that can
+              listen to browser requests and send a response.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="creating">Creating a database and collection</h2>
+
+          <p>Follow the steps below:</p>
+
+          <ol>
+            <li>
+              Download the
+              <a href="assets/downloads/project/MOCK_DATA.json" target="_blank"
+                >MOCK_DATA.json</a
+              >
+              file.
+            </li>
+            <li>
+              Launch the Compass app and connect it to your account on MongoDB
+              Atlas. You should see a screen similar to that below.
+              <img
+                src="assets/img/project-data-routes/compass-data-1.png"
+                alt="screenshot"
+              />
+            </li>
+            <li>
+              In the left column, beside the <b>Databases</b> heading, click the
+              plus (<b>+</b>) icon.
+              <img
+                src="assets/img/project-data-routes/compass-data-2.png"
+                alt="screenshot"
+                style="max-width: 400px"
+              />
+            </li>
+            <li>
+              Enter the names for your database and collection. For example,
+              <b>db_ecommerce</b> and <b>products</b>.
+              <img
+                src="assets/img/project-data-routes/compass-data-3.png"
+                alt="screenshot"
+                style="max-width: 600px; padding-bottom: 14px"
+              />
+            </li>
+            <li>Click the <b>Create Database</b> button.</li>
+          </ol>
+          <p>Now, you are ready to add data to your database and collection.</p>
+        </section>
+
+        <section>
+          <h2 id="json">Importing JSON data</h2>
+          <p>
+            With the <b>products</b> collection selected in the left column:
+          </p>
+
+          <ol>
+            <li>
+              Click the dropdown arrow at the right of the
+              <b>ADD DATA</b> button and select <b>Import JSON or CSV</b> file.
+              <img
+                src="assets/img/project-data-routes/compass-data-4.png"
+                alt="screenshot"
+              />
+            </li>
+            <li>
+              Select the <b>MOCK_DATA.json</b> file and, on the next screen,
+              click the <b>Import</b> button.
+              <img
+                src="assets/img/project-data-routes/compass-data-5.png"
+                alt="screenshot"
+                style="max-width: 600px"
+              />
+            </li>
+            <li>
+              You should now see a screen similar to the following.
+              <img
+                src="assets/img/project-data-routes/compass-data-6.png"
+                alt="screenshot"
+              />
+            </li>
+          </ol>
+
+          <p>
+            Note that MongoDB has automatically added a field named
+            <b>_id</b> to each document.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="vscode">Viewing data with VS Code extension</h2>
+
+          <p>
+            To view your database and collection with the VS Code extension for
+            MongoDB, follow the steps below:
+          </p>
+
+          <ol>
+            <li>In the left Activity Bar, click the MongoDB extension icon.</li>
+
+            <li>
+              Click and expand the <b>db_ecommerce</b> database,
+              <b>products</b> collection, and individual documents. See the
+              sample screen below.
+              <img
+                src="assets/img/mongo-compass-data/vscode.png"
+                alt="screenshot"
+              />
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Updating your <code>.env</code> credentials</h2>
+          <p>
+            Now that you have created a new database in MongoDB Atlas, you need
+            to update your <b>.env</b> file in the <b>/server</b>folder with the
+            database name:
+            <img
+              src="assets/img/project-data-routes/env.png"
+              alt="screenshot"
+              style="max-width: 700px"
+            />
+          </p>
+
+          <p>
+            Also, update your <b>index.js</b> file in the <b>/server</b> folder.
+
+            <img
+              src="assets/img/project-data-routes/dbname.png"
+              alt="screenshot"
+              style="max-width: 600px"
+            />
+            <img
+              src="assets/img/project-data-routes/async.png"
+              alt="screenshot"
+              style="max-width: 660px"
+            />
+          </p>
+        </section>
+
+        <section>
+          <h2>Creating the data model</h2>
+          <p>
+            Your next step is to create a model for the product data using the
+            Mongoose package.
+          </p>
+
+          <ol>
+            <li>
+              In the <b>/backend</b> folder create a <b>/Models</b> sub-folder.
+            </li>
+            <li>
+              In this sub-folder, create a <b>product.js</b> file add to it the
+              following code:
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">import mongoose from "mongoose";
+
+const productSchema = new mongoose.Schema({
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      discountPercentage: {
+        type: Number,
+        required: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+      stock: {
+        type: Number,
+        required: true,
+      },
+      brand: {
+        type: String,
+        required: true,
+      },
+      category: {
+        type: String,
+        required: true,
+      },
+      thumbnail: {
+        type: String,
+        required: true,
+      },
+      images: {
+        type: String,
+        required: true,
+      },
+});
+    
+// Add data to schema to create model
+const Product = mongoose.model("Product", productSchema);
+    
+export default Product;</code></pre>
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Adding routes to <code>index.js</code></h2>
+
+          <p>
+            Add the following CRUD routes to your <b>index.js</b> file. (You
+            will later move these to a separate file.)
+
+            <img
+              src="assets/img/project-data-routes/routes-import.png"
+              alt="screenshot"
+              style="max-width: 600px"
+            />
+          </p>
+
+          <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">//Create a new product
+app.post("/create", async (req, res) => {
+      const newProduct = new Product({
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        discountPercentage: req.body.discountPercentage,
+        rating: req.body.rating,
+        stock: req.body.stock,
+        brand: req.body.brand,
+        category: req.body.category,
+        thumbnail: req.body.thumbnail,
+        images: req.body.images,
+      });
+    
+      await Product.create(newProduct);
+      res.send("Product saved to the database!");
+});</code></pre>
+
+          <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">//Get the all product list
+app.get("/read", async (req, res) => {
+      const productList = await Product.find();
+      res.send(JSON.stringify(productList));
+});</code></pre>
+
+          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">//Update a product based on the id
+app.put("/update/:id", async (req, res) => {
+      const product_id = req.params.id;
+      await Product.findByIdAndUpdate(product_id, {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        discountPercentage: req.body.discountPercentage,
+        rating: req.body.rating,
+        stock: req.body.stock,
+        brand: req.body.brand,
+        category: req.body.category,
+        thumbnail: req.body.thumbnail,
+        images: req.body.images,
+    });
+    
+      res.send("Product updated successfully!");
+});    
+</code></pre>
+
+          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">//Delete a product based on the id
+app.delete("/delete/:id", async (req, res) => {
+      const product_id = req.params.id;
+      await Product.findByIdAndDelete(product_id);
+      res.send("Product deleted!");
+});</code></pre>
+        </section>
+
+        <section>
+          <h2>Testing your routes with POSTMAN</h2>
+          <p>
+            Use POSTMAN or similar to test your routes are working correctly.
+            For example:
+          </p>
+
+          <img
+            src="assets/img/project-data-routes/postman.png"
+            alt="screenshot"
+          />
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>

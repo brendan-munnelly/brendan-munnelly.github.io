@@ -290,6 +290,11 @@ const app = express()
 // Middleware for CORS
 app.use(cors())
 
+// Response sent to browser
+app.get("/", (req, res) =&gt; {
+  res.send("Hello Web Browser!");
+});
+
 async function connectToMongoDB() {
   try {
       await mongoose.connect((mongoDBUri), { 

@@ -1,205 +1,414 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Express / MongoDB Tutorials | Brendan Munnelly </title>
+    <title>Express / MongoDB Tutorials | Brendan Munnelly</title>
 
-	<meta name="description" content="Express / MongoDB Tutorials">
+    <meta name="description" content="Express / MongoDB Tutorials" />
 
-	<!-- Styleheet -->
-    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+    <!-- Styleheet -->
+    <link
+      rel="stylesheet"
+      href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css"
+    />
     <link rel="stylesheet" href="../assets/css/toc.css" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600&display=swap"
+      rel="stylesheet"
+    />
 
-	<style>
-		nav.theme-light a.brand:link, 
-		nav.theme-light a.brand:visited {
-			font-size: var(--font-size-md);
-			text-decoration: none;
-			color: var(--blue-700);
-		} 
+    <style>
+      nav.theme-light a.brand:link,
+      nav.theme-light a.brand:visited {
+        font-size: var(--font-size-md);
+        text-decoration: none;
+        color: var(--blue-700);
+      }
 
-		nav.theme-light a.brand:focus, 
-		nav.theme-light a.brand:hover,
-		nav.theme-light a.brand:active {
-			color: var(--blue-500);
-			text-decoration: none;
-		} 
-	</style>
+      nav.theme-light a.brand:focus,
+      nav.theme-light a.brand:hover,
+      nav.theme-light a.brand:active {
+        color: var(--blue-500);
+        text-decoration: none;
+      }
+    </style>
 
     <!-- Font Awesome 6 icons. -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-</head>
+  <body id="top">
+    <!--navbar menu begins here-->
+    <nav class="theme-light">
+      <div class="container-menu">
+        <a href="https://munnelly.com" class="brand"><b>MUNNELLY</b>.COM</a>
 
-<body id="top">
+        <div class="container-menu-links">
+          <div class="nav-toggle" id="nav-toggle-btn">
+            <div class="bar-1"></div>
+            <div class="bar-2"></div>
+            <div class="bar-3"></div>
+          </div>
 
-<!--navbar menu begins here-->
-<nav class="theme-light">
-	<div class="container-menu">
-		<a href="https://munnelly.com" class="brand"><b>MUNNELLY</b>.COM</a>
+          <ul class="links-wrapper">
+            <li><a href="../../frontend/index.html">Frontend</a></li>
+            <li><a href="../../backend/index.html">Backend</a></li>
+            <li><a href="../../javascript/index.html">JavaScript</a></li>
+            <li><a href="index.html">Express/MongoDB</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar menu ends here -->
 
-		<div class="container-menu-links">
-			
-			<div class="nav-toggle" id="nav-toggle-btn">
-				<div class="bar-1"></div>
-				<div class="bar-2"></div>
-				<div class="bar-3"></div>
-			</div>
-
-			<ul class="links-wrapper">
-				<li><a href="../../frontend/index.html">Frontend</a></li>
-				<li><a href="../../backend/index.html">Backend</a></li>
-				<li><a href="../../javascript/index.html">JavaScript</a></li>
-				<li><a href="index.html">Express/MongoDB</a></li>
-			</ul>
-
-		</div>
-	</div>
-</nav>
-<!-- navbar menu ends here -->
-
-<!-- header starts here -->
-<header class="theme-dark hero-bg text-center-desktop text-center-mobile">
-
-    <div class="container-text">
+    <!-- header starts here -->
+    <header class="theme-dark hero-bg text-center-desktop text-center-mobile">
+      <div class="container-text">
         <h1 class="text-shadow">Express and MongoDB</h1>
-        <h2 class="text-shadow">Bulding the backend for full-stack CRUD apps.</h2>
-    </div>
+        <h2 class="text-shadow">
+          Bulding the backend for full-stack CRUD apps.
+        </h2>
+      </div>
 
-    
+      <div class="container-media">
+        <img
+          src="assets/img/toc/bg-header-mongodb.jpg"
+          alt="Placeholder image"
+        />
+      </div>
 
-    <div class="container-media">
-        <img src="assets/img/toc/bg-header-mongodb.jpg" alt="Placeholder image">
-    </div>
+      <div class="container-overlay"></div>
+    </header>
 
-    <div class="container-overlay"></div>
+    <main>
+      <!-- section starts here -->
 
-</header>
+      <section class="theme-light section-selector-1 w-1356px">
+        <div class="col-1 text-center w-820px">
+          <h2>Getting started</h2>
+          <h3>
+            A series of tutorials leading you through the steps of using Express
+            and MongoDB to build the backend for a basic CRUD app.
+          </h3>
+        </div>
 
+        <!-- Begin four-column flexbox grid -->
+        <div class="flex-cols-4 mobile-col-2">
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="express-intro.html"
+                ><img
+                  src="assets/img/toc/toc-express.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="express-intro.html" class="col-4-h3"
+              >Introduction to Express</a
+            >
+            <p>
+              Building a basic Express app running on a Node.js server that can
+              serve a response to a GET request from a web browser.
+            </p>
+            <a
+              href="express-intro.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-register.html"
+                ><img
+                  src="assets/img/toc/toc-mongodb-atlas.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-register.html" class="col-4-h3"
+              >Registering with MongoDB</a
+            >
+            <p>
+              Creating a free MongoDB Atlas account and obtaining a connection
+              string for use with your Express apps.
+            </p>
+            <a
+              href="mongodb-register.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-<main>
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-connect.html"
+                ><img
+                  src="assets/img/toc/toc-mongodb-connect.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-connect.html" class="col-4-h3"
+              >Connecting to MongoDB Atlas</a
+            >
+            <p>
+              Using the provided connection string to connect an Express app to
+              your account on MongoDB Atlas.
+            </p>
+            <a
+              href="mongodb-connect.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-	<!-- section starts here -->
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-compass-install.html"
+                ><img
+                  src="assets/img/toc/toc-mongodb-compass.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-compass-install.html" class="col-4-h3"
+              >Installing MongoDB Compass</a
+            >
+            <p>
+              Downloading and installing the free MongoDB Compass app for
+              interacting with databases and collections.
+            </p>
+            <a
+              href="mongodb-compass-install.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-    <section class="theme-light section-selector-1 w-1356px">
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-compass-data.html"
+                ><img
+                  src="assets/img/toc/toc-compass-data.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-compass-data.html" class="col-4-h3"
+              >Adding data with Compass</a
+            >
+            <p>
+              Using the Compass app to create a database and collection in
+              MongoDB Atlas, and to import data from a JSON file.
+            </p>
+            <a
+              href="mongodb-compass-data.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-		<div class="col-1 text-center w-820px">
-			<h2>Getting started</h2>
-			<h3>A series of tutorials leading you through the steps of using Express and MongoDB to build the backend for a basic CRUD app.</h3>
-		</div>
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-app-routes.html"
+                ><img
+                  src="assets/img/toc/toc-mongodb-routes.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-app-routes.html" class="col-4-h3"
+              >Building a backend CRUD app</a
+            >
+            <p>
+              Bullding the backend of an app that uses Express routes to perform
+              CRUD operations on data stored on MongoDB Atlas.
+            </p>
+            <a
+              href="mongodb-app-routes.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-		<!-- Begin four-column flexbox grid -->
-		<div class="flex-cols-4 mobile-col-2">
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-app-controllers.html"
+                ><img
+                  src="assets/img/toc/toc-mongodb-controllers.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-app-controllers.html" class="col-4-h3"
+              >Adding route controllers</a
+            >
+            <p>
+              Refactoring the Express routes code to move the route handler
+              functions to a separate controllers file.
+            </p>
+            <a
+              href="mongodb-app-controllers.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="express-intro.html"><img src="assets/img/toc/toc-express.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="express-intro.html" class="col-4-h3">Introduction to Express</a>
-				<p>Building a basic Express app runnng on a Node.js server that can serve a response to a GET request from a web browser.</p>
-				<a href="express-intro.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-app-static.html"
+                ><img
+                  src="assets/img/toc/toc-static.png"
+                  alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-app-static.html" class="col-4-h3"
+              >Adding .env and static files</a
+            >
+            <p>
+              Adding an .env file to hide your login details. And using
+              middleware to serve static files such as images and stylesheets.
+            </p>
+            <a
+              href="mongodb-app-static.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-register.html"><img src="assets/img/toc/toc-mongodb-atlas.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-register.html" class="col-4-h3">Registering with MongoDB</a>
-				<p>Creating a free MongoDB Atlas account and obtaining a connection string for use with your Express apps.</p>
-				<a href="mongodb-register.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="mongodb-app-jwt.html"
+                ><img src="assets/img/toc/toc-jwt.png" alt="Placeholder image"
+              /></a>
+            </figure>
+            <a href="mongodb-app-jwt.html" class="col-4-h3"
+              >Protecting routes with JWT</a
+            >
+            <p>
+              Adding JWT-based protection to routes in Express so that only
+              authorised users can access them.
+            </p>
+            <a
+              href="mongodb-app-jwt.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span>View Tutorial</span><i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <!-- End fourcolumn flexbox grid -->
+      </section>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-connect.html"><img src="assets/img/toc/toc-mongodb-connect.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-connect.html" class="col-4-h3">Connecting to MongoDB Atlas</a>
-				<p>Using the provided connection string to connect an Express app to your account on MongoDB Atlas.</p>
-				<a href="mongodb-connect.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+      <!-- section starts here -->
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-compass-install.html"><img src="assets/img/toc/toc-mongodb-compass.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-compass-install.html" class="col-4-h3">Installing MongoDB Compass</a>
-				<p>Downloading and installing the free MongoDB Compass app for interacting with databases and collections.</p>
-				<a href="mongodb-compass-install.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+      <section class="section-selector-1 w-1356px">
+        <div class="col-1 text-center w-820px" id="full-project">
+          <h2 style="color: #4db33d">
+            Full Project:
+            <span style="font-weight: 400"
+              >Creating an E-commerce Website with the MERN Stack</span
+            >
+          </h2>
+        </div>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-compass-data.html"><img src="assets/img/toc/toc-compass-data.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-compass-data.html" class="col-4-h3">Adding data with Compass</a>
-				<p>Using the Compass app to create a database and collection in MongoDB Atlas, and to import data from a JSON file.</p>
-				<a href="mongodb-compass-data.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+        <!-- Begin four-column flexbox grid -->
+        <div class="flex-cols-4 mobile-col-2">
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="project-frontend-backend.html"
+                ><img src="assets/img/toc/toc-mern.png" alt="Placeholder image"
+              /></a>
+            </figure>
+            <a
+              href="project-frontend-backend.html"
+              class="col-4-h3"
+              style="color: #4db33d"
+              >Frontend and backend servers</a
+            >
+            <p>
+              Setting up the frontend and backend servers with ReactJS and
+              Express.
+            </p>
+            <a
+              href="project-frontend-backend.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span style="color: #fff">View Tutorial</span
+              ><i class="fas fa-arrow-right" style="color: #fff"></i
+            ></a>
+          </div>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-app-routes.html"><img src="assets/img/toc/toc-mongodb-routes.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-app-routes.html" class="col-4-h3">Building a backend CRUD app</a>
-				<p>Bullding the backend of an app that uses Express routes to perform CRUD operations on data stored on MongoDB Atlas.</p>
-				<a href="mongodb-app-routes.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
+          <div class="col-4">
+            <figure
+              class="photos-zoom photos-brightness"
+              style="overflow: hidden"
+            >
+              <a href="project-data-routes.html"
+                ><img src="assets/img/toc/toc-mern.png" alt="Placeholder image"
+              /></a>
+            </figure>
+            <a
+              href="project-data-routes.html"
+              class="col-4-h3"
+              style="color: #4db33d"
+              >Data model and routes</a
+            >
+            <p>
+              Importing data, setting up the data model, and defining the app
+              routes.
+            </p>
+            <a
+              href="project-data-routes.html"
+              class="btn btn-solid btn-small btn-soft btn-shadow"
+              ><span style="color: #fff">View Tutorial</span
+              ><i class="fas fa-arrow-right" style="color: #fff"></i
+            ></a>
+          </div>
+        </div>
+        <!-- End fourcolumn flexbox grid -->
+      </section>
+    </main>
 
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-app-controllers.html"><img src="assets/img/toc/toc-mongodb-controllers.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-app-controllers.html" class="col-4-h3">Adding route controllers</a>
-				<p>Refactoring the Express routes code to move the route handler functions to a separate controllers file.</p>
-				<a href="mongodb-app-controllers.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
-
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-app-static.html"><img src="assets/img/toc/toc-static.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-app-static.html" class="col-4-h3">Adding .env and static files</a>
-				<p>Adding an .env file to hide your login details. And using middleware to serve static files such as images and stylesheets.</p>
-				<a href="mongodb-app-static.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
-
-			<div class="col-4">
-				<figure class="photos-zoom photos-brightness" style="overflow: hidden;">
-					<a href="mongodb-app-jwt.html"><img src="assets/img/toc/toc-jwt.png" alt="Placeholder image"></a>
-				</figure>
-				<a href="mongodb-app-jwt.html" class="col-4-h3">Protecting routes with JWT</a>
-				<p>Adding JWT-based protection to routes in Express so that only authorised users can access them.</p>
-				<a href="mongodb-app-jwt.html" class="btn btn-solid btn-small btn-soft btn-shadow"><span>View Tutorial</span><i class="fas fa-arrow-right"></i></a>
-			</div>
-
-
-		</div>
-		<!-- End fourcolumn flexbox grid -->
-
-	</section>
-
-
-
-
-
-</main>
-
-<!-- <footer>
+    <!-- <footer>
 
 </footer> -->
 
-<script src="https://lunevedy.com/assets/js/lunevedy.js"></script>
-
-</body>
+    <script src="https://lunevedy.com/assets/js/lunevedy.js"></script>
+  </body>
 </html>
-
-
