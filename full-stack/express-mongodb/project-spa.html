@@ -63,15 +63,16 @@
 
         <h3>THIS TUTORIAL</h3>
         <p><a href="#learning-goals">Learning Goals</a></p>
-        <p><a href="#about">Installing the frontend packages</a></p>
-        <p><a href="#folders-app">Updating your main.jsx file</a></p>
-        <p><a href="#basic-app">Creating your Home page</a></p>
+        <p><a href="#install">Installing the frontend packages</a></p>
         <p>
-          <a href="#code-review">Updating your Home page to display data</a>
+          <a href="#main">Updating your main.jsx file</a>
         </p>
+        <p><a href="#home-create">Creating your Home page</a></p>
         <p>
-          <a href="#code-review">Updating your Home page to display data</a>
+          <a href="#home-data">Updating your Home page to display data</a>
         </p>
+
+        <p><a href="#product-card">Adding a product card component</a></p>
       </aside>
 
       <article>
@@ -87,7 +88,7 @@
           </ul>
         </section>
 
-        <section>
+        <section id="install">
           <h2>Installing the frontend packages</h2>
           <p>
             In this stage of your MERN full-stack project, you will set up a
@@ -104,8 +105,8 @@
           ><span class="yellow">npm</span> i react-router-dom axios @mui/material @emotion/react @emotion/styled</pre>
         </section>
 
-        <section>
-          <h2 id="creating">Updating your <code>main.jsx</code> file</h2>
+        <section id="main">
+          <h2>Updating your <code>main.jsx</code> file</h2>
 
           <p>Here are the steps to add routes for the 'pages' of your SPA.</p>
 
@@ -135,14 +136,14 @@
           </ol>
         </section>
 
-        <section>
+        <section id="home-create">
           <h2>Creating your Home page</h2>
 
           <p>Follow these steps:</p>
 
           <ol>
             <li>
-              Inside the <b>/src</b> sub-folder of the <b>/frontend</b> folder,
+              Inside the <b>/src</b> sub-folder of your <b>/frontend</b> folder,
               create a new folder named <b>/pages</b>.
             </li>
 
@@ -199,7 +200,7 @@ export default App;</code></pre>
           <p>Congratulations, you have created your first route!</p>
         </section>
 
-        <section>
+        <section id="home-data">
           <h2>Updating your Home page to display data</h2>
 
           <p>
@@ -249,6 +250,97 @@ export default HomePage;</code></pre>
           <p>
             If your Express app is running, your web browser should now display
             a list of product titles from the MongoDB database.
+          </p>
+        </section>
+
+        <section>
+          <h2>Adding a product card component</h2>
+          <p>Follow these steps:</p>
+
+          <ol>
+            <li>
+              Inside the <b>/src</b> sub-folder of your <b>/frontend</b> folder,
+              create a new folder named <b>/components</b>.
+            </li>
+
+            <li>
+              Inside the <b>/components</b> folder, create a new file named
+              <b>ProductCard.jsx</b>.
+            </li>
+
+            <li>
+              Add the following code to this file:
+              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">  
+import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+                
+const ProductCard = (props) =&gt; {
+    const [product, setProduct] = useState(props.product);
+                
+    return (
+        &lt;&gt;
+            &lt;Card
+                sx={{
+                    width: 345,
+                    height: 550,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                }}
+            &gt;
+                &lt;CardHeader title={product.title} /&gt;
+                        &lt;CardMedia
+                          component="img"
+                          height="194"
+                          image={product.images}
+                          alt="Product image"
+                /&gt;
+                &lt;CardContent&gt;
+                          &lt;Stack direction="column" spacing={1}&gt;
+                            &lt;Typography variant="body2" color="text.secondary"&gt;
+                              {product.description}
+                            &lt;/Typography&gt;
+                            &lt;Stack direction="row" spacing={1}&gt;
+                              &lt;Rating
+                                name="half-rating-read"
+                                defaultValue={product.rating}
+                                precision={0.5}
+                                readOnly
+                              /&gt;
+                              &lt;Typography variant="body1" color="text.primary"&gt;
+                                {product.rating}
+                              &lt;/Typography&gt;
+                            &lt;/Stack&gt;
+                            &lt;Stack direction="column"&gt;
+                              &lt;Typography variant="body1" color="text.primary"&gt;
+                                {product.price} $
+                              &lt;/Typography&gt;
+                              &lt;Typography variant="body1" color="text.primary"&gt;
+                                Price discount: {product.discountPercentage}%
+                              &lt;/Typography&gt;
+                            &lt;/Stack&gt;
+                          &lt;/Stack&gt;
+                    &lt;/CardContent&gt;
+                &lt;/Card&gt;
+            &lt;/&gt;
+        );
+    };
+                
+export default ProductCard;</code></pre>
+            </li>
+
+            <li>Update your <b>HomePage.jsx</b> page to use this component.</li>
+          </ol>
+
+          <p>
+            In your web browser, you should see a single-column list of products
+            in card format (without product images).
           </p>
         </section>
       </article>
