@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Adding CRUD functionality | Creating an E-commerce Website with the MERN
+      Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Adding frontend components and pages to handle CRUD operations with the database."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Adding CRUD functionality</h1>
+          <h2>
+            Adding frontend components and pages to handle CRUD operations with
+            the database.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#navbar">Adding a NavBar component</a></p>
+        <p>
+          <a href="#add-update"
+            >Adding AddProduct and ProductUpdate components</a
+          >
+        </p>
+        <p>
+          <a href="#product-card-update">Updating your ProductCard component</a>
+        </p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Add a NavBar component that will display on all other pages of the
+              frontend app.
+            </li>
+            <li>
+              Add components and pages to add, update and delete data for the
+              MongoDB database.
+            </li>
+            <li>
+              Move the routes from <b>index.js</b> in the <b>/backend</b> folder
+              to a separate file.
+            </li>
+          </ul>
+        </section>
+
+        <section id="navbar">
+          <h2>Adding a NavBar component</h2>
+          <p>
+            Follow these steps to create a Navbar component for including on
+            every page component of your frontend app.
+          </p>
+
+          <ol>
+            <li>
+              In your <b>/src/components</b> sub-folder, create a new text file
+              named <b>NavBar.jsx</b>.
+            </li>
+            <li>
+              Paste the following code into this file:
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">import React from "react";
+import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+                        
+const NavBar = () =&gt; {
+    const navigate = useNavigate();
+                        
+    const goToHome = () =&gt; {
+        navigate("/");
+    };
+                        
+    const goToAddProduct = () =&gt; {
+        navigate("/addProduct");
+    };
+                        
+    return (
+        &lt;&gt;
+            &lt;Box sx={{ flexGrow: 1 }}&gt;
+                &lt;AppBar position="static"&gt;
+                &lt;Toolbar&gt;
+                &lt;Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        flexGrow: 1,
+                    }}
+                &gt;
+                E-COM
+                &lt;/Typography&gt;
+                &lt;Button color="inherit" onClick={goToHome}&gt;
+                Home
+                &lt;/Button&gt;
+                &lt;Button color="inherit" onClick={goToAddProduct}&gt;
+                   Add product
+                &lt;/Button&gt;
+                &lt;/Toolbar&gt;
+                &lt;/AppBar&gt;
+            &lt;/Box&gt;
+        &lt;/&gt;
+    );
+};
+                        
+export default NavBar;</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            The useNavigate hook, imported from the React Router DOM library,
+            enables users to navigate between different pages of the app.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="add-update">
+            Adding AddProduct and ProductUpdate components
+          </h2>
+          <p>
+            Follow these steps to create components for adding a new product and
+            updating an existing one.
+          </p>
+
+          <ol>
+            <li>
+              In your <b>/frontend/src/components</b> sub-folder, download the
+              following two files:
+              <span class="inside-ol">&nbsp;</span>
+              <b
+                ><a
+                  href="assets/downloads/project/AddProduct.jsx"
+                  target="_blank"
+                  >AddProduct.jsx</a
+                ></b
+              >
+              <span class="inside-ol">&nbsp;</span>
+              <b
+                ><a
+                  href="assets/downloads/project/UpdateProduct.jsx"
+                  target="_blank"
+                  >UpdateProduct.jsx</a
+                ></b
+              >
+            </li>
+
+            <li>
+              In your <b>/src/pages</b> sub-folder, create a new text file named
+              <b>AddProductPage.jsx</b> and paste the code below into it:
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
+  import React, { useEffect, useState } from "react";
+  import NavBar from "../components/NavBar";
+  import AddProduct from "../components/AddProduct";
+                      
+  const AddProductPage = () =&gt; {
+      return (
+          &lt;&gt;
+              &lt;NavBar /&gt;
+              &lt;AddProduct /&gt;
+          &lt;/&gt;
+      );
+  };
+                      
+  export default AddProductPage;</code></pre>
+            </li>
+
+            <li>
+              Also in your <b>/src/pages</b> sub-folder, create a new text file
+              named <b>UpdateProductPage.jsx</b> and paste the code below into
+              it:
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
+import React, { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
+import UpdateProduct from "../components/UpdateProduct";
+                    
+const UpdateProductPage = () =&gt; {
+    return (
+        &lt;&gt;
+            &lt;NavBar /&gt;
+            &lt;UpdateProduct /&gt;
+        &lt;/&gt;
+    );
+};
+                    
+export default UpdateProductPage;
+</code></pre>
+            </li>
+
+            <li></li>
+
+            <li>
+              In your <b>/frontend/src</b> sub-folder, update your
+              <b>app.jsx</b> file with the code below:
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
+//import Route and Routes from the React router library
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AddProductPage from "./pages/AddProductPage";
+import UpdateProductPage from "./pages/UpdateProductPage";
+                
+function App() {
+    return (
+        &lt;Routes&gt;
+            {/* Use Home component for the root path */}
+            &lt;Route index element={&lt;HomePage /&gt;} /&gt;
+            &lt;Route path="/add" element={&lt;AddProductPage /&gt;} /&gt;
+            &lt;Route path="/update/:id" element={&lt;UpdateProductPage /&gt;} /&gt;
+        &lt;/Routes&gt;
+    );
+}
+                
+export default App;</code></pre>
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2 id="product-card-update">Updating your ProductCard component</h2>
+
+          <p>
+            In order to implement the update and delete functionalities, you
+            need to make some modifications to <b>ProductCard.jsx</b> in your
+            <b>frontend/src/components</b> sub-folder.
+          </p>
+
+          <ol>
+            <li>
+              Add four new import statements to the top of the file:
+              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
+import CardActions from "@mui/material/CardActions";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import axios from "axios";</code></pre>
+            </li>
+
+            <li>
+              Now, inside the <b>ProductCard</b> function, add a
+              <b>handleUpdate</b> function that is responsible for navigating to
+              the update page when called.
+              <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6" class="hljs">
+const navigate = useNavigate();
+
+const handleUpdate = (id) =&gt; {
+    navigate("/update/" + id);
+};</code></pre>
+            </li>
+            <li>
+              Next add a <b>handleDelete</b> function:
+              <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-7" class="hljs">
+const handleDelete = async (id) =&gt; {
+    try {
+        const response = await axios.delete("http://localhost:5000/delete/" + id);
+        console.log(response.data);
+        if (response.data === "Product deleted!") {
+            props.getProduct();
+            }
+        } catch (e) {
+            console.log(e);
+    }
+};</code></pre>
+              <span class="inside-ol">&nbsp;</span>
+              With these changes, the card component is now able to navigate to
+              the update page and delete products from the database.
+            </li>
+
+            <li>
+              Finally, after closing the <b>&lt;/CardContent&gt;</b> tag,
+              include the <b>CardActions</b> component below:
+              <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-8" class="hljs">
+&lt;CardActions&gt;
+    &lt;Stack direction="row" gap={2}&gt;
+        &lt;Button
+            color="primary"
+            variant="contained"
+            onClick={() =&gt; handleUpdate(product._id)}
+            &gt;
+            Update
+        &lt;/Button&gt;
+        &lt;Button
+            color="error"
+            variant="contained"
+            onClick={() =&gt; handleDelete(product._id)}
+            &gt;
+            Delete
+        &lt;/Button&gt;
+    &lt;/Stack&gt;
+&lt;/CardActions&gt;</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            In your web browser, your frontend home page should now look like
+            that below. Note that the <b>UPDATE</b> and <b>DELETE</b> buttons do
+            not yet work.
+
+            <img
+              src="assets/img/project-crud-functionality/output-buttons.png"
+              alt="scneenshot"
+            />
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
