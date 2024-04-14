@@ -112,8 +112,14 @@
 
           <ol>
             <li>
-              Near the top of your <b>main.jsx</b> file, delete the import
+              In your <b>/frontend/src</b> subfolder, open the
+              <b>main.jsx</b> file and delete the import
               <b>index.css</b> statement.
+              <img
+                src="assets/img/project-spa/delete-css.png"
+                alt="screenshot"
+                style="max-width: 600px"
+              />
             </li>
             <li>
               Add this new <b>import</b> statement:
@@ -131,7 +137,8 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span></code></pre>
 
               <b>App.jsx</b> will now act as a <i>layout component</i> that
-              wraps around all the 'pages' in the entire application.
+              wraps around all the &#8216;pages&#8217; in your frontend ReactJS
+              app.
             </li>
           </ol>
         </section>
@@ -139,17 +146,20 @@
         <section id="home-create">
           <h2>Creating your Home page</h2>
 
-          <p>Follow these steps:</p>
+          <p>
+            Follow these steps to create a component that will be the home page
+            of your frontend:
+          </p>
 
           <ol>
             <li>
-              Inside the <b>/src</b> sub-folder of your <b>/frontend</b> folder,
-              create a new folder named <b>/pages</b>.
+              Inside the <b>/frontend/src</b> sub-folder, create a new folder
+              named <b>/pages</b>.
             </li>
 
             <li>
               Inside the <b>/pages</b> folder, create a new file named
-              <b>HomePage.jsx</b>. This file will serve as our home page.
+              <b>HomePage.jsx</b>. This file will serve as your home page.
             </li>
 
             <li>
@@ -169,7 +179,7 @@ export default HomePage;</code></pre>
             </li>
 
             <li>
-              Update your <b>app.jsx</b> file as follows:
+              Replace all the content of your <b>app.jsx</b> with the following:
 
               <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
 //import Route and Routes from the React router library
@@ -195,7 +205,10 @@ export default App;</code></pre>
             similar to that below.
           </p>
 
-          <img src="assets/img/project-spa/output-1.png" alt="screenshot" />
+          <img
+            src="assets/img/project-spa/output-frontend.png"
+            alt="screenshot"
+          />
 
           <p>Congratulations, you have created your first route!</p>
         </section>
@@ -248,8 +261,13 @@ export default HomePage;</code></pre>
           </ol>
 
           <p>
-            If your Express app is running, your web browser should now display
-            a list of product titles from the MongoDB database.
+            If your Express app is running, your frontend app now should now
+            display in your web browser a list of product titles from the
+            MongoDB database.
+            <img
+              src="assets/img/project-spa/output-data-1.png"
+              alt="screenshot"
+            />
           </p>
         </section>
 
@@ -259,17 +277,17 @@ export default HomePage;</code></pre>
 
           <ol>
             <li>
-              Inside the <b>/src</b> sub-folder of your <b>/frontend</b> folder,
-              create a new folder named <b>/components</b>.
+              In your <b>/frontend/src</b> folder, create a new sub-folder named
+              <b>/components</b>.
             </li>
 
             <li>
-              Inside the <b>/components</b> folder, create a new file named
+              Inside this <b>/components</b> sub-folder, create a new file named
               <b>ProductCard.jsx</b>.
             </li>
 
             <li>
-              Add the following code to this file:
+              Paste the following code into this file:
               <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">  
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
@@ -335,12 +353,33 @@ const ProductCard = (props) =&gt; {
 export default ProductCard;</code></pre>
             </li>
 
-            <li>Update your <b>HomePage.jsx</b> page to use this component.</li>
+            <li>
+              Update your <b>HomePage.jsx</b> page to use this component.
+              <img
+                src="assets/img/project-spa/import-card.png"
+                alt="screenshot"
+                style="margin-bottom: 32px"
+              />
+
+              <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">return (
+  &lt;&gt;
+  &lt;h1&gt;My HomePage&gt;/h1&gt;
+      {productList.length !== 0 &&
+        productList.map((product) =&gt; &lt;ProductCard product={product} /&gt;)}
+  &lt;/&gt;
+);
+</code></pre>
+            </li>
           </ol>
 
           <p>
             In your web browser, you should see a single-column list of products
-            in card format (without product images).
+            in card format, but without the product images.
+
+            <img
+              src="assets/img/project-spa/output-data-2.png"
+              alt="screenshot"
+            />
           </p>
         </section>
       </article>
