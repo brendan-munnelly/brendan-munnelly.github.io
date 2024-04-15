@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      The Fetch API | Full-stack Development Tutorials | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Using the Promise and Response objects of the Fetch API and get plain-text and JSON formatted data from remote web servers."
+    />
+
+    <meta name="author" content="Brendan Munnelly" />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div></div>
+        </div>
+
+        <div class="content">
+          <h1>The Fetch API</h1>
+          <h2>
+            Using the Promise and Response objects of the Fetch API and get
+            plain-text and JSON formatted data from remote web servers.
+          </h2>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <aside>
+        <h3>JavaScript</h3>
+
+        <p><i class="fas fa-home"></i> &nbsp;<a href="index.html">Home</a></p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#fetch-api">The Fetch API</a></p>
+        <p>
+          <a href="#promise-object">Working with the <i>Promise</i> object</a>
+        </p>
+        <p><a href="#sample-data">Working with sample data</a></p>
+        <p><a href="#fetch-options">Working with the Fetch API options</a></p>
+        <p><a href="#fetch-post">Working wth a sample POST request</a></p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>Send a request to a web server with the Fetch API.</li>
+            <li>
+              Work with the Promise object for chaining multiple requests.
+            </li>
+            <li>Work with the Response object.</li>
+            <li>Handle server status codes.</li>
+          </ul>
+        </section>
+
+        <section class="theme-dark">
+          <h2 id="fetch-api">The Fetch API</h2>
+          <p>
+            The Fetch API is a modern alternative to the older XMLHttpRequest
+            API. You use the Fetch API to send HTTP requests to web servers and
+            handle responses.
+          </p>
+
+          <p>
+            You need to supply only a single argument to the
+            <span class="syn-js">fetch()</span> method: the URL of the data that
+            you want to fetch. This URL is known as an <i>endpoint</i>. See
+            below.
+          </p>
+
+          <pre><code class="hljs language-js">const response = fetch(url);</code></pre>
+
+          <p>
+            The call to the requested resource by the
+            <span class="syn-js">fetch()</span> method is <i>asynchronous</i>.
+            That is, the time taken for the Fetch API to complete its task does
+            not halt the execution of other instructions elsewhere in the web
+            page.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="promise-object">
+            Working with the <code>Promise</code> object
+          </h2>
+
+          <p>
+            Before it returns a <span class="syn-js">Response</span> object, the
+            <span class="syn-js">fetch()</span> method returns a
+            <span class="syn-js">Promise</span> object that can have one of
+            three possible properties:
+          </p>
+
+          <table class="table-js-methods">
+            <tbody>
+              <tr>
+                <td style="min-width: 30%">
+                  <p><span class="syn-js">pending</span></p>
+                </td>
+                <td><p>The request's initial state.</p></td>
+              </tr>
+              <tr>
+                <td style="min-width: 30%">
+                  <p><span class="syn-js">fulfilled</span></p>
+                </td>
+                <td>
+                  <p>
+                    The request has completed successfully and a value is
+                    returned.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="min-width: 30%">
+                  <p><span class="syn-js">rejected</span></p>
+                </td>
+                <td>
+                  <p>
+                    The request has failed and a reason (error) is returned.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            A <span class="syn-js">Promise</span> is said to be
+            <i>settled</i> or <i>resolved</i> if it is either fulfilled or
+            rejected, but not pending. When a Promise is fulfilled, you can use
+            its <span class="syn-js">then()</span> and
+            <span class="syn-js">catch()</span> methods to handle it.
+          </p>
+
+          <p>
+            Using the <span class="syn-js">Promise</span> object enables
+            multiple response functions to be chained togother. See the sample
+            code below.
+          </p>
+
+          <pre><code class="hljs language-js">fetch(url)
+  .then(res =&gt; {
+     // handle the response
+  })
+
+  .catch(error =&gt; {
+     // handle any network connection error
+  });</code></pre>
+
+          <p>
+            If the request completes successfully, the requested data is
+            returned and wrapped inside a Response <b>res</b> object. This
+            object has a number of useful properties and methods for working
+            with the data from the server.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="sample-data">Working with sample data</h2>
+
+          <p>
+            Let's work with a an example of fetching the contents of a text
+            file.
+          </p>
+
+          <p>Start by creating an HTML file with a pair of script tags.</p>
+
+          <p>
+            Paste the following server URIs with which you can use the
+            <span class="syn-js">fetch()</span> method.
+          </p>
+
+          <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+const URI_1 = "https://reqres.in/api/users";
+const URI_2 = "https://reqres.in/api/users/2";
+const URI_3 = "https://jsonplaceholder.typicode.com/users";
+const URI_4 = "https://pokeapi.co/api/v2/eevee";
+
+console.log(fetch(URI_1));</code></pre>
+
+          <p>
+            In the DevTools Console, you can see the result of the call to the
+            <span class="syn-js">fetch()</span> method is a Promise.
+          </p>
+          <img src="assets/img/fetch-intro/fetch-1.png" alt="screenshot" />
+
+          <p>
+            Next, let's examine the Response (<b>res</b>) object returned from
+            the web server. Paste these new lines in your sample code.
+          </p>
+
+          <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
+fetch(URI_1)
+  .then(res =&gt; console.log(res));
+</code></pre>
+
+          <p>The Console should look as follows:</p>
+          <img
+            src="assets/img/fetch-intro/fetch-2.png"
+            alt="screenshot"
+            class="wider-115"
+          />
+
+          <p>
+            The data from the server is not directly accessible from the
+            <b>res</b> object. So you need to process the data using one of two
+            methods:
+          </p>
+
+          <table class="table-js-methods">
+            <tbody>
+              <tr>
+                <td style="min-width: 30%">
+                  <p><span class="syn-js">.text()</span></p>
+                </td>
+                <td>
+                  <p>
+                    Use this when the
+                    <span class="syn-js">Response</span> object contains 'raw'
+                    or 'plain' text, or HTML-formatted text.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="min-width: 30%">
+                  <p><span class="syn-js">.json()</span></p>
+                </td>
+                <td>
+                  <p>
+                    Use this when the
+                    <span class="syn-js">Response</span> object contains only
+                    data in JSON format.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Both methods are also asynchronous.</p>
+
+          <p>Update your sample code as follows:</p>
+
+          <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
+fetch(URI_1)
+  .then(res =&gt; res.json())
+  .then(data =&gt; console.log(data));
+</code></pre>
+
+          <p>Your Console should look similar to the following:</p>
+
+          <img
+            src="assets/img/fetch-intro/fetch-3.png"
+            alt="screenshot"
+            class="wider-115"
+          />
+
+          <p>
+            Update your code to request data on a single user (with an id of 2)
+            and view the result in your Console.
+          </p>
+
+          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
+fetch(URI_2)
+  .then(res =&gt; res.json())
+  .then(data =&gt; console.log(data));
+</code></pre>
+
+          <p>
+            What would happen if you requested data on a non-existent user. For
+            example, a user with an id of 99? Update your sample code as shown
+            below.
+          </p>
+
+          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
+fetch("https://reqres.in/api/users/99")
+  .then(res =&gt; res.json())
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.log(`Error: ${error}`));
+</code></pre>
+
+          <p>Your Console should display the error below.</p>
+
+          <img
+            src="assets/img/fetch-intro/fetch-4.png"
+            alt="screenshot"
+            style="max-width: 700px"
+          />
+
+          <p>
+            Note that the Console does <i>not</i> log the error statement. This
+            is because the Fetch API only handles the network connection to the
+            server. It does not handle the server's response, whether that
+            response is a success or failure.
+          </p>
+
+          <p>Update your sample code as follows and check your Console:</p>
+
+          <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
+fetch("https://reqres.in/api/users/99")
+  .then(res =&gt; {
+        if (res.ok) {
+           console.log("Response success.")
+           res.json()
+          .then(data =&gt; console.log(data));
+        }
+       else {
+          console.log("Response error.");
+        }
+  })
+.catch(error =&gt; console.log(`Error: ${error}`));   
+</code></pre>
+
+          <p>
+            Finally, edit the id to 2 for a real user, reload the web page, and
+            check your Console again.
+          </p>
+        </section>
+
+        <section>
+          <h2 id="fetch-options">Working with the Fetch API options</h2>
+
+          <p>
+            The <span class="syn-js">fetch()</span> method can take a second
+            argument, an object that contains a number of options. The most
+            common options are:
+          </p>
+          <ul>
+            <li><b>method</b></li>
+            <li><b>headers</b></li>
+            <li><b>body</b></li>
+          </ul>
+
+          <h3>The <code>METHOD</code> options</h3>
+          <p>By default, a fetch request uses the GET method. So this:</p>
+
+          <pre><code>fetch("https://reqres.in/api/users/2")</code></pre>
+
+          <p>Is really this:</p>
+
+          <pre><code>fetch("https://reqres.in/api/users/2", 
+   { method: "GET" }
+)</code></pre>
+
+          <p>The four main values of METHOD are as follows:</p>
+
+          <table class="table-js-methods">
+            <tr>
+              <td>&nbsp;<span class="syn-js">GET</span></td>
+              <td>Retrieves data for the specified resource.</td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">POST</span></td>
+              <td>
+                Submits data to create a new entity for the specified resource.
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">PUT</span></td>
+              <td>Updates the target resource with supplied data.</td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">DELETE</span></td>
+              <td>Removes the specified resource.</td>
+            </tr>
+          </table>
+
+          <h3>The <code>headers</code> options</h3>
+
+          <p>
+            By default, a fetch request does not specify or use any headers.
+            Here are the two most common ones:
+          </p>
+
+          <table class="table-js-methods">
+            <tr>
+              <td>&nbsp;<span class="syn-js">Content-Type</span></td>
+              <td>
+                Indicates the media type of the resource or data being from the
+                client to the server. For example:<br />
+                'Content-type': 'application/json'<br />
+                'Content-type': 'application/text'<br />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">Accept</span></td>
+              <td>
+                Specifies the media types that the client is willing to receive
+                from the server.
+              </td>
+            </tr>
+          </table>
+
+          <h3>The <code>body</code> options</h3>
+
+          <p>
+            You will use the body property with methods like POST, PUT, and
+            PATCH, where the request includes data to be sent from the client to
+            the server.
+          </p>
+
+          <table class="table-js-methods">
+            <tr>
+              <td>&nbsp;<span class="syn-js">String</span></td>
+              <td>
+                Plain text or a string of JSON, XML, etc. Useful for APIs that
+                accept raw text or JSON string.
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">FormData</span></td>
+              <td>
+                Useful for constructing a set of key/value pairs representing
+                form fields and their values, which are sent in a request
+                with:<br />
+                'Content-Type': 'multipart/form-data'
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;<span class="syn-js">Blob</span></td>
+              <td>
+                Used to send binary data, such as images or files, in a request.
+              </td>
+            </tr>
+          </table>
+        </section>
+
+        <section>
+          <h2 id="fetch-post">Working wth a sample POST request</h2>
+
+          <p>
+            Let's add some sample code to create a fetch() request that sends
+            data to the server.
+          </p>
+
+          <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7" class="hljs language-javascript">	
+fetch('https://reqres.in/api/users', {
+   method: 'POST',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify({
+     name: 'User 1'
+   })
+}).then(res =&gt; {
+   return res.json()
+})
+.then(data =&gt; console.log(data))
+.catch(error =&gt; console.log('ERROR'))</code></pre>
+
+          <p>
+            In this fetch request, the method <b>JSON.stringify()</b> takes the
+            object <b>{ name: 'User 1' }</b> and converts it into the JSON
+            string <b>{"name": "User 1"}</b>, which is then assigned to the body
+            property of the request. This string is what gets sent to the server
+            as the payload of the POST request.
+          </p>
+
+          <p>
+            It's crucial to set the Content-Type header to 'application/json' as
+            well, as this tells the server to expect JSON-formatted data. The
+            server then knows how to parse the incoming string back into a JSON
+            object on its end.
+          </p>
+        </section>
+
+        <section>
+          <h2>The <code>async/await</code> syntax</h2>
+
+          <p>
+            The Fetch API also provides an
+            <span class="syn-js">async/await</span> syntax for writing
+            asynchronous code. You may find this a better alternative to the
+            promise chaining syntax.
+          </p>
+
+          <p>Below is an example:</p>
+
+          <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8" class="hljs language-javascript">	
+async function fetchUserData() {
+  try {
+    const response = await fetch("https://reqres.in/api/users/2");
+    if (response.ok) {
+      console.log("Response success.");
+      const data = await response.json();
+      console.log(data);
+    } else {
+      console.log("Response error.");
+    }
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+}
+
+fetchUserData();</code></pre>
+
+          <p>In this async function:</p>
+
+          <ol>
+            <li>
+              <b>await</b> is used to wait for the fetch call to resolve to a
+              response.
+            </li>
+
+            <li>Then it checks if the response was successful.</li>
+
+            <li>
+              If so, it waits for the <b>.json()</b> method to resolve to a
+              JavaScript object, which it then logs to the console.
+            </li>
+
+            <li>
+              If the response is not successful (e.g., if the status code of the
+              response is outside the 200-299 range), it logs "Response error."
+              Any network errors are caught in the catch block and logged as an
+              error.
+            </li>
+          </ol>
+
+          <p>
+            The async/await format is considered to be <i>syntactic sugar</i>,
+            which is built on top of underlying promise chaining. In the
+            async/await version, the flow of the code is linear and
+            straightforward, which makes it easier to follow the logic and
+            manage errors.
+          </p>
+
+          <p>And here is the sample POST in async/await format:</p>
+
+          <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9" class="hljs language-javascript">	
+
+async function createUser() {
+  try {
+    const response = await fetch('https://reqres.in/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'User 1'
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log('ERROR', error);
+  }
+}
+
+createUser();</code></pre>
+        </section>
+
+        <section>
+          <h2>Pokemon project</h2>
+          <p>Follow these steps:</p>
+
+          <ol>
+            <li>
+              Create an HTML file with the content below:
+              <pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10" class="hljs language-javascript">	              
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Pokemon Finder&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+                
+  &lt;h1&gt;Find your favorite Pokemon&lt;/h1&gt;
+                
+  &lt;input type="text" id="pokemonName"&gt;
+                
+  &lt;button id="btn_1" onclick="fetchData()"&gt;Find&lt;/button&gt;
+                
+  &lt;img id="pokemonSprite" style="display: none"&gt;
+                
+  &lt;script&gt;&lt;/script&gt;       
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </li>
+            <li>
+              Inside the <b>&lt;script&gt;</b> tag, add the following JavaScript
+              code:
+              <pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11" class="hljs language-javascript">	 
+async function fetchData(){
+        
+try {
+        
+    const pokemonName = document.getElementById("pokemonName").value.toLowerCase();
+                
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        
+    if(!response.ok){
+      throw new Error("Could not fetch resource");
+    }
+        
+    const data = await response.json();
+      const pokemonSprite = data.sprites.front_default;
+      const imgElement = document.getElementById("pokemonSprite");
+        
+      imgElement.src = pokemonSprite;
+      imgElement.style.display = "block";
+    }
+    catch(error){
+      console.error(error);
+   }
+}</code></pre>
+            </li>
+          </ol>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="assets/js/utils.js"></script>
+  </body>
+</html>
