@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Authentication and authorisation | Creating an E-commerce Website with the
+      MERN Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Implementing basic authentication and authorization for an e-commerce MERN app."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Authentication and authorisation</h1>
+          <h2>
+            Implementing basic authentication and authorization for an
+            e-commerce MERN app.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#intro">Introduction</a></p>
+        <p><a href="#packages">Adding backend security packages</a></p>
+        <p><a href="#env">Updating your .env file</a></p>
+        <p><a href="#users-model">Adding the users.js Model file</a></p>
+        <p><a href="#users-routes">Adding the users.js Routes file</a></p>
+        <p><a href="#middleware">Adding the security middleware</a></p>
+        <p><a href="#context">Adding a context provider</a></p>
+        
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Add user authentication and authorization features to a MERN app. 
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="intro">Introduction</h2>
+          <p>
+            Authentication is the process of verifying the identity of a user or
+            system, whereas authorization is the process of granting or denying
+            access to a resource based on the authenticated user’s privileges or
+            permissions. In other words, authentication is about proving who you
+            are, while authorization is about determining what you are allowed
+            to do.
+          </p>
+        </section>
+
+        <section id="packages">
+          <h2>Adding backend security packages</h2>
+          <p>
+            Your first step is to add to your <b>/backend</b> folder the following two packages:
+
+            <pre class="no-syn">npm i jsonwebtoken bcrypt</pre>
+          </p>
+
+        </section>
+
+        <section>
+
+        <h2 id="env">Updating your <code>.env</code> file</h2>
+        <p>In the <b>/backend</b> folder, open your <b>.env</b> file and add a <b>SECRET_KEY</b> value to it. For example:</p>
+
+<img src="assets/img/project-auth/env.png" alt="screenshot">
+
+
+        </section>
+
+
+        <section>
+
+          <h2 id="users-model">Adding the <code>users.js</code> Model file</h2>
+
+          
+        <p>
+          In your <b>/backend/Models</b> sub-folder, you previously created a <b>products.js</b> model file. Now, create a <b>users.js</b> file in the same sub-folder and paste the following code into it: </p>
+          
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import { config } from "dotenv";
+config();
+
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        minlength: 5,
+        maxlength: 50,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        minlength: 5,
+        maxlength: 225,
+    },
+    password: {
+        type: String,
+        required: true,
+        unique: true,
+        minlength: 5,
+        maxlength: 1024,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+        process.env.SECRET_KEY
+    );
+  return token;
+};
+    
+const User = mongoose.model("User", userSchema);
+    
+exports.User = User;</code></pre>
+            
+  </section>
+
+  <section>
+
+
+    <h2 id="users-routes">Adding the <code>users.js</code> Routes file</h2>
+  
+          <p>
+            In your <b>/backend/Routes</b> sub-folder, you previously created a <b>products.js</b> routes file. Now, create a <b>users.js</b> file in the same sub-folder and paste the following code into it: </p>
+            
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
+import express from "express";
+import bcrypt from "bcrypt";
+import mongoose from "mongoose";
+import { User } from "../Models/user.js";
+
+router.get("/:id", async (req, res) =&gt; {
+  const user_id = req.params.id;
+  const user = await User.findById(user_id);
+  res.send(JSON.stringify(user));
+});
+
+router.post("/regiser", async (req, res) =&gt; {
+  const newUser = new User({
+    username: req.body.data.username,
+    email: req.body.data.email,
+    password: req.body.data.password,
+    isAdmin: req.body.data.isAdmin,
+  });
+
+  const user = await User.findOne({ email: newUser.email });
+  if (user) {
+    throw new Error("Already in db");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  newUser.password = await bcrypt.hash(newUser.password, salt);
+
+  await newUser.save();
+  const token = newUser.generateAuthToken();
+
+  const data = {
+    token: token,
+    id: newUser.id,
+    isAdmin: newUser.isAdmin,
+  };
+  res.send(data);
+});
+
+router.post("/login", async (req, res) =&gt; {
+  const user = await User.findOne({ email: req.body.data.email });
+  if (!user) {
+    throw new Error("Not user with that email");
+  }
+  const validPassword = await bcrypt.compare(req.body.data.password, user.password);
+
+  if (!validPassword) {
+    throw new Error("Invalid password");
+  }
+  const token = user.generateAuthToken();
+  const data = {
+    token: token,
+    userId: user.id,
+    isAdmin: user.isAdmin,
+  };
+  res.send(data);
+});
+
+module.exports = router;</code></pre>
+
+      </section>
+
+      <section>
+          <h2 id="middleware">
+            Adding the security middleware
+          </h2>
+          <p>
+            To secure the routes, follow these steps to add a middleware function:
+          </p>
+
+          <ol>
+            <li>
+              In your <b>/backend</b> folder, create a new sub-folder named
+              <b>Middleware</b>.
+            </li>
+            <li>
+              In this <b>Middleware</b> sub-folder, create a new text file named
+              <b>auth.js</b> and paste the following code into it:
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
+import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+config();
+
+function isAuth(req, res, next) {
+  const authHeader = req.get("Authorization");
+  if (!authHeader) {
+    req.isAuth = false;
+    return next();
+  }
+
+  const token = authHeader.split(" ")[1];
+  if (!token || token === "") {
+    {
+      req.isAuth = false;
+      return next();
+    }
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = decoded;
+    req.isAuth = true;
+    next();
+  } catch (ex) {
+    req.isAuth = false;
+    next();
+  }
+}
+
+module.exports = isAuth;</code></pre></li>
+
+      <li>To use the auth middleware, import it into your <b>index.js</b> file and add it to the app’s middleware stack:
+      
+      <img src="assets/img/project-auth/auth.png" alt="screenshot" style="max-width: 600px;"></li>
+
+      </ol>
+
+
+        </section>
+
+
+        <section>
+          <h2 id="context">Adding a context provider</h2>
+
+          <p>To handle the authentication flow in the frontend, you need to use a context provider. The context provider ensures that we can access the authentication variables wherever we need them. Follow these steps to create the required context:</p>
+
+          <ol>
+            <li>In your <b>/frontend/src</b> folder, create a new sub-folder named <b>context</b>.</li>
+            
+            <li>In this sub-folder, create a new text file named <b>authContext.js</b>, and paste into it the code below:
+  <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">      
+import React from "react";
+
+export const AuthContext = React.createContext({
+  token: null,
+  userId: null,
+  isAdmin: false,
+  login: (token, userId, isAdmin) =&gt; {},
+  logout: () =&gt; {},
+});</code></pre></li>
+            
+            
+            <li>Also in your <b>/frontend/src</b> folder, create a new sub-folder named <b>util</b>.</li>
+
+            <li>In this sub-folder, create a new text file named <b>authRoutes.js</b>, and paste into it the code below:
+<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
+import React from "react";
+import { AuthContext } from "../context/authContext";
+import { useLocation, Navigate } from "react-router-dom";
+
+const RequiredAuth = ({ children }) =&gt; {
+  const authContext = React.useContext(AuthContext);
+  const location = useLocation();
+  const token = localStorage.getItem("token");
+  console.log(token);
+  if (token === null && authContext.token === null) {
+    return &lt;Navigate to="/login" state={{ from: location }} replace /&gt;;
+  }
+
+  return children;
+};
+
+export default RequiredAuth;</code></pre></li>
+
+<li>Finally, in your <b>frontend/src</b> folder, update your <b>app.jsx</b> file as follows:
+
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AddProductPage from "./pages/AddProductPage";
+import UpdateProductPage from "./pages/UpdateProductPage";
+import { AuthContext } from "./context/authContext";
+import RequiredAuth from "./util/authRoutes";
+
+function App() {
+  const [userLoggedData, setUserLoggedData] = useState({
+    token: null,
+    userId: null,
+    isAdmin: false,
+  });
+
+  const login = (token, userId, isAdmin) =&gt; {
+    //console.log("app token", token);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+    setUserLoggedData({ token: token, userId: userId, isAdmin: isAdmin });
+  };
+
+  const logout = () =&gt; {
+    setUserLoggedData({ token: null, userId: null, isAdmin: false });
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+  };
+
+  return (
+    &lt;AuthContext.Provider
+      value={{
+        token: userLoggedData.token,
+        userId: userLoggedData.userId,
+        isAdmin: userLoggedData.isAdmin,
+        login: login,
+        logout: logout,
+      }}
+    &gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;HomePage /&gt;} /&gt;
+        &lt;Route path="/login" element={&lt;AuthPage /&gt;} /&gt;
+        {/* protected views*/}
+        &lt;Route
+          path="/addProduct"
+          element={
+            &lt;RequiredAuth&gt;
+              &lt;AddProductPage /&gt;
+            &lt;/RequiredAuth&gt;
+          }
+        /&gt;
+        &lt;Route
+          path="/update/:id"
+          element={
+            &lt;RequiredAuth&gt;
+              &lt;UpdateProductPage /&gt;
+            &lt;/RequiredAuth&gt;
+          }
+        /&gt;
+        &lt;Route
+          path="/admin"
+          element={
+            &lt;RequiredAuth&gt;
+              &lt;AdminPage /&gt;
+            &lt;/RequiredAuth&gt;
+          }
+        /&gt;
+      &lt;/Routes&gt;
+    &lt;/AuthContext.Provider&gt;
+  );
+}
+export default App;</code></pre>
+
+
+</li>
+
+          </ol>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
