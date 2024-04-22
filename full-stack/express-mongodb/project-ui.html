@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Adding auth UI elements | Creating an E-commerce Website with the MERN
+      Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Adding UI elements to handle user registration and login for a MERN ecommerce app."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Adding auth UI elements</h1>
+          <h2>Adding UI elements to handle user registration and login.</h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#icons">Adding the MUI icons</a></p>
+
+        <p><a href="#auth-page">Creating the AuthPage.jsx component</a></p>
+        <p><a href="#login-form">Creating the LoginForm.jsx component</a></p>
+        <p>
+          <a href="#register-form">Creating the RegisterForm.jsx component</a>
+        </p>
+        <p><a href="#navbar">Updating your NavBar.jsx component</a></p>
+        <p>
+          <a href="#product-card">Updating your ProductCard.jsx component</a>
+        </p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>Adding UI elements to handle user registration and login.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="icons">Adding the MUI icons</h2>
+          <p>
+            Before implementing the UI elements for the user authentication
+            flow, install the following icon pack from the MUI library in your
+            <b>/frontend</b> folder:
+          </p>
+
+          <pre class="no-syn">npm i @mui/icons-material</pre>
+        </section>
+
+        <section id="auth-page">
+          <h2>Creating the <code>AuthPage.jsx</code> page</h2>
+          <p>
+            In your <b>/frontend/src/pages</b> sub-folder, create an
+            <b>AuthPage.jsx</b> page component that will display either the
+            login form or registration form based on the user’s choice.
+          </p>
+
+          <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+import { Grid } from "@mui/material";
+import React, { useState } from "react";
+import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
+import NavBar from "../components/NavBar";
+
+const AuthPage = () =&gt; {
+  const [loginShow, setLoginShow] = useState(true);
+
+  const handleSignup = () =&gt; {
+    setLoginShow(!loginShow);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;NavBar /&gt;
+
+      &lt;Grid
+        container
+        direction="column"
+        alignContent="center"
+        justifyContent="center"
+        gap={5}
+        style={{ paddingTop: "50px" }}
+      &gt;
+        &lt;Grid item&gt;
+          {loginShow ? (
+            &lt;LoginForm showSignup={handleSignup} /&gt;
+          ) : (
+            &lt;RegisterForm showSignup={handleSignup} /&gt;
+          )}
+        &lt;/Grid&gt;
+      &lt;/Grid&gt;
+    &lt;/&gt;
+  );
+};
+
+export default AuthPage;</code></pre>
+        </section>
+
+        <section id="login-form">
+          <h2>Creating the <code>LoginForm.jsx</code> component</h2>
+
+          <p>
+            Now, in your <b>/frontend/src/components/</b> sub-folder, create the
+            <b>LoginForm.jsx</b> component as shown below.
+          </p>
+
+          <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
+import React, { useState } from "react";
+import { Paper, TextField, Grid, Button, Box } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+import axios from "axios";
+
+const LoginForm = (props) =&gt; {
+  const navigate = useNavigate();
+  const authContext = React.useContext(AuthContext);
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (event) =&gt; {
+    const { name, value } = event.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
+
+  const handleSubmit = async () =&gt; {
+    console.log(loginData);
+
+    try {
+      const response = await axios.post("http://localhost:5000/users/login", {
+        data: loginData,
+      });
+      console.log(response.data);
+      if (response) {
+        if (Object.keys(props)[0] !== "closeForm") {
+          console.log(response.data);
+          authContext.login(
+            response.data.token,
+            response.data.userId,
+            response.data.isAdmin
+          );
+          if (response.data.isAdmin === true) {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        } else {
+          authContext.login(
+            response.data.token,
+            response.data.userId,
+            response.data.isAdmin
+          );
+          props.closeForm();
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Paper
+        elevation={3}
+        style={{
+          width: 500,
+        }}
+      &gt;
+        &lt;Grid
+          container
+          direction="column"
+          alignContent="center"
+          justifyContent="center"
+          gap={5}
+          style={{ paddingTop: "50px" }}
+        &gt;
+          &lt;Grid item&gt;
+            &lt;TextField
+              label="E-mail"
+              variant="outlined"
+              type="text"
+              name="email"
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item&gt;
+            &lt;TextField
+              label="Password"
+              variant="outlined"
+              type="password"
+              name="password"
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item&gt;
+            &lt;Box
+              textAlign="center"
+              justifyContent="center"
+              sx={{ display: "flex", flexDirection: "row", gap: "10px" }}
+            &gt;
+              &lt;Button variant="contained" onClick={handleSubmit}&gt;
+                Login
+              &lt;/Button&gt;
+              {Object.keys(props)[0] !== "closeForm" && (
+                &lt;Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={props.showSignup}
+                &gt;
+                  Sign up
+                &lt;/Button&gt;
+              )}
+            &lt;/Box&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item /&gt;
+        &lt;/Grid&gt;
+      &lt;/Paper&gt;
+    &lt;/&gt;
+  );
+};
+
+export default LoginForm;</code></pre>
+        </section>
+
+        <section id="register-form">
+          <h2>Creating the <code>RegisterForm.jsx</code> component</h2>
+
+          <p>
+            Next, in the same <b>/frontend/src/components/</b> sub-folder,
+            create the <b>RegisterForm.jsx</b> component as shown below.
+          </p>
+
+          <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
+import React, { useState } from "react";
+import { Paper, TextField, Grid, Button, Box } from "@mui/material";
+import { AuthContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const RegisterForm = (props) =&gt; {
+  const authContext = React.useContext(AuthContext);
+  const navigate = useNavigate();
+  const [checked, setChecked] = useState(false);
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (event) =&gt; {
+    const { name, value } = event.target;
+
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleRegister = async () =&gt; {
+    console.log(userData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/users/register",
+        {
+          data: userData,
+        }
+      );
+      console.log(response);
+      if (response) {
+        if (Object.keys(props)[0] !== "closeForm") {
+          authContext.login(
+            response.data.token,
+            response.data.id,
+            response.data.isAdmin
+          );
+          if (response.data.isAdmin === true) {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        } else {
+          authContext.login(
+            response.data.token,
+            response.data.id,
+            response.data.isAdmin
+          );
+          props.closeForm();
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleIsAdmin = (e) =&gt; {
+    console.log(e.target.value);
+    console.log(checked);
+    setChecked(!checked);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Paper
+        elevation={3}
+        style={{
+          width: 500,
+        }}
+      &gt;
+        &lt;Grid
+          container
+          direction="column"
+          alignContent="center"
+          justifyContent="center"
+          gap={5}
+          style={{ paddingTop: "50px" }}
+        &gt;
+          &lt;Grid item&gt;
+            &lt;TextField
+              label="Username"
+              variant="outlined"
+              type="text"
+              name="username"
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item&gt;
+            &lt;TextField
+              label="E-mail"
+              variant="outlined"
+              type="text"
+              name="email"
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item&gt;
+            &lt;TextField
+              label="Password"
+              variant="outlined"
+              type="password"
+              name="password"
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /&gt;
+          &lt;/Grid&gt;
+          {/* 
+          &lt;Grid item&gt;
+            &lt;FormControlLabel
+              control={&lt;Checkbox onChange={handleIsAdmin} value={checked} /&gt;}
+              label="Admin"
+            /&gt;
+          &lt;/Grid&gt;
+          */}
+          &lt;Grid item&gt;
+            &lt;Box
+              textAlign="center"
+              justifyContent="center"
+              sx={{ display: "flex", flexDirection: "row", gap: "10px" }}
+            &gt;
+              &lt;Button variant="contained" onClick={handleRegister}&gt;
+                Register
+              &lt;/Button&gt;
+              {Object.keys(props)[0] !== "closeForm" && (
+                &lt;Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={props.showSignup}
+                &gt;
+                  Login
+                &lt;/Button&gt;
+              )}
+            &lt;/Box&gt;
+          &lt;/Grid&gt;
+          &lt;Grid item /&gt;
+        &lt;/Grid&gt;
+      &lt;/Paper&gt;
+    &lt;/&gt;
+  );
+};
+
+export default RegisterForm;</code></pre>
+        </section>
+
+        <section>
+          <h2 id="navbar">Updating your <code>NavBar.jsx</code> component</h2>
+          <p>
+            In your <b>/frontend/src/components</b> sub-folder, update the
+            <b>NavBar.jsx</b> component to a add a new button for login/logout.
+            Which button is displayed will depend on whether the authentication
+            token is present in the local storage.
+          </p>
+
+          <p>You will also verify the tokens using a useEffect hook.</p>
+
+          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
+const NavBar = () =&gt; {
+  const navigate = useNavigate();
+  const [token, setToken] = useState();
+  const [isAdmin, setIsAdmin] = useState();
+
+  useEffect(() =&gt; {
+    setToken(localStorage.getItem("token"));
+    setIsAdmin(localStorage.getItem("isAdmin"));
+  }, [token]);
+
+  const goToHome = () =&gt; {
+    navigate("/");
+  };
+
+  const goToAddProduct = () =&gt; {
+    navigate("/addProduct");
+  };
+
+  const goToLogin = () =&gt; {
+    navigate("/login");
+  };
+
+  const logOut = () =&gt; {
+    localStorage.clear();
+    navigate("/");
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Box sx={{ flexGrow: 1 }}&gt;
+        &lt;AppBar position="static"&gt;
+          &lt;Toolbar&gt;
+            &lt;Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+              }}
+            &gt;
+              E-COM
+            &lt;/Typography&gt;
+            &lt;Button color="inherit" onClick={goToHome}&gt;
+              Home
+            &lt;/Button&gt;
+            {isAdmin && (
+              &lt;Button color="inherit" onClick={goToAddProduct}&gt;
+                Add product
+              &lt;/Button&gt;
+            )}
+            {!token ? (
+              &lt;Button color="inherit" onClick={goToLogin}&gt;
+                Login
+              &lt;/Button&gt;
+            ) : (
+              &lt;Button color="inherit" onClick={logOut}&gt;
+                LogOut
+              &lt;/Button&gt;
+            )}
+          &lt;/Toolbar&gt;
+        &lt;/AppBar&gt;
+      &lt;/Box&gt;
+    &lt;/&gt;
+  );
+};
+
+export default NavBar;</code></pre>
+        </section>
+
+        <section>
+          <h2 id="product-card">
+            Updating your <code>ProductCard.jsx </code> component
+          </h2>
+
+          <p>
+            In your <b>/frontend/src/components</b> sub-folder, modify your
+            <b>ProductCard.jsx</b> component by adding a new section called
+            “Card Actions” where users can add or remove a product from the
+            shopping cart:
+          </p>
+
+          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
+import React, { useState, useEffect, useRef } from "react";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import axios from "axios";
+
+const ProductCard = (props) =&gt; {
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(props.product);
+  const [token, setToken] = useState();
+  const [isAdmin, setIsAdmin] = useState();
+  const amountInputRef = useRef();
+
+  useEffect(() =&gt; {
+    setToken(localStorage.getItem("token"));
+    setIsAdmin(localStorage.getItem("isAdmin"));
+  }, [token]);
+
+  const handleUpdate = (id) =&gt; {
+    navigate("/update/" + id);
+  };
+
+  const handleDelete = async (id) =&gt; {
+    try {
+      const response = await axios.delete("http://localhost:5000/delete/" + id);
+      console.log(response.data);
+      if (response.data === "Product deleted!") {
+        props.getProduct();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Card
+        sx={{
+          width: 345,
+          height: 550,
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column",
+        }}
+      &gt;
+        &lt;CardHeader title={product.title} /&gt;
+        &lt;CardMedia
+          component="img"
+          height="194"
+          image={product.images}
+          alt="Product image"
+        /&gt;
+        &lt;CardContent&gt;
+          &lt;Stack direction="column" spacing={1}&gt;
+            &lt;Typography variant="body2" color="text.secondary"&gt;
+              {product.description}
+            &lt;/Typography&gt;
+            &lt;Stack direction="row" spacing={1}&gt;
+              &lt;Rating
+                name="half-rating-read"
+                defaultValue={product.rating}
+                precision={0.5}
+                readOnly
+              /&gt;
+              &lt;Typography variant="body1" color="text.primary"&gt;
+                {product.rating}
+              &lt;/Typography&gt;
+            &lt;/Stack&gt;
+            &lt;Stack direction="column"&gt;
+              &lt;Typography variant="body1" color="text.primary"&gt;
+                {product.price} $
+              &lt;/Typography&gt;
+              &lt;Typography variant="body1" color="text.primary"&gt;
+                Price discount: {product.discountPercentage}%
+              &lt;/Typography&gt;
+            &lt;/Stack&gt;
+          &lt;/Stack&gt;
+        &lt;/CardContent&gt;
+
+        &lt;CardActions&gt;
+          {token && isAdmin ? (
+            &lt;Stack direction="row" gap={2}&gt;
+              &lt;Button
+                color="primary"
+                variant="contained"
+                onClick={() =&gt; handleUpdate(product._id)}
+              &gt;
+                Update
+              &lt;/Button&gt;
+              &lt;Button
+                color="error"
+                variant="contained"
+                onClick={() =&gt; handleDelete(product._id)}
+              &gt;
+                Delete
+              &lt;/Button&gt;
+            &lt;/Stack&gt;
+          ) : (
+            &lt;&gt;
+              &lt;Stack direction="row" spacing={2}&gt;
+                &lt;Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={&lt;AddShoppingCartIcon /&gt;}
+                  // onClick={addToCartHandler}
+                &gt;
+                  + Add
+                &lt;/Button&gt;
+                &lt;TextField
+                  inputRef={amountInputRef}
+                  sx={{ width: 70 }}
+                  label="Amount"
+                  id={"amount_" + props.id}
+                  type="number"
+                  min={1}
+                  max={5}
+                  step={1}
+                  defaultValue={1}
+                /&gt;
+              &lt;/Stack&gt;
+            &lt;/&gt;
+          )}
+        &lt;/CardActions&gt;
+      &lt;/Card&gt;
+    &lt;/&gt;
+  );
+};
+
+export default ProductCard;</code></pre>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
