@@ -129,8 +129,8 @@
 <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import { config } from "dotenv";
-config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -170,7 +170,7 @@ userSchema.methods.generateAuthToken = function () {
     
 const User = mongoose.model("User", userSchema);
     
-exports.User = User;</code></pre>
+export default User;</code></pre>
             
   </section>
 
@@ -186,7 +186,7 @@ exports.User = User;</code></pre>
 import express from "express";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
-import { User } from "../Models/user.js";
+import User from "../Models/users.js";
 
 router.get("/:id", async (req, res) =&gt; {
   const user_id = req.params.id;
@@ -240,7 +240,13 @@ router.post("/login", async (req, res) =&gt; {
   res.send(data);
 });
 
-module.exports = router;</code></pre>
+export default router;</code></pre>
+
+      <p>Your next step is to import and access the <b>users.js</b> Routes file in your <b>index.js</b> file.</p>
+
+      <img src="assets/img/project-auth/import-users.png" alt="screenshot" style="max-width:500px">
+
+      <img src="assets/img/project-auth/app-user.png" alt="screenshot" style="max-width:500px">
 
       </section>
 
@@ -262,8 +268,8 @@ module.exports = router;</code></pre>
               <b>auth.js</b> and paste the following code into it:
               <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
 import jwt from "jsonwebtoken";
-import { config } from "dotenv";
-config();
+import dotenv from "dotenv";
+dotenv.config();
 
 function isAuth(req, res, next) {
   const authHeader = req.get("Authorization");
@@ -291,11 +297,14 @@ function isAuth(req, res, next) {
   }
 }
 
-module.exports = isAuth;</code></pre></li>
+export default isAuth;</code></pre></li>
 
       <li>To use the auth middleware, import it into your <b>index.js</b> file and add it to the app’s middleware stack:
       
-      <img src="assets/img/project-auth/auth.png" alt="screenshot" style="max-width: 600px;"></li>
+      <img src="assets/img/project-auth/import-middleware.png" alt="screenshot" style="max-width: 580px;">
+    
+      <img src="assets/img/project-auth/app-middleware.png" alt="screenshot" style="max-width: 580px;"></li>
+    
 
       </ol>
 
@@ -329,7 +338,7 @@ export const AuthContext = React.createContext({
             <li>In this sub-folder, create a new text file named <b>authRoutes.jsx</b>, and paste into it the code below:
 <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
 import React from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/authContext.jsx";
 import { useLocation, Navigate } from "react-router-dom";
 
 const RequiredAuth = ({ children }) =&gt; {
@@ -349,12 +358,14 @@ export default RequiredAuth;</code></pre></li>
 <li>Finally, in your <b>frontend/src</b> folder, update your <b>app.jsx</b> file as follows:
 
 <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
+import React, { useState } from "react";  
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AddProductPage from "./pages/AddProductPage";
-import UpdateProductPage from "./pages/UpdateProductPage";
-import { AuthContext } from "./context/authContext";
-import RequiredAuth from "./util/authRoutes";
+import HomePage from "./pages/HomePage.jsx";
+import AddProductPage from "./pages/AddProductPage.jsx";
+import UpdateProductPage from "./pages/UpdateProductPage.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
+import { AuthContext } from "./context/authContext.jsx";
+import RequiredAuth from "./util/authRoutes.jsx";
 
 function App() {
   const [userLoggedData, setUserLoggedData] = useState({
@@ -424,6 +435,8 @@ export default App;</code></pre>
 </li>
 
           </ol>
+
+          <p>Next: <a href="project-ui.html">Adding UI elements for user flow</a>.</p>
         </section>
       </article>
     </main>
