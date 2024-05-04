@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Updating product routes | Creating an E-commerce Website with the MERN
+      Stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Moving product routes to a separate file and adding the URL to an .env configuration file."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Updating product routes</h1>
+          <h2>
+            Moving product routes to a separate file and adding the URL to an
+            <b>.env</b> configuration file.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#product-routes">Creating a products.js Routes file</a></p>
+
+        <p>
+          <a href="#frontend-env">Adding a frontend .env file for route URLs</a>
+        </p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>
+              Move the routes from <b>index.js</b> in the <b>/backend</b> folder
+              to a separate file.
+            </li>
+            <li>
+              Creating a frontend configuration <b>.env</b> file to hold the
+              product routes URL.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="product-routes">
+            Creating a <code>products.js</code> Routes file
+          </h2>
+
+          <p>
+            Curently, all your CRUD product routes are in your main
+            <b>index.js</b>. Let's move them to a separate file.
+          </p>
+
+          <ol>
+            <li>
+              In your <b>/backend</b> folder, create a new sub-folder named
+              <b>Routes</b>.
+            </li>
+            <li>
+              In this <b>Routes</b> sub-folder, create a new text file named
+              <b>products.js</b> and add the three import statements below to
+              the top of the file:
+              <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-9" class="hljs">
+import express from "express";
+import Product from "../Models/products.js";
+const router = express.Router();</code></pre>
+            </li>
+
+            <li>
+              Now, paste the following CRUD routes into this
+              <b>products.js</b> file:
+
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1" class="hljs">
+//Get products from database
+//Get API
+    router.get("/", async (req, res) =&gt; {
+    const productList = await Product.find();
+    res.send(JSON.stringify(productList));
+});
+                
+//Get a single product by id
+router.get("/:id", async (req, res) =&gt; {
+    const product_id = req.params.id;
+    const product = await Product.findById(product_id);
+    res.send(JSON.stringify(product));
+});
+                
+//Post new product
+//Create API
+    router.post("/create", async (req, res) =&gt; {
+        const newProduct = new Product({
+            title: req.body.data.title,
+            description: req.body.data.description,
+            price: req.body.data.price,
+            discountPercentage: req.body.data.discountPercentage,
+            rating: req.body.data.rating,
+            stock: req.body.data.stock,
+            brand: req.body.data.brand,
+            category: req.body.data.category,
+            thumbnail: req.body.data.thumbnail,
+            images: req.body.data.images,
+        });
+                
+    await Product.create(newProduct);
+    res.send("Product saved to the database!");
+});
+                
+//Update a product
+//Put API
+    router.put("/update/:id", async (req, res) =&gt; {
+        const product_id = req.params.id;
+        await Product.findByIdAndUpdate(product_id, {
+        title: req.body.data.title,
+        description: req.body.data.description,
+        price: req.body.data.price,
+        discountPercentage: req.body.data.discountPercentage,
+        rating: req.body.data.rating,
+        stock: req.body.data.stock,
+        brand: req.body.data.brand,
+        category: req.body.data.category,
+        thumbnail: req.body.data.thumbnail,
+        images: req.body.data.images,
+    });
+                
+    res.send("Product updated successfully!");
+});
+                
+//Delete a product
+//Delete API
+router.delete("/delete/:id", async (req, res) =&gt; {
+    const product_id = req.params.id;
+    await Product.findByIdAndDelete(product_id);
+    res.send("Product deleted!");
+});
+                
+export default router;</code></pre>
+            </li>
+            <li>
+              Next, update your <b>index.js</b> file by adding this new import
+              statement:
+              <pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-11" class="hljs">
+import product from "./Routes/products.js";</code></pre>
+            </li>
+
+            <li>Next, remove the CRUD routes from <b>index.js</b>.</li>
+
+            <li>
+              Also delete the test message:
+
+              <img
+                src="assets/img/project-routes-cors/block-delete.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+
+            <li>
+              Finally, add the two new lines below to the middleware part of
+              <b>index.js</b>:
+              <img
+                src="assets/img/project-routes-cors/middleware.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+          </ol>
+        </section>
+
+        <section id="frontend-env">
+          <h2>Adding a frontend <code>.env</code> file for route URLs</h2>
+
+          <p>
+            Your CRUD product routes currently contain a hard-coded URL of
+            <b>http://localhost:5000</b>. For example, here is a product route
+            from <b>HomePage.jsx</b>.
+          </p>
+
+          <img
+            src="assets/img/project-routes-cors/hard-coded.png"
+            alt="screenshot"
+          />
+
+          <p>
+            It is better to abstract the URL and move it to a new
+            <b>.env</b> configuration file in your root <b>frontend</b> folder.
+            Follow these steps:
+          </p>
+
+          <ol>
+            <li>
+              In your <b>/frontend</b> folder, create a new text file and name
+              it <b>.env</b>.
+            </li>
+
+            <li>
+              In this new <b>.env</b> file, enter the URL below:
+
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2" class="hljs">
+VITE_BASE_URL=http://localhost:5000</code></pre>
+
+              <span class="inside-ol">&nbsp;</span>
+              Note that you now <i>two</i> configuration <b>.env</b> files: one
+              in your root <b>/frontend</b> folder and one in you your
+              <b>/backend</b> folder.
+
+              <span class="inside-ol">&nbsp;</span>Next, you can update the four
+              frontend files containing the hard-coded URL with this
+              configuration variable.
+            </li>
+            <li>
+              In <b>frontend/src/pages</b>, in <b>HomePage.jsx</b>, update the
+              hard-coded route within the <b>getProduct</b> function as shown
+              below:
+
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3" class="hljs">
+const response = await axios.get(`${baseURL}/read`);</code></pre>
+            </li>
+            <li>
+              In <b>frontend/src/components</b>, in <b>AddProduct.jsx</b>, the
+              <b>handleSave</b> function looks as follows:
+              <img
+                src="assets/img/project-routes-cors/addproduct.png"
+                alt="screenshot"
+              />
+
+              Update the hard-coded URL as shown below:
+
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4" class="hljs">
+const response = await axios.post(`${baseURL}/create`, {
+  data: productData,
+});</code></pre>
+            </li>
+            <li>
+              In <b>frontend/src/components</b>, in <b>UpdateProduct.jsx</b>,
+              the <b>getProduct</b> function looks as follows:
+
+              <img
+                src="assets/img/project-routes-cors/updateproduct-1.png"
+                alt="screenshot"
+              />
+
+              Update the hard-coded URL as shown below:
+
+              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-5" class="hljs">
+const response = await axios.get(`${baseURL}/get/${id}`);</code></pre>
+
+              The
+              <b>handleUpdate</b> function currently looks as follows:
+              <img
+                src="assets/img/project-routes-cors/updateproduct-2.png"
+                alt="screenshot"
+              />
+
+              Update the hard-coded URL as shown below:
+
+              <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6" class="hljs">
+const response = await axios.put(`${baseURL}/update/${id}`, {
+  data: productData,
+});</code></pre>
+            </li>
+            <li>
+              In <b>frontend/src/components</b>, in <b>ProductCard.jsx</b>, the
+              <b>handleDelete</b> function looks as follows:
+              <img
+                src="assets/img/project-routes-cors/productcard.png"
+                alt="screenshot"
+              />
+
+              Update the hard-coded URL as shown below:
+
+              <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-7" class="hljs">
+const response = await axios.delete(`${baseURL}/delete/${id}`);</code></pre>
+            </li>
+
+            <li>
+              Finally, for all four of the above files, add the following two
+              lines after the import statements:
+              <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-8" class="hljs">
+const baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = baseURL;</code></pre>
+            </li>
+          </ol>
+
+          <p>
+            Because you have added a new <b>.env</b> file, you will need to
+            restart your frontend ReactJS Vite server.
+          </p>
+          <p>
+            <br />
+            You are now ready to add
+            <a href="project-auth.html">authentication and authorisation</a>
+            features to your MERN app.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils.js"></script>
+  </body>
+</html>
