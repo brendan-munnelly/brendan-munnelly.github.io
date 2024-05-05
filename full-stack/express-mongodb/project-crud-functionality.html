@@ -84,11 +84,11 @@
 
           <ul>
             <li>
-              Add a NavBar component that will display on all other pages of the
+              Add a NavBar component that will display on all pages of the
               frontend app.
             </li>
             <li>
-              Add components and pages to add, update and delete data for the
+              Add components and pages to update and delete product data for the
               MongoDB database.
             </li>
           </ul>
@@ -97,7 +97,7 @@
         <section id="navbar">
           <h2>Adding a NavBar component</h2>
           <p>
-            Follow these steps to create a Navbar component for including on
+            Follow these steps to create a NavBar component for including on
             every page component of your frontend app.
           </p>
 
@@ -115,45 +115,50 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-                        
+
 const NavBar = () =&gt; {
-    const navigate = useNavigate();
-                        
-    const goToHome = () =&gt; {
-        navigate("/");
-    };
-                        
-    const goToAddProduct = () =&gt; {
-        navigate("/addProduct");
-    };
-                        
-    return (
-        &lt;&gt;
-            &lt;Box sx={{ flexGrow: 1 }}&gt;
-                &lt;AppBar position="static"&gt;
-                &lt;Toolbar&gt;
-                &lt;Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                        flexGrow: 1,
-                    }}
-                &gt;
-                E-COM
-                &lt;/Typography&gt;
-                &lt;Button color="inherit" onClick={goToHome}&gt;
-                Home
-                &lt;/Button&gt;
-                &lt;Button color="inherit" onClick={goToAddProduct}&gt;
-                   Add product
-                &lt;/Button&gt;
-                &lt;/Toolbar&gt;
-                &lt;/AppBar&gt;
-            &lt;/Box&gt;
-        &lt;/&gt;
-    );
+  // Using the useNavigate hook from react-router-dom to get the navigate function
+  const navigate = useNavigate();
+
+  // Function to navigate to the home page
+  const goToHome = () =&gt; {
+    navigate("/");
+  };
+
+  // Function to navigate to the add product page
+  const goToAddProduct = () =&gt; {
+    navigate("/addProduct");
+  };
+
+  // The component returns a Box containing an AppBar, which in turn contains a Toolbar.
+  // The Toolbar contains a Typography component for the title and two Button components for navigation.
+  return (
+    &lt;&gt;
+      &lt;Box sx={{ flexGrow: 1 }}&gt;
+        &lt;AppBar position="static"&gt;
+          &lt;Toolbar&gt;
+            &lt;Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+              }}
+            &gt;
+              E-COM
+            &lt;/Typography&gt;
+            &lt;Button color="inherit" onClick={goToHome}&gt;
+              Home
+            &lt;/Button&gt;
+            &lt;Button color="inherit" onClick={goToAddProduct}&gt;
+              Add product
+            &lt;/Button&gt;
+          &lt;/Toolbar&gt;
+        &lt;/AppBar&gt;
+      &lt;/Box&gt;
+    &lt;/&gt;
+  );
 };
-                        
+
 export default NavBar;</code></pre>
             </li>
           </ol>
@@ -244,7 +249,7 @@ export default UpdateProductPage;
               In your <b>frontend/src</b> sub-folder, update your
               <b>App.jsx</b> file with the code below:
               <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
-//import Route and Routes from the React router library
+// Import Route and Routes from the React router library
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AddProductPage from "./pages/AddProductPage";
@@ -290,11 +295,13 @@ import axios from "axios";</code></pre>
               <b>handleUpdate</b> function that is responsible for navigating to
               the update page when called.
               <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6" class="hljs">
-const navigate = useNavigate();
+// Use the useNavigate hook from react-router-dom to get the navigate function
+  const navigate = useNavigate();
 
-const handleUpdate = (id) =&gt; {
+  const handleUpdate = (id) => {
+    // Use the navigate function to go to the update page for the product with the given ID
     navigate("/update/" + id);
-};</code></pre>
+  };</code></pre>
             </li>
             <li>
               Next add a <b>handleDelete</b> function:
@@ -303,6 +310,8 @@ const handleDelete = async (id) =&gt; {
     try {
         const response = await axios.delete("http://localhost:5000/delete/" + id);
         console.log(response.data);
+        // If the server responds with "Product deleted!", call the getProduct function from the props
+        // This will likely refresh the list of products
         if (response.data === "Product deleted!") {
             props.getProduct();
             }
