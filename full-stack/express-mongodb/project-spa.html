@@ -85,6 +85,10 @@
               Create a single-page app in ReactJS to support multiple routes.
             </li>
             <li>Add pages and components to the app.</li>
+            <li>
+              Display MongoDB product data from your Express backend app route
+              in your ReactJS frontend app home page.
+            </li>
           </ul>
         </section>
 
@@ -179,7 +183,8 @@ export default HomePage;</code></pre>
             </li>
 
             <li>
-              Replace all the content of your <b>app.jsx</b> with the following:
+              Replace all the content of your <b>frontend/src/App.jsx</b> file
+              with the following:
 
               <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
 //import Route and Routes from the React router library
@@ -217,7 +222,8 @@ export default App;</code></pre>
           <h2>Updating your Home page to display data</h2>
 
           <p>
-            Follow these steps to display data from MongoDB in your Home page:
+            Follow these steps to display data from MongoDB, through a route in
+            your Express backend app, in your Home page:
           </p>
 
           <ol>
@@ -228,31 +234,46 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const HomePage = () =&gt; {
+  // Initialize productList state variable with an empty array
   const [productList, setProductList] = useState([]);
+  // Initialize error state variable with null
+  const [error, setError] = useState(null);
 
+  // Use the useEffect hook to run code after the component mounts
   useEffect(() =&gt; {
-    getProduct();
-  }, []);
+    // Define an async function to fetch product data
+    const getProduct = async () =&gt; {
+      try {
+        // Send a GET request to the server and await the response
+        const response = await axios.get("http://localhost:5000/read");
+        // Set the productList state variable to the data from the response
+        setProductList(response.data);
+      } catch (e) {
+        // If an error occurs, set the error state variable to the error message
+        setError(e.message);
+      }
+    };
 
-  const getProduct = async () =&gt; {
-    try {
-      const response = await axios.get("http://localhost:5000/read");
-      setProductList(response.data);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    // Call the getProduct function
+    getProduct();
+  }, []); // The dependency array is empty, so this effect runs once after the component mounts
+
+  // If there's an error, return a paragraph element with the error message
+  if (error) {
+    return &lt;p&gt;Error: {error}&lt;/p&gt;;
+  }
 
   return (
     &lt;&gt;
-        &lt;h1&gt;My HomePage&lt;/h1&gt;
-        {productList.map((product, index) =&gt; (
-            &lt;div key={index}&gt;
-            &lt;p&gt;{product.title}&lt;/p&gt;
-            &lt;/div&gt;
-        ))}
-    &lt;/&gt;
+      &lt;h1&gt;My HomePage&lt;/h1&gt;
+      {/* Map over the productList array to display each product */}
+      {productList.map((product, index) =&gt; (
+        // Create a new div for each product. The key is the index of the product in the array.
+        &lt;div key={index}&gt;
+        &lt;p&gt;{product.title}&lt;/p&gt;
+        &lt;/div&gt;
+      ))}
+      &lt;/&gt;
   );
 };
 
@@ -299,9 +320,10 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
                 
 const ProductCard = (props) =&gt; {
-    const [product, setProduct] = useState(props.product);
+  // Initialize product state variable with the product prop
+  const [product, setProduct] = useState(props.product);
                 
-    return (
+  return (
         &lt;&gt;
             &lt;Card
                 sx={{
@@ -337,7 +359,7 @@ const ProductCard = (props) =&gt; {
                             &lt;/Stack&gt;
                             &lt;Stack direction="column"&gt;
                               &lt;Typography variant="body1" color="text.primary"&gt;
-                                {product.price} $
+                              ${product.price} 
                               &lt;/Typography&gt;
                               &lt;Typography variant="body1" color="text.primary"&gt;
                                 Price discount: {product.discountPercentage}%
@@ -363,12 +385,17 @@ export default ProductCard;</code></pre>
 
               <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">return (
   &lt;&gt;
-    &lt;h1&gt;My HomePage&lt;/h1&gt;
-      {productList.length !== 0 &&
-        productList.map((product) =&gt; (
-        &lt;ProductCard key={product.id} product={product} /&gt;
+  {/* Render a heading with the text "My HomePage" */}
+  &lt;h1&gt;My HomePage&lt;/h1&gt;
+  {/* Check if productList is not empty */}
+  {productList.length !== 0 &&
+    // If productList is not empty, map over it and render a ProductCard component for each product
+    productList.map((product) =&gt; (
+      // Render a ProductCard component with a unique key and the product as a prop
+      &lt;ProductCard key={product.id} product={product} /&gt;
     ))}
   &lt;/&gt;
+  // End of the component's return statement
 );</code></pre>
             </li>
           </ol>
