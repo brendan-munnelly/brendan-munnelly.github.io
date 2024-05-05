@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AddProduct = () => {
+  // Use the useNavigate hook from react-router-dom to get the navigate function
   const navigate = useNavigate();
+
+  // Use the useState hook from React to create a state variable for the product data
+  // The initial state is an object with empty strings for all the product properties
   const [productData, setProductData] = useState({
     title: "",
     brand: "",
@@ -18,18 +22,26 @@ const AddProduct = () => {
     thumbnail: "",
   });
 
+  // Define a function to handle changes to the input fields
+  // This function will be called whenever the user types into one of the input fields
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
 
+    // Call setProductData to update the product data state
+    // Use the spread operator to copy the existing product data, then overwrite the property that changed
     setProductData({ ...productData, [name]: value });
   };
 
+  // Define a function to handle the save button click
+  // This function will be called when the user clicks the save button
   const handleSave = async () => {
+    // Log the current product data to the console
     console.log(productData);
     try {
       const response = await axios.post("http://localhost:5000/create", {
         data: productData,
       });
+      // If the server responds with "Product saved to the database!", navigate back to the home page
       if (response.data === "Product saved to the database!") {
         navigate("/");
       }

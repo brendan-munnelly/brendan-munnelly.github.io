@@ -5,10 +5,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UpdateProduct = () => {
+  // Use the useParams hook from react-router-dom to get the product ID from the URL
   const { id } = useParams();
+
+  // Use the useNavigate hook from react-router-dom to get the navigate function
   const navigate = useNavigate();
+
+  // Use the useState hook from React to create a state variable for the product data
+  // The initial state is an empty object
   const [productData, setProductData] = useState({});
 
+  // Use the useEffect hook from React to fetch the product data when the component mounts
   useEffect(() => {
     getProduct();
   }, []);
@@ -17,6 +24,8 @@ const UpdateProduct = () => {
     try {
       const response = await axios.get("http://localhost:5000/get/" + id);
       console.log(response.data);
+
+      // Call setProductData to update the product data state with the response data
       setProductData(response.data);
     } catch (e) {
       console.log(e);
@@ -26,6 +35,8 @@ const UpdateProduct = () => {
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
 
+    // Call setProductData to update the product data state
+    // Use the spread operator to copy the existing product data, then overwrite the property that changed
     setProductData({ ...productData, [name]: value });
   };
 
