@@ -24,8 +24,6 @@ const UpdateProduct = () => {
     try {
       const response = await axios.get("http://localhost:5000/get/" + id);
       console.log(response.data);
-
-      // Call setProductData to update the product data state with the response data
       setProductData(response.data);
     } catch (e) {
       console.log(e);
