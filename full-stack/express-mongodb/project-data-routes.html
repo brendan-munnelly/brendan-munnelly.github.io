@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-      Setting up Data Model and Routes | Creating an E-commerce Website with the
-      MERN Stack | Brendan Munnelly
+      Setting up product data model and routes | Creating an E-commerce Website
+      with the MERN Stack | Brendan Munnelly
     </title>
     <meta
       name="description"
-      content="Setting up the data model and routes for MERN ecommerce app."
+      content="Importing sample data, setting up the product data model, and defining the backend app routes."
     />
 
     <!-- Stylesheet-->
@@ -43,7 +43,7 @@
         </div>
 
         <div class="content">
-          <h1>Setting up the Data Model and Routes</h1>
+          <h1>Setting up the product data model and backend app routes</h1>
           <h2>
             Importing sample data, and setting up the data model and routes for
             your MERN app.
@@ -314,7 +314,8 @@ export default Product;</code></pre>
 
           <p>
             Also in your <b>index.js</b> file, add the following CRUD routes.
-            (You will later move these to a separate file.)
+            (You will <a href="project-routes-cors.html">later</a> move these
+            routes to a separate file.)
           </p>
 
           <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">//Create a new product
@@ -342,7 +343,14 @@ app.get("/read", async (req, res) =&gt; {
       res.send(JSON.stringify(productList));
 });</code></pre>
 
-          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">//Update a product based on the id
+          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">//Get a single product by id
+app.get("/get/:id", async (req, res) => {
+  const product_id = req.params.id;
+  const product = await Product.findById(product_id);
+  res.send(JSON.stringify(product));
+});</code></pre>
+
+          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">//Update a product based on the id
 app.put("/update/:id", async (req, res) =&gt; {
       const product_id = req.params.id;
       await Product.findByIdAndUpdate(product_id, {
@@ -362,7 +370,7 @@ app.put("/update/:id", async (req, res) =&gt; {
 });    
 </code></pre>
 
-          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">//Delete a product based on the id
+          <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">//Delete a product based on the id
 app.delete("/delete/:id", async (req, res) =&gt; {
       const product_id = req.params.id;
       await Product.findByIdAndDelete(product_id);
@@ -379,6 +387,11 @@ app.delete("/delete/:id", async (req, res) =&gt; {
 
           <img
             src="assets/img/project-data-routes/postman.png"
+            alt="screenshot"
+          />
+
+          <img
+            src="assets/img/project-data-routes/postman-1.png"
             alt="screenshot"
           />
 
