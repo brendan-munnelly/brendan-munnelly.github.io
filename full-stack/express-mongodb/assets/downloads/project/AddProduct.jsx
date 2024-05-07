@@ -38,9 +38,10 @@ const AddProduct = () => {
     // Log the current product data to the console
     console.log(productData);
     try {
-      const response = await axios.post("http://localhost:5000/create", {
-        data: productData,
-      });
+      const response = await axios.put(
+        "http://localhost:5000/create",
+        productData
+      );
       // If the server responds with "Product saved to the database!", navigate back to the home page
       if (response.data === "Product saved to the database!") {
         navigate("/");
