@@ -43,10 +43,10 @@
         </div>
 
         <div class="content">
-          <h1>Setting up the product data model and backend app routes</h1>
+          <h1>Setting up product data model and routes</h1>
           <h2>
-            Importing sample data, and setting up the data model and routes for
-            your MERN app.
+            Importing sample data, and setting up the backend data model and
+            routes for your MERN app.
           </h2>
         </div>
       </div>
@@ -70,12 +70,13 @@
         <p><a href="#data-model">Creating the product data model</a></p>
         <p><a href="#routes">Adding CRUD product routes to index.js</a></p>
         <p><a href="#postman">Testing your GET routes with POSTMAN</a></p>
+        <p><a href="#checklist">3: Project checklist and next step</a></p>
       </aside>
 
       <article>
         <section id="learning-goals">
-          <h2>Learning Goals</h2>
-          <p>At the end of this Tutorial, you will be able to:</p>
+          <h2>Project Goals</h2>
+          <p>In this second stage of the MERN project, you will:</p>
 
           <ul>
             <li>
@@ -85,6 +86,15 @@
             <li>
               Set up routes in your Express app to create, read, update, and
               delete data.
+            </li>
+
+            <li>
+              Create a Mongoose data model for your MongoDB products collection.
+            </li>
+
+            <li>
+              Set up backend routes in your Express app to create, read, update,
+              and delete product data.
             </li>
           </ul>
         </section>
@@ -346,7 +356,7 @@ app.get("/read", async (req, res) =&gt; {
 });</code></pre>
 
           <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">//Get a single product by id
-app.get("/get/:id", async (req, res) => {
+app.get("/get/:id", async (req, res) =&gt; {
       const product_id = req.params.id;
       const product = await Product.findById(product_id);
       res.send(JSON.stringify(product));
@@ -383,8 +393,8 @@ app.delete("/delete/:id", async (req, res) =&gt; {
         <section>
           <h2 id="postman">Testing your GET routes with POSTMAN</h2>
           <p>
-            Use POSTMAN or similar to test your two GET routes are working
-            correctly. For example:
+            Use POSTMAN or similar to test your two backend GET routes are
+            working correctly. For example:
           </p>
 
           <img
@@ -396,6 +406,27 @@ app.delete("/delete/:id", async (req, res) =&gt; {
             src="assets/img/project-data-routes/postman-1.png"
             alt="screenshot"
           />
+        </section>
+
+        <section id="checklist">
+          <h2>Project checklist and next step</h2>
+
+          <p>Before continuing:</p>
+
+          <div class="box-warning" style="margin-top: 20px">
+            <div>
+              <img
+                src="../express-mongodb/assets/img/warning-sign.png"
+                alt="icon"
+              />
+            </div>
+            <div>
+              <p>
+                <span>CHECK</span> that your two backend GET routes to the
+                products collection on MongoDb are working correctly.
+              </p>
+            </div>
+          </div>
 
           <p>
             You are now ready to update your ReactJS frontend as a
