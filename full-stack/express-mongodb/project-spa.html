@@ -62,7 +62,7 @@
         </p>
 
         <h3>THIS TUTORIAL</h3>
-        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#learning-goals">Project Goals</a></p>
         <p><a href="#install">Installing the frontend packages</a></p>
         <p>
           <a href="#main">Updating your main.jsx file</a>
@@ -73,21 +73,23 @@
         </p>
 
         <p><a href="#product-card">Adding a product card component</a></p>
+        <p><a href="#checklist">Project checklist and next step</a></p>
       </aside>
 
       <article>
         <section id="learning-goals">
-          <h2>Learning Goals</h2>
-          <p>At the end of this Tutorial, you will be able to:</p>
+          <h2>Project Goals</h2>
+          <p>In this third stage of the MERN project, you will:</p>
 
           <ul>
             <li>
-              Create a single-page app in ReactJS to support multiple routes.
+              Create a single-page app in ReactJS to support multiple routes and
+              install the required npm packages.
             </li>
-            <li>Add pages and components to the app.</li>
+            <li>Add pages and components to the ReactJS app.</li>
             <li>
-              Display MongoDB product data from your Express backend app route
-              in your ReactJS frontend app home page.
+              Display MongoDB product data, via an Express backend routes, in
+              your ReactJS frontend app home page.
             </li>
           </ul>
         </section>
@@ -187,9 +189,9 @@ export default HomePage;</code></pre>
               with the following:
 
               <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
-//import Route and Routes from the React router library
+// Import Route and Routes from the React router library
 import { Route, Routes } from "react-router-dom";
-//import the HomePage 
+// Import the HomePage 
 import HomePage from './pages/HomePage';
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
@@ -214,8 +216,6 @@ export default App;</code></pre>
             src="assets/img/project-spa/output-frontend.png"
             alt="screenshot"
           />
-
-          <p>Congratulations, you have created your first route!</p>
         </section>
 
         <section id="home-data">
@@ -236,10 +236,6 @@ import axios from "axios";
 const HomePage = () =&gt; {
   const [productList, setProductList] = useState([]);
 
-  useEffect(() =&gt; {
-    getProduct();
-  }, []);
-
   const getProduct = async () =&gt; {
     try {
       const response = await axios.get("http://localhost:5000/read");
@@ -250,17 +246,21 @@ const HomePage = () =&gt; {
     }
   };
 
+  useEffect(() =&gt; {
+    getProduct();
+  }, []);
+
   return (
     &lt;&gt;
       &lt;h1&gt;My HomePage&lt;/h1&gt;
       {/* Map over the productList array to display each product */}
       {productList.map((product, index) =&gt; (
-        // Create a new div for each product. The key is the index of the product in the array.
         &lt;div key={index}&gt;
-        &lt;p&gt;{product.title}&lt;/p&gt;
+          &lt;h2&gt;{product.name}&lt;/h2&gt;
+          &lt;p&gt;{product.description}&lt;/p&gt;
         &lt;/div&gt;
       ))}
-      &lt;/&gt;
+    &lt;/&gt;
   );
 };
 
@@ -269,9 +269,9 @@ export default HomePage;</code></pre>
           </ol>
 
           <p>
-            If your Express app is running, your frontend app now should now
-            display in your web browser a list of product titles from the
-            MongoDB database.
+            If your Express app is running, your frontend app should now display
+            in your web browser a list of product titles from the MongoDB
+            database.
             <img
               src="assets/img/project-spa/output-data-1.png"
               alt="screenshot"
@@ -399,6 +399,29 @@ export default ProductCard;</code></pre>
               alt="screenshot"
             />
           </p>
+        </section>
+
+        <section id="checklist">
+          <h2>Project checklist and next step</h2>
+
+          <p>Before continuing:</p>
+
+          <div class="box-warning" style="margin-top: 20px">
+            <div>
+              <img
+                src="../express-mongodb/assets/img/warning-sign.png"
+                alt="icon"
+              />
+            </div>
+            <div>
+              <p>
+                <span>CHECK</span> that your ReactJS home page can list products
+                using the frontend <b>getProduct()</b> function and the backend
+                <b>http://localhost:5000/read</b> route.
+              </p>
+            </div>
+          </div>
+
           <p>
             In the next step you will add frontend components and pages to
             <a href="project-crud-functionality.html">handle CRUD operations</a>
