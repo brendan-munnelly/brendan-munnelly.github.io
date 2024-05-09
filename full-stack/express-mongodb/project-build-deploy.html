@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Deploying MERN app to GitHub and GitHub Pages | Creating an E-commerce
+      Website with the MERN stack | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Deploying your app code files to GitHub and a minimial, remotely working-version to GitHub Pages."
+    />
+
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="../assets/css/full-stack-tutorials-brendan-munnelly.css"
+    />
+
+    <style>
+      h2 code,
+      h3 code {
+        font-weight: normal !important;
+      }
+      span.grey {
+        color: lightgray;
+      }
+      span.green {
+        color: green;
+      }
+
+      ul.git-list li {
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: solid 2px #000;
+      }
+      .four-samples div {
+        background-color: #f4f7a0;
+        padding: 12px;
+      }
+      .four-samples div > img {
+        margin-bottom: 12px !important;
+      }
+      .four-samples div > p {
+        font-size: 16px;
+      }
+
+      .four-samples {
+        margin-top: 12px;
+        margin-bottom: 20px;
+      }
+      .four-samples a {
+        font-weight: bold;
+        font-size: 16px !important;
+        text-underline-offset: 4px;
+      }
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+
+  <body id="top">
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div><p>&nbsp;</p></div>
+        </div>
+
+        <div class="content">
+          <h1>Deploying MERN app to GitHub and GitHub Pages</h1>
+          <h2>
+            Deploying your MERN app code files to GitHub and a minimial,
+            remotely working-version to GitHub Pages.
+          </h2>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </header>
+
+    <main>
+      <aside>
+        <h3>Express and MongoDB</h3>
+
+        <p>
+          <i class="fa-solid fa-house"></i> &nbsp;<a href="index.html">Home</a>
+        </p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Project Goals</a></p>
+
+        <p>
+          <a href="#new-repo-github">1: Create local and remote GitHub repos</a>
+        </p>
+        <p><a href="#verify-push">2: Verify your app has been deployed</a></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+      </aside>
+
+      <article>
+        <section id="learning-goals">
+          <h2>Project Goals</h2>
+          <p>In this sixth stage of the MERN project, you will:</p>
+
+          <ul>
+            <li>
+              Create local and remote repos for your MERN in the
+              <b>main</b> (or <b>master</b>) branch, link the two repos, and
+              push your app code from local to remote.
+            </li>
+
+            <li>
+              Test that your MERN app files have deployed correctly by
+              downloading and reinstalling them in a new folder on your local
+              machine.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="new-repo-github">1: Create local and remote GitHub repos</h2>
+
+          <p>
+            On GitHub, your app will be stored in a new repo separate from all
+            your other folders and files. Follow these steps:
+          </p>
+
+          <ol>
+            <li>
+              In your GitHub account create a new repo to host your app.
+
+              <img
+                src="assets/img/project-build-deploy/serve-3.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              Give your new repo a name.
+              <img
+                src="assets/img/project-build-deploy/github-new-app-2.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              <i>Do not</i> initialise the new repo with a description, README,
+              license, or .gitignore files.
+              <img
+                src="assets/img/project-build-deploy/github-new-app-3.png"
+                alt="screenshot"
+                style="margin-bottom: 12px !important; max-width: 600px"
+              />
+              Your repo should be empty.
+            </li>
+
+            <li>Click the green <b>Create repository</b> button</li>
+
+            <li>
+              GitHub displays a screen that includes commands for setting up a
+              local repo for your new app and then pushing your app files to the
+              GitHub remote repo.
+
+              <img
+                src="assets/img/project-build-deploy/list-commands.png"
+                alt="screenshot"
+                style="max-width: 680px"
+              />
+            </li>
+
+            <li>
+              In a terminal, navigate to the folder that contains the
+              <b>/frontend</b> and <b>/backend</b> sub-folders of your MERN app.
+            </li>
+            <li>
+              Select and copy the above commands, and paste them into a text
+              file.
+              <span class="inside-ol">&nbsp;</span>
+              Include a <b>git add .</b> command as shown below, paste the
+              commands in to your terminal, and then run them.
+              <img
+                src="assets/img/project-build-deploy/git-add.png"
+                alt="screenshot"
+                style="max-width: 680px"
+              />
+            </li>
+            <li>
+              The <b>git remote add</b> assumes you are using SSH and have SSH
+              keys set up in your GitHub account.
+              <img
+                src="assets/img/project-build-deploy/list-commands-ssh.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+
+              If you are using HTTPS instead, the command syntax would be as
+              follows:
+              <img
+                src="assets/img/project-build-deploy/list-commands-https.png"
+                alt="screenshot"
+                style="max-width: 700px"
+              />
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2 id="verify-push">2: Verify your app has been deployed</h2>
+
+          <p>
+            To check your app has been deployed to GitHub, do the following.
+          </p>
+
+          <ol>
+            <li>
+              In your browser, display the GitHub repo of your app. Ensure the
+              <b>Code</b> tab is selected.
+            </li>
+
+            <li>
+              You should see a screen similar to the following.
+
+              <img
+                src="assets/img/project-build-deploy/github-new-app-6.png"
+                alt="screenshot"
+              />
+            </li>
+            <li>
+              Near the top-right of the screen, click the dropdown arrow in the
+              green <b>Code</b> button and then select the
+              <b>Download ZIP</b> option.
+              <img
+                src="assets/img/project-build-deploy/download-1.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              Save the downloaded ZIP file and copy it to a new folder on your
+              local machine - for example, <b>app-mern-ecommerce-download</b>.
+            </li>
+
+            <li>
+              In your new folder, extract the ZIP file to create two main
+              sub-folders - <b>/frontend</b> and /backend.
+            </li>
+
+            <li>
+              Copy into the downloaded <b>/backend</b> sub-folder the
+              <b>.env</b> file from the <b>/backend</b> folder of your original
+              Express app. This <b>.env</b> is required for your backend server
+              to access your account on MongoDB.
+            </li>
+
+            <li>
+              In your downloaded folder, start the ReactJS frontend and Express
+              backend servers, and verify your code runs correctly.
+            </li>
+          </ol>
+        </section>
+
+        <section id="checklist">
+          <h2>Project checklist and next step</h2>
+
+          <p>Before continuing:</p>
+
+          <div class="box-warning" style="margin-top: 20px">
+            <div>
+              <img
+                src="../express-mongodb/assets/img/warning-sign.png"
+                alt="icon"
+              />
+            </div>
+            <div>
+              <p>
+                <span>CHECK</span> that your downloaded CRUD routes for
+                creating, reading, updating, and deleting products are working
+                correctly.
+              </p>
+            </div>
+          </div>
+
+          <p>
+            <br />
+            You are now ready to add
+            <a href="project-auth.html">authentication and authorisation</a>
+            features to your MERN app.
+          </p>
+        </section>
+
+        <!-- <section>
+        <h2 id="app-updating">Updating your deployed/hosted app</h2>
+
+        <p>Over time, you may make changes to your app and wish to host the new version to GitHub Pages. Here are the steps:</p>
+
+        <ol>
+                <li>Update and save your app on your local server.</li>
+                <li>From inside your app folder, update the <b>build</b> version of your app.
+<pre class="no-syn"><span class="yellow">npm</span> run build</pre></li>
+                <li>Add file updates and any new files to your local repo.
+<pre class="no-syn"><span class="yellow">git</span> add .</pre></li>
+                <li>Commit the latest version of app with a descriptive message.
+<pre class="no-syn"><span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"Fixed bugs and added cool new features."</span></pre></li>
+                
+                <li>Push your changes to the <b>main</b> (or <b>master</b>) branch on GitHub.
+<pre class="no-syn"><span class="yellow">git</span> push origin main</pre></li>
+                                
+                <li>Finally, deploy your updated <b>/build</b> folder to GitHub for hosting.
+<pre class="no-syn"><span class="yellow">npm</span> run deploy</pre>
+</li>
+        </ol>
+        <p>✅ &nbsp;That&#8217;s it. Both the <b>main</b> (or <b>master</b>) and <b>gh-pages</b> branches will be updated.</p>
+    </section>
+
+    <section>
+        <h2 id="update-readme">Update your app README.md file</h2>
+
+        <p>You can replace the default <b>README.md</b> file with your own. Here are the steps:</p>
+        <ol>
+                <li>Prompt ChatGPT or Github Copilot Chat to draft the file for you
+<div class="gpt"><button class="copy-gpt" id="btn-1">Copy Prompt <i class="fa-brands fa-react"></i></button><code id="strCode-1">
+        Can you help me create a basic README.md file for a ReactJS app at the following URL:<br><br>
+
+        https://username.github.io/reponame/</code></div></li>
+
+        <li>Push the new file up to your remote repo:
+
+<pre class="no-syn"><span class="yellow">git</span> add README.md
+<span class="yellow">git</span> commit <span class="grey">-m</span> <span class="comment">"Update README.md"</span>
+<span class="yellow">git</span> push origin main</pre>
+        where <b>main</b> is your default branch.
+</li>
+</ol>
+
+        <p>Because your README.md file is <i>outside</i> your <b>/build</b> folder, the <b>npm run deploy</b> command will not deploy this file to GitHub. </p>
+    </section>
+-->
+      </article>
+    </main>
+
+    <footer></footer>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <script src="../assets/js/utils-react.js"></script>
+  </body>
+</html>
