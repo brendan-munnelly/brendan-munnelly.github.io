@@ -62,29 +62,132 @@
         </p>
 
         <h3>THIS TUTORIAL</h3>
-        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#learning-goals">Project Goals</a></p>
+        <p><a href="#edit-route">Updating your home page route</a></p>
+        <p><a href="#edit-route-id">Updating your get product route</a></p>
         <p><a href="#product-routes">Creating a products.js Routes file</a></p>
 
         <p>
           <a href="#frontend-env">Adding a frontend .env file for route URLs</a>
         </p>
+        <p><a href="#checklist">Project checklist and next step</a></p>
       </aside>
 
       <article>
         <section id="learning-goals">
-          <h2>Learning Goals</h2>
-          <p>At the end of this Tutorial, you will be able to:</p>
+          <h2>Project Goals</h2>
+          <p>In this fifth stage of the MERN project, you will:</p>
 
           <ul>
             <li>
-              Move the routes from <b>index.js</b> in the <b>/backend</b> folder
-              to a separate file.
+              Simplify the two routes to list all products and to retrieve a
+              single product by id.
             </li>
+
+            <li>
+              Move all the product routes from <b>index.js</b> in the
+              <b>/backend</b> folder to a separate file.
+            </li>
+
             <li>
               Creating a frontend configuration <b>.env</b> file to hold the
-              product routes URL.
+              product route URLs.
             </li>
           </ul>
+        </section>
+
+        <section>
+          <h2 id="edit-route">Updating your home page route</h2>
+
+          <p>
+            Currently, your frontend home page lists all items from the MongoDB
+            products collection using the
+            <b>http://localhost:5000/read</b> route. Let's update this route to
+            use the <b>http://localhost:5000</b> base URL instead:
+          </p>
+
+          <ol>
+            <li>
+              In the
+              <b>frontend/src/pages</b> folder, update the
+              <b>getProduct()</b> function in the <b>HomePage.jsx</b> file as
+              follows:
+              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1" class="hljs">
+const getProduct = async () =&gt; {
+    try {
+        const response = await axios.get("http://localhost:5000");
+        setProductList(response.data);
+        console.log(response.data);
+    } catch (e) {
+        console.log(e);
+    }
+};</code></pre>
+            </li>
+            <li>
+              In the <b>backend/src/</b> folder, in the <b>index.js</b> file,
+              update the get all products route as follows:
+              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2" class="hljs">
+// Get the all product list
+app.get("/", async (req, res) =&gt; {
+    const productList = await Product.find();
+    res.send(JSON.stringify(productList));
+});</code></pre>
+            </li>
+            <li>
+              Also in this <b>index.js</b> file, delete the test message:
+              <img
+                src="assets/img/project-routes-cors/test-message.png"
+                alt="screenshot"
+                style="max-width: 600px"
+              />
+            </li>
+            <li>
+              Using POSTMAN or similar, verify that your new list all products
+              route is working correctly.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2 id="edit-route-id">Updating your get product route</h2>
+
+          <p>
+            Currently, your route for retrieving a single product by id from the
+            MongoDB products collection is the
+            <b>http://localhost:5000/get/&lt;id&gt;</b>. Let's update this route
+            to use the simpler <b>http://localhost:5000/&lt;id&gt;</b> URL
+            instead:
+          </p>
+
+          <ol>
+            <li>
+              In the
+              <b>frontend/src/components</b> folder, the
+              <b>getProduct()</b> function currently looks as follows:
+              <img
+                src="assets/img/project-routes-cors/old-get-product.png"
+                alt="screenshot"
+              />
+            </li>
+
+            <li>
+              Update the route as shown below:
+              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3" class="hljs">
+const getProduct = async () =&gt; {
+  try {
+    const response = await axios.get("http://localhost:5000/" + id);
+    console.log(response.data);
+    setProductData(response.data);
+  } catch (e) {
+     console.log(e);
+  }
+};</code></pre>
+            </li>
+            <li>
+              Using POSTMAN or similar, verify that your get product by id route
+              is working correctly.
+            </li>
+          </ol>
         </section>
 
         <section>
@@ -93,8 +196,8 @@
           </h2>
 
           <p>
-            Curently, all your CRUD product routes are in your main
-            <b>index.js</b>. Let's move them to a separate file.
+            Currently, all your CRUD product routes are in the main backend
+            <b>index.js</b> file. Let's move them to a separate file.
           </p>
 
           <ol>
@@ -106,102 +209,55 @@
               In this <b>Routes</b> sub-folder, create a new text file named
               <b>products.js</b> and add the three import statements below to
               the top of the file:
-              <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-9" class="hljs">
+              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4" class="hljs">
 import express from "express";
+import mongoose from 'mongoose'
 import Product from "../Models/products.js";
 const router = express.Router();</code></pre>
             </li>
 
             <li>
-              Now, paste the following CRUD routes into this
-              <b>products.js</b> file:
-
-              <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-1" class="hljs">
-//Get products from database
-//Get API
-    router.get("/", async (req, res) =&gt; {
-    const productList = await Product.find();
-    res.send(JSON.stringify(productList));
-});
-                
-//Get a single product by id
-router.get("/:id", async (req, res) =&gt; {
-    const product_id = req.params.id;
-    const product = await Product.findById(product_id);
-    res.send(JSON.stringify(product));
-});
-                
-//Post new product
-//Create API
-    router.post("/create", async (req, res) =&gt; {
-        const newProduct = new Product({
-            title: req.body.data.title,
-            description: req.body.data.description,
-            price: req.body.data.price,
-            discountPercentage: req.body.data.discountPercentage,
-            rating: req.body.data.rating,
-            stock: req.body.data.stock,
-            brand: req.body.data.brand,
-            category: req.body.data.category,
-            thumbnail: req.body.data.thumbnail,
-            images: req.body.data.images,
-        });
-                
-    await Product.create(newProduct);
-    res.send("Product saved to the database!");
-});
-                
-//Update a product
-//Put API
-    router.put("/update/:id", async (req, res) =&gt; {
-        const product_id = req.params.id;
-        await Product.findByIdAndUpdate(product_id, {
-        title: req.body.data.title,
-        description: req.body.data.description,
-        price: req.body.data.price,
-        discountPercentage: req.body.data.discountPercentage,
-        rating: req.body.data.rating,
-        stock: req.body.data.stock,
-        brand: req.body.data.brand,
-        category: req.body.data.category,
-        thumbnail: req.body.data.thumbnail,
-        images: req.body.data.images,
-    });
-                
-    res.send("Product updated successfully!");
-});
-                
-//Delete a product
-//Delete API
-router.delete("/delete/:id", async (req, res) =&gt; {
-    const product_id = req.params.id;
-    await Product.findByIdAndDelete(product_id);
-    res.send("Product deleted!");
-});
-                
-export default router;</code></pre>
-            </li>
-            <li>
-              Next, update your <b>index.js</b> file by adding this new import
-              statement:
-              <pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-11" class="hljs">
-import product from "./Routes/products.js";</code></pre>
+              Now, cut-and-paste all five CRUD routes from <b>index.js</b> into
+              this <b>products.js</b> file.
             </li>
 
-            <li>Next, remove the CRUD routes from <b>index.js</b>.</li>
-
             <li>
-              Also delete the test message:
+              For each of the five routes, replace the <b>app</b> object by the
+              <b>router</b> object. See the example below:
 
               <img
-                src="assets/img/project-routes-cors/block-delete.png"
+                src="assets/img/project-routes-cors/app-to-router.png"
                 alt="screenshot"
-                style="max-width: 700px"
               />
             </li>
 
             <li>
-              Finally, add the two new lines below to the middleware part of
+              At the end of the <b>products.js</b> file, add this export
+              statement:
+
+              <img
+                src="assets/img/project-routes-cors/export-router.png"
+                alt="screenshot"
+                style="max-width: 640px"
+              />
+            </li>
+
+            <li>
+              In <b>index.js</b>, remove the following import statement:
+
+              <img
+                src="assets/img/project-routes-cors/delete-import.png"
+                alt="screenshot"
+              />
+            </li>
+            <li>
+              And add this new import statement:
+              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-5" class="hljs">
+import productRoutes from "./Routes/products.js";</code></pre>
+            </li>
+
+            <li>
+              Finally, add the new line below to the middleware part of
               <b>index.js</b>:
               <img
                 src="assets/img/project-routes-cors/middleware.png"
@@ -210,6 +266,23 @@ import product from "./Routes/products.js";</code></pre>
               />
             </li>
           </ol>
+
+          <p>
+            In this <b>index.js</b> code, you are importing the
+            <b>productRoutes</b> from the <b>products.js</b> file and using them
+            as middleware for the path <b>/products</b>.
+          </p>
+
+          <p>Note the plural &#8216;s&#8217;.</p>
+          <p>
+            This means that any request to the server with a path that starts
+            with <b>/products</b> will be handled by the routes defined in
+            <b>products.js</b>.
+          </p>
+          <p>
+            You will next need to update the routes in other files to take
+            account of this <b>/products</b> prefix in the URLs.
+          </p>
         </section>
 
         <section id="frontend-env">
@@ -224,6 +297,7 @@ import product from "./Routes/products.js";</code></pre>
           <img
             src="assets/img/project-routes-cors/hard-coded.png"
             alt="screenshot"
+            style="max-width: 700px"
           />
 
           <p>
@@ -241,25 +315,26 @@ import product from "./Routes/products.js";</code></pre>
             <li>
               In this new <b>.env</b> file, enter the URL below:
 
-              <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-2" class="hljs">
+              <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6" class="hljs">
 VITE_BASE_URL=http://localhost:5000</code></pre>
 
               <span class="inside-ol">&nbsp;</span>
               Note that you now <i>two</i> configuration <b>.env</b> files: one
-              in your root <b>/frontend</b> folder and one in you your
+              in your root <b>/frontend</b> folder and one in your
               <b>/backend</b> folder.
 
               <span class="inside-ol">&nbsp;</span>Next, you can update the four
               frontend files containing the hard-coded URL with this
-              configuration variable.
+              configuration variable. At the same time, you can add the
+              <b>/products</b> prefix to the URLs.
             </li>
             <li>
               In <b>frontend/src/pages</b>, in <b>HomePage.jsx</b>, update the
               hard-coded route within the <b>getProduct</b> function as shown
               below:
 
-              <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-3" class="hljs">
-const response = await axios.get(`${baseURL}/read`);</code></pre>
+              <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-7" class="hljs">
+const response = await axios.get(`${baseURL}/products`);</code></pre>
             </li>
             <li>
               In <b>frontend/src/components</b>, in <b>AddProduct.jsx</b>, the
@@ -269,12 +344,13 @@ const response = await axios.get(`${baseURL}/read`);</code></pre>
                 alt="screenshot"
               />
 
-              Update the hard-coded URL as shown below:
+              Update the function as shown below:
 
-              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-4" class="hljs">
-const response = await axios.post(`${baseURL}/create`, {
-  data: productData,
-});</code></pre>
+              <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-8" class="hljs">
+const response = await axios.post(
+   `${baseURL}/products/create`,
+    productData
+);</code></pre>
             </li>
             <li>
               In <b>frontend/src/components</b>, in <b>UpdateProduct.jsx</b>,
@@ -287,10 +363,10 @@ const response = await axios.post(`${baseURL}/create`, {
 
               Update the hard-coded URL as shown below:
 
-              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-5" class="hljs">
-const response = await axios.get(`${baseURL}/get/${id}`);</code></pre>
+              <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-9" class="hljs">
+const response = await axios.get(`${baseURL}/products/${id}`);</code></pre>
 
-              The
+              In the same file, the
               <b>handleUpdate</b> function currently looks as follows:
               <img
                 src="assets/img/project-routes-cors/updateproduct-2.png"
@@ -299,8 +375,8 @@ const response = await axios.get(`${baseURL}/get/${id}`);</code></pre>
 
               Update the hard-coded URL as shown below:
 
-              <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-6" class="hljs">
-const response = await axios.put(`${baseURL}/update/${id}`, {
+              <pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-10" class="hljs">
+const response = await axios.put(`${baseURL}/products/update/${id}`, {
   data: productData,
 });</code></pre>
             </li>
@@ -314,14 +390,14 @@ const response = await axios.put(`${baseURL}/update/${id}`, {
 
               Update the hard-coded URL as shown below:
 
-              <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-7" class="hljs">
-const response = await axios.delete(`${baseURL}/delete/${id}`);</code></pre>
+              <pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-11" class="hljs">
+const response = await axios.delete(`${baseURL}/products/delete/${id}`);</code></pre>
             </li>
 
             <li>
               Finally, for all four of the above files, add the following two
               lines after the import statements:
-              <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-8" class="hljs">
+              <pre><button class="copy-code" id="btn-12">Copy Code <i class="fa-brands fa-react"></i></button><code id="strCode-12" class="hljs">
 const baseURL = import.meta.env.VITE_BASE_URL;
 axios.defaults.baseURL = baseURL;</code></pre>
             </li>
@@ -331,6 +407,28 @@ axios.defaults.baseURL = baseURL;</code></pre>
             Because you have added a new <b>.env</b> file, you will need to
             restart your frontend ReactJS Vite server.
           </p>
+        </section>
+
+        <section id="checklist">
+          <h2>Project checklist and next step</h2>
+
+          <p>Before continuing:</p>
+
+          <div class="box-warning" style="margin-top: 20px">
+            <div>
+              <img
+                src="../express-mongodb/assets/img/warning-sign.png"
+                alt="icon"
+              />
+            </div>
+            <div>
+              <p>
+                <span>CHECK</span> that your updated CRUD routes for creating,
+                reading, updating, and deleting products are working correctly.
+              </p>
+            </div>
+          </div>
+
           <p>
             <br />
             You are now ready to add
