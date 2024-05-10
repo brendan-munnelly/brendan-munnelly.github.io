@@ -71,6 +71,12 @@
         <p>
           <a href="#product-card">Updating your ProductCard.jsx component</a>
         </p>
+
+        <p>
+          <a href="#cors">Preventing CORS issues</a>
+        </p>        
+
+
       </aside>
 
       <article>
@@ -689,6 +695,29 @@ const ProductCard = (props) =&gt; {
 };
 
 export default ProductCard;</code></pre>
+        </section>
+
+        <section id="cors">
+          <h2>Preventing CORS issues</h2>
+
+          <p>
+            To prevent possible CORS issues, update the middleware section of your
+            <b>backend/index.js</b> file as shown below:
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
+// Middleware
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  "content-type": "application/json;charset=UTF-8",
+  "Access-Control-Allow-Origin": "*",
+  allowedHeaders: ["Authorization", "Content-Type", "Accept"],
+  exposedHeaders: ["*"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));</code></pre>
+
+          </p>
         </section>
       </article>
     </main>
