@@ -59,7 +59,7 @@
         </p>
 
         <h3>THIS TUTORIAL</h3>
-        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#learning-goals">Project Goals</a></p>
         <p><a href="#icons">Adding the MUI icons</a></p>
 
         <p><a href="#auth-page">Creating the AuthPage.jsx component</a></p>
@@ -75,8 +75,8 @@
 
       <article>
         <section id="learning-goals">
-          <h2>Learning Goals</h2>
-          <p>At the end of this Tutorial, you will be able to:</p>
+          <h2>Project Goals</h2>
+          <p>In this seventh stage of your MERN project, you will:</p>
 
           <ul>
             <li>Add UI elements to handle user registration and login.</li>
@@ -99,7 +99,7 @@ npm i @mui/icons-material @emotion/react @emotion/styled</pre
         <section id="auth-page">
           <h2>Creating the <code>AuthPage.jsx</code> page</h2>
           <p>
-            In your <b>/frontend/src/pages</b> sub-folder, create an
+            In your <b>frontend/src/pages</b> sub-folder, create an
             <b>AuthPage.jsx</b> page component that will display either the
             login form or registration form based on the user’s choice.
           </p>
@@ -149,7 +149,7 @@ export default AuthPage;</code></pre>
           <h2>Creating the <code>LoginForm.jsx</code> component</h2>
 
           <p>
-            Now, in your <b>/frontend/src/components/</b> sub-folder, create the
+            Now, in your <b>frontend/src/components/</b> sub-folder, create the
             <b>LoginForm.jsx</b> component as shown below.
           </p>
 
@@ -159,6 +159,9 @@ import { Paper, TextField, Grid, Button, Box } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/authContext.jsx";
 import axios from "axios";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = baseURL;
 
 const LoginForm = (props) =&gt; {
   const navigate = useNavigate();
@@ -177,9 +180,10 @@ const LoginForm = (props) =&gt; {
     console.log(loginData);
 
     try {
-      const response = await axios.post("http://localhost:5000/users/login", {
+      const response = await axios.post(`${baseURL}/users/login`, {
         data: loginData,
       });
+
       console.log(response.data);
       if (response) {
         if (Object.keys(props)[0] !== "closeForm") {
@@ -275,15 +279,16 @@ const LoginForm = (props) =&gt; {
   );
 };
 
-export default LoginForm;</code></pre>
+export default LoginForm;
+</code></pre>
         </section>
 
         <section id="register-form">
           <h2>Creating the <code>RegisterForm.jsx</code> component</h2>
 
           <p>
-            Next, in the same <b>/frontend/src/components/</b> sub-folder,
-            create the <b>RegisterForm.jsx</b> component as shown below.
+            Next, in the same <b>frontend/src/components/</b> sub-folder, create
+            the <b>RegisterForm.jsx</b> component as shown below.
           </p>
 
           <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
@@ -292,6 +297,9 @@ import { Paper, TextField, Grid, Button, Box } from "@mui/material";
 import { AuthContext } from "../context/authContext.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = baseURL;
 
 const RegisterForm = (props) =&gt; {
   const authContext = React.useContext(AuthContext);
@@ -313,12 +321,10 @@ const RegisterForm = (props) =&gt; {
     console.log(userData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/users/register",
-        {
-          data: userData,
-        }
-      );
+      const response = await axios.post(`${baseURL}/users/register`, {
+        data: userData,
+      });
+
       console.log(response);
       if (response) {
         if (Object.keys(props)[0] !== "closeForm") {
@@ -439,13 +445,14 @@ const RegisterForm = (props) =&gt; {
   );
 };
 
-export default RegisterForm;</code></pre>
+export default RegisterForm;
+</code></pre>
         </section>
 
         <section>
           <h2 id="navbar">Updating your <code>NavBar.jsx</code> component</h2>
           <p>
-            In your <b>/frontend/src/components</b> sub-folder, update the
+            In your <b>frontend/src/components</b> sub-folder, update the
             <b>NavBar.jsx</b> component to a add a new button for login/logout.
             Which button is displayed will depend on whether the authentication
             token is present in the local storage.
@@ -536,7 +543,7 @@ export default NavBar;</code></pre>
           </h2>
 
           <p>
-            In your <b>/frontend/src/components</b> sub-folder, modify your
+            In your <b>frontend/src/components</b> sub-folder, modify your
             <b>ProductCard.jsx</b> component by adding a new section called
             “Card Actions” where users can add or remove a product from the
             shopping cart:
@@ -577,7 +584,7 @@ const ProductCard = (props) =&gt; {
 
   const handleDelete = async (id) =&gt; {
     try {
-      const response = await axios.delete("http://localhost:5000/delete/" + id);
+      const response = await axios.delete(`${baseURL}/delete/${id}`);
       console.log(response.data);
       if (response.data === "Product deleted!") {
         props.getProduct();
