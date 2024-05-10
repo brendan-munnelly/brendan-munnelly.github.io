@@ -45,7 +45,7 @@
         <div class="content">
           <h1>Authentication and authorisation</h1>
           <h2>
-            Implementing basic authentication and authorization for an
+            Implementing basic authentication and authorization for your
             e-commerce MERN app.
           </h2>
         </div>
@@ -62,7 +62,7 @@
         </p>
 
         <h3>THIS TUTORIAL</h3>
-        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#learning-goals">Project Goals</a></p>
         <p><a href="#intro">Introduction</a></p>
         <p><a href="#packages">Adding backend security packages</a></p>
         <p><a href="#env">Updating your .env file</a></p>
@@ -75,15 +75,32 @@
 
       <article>
         <section id="learning-goals">
-          <h2>Learning Goals</h2>
-          <p>At the end of this Tutorial, you will be able to:</p>
+          <h2>Project Goals</h2>
+          <p>In this seventh stage of your MERN project, you will:</p>
 
           <ul>
             <li>
-              Add user authentication and authorization features to a MERN app. 
+              Begin the process of adding user authentication and authorization features to the MERN app. 
             </li>
           </ul>
         </section>
+
+
+        <section>
+
+            <h2>Making a new copy of your MERN app</h2>
+
+            <p>Before continuing further, make a copy of your existing MERN app and place it in a new folder. See the example below:</p>
+
+            <img src="assets/img/project-auth/folders-copy.png" alt="screenshot">
+
+            <p>This makes it easier for me to grade your work and award you marks.</p>
+
+            <p>In this <i>copy</i> of your work to date, start the frontend and backend servers, and verify the code runs correctly. </p>
+
+
+        </section>
+
 
         <section>
           <h2 id="intro">Introduction</h2>
@@ -185,8 +202,9 @@ export default User;</code></pre>
 <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
 import express from "express";
 import bcrypt from "bcrypt";
-import mongoose from "mongoose";
 import User from "../Models/users.js";
+
+const router = express.Router();
 
 router.get("/:id", async (req, res) =&gt; {
   const user_id = req.params.id;
@@ -194,7 +212,7 @@ router.get("/:id", async (req, res) =&gt; {
   res.send(JSON.stringify(user));
 });
 
-router.post("/regiser", async (req, res) =&gt; {
+router.post("/register", async (req, res) =&gt; {
   const newUser = new User({
     username: req.body.data.username,
     email: req.body.data.email,
@@ -244,11 +262,21 @@ export default router;</code></pre>
 
       <p>Your next step is to import and access the <b>users.js</b> Routes file in your <b>index.js</b> file.</p>
 
-      <img src="assets/img/project-auth/import-users.png" alt="screenshot" style="max-width:500px">
+      <img src="assets/img/project-auth/import-users.png" alt="screenshot" style="max-width:680px">
 
-      <img src="assets/img/project-auth/app-user.png" alt="screenshot" style="max-width:500px">
+      <img src="assets/img/project-auth/app-user.png" alt="screenshot" style="max-width:580px">
+
+      <p>In your <b>index.js</b> code, you are importing the <b>userRoutes</b> from the <b>users.js</b> file and using them as middleware for the path <b>/users</b>.</p>
+
+      <p>Note the plural ‘s’.</p>
+        
+      <p>This means that any request to the server with a path that starts with <b>/users</b> will be handled by the routes defined in <b>users.js</b>.</p>
+       
+<p>Note also that you do not need to create a <b>users</b> collection in your MongoDB Atlas database. A collection with that name will be created when you register your first user.</p>
 
       </section>
+
+
 
       <section>
           <h2 id="middleware">
@@ -264,7 +292,7 @@ export default router;</code></pre>
               <b>Middleware</b>.
             </li>
             <li>
-              In this <b>Middleware</b> sub-folder, create a new text file named
+              In this <b>backend/Middleware</b> sub-folder, create a new text file named
               <b>auth.js</b> and paste the following code into it:
               <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
 import jwt from "jsonwebtoken";
@@ -297,7 +325,9 @@ function isAuth(req, res, next) {
   }
 }
 
-export default isAuth;</code></pre></li>
+export default isAuth;</code></pre>
+
+<span>This code checks for an "Authorization" header in the request, and then decodes it.</span></li>
 
       <li>To use the auth middleware, import it into your <b>index.js</b> file and add it to the app’s middleware stack:
       
@@ -312,13 +342,15 @@ export default isAuth;</code></pre></li>
         </section>
 
 
+
+
         <section>
           <h2 id="context">Adding a context provider</h2>
 
           <p>To handle the authentication flow in the frontend, you need to use a context provider. The context provider ensures that we can access the authentication variables wherever we need them. Follow these steps to create the required context:</p>
 
           <ol>
-            <li>In your <b>/frontend/src</b> folder, create a new sub-folder named <b>context</b>.</li>
+            <li>In your <b>frontend/src</b> folder, create a new sub-folder named <b>context</b>.</li>
             
             <li>In this sub-folder, create a new text file named <b>authContext.jsx</b>, and paste into it the code below:
   <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">      
@@ -333,7 +365,7 @@ export const AuthContext = React.createContext({
 });</code></pre></li>
             
             
-            <li>Also in your <b>/frontend/src</b> folder, create a new sub-folder named <b>util</b>.</li>
+            <li>Also in your <b>frontend/src</b> folder, create a new sub-folder named <b>util</b>.</li>
 
             <li>In this sub-folder, create a new text file named <b>authRoutes.jsx</b>, and paste into it the code below:
 <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
@@ -357,13 +389,14 @@ export default RequiredAuth;</code></pre></li>
 
 <li>Finally, in your <b>frontend/src</b> folder, update your <b>app.jsx</b> file as follows:
 
-<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7" class="hljs language-javascript">
 import React, { useState } from "react";  
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import AddProductPage from "./pages/AddProductPage.jsx";
 import UpdateProductPage from "./pages/UpdateProductPage.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
 import { AuthContext } from "./context/authContext.jsx";
 import RequiredAuth from "./util/authRoutes.jsx";
 
@@ -435,6 +468,8 @@ export default App;</code></pre>
 </li>
 
           </ol>
+
+          <p>In its current form, the Express backend of your MERN app should run correctly. However, the ReactJS frontend will generate errors as a result of missing, yet-to-be created component files.</p>
 
           <p>Next: <a href="project-ui.html">Adding UI elements for user flow</a>.</p>
         </section>
