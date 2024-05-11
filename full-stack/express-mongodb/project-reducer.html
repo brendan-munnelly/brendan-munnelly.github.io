@@ -61,18 +61,36 @@
         </p>
 
         <h3>THIS TUTORIAL</h3>
-        <p><a href="#learning-goals">Project Goals</a></p>
-        <p><a href="#icons">Adding the MUI icons</a></p>
 
-        <p><a href="#auth-page">Creating the AuthPage.jsx component</a></p>
-        <p><a href="#login-form">Creating the LoginForm.jsx component</a></p>
+        <p><a href="#learning-goals">Project Goals</a></p>
+
+        <p><a href="#intro">Introduction</a></p>
+
+        <p><a href="#reducer">Installing the reducer package</a></p>
+
+        <p><a href="#cart-action">Adding the shopping cart actions</a></p>
+
         <p>
-          <a href="#register-form">Creating the RegisterForm.jsx component</a>
+          <a href="#product-card-update">Updating the ProductCard.jsx file</a>
         </p>
-        <p><a href="#navbar">Updating your NavBar.jsx component</a></p>
-        <p>
-          <a href="#product-card">Updating your ProductCard.jsx component</a>
-        </p>
+
+        <p><a href="#cart-page">Creating the CartPage.jsx page</a></p>
+        <p><a href="#orders-model">Creating the orders.js Model</a></p>
+
+        <p><a href="#orderss-route">Creating the orders.js Route</a></p>
+
+        <p><a href="#index-update">Updating your index.js file</a></p>
+
+        <p><a href="#ecommerce-images">Adding the ecommerce images</a></p>
+
+        <p><a href="#navbar-update">Updating your NavBar.jsx omponent</a></p>
+
+        <p><a href="#app-update">Updating your App.jsx file</a></p>
+
+        <p><a href="#orders-page">Creating an OrderPage.jsx file</a></p>
+        <p><a href="#orders-navbar">Adding orders to NavBar.jsx </a></p>
+
+        <p><a href="#orders-app">Updating App.jsx with orders</a></p>
       </aside>
 
       <article>
@@ -680,7 +698,7 @@ export default router;</code></pre>
         </section>
 
         <section>
-          <h2>Updating your <code>index.js</code> file.</h2>
+          <h2>Updating your <code>index.js</code> file</h2>
 
           <p>
             Import the <b>order.js</b> Route into your <b>index.js</b> file and
@@ -1097,26 +1115,109 @@ const goToOrders = () =&gt; {
         <section>
           <h2>Updating <code>App.jsx</code> with orders</h2>
 
-          <p>
-            In your <b>frontend/src/App.jsx</b> file, add this import statement:
-          </p>
+          <p>Paste the following into your <b>App.jsx</b> file.</p>
 
-          <img
-            src="assets/img/project-reducer/import-orders-app.png"
-            alt="screenshot"
-            style="max-width: 700px"
-          />
-
-          <p>And add a frontend route for orders:</p>
           <pre><button class="copy-code" id="btn-19">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-19" class="hljs language-javascript">
-&lt;Route
-   path="/orders"
-   element={
-      &lt;RequiredAuth&gt;
-      &lt;OrdersPage /&gt;
-      &lt;/RequiredAuth&gt;
-    }
- /&gt;</code></pre>
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import RequiredAuth from "./util/authRoutes";
+
+import HomePage from "./pages/HomePage";
+import AddProductPage from "./pages/AddProductPage";
+import UpdateProductPage from "./pages/UpdateProductPage";
+import AuthPage from "./pages/AuthPage";
+
+import CartPage from "./pages/CartPage";
+import cartReducer from "./store/cart/cartReducer";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+import { AuthContext } from "./context/authContext";
+import { useState } from "react";
+import AdminPage from "./pages/AdminPage";
+import OrdersPage from "./pages/OrdersPage";
+
+const store = configureStore({
+  reducer: {
+    cartStore: cartReducer,
+  },
+});
+
+function App() {
+  const [userLoggedData, setUserLoggedData] = useState({
+    token: null,
+    userId: null,
+    isAdmin: false,
+  });
+
+  const login = (token, userId, isAdmin) =&gt; {
+    //console.log("app token", token);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+    setUserLoggedData({ token: token, userId: userId, isAdmin: isAdmin });
+  };
+
+  const logout = () =&gt; {
+    setUserLoggedData({ token: null, userId: null, isAdmin: false });
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+  };
+
+  return (
+    &lt;Provider store={store}&gt;
+      &lt;AuthContext.Provider
+        value={{
+          token: userLoggedData.token,
+          userId: userLoggedData.userId,
+          isAdmin: userLoggedData.isAdmin,
+          login: login,
+          logout: logout,
+        }}
+      &gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;HomePage /&gt;} /&gt;
+          &lt;Route path="/login" element={&lt;AuthPage /&gt;} /&gt;
+          &lt;Route path="/cart" element={&lt;CartPage /&gt;} /&gt;
+          {/* protected views*/}
+          &lt;Route
+            path="/addProduct"
+            element={
+              &lt;RequiredAuth&gt;
+                &lt;AddProductPage /&gt;
+              &lt;/RequiredAuth&gt;
+            }
+          /&gt;
+          &lt;Route
+            path="/update/:id"
+            element={
+              &lt;RequiredAuth&gt;
+                &lt;UpdateProductPage /&gt;
+              &lt;/RequiredAuth&gt;
+            }
+          /&gt;
+          &lt;Route
+            path="/admin"
+            element={
+              &lt;RequiredAuth&gt;
+                &lt;AdminPage /&gt;
+              &lt;/RequiredAuth&gt;
+            }
+          /&gt;
+          &lt;Route
+            path="/orders"
+            element={
+              &lt;RequiredAuth&gt;
+                &lt;OrdersPage /&gt;
+              &lt;/RequiredAuth&gt;
+            }
+          /&gt;
+        &lt;/Routes&gt;
+      &lt;/AuthContext.Provider&gt;
+    &lt;/Provider&gt;
+  );
+}
+
+export default App;</code></pre>
 
           <p>
             Now, you can test the application by placing some orders and
