@@ -66,31 +66,31 @@
 
         <p><a href="#intro">Introduction</a></p>
 
-        <p><a href="#reducer">Installing the reducer package</a></p>
+        <p><a href="#install-reducer">Installing the reducer package</a></p>
 
-        <p><a href="#cart-action">Adding the shopping cart actions</a></p>
+        <p><a href="#cart-actions">Adding the shopping cart actions</a></p>
+
+        <p><a href="#cart-page">Creating the CartPage.jsx page</a></p>
+
+        <p><a href="#orders-page">Creating an OrderPage.jsx file</a></p>
+
+        <p><a href="#ecommerce-images">Adding the ecommerce images</a></p>
+
+        <p><a href="#orders-model">Creating the orders.js Model</a></p>
+
+        <p><a href="#orders-route">Creating the orders.js Route</a></p>
 
         <p>
           <a href="#product-card-update">Updating the ProductCard.jsx file</a>
         </p>
 
-        <p><a href="#cart-page">Creating the CartPage.jsx page</a></p>
-        <p><a href="#orders-model">Creating the orders.js Model</a></p>
+        <p><a href="#update-index">Updating your index.js file</a></p>
 
-        <p><a href="#orderss-route">Creating the orders.js Route</a></p>
+        <p><a href="#add-orders">Adding orders to NavBar.jsx </a></p>
 
-        <p><a href="#index-update">Updating your index.js file</a></p>
+        <p><a href="#add-orders-app">Adding orders to App.jsx</a></p>
 
-        <p><a href="#ecommerce-images">Adding the ecommerce images</a></p>
-
-        <p><a href="#navbar-update">Updating your NavBar.jsx omponent</a></p>
-
-        <p><a href="#app-update">Updating your App.jsx file</a></p>
-
-        <p><a href="#orders-page">Creating an OrderPage.jsx file</a></p>
-        <p><a href="#orders-navbar">Adding orders to NavBar.jsx </a></p>
-
-        <p><a href="#orders-app">Updating App.jsx with orders</a></p>
+        <p><a href="#update-home">Updating your HomePage.jsx file</a></p>
       </aside>
 
       <article>
@@ -105,7 +105,7 @@
           </ul>
         </section>
 
-        <section>
+        <section id="intro">
           <h2>Introduction</h2>
 
           <p>
@@ -145,8 +145,8 @@
           </p>
         </section>
 
-        <section>
-          <h2 id="install-reducer">Installing the reducer package</h2>
+        <section id="install-reducer">
+          <h2>Installing the reducer package</h2>
           <p>
             Your first step is to install the package in your
             <b>/frontend</b> folder:
@@ -301,7 +301,134 @@ export default cartReducer;</code></pre>
           </ol>
         </section>
 
-        <section id="update-product-card">
+        <section id="cart-page">
+          <h2>Creating the <code>CartPage.jsx</code> page</h2>
+
+          <p>
+            After creating the cart reducer, you next need to create the
+            CartPage where you can display the cart data.
+          </p>
+
+          <p>
+            Into your <b>frontend/src/pages</b> sub-folder, download the
+            following file:
+          </p>
+
+          <p>
+            <a href="assets/downloads/project/CartPage.jsx">CartPage.jsx</a>
+          </p>
+        </section>
+
+        <section id="orders-page">
+          <h2>Creating an <code>OrderPage.jsx</code> file</h2>
+          <p>
+            Into your <b>frontend/src/pages</b> sub-folder, download the
+            following file:
+          </p>
+
+          <p>
+            <a href="assets/downloads/project/OrdersPage.jsx">OrdersPage.jsx</a>
+          </p>
+        </section>
+
+        <section id="ecommerce-images">
+          <h2>Adding the ecommerce images</h2>
+
+          <p>Follow the steps below:</p>
+
+          <ol>
+            <li>
+              Download the following three images:<br />
+              <a href="assets/downloads/project/emptycart.png">emptycart.png</a
+              ><br />
+              <a href="assets/downloads/project/logo_2.png">logo_2.png</a><br />
+              <a href="assets/downloads/project/not_found.png">not_found.png</a>
+            </li>
+            <li>
+              In your <b>frontend/src</b> folder, create a new sub-folder named
+              <b>/img</b>.
+            </li>
+            <li>Copy the above three images into this new sub-folder.</li>
+          </ol>
+        </section>
+
+        <section id="orders-model">
+          <h2>Creating the <code>orders.js</code> Model</h2>
+
+          <p>
+            Now it’s time to work on the backend layer of your app. Begin by
+            creating an <b>order.js</b> file in your
+            <b>backend/Models</b> sub-folder. Paste the code below into this
+            file:
+          </p>
+
+          <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7" class="hljs language-javascript">
+import mongoose from "mongoose";
+
+const orderSchema = new mongoose.Schema({
+  userID: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  country: { type: String, required: true },
+  zipCode: { type: String, required: true },
+  totalAmount: { type: String, required: true },
+  items: { type: String, required: true },
+  createdDate: { type: Date, required: true },
+});
+
+const Order = mongoose.model("Order", orderSchema);
+
+export default Order;</code></pre>
+        </section>
+
+        <section id="orders-route">
+          <h2>Creating the <code>orders.js</code> Route</h2>
+
+          <p>
+            In your
+            <b>backend/Routes</b> sub-folder, create an <b>order.js</b> file and
+            paste the code below into this file:
+          </p>
+
+          <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8" class="hljs language-javascript">
+import express from "express";
+import mongoose from "mongoose";
+import Order from "../Models/products.js";
+const router = express.Router();
+
+//Post new order
+//Create API
+router.post("/create", async (req, res) =&gt; {
+  console.log(req.body);
+  const newOrder = new Order({
+    userID: req.body.data.userID,
+    firstName: req.body.data.firstName,
+    lastName: req.body.data.lastName,
+    address: req.body.data.address,
+    city: req.body.data.city,
+    country: req.body.data.country,
+    zipCode: req.body.data.zipCode,
+    totalAmount: req.body.data.totalAmount,
+    items: JSON.stringify(req.body.data.items),
+    createdDate: req.body.data.createdDate,
+  });
+
+  await Order.create(newOrder);
+  res.send("Order saved to the database!");
+});
+
+router.get("/:userId", async (req, res) =&gt; {
+  const userID = req.params.userId;
+  const orderList = await Order.find({ userID: userID });
+  res.send(orderList);
+});
+
+export default router;</code></pre>
+        </section>
+
+        <section id="product-card-update">
           <h2>Updating the <code>ProductCard.jsx</code> file</h2>
 
           <p>
@@ -309,42 +436,66 @@ export default cartReducer;</code></pre>
             <b>ProductCard.jsx</b> file as follows:
           </p>
 
-          <ol>
-            <li>
-              Add these two new import statements:
-              <img
-                src="assets/img/project-reducer/product-card-import.png"
-                alt="screenshot"
-              />
-            </li>
-            <li>
-              Assign the <b>dispatch</b> function to a variable within the
-              <b>productCard</b> function:
-              <img
-                src="assets/img/project-reducer/dispatch.png"
-                alt="screenshot"
-              />
-            </li>
-            <li>
-              Next, within the <b>productCard</b> function, add the new function
-              below. This is triggered when a user wants to add a product to the
-              cart. It retrieves the entered quantity, creates an object with
-              the product details and quantity, and dispatches an action to
-              update the cart state in the Redux store.
-              <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
-const handleAddToCart = (product) =&gt; {
+          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
+import React, { useState, useEffect, useRef } from "react";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import { addToCart, removeFromCart } from "../store/cart/cartActions";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = baseURL;
+
+const ProductCard = (props) =&gt; {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [product, setProduct] = useState(props.product);
+  const [token, setToken] = useState();
+  const [isAdmin, setIsAdmin] = useState();
+  const amountInputRef = useRef();
+
+  useEffect(() =&gt; {
+    setToken(localStorage.getItem("token"));
+    setIsAdmin(localStorage.getItem("isAdmin"));
+  }, [token]);
+
+  const handleUpdate = (id) =&gt; {
+    navigate("/update/" + id);
+  };
+
+  const handleDelete = async (id) =&gt; {
+    try {
+      const response = await axios.delete(`${baseURL}/delete/${id}`);
+      console.log(response.data);
+      if (response.data === "Product deleted!") {
+        props.getProduct();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleAddToCart = (product) =&gt; {
     console.log(amountInputRef.current.value);
     const product_item = {
       product: product,
       amount: amountInputRef.current.value,
-  };
+    };
     dispatch(addToCart(product_item));
-};</code></pre>
-            </li>
-            <li>
-              Finally, update the UI component and use the function with the
-              button.
-              <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
+  };
+
   return (
     &lt;&gt;
       &lt;Card
@@ -440,264 +591,9 @@ const handleAddToCart = (product) =&gt; {
 };
 
 export default ProductCard;</code></pre>
-            </li>
-          </ol>
         </section>
 
-        <section id="cart-page">
-          <h2>Creating the <code>CartPage.jsx</code> page</h2>
-
-          <p>
-            After creating the cart reducer, you next need to create the
-            CartPage where you can display the cart data.
-          </p>
-
-          <p>
-            In your <b>frontend/src/pages</b> sub-folder, create a
-            <b>CartPage.jsx</b> file to display your cart data. See below:
-          </p>
-
-          <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
-import {
-  Grid,
-  Button,
-  Paper,
-  TableCell,
-  TableContainer,
-  TableRow,
-  TableHead,
-  TableBody,
-  Table,
-  IconButton,
-  Typography,
-  Stack,
-  Card,
-  TextField,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import Avatar from "@mui/material/Avatar";
-import NavBar from "../components/NavBar";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import HomeIcon from "@mui/icons-material/Home";
-import FlagIcon from "@mui/icons-material/Flag";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
-import MarkunreadMailbox from "@mui/icons-material/MarkunreadMailbox";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
-import emptyCartImg from "../img/emptycart.png";
-
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-
-import {
-  addToCart,
-  removeFromCart,
-  emptyCart,
-} from "../store/cart/cartActions";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-
-import LoginForm from "../components/LoginForm";
-import RegisterForm from "../components/RegisterForm";
-
-const baseURL = import.meta.env.VITE_BASE_URL;
-axios.defaults.baseURL = baseURL;
-
-const CartPage = () =&gt; {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const authContext = useContext(AuthContext);
-  const addedItems = useSelector((state) =&gt; state.cartStore.addedItems);
-  const total = useSelector((state) =&gt; state.cartStore.total);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [open, setOpen] = React.useState(false);
-  const [accountDialog, setAccountDialog] = React.useState(false);
-  const [showLogin, setShowLogin] = React.useState(false);
-  const [confirmShow, setConfirmShow] = React.useState(false);
-  const [checkoutForm, setCheckoutForm] = useState({
-    firstName: "",
-    lastName: "",
-    address: "",
-    city: "",
-    country: "",
-    zipCode: "",
-  });
-
-  useEffect(() =&gt; {
-    if (total !== undefined) {
-      setTotalAmount(`$${total.toFixed(2)}`);
-    }
-  }, [total, addedItems, totalAmount]);
-
-  const goBack = () =&gt; {
-    navigate("/");
-  };
-
-  const cartItemRemoveHandler = (id) =&gt; {
-    dispatch(removeFromCart(id));
-  };
-
-  const cartItemAddHandler = (item) =&gt; {
-    const product_item = {
-      product: item,
-      amount: 1,
-    };
-    dispatch(addToCart(product_item));
-  };
-
-  const handleCheckout = async () =&gt; {
-    if (!authContext.token) {
-      setOpen(true);
-    } else {
-      setConfirmShow(true);
-    }
-  };
-
-  const handleFormInput = (e) =&gt; {
-    const { name, value } = e.target;
-    setCheckoutForm({ ...checkoutForm, [name]: value });
-  };
-
-  const handleGoToLogin = () =&gt; {
-    setShowLogin(true);
-    setAccountDialog(true);
-    setOpen(false);
-  };
-
-  const handleCreateAccount = () =&gt; {
-    setShowLogin(false);
-    setAccountDialog(true);
-    setOpen(false);
-  };
-
-  const handleCloseAccountDialog = async () =&gt; {
-    setAccountDialog(false);
-    setConfirmShow(true);
-  };
-
-  const handleCancel = () =&gt; {
-    setConfirmShow(false);
-  };
-
-  const handleConfirm = async () =&gt; {
-    const order = {
-      userID: localStorage.getItem("userId"),
-      firstName: checkoutForm.firstName,
-      lastName: checkoutForm.lastName,
-      address: checkoutForm.address,
-      city: checkoutForm.city,
-      country: checkoutForm.country,
-      zipCode: checkoutForm.zipCode,
-      totalAmount: totalAmount,
-      items: addedItems,
-      createdDate: new Date(),
-    };
-    try {
-      const response = await axios.post(`${baseURL}/order/create`, {
-        data: order,
-      });
-
-      if (response.data === "Order saved to the database!") {
-        dispatch(emptyCart());
-        setConfirmShow(false);
-        navigate("/");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    console.log(order);
-  };
-};
-
-export default CartPage;
-</code></pre>
-        </section>
-
-        <section>
-          <h2>Creating the <code>orders.js</code> Model</h2>
-
-          <p>
-            Now it’s time to work on the backend layer of your app. Begin by
-            creating an <b>order.js</b> file in your
-            <b>backend/Models</b> sub-folder. Paste the code below into this
-            file:
-          </p>
-
-          <pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7" class="hljs language-javascript">
-import mongoose from "mongoose";
-
-const orderSchema = new mongoose.Schema({
-  userID: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  address: { type: String, required: true },
-  city: { type: String, required: true },
-  country: { type: String, required: true },
-  zipCode: { type: String, required: true },
-  totalAmount: { type: String, required: true },
-  items: { type: String, required: true },
-  createdDate: { type: Date, required: true },
-});
-
-const Order = mongoose.model("Order", orderSchema);
-
-export default Order;</code></pre>
-        </section>
-
-        <section>
-          <h2>Creating the <code>orders.js</code> Route</h2>
-
-          <p>
-            In your
-            <b>backend/Routes</b> sub-folder, create an <b>order.js</b> file and
-            paste the code below into this file:
-          </p>
-
-          <pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8" class="hljs language-javascript">
-import express from "express";
-import mongoose from "mongoose";
-import Order from "../Models/products.js";
-const router = express.Router();
-
-//Post new order
-//Create API
-router.post("/create", async (req, res) =&gt; {
-  console.log(req.body);
-  const newOrder = new Order({
-    userID: req.body.data.userID,
-    firstName: req.body.data.firstName,
-    lastName: req.body.data.lastName,
-    address: req.body.data.address,
-    city: req.body.data.city,
-    country: req.body.data.country,
-    zipCode: req.body.data.zipCode,
-    totalAmount: req.body.data.totalAmount,
-    items: JSON.stringify(req.body.data.items),
-    createdDate: req.body.data.createdDate,
-  });
-
-  await Order.create(newOrder);
-  res.send("Order saved to the database!");
-});
-
-router.get("/:userId", async (req, res) =&gt; {
-  const userID = req.params.userId;
-  const orderList = await Order.find({ userID: userID });
-  res.send(orderList);
-});
-
-export default router;</code></pre>
-        </section>
-
-        <section>
+        <section id="update-index">
           <h2>Updating your <code>index.js</code> file</h2>
 
           <p>
@@ -718,60 +614,74 @@ export default router;</code></pre>
           />
         </section>
 
-        <section>
-          <h2>Adding ecommerce images</h2>
+        <section id="add-orders">
+          <h2>Adding orders to <code>NavBar.jsx</code></h2>
 
-          <p>Follow the steps below:</p>
-
-          <ol>
-            <li>
-              Download the following three images:<br />
-              <a href="assets/downloads/project/emptycart.png">emptycart.png</a
-              ><br />
-              <a href="assets/downloads/project/logo_2.png">logo_2.png</a><br />
-              <a href="assets/downloads/project/not_found.png">not_found.png</a>
-            </li>
-            <li>
-              In your <b>frontend/src</b> folder, create a new sub-folder named
-              <b>img</b>.
-            </li>
-            <li>Copy the above three images into this new sub-folder.</li>
-          </ol>
-        </section>
-
-        <section>
-          <h2 id="navbar">Updating your <code>NavBar.jsx</code> component</h2>
           <p>
-            Before you can test your orders feature, update your
-            <b>frontend/src/components/NavBar.jsx</b> component AS follows:
+            Update your <b>frontend/components/NavBar.jsx</b> file as follows:
           </p>
 
-          <ol>
-            <li>
-              Add these new import statements:
-
-              <pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9" class="hljs language-javascript">
+          <pre><button class="copy-code" id="btn-16">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-16" class="hljs language-javascript">
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
 import logo from "../img/logo_2.png";
-import ButtonBase from "@mui/material/ButtonBase";</code></pre>
-            </li>
+import ButtonBase from "@mui/material/ButtonBase";
+import { AuthContext } from "../context/authContext";
 
-            <li>
-              Within the <b>NavBar</b> function, add this new function:
-              <pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10" class="hljs language-javascript">  
-const goToOrders = () =&gt; {
+const NavBar = () =&gt; {
+  const navigate = useNavigate();
+  const authContext = React.useContext(AuthContext);
+  const items = useSelector((state) =&gt; state.cartStore.addedItems);
+  const [token, setToken] = useState();
+  const [isAdmin, setIsAdmin] = useState();
+
+  useEffect(() =&gt; {
+    setToken(localStorage.getItem("token"));
+    setIsAdmin(localStorage.getItem("isAdmin"));
+  }, [token]);
+
+  const goToHome = () =&gt; {
+    navigate("/");
+  };
+
+  const goToAddProduct = () =&gt; {
+    navigate("/addProduct");
+  };
+
+  const goToLogin = () =&gt; {
+    navigate("/login");
+  };
+
+  const logOut = () =&gt; {
+    localStorage.clear();
+    setIsAdmin();
+    setToken();
+    authContext.logout();
+    navigate("/");
+  };
+
+  const goToCart = () =&gt; {
     navigate("/cart");
-};</code></pre>
-            </li>
+  };
 
-            <li>
-              Lastly, update the <b>AppBar</b> component as follows:
-              <pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11" class="hljs language-javascript">
-&lt;AppBar position="static" sx={{ background: "#38B6FF" }}&gt;
-    &lt;Toolbar&gt;
+  const goToOrders = () =&gt; {
+    navigate("/orders");
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Box sx={{ flexGrow: 1 }}&gt;
+        &lt;AppBar position="static" sx={{ background: "#38B6FF" }}&gt;
+          &lt;Toolbar&gt;
             &lt;ButtonBase onClick={goToHome}&gt;
               &lt;Box
                 component="img"
@@ -780,8 +690,12 @@ const goToOrders = () =&gt; {
               /&gt;
             &lt;/ButtonBase&gt;
             &lt;Typography variant="h6" component="div" sx={{ flexGrow: 1 }} /&gt;
-
-            &lt;IconButton onClick={goToOrders}&gt;
+            {token && (
+              &lt;Button color="inherit" onClick={goToOrders}&gt;
+                Orders
+              &lt;/Button&gt;
+            )}
+            &lt;IconButton onClick={goToCart}&gt;
               &lt;Badge badgeContent={items.length} color="secondary"&gt;
                 &lt;ShoppingCartIcon /&gt;
               &lt;/Badge&gt;
@@ -800,324 +714,23 @@ const goToOrders = () =&gt; {
                 LogOut
               &lt;/Button&gt;
             )}
-    &lt;/Toolbar&gt;
-&lt;/AppBar&gt;
-</code></pre>
-            </li>
-          </ol>
-        </section>
-
-        <section>
-          <h2 id="app-update">Updating your <code>App.jsx </code> file</h2>
-
-          <p>
-            Open your <b>frontend/app.jsx</b> file and add this new import
-            statement:
-          </p>
-
-          <pre><button class="copy-code" id="btn-12">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-12" class="hljs language-javascript">
-import CartPage from "./pages/CartPage";
-          </code></pre>
-
-          <p>Next, add this route:</p>
-
-          <pre><button class="copy-code" id="btn-13">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-13" class="hljs language-javascript">
-&lt;Route path="/cart" element={&lt;CartPage /&gt;} /&gt;</code></pre>
-        </section>
-
-        <section>
-          <h2>Creating an <code>OrderPage.jsx</code> file</h2>
-          <p>
-            In your <b>frontend/src/pages</b>, create a new file named
-            <b>OrdersPage.jsx</b> and add these import statements to it:
-          </p>
-          <pre><button class="copy-code" id="btn-14">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-14" class="hljs language-javascript">
-import React, { useEffect, useState } from "react";            
-import NavBar from "../components/NavBar";
-import axios from "axios";
-import {
-  Typography,
-  Grid,
-  Stack,
-  Divider,
-  Chip,
-  Paper,
-  Button,
-} from "@mui/material";
-import Card from "@mui/material/Card";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CardContent from "@mui/material/CardContent";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Tooltip from "@mui/material/Tooltip";
-
-const baseURL = import.meta.env.VITE_BASE_URL;
-axios.defaults.baseURL = baseURL;</code></pre>
-
-          <p>Next, add the <b>OrdersPage</b> component and JSX:</p>
-
-          <pre><button class="copy-code" id="btn-15">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-15" class="hljs language-javascript">
-  const OrdersPage = () =&gt; {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() =&gt; {
-    getOrders();
-  }, []);
-
-  const getOrders = async () =&gt; {
-    const userId = localStorage.getItem("userId");
-    try {
-      const response = await axios.get(`${baseURL}/order/${userId}`);
-
-      setOrders(response.data);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const sortByDateASC = () =&gt; {
-    let arrayForSort = [...orders];
-    //ascending
-    const ascArray = arrayForSort.sort((a, b) =&gt; {
-      const date1 = new Date(a.createdDate);
-      const date2 = new Date(b.createdDate);
-      return date1 - date2;
-    });
-    setOrders(ascArray);
-  };
-
-  const sortByDateDESC = () =&gt; {
-    let arrayForSort = [...orders];
-    //descending
-    const ascArray = arrayForSort.sort((a, b) =&gt; {
-      const date1 = new Date(a.createdDate);
-      const date2 = new Date(b.createdDate);
-      return date2 - date1;
-    });
-    setOrders(ascArray);
-  };
-
-  return (
-    &lt;&gt;
-      &lt;NavBar /&gt;
-      &lt;Grid
-        container
-        alignContent="center"
-        alignItems="center"
-        justifyContent="space-around"
-        sx={{ paddingTop: 2 }}
-      &gt;
-        &lt;Typography variant="h3"&gt;Order history&lt;/Typography&gt;
-        &lt;Stack direction="row" gap={2}&gt;
-          &lt;Tooltip title="Ascending"&gt;
-            &lt;Button
-              variant="contained"
-              onClick={sortByDateASC}
-              startIcon={&lt;FilterListIcon /&gt;}
-              endIcon={&lt;ExpandLessIcon /&gt;}
-            &gt;
-              Date
-            &lt;/Button&gt;
-          &lt;/Tooltip&gt;
-          &lt;Tooltip title="Descending"&gt;
-            &lt;Button
-              variant="contained"
-              onClick={sortByDateDESC}
-              startIcon={&lt;FilterListIcon /&gt;}
-              endIcon={&lt;ExpandMoreIcon /&gt;}
-            &gt;
-              Date
-            &lt;/Button&gt;
-          &lt;/Tooltip&gt;
-        &lt;/Stack&gt;
-      &lt;/Grid&gt;
-      &lt;Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignContent="center"
-        alignItems="center"
-        gap={2}
-        sx={{ paddingTop: 5 }}
-      &gt;
-        {orders !== undefined &&
-          orders.map((Orderitem) =&gt; (
-            &lt;Grid item key={Orderitem._id}&gt;
-              &lt;Card key={Orderitem._id} sx={{ height: 400 }}&gt;
-                &lt;CardContent&gt;
-                  &lt;Stack direction="row" justifyContent="space-between"&gt;
-                    &lt;div&gt;
-                      &lt;Typography
-                        sx={{ fontSize: 14 }}
-                        color="text.secondary"
-                        gutterBottom
-                      &gt;
-                        Order number:
-                      &lt;/Typography&gt;
-                      &lt;Typography sx={{ fontSize: 14 }} color="text.primary"&gt;
-                        {Orderitem._id}
-                      &lt;/Typography&gt;
-                    &lt;/div&gt;
-                    &lt;div&gt;
-                      &lt;Typography sx={{ fontSize: 14 }} color="text.primary"&gt;
-                        {Orderitem.createdDate}
-                      &lt;/Typography&gt;
-                    &lt;/div&gt;
-                  &lt;/Stack&gt;
-                  &lt;Chip label="Processing..." /&gt;
-                  &lt;Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignContent="center"
-                    alignItems="center"
-                    gap={2}
-                    paddingTop={2}
-                  &gt;
-                    &lt;Grid item&gt;
-                      &lt;TableContainer
-                        component={Paper}
-                        sx={{
-                          overflow: "scroll",
-                          overflowX: "hidden",
-                          maxHeight: 300,
-                        }}
-                      &gt;
-                        &lt;Table sx={{ width: 300 }} aria-label="simple table"&gt;
-                          &lt;TableHead&gt;
-                            &lt;TableRow&gt;
-                              &lt;TableCell&gt;Product&lt;/TableCell&gt;
-                              &lt;TableCell&gt;Price&lt;/TableCell&gt;
-                              &lt;TableCell&gt;Quantity&lt;/TableCell&gt;
-                              &lt;TableCell&gt;Total&lt;/TableCell&gt;
-                            &lt;/TableRow&gt;
-                          &lt;/TableHead&gt;
-                          &lt;TableBody&gt;
-                            {JSON.parse(Orderitem.items).map((item) =&gt; (
-                              &lt;TableRow
-                                key={item._id}
-                                sx={{
-                                  "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                  },
-                                }}
-                              &gt;
-                                &lt;TableCell component="th" scope="row"&gt;
-                                  {item.title}
-                                &lt;/TableCell&gt;
-                                &lt;TableCell&gt;${item.price}&lt;/TableCell&gt;
-                                &lt;TableCell&gt;{item.quantity}&lt;/TableCell&gt;
-                                &lt;TableCell&gt;{Orderitem.totalAmount}&lt;/TableCell&gt;
-                              &lt;/TableRow&gt;
-                            ))}
-                          &lt;/TableBody&gt;
-                        &lt;/Table&gt;
-                      &lt;/TableContainer&gt;
-                    &lt;/Grid&gt;
-
-                    &lt;Divider
-                      orientation="vertical"
-                      flexItem
-                      sx={{ borderRightWidth: 5 }}
-                    /&gt;
-                    &lt;br /&gt;
-                    &lt;Grid item&gt;
-                      &lt;Stack direction="column" gap={1}&gt;
-                        &lt;Typography variant="h6"&gt;Order details:&lt;/Typography&gt;
-                        &lt;Divider /&gt;
-                        &lt;Typography&gt;
-                          {Orderitem.firstName} {Orderitem.lastName}
-                        &lt;/Typography&gt;
-                        &lt;Typography variant="h6"&gt;Shipping:&lt;/Typography&gt;
-                        &lt;Divider /&gt;
-                        &lt;Typography&gt;{Orderitem.address}&lt;/Typography&gt;
-                        &lt;Typography&gt;{Orderitem.zipCode}&lt;/Typography&gt;
-                        &lt;Typography&gt;{Orderitem.country}&lt;/Typography&gt;
-                      &lt;/Stack&gt;
-                    &lt;/Grid&gt;
-                  &lt;/Grid&gt;
-                &lt;/CardContent&gt;
-              &lt;/Card&gt;
-            &lt;/Grid&gt;
-          ))}
-      &lt;/Grid&gt;
+          &lt;/Toolbar&gt;
+        &lt;/AppBar&gt;
+      &lt;/Box&gt;
     &lt;/&gt;
   );
 };
+export default NavBar;
 
-export default OrdersPage;</code></pre>
+</code></pre>
         </section>
 
-        <section>
-          <h2>Adding orders to <code>NavBar.jsx</code></h2>
-
-          <p>Modify the <b>frontend/src/components</b> file as follows:</p>
-
-          <ol>
-            <li>
-              Add this import statement:
-
-              <img
-                src="assets/img/project-reducer/import-auth.png"
-                alt="screenshot"
-                style="max-width: 640px"
-              />
-            </li>
-            <li>
-              Add this new line to the <b>NavBar</b> component:
-
-              <img
-                src="assets/img/project-reducer/update-navbar-component.png"
-                alt="screenshot"
-                style="max-width: 680px"
-              />
-            </li>
-            <li>
-              Update the current <b>logOut</b> function with this code:
-              <pre><button class="copy-code" id="btn-16">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-16" class="hljs language-javascript">
-  const logOut = () =&gt; {
-    localStorage.clear();
-    setIsAdmin();
-    setToken();
-    authContext.logout();
-    navigate("/");
-  };</code></pre>
-            </li>
-            <li></li>
-            <li>
-              Update the current <b>goToOrders</b> function with this code:
-              <pre><button class="copy-code" id="btn-17">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-17" class="hljs language-javascript">
-const goToOrders = () =&gt; {
-    navigate("/orders");
-};</code></pre>
-            </li>
-            <li>
-              In the JSX section, updaste the button that handles the
-              <b>goToOrders</b> function as follows:
-              <pre><button class="copy-code" id="btn-18">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-18" class="hljs language-javascript">
-{token && (
-    &lt;Button color="inherit" onClick={goToOrders}&gt;
-       Orders
-    &lt;/Button&gt;
- )}
- &lt;IconButton onClick={goToCart}&gt;</code></pre>
-            </li>
-          </ol>
-        </section>
-
-        <section>
-          <h2>Updating <code>App.jsx</code> with orders</h2>
+        <section id="add-orders-app">
+          <h2>Adding orders to <code>App.jsx</code></h2>
 
           <p>Paste the following into your <b>App.jsx</b> file.</p>
 
-          <pre><button class="copy-code" id="btn-19">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-19" class="hljs language-javascript">
+          <pre><button class="copy-code" id="btn-20">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-20" class="hljs language-javascript">
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import RequiredAuth from "./util/authRoutes";
@@ -1218,11 +831,65 @@ function App() {
 }
 
 export default App;</code></pre>
+        </section>
+
+        <section id="update-home">
+          <h2>Updating your <code>HomePage.jsx</code> file</h2>
 
           <p>
-            Now, you can test the application by placing some orders and
-            visiting the orders page to verify them.
+            Into your <b>frontend/src/pages/HomePage.jsx</b> file, paste the
+            following:
           </p>
+
+          <pre><button class="copy-code" id="btn-19">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-19" class="hljs language-javascript">
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Grid } from "@mui/material";
+
+import NavBar from "../components/NavBar";
+import ProductCard from "../components/ProductCard";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = baseURL;
+
+const HomePage = () =&gt; {
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() =&gt; {
+    getProduct();
+  }, []);
+
+  const getProduct = async () =&gt; {
+    try {
+      const response = await axios.get(`${baseURL}/products`);
+      setProductList(response.data);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    &lt;&gt;
+      &lt;NavBar /&gt;
+      &lt;Grid container gap={3} sx={{ paddingTop: 2, paddingLeft: 3 }}&gt;
+        {productList.length !== 0 &&
+          productList.map((product) =&gt; (
+            &lt;Grid item key={product._id}&gt;
+              &lt;ProductCard
+                key={product._id}
+                product={product}
+                getProduct={() =&gt; getProduct()}
+              /&gt;
+            &lt;/Grid&gt;
+          ))}
+      &lt;/Grid&gt;
+    &lt;/&gt;
+  );
+};
+
+export default HomePage;
+</code></pre>
         </section>
       </article>
     </main>
