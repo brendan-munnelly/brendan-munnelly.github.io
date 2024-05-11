@@ -36,9 +36,9 @@ const OrdersPage = () => {
   const getOrders = async () => {
     const userId = localStorage.getItem("userId");
     try {
-      const response = await axios.get(`${baseURL}/order/${userId}`);
-      setOrders(response.data);
+      const response = await axios.get(`${baseURL}/orders/${userId}`);
 
+      setOrders(response.data);
       console.log(response.data);
     } catch (e) {
       console.log(e);
