@@ -100,6 +100,31 @@
 
 			</section>
 
+            <section>
+
+                <h2>Stacking layers in HTML/CSS</h2>
+
+                <p>You can create a 3D effect in a web page where one item overlaps another with the <span class="csyn">z-index</span> and <span class="csyn">position</span> CSS properties.</p>
+
+                <ul>
+                    <li><b>z-index</b>: HTML elements with higher <span class="csyn">z-index</span> values will display in front of elements with lower <span class="csyn">z-index</span> values. By default, elements have a <span class="csyn">z-index</span> of 0.</li>
+                    <li><b>position</b>: The <span class="csyn">z-index</span> property does not work with HTML elements that have the default <span class="csyn">position</span> property of <span class="csyn">static</span>.</li>
+                </ul>
+
+                <p>Here are the typical steps for creating a 3D layering effect:</p>
+
+                <ul>
+                    <li>Create a parent container such as a <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;section&gt;</span> or a <span class="syn">&lt;div&gt;</span> to contain the overlapping elements.  In your CSS file, give this parent container a <span class="csyn">position: relative</span> style.</li>
+                    <li>Inside this parent container, add a number of <span class="syn">&lt;div&gt;</span> elements that will overlap one another. In your CSS file, give each child element a <span class="csyn">position: absolute</span> style and a <span class="csyn">z-index</span> value to set the stacking order. Typically, you will want to set the overlapping child elements to fill the full space of their parent container. So, also add this style fule for each stacked child element:
+                    
+<pre class="language-html">
+    <span class="white">top: 0; right: 0; bottom: 0; left: 0;</span>
+</pre>                    
+                    
+                    </li>
+                </ul>
+
+            </section>
             
 
             <section id="sample-files" class="wrapper-content bg-white">
@@ -167,7 +192,7 @@
                 <p>Let's update the stylesheet so that the text 'stacks' in front of the image.</p>
                 <ol>
 
-                  <li>In the <b>hero-image.css</b> stylesheet, add these two new style rules to the <span class="csyn">header { }</span> declaration.
+                  <li>In the <b>hero-image.css</b> stylesheet, add this new style rule to the <span class="csyn">header { }</span> declaration.
 
                 <img src="assets/img/hero-block-image/vs-code-header.png" alt="screenshot"></li>
                 <li>At the end of the CSS file, add these three new declaration blocks.
@@ -186,7 +211,10 @@
                     
 <span class="token class">.hero-bg-media img</span> {
     <span class="token property">object-fit</span>: <span class="token value-text">cover</span>; <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token number">100%</span>;
-}</pre></li>
+}</pre>
+
+        The <span class="csyn">object-fit: cover</span> style rule tells the image to fill its <span class="csyn">.hero-bg-media</span> container while keeping its aspect ratio. Some parts of the image might be cropped if its proportions don’t match the container’s proportions.</li>
+
                 <li>Save the <b>hero-image.css</b> stylesheet.</li>
 
                 <li>Finally, switch to the <b>hero-image.html</b> web page, and add the following new line to the <span class="syn">&lt;head&gt;</span>, to just before the stylesheet link.
@@ -202,7 +230,23 @@
 
                 <img src="assets/img/hero-block-image/hero-image-no-shadow.jpg" alt="Project Hero Blocks">
 
+        <h3>About the <code>position: relative</code> CSS property</h3>
+        <p>The <span class="csyn">position: relative</span> property establishes a new positioning context for a parent element that has inside it child elements with a <span class="csyn">position: absolute</span> property.</p>
+
+        <p>Without <span class="csyn">position: relative</span>, the absolutely positioned child elements would be positioned relative to the entire document (<span class="syn">&lt;html&gt;</span> or <span class="syn">&lt;body&gt;</span>), not within the parent itself.</p>
+
+        <p>In summary, by adding <span class="csyn">position: relative</span> to the parent, the child elements are positioned relative to the parent container.</p>
 </section>
+
+
+
+
+
+
+
+
+
+
 
 <section>
                 <h2  id="add-shadow">Adding a text shadow</h2>
