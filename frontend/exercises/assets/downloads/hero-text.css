@@ -16,7 +16,7 @@ h1, h2, h3, h4, p, li { word-break: break-word; hyphens: auto }
 /* ============ CUSTOM PROPERTIES ============  */
 
 :root {
-    /* Color variables */
+    /* ==== Color variables ==== */
     --black-000: #000000;
     --white-000: #ffffff;
     --trans-000: transparent;
@@ -230,14 +230,14 @@ h1, h2, h3, h4, p, li { word-break: break-word; hyphens: auto }
     --trend-800: #1f364d;
     --trend-900: #0e2439;
 
-    /* Nicer than browser default fonts */
+    /* ==== Nicer than browser default fonts ==== */
     --font-sans: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
     --font-serif: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
     --font-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     
     --global-font: var(--font-sans);
 
-    /* Fluid font sizes */
+    /* ==== Fluid font sizes ==== */
     --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
     --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
     --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
@@ -251,40 +251,53 @@ h1, h2, h3, h4, p, li { word-break: break-word; hyphens: auto }
 /* Global font */
 body { font-family: var(--global-font); }
 
-.hero-block {
+
+/* ============= CSS FOR HERO BLOCK ============= */
+
+header {
+    /* Flexbox to centre child div vertically */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* Spacing around child div inside hero block */
+    padding: 0 20% 4% 20%;
+    /* Optionally, centre child div horizontally */
+    text-align: center;
+    /* Background colour */
     background-color: gray;
 }
 
+/* Set minimum height of hero block */
 @media (min-width: 768px) { 
-    .hero-block { min-height: 80vh }
+    header { min-height: 80vh } 
 }
-
 @media (max-width: 767px) { 
-    .hero-block { min-height: 500px; }
+    header { min-height: 500px } 
 }
 
-.hero-text-container { padding: 0 12% 4% 12% }
-
-.hero-block h1, .hero-block h2 {
+.hero-text-container h1, 
+.hero-text-container h2 {
     line-height: 1.2;
     color:#fff;
 }
 
-.hero-block h1 {
-    font-size: calc( var(--fs-xxxl) * 1.4);
+.hero-text-container h1 {
+    /* Space under h1 and above h2 */
     margin-bottom: 24px;
+    /* Set main heading to extra large size */
+    font-size: calc(var(--fs-xxxl) * 1.5);
+    /* When text extra large, decrease spacing between characters  */
+    letter-spacing: -4px;
 }
 
-.hero-block h2 {
+.hero-text-container h2 {
+    /* Optionally, remove default weight of 'bold' from h2 */
     font-weight: normal;
-    font-size: var(--fs-xxl);
+    font-size: var(--fs-xl);
+    /* Optionally, change text in h2 to all capital letters */
     text-transform: uppercase;
 }
 
-/* ================ UTILITY CLASSES ============= */
-.text-center { text-align: center }
+/* ======== END CSS FOR HERO BLOCK ======== */
 
 
