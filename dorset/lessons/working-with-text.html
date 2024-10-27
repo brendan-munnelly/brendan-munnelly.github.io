@@ -73,7 +73,11 @@
 			<p><a href="#css-font-style">Styling with <span class="code-text">font-style</span></a></p>
 			<p><a href="#css-text-align">Styling with <span class="code-text">text-align</span></a></p>
 			<p><a href="#css-letter-spacing">Styling with <span class="code-text">letter-spacing</span></a></p>
-
+			<p><a href="#custom-properties">About CSS custom properties</a></p>
+			<p><a href="#font-stack">CSS custom properties and the system font stack</a></p>
+			<p><a href="#fluid-typography-about">About fluid typography</a></p>
+			<p><a href="#fluid-type">Adding custom properties for fluid type sizes</a></p>
+			<p><a href="#github-upload">Uploading your work to Github</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
         </aside>
@@ -84,7 +88,7 @@
                 <h2>Learning Goals</h2>
                 <p>At the end of this Tutorial, you will be able to:</p>
                 <ul>
-                    <li>Recognise the most commonly used CSS text properties in web design. in web design. These are:<br>
+                    <li>Recognise the most commonly used CSS text properties in frontend development:<br>
                         &nbsp;&nbsp;font-family<br>
                         &nbsp;&nbsp;font-size<br>
                         &nbsp;&nbsp;font-weight<br>
@@ -179,7 +183,7 @@
 
             <section id="css-font-style">
                 <h2>Styling with <code>font-style</code></h2>
-                <p>The two basic values of <b>font-style</b> are <b>normal</b> and <b>italic</b>. By default, web browsers display both all headings, sub-headings and text paragraphs in the normal <b>font-style</b>.</p>
+                <p>The two basic values of <b>font-style</b> are <b>normal</b> and <b>italic</b>. By default, web browsers display all headings, sub-headings and text paragraphs in the normal <b>font-style</b>.</p>
 
 <pre class="language-css">
     <span class="token comment">/* These make no difference. Both are already normal by default. */</span>
@@ -258,7 +262,166 @@
             </section>
 
 
+            <section id="custom-properties">
 
+                <h2>About CSS custom properties</h2>
+                <p>CSS custom properties (also known as CSS variables) let you store values at the top of your CSS file and then reuse them throughout your CSS. They make your CSS styles more organised, flexible, and easier to update.</p>
+
+                <p>Typically, you:</p>
+                    <ul>
+                        <li>Place CSS custom properties after the == WEB BROWSER RESETS == in a CSS file, and</li>
+                        <li>Write them inside a so-called <b>:root {&nbsp; }</b> selector.</li>
+                </ul>    
+
+                <img src="assets/img/working-with-text/custom-properties-1.png" alt="custom-properties-1" style="max-width: 700px">
+
+                <p>CSS custom properties are most commonly used for font-families, fluid font-sizes, and colours. </p>
+
+                <p>CSS custom properties are created using two dashes <b>--</b> followed by a name, and then a value. For example:</p>
+
+                <img src="assets/img/working-with-text/custom-create.png" alt="create CSS custom properties" style="max-width: 600px">
+                <p>To use a custom property later in your CSS file, you would enter a style rule with the <b>var( &nbsp;)</b> function such as the following:</p>
+
+                <img src="assets/img/working-with-text/custom-use.png" alt="create CSS custom properties"  style="max-width: 600px">
+
+</section>
+
+
+        <section id="font-stack">
+            
+            <h2>CSS custom properties and the system font stack</h2>
+
+            <p>Modern frontends typically make use of the <i>system font stack</i> to display text in the most visually appealing way. The easiest way to use these fonts is to specify a generic font-family name as a custom property in your CSS.</p> 
+
+            <p>Follow these steps.</p>
+
+            <ol>
+                <li>In VS Code, open and display your <b>style-3.css</b> stylesheet.</li>
+                <li>Click after the == WEB BROWSER RESETS == and press the <kbd class="tutorial-key">Enter</kbd> key a few times to open up some space.</li>
+                <li>Copy and paste the following empty CSS custom properties container <b>{&nbsp; }</b> into your stylesheet.
+<pre class="language-css"><button class="copy-css" id="btn-1">Copy CSS { }</button><code id="strCode-1">
+<span class="comment">/* === CUSTOM PROPERTIES === */</span>
+<span class="yellow">:root {
+
+}</span></code></pre></li>
+
+
+<li>Inside the CSS custom properties container <b>{&nbsp; }</b>, copy-and-paste the following:
+<pre class="language-css"><button class="copy-css" id="btn-2">Copy CSS { }</button><code id="strCode-2">
+
+<span class="comment">/* Alternatives to default sans-serif font-family */</span>
+<span class="token property">--font-sans</span>: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
+
+<span class="comment">/* Alternatives to default serif font-family */</span>
+<span class="token property">--font-serif</span>: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+
+<span class="comment">/* Alternatives to default monospace font font-family */</span>
+<span class="token property">--font-monospace</span>: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;</code></pre></li>
+                <li>Use the <kbd class="tutorial-key">Tab</kbd> key to indent all the lines inside the <b>{ &nbsp;}</b>. Your CSS file should now look as follows.
+                <img src="assets/img/working-with-text/custom-properties-2.png" alt="custom-properties-2"></li>
+
+                <li>Typically, every web page on a website will mostly (or even entirely) use one font-family. At the end of your custom properties list, create a new one as follows to define the main font-family to be used by web pages linked to this CSS file.
+                <img src="assets/img/working-with-text/custom-properties-3.png" alt="custom-properties-3"></li>
+
+                <li>Next, assign this new CSS custom property to the <span class="csyn">body {&nbsp;}</span> selector in your CSS file as shown below.
+<img src="assets/img/working-with-text/custom-properties-5.png" alt="custom-properties-5"></li>
+
+                <li>When you save your <b>style-3.css</b> file, you can see that, on a Windows PC, the text is now displayed differently.
+<img src="assets/img/working-with-text/custom-properties-4.png" alt="custom-properties-4" style="max-width: 600px"></li>
+
+                <li>Let's update the <b>h2 { &nbsp; }</b> selector with a different <b>font-family</b>. Also, add a negative <b>letter-spacing</b> value.
+<img src="assets/img/working-with-text/custom-properties-6.png" alt="custom-properties-6" style="max-width: 640px"></li>
+
+                 <li>When you save your <b>style-3.css</b> stylesheet, each of the six <span class="syn">&lt;section&gt;</span> blocks of content in your web page should now look similar to the following.
+                <img src="assets/img/working-with-text/custom-properties-8.png" alt="custom-properties-8" style="max-width: 640px;margin-bottom: 0"></li>
+            </ol>
+        
+        </section>
+
+
+            <section id="fluid-typography-about" style="padding-top:0">
+                <h2>About fluid typography</h2>
+                <p>Fluid typography means that the font sizes of text &#8211; headings, paragraphs, bulleted lists, menu items &#8211; on a web page &#8216;scale&#8217; (shrink or expand) smoothly according to the width of the user&#8217;s device viewport.</p>
+    
+                <p>Here are some examples of web pages that did not use fluid typography to scale font sizes correctly for mobile phone screens.</p>
+    
+                <img src="assets/img/working-with-text/wall-of-shame.png" alt="fluid type examples" style="max-width: 600px">
+    
+    
+                <p>The animated gif below is taken from an article on the <a href="https://css-tricks.com/snippets/css/fluid-typography/" target="_blank">CSS Tricks</a> website that features the widely-used implementation of the fluid typography approach developed by Australian web designer <a href="https://www.madebymike.com.au/writing/fluid-type-calc-examples/" target="_blank" rel="noopener">Mike Riethmuller</a>.</p>
+    
+                <img src="https://css-tricks.com/wp-content/uploads/2017/02/css-fluid-text-calc.gif" style="max-width: 600px" alt="fluid typography">
+    
+                <p>The modern approach is to use the CSS <b>clamp()</b> function and include the range preset values as custom properties in your stylesheets.</p>
+    
+    
+                <p>You can then include the preset values as custom properties in your stylesheets. See the example below.</p>
+    
+            </section>
+    
+    
+            <section id="fluid-type">
+    
+                <h2>Adding custom properties for fluid type sizes</h2>
+    
+                <p>Follow these steps.</p>
+    
+                <ol>
+                    <li>Go to the <a href="https://www.fluid-type-scale.com/" target="_blank">Fluid Type Scale Calculator</a> website.</li>
+                    <li>Copy the preset font scale at the right of the screen.</li>
+                    <li>In VS Code, open your <b>style-3.css</b> stylesheet and paste in the copied responsive type scale. Typically, these CSS custom properties are located just after the system font stack custom properties.
+                    <img src="assets/img/working-with-text/custom-properties-9.png" alt="screenshot"></li>
+                    <li>Scroll down to <span class="csyn">h2 {}</span>, <span class="csyn">h3 {}</span> and <span class="csyn">p {}</span> selectors that contain the fixed <span class="csyn">font size:</span> values, and update them with fluid values as shown below.
+                    <img src="assets/img/working-with-text/custom-properties-10.png" alt="screenshot" style="max-width: 580px"></li>
+                </ol>
+    
+                <p>When finished, save your <b>style-3.css</b> stylesheet and display the web page at different screen sizes.</p>
+    
+            </section>
+    
+    
+
+            <section id="github-upload">
+                <h2>Uploading your work to Github</h2>
+        
+                <p>You are now ready to upload your work to your account on Github.</p>
+        
+                <ol>
+        
+                    <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">Github.com</a>. If you are not already signed in to your Github account, sign in now.
+                    <img src="assets/img/responsive-spacing/github-signin.png" alt="github-signin"></li>
+        
+                    <li>On your Github home page, click the name of the repository (‘repo’) that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on Github.
+                    <span class="inside-ol">&nbsp;</span>
+                    <b>username.github.io</b>
+        
+                    <img src="assets/img/responsive-spacing/github-repo-select.png" alt="github-signin" style="max-width: 600px"></li>
+        
+                    <li>On the next Github screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+                    <img src="assets/img/responsive-spacing/github-btn-add-file.png" alt="github-upload-portfolio" style="max-width: 620px"></li>
+        
+                    <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+        
+                    <img src="assets/img/responsive-spacing/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts" style="max-width: 620px"></li>
+        
+                    <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your <b>index.html</b> file and your 📁 <b>assets</b> and 📁 <b>exercises</b> sub-folders to upload them to your repository on Github.
+                    <img src="assets/img/responsive-spacing/github-upload-folder-files.png" alt="Introduction to HTML" style="max-width: 660px">
+                    </li>
+        
+                    <li>Scroll down to the bottom of the Github screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+        
+                    <li>Finally, click the green <b>Commit changes</b> button to upload your entire <b>exercises</b> sub-folder and all the files it contains.</li>
+        
+                </ol>
+        
+                <p>Your web pages are now published on Github at web addresses similar to the following, where <b>username</b> is the username you have chosen for your Github account:</p>
+        
+                <p><b>https://username.github.io/exercises/page-3.html</b>
+                </p>
+        
+        
+                <p>It may take a few minutes for your uploaded files to appear on Github.</p>
+            </section>
 
 
         </article>
@@ -268,7 +431,9 @@
 
     </footer>
 
-        <!-- JavaScript for Cookie Consent Popup Message -->
+    <script src="assets/js/utils.js"></script>
+    
+    <!-- JavaScript for Cookie Consent Popup Message -->
 	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
 	<script>
 	window.cookieconsent.initialise({
