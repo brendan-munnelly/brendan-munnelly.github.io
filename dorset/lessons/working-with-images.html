@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Working with Images | Front-end Development Tutorials</title>
+    <title>Working with Images and Videos| Front-end Development Tutorials</title>
     <meta name="description" content="Inserting images in a web page, styling images with drop shadow and rounded corner effects, and removing image backgrounds.">
 
     <!-- Stylesheet-->
@@ -55,7 +55,7 @@
             </div>
     
             <div class="content">
-                <h1>Working with Images</h1>
+                <h1>Working with Images and Videos</h1>
                 <h2>Inserting images in a web page, styling images with drop shadow and rounded corner effects, and removing image backgrounds.</h2>
             </div>
         </div><!-- /wrapper -->
@@ -77,8 +77,8 @@
             <p><a href="#sample-tourism">The <i>Tourism</i> web page</a></p>
             <p><a href="#sample-smoothies">The <i>Smoothies</i> web page</a></p>
             <p><a href="#sample-software">The <i>Software</i> web page</a></p>
-            <p><a href="#update-home-page-content">Your <i>home</i> web page</a></p>
-            <p><a href="#add-image-home-page">Adding an image to your home page</a></p>
+            <p><a href="#embed-video">Embedding a YouTube Video</a></p>
+            <p><a href="#update-home-page">Updating your website home page</a></p>
             <p><a href="#upload-github">Uploading your files to Github</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
@@ -404,9 +404,94 @@
             
             </section>
             
+            <section id="embed-video">
+
+                <h2>Embedding a YouTube Video</h2>
+                <p>Your next task ia to embed a video from YouTube into your <b>page-4.html</b> web page.</p>
+            
+                <ol>
+            
+                    <li>In the <b>page-4.html</b>, scroll down to just after the <span class="syn">h1</span> heading and press the <kbd class="tutorial-key">Enter</kbd> key a few times to open up some blank lines.
+                    
+                    <img src="assets/img/intro-images/vscode-1.png" alt="Web Design Project: Vincent van Gogh"></li>
+            
+                    <li>Next, click the link below to open a new web browser tab that displays a video on the YouTube website.
+                    <span class="inside-ol">&nbsp;</span>
+                    <a href="https://www.youtube.com/watch?v=wI2i5ca1RT4" target="_blank">Vincent van Gogh: The Humble Genius</a></li>
+            
+                    <li>Under the video, click the option named <b>SHARE</b>.
+                    
+                    <img src="assets/img/intro-images/van-gogh-embed-1.png" alt="Web Design Project: Vincent van Gogh"></li>
+            
+                    <li>From the choices now displayed, choose <b>Embed</b>.
+                    <img src="assets/img/intro-images/van-gogh-embed-2.png" alt="Web Design Project: Vincent van Gogh"></li>
+                    
+                    
+                    <li>From the pop-up box, click the <b>Copy</b> button.
+                    
+                    <img src="assets/img/intro-images/vg-copy.png" alt="Web Design Project: Vincent van Gogh">
+                    You can now close the YouTube web browser tab.</li>
+            
+                    <li>Return to VS Code and the <b>index.html</b> file.</li>
+            
+                    <li>Paste the copied YouTube embed code into your web page.
+                    <img src="assets/img/intro-images/vscode-2.png" alt="Web Design Project: Vincent van Gogh"></li>
+            
+                    <li>In your web browser, reload and view your <b>index.html</b> web page.
+                    <span class="inside-ol">&nbsp;</span>
+                    It may take a few seconds for the embedded video to load, depending on the speed of your Internet connection.
+                
+                </li>
+            
+                </ol>
+
+
+
+                <h3>Making the video responsive</h3>
+            
+                <p>The problem with embedding YouTube videos directly is that they are positioned in an <span class="syn">iframe</span> container. You cannot make an iframe responsive. A fixed width and height need to be set for it.</p>
+                
+                <p>Follow these steps to make the embedded video scale according to the width of the user’s screen.</p>
+                
+                <ol>
+                    <li>In your <b>index.html</b> file, ‘wrap’ the Youtube video code in a new container as follows:
+                    
+<pre class="language-html">&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"video-container"</span>&gt;
+   &lt;<span class="blue-dark">iframe</span> <span class="blue-light">src</span>=<span class="brown">"https://www.youtube.com/embed/wI2i5ca1RT4"</span> <span class="blue-light">frameborder</span>="0" <span class="blue-light">allow=</span><span class="brown">"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"</span> <span class="blue-light">allowfullscreen</span>&gt;&lt;/<span class="blue-dark">iframe</span>&gt;  
+&lt;/<span class="blue-dark">div</span>&gt;
+</pre></li>
+            
+                <li>In VS Code, switch to the <b>van-gogh.css</b> stylesheet.</li>
+            
+                <li>At the bottom of the stylesheet, copy-and-paste the following.
+            
+<pre class="language-css"><span class="token class">.video-container</span> {
+    <span class="token property">position</span>: <span class="token value-text">relative</span>;
+    <span class="token property">width</span>: <span class="token number">100%</span>;
+    <span class="token property">aspect-ratio</span>: <span class="token number">16 / 9</span>;
+    <span class="token property">margin-bottom</span>: <span class="token number">32px</span>;
+}
+                      
+<span class="token class">.video-container iframe</span> {
+    <span class="token property">position</span>: <span class="token value-text">absolute</span>;
+    <span class="token property">width</span>: <span class="token number">100%</span>;
+    <span class="token property">height</span>: <span class="token number">100%</span>;
+}
+</pre>
+</li>
+            
+                <li>In your web browser, reload and view your <b>index.html</b> web page on desktop/laptop and mobile screens.</li>
             
             
-            <section id="update-home-page-content" class="wrapper-content bg-white">
+                </ol>
+
+
+            </section>
+
+
+            
+            
+            <section id="update-home-page" class="wrapper-content bg-white">
                 <h2>Updating your website home page</h2>
             
                 <p>Now that you have created and styled four new web pages, let&#8217;s add hyperlinks to these new pages to the &#8216;home page&#8217; of your web site. </p>
@@ -440,11 +525,8 @@
             
                 <p>Save your <b>index.html</b> web page and view the result in your browser.</p>
 
-            </section>
-
-            <section>
-        
-                <h2 id="add-image-home-page">Adding an image to your home page</h2>
+       
+                <h3 id="add-image-home-page">Adding an image to your home page</h3>
 
                 <p>Before adding images to the pages of your personal website, you need to create a sub-folder to store them.</p>
 
@@ -484,6 +566,7 @@
                 <p>✅ &nbsp;Another task complete.</p>
 
             </section>
+
             
             <section id="upload-github" class="wrapper-content bg-white">
                 <h2>Uploading your files to Github</h2>
