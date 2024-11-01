@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>1: Adding JavaScript to a Web Page | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+
+	<style>
+        h2 code, h3 code { font-weight: normal !important }
+        h3 code { letter-spacing: 0px !important }
+        span.grey { color: lightgray }
+        main pre { padding: 12px 12px 12px 22px !important }
+    </style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+    <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    
+</head>
+  
+    <body id="top">
+  
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+  
+      <header>
+          <div class="wrapper">
+              <div class="sidebar">
+                  <div>
+                      <p>&nbsp;</p>
+                  </div>
+              </div>
+  
+              <div class="content">
+                <h1>1: Adding JavaScript to a Web Page</h1>
+                <h2>Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.</h2>
+              </div>
+          </div><!-- /wrapper -->
+      </header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#script-tag">JavaScript and the &lt;script&gt; tag</a></p>
+				<p class="toc-indent"><a href="#external-files">External JavaScript files</a></p>
+				<p><a href="#dev-tools">Working with web browser DevTools</a></p>
+				<p class="toc-indent"><a href="#dev-tools-position">Changing the DevTools position</a></p>
+				<p class="toc-indent"><a href="#dev-tools-font-size">Changing the DevTools font size</a></p>
+				<p><a href="#dev-tools-working">Working with the JavaScript Console</a></p>
+				<p><a href="#ai-tools">JavaScript and AI tools</a></p>
+				<p><a href="#exercises">Exercises</a></p>
+
+	
+			</aside>
+	
+	<article>
+	
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+		<div class="box-goals">
+			<ul>
+				<li>Use the <span class="syn-js">&lt;script&gt;</span> tag to include JavaScript code in a HTML file and to link to external JavaScript files.</li>
+				<li>Ensure that JavaScript code is <i>non-blocking</i> &#8212; it does not delay the loading of the HTML content.</li>
+				<li>Ensure that JavaScript code does not attempt to access the HTML content until the HTML has been fully loaded.</li>
+				<li>Open and use the JavaScript Console in your web browser&#8217;s DevTools.</li>
+			</ul>
+		</div>
+
+
+	</section>
+
+	<section>
+				
+		<div class="code-snippets">
+			<h3 style="margin-top:0">Exercise Files</h3>
+	
+			<p>To work with the exercise files in this and later Tutorials:</p>
+			<ul style="margin-bottom: 12px">
+				<li>Create a new folder named <b>javascript</b>.</li>
+				<li>In this, create a sub-folder named <b>exercises</b>.</li>
+			</ul>
+			<p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new sub-folder named <b>1</b>.</p><p>Save the two exercise files below to this new <b>javascript/exercises/1</b> sub-folder.</p>
+
+			<p>📄  &nbsp;<a download="index.html" href="/javascript/1-adding-js-to-a-web-page/exercises/"><b>index.html</b></a></p>
+			<p>📄  &nbsp;<a download="script.js"  href="exercises/script.js"><b>script-1.js</b></a></p>
+
+		</div>
+
+	</section>
+
+
+<section>
+
+	<h2 id="script-tag">JavaScript and the <span>&lt;script&gt;</span> tag</h2>
+	<p>The most efficient ways to add JavaScript to a web page are as follows:</p>
+
+	<div class="flex-50">
+		<img src="assets/img/adding-js-to-web-pages/load-script-page-bottom.png" alt="JavaScript">
+		<div><p>If your JS code is in the HTML file, add it to the bottom before <span class="syn-js">&lt;/body&gt;</span> tag. Script loads <i>after</i> web page has been fully loaded.</p></div>
+	</div>
+
+
+	<div class="flex-50">
+		<img src="assets/img/adding-js-to-web-pages/load-script-page-top-defer.png" alt="JavaScript">
+		<div><p>Add external JS file(s) to the <span class="syn-js">head</span> with <span class="syn-js">defer</span> attribute. Files load &#8216;in the background&#8217; in order placed. Only run <i>after</i> web page is fully loaded.</p></div>
+
+	</div>
+
+
+	<p>Both methods are:</p>
+	
+	<ul>
+		<li><b>Non-blocking</b>: Loading the JS code does not delay rendering of the HTML. So users experience faster page load time. And you should see fewer audit messages like this on Google"s <a href="https://pagespeed.web.dev/" target="_blank">PageSpeed Insights</a> site.
+		<img src="assets/img/adding-js-to-web-pages/render-blocking.png" alt="JavaScript" style="max-width: 640px"></li>
+		<li><b>Access to HTML elements</b>: The JS code will try to access elements in the HTML file only <i>after</i> the file is loaded. So you should not see errors like this in the JavaScript Console.
+		<img src="assets/img/adding-js-to-web-pages/console-error-message.png" alt="JavaScript">
+		</li>
+	</ul>
+
+	<h3 id="external-files">External JavaScript files</h3>
+
+		<p>Here are the benefits of using external JavaScript files:</p>
+		
+		<ul>
+			<li>They separate HTML and JavaScript code.</li>
+			<li>They make the HTML and JavaScript easier to read and maintain</li>
+			<li>On multi-page websites, cached JavaScript files can speed up page loads.</li>
+		</ul>
+		
+		<p>Do not include <span class="syn-js">&lt;script&gt;</span> tags in external JavaScript files.</p>
+	
+	</section>
+
+<section>
+
+	<h2 id="dev-tools">Working with web browser DevTools</h2>
+
+	<p>Your web browser&#8217;s Developer Tools (also known as DevTools) includes a JavaScript Console. To display this:</p>
+
+	<ul>
+		<li><b>Windows (all browsers)</b>: Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd></li>
+		<li><b>Mac (Safari browser)</b>: Press <kbd> &#8984; </kbd> + <kbd> &#8997; </kbd> + <kbd>I</kbd>.</li>
+	</ul>
+
+	<h3 id="dev-tools-position">Changing the DevTools position</h3>
+	<p>To position or &#8216;dock&#8217; the DevTools window:</p>
+	<ol>
+		<li>Open the DevTools window.</li>
+		<li>Near the top-right of the DevTools window, click the ellipses (three dots) icon.
+		<img src="assets/img/adding-js-to-web-pages/docking-1.png" alt="JavaScript">
+		</li>
+		<li>Click the docking position you want for the DevTools window.</li>
+	</ol>
+
+	<p>Below is an example of the DevTools window docked on the right.</p>
+
+	<img src="assets/img/adding-js-to-web-pages/devtools-right.png" alt="JavaScript">
+
+	<p>And here is an example of the DevTools window docked along the bottom.</p>
+
+	<img src="assets/img/adding-js-to-web-pages/devtools-bottom.png" alt="JavaScript">
+
+
+	<h3 id="dev-tools-font-size">Changing the DevTools font size</h3>
+	<p>To change the font size in the DevTools window, select the window, and then press the <b>Ctrl</b> key followed by the plus (<b>+</b>) or minus (<b>-</b>) key. To reset, press <b>Ctrl</b> and <b>0</b>.</p>
+
+	<h3 id="dev-tools-working">Working with the JavaScript Console</h3>
+	<p>Of the various tabs shown across the top of DevTools window, click <b>Console</b> to display the JavaScript Console.</p>
+
+	<img src="assets/img/adding-js-to-web-pages/console-tab.png" alt="JavaSript">
+
+	<p>You can use the Console to display or &#8216;log&#8217; information as part of your JavaScript coding process.</p>
+
+	<ul>
+		<li>Any coding errors will appear in the Console, along with the line number and a short explanatory message.</li>
+		<li>In your code, you can use <span class="syn-js">console.log()</span> statements to inspect the values of variables and properties of objects.</li>
+	</ul>
+
+
+		<p>In summary, the JavaScript Console provides an environment similar to a terminal shell interface to try out JavaScript code in real-time.</p>
+
+</section>
+
+
+<section>
+
+	<h2 id="ai-tools">JavaScript and AI tools</h2>
+	<p>There are lots of AI tools to help you on your JavaScript learning journey. For example:</p>
+
+	<ul>
+		<li><a href="https://copilot.microsoft.com/" target="_blank">Microsoft Copilot</a></li>
+		<li><a href="https://chat.openai.com/" target="_blank">ChatGPT</a></li>
+		<li><a href="https://gemini.google.com/" target="_blank">Google Gemini</a></li>
+		<li><a href="https://claude.ai/" target="_blank">Claude</a></li>
+
+	</ul>
+
+	<p>With these services, you will obtain better, more focused results if you begin by entering a persona such as the following:</p>
+
+<pre class="text"><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1">
+You are a skilled and experienced JavaScript developer and instructor. You have 
+a special skill in explaining modern ES5/ES6 JavaScript concepts, features and best
+practices. Please respond to my questions and requests with basic, 
+step-by-step directions supported by sample code snippets. 
+Please display "read" to acknowledge. Thank you.</code></pre>
+
+	<p>In VS Code, install the following two extensions:</p>
+
+	<ul>
+		<li>GitHub Copilot</li>
+		<li>GitHub Copilot Chat</li>
+	</ul>
+
+	<img src="assets/img/adding-js-to-web-pages/github-extensions.png" alt="screenshot" style="max-width: 540px">
+
+</section>
+
+
+	<section>
+		<h2 id="exercises">Exercises</h2>
+		<p>Follow these steps:</p>
+
+		<ol>
+			<li>Open the <b>index.html</b> web page. Just before the closing <span class="syn">&lt;/body&gt;</span> tag, enter the following JavaScript code snippet:
+			<img src="assets/img/adding-js-to-web-pages/log-1.png" alt="screenshot" style="max-width: 700px"></li>
+
+			<li>Save and reload the web page. You should see the following message in your browser"s JavaScript Console:
+			<img src="assets/img/adding-js-to-web-pages/log-1n.png" alt="screenshot" style="max-width: 700px"></li>
+
+			<li>In the <b>index.html</b> file, add the following line just before the closing <b>&lt;/head&gt;</b> tag.
+			
+			<img src="assets/img/adding-js-to-web-pages/log-1n1.png" alt="screenshot" style="max-width: 700px"></li>
+
+			<li>Open the <b>script-1.js</b> file and add the following new line:
+			<img src="assets/img/adding-js-to-web-pages/log-2.png" alt="screenshot" style="max-width: 700px"></li>
+
+			<li>Save the JavaScript file and reload the web page. You should see the following message in the JavaScript Console:
+			<img src="assets/img/adding-js-to-web-pages/log-4.png" alt="screenshot" style="max-width: 700px"></li>
+		</ol>
+
+	</section>
+
+</article>
+
+	</main>
+
+	<footer>
+		<!--Footer content goes here -->
+	</footer>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>
+
+	<!-- JavaScript for Cookie Consent Popup Message -->
+		<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+		<script>
+		window.cookieconsent.initialise({
+			  "palette": {
+				"popup": {
+					"background": "#000"
+				},
+				"button": {
+					"background": "#f1d600"
+				}
+			},
+			  "content": {
+				"href": "https://www.munnelly.com/legal/index.html"
+			}
+		});
+		</script>
+
+</body>
+</html>
+
