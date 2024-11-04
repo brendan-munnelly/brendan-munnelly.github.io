@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Function declarations | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating function declarations, passing arguments to their parameters, and returning values back to the calling program.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Function Declarations</h1>
+					<h2>Creating function declarations, passing arguments to their parameters, and returning values back to the calling program.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#about-functions">About functions</a></p>
+				<p class="toc-indent"><a href="#function-names">Function names</a></p>
+				<p class="toc-indent"><a href="#function-code-blocks">Functions and code blocks</a></p>
+				<p><a href="#function-declarations">Function declarations</a></p>
+				<p class="toc-indent"><a href="#function-coding styles">Function declarations and coding styles</a></p>
+				<p class="toc-indent"><a href="#function-declarations-hoisted">Function declarations are <i>hoisted</i></a></p>
+				<p><a href="#passing-values">Passing values to functions</a></p>
+				<p class="toc-indent"><a href="#functions-parameters">Parameters and arguments</a></p>
+				<p class="toc-indent"><a href="#multiple-parameters">Functions with multiple parameters</a></p>
+				<p><a href="#functions-return-values">Functions and return values</a></p>
+				<p class="toc-indent"><a href="#too-few">No or too few arguments passed to a function</a></p>
+				<p class="toc-indent"><a href="#too-many">Too many arguments passed to a function</a></p>
+				<p><a href="#functions-scope">Functions and scope</a></p>
+				<p><a href="#when-to-use">Function declarations: When to use</a></p>
+				<p><a href="#further-resources">Further resources</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+	
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create a <i>function declaration</i>.</li>
+			<li>Pass input values as arguments to function parameters.</li>
+			<li>Assign an output value returned by a function to a variable.</li>
+			<li>Add default input values in function parameters.</li>
+			<li>Know the difference between global and local function-scoped variables.</li>
+			<li>Recognise that function declarations are <i>hoisted</i>.</li>
+		</ul>
+
+	</section>
+
+
+	<div class="code-snippets" style="margin-bottom:32px">
+		<p>Download a new workfile on your computer as described at the link below.</p>
+		<p>📄 &nbsp;<a href="assets/workfiles/functions.html" target="_blank"><b>Functions</b>: Exercises</a></p>
+	</div>
+
+
+	<section class="theme-dark" id="about-functions">
+
+        <h2>About functions</h2>
+        <p>Functions are the building blocks of a programming language. You can think of a function as a &#8216;box&#8217; or &#8216;sub-program&#8217; that stores some code inside it and often some values too.</p>
+        
+        <p>In summary:</p>
+        
+        <ul>
+            <li>A function is a block of code that performs a particular task.</li>
+            <li>Whenever the program needs that task to be performed, it <i>invokes</i> (&#8216;calls&#8217; or &#8216;fires&#8217; or &#8216;triggers&#8217;) the function and runs the code inside it.</li>
+        </ul>
+	
+		<img src="assets/img/functions-declarations/functions-diagram.png" alt="JavaScript functions diagram" style="max-width: 600px">
+
+		<p>Dividing your program into functions brings one huge advantage: You need to write the code inside functions only once &#8211; but the program can invoke and run the functions as many times as is needed.</p>
+
+        <p>In short, functions are reusable ♻️ code blocks.</p>
+		
+	    <h3 id="function-names">Function names</h3>
+		<p>In a JavaScript program, you can invoke a function by typing its name, followed by a parenthesis <span class="syn-js">()</span>. Usually, developers add a semi-colon <span class="syn-js">;</span> at the end. For example:</p>
+
+		<pre class="language-js"><span class="yellow">displayMessage</span>();</pre>
+
+        <p>There is no space between the function name and the parenthesis.</p>
+
+		<p>Here are some important points about naming functions in JavaScript:</p>
+	
+		<ul>
+			<li><b>Names must be unique</b>: Not every function need to have a name. (Functions can be <a href="functions-anonymous.html">anonymous</a>) But when a function has a name, that name must be unique. No two functions in the same scope may have the same name.</li>
+
+			<li><b>No spaces or hyphens</b>: Like variable names, function names may not contain spaces.</li>
+
+			<li><b>Mixed character case</b>: Developers typically combine upper and lowercase letters in a function name to make the name easier to read. This convention is known as <i>camelCase</i>. For example:<br>
+			<span class="syn-js">setFontSize()</span><br>
+			<span class="syn-js">calculateTax()</span>.</li>
+
+			<li><b>Case sensitivity</b>: Function names are case-sensitive. The following are two different function names:<br>
+			<span class="syn-js">UpdateTotal()</span><br>
+			<span class="syn-js">updateTOTAL()</span></li>
+
+		</ul>
+	  
+		<p>It's always a good idea to start a function name with an imperative verb (an action word) that describes what the function does. For example:</p>
+
+		<p><span class="syn-js"><b>add</b>Something()</span><br>
+		<span class="syn-js"><b>update</b>Something()</span><br>
+		<span class="syn-js"><b>calculate</b>Something()</span><br>
+		<span class="syn-js"><b>move</b>Something()</span><br>
+		<span class="syn-js"><b>display</b>Something()</span><br></p>
+	
+		<h3 id="function-code-blocks">Functions and code blocks</h3>
+        <p>In JavaScript, a code block is some code inside curly braces <span class="syn-js"><b>{ }</b></span>. The code inside a function is named the <i>function body</i> and can contain or or more statements.</p>
+				
+		<p>Typically, developers use the <kbd class="tutorial-key">Tab</kbd> key to indent the function body from the left to make the function easier to read.</p>
+
+		<img src="assets/img/functions-declarations/code-blocks.png" alt="JavaScript code blocks" style="max-width: 500px">
+
+		<img src="assets/img/functions-declarations/" alt="">
+
+		<p>JavaScript functions may be created in different ways. Two of the most common are <i>function declarations</i> and <i>function expressions</i>. See below.</p>
+
+	</section>
+
+    <section class="theme-dark" id="function-declarations">
+
+        <h2>Function declarations</h2>
+        <p>One way to create a function is to <i>declare</i> it with the relevant JavaScript <i>keyword</i>, much in the same way you would declare a variable.</p>
+
+		<ul>
+			<li>You declare a variable with the <span class="syn-js">const</span> or <span class="syn-js">let</span> keywords.</li>
+			<li>You declare a function with the <span class="syn-js">function</span> keyword.</li>
+		</ul>
+		
+		<p>Copy the sample function declaration below to your <b>functions.html</b> workfile, within the <span class="syn">&lt;script&gt;</span> tag near the bottom of the web page:</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== FUNCTION DECLARATIONS ========
+
+// Function declaration	
+function displayGreeting() {
+   console.log('Hello, world!');
+}
+// Outputs 'Hello, world!' to Console when called
+</code></pre>
+
+        <p>Here is the syntax of a function declaration:</p>
+        
+        <ul>
+            <li>Begins with the <span class="syn-js">function</span> keyword.
+			<img src="assets/img/functions-declarations/function-declaration-1.png" alt="JavaScript function declaration keyword" style="max-width: 440px; margin-top: 4px"></li>
+            
+			<li>Then, after a space, comes the function name.
+			<img src="assets/img/functions-declarations/function-declaration-2.png" alt="JavaScript function declaration function name"  style="max-width: 440px; margin-top: 4px"></li>
+            <li>Then, without a space, is a pair of parentheses <span class="syn-js">()</span>. This may include one or more parameters separated by commas.<img src="assets/img/functions-declarations/function-declaration-3.png" alt="JavaScript function declaration parenthesis"  style="max-width: 440px; margin-top: 4px"></li>
+            <li>Finally, inside a code block <span class="syn-js">{&nbsp;}</span>, you type the function's code.<img src="assets/img/functions-declarations/function-declaration-4.png" alt="JavaScript function declaration code block"  style="max-width: 440px; margin-top: 4px"></li>
+        </ul>
+
+		<p>Functions only run when they are called. You would call this function as shown below.</p>
+		<img src="assets/img/functions-declarations/function-declaration-5.png" alt="JavaScript function declaration calling"  style="max-width: 440px; margin-top: 4px">
+
+		<p>Update your <b>functions.html</b> workfile as follows:</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Function declaration	
+function displayGreeting() {
+   console.log('Hello, world!');
+}
+
+displayGreeting(); // Outputs 'Hello, world!' to Console </code></pre>
+
+		<h3 id="function-coding styles">Function declarations and coding styles</h3>
+		<p>Developers write function declarations in slightly different ways.</p>
+		
+		<ul>
+			<li>The space after the pair of parenthesis <span class="syn-js">()</span> and before the opening brace <span class="syn-js">{</span> of the code block is optional.</li>
+			<li>And some developers begin the code block <span class="syn-js">{&nbsp;}</span> on a new line. All three examples below will run correctly.</li>
+		</ul>
+
+		<img src="assets/img/functions-declarations/function-declaration-styles.png" alt="JavaScript function declaration styles">
+
+		<h3 id="function-declarations-hoisted">Function declarations are <i>hoisted</i></h3>
+
+        <p>Function variables are <i>hoisted</i>. This means you can call them <i>before</i> or <i>after</i> they are declared. Both of the code samples below will run without error.</p>
+
+		<img src="assets/img/functions-declarations/function-declaration-hoisted.png" alt="JavaScript function declaration hoisted">
+
+	</section>
+
+	<section id="passing-values">
+
+		<h2>Passing values to functions</h2>
+
+		<p>Typically, you will want to provide some information to a function for the function to perform its task. You can think of this as ‘feeding’ the function.</p>
+
+		<p>Technically, ‘feeding’ a function is called passing a value to the function. You pass a value – or maybe multiple values – to a function when you invoke (call or fire) the function.</p>
+
+		<h3 id="functions-parameters">Parameters and arguments</h3>
+		<p>A variable that stores the expected input to a function is called a <i>parameter</i>.</p>
+		
+		<ul>
+			<li>You specify the parameter(s) expected by a function when you create the function.</li>
+			<li>You type the parameter(s) inside the parenthesis <span class="syn-js">()</span> of the function.</li>
+		</ul>
+
+		<p>See the examples below.</p>
+
+		<img src="assets/img/functions-declarations/functions-parameters-1.png" alt="JavaScript function parameters">
+
+		<p>In the above example, the parameter <b>product_price</b> is part of the function declaration. In other words, it is created as part of the function. There is no need to create this parameter as a variable separately.</p>
+
+		<p>Parameters are what you specify when you create the function. <i>Arguments</i> are what you pass to the function when you call the function.</p>
+
+		<img src="assets/img/functions-declarations/function-pass-values-1.png" alt="JavaScript function passing values" style="max-width: 680px">
+		
+		<p>In the example above:</p>
+			
+		<ul>
+			<li>A function is created with a <i>parameter</i> named <span class="syn-js">age</span>. This never changes.</li>
+			<li>When the function is called, an <i>argument</i> of <span class="syn-js">21</span> is passed to the function. This argument value can be different every time you call the function.</li>
+		</ul>
+
+
+		<p>Add the following to your <b>functions.html</b> workfile:</p>
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Function declaration with parameter
+function showNumber(num) {
+   console.log(`Number passed as parameter is: ${num}`);
+}
+
+// Function call with argument
+showNumber(21); </code></pre>
+
+		<p>Test your function by changing the argument value of <b>21</b> to a different number.</p>
+
+
+
+		<h3 id="multiple-parameters">Functions with multiple parameters</h3>
+		<p>A function may accept multiple parameters, separated by a <span class="syn-js">,</span> comma. The space between parameters is optional.</p>
+
+		<p>Copy the following to your <b>functions.html</b> workfile:</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Function declaration with two parameters
+function addTwoNumbers(num1, num2) {
+    // Outputs the sum of two numbers
+    console.log(`Sum is : ${num1 + num2}`); 
+}
+
+// Function call with two arguments
+addTwoNumbers(1, 2);
+</code></pre>
+
+		<p>In JavaScript tutorials, you will often see the words ‘parameter’ and ‘argument’ written as follows:</p>
+
+		<img src="assets/img/functions-declarations/function-pass-values-3.png" style="max-width: 600px" alt="JavaScript function passing values">
+
+		</section>
+
+
+
+
+	<section id="functions-return-values">
+
+		<h2>Functions and return values</h2>
+		<p>Consider the function below you previously entered to your workfile.</p>
+
+		<img src="assets/img/functions-declarations/function-return-1.png" alt="JavaScript function return values" style="max-width: 600px">
+
+	<p>Note the following:</p>
+	<ul>
+		<li>The function accepts two input parameter values, adds them, and outputs the result to the web browser console.</li>
+		<li>The functions does not return a value back to anywhere else in the program. (Or, more exactly, it returns a value of <i>undefined</i>.)</li>
+	</ul>
+
+	<p>How can the calling code (the code outside the function) access and use the result of the function?</p>
+
+	<p>Two steps are required:</p>
+
+	<ul>
+		<li>Add a new last line to the function with the <span class="syn-js">return</span> keyword to send back the function's output to the calling code.
+		<img src="assets/img/functions-declarations/function-return-2.png" alt="screenshot" style="max-width:700px"></li>
+		<li>Create a variable in the calling program and assign to it the output returned by the function.
+		<img src="assets/img/functions-declarations/function-return-3.png" alt="screenshot" style="max-width:700px"></li>
+	</ul>
+
+	<p>Update your function in the <b>functions.html</b> workfile as shown above and verify it runs correctly.</p>
+
+	<p>Another feature of the <span class="syn-js">return</span> keyword is that it stops the function from executing any further code. Any line(s) of code after the <span class="syn-js">return</span> statement are ignored.</p>
+
+	<p>You can verify this by updating your function as shown below:</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Function declaration with two parameters
+function addTwoNumbers(num1, num2) {
+    // Returns the sum of two numbers
+    return (num1 + num2);
+    // Outputs the sum of two numbers
+    console.log(`Sum is : ${num1 + num2}`);  // Line will not be executed
+}
+
+// Function call with two arguments
+let result = addTwoNumbers(1, 2);
+console.log(`Returned result: ${result}`);</code></pre>	
+
+		<p>When you run the code, you will see that the line of code that outputs the sum of the two numbers is not executed.</p>
+
+			<p>What happens if the number of arguments passed to a function is different to the number of parameters the function expects to receive?</p>
+
+			<p>Let's look at the two possibilities.</p>
+
+			<h3 id="too-few">No or too few arguments passed to a function</h3>
+
+			<p>In this case, the function gives the missing parameter the default value of <span class="syn-js">undefined</span>.</p>
+			
+			<p>Copy the following to your <b>functions.html</b> workfile:</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">
+// Function declaration with one parameter that expects one argument
+function showMessage(message) {
+   console.log(message);
+}
+
+// Function called without passing an argument
+showMessage(); // Outputs 'undefined'
+</code></pre>
+
+		<p>To prevent such a mistake from throwing an error in your code, you can assign a default value to a function parameter. Update your function as shown below.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">
+function showMessage(message="An error occured. Contact support.") {
+   console.log(message);
+}
+
+showMessage(); // Outputs "An error occured. Contact support."
+showMessage('Hi, there'); // Outputs 'Hi, there!'
+</code></pre>
+
+			<p>This will prevent an error that would &#8216;freeze&#8217; the code and prevent it running further.</p>
+
+			<h3 id="too-many">Too many arguments passed to a function</h3>
+		
+			<p>In this case, the function simply ignores the excess arguments.</p>
+		
+			<p>Copy the following to your <b>functions.html</b> workfile:</p>			
+		
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">averageThreeNums = (x,y,z) =&gt; {
+   console.log(`Average of three numbers is: ${(x + y + z)/3}`);
+}
+		
+averageThreeNums(1,2,3,4,5,6); <span class="comment">// ignores 4, 5, 6</span>
+averageThreeNums(1,2,3,4,5); <span class="comment">// ignores 4, 5</span>
+averageThreeNums(1,2,3,4); <span class="comment">// ignores 4</span>
+averageThreeNums(1,2,3); <span class="comment">// result is always '2'</span></code></pre>
+		
+
+
+</section>
+
+
+<section id="functions-scope">
+	<h2>Functions and scope</h2>
+	<p>The word <i>scope</i> means the availability of a variable or other item in a particular area of a program. </p>
+
+	<ul>
+		<li><b>Global scope</b>: This is the area outside any functions in the program.
+		<img src="assets/img/functions-declarations/variable-scope-global.png" alt="JavaScript function passing values" style="max-width: 600px">
+		<span class="inside-ol">&nbsp;</span>
+		Variables defined in the global scope can be accessed and altered from any function or code block anywhere in the program.</li>
+		<li><b>Local scope</b>: Variables declared inside a function are <i>local</i> to that function.
+		<img src="assets/img/functions-declarations/variable-scope-local.png" alt="JavaScript function passing values" style="max-width: 700px">
+		<span class="inside-ol">&nbsp;</span> 
+		Every function has its own scope. The same variable name can be used in different functions because local variables are not accessible across functions.</li>
+	</ul>
+
+	</section>
+
+	<section id="when-to-use">
+	
+		<h2>Function declarations: When to use</h2>
+		<p>Function declarations are typically used to create standalone code blocks in a program&#8217;s global scope. Or they may be nested in the direct the scope of other functions.</p>
+
+		<p>In a typical JavaScript program, it would be common for a function declaration may be called more than once by other code blocks in the program.</p>
+
+		<p>It is <i>not recommended</i> to use function declarations inside conditionals (if) and loops (while, for).</p>
+
+	</section>
+
+	<section id="further-resources">
+
+		<h2>Further resources</h2>
+		<p>Below are links to two helpful YouTube videos about function declarations in JavaScipt.</p>
+		<div class="box-toc">
+			<p><a href="https://www.youtube.com/watch?v=FOD408a0EzU" target="_blank">How To Create/Use Functions: <span style="font-weight: normal">Web Dev Simplified</span></a></p>
+			<p><a href="https://www.youtube.com/watch?v=HFaxylC7bUc" target="_blank">JavaScript Functions are Easy: <span style="font-weight: normal">Bro Code</span></a></p>
+
+		</div>
+
+
+	</section>
+
+
+	<!-- <p>Local scope can be divided into <i>function scope</i> and <i>block scope</i>.</p>
+
+	 <h3 id="function-scope">Function scope</h3>
+	<p>Whenever you declare a variable in a function, the variable is visible only within the function. You cannot access it outside the function.</p>
+	
+	<p><span class="syn-js">var</span> is the keyword to define a variable for function-scope accessibility.</p>
+
+	<h3 id="block-scope">Block scope</h3>
+	<p>Block scope is the area within <span class="syn-js">if</span> and <span class="syn-js">switch</span> conditions, and within <span class="syn-js">for</span> and <span class="syn-js">while</span> loops.</p>
+		
+	<p>As a general rule, whenever you see parenthesis <span class="syn-js">{}</span>, it is a code block.</p>
+	
+	<p>The <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords enable you to declare variables in the block scope. These variables are accessible only within their code blocks.</p> -->
+
+
+<!--
+
+
+https://www.youtube.com/watch?v=cMt9U6kCWsM
+
+https://www.youtube.com/watch?v=HFaxylC7bUc
+
+https://www.youtube.com/watch?v=gigtS_5KOqo
+
+https://www.youtube.com/watch?v=j1laALb8OVM
+
+https://www.youtube.com/watch?v=W6QaDqud66Y&list=PLyuRouwmQCjm_RIe2_W4-7cqD_5C_zqVu
+
+Anonymous functions
+https://www.youtube.com/watch?v=Y8dztLmscwc
+
+Callbacks
+https://www.youtube.com/watch?v=7UMuJMiNjSk&t=215s
+
+Function expressions
+https://www.youtube.com/watch?v=jDqmFt03Gy0
+
+-->
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+		  "palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+		  "content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+	</script>
+
+</body>
+</html>

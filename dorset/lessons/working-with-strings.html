@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with strings | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with string index positions and length, querying strings, joining and slicing strings, and replacing characters.">
+
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+	<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Working with strings</h1>
+					<h2>Working with string index positions and length, querying strings, joining and slicing strings, and replacing characters.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JavaScript</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#strings-introduction">Introducing strings</a></p>
+				<p class="toc-indent"><a href="#strings-assign">Assigning string content to variables</a></p>
+				<p class="toc-indent"><a href="#strings-typeof">The typeof operator</a></p>
+				<p><a href="#strings-checking">Checking string content</a></p>
+				<p><a href="#strings-transforming">Transforming string content</a></p>
+				<p class="toc-indent"><a href="#method-chaining">Chaining string methods</a></p>
+				<p class="toc-indent"><a href="#updating-transformed">Updating a string with the transformed string value</a></p>
+				<p><a href="#join-splice">Concatenating and slicing strings</a></p>
+				<p><a href="#strings-replace">Replacing content in a string</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Declare string variables in JavaScript and use <span class="syn-js">typeof</span> to test that a variable contains a string.</li>
+			<li>Use index position and the <span class="syn-js">.length</span> property to work with string characters.</li>
+			<li>Check if a string contains a specific character or substring.</li>
+			<li>Remove whitespace with <span class="syn-js">.trim()</span> and change character case with <span class="syn-js">.toUpperCase()</span> and <span class="syn-js">.toLowerCase()</span>.</li>
+			<li>Concatenate strings with template literals split them with the <span class="syn-js">.slice()</span> method.</li>
+			<li>Search and replace string content.</li>
+		</ul>
+
+	</section>
+
+	<div class="code-snippets" style="margin-bottom:32px">
+		<p>Download a new workfile on your computer as described at the link below.</p>
+		<p>📄 &nbsp;<a href="assets/workfiles/strings.html" target="_blank"><b>Working with strings</b>: Exercises</a></p>
+	</div>
+
+	<section id="strings-introduction">
+
+        <h2>Introducing strings</h2>
+        <p>A <i>string</i> is a sequence of one or more characters &#8211; letters, numbers, or symbols. Each character in a string can be accessed by its position-based index number, beginning with zero. All strings have methods and properties available to them.</p>
+
+        <p>JavaScript offers two types of strings:</p>
+
+        <ul>
+            <li>String primitives</li>
+            <li>String objects</li>
+        </ul>
+
+        <p>This Tutorial focuses only on the more commonly-used string primitives.</p>
+
+		<h3 id="strings-assign">Assigning string content to variables</h3>
+
+		<p>To assign string content to a variable, wrap the content in single or double quotes. Copy the sample code below into your <b>strings.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== ASSIGN CONTENT AS A STRING ========
+const myStr1 = "Hello"; // JavaScript treats myStr1 as a string
+const myStr2 = 'World'; // JavaScript treats myStr2 as a string
+const myStr3 = " ";     // JavaScript treats myStr3 as a string
+console.log(`${myStr1} ${myStr2} ${myStr3}`); // Outputs: 'Hello World'</code></pre>
+
+		<p>Note that a whitespace character is treated as a valid string. The <b>myStr3</b> variable is not empty.</p>
+
+		<p>With the <span class="syn-js">let</span> keywords, an empty string can be <i>declared</i> (created) in one statement and then <i>initialised</i> (first value assigned to it) in another.</p>
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Declare and initialise a string variable
+let myStr4 = ""; // Create an empty string variable
+console.log(myStr4); // Outputs an empty string
+myStr4 = "Some text here"; // String now initialised with content</code></pre>
+		
+		<p>A string declared with <span class="syn-js">let</span> (but not <span class="syn-js">const</span>) can be reassigned.</p>
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Re-assign content in string variable
+let myStr5 = "Things are looking good."; 
+myStr5 = "Things are looking even better."; // New content assigned
+console.log(myStr5); // Outputs new re-assigned content</code></pre>
+		
+		<p>Attempting to reassign a string variable created with <span class="syn-js">const</span> throws an error in the Console as shown below.</p>
+
+		<img src="assets/img/working-with-strings/constant-reassign-error.png" alt="Error with empty const variable"  style="max-width:680px">
+
+		<h3 id="strings-typeof">The <code>typeof</code> operator</h3>
+		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// All statements return 'string' 
+console.log(`Data type of myStr1: ${typeof myStr1}`);
+console.log(`Data type of myStr2: ${typeof myStr2}`);
+console.log(`Data type of myStr3: ${typeof myStr3}`);
+console.log(`Data type of myStr4: ${typeof myStr4}`);
+console.log(`Data type of myStr5: ${typeof myStr5}`);</code></pre>
+
+</section>
+
+
+
+<section>
+	<h2 id="strings-checking">Checking string content</h2>
+
+	<p>JavaScript assigns an <i>index number</i> to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. See below.</p>
+
+	<img src="assets/img/working-with-strings/hello-world.png" alt="Sample string in JavaScript" style="max-width: 600px">
+
+    <p>Copy the sample code below into your <b>strings.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">
+// Using [] notation to access position of characters within string
+let myStr6 = "Hello, World!";
+console.log(`Position [0]: ${myStr6[0]};`)   // returns H
+console.log(`Position [5]: ${myStr6[5]};`)   // returns ,
+console.log(`Position [6]: ${myStr6[6]};`)   // returns whitespace
+console.log(`Position [7]: ${myStr6[7]};`)   // returns W
+console.log(`Position [12]: ${myStr6[12]};`) // returns !</code></pre>
+
+   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>. Note that the whitespace character also have an index, at <b>6</b>.</p>
+
+   <p>Being able to access every character in a string with the square bracket <span class="syn-js"><b>[]</b></span> notation makes it easy to access and manipulate strings.</p>  
+
+	<p>Every string has a <span class="syn-js">.length</span> property that reveals the number of characters in the string. The syntax is as follows.</p>
+
+	<img src="assets/img/working-with-strings/string-length.png" alt="screenshot" style="max-width: 700px">
+	<p>Copy the following example to your <b>strings.html</b> workfile. It should output a string length of <b>13</b> to the console.</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// ======== CHECKING STRING CONTENT ========
+const myStr6 = "Hello, World!";
+console.log(myStr6.length); // Outputs string length of 13</code></pre>
+
+	<p>Remember: the length of a string is always <i>one number greater</i> than the string&#8217;s highest index number.</p>
+
+	<p>Often you will want to know if a string contains particular character(s). Copy these methods for investigating the content of a string variable.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Testing for character(s) present in string
+console.log(myStr6.includes("World"));    // true
+console.log(myStr6.startsWith("Hello"));  // true
+console.log(myStr6.endsWith("!"));        // true
+
+// Finding position of character(s) in string
+console.log(myStr6.indexOf("World"));      // 7</code></pre>
+
+
+
+</section>
+
+<section>
+
+
+	<h2 id="strings-transforming">Transforming string content</h2>
+
+
+	<p>JavaScript offers lots of methods for reformatting or changing the content of a string variable. Copy the following examples to your <b>strings.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// ======== TRANSFORMING STRING CONTENT ========
+let strUserName = "  John Smith  ";
+		
+// Remove whitespace
+console.log(strUserName.trim());          // "John Smith"
+
+// Change case
+console.log(strUserName.toLowerCase());    // "  john smith  "
+console.log(strUserName.toUpperCase());    // "  JOHN SMITH  "</code></pre>
+
+	<p>These methods are useful for cleaning up user input to forms or for formatting text for display.</p>
+
+	<p>In addition to whitespaces, <span class="syn-js">.trim()</span> also removes tab, no-break space and line terminator characters.</p>
+
+	<p>Note that <span class="syn-js">.trim()</span> only works for characters at the start and end of a string. Any spaces between words are unaffected.</p>
+
+	<h3 id="method-chaining">Chaining string methods</h3>
+
+	<p>You can <i>chain</i> (combine) string methods together in a single expression. See below.</p>
+
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Chaining methods
+console.log(strUserName.trim().toLowerCase());</code></pre>
+	
+	<h3 id="updating-transformed">Updating a string with the transformed string value </h3>
+
+
+		<p>Note that each of the above methods actually creates a new string. <i>The original string is unchanged</i>. Typically, you will want to reassign the transformed value back to the original string. See the example below.</p>
+	
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Updating a transformed string variable
+let strFirstName = "  Marie ";
+console.log(strFirstName.trim()); // returns "Marie"
+console.log(strFirstName); // returns unchanged "  Marie "
+
+// Reasigning new trimmed value back to the original string variable
+strFirstName = strFirstName.trim();
+console.log(`Trimmed string variable: ${strUserFirstName};`); // returns 'Marie'</code></pre>
+			
+
+</section>
+
+<section id="join-splice">
+	<h2>Concatenating and slicing strings</h2>
+
+	<p>Joining string variables is known as <i>concatenating</i> strings. You can achieve this using template literals. Copy the example below.</p>
+
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// ======== CONCATENATING AND SLICING STRINGS ========
+
+// Joining two strings together
+let txtFirstName = "John";
+let txtLastName = "Lennon";
+let txtFullName = `${txtFirstName} ${txtLastName}`; 
+console.log(`Full name: ${txtFullName}`);  // outputs 'John Lennon'</code></pre>
+
+	<p>Sometimes, you will want to extract and work with part of a string or <i>substring</i>. You can use the <span class="syn-js">.slice()</span> method for this task. Copy the examples below.</p>
+	
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// Extracting substrings from a string
+const strForSplicing = "JavaScript is awesome";
+console.log(strForSplicing.slice(0, 10));       // "JavaScript"
+console.log(strForSplicing.slice(-7));          // "awesome"
+console.log(strForSplicing.slice(11));         // "is awesome"</code></pre>
+
+<table class="table-js-methods">
+	<tbody>
+		<tr>
+			<td><p><span class="syn-js">.slice(start,end)</span></p></td>
+			<td><p>Returns a new string extracted at the specified <i>start</i> position from the original string.</p>
+			
+			<p>If the optional <b>end</b> argument is omitted, the new string will include every character of the original string up to the end.</p></td>
+		</tr>
+	</tbody>
+</table>
+
+</section>
+
+
+
+
+        <section id="strings-replace">
+
+            <h2>Replacing content in a string</h2>
+
+			<p>JavaScript provides two methods that will search a string for a value and replace it with a new value. Copy the examples below to your <b>strings.html</b> workfile.</p>
+			
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// ======== REPLACING STRING CONTENT ========
+const txtMessage = "Hello World";
+
+// Replace first occurrence
+console.log(txtMessage.replace("o", "0"));   // "Hell0 World"
+	
+// Replace all occurrences
+console.log(txtMessage.replaceAll("o", "0")); // "Hell0 W0rld</code></pre>
+
+	<p>Both these methods are case-sensitive.</p>
+
+
+
+            </section>
+</article>
+</main>
+
+<footer></footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+		  "palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+		  "content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+	</script>
+
+</body>
+</html>
+

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Anonymous Functions | JavaScript Tutorials</title>
+	<meta name="description" content="Creating a function that is stored in a variable, passing arguments and retunring values, and invoking it immediately.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Anonymous Functions</h1>
+					<h2>Creating a function that is stored in a variable, passing arguments and returning values, and invoking it immediately.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#anonymous-functions">About anonymous functions</a></p>
+				<p><a href="#parameters-arguments-returns">Parameters, arguments, and return values</a></p>
+				<p><a href="#functions-not-hoisted">Anonymous functions are not hoisted</a></p>
+				<p><a href="#functions-immediate">Immediately-invoked anonymous functions</a></p>
+				<p><a href="#when-to-use">Anonymous functions: When to use</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+
+
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create an <i>anonymous function</i> expression whose value is stored in a variable.</li>
+			<li>Work with parameters, arguments and return values in anonymous functions.</li>
+			<li>Add default input values to anonymous functions.</li>
+			<li>Recognise that anonymous functions are <i>not</i> hoisted.</li>
+			<li>Immediately invoke an anonymous function without calling it.</li>
+		</ul>
+	
+	</section>
+
+	<section>
+		<div class="code-snippets">
+			<p>Continue using the <b>functions.html</b> workfile you downloaded in the <a href="function-declarations.html">Function Declarations</a> Tutorial.</p>
+
+			<p>📄 &nbsp;<a href="assets/workfiles/functions.html" target="_blank"><b>Functions</b>: Exercises</a></p>
+		</div>
+	</section>
+
+	<section id="anonymous-functions">
+
+		<h2>About anonymous functions</h2>
+		<p>Unlike a <a href="function-declarations.html">function declaration</a>, an anonymous function is a function without a name.</p>
+
+		<img src="assets/img/functions-anonymous/function-no-name.png" alt="screenshot" style="max-width: 600px">
+		<p>But if it has no name, how can an anonymous function be called in a program?</p>
+
+		<p>One option is to assign the anonymous function to variable declared with the <span class="syn-js">const</span> keyword.</p> 
+
+		<img src="assets/img/functions-anonymous/function-no-name-1.png" alt="screenshot" style="max-width: 660px">
+
+		<p>You can then call the anonymous function in a similar way to how you call a function declaration. See below.</p>
+
+		<img src="assets/img/functions-anonymous/function-no-name-3.png" alt="screenshot" style="max-width: 680px">
+
+		<p>Using the <span class="syn-js">const</span> variable type ensures the function is not accidentally changed or overwritten elsewhere in the program.</p>   
+
+		<p>(Strictly speaking, an anonymous function is not stored inside a JavaScript variable. Only the <i>value</i> that the function evaluates to is stored in the variable.)</p>
+
+		<p>Anonymous functions are also called <i>function expressions</i>.</p>
+
+		<p>Copy the following sample anonymous function to your <b>functions.html</b> workfile and verify it runs correctly.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== ANONYMOUS FUNCTIONS ========
+
+// Anonymous function	
+const showGreeting = function () {
+   console.log('Hello from anonymous function');
+}
+
+showGreeting(); // Outputs 'Hello from anonymous function' to Console
+</code></pre>
+
+	</section>
+
+
+	<section id="parameters-arguments-returns">
+
+		<h2>Parameters, arguments, and return values</h2>
+
+		<p>As with function declarations, an anonymous function can contain parameters that you can pass values to as arguments. And an anonymous function can return a value back to the program that called it.</p>
+
+		<p>Copy these two anonymous functions to your <b>functions.html</b> workfile and verify they run correctly.</p>
+
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+// Anonymous function with two parameters that returns a value
+const sumNumbers = function(a, b) {
+    return a + b;
+};
+
+// Call the function with two arguments
+let resultSum = sumNumbers(5, 3); 
+// Outputs result to Console
+console.log(`Returned result: ${resultSum}`);
+
+
+// Anonymous function with two parameters that returns a value
+const multiplyNumbers = function(x, y) {
+    return x * y;
+};
+
+// Call the function with two arguments
+let resultMultiply = multiplyNumbers(5, 3);
+// Outputs result to Console
+console.log(`Returned result: ${resultMultiply}`);</code></pre>
+
+	</section>
+
+
+	<section id="functions-not-hoisted">
+
+		<h2>Anonymous functions are <i>not</i> hoisted</h2>
+
+		<p>One important difference between a function declaration and an anonymous function is that the first is <i>hoisted</i> while the second is <i>not hoisted</i>.</p>
+
+		<p>As a result, you can call an anonumous function only after you have created it &#8211; and never before.</p>
+
+		<img src="assets/img/functions-anonymous/function-not-hoisted.png" alt="JavaScript function expression not hoisted">
+
+
+	</section>
+
+
+	<section id="functions-immediate">
+
+		<h2>Immediately-invoked anonymous functions</h2>
+		<p>You can amend the syntax of an anonymous function so that it is run without being called from elsewhere in the program. Such a function is said to be <i>immediately-invoked</i>.</p>
+
+		<p>Note that function declarations cannot be immediately-invoked. Only an anonymous function can.</p>
+
+		<p>To invoke an anonymous function immediately, add a parenthesis <span class="syn-js">()</span> at the end of the function, just before the semi-colon.</p>
+
+		<p>Copy this anonymous function to your <b>functions.html</b> workfile and verify it runs without being called.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">const runImmediately = function() {
+    console.log("Hello from immediately-invoked anonymous function");
+}();</code></pre>
+
+	</section>
+
+
+	<section id="when-to-use">
+	
+		<h2>Anonymous functions: When to use</h2>
+		<p>Anonymous functions are most commonly used in <a href="callback-functions.html">callbacks</a>, where they are passed as arguments to another function.</p>
+
+		<p>You can also use anonymous functions as <i>methods</i> in <a href="working-with-arrays.html">arrays</a>, <a href="working-with-objects.html">objects</a> and <a href="event-handlers.html">event-handlers</a>.</p>
+
+	</section>
+
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+		  "palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+		  "content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+	</script>
+
+
+
+</body>
+</html>

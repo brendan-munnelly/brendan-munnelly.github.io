@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Arrow Functions | JavaScript Tutorials</title>
+	<meta name="description" content="Creating a single-statement arrow function, passing values, working with implicit and explicit returns, and invoking it immediately.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Arrow Functions</h1>
+					<h2>Creating a single-statement arrow function, passing values, working with implicit and explicit returns, and invoking it immediately.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#function-arrow">About arrow functions</a></p>
+				<p><a href="#parameters-arguments">Parameters, arguments, and return values</a></p>
+				<p><a href="#single-parameters">Single-statement, single-parameter arrow functions</a></p>
+				<p class="toc-indent"><a href="#explicit-implicit">Implicit and explicit returns from arrow functions</a></p>
+				<p><a href="#multiple-parameters">Single-statement, multiple-parameter arrow functions</a></p>
+
+				<p><a href="#multiple-statements">Arrow functions with multiple statements</a></p>
+
+				<p><a href="#immediate">Immediately-invoked arrow functions</a></p>
+
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<ul>
+				<li>Create and call an <i>arrow function</i>.</li>
+				<li>Use the shorthand syntax for arrow functions with only a single statement.</li>
+				<li>Pass single or multiple arguments to an arrow function.</li>
+				<li>Pass arrow function output back to the calling program with implicit or explicit returns.</li>
+				<li>Immediately invoke an arrow function without calling it.</li>
+			</ul>
+		</ul>
+
+	</section>
+
+<section>
+	<div class="code-snippets">
+		<p>Continue using the <b>functions.html</b> workfile you downloaded in the <a href="function-declarations.html">Function Declarations</a> Tutorial.</p>
+
+		<p>📄 &nbsp;<a href="assets/workfiles/functions.html" target="_blank"><b>Functions</b>: Exercises</a></p>
+	</div>
+
+</section>		
+
+	<section id="function-arrow">
+
+        <h2>About arrow functions</h2>
+        <p>A so-called <i>arrow function</i> is a short-hand or quick way of typing an anonymous function expression. As with regular anonymous functions, you must assign an arrow function to a variable if you want to call it from elsewhere in the program. Arrow functions are not hoisted. You must create them before you call them in your program.</p>
+		
+		<p>You can convert a regular anonymous function to an arrow function as follows:</p>
+
+		<ul>
+			<li>Remove the <span class="syn-js">function</span> keyword. But leave the parentheses <span class="syn-js">()</span>.
+			<img src="assets/img/functions-arrow/functions-arrow-1.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+			<li>After the <span class="syn-js">()</span> and before the opening code block <span class="syn-js">{</span>, type an equals sign and a right angle bracket character <span class="syn-js">=&gt;</span>. This is called the &#8216;fat arrow&#8216; symbol.
+			<img src="assets/img/functions-arrow/functions-arrow-2.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+		</ul>
+
+		<p>That's it. You have now created an arrow function.</p>
+
+		<p>Copy the sample arrow function below into your <b>functions.html</b> file and verify it runs correctly.</p>
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== ARROW FUNCTIONS ========
+
+// Arrow function
+const helloFromArrow = () =&gt; {
+    console.log('Hello from arrow function');
+}
+
+// Call the arrow function using the variable name
+helloFromArrow();</code></pre>
+
+
+	</section>
+
+
+		<section id="parameters-arguments">
+
+			<h2>Parameters, arguments, and return values</h2>
+		
+			<p>As with regular anonymous functions, an arrow function can contain parameters that you can pass values to as arguments. And an arrow function can return a value back to the program that called it.</p>
+		
+			<p>Consider a function with a single task: <i>to generate a random integer between supplied upper and lower values inclusively</i>.</p>
+
+			<p>You could write this as a function declaration. Or as a regular anonymous function. Either is fine.</p>
+
+			<img src="assets/img/functions-arrow/function-random-1.png" alt="screenshot">
+
+			<p>A third option using an arrow function is also fine. See below.</p>
+
+			<img src="assets/img/functions-arrow/arrow-shorthand-1.png" alt="screenshot" style="max-width: 780px">
+
+			<p>In the above arrow function, there are the usual parentheses <span class="syn-js"><b>()</b></span> around the input parameters and curly braces <span class="syn-js"><b>{&nbsp;}</b></span> around the code block. Also, the <span class="syn-js">return</span> keyword is needed to send the function output back to the calling program.</p>
+
+			<p>However, there is no advantage to using an arrow function in this situation because it is not possible to take advantage of the concise syntax available with arrow functions.</p>
+
+			<p>Arrow functions are best used when:</p>
+
+			<ul>
+				<li>There is only <i>one statement</i> in the function body.</li>
+				<li>There is <i>no or only one parameter</i> expected by the function.</li>
+			</ul>
+
+		</section>
+
+
+		<section id="single-parameters">
+			<h2>Single-statement, single-parameter arrow functions</h2>
+			<p>When an arrow function contains just one input parameter, you can omit the usual parentheses <span class="syn-js"><b>()</b></span> around that parameter.</p>
+
+			<p>Copy the following two arrow functions to your <b>functions.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Arrow function with parentheses
+const greetParen = (name) =&gt; {
+    return `Hello, ${name}!`;
+};
+
+let greetingParen = greetParen("John"); 
+console.log(greetingParen); // Outputs 'Hello, John!'
+
+// Arrow function without parentheses
+const greetNoParen = name =&gt; {
+    return `Hello, ${name}!`;
+};
+
+let greetingNoParen = greetNoParen("Mary");
+console.log(greetingNoParen); // Outputs 'Hello, Mary!'</code></pre>
+
+	<p>But we can make this code even more concise! When an arrow function contains only one statement, you can:</p>
+	
+	<ul>
+		<li>Write the arrow function on one line.</li>
+		<li>Omit the <span class="syn-js"><b>{&nbsp;}</b></span> around the code block.</li>
+		<li>Omit the <span class="syn-js"><b>return</b></span> keyword.</li>
+	</ul>
+
+		<p>In <b>functions.html</b>, update the second arrow function as shown below and verify it still works.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Arrow function without parentheses
+const greetNoParen = name =&gt; `Hello, ${name}!`;</code></pre>
+
+			<p>No <span class="syn-js"><b>{&nbsp;}</b></span> and no <span class="syn-js"><b>return</b></span> keyword needed!</p>
+
+			<h3 id="explicit-implicit">Implicit and explicit returns from arrow functions</h3>
+			<p>Arrow functions offer two ways of returning values to the calling program. These are <i>implicit returns</i> and <i>explicit returns</i>.</p>
+
+			<p>When an arrow function contains only a single statement, omitting the <span class="syn-js"><b>return</b></span> keyword creates an <i>implicit return</i>. See the illustration below.</p>
+
+			<img src="assets/img/functions-arrow/dense-syntax.png" style="max-width:600px" alt="screenshot">
+
+			<p>Copy the following arrow functions with implicit returns to your <b>functions.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Single-statement arrow functions with implicit returns
+
+const shortGreet = () =&gt; 'Hello with no parameter!';	
+console.log(shortGreet()); // Outputs 'Hello with no parameter!'
+
+const double = x =&gt; x * 2;
+console.log(double(10)); // Outputs 20
+
+const halfNum = num =&gt; (num / 2);
+console.log(halfNum(200)); // Outputs 100
+
+const add15ToPrice = num =&gt; (num + 15);
+console.log(add15ToPrice(100)); // Outputs 115
+
+const increasePriceby5Percent = num =&gt; (num + (num * .05));
+console.log(increasePriceby5Percent(200)); // Outputs 210
+
+const isPositive = num =&gt; num &gt; 0;
+console.log(isPositive(5)); // Outputs true
+
+const uppercase = str =&gt; str.toUpperCase()
+console.log(uppercase("hello")); // Outputs 'HELLO'</code></pre>
+
+			<p>Verify the above functions all run without error.</p>
+
+</section>			
+			
+		<section id="multiple-parameters">
+			<h2>Single-statement, multiple-parameter arrow functions</h2>
+
+			<p>Here are some examples of single-statement arrow functions with implicit returns that accept multiple parameters.</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Arrow functions with multiple parameters and implicit returns 
+					   
+// add three numbers
+const addNums = (x, y, z) =&gt; (x + y + z);
+console.log(addNums(4, 8, 16)); // Outputs 28
+					
+// divide one number by another
+const divideNum = (num1, num2) =&gt; (num1 / num2);
+console.log(divideNum(16, 8)); // Outputs 2
+					
+// calculate product price after 20% tax
+const finalPrice = (price, tax) =&gt; (price + (price * tax));
+console.log(finalPrice(50, 20)); // Outputs 60</code></pre>
+			
+		<p>Copy the above functions to your <b>functions.html</b> workfile and verify they run without error.</p>
+
+</section>
+
+		<section id="multiple-statements">
+
+			<h2>Arrow functions with multiple statements</h2>
+			<p>When the function body contains multiple statements, you must use curly braces <span class="syn-js"><b>{&nbsp;}</b></span> and explicitedly include the <span class="syn-js"><b>return</b></span> statement if you want a value sent back to the calling program.</p>
+
+			<p>Copy the following two arrow functions with explicit returns to your <b>functions.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">
+// Arrow functions with multiple statements and explicit returns
+const addTwoNums = (a, b) =&gt; {
+    const sum = a + b;
+    return sum;
+};
+console.log(addTwoNums(5, 12)); // Outputs 17
+	
+const multipleTwoNums = (a, b) =&gt; {    
+    const product = a * b;
+    return product;
+};
+console.log(multipleTwoNums(5, 12)); // Outputs 60</code></pre>
+
+		
+		<div class="box-warning">
+			<div>
+				<img src="assets/img/functions-arrow/warning-sign.png" alt="warning sign">
+			</div>
+			<div>
+				<p>The above two functions should run without error. However, it is <b>NOT RECOMMENDED</b> to use arrow functions when you have multiple statements in the function body. You will not shorten the function syntax significantly and increase the likliehood of errors.</p>
+				<p>When a function body needs multiple statements, it is best to use a function declaration or a regular anonymous function.</p>
+			</div>
+		</div>
+
+		<p>Arrow functions are most commonly used in <a href="callback-functions.html">callbacks</a>, where they are passed as arguments to another function.</p>
+
+		<p>You can also use arrow functions as <i>methods</i> in <a href="working-with-arrays.html">arrays</a>, <a href="working-with-objects.html">objects</a> and <a href="event-handlers.html">event-handlers</a>.</p>
+
+
+
+	</section>
+
+	<section id="immediate">
+
+		<h2>Immediately-invoked arrow functions</h2>
+		<p>Like a regular anonymous function, you can amend the syntax of an arrow function so that it is run without being called from elsewhere in the program. </p>
+
+		<p>To invoke an arrow function immediately, add a parenthesis <span class="syn-js">()</span> at the end of the function, just before the semi-colon.</p>
+
+		<p>Copy this arrow function to your <b>functions.html</b> workfile and verify it runs without being called.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">const runArrowImmediately = function() {
+    console.log("Hello from immediately-invoked arrow function");
+}();</code></pre>
+
+
+	</section>
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+		  "palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+		  "content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+	</script>
+
+</body>
+</html>

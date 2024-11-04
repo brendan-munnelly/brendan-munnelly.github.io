@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Variables and Literals | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with string, numeric and boolean variables, assigning values to variables, and using template literals.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Variables and Literals</h1>
+					<h2>Working with string, numeric and boolean variables, assigning values to variables, and using template literals.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>		
+	
+		<main>
+
+			<aside>
+				<h3>JavaScript Course</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#js-variables">About variables in JavaScript</a></p>
+				<p class="toc-indent"><a href="#variable-names">Variable names</a></p>
+				<p class="toc-indent"><a href="#string-variables">About string variables</a></p>
+				<p class="toc-indent"><a href="#numeric-variables">About numeric variables</a></p>
+				<p class="toc-indent"><a href="#boolean-variables">About Boolean variables</a></p>
+				<p><a href="#assignment-operator">About the assignment (=) operator</a></p>
+				<p><a href="#variables-literals">Mixing literals and variables</a></p>
+			
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+			</aside>
+	
+	<article>
+	
+
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Lesson you will be able to:</p>
+		<div class="box-goals">
+		<ul>
+			<li>Declare string, numeric and Boolean variables, and assign values to them with the <span class="syn-js">let</span> and <span class="syn-js">const</span> keywords.</li>
+			<li>Apply the correct variable naming standards</li>
+			<li>Reveal a variable's type using the <span class="syn-js">typeof</span> operator.</li>
+
+		</ul>
+	</div>
+
+	</section>
+
+	<section>
+	
+	<div class="code-snippets" style="margin-bottom:32px">
+		<p>Download a new workfile on your computer as described at the link below.</p>
+		<p>📄 &nbsp;<a href="assets/workfiles/variables-literals.html" target="_blank"><b>Variables and literals</b>: Exercises</a></p>
+	</div>
+
+</section>
+
+
+<section id="js-variables">
+
+	<h2>About variables in JavaScript</h2>
+
+	<p>You can think of a variable as a <i>container</i> or &#8216;storage box&#8217; for a value that may be different each time the JavaScript code is run.</p>
+	
+	<p>Consider the example of a website login page that asks for a user's First Name.</p>
+
+	<p>The value entered might be 'Laurent' or 'John' or whatever. But in the JavaScript code that stores the value, the variable will always have the same name of, for example, <b>userFirstName</b>.</p>
+
+	<img src="assets/img/variables-literals/first-name.png" alt="JavaScript" style="max-width: 640px">
+
+	<p>In JavaScript, the first thing you do with a variable is <i>declare</i> it. The following code declares variables named <b>userFirstName</b> and <b>taxRate</b>. Copy this code into your <b>variables-literals.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Declaring variables in JavaScript
+let userFirstName; // Declares a variable named userFirstName
+let taxRate;       // Declares a variable named taxRate</code></pre>
+
+	<p>Variable declarations begin with the words <span class="syn-js">let</span> or <span class="syn-js">const</span>. These so-called keywords allocate memory storage space for new data and tell JavaScript that a new variable name is in use.</p>
+
+	<p>Here are the differences between the <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords.</p>
+		<table class="table-js-methods">
+			<tbody>
+				<tr>
+				<td style="min-width: 15%"><p><span class="syn-js">const</span></p></td>
+				<td><p>Use this for a variable where the value remains constant when the script is run.</p></td>
+				</tr>
+				<tr>
+					<td style="min-width: 15%"><p><span class="syn-js">let</span></p></td>
+					<td><p>Use this for a variable where the value may change during the running of the script, such as in a math calculation or a loop.</p></td>
+				</tr>
+			</tbody>
+		</table>
+
+	<h3 id="variable-names">Variable names</h3>
+
+	<p>Here are a few points to remember about variable names:</p>
+
+	<ul>
+		<li><b>Uniqueness</b>: Don't use the same name for two different variables within the same scope of JavaScript code.</li>
+
+		<li><b>No spaces</b>: Variable names cannot contain spaces. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">Product Name</span>; <span class="comment">// Invalid variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">Sub Total</span>; <span class="comment">// Also invalid variable name</span>
+</pre></li>
+
+		<li><b>Mixed character case</b>: You can combine upper and lowercase letters in a variable name to make it easier to read. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">postCode</span>; <span class="comment">// camel case variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">localCurrency</span>; <span class="comment">// Also camel case variable name</span>
+</pre></li>
+
+		<li><b>Case sensitivity</b>: Variable names are case-sensitive. For example:
+<pre class="language-js">
+<span class="blue-dark" style="padding-left: 24px !important; margin-left:0">const</span> <span class="blue-light">firstName</span>; <span class="comment">// This is one variable name</span>
+<span class="blue-dark" style="padding-left: 0px !important; margin-left:0">let</span> <span class="blue-light">FirstName</span>; <span class="comment">// This is a DIFFERENT variable name</span></pre></li>
+	</ul>
+
+	<h3 id="assign-values">Assigning values to variables</h3>
+	<p>When you declare a variable you will often want to <i>assign</i> a value to it. Copy the examples below.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Declaring variables and then assigning values to them
+let userName; // Declare a variable
+userName = "Sheila Murphy"; // Assign value to the variable
+console.log(userName); // Outputs 'Sheila Murphy'
+
+let userCountry; // Declare a variable
+userCountry = "Ireland"; // Assign value to the variable
+console.log(userName); // Outputs 'Sheila Murphy'</code></pre>
+
+
+	<p>You can declare a variable and assign a value to it in the same statement on the same line. Here&#8217;s two examples.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Declaring and assigning values to variables
+let userEmail = "abcd@email.com";
+console.log(userEmail); // Outputs 'abcd@email.com'
+let userPassword = "banana42%";
+console.log(userPassword); // Outputs 'banana42%'</code></pre>
+
+
+	
+	<h3 id="string-variables">About string variables</h3>
+
+	<p>The variables you have worked with so far have all been of one type: the <i>string variable</i>. This is a variable type that holds letters, numbers, blank spaces or punctuation symbols. </p>
+
+	<p>When you enclose the value in single quotes (<span class="syn-js">''</span>), double quotes (<span class="syn-js">""</span>) or backticks (<span class="syn-js">``</span>) JavaScript assumes that you want to create a string variable. For example:</p>
+
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Working with string variables
+const firstName = "Peter";
+let lastName = 'Smith';
+let streetAddress = `42 Green Avenue`;
+console.log(firstName, lastName, streetAddress); // Outputs 'Peter Smith 42 Green Avenue'</code></pre>
+
+	<p>You will learn more about string variables in the <a href="working-with-strings.html">Working with strings</a> Tutorial.</p>
+
+
+
+	<h3 id="numeric-variables">About numeric variables</h3>
+
+	<p>Another type of variable in JavaScript is the <i>numeric variable</i>, which stores a number that you can perform arithmetic operations with.</p>
+
+	<p>When you omit the quotes around the value, JavaScript makes the variable a numeric variable. For example.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Working with numeric variables	
+let orderQty = 42;
+let productPrice = 9.99;</code></pre>
+
+	<p>When declaring a variable you don&#8217;t need to tell JavaScript which type of variable you want to create. JavaScript decides the variable type according to the type of value (such as string or number) you assign to it.</p>
+
+	<p>You will learn more about numeric variables in the <a href="working-with-numbers.html">Working with numbers</a> Tutorial.</p>
+
+	<h3 id="boolean-variables">About Boolean variables</h3>
+
+	<p>A third type of variable in JavaScript is the Boolean variable. This may have one of only two possible values: <span class="syn-js">true</span> or <span class="syn-js">false</span>.</p>
+
+	<p>Developers typically give Boolean variables names such as <b>isCustomer</b>, <b>isLoggedIn</b>, <b>isSelected</b>, and so on.</p>
+
+
+</section>
+
+		<section id="assignment-operator">
+
+			<h2>About the assignment (=) operator</h2>
+		
+			<p>Putting a value into a variable is known as assignment, and is achieved through the use of the <i>assignment operator</i> (<b>=</b>). For example:</p>
+	
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// About variable assignment
+let salePrice = 100;</code></pre>
+		
+		<p>This places the value of <b>100</b> inside the variable named <b>salePrice</b>.</p>
+		
+		<p>In JavaScript, the <b>=</b> symbol does <i>not</i> mean &#8216;equal to&#8217; as it does in arithmetic or algebra. It means as follows:</p> 
+		
+		<p><i>&#8216;Take whatever is on the right hand side (RHS) of the <b>=</b> and place it in the variable on the left hand side LHS.'</i></p>
+		
+		<p>Sometimes you may want to change a variable's value by a fixed amount. The following would make no sense if it where algebra.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Update variable value
+salePrice = salePrice + 25;
+console.log(salePrice); // Outputs 125</code></pre>
+					
+		
+		<p>But in JavaScript it means &#8216;increase the product price by 25'.</p>
+		
+		
+		</section>
+		
+		
+
+	<section id="variables-literals">
+		<h2>Mixing literals and variables</h2>
+
+		<p>Often you will want to include literals and variables in the same JavaScript code. Literals are unchanging items of text, numbers or symbols.</p>
+
+		<img src="assets/img/variables-literals/literals.png" alt="screenshot" style="max-width: 600px">
+
+		<p>Modern JavaScript uses so-called <i>template literals</i> for this purpose. With this method, you:</p>
+		
+		<ul>
+			<li>Type the literals as you normally would.</li>
+			<li>Embed the variables with the <b>${}</b> syntax</li>
+			<li>Enclose everything within a pair of backtick <b>`</b> characters.</li>
+		</ul>
+		
+		<p>Copy the example below into your <b>variables-literals.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Mixing literals and variables
+const customerFirstName = "Marie";
+const balance = 10;
+	
+// Using template literals
+const strOutput = `Hi ${customerFirstName}, your balance is ${balance}.`;
+console.log("Template literal: ", strOutput);  // Outputs 'Hi Marie, your balance is 10.'</code></pre>
+
+
+	</section>
+
+	<!-- <section>
+		<h2 id="variable-retyping">Automatic variable retyping</h2>
+
+		<p>JavaScript, as you have learnt, decides which type of variable you want to create by the way that you first assign a value to it. When you enclose the value within quotes, JavaScript makes the variable a string variable; when you omit the quotes, JavaScript makes it a numeric variable.</p>
+
+		<p>JavaScript can also change the type of a variable when you assign a value of a different type to that variable. It's called <i>automatic type conversion</i>. Consider the following two statements.</p>
+
+<pre class="language-js">let myvar = "12.34";
+myvar = 12.34;
+</pre>
+
+		<p>In the first statement JavaScript makes the variable named ‘myvar’ a string variable. In the second statement JavaScript changes the variable type to numeric because a number was assigned to it.</p>
+
+		<p>Automatic variable type conversion is a powerful feature of JavaScript, but its very power can result in scripting errors or in scripts that produce unexpected results. You need to be particularly careful with variables types when dealing with HTML forms that accept input from web page visitors. Because forms accept input as strings you need to convert such strings to numbers when you want to include them in arithmetic calculations.</p>
+
+	</section>
+ -->
+
+
+
+</article>
+</main>
+
+<footer></footer>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+		  "palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+		  "content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+	</script>
+
+
+</body>
+</html>
+
