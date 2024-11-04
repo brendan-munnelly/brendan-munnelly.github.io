@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>1: Adding JavaScript to a Web Page | JavaScript Tutorials | Brendan Munnelly</title>
+	<title>Adding JavaScript to a web page | JavaScript Tutorials | Brendan Munnelly</title>
 	<meta name="description" content="Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.">
 
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
 	<style>
         h2 code, h3 code { font-weight: normal !important }
         h3 code { letter-spacing: 0px !important }
         span.grey { color: lightgray }
         main pre { padding: 12px 12px 12px 22px !important }
+		pre { background-color: #282c34;}
     </style>
+
 
     <!-- Syntax Highlighter -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
@@ -56,7 +58,7 @@
               </div>
   
               <div class="content">
-                <h1>1: Adding JavaScript to a Web Page</h1>
+                <h1>Adding JavaScript to a web page</h1>
                 <h2>Efficiently adding JavaScript code to a web page, and working with the JavaScript Console in your web browser&#8219;s Developer Tools.</h2>
               </div>
           </div><!-- /wrapper -->
@@ -78,7 +80,9 @@
 				<p class="toc-indent"><a href="#dev-tools-font-size">Changing the DevTools font size</a></p>
 				<p><a href="#dev-tools-working">Working with the JavaScript Console</a></p>
 				<p><a href="#ai-tools">JavaScript and AI tools</a></p>
-				<p><a href="#exercises">Exercises</a></p>
+				<p><a href="#add-web-page">Adding JavaScript to HTML of a web page</a></p>
+				<p><a href="#add-external">Adding an external JavaScript file to a web page</a></p>
+
 
 	
 			</aside>
@@ -90,7 +94,7 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 		<div class="box-goals">
 			<ul>
-				<li>Use the <span class="syn-js">&lt;script&gt;</span> tag to include JavaScript code in a HTML file and to link to external JavaScript files.</li>
+				<li>Use the <span class="syn">&lt;script&gt;</span> tag to include JavaScript code in an HTML file and to link to external JavaScript files.</li>
 				<li>Ensure that JavaScript code is <i>non-blocking</i> &#8212; it does not delay the loading of the HTML content.</li>
 				<li>Ensure that JavaScript code does not attempt to access the HTML content until the HTML has been fully loaded.</li>
 				<li>Open and use the JavaScript Console in your web browser&#8217;s DevTools.</li>
@@ -102,20 +106,13 @@
 
 	<section>
 				
-		<div class="code-snippets">
-			<h3 style="margin-top:0">Exercise Files</h3>
-	
-			<p>To work with the exercise files in this and later Tutorials:</p>
-			<ul style="margin-bottom: 12px">
-				<li>Create a new folder named <b>javascript</b>.</li>
-				<li>In this, create a sub-folder named <b>exercises</b>.</li>
-			</ul>
-			<p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new sub-folder named <b>1</b>.</p><p>Save the two exercise files below to this new <b>javascript/exercises/1</b> sub-folder.</p>
-
-			<p>📄  &nbsp;<a download="index.html" href="/javascript/1-adding-js-to-a-web-page/exercises/"><b>index.html</b></a></p>
-			<p>📄  &nbsp;<a download="script.js"  href="exercises/script.js"><b>script-1.js</b></a></p>
-
+		<div class="code-snippets" style="margin-bottom:32px">
+			<p>Create a new folder on your computer named <b>javascript</b> and inside it create a sub-folder named <b>exercises</b>.</p>
+			<p>Download a new workfile on your computer as described at the link below.</p>
+			<p>📄 &nbsp;<a href="assets/workfiles/adding-javascript.html" target="_blank"><b>Adding JavaScript</b>: Exercises</a></p>
+			<p>Download this empty JavaScript file named <a href="assets/workfiles/script.js">script.js</a> to your <b>javascript/exercises</b> folder.</p>
 		</div>
+	
 
 	</section>
 
@@ -123,17 +120,17 @@
 <section>
 
 	<h2 id="script-tag">JavaScript and the <span>&lt;script&gt;</span> tag</h2>
-	<p>The most efficient ways to add JavaScript to a web page are as follows:</p>
+	<p>The two most efficient ways to add JavaScript to a web page are as follows:</p>
 
 	<div class="flex-50">
 		<img src="assets/img/adding-js-to-web-pages/load-script-page-bottom.png" alt="JavaScript">
-		<div><p>If your JS code is in the HTML file, add it to the bottom before <span class="syn-js">&lt;/body&gt;</span> tag. Script loads <i>after</i> web page has been fully loaded.</p></div>
+		<div><p>If your JS code is in the HTML file, add it to the bottom before <span class="syn">&lt;/body&gt;</span> tag. The code loads <i>after</i> web page has been fully loaded.</p></div>
 	</div>
 
 
 	<div class="flex-50">
 		<img src="assets/img/adding-js-to-web-pages/load-script-page-top-defer.png" alt="JavaScript">
-		<div><p>Add external JS file(s) to the <span class="syn-js">head</span> with <span class="syn-js">defer</span> attribute. Files load &#8216;in the background&#8217; in order placed. Only run <i>after</i> web page is fully loaded.</p></div>
+		<div><p>Add external JS file(s) to the <span class="syn">&lt;head&gt;</span> with <span class="stn">defer</span> attribute. The files load &#8216;in the background&#8217; in the order placed and only run <i>after</i> web page is fully loaded.</p></div>
 
 	</div>
 
@@ -158,13 +155,13 @@
 			<li>On multi-page websites, cached JavaScript files can speed up page loads.</li>
 		</ul>
 		
-		<p>Do not include <span class="syn-js">&lt;script&gt;</span> tags in external JavaScript files.</p>
+		<p>Do not include <span class="syn">&lt;script&gt;</span> tags in external JavaScript files.</p>
 	
 	</section>
 
 <section>
 
-	<h2 id="dev-tools">Working with web browser DevTools</h2>
+	<h2 id="dev-tools">Working with your web browser DevTools</h2>
 
 	<p>Your web browser&#8217;s Developer Tools (also known as DevTools) includes a JavaScript Console. To display this:</p>
 
@@ -177,20 +174,11 @@
 	<p>To position or &#8216;dock&#8217; the DevTools window:</p>
 	<ol>
 		<li>Open the DevTools window.</li>
-		<li>Near the top-right of the DevTools window, click the ellipses (three dots) icon.
+		<li>Near the top-right of the DevTools window, click the vertical ellipses (<b>...</b>) icon.
 		<img src="assets/img/adding-js-to-web-pages/docking-1.png" alt="JavaScript">
 		</li>
 		<li>Click the docking position you want for the DevTools window.</li>
 	</ol>
-
-	<p>Below is an example of the DevTools window docked on the right.</p>
-
-	<img src="assets/img/adding-js-to-web-pages/devtools-right.png" alt="JavaScript">
-
-	<p>And here is an example of the DevTools window docked along the bottom.</p>
-
-	<img src="assets/img/adding-js-to-web-pages/devtools-bottom.png" alt="JavaScript">
-
 
 	<h3 id="dev-tools-font-size">Changing the DevTools font size</h3>
 	<p>To change the font size in the DevTools window, select the window, and then press the <b>Ctrl</b> key followed by the plus (<b>+</b>) or minus (<b>-</b>) key. To reset, press <b>Ctrl</b> and <b>0</b>.</p>
@@ -206,9 +194,107 @@
 		<li>Any coding errors will appear in the Console, along with the line number and a short explanatory message.</li>
 		<li>In your code, you can use <span class="syn-js">console.log()</span> statements to inspect the values of variables and properties of objects.</li>
 	</ul>
-
-
 		<p>In summary, the JavaScript Console provides an environment similar to a terminal shell interface to try out JavaScript code in real-time.</p>
+
+</section>
+
+
+<section>
+
+	<h2 id="liveserver">Installing the Live Server Extension</h2>
+	<p>
+	  You will find it helpful when working with JavaScript to install the popular VS Code <i>Extension</i> is called <b>Live Server</b>.</p>
+
+	<p>
+	  Live Server launches a web server on your computer with a live
+	  reload feature. Every time you save your HTML, CSS or JavaScript files, you'll
+	  instantly see the changes reflected in the web browser. You'll be
+	  much faster at spotting errors and it's much easier to do some quick
+	  experiments with your code.
+	</p>
+
+	<p>Follow these steps to install Live Server in VS Code.</p>
+
+	<ol>
+	  <li>
+		At the bottom-left of the VS Code screen, click the
+		<b>Gears</b> icon.
+		<img
+		  src="assets/img/adding-js-to-web-pages/settings-extensions-0.png"
+		  alt="User Settings Microsoft Visual Studio Code"
+		  style="max-width: 600px"
+		/>
+	  </li>
+
+	  <li>
+		Visual Studio opens a new window named <b>Extensions</b> at the
+		left of your screen. Typically, it will show a list of currently
+		popular Extensions. 
+	  </li>
+
+	  <li>
+		In the Extensions search box, type <b>Live Server</b>.
+		<img
+		  src="assets/img/adding-js-to-web-pages/settings-extensions-2.png"
+		  alt="User Settings Microsoft Visual Studio Code"
+		/>
+	  </li>
+
+	  <li>
+		You can drag the right border of the Extension window further to
+		the right, to see the full text of the search results.
+		<img
+		  src="assets/img/adding-js-to-web-pages/settings-extensions-3.png"
+		  alt="User Settings Microsoft Visual Studio Code"
+		/>
+	  </li>
+
+	  <li>
+		Click the <b>Install</b> button under the first search result.
+	  </li>
+
+	  <li>
+		The top part of your VS Code window should now look similar to
+		that below.
+		<img
+		  src="assets/img/adding-js-to-web-pages/settings-extensions-4.png"
+		  alt="User Settings Microsoft Visual Studio Code" style="padding-bottom: 14px"
+		/>
+
+		Live Server is now successfully installed. You do not need to
+		restart VS Code.
+	  </li>
+
+	  <li>
+		To close the Live Server Extensions window, click the close (X)
+		icon at the top.
+
+		<img
+		  src="assets/img/adding-js-to-web-pages/settings-extensions-5.png"
+		  alt="HTMLHint Close"
+		/>
+	  </li>
+
+	  <li>
+		To close the Extensions search box, click the large Extensions
+		icon in the Activity Bar at the left of the VS Code screen.
+	  </li>
+	</ol>
+
+	<p>
+	  To start Live Server on your computer, click the icon near the
+	  bottom-right of the VS Code window. This will open the current web
+	  page in a new tab of your default web browser.
+
+	  <img
+		src="assets/img/adding-js-to-web-pages/settings-extensions-6.png"
+		alt="HTMLHint Close"
+		style="max-width: 600px"
+	  />
+	  To close the extension, click the icon a second time.
+	</p>
+
+
 
 </section>
 
@@ -235,7 +321,7 @@ practices. Please respond to my questions and requests with basic,
 step-by-step directions supported by sample code snippets. 
 Please display "read" to acknowledge. Thank you.</code></pre>
 
-	<p>In VS Code, install the following two extensions:</p>
+	<p>In VS Code, you could install the following two extensions:</p>
 
 	<ul>
 		<li>GitHub Copilot</li>
@@ -248,26 +334,57 @@ Please display "read" to acknowledge. Thank you.</code></pre>
 
 
 	<section>
-		<h2 id="exercises">Exercises</h2>
+		<h2 id="add-web-page">Adding JavaScript to HTML of a web page</h2>
 		<p>Follow these steps:</p>
 
 		<ol>
-			<li>Open the <b>index.html</b> web page. Just before the closing <span class="syn">&lt;/body&gt;</span> tag, enter the following JavaScript code snippet:
+			<li>Open the <b>adding-javascript.html</b> web page. Just before the closing <span class="syn">&lt;/body&gt;</span> tag, enter the following JavaScript code snippet:
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">&lt;script&gt;
+    console.log("Hello from web page.");
+&lt;/script&gt;	
+</code></pre>
+			The bottom of your web page should now look as follows:
+
 			<img src="assets/img/adding-js-to-web-pages/log-1.png" alt="screenshot" style="max-width: 700px"></li>
 
 			<li>Save and reload the web page. You should see the following message in your browser"s JavaScript Console:
 			<img src="assets/img/adding-js-to-web-pages/log-1n.png" alt="screenshot" style="max-width: 700px"></li>
 
-			<li>In the <b>index.html</b> file, add the following line just before the closing <b>&lt;/head&gt;</b> tag.
+			</ol>
+
+			<p>✅ &nbsp; You have now added some JavaScript code directly to the HTML of a web page.</p>
+
+		</section>
+
+		<section>
+			<h2 id="add-external">Adding an external JavaScript file to a web page</h2>
+			<p>Follow these steps:</p>
+			<ol>
+
+				<li>In your <b>adding-javascript.html</b> workfile, add the following line just before the closing <span class="syn"><b style="color:#fff">&lt;/head&gt;</b></span> tag.
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">&lt;script defer src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+Your web page should now look as follows:
 			
-			<img src="assets/img/adding-js-to-web-pages/log-1n1.png" alt="screenshot" style="max-width: 700px"></li>
+			<img src="assets/img/adding-js-to-web-pages/log-2.png" alt="screenshot">		</li>
 
-			<li>Open the <b>script-1.js</b> file and add the following new line:
-			<img src="assets/img/adding-js-to-web-pages/log-2.png" alt="screenshot" style="max-width: 700px"></li>
+			<li>Open your <b>script.js</b> file and add the following new line:
 
-			<li>Save the JavaScript file and reload the web page. You should see the following message in the JavaScript Console:
-			<img src="assets/img/adding-js-to-web-pages/log-4.png" alt="screenshot" style="max-width: 700px"></li>
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">console.log("Hello from external JavaScript file.");</code></pre>
+
+				Your JavaScript file should now look as follows.
+				<img src="assets/img/adding-js-to-web-pages/log-3.png" alt="screenshot">		</li>
+
+
+
+			<li>Save the JavaScript file and then reload your web page. You should see the following message in the JavaScript Console:
+			<img src="assets/img/adding-js-to-web-pages/log-4.png" alt="screenshot"></li>
 		</ol>
+
+
+		<p>✅ &nbsp; You have now linked your web page to an external JavaScript file .</p>
+
 
 	</section>
 
