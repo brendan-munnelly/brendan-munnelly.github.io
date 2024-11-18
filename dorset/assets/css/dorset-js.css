@@ -77,6 +77,8 @@ body { font-family: 'Inter', sans-serif }
 	/* Alternatives to default monospace font */
 	--font-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
+    --gray-400: #cbd5e0;
+
 	--yellow-050: #FEFCE8;
 	--yellow-100: #fffff0;
 	--yellow-200: #fefcbf;
@@ -367,11 +369,17 @@ main {
 	flex-wrap: wrap; 
 }
 
-/* Desktops  */
-@media (min-width: 768px) { 
-	/* main { padding: 3% 20% 2% 0 } */
+@media (min-width: 1280px) {
 	main { padding: 3px 20% 2% 0 }
+}
 
+@media (min-width: 1025px) and (max-width: 1279px) { 
+	main { padding: 3px 10% 2% 0 }
+	main section:last-child { margin-bottom: 0 }	 
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+	main { padding: 3px 5% 2% 0 }
 	main section:last-child { margin-bottom: 0 }	 
 }
 
@@ -448,7 +456,7 @@ main aside p a.menu-item-selected { font-weight: 600 }
 @media (min-width: 768px) { section { padding: 1.5% 0 5% 0 } }
 
 /* Mobiles */
-@media (max-width: 767px) { section { padding: 4% 0 2% 0 } }
+@media (max-width: 767px) { section { padding: 2% 0 1% 0 } }
 
 /* Section: headings */
 section h1, section h2, section h3, section h4 {
@@ -484,8 +492,11 @@ section h2 span {
 section h3 {
 	font-size: calc(var(--font-size-lg) * 0.9);
 	border-top: solid 2px #230cea; 
-	padding-top: 6px; margin-top: 54px; margin-bottom: 12px;
+	padding-top: 6px; margin-bottom: 12px;
 }
+
+@media(min-width:768px) { section h3 { margin-top: 48px } }
+@media(max-width:767px) { section h3 { margin-top: 42px } }
 
 /* Section: text */
 section p, section li { 
@@ -493,6 +504,13 @@ section p, section li {
     color: #023753;
 	font-size: calc(var(--font-size-base) * 0.92);
 }
+
+@media (max-width: 767px) { 
+	section p, section li { 
+		font-size: var(--font-size-base);
+	}
+}
+
 
 /* Section: bold text */
 section p b, section ul li b, section ol li b,
@@ -632,6 +650,74 @@ section p i.fas { color: rgb(35, 12, 234) }
 		line-height: 1.5;
 	}	
 	#learning-goals ul li:before { margin-right: 14px }
+}
+
+
+#resources {
+	background-color: #d8f5fe;
+	border-radius: 5px;
+	margin: 20px 0 32px 0;
+	padding: 14px 24px 28px 24px;
+	border-radius: 4px;
+}
+
+#resources h2 {
+	margin-top: 0;
+}
+
+#resources p, #resources ul li {
+	color: #000;
+}
+
+#resources p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+#resources ul li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* Bullet character */
+#resources ul > li:before { 
+	color: #230cea;
+	transform: translateY(2px);
+	content: '\2714';
+	font-size: 100%;
+}
+
+#resources ul, 
+#resources ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Desktops */
+@media (min-width: 768px) {
+	#resources ul li { 
+		padding-left: 20px ;
+		text-indent: -21px ;
+		margin: 0 0 12px 21px;
+		line-height: 1.5
+	}	
+}
+
+/* Mobiles */
+@media (max-width: 767px) {
+	#resources { margin-top: 30px }
+	#resources p, #resources ul li {
+		font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
+	}
+
+	#resources p { margin-bottom: 10px }
+
+	#resources ul li { 
+		margin: 0 0 10px 18px;
+		padding-left: 10px;
+		text-indent: -14px;
+		line-height: 1.5;
+	}	
+	#resources ul li:before { margin-right: 14px }
 }
 
 
@@ -966,13 +1052,21 @@ pre {
 	font-size: calc(var(--font-size-base) * 0.9);
 	line-height: 1.8;
 	margin: 12px 0 24px 0;
-	padding: 16px 16px 18px 24px;
-	background-color: rgb(24,53,75);
+	background-color: rgb(24,53,75); /* HTML ? */
+	background-color: #282c34;
 	word-break: normal;
 	hyphens: none;
 	white-space: pre;
 	border-radius: 6px;
 	overflow-x: auto;
+}
+
+@media (min-width: 768px) { 
+	pre { padding: 16px 16px 18px 24px; }
+}
+
+@media (max-width: 767px) { 
+	pre { padding: 42px 16px 18px 10px; }
 }
 
 pre.language-html { color: rgb(128,128,128) }
@@ -1456,7 +1550,6 @@ aside p a code {
 	border-top: solid 2px #044d6c;
 	background: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
 	min-width: 96%;
-
 }
 
 .table-js-arithmetic td {
@@ -1593,7 +1686,6 @@ section div.code-snippets ul > li::before {
 	.flex-50 > div p { margin-bottom: 12px !important }
 }
 
-
 main pre { position: relative } 
 
 button.copy-html, 
@@ -1601,10 +1693,8 @@ button.copy-css,
 button.copy-code,
 button.copy-text,
 div.gpt button.copy-gpt { 
-	position: absolute; top: 10px; right: 12px;
+	position: absolute;
 	z-index: 2;
-	padding: 8px 12px 10px 12px;
-	font-size: 16px;
 	border-width: 2px;
 	border-style: solid;
 	border-radius: 4px;
@@ -1614,19 +1704,45 @@ div.gpt button.copy-gpt {
 	appearance: none;
 	text-decoration: none;
 	cursor: pointer;
-	min-width: 140px;
-	background-color: transparent;
 	border: solid 2px lightskyblue;
 	color: lightskyblue;
 	background-color: transparent;
+	font-size: calc(var(--font-size-base) * 0.85);
 }
 
-button.copy-text {
-	top: 56px; right: 16px;
-	min-width: 124px;
+@media(min-width: 768px) {
+	button.copy-html, 
+	button.copy-css, 
+	button.copy-code,
+	button.copy-text,
+	div.gpt button.copy-gpt { 
+		top: 10px; right: 12px;
+		padding: 8px 12px 10px 12px;
+		min-width: 140px;
+	}
+	button.copy-text {
+		top: 56px; right: 16px;
+		min-width: 124px;
+	}
+	div.gpt button.copy-gpt { top: 16px; right: 16px }
 }
 
-div.gpt button.copy-gpt { top: 56px; right: 16px }
+@media(max-width: 767px) {
+	button.copy-html, 
+	button.copy-css, 
+	button.copy-code,
+	button.copy-text,
+	div.gpt button.copy-gpt { 
+		top: 10px; right: 12px;
+		padding: 8px 12px 10px 12px;
+		min-width: 100px;
+	}
+	button.copy-text {
+		top: 56px; right: 16px;
+		min-width: 100px;
+	}
+	div.gpt button.copy-gpt { top: 16px; right: 16px }
+}
 
 button.copy-html:link, button.copy-html:visited,
 button.copy-css:link, button.copy-css:visited,
@@ -1652,35 +1768,22 @@ div.gpt button.copy-text:active {  */
 	background-color: transparent;
 }
 
-button.copy-text {  
-	border: solid 2px lightskyblue;
-	color: lightskyblue;
-	background-color: transparent;
-}
-
 button.copy-gpt i,
 button.copy-text svg,
 button.copy-code i,
 button.copy-html i { margin-left: 8px; color: inherit }
 
 
-button.copy-text { 
-	border: solid 2px lightskyblue;
-	color: lightskyblue;
-	background-color: transparent;
-}
-
-
 div.gpt {
-	margin-top: 12px;
+	margin: 12px 0 24px 0;
 	padding: 72px 30px 20px 30px;
 	background-color: #343541;
-	color: #fff;
-	font-size: calc(15px + (17 - 15) * ((100vw - 320px)/(1600 - 320)));
-	font-size: calc(var(--font-size-base) * 0.85); 
+	color: var(--gray-400);
+	font-size: calc(var(--font-size-base) * 0.95); 
 	font-weight: 400;
-	border-radius: 4px;
-	font-family: sans-serif
+	border-radius: 8px;
+	font-family: sans-serif;
+	position: relative
 }
 
 button.copy-text svg.filter-blue {
@@ -1720,7 +1823,7 @@ span.green { color: green }
 span.red { background-color: red; color: #fff; padding: 2px 4px }
 
 #cookie-banner {
-	position: fixed;
+	position: fixed; z-index:100;
 	bottom: 0; left: 0; right: 0; background-color: #111;
 	padding: 20px 32px; 
 	box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
@@ -1769,5 +1872,192 @@ span.red { background-color: red; color: #fff; padding: 2px 4px }
 	color: #111;
 }
 
+.resources-learning {
+	background-color: #d8f5fe;
+	border-radius: 5px;
+	margin: 20px 0 48px 0;
+	padding: 18px 24px 28px 24px;
+	border-radius: 4px;
+}
+
+.resources-learning h2 { margin-top: 0; font-size: calc(var(--font-size-xl) * 0.7); }
+.resources-learning p { 
+	color: #000; margin-bottom: 8px; line-height: 1.5;
+	font-size: calc(var(--font-size-base) * 0.92);
+}
 
 
+/* Mobiles */
+@media (max-width: 767px) {
+	.resources-learning { 
+		margin-top: 30px; padding: 14px 10px 28px 10px; }
+	.resources-learning p { margin-bottom: 10px }
+}
+
+
+		/* Flex Container */
+		.flex-container { 
+			display: flex; flex-wrap: wrap; gap: 30px; margin-top: 16px
+		}
+
+		/* Text and audio containers */
+		.text-container, .audio-container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			background-size: cover;
+			background-color: #333;
+			border-radius: 4px;
+			z-index: 1;
+			justify-content: space-between;
+		}
+
+		@media (min-width: 1440px) {
+			.flex-container { flex-direction: row }
+			.text-container, .audio-container {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 300px; /* Minimum width of 300px */
+				min-width: 300px; /* Ensure it doesn't shrink below 200px */
+				min-height: 240px; /* Minimum height */
+				width: 100%; /* Full width on smaller screens */ 
+			}
+			.audio-container { padding: 6px 10px 12px 10px; }
+			.text-container { padding: 6px 20px 12px 18px; }
+		}
+
+		@media (min-width: 1280px) and (max-width: 1439px) {
+			.flex-container { flex-direction: row }
+			.text-container, .audio-container {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 200px; /* Minimum width of 300px */
+				min-width: 200px; /* Ensure it doesn't shrink below 200px */
+				min-height: 220px; /* Minimum height */
+				max-width: 320px;				
+				width: 100%; /* Full width on smaller screens */ 
+			}
+			.text-container { padding: 6px 20px 15px 18px; }
+			.audio-container { padding: 6px 10px 6px 10px; }
+		}
+
+		@media (min-width: 1025px) and (max-width: 1279px) {
+			.flex-container { flex-direction: column }
+			.text-container, .audio-container {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 200px; /* Minimum width of 300px */
+				min-width: 200px; /* Ensure it doesn't shrink below 200px */
+				min-height: 200px; /* Minimum height */
+				max-width: 320px;
+				width: 100%; /* Full width on smaller screens */ 
+			}
+			.audio-container { padding: 12px 10px; }
+			.text-container { padding: 6px 20px 15px 18px; }
+		}
+
+		@media (max-width: 1024px) {
+			.flex-container { flex-direction: column }
+			.text-container, .audio-container {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 200px; /* Minimum width of 300px */
+				min-width: 200px; /* Ensure it doesn't shrink below 200px */
+				min-height: 200px; /* Minimum height */
+				max-width: 320px;
+				width: 100%; /* Full width on smaller screens */ 
+			}
+			.text-container { padding: 9px 20px 15px 18px; }
+			.audio-container { padding: 9px 10px 12px 10px; }
+		}
+
+		/* Text Container */
+		.text-container {
+			background: url('../../assets/img/quiz.png') no-repeat center center;
+			color: #fff;
+			background-size: cover;
+		}
+
+		.text-container h3, .audio-container h3 {
+			border: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.text-container h3 span, .audio-container h3 span {
+			background-color: blue;
+			color: #fff;
+			font-size: calc(var(--font-size-base) * 0.8);
+			padding: 6px 10px 6px 10px;
+			letter-spacing: 1px;
+			border-radius: 4px;
+		}
+
+		/* Audio Container */
+		.audio-container {
+			background: url('../../assets/img/podcast.png') no-repeat center center;
+			background-size: cover;
+		}
+
+		/* Align Child Items to the Bottom */
+		.text-container > p {
+			margin-top: auto; /* Push child item to the bottom */
+		}
+
+		.audio-container > * {
+			margin-top: auto; /* Push child item to the bottom */
+		}
+
+
+		/* ======== QUIZ =========*/
+
+		.text-container p {
+			font-size: calc(var(--font-size-base) * 0.8);
+			letter-spacing: 2px;
+			margin: 0;
+		}
+
+		.text-container p a:link, 
+		.text-container p a:visited,
+		.text-container p a:hover,
+		.text-container p a:active {
+			text-decoration: none;
+			line-height: 1;
+			letter-spacing: 0;
+		}
+
+		.firefox .text-container p { 
+			background-color: #000;
+			padding: 7px 6px 9px 20px;
+		}
+
+		.firefox .text-container p a:link, 
+		.firefox .text-container p a:visited { color: #fff}
+
+		.firefox .text-container p a:hover,
+		.firefox .text-container p a:active { color: rgb(72,160,247) }
+
+		.chrome .text-container p {
+			background-color: #F1F3F4;
+			padding: 15px 6px 15px 20px;
+			border-radius: 40px;
+			font-size: calc(var(--font-size-base) * 0.8);
+		}
+
+		.chrome .text-container p a:link, 
+		.chrome .text-container p a:visited,
+		.chrome .text-container p a:hover,
+		.chrome .text-container p a:active { color: #000 }
+
+		.safari .text-container p {
+			background-color: #F1F3F4;
+			padding: 15px 6px 15px 20px;
+			border-radius: 40px;
+			font-size: calc(var(--font-size-base) * 0.8);
+		}
+
+		.safari .text-container p a:link, 
+		.safari .text-container p a:visited,
+		.safari .text-container p a:hover,
+		.safari .text-container p a:active { color: #000 }		
