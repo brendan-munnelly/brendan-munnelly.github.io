@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Making decisions with if | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating decision-making structures in JavaScript with if, else if, and else code blocks.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<!-- <script defer src="../../assets/js/cookie.js"></script> -->
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Making decisions with <i>if</i></h1>
+					<h2>Create decision-making structures in JavaScript with <i>if</i>, <i>else if</i> and <i>else</i> code blocks.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#decision-making">Decision-making with if</a></p>
+				<p class="toc-indent"><a href="#if-example">The <i>if</i> statement in action</a></p>
+				<p class="toc-indent"><a href="#comparision-operators">Comparison operators</a></p>
+				<p><a href="#multiple-conditions">Handling multiple conditions with <i>else if</i></a></p>
+				<p><a href="#all-purpose-else">The all-purpose <i>else</i> command</a></p>
+				<p><a href="#linking-conditions">Linking conditions with logical operators</a></p>
+				<p class="toc-indent"><a href="#improving-user-input">Improving your user-entered number testing code</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+				<p>&nbsp;</p>
+			</aside>
+	
+	<article>
+		
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create decision-making structures in JavaScript with <span class="syn">if</span>, <span class="syn">else if</span> and <span class="syn">else</span> code blocks.</li>
+		</ul>
+
+	</section>
+
+<!-- 
+	<p>In this Tutorial, you will work with the following HTML files:</p>
+
+	<ul>
+		<li><a href="exercises/7/exercise-7-1.html" target="_blank">exercise-7-1.html</a></li>
+		<li><a href="exercises/7/exercise-7-2.html" target="_blank">exercise-7-2.html</a></li>
+		<li><a href="exercises/7/exercise-7-3.html" target="_blank">exercise-7-3.html</a></li>
+		<li><a href="exercises/7/exercise-7-4.html" target="_blank">exercise-7-4.html</a></li>
+		<li><a href="exercises/7/exercise-7-5.html" target="_blank">exercise-7-5.html</a></li>
+	</ul>
+
+	<p>Download the compressed file below and copy it to your <b>websites/javascript/exercises</b> sub-folder.</p>
+
+<p>📄 &nbsp;&nbsp;<a href="7.zip">7.zip</a></p>
+
+<p>Unzip the five files it contains into a sub-folder named <b>/7</b>.</p>
+<img src="assets/img/conditional/unzip.png" alt="JavaScript">
+ -->
+
+ <section>
+	
+	<div class="code-snippets" style="margin-bottom:32px">
+		<p>Download a new workfile on your computer as described at the link below.</p>
+		<p>📄 &nbsp;<a href="assets/workfiles/making-decisions.html" target="_blank"><b>Making decisions with <i>if</i></b> : Exercises</a></p>
+	</div>
+
+</section>
+
+ 
+<section id="decision-making">
+
+	<h2>Decision-making with <code>if</code></h2>
+
+	<p>In JavaScript, as in other programming languages, the <span class="syn-js">if</span> keyword is at the basis of most decision-making. The code structure is as follows:</p>
+
+<pre class="language-js">
+if (condition is true) {
+    <span class="comment">// code to execute if condition is true;</span>
+}</pre>
+
+	<p>Note the following:</p>
+
+	<ul>
+		<li>The statement begins with the keyword <span class="syn-js">if</span> &#8211; not IF or If or iF.</li>
+		<li>The condition tested is enclosed within parenthesis <span class="syn-js"><b>( )</b></span>.</li>
+		<li>When the condition is true, the code to be run is enclosed inside a pair of curly braces <span class="syn-js">{ }</span>.</li>
+	</ul>
+
+	<h3 id="if-example">The <code>if</code> statement in action</h3>
+
+	<p>Consider the following example that tests the value in the variable named 'temperature'. If the value in the variable exceeds a certain amount, the condition is satisfied and the script shows an alert box. The right angle bracket (<b>&gt;</b>) is the JavaScript <i>greater than</i> operator.</p>
+
+	<p>Copy the following code to your <b>making-decisions.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Testing the value of a variable
+let tempValue = 21;		
+if (tempValue &gt; 15) {
+    console.log(`Temperature is greater than 15 degrees.`);
+}</code></pre>
+	
+	<h3 id="comparision-operators">Comparison operators</h3>
+
+	<p>You use a <i>comparison operator</i> to make some kind of comparison between two values. Here are the main ones.</p>
+
+	<table class="table-gray">
+		<tr>
+			<td><p><b>Comparison Operators</b></p></td>
+			<td><p><b>Description</b></p></td>
+	 </tr>
+		<tr>
+			<td><p><b>==</b></p></td>
+			<td><p>Tests if the two values are the same.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>!=</b></p></td>
+			<td><p>Tests if the two values are not the same.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>&gt;</b></p></td>
+			<td><p>Tests if the first value is greater than the second.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>&gt;=</b></p></td>
+			<td><p>Tests if the first value is greater than or equal to the second.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>&lt;</b></p></td>
+			<td><p>Tests if the first value is less than the second.</p></td>
+		</tr>
+		<tr>
+			<td><p><b>&lt;=</b></p></td>
+			<td><p>Tests if the first value is less than or equal to the second.</p></td>
+		</tr>
+	</table>
+
+	<p>Let's try another example. Copy this code to your <b>making-decisions.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Testing a number in range 1-100
+let userNumber = 25;
+if (userNumber &lt; 50 ) {
+    console.log("The tested number is less than 50.");
+}</code></pre>
+
+</section>
+
+
+<section id="multiple-conditions">
+	<h2>Handling multiple conditions with <code>else if</code></h2>
+
+	<p>It is good practice to provide user feedback in <i>all</i> situations.</p>
+
+	<p>One way to do this is to combine an <span class="syn-js">if</span> command with the <span class="syn-js">else if</span> command in a single JavaScript code block. You can then evaluate more than two possible outcomes.</p>
+	
+	<p>Update the code in your workfile as follows.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Testing a number in range 1-100
+let userNumber = 25;
+if (userNumber &lt; 50 ) {
+    console.log("The tested number is less than 50.");
+}
+else if (userNumber &gt; 50 ) {
+    console.log("The tested number is greater than 50.");
+}</code></pre>
+
+		<p>Save and run the updated code. Update the <b>userNumber</b> value to <b>75</b> and view the result.</p>
+
+		<p>Here is the basic decision-making structure of an <span class="syn-js">if</span> clause combined with an <span class="syn-js">else if</span> clause.</p>
+
+<pre class="language-js">
+if (first condition true) {
+   <span class="comment">// perform first instruction;</span>
+}
+		
+else if (second condition true) {
+   <span class="comment">// perform second other instruction;</span>
+}</pre>
+		
+</section>
+
+<section id="all-purpose-else">
+
+
+<h2>The all-purpose <code>else</code> command</h2>
+
+<p>If you have ever organised physical items in a room or workplace you probably ended up with a drawer or shelf called 'miscellaneous' or 'other stuff'.</p>
+
+<p>Similarly, there are many programming situations where no amount of <span class="syn-js">if</span> and <span class="syn-js">else if</span> statements is enough to cope with every possible value.</p>
+
+<p>The solution is to use the <span class="syn-js">else</span> command. This is JavaScript&#8217;s way of handling values that fall in the category of &#8216;other&#8217; or &#8216;miscellaneous&#8217;.</p>
+
+<p>Update the code in your workfile as follows.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Testing a number in range 1-100
+let userNumber = 50;
+if (userNumber &lt; 50 ) {
+    console.log("The tested number is less than 50.");
+}
+else if (userNumber &gt; 50 ) {
+    console.log("The tested number is greater than 50.");
+}
+else {
+    console.log("The tested number is exactly 50.");
+}</code></pre>
+
+
+	<p>Verify your new code can deal with various numbers in the range 1-100.</p>
+
+
+<p>The general form of the <span class="syn-js">if</span>, <span class="syn-js">if else</span> and <span class="syn-js">else</span> decision-making structure is as follows.</p>
+
+
+<pre class="language-js">
+if (first condition true) {
+   <span class="comment">// perform first instruction;</span>
+}
+			
+else if (second condition true) {
+   <span class="comment">// perform second other instruction;</span>
+}
+else {
+   <span class="comment">// perform some other instruction;</span>
+}</pre>
+
+
+</section>
+
+<section id="linking-conditions">
+
+<h2>Linking conditions with logical operators</h2>
+
+<p>There are times when one condition is not enough. You can join multiple conditions together to form a single statement using the so-called <i>logical operators</i>.</p>
+	
+<p>The following code tests both temperature and humidity with the AND (<span class="syn-js">&amp;&amp;</span>) operator.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Testing with the logical AND operator
+let temperature_1 = 21;
+let humidity_1 = 61;
+if ( (temperature_1 &gt; 20) &amp;&amp; (humidity_1 &gt; 60) ) {
+   console.log("Temperature and humidity conditions are met");
+}</code></pre>
+
+<p>The logical AND (<span class="syn-js">&amp;&amp;</span>) operator is found in user login forms, where the user needs to enter the correct email address <i>and</i> correct password.</p>
+
+<p>The following code uses the AND (<span class="syn-js">&&</span>) and the OR (<span class="syn-js">||</span>) operators and is satisfied when:</p>
+	
+<ul>
+	<li>The two AND <b>time</b> conditions are true.</li>
+	<li>Either the <b>isWeekend</b> conition OR the <b>isHoliday</b> condition is false.</li>
+</ul>	
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Testing with both logical operators
+let time = 14;  // 2 PM
+let isWeekend = true;
+let isHoliday = false;
+
+if (time &gt;= 9 && time &lt;= 17) {  // Between 9 AM and 5 PM
+    if (isWeekend || isHoliday) {
+        console.log("It's business hours but we're closed for weekend/holiday");
+    } else {
+        console.log("We're open for business!");
+    }
+} else {
+    console.log("Sorry, we're closed!");
+}</code></pre>
+
+<p>Copy each of the above two code examples into your <b>making-decisions.html</b> workfile verify they run correctly.</p>
+
+<p>The following table describes the two logical operators.</p>
+
+<table class="table-gray">
+
+	<tr>
+		<td style="width:30%"><p><b>Logical Operators</b></p></td>
+		<td style="width:60%"><p><b>Description</b></p></td>
+	</tr>
+
+	<tr>
+		<td style="width:30%"><p>&amp;&amp;</p></td>
+		<td style="width:60%"><p>The <b>AND</b> operator. Joins multiple conditions in such a way that the output is true only if all the individual conditions are true.<br><br></p></td>
+	</tr>
+	<tr>
+		<td style="width:30%"><p>||</p></td>
+		<td style="width:60%"><p>The <b>OR</b> operator. Joins multiple conditions in such a way that the output is true if any one (or more or all) of the individual conditions is true.</p></td>
+	</tr>
+
+</table>
+
+<h3 id="improving-user-input">Improving your user-entered number testing code</h3>
+
+<p>Update your code for testing numbers in the range 1-100 as shown below. </p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Testing a number in range 1-100
+let userNumber = 250;
+
+if ( (userNumber &lt; 1 ) || (userNumber &gt; 100 ) ) {
+   console.log("The tested number is not within the allowed 1-100 range.");
+}
+
+else if (userNumber &lt; 50 ) {
+   console.log("The tested number is between 0 and 50.");
+}
+else if (userNumber &gt; 50 ) {
+   console.log("The tested number is between 50 and 100.");
+}
+else {
+   console.log("The tested number is exactly 50.");
+}</code></pre>
+
+<p>Save your workfile and test your new code by entering various numbers inside the 1-100 range and also greater than 100.</p>
+
+
+
+
+</section>
+
+
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+
+<!-- <div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div> -->
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
