@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
 	<style>
-		pre { background-color: #282c34;}
+		table.table-gray {
+            padding: 5px 20px 10px 20px;
+        }
+        table.table-gray tr td {
+            padding: 5px 20px 5px 0px;
+            border-bottom: 1px solid #888;
+        }
 	</style>
 
     <!-- Syntax Highlighter -->
@@ -99,6 +105,174 @@
 
     </section>
 
+
+    <section>
+
+        <h2>Normal (non-weird) data types</h2>
+
+        <p>Up to now you have been working with four basic data types in JavaScript.</p>
+
+        <table class="table-gray">
+            <tr>
+                <td style="min-width: 20%"><p><b>Data Type</b></p></td>
+                <td><p><b>Description</b></p></td>
+            </tr>
+            <tr>
+                <td><p>string</p></td>
+                <td><p>Text within quotes, such as <b>"Hello, World"</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>number</p></td>
+                <td><p>A number without surrounding quotes, such as <b>12</b> or <b>9.99</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>boolean</p></td>
+                <td><p>Only two possible values: either <b>true</b> or <b>false</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>null</p></td>
+                <td><p>A data type that <i>intentionally</i> has no value.</p></td>
+            </tr>
+        </table>
+    
+        <p>Copy the following four functions into your <b>testing-weird.html</b> workfile. Each can check whether a supplied value has a particular data type.</p>
+
+        <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// === TESTING DATA TYPES ===
+
+// Test if a value is a string            
+function isString(value) {
+    return typeof value === 'string';
+}
+
+console.log(isString("Hello")); // true
+console.log(isString(42));  // false
+
+// Test if a value is a number
+function isNumber(value) {
+    return typeof value === 'number' && !isNaN(value);
+}
+
+console.log(isNumber(42));  // true
+console.log(isNumber("42"));  // false
+
+// Test if a Value is a Boolean
+function isBoolean(value) {
+    return typeof value === 'boolean';
+}
+
+console.log(isBoolean(true));  // true
+console.log(isBoolean(false)); // true
+console.log(isBoolean("true")); // false
+
+// Test if a Value is null
+function isNull(value) {
+    return value === null;
+}
+
+console.log(isNull(null));  // true
+console.log(isNull("null")); // false
+console.log(isNull(undefined)); // false
+
+let myVariable = "Hello, world!";
+
+if (isString(myVariable)) {
+  console.log("myVariable is a string");
+} else {
+  console.log("myVariable is not a string");
+}</code></pre>
+
+    </section>
+
+
+
+    <section>
+        <h2>Understanding type coercion</h2>
+        <p>In certain situations, JavaScript automatically <i>coerces</i> (converts) values from one data type to another. This can cause unexpected results or fatal errors in your code.</p>
+    
+        <p>Consider the following examples:</p>
+    
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// === DATA TYPE COERCION ===
+    
+// + operator examples
+console.log(5 + "10");     // "510" (string concatenation)
+console.log("5" + 10);     // "510" (string concatenation)
+console.log("5" + "10");   // "510" (string concatenation)
+        
+// -, * and / operator examples
+console.log(5 - "10");     // -5 (number subtraction)
+console.log("5" * 10);     // 50 (number multiplication)
+console.log("5" / "10");   // 0.5 (number division)</code></pre>
+    
+    <p>In the above code you can see that JavaScript:</p>
+        
+    <ul>
+        <li><b>+</b> When used with a string and a number, this operator <i>coerces</i> the number to a string. See below.
+<pre>  console.log(5 + "10"); <span class="comment">// + operator coerces number 5 to string "5"</span>
+<span class="comment">// Outputs string 126</span></pre></li>
+        <li><b>-, * and /</b>: When used with string and a number, the subtraction, multiplication and division operators coerce the string to a number. See below.
+<pre>  console.log(5 - "10") <span class="comment">// - operator coerces string "10" to number 10;</span>
+<span class="comment">// Outputs number -5</span>
+</pre></li>
+    </ul>
+    
+    <p>Here is a general purpose function to demonstrate type coercion.</p>
+    
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Function to demonstrate type coercion
+function demonstrateCoercion(value1, value2) {
+    console.log(`Addition: ${value1} + ${value2} = ${value1 + value2}`);
+    console.log(`Subtraction: ${value1} - ${value2} = ${value1 - value2}`);
+    console.log(`Multiplication: ${value1} * ${value2} = ${value1 * value2}`);
+    console.log(`Division ${value1} / ${value2} = ${value1 / value2}`);
+}
+    
+demonstrateCoercion(5, "10");
+demonstrateCoercion("5", 10);</code></pre>
+
+        <p>To avoid surprises, it's good practice to:</p>
+        <ul>
+            <li>Convert strings to numbers explicitly when doing arithmetic.</li>
+            <li>Use strict equality (<span class="syn-js">===</span>) when comparing values.</li>
+            <li>Test the type of values before performing operations.</li>
+        </ul>
+    
+    </section>
+    
+    <section>
+        
+            <h2>Loose (<code>==</code>) and strict (<code>===</code>) equality</h2>
+    
+            <p>JavaScript provides two types of equality operators:</p>
+    
+            <ul>
+                <li><b>Loose equality (==)</b>: This operator performs type coercion before comparing two values. Only the values need to be the same. The data types can be different. See below. 
+    <pre>  1 == "1" <span class="comment">// Yes. This is true.</span></pre>
+                
+                </li>
+                <li><b>Strict equality (===)</b>: This does not perform type coercion. The values <i>and</i> the data types must be the same. See below.
+    <pre>  1 === "1" <span class="comment">// No! This is false.</span>
+1 === 1  <span class="comment">// Much better. This is true. Same data type.</span>
+"1" === "1"  // <span class="comment">Again, this is also true. Same data type.</span>
+false === false  // <span class="comment">Also true. Same data type.</span>
+true !== false  // <span class="comment">True too. Same data type.</span></pre></li>
+            </ul>
+    
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Function to compare values using == and === operators
+function compareValues(value1, value2) {
+    console.log(`Testing: ${value1} vs ${value2}`);
+    console.log(`Loose equality (==): ${value1 == value2}`);
+    console.log(`Strict equality (===): ${value1 === value2}`);
+    console.log('---');
+}
+    
+// Test different combinations
+compareValues(5, "5");      // number vs string
+compareValues(0, false);    // number vs boolean
+compareValues("", false);   // empty string vs boolean
+compareValues(null, undefined); // null vs undefined</code></pre>
+    
+    </section>    
+
+
  
 <section id="decision-making">
 
@@ -107,13 +281,13 @@
 	<p>Like other programming languages, JavaScript supports boolean variables that can have one of two possible and opposite values:</p>
     
     <ul>
-        <li>The value stored in variable could be <span class="syn-js">true</span></li>
+        <li>The value stored in the variable could be <span class="syn-js">true</span></li>
         <li>Or the value could be <span class="syn-js">false</span>. </li>
     </ul>
 
     <p>No other possible value is allowed.</p>
     
-    <p>Boolean variable typically have names that begin with 'is.' See some examples of booleans below.</p>
+    <p>Boolean variables typically have names that begin with 'is.' See some examples of booleans below.</p>
 
 <pre class="language-js">
 <span class="comment">// Declaring some typical Boolean variables</span>
@@ -123,39 +297,6 @@ let isAdminUser; <span class="comment">// Could be 'true' or 'false'.</span></pr
 
     <p>However, JavaScript extends this basic <i>true/false</i> concept to include the idea of <i>truthy/falsy</i>.</p>
 
-    <p>Here is a list of <i>falsy</i> types:</p>
-
-
-    <table class="table-gray">
-        <tr>
-            <td style="min-width: 20%"><p><b>Falsy Values</b></p></td>
-            <td><p><b>Description</b></p></td>
-        </tr>
-        <tr>
-            <td><p>false</p></td>
-            <td><p>A valid boolean variable that contains a value of <i>false</i>.</p></td>
-        </tr>
-        <tr>
-            <td><p>0</p></td>
-            <td><p>A valid numeric variable that contains a value of zero.</p></td>
-        </tr>
-        <tr>
-            <td><p>""</p></td>
-            <td><p>A valid string variable that is empty.</p></td>
-        </tr>
-        <tr>
-            <td><p>undefined</p></td>
-            <td><p>A data type that has <i>not yet</i> been given a value.</p></td>
-        </tr>
-        <tr>
-            <td><p>null</p></td>
-            <td><p>A data type that <i>intentionally</i> has no value.</p></td>
-        </tr>
-        <tr>
-            <td><p>NaN</p></td>
-            <td><p>What JavaScript returns when you try to do some math on a variable that is Not a Number.</p></td>
-        </tr>
-    </table>
 
     <p>Everything that is not <i>falsy</i> is considered to be <i>truthy</i>.</p>
 
@@ -165,12 +306,12 @@ let isAdminUser; <span class="comment">// Could be 'true' or 'false'.</span></pr
 
     <h2>Working with some <i>falsy</i> values</h2>
 
-    <p>Let's look at some examples of three <i>falsy</i> values.</p>
+    <p>Let's look at some examples of two <i>falsy</i> values.</p>
 
     <h3>Working with <code>undefined</code></h3>
     <p>Think of <span class="syn-js">undefined</span> as JavaScript's way of saying: <i>"This doesn't exist yet"</i> or <i>"This hasn't been given a value."</i></p>
 
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======= HOW TO GENERATE 'undefined' =======
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// ======= HOW TO GENERATE 'undefined' =======
                 
 // 1: You declare a variable - but do not (yet) assign a value to it.
 let userName;
@@ -190,74 +331,10 @@ function addTwoNums(num1, num2) {
 console.log(addTwoNums(12, 8));  // Outputs undefined
 </code></pre>
 
-<h3>Working with <code>null</code></h3>
-
-<p>Think of <span class="syn-js">null</span> as JavaScript's way of saying: <i>"This deliberately has no value."</i> It's like an empty box - you know the box exists, but you've specifically marked it as empty. The key difference from <span class="syn-js">undefined</span> is that <span class="syn-js">null</span> is usually set deliberately by the programmer.</p>
-
-<p>Consider the following code where you have variables named <b>testScore_1</b>, <b>testScore_2</b> and <b>testScore_3</b> to store the results of a student test. You want these variables to be numeric - to store numbers in the range <b>0-100</b>.</p>
-
-<p>But what happens if a student does not take the test? What value do you give to their <b>testScore</b> variable?</p>
-
-<ul>
-    <li>You cannot assign a value of "Did not take test". That would make <b>testScore</b> a string variable.</li>
-    <li>You cannot assign a value if <span class="syn-js">false</span>.  That would make <b>testScore</b> a boolean variable.</li>
-    <li>You could assign a numeric value of <b>0</b>. But then you have no way of recording whether a student failed the test <i>or</i> missed the test.</li>
-</ul>
-
-<p>This would be a case of where you would want to use a <span class="syn-js">null</span> value. This is not an &#8216;'error'&#8217; - you have done this deliberately.</p>
-
-
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
-// ======= WHEN YOU MIGHT WANT TO ASSIGN A null VALUE TO A VARIABLE =======
-
-// Declare and assign three string variables for student names
-let student_1 = "John";
-let student_2 = "Tony";
-let student_3 = "Mary";
-
-// Declare three variables, but do not yet assign any values to them
-// You will want to assign numbers to these three variables
-// But at the moment their current values are 'undefined'
-let testScore_1;
-let testScore_2;
-let testScore_3;
-
-// John scores a mark of 70 in the test.
-testScore_1 = 70;
-console.log(`${student_1} scored ${testScore_1} in the test.`);
-
-// Tony scores a mark of 0 in the test.
-testScore_2 = 0;
-console.log(`${student_2} scored ${testScore_2} in the test.`);
-
-// Mary does not take the test - she never turned up.
-testScore_3 = null;
-console.log(`${student_3} scored ${testScore_3} in the test.`);</code></pre>
-
-<p>A shorter version of the above code is shown below.</p>
-
-<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">
-// Function that accepts a null value as an argument when recording student test scores
-function displayTestResults(studentName, studentScore) {
-    if (studentScore === null) { // strict equality operator
-        console.log(`${studentName} did not take the test.`);
-    } else {
-        console.log(`${studentName} scored ${studentScore} in the test.`);
-    }
-}
-
-displayTestResults("Seamus", 65); // Seamus scored 65 in the test.
-displayTestResults("Sheila", 0); // Sheila scored 0 in the test.
-displayTestResults("Sally", null); // Sally did not take the test.</code></pre>
-
-
-
 <h3>Working with <code>NaN</code></h3>
 <p>Think of <span class="syn-js">NaN</span> as JavaScript's way of saying: <i>"I tried to do a math operation, but something went wrong."</i> See the code below.</p>
 
-
-
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Some examples that will generate a NaN
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Some examples that will generate a NaN
 console.log("hello" / 2);  // NaN - can't divide a word by 2
 console.log(Number("hello"));  // NaN - can't convert "hello" to a number
 console.log(0 / 0);  // NaN - mathematically undefined</code></pre>
@@ -267,288 +344,75 @@ console.log(0 / 0);  // NaN - mathematically undefined</code></pre>
 
 <section>
 
-    <h2>Understanding type coercion</h2>
-    <p>In certain situations, JavaScript automatically <i>coerces</i> (converts) values from one data type to another. This can cause unexpected results or fatal errors in your code.</p>
+    <h2>Testing for <code>falsy</code> values</h2>
 
-    <p>Consider the following examples:</p>
-
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// + operator examples
-console.log(5 + "10");     // "510" (string concatenation)
-console.log("5" + 10);     // "510" (string concatenation)
-console.log("5" + "10");   // "510" (string concatenation)
-    
-// -, * and / operator examples
-console.log(5 - "10");     // -5 (number subtraction)
-console.log("5" * 10);     // 50 (number multiplication)
-console.log("5" / "10");   // 0.5 (number division)</code></pre>
-
-<p>In the above code you can see that JavaScript:</p>
-    
-<ul>
-    <li>JavaScript <i>coerces</i> a number to a string when used with the addition (<b>+</b>) operator. See below.
-<pre>  console.log(5 + "10"); <span class="comment">// + operator coerces number 5 to string "5"</span>
-<span class="comment">// Outputs string 126</span></pre></li>
-    <li>JavaScript <i>coerces</i> a string variable containing a number within quotes to a numeric variable when used with subtraction (<b>-</b>), multiplication (<b>*</b>) and division (<b>/</b>) operators. See below.
-<pre>  console.log(5 - "10") <span class="comment">// - operator coerces string "10" to number 10;
-<span class="comment">// Outputs number -5</span>
-</span></pre></li>
-</ul>
-
-<p>Here is a general purpose function to demonstrate type coercion.</p>
-
-<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to demonstrate type coercion
-function demonstrateCoercion(value1, value2) {
-    console.log(`Addition: ${value1} + ${value2} = ${value1 + value2}`);
-    console.log(`Subtraction: ${value1} - ${value2} = ${value1 - value2}`);
-    console.log(`Multiplication: ${value1} * ${value2} = ${value1 * value2}`);
-    console.log(`Division ${value1} / ${value2} = ${value1 / value2}`);
-}
-
-// Test with different combinations
-demonstrateCoercion(5, "10");
-demonstrateCoercion("5", 10);</code></pre>
-
-</section>
-
-<section>
-    
-        <h2>Loose (<code>==</code>) and strict (<code>===</code>) equality</h2>
-
-        <p>JavaScript provides two types of equality operators:</p>
-
-        <ul>
-            <li><b>Loose equality (==)</b>: This operator performs type coercion before comparing two values. Only the values need to be the same. The data types can be different. See below. 
-<pre>  1 == "1" <span class="comment">// Yes. This is true.</span></pre>
+    <p>Here is a list of <i>falsy</i> types. </p>
+        
+        <table class="table-gray">
+            <tr>
+                <td style="min-width: 20%"><p><b>Falsy Values</b></p></td>
+                <td><p><b>Description</b></p></td>
+            </tr>
+            <tr>
+                <td><p>false</p></td>
+                <td><p>A valid boolean variable that contains a value of <i>false</i>.</p></td>
+            </tr>
+            <tr>
+                <td><p>0</p></td>
+                <td><p>A valid numeric variable that contains a value of zero.</p></td>
+            </tr>
+            <tr>
+                <td><p>""</p></td>
+                <td><p>A valid string variable that is empty.</p></td>
+            </tr>
+            <tr>
+                <td><p>undefined</p></td>
+                <td><p>A data type that has <i>not yet</i> been given a value.</p></td>
+            </tr>
+            <tr>
+                <td><p>null</p></td>
+                <td><p>A data type that <i>intentionally</i> has no value.</p></td>
+            </tr>
+            <tr>
+                <td><p>NaN</p></td>
+                <td><p>What JavaScript returns when you try to do some math on a variable that is Not a Number.</p></td>
+            </tr>
+        </table>
             
-            </li>
-            <li><b>Strict equality (===)</b>: This does not perform type coercion. The values <i>and</i> the data types must be the same. See below.
-<pre>  1 === "1" <span class="comment">// No! This is false.</span>
-1 === 1  <span class="comment">// Much better. This is true. Same data type.</span>
-"1" === "1"  // <span class="comment">Again, this is also true. Same data type.</span>
-false === false  // <span class="comment">Also true. Same data type.</span>
-true !== false  // <span class="comment">True too. Same data type.</span></pre></li>
-        </ul>
+      
+        <p>Some items are definite errors - <span class="syn-js">undefined</span> and <span class="syn-js">NaN</span>.</p>
+    
+    <p>One looks like an error but is not - <span class="syn-js">null</span>.</p>
 
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Function to compare values using == and === operators
-function compareValues(value1, value2) {
-   console.log(`Testing: ${value1} vs ${value2}`);
-   console.log(`Loose equality (==): ${value1 == value2}`);
-   console.log(`Strict equality (===): ${value1 === value2}`);
-   console.log('---');
-}
+    <p>Another falsy value is the boolean value of <span class="syn-js">false</span>.</p>
 
-// Test different combinations
-compareValues(5, "5");      // number vs string
-compareValues(0, false);    // number vs boolean
-compareValues("", false);   // empty string vs boolean
-compareValues(null, undefined); // null vs undefined</code></pre>
+    <p>Finally, there is an empty string and the zero number. These are not coding errors. But they might indicate an issue with the data you are working with, whether entered by a user or retrieved from a database.</p>
 
-    <h3>The <code>if</code> statement</h3>
+    <p>You can think of <i>falsy</i> as meaning: actually false, an error, a deliberate 'nothing here' or a possibly suspicious empty string or zero value.</p>
 
-    <p>The <span class="syn-js">if</span> statement is used to test a condition. If the condition is true, the code inside the curly braces is executed. If the condition is false, the code is skipped.</p>
-
-    <p>Here is the basic structure of an <span class="syn-js">if</span> statement.</p>
-
-
-	<p>Note the following:</p>
-
-	<ul>
-		<li>The statement begins with the keyword <span class="syn-js">if</span> &#8211; not IF or If or iF.</li>
-		<li>The condition tested is enclosed within parenthesis <span class="syn-js"><b>( )</b></span>.</li>
-		<li>When the condition is true, the code to be run is enclosed inside a pair of curly braces <span class="syn-js">{ }</span>.</li>
-	</ul>
-
-	<h3 id="if-example">The <code>if</code> statement in action</h3>
-
-	<p>Consider the following example that tests the value in the variable named 'temperature'. If the value in the variable exceeds a certain amount, the condition is satisfied and the script shows an alert box. The right angle bracket (<b>&gt;</b>) is the JavaScript <i>greater than</i> operator.</p>
-
-	<p>Copy the following code to your <b>making-decisions.html</b> workfile.</p>
-
-	<h3 id="comparision-operators">Comparison operators</h3>
-
-	<p>You use a <i>comparison operator</i> to make some kind of comparison between two values. Here are the main ones.</p>
-
-	<table class="table-gray">
-		<tr>
-			<td><p><b>Comparison Operators</b></p></td>
-			<td><p><b>Description</b></p></td>
-	 </tr>
-		<tr>
-			<td><p><b>==</b></p></td>
-			<td><p>Tests if the two values are the same.</p></td>
-		</tr>
-		<tr>
-			<td><p><b>!=</b></p></td>
-			<td><p>Tests if the two values are not the same.</p></td>
-		</tr>
-		<tr>
-			<td><p><b>&gt;</b></p></td>
-			<td><p>Tests if the first value is greater than the second.</p></td>
-		</tr>
-		<tr>
-			<td><p><b>&gt;=</b></p></td>
-			<td><p>Tests if the first value is greater than or equal to the second.</p></td>
-		</tr>
-		<tr>
-			<td><p><b>&lt;</b></p></td>
-			<td><p>Tests if the first value is less than the second.</p></td>
-		</tr>
-		<tr>
-			<td><p><b>&lt;=</b></p></td>
-			<td><p>Tests if the first value is less than or equal to the second.</p></td>
-		</tr>
-	</table>
-
-	<p>Let's try another example. Copy this code to your <b>making-decisions.html</b> workfile.</p>
-
-
-</section>
-
-
-<section id="multiple-conditions">
-	<h2>Handling multiple conditions with <code>else if</code></h2>
-
-	<p>It is good practice to provide user feedback in <i>all</i> situations.</p>
-
-	<p>One way to do this is to combine an <span class="syn-js">if</span> command with the <span class="syn-js">else if</span> command in a single JavaScript code block. You can then evaluate more than two possible outcomes.</p>
-	
-	<p>Update the code in your workfile as follows.</p>
-
-
-		<p>Save and run the updated code. Update the <b>userNumber</b> value to <b>75</b> and view the result.</p>
-
-		<p>Here is the basic decision-making structure of an <span class="syn-js">if</span> clause combined with an <span class="syn-js">else if</span> clause.</p>
-
-<pre class="language-js">
-if (first condition true) {
-   <span class="comment">// perform first instruction;</span>
-}
-		
-else if (second condition true) {
-   <span class="comment">// perform second other instruction;</span>
-}</pre>
-		
-</section>
-
-<section id="all-purpose-else">
-
-
-<h2>The all-purpose <code>else</code> command</h2>
-
-<p>If you have ever organised physical items in a room or workplace you probably ended up with a drawer or shelf called 'miscellaneous' or 'other stuff'.</p>
-
-<p>Similarly, there are many programming situations where no amount of <span class="syn-js">if</span> and <span class="syn-js">else if</span> statements is enough to cope with every possible value.</p>
-
-<p>The solution is to use the <span class="syn-js">else</span> command. This is JavaScript&#8217;s way of handling values that fall in the category of &#8216;other&#8217; or &#8216;miscellaneous&#8217;.</p>
-
-<p>Update the code in your workfile as follows.</p>
-
-
-
-	<p>Verify your new code can deal with various numbers in the range 1-100.</p>
-
-
-<p>The general form of the <span class="syn-js">if</span>, <span class="syn-js">if else</span> and <span class="syn-js">else</span> decision-making structure is as follows.</p>
-
-
-<pre class="language-js">
-if (first condition true) {
-   <span class="comment">// perform first instruction;</span>
-}
-			
-else if (second condition true) {
-   <span class="comment">// perform second other instruction;</span>
-}
-else {
-   <span class="comment">// perform some other instruction;</span>
-}</pre>
-
-
-</section>
-
-<section id="linking-conditions">
-
-<h2>Linking conditions with logical operators</h2>
-
-<p>There are times when one condition is not enough. You can join multiple conditions together to form a single statement using the so-called <i>logical operators</i>.</p>
-	
-<p>The following code tests both temperature and humidity with the AND (<span class="syn-js">&amp;&amp;</span>) operator.</p>
-
-
-<p>The logical AND (<span class="syn-js">&amp;&amp;</span>) operator is found in user login forms, where the user needs to enter the correct email address <i>and</i> correct password.</p>
-
-<p>The following code uses the AND (<span class="syn-js">&&</span>) and the OR (<span class="syn-js">||</span>) operators and is satisfied when:</p>
-	
-<ul>
-	<li>The two AND <b>time</b> conditions are true.</li>
-	<li>Either the <b>isWeekend</b> conition OR the <b>isHoliday</b> condition is false.</li>
-</ul>	
-
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Testing with both logical operators
-let time = 14;  // 2 PM
-let isWeekend = true;
-let isHoliday = false;
-
-if (time &gt;= 9 && time &lt;= 17) {  // Between 9 AM and 5 PM
-    if (isWeekend || isHoliday) {
-        console.log("It's business hours but we're closed for weekend/holiday");
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Function to test if a value is truthy or falsy
+function checkTruthiness(value) {
+    if (value) {
+        console.log(`"${value}" is truthy`);
     } else {
-        console.log("We're open for business!");
+        console.log(`"${value}" is falsy`);
     }
-} else {
-    console.log("Sorry, we're closed!");
-}</code></pre>
-
-<p>Copy each of the above two code examples into your <b>making-decisions.html</b> workfile verify they run correctly.</p>
-
-<p>The following table describes the two logical operators.</p>
-
-<table class="table-gray">
-
-	<tr>
-		<td style="width:30%"><p><b>Logical Operators</b></p></td>
-		<td style="width:60%"><p><b>Description</b></p></td>
-	</tr>
-
-	<tr>
-		<td style="width:30%"><p>&amp;&amp;</p></td>
-		<td style="width:60%"><p>The <b>AND</b> operator. Joins multiple conditions in such a way that the output is true only if all the individual conditions are true.<br><br></p></td>
-	</tr>
-	<tr>
-		<td style="width:30%"><p>||</p></td>
-		<td style="width:60%"><p>The <b>OR</b> operator. Joins multiple conditions in such a way that the output is true if any one (or more or all) of the individual conditions is true.</p></td>
-	</tr>
-
-</table>
-
-<h3 id="improving-user-input">Improving your user-entered number testing code</h3>
-
-<p>Update your code for testing numbers in the range 1-100 as shown below. </p>
-
-<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Testing a number in range 1-100
-let userNumber = 250;
-
-if ( (userNumber &lt; 1 ) || (userNumber &gt; 100 ) ) {
-   console.log("The tested number is not within the allowed 1-100 range.");
 }
 
-else if (userNumber &lt; 50 ) {
-   console.log("The tested number is between 0 and 50.");
-}
-else if (userNumber &gt; 50 ) {
-   console.log("The tested number is between 50 and 100.");
-}
-else {
-   console.log("The tested number is exactly 50.");
-}</code></pre>
+checktruthngess(false);  // false is falsy
+checktruthngess(0);  // 0 is falsy
+checktruthngess("");  // empty string is falsy
+checktruthngess(undefined);  // undefined is falsy
+checktruthngess(null);  // null is falsy
+checktruthngess(NaN);  // NaN is falsy
+</code></pre>
 
-<p>Save your workfile and test your new code by entering various numbers inside the 1-100 range and also greater than 100.</p>
-
-
+    <p>In summary, a value is considered <i>truthy</i> if it evaluates to a boolean <span class="syn-js">true</span> when used in a conditional statement (<b>if (value)</b>). 
+        
+    And value is considered <i>falsy</i> if it evaluates to <span class="syn-js">false</span> when used in a conditional statement.</p>
 
 
 </section>
-
 
 
 </article>
