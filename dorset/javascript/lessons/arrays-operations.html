@@ -1,0 +1,659 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Array operations | JavaScript Tutorials</title>
+
+	<meta name="description" content="Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+		.table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+		table.table-gray { padding: 10px 20px 10px 20px !important;}
+
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
+
+		.four-samples { margin-top: 24px; margin-bottom: 20px }
+
+		.four-samples div {
+			background-image: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
+		  	padding:  6px 0 6px 0;
+		}
+
+		.four-samples div td,
+		.four-samples div > p {
+			font-size: calc(var(--font-size-base) * 0.85);
+			line-height: 1.5;
+		}
+  
+
+
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to arrays</h1>
+					<h2>Understanding the Document Object Model (DOM), and accessing elements in a web page that have or do not have a unique ID.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#javascript-loops">Going on and on &#8212; until it stops: a JavaScript loop</a></p>
+
+				<p class="toc-indent"><a href="#about-for-loop">The for loop</a></p>
+		
+		
+				<p class="toc-indent"><a href="#loop-conditions">About loop conditions</a></p>
+		
+				<p class="toc-indent"><a href="#increment-decrement">About the increment and decrement operators</a></p>
+		
+				<p><a href="#for-loop-structure">The for loop structure</a></p>
+		
+		
+				<p class="toc-indent"><a href="#more-for-loops">More about for loops</a></p>
+		
+		
+		
+				<p><a href="#interrupt">Interrupting loops with <span class="syn-js">break</span> and <span class="syn-js">continue</span></a></p>
+				<p class="toc-indent"><a href="#break-command">About the break command</a></p>
+				<p class="toc-indent"><a href="#continue-command">About the continue command</a></p>
+		
+				<p>&nbsp;</p>
+			</aside>
+	
+	
+	<article>
+	
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+
+		<p>In this Lesson, you will learn how to:</p>
+		<div class="box-goals">
+			<p>At the end of this Tutorial, you will be able to:</p>
+
+			<ul>
+				<li>Create and populate an array.</li>
+				<li>Find the length of an array.</li>
+				<li>Use array indexes to read elements in an array.</li>
+				<li>Add and remove an element at the start of an array.</li>
+				<li>Add and remove an element at the end of an array.</li>
+				<li>Copying out part of an array to a new sub-array.</li>
+				<li>Converting an entire array to a string.</li>
+				<li>Destructuring array elements to variables.</li>
+			</ul>
+		</div>
+
+	</section>
+	
+	<section>
+		<div class="code-snippets" style="margin-bottom:32px">
+			<p>Download a new workfile on your computer as described at the link below.</p>
+			<p>📄 &nbsp;<a href="assets/workfiles/arrays-intro.html" target="_blank"><b>Introduction to arrays</b>: Exercises</a></p>
+		</div>
+	
+	</section>
+
+
+    <section id="arrays-about">
+
+        <h2>Arrays: when variables are not enough</h2>
+        <p>A variable, <a href="variables-literals.html">as you have learnt</a>, can store a value. Think of a variable as a &#8216;box&#8217; in which you can place a <i>single</i> value. See below.</p>
+
+        <img src="assets/img/arrays-operations/arrays-intro/array-not-single-value.png" alt="Variable with a single value" style="max-width: 700px">
+    
+        <p>But suppose you want to store <i>several</i> values in a &#8216;box&#8217;? You need a different kind of variable; you need an <i>array</i>. </p>
+
+		<p>Below you can see an array or multi-compartment &#8216;box&#8217; that contains four values or <i>elements</i> (also called <i>items</i>).</p>
+    
+		<img src="assets/img/arrays-operations/arrays-intro/array-multiple-values.png" alt="Array with multiple values" style="max-width: 700px">
+
+		<p>The benefit of using arrays is that you can work with <i>datasets</i> with just a single item in your code. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+
+		<h3>Naming your arrays</h3>
+
+        <p>Array names follow the same rules as the names for regular variables. They are case-senstive, and cannot contain spaces or the dash (-) character.</p>
+
+		<p>Your JavaScript code will be easier to read if you name your arrays in a different way to regular (single-value) variables.</p>
+
+		<ul>
+			<li>Some developers begin array names with <b>arr</b>, such as <b>arrStudents</b> and <b>arrEmployees</b>.</li>
+			<li>It is common to pluralise array names, such as <b>arrProducts</b> rather that <b>arrProduct</b> and <b>arrUsers</b> rather than <b>arrUser</b>.</li>
+		</ul>
+   
+		
+	</section>
+
+
+	
+	<section id="array-first">
+
+		<h2>Arrays: working with the first element</h2>
+        <p>JavaScript offers two methods for working with the first element in an array. That is, the element at the <b>[0]</b> index position.</p>
+
+		<h3 id="array-shift">The <code>shift()</code> method</h3>
+		<p>This method <i>removes</i> the first array element. All other elements are 'shifted' downwards to a lower index position. For example, the element that was at <b>[1]</b> is now at position <b>[0]</b>. See below.</p>
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.shift();
+let fruitShifted = fruits.shift();</pre>
+
+<p>This method returns the value that was removed or &#8216;shifted out&#8217;. The array <span class="syn-js">length</span> will be decreased by one.</p>
+
+		<h3 id="array-unshift">The <code>unshift()</code> method</h3>
+		<p>This method <i>adds</i> a new element at the beginning (position <b>[0]</b>) of an array, which you enter as an argument in the parenthesis <span class="syn-js">()</span>. All other elements are moved up or 'unshifted' to a higher index position. For example, the element that was at <b>[1]</b> is now at position <b>[2]</b>. See below.</p>
+
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.unshift("Lemon");
+let arrLength = fruits.push("Kiwi");</pre>
+
+<p>As with <span class="syn-js">shift()</span>, this method returns the new array <span class="syn-js">length</span>, which will be one greater than before.</p>
+
+
+	</section>
+
+
+    <section id="array-last">
+
+
+        <h2>Arrays: working with the last element</h2>
+        <p>JavaScript offers two methods for working with the <i>last</i> element in an array. That is, the element with the highest <i>index</i> number.</p>
+
+		<h3 id="array-pop">The <code>pop()</code> method</h3>
+		<p>Use this method to <i>remove</i> the last element from an array. See the example below.</p>
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.pop();
+let fruitRemoved = fruits.pop();</pre>
+
+<p>This method returns the value that was removed or &#8216;popped out&#8217;. The array <span class="syn-js">length</span> will be decreased by one.</p>
+
+		<h3 id="array-push">The <code>push()</code> method</h3>
+		<p>This method <i>adds</i> a new element at the end of an array, which you enter as an argument in the parenthesis <span class="syn-js">()</span>. See below.</p>
+
+<pre class="language-js">
+const fruits = ["Banana", "Orange", "Pineapple", "Mango"];
+fruits.push("Kiwi");
+let arrLength = fruits.push("Kiwi");</pre>
+
+<p>This method returns the new array <span class="syn-js">length</span>, which will be one greater than before.</p>
+
+</section>
+
+<section>
+
+		<h2 id="array-splice">Adding and removing array elements with <code>splice()</code></h2>
+
+		<p>JavaScript offers a  <span class="syn-js">splice()</span> method for adding or removing an element at a <i>specified index position</i> in an array. It takes the following parameters:</p>
+
+		<ul>
+			<li>The first parameter (a number) specifies the position where new elements should be added (&#8216;spliced in&#8217;).</li>
+			<li>The second parameter (also a number) specifies how many elements should be removed.</li>
+			<li>The remaining parameters (any data type) are optional. If included, they define the new elements to be added, in comma-separated format.</li>
+		</ul>
+
+		<h3  id="array-splice-add">Adding an element with <code>splice()</code></h3>
+		<p>In the example below, new elements are added at index position <b>[2]</b>, zero elements are removed, and two string elements are added.</p>
+
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  fruits.splice(2, 0, "Lemon", "Kiwi");</pre>
+
+<p>The method returns an array with the deleted items, if any. </p>		
+
+		<h3  id="array-splice-remove">Removing an element with <code>splice()</code></h3>
+		<p>You can use <span class="syn-js">splice()</span> to remove elements &#8211; without leaving &#8216;holes&#8217; (elements with a value of <i>undefined</i>) in the array.</p>
+
+		<p>In the example below, the first element is deleted.</p>
+
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  fruits.splice(0, 1);</pre>
+
+</section>
+
+	<section id="array-copy-out">
+
+		<h2>Copying out part of an array</h2>
+
+		<p>You can create a new array based on a specified part of an existing array with the <span class="syn-js">slice()</span> method. The original array is unchanged.</p>
+
+		<p>This method takes two arguments.</p>
+
+		<ul>
+			<li>The first or <i>start</i> argument defines the index position where the method will begin its copy operation.</li>
+			<li>The second or <i>finish</i> argument defines the index position up to which (but <i>not including</i>) the method will end its copy operation. If this end argument is omitted, the method slices out the rest of the array.</li>
+		</ul>
+
+		<p>The example below slices out the elements "Orange" and "Lemon".</p>
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const slicedFruits1 = fruits.slice(1, 3);</pre>
+
+<p>The example below slices out all elements starting from array element <b>[1]</b> ("Orange").</p>
+<pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const slicedFruits2 = fruits.slice(1);</pre>
+
+
+	</section>
+
+	<section>
+
+		<h2 id="array-to-string">Converting an array to a string</h2>
+		<p>Use the toString method to convert all the elements to a comma-separated string variable. See the example below.</p>
+  <pre class="language-js">
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const newString = fruits.toString();</pre>
+
+	</section>
+
+	<section id="javascript-loops">
+
+
+		<h2>Going on and on &#8212; until it stops: a loop</h2>
+	
+		<p>A loop is a programming structure that repeats an instruction or series of instructions when certain conditions are satisfied, and then <i>stops</i>. JavaScript offers three types of loops.</p>
+	
+		<p class="defhead">Loop</p>
+	
+		<p class="deftext">A script that performs a statement or series of statements repeatedly until a certain condition is satisfied. The loop then stops and the next statement in the script after the loop is performed.</p>
+	</section>
+		<section>
+	
+		<h2 id="for-loop">The JavaScript <span>for</span> Loop</h2>
+	
+		<p>This is the most common loop in JavaScript. Use a <span class="syn-js">for</span> loop when you know in advance how many times you want the loop to repeat.</p>
+	
+		<p>A basic <span class="syn-js">for</span> loop in JavaScript looks as shown below.</p>
+	
+	<pre class="language-js">
+	<span class="purple">for</span> (<span class="blue-dark">let</span> <span class="blue-light">i</span> = 1; <span class="blue-light">i</span> &lt;= 5; <span class="blue-light">i++</span>) {
+		<span class="comment">// perform statements(s);</span>
+	}</pre>
+	
+	<p>Let's examine each element in detail.</p>
+	
+	<ul>
+		<li><span class="syn-js">for</span>: Always type 'for', not 'FOR' of 'For'. The <span class="syn-js">for</span> keyword is case-sensitive.</li>
+	
+		<li><span class="syn-js">i</span>: Every loop has a <i>counter variable</i> that tracks how many times the loop has been performed. The counter variable is typically named with the lower-case letter <b>i</b>. Some developers prefer the letter <b>n</b>, while others use the word <b>count</b> or <b>counter</b>. See below.
+	<pre class="language-js">
+	  <span class="purple">for</span> (<span class="blue-dark">let</span> <span class="blue-light">counter</span> = 1; <span class="blue-light">counter</span> &lt;= 10; <span class="blue-light">counter++</span>) {
+		<span class="comment">// perform statements(s);</span>
+	}</pre></li>
+	
+		<li><span class="syn-js">let i = 1</span>: The loop has to start somewhere. Typically, the <i>initial value</i> is <b>1</b> <b>0</b>. It could also be <b>12</b>, <b>56</b>, <b>78</b> or whatever.
+		<span class="inside-ol">&nbsp;</span>
+		When looping through <i>zero-indexed</i> strings, arrays or objects, this initial value is typically <b>0</b>.</li>
+	
+		<li><span class="syn-js">i &lt;= 5</span>: You don't want a loop to run indefinitely, so you set an upper limit.</li>
+	
+		<li><span class="syn-js">i++</span>: This tells JavaScript to <i>increment</i> (add <b>1</b> repeatedly) to the <i>counter variable</i> until the variable reaches the upper loop limit (in this case, <b>5</b>). It does not have to be the increment operator. A loop can contain the <i>decrement operator</i>, <span class="syn-js">i--</span>.</li>
+	</ul>
+	
+	
+		<h3 id="loop-conditions">About loop conditions</h3>
+	
+		<p>Every loop type contains some type of condition statement. As with the <span class="syn-js">if</span> command, condition statements in loops include comparison operators such as greater than (<b>&gt;</b>) or equal to (<b>==</b>).</p>
+	
+		<ul>
+			<li>When the condition is tested and satisfied, the loop runs.</li>
+			<li>After every time that the loop runs, it tests the condition again.</li>
+			<li>The loop will keep repeating until the condition is no longer satisfied.</li>
+		</ul>
+	
+		<img src="assets/img/arrays-operations/loop-condition.png" alt="JavaScript" style="max-width: 400px">
+	
+		<p>The initial and upper values of a <span class="syn-js">for</span> loop do not have to be literals, such as <b>3</b> or <b>-42</b>. They can also be variables whose values come from elsewhere in the code or from a user input. For example:</p>
+	
+	<pre class="language-js">
+	for (i = baseTemperature; i &lt;= userTemperature; i++);
+	</pre>
+	
+		<p>The general syntax of a <span class="syn-js">for</span> loop is shown below.</p>
+	
+	<pre class="language-js">
+	for (initialisation; condition statement; counter variable update) {
+	   <i>statements(s) containing counter variable;</i>
+	}</pre>
+	
+	<p>Developers use a special term to describe the performance of a loop: <i>iteration</i>.</p>
+	
+		<p class="defhead">Iteration</p>
+	
+		<p class="deftext">A single performance of a loop. If a loop runs five times, it is said to have performed five iterations.</p>
+	
+		<p class="defhead">Loop Counter Variable</p>
+	
+		<p class="deftext">The variable in a loop structure that keeps track of how many loop iterations have been performed. The variable is typically named 'i'. Alternative names include 'n', 'count' or 'counter'.</p>
+	
+		<h4 id="ex-15-1">Exercise 15.1: Building a simple <span>for</span> loop</h4>
+		<p>In this exercise, you will create a simple <span class="syn-js">for</span> loop structure.</p>
+	
+		<p>Into the first <b>js-box</b> DIV of the Lesson <a href="exercises/index.html" target="_blank">exercise file</a>, copy-and-paste the following loop inside the <span class="syn-js">&lt;script&gt;</span> tag:</p>
+	
+	<pre class="language-js">
+	<span class="purple">for</span> (<span class="blue-dark">let</span> <span class="blue-light">i</span> = 1; <span class="blue-light">i</span> &lt;= 5; <span class="blue-light">i++</span>) {
+		<span class="comment">// perform statement;</span>
+		document.write(`This is loop step number: &lt;b&gt;${i}&lt;/b&gt;.&lt;br&gt;`);
+	}</pre>
+	
+		<p>Save and reload your web page. The result should look as shown below.</p>
+	
+		<p><img src="assets/img/arrays-operations/loop-1.png" alt="JavaScript" style="width: 600px"></p>
+	
+		<p>Edit the loop condition as shown below, and save and reload your web page.</p>
+	
+	<pre class="language-js">
+	(<span class="blue-dark">let</span> <span class="blue-light">i</span> = -5; <span class="blue-light">i</span> &lt;= -1; <span class="blue-light">i++</span>)</pre>
+	
+		<p>You should now see the following output.</p>
+	
+		<p><img src="assets/img/arrays-operations/loop-2.png" alt="JavaScript" style="width: 600px"></p>
+	
+		<h4 id="ex-15-2">Exercise 15.2: Building a user-controlled for loop</h4>
+		<p>In this exercise, you will create a <span class="syn-js">for</span> loop in which the number of iterations is not a fixed literal but a numeric variable input by the user.</p>
+	
+	
+	</section>
+	
+	
+	
+	<section id="interrupt">
+	
+	<h2>Interrupting loops with <span>break</span> and <span>continue</span></h2>
+	
+	<p>A <span class="syn-js">for</span> loop can include a <span class="syn-js">break</span> and/or <span class="syn-js">continue</span> statement that interrupts a loop when its counter variable reaches a certain value.</p>
+	
+	<p>The <span class="syn-js">break</span> command tells JavaScript that, when the counter variable reaches a specified value, to exit the loop, and move on the next statement in the script after the loop. The <span class="syn-js">break</span> command comes before the statement(s) that are performed within the loop.</p>
+	
+	<p>The <span class="syn-js">continue</span> command also interrupts the running of a loop, but it the message it sends to JavaScript is slightly different: when the counter variable reaches a specified value, don't perform the statement(s) in the loop, but return to the top of the loop as if all the statements have been performed. The loop then continues on as normal. You typically use the <span class="syn-js">continue</span>	command to handle special or exceptional values of the counter variable.</p>
+	
+	
+	<h3 id="break-command">Using a <span>break</span> statement</h3>
+	<p>A <span class="syn-js">break</span> statement sends the following message to JavaScript: </p>
+	
+	<p><i>When the counter variable reaches a specified value, exit the loop, and move on the next statement in the script after the loop.</i></p>
+	
+	<p>The loops below run only when the counter variable has values of 1, 2 and 3. When the counter variable reaches a value of 4, the loops stop.</p>
+	
+	<img src="assets/img/arrays-operations/8-9.png" alt="JavaScript">
+	
+	<p>The <span class="syn-js">break</span> statement comes <i>before</i> the statement that is performed within the loop – in these three examples, a simple <span class="syn-js">document.write()</span> statement.</p>
+	
+	<p>The interrupted loop generates the following output in a web browser window.</p>
+	
+	<h3 id="continue-command">Using a <span>continue</span> statement</h3>
+	
+	<p>A <span class="syn-js">continue</span> statement also interrupts the running of a loop, but the message it sends to JavaScript is slightly different:</p>
+	
+	<p><i>When the counter variable reaches a specified value, don’t perform the statement(s) in the loop, but return to the top of the loop as if all the statements have been performed.</i></p>
+	
+	<p>The loop then continues on as normal. You typically use the <span class="syn-js">continue</span> command to handle special or exceptional values of the counter variable.</p>
+	
+	<p>The loop below runs only when the counter variable has values of 1, 2, 3 and 5. When the counter variable reaches a value of 4, the loops stop, return to the top, and then continues on.</p>
+	
+	<img src="assets/img/arrays-operations/8-10.png" alt="JavaScript">
+	
+	
+	
+	
+	<h3 id="exercise-8-5">Exercise 15.3: Skipping unlucky number 13</h3>
+	<p>Consider a <span class="syn-js">for</span> loop that counts from 1 to 20. Number 13 is considered unlucky. In Exercise 15.3, your task is to amend such a loop so that it skips the 13th iteration and restarts at number 14.</p>
+	
+	<p>The loop should now run as shown below.</p>
+		
+	<p><img src="assets/img/arrays-operations/8-12.png" style="max-width: 660px" alt="JavaScript"></p>
+	
+	
+	</section>
+	
+	
+	
+	<section id="arrays-reading">
+	
+		<h2>About loops and arrays</h2>
+	
+		<p>JavaScript <span class="syn-js">for</span> and similar loops are commonly used for traversing (moving through) the elements of an array, either to read the array elements values or to modify them in some way.</p>
+	
+		<p>Suppose your code contains an array named <b>teamsF1Teams</b> with six elements.</p>
+		
+	<pre class="language-js">const arrF1Teams = [
+	   "Red Bull",
+	   "Ferrari",
+	   "Mercedes",
+	   "McLaren",
+	   "Alpine",
+	   "Alpha Romeo",
+	]</pre>
+		
+		<p>sYou could write the values of the array&#8216;s six elements to the JavaScript console with six separate <span class="syn-js">console.log()</span> statements as shown below.</p>
+	
+	<pre class="language-js">console.log(`Array element 0: arrF1Teams[0]`);
+	console.log(`Array element 1: arrF1Teams[1]`);
+	console.log(`Array element 2: arrF1Teams[2]`);
+	console.log(`Array element 3: arrF1Teams[3]`);
+	console.log(`Array element 4: arrF1Teams[4]`);
+	console.log(`Array element 5: arrF1Teams[5]`);</pre>
+		
+		<p>That's a lot of typing.</p>
+	
+		<p>There is an easier way: use a <span class="syn-js">for</span> loop.</p>
+	
+		<h3>Exercise: 15.4: Reading array element values <span>for</span> loop</h3>
+	
+	<pre class="language-js">for (i = 0; i &lt;= 5; i++) {
+	   console.log(`Array element [i]: arrF1Teams[i]`);
+	}</pre>
+	
+		<p>As you can see, there are six elements in the array. However, the initial value of the <i>counter variable</i> <b>i</b> is set to <b>0</b> and the upper value is set to <b>5</b>.</p>
+		
+		<p>This is because the array's index numbering runs from <b>[0]</b> to <b>[5]</b> and <i>not</i> from <b>[1]</b> to <b>[6]</b>.</p>
+	
+		<p>To use a <span class="syn-js">for</span> loop to access all the values from an array, follow this simple rule:</p>
+		
+		<p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+		
+		<p>That way a <span class="syn-js">console.log()</span> statement is performed for each individual array element.</p>
+		
+		<p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+	
+		<p>The solution is to use the array <span class="syn-js">length</span> property as the upper limit of a <span class="syn-js">for</span> loop as follows.</p>
+	
+	<pre class="language-js">
+	const arrFruits = ["Apple","Banana","Blueberry","Pear","Lemon"];	
+	for (i = 0; i &lt; arrFruits.length; i++) {
+	   console.log("Looping with for: "+arrFruits[i]);
+	}</pre>
+	
+		<p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<span class="syn-js"><b>&lt;</b></span>) and not 'less than or equal to' (<span class="syn-js"><b>&lt;=</b></span>).</p> 
+			
+		<p>Why?</p>
+	
+		<p>Because the array <span class="syn-js">length</span> is always one greater than the index number of the highest array element.</p>
+			
+		<p>For example, When an array has six elements, its index numbers run from <b>[0]</b> to <b>[5]</b>, and its <span class="syn-js">length</span> property contains the value of <b>6</b>.</p>
+	
+	</section>
+	
+	<section>
+	
+		<h2 id="arrays-looping-forNext">Looping through an array with <code>forEach</code></h2>
+		<p>A second option is to use the  <span class="syn-js">forEach</span> loop. In its simplest form, the syntax is as follows:</p>
+	
+		<pre class="language-js">array.forEach(item =&gt; console.log(item));</pre>	
+	
+		<p>The <b>forEach()</b> method executes a provided function once for each element in an array.</p>
+	
+		<p>For example:</p>
+	
+	<pre>arrF1Teams.forEach(item =&gt; console.log(item));</pre>
+	
+	
+		<p>To include the index position of each item in the output, you can add an optional index argument.</p>
+	
+		<pre>fruits.forEach((item, index) =&gt; console.log(index, item));</pre>
+	
+		
+	</section>
+
+	<section id="arrays-reading">
+
+		<h2>About loops and arrays</h2>
+	
+		<p>JavaScript <span class="syn-js">for</span> and similar loops are commonly used for traversing (moving through) the elements of an array, either to read the array elements values or to modify them in some way.</p>
+	
+		<p>Suppose your code contains an array named <b>teamsF1Teams</b> with six elements.</p>
+		
+	<pre class="language-js">arrF1Teams = [
+	   "Red Bull",
+	   "Ferrari",
+	   "Mercedes",
+	   "McLaren",
+	   "Alpine",
+	   "Alpha Romeo"
+	]</pre>
+		
+		<p>You could write the values of the array&#8216;s six elements to the JavaScript console with six separate <span class="syn-js">console.log()</span> statements as shown below.</p>
+	
+	<pre class="language-js">console.log(`Array element 0: arrF1Teams[0]`);
+	console.log(`Array element 1: arrF1Teams[1]`);
+	console.log(`Array element 2: arrF1Teams[2]`);
+	console.log(`Array element 3: arrF1Teams[3]`);
+	console.log(`Array element 4: arrF1Teams[4]`);
+	console.log(`Array element 5: arrF1Teams[5]`);</pre>
+		
+		<p>That's a lot of typing.</p>
+	
+		<p>There is an easier way: use a <span class="syn-js">for</span> loop.</p>
+	
+		<h3>Exercise: 17:1: Reading array element values <span>for</span> loop</h3>
+	
+	<pre class="language-js">for (i = 0; i &lt;= 5; i++) {
+	   console.log(`Array element [i]: arrF1Teams[i]`);
+	}</pre>
+	
+		<p>As you can see, there are six elements in the array. However, the initial value of the <i>counter variable</i> <b>i</b> is set to <b>0</b> and the upper value is set to <b>5</b>.</p>
+		
+		<p>This is because the array's index numbering runs from <b>[0]</b> to <b>[5]</b> and <i>not</i> from <b>[1]</b> to <b>[6]</b>.</p>
+	
+		<p>To use a <span class="syn-js">for</span> loop to access all the values from an array, follow this simple rule:</p>
+		
+		<p><i>The number of loop iterations must be the same as the number of elements in the array.</i></p>
+		
+		<p>That way a <span class="syn-js">console.log()</span> statement is performed for each individual array element.</p>
+		
+		<p>But the number of array elements may change during the script, so how can you set the upper value for the counter variable?</p>
+	
+		<p>The solution is to use the array <span class="syn-js">length</span> property as the upper limit of a <span class="syn-js">for</span> loop as follows.</p>
+	
+	<pre class="language-js">for (i = 0; i &lt; fruits.length; i++) {
+		 console.log("Looping with for: "+fruits[i]);
+	}</pre>
+	
+		<p>Notice that the comparison operator for the upper value of the counter variable is 'less than' (<span class="syn-js"><b>&lt;</b></span>) and not 'less than or equal to' (<span class="syn-js"><b>&lt;=</b></span>).</p> 
+			
+		<p>Why?</p>
+	
+		<p>Because the array <span class="syn-js">length</span> is always one greater than the index number of the highest array element.</p>
+			
+		<p>For example, When an array has six elements, its index numbers run from <b>[0]</b> to <b>[5]</b>, and its <span class="syn-js">length</span> property contains the value of <b>6</b>.</p>
+	
+		
+	
+		<h3 id="arrays-looping-forNext">Looping through an array with <code>forEach</code></h3>
+		<p>A second option is to use the  <span class="syn-js">forEach</span> loop. See the example below.</p>
+	
+		<pre class="language-js">arrCars.forEach(element =&gt; console.log(element));</pre>		
+	
+	
+	</section>
+	
+	
+
+</article>
+
+</main>
+<footer></footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
