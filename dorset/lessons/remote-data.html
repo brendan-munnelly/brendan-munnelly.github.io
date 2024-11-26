@@ -1,0 +1,315 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Working with API Data | JavaScript Tutorials</title>
+
+    <meta name="description" content="Retrieving and displaying data from online APIs using JavaScript fetch.">
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+    <style>
+        pre { background-color: #282c34;}
+        .api-example { 
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+
+    <!-- Syntax Highlighter -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+
+<body id="top">
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+    
+            <div class="content">
+                <h1>Working with API Data</h1>
+                <h2>Retrieving and displaying real-world data from online APIs using JavaScript</h2>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+            <h3>JAVASCRIPT</h3>
+        </aside>
+
+        <article>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <div class="box-goals">
+                    <ul>
+                        <li>Understand what an API is and how to access it</li>
+                        <li>Use the fetch API to retrieve remote data</li>
+                        <li>Handle API responses and errors properly</li>
+                        <li>Display and update API data in real-time</li>
+                        <li>Work with different types of API endpoints</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <div class="code-snippets" style="margin-bottom:32px">
+                    <p>Download the exercise files on your computer as described at the link below.</p>
+                    <p>📄 &nbsp;<a href="assets/workfiles/api-data.html" target="_blank"><b>Working with APIs</b>: Exercises</a></p>
+                </div>
+            </section>
+
+            <section id="about-apis">
+                <h2>About APIs</h2>
+                <p>An API (Application Programming Interface) is a way for different software applications to communicate with each other. Many websites provide APIs that allow you to request data from their servers.</p>
+
+                <p>For this tutorial, we'll use some free, public APIs that don't require authentication:</p>
+                <ul>
+                    <li><b>JSONPlaceholder</b>: Fake data for testing and prototyping</li>
+                    <li><b>OpenWeather</b>: Current weather data (requires free API key)</li>
+                    <li><b>Dog CEO</b>: Random dog images</li>
+                </ul>
+            </section>
+
+            <section id="basic-api-request">
+                <h2>Making a Basic API Request</h2>
+                <p>Let's start with a simple example using JSONPlaceholder to get a list of users:</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">// Function to fetch users from the API
+async function getUsers() {
+    try {
+        // Make the API request
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        
+        // Check if the request was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Convert the response to JSON
+        const users = await response.json();
+        
+        // Display in console
+        console.log('Users:', users);
+        
+        return users;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        return [];
+    }
+}
+
+// Call the function
+getUsers();</code></pre>
+
+                <p>Key points about this code:</p>
+                <ul>
+                    <li>We use <span class="syn-js">async/await</span> for cleaner asynchronous code</li>
+                    <li>Error handling with try/catch is important for API calls</li>
+                    <li>We check <span class="syn-js">response.ok</span> for HTTP errors</li>
+                </ul>
+            </section>
+
+            <section id="displaying-api-data">
+                <h2>Displaying API Data</h2>
+                <p>Let's display the user data in an HTML table:</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">async function displayUsers() {
+    // Get users data
+    const users = await getUsers();
+    
+    // Create table HTML
+    let tableHTML = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>City</th>
+                    <th>Company</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    // Add each user as a row
+    users.forEach(user =&gt; {
+        tableHTML += `
+            <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.address.city}</td>
+                <td>${user.company.name}</td>
+            </tr>
+        `;
+    });
+    
+    tableHTML += `</tbody></table>`;
+    
+    // Add to page
+    document.getElementById('user-table').innerHTML = tableHTML;
+}
+
+// Load data when page loads
+document.addEventListener('DOMContentLoaded', displayUsers);</code></pre>
+            </section>
+
+            <section id="weather-api">
+                <h2>Working with the OpenWeather API</h2>
+                <p>This example shows how to get current weather data for a city:</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">const API_KEY = 'your_api_key_here'; // Get this from OpenWeather
+
+async function getWeather(city) {
+    try {
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+        );
+        
+        if (!response.ok) {
+            throw new Error(`Weather API error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Display weather information
+        document.getElementById('weather').innerHTML = `
+            <h3>Weather in ${data.name}</h3>
+            <p>Temperature: ${data.main.temp}°C</p>
+            <p>Conditions: ${data.weather[0].description}</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+        `;
+        
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        document.getElementById('weather').innerHTML = 
+            '<p>Error loading weather data</p>';
+    }
+}
+
+// Add search functionality
+document.getElementById('weather-form').addEventListener('submit', (e) =&gt; {
+    e.preventDefault();
+    const city = document.getElementById('city-input').value;
+    getWeather(city);
+});</code></pre>
+            </section>
+
+            <section id="random-images">
+                <h2>Working with Image APIs</h2>
+                <p>The Dog CEO API provides random dog images. Here's how to use it:</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">async function getRandomDog() {
+    try {
+        const response = await fetch('https://dog.ceo/api/breeds/image/random');
+        
+        if (!response.ok) {
+            throw new Error(`Dog API error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Display the image
+        document.getElementById('dog-image').innerHTML = `
+            <img src="${data.message}" alt="Random Dog" style="max-width: 100%">
+        `;
+        
+    } catch (error) {
+        console.error('Error fetching dog image:', error);
+        document.getElementById('dog-image').innerHTML = 
+            '<p>Error loading image</p>';
+    }
+}
+
+// Add button to load new image
+document.getElementById('new-dog-btn').addEventListener('click', getRandomDog);</code></pre>
+            </section>
+
+            <section id="api-best-practices">
+                <h2>API Best Practices</h2>
+                <ul>
+                    <li><b>Error Handling</b>: Always include error handling for API requests</li>
+                    <li><b>Loading States</b>: Show loading indicators while data is being fetched</li>
+                    <li><b>Rate Limiting</b>: Be aware of API rate limits and handle accordingly</li>
+                    <li><b>Security</b>: Never expose API keys in client-side code in production</li>
+                    <li><b>Caching</b>: Consider caching responses for better performance</li>
+                </ul>
+
+                <p>Here's an example incorporating these practices:</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 5000 } = options;
+    
+    const controller = new AbortController();
+    const id = setTimeout(() =&gt; controller.abort(), timeout);
+    
+    try {
+        const response = await fetch(resource, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(id);
+        return response;
+    } catch (error) {
+        clearTimeout(id);
+        throw error;
+    }
+}
+
+async function getDataWithRetry(url, maxRetries = 3) {
+    let lastError;
+    
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            // Show loading state
+            document.getElementById('loading').style.display = 'block';
+            
+            const response = await fetchWithTimeout(url);
+            const data = await response.json();
+            
+            // Cache the response
+            localStorage.setItem(url, JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
+            
+            return data;
+        } catch (error) {
+            lastError = error;
+            console.warn(`Attempt ${i + 1} failed:`, error);
+            await new Promise(resolve =&gt; setTimeout(resolve, 1000 * (i + 1)));
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    }
+    
+    throw lastError;
+}</code></pre>
+            </section>
+
+            <section id="exercises">
+                <h2>Exercises</h2>
+                <p>Try these exercises to enhance your understanding:</p>
+                <ul>
+                    <li>Add error handling for network timeouts</li>
+                    <li>Implement a loading spinner while data loads</li>
+                    <li>Cache API responses in localStorage</li>
+                    <li>Add pagination to the users table</li>
+                    <li>Create a search function for the users</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
