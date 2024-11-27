@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Testing for weird values | JavaScript Tutorials | Brendan Munnelly</title>
-	<meta name="description" content="Creating decision-making structures in JavaScript with if, else if, and else code blocks.">
+	<meta name="description" content="Understanding type coercion, working with undefined, null and NaN, and truthy and falsy values.">
 
     <meta name="author" content="Brendan Munnelly">
 
@@ -26,7 +26,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-	<!-- <script defer src="../../assets/js/cookie.js"></script> -->
+	<script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -57,7 +57,7 @@
 		
 				<div class="content">
 					<h1>Testing for weird values</h1>
-					<h2>Working with <span class="syn-js">undefined</span>, <span class="syn-js">null</span> and <span class="syn-js">NaN</span>. Understanding <i>truthy</i>, <i>falsy</i>, and verifying numeric variables for use in calculations.</h2>
+					<h2>Understanding type coercion, working with <span class="syn-js">undefined</span>, <span class="syn-js">null</span> and <span class="syn-js">NaN</span>, and <i>truthy</i> and <i>falsy</i> values.</h2>
 				</div>
 			</div><!-- /wrapper -->
 		</header>
@@ -71,13 +71,21 @@
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#decision-making">Decision-making with if</a></p>
-				<p class="toc-indent"><a href="#if-example">The <i>if</i> statement in action</a></p>
-				<p class="toc-indent"><a href="#comparision-operators">Comparison operators</a></p>
-				<p><a href="#multiple-conditions">Handling multiple conditions with <i>else if</i></a></p>
-				<p><a href="#all-purpose-else">The all-purpose <i>else</i> command</a></p>
-				<p><a href="#linking-conditions">Linking conditions with logical operators</a></p>
-				<p class="toc-indent"><a href="#improving-user-input">Improving your user-entered number testing code</a></p>
+				<p><a href="#type-coercion">Understanding type coercion</a></p>
+
+                <p><a href="#loose-strict-equality">Loose and strict equality</a></p>
+
+                <p><a href="#non-weird">Normal (non-weird) data types</a></p>
+    
+                <p><a href="#weird">Weirdly beyond boolean true or false</a></p>
+
+                <p><a href="#falsy">Working with some <i>falsy</i> values</a></p>
+
+                <p class="toc-indent"><a href="#undefined">Working with <i>undefined</i></a></p>
+                <p class="toc-indent"><a href="#nan">Working with <i>NaN</i></a></p>
+
+                <p><a href="#falsy-testing">Testing for <i>falsy</i> values</a></p>
+
 				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 	
 				<p>&nbsp;</p>
@@ -106,86 +114,7 @@
     </section>
 
 
-    <section>
-
-        <h2>Normal (non-weird) data types</h2>
-
-        <p>Up to now you have been working with four basic data types in JavaScript.</p>
-
-        <table class="table-gray">
-            <tr>
-                <td style="min-width: 20%"><p><b>Data Type</b></p></td>
-                <td><p><b>Description</b></p></td>
-            </tr>
-            <tr>
-                <td><p>string</p></td>
-                <td><p>Text within quotes, such as <b>"Hello, World"</b>.</p></td>
-            </tr>
-            <tr>
-                <td><p>number</p></td>
-                <td><p>A number without surrounding quotes, such as <b>12</b> or <b>9.99</b>.</p></td>
-            </tr>
-            <tr>
-                <td><p>boolean</p></td>
-                <td><p>Only two possible values: either <b>true</b> or <b>false</b>.</p></td>
-            </tr>
-            <tr>
-                <td><p>null</p></td>
-                <td><p>A data type that <i>intentionally</i> has no value.</p></td>
-            </tr>
-        </table>
-    
-        <p>Copy the following four functions into your <b>testing-weird.html</b> workfile. Each can check whether a supplied value has a particular data type.</p>
-
-        <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// === TESTING DATA TYPES ===
-
-// Test if a value is a string            
-function isString(value) {
-    return typeof value === 'string';
-}
-
-console.log(isString("Hello")); // true
-console.log(isString(42));  // false
-
-// Test if a value is a number
-function isNumber(value) {
-    return typeof value === 'number' && !isNaN(value);
-}
-
-console.log(isNumber(42));  // true
-console.log(isNumber("42"));  // false
-
-// Test if a Value is a Boolean
-function isBoolean(value) {
-    return typeof value === 'boolean';
-}
-
-console.log(isBoolean(true));  // true
-console.log(isBoolean(false)); // true
-console.log(isBoolean("true")); // false
-
-// Test if a Value is null
-function isNull(value) {
-    return value === null;
-}
-
-console.log(isNull(null));  // true
-console.log(isNull("null")); // false
-console.log(isNull(undefined)); // false
-
-let myVariable = "Hello, world!";
-
-if (isString(myVariable)) {
-  console.log("myVariable is a string");
-} else {
-  console.log("myVariable is not a string");
-}</code></pre>
-
-    </section>
-
-
-
-    <section>
+    <section id="type-coercion">
         <h2>Understanding type coercion</h2>
         <p>In certain situations, JavaScript automatically <i>coerces</i> (converts) values from one data type to another. This can cause unexpected results or fatal errors in your code.</p>
     
@@ -236,45 +165,131 @@ demonstrateCoercion("5", 10);</code></pre>
         </ul>
     
     </section>
-    
-    <section>
+
+
+    <section id="loose-strict-equality">
         
-            <h2>Loose (<code>==</code>) and strict (<code>===</code>) equality</h2>
-    
-            <p>JavaScript provides two types of equality operators:</p>
-    
-            <ul>
-                <li><b>Loose equality (==)</b>: This operator performs type coercion before comparing two values. Only the values need to be the same. The data types can be different. See below. 
-    <pre>  1 == "1" <span class="comment">// Yes. This is true.</span></pre>
-                
-                </li>
-                <li><b>Strict equality (===)</b>: This does not perform type coercion. The values <i>and</i> the data types must be the same. See below.
-    <pre>  1 === "1" <span class="comment">// No! This is false.</span>
+        <h2>Loose (<code>==</code>) and strict (<code>===</code>) equality</h2>
+
+        <p>JavaScript provides two types of equality operators:</p>
+
+        <ul>
+            <li><b>Loose equality (==)</b>: This operator performs type coercion before comparing two values. Only the values need to be the same. The data types can be different. See below. 
+<pre>  1 == "1" <span class="comment">// Yes. This is true.</span></pre>
+            
+            </li>
+            <li><b>Strict equality (===)</b>: This does not perform type coercion. The values <i>and</i> the data types must be the same. See below.
+<pre>  1 === "1" <span class="comment">// No! This is false.</span>
 1 === 1  <span class="comment">// Much better. This is true. Same data type.</span>
 "1" === "1"  // <span class="comment">Again, this is also true. Same data type.</span>
 false === false  // <span class="comment">Also true. Same data type.</span>
 true !== false  // <span class="comment">True too. Same data type.</span></pre></li>
-            </ul>
-    
+        </ul>
+
+        <p>Copy the following to your workfile.</p>
+
 <pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Function to compare values using == and === operators
 function compareValues(value1, value2) {
-    console.log(`Testing: ${value1} vs ${value2}`);
-    console.log(`Loose equality (==): ${value1 == value2}`);
-    console.log(`Strict equality (===): ${value1 === value2}`);
-    console.log('---');
+console.log(`Testing: ${value1} vs ${value2}`);
+console.log(`Loose equality (==): ${value1 == value2}`);
+console.log(`Strict equality (===): ${value1 === value2}`);
+console.log('---');
 }
-    
+
 // Test different combinations
 compareValues(5, "5");      // number vs string
 compareValues(0, false);    // number vs boolean
 compareValues("", false);   // empty string vs boolean
 compareValues(null, undefined); // null vs undefined</code></pre>
-    
-    </section>    
 
+</section>    
+
+
+
+
+    <section id="non-weird">
+
+        <h2>Normal (non-weird) data types</h2>
+
+        <p>Up to now you have been working with four basic data types in JavaScript.</p>
+
+        <table class="table-gray">
+            <tr>
+                <td style="min-width: 20%"><p><b>Data Type</b></p></td>
+                <td><p><b>Description</b></p></td>
+            </tr>
+            <tr>
+                <td><p>string</p></td>
+                <td><p>Text within quotes, such as <b>"Hello, World"</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>number</p></td>
+                <td><p>A number without surrounding quotes, such as <b>12</b> or <b>9.99</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>boolean</p></td>
+                <td><p>Only two possible values: either <b>true</b> or <b>false</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>null</p></td>
+                <td><p>A data type that <i>intentionally</i> has no value.</p></td>
+            </tr>
+        </table>
+    
+        <!-- <p>Copy the following four functions into your <b>testing-weird.html</b> workfile. Each can check whether a supplied value has a particular data type.</p>
+
+        <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// === TESTING DATA TYPES ===
+
+// Test if a value is a string            
+function isString(value) {
+    return typeof value === 'string';
+}
+
+console.log(isString("Hello")); // true
+console.log(isString(42));  // false
+
+// Test if a value is a number
+function isNumber(value) {
+    return typeof value === 'number' && !isNaN(value);
+}
+
+console.log(isNumber(42));  // true
+console.log(isNumber("42"));  // false
+
+// Test if a Value is a Boolean
+function isBoolean(value) {
+    return typeof value === 'boolean';
+}
+
+console.log(isBoolean(true));  // true
+console.log(isBoolean(false)); // true
+console.log(isBoolean("true")); // false
+
+// Test if a Value is null
+function isNull(value) {
+    return value === null;
+}
+
+console.log(isNull(null));  // true
+console.log(isNull("null")); // false
+console.log(isNull(undefined)); // false
+
+let myVariable = "Hello, world!";
+
+if (isString(myVariable)) {
+  console.log("myVariable is a string");
+} else {
+  console.log("myVariable is not a string");
+}</code></pre> -->
+
+    </section>
+
+
+
+    
 
  
-<section id="decision-making">
+<section id="weird">
 
 	<h2>Weirdly beyond boolean <code>true</code> or <code>false</code></h2>
 
@@ -302,13 +317,13 @@ let isAdminUser; <span class="comment">// Could be 'true' or 'false'.</span></pr
 
 </section>
 
-<section>
+<section id="falsy">
 
     <h2>Working with some <i>falsy</i> values</h2>
 
     <p>Let's look at some examples of two <i>falsy</i> values.</p>
 
-    <h3>Working with <code>undefined</code></h3>
+    <h3 id="undefined">Working with <code>undefined</code></h3>
     <p>Think of <span class="syn-js">undefined</span> as JavaScript's way of saying: <i>"This doesn't exist yet"</i> or <i>"This hasn't been given a value."</i></p>
 
 <pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// ======= HOW TO GENERATE 'undefined' =======
@@ -331,7 +346,7 @@ function addTwoNums(num1, num2) {
 console.log(addTwoNums(12, 8));  // Outputs undefined
 </code></pre>
 
-<h3>Working with <code>NaN</code></h3>
+<h3 id="nan">Working with <code>NaN</code></h3>
 <p>Think of <span class="syn-js">NaN</span> as JavaScript's way of saying: <i>"I tried to do a math operation, but something went wrong."</i> See the code below.</p>
 
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Some examples that will generate a NaN
@@ -342,7 +357,7 @@ console.log(0 / 0);  // NaN - mathematically undefined</code></pre>
 </section>
 
 
-<section>
+<section id="falsy-testing">
 
     <h2>Testing for <code>falsy</code> values</h2>
 
@@ -407,6 +422,14 @@ checktruthngess(null);  // null is falsy
 checktruthngess(NaN);  // NaN is falsy
 </code></pre>
 
+    <p>When the condition <b>if (value)</b> is evaluated, JavaScript coerces the <b>value</b> into a boolean:</p>
+
+    <ul>
+        <li>If the <b>value</b> is <i>truthy</i>, the <b>if</b> {} block runs.</li>
+        <li>If the <b>value</b> is <i>falsy</i>, the <b>else</b> {} block runs.</li>
+    </ul>
+
+
     <p>In summary, a value is considered <i>truthy</i> if it evaluates to a boolean <span class="syn-js">true</span> when used in a conditional statement (<b>if (value)</b>). 
         
     And value is considered <i>falsy</i> if it evaluates to <span class="syn-js">false</span> when used in a conditional statement.</p>
@@ -423,17 +446,18 @@ checktruthngess(NaN);  // NaN is falsy
 </footer>
 
 
-<!-- <div id="cookie-banner">
+<div id="cookie-banner">
 	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
 	<div class="buttons">
 		<button id="accept-cookies">Got it</button>
 	</div>
-</div> -->
-
+</div>
 
 <script>hljs.highlightAll();</script>
 
 <script src="assets/js/utils.js"></script>
+
+
 
 
 </body>
