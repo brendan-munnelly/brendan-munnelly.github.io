@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Practical functions | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating useful JavaScript functions for everyday tasks like string manipulation, number validation, and financial calculations.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <style>
+        table.table-gray {
+            padding: 5px 20px 10px 20px;
+        }
+        table.table-gray tr td {
+            padding: 5px 20px 5px 0px;
+            border-bottom: 1px solid #888;
+        }
+    </style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Practical functions</h1>
+
+					<h2>Creating useful JavaScript functions for everyday tasks like string manipulation, number validation, and financial calculations.</h2>
+
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+                <p><a href="#learning-goals">Learning Goals</a></p>
+                <p><a href="#working-with-strings">Working with strings</a></p>
+                <p class="toc-indent"><a href="#character-checking">Checking for a character</a></p>
+                <p class="toc-indent"><a href="#count-characters">Character counting</a></p>
+                <p class="toc-indent"><a href="#length-position">String length and position</a></p>
+                <p><a href="#type-checking">Working with numbers</a></p>
+                <p class="toc-indent"><a href="#verify-numbers">Verifying a variable is a valid number</a></p>
+                <p class="toc-indent"><a href="#rounding-numbers">Rounding numbers</a></p>
+
+                <p class="toc-indent"><a href="#percent-numbers">Percentage calculations</a></p>
+
+
+                <p><a href="#financial-calculations">Currencies and financial calculations</a></p>
+                
+				<p><a href="#resources">More learning resources</a></p>
+
+				<p><a href="#ai-prompts">Sample AI prompts</a></p>
+		  
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+				<p>&nbsp;</p>
+			  
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Create functions to validate and manipulate text strings</li>
+            <li>Test strings for length, position, and specific characters</li>
+            <li>Verifying a variable contains a valid number.</li>
+            <li>Rounding numbers and calculating percentages.</li>
+            <li>Working with currency amounts.</li>
+
+		</ul>
+
+	</section>
+
+    <section>
+
+        <section>
+            <div class="code-snippets">
+                <p>Continue using the <b>functions.html</b> workfile you downloaded in the <a href="function-declarations.html">Function Declarations</a> Tutorial.</p>
+    
+                <p>📄 &nbsp;<a href="assets/workfiles/functions.html" target="_blank"><b>Functions</b>: Exercises</a></p>
+            </div>
+        </section>
+    
+
+
+    </section>
+    
+    <section id="working-with-strings">
+
+    <h2>Working with strings</h2>
+    
+    <p>In JavaScript, you often need to work with text strings. The following functions help with common string operations.</p>
+    
+        <h3 id="character-checking">Checking for a character</h3>
+
+    <p>Copy the following code to your <strong>practical-functions.html</strong> workfile.</p>
+    
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Function to check if a string contains a specific word
+function containsWord(text, searchWord) {
+    // Convert both strings to lowercase for case-insensitive search
+    return text.toLowerCase().includes(searchWord.toLowerCase());
+}
+    
+// Test the function
+let testText = "Hello World";
+if (containsWord(testText, "world")) {
+    console.log("Found the word!");
+}</code></pre>
+    
+    <p>Note the following:</p>
+    <ul>
+        <li>The statement begins with a function declaration.</li>
+        <li>The text string and search word are passed as parameters.</li>
+        <li>The function returns <span class="syn-js">true</span> or <span class="syn-js">false</span>.</li>
+    </ul>
+    
+    <h3 id="count-characters">Character counting</h3>
+    
+    <p>Let's try another example. Copy this code to your workfile.</p>
+    
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Function to count occurrences of a character
+function countCharacter(text, char) {
+    return text.split(char).length - 1;
+}
+    
+// Test the function
+console.log(countCharacter("hello@example.com", "@")); // Outputs: 1
+console.log(countCharacter("javascript", "a")); // Outputs: 2</code></pre>
+
+    <h3 id="length-position">String length and position</h3>
+    
+    <p>It is good practice to validate string lengths before processing them.</p>
+    
+    <p>Copy this code to your workfile:</p>
+    
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Function to check string length is within range
+function isValidLength(text, minLength, maxLength) {
+    const length = text.trim().length;
+    return length &gt;= minLength && length &lt;= maxLength;
+}
+    
+// Test the function
+let userName = "Jo";  // Too short
+if (!isValidLength(userName, 3, 20)) {
+    console.log("Username must be between 3 and 20 characters");
+}</code></pre>
+    
+    <p>The function above helps you:</p>
+    <ul>
+        <li>Remove whitespace from both ends of the string</li>
+        <li>Check if the remaining text is within allowed length</li>
+        <li>Return <span class="syn-js">true</span> or <span class="syn-js">false</span></li>
+    </ul>
+
+    </section>
+    
+
+        
+        <section id="type-checking" class="section">
+
+
+        <h2>Working with numbers</h2>
+        
+        <p>Before performing operations, it's important to verify the data types of your values.</p>
+        
+
+        <table class="table-gray">
+            <tr>
+                <td style="min-width: 20%"><p><b>Data Type</b></p></td>
+                <td><p><b>Description</b></p></td>
+            </tr>
+            <tr>
+                <td><p>string</p></td>
+                <td><p>Text within quotes, such as <b>"Hello, World"</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>number</p></td>
+                <td><p>A number without surrounding quotes, such as <b>12</b> or <b>9.99</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>boolean</p></td>
+                <td><p>Only two possible values: either <b>true</b> or <b>false</b>.</p></td>
+            </tr>
+            <tr>
+                <td><p>null</p></td>
+                <td><p>A data type that <i>intentionally</i> has no value.</p></td>
+            </tr>
+        </table>
+
+        
+        <h3 id="verify-numbers">Verifying a variable is a valid number</h3>
+        <p>Copy this type checking function to your workfile:</p>
+        
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Function to check if value can be used in calculations
+function isValidNumber(value) {
+    const num = Number(value);
+    return !isNaN(num) && isFinite(num);
+}
+        
+// Test the function
+console.log(isValidNumber("123")); // true
+console.log(isValidNumber("abc")); // false
+console.log(isValidNumber("12.34")); // true</code></pre>
+        
+    
+    <h3 id="rounding-numbers">Rounding numbers</h3>
+            
+    <p>Here's a function for precise decimal rounding. Add this to your workfile:</p>
+    
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to round to 2 decimal places
+function roundMoney(amount) {
+    return Math.round(amount * 100) / 100;
+}
+    
+// Test the function
+console.log(roundMoney(10.567)); // Outputs: 10.57
+console.log(roundMoney(10.564)); // Outputs: 10.56</code></pre>
+    
+    <h3 id="percent-numbers">Percentage calculations</h3>
+    
+    <p>Copy this percentage calculation function to your workfile:</p>
+    
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Function to calculate percentage
+function calculatePercentage(amount, percentage) {
+    if (!isValidNumber(amount) || !isValidNumber(percentage)) {
+        return "Error: Invalid numbers";
+    }
+    return roundMoney((Number(amount) * Number(percentage)) / 100);
+}
+    
+// Test the function
+console.log(calculatePercentage(100, 15)); // Outputs: 15.00
+console.log(calculatePercentage("100", "15.5")); // Outputs: 15.50</code></pre>
+    </section>
+
+
+
+        <section id="financial-calculations" class="section">
+            <h2>Currencies and financial calculations</h2>
+            
+            <p>When working with money values, precision and proper formatting are essential.</p>
+            
+            <p>Copy this currency formatting function to your workfile:</p>
+            
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Function to format number as currency
+function formatCurrency(amount, currency = 'USD') {
+    const currencies = {
+        'USD': { symbol: '$', locale: 'en-US' },
+        'EUR': { symbol: '€', locale: 'de-DE' }
+    };
+                
+    const { locale } = currencies[currency] || currencies['USD'];
+                
+    return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency
+    }).format(amount);
+}
+            
+// Test the function
+console.log(formatCurrency(123.456, 'USD')); // Outputs: "$123.46"
+console.log(formatCurrency(123.456, 'EUR')); // Outputs: "123,46 €"</code></pre>
+            
+            <p>Note the following:</p>
+            <ul>
+                <li>The function accepts an amount and optional currency type</li>
+                <li>It uses the browser's built-in number formatting</li>
+                <li>Numbers are automatically rounded to two decimal places</li>
+                <li>Currency symbols are properly positioned based on locale</li>
+            </ul>
+            
+        </section>
+
+            <section id="further-resources" class="section">
+            <h2>Further Resources</h2>
+            
+            <div class="box-toc">
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">JavaScript String Methods: <span style="font-weight: normal">Mozilla Developer Network</span></a></p>
+            
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">JavaScript Number Methods: <span style="font-weight: normal">Mozilla Developer Network</span></a></p>
+
+            <p><a href="https://javascript.info/number" target="_blank">Number Formatting: <span style="font-weight: normal">JavaScript.info</span></a></p>
+            </div>
+    </section>
+            
+
+
+		   <section class="resources-learning" id="resources">
+	
+				  <h2>More learning resources</h2>
+			  
+				  <div class="flex-container">
+					<div class="text-container">
+					  <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+					  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/5" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+			  
+					</div>
+				
+					<div class="audio-container">
+					  <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+			  
+					  <audio controls>
+						<source src="assets/audio/function-declarations.mp3" type="audio/mp3">
+						Your browser does not support the audio element.
+					  </audio>
+			  
+					</div>
+				  </div>
+			  
+				</section>
+				
+				<section class="resources-learning" id="ai-prompts">
+			  
+				  <h2>Sample AI prompts</h2>
+			  
+				  <div class="gpt"><button class="copy-gpt" id="btn-9">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-9">
+				  Explain why we use parameters in functions instead of just using global variables. What are the advantages of passing values through parameters?</code></div>
+
+				  <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">I have a function that calculates a student's average grade from three test scores. Show me how to handle cases where a teacher might enter only two scores or add an extra fourth score.</code></div>
+
+				  <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">What's the difference between these two functions and when would you use each approach:<br><br>
+					function greet(name) {<br>
+					  &nbsp;&nbsp;&nbsp;console.log(`Hello ${name}`);<br>
+					}<br><br>
+					  
+					function greet(name) {<br>
+					  &nbsp;&nbsp;&nbsp;return `Hello ${name}`;<br>
+					}</code></div>
+				  
+
+					<div class="gpt"><button class="copy-gpt" id="btn-12">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-12">What's wrong with this code and how can we fix it?<br><br>
+						function calculateTotal(price, tax) {<br>
+							&nbsp;&nbsp;&nbsp;total = price + tax;<br>
+							&nbsp;&nbsp;&nbsp;return total;<br>
+						}</code></div>
+
+
+				</section>
+	
+
+	<!-- <p>Local scope can be divided into <i>function scope</i> and <i>block scope</i>.</p>
+
+				<p>---</p>
+	
+			<p>Create a function that takes a person's first name and last name as parameters and returns a properly formatted full name (first letter of each name capitalised). Include a default value for the last name.</p>
+
+			<p>---</p>
+
+			<p>Build a function that validates a username. It should check if the username is between 3-15 characters long and contains no spaces.</p>	
+
+	 <h3 id="function-scope">Function scope</h3>
+	<p>Whenever you declare a variable in a function, the variable is visible only within the function. You cannot access it outside the function.</p>
+	
+	<p><span class="syn-js">var</span> is the keyword to define a variable for function-scope accessibility.</p>
+
+	<h3 id="block-scope">Block scope</h3>
+	<p>Block scope is the area within <span class="syn-js">if</span> and <span class="syn-js">switch</span> conditions, and within <span class="syn-js">for</span> and <span class="syn-js">while</span> loops.</p>
+		
+	<p>As a general rule, whenever you see parenthesis <span class="syn-js">{}</span>, it is a code block.</p>
+	
+	<p>The <span class="syn-js">const</span> and <span class="syn-js">let</span> keywords enable you to declare variables in the block scope. These variables are accessible only within their code blocks.</p> -->
+
+
+<!--
+
+
+https://www.youtube.com/watch?v=cMt9U6kCWsM
+
+https://www.youtube.com/watch?v=HFaxylC7bUc
+
+https://www.youtube.com/watch?v=gigtS_5KOqo
+
+https://www.youtube.com/watch?v=j1laALb8OVM
+
+https://www.youtube.com/watch?v=W6QaDqud66Y&list=PLyuRouwmQCjm_RIe2_W4-7cqD_5C_zqVu
+
+Anonymous functions
+https://www.youtube.com/watch?v=Y8dztLmscwc
+
+Callbacks
+https://www.youtube.com/watch?v=7UMuJMiNjSk&t=215s
+
+Function expressions
+https://www.youtube.com/watch?v=jDqmFt03Gy0
+
+-->
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
