@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Check if page is being accessed via HTTP/HTTPS protocol
+    const isWebProtocol = window.location.protocol.startsWith('http');
+    
+    // Only proceed with cookie banner logic if accessed via web protocol
+    if (!isWebProtocol) {
+        return; // Exit early if using file:// protocol
+    }
+
     const cookieBanner = document.getElementById('cookie-banner');
     const acceptButton = document.getElementById('accept-cookies');
 
@@ -7,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         const expires = "expires=" + date.toUTCString();
         document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)};${expires};path=/;domain=.munnelly.com;Secure;SameSite=Lax`;
-        // Remove 'Secure' attribute for local testing
-        // document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)};${expires};path=/;domain=.munnelly.com;SameSite=Lax`;
+        document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)};${expires};path=/;domain=.munnelly.com;SameSite=Lax`;
     }
 
     function getCookie(name) {
