@@ -61,20 +61,30 @@
 
    <aside>
       <h3>JAVASCRIPT</h3>
-  
       <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
   
       <h3>THIS TUTORIAL</h3>
       <p><a href="#learning-goals">Learning Goals</a></p>
       <p><a href="#strings-introduction">About string variables in JavaScript</a></p>
       <p class="toc-indent"><a href="#strings-assign">Assigning string content to variables</a></p>
-      <p class="toc-indent"><a href="#strings-typeof">The typeof operator</a></p>
-      <p><a href="#strings-checking">Checking string content</a></p>
+      <p class="toc-indent"><a href="#strings-typeof">The <i>typeof</i> operator</a></p>
+      <p><a href="#strings-character-position">About character positions in a string</a></p>
+
+      <p><a href="#strings-length">Finding the length of a string</a></p>
+
+
+      <p><a href="#strings-methods">Checking string content with methods</a></p>
       <p><a href="#strings-transforming">Transforming string content</a></p>
       <p class="toc-indent"><a href="#method-chaining">Chaining string methods</a></p>
-      <p class="toc-indent"><a href="#updating-transformed">Updating a string with the transformed string value</a></p>
-      <p><a href="#join-splice">Concatenating and slicing strings</a></p>
+
+      <p><a href="#strings-slicing">Extracting a substring from a string (slicing)</a></p>
       <p><a href="#strings-replace">Replacing content in a string</a></p>
+
+      <p><a href="#methods-no-change">String methods do not change string values</a></p>
+
+      <p><a href="#strings-joining">Concatenating (joining) strings together</a></p>
+
+      <p><a href="#compound-assignment">Using the <code>+=</code> operator</a></p>
 
       <p><a href="#try-it">Try it yourself</a></p>
 
@@ -93,12 +103,11 @@
   <p>At the end of this Tutorial, you will be able to:</p>
 
   <ul>
-   <li>Declare string variables in JavaScript and use <span class="syn-js">typeof</span> to test that a variable contains a string.</li>
-   <li>Use index position and the <span class="syn-js">.length</span> property to work with string characters.</li>
-   <li>Check if a string contains a specific character or substring.</li>
-   <li>Remove whitespace with <span class="syn-js">.trim()</span> and change character case with <span class="syn-js">.toUpperCase()</span> and <span class="syn-js">.toLowerCase()</span>.</li>
-   <li>Concatenate strings with template literals split them with the <span class="syn-js">.slice()</span> method.</li>
-   <li>Search and replace string content.</li>
+      <li>Declare string variables in JavaScript and use <span class="syn-js">typeof</span> to test that a variable contains a string.</li>
+      <li>Use index position and the <span class="syn-js">.length</span> property to work with string characters.</li>
+      <li>Remove whitespace with <span class="syn-js">.trim()</span> and change character case with <span class="syn-js">.toUpperCase()</span> and <span class="syn-js">.toLowerCase()</span>.</li>
+      <li>Concatenate strings with template literals and split them with the <span class="syn-js">.slice()</span> method.</li>
+      <li>Search and replace string content.</li>
   </ul>
 
  </section>
@@ -108,7 +117,7 @@
   <p>📄 &nbsp;<a href="assets/workfiles/strings.html" target="_blank"><b>Working with strings</b>: Exercises</a></p>
  </div>
 
- <section id="strings-introduction">
+  <section id="strings-introduction">
 
         <h2>About string variables in JavaScript</h2>
         <p>What is usually referred to as &#8216;text&#8217; in everyday language in programming is called a <i>string</i>. A string is simply a sequence of one or more characters &#8211; letters, numbers, blank spaces or punctuation symbols.</p>
@@ -121,13 +130,13 @@
 const myStr1 = "Hello"; // JavaScript treats myStr1 as a string
 const myStr2 = 'World'; // JavaScript treats myStr2 as a string
 const myStr3 = " ";     // JavaScript treats myStr3 as a string
-console.log(`${myStr1} ${myStr2} ${myStr3}`); // Outputs: 'Hello World'</code></pre>
+console.log(`${myStr1} ${myStr2} ${myStr3}`); // Hello World</code></pre>
 
   <p>Note that a whitespace character is treated as a valid string. The <b>myStr3</b> variable is not empty.</p>
 
-  <p>With the <span class="syn-js">let</span> keywords, an empty string can be <i>declared</i> (created) in one statement and then <i>initialised</i> (first value assigned to it) in another.</p>
+  <p>With the <span class="syn-js">let</span> keywords, an empty string can be <i>declared</i> (created and named) in one statement and then <i>initialised</i> (first value assigned to it) in another.</p>
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Declare and initialise a string variable
-let myStr4 = ""; // Create an empty string variable
+let myStr4 = ""; // Creates an empty string variable
 console.log(myStr4); // Outputs an empty string
 myStr4 = "Some text here"; // String now initialised with content</code></pre>
   
@@ -156,27 +165,54 @@ console.log(`Data type of myStr5: ${typeof myStr5}`);</code></pre>
 
 
 <section>
- <h2 id="strings-checking">Checking string content</h2>
+ <h2 id="strings-character-position">About character positions in a string</h2>
 
- <p>Each character in a string can be accessed by its position-based index number, beginning with zero.</p>
- <p>JavaScript assigns an <i>index number</i> to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. See below.</p>
+ <p>JavaScript assigns an index number to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. Each character in a string can be accessed by its position-based index number within square brackets <span class="syn-js">[n]</span>. See below.</p>
 
  <img src="assets/img/working-with-strings/hello-world.png" alt="Sample string in JavaScript" style="max-width: 600px">
+
+
+    <table class="table-js-methods">
+    <tbody>
+      <tr>
+      <td><p><span class="syn-js">myStr6[0]</span></p></td>
+      <td><p>Outputs the first character in the string</p></td>
+      </tr>
+      <tr>
+      <td><p><span class="syn-js">myStr6[5]</span></p></td>
+      <td><p>Outputs the sixth character in the string</p></td>
+      </tr>
+      <tr>
+      <td><p><span class="syn-js">myStr6[12]</span></p></td>
+      <td><p>Outputs the last character in the string</p></td>
+      </tr>
+    </tbody>
+    </table>
+
+
 
     <p>Copy the sample code below into your <b>strings.html</b> workfile.</p>
 
 <pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">
 // Using [] notation to access position of characters within string
 let myStr6 = "Hello, World!";
-console.log(`Position [0]: ${myStr6[0]};`)   // returns H
-console.log(`Position [5]: ${myStr6[5]};`)   // returns ,
-console.log(`Position [6]: ${myStr6[6]};`)   // returns whitespace
-console.log(`Position [7]: ${myStr6[7]};`)   // returns W
-console.log(`Position [12]: ${myStr6[12]};`) // returns !</code></pre>
+console.log(`Position [0]: ${myStr6[0]};`)   // H
+console.log(`Position [5]: ${myStr6[5]};`)   // ,
+console.log(`Position [6]: ${myStr6[6]};`)   // whitespace
+console.log(`Position [7]: ${myStr6[7]};`)   // W
+console.log(`Position [12]: ${myStr6[12]};`) // !</code></pre>
 
-   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>. Note that the whitespace character also have an index, at <b>6</b>.</p>
+   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>.</p>
+   
+   <p>Note that the whitespace character, entered with the <kbd>Spacebar</kbd> also has an index value, at <b>6</b>.</p>
 
    <p>Being able to access every character in a string with the square bracket <span class="syn-js"><b>[]</b></span> notation makes it easy to access and manipulate strings.</p>  
+
+</section>
+
+<section>
+  <h2 id="strings-length">Finding the length of a string</h2>
+ 
 
  <p>Every string has a <span class="syn-js">.length</span> property that reveals the number of characters in the string. The syntax is as follows.</p>
 
@@ -184,17 +220,58 @@ console.log(`Position [12]: ${myStr6[12]};`) // returns !</code></pre>
  <p>Copy the following example to your <b>strings.html</b> workfile. It should output a string length of <b>13</b> to the console.</p>
 
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// ======== CHECKING STRING CONTENT ========
-const myStr6 = "Hello, World!";
-console.log(myStr6.length); // Outputs string length of 13</code></pre>
+// String length  
+console.log(myStr6.length); // 13</code></pre>
 
- <p>Remember: the length of a string is always <i>one number greater</i> than the string&#8217;s highest index number.</p>
+ <p>Note: the length of a string is always <i>one number greater</i> than the string&#8217;s highest index number.</p>
 
- <p>Often you will want to know if a string contains particular character(s). Copy these methods for investigating the content of a string variable.</p>
+
+</section>
+
+<section id="strings-methods">
+    <h2>Checking string content with methods</h2>
+
+    <p>In JavaScript, the word <i>method</i> describes some action you can perform on a item of code such as a variable. Note that:</p>
+
+    <ul>
+      <li>A method ends with a parenthesis <span class="syn-js"><b>()</b></span>.</li>
+      <li>Some methods take arguments (values) inside the parenthesis.</li>
+    </ul>
+
+    <p>Below is a table of some common string methods.</p>
+
+    <table class="table-js-methods">
+      <tbody>
+        <tr>
+          <td><p>&nbsp;<b>Method</b></p></td>
+          <td><p><b>Description</b></p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.includes()</span></p></td>
+          <td><p>Checks if a string contains a specified character(s).</p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.startsWith()</span></p></td>
+          <td><p>Checks if a string starts with a specified character(s).</p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.endsWith()</span></p></td>
+          <td><p>Checks if a string ends with a specified character(s).</p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.indexOf()</span></p></td>
+          <td><p>Outputs the position of the first occurrence of a specified character(s) in a string.</p></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+ <p>Here are some examples of using such methods to investigate the content of a string variable.</p>
 
 <pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Testing for character(s) present in string
-console.log(myStr6.includes("World"));    // true
-console.log(myStr6.startsWith("Hello"));  // true
-console.log(myStr6.endsWith("!"));        // true
+console.log(myStr6.includes("World"));    // boolean true
+console.log(myStr6.startsWith("Hello"));  // boolean true
+console.log(myStr6.endsWith("!"));        // boolean true
 
 // Finding position of character(s) in string
 console.log(myStr6.indexOf("World"));      // 7
@@ -210,17 +287,17 @@ console.log(myStr6.indexOf("cheese"));     // -1 (Not found in string)</code></p
  <h2 id="strings-transforming">Transforming string content</h2>
 
 
- <p>JavaScript offers lots of methods for reformatting or changing the content of a string variable. Copy the following examples to your <b>strings.html</b> workfile.</p>
+ <p>JavaScript also offers methods for reformatting or changing the content of a string variable. Copy the following examples to your <b>strings.html</b> workfile.</p>
 
 <pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// ======== TRANSFORMING STRING CONTENT ========
 let strUserName = "  John Smith  ";
   
 // Remove whitespace
-console.log(strUserName.trim());          // "John Smith"
+console.log(strUserName.trim());           // "John Smith" (without quotes)
 
 // Change case
-console.log(strUserName.toLowerCase());    // "  john smith  "
-console.log(strUserName.toUpperCase());    // "  JOHN SMITH  "</code></pre>
+console.log(strUserName.toLowerCase());    // "  john smith  " (without quotes)
+console.log(strUserName.toUpperCase());    // "  JOHN SMITH  " (without quotes)</code></pre>
 
  <p>These methods are useful for cleaning up user input to forms or for formatting text for display.</p>
 
@@ -235,51 +312,31 @@ console.log(strUserName.toUpperCase());    // "  JOHN SMITH  "</code></pre>
 <pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Chaining methods
 console.log(strUserName.trim().toLowerCase());</code></pre>
  
- <h3 id="updating-transformed">Updating a string with the transformed string value </h3>
-
-
-  <p>Note that each of the above methods actually creates a new string. <i>The original string is unchanged</i>. Typically, you will want to reassign the transformed value back to the original string. See the example below.</p>
- 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Updating a transformed string variable
-let strFirstName = "  Marie ";
-console.log(strFirstName.trim()); // returns "Marie"
-console.log(strFirstName); // returns unchanged "  Marie "
-
-// Reasigning new trimmed value back to the original string variable
-strFirstName = strFirstName.trim();
-console.log(`Trimmed string variable: ${strUserFirstName};`); // returns 'Marie'</code></pre>
-   
 
 </section>
 
-<section id="join-splice">
- <h2>Concatenating and slicing strings</h2>
-
- <p>Joining string variables is known as <i>concatenating</i> strings. You can achieve this using template literals. Copy the example below.</p>
-
-<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// ======== CONCATENATING AND SLICING STRINGS ========
-
-// Joining two strings together
-let txtFirstName = "John";
-let txtLastName = "Lennon";
-let txtFullName = `${txtFirstName} ${txtLastName}`; 
-console.log(`Full name: ${txtFullName}`);  // outputs 'John Lennon'</code></pre>
+<section id="strings-slicing">
+ <h2>Extracting a substring from a string (slicing)</h2>
 
  <p>Sometimes, you will want to extract and work with part of a string or <i>substring</i>. You can use the <span class="syn-js">.slice()</span> method for this task. Copy the examples below.</p>
  
-<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// Extracting substrings from a string
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Extracting substrings from a string
 const strForSplicing = "JavaScript is awesome";
-console.log(strForSplicing.slice(0, 10));       // "JavaScript"
-console.log(strForSplicing.slice(-7));          // "awesome"
-console.log(strForSplicing.slice(11));         // "is awesome"</code></pre>
+console.log(strForSplicing.slice(0, 10));       // JavaScript
+console.log(strForSplicing.slice(11));          // is awesome
+console.log(strForSplicing.slice(-7));          // awesome</code></pre>
 
 <table class="table-js-methods">
  <tbody>
   <tr>
    <td><p><span class="syn-js">.slice(start,end)</span></p></td>
-   <td><p>Returns a new string extracted at the specified <i>start</i> position from the original string.</p>
+   <td><p>Outputs a new string extracted at the specified <b>start</b> position from the original string.</p>
    
-   <p>If the optional <b>end</b> argument is omitted, the new string will include every character of the original string up to the end.</p></td>
+   <p>If the optional <b>end</b> argument is omitted, the new string will include every character of the original string from the <b>start</b> up to the end.</p>
+  
+  <p>When you use a negative number as the only argument, this method counts backwards from the end of the string.</p>
+  
+  </td>
   </tr>
  </tbody>
 </table>
@@ -292,17 +349,112 @@ console.log(strForSplicing.slice(11));         // "is awesome"</code></pre>
 
           <p>JavaScript provides two methods that will search a string for a value and replace it with a new value. Copy the examples below to your <b>strings.html</b> workfile.</p>
    
-<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// ======== REPLACING STRING CONTENT ========
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// ======== REPLACING STRING CONTENT ========
 const txtMessage = "Hello World";
 
 // Replace first occurrence
-console.log(txtMessage.replace("o", "0"));   // "Hell0 World"
- 
+console.log(txtMessage.replace("o", "0"));    // Hell0 World 
 // Replace all occurrences
-console.log(txtMessage.replaceAll("o", "0")); // "Hell0 W0rld</code></pre>
+console.log(txtMessage.replaceAll("o", "0")); // Hell0 W0rld</code></pre>
 
  <p>Both these methods are case-sensitive.</p>
 
+       </section>
+
+      <section id="methods-no-change">
+        <h2>String methods do <i>not</i> change string values</h2>      
+
+        <p><b>Important</b>: string methods do <i>not</i> change the original string value. Instead, a string method will <i>create a new string with the changes applied</i>.</p>
+        
+        <p>To demonstrate this fact, copy the examples below to your <b>strings.html</b> workfile. In every case, you can see that the original string is unchanged.</p>
+
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// === STRING METHODS DO NOT CHANGE ORIGINAL STRING VALUES ===
+  
+// Original string
+let strMessage = "Hello from JavaScript string variable";
+console.log(strMessage); // Original: Hello from JavaScript string variable
+  
+// This does NOT change the original string
+strMessage.toUpperCase();
+console.log(strMessage); // Unchanged: Hello from JavaScript string variable</code></pre>
+
+<p>Typically, the reason you apply a string method is that you <i>want</i> to change the original value. To do this, you need to reassign the transformed value back to the original string. See below.</p>
+       
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">
+// To actually change the value, you need to assign the result back
+strMessage = strMessage.toUpperCase();
+console.log(strMessage); // HELLO WORLD</code></pre>
+
+<p>Here's another example with multiple string operations</p>
+         
+<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-javascript">let sampleText = "   JavaScript   ";
+
+// These methods don't modify the original string
+sampleText.trim();
+sampleText.replace("J", "j");
+console.log(sampleText);    // "   JavaScript   " (without quotes)
+  
+// To make actual changes, assign the output back
+sampleText = sampleText.trim().replace("J", "j");
+console.log(sampleText);  // "javaScript" (without quotes)</code></pre>
+
+      <p>In summary, if you want to modify a string value, you need to:</p>
+
+      <ul>
+        <li>Use the string method to create the new string</li>
+        <li>Assign that new string back to a variable (either the original variable or a new one)</li>
+      </ul>
+
+
+      </section>
+
+       <section id="strings-joining">
+        <h2>Concatenating (joining) strings together</h2>
+       
+        <p>Joining two or more string variables is known as <i>concatenation</i>. You can achieve this using template literals. Copy the example below.</p>
+       
+<pre><button class="copy-code" id="btn-16">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-16" class="hljs language-javascript">// ======== CONCATENATING STRINGS ========
+       
+// Joining strings with template literals
+let txtFirstName = "John";
+let txtLastName = "Lennon";
+let txtFullName = `${txtFirstName} ${txtLastName}`; 
+console.log(`Full name: ${txtFullName}`);  // John Lennon</code></pre>
+
+    <p>A second and more common option for joining strings is to use the <span class="syn-js">+</span> operator.</p>
+<pre><button class="copy-code" id="btn-17">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-17" class="hljs language-javascript">// Joining strings with the + operator
+txtFullName = txtFirstName+ " " +txtLastName; 
+console.log(`Full name: ${txtFullName}`);  // John Lennon</code></pre>
+
+        <p>Both methods will output the same result.</p>
+        
+        
+        <h3 id="compound-assignment">Using the <code>+=</code> operator</h3>
+        <p>JavaScript offers a <i>compound assignment</i> <span class="syn-js">+=</span> that combines two operations:</p>
+
+        <ul>
+          <li>It adds the value on the right to the variable on the left</li>
+          <li>It assigns the result back to the variable on the left</li>
+        </ul>
+
+      <p>Here are two examples:</p>  
+<pre><button class="copy-code" id="btn-18">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-18" class="hljs language-javascript">// Compound assignment operator +=
+let greeting = "Hello";
+greeting += " there";  // Hello there
+greeting += "!";       // Hello there!
+console.log(greeting);
+        
+let story = "Once upon a time";
+story += " there was a programmer";
+story += " who loved to code";
+story += " and debug all day long.";
+console.log(story)</code></pre>        
+        
+        
+        <p>However, in certain circumstances, the <span class="syn-js">+</span> and <span class="syn-js">+=</span> operators can create unexpected results. See the <a href="testing-weird-values.html">Testing for weird values</a> Tutorial.</p>
+       
+
+        <p>In the <a href="functions-practical.html">Practical functions</a> Tutorial, you will learn to apply string methods to solve everyday coding problems.</p>
        </section>
 
        <section class="resources-learning" id="try-it">
@@ -318,10 +470,10 @@ Use a template literal to output: "Hi! My name is [firstName] [lastName] and my 
         <p>---</p>
 
         <p>Create a variable with the text: "JavaScript is fun!"</p>
-        <p>- Find and output its total length</p>
-        <p>- Output the first character</p>
-        <p>- Output the last character</p>
-        <p>- Output the position of the word "fun"</p>
+        <p>- Output its total length</p>
+        <p>- Output the first character using [] notation</p>
+        <p>- Output the last character using [] notation</p>
+        <p>- Output the start position of the word "fun" using [] notation</p>
 
         <p>---</p>
 
@@ -362,18 +514,18 @@ Use a template literal to output: "Hi! My name is [firstName] [lastName] and my 
           
               <h2>Sample AI prompts</h2>
           
-              <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">
-              Can you explain the difference between using .slice() and .indexOf() on strings? Please provide simple examples showing when to use each.</code></div>
-          
-              <div class="gpt"><button class="copy-gpt" id="btn-16">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-16">
-              What is the practical purpose of string methods like .trim(), .toUpperCase(), and .toLowerCase()? Give me very basic real-world scenarios where each would be useful.</code></div>
-          
-              <div class="gpt"><button class="copy-gpt" id="btn-17">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-17">Review this code and suggest improvements:<br>
-              let userName = '  john smith  ';<br>
-              userName = userName.toUpperCase();<br>
-              let finalName = userName.trim();<br>
-              console.log(finalName);</code></div>
+              <div class="gpt"><button class="copy-gpt" id="btn-19">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-19">
+              What is the practical purpose of string methods like <code>.trim()</code>, <code>.toUpperCase()</code>, and <code>.toLowerCase()</code>? Give me very basic real-world scenarios where each would be useful.</code></div>
               
+              <div class="gpt"><button class="copy-gpt" id="btn-20">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-20">Review this code and suggest improvements:<br>
+                <code>&nbsp;&nbsp;&nbsp;let userName = '  john smith  ';<br>
+                &nbsp;&nbsp;&nbsp;userName = userName.toUpperCase();<br>
+                &nbsp;&nbsp;&nbsp;let finalName = userName.trim();<br>
+                &nbsp;&nbsp;&nbsp;console.log(finalName);</code></code></div>
+           
+                <div class="gpt"><button class="copy-gpt" id="btn-18">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-18">
+                  Can you explain the difference between using <code>.slice()</code> and <code>.indexOf()</code> on strings? Please provide simple examples showing when to use each.</code></div>
+                  
             </section>
 
 
