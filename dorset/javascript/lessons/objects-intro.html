@@ -51,11 +51,7 @@
             <p><a href="#accessing-properties">Displaying a property's value by its key</a></p>
             <p><a href="#properties-working-with">Working with the properties of an object</a></p>
                 <p class="toc-indent"><a href="#testing-for-property">Testing an object for a property</a></p>
-                <p class="toc-indent"><a href="#looping-properties">Looping through the properties of object</a></p>
-            <p><a href="#objects-arrays">From objects to arrays</a></p>
             <p><a href="#object-empty">Creating an empty object</a></p>
-                <p class="toc-indent"><a href="#counting-properties">Counting the properties in an object</a></p>
-            <p><a href="#nested-objects">Working with nested objects</a></p>
             <p><a href="#object-destructuring">Object destructuring</a></p>
 
         </aside>
@@ -68,10 +64,7 @@
                     <ul>
                         <li>Create and populate objects using object literal notation with curly braces <span class="syn-js">{}</span>.</li>
                         <li>Add, modify and delete properties within an object.</li>
-                        <li>Access object properties using dot notation (<span class="syn-js">.</span>) and bracket notation (<span class="syn-js">[]</span>).</li>
-                        <li>Use the <span class="syn-js">Object.keys()</span> method to get an array of an object's keys.</li>
-                        <li>Use the <span class="syn-js">Object.values()</span> method to get an array object's values.</li>
-                        <li>Use <span class="syn-js">for...in</span> to loop through an object's keys and pairs.</li>                        
+                        <li>Access object properties using dot notation (<span class="syn-js">.</span>).</li>
                         <li>Test for object type.</li>
                         <li>Destructure properties from an object to variables.</li>
                     </ul>
@@ -87,13 +80,12 @@
 
             <section id="objects-about">
                 <h2>Storing spreadsheet-type data as objects</h2>
-                <p>An object stores related <i>properties</i> about a single entity, like a user's first name, last name, age, and email. Each item in an object is called a <i>property</i>, and has two parts: a <i>key</i> (name or label) and a <i>value</i>.</p>
-                
-                <p>Objects enable you to work with such structured data of related datasets. For example, instead of assigning the details of a product to different variables, you could assign them to a single object.</p>
+                <p>Often you will want to work wth sets of related data about a particular person or thing. Consider the spreadsheet below. For each person, there are four items of data.</p>
 
-                <p>Each object has a set of properties, each with a key and a value. The keys are the property names, and the values are the data stored in the properties.</p>
+                <img src="assets/img/objects/spreadsheet=1.png" alt="screenshot" style="max-width: 660px">
+                    
+                <p>In JavaScript, you can use an <i>object</i> to stote such related data. Each item in an object is called a <i>property</i>, and has two parts: a <i>key</i> (name or label) and a <i>value</i>.</p>
 
-                <p>As you can see, the colon <b>:</b> character separate a key from its value. And the comma <b>,</b> character signals the end of each key-value pair.</p>
 
                 <h3 id="objects-naming">Naming your objects</h3>
                 <p>Object names follow the usual JavaScript rules: they are case-sensitive and cannot contain spaces or the dash (<b>-</b>) character. Here are two tips:</p>
@@ -122,6 +114,8 @@ const objUser = {
 console.log(objUser);
 </code></pre>
 
+<p>As you can see, the colon <b>:</b> character separate a key from its value. And the comma <b>,</b> character signals the end of each key-value pair.</p>
+
                 <p>Your web browser JavaScript console should now look similar to the following.</p>
 
                 <img src="assets/img/objects/console-log-1.png" alt="screenshot">
@@ -132,17 +126,13 @@ console.log(objUser);
 
             <section id="accessing-properties">
                 <h2>Displaying a property's value by its key</h2>
-                <p>You can use the key of a property to display its value. JavaScript gives you two ways to do this.</p>
+                <p>You can use the key of a property to display its value.</p>
 
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// === Displaying a property inside an object by its key ===
 
 // Using dot notation
 console.log(`User's first name: ${objUser.firstName}`);
-console.log(`User's last name:  ${objUser.lastName}`);
-
-// Using square bracket notation
-console.log(`User's age: ${objUser["age"]}`);
-console.log(`User active? : ${objUser["isActive"]}`);</code></pre>
+console.log(`User's last name:  ${objUser.lastName}`);</code></pre>
 
             <p>This should output the following to your console.</p>
 
@@ -203,17 +193,10 @@ function hasProperty(obj, prop) {
 
 console.log(hasProperty(objCar, "model")); // Outputs: true</code></pre>
 
-        <h3 id="looping-properties">Looping through the properties of object</h3>
-        <p>Use a <span class="syn-js">for...in</span> loop to iterate over all the properties (keys and values ) of an object.</p>                
 
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// === Looping through the properties of an object ===
-for (const key in objCar) {
-    console.log(`${key}: ${objCar[key]}`);
-}</code></pre>
-        <p>The output of the above code is a series of strings. Each string represents a key-value pair from the object. Unfortunately, the format of this output does not make it usable in the rest of the program.</p>
 </section>
     
-    
+<!--     
             <section id="objects-arrays">
                 <h2>From objects to arrays</h2>
 
@@ -296,7 +279,7 @@ console.log(arrProductProps);
         <p>You can work with <b>arrProductProps</b> as you would any other array.</p>
 
 
-        </section>
+        </section> -->
 
         <section id="object-empty">
             <h2>Creating an empty object</h2>
@@ -317,7 +300,7 @@ console.log(objPerson.length === 0); // Outputs: false
 console.log(objPerson);
 // Outputs: {firstName: "Emma", lastName: "Smith"}</code></pre>
 
-        <h3 id="counting-properties">Counting the properties in an object</h3>
+        <!-- <h3 id="counting-properties">Counting the properties in an object</h3>
 
         <p>With strings and arrays, you can use their <span class="syn-js">.length</span> property to count the number of characters and elements they contain.</p>
 
@@ -334,12 +317,12 @@ const obj1 = { name: "Alice", age: 25, city: "New York" };
 const obj2 = {};
     
 console.log(countProperties(obj1)); // Outputs: 3
-console.log(countProperties(obj2)); // Outputs: 0</code></pre>
+console.log(countProperties(obj2)); // Outputs: 0</code></pre> -->
 
-        </section>
+        <!-- </section> -->
 
 
-        <section id="nested-objects">
+        <!-- <section id="nested-objects">
 
             <h2>Working with nested objects</h2>
 
@@ -348,18 +331,18 @@ console.log(countProperties(obj2)); // Outputs: 0</code></pre>
 <pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// === Working with nested objects ===
 
 const person = {
-name: "John",
-age: 30,
-address: {
-city: "New York",
-zip: 10001
-},
-hobbies: ["reading", "cycling"]
+    name: "John",
+    age: 30,
+    address: {
+        city: "New York",
+        zip: 10001
+    },
+    hobbies: ["reading", "cycling"]
 };
 
 console.log(person.address.city); // Outputs: New York
 console.log(person.hobbies[1]); // Outputs: cycling</code></pre>
-
+ -->
 
         </section>
 

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with the DOM | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Assigning numbers to variables, performing arithmetic with correct operator precedence, and using the increment and decrement operators.">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/working-with-dom/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/working-with-dom/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/working-with-dom/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../assets/img/working-with-dom/favicon/site.webmanifest">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Working with the DOM</h1>
+                <h2>Adding JavaScript code to a web page, creating pop-up dialog boxes, and using a web browser&#8219;s JavaScript Developer Console.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+
+        <aside>
+            <h3>JAVASCRIPT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-the-DOM">About the Document Object Model (DOM)</a></p>
+            <p><a href="#element-id">Accessing HTML elements by their id</a></p>
+
+            <p><a href="#element-modify">Modifying an HTML element</a></p>
+
+            <p class="toc-indent"><a href="#property-modify">Modifying the properties of an HTML element</a></p>
+            <p class="toc-indent"><a href="#content-modify">Modifying the content of an HTML element</a></p>
+
+            <p><a href="#element-button">Updating an HTML element with a button</a></p>
+
+            <p class="toc-indent"><a href="#event-handlers">Working with event handlers</a></p>
+
+
+            <p><a href="#class-add-remove">Adding and removing CSS classes for an element</a></p>
+
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+            <p>&nbsp;</p>
+        </aside>
+
+
+<article>
+
+<section id="learning-goals">
+    <h2>Learning Goals</h2>
+    <p>At the end of this Tutorial, you will be able to:</p>
+    <div class="box-goals">
+        <ul>
+            <li>Access an HTML element by its unique id using the JavaScript <span class="syn-js">document.getElementById()</span> method.</li>
+            <li>Add JavaScript function handers to buttons in a web page.</li>
+            <li>Modify the CSS properties of an HTML element.</li>
+            <li>Modify the content of an HTML element with <span class="syn-js">.innerText</span> and <span class="syn-js">.innerHTML</span>.</li>
+            <li>Change and restore the visual appearance of an HTML element with the <span class="syn-js">.classList.add()</span> and <span class="syn-js">.classList.remove()</span> methods.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section>
+	
+	<div class="code-snippets" style="margin-bottom:32px">
+		<p>Download the new workfile on your computer and dave it as <b>dom-buttons.html</b>.</p>
+		<p>📄 &nbsp;<a href="assets/workfiles/dom-buttons.html" target="_blank"><b>DOM and buttons</b> : Exercises</a></p>
+	</div>
+
+</section>
+
+
+<section>
+
+    <h2 id="about-the-DOM">About the Document Object Model (DOM)</h2>
+    <p>When a web browser accesses a web page &#8211; also known as an <i>HTML document</i> &#8211; it performs two operations. It:</p>
+
+    <ul>
+        <li>Displays (<i>renders</i>) the web page in the browser, using any links in the page to CSS, image, video, font, and other files.</li>
+        <li>Creates a Document Object Model (DOM) of the web page that enables the page's content to be accessed and modified by JavaScript code.
+        <span class="inside-ul">&nbsp;</span>
+        In effect, the DOM is an <i>interface</i> between and JavaScript.</li>
+    </ul>
+
+    <img src="assets/img/working-with-dom/11-1.png" alt="JavaScript">
+
+</section>        
+
+<section>
+
+    <h2 id="element-id">Accessing HTML elements by their <code>id</code></h2>
+    <p>The simplest way to enable JavaScript to access an element in a web page is to give that element a unique <b>id</b>.</p>
+    
+    <img src="assets/img/working-with-dom/unique-id.png" style="max-width:620px" alt="DOM">
+
+    <p>You can then use the <span class="syn-js">document.getElementById()</span> method to access the element.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Access a web page element with by its unique ID
+const bigHeading = document.getElementById('bigHeading');</code></pre>
+
+    <p>Now <b>bigHeading</b> becomes an object in JavaScript representing <b>&lt;h1&gt;</b> element in the webpage. You can verify this HTML-JavaScript connection as follows:</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Shows the element in the console
+console.log(bigHeading);</code></pre>
+
+    <p>Note that the <span class="syn-js">document.getElementByID()</span> method is case-sensitive. If there is more than one element with the same <b>id</b> in the web page (which there should not be!), the above method returns the first element found. A <span class="syn-js">null</span> value is returned if no element with the target <b>id</b> exists in the web page.</p>
+
+
+</section>
+
+<section>
+
+    <h2 id="element-modify">Modifying an HTML element</h2>
+    <p>Once JavaScript has access to an HTML element, it can then modify the properties and content of that element.</p>
+
+    <h3 id="property-modify">Modifying the properties of an HTML element</h3>
+
+    <p>Here are two examples of JavaScript changing an element's properties. You will need to reload the web page to see the result.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// JavaScript can change the properties of an element
+bigHeading.style.backgroundColor = 'red';
+bigHeading.style.color = 'white';</code></pre>
+
+    <h3 id="content-modify">Modifying the content of an HTML element</h3>
+    <p>JavaScript can also change the content of an element. The following code changes the text content and HTML tags of the <b>&lt;h1&gt;</b> element.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// JavaScript can change the content of an element
+bigHeading.innerText = "New heading text from JS";
+bigHeading.innerHTML = "New heading text in &lt;i&gt;italics&lt;/i&gt; from JS";</code></pre>
+
+        <p>Again, you will need to reload the web page to see the result in your web browser.</p>
+        <p>Note the key differences:</p>
+
+        <table class="table-js">
+            <tbody>
+                <tr>
+                    <td><p><b>innerText</b></p></td>
+                    <td><p>Updates text content only</p></td>
+                </tr>
+                <tr>
+                    <td><p><b>innerHTML</b></p></td>
+                    <td><p> Can update both HTML tags and content.</p></td>
+                </tr>
+             </tbody>
+        </table>
+
+        </section>
+
+        <section id="element-button">
+
+            <h2>Updating an HTML element with a button</h2>
+
+            <p>Typically, you will want JavaScript to update a web page after some user interaction such as a user clicking a button. A typical sequence would be as follows:</p>
+
+            <ul>
+                <li>The visitor loads the web page that includes the HTML tags, the content, and the one or more JavaScript functions.
+                <span class="inside-ol">&nbsp;</span>
+                But the functions do not perform any action. <i>They just wait passively until they are called.</i></li>
+        
+                <li>The visitor clicks a button somewhere on the page and the button calls calls a JavaScript function.</li>
+        
+                <li>The function then carries out a particular task, such as calculating the sale price of an item or changing the content of the web page.</li>
+            </ul>
+        
+            <h3 id="event-handlers">Working with event handlers</h3>
+		
+            <p>One way to call a function is to use an <i>event handler</i> to connect the button (in the HTML) to the function (in the JavaScript).</p>
+            
+            <p>Three common events handlers are set out in the following table.</p>
+            
+            <table class="table-js-methods">
+                <tbody>
+                <tr>
+                    <td width="22%"><p>&nbsp;<b>Event Handler</b></p></td>
+                    <td><p><b>Description</b></p></td>
+                </tr>
+                <tr>
+                    <td width="22%"><p>&nbsp;<b>onclick</b></p></td>
+                    <td><p>This calls a function when the page visitor clicks once on an HTML element such as a button, image or item of text.</p></td>
+                </tr>
+                <tr>
+                    <td width="22%"><p>&nbsp;<b>ondblclick</b></p></td>
+                    <td><p>This calls a function when the page visitor clicks twice on an HTML element such as a button, image or item of text.</p></td>
+                </tr>
+                <tr>
+                    <td width="22%"><p>&nbsp;<b>onmouseover</b></p></td>
+                    <td><p>This calls a function when the page visitor holds the mouse pointer over an HTML element such as a button, image or item of text.</p></td>
+                </tr>
+                </tbody>
+            </table>
+            
+            <p>Event handlers are usually attached to buttons.</p>
+            
+            <img src="assets/img/working-with-dom/event-handler.png" alt="screenshot" style="max-width:720px">           
+            <p>But you can also link an event handler with an image or some text.</p>
+    
+        <p>Let's add an event handler to your workfile.</p>
+
+        <ol>
+            <li>Comment out the lines of JavaScript code below.
+                <img src="assets/img/working-with-dom/comment-direction-changes.png" alt="screenshot" style="padding-bottom: 14px">
+                We want these updates to happen after the user has clicked a button, not immediately after the web page loads.</li>
+
+            <li>Update the <b>btn_1</b> button in the HTML of your workfile by adding an event handler function to it.
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">&lt;!-- Button linked to event handler function --&gt;
+&lt;button id="btn_1" onclick="changeHeading()"&gt;Update h1&lt;/button&gt;</code></pre></li>
+            <li>In the JavaScript of the web page, add the function below.
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to change the heading properties
+function changeHeading() {
+   bigHeading.style.backgroundColor = 'red';
+   bigHeading.style.color = 'white';
+   bigHeading.innerText = 'New heading text from JS';
+   bigHeading.innerHTML = 'New heading text in &lt;i&gt;italics&lt;/i&gt; from JS';
+}</code></pre></li>
+        </ol>
+
+        <p>Reload your web page, click the first button, and verify the event handler function is called and runs correctly.</p>
+
+        <p>Let's try a second example of working with an event handler.</p>
+        
+        <ol>
+            <li>In the HTML of the web page, add a unique <b>id</b> to the text paragraph as shown below.
+                <img src="assets/img/working-with-dom/text-paragraph.png" alt="screenshot" class="wider-110"></li>
+            <li>In the JavaScript of the web page, add the following function.
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Function to change the paragraph content
+function doParaText() {
+    const strText = document.getElementById('paraText');
+    strText.innerText = 'New paragraph text from JS.';
+}</code></pre></li>
+
+
+            <li>Finally, add the event handler to the third button in the HTML of the web page.
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">
+&lt;button id="btn_3" onclick="doParaText()"&gt;Update para text&lt;/button&gt;</code></pre></li>
+
+        </ol>
+
+        <p>Reload your web page, click the third button, and verify the event handler function is called and runs correctly.</p>
+
+    </section>
+
+    <section id="class-add-remove">
+
+        <h2>Adding and removing classes for an HTML element</h2>
+
+        <p>Up to now, you have been changing the visual properties of an HTML element in a web page with code such as the following.</p>
+
+    <img src="assets/img/working-with-dom/crude.png" alt="screenshot">
+
+        <p>A better option is to create classes in the CSS, and use an event hander to add and remove the CSS classes as required. For example.</p>
+
+        <ol>
+            <li>Add the following new CSS class to the <b>&lt;style&gt;</b> block in the <b>&lt;head</b>&gt; of the web page.
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">.newHeadingClass { 
+    background-color: blue; 
+    color: pink; 
+    padding: 10px; 
+    border-radius: 5px
+}</code></pre></li>
+            <li>In the JavaScript code of the web page, update your first function and add a new third function as shown below.
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Add CSS class to the heading
+function changeHeading() {
+    bigHeading.classList.add('newHeadingClass');
+}
+
+// Remove CSS class from the heading
+function restoreHeading() {
+    bigHeading.classList.remove('newHeadingClass');
+}</code></pre></li>
+            <li>In the HTML of the web page, add the new event handler function to the second button. 
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">
+&lt;button id="btn_2" onclick="restoreHeading()"&gt;Restore h1&lt;/button&gt;</code></pre></li>
+        </ol>
+
+        <p>Reload your web page and verify the first and second buttons work correctly.</p>
+
+
+    </section>
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
+
