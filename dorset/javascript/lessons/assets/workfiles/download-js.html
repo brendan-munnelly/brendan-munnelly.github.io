@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- HTML Structure -->
+<p id="message"></p>
+<a href="#" id="download-link">Download functions.html</a>
+
+<script>
+  document.getElementById("download-link").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+
+    // URL of the file to download
+    const url = "functions.html";
+    const fileName = "functions.html";
+
+    // Create a hidden <a> element
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = fileName;
+
+    // Append to the body and simulate a click
+    document.body.appendChild(anchor);
+    anchor.click();
+
+    // Remove the anchor element after click
+    document.body.removeChild(anchor);
+
+    // Display a "Download complete" message
+    const messageElement = document.getElementById("message");
+    messageElement.textContent = "Download complete.";
+  });
+</script>
+
+</body>
+</html>
