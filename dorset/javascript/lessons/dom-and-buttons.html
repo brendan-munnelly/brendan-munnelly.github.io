@@ -98,7 +98,7 @@
     <div class="box-goals">
         <ul>
             <li>Access an HTML element by its unique id using the JavaScript <span class="syn-js">document.getElementById()</span> method.</li>
-            <li>Add JavaScript function handers to buttons in a web page.</li>
+            <li>Add JavaScript function handlers to buttons in a web page.</li>
             <li>Modify the CSS properties of an HTML element.</li>
             <li>Modify the content of an HTML element with <span class="syn-js">.innerText</span> and <span class="syn-js">.innerHTML</span>.</li>
             <li>Change and restore the visual appearance of an HTML element with the <span class="syn-js">.classList.add()</span> and <span class="syn-js">.classList.remove()</span> methods.</li>
@@ -110,7 +110,7 @@
 <section>
 	
 	<div class="code-snippets" style="margin-bottom:32px">
-		<p>Download the new workfile on your computer and dave it as <b>dom-buttons.html</b>.</p>
+		<p>Download the new workfile on your computer and save it as <b>dom-buttons.html</b>.</p>
 		<p>📄 &nbsp;<a href="assets/workfiles/dom-buttons.html" target="_blank"><b>DOM and buttons</b> : Exercises</a></p>
 	</div>
 
@@ -145,12 +145,14 @@
 <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Access a web page element with by its unique ID
 const bigHeading = document.getElementById('bigHeading');</code></pre>
 
-    <p>Now <b>bigHeading</b> becomes an object in JavaScript representing <b>&lt;h1&gt;</b> element in the webpage. You can verify this HTML-JavaScript connection as follows:</p>
+    <p>Now <b>bigHeading</b> becomes an object in JavaScript representing <b>&lt;h1&gt;</b> element in the webpage. You will learn more about objects in the <a href="working-with-objects.html">Working with objects</a> Tutorial.</p>
 
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Shows the element in the console
-console.log(bigHeading);</code></pre>
-
-    <p>Note that the <span class="syn-js">document.getElementByID()</span> method is case-sensitive. If there is more than one element with the same <b>id</b> in the web page (which there should not be!), the above method returns the first element found. A <span class="syn-js">null</span> value is returned if no element with the target <b>id</b> exists in the web page.</p>
+    <p>Note that the <span class="syn-js">document.getElementById()</span> method is case-sensitive.</p>
+    
+    <ul>
+        <li>If there is more than one element with the same <b>id</b> in the web page (which there should not be!), the above method returns the first element found.</li>
+        <li>A <span class="syn-js">null</span> value is returned if no element with the target <b>id</b> exists in the web page.</li>
+    </ul>
 
 
 </section>
@@ -164,14 +166,20 @@ console.log(bigHeading);</code></pre>
 
     <p>Here are two examples of JavaScript changing an element's properties. You will need to reload the web page to see the result.</p>
 
-<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// JavaScript can change the properties of an element
-bigHeading.style.backgroundColor = 'red';
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// JavaScript can change the properties of an element
+bigHeading.style.backgroundColor = 'red'; // NOT background-color
 bigHeading.style.color = 'white';</code></pre>
+
+    <p>Note that because the dash <span class="syn-js">-</span> character is used in JavaScript as the subtraction operator (see <a href="working-with-numbers.html">Working with numbers</a>), it cannot also be used to represent CSS style properties. For this reason, you need to remove the dashes from CSS styles and capitalise the first letter of each subsequent word (camelCase).</p>
+    
+    <p>For example, to modify the styles applied to an HTML element with an <b>id</b> of <b>subHeading</b>, you would enter the following:</p>
+
+    <img src="assets/img/working-with-dom/camelCase.png" alt="screenshot">
 
     <h3 id="content-modify">Modifying the content of an HTML element</h3>
     <p>JavaScript can also change the content of an element. The following code changes the text content and HTML tags of the <b>&lt;h1&gt;</b> element.</p>
 
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// JavaScript can change the content of an element
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// JavaScript can change the content of an element
 bigHeading.innerText = "New heading text from JS";
 bigHeading.innerHTML = "New heading text in &lt;i&gt;italics&lt;/i&gt; from JS";</code></pre>
 
@@ -197,14 +205,14 @@ bigHeading.innerHTML = "New heading text in &lt;i&gt;italics&lt;/i&gt; from JS";
 
             <h2>Updating an HTML element with a button</h2>
 
-            <p>Typically, you will want JavaScript to update a web page after some user interaction such as a user clicking a button. A typical sequence would be as follows:</p>
+            <p>Typically, you will want JavaScript to update a web page after some user interaction, such as when a user clicks a button. A typical sequence would be as follows:</p>
 
             <ul>
                 <li>The visitor loads the web page that includes the HTML tags, the content, and the one or more JavaScript functions.
                 <span class="inside-ol">&nbsp;</span>
                 But the functions do not perform any action. <i>They just wait passively until they are called.</i></li>
         
-                <li>The visitor clicks a button somewhere on the page and the button calls calls a JavaScript function.</li>
+                <li>The visitor clicks a button somewhere on the page and the button calls a JavaScript function.</li>
         
                 <li>The function then carries out a particular task, such as calculating the sale price of an item or changing the content of the web page.</li>
             </ul>
@@ -246,18 +254,23 @@ bigHeading.innerHTML = "New heading text in &lt;i&gt;italics&lt;/i&gt; from JS";
         <ol>
             <li>Comment out the lines of JavaScript code below.
                 <img src="assets/img/working-with-dom/comment-direction-changes.png" alt="screenshot" style="padding-bottom: 14px">
-                We want these updates to happen after the user has clicked a button, not immediately after the web page loads.</li>
+                We want this code to run after the user has clicked a button, not immediately after the web page loads.</li>
 
-            <li>Update the <b>btn_1</b> button in the HTML of your workfile by adding an event handler function to it.
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">&lt;!-- Button linked to event handler function --&gt;
+            <li>Update the <b>btn_1</b> button in the HTML of your workfile by adding an <b>onclick </b>event handler and the <b>changeHeading()</b> function to it.
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">&lt;!-- Button linked to event handler function --&gt;
 &lt;button id="btn_1" onclick="changeHeading()"&gt;Update h1&lt;/button&gt;</code></pre></li>
-            <li>In the JavaScript of the web page, add the function below.
-<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to change the heading properties
+            <li>In the JavaScript of the web page, add the function below.                
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Function to change the heading properties and content
 function changeHeading() {
-   bigHeading.style.backgroundColor = 'red';
-   bigHeading.style.color = 'white';
-   bigHeading.innerText = 'New heading text from JS';
-   bigHeading.innerHTML = 'New heading text in &lt;i&gt;italics&lt;/i&gt; from JS';
+    // Get the HTML heading element from the web page
+    const bigHeading = document.getElementById('bigHeading');
+    // Update HTML element styles directly;
+    bigHeading.style.backgroundColor = 'red';
+    bigHeading.style.color = 'white';
+    // Update HTML element content
+    bigHeading.innerText = 'New heading text from JS';
+    // Update the HTML element content with HTML tag included
+    bigHeading.innerHTML = 'New heading text in &lt;i&gt;italics&lt;/i&gt; from JS';
 }</code></pre></li>
         </ol>
 
@@ -269,15 +282,17 @@ function changeHeading() {
             <li>In the HTML of the web page, add a unique <b>id</b> to the text paragraph as shown below.
                 <img src="assets/img/working-with-dom/text-paragraph.png" alt="screenshot" class="wider-110"></li>
             <li>In the JavaScript of the web page, add the following function.
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Function to change the paragraph content
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to change the paragraph content
 function doParaText() {
+    // Get the HTML first paragraph of text from the web page
     const strText = document.getElementById('paraText');
+    // Update its content
     strText.innerText = 'New paragraph text from JS.';
 }</code></pre></li>
 
 
-            <li>Finally, add the event handler to the third button in the HTML of the web page.
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">
+            <li>Finally, add an <b>onclick</b> event handler with the <b>doParaText()</b> to the third button in the HTML of the web page.
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">
 &lt;button id="btn_3" onclick="doParaText()"&gt;Update para text&lt;/button&gt;</code></pre></li>
 
         </ol>
@@ -294,28 +309,42 @@ function doParaText() {
 
     <img src="assets/img/working-with-dom/crude.png" alt="screenshot">
 
-        <p>A better option is to create classes in the CSS, and use an event hander to add and remove the CSS classes as required. For example.</p>
+        <p>A better option is to create classes in the CSS, and use an event handler to add and remove the CSS classes as required. For example.</p>
 
         <ol>
             <li>Add the following new CSS class to the <b>&lt;style&gt;</b> block in the <b>&lt;head</b>&gt; of the web page.
-<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">.newHeadingClass { 
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">.newHeadingClass { 
     background-color: blue; 
     color: pink; 
     padding: 10px; 
     border-radius: 5px
 }</code></pre></li>
             <li>In the JavaScript code of the web page, update your first function and add a new third function as shown below.
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Add CSS class to the heading
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Add CSS class to the heading
+// Function to change the heading properties and content
 function changeHeading() {
+    // Get the HTML heading element from the web page
+    const bigHeading = document.getElementById('bigHeading');
+    // Add a new CSS class to the element
     bigHeading.classList.add('newHeadingClass');
+    // Update HTML element content
+    bigHeading.innerText = 'New heading text from JS';
+    // Update the HTML element content with HTML tag included
+    console.log(bigHeading.innerHTML);
+    bigHeading.innerHTML = 'New heading text in <i>italics</i> from JS';
 }
-
-// Remove CSS class from the heading
+    
+// Function to restore the heading to its original state
 function restoreHeading() {
+    // Get the HTML heading element from the web page
+    const bigHeading = document.getElementById('bigHeading');
+    // Remove the CSS class from the element
     bigHeading.classList.remove('newHeadingClass');
+    // Replace the new HTML element content with the original content
+    bigHeading.innerText = 'Big heading here';
 }</code></pre></li>
-            <li>In the HTML of the web page, add the new event handler function to the second button. 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">
+            <li>In the HTML of the web page, add an <b>onclick</b> event handler with the <b>restoreHeading</b> function to the second button. 
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">
 &lt;button id="btn_2" onclick="restoreHeading()"&gt;Restore h1&lt;/button&gt;</code></pre></li>
         </ol>
 
