@@ -83,6 +83,9 @@
 
             <p><a href="#class-add-remove">Adding and removing CSS classes for an element</a></p>
 
+            <p><a href="#element-add">Adding a new HTML element to a web page</a></p>
+
+            <p><a href="#dom-parents-children">About the DOM and HTML parents and children</a></p>
 
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
@@ -143,7 +146,7 @@
     <p>You can then use the <span class="syn-js">document.getElementById()</span> method to access the element.</p>
 
 <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Access a web page element with by its unique ID
-const bigHeading = document.getElementById('bigHeading');</code></pre>
+let bigHeading = document.getElementById('bigHeading');</code></pre>
 
     <p>Now <b>bigHeading</b> becomes an object in JavaScript representing <b>&lt;h1&gt;</b> element in the webpage. You will learn more about objects in the <a href="objects-intro.html">Working with objects</a> Tutorial.</p>
 
@@ -263,7 +266,7 @@ bigHeading.innerHTML = "New heading text in &lt;i&gt;italics&lt;/i&gt; from JS";
 <pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Function to change the heading properties and content
 function changeHeading() {
     // Get the HTML heading element from the web page
-    const bigHeading = document.getElementById('bigHeading');
+    let bigHeading = document.getElementById('bigHeading');
     // Update HTML element styles directly;
     bigHeading.style.backgroundColor = 'red';
     bigHeading.style.color = 'white';
@@ -285,7 +288,7 @@ function changeHeading() {
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Function to change the paragraph content
 function doParaText() {
     // Get the HTML first paragraph of text from the web page
-    const strText = document.getElementById('paraText');
+    let strText = document.getElementById('paraText');
     // Update its content
     strText.innerText = 'New paragraph text from JS.';
 }</code></pre></li>
@@ -307,7 +310,7 @@ function doParaText() {
 
         <p>Up to now, you have been changing the visual properties of an HTML element in a web page with code such as the following.</p>
 
-    <img src="assets/img/working-with-dom/crude.png" alt="screenshot">
+    <img src="assets/img/working-with-dom/crude.png" alt="screenshot" style="max-width: 700px">
 
         <p>A better option is to create classes in the CSS, and use an event handler to add and remove the CSS classes as required. For example.</p>
 
@@ -324,7 +327,7 @@ function doParaText() {
 // Function to change the heading properties and content
 function changeHeading() {
     // Get the HTML heading element from the web page
-    const bigHeading = document.getElementById('bigHeading');
+    let bigHeading = document.getElementById('bigHeading');
     // Add a new CSS class to the element
     bigHeading.classList.add('newHeadingClass');
     // Update HTML element content
@@ -337,7 +340,7 @@ function changeHeading() {
 // Function to restore the heading to its original state
 function restoreHeading() {
     // Get the HTML heading element from the web page
-    const bigHeading = document.getElementById('bigHeading');
+    let bigHeading = document.getElementById('bigHeading');
     // Remove the CSS class from the element
     bigHeading.classList.remove('newHeadingClass');
     // Replace the new HTML element content with the original content
@@ -353,7 +356,106 @@ function restoreHeading() {
 
     </section>
 
+    <section id="element-add">
+        <h2>Adding a new HTML element to a web page</h2>
+        <p>JavaScript can also add new HTML elements to a web page. This is a <i>two-step</i> process:</p>
 
+        <ol>
+            <li>You use the <span class="syn-js">.createElement()</span> method to create the HTML element in the JavaScript code and to specify what type of element you want to create. See the examples below.
+            <img src="assets/img/working-with-dom/create-element-1.png" alt="screenshot" style="max-width:520px;padding-bottom: 14px">
+            At this stage, the new element exists only in JavaScript. It has not been added to the HTML of the web page yet.
+            <span class="inside-ol">&nbsp;</span>
+            Typically, you would now add some styles and content to the new element in the JavaScript code, and maybe an <b>id</b> too. For example.
+            <img src="assets/img/working-with-dom/create-element-2.png" alt="screenshot" style="max-width:700px;padding-bottom: 14px"></li>
+
+            <li>Next, you use the <span class="syn-js">.appendChild()</span> method to add your new element to the HTML of the web page. Only then does it become visible to the user.
+            <img src="assets/img/working-with-dom/create-element-3.png" alt="screenshot" style="max-width:580px">              
+            <span class="inside-ol">&nbsp;</span>
+            You need to specify where to put your new element on the web page. In other words, the <i>parent element</i> that your new element will belong to. JavaScript adds your new element as the last child of the parent.
+            <span class="inside-ol">&nbsp;</span>
+            In the simplest case, you would append your new element to the web page as a whole, the <b>document.body</b>.</li>
+        </ol>
+
+        <p>Let's work through a complete example of creating a new HTML element in JavaScript and adding it to a web page.</p>
+
+
+        <ol>
+            <li>Add the following new CSS class to the <b>&lt;style&gt;</b> block in the <b>&lt;head</b>&gt; of the workfile.
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">.messageOrderPlaced { 
+    background-color: lightgreen; 
+    color: #000; 
+    border: solid 1px green;
+    padding: 10px; 
+    border-radius: 5px
+}</code></pre></li>
+            <li>In the HTML of workfile, add a fourth button after the other three already present.
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">
+&lt;button id="btn_4" onclick="placeOrder()"&gt;Order product&lt;/button&gt;</code></pre></li>
+            <li>In the JavaScript part of the workfile, add the following function.
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// Function to add a new message to the page
+function placeOrder() {
+    // Create a new HTML element
+    let newMessage = document.createElement("div");
+    // Add a CSS class to the new element
+    newMessage.classList.add("messageOrderPlaced");
+    // Add content to the new element
+    newMessage.innerHTML = "Your order has been placed. &lt;b&gt;Thank you&lt;/b&gt;";
+    // Add the new element to the web page
+    document.body.appendChild(newMessage);
+}</code></pre></li>
+
+        </ol>
+        <p>As you can see, your new element is now added to the bottom of the web page.</p>
+
+        <img src="assets/img/working-with-dom/create-element-4.png" alt="screenshot" style="max-width: 700px">
+
+        <p>If you reload the web page, the new element is removed. The element will only exist after JavaScript has created it in response to the user action of clicking a button.</p>
+    </section>
+
+    <section id="dom-parents-children">
+        <h2>About the DOM and HTML parents and children</h2>
+        <p>You can think of the Document Object Model (DOM) as like a family tree:</p>
+
+        <ul>
+            <li>A parent element contains other elements</li>
+            <li>Elements inside a parent are called children</li>
+            <li>Elements at the same level are called siblings</li>
+        </ul>
+
+        <p>Here is a simple example:</p>
+
+        <img src="assets/img/working-with-dom/create-element-5.png" alt="screenshot" style="max-width: 780px">
+
+        <p>Every HTML element on a web page is ultimately a child of the web page itself, represented in JavaScipt by the <b>document.body</b> object.</p>
+
+        <p>Let's update the previous example to add the new HTML element as a child of the <b>&lt;section&gt;</b> element, instead of the web page as a whole.</p>
+
+        <ol>
+            <li>Add a unique <b>id</b> to the <b>&lt;section&gt;</b> element of the HTML part of the workfile as shown below.
+            <img src="assets/img/working-with-dom/create-element-6.png" alt="screenshot" style="max-width: 600px"></li>
+
+            <li>In the JavaScript code, update the <b>placeOrder()</b> function as shown below.
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// Function to add a new message to section element in the page            
+function placeOrder() {
+    // Create a new HTML element
+    let newMessage = document.createElement("div");
+    // Add a CSS class to the new element
+    newMessage.classList.add("messageOrderPlaced");
+    // Add content with HTML tag to the new element
+    newMessage.innerHTML = "Your order has been placed. <b>Thank you</b>";
+    // Get the section element as the parent element
+    let parentSection = document.getElementById("mySection");
+    // Add the new element as a child of the parent section
+    parentSection.appendChild(newMessage);
+}</code></pre></li>
+
+        </ol>
+
+        <p>Reload your web page, click the fourth button, and verify the new element is added correctly.</p>
+
+        <img src="assets/img/working-with-dom/create-element-7.png" alt="screenshot" style="max-width:700px">
+
+    </section>
 
 </article>
 </main>
@@ -361,7 +463,6 @@ function restoreHeading() {
 <footer>    
 
 </footer>
-
 
 <div id="cookie-banner">
 	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
