@@ -156,28 +156,27 @@
 
     <section id="arrays-about">
 
-        <h2>Arrays: when a variable is not enough</h2>
-        <p>A <a href="variables-literals.html">variable</a>, as you have learnt, can store a value. Think of a variable as a &#8216;box&#8217; in which you can place a <i>single</i> value. See below.</p>
+		<h2>Storing spreadsheet-type data in arrays</h2>
 
-        <img src="assets/img/arrays-intro/array-not-single-value.png" alt="Variable with a single value" style="max-width: 700px">
-    
-        <p>But suppose you want to store <i>several</i> values in a &#8216;box&#8217;? You need a different kind of variable; you need an <i>array</i>. </p>
+		<p>In the previous <a href="objects-intro.html">Working with objects</a> Tutorial, you learnt that a JavaScript <i>object</i> can be used to store the related data in a single row of a spreadsheet such as shown below.</p>
 
-		<p>Below you can see an array or multi-compartment &#8216;box&#8217; that contains four values or <i>elements</i> (also called <i>items</i>).</p>
-    
-		<img src="assets/img/arrays-intro/array-multiple-values.png" alt="Array with multiple values" style="max-width: 700px">
+		<img src="assets/img/arrays-intro/spreadsheet=1.png" alt="screenshot" style="max-width:700px">
 
-		<p>The benefit of using arrays is that you can work with <i>datasets</i> with just a single item in your code. For example, instead of assigning the twelve months of the year to twelve different variables, you could assign them to a single array.</p>
+		<p>But what about all the rows of a spreadsheet? How can they be stored in JavaScript? The answer is: in an <i>array</i>.</p>
+
+		<p>You can think of an array as a <i>list of things</i>. The things (usually called <i>items</i>) in an array could be objects. But they can also be simple variables such as strings or numbers.</p>
+
+		<p>In an array, the order in which the items are stored is important. For this reason, an array is more propertly defined as an <i>ordered list of items</i>.</p>
+
+		<img src="assets/img/arrays-intro/array-order.png" alt="screenshot" style="max-width: 600px">
 
 		<h3 id="arrays-naming">Naming your arrays</h3>
 
-        <p>Array names follow the same rules as the names for <a href="variables-literals.html#variable-names">regular variables</a>. They are case-senstive, and cannot contain spaces or the dash (<b>-</b>) character.</p>
-
-		<p>Your JavaScript code will be easier to read if you name your arrays in a different way to regular (single-value) variables.</p>
+        <p>Object names follow the usual JavaScript rules: they are case-sensitive and cannot contain spaces or the dash (-) character. Here are two tips:</p>
 
 		<ul>
-			<li>Some developers begin array names with <b>arr</b>, such as <b>arrStudents</b> and <b>arrEmployees</b>.</li>
-			<li>It is common to use plural nouns for array names, such as <b>arrProducts</b> rather than <b>arrProduct</b> and <b>arrUsers</b> rather than <b>arrUser</b>.</li>
+			<li>Begin array names with <b>arr</b>, such as <b>arrStudents</b> and <b>arrEmployees</b>.</li>
+			<li>Use plural nouns for array names, such as <b>arrProducts</b> rather than <b>arrProduct</b> and <b>arrUsers</b> rather than <b>arrUser</b>.</li>
 		</ul>
    
 		
@@ -200,7 +199,7 @@ const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford"];</code></
 		
 		<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This does <i>not</i> prevent your code from modifying elements in an array later as needed. Array elements are always <i>mutable</i>. </p>
 
-		<p>But it does prevent the array from being accidentally overwriting by another another array (or variable) with the same name that might exist elsewhere in the same scope.</p>
+		<p>But it does prevent the array from being accidentally overwritten by another another array (or variable) with the same name that might exist elsewhere in the same scope.</p>
 
 		<p>Individual <i>array elements</i> are separated by commas and, for extra readability, with a single space. Strings are typically wrapped with double <span class="syn-js">""</span> rather than single quotes <span class="syn-js">''</span>.</p>
 
@@ -254,9 +253,9 @@ console.log(`First element of arrUserIDs array: ${arrUserIDs[3]}`);</code></pre>
 <pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// === Array length property ===
 
 console.log(`Number of elements in arrUserFirstNames: ${arrUserFirstNames.length}`);
-// Outputs 4
+// 4
 console.log(`Number of elements in arrPrices: ${arrPrices.length}`);
-// Outputs 4</code></pre>
+// 4</code></pre>
 
         <p>Remember: the length of an array is always <i>one number greater</i> than the array's highest index number.</p>
 
@@ -265,9 +264,9 @@ console.log(`Number of elements in arrPrices: ${arrPrices.length}`);
 <pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// === Accessing last element in array ===
 
 console.log(`Last element of arrCars array: ${arrCars[arrCars.length-1]}`);
-// Outputs Ford
+// Ford
 console.log(`Last element of arrStudentIDs array: ${arrUserIDs[arrUserIDs.length-1]}`);
-// Outputs 6317</code></pre>
+// 6317</code></pre>
 
         <h3 id="arrays-typeof">Arrays and the <code>typeof</code> operator</h3>
 
@@ -327,7 +326,7 @@ if (Array.isArray(someVar)) {
 
 const arrFruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
 const strFruits = arrFruits.toString();
-// Outputs Banana,Orange,Lemon,Apple,Mango
+// Banana,Orange,Lemon,Apple,Mango
 console.log(`Array elements as string variable: ${strFruits}`);</code></pre>
 
 		<p>In the string output, JavaScript inserts a comma between each array element.</p>
@@ -391,6 +390,33 @@ console.log(`Array elements: ${arrUserNames}`);
 </code></pre>
 	</section>
 
+
+	<section>
+		<h2>Lopping through an array</h2>
+
+		<p>Often, you will want to perform the same operation on all the items in an array - such as displaying their values.</p>
+
+		<p>In modern JavaScript, the preferred wy of looping through an array is to use the <span class="syn-js">forEach()</span> method. See the example below.</p>
+
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// === Looping through array values ===
+
+// Looping through the arrUserFirstNames array
+numbers.forEach(userFirstName =&gt; {
+    console.log(userFirstName);
+});	
+
+// Looping through the arrPrices array
+arrPrices.forEach(price =&gt; {
+    console.log(price);
+});
+
+// looping through the arrCars array
+arrCars.forEach(car =&gt; {
+    console.log(car);
+});</code></pre>
+
+		<p>In the above examples, the variables <b>userFirstName</b>, <b>price</b> and <b>car</b> are parameters that represent the current array item being processed. They are typically named in a single form of the array name. The <span class="syn-js">=&gt;</span> operator is called a <i>fat arrow</i> symbol.</p>
+	</section>
 
 
 </article>
