@@ -141,9 +141,10 @@
 
 			<ul>
 				<li>Create and populate an array with square brackets <span class="syn-js">[]</span> notation.</li>
-				<li>Use the <span class="syn-js">.length</span> method to find the number of items in an array.</li>
+				<li>Use the <span class="syn-js">.length</span> property to find the number of items in an array.</li>
 				<li>Use array indexes to access individual items in an array.</li>
 				<li>Test for an array with the <span class="syn-js">Array.IsArray()</span> method.</li>
+				<li>Lopp through the items in an array with the <span class="syn-js">.forEach()</span> method.</li>
 				<li>Destructure individual items of an array to variables.</li>
 			</ul>
 		</div>
@@ -195,29 +196,47 @@
 		<p>You can create an array with an array name and pair of square brackets <span class="syn-js">[]</span>. This is called <i>literal notation</i>.</p>
 		
 		
-		<p>Copy the following code to your <b>arrays.html</b> workfile. It should not throw any errors.</p>
+		<p>Copy the following array code to your <b>arrays.html</b> workfile.</p>
 
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Declaring and populating arrays in one step
-const arrUserFirstNames = ["Camille","Emma","Gabriel","Romy"];
-const arrPrices = [11.99, 24.50, 34.25, 49.99];
-const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford"];</code></pre>
-		
-		<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This does <i>not</i> prevent your code from modifying items in an array later as needed. But it does prevent the array from being accidentally overwritten by another another array (or variable) with the same name that might exist elsewhere in the same scope.</p>
-
-		<p>Individual array items are separated by commas and, for extra readability, with a single space. Strings are typically wrapped with double <span class="syn-js">""</span> rather than single quotes <span class="syn-js">''</span>.</p>
-
-		<p>Also for extra readability, arrays are sometimes written with each item on a separate line. Copy the code below to your workfile.</p>
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">
 // Declaring an array with items on separate lines and a trailing comma
-const arrUserIDs = [
-   4032,
-   5229,
-   1234,
-   6317,
+const arrUserFirstNames = [
+   "Camille",
+   "Emma",
+   "Gabriel",
+   "Romy",
 ];</code></pre>
-		<p>As you can see above, there is a &#8216;trailing comma&#8217; <span class="syn-js">,</span> after the final item <b>6317</b>. Developers sometimes add an optional trailing comma to make it easier to insert/remove items later.</p>
-	
-		<p>In JavaScript, item in an array need not be the same data type. But it is <i>not</i> recommended to mix multiple data types in the same array.</p>
+
+	<p>As you can see above, there is a <span class="syn-js">,</span> character after each item. Also, a &#8216;trailing comma&#8217; is added after the final item <b>"Romy"</b>. Developers sometimes add an optional trailing comma to make it easier to insert/remove items later.</p>
+
+	<p>You can see some further examples of arrays below.</p>
+
+	<img src="assets/img/arrays-intro/array-image.png" alt="screenshot">
+
+	<p>In practice, arrays are commonly typed on a single line. For extra readability, individual array items are separated by a single space. </p>
+
+	<p>Copy these three arrays to your workfile.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+const arrUserIDs = [4032, 5229, 1234, 6317];
+const arrCars = ["Volvo", "Citreon", "BMW", "Opel", "Peugeot", "Ford"];
+const arrPrices = [11.99, 24.50, 34.25, 49.99];
+</code></pre>
+		
+<p>Strings are typically wrapped with double <span class="syn-js">""</span> rather than single quotes <span class="syn-js">''</span>.</p>
+
+<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This does <i>not</i> prevent your code from modifying items in an array later as needed. But it does prevent the array from being accidentally overwritten by another another array (or variable) with the same name that might exist elsewhere in the same scope.</p>
+
+
+		<p>Here is the general form of an array of numbers.</p>
+		<img src="assets/img/arrays-intro/array-numbers.png" alt="screenshot" style="max-width:700px">
+
+		<p>And here is the general form of an array of strings.</p>
+		<img src="assets/img/arrays-intro/array-strings.png" alt="screenshot" style="max-width:700px">
+
+		<p>In JavaScript, items in an array need not be the same data type. But it is <i>not</i> recommended to mix multiple data types in the same array.</p>
+
+
 
 	</section>
 
@@ -235,13 +254,9 @@ const arrUserIDs = [
 
 <pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// === Outputting array items by index position ===
 
-// Outputting the first item from an array
 console.log(`First item of arrUserFirstNames array: ${arrUserFirstNames[0]}`);
-// Outputting the second item from an array
 console.log(`First item of arrPrices array: ${arrPrices[1]}`);
-// Outputting the third item from an array
 console.log(`First item of arrCars array: ${arrCars[2]}`);
-// Outputting the fourth item from an array
 console.log(`First item of arrUserIDs array: ${arrUserIDs[3]}`);</code></pre>
 
 
@@ -322,7 +337,7 @@ if (Array.isArray(someVar)) {
 
 		<p>In modern JavaScript, the preferred way of looping through an array is to use the <span class="syn-js">forEach()</span> method. See the example below.</p>
 
-<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// === Looping through array values ===
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// === Looping through array values ===
 
 // Looping through the arrUserFirstNames array
 arrUserFirstNames.forEach(userFirstName =&gt; {
@@ -346,6 +361,26 @@ arrCars.forEach(car =&gt; {
 		<p>The general form of the <span class="syn-js">.forEach()</span> loop is as shown below.</p>
 
 		<img src="assets/img/arrays-intro/forEach-image.png" alt="screenshot">
+
+		<p>With a <span class="syn-js">.forEach()</span> loop, you can perform any valid operation on the items in an array. For an array of numbers, for example, you could reduce each item by 10%.</p>
+
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Changing numeric values with a loop
+arrPrices.forEach(price =&gt; {
+    console.log(`Original price: ${price}`);
+    console.log(`Sale price (10% off): ${price - (price * 0.1)}`);
+});
+</code></pre>
+
+		<p>And for an array of strings, you could change all the characters in each item to lower case letters.</p>
+
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Changing case of text characters in loop
+arrUserFirstNames.forEach(userFirstName =&gt; {
+    console.log(`Original name: ${userFirstName}`);
+    console.log(`Lower case name: ${userFirstName.toLowerCase()}`);
+});</code></pre>
+
+
+		<p>Note that the <span class="syn-js">.forEach()</span> loop does <i>not</i> change the items in the array. It instead creates of a copy of the original array.</p>
 	</section>
 
 
@@ -361,11 +396,11 @@ arrCars.forEach(car =&gt; {
 <pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// === Creating an empty array to populate later ===
 
 // Create array without items
-let arrUserNames = [];
+let arrLastNames = [];
 
 // Populate empty array
-arrUserNames = ["Camille", "Emma", "Gabriel", "Romy"];
-console.log(`Array items: ${arrUserNames}`);
+arrLastNames = ["Bloggs", "Smith", "Murphy", "Higgins"];
+console.log(`Array items: ${arrLastNames}`);
 </code></pre>
 	</section>
 
@@ -376,10 +411,10 @@ console.log(`Array items: ${arrUserNames}`);
 
 		<p>You could do this:</p>
 
-<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Create and polulate new array
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Create and populate new array
 const arrFruits = ["Apple", "Banana", "Orange", "Pear"];
 	
-// Assign array itmes to variables without destructuring
+// Assign array items to variables without destructuring
 let fruit1 = arrFruits[0];
 let fruit2 = arrFruits[1];
 let fruit3 = arrFruits[2];
@@ -403,7 +438,7 @@ console.log(`Fruit 4: ${fruitFour}`);</code></pre>
 
 		<p>You can skip items in the array as follows:</p>
 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Create and polulate new array
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Create and populate new array
 const arrCities = ["Dublin", "Cork", "Belfast", "Derry"];
 	
 // Skipping an array item while destructuring
@@ -421,11 +456,11 @@ console.log(`Array item at position [2]: ${thirdCity}`);</code></pre>
 
         <p>---</p>
 
-        <p>Create an array called <code>arrColors</code> with five different colour names. Then, in the console, output:</p>
+        <p>Create an array called <code>arrColours</code> with five different colour names. Then, in the console, output:</p>
 
 		<p>- The first colour</p>
-		<p>- The last color using the array's length</p>
-		<p>- The total number of colors in the array</p>
+		<p>- The last colour using the array's length</p>
+		<p>- The total number of colours in the array</p>
 
 
         <p>---</p>
@@ -471,7 +506,7 @@ console.log(`Array item at position [2]: ${thirdCity}`);</code></pre>
               <h2>Sample AI prompts</h2>
           
             
-              <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">Create a visual explanation of how array indexing works in JavaScript. Compare an array to a real-world example like numbered parking spots in a parking lot, or seats in a theater. Explain why arrays start at index 0 instead of 1, and demonstrate common indexing mistakes beginners should avoid.</code></div>
+              <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">Create a visual explanation of how array indexing works in JavaScript. Compare an array to a real-world example like numbered parking spots in a parking lot, or seats in a theatre. Explain why arrays start at index 0 instead of 1, and demonstrate common indexing mistakes beginners should avoid.</code></div>
            
 			  
 			  <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">
