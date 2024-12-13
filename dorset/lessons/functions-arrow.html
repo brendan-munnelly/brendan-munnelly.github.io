@@ -10,7 +10,7 @@
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../../assets/css/dorset.css" />
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
 	<style>
 		pre { background-color: #282c34;}
@@ -21,8 +21,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-  	<!-- Styles for Cookie Consent Popup Message  -->
-	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+	<script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -64,7 +63,7 @@
 		<main>
 
 			<aside>
-				<h3>JAVASCRIPT COURSE</h3>
+				<h3>JAVASCRIPT TUTORIALS</h3>
 	
 				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
 	
@@ -185,7 +184,7 @@ const greetParen = (name) =&gt; {
 };
 
 let greetingParen = greetParen("John"); 
-console.log(greetingParen); // Outputs 'Hello, John!'
+console.log(greetingParen); // Hello, John!
 
 // Arrow function without parentheses
 const greetNoParen = name =&gt; {
@@ -193,7 +192,7 @@ const greetNoParen = name =&gt; {
 };
 
 let greetingNoParen = greetNoParen("Mary");
-console.log(greetingNoParen); // Outputs 'Hello, Mary!'</code></pre>
+console.log(greetingNoParen); // Hello, Mary!</code></pre>
 
 	<p>But we can make this code even more concise! When an arrow function contains only one statement, you can:</p>
 	
@@ -222,25 +221,25 @@ const greetNoParen = name =&gt; `Hello, ${name}!`;</code></pre>
 <pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Single-statement arrow functions with implicit returns
 
 const shortGreet = () =&gt; 'Hello with no parameter!';	
-console.log(shortGreet()); // Outputs 'Hello with no parameter!'
+console.log(shortGreet()); // Hello with no parameter!
 
 const double = x =&gt; x * 2;
-console.log(double(10)); // Outputs 20
+console.log(double(10)); // 20
 
 const halfNum = num =&gt; (num / 2);
-console.log(halfNum(200)); // Outputs 100
+console.log(halfNum(200)); // 100
 
 const add15ToPrice = num =&gt; (num + 15);
-console.log(add15ToPrice(100)); // Outputs 115
+console.log(add15ToPrice(100)); // 115
 
 const increasePriceby5Percent = num =&gt; (num + (num * .05));
-console.log(increasePriceby5Percent(200)); // Outputs 210
+console.log(increasePriceby5Percent(200)); // 210
 
 const isPositive = num =&gt; num &gt; 0;
-console.log(isPositive(5)); // Outputs true
+console.log(isPositive(5)); // true
 
 const uppercase = str =&gt; str.toUpperCase()
-console.log(uppercase("hello")); // Outputs 'HELLO'</code></pre>
+console.log(uppercase("hello")); // HELLO</code></pre>
 
 			<p>Verify the above functions all run without error.</p>
 
@@ -253,17 +252,17 @@ console.log(uppercase("hello")); // Outputs 'HELLO'</code></pre>
 
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Arrow functions with multiple parameters and implicit returns 
 					   
-// add three numbers
+// Add three numbers
 const addNums = (x, y, z) =&gt; (x + y + z);
-console.log(addNums(4, 8, 16)); // Outputs 28
+console.log(addNums(4, 8, 16)); // 28
 					
-// divide one number by another
+// Divide one number by another
 const divideNum = (num1, num2) =&gt; (num1 / num2);
-console.log(divideNum(16, 8)); // Outputs 2
+console.log(divideNum(16, 8)); // 2
 					
-// calculate product price after 20% tax
+// Calculate product price after 20% tax
 const finalPrice = (price, tax) =&gt; (price + (price * tax));
-console.log(finalPrice(50, 20)); // Outputs 60</code></pre>
+console.log(finalPrice(50, 20)); // 60</code></pre>
 			
 		<p>Copy the above functions to your <b>functions.html</b> workfile and verify they run without error.</p>
 
@@ -282,13 +281,13 @@ const addTwoNums = (a, b) =&gt; {
     const sum = a + b;
     return sum;
 };
-console.log(addTwoNums(5, 12)); // Outputs 17
+console.log(addTwoNums(5, 12)); // 17
 	
 const multipleTwoNums = (a, b) =&gt; {    
     const product = a * b;
     return product;
 };
-console.log(multipleTwoNums(5, 12)); // Outputs 60</code></pre>
+console.log(multipleTwoNums(5, 12)); // 60</code></pre>
 
 		
 		<div class="box-warning">
@@ -314,13 +313,22 @@ console.log(multipleTwoNums(5, 12)); // Outputs 60</code></pre>
 		<h2>Immediately-invoked arrow functions</h2>
 		<p>Like a regular anonymous function, you can amend the syntax of an arrow function so that it is run without being called from elsewhere in the program. </p>
 
-		<p>To invoke an arrow function immediately, add a parenthesis <span class="syn-js">()</span> at the end of the function, just before the semi-colon.</p>
+		<p>To invoke an anonymous function immediately, wrap the function inside a parenthesis <span class="syn-js">()</span> and add another parenthesis after it.</p>
 
-		<p>Copy this arrow function to your <b>functions.html</b> workfile and verify it runs without being called.</p>
+		<p>Copy these two arrow function to your <b>functions.html</b> workfile and verify it runs without being called.</p>
 
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">const runArrowImmediately = function() {
-    console.log("Hello from immediately-invoked arrow function");
-}();</code></pre>
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Immediately invoked arrow functions
+(() =&gt; {
+    console.log("Hello from arrow function");
+})();	
+
+// IIAF that returns a value
+const result = (() =&gt; {
+    const x = 10;
+    const y = 20;
+    return x + y;
+})();
+console.log(result); // 30</code></pre>
 
 
 	</section>
@@ -330,31 +338,20 @@ console.log(multipleTwoNums(5, 12)); // Outputs 60</code></pre>
 </main>
 
 <footer>
-
-
 </footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
 
 <script>hljs.highlightAll();</script>
 
 <script src="assets/js/utils.js"></script>
 
-<!-- JavaScript for Cookie Consent Popup Message -->
-	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-	<script>
-	window.cookieconsent.initialise({
-		  "palette": {
-			"popup": {
-				"background": "#000"
-			},
-			"button": {
-				"background": "#f1d600"
-			}
-		},
-		  "content": {
-			"href": "https://www.munnelly.com/legal/index.html"
-		}
-	});
-	</script>
 
 </body>
 </html>
