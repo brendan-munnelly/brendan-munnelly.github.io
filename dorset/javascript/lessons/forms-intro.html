@@ -1,0 +1,303 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Introduction to forms | JavaScript Tutorials | Brendan Munnelly</title>
+
+	<meta name="description" content="Working with HTML forms using JavaScript, handling form submissions, validating user input, and accessing form data.">
+
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+		.table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+		table.table-gray { padding: 10px 20px 10px 20px !important;}
+
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
+
+		.four-samples { margin-top: 24px; margin-bottom: 20px }
+
+		.four-samples div {
+			background-image: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
+		  	padding:  6px 0 6px 0;
+		}
+
+		.four-samples div td,
+		.four-samples div > p {
+			font-size: calc(var(--font-size-base) * 0.85);
+			line-height: 1.5;
+		}
+  
+
+
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Introduction to forms</h1>
+					<h2>Working with HTML forms using JavaScript, handling form submissions, validating user input, and accessing form data.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+					
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+                <p><a href="#forms-about">About HTML Forms</a></p>
+                <p><a href="#accessing-forms">Accessing forms data with JavaScript</a></p>
+                <p><a href="#form-validation">Form validation</a></p>
+                <p><a href="#resources">More learning resources</a></p>
+                <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			  
+				<p>&nbsp;</p>
+
+	
+			</aside> 
+	
+	
+	<article>
+	
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+
+		<p>At the end of this Tutorial, you will be able to:</p>
+		<div class="box-goals">
+
+			<ul>
+                <li>Access and manipulate HTML forms using JavaScript</li>
+                <li>Handle form submission events and prevent default behavior</li>
+                <li>Validate user input before form submission</li>
+                <li>Extract and process form data</li>
+            </ul>
+		</div>
+
+	</section>
+	
+	<section>
+		<div class="code-snippets" style="margin-bottom:32px">
+			<p>Download a new workfile on your computer as described at the link below.</p>
+			<p>📄 &nbsp;<a href="assets/workfiles/forms.html" target="_blank"><b>JavaScript forms</b>: Exercises</a></p>
+		</div>
+	
+	</section>
+
+
+    <section id="forms-about">
+        <h2>About HTML forms</h2>
+        <p>Forms are an essential part of web applications, allowing users to input data that can be processed by JavaScript and stored in a database.</p>
+
+        <p>Copy the following basic form structure into the HTML part of your <b>forms.html</b> workfile:</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;!-- Email and password form --&gt;
+&lt;h2&gt;A basic form&lt;/h2&gt;
+&lt;form id="userForm" onsubmit="processForm(event)"&gt;
+    &lt;label for="userName"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="userName" name="userName"&gt;&lt;br&gt;&lt;br&gt;
+                
+    &lt;label for="userEmail"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="userEmail" name="userEmail"&gt;&lt;br&gt;&lt;br&gt;
+                
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+    <img src="assets/img/forms/form-basic.png" alt="screenshot" style="max-width: 360px;margin-bottom: 12px">
+
+        <p>When working with forms in JavaScript, you will typically want to:</p>
+        <ul>
+            <li>Capture the form submission event (user clicking the <b>Submit</b> button)</li>
+            <li>Validate user input</li>
+            <li>Process form data</li>
+            <li>Provide feedback to users</li>
+        </ul>
+    </section>
+
+    <section id="accessing-forms">
+        <h2>Accessing form data with JavaScript</h2>
+
+        <p>The simplest way to access the details entered in HTML forms with JavaScript is with code such as that below. Copy this code to the JavaScript part of your <b>forms.html</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Function to process the form
+function processForm(event) {
+    event.preventDefault(); // prevents the web page reloadiing
+    // Get values entered by the user
+    const userNameInput = document.getElementById('userName').value;
+    const userEmailInput = document.getElementById('userEmail').value;
+    // Output the values to the console
+    console.log(`Name entered by user: ${userNameInput}`);
+    console.log(`Email entered by user: ${userEmailInput}`);
+}</code></pre>
+
+    <p>Enter some details in the form, click <b>Submit</b>, and verify your form runs correctly.</p>
+
+    <img src="assets/img/forms/form-basic-2.png" alt="screenshot" style="max-width: 440px;margin-bottom: 12px"> 
+
+    <h3>About <code>event.preventDefault()</code></h3>
+    <p>By default, clicking the form <b>Submit</b> button will trigger two actions:</p>
+    <ul>
+        <li>The data in the form will be submitted.</li>
+        <li>The web page will reload.</li>
+    </ul>
+
+    <p>Typically, you will want to validate the entered data before the form is submitted. Also, you will not want the web page to reload in the browser. </p>
+       
+    </section>
+
+    
+
+    <section id="form-validation">
+        <h2>Form validation</h2>
+
+        <p>Validation ensures that user input meets your requirements before processing. JavaScript can perform validation when the form is submitted.</p>
+
+
+        <p>The <b>type="email"</b> form input field has built-in web browser validation that checks for a correct email address format.</p>
+        
+        <img src="assets/img/forms/form-basic-3.png" alt="screenshot" style="max-width: 500px;margin-bottom: 12px">
+        <p>You can add validation to other input fields JavaScript. For example, add the code below to your <b>processForm()</b> function.</p>
+
+        <img src="assets/img/forms/form-basic-4.png" alt="screenshot" style="max-width: 700px;margin-bottom: 12px">
+
+        <p>After form has been successfully submitted, you can use the <span class="syn-js">reset()</span> method to clear the form.</p>
+
+        <img src="assets/img/forms/form-basic-5.png" alt="screenshot" style="max-width: 700px;margin-bottom: 12px">
+    </section>
+
+
+       <section class="resources-learning" id="resources">
+
+              <h2>More learning resources</h2>
+          
+              <div class="flex-container">
+                <div class="text-container">
+                  <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/16" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+          
+                </div>
+            
+                <div class="audio-container">
+                  <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+          
+                  <audio controls>
+                    <source src="assets/audio/forms.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+          
+                </div>
+              </div>
+          
+            </section>
+            
+        <section class="resources-learning" id="ai-prompts">
+          
+           <h2>Sample AI prompts</h2>
+          
+            
+            <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">In an HTML file, create a simple registration form with the following fields:<br>
+            - Username (text input)<br>
+            - Email (email input)<br>
+            - Password (password input)<br>
+            - Confirm Password (password input)<br><br>
+
+            In the same file, create a plain JavaScript code:<br>
+            - Validate that all fields are filled out<br>
+            - Check that passwords match<br>
+            - Output the form data to the console
+            - Use an event handler instead of an event listener.
+            - user innerText instead of textContent<br><br>
+
+            In the &lt;head&gt; of the HTML file, add two CSS classes to style a DIV tag with an id of "message" depending on whether the form passes validation or not.<br><br>
+            After the form is submitted, use JavaScript to create the "message" DIV tag, assign the appropriate CSS class to it with classList.add(), and append it to the form.<br>
+            Finally, reset the form.</code></div>
+        
+          
+
+
+            </section>
+
+
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+<div id="cookie-banner">
+    <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+    <div class="buttons">
+        <button id="accept-cookies">Got it</button>
+    </div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
