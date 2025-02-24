@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Callback functions | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Working with callback functions in JavaScript.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Callback functions</h1>
+					<h2>Working with callback functions in JavaScript.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#function-arrow">About arrow functions</a></p>
+				<p><a href="#parameters-arguments">Parameters, arguments, and return values</a></p>
+				<p><a href="#single-parameters">Single-statement, single-parameter arrow functions</a></p>
+				<p class="toc-indent"><a href="#explicit-implicit">Implicit and explicit returns from arrow functions</a></p>
+				<p><a href="#multiple-parameters">Single-statement, multiple-parameter arrow functions</a></p>
+
+				<p><a href="#multiple-statements">Arrow functions with multiple statements</a></p>
+
+				<p><a href="#immediate">Immediately-invoked arrow functions</a></p>
+
+				<p><a href="#try-it">Try it yourself</a></p>
+
+				<p><a href="#resources">More learning resources</a></p>
+		  
+				<p><a href="#ai-prompts">Sample AI prompts</a></p>
+	
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<ul>
+				<li>Create and call an <i>arrow function</i>.</li>
+				<li>Use the shorthand syntax for arrow functions with only a single statement.</li>
+				<li>Pass single or multiple arguments to an arrow function.</li>
+				<li>Pass arrow function output back to the calling program with implicit or explicit returns.</li>
+				<li>Immediately invoke an arrow function without calling it.</li>
+			</ul>
+		</ul>
+
+	</section>
+
+    <section>
+	
+        <div class="code-snippets" style="margin-bottom:32px">
+            <p>Download a new workfile on your computer as described at the link below.</p>
+            <p>📄 &nbsp;<a href="assets/workfiles/callback-functions.html" target="_blank"><b>callback-functions.html</b> : Exercises</a></p>
+        </div>
+    
+    </section>	
+
+	<section id="function-arrow">
+
+        <h2>About callback functions</h2>
+        <p>A feature of JavaScript is that is allows you to pass a function as an argument to another function. This enables asynchronous programming and helps manage code execution flow. This tutorial will help you understand callbacks are, why they're useful, and how to use them effectively.</p>
+		
+		<p>In simple terms, a callback function is a function that:</p>
+        
+        <ul>
+            <li>Is passed as an argument to another function and </li>
+            <li>Is executed after the main function has finished its execution.</li>
+        </ul>
+        
+        <p>Think of it as saying: <i>"Hey, when you're done with your task, call this function next."</i></p>
+
+		<p>Copy the two functions below into your <b>callback-functions.html</b> file and verify they run correctly.</p>
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== BASIC MAIN AND CALLBACK FUNCTION ========
+
+// When this line runs:
+mainFunction(callbackFunction);
+    
+// callbackFunction becomes the value of the callback parameter, so it's equivalent to:
+function mainFunction(callback) {     // here callback = callbackFunction
+    // Do something
+    callback();                       // this executes callbackFunction()
+};</code></pre>
+
+
+	</section>
+
+
+		<section id="parameters-arguments">
+
+			<h2>Parameters and callback functions</h2>
+		
+			<p>The 'main' function can accept different callback functions to produce different results. And the 'main' function can pass parameters to the callback function. See the example below:</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+// ======== MAIN FUNCTION WITH TWO CALLBACK FUNCTIONS ========
+function greetingMaker(callback) {
+    let name = "Alice";
+    callback(name);
+}
+
+function sayHello(name) {
+    console.log("Hello, " + name);
+}
+
+function sayGoodbye(name) {
+    console.log("Goodbye, " + name);
+}
+
+// We can pass different callbacks
+greetingMaker(sayHello);    // Outputs: "Hello, Alice"
+greetingMaker(sayGoodbye);  // Outputs: "Goodbye, Alice"</code></pre>
+
+		<p>You can apply this logic of passing different callbacks to a main function to build a simple calculator. See below:</p>
+
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Main calculate function
+function calculate(num1, num2, callback) {
+    return callback(num1, num2);
+}
+
+// Named functions for each operation
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+// Using the calculator with named functions
+console.log(calculate(5, 3, add));      // Returns 8
+console.log(calculate(5, 3, subtract)); // Returns 2
+console.log(calculate(5, 3, multiply)); // Returns 15
+console.log(calculate(5, 3, divide));   // Returns 1.6666...</code></pre>
+    
+<p>Note:</p>
+
+<ul>
+    <li>Each arithmetic operation is defined as a separate named function.</li>
+    <li>You pass the required operation function to the <span class="syn-js"><b>calculate()</b></span> function with the <b>callback</b> parameter.</li>
+</ul>
+			
+		</section>
+
+
+		<section id="single-parameters">
+			<h2>Named, anonymous and arrow callback functions</h2>
+			<p>Here's a simple example showing the same callback implemented in three different ways:</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Main function that will use  callbacks
+function greetUser(name, callback) {
+    console.log("Processing user name...");
+    callback(name);
+}
+
+// 1. Named callback function
+function printGreeting(name) {
+    console.log("Hello, " + name);
+}
+greetUser("Alice", printGreeting);
+
+// 2. Anonymous callback function
+greetUser("Bob", function(name) {
+    console.log("Hello, " + name);
+});
+
+// 3. Arrow function callback
+greetUser("Charlie", (name) =&gt; {
+    console.log("Hello, " + name);
+});</code></pre>
+
+	<p>When you run this code, each version should produce similar output.</p>
+
+
+		<p>All three versions do exactly the same thing, they just use different syntax. The named function is reusable, while the anonymous and arrow functions are typically used when you only need the callback once.</p>
+
+    </section>			
+			
+    <section id="multiple-parameters">
+        <h2>Callback functions and array method</h2>
+
+        <p>In JavaScript, many array methods in JavaScript use callbacks. Begin by creating an array of objects named <b>arrUsers</b>:</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Creating an array with objects on a single line
+const arrUsers = [
+    { firstName: "Alice", age: 25, city: "New York" },
+    { firstName: "Bob", age: 30, city: "Los Angeles" },
+    { firstName: "Charlie", age: 35, city: "Chicago" }
+];
+console.log(arrUsers);</code></pre>
+
+    <p>Next,loop through <b>arrUsers</b> and output formatted data to the console using three callback function with different syntax styles - named, anonymous, and arrow/</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">    
+// 1. Named callback function
+function displayUser(user) {
+    console.log(`Name: ${user.firstName}, Age: ${user.age}, City: ${user.city}`);
+}
+arrUsers.forEach(displayUser);
+
+// 2. Anonymous callback function
+arrUsers.forEach(function(user) {
+    console.log(`Name: ${user.firstName}, Age: ${user.age}, City: ${user.city}`);
+});
+
+// 3. Arrow function callback
+arrUsers.forEach(user => {
+    console.log(`Name: ${user.firstName}, Age: ${user.age}, City: ${user.city}`);
+});</code></pre>
+
+    <p>When you run this code, each version should produce similar output.</p>
+
+    </section>
+
+
+
+
+
+
+    <section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your workfile...</p>
+
+        <p>---</p>
+
+        <p>Create these arrow functions that work with multiple parameters:<br>
+		- Create <code>combineWords</code> that takes two strings and joins them with a space<br>
+		- Create <code>calculateArea</code> that computes the area of a rectangle (width × height)<br>
+		- Create <code>numBetween</code> that checks if a number is between two other numbers</p>
+
+        <p>---</p>
+
+        <p>Convert these anonymous functions to arrow functions:</p>
+
+		<p><code>// Simple greeting<br>
+		const sayHelloUser = function() {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return "Hello!";<br>
+		};</code></p>
+		<p><code>// Square a number<br>
+		const squareNum = function(x) {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return x * x;<br>
+		};</code></p>
+
+		<p><code>// Check if string is empty<br>
+		const isEmptyStr = function(str) {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return str.length === 0;<br>
+		};</code></p>
+
+
+        <p>---</p>
+
+    
+      </section>
+    	
+	<section class="resources-learning" id="resources">
+
+		<h2>More learning resources</h2>
+	
+		<div class="flex-container">
+		  <div class="text-container">
+			<h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+			<p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/15" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+	
+		  </div>
+	  
+		  <div class="audio-container">
+			<h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+	
+			<audio controls>
+			  <source src="assets/audio/functions-arrow.mp3" type="audio/mp3">
+			  Your browser does not support the audio element.
+			</audio>
+	
+		  </div>
+		</div>
+	
+	  </section>
+
+	  <section class="resources-learning" id="ai-prompts">
+          
+        <h2>Sample AI prompts</h2>
+    
+        <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">I'm learning about arrow functions in JavaScript. Could you compare them with regular anonymous functions, focusing specifically on syntax differences and use cases? Please provide practical examples showing when arrow functions would be the better choice and when they wouldn't be ideal.</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">I understand the basic syntax of arrow functions with implicit returns, but I'm confused about when I can and can't use them. Could you create a guide showing different scenarios where implicit returns work and don't work, with examples of common mistakes to avoid?</code></div>
+     
+
+    
+      </section>
+
+
+
+</article>
+</main>
+
+<footer>
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
