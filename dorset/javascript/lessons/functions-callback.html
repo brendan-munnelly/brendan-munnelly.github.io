@@ -69,15 +69,12 @@
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
-				<p><a href="#function-arrow">About arrow functions</a></p>
-				<p><a href="#parameters-arguments">Parameters, arguments, and return values</a></p>
-				<p><a href="#single-parameters">Single-statement, single-parameter arrow functions</a></p>
-				<p class="toc-indent"><a href="#explicit-implicit">Implicit and explicit returns from arrow functions</a></p>
-				<p><a href="#multiple-parameters">Single-statement, multiple-parameter arrow functions</a></p>
+				<p><a href="#about-callbacks">About callback functions</a></p>
+				<p><a href="#parameters-arguments">Parameters and callback functions</a></p>
+				<p><a href="#callback-syntax">Named, anonymous and arrow callback functions</a></p>
 
-				<p><a href="#multiple-statements">Arrow functions with multiple statements</a></p>
+				<p><a href="#callback-array">Callback functions and array methods</a></p>
 
-				<p><a href="#immediate">Immediately-invoked arrow functions</a></p>
 
 				<p><a href="#try-it">Try it yourself</a></p>
 
@@ -100,11 +97,8 @@
 
 		<ul>
 			<ul>
-				<li>Create and call an <i>arrow function</i>.</li>
-				<li>Use the shorthand syntax for arrow functions with only a single statement.</li>
-				<li>Pass single or multiple arguments to an arrow function.</li>
-				<li>Pass arrow function output back to the calling program with implicit or explicit returns.</li>
-				<li>Immediately invoke an arrow function without calling it.</li>
+				<li>Understanding what a callback function is in JavaScript.</li>
+				<li>Pass functions as callbacks to a 'main' function, using the named, anonymous and arrow function syntax for the passed fucntions.</li>
 			</ul>
 		</ul>
 
@@ -119,7 +113,7 @@
     
     </section>	
 
-	<section id="function-arrow">
+	<section id="about-callbacks">
 
         <h2>About callback functions</h2>
         <p>A feature of JavaScript is that is allows you to pass a function as an argument to another function. This enables asynchronous programming and helps manage code execution flow. This tutorial will help you understand callbacks are, why they're useful, and how to use them effectively.</p>
@@ -215,7 +209,7 @@ console.log(calculate(5, 3, divide));   // Returns 1.6666...</code></pre>
 		</section>
 
 
-		<section id="single-parameters">
+		<section id="callback-syntax">
 			<h2>Named, anonymous and arrow callback functions</h2>
 			<p>Here's a simple example showing the same callback implemented in three different ways:</p>
 
@@ -248,8 +242,8 @@ greetUser("Charlie", (name) =&gt; {
 
     </section>			
 			
-    <section id="multiple-parameters">
-        <h2>Callback functions and array method</h2>
+    <section id="callback-array">
+        <h2>Callback functions and array methods</h2>
 
         <p>In JavaScript, many array methods in JavaScript use callbacks. Begin by creating an array of objects named <b>arrUsers</b>:</p>
 
@@ -261,7 +255,7 @@ const arrUsers = [
 ];
 console.log(arrUsers);</code></pre>
 
-    <p>Next,loop through <b>arrUsers</b> and output formatted data to the console using three callback function with different syntax styles - named, anonymous, and arrow/</p>
+    <p>Next, loop through <b>arrUsers</b> and output formatted data to the console using three callback function with different syntax styles - named, anonymous, and arrow/</p>
 
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">    
 // 1. Named callback function
@@ -276,7 +270,7 @@ arrUsers.forEach(function(user) {
 });
 
 // 3. Arrow function callback
-arrUsers.forEach(user => {
+arrUsers.forEach(user =&gt; {
     console.log(`Name: ${user.firstName}, Age: ${user.age}, City: ${user.city}`);
 });</code></pre>
 
@@ -296,28 +290,21 @@ arrUsers.forEach(user => {
 
         <p>---</p>
 
-        <p>Create these arrow functions that work with multiple parameters:<br>
-		- Create <code>combineWords</code> that takes two strings and joins them with a space<br>
-		- Create <code>calculateArea</code> that computes the area of a rectangle (width × height)<br>
-		- Create <code>numBetween</code> that checks if a number is between two other numbers</p>
+        <p>Create a main function called <code>processText</code> that accepts a string and a callback function. Then create three different callback functions that:</p>
+
+<p>- Convert the text to uppercase<br>
+- Add exclamation marks to the end<br>
+- Reverse the text<br>
+- Test each callback with the word "hello"</p>
 
         <p>---</p>
 
-        <p>Convert these anonymous functions to arrow functions:</p>
+<p>Given this array of numbers: <b>[1, 2, 3, 4, 5]</b>.</p>
+<p>Create a main function called <code>transformArray</code> that accepts the array and a callback. Create callbacks that:</p>
 
-		<p><code>// Simple greeting<br>
-		const sayHelloUser = function() {<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;return "Hello!";<br>
-		};</code></p>
-		<p><code>// Square a number<br>
-		const squareNum = function(x) {<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;return x * x;<br>
-		};</code></p>
-
-		<p><code>// Check if string is empty<br>
-		const isEmptyStr = function(str) {<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;return str.length === 0;<br>
-		};</code></p>
+<p>- Double each number<br>
+- Square each number<br>
+- Add 10 to each number</p>
 
 
         <p>---</p>
@@ -353,9 +340,10 @@ arrUsers.forEach(user => {
           
         <h2>Sample AI prompts</h2>
     
-        <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">I'm learning about arrow functions in JavaScript. Could you compare them with regular anonymous functions, focusing specifically on syntax differences and use cases? Please provide practical examples showing when arrow functions would be the better choice and when they wouldn't be ideal.</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">What is the difference between a regular function and a callback function in JavaScript? Can you show me a basic example of a callback function and explain each part?</code></div>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">I understand the basic syntax of arrow functions with implicit returns, but I'm confused about when I can and can't use them. Could you create a guide showing different scenarios where implicit returns work and don't work, with examples of common mistakes to avoid?</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">Show me three different ways to write the same callback function using named, anonymous, and arrow function syntax. What are the advantages and disadvantages of each callback function syntax style?
+Please provide examples of when to use each type of callback syntax.</code></div>
      
 
     
