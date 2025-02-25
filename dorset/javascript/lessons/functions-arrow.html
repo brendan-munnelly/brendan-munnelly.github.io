@@ -24,7 +24,7 @@
 	<script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 	
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -122,7 +122,7 @@
 	<section id="function-arrow">
 
         <h2>About arrow functions</h2>
-        <p>A so-called <i>arrow function</i> is a short-hand or quick way of typing an anonymous function expression. As with regular anonymous functions, you must assign an arrow function to a variable if you want to call it from elsewhere in the program. Arrow functions are not hoisted. You must create them before you call them in your program.</p>
+        <p>A so-called <i>arrow function</i> is a short-hand or quick way of typing an <a href="functions-anonymous.html">anonymous function expression</a>. As with regular anonymous functions, you must assign an arrow function to a variable if you want to call it from elsewhere in the program. Arrow functions are not hoisted. You must create them before you call them in your program.</p>
 		
 		<p>You can convert a regular anonymous function to an arrow function as follows:</p>
 
@@ -186,15 +186,7 @@ helloFromArrow();</code></pre>
 
 			<p>Copy the following two arrow functions to your <b>functions.html</b> workfile.</p>
 
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Arrow function with parentheses
-const greetParen = (name) =&gt; {
-    return `Hello, ${name}!`;
-};
-
-let greetingParen = greetParen("John"); 
-console.log(greetingParen); // Hello, John!
-
-// Arrow function without parentheses
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Arrow function without parentheses around single parameter
 const greetNoParen = name =&gt; {
     return `Hello, ${name}!`;
 };
@@ -202,7 +194,8 @@ const greetNoParen = name =&gt; {
 let greetingNoParen = greetNoParen("Mary");
 console.log(greetingNoParen); // Hello, Mary!</code></pre>
 
-	<p>But we can make this code even more concise! When an arrow function contains only one statement, you can:</p>
+<h3 id="explicit-implicit">Implicit and explicit returns from arrow functions</h3>
+	<p>But you can make this code even more concise! When an arrow function contains only one statement, you can:</p>
 	
 	<ul>
 		<li>Write the arrow function on one line.</li>
@@ -210,15 +203,12 @@ console.log(greetingNoParen); // Hello, Mary!</code></pre>
 		<li>Omit the <span class="syn-js"><b>return</b></span> keyword.</li>
 	</ul>
 
-		<p>In <b>functions.html</b>, update the second arrow function as shown below and verify it still works.</p>
+		<p>In <b>functions.html</b>, update your arrow function as shown below and verify it still works.</p>
 
 <pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Arrow function without parentheses
 const greetNoParen = name =&gt; `Hello, ${name}!`;</code></pre>
 
 			<p>No <span class="syn-js"><b>{&nbsp;}</b></span> and no <span class="syn-js"><b>return</b></span> keyword needed!</p>
-
-			<h3 id="explicit-implicit">Implicit and explicit returns from arrow functions</h3>
-			<p>Arrow functions offer two ways of returning values to the calling program. These are <i>implicit returns</i> and <i>explicit returns</i>.</p>
 
 			<p>When an arrow function contains only a single statement, omitting the <span class="syn-js"><b>return</b></span> keyword creates an <i>implicit return</i>. See the illustration below.</p>
 
@@ -270,7 +260,7 @@ console.log(divideNum(16, 8)); // 2
 					
 // Calculate product price after 20% tax
 const finalPrice = (price, tax) =&gt; (price + (price * tax));
-console.log(finalPrice(50, 20)); // 60</code></pre>
+console.log(finalPrice(50, .20)); // 60</code></pre>
 			
 		<p>Copy the above functions to your <b>functions.html</b> workfile and verify they run without error.</p>
 
@@ -279,7 +269,7 @@ console.log(finalPrice(50, 20)); // 60</code></pre>
 		<section id="multiple-statements">
 
 			<h2>Arrow functions with multiple statements</h2>
-			<p>When the function body contains multiple statements, you must use curly braces <span class="syn-js"><b>{&nbsp;}</b></span> and explicitedly include the <span class="syn-js"><b>return</b></span> statement if you want a value sent back to the calling program.</p>
+			<p>When the function body contains multiple statements, you must use curly braces <span class="syn-js"><b>{&nbsp;}</b></span> and explicitly include the <span class="syn-js"><b>return</b></span> statement if you want a value sent back to the calling program.</p>
 
 			<p>Copy the following two arrow functions with explicit returns to your <b>functions.html</b> workfile.</p>
 
@@ -303,7 +293,7 @@ console.log(multipleTwoNums(5, 12)); // 60</code></pre>
 				<img src="assets/img/functions-arrow/warning-sign.png" alt="warning sign">
 			</div>
 			<div>
-				<p>The above two functions should run without error. However, it is <b>NOT RECOMMENDED</b> to use arrow functions when you have multiple statements in the function body. You will not shorten the function syntax significantly and increase the likliehood of errors.</p>
+				<p>The above two functions should run without error. However, it is <b>NOT RECOMMENDED</b> to use arrow functions when you have multiple statements in the function body. You will not shorten the function syntax significantly and increase the likelihood of errors.</p>
 				<p>When a function body needs multiple statements, it is best to use a function declaration or a regular anonymous function.</p>
 			</div>
 		</div>
@@ -321,22 +311,14 @@ console.log(multipleTwoNums(5, 12)); // 60</code></pre>
 		<h2>Immediately-invoked arrow functions</h2>
 		<p>Like a regular anonymous function, you can amend the syntax of an arrow function so that it is run without being called from elsewhere in the program. </p>
 
-		<p>To invoke an anonymous function immediately, wrap the function inside a parenthesis <span class="syn-js">()</span> and add another parenthesis after it.</p>
+		<p>To invoke an arrow function immediately, wrap the function inside a parenthesis <span class="syn-js">()</span> and add another parenthesis <span class="syn-js">()</span> after it.</p>
 
-		<p>Copy these two arrow function to your <b>functions.html</b> workfile and verify it runs without being called.</p>
+		<p>Copy the arrow function below to your <b>functions.html</b> workfile and verify it runs without being called.</p>
 
 <pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Immediately invoked arrow functions
 (() =&gt; {
     console.log("Hello from arrow function");
-})();	
-
-// IIAF that returns a value
-const result = (() =&gt; {
-    const x = 10;
-    const y = 20;
-    return x + y;
-})();
-console.log(result); // 30</code></pre>
+})();</code></pre>
 
 
 	</section>
@@ -352,7 +334,7 @@ console.log(result); // 30</code></pre>
         <p>Create these arrow functions that work with multiple parameters:<br>
 		- Create <code>combineWords</code> that takes two strings and joins them with a space<br>
 		- Create <code>calculateArea</code> that computes the area of a rectangle (width × height)<br>
-		- Create <code>numBetween</code> that checks if a number is between two other numbers</p>
+		- Create <code>calculateVolume</code> that computes the volume of a box (width × height × depth)</p>
 
         <p>---</p>
 
