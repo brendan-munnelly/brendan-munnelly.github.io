@@ -46,7 +46,20 @@
         });
     });
 
+    const btnsGPT = document.querySelectorAll('main .copy-gpt');
+    const btnsArrGPT = Array.from(btnsGPT);
+    let btnGPTID;
 
+    btnsArrGPT.forEach(btnGPT => {
+        btnGPT.addEventListener("click", e => {
+            e.stopPropagation();
+            btnGPTID = e.target.id;
+            console.log("You clicked button: "+btnGPTID);
+            // remove 'btn-' from ID
+            btnGPTID = btnGPTID.replace('btn-', '');
+            doCopyGPT(btnGPTID);
+        });
+    });
 
     async function doCopyCode(id) {
         const strCode = document.getElementById('strCode-'+id).textContent;
@@ -88,6 +101,20 @@
             document.getElementById("btn-"+id).style.borderColor= "";
             document.getElementById("btn-"+id).innerHTML = "Copy CSS { }";
             document.getElementById("btn-"+id).classList.add('copy-css');	
+        }, 1500);
+    }
+
+    async function doCopyGPT(id) {
+        const strCode = document.getElementById('strCode-'+id).textContent;
+        await navigator.clipboard.writeText(strCode);
+        document.getElementById("btn-"+id).style.color= "#00ff00";
+        document.getElementById("btn-"+id).style.borderColor= "#00ff00";
+        document.getElementById("btn-"+id).innerHTML = "Copied <i class=\"fa-solid fa-check\"><\/i>";
+        setTimeout(function() {
+            document.getElementById("btn-"+id).style.color= "#87CEFA";
+            document.getElementById("btn-"+id).style.borderColor= "#87CEFA";
+            document.getElementById("btn-"+id).innerHTML = "Copy <i class=\"fa-regular fa-lightbulb\"></i>";
+            document.getElementById("btn-"+id).classList.add('copy-gpt');	
         }, 1500);
     }
 
