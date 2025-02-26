@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Callback functions | JavaScript Tutorials | Brendan Munnelly</title>
-	<meta name="description" content="Working with callback functions in JavaScript.">
+	<meta name="description" content="Passing functions as parameters to another function, in named, anonymous and arrow function formats.">
 
     <meta name="author" content="Brendan Munnelly">
 
@@ -69,9 +69,12 @@
 	
 				<h3>THIS TUTORIAL</h3>
 				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#functions-parameters-arguments">Functions, parameters, and arguments</a></p>
 				<p><a href="#about-callbacks">About callback functions</a></p>
 				<p><a href="#parameters-arguments">Parameters and callback functions</a></p>
-				<p><a href="#callback-syntax">Named, anonymous and arrow callback functions</a></p>
+				<p><a href="#callbacks-anonymous">Passing anonymous functions as callbacks</a></p>
+				<p><a href="#callbacks-arrow">Passing arrow functions as callbacks</a></p>
+
 
 				<p><a href="#callback-array">Callback functions and array methods</a></p>
 
@@ -98,7 +101,7 @@
 		<ul>
 			<ul>
 				<li>Understanding what a callback function is in JavaScript.</li>
-				<li>Pass functions as callbacks to a 'main' function, using the named, anonymous and arrow function syntax for the passed fucntions.</li>
+				<li>Pass functions as callbacks to a 'main' function, using the named, anonymous and arrow function syntax for the passed functions.</li>
 			</ul>
 		</ul>
 
@@ -113,31 +116,46 @@
     
     </section>	
 
+
+    <section id="functions-parameters-arguments">
+        <h2>Functions, parameters, and arguments</h2>
+        <p>In the <a href="function-declarations.html">Function declarations</a> Tutorial, you learnt that you can pass one or more values to a function for that function to work with. </p>
+
+        <img src="assets/img/functions-callback/function-pass-values-1.png" alt="pass values" style="max-width:660px">
+
+        <p>In the example above:</p>
+			
+		<ul>
+			<li>A function is created with a <i>parameter</i> named <span class="syn-js">num</span>. There is no need to declare <b>num</b> as a variable separately. It is created as part of the function that contains it.</li>
+			<li>When the function is called, an <i>argument</i> of <span class="syn-js">21</span> is passed to the function. This argument value can be different every time you call the function.</li>
+		</ul>
+
+        <p><i>Parameters</i> are what you specify when you create the function. <i>Arguments</i> are what you pass to the function when you call the function.</p>
+
+
+    </section>
+
 	<section id="about-callbacks">
 
         <h2>About callback functions</h2>
-        <p>A feature of JavaScript is that is allows you to pass a function as an argument to another function. This enables asynchronous programming and helps manage code execution flow. This tutorial will help you understand callbacks are, why they're useful, and how to use them effectively.</p>
-		
-		<p>In simple terms, a callback function is a function that:</p>
-        
-        <ul>
-            <li>Is passed as an argument to another function and </li>
-            <li>Is executed after the main function has finished its execution.</li>
-        </ul>
-        
-        <p>Think of it as saying: <i>"Hey, when you're done with your task, call this function next."</i></p>
+		<p>A callback function is a function that is passed as an argument to another function.</p>
 
 		<p>Copy the two functions below into your <b>callback-functions.html</b> file and verify they run correctly.</p>
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== BASIC MAIN AND CALLBACK FUNCTION ========
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript"> // ======== BASIC MAIN AND CALLBACK FUNCTION ========
 
-// When this line runs:
-mainFunction(callbackFunction);
-    
-// callbackFunction becomes the value of the callback parameter, so it's equivalent to:
-function mainFunction(callback) {     // here callback = callbackFunction
+// The main function with a parameter named 'callback'
+function mainFunction(callback) { 
     // Do something
-    callback();                       // this executes callbackFunction()
-};</code></pre>
+    callback();  // run the callback function passed as an argument            
+};
+
+// The function that will be passed as an argument to the 'callback' parameter
+function callbackFunction() {
+    console.log("Hello from callback function.");
+} 
+
+// Run the main function
+mainFunction(callbackFunction)</code></pre>
 
 
 	</section>
@@ -151,9 +169,9 @@ function mainFunction(callback) {     // here callback = callbackFunction
 
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
 // ======== MAIN FUNCTION WITH TWO CALLBACK FUNCTIONS ========
-function greetingMaker(callback) {
-    let name = "Alice";
-    callback(name);
+function showUserGreeting(callback) {
+    let userName = "Alice";
+    callback(userName);
 }
 
 function sayHello(name) {
@@ -165,10 +183,10 @@ function sayGoodbye(name) {
 }
 
 // We can pass different callbacks
-greetingMaker(sayHello);    // Outputs: "Hello, Alice"
-greetingMaker(sayGoodbye);  // Outputs: "Goodbye, Alice"</code></pre>
+showUserGreeting(sayHello);    // Outputs: "Hello, Alice"
+showUserGreeting(sayGoodbye);  // Outputs: "Goodbye, Alice"</code></pre>
 
-		<p>You can apply this logic of passing different callbacks to a main function to build a simple calculator. See below:</p>
+		<p>You can apply this logic of passing different callbacks to the same main function to build a simple calculator. See below:</p>
 
 
 <pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Main calculate function
@@ -202,54 +220,85 @@ console.log(calculate(5, 3, divide));   // Returns 1.6666...</code></pre>
 <p>Note:</p>
 
 <ul>
-    <li>Each arithmetic operation is defined as a separate named function.</li>
+    <li>Each arithmetic operation uses a different callback function.</li>
     <li>You pass the required operation function to the <span class="syn-js"><b>calculate()</b></span> function with the <b>callback</b> parameter.</li>
+    <li>The two data parameters <b>num1</b> and <b>num2</b> can be accessed by the <b>callback</b> function inside the main <span class="syn-js"><b>calculate()</b></span> function.</li>
 </ul>
 			
 		</section>
 
+        <section id="callbacks-anonymous">
+            <h2>Passing anonymous functions as callbacks</h2>
+            <p>In the <a href="functions-anonymous.html">Anonymous functions</a> Tutorial, you learnt you can store (the output of) an anonymous function in a variable, and then use that variable name to call the function. See an example below.</p>
 
-		<section id="callback-syntax">
-			<h2>Named, anonymous and arrow callback functions</h2>
-			<p>Here's a simple example showing the same callback implemented in three different ways:</p>
+            <img src="assets/img/functions-callback/function-anonymous.png" alt="screenshot" style="max-width: 780px;">
 
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Main function that will use  callbacks
-function greetUser(name, callback) {
-    console.log("Processing user name...");
-    callback(name);
+            <p>As with a function declaration, you can pass an anonymous function as a callback to a 'main' function.' Copy the following code to your workfile and verify it runs correctly.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Anonymous function stored in variable sayHelloFrench
+const sayHelloFrench = function(name) {
+    console.log("Bonjour, " + name);
 }
+// Call the main function with the anonymous function
+showUserGreeting(sayHelloFrench);  // Outputs: "Bonjour, Alice"</code></pre>
+            
+        <p>Note the two steps above:</p>
 
-// 1. Named callback function
-function printGreeting(name) {
-    console.log("Hello, " + name);
-}
-greetUser("Alice", printGreeting);
+        <ul>
+            <li>You create and give a name (of <b>sayHelloFrench</b>) to the anonymous function.</li>
+            <li>You then pass the named anonymous function as a callback to the 'main' <b>showUserGreeting()</b> function.</li>
+        </ul>
 
-// 2. Anonymous callback function
-greetUser("Bob", function(name) {
-    console.log("Hello, " + name);
+        <p>As a shortcut, you can eliminate the first of these two steps. You don't need to create the named anonymous function. You can directly pass the code of the anonymous function as a callback.</p>
+
+        <p>In your workfile, comment out the named anonymous function and the calling of the 'main' function.</p>
+
+        <img src="assets/img/functions-callback/comment.png" alt="screenshot" style="max-width: 790px;">
+
+        <p>Rewrite the function call to the 'main' function so that it contains the code of the anonymous function and its parameter.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">
+// Passing anonymous callback function code with a parameter to main function
+showUserGreeting(function(name) {
+    console.log("Bonjour, " + name)
 });
+// Outputs: "Bonjour, Alice"</code></pre>        
 
-// 3. Arrow function callback
-greetUser("Charlie", (name) =&gt; {
-    console.log("Hello, " + name);
-});</code></pre>
+        </section>
 
-	<p>When you run this code, each version should produce similar output.</p>
+        <section id="callbacks-arrow">
+            <h2>Passing arrow functions as callbacks</h2>
+            <p>As with an anonymous function, you can pass the code of an arrow function directly as a callback, without creating a separate variable to store that arrow function. See the example below.</p>
 
 
-		<p>All three versions do exactly the same thing, they just use different syntax. The named function is reusable, while the anonymous and arrow functions are typically used when you only need the callback once.</p>
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">
+// Passing arrow callback function code with parameter to main function
+showUserGreeting( (name) =&gt; {
+    console.log("Buongiorno, " + name)
+});
+// Outputs: "Buongiorno, Alice"</code></pre>
 
-    </section>			
+        <p>Or even more concisely, you can write.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">
+// Passing arrow callback function code with parameter to main function
+// Arrow function has just one parameter and only single statement
+showUserGreeting( name =&gt; console.log("Guten Tag, " + name) );
+// Outputs: "Guten Tag, Alice"</code></pre>
+
+        </section>
+
+
+
 			
     <section id="callback-array">
         <h2>Callback functions and array methods</h2>
 
         <p>In JavaScript, many array methods in JavaScript use callbacks. Begin by creating an array of objects named <b>arrUsers</b>:</p>
 
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Creating an array with objects on a single line
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Creating an array with objects on a single line
 const arrUsers = [
-    { firstName: "Alice", age: 25, city: "New York" },
+    { firstName: "Maria", age: 25, city: "New York" },
     { firstName: "Bob", age: 30, city: "Los Angeles" },
     { firstName: "Charlie", age: 35, city: "Chicago" }
 ];
@@ -257,7 +306,7 @@ console.log(arrUsers);</code></pre>
 
     <p>Next, loop through <b>arrUsers</b> and output formatted data to the console using three callback function with different syntax styles - named, anonymous, and arrow/</p>
 
-<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">    
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">    
 // 1. Named callback function
 function displayUser(user) {
     console.log(`Name: ${user.firstName}, Age: ${user.age}, City: ${user.city}`);
@@ -290,17 +339,15 @@ arrUsers.forEach(user =&gt; {
 
         <p>---</p>
 
-        <p>Create a main function called <code>processText</code> that accepts a string and a callback function. Then create three different callback functions that:</p>
+        <p>Create a main function called <code>processText</code> that accepts a string and a callback function. Then create two different callback functions that:</p>
 
 <p>- Convert the text to uppercase<br>
-- Add exclamation marks to the end<br>
-- Reverse the text<br>
-- Test each callback with the word "hello"</p>
+- Add exclamation marks to the end of the text</p>
 
         <p>---</p>
 
 <p>Given this array of numbers: <b>[1, 2, 3, 4, 5]</b>.</p>
-<p>Create a main function called <code>transformArray</code> that accepts the array and a callback. Create callbacks that:</p>
+<p>Create a main function called <code>transformArray</code> that accepts the array and a callback. Create three callbacks that:</p>
 
 <p>- Double each number<br>
 - Square each number<br>
