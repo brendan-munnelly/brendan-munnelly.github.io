@@ -59,102 +59,29 @@
             <p><i class="fas fa-home"></i> &nbsp;
                 
             <script>
-/**
- * Referrer Detection Utility
- * 
- * This script provides several methods to detect the referring web page
- * and offers additional functionality to handle different referrer scenarios.
- */
-
 // Basic referrer detection
 function getBasicReferrer() {
   return document.referrer || "Direct visit (no referrer)";
 }
 
-// Get referrer domain only
-function getReferrerDomain() {
-  if (!document.referrer) return "Direct visit (no referrer)";
-  
-  try {
-    const url = new URL(document.referrer);
-    return url.hostname;
-  } catch (e) {
-    return "Invalid referrer URL";
-  }
+const testReferrer = getBasicReferrer();
+if (testReferrer.includes("ibat")) {
+    console.log("Referrer is iBAT");
 }
-
-// Get referrer with additional details
-function getDetailedReferrer() {
-  if (!document.referrer) return { type: "direct", url: null, domain: null };
-  
-  try {
-    const url = new URL(document.referrer);
-    
-    // Check if referrer is a search engine
-    const searchEngines = {
-      "google": ["google.com", "google.co.uk", "google.de", "google.fr"],
-      "bing": ["bing.com"],
-      "yahoo": ["yahoo.com", "search.yahoo.com"],
-      "duckduckgo": ["duckduckgo.com"]
-    };
-    
-    let refType = "website";
-    let searchEngine = null;
-    
-    for (const [engine, domains] of Object.entries(searchEngines)) {
-      if (domains.some(domain => url.hostname.includes(domain))) {
-        refType = "search";
-        searchEngine = engine;
-        break;
-      }
-    }
-    
-    // Check if referrer is social media
-    const socialMedia = {
-      "facebook": ["facebook.com", "fb.com"],
-      "twitter": ["twitter.com", "t.co", "x.com"],
-      "linkedin": ["linkedin.com"],
-      "instagram": ["instagram.com"],
-      "reddit": ["reddit.com"]
-    };
-    
-    for (const [platform, domains] of Object.entries(socialMedia)) {
-      if (domains.some(domain => url.hostname.includes(domain))) {
-        refType = "social";
-        break;
-      }
-    }
-    
-    return {
-      type: refType,
-      url: document.referrer,
-      domain: url.hostname,
-      searchEngine: searchEngine,
-      path: url.pathname,
-      query: url.search
-    };
-  } catch (e) {
-    return { type: "error", error: e.message };
-  }
+else if (testReferrer.includes("dorset")) {
+    console.log("Referrer is Dorset");
+}
+else {
+    console.log("Referrer unknown");
 }
 
 // Log the referrer information
 function logReferrer() {
   console.log("Basic Referrer:", getBasicReferrer());
-  console.log("Referrer Domain:", getReferrerDomain());
-  console.log("Detailed Referrer Info:", getDetailedReferrer());
 }
 
-// Example usage
+// Call the function to log the referrer
 logReferrer();
-
-// You can also expose this as a global variable for other scripts to use
-window.referrerInfo = {
-  basic: getBasicReferrer(),
-  domain: getReferrerDomain(),
-  detailed: getDetailedReferrer()
-};
-
 
 
             </script>    
