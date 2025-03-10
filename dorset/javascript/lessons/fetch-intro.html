@@ -442,124 +442,46 @@ fetchUserData();</code></pre>
 
 
           <p>
-            Let's work with a an example of fetching the contents of a text
+            Let's work with a an example of fetching the contents of a JSON
             file.
           </p>
-
-          <p>Start by creating an HTML file with a pair of script tags.</p>
 
           <p>
             Paste the following server URIs with which you can use the
             <span class="syn-js">fetch()</span> method.
           </p>
 
-          <pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
 const URI_1 = "https://reqres.in/api/users";
 const URI_2 = "https://reqres.in/api/users/2";
 const URI_3 = "https://jsonplaceholder.typicode.com/users";
-const URI_4 = "https://pokeapi.co/api/v2/eevee";
+const URI_4 = "https://pokeapi.co/api/v2/eevee";</code></pre>
 
-console.log(fetch(URI_1));</code></pre>
+<p>Update the URL in your <span call="syn-js">fetch()</span> method as follows:</p>
+
+<pre>const response = await fetch("URI_1");</pre>
 
           <p>
             In the DevTools Console, you can see the result of the call to the
             <span class="syn-js">fetch()</span> method is a Promise.
           </p>
-          <img src="assets/img/fetch-intro/fetch-1.png" alt="screenshot" />
+          <img src="assets/img/fetch-intro/sample-1.png" alt="screenshot" class="wider-115"/>
 
-          <p>
-            Next, let's examine the Response (<b>res</b>) object returned from
-            the web server. Paste these new lines in your sample code.
-          </p>
-
-          <pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">
-fetch(URI_1)
-  .then(res =&gt; console.log(res));
-</code></pre>
-
-          <p>The Console should look as follows:</p>
-          <img
-            src="assets/img/fetch-intro/fetch-2.png"
-            alt="screenshot"
-            class="wider-115"
-          />
-
-          <p>
-            The data from the server is not directly accessible from the
-            <b>res</b> object. So you need to process the data using one of two
-            methods:
-          </p>
-
-          <table class="table-js-methods">
-            <tbody>
-              <tr>
-                <td style="min-width: 30%">
-                  <p><span class="syn-js">.text()</span></p>
-                </td>
-                <td>
-                  <p>
-                    Use this when the
-                    <span class="syn-js">Response</span> object contains 'raw'
-                    or 'plain' text, or HTML-formatted text.
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td style="min-width: 30%">
-                  <p><span class="syn-js">.json()</span></p>
-                </td>
-                <td>
-                  <p>
-                    Use this when the
-                    <span class="syn-js">Response</span> object contains only
-                    data in JSON format.
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>Both methods are also asynchronous.</p>
-
-          <p>Update your sample code as follows:</p>
-
-          <pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">
-fetch(URI_1)
-  .then(res =&gt; res.json())
-  .then(data =&gt; console.log(data));
-</code></pre>
-
-          <p>Your Console should look similar to the following:</p>
-
-          <img
-            src="assets/img/fetch-intro/fetch-3.png"
-            alt="screenshot"
-            class="wider-115"
-          />
 
           <p>
             Update your code to request data on a single user (with an id of 2)
             and view the result in your Console.
           </p>
 
-          <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">
-fetch(URI_2)
-  .then(res =&gt; res.json())
-  .then(data =&gt; console.log(data));
-</code></pre>
+<pre>const response = await fetch("URI_2");</pre>
+
+<img src="assets/img/fetch-intro/sample-2.png" alt="screenshot" class="wider-115"/>
 
           <p>
             What would happen if you requested data on a non-existent user. For
             example, a user with an id of 99? Update your sample code as shown
             below.
           </p>
-
-          <pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript">
-fetch("https://reqres.in/api/users/99")
-  .then(res =&gt; res.json())
-  .then(data =&gt; console.log(data))
-  .catch(error =&gt; console.log(`Error: ${error}`));
-</code></pre>
 
           <p>Your Console should display the error below.</p>
 
@@ -569,37 +491,9 @@ fetch("https://reqres.in/api/users/99")
             style="max-width: 700px"
           />
 
-          <p>
-            Note that the Console does <i>not</i> log the error statement. This
-            is because the Fetch API only handles the network connection to the
-            server. It does not handle the server's response, whether that
-            response is a success or failure.
-          </p>
-
-          <p>Update your sample code as follows and check your Console:</p>
-
-          <pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript">
-fetch("https://reqres.in/api/users/99")
-  .then(res =&gt; {
-        if (res.ok) {
-           console.log("Response success.")
-           res.json()
-          .then(data =&gt; console.log(data));
-        }
-       else {
-          console.log("Response error.");
-        }
-  })
-.catch(error =&gt; console.log(`Error: ${error}`));   
-</code></pre>
-
-          <p>
-            Finally, edit the id to 2 for a real user, reload the web page, and
-            check your Console again.
-          </p>
         </section>
 
-        <section>
+        <!-- <section>
           <h2 id="fetch-options">Working with the Fetch API options</h2>
 
           <p>
@@ -835,7 +729,7 @@ async function createUser() {
 }
 
 createUser();</code></pre>
-        </section>
+        </section> -->
 
         <section>
           <h2>Pokemon project</h2>
