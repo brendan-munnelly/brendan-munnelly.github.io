@@ -12,8 +12,6 @@
       content="Using the Promise and Response objects of the Fetch API and get plain-text and JSON formatted data from remote web servers."
     />
 
-    <meta name="author" content="Brendan Munnelly" />
-
     <meta name="author" content="Brendan Munnelly">
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
@@ -105,12 +103,20 @@
           </ul>
         </section>
 
+        <section>
+          <div class="code-snippets" style="margin-bottom:32px">
+              <p>Download a new workfile on your computer as described at the link below.</p>
+              <p>📄 &nbsp;<a href="assets/workfiles/fetch.html" target="_blank"><b>Fetch API</b>: Exercises</a></p>
+          </div>
+      </section>
+
+
         <section class="theme-dark">
           <h2 id="fetch-api">The Fetch API</h2>
           <p>
             The Fetch API is a modern alternative to the older XMLHttpRequest
             API. You use the Fetch API to send HTTP requests to web servers and
-            handle responses.
+            handle responses. <span class="syn-js">fetch()</span> is a method of the global window object.
           </p>
 
           <p>
@@ -129,85 +135,311 @@
             not halt the execution of other instructions elsewhere in the web
             page.
           </p>
-        </section>
-
-        <section>
-          <h2 id="promise-object">
-            Working with the <code>Promise</code> object
-          </h2>
 
           <p>
-            Before it returns a <span class="syn-js">Response</span> object, the
-            <span class="syn-js">fetch()</span> method returns a
-            <span class="syn-js">Promise</span> object that can have one of
-            three possible properties:
+            The Fetch API provides an
+            <span class="syn-js">async/await</span> syntax for writing
+            asynchronous code. You may find this a better alternative to the
+            promise chaining syntax.
           </p>
 
-          <table class="table-js-methods">
-            <tbody>
-              <tr>
-                <td style="min-width: 30%">
-                  <p><span class="syn-js">pending</span></p>
-                </td>
-                <td><p>The request's initial state.</p></td>
-              </tr>
-              <tr>
-                <td style="min-width: 30%">
-                  <p><span class="syn-js">fulfilled</span></p>
-                </td>
-                <td>
-                  <p>
-                    The request has completed successfully and a value is
-                    returned.
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td style="min-width: 30%">
-                  <p><span class="syn-js">rejected</span></p>
-                </td>
-                <td>
-                  <p>
-                    The request has failed and a reason (error) is returned.
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <p>Below is a very basic example without error handling:</p>
 
+<pre><button class="copy-code" id="btn-1">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1" class="hljs language-javascript">async function fetchUserData() {
+    // Create a response object to hold the remote data
+    const response = await fetch("https://reqres.in/api/users/2");
+    // Convert the response object to a parsed JavaScript object
+    const data = await response.json();
+    // Log the data to the console
+    console.log(data);
+}
+
+fetchUserData();</code></pre>
+
+  <p>The code snippet demonstrates two key JavaScript concepts: Promise and Response objects, which are fundamental to modern asynchronous JavaScript.</p>
+
+<section>
+  <h2 id="promise-object">
+    Working with the <code>Promise</code> object
+  </h2>
+
+  <p>
+    Before it returns a <span class="syn-js">Response</span> object, the
+    <span class="syn-js">fetch()</span> method returns a
+    <span class="syn-js">Promise</span> object that can have one of
+    three possible properties:
+  </p>
+
+  <table class="table-js-methods">
+    <tbody>
+      <tr>
+        <td style="min-width: 30%">
+          <p><span class="syn-js">pending</span></p>
+        </td>
+        <td><p>The request's initial state.</p></td>
+      </tr>
+      <tr>
+        <td style="min-width: 30%">
+          <p><span class="syn-js">fulfilled</span></p>
+        </td>
+        <td>
           <p>
-            A <span class="syn-js">Promise</span> is said to be
-            <i>settled</i> or <i>resolved</i> if it is either fulfilled or
-            rejected, but not pending. When a Promise is fulfilled, you can use
-            its <span class="syn-js">then()</span> and
-            <span class="syn-js">catch()</span> methods to handle it.
+            The request has completed successfully and a value is
+            returned.
           </p>
-
+        </td>
+      </tr>
+      <tr>
+        <td style="min-width: 30%">
+          <p><span class="syn-js">rejected</span></p>
+        </td>
+        <td>
           <p>
-            Using the <span class="syn-js">Promise</span> object enables
-            multiple response functions to be chained togother. See the sample
-            code below.
+            The request has failed and a reason (error) is returned.
           </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-          <pre><code class="hljs language-js">fetch(url)
-  .then(res =&gt; {
-     // handle the response
-  })
+  <p>A <span class="syn-js">Promise</span> is said to be
+    <i>settled</i> or <i>resolved</i> if it is either fulfilled or
+    rejected, but not pending. When a Promise is fulfilled, you can use
+    its <span class="syn-js">then()</span> and
+    <span class="syn-js">catch()</span> methods to handle it.</p>
 
-  .catch(error =&gt; {
-     // handle any network connection error
-  });</code></pre>
+<ul>
+  <li>The <span class="syn-js">async</span> keyword before the function declaration automatically makes the function return a Promise.</li>
+  <li>The <span class="syn-js">await</span> keyword pauses execution until the Promise is resolved or rejected.</li>
 
-          <p>
-            If the request completes successfully, the requested data is
-            returned and wrapped inside a Response <b>res</b> object. This
-            object has a number of useful properties and methods for working
-            with the data from the server.
-          </p>
-        </section>
+</ul>
+
+<p>In summary, the <span class="syn-js">fetch()</span> method returns a Promise that resolves to a Response object once the network request completes.</p>
+
+<p>Using <span class="syn-js">await</span> with <span class="syn-js">fetch()</span> means your code waits for the network request to complete before continuing, but without blocking the main thread.</p>
+
+  <p>If the request completes successfully, the requested data is
+    returned and wrapped inside a Response  object.</p>
+
+  <p>Update your sample code as shown below.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2" class="hljs language-javascript">/**
+* Asynchronous function to fetch user data from a remote API.
+* Uses the Fetch API with async/await for cleaner promise handling.
+*/
+async function fetchUserData() {
+   // Initiate a GET request to the RESTful API endpoint for user with ID 2
+   // The 'await' keyword pauses execution until the fetch Promise resolves
+   const response = await fetch("https://reqres.in/api/users/2");
+   
+   // Check if the HTTP response status is in the successful range (200-299)
+   // response.ok is true for successful HTTP status codes, false otherwise
+   if (!response.ok) {
+       // If response has an error status code, log a message
+       // This handles cases like 404 (not found), 500 (server error), etc.
+       console.log("Network response was not ok");
+   }
+   else {
+       // For successful responses, parse the JSON body content
+       // response.json() returns a Promise that resolves with the parsed JSON
+       // 'await' is used to wait for the parsing to complete
+       const data = await response.json();
+       
+       // Output the parsed user data object to the console
+       // This will display properties like id, email, first_name, last_name, etc.
+       console.log(data);
+   }
+}
+
+// Execute the fetchUserData function to start the API request
+// This initiates the asynchronous operation
+fetchUserData();</code></pre>
+      
+      <p>For more detailed server error-checking, update the <b>if</b> statement as follows:</p>
+
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript">if (!response.ok) {
+  console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+}</code></pre>
+
+
+<p>This will show both the numeric status code (like 404, 500, etc.) and the associated status text (like "Not Found" or "Internal Server Error"). This provides more detailed information about what went wrong with the request.</p>
+
+<table class="table-js-methods">
+  <tbody>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">100-199</span></p>
+      </td>
+      <td><p> Informational responses</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">200-299</span></p>
+      </td>
+      <td>
+        <p>Success responses
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">300-399</span></p>
+      </td>
+      <td>
+        <p>
+          Redirection messages
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">400-499</span></p>
+      </td>
+      <td>
+        <p>
+          Client error responses
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">500-599</span></p>
+      </td>
+      <td>
+        <p>
+          Server error responses
+        </p>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+<p>
+  The data from the server is not directly accessible from the
+  Resonse object. So you need to process the data using one of two
+  methods:
+</p>
+
+<table class="table-js-methods">
+  <tbody>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">.text()</span></p>
+      </td>
+      <td>
+        <p>
+          Use this when the
+          <span class="syn-js">Response</span> object contains 'raw'
+          or 'plain' text, or HTML-formatted text.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">.json()</span></p>
+      </td>
+      <td>
+        <p>
+          Use this when the
+          <span class="syn-js">Response</span> object contains only
+          data in JSON format.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<section id="error-checking">
+  <h2>Adding further error-checking</h2>
+  <p>The <b>if(!response.ok)</b> condition only checks if the HTTP response status is in the successful range (200-299). It handles scenarios where the server responded properly but with an error status code like 404 (Not Found) or 500 (Internal Server Error).</p>
+
+  <p>Adding a <b>try-catch</b> clause provides wider protection against different types of errors than the <b>if(!response.ok)</b> condition checks for. These include:</p>
+  <ul>
+    <li>Network errors - if the fetch fails completely (e.g., no internet connection, DNS failure)</li>
+    <li>Server errors - if the server responds with an error status code (e.g., 404, 500)</li>
+    <li>Client errors - if the fetch request is malformed or the server cannot process it</li>
+    <li>Parsing errors - if <b>response.json()</b> fails because the response isn't valid JSON</li>
+
+  </ul>
+
+  <h3>About the <code>try-catch</code> syntax</h3>
+
+  <p>The <b>try-catch</b> statement in JavaScript allows you to test a block of code for errors and handle any exceptions that occur. The basic syntax is as follows.</p>
+
+  <pre>
+  try {
+      // Code that might cause an error
+  } catch (error) {
+      // Code to handle the error
+  }</pre>
+    
+<p>Here is how it works:</p>
+<ul>
+    <li>The <b>try</b> block contains the code that might throw an exception.</li>
+    <li>If an exception occurs within the <b>try</b> block, execution of that block stops immediately.</li>
+    <li>Control transfers to the <b>catch</b> block.</li>
+    <li>The catch parameter (commonly named <b>error</b> or <b>err</b>) contains information about the error.</li>
+    <li>After the <b>catch</b> block executes, the program continues running after the <b>try-catch</b> statement.</li>
+</ul>
+
+<p>Update your code as shown below.</p>
+
+  <pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript">/**
+ * Asynchronous function to fetch user data from a remote API.
+ * Uses the Fetch API with async/await for cleaner promise handling.
+ */
+async function fetchUserData() {
+  try {
+    // Initiate a GET request to the RESTful API endpoint for user with ID 2
+    // The 'await' keyword pauses execution until the fetch Promise resolves
+    const response = await fetch("https://reqres.in/api/users/2");
+    
+    // Check if the HTTP response status is in the successful range (200-299)
+    // response.ok is true for successful HTTP status codes, false otherwise
+    if (!response.ok) {
+        // If response has an error status code, log a message
+        // This handles cases like 404 (not found), 500 (server error), etc.
+          console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+    }
+    else {
+        // For successful responses, parse the JSON body content
+        // response.json() returns a Promise that resolves with the parsed JSON
+        // 'await' is used to wait for the parsing to complete
+        const data = await response.json();
+        
+        // Output the parsed user data object to the console
+        // This will display properties like id, email, first_name, last_name, etc.
+        console.log(data);
+    }
+  } catch (error) {
+    // Catch network errors, JSON parsing errors, or any other exceptions
+    console.error("Error fetching user data:", error);
+  }
+}
+// Execute the fetchUserData function to start the API request
+// This initiates the asynchronous operation
+fetchUserData();</code></pre>
+
+</section>
+
+
+
 
         <section>
           <h2 id="sample-data">Working with sample data</h2>
+
+          <p>
+            If the request completes successfully, the requested data is
+            returned and wrapped inside a Response  object. This
+            object has a number of useful properties and methods for working
+            with the data from the server.
+          </p>
+
 
           <p>
             Let's work with a an example of fetching the contents of a text
