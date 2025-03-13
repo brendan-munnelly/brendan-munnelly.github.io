@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Working with Hyperlinks | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Introduction to Hyperlinks: A Web Design and Development Tutorial from Brendan Munnelly.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34 }
+    </style>
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+
+</head>
+
+<body id="top">
+
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Working with Hyperlinks</h1>
+                <h2>Understanding the difference between absolute and relative hyperlinks, and adding hyperlinks to sample web pages.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+
+
+
+    
+    <main>
+
+		<aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+// Basic referrer detection
+let returnHome;
+function getBasicReferrer() {
+  return document.referrer || "Direct visit (no referrer)";
+}
+
+const testReferrer = getBasicReferrer();
+
+if (testReferrer.includes("ibat")) {
+    console.log("Referrer is IBAT");
+    returnHome = "https://munnelly.com/ibat/index.html"
+}
+else if (testReferrer.includes("dorset")) {
+    console.log("Referrer is Dorset");
+    returnHome = "https://munnelly.com/dorset/index.html"
+}
+
+else {
+    console.log("Referrer unknown");
+    returnHome = "../index.html"
+}
+
+// Set the href attribute of the link
+document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+
+// Log the referrer information
+function logReferrer() {
+  console.log("Basic Referrer:", getBasicReferrer());
+}
+
+// Call the function to log the referrer
+logReferrer();</script>    
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning goals</a></p>
+            <p><a href="#hyperlinks-about">About hyperlinks</a></p>
+            <p><a href="#hyperlink-destinations">Hyperlinks: same or different website?</a></p>
+            <p><a href="#hyperlink-tabs">Hyperlinks: same or new web browser tab?</a></p>
+            <p><a href="#page-add-links">Adding hyperlinks to your <i>van Gogh</i> page</a></p>
+            <p><a href="#hyperlinks-about-internal">About internal hyperlinks</a></p>
+            <p><a href="#page-add-links-internal">Adding internal hyperlinks to your <i>Tourism</i> page</a></p>
+            <p><a href="#upload-github">Uploading your files to GitHub</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+
+			<section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Recognise the structure of a hyperlink.</li>
+                    <li>Understand the difference between absolute and relative hyperlinks.</li>
+                    <li>Add hyperlinks to sample web pages.</li>
+                </ul>
+
+            </section>
+
+
+            <section id="hyperlinks-about" class="wrapper-content bg-white">
+
+                <h2>About hyperlinks</h2>
+            
+                    <p>Hyperlinks, or more simply links, enable users to click or tap their way from one web page to another web page, on the same or different website.</p>
+            
+                    <p>You can also use hyperlinks to go from one section of a web page to another.</p>
+            
+                    <p>The general format of a hyperlink in HTML is as shown below.</p>
+            
+                    <img src="assets/img/working-with-hyperlinks/link-format.png" alt="screenshot" style="max-width: 680px">
+            
+                    <p>Note the following:</p>
+                    
+                    <ul>
+                        <li>A hyperlink begins with an opening <span class="syn">&lt;a&gt;</span> (for &#8216;anchor&#8217;) tag.</li>
+                        <li>Hyperlinks end with the closing <span class="syn">&lt;/a&gt;</span> tag.</li>
+                        <li>Inside the opening <span class="syn">&lt;a&gt;</span> tag is the <span class="atsyn">href</span> attribute that is followed by an equal to sign (<b>=</b>).</li>
+                        <li>The <span class="atsyn">href</span> attribute holds, within quotation marks, the link destination.
+                        <span class="inside-ol">&nbsp;</span>
+                        This is the location to where the user will be taken when they click or tap on the link.</li>
+                    </ul>
+            
+                    <p>Hyperlinks typically have the following format:</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;<span class="white">To learn more, please click</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"webpage.html"</span>&gt;<span class="white">here</span>&lt;/<span class="blue-dark">a</span>&gt;.&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+            
+                <p>The above HTML tag would produce the following result.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/click-here.png" alt="screenshot">
+            
+                <p>This is an example of a hyperlink placed around an item of text. In this case, the word &#8216;here&#8217;.</p>
+                
+                <p>Hyperlinks can also be placed around an image, as follows.</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;<span class="white">Please click on the picture of a cat below.</span>&lt;/<span class="blue-dark">p</span>&gt;
+            
+&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"webpage.html"</span>&gt;&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span><span class="white">=</span><span class="brown">"cat.jpg"</span> <span class="blue-light">alt</span><span class="white">=</span><span class="brown">"cat"</span>&gt;&lt;/<span class="blue-dark">a</span>&gt;
+</pre>
+            
+                <p>This second example would produce the following result.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/cat-hyperlink.jpg" alt="screenshot">
+            
+            </section>
+            
+            
+            <section id="hyperlink-destinations" class="wrapper-content bg-white">
+            
+                <h2>Hyperlinks: same or different website?</h2>
+            
+                <p>One way of looking at hyperlinks is to ask: what is the destination of the link? Where will it send the user to?</p>
+            
+                <p>In terms of their destination, you can think of hyperlinks as of two types:</p>
+            
+                <h3 id="urls-absolute">Hyperlinks with absolute URLs</h3>
+            
+                <p>An absolute URL contains the <i>full address</i> of the web page being linked to, and begins with the <b>http://</b> or <b>https://</b> protocol.</p>
+            
+                <p>Absolute URLs will always include the domain (website) name and typically also the name of a particular web page and perhaps too the folder that contains it.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/absolute-url.png" alt="screenshot">
+            
+                <p>You use absolute URLs when you want to link from one website to a different website &#8211; that is, to a website with a different domain name.</p>
+            
+            
+            
+                <h3 id="urls-relative">Hyperlinks with relative URLs</h3>
+            
+                    <p>If you are linking between web pages of the <i>same</i> website, you do not need to include the  <b>http://</b> or <b>https://</b> protocol or the website domain name.</p>
+            
+                    <p>It is enough to enter only the web page name, such as:<br>
+                    <b>services.html</b><br>
+                    or <br>
+                    <b>privacy-statement.html</b><br>
+                    <br>
+                    And perhaps also the folder that contains the web page, such as<br>
+                    <b>products/shoes.html</b><br>
+                    or <br>
+                    <b>services/financial/insurance.html</b></p>
+                    <span class="inside-ol">&nbsp;</span>
+                    <p>For example, the relative hyperlink below will take the user to a different page within the <em>same</em> folder of the <em>same</em> website.</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;<span class="white">Read about our</span> &lt;<span class="blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"about-us.html"</span>&gt;<span class="white">team members</span>&lt;/<span class="blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+            
+                <p>You will commonly see relative hyperlinks used in navigation menus that can lead users to the various pages of a website.</p>
+                <img src="assets/img/working-with-hyperlinks/menu-relative-links.png" alt="screenshot">
+            
+            </section>
+            
+            
+            <section id="hyperlink-tabs" class="wrapper-content bg-white">
+            
+                <h2>Hyperlinks: same or new web browser tab?</h2>
+            
+                <p>You can choose to display a linked-to (&#8216;destination&#8217;) web page in the <i>same</i> or in a <i>new</i> tab of your web browser.</p>
+            
+                <p>Consider the example of a web page named <b>page-1.html</b> that contains a hyperlink to a second web page named <b> page-2.html</b>.</p>
+            
+                <h3 id="tab-same">New page, same browser tab</h3>
+                <p>In the first case below, the linked-to web page named <b>page-2.html</b> replaces the current <b>page-1.html</b> web page in the user&#8217;s web browser tab.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/link-same-tab.png" alt="screenshot">
+            
+            <p>In the <b>page-1.html </b> web page, the HTML link code would be as follows:</p>
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;<span class="white">Click to go to</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"page-2.html"</span>&gt;<span class="white">Page 2</span>&lt;/<span class="token blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+            
+            
+                <h3 id="tab-new">New page, new browser tab</h3>
+                <p>In the second case below, the linked-to <b>page-2.html</b> web page opens in a <i>new</i> tab of the user&#8217;s web browser. The original web page is still displayed in the original web browser tab.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/link-new-tab.png" alt="screenshot">
+            
+            <p>In the <b>page-1.html </b> web page, the HTML code for this <i>open in a new tab</i> link would be as follows:</p>
+            
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;<span class="white">Click to go to</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="white">=</span><span class="brown">"page-2.html"</span> <span class="blue-light">target</span><span class="white">=</span><span class="brown">"_blank"</span>&gt;<span class="white">Page 2</span>&lt;/<span class="token blue-dark">a</span>&gt;<span class="white">.</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+            
+                <p>Your hyperlink now has <i>two</i> attributes:</p>
+            
+                <ul>
+                    <li>The <span class="atsyn">href</span> attribute value contains the destination of the hyperlink.</li>
+                    <li>The <span class="atsyn">target</span> attribute with its value of <b>"_blank"</b> (within double quotes) forces the new page to open in a tab of the user&#8217;s web browser.</li>
+            
+                </ul>
+            
+                <p>The order of the two attributes inside the opening tag of a hyperlink does not matter.</p>
+                
+                <p>For example, both of these hyperlinks are correct.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/links-order-correct.png" alt="screenshot" style="max-width: 680px">
+            
+                <p>But ensure you separate the two attributes from each other by a single space. For example, both these hyperlinks are correct. And for the same reason.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/links-order-incorrect.png" alt="screenshot"  style="max-width: 680px">
+            
+                <h3 id="tab-hijack">Preventing web page hijacking</h3>
+                <p>When you open a hyperlink in a new tab of your web browser, JavaScript code in the new web page is able to take control of the original web page you linked from.</p>
+                
+                <p>See this article from Google: <a href="https://web.dev/external-anchors-use-rel-noopener/" target="_blank" rel="noopener">Links to cross-origin destinations are unsafe</a>.</p>
+            
+                <p>For this reason, a third attribute of <span class="atsyn">rel</span> with a value of <b>"noopener"</b> is a widely-used security feature that is added to hyperlinks which open in a new tab.</p>
+            
+            
+<pre class="language-html">
+&lt;<span class="blue-light">a</span> <span class="blue-light">href</span>=<span class="brown">"https://www.website.com"</span> <span class="blue-light">target</span>=<span class="brown">"_blank"</span> <span class="blue-light">rel</span>=<span class="brown">"noopener"</span>&gt;<span class="white">Other Website</span>&lt;/<span class="token class">a</span>&gt;   
+</pre>
+            
+                <p>Within the opening <span class="syn">&lt;a&gt;</span> hyperlink tag, you can place the three attributes in any order. All three hyperlink examples below are valid.</p>
+                <img src="assets/img/working-with-hyperlinks/new-tab-options.png" alt="screenshot">
+            
+                <p>But, again, always enter a <i>single space</i> between the different attributes.</p>
+            
+                <p>In the next section of this Tutorial you will add hyperlinks to a web page you created previously.</p>
+            
+            
+            </section>
+            
+            
+            
+            <section id="page-add-links" class="wrapper-content bg-white">
+                <h2>Adding hyperlinks to your <i>van Gogh</i> page</h2>
+            
+                <p>In this section, you will work with the van Gogh sample web page.</p>
+            
+                <p>You created this web page and stylesheet in the <a href="working-with-images.html">Working with Images</a> Tutorial, and later updated it in the <a href="working-with-google-fonts.html">Working with Google Fonts</a> Tutorial.</p>
+
+           
+                <ol>
+                    <li>In VS Code, open the <b>page-4.html</b> file in your <b>exercises/van-gogh</b> folder.</li>
+            
+                    <li>Drectly under the first image, &#8220;Bedroom in Arles&#8221;, copy-and-paste the following new paragraph and empty hyperlink:
+                    
+<pre class="language-html">
+&lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">b</span>&gt;<span class="token content">On view</span>&lt;/<span class="token blue-dark">b</span>&gt;<span class="token content">:</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="token content">=</span><span class="brown">""</span>&gt;<span class="token content">Vincent van Gogh Museum, Amsterdam</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt;   
+</pre></li>
+            
+                    <li>Directly under the second image, &#8220;The Yellow House&#8221; on about line 33, copy-and-paste the following new paragraph and empty hyperlink:
+            
+<pre class="language-html">
+&lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">b</span>&gt;<span class="token content">On view</span>&lt;/<span class="token blue-dark">b</span>&gt;<span class="token content">:</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="token content">=</span><span class="brown">""</span>&gt;<span class="token content">Vincent van Gogh Museum, Amsterdam</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt;   
+</pre></li>
+            
+<li>Directly under the third image, &#8220;The Cafe Terrace at Night&#8221; on about line 38, copy-and-paste the following new paragraph and empty hyperlink:
+            
+<pre class="language-html">
+&lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">b</span>&gt;<span class="token content">On view</span>&lt;/<span class="token blue-dark">b</span>&gt;<span class="token content">:</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="token content">=</span><span class="brown">""</span>&gt;<span class="token content">Kr&#246;ller-M&#252;ller Museum, Otterlo</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt;   
+</pre></li>
+            
+                    <li>And directly under the fourth and final image, &#8220;The Starry Night&#8221; on about line 44, copy-and-paste the following new paragraph and empty hyperlink:
+            
+<pre class="language-html">
+&lt;<span class="token blue-dark">p</span>&gt;&lt;<span class="token blue-dark">b</span>&gt;<span class="token content">On view</span>&lt;/<span class="token blue-dark">b</span>&gt;<span class="token content">:</span> &lt;<span class="token blue-dark">a</span> <span class="blue-light">href</span><span class="token content">=</span><span class="brown">""</span>&gt;<span class="token content">The Museum of Modern Art, New York</span>&lt;/<span class="token blue-dark">a</span>&gt;&lt;/<span class="token blue-dark">p</span>&gt;  
+</pre></li>
+            
+                <li>Save your web page and view the result in your browser. All four images should now have text with empty hyperlinks under them.
+                
+                <img src="assets/img/working-with-hyperlinks/hyperlinks-empty.png" alt="screenshot"></li>
+            
+                <li>For each of the four hyperlinks, one after the other, add the following values to their <span class="atsyn">href</span> attribute (inside the pair of double quotes):
+            
+<pre class="language-html">
+<span class="brown">https://www.vangoghmuseum.nl/en/collection/s0047V1962</span>
+</pre>
+            
+<pre class="language-html">
+<span class="brown">https://www.vangoghmuseum.nl/en/collection/s0032V1962</span>
+</pre>
+            
+<pre class="language-html">
+<span class="brown">https://krollermuller.nl/en/vincent-van-gogh-terrace-of-a-cafe-at-night-place-du-forum-1</span>   
+</pre>
+            
+<pre class="language-html">
+<span class="brown">https://www.moma.org/collection/works/79802</span>
+</pre></li>
+            
+                <li>Save your web page and view the result in your browser. Click the four hyperlinks to ensure they all work correctly.</li>
+            
+                <li>Finally, add these two attributes and their values inside each of the four opening hyperlink tags:
+
+<pre class="language-html">
+<span class="blue-light">target</span>=<span class="brown">"_blank"</span> <span class="blue-light">rel</span>=<span class="brown">"noopener"</span>
+</pre>
+
+                Ensure you enter a single space between the attributes in your hyperlink opening tags.</li>
+                
+                <li>Save your web page and, in your web browser, verify the four hyperlinks all work correctly.</li>
+            
+                </ol>
+            
+                <p>✅ That’s it. You are now finished working on your Van Gogh web page.</p>
+            
+           
+            </section>
+            
+
+            <section id="hyperlinks-about-internal" class="wrapper-content bg-white">
+
+                <h2>About internal hyperlinks</h2>
+            
+                <p>Hyperlinks are not just for linking to web pages or other files. You can also create a hyperlink  to link to a <i>part</i> of a web page.</p>
+            
+                <p>So-called <i>internal hyperlinks</i> are commonly found on lengthy web pages with large amounts of content. They enable the web designer to offer a &#8220;Table of Contents&#8221; at the top of the page that users can click/tap to navigate to a particular section of that web page.</p>
+            
+                <p>Pages on Wikipedia typically include internal hyperlinks. For example, click the link below to open a Wikipedia page in a new browser tab for the Steve Goodman song, <i>City of New Orleans</i>.</p>
+            
+            
+                <p><a href="https://en.wikipedia.org/wiki/City_of_New_Orleans_(song)" target="_blank"><span style="font-weight:bold">City of New Orleans (song)</span></a></p>
+                
+                <p>After some introductory text, you can see a number of internal hyperlinks that will bring you to different parts of the <i>same</i> web page.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/wiki-page.png" alt="screenshot">
+            
+                <p>If you click on any of these links, notice how the URL (web address) in your browser changes.</p>
+            
+                <img src="assets/img/working-with-hyperlinks/wiki-sections.png" alt="screenshot">
+            
+                <p>You can see that the web address is now composed of <i>two</i> parts:</p>
+            
+                <ul>
+                    <li>The address of the web page, and </li>
+                    <li>The name of a section of the web page</li>
+                </ul>
+            
+                <p>The two parts of the web address are separated by the hash <b>#</b> character. A linked-to section of a web page is known as a <i>document fragment</i>.</p>
+            
+                <h3 id="links-anchors">Internal hyperlinks and named anchors</h3>
+            
+                <p>Consider the basic example where you want to offer visitors a &#8220;Table of Contents&#8221; at the top of a web page. </p>
+            
+                <p>You might begin by entering the following:</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span>&gt;<span class="token content">Contents</span>&lt;/<span class="blue-dark">h2</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Introduction</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section One</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section Two</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;<span class="token content">Summary</span>&lt;/<span class="blue-dark">p</span>&gt;
+</pre>
+                In a web browser, this will display as shown below.
+                <img src="assets/img/working-with-hyperlinks/sample-toc-1.png" alt="screenshot">
+            
+                <p>Next, you would add the internal hyperlinks. Note how the link destinations inside the <span class="atsyn">href</span> attributes always start with the <b>#</b> hash character.</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span>&gt;<span class="token content">Contents</span>&lt;/<span class="blue-dark">h2</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#introduction"</span>&gt;<span class="token content">Introduction</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#one"</span>&gt;<span class="token content">Section One</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#two"</span>&gt;<span class="token content">Section Two</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#three"</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#summary"</span>&gt;<span class="token content">Summary</span>&lt;/<span class="blue-dark">a</span>&gt;/&lt;<span class="blue-dark">p</span>&gt;
+</pre>
+            
+                <p>Your &#8220;Table of Contents&#8221; now look like a list of hyperlinks.</p>
+                <img src="assets/img/working-with-hyperlinks/sample-toc-2.png" alt="screenshot">
+                <p>But the hyperlinks have no destinations &#8211; they do not lead anywhere.</p>
+            
+                <p>Your final step is to add destination <b>IDs</b>. These are the locations in the page to which the hyperlinks will take the user. See the example below.</p>
+            
+<pre class="language-html">
+&lt;<span class="blue-dark">h3</span> <span class="blue-light">id</span><span class="token content">=</span><span class="brown">"three"</span>&gt;<span class="token content">Section Three</span>&lt;/<span class="blue-dark">h3</span>&gt;
+</pre>
+                
+                <p>In the remainder of this Tutorial, you will add and style internal hyperlinks using a web page and stylesheet file you previously created.</p>
+            
+            </section>
+            
+            
+            <section id="page-add-links-internal" class="wrapper-content bg-white">
+                <h2>Adding internal hyperlinks to your <i>Tourism</i> page</h2>
+            
+                <p>In this section, you will work with the sample <b>page-5.html</b> web page in your <b>websites/exercises</b> folder.</p>
+            
+                <p>You created this web page and stylesheet in the <a href="working-with-images.html">Working with Images</a> Tutorial, and later updated it in the <a href="working-with-google-fonts.html">Working with Google Fonts</a> Tutorial.</p>
+            
+                <ol>
+                    <li>In Visual Studio Code, open the following file: 
+                    <span class="inside-ol">&nbsp;</span>
+                    <b>page-5.html</b><br></li>
+                    
+            
+
+                
+                        <li>Directly uner the main <span class="syn">&lt;h1&gt;</span> heading of &#8220;Ireland&#8217;s Top Five Visitor Attractions&#8221;, copy-and-paste the following:
+                
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#guinness"</span>&gt;<span class="token content">1: Guinness Storehouse, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#cliffs-of-moher"</span>&gt;<span class="token content">2: Cliffs of Moher, Co. Clare</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#dublin-zoo"</span>&gt;<span class="token content">3: Dublin Zoo</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>="<span class="brown">#aquatic-centre"</span>&gt;<span class="token content">4: National Aquatic Centre, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>="<span class="brown">#kells-tcd"</span>&gt;<span class="token content">5: Book of Kells Exhibition, Trinity College, Dublin</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;   
+</pre></li>
+                
+                    <li>Save the <b>page-5.html</b> web page and view it in your web browser.</li>
+                
+                </ol>
+                
+                    <p>You can see the five items <em>look like</em> hyperlinks &#8211; but they are not clickable. They do not lead anywhere. </p>
+                
+                    <img src="assets/img/working-with-hyperlinks/hyperlinks-unstyled.png" alt="screenshot">
+                
+                    <p>This is because the five link destinations do not yet exist. Let&#8217;s add these now.</p>
+                
+                
+                    <h3 id="named-anchors">Adding the destination IDs</h3>
+                    <p>For the five internal hyperlinks, you will now add their link destinations.</p>
+                
+                    <ol>
+                        <li>In your <b>page-5.html</b> web page, add five destination IDs, one for each of the <span class="syn">&lt;h2&gt;</span> sub-headings under the &#8220;Contents&#8221; list at the top of the page.
+                        
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"guinness"</span>&gt;<span class="token content">Guinness Storehouse, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+                
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"cliffs-of-moher"</span>&gt;<span class="token content">Cliffs of Moher, Co. Clare</span>&lt;/<span class="blue-dark">h2</span>&gt;</pre>
+                
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"dublin-zoo"</span>&gt;<span class="token content">Dublin Zoo</span>&lt;/<span class="blue-dark">h2</span>&gt;
+</pre>
+                
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"aquatic-centre"</span>&gt;<span class="token content">National Aquatic Centre, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;   
+</pre>
+                
+<pre class="language-html">
+&lt;<span class="blue-dark">h2</span> <span class="blue-light">id</span>=<span class="brown">"kells-tcd"</span>&gt;<span class="token content">Book of Kells Exhibition, Trinity College, Dublin</span>&lt;/<span class="blue-dark">h2</span>&gt;   
+</pre>
+                
+            Note that you do <i>not</i> add the hash <b>#</b> character before the link destinations.</li>
+                
+            <li>Save the web page and view it in your web browser. </li>
+        </ol>
+                    
+                <p>The five internal hyperlinks at the top of the web page should now work correctly.</p>
+                
+                
+                    <h3 id="smooth-scrolling">The smooth scrolling effect</h3>
+                    <p>You can see that, when clicked or tapped, the internal page links scroll smoothly down to their respective destinations further down the web page.</p>
+                
+                    <p>This is the result of adding the <span class="csyn">scroll-behavior</span> style rule to the RESETS section of the top of the linked stylesheet file.</p>
+
+                    <img src="assets/img/working-with-hyperlinks/smooth.png" alt="Sample image">
+
+
+                    <p>A related style rule, for <span class="csyn">scroll-padding-top</span>, provides a vertical offset when the destination link is scrolled to.</p>
+
+              
+                    <h3 id="back-to-top">Adding a &#8216;Back to top&#8216; hyperlink</h3>
+                    <p>Let&#8217;s add one further internal hyperlink: one that takes the user back up to the top of the web page.</p>
+                    
+                    <p>Here are the steps.</p>
+                
+                    <ol>
+                        <li>At the very top of the <b>page-5.html</b> web page, replace the current opening <span class="syn">&lt;body&gt;</span> tag with the following that includes a destination ID.
+<pre class="language-html">
+&lt;<span class="blue-dark">body</span> <span class="blue-light">id</span>=<span class="brown">"top-of-page"</span>&gt;
+</pre>
+                        This will be the destination for the &#8216;Back to top&#8216; internal hyperlink.</li>
+                
+                        <li>Next, at the very end of the web page, just before the closing <span class="syn">&lt;/body&gt;</span> tag, add the following internal hyperlink.
+<pre class="language-html">
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"#top-of-page"</span>&gt;<span class="token content">Return to top of page</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;   
+</pre>
+                    The end of your web page should now look similar to that below.
+                    <img src="assets/img/working-with-hyperlinks/back-to-top.png" alt="screenshot"></li>
+                
+                        <li>Save your web page and verify the &#8216;Back to top&#8216; link works correctly.</li>
+                </ol>
+             
+                
+                <p>✅ That’s it. You are now finished working on your sample web page.</p>
+
+            </section>
+            
+
+<section id="upload-github">
+	<h2>Uploading your files to GitHub</h2>
+
+	<p>After finishing your web page, you are now ready to upload it to your account on GitHub.</p>
+
+        <ol>
+			
+            <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.
+            <img src="assets/img/working-with-hyperlinks/github-signin.png" alt="github-signin"></li>
+        
+            <li>On your GitHub home page, click the &#8216;repo&#8217; that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+            <span class="inside-ol">&nbsp;</span>
+            <b>username.github.io</b>
+        
+            <img src="assets/img/working-with-hyperlinks/github-repo-select.png" alt="github-signin"></li>
+
+            <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+
+            <img src="assets/img/working-with-hyperlinks/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+        
+            <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+        
+            <img src="assets/img/working-with-hyperlinks/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+        
+            <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your 📁 <b>exerciss</b> sub-folder to upload it io your repository on GitHub.
+            <img src="assets/img/working-with-hyperlinks/github-upload-folder-files.png"  alt="Introduction to HTML"></li>
+    
+            <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+        
+            <li>Finally, click the green <b>Commit changes</b> button to upload your files.
+            <img src="assets/img/working-with-hyperlinks/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+        </ol>
+
+	<p>Your updated web page is now published on GitHub at a web address similar to the following:</p>
+		
+    <p><b>https://username.github.io/exercises/page-4.html<br>	
+    https://username.github.io/exercises/page-5.html</b></p>	
+
+	<p>It may take a few minutes for your uploaded file to appear on GitHub.</p>
+
+</section>
+
+</article>
+</main>
+
+<footer></footer>
+
+<div id="cookie-banner">
+    <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+    <div class="buttons">
+        <button id="accept-cookies">Got it</button>
+    </div>
+</div>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>       
+
+</body>
+</html>
+
