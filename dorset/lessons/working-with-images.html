@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Working with Images and Videos| Front-end Development Tutorials</title>
+    <title>Working with Images and Videos | Front-end Development Tutorials</title>
     <meta name="description" content="Inserting images in a web page, styling images with drop shadow and rounded corner effects, and removing image backgrounds.">
 
+    <meta name="author" content="Brendan Munnelly">
+
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../assets/css/dorset.css" />
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
 
     <style>
-    .four-samples div {
-        margin-bottom: 12px;
-    }
+        .four-samples div > img { margin-bottom: 12px }
 
-    .four-samples div img {
-        margin-bottom: 12px;
-    }
+        .four-samples div img {
+            margin-bottom: 12px;
+        }
     </style>
 
-  	<!-- Styles for Cookie Consent Popup Message  -->
-	  <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
 
     <!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -38,6 +38,7 @@
       gtag('config', 'G-RQ1JXS4GKM');
     </script>
     </head>
+
 
     <body id="top">
 
@@ -66,17 +67,49 @@
 
         <aside>
             <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+// Basic referrer detection
+let returnHome;
+function getBasicReferrer() {
+  return document.referrer || "Direct visit (no referrer)";
+}
 
-            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+const testReferrer = getBasicReferrer();
 
+if (testReferrer.includes("ibat")) {
+    console.log("Referrer is IBAT");
+    returnHome = "https://munnelly.com/ibat/index.html"
+}
+else if (testReferrer.includes("dorset")) {
+    console.log("Referrer is Dorset");
+    returnHome = "https://munnelly.com/dorset/index.html"
+}
+
+else {
+    console.log("Referrer unknown");
+    returnHome = "../index.html"
+}
+
+// Set the href attribute of the link
+document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+
+// Log the referrer information
+function logReferrer() {
+  console.log("Basic Referrer:", getBasicReferrer());
+}
+
+// Call the function to log the referrer
+logReferrer();</script>    
             <h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#images-about">About JPG and PNG image formats</a></p>
+            <p><a href="#images-sources">Copyright-free images</a></p>
             <p><a href="#images-adding">Adding images to a web page</a></p>
             <p><a href="#sample-files">Downloading sample files</a></p>
             <p><a href="#sample-van-gogh">The <i>van Gogh</i> web page</a></p>
             <p><a href="#sample-tourism">The <i>Tourism</i> web page</a></p>
-            <p><a href="#sample-smoothies">The <i>Smoothies</i> web page</a></p>
-            <p><a href="#sample-software">The <i>Software</i> web page</a></p>
             <p><a href="#embed-video">Embedding a YouTube Video</a></p>
             <p><a href="#update-home-page">Updating your website home page</a></p>
             <p><a href="#upload-github">Uploading your files to Github</a></p>
@@ -90,38 +123,119 @@
                 <h2>Learning Goals</h2>
                 <p>At the end of this Tutorial, you will be able to:</p>
                 <ul>
+                    <li>Know when to use the JPG and PNG file formats for bitmap images.</li>
+                    <li>Be familiar with common sources of free-to-use stock images.</li>
                     <li>Insert images in a web page and add alternative text with the alt attribute</li>
                     <li>Insert spacing beneath images, add drop shadow and rounded corner effects, and remove image backgrounds.</li>
                 </ul>
             </section>
 
-            <section>
-                <p>The finished versions of the four sample web pages you will create in this Tutorial should look as shown below.</p>
+            <section id="images-about" class="wrapper-content bg-white">
 
-                <div class="four-samples">
-                    <div>
-                        <img src="assets/img/intro-images/example-one-browser.png" alt="Sample image">
-                        <a href="#"  class="link-exercise"  target="_blank">page-4.html</a>
-                    </div>
-                    <div>
-                        <img src="assets/img/intro-images/example-two-browser.png" alt="Sample image">
-                        <a href="#"  class="link-exercise" target="_blank">page-5.html</a>
-                    </div>
-                    <div>
-                       <img src="assets/img/intro-images/example-three-browser.png" alt="Sample image">
-                        <a href="#" class="link-exercise"  target="_blank">page-6.html</a>
-                    </div>
-                    <div>
-                        <img src="assets/img/intro-images/example-four-browser.png" alt="Sample image">
-                        <a href="#" class="link-exercise"  target="_blank">page-7.html</a>
-                    </div>
-                </div>
+                <h2>About JPG and PNG image formats</h2>
+                <p>Images added to web pages are mostly either in <b>jpg</b> or <b>png</b> format.</p>
 
-                <p>You will also update your website home web page with an image, and with hyperlinks to your four new sample web pages.</p>
-            
+                <h3 id="images-jpg">JPG format images</h3>
+                <p>This format (pronounced <i>jay-peg</i>) is the best choice for displaying photographs that contain lots of colours and colour gradations.</p>
+
+                <p>Image files in this format end with the filename extension <b>.jpg</b> or <b>.jpeg</b>. You can see some examples of typical JPG-format images below.</p>
+
+                <img src="assets/img/intro-images/jpg-format.jpg"  alt="Introduction to Images">
+
+                <h3 id="images-png">PNG format images</h3>
+                <p>This format (pronounced <i>pea-n-g</i>) is typically used for images that contain areas of solid colour, for logos and icons, for text, and for charts, diagrams and line drawings.</p>
+
+                <p>Below are some examples of images suited to this file format. Such files end with the extension <b>.png</b>.</p>
+
+                <img src="assets/img/intro-images/png-format.png"  alt="Introduction to Images">
+
+                <p>Photographic images can also be saved in PNG-format and will display in a web page with the same quality as if they were JPGs. But the image file sizes will be larger and, as a result, the web page will take longer to load.</p>
+
+                <img src="assets/img/intro-images/flowers-formats.jpg"  alt="Introduction to Images">
+
+                <p>A feature of PNG format images is that, unlike JPG files, they can have transparent backgrounds.</p>
+
 
             </section>
-            
+
+
+            <section id="images-sources" class="wrapper-content bg-white">
+                <h2>Where to find copyright-free images</h2>
+                <p>A wide range of so-called <em>stock photography</em> websites exists from where you can download, modify and use copyright- and royalty-free images, whether for  personal, not-for-profit or commercial web projects.</p>
+
+                <p>In most cases, you do not need to credit the image&#8217;s creator, but it is good practice and courteous to do so.</p>
+
+                <p>Here are some popular sources of general-purpose stock images:</p>
+
+                <table class="table-js">
+                    <tbody>
+                        <tr>
+                            <td><p><a href="https://pexels.com" target="_blank" rel="noopener">Pexels</a></p></td>
+                            <td><p><a href="https://burst.shopify.com/" target="_blank" rel="noopener">Shopify Burst</a></p></td>
+                            <td><p><a href="https://www.unsplash.com" target="_blank" rel="noopener">Unsplash</a></p></td>
+                        </tr>
+                        <tr>
+                            <td><p><a href="https://pixabay.com" target="_blank" rel="noopener">Pixabay</a></p></td>
+                            <td><p><a href="https://www.stockvault.net" target="_blank" rel="noopener">StockVault</a></p></td>
+                            <td><p><a href="https://www.freeimages.com" target="_blank" rel="noopener">FreeImages</a></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Here are some online libraries that offer less generic and more stylised photography:</p>
+
+                <table class="table-js">
+                    <tbody>
+                        <tr>
+                            <td><p><a href="https://www.lifeofpix.com/" target="_blank" rel="noopener">Life of Pix</a></p></td>
+                            <td><p><a href="https://freerangestock.com/" target="_blank" rel="noopener">Freerange</a></p></td>
+                            <td><p><a href="https://kaboompics.com/" target="_blank" rel="noopener">KaboomPics</a></p></td>
+                        </tr>
+                        <tr>
+                            <td><p><a href="https://littlevisuals.co/" target="_blank" rel="noopener">Little Visuals</a></p></td>
+                            <td><p><a href="https://gratisography.com/" target="_blank" rel="noopener">Gratisography</a></p></td>
+                            <td><p><a href="https://picography.co/" target="_blank" rel="noopener">Picography</a></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>The Internet&#8217;s largest collection of free online images is the one below. It includes vintage photography and reproductions of classic works of art:</p>
+
+                <table class="table-js">
+                    <tbody>
+                        <tr>
+                            <td><p><a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank" rel="noopener">Wikimedia Commons</a></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>For a wide-ranging list of online image libraries, from the <a href="https://www.flickr.com/people/nlireland/" target="_blank" rel="noopener">National Library of Ireland</a> to the <a href="https://unsplash.com/@britishlibrary" target="_blank" rel="noopener">British Library</a> and <a href="https://images.nasa.gov/" target="_blank" rel="noopener">NASA</a>, visit the following article from CSS Tricks.</p>
+
+                <table class="table-js">
+                    <tbody>
+                        <tr>
+                            <td><p><a href="https://css-tricks.com/unconventional-stock-image-sources/" target="_blank" rel="noopener">Unconventional Stock Image Sources</a></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>For illustrations rather than photographs, here are four open-source collections of vector images. Files can be downloaded as bitmap images in PNG-format.</p>
+
+                <table class="table-js">
+                    <tbody>
+                        <tr>
+                            <td><p><a href="https://undraw.co/illustrations" target="_blank" rel="noopener">Undraw</a></p></td>
+                            <td><p><a href="https://icons8.com/ouch" target="_blank" rel="noopener">Ouch</a></p></td>
+                        </tr>
+                        <tr>
+                            <td><p><a href="https://gallery.manypixels.co" target="_blank" rel="noopener">ManyPixels</a></p></td>
+                            <td><p><a href="https://www.humaaans.com" target="_blank" rel="noopener">Humaaans</a></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+                       
             <section id="images-adding" class="wrapper-content bg-white" >
                 <h2>Adding images to a web page</h2>
                 <p>You add an image to a web page using the single, simple line of HTML code such as shown below.</p>
@@ -137,7 +251,7 @@
 </pre>
 
                 <p>As you can see from the examples below, the HTML <span class="syn">&lt;img&gt;</span> tag for every image has the same format.</p>
-                <img src="assets/img/intro-images/img-tag-format.png"  alt="Introduction to Images" style="max-width: 700px">
+                <img src="assets/img/working-with-images/img-tag-format.png"  alt="Introduction to Images" style="max-width: 700px">
             
                 <p>After the <span class="syn">&lt;img&gt;</span> tag name are the three letters of <span class="atsyn">src</span> which set the source (location and file name) of the image file. This is known as an <i>attribute</i> or property of the <span class="syn">&lt;img&gt;</span> tag.</p>
             
@@ -151,11 +265,36 @@
 
                 <p>Below you can see the output produced by the official <a href="https://validator.w3.org/" target="_blank" rel="noopener">W3C HTML validity checker</a> on a web page which is missing the <span class="atsyn">alt</span> attribute from an <span class="syn">img</span> tag.</p>
 
-                <img src="assets/img/intro-images/img-tag-missing.png"  alt="Introduction to Images">
+                <img src="assets/img/working-with-images/img-tag-missing.png"  alt="Introduction to Images">
             
             </section>
             
             
+            <section>
+
+                <h2>Adding images to two sample web pages</h2>
+                <p>In this Tutorial, you will add images to wo new sample web pages in your <b>exercises</b> folder.</p>
+                
+                <p>The finished versions of the two sample web pages you will create in this Tutorial should look as shown below.</p>
+
+                <div class="four-samples">
+                    <div>
+                        <img src="assets/img/working-with-images/example-one-browser.png" alt="Sample image">
+                        <a href="#"  class="link-exercise"  target="_blank">page-4.html</a>
+                    </div>
+                    <div>
+                        <img src="assets/img/working-with-images/example-two-browser.png" alt="Sample image">
+                        <a href="#"  class="link-exercise" target="_blank">page-5.html</a>
+                    </div>
+                </div>
+
+                <p><br>You will also update your website home web page with an image, and with hyperlinks to your two new sample web pages.</p>
+            
+
+            </section>
+
+
+
             <section id="sample-files" class="wrapper-content">
                 <h2>Downloading your sample files</h2>
                 <p>Your first step is to download the files you need for this Tutorial.</p>
@@ -167,28 +306,32 @@
                     <li>Copy the ZIP file into your <b>websites</b> folder.</li>
             
                     <li>Uncompress the ZIP file as shown below.
-                    <img src="assets/img/intro-images/extract-files.png" alt="Introduction to Images"></li>
+                    <img src="assets/img/working-with-images/extract-files.png" alt="Introduction to Images"></li>
                     <li>The files will unzip into a new sub folder in your <b>websites</b> folder named <b>lesson-images</b>.
-                    <img src="assets/img/intro-images/unzip-main.png" alt="Introduction to Images">
-                    Inside this new sub-folder you should see 25 files: four HTML files, four CSS files and a group of image files.
-                    <img src="assets/img/intro-images/lesson-3-files.png" alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/unzip-main.png" alt="Introduction to Images" style="max-width: 700px">
+                    Inside this new sub-folder you should see 13 files: two HTML files, two CSS files and a group of image files.
+                    <img src="assets/img/working-with-images/lesson-3-files.png" alt="Introduction to Images" style="max-width: 700px;margin-bottom:12px !important">
                     Next, you will copy these unzipped files to their appropriate sub folders.</li>
-                    <li>From the <b>websites/lesson-images</b> sub-folder, copy the four HTML files to your <b>websites/exercises</b> sub-folder.
-                    <img src="assets/img/intro-images/unzip-html-files.png" alt="Introduction to Images"></li>
-                    <li>From the <b>websites/lesson-images</b> sub-folder, copy the four CSS files to your <b>websites/exercises/assets/css</b> sub-folder.
-                    <img src="assets/img/intro-images/unzip-css-files.png" alt="Introduction to Images"></li>
+
+                    <li>From the <b>websites/lesson-images</b> sub-folder, copy the two HTML files to your <b>websites/exercises</b> sub-folder.
+                    <img src="assets/img/working-with-images/unzip-html-files.png" alt="Introduction to Images" style="max-width: 700px"></li>
+                   
+                    <li>From the <b>websites/lesson-images</b> sub-folder, copy the two CSS files to your <b>websites/exercises/assets/css</b> sub-folder.
+                    <img src="assets/img/working-with-images/unzip-css-files.png" alt="Introduction to Images" style="max-width: 700px"></li>
+
                     <li>Display your <b>websites/exercises/assets</b> sub-folder, and inside it create a new sub-folder named <b>img</b>.
-                    <img src="assets/img/intro-images/unzip-img.png" alt="Introduction to Images"></li>
-                    <li>To this new <b>websites/exercises/assets/img</b> sub-folder, copy the 17 image files from your <b>websites/lesson-images</b> sub-folder.
-                    <img src="assets/img/intro-images/unzip-img-all.png" alt="Introduction to Images"></li>
+                    <img src="assets/img/working-with-images/unzip-img.png" alt="Introduction to Images"></li>
+
+                    <li>To this new <b>websites/exercises/assets/img</b> sub-folder, copy the various image files from your <b>websites/lesson-images</b> sub-folder.
+                    <img src="assets/img/working-with-images/unzip-img-all.png" alt="Introduction to Images" style="max-width: 700px"></li>
+
                     <li>You no longer need the downloaded <b>lesson-images.zip</b> file or the <b>websites/lesson-images</b> sub-folder. You can delete them both.
-                    <img src="assets/img/intro-images/unzip-delete.png" alt="Introduction to Images"></li>
-                    <li>In your web browser, display these four web pages:
+                    <img src="assets/img/working-with-images/unzip-delete.png" alt="Introduction to Images" style="max-width: 700px"></li>
+
+                    <li>In your web browser, display these two web pages:
                         <span class="inside-ol">&nbsp;</span>
                         <b>page-4.html</b><br>
-                        <b>page-5.html</b><br>
-                        <b>page-6.html</b><br>
-                        <b>page-7.html</b></li>
+                        <b>page-5.html</b><br></li>
                 </ol>
                 <p>You are now ready to work with the sample files you have downloaded.</p>
             
@@ -201,7 +344,7 @@
             <section id="sample-van-gogh" class="wrapper-content bg-white">
             
                 <h2>Working with the <i>van Gogh</i> web page</h2>
-                <p>In this section, you will work with the sample <b>page-4.html</b> web page, the sample <b>style-4.css</b> stylesheet and four images.</p>
+                <p>Firs you will work with the sample <b>page-4.html</b> web page, the sample <b>style-4.css</b> stylesheet and four images.</p>
                 <ol>
                     <li>In Visual Studio Code, open the following two files: 
                     <span class="inside-ol">&nbsp;</span>
@@ -210,46 +353,64 @@
             
                     <li>After the paragraph under the heading &#8220;The Arles Years&#8221;, type the following code:
             
-                    <img src="assets/img/intro-images/van-gogh-1.png" class="wider-115" alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/van-gogh-1.png" class="wider-115" alt="Introduction to Images">
             
                     Or, just copy-and-paste the following:
             
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/bedroom-arles-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Bedroom in Arles, van Gogh"</span>&gt;  
-</pre>
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">
+&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/bedroom-arles-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Bedroom in Arles, van Gogh"</span>&gt; </code></pre>
                     </li>
             
                     <li>Next, add the following three images in the locations shown.
             
-                    <img src="assets/img/intro-images/van-gogh-2.png"  class="wider-115" alt="Introduction to Images">
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/yellow-house-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"The Yellow House, van Gogh"</span>&gt;  
-</pre>      
+                    <img src="assets/img/working-with-images/van-gogh-2.png"  class="wider-115" alt="Introduction to Images">
+
+                    <span class="inside-ol">&nbsp;</span>
+                  
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
+&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/yellow-house-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"The Yellow House, van Gogh"</span>&gt; </code></pre>
+
 <span class="inside-ol">&nbsp;</span>
             
-                    <img src="assets/img/intro-images/van-gogh-3.png"  class="wider-115" alt="Introduction to Images">
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/cafe-terrace-at-night-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"The Cafe Terrace at Night, van Gogh"</span>&gt;  
-</pre>       
+                    <img src="assets/img/working-with-images/van-gogh-3.png"  class="wider-115" alt="Introduction to Images">
+                    <span class="inside-ol">&nbsp;</span>
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
+&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/cafe-terrace-at-night-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"The Cafe Terrace at Night, van Gogh"</span>&gt;  </code></pre>
+
 <span class="inside-ol">&nbsp;</span>
-                    <img src="assets/img/intro-images/van-gogh-4.png"  class="wider-115" alt="Introduction to Images">
-<pre class="language-html">
- &lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/starry-night-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Starry Night, van Gogh"</span>&gt;  
-</pre>     </li>
+
+                    <img src="assets/img/working-with-images/van-gogh-4.png"  class="wider-115" alt="Introduction to Images">
+                    <span class="inside-ol">&nbsp;</span>
+ 
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">
+ &lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/starry-night-van-gogh.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Starry Night, van Gogh"</span>&gt;  </code></pre></li>
+
                     <li>When finished, save your <b>page-4.html</b> file and view it in your web browser.</li>
+
+                    <li>You can see that some vertical space is need under your images.
+                        <img src="assets/img/working-with-images/margin-bottom-images.png" alt="screenshot">
+
+                    </li>
+                    <li>In your <b>style-4.css</b> stylesheet, at the bottom of the file, add a new declaration for <span call="csyn">img</span> and inside a single style rule for <b>margin-top:</b> as shown below, and save your stylesheet.
+                    <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 580px"></li>
+
+                    <li>In your browser, note the effect of adding this spacing under the images.</li>
                 </ol>
             
-                <h3 id="effect-drop-shadow">Adding a drop shadow effect</h3>
+                <p>✅ &nbsp;Task complete.</p>
+               
+            
+
+                <!-- <h3 id="effect-drop-shadow">Adding a drop shadow effect</h3>
             
                 <p>To give the images on your web page a <i>drop shadow</i> effect, add the following at the end of your <b>style-4.css</b> stylesheet.</p>
             
-                <img src="assets/img/intro-images/van-gogh-5.png" alt="Introduction to Images" style="max-width:780px">
+                <img src="assets/img/working-with-images/van-gogh-5.png" alt="Introduction to Images" style="max-width:780px">
             
                 <p>This will also add a vertical bottom margin of 42 pixels under each image.</p>
             
                 <p>Save your CSS file and view the effect on your <b>page-4.html</b> web page in your browser.</p>
-            
-                <p>In VS Code, you can now close your <b>page-4.html</b> and <b>style-4.css</b> files. </p>
+             -->
             
             </section>
             
@@ -257,7 +418,7 @@
             <section id="sample-tourism" class="wrapper-content bg-white">
             
                 <h2>Working with the <i>Tourism</i> web page</h2>
-                <p>In this section, you will work with the sample <b>page-5.html</b> web page, the sample <b>style-5.css</b> stylesheet and five images.</p>
+                <p>Next you will work with the sample <b>page-5.html</b> web page, the sample <b>style-5.css</b> stylesheet and five images.</p>
                 <ol>
                     <li>In Visual Studio Code, open the following two files: 
                     <span class="inside-ol">&nbsp;</span>
@@ -266,143 +427,99 @@
             
                     <li>Directly under the sub-heading &#8220;Guinness Storehouse, Dublin&#8221;, type the following code:
             
-                    <img src="assets/img/intro-images/tourism-1.png" class="wider-110" alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/tourism-1.png" class="wider-110" alt="Introduction to Images">
             
                     Or, just copy-and-paste the following:
             
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/guinness-storehouse.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Guinness Storehouse"</span>&gt;  
-</pre>
+<pre><button class="copy-html" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-html">
+&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/guinness-storehouse.jpg"</span> <span class="blue-light">alt</span>=<span class="brown">"Guinness Storehouse"</span>&gt;</code></pre>
                     </li>
             
                     <li>Next, add the following four images to your HTML file in the locations shown.
             
-                    <img src="assets/img/intro-images/tourism-2.png" class="wider-110"  alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/tourism-2.png" class="wider-110"  alt="Introduction to Images">
             
-                    <img src="assets/img/intro-images/tourism-3.png" class="wider-110" alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/tourism-3.png" class="wider-110" alt="Introduction to Images">
             
-                    <img src="assets/img/intro-images/tourism-4.png" class="wider-110" alt="Introduction to Images">
+                    <img src="assets/img/working-with-images/tourism-4.png" class="wider-110" alt="Introduction to Images">
             
-                    <img src="assets/img/intro-images/tourism-5.png" class="wider-110" alt="Introduction to Images"></li>
+                    <img src="assets/img/working-with-images/tourism-5.png" class="wider-110" alt="Introduction to Images"></li>
             
-                    <li>When finished, save your <b>page-5.html</b> file and view it in your web browser.</li>
+                    <li>When finished, save your <b>page-5.html</b> file.</li>
+
+                    <li>In your <b>style-5.css</b> stylesheet, at the bottom of the file, add a new declaration for <span call="csyn">img</span> and inside a single style rule for <b>margin-top:</b> as shown below, and save your stylesheet.
+                        <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 600px"></li>
+
+                    <li>Also in the stylsheet file, update the <b>margin-bottom:</b> style rule for the <span class="csyn">h2</span> declaration as shown below.
+                        <img src="assets/img/working-with-images/tourism-margin-bottom.png" alt="screenshot" style="max-width: 540px"></li>
                 </ol>
             
-            
-                <h3 id="effect-rounded-corner">Adding a rounded corner effect</h3>
-            
-                <p>To give the images on your web page a <i>rounded corner</i> effect, add the following at the end of your <b>style-5.css</b> stylesheet.</p>
-            
-                <img src="assets/img/intro-images/tourism-7.png" alt="Introduction to Images" style="max-width: 620px">
-            
-                <p>This will also add a vertical bottom margin of 32 pixels under each image.</p>
-            
-                <p>Save your CSS file and view the effect on your <b>page-5.html</b> web page in your browser.</p>
-            
-                <p>In VS Code, you can now close your <b>page-5.html</b> and <b>style-5.css</b> files. </p>
-            
+                <p>✅ &nbsp;Task complete.</p>
+
             </section>
-            
-            
-            <section id="sample-smoothies" class="wrapper-content bg-white">
-            
-                <h2>Working with the <i>Smoothies</i> web page</h2>
-                <p>In this section, you will work with the sample <b>page-6.html</b> web page, the sample <b>style-6.css</b> stylesheet and four images.</p>
-            
+
+            <section>
+                <h2>Adding some visual effects</h2>
+                <p>Next you will add some visual effects to the design of your two sample web pages.</p>
+
+                <h3>Adding a drop-shadow effect to images</h3>
+                <p>In VS Code, open <b>style-4.css</b>, update the <span class="csyn">img</span> declaration as shown below, save your stylesheet, and view the effect on your web page in a browser.
+
+                    <img src="assets/img/working-with-images/box-shadow.png" alt="screenshot" style="max-width: 560px"></p>
+
+                <p>Drop-shadow also known as box-shadow, is a visual effect that adds a shadow-like border around an element, making it appear as if it's floating above the surface behind it.</p>
+
+                <img src="assets/img/working-with-images/box-shadow-van-gogh.jpg" alt="screenshot" style="max-width: 660px">
+
+                <p>✅ &nbsp;Done.</p>
+
+
+                <h3>Adding a rounded corner effect to images</h3>
+                <p>In VS Code, open <b>style-5.css</b>, update the <span class="csyn">img</span> declaration as shown below, save your stylesheet, and view the effect on your web page in a browser.</p>
+
+                <img src="assets/img/working-with-images/border-radius-tourism.png" alt="screenshot" style="max-width: 620px">
+
+                <p>Your images now have smooth, rounded corners on all four sides.</p>
+
+                <img src="assets/img/working-with-images/tourism-rounded-corners.png" alt="screenshot" style="max-width:700px">
+
+                <p>✅ &nbsp;Done.</p>
+
+
+                <h3>Highlighting text elements</h3>
+                <p>For example of the five tourist attractions in <b>page-5.html</b>, there are two parageaphs of text. The second paragraphs always looks like that below.</p>
+
+                <img src="assets/img/working-with-images/para-highlight-1.png" alt="screenshot" style="max-width: 700px">
+
+                <p>Let's highlight the text of this second paragraph.</p>
+
                 <ol>
-                    <li>In Visual Studio Code, open the following two files: 
-                    <span class="inside-ol">&nbsp;</span>
-                    <b>page-6.html</b><br>
-                    <b>style-6.css</b></li>
-            
-                    <li>After the paragraph under the heading &#8220;Smooth Smoothies&#8221;, type the following line to add an image named &#8220;watermelon.png&#8221;:
-            
-                    <img src="assets/img/intro-images/smoothies-1.png" class="wider-110" alt="Introduction to Images">
-            
-                    Or, just copy-and-paste the following:
-            
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/watermelon.png"</span> <span class="blue-light">alt</span>=<span class="brown">"Watermelon Wonder"</span>&gt;  
-</pre></li>
-            
-                    <li>Next, add the following three further images to your HTML file at the locations shown.
-            
-                    <img src="assets/img/intro-images/smoothies-2.png"  class="wider-110" alt="Introduction to Images">
-                    <span class="inside-ol">&nbsp;</span>
-                    <img src="assets/img/intro-images/smoothies-3.png"  class="wider-110" alt="Introduction to Images">
-                    <span class="inside-ol">&nbsp;</span>
-                    <img src="assets/img/intro-images/smoothies-4.png"  class="wider-110" alt="Introduction to Images"></li>
-            
-                    <li>When finished, save your <b>page-6.html</b> file and view it in your web browser.</li>
+                    <li>In VS Code, open <b>page-5.html</b> and add a new class this is second <span class="syn">&lt;p&gt;</span> tag for all five of the tourist attractions as shown below.
+
+                    <img src="assets/img/working-with-images/para-highlight-2.png" alt="screenshot" style="max-width: 750px"></li>
+
+                    <li>In your <b>style-5.css</b> stylesheet, add a new <span class="csyn">.highlight-text</span> class declaration with three style rules as shown below.
+                    
+                    <img src="assets/img/working-with-images/para-highlight-3.png" alt="screenshot" style="max-width: 460px"></li>
+
+                    <li>Save your web page and stylesheet and view the effect in your web page in a browser.
+                    <img src="assets/img/working-with-images/para-highlight-4.png" alt="screenshot" style="max-width: 750px">
+                    As you can see, the highlighted text extends across the full-width of the screen. This is because the <span class="syn">&lt;img&gt;</span> tag is a block-level element, like <span class="syn">&lt;h1&gt;</span> and <span class="syn">&lt;p&gt;</span>.</li>
+
+                    <li>To make the background colour effect only extend behind the actual content, and not the full screen width, add one further style rule as shown below.
+                        <img src="assets/img/working-with-images/para-highlight-5.png" alt="screenshot" style="max-width: 500px"></li>
+
+                    <li>Save your <b>style-5.css</b>. In a browser, the highlighter text  should now look similar to that below.
+                        <img src="assets/img/working-with-images/para-highlight-6.png" alt="screenshot" style="max-width: 750px">
+                    
+                    </li>
                 </ol>
-            
-            
-                <h3 id="effect-remove-background">Removing an image background</h3>
-            
-                <p>You will see that the <b>lemons.png</b> image does not have a transparent background. Follow these steps to make the background of the image transparent.</p>
-            
-                <ol>
-                    <li>Open a new tab in your web browser and go to this web address:
-                    <span class="inside-ol">&nbsp;</span>
-                    <a href="https://remove.bg" target="_blank" style="font-weight:bold">remove.bg</a></li>
-            
-                    <li>Click the <b>Upload image</b> button, and upload your <b>lemons.png</b> image file.
-                    
-                    <img src="assets/img/intro-images/remove-bg.png" alt="Introduction to Images"></li>
-            
-                    <li>When the operation is finished, click the <b>Download</b> button.
-                    
-                    <img src="assets/img/intro-images/remove-bg-1.png" alt="Introduction to Images"></li>
-                    
-                    <li>Your downloaded file will have a modified name such as:
-                    <b>lemons-removebg-preview.png</b></li>
-            
-                    <li>Copy this file to your <b>websites</b> folder, and add it to your web page to replace the original file which had a non-transparent, white background.</li>
-                </ol>
-            
-                <p>Save your web page and view the result in your browser.</p>
-            
-                <p>In VS Code, you can now close your <b>page-6.html</b> and <b>style-6.css</b> files.</p>
-            
-           
+
+                <p>✅ &nbsp;Done.</p>
+
             </section>
+
             
-            
-            
-            <section id="sample-software" class="wrapper-content bg-white">
-            
-                <h2>Working with the <i>Software</i> web page</h2>
-                <p>In this section, you will work with the sample <b>page-7.html</b> web page, the sample <b>style-7.css</b> stylesheet and four images.</p>
-                <ol>
-                    <li>In Visual Studio Code, open the following two files: 
-                    <span class="inside-ol">&nbsp;</span>
-                    <b>page-7.html</b><br>
-                    <b>style-7.css</b></li>
-            
-                    <li>At the very top of the web page, just after the opening <span class="syn">&lt;body&gt;</span> tag, type the following line to add a new image named &#8220;visual-data.png&#8221;:
-            
-                    <img src="assets/img/intro-images/software-1.png" class="wider-110"  alt="Introduction to Images">
-            
-                    Or, just copy-and-paste the following:
-            
-<pre class="language-html">
-&lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="brown">"assets/img/visual-data.png"</span> <span class="blue-light">alt</span>=<span class="brown">"Dorset Analytics product"</span>&gt;  
-</pre></li>
-            
-                    <li>Next, add the following three more images to your HTML file at the locations shown.
-            
-                    <img src="assets/img/intro-images/software-2.png" class="wider-110"  alt="Introduction to Images"><span class="inside-ol">&nbsp;</span>
-            
-                    <img src="assets/img/intro-images/software-3.png" class="wider-110"  alt="Introduction to Images"><span class="inside-ol">&nbsp;</span>
-            
-                    <img src="assets/img/intro-images/software-4.png" class="wider-110"  alt="Introduction to Images"></li>
-            
-                    <li>When finished, save your <b>page-7.html</b> file and view it in your web browser.</li>
-                </ol>
-            
-                <p>In VS Code, you can now close your <b>page-7.html</b> and <b>style-7.css</b> files.</p>
-            
-            </section>
             
             <section id="embed-video">
 
@@ -413,7 +530,7 @@
             
                     <li>In the <b>page-4.html</b> file, scroll down to just after the <span class="syn">&lt;h1&gt;</span> heading and press the <kbd class="tutorial-key">Enter</kbd> key a few times to open up some blank lines.
                     
-                    <img src="assets/img/intro-images/vscode-1.png" alt="Web Design Project: Vincent van Gogh"></li>
+                    <img src="assets/img/working-with-images/vscode-1.png" alt="Web Design Project: Vincent van Gogh"></li>
             
                     <li>Next, click the link below to open a new web browser tab that displays a video on the YouTube website.
                     <span class="inside-ol">&nbsp;</span>
@@ -421,21 +538,21 @@
             
                     <li>Under the video, click the option named <b>Share</b>.
                     
-                    <img src="assets/img/intro-images/van-gogh-embed-1.png" alt="Web Design Project: Vincent van Gogh"></li>
+                    <img src="assets/img/working-with-images/van-gogh-embed-1.png" alt="Web Design Project: Vincent van Gogh"></li>
             
                     <li>From the choices now displayed, choose <b>Embed</b>.
-                    <img src="assets/img/intro-images/van-gogh-embed-2.png" alt="Web Design Project: Vincent van Gogh"></li>
+                    <img src="assets/img/working-with-images/van-gogh-embed-2.png" alt="Web Design Project: Vincent van Gogh"></li>
                     
                     
                     <li>From the pop-up box, click the <b>Copy</b> button.
                     
-                    <img src="assets/img/intro-images/vg-copy.png" alt="Web Design Project: Vincent van Gogh">
+                    <img src="assets/img/working-with-images/vg-copy.png" alt="Web Design Project: Vincent van Gogh">
                     You can now close the YouTube web browser tab.</li>
             
                     <li>Return to VS Code and the <b>page-4.html</b> file.</li>
             
                     <li>Paste the copied YouTube embed code into your web page.
-                    <img src="assets/img/intro-images/vscode-2.png" alt="Web Design Project: Vincent van Gogh"></li>
+                    <img src="assets/img/working-with-images/vscode-2.png" alt="Web Design Project: Vincent van Gogh"></li>
             
                     <li>In your web browser, reload and view your <b>page-4.html</b> web page.
                     <span class="inside-ol">&nbsp;</span>
@@ -454,18 +571,27 @@
                 <p>Follow these steps to make the embedded video scale according to the width of the user’s viewport.</p>
                 
                 <ol>
-                    <li>In your <b>page-4.html</b> file, ‘wrap’ the Youtube video code in a new container as follows:
+
+                    <li>In your <b>page-4.html</b> file, select <span class="syn">&lt;iframe&gt;</span> container you copied from YouTube.</li>
+
+                    <li>Copy the code below and paste it over the YouTube <span class="syn">&lt;iframe&gt;</span> container to replace it.
                     
-<pre class="language-html">&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"video-container"</span>&gt;
+<pre><button class="copy-html" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-html">
+&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"video-container"</span>&gt;
    &lt;<span class="blue-dark">iframe</span> <span class="blue-light">src</span>=<span class="brown">"https://www.youtube.com/embed/wI2i5ca1RT4"</span> <span class="blue-light">frameborder</span>="0" <span class="blue-light">allow=</span><span class="brown">"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"</span> <span class="blue-light">allowfullscreen</span>&gt;&lt;/<span class="blue-dark">iframe</span>&gt;  
 &lt;/<span class="blue-dark">div</span>&gt;
-</pre></li>
+</code></pre>
+            This ‘wraps’ the YouTube video code in a new <span class="syn">&lt;div&gt;</span> container
+
+</li>
             
                 <li>In VS Code, switch to the <b>style-4.css</b> stylesheet.</li>
             
-                <li>At the bottom of the stylesheet, copy-and-paste the following.
+                <li>At the bottom of the stylesheet, copy-and-paste the following, and save the file.
             
-<pre class="language-css"><span class="token class">.video-container</span> {
+
+<pre><button class="copy-html" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-css"><span class="token comment">/* ===== VIDEO ===== */</span>
+<span class="token class">.video-container</span> {
     <span class="token property">position</span>: <span class="token value-text">relative</span>;
     <span class="token property">width</span>: <span class="token number">100%</span>;
     <span class="token property">aspect-ratio</span>: <span class="token number">16 / 9</span>;
@@ -476,8 +602,7 @@
     <span class="token property">position</span>: <span class="token value-text">absolute</span>;
     <span class="token property">width</span>: <span class="token number">100%</span>;
     <span class="token property">height</span>: <span class="token number">100%</span>;
-}
-</pre>
+}</code></pre>
 </li>
             
                 <li>In your web browser, reload and view your <b>page-4.html</b> web page on desktop/laptop and mobile screens.</li>
@@ -485,6 +610,7 @@
             
                 </ol>
 
+                <p>✅ &nbsp;Done.</p>
 
             </section>
 
@@ -502,44 +628,32 @@
                 <ol>
                     <li>In Visual Studio Code, open this HTML file in your <b>websites</b> folder:
                     <span class="inside-ol">&nbsp;</span>
-                    <b>index.html</b>
-                    <span class="inside-ol">&nbsp;</span>
-            
-                    Its content should look as follows:
-                    <img src="assets/img/intro-images/home-page-body-2.png" alt="Introduction to Images"></li>
+                    <b>index.html</b></li>
             
                     <li>Copy-and-paste the following new lines to your web page, directly under the line that contains the link to the <b>page-3.html</b> web page.
             
-<pre class="language-html">
+<pre><button class="copy-html" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-html">
 &lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-4.html"</span>&gt;<span class="white">Vincent van Gogh</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt; 
-&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-5.html"</span>&gt;<span class="white">Irish Tourism</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt; 
-&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-6.html"</span>&gt;<span class="white">Smoothies</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt; 
-&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-7.html"</span>&gt;<span class="white">Software Analytics</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt; 
-</pre></li>
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-5.html"</span>&gt;<span class="white">Irish Tourism</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;</code></pre></li>
             
-                    <li>The <span class="syn">&lt;body&gt;</span> of your edited home page should now look similar to that below.
-            
-                    <img src="assets/img/intro-images/home-page-body-3.png" alt="Introduction to Images"></li>
-            
+                <li>Save your <b>index.html</b> web page and view the result in your browser.</li>
                 </ol>
             
-                <p>Save your <b>index.html</b> web page and view the result in your browser.</p>
-
        
                 <h3 id="add-image-home-page">Adding an image to your home page</h3>
 
-                <p>Before adding images to the pages of your personal website, you need to create a sub-folder to store them.</p>
+                <p>Before adding images to your home page, you need to create a sub-folder to store them.</p>
 
-                <p>For Microsoft Windows 11 users, here are the steps:</p>
+                <p>For Microsoft Windows users, here are the steps:</p>
                 <ol>
-                    <li>Open <b>File Explorer</b>, display your 📁 <b>websites/assets</b> sub-folder.</li>
-                    <li>In the blank space at the right side, right-click and choose <b>New | New folder</b> from the context menu.
-                    <img src="assets/img/intro-images/folder-files-2.png" alt="Introduction to HTML" style="max-width: 500px"></li>
+                    <li>Open <b>File Explorer</b> and display your 📁 <b>websites/assets</b> sub-folder.</li>
+                    <li>In the blank space at the right side, right-click and choose <b>New | New folder</b> from the context menu.</li>
+                    
                     <li>Give your new sub-folder the name <b>img</b>.
-                    <img src="assets/img/intro-images/folder-files-3.png" alt="Introduction to HTML">
+                    <img src="assets/img/working-with-images/folder-files-3.png" alt="Introduction to HTML">
                     <div class="box-warning">
                         <div>
-                            <img src="assets/img/intro-images/warning-sign.png" alt="Introduction to HTML">
+                            <img src="assets/img/working-with-images/warning-sign.png" alt="Introduction to HTML">
                         </div>
                         <div>
                             <p><span>DO NOT</span> type upper-case letters. Type <b>img</b>.</p>
@@ -548,17 +662,20 @@
                     </div>
                     </li>
                 </ol>
-                <img src="assets/img/intro-images/file-explorer-home-img.png" alt="Introduction to HTML">
-                <p>✅ &nbsp;That’s it. The <b>assets</b> sub-folder of your 'main' <b>websites</b> folder now has two sub-folders: one for stylesheets and one for images.</p>
+
+                <p>✅ &nbsp;That’s it.</p>
+                
+                <img src="assets/img/working-with-images/file-explorer-home-img.png" alt="Introduction to HTML" style="max-width: 680px">
+                <p>The <b>assets</b> sub-folder of your 'main' <b>websites</b> folder now has two sub-folders: one for stylesheets and one for images.</p>
 
                 <p>Now, you can add one or more images to the home page of your website.</p>
                 <ol>
                     <li>In VS Code, open your home page <b>index.html</b> file.</li>
                     <li>In your web browser, select and download a suitable image from the range of copyright-free, <a href="intro-images.html#images-sources">stock photography websites.</a></li>
                     <li>Copy your selected image from your <b>Downloads</b> folder to your <b>assets/img</b> sub-folder.</li>
-                    <li>In VS Code, add the image to your <b>index.html</b> web page.
+                    <li>In VS Code, add the image to your <b>index.html</b> web page, inside the <span class="syn">&lt;header&gt;</span> tag.
                     <span class="inside-ol">&nbsp;</span>
-                    In the <span class="syn">img</span> tag, don&#8217;t forget to include the <span class="atsyn">alt</span> attribute with some descriptive text.</li>
+                    In the <span class="syn">&lt;img&gt;</span> tag, don&#8217;t forget to include the <span class="atsyn">alt</span> attribute with some descriptive text.</li>
                     <li>Save your web page and view it in your web browser.</li>
 
                 </ol>
@@ -576,40 +693,49 @@
                 <ol>
             
                     <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">Github.com</a>. If you are not already signed in to your Github account, sign in now.
-                    <img src="assets/img/intro-images/github-signin.png" alt="github-signin"></li>
+                    <img src="assets/img/working-with-images/github-signin.png" alt="github-signin"></li>
                 
                     <li>On your Github home page, click the &#8216;repo&#8217; that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on Github.
                     <span class="inside-ol">&nbsp;</span>
                     <b>username.github.io</b>
                 
-                    <img src="assets/img/intro-images/github-repo-select.png" alt="github-signin"></li>
+                    <img src="assets/img/working-with-images/github-repo-select.png" alt="github-signin"></li>
                 
                     <li>On the next Github screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
-                    <img src="assets/img/intro-images/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+                    <img src="assets/img/working-with-images/github-btn-add-file.png" alt="github-upload-portfolio"></li>
                 
                     <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
                 
-                    <img src="assets/img/intro-images/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+                    <img src="assets/img/working-with-images/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
                 
                     <li>In File Explorer (Windows 11) or Finder (Apple Mac), drag-and-drop your 📄 <b>index.html</b> file and your 📁 <b>assets</b> and 📁 <b>exercises</b> sub-folders to upload them to your repository on Github.
-                    <img src="assets/img/intro-images/github-upload-folder-files.png"  alt="Introduction to HTML">
+                    <img src="assets/img/working-with-images/github-upload-folder-files.png"  alt="Introduction to HTML">
                     </li>
     
                     <li>Scroll down to the bottom of the Github screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
                 
                     <li>Finally, click the green <b>Commit changes</b> button to upload your files.
-                    <img src="assets/img/intro-images/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+                    <img src="assets/img/working-with-images/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
                 </ol>
                 
                 <p>Your updated home page and four new web pages are now published on Github at web addresses similar to the following:</p>
                     
-                <p><b>https://username.github.io/index.html</b><br>
-                <b>https://username.github.io/exercises/page-4.html</b><br>
-                <b>https://username.github.io/exercises/page-5.html</b><br>
-                <b>https://username.github.io/exercises/page-6.html</b><br>
-                <b>https://username.github.io/exercises/page-7.html</b></p>
+                <p><b>https://username.github.io/index.html<br>
+                https://username.github.io/exercises/page-4.html<br>
+                https://username.github.io/exercises/page-5.html</b></p>
                 
                 <p>It may take a few minutes for your uploaded files to appear on Github.</p>
+
+            </section>
+
+            <section id="further-resources">
+
+                <div class="box-toc">
+                    <h2>Further resources</h2>
+                    <p><a href="https://speckyboy.com/quick-guide-website-photography/" target="_blank" rel="noopener" class="further-title">A quick guide to website photography</a>
+                    <br>By Eric Karkovack at <a href="https://speckyboy.com/" target="_blank" rel="noopener" style="font-weight:normal">Speckyboy</a></p>
+
+                </div>
 
             </section>
             <!--
@@ -628,28 +754,22 @@
         </article>
     </main>
 
-	<footer>
+    <footer>
 
     </footer>
-    
-    <!-- JavaScript for Cookie Consent Popup Message -->
-	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-	<script>
-	window.cookieconsent.initialise({
-	  	"palette": {
-			"popup": {
-				"background": "#000"
-			},
-			"button": {
-				"background": "#f1d600"
-			}
-		},
-	  	"content": {
-			"href": "https://www.munnelly.com/legal/index.html"
-		}
-	});
-    </script>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>       
 
 
 </body>
 </html>
+
