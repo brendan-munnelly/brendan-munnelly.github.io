@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Styling Hyperlinks | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Understanding the different states of hyperlinks and how to customise their appearance using CSS.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34 }
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Styling Hyperlinks</h1>
+                <h2>Understanding the different states of hyperlinks and how to customise their appearance using CSS.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    
+    <main>
+
+		<aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+// Basic referrer detection
+let returnHome;
+function getBasicReferrer() {
+  return document.referrer || "Direct visit (no referrer)";
+}
+
+const testReferrer = getBasicReferrer();
+
+if (testReferrer.includes("ibat")) {
+    console.log("Referrer is IBAT");
+    returnHome = "https://munnelly.com/ibat/index.html"
+}
+else if (testReferrer.includes("dorset")) {
+    console.log("Referrer is Dorset");
+    returnHome = "https://munnelly.com/dorset/index.html"
+}
+
+else {
+    console.log("Referrer unknown");
+    returnHome = "../index.html"
+}
+
+// Set the href attribute of the link
+document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+
+// Log the referrer information
+function logReferrer() {
+  console.log("Basic Referrer:", getBasicReferrer());
+}
+
+// Call the function to log the referrer
+logReferrer();</script>    
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning goals</a></p>
+            <p><a href="#styling-with-css">Styling hyperlinks with CSS</a></p>
+            <p><a href="#update-sample-pages">Updating your <i>van Gogh</i> and <i>Tourism</i> hyperlinks</a></p>
+            <p><a href="#css-underlines">Underlines and the |<code>text-decoration</code> property</a></p>
+            <p><a href="#upload-github">Uploading your files to GitHub</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+
+			<section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Understand the different states of hyperlinks</li>
+                    <li>Know how to target specific hyperlink states using CSS pseudo-classes</li>
+                    <li>Change the color and text decoration of hyperlinks</li>
+                    <li>Style the underline properties of hyperlinks</li>
+                    <li>Create custom hyperlink styles for your web pages</li>
+                </ul>
+            </section>
+
+
+            <section id="styling-with-css" class="wrapper-content bg-white">
+
+                <h2>Styling hyperlinks with CSS</h2>
+            
+
+                <p>The simplest way to style a hyperlink in a web page is to add a style rule for <b>color</b> in the linked stylesheet file as follows.</p>
+
+                <img src="assets/img/styling-hyperlinks/hyperlinks-1.png" alt="screenshot" style="max-width: 660px">
+
+                <p>However, unlike other inline elements such as <span class="syn">&lt;b&gt;</span> or <span class="syn">&lt;i&gt;</span>, hyperlinks are <i>interactive</i> elements. Users expect links to display differently depending on their interaction with them.</p>
+            
+                <p>Hyperlinks have five dynamic states. In CSS, you can target these different states using <i>pseudo-classes</i>. See below.</p>
+
+                <img src="assets/img/styling-hyperlinks/hyperlinks-2.png" alt="screenshot" style="max-width: 720px">
+                
+                <p>Note the colon character <span class="csyn">:</span> between the <span class="csyn">a</span> selector and the pseudo-class name, such as <span class="csyn">link</span> and <span class="csyn">active</span>.</p>
+            
+                <p>For simplicity, these five states can be grouped into two categories: passive and interactive.</p>
+
+                <img src="assets/img/styling-hyperlinks/hyperlinks-3.png" alt="screenshot" style="max-width: 732px">
+
+                <p>In the example above, the link colour changes from blue to dark blue when the user interacts with it.</p>
+
+                <p>Typically, you will add smooth transition effect between states to create a more polished experience. See below.</p>
+                
+                <img src="assets/img/styling-hyperlinks/hyperlinks-4.png" alt="screenshot" style="max-width: 732px">
+
+    
+            </section>
+
+
+            <section id ="update-sample-pages">
+                <h2>Updating your <i>van Gogh</i> and <i>Tourism</i> hyperlinks</h2>
+
+                <p>Now you will update the hyperlinks in two of your sample exercise files. Follow these steps:</p>
+
+
+                <ol>
+                    <li>In VS Code, open the <b>style-4.css</b> stylesheet.</li>
+                    <li>Add the following at the end of the file.
+
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-css">/* ======== HYPERLINKS ======== */
+a:link, a:visited {
+    color: #000; 
+    transition: all 0.3s ease;
+}
+
+a:hover, a:focus, a:active {
+    color: var(--yellow-700)
+}</code></pre></li>
+                    <li>Save the stylesheet and, in your browser, note the effect on your web page.</li>
+
+                    <li>In VS Code, open the <b>style-5.css</b> stylesheet.</li>
+                    <li>Add the following at the end of the file.
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-css">/* ======== HYPERLINKS ======== */
+a:link, a:visited {
+    color: var(--green-800); 
+    transition: all 0.3s ease;
+}
+
+a:hover, a:focus, a:active {
+    color: var(--green-600)
+}</code></pre>  </li>
+                    <li>Save the stylesheet and, in your browser, note the effect on your web page.</li>
+                </ol>
+
+                <p>✅ &nbsp;Done.</p>
+
+            </section>
+           
+
+            
+            
+            <section id="css-underlines" class="wrapper-content bg-white">
+            
+                <h2>Underlines and the <code>text-decoration</code> property</h2>
+            
+                <p>Changing their colour according to state is the most basic way to style hyperlinks to provide clear visual feedback to users.</p>
+
+                <p>Another option is to change the underline properties.</p>
+
+                <p>By default, browsers display hyperlinks with an underline. This helps users identify clickable text, especially when links are embedded within paragraphs.</p>
+
+                <img src="assets/img/styling-hyperlinks/hyperlinsk-underlines.png" alt="screenshot" style="max-width: 620px">
+                
+                <p>You can control the presence of underlines using the <b>text-decoration</b> property. For example, to remove the underline from active hyperlink states, you would do the following:</p>
+                
+                <img src="assets/img/styling-hyperlinks/hyperlinks-5.png" alt="screenshot" style="max-width: 640px">
+
+                <p>Typically, you would remove underlines from hyperlinks in navigation menus and footers.</p>
+
+                <img src="assets/img/styling-hyperlinks/hyperlinks-no-underline.png" alt="screenshot">
+
+                <p>Three commonly used <b>text-decoration</b>-related properties for hyperlinks are the following:</p>
+
+                <ul>
+                    <li><b>text-decoration-color</b>: Sets the color of the line (can be different from the text color)</li>
+                    <li><b>text-decoration-thickness</b>: Sets the thickness of the line</li>
+                    <li><b>text-underline-offset</b>: Sets the distance between the text and the underline</li>
+                </ul>
+                
+                <p>Let's apply these to your two sample web pages.</p>
+                
+                <ol>
+                    <li>In VS Code, for <b>style-4.css</b>, update your hyperlink style rules as follows.
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-css">a:link, a:visited {
+    color: #000; 
+    transition: all 0.3s ease;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #000;
+    text-underline-offset: 7px;
+}
+
+a:hover, a:focus, a:active {
+    color: var(--yellow-700);
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--blue-600);
+    text-underline-offset: 7px;
+}</code></pre></li>
+                    <li>In VS Code, for <b>style-5.css</b>, update your hyperlink style rules as follows.
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-css">/* ======== HYPERLINKS ======== */
+a:link, a:visited {
+    color: var(--green-800); 
+    transition: all 0.3s ease;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--green-800);
+    text-underline-offset: 6px;
+}
+
+a:hover, a:focus, a:active {
+    color: var(--rose-600);
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--rose-600);
+    text-underline-offset: 6px;
+}</code></pre>                        
+                    
+                    
+                    </li>
+                    <li>Save both stylesheets and view the effect on your web pages.</li>
+
+                </ol>
+            
+                <p>✅ &nbsp;All done.</p>
+
+            </section>
+
+    <section id="upload-github">
+        <h2>Uploading your files to GitHub</h2>
+    
+        <p>You are now ready to upload your work to your account on GitHub.</p>
+    
+            <ol>
+                
+                <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">github.com</a>. If you are not already signed in to your GitHub account, sign in now.
+                <img src="assets/img/styling-hyperlinks/github-signin.png" alt="github-signin"></li>
+            
+                <li>On your GitHub home page, click the &#8216;repo&#8217; that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+                <span class="inside-ol">&nbsp;</span>
+                <b>username.github.io</b>
+            
+                <img src="assets/img/styling-hyperlinks/github-repo-select.png" alt="github-signin"></li>
+    
+                <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+    
+                <img src="assets/img/styling-hyperlinks/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+            
+                <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+            
+                <img src="assets/img/styling-hyperlinks/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+            
+                <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your 📁 <b>exerciss</b> sub-folder to upload it io your repository on GitHub.
+                <img src="assets/img/styling-hyperlinks/github-upload-folder-files.png"  alt="Introduction to HTML"></li>
+        
+                <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+            
+                <li>Finally, click the green <b>Commit changes</b> button to upload your files.
+                <img src="assets/img/styling-hyperlinks/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+            </ol>
+    
+        <p>Your updated web pages are now published on GitHub at web addresses similar to the following:</p>
+            
+        <p><b>https://username.github.io/exercises/page-4.html<br>	
+        https://username.github.io/exercises/page-5.html</b></p>	
+    
+        <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+    
+    </section>
+
+        
+    </article>
+</main>
+
+    <footer>
+
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>       
+
+
+</body>
+</html>
