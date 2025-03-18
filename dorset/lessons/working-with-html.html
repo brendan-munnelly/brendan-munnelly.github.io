@@ -8,44 +8,17 @@
     <meta name="description" content="Understanding the basic structure of an HTML file and adding HTML text formatting tags.">
 
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+    <link rel="stylesheet" href="../assets/css/front-end-tutorials.css" />
 
-    <style>
-        .table-js-methods {
-            margin: 24px 0 24px 0;
-            border-top: solid 2px #044d6c;
-            background: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
-            min-width: 96%;
-
-        }
-
-        .table-js-methods td {
-            border-bottom: solid 1px #044d6c;
-            padding: 6px 0 8px
-        }
-
-        .table-js-methods td:nth-child(1) {
-            min-width: 20%;
-            vertical-align: top;
-            padding-left: 8px
-        }
-
-        .table-js-methods td p span {
-            font-weight: 500;
-        }
-
-        .table-js-methods td p  {
-            margin-bottom: 6px;
-            line-height: 1.4;
-            padding-right: 6px;
-        }
-    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -81,43 +54,8 @@
 
         <aside>
             <h3>FRONT-END DEVELOPMENT</h3>
-            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
-                
-            <script>
-	// Basic referrer detection
-	let returnHome;
-	function getBasicReferrer() {
-	  return document.referrer || "Direct visit (no referrer)";
-	}
-	
-	const testReferrer = getBasicReferrer();
-	
-	if (testReferrer.includes("ibat")) {
-		console.log("Referrer is IBAT");
-		returnHome = "https://munnelly.com/ibat/index.html"
-	}
-	else if (testReferrer.includes("dorset")) {
-		console.log("Referrer is Dorset");
-		returnHome = "https://munnelly.com/dorset/index.html"
-	}
-	
-	else {
-		console.log("Referrer unknown");
-		returnHome = "../index.html"
-	}
-	
-	// Set the href attribute of the link
-	document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
-	
-	// Log the referrer information
-	function logReferrer() {
-	  console.log("Basic Referrer:", getBasicReferrer());
-	}
-	
-	// Call the function to log the referrer
-	logReferrer();</script>
 
-
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
             <h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
             <p><a href="#html-structure">HTML files: The basic structure</a></p>
@@ -128,13 +66,11 @@
             <p><a href="#displaying-page">Displaying your web page</a></p>
             <p><a href="#adding-text">Adding text to the <code>&lt;body&gt;</code> of your web page</a></p>
 
-            <p><a href="#marking-up-text">Marking up text content</a></p>
-            <p><a href="#marking-up-html">Marking up text in HTML</a></p>
-            <p><a href="#first-web-page-marking-up">Marking up content in the <code>page-1.html</code> file</a></p>
+            <p><a href="#first-web-page-marking-up">Marking up the content in your web page</a></p>
 
             <p><a href="#home-page">Creating a home page for your website</a></p>
 
-            <p><a href="#github-upload">Uploading your work to GitHub</a></p>
+            <p><a href="#github-upload">Uploading your web pages to GitHub</a></p>
 
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
@@ -157,24 +93,11 @@
                     <li>Create hyperlinks between web pages.</li>
                     <li>Upload web pages to your GitHub account.</li>
                 </ul>
-        </section>
+            </section>
 
     <section id="html-structure">
         <h2>HTML files: The basic structure</h2>
-        <p>Every HTML file has two basic parts - the <i>head</i> and the <i>body</i></p>
-
-        <table class="table-js-methods">
-            <tr>
-                <td style="width: 20%"><p><b>head</b></p></td>
-                <td style="width: 80%"><p>Technical stuff the web page needs to display properly.</p></td>
-            </tr>
-            <tr>
-                <td style="width: 20%"><p><b>body</b></p></td>
-                <td style="width: 80%"><p>The actual web page content visible to the user.</p></td>
-            </tr>
-        </table>
-        
-        <p>In VS Code, the simplest possible web page looks as shown below.</p>
+        <p>The simplest possible HTML file has two main parts - the <i>head</i> and the <i>body</i> and looks as shown below.</p>
 
         <img src="assets/img/working-with-html/html-file-structure.png" alt="Tutorial: About HTML Files">
 
@@ -186,14 +109,14 @@
         <p>You are now ready to create a new web page – that is, an  HTML file. Here are the steps:</p>
 
         <ol>
-            <li>On your Taskbar (Windows) or Dock (Apple Mac), click the icon to start Microsoft Visual Sudio Code (VS Code).
+            <li>Start Microsoft Visual Code (VS Code) on your computer.
             <img src="assets/img/working-with-html/taskbar-vscode.png" alt="Introduction to HTML"></li>
             <li>Choose the <b>File | New Text File</b> command.
             <img src="assets/img/working-with-html/file-new.png" alt="Introduction to HTML">
             VS Code creates a new, empty file in a new tab within your VS Code window.
             <span class="inside-ol">&nbsp;</span>
             It suggests the name of <b>Untitled-1</b> for your new file.
-            <img src="assets/img/working-with-html/file-new-untitled.png" alt="Introduction to HTML" style="padding-bottom: 10px">
+            <img src="assets/img/working-with-html/file-new-untitled.png" alt="Introduction to HTML">
             Let’s give your file a new name and save it as an HTML file.</li>
 
             <li>Choose the <b>File | Save As...</b> command.
@@ -231,7 +154,6 @@
         <p>Your folder and file structure should look as shown below.</p>
         <img src="assets/img/working-with-html/folder-files-7.png" style="width:600px" alt="Introduction to HTML">
 
-        <p>Note that your <b>page-1.html</b> file is <i>inside</i> your  📁 <b>exercises</b> folder, which is <i>inside</i> your  📁 <b>websites</b> folder.</p>
 
     </section>
 
@@ -241,7 +163,7 @@
         <h2>Adding the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> structure</h2>
         <p>After creating and naming your new, empty  <b>page-1.html</b> web page, your next task is to add the basic <span class="syn">&lt;head&gt;</span> and <span class="syn">&lt;body&gt;</span> structure to it.</p>
 
-                <p>VS Code offers a convenient shortcut for doing this.</p>
+                <p>Visual Studio Code offers a convenient shortcut for doing this.</p>
 
                 <ol>
 
@@ -330,33 +252,47 @@
                     <li>Open File Explorer (Windows) or Finder (Apple Mac), and display the contents of your  📁 <b>websites/exercises</b> sub-folder.
                     <span class="inside-ol">&nbsp;</span>
                     Your choice of default web browser determines which icon is shown for your HTML files.
-                    <img src="assets/img/working-with-html/file-display-chrome.png" alt="Introduction to HTML"></li>
+                    <ul>
+                        <li>If you have set Google Chrome as your default web browser, your screen should look as shown below.
+                        <img src="assets/img/working-with-html/file-display-chrome.png" alt="Introduction to HTML"></li>
+                        <li>If you have set Mozilla Firefox Developer Edition as your default web browser, your screen shown look as below.
+                        <img src="assets/img/working-with-html/file-display-firefox.png" alt="Introduction to HTML"></li>
+                    </ul>
+                    In either case, double-click the  <b>page-1.html</b> file to open it.</li>
 
-                    <li>Double-click the  <b>page-1.html</b> file. This will open your default web browser to display the file. It should look as shown below.
-                    <img src="assets/img/working-with-html/looks-empty.png" alt="Introduction to HTML"></li>
+                    <li>If some other web browser is your default:
+                        <ul>
+                            <li>Right-click the  <b>page-1.html</b> file.</li>
+                            <li>From the context menu displayed, choose <b>Open with</b>.</li>
+                            <li>Select either <b>Firefox Developer Edition</b> or <b>Google Chrome</b> to open the web page.
+                            <img src="assets/img/working-with-html/file-explorer-right-click.png" alt="file-explorer-right-click"></li>
+                        </ul>
+                    </li>
 
-                    </ol>
+                    <li>Your web page should look as shown below.
+                    <img src="assets/img/working-with-html/looks-empty.png" alt="Introduction to HTML">
+                    Note the address of your web page in the Address Bar of your web browser.
+                    <ul>
+                        <li>The first part of the address shows the name of the folder and sub-folder (<b>websites/exercises</b>) that contains your web page.</li>
+                        <li>The second part of the address shows the name of the file (<b>page-1.html</b>).</li>
+                    </ul>
 
-                    <h3>About the Title and Address bar</h3>
+                    Also in the Address Bar of the web browser you can see that the forward slash <b>/</b> character is used to separate the name of the file from the name of the folders where the file is located.</li>
 
-                    <p>In the Title area at the top of your web browser you can see the title text ("A Tale of Two Cities") you entered in VS Code.</p>
-
-                    <p>In the Address bar you can see the location of the web page on your computer is mirrored in the address of the web page.</p>
-                    <img src="assets/img/working-with-html/address-bar.png" alt="screenshot" style="max-width: 600px">
-                   
-                    <p>You can also can see that the forward slash <b>/</b> character is used to separate the different parts of the web address.</p>
-
-                    <h3>Viewing the HTML code of a web page</h3>
-
-                    <p>In a web browser, you can view the source HTML code 'behind' any web page as follows:</p>
-                    <ol>
-                        <li>Right-click on any empty part of the web page.</li>
+                    <li>Because you have not yet added any content to the <span class="syn">&lt;body&gt;</span> of your web page, it looks as if it is empty.
+                    <span class="inside-ol">&nbsp;</span>
+                    However, your web page does contain the correct content within its <span class="syn">&lt;head&gt;</span>.
+                    <span class="inside-ol">&nbsp;</span>
+                    To view this:
+                    <ul>
+                        <li>Right-click anywhere on the web page.</li>
                         <li>From the context menu displayed, choose the <b>View page source</b> command.
                         <img src="assets/img/working-with-html/view-page-source-command.png" class="wider-110" alt="Introduction to HTML"></li>
-                        <li>Your web browser opens a new tab and displays the HTML source code of your web page.
-                        <img src="assets/img/working-with-html/view-page-source.png" class="wider-110" alt="Introduction to HTML"></li>
-                    </ol>
-                    <p>You can now close this new browser tab.</p>
+                    </ul></li>
+                    <li>Your web browser opens a new tab and displays the HTML source code of your web page.
+                    <img src="assets/img/working-with-html/view-page-source.png" class="wider-110" alt="Introduction to HTML"></li>
+                </ol>
+
             </section>
 
             <section id="adding-text">
@@ -406,57 +342,22 @@
 
             </section>
 
-            <section id="marking-up-text">
-                <h2>Marking up text content</h2>
-
-                <p>A lot has changed in the evolution from paper-based traditional printing to modern digital publishing. But the process remains the same.</p>
-
-                <ul>
-                    <li>You start with text that is unformatted in any way - all the words are the same size and in the same colour.</li>
-                    <li>You then add instructions around the text that control the visual appearance of the final output.</li>
-                </ul>
-
-                <p>In the past, editors would add handwritten notes that directed the printers how the text should be formatted in the final publication. See the examples below.</p>
-
-                <img src="assets/img/working-with-html/marking-up-1.png" alt="Introduction to HTML">
-
-                <img src="assets/img/working-with-html/marking-up-2.png" alt="Introduction to HTML">
-
-                <p>This process was called <i>marking-up</i>.</p>
-            </section>
-
             <section>
-                <h2 id="marking-up-html">Marking up text in HTML</h2>
-
-                <p>In web publishing, marking-up continues - but is now done by adding special characters called <i>tags</i> to the text in a HTML file.</p>
-
-                <p>Almost all HTML tags come in pairs: an opening (or start tag) and a closing (or end) tag.</p>
-
-                <img src="assets/img/working-with-html/marking-up-3.png" alt="Introduction to HTML" style="max-width: 600px">
-
-                <p>HTML tags are enclosed with angle brackets <b>&lt; &gt;</b>. And the closing tag includes the forward slash <b>/</b> character. You can see some examples of <i>marked-up</i> text in an HTML file below.</p>
-
-                <img src="assets/img/working-with-html/marking-up-4.png" alt="Introduction to HTML">
-
-
-            </section>
-
-            <section>
-                <h2 id="first-web-page-marking-up">Marking up content in the <code>page-1.html</code> file</h2>
+                <h2 id="first-web-page-marking-up">Marking up the content in your web page</h2>
 
                 <p>Now you will mark-up the text of your web page with opening and closing pairs of the following HTML tags: <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span>, <span class="syn">&lt;h3&gt;</span> and <span class="syn">&lt;p&gt;</span>.</p>
 
+                <p>	The <b>&lt;</b> symbol is known as the <i>left angle bracket</i>. And the <b>&gt;</b> symbol is known as the <i>right angle bracket</i>.</p>
                 <ul>
-                    <li>To type a <b>&lt;</b> hold down the <kbd class="tutorial-key">Shift &#8593;</kbd> key and type the <kbd class="tutorial-key">,</kbd> (comma) key.</li>
-                    <li>To type a <b>&gt;</b> hold down the <kbd class="tutorial-key">Shift &#8593;</kbd> key and type the <kbd class="tutorial-key">.</kbd> (full stop) key.</li>
-                    <li>To type a <b>/</b> press the key just to the right of the <kbd class="tutorial-key">.</kbd> full stop key.</li>
+                    <li>To type a left angle bracket, hold down the <b>Shift</b> key and type the <b>,</b> (comma) key.</li>
+                    <li>To type a right angle bracket, hold down the <b>Shift</b> key and type the <b>.</b> (full stop) key.</li>
+                    <li>The <b>/</b> symbol is called the <i>forward slash</i>. The key is just to the right of the <b>.</b> (full stop).</li>
 
                 </ul>
 
-                
                 <img src="assets/img/working-with-html/keyboard-2.png" alt="Introduction to HTML">
 
-                    <p>Follow these steps:</p>
+
                 <ol>
                     <li>Wrap the main heading text “A Tale of Two Cities” within <span class="syn">&lt;h1&gt;</span> ... <span class="syn">&lt;/h1&gt;</span> tags.</li>
                     <li>Wrap the two “Small Heading” texts within <span class="syn">&lt;h2&gt;</span> ... <span class="syn">&lt;/h2&gt;</span> tags.</li>
@@ -469,7 +370,7 @@
 
                     <li>Save your <b>page-1.html</b> web page file.</li>
 
-                    <li>Display your web page in your browser. It should now look as shown below.
+                    <li>Display your web page in your web browser. It should now look as shown below.
                     <img src="assets/img/working-with-html/example-one-browser.png" class="wider-110" alt="Introduction to HTML"></li>
                 </ol>
 
@@ -597,22 +498,13 @@ http://animista.net, t: @cssanimista
 
 
         <section id="github-upload">
-            <h2>Uploading your work to GitHub</h2>
+            <h2>Uploading your web pages to GitHub</h2>
 
-            <p>Your final task is to upload your work to your account on GitHub.</p>
-
-            <div class="box-warning">
-                <div>
-                    <img src="assets/img/working-with-html/warning-sign.png" alt="Introduction to HTML" style="max-width: 100px;">
-                </div>
-                <div>
-                    <p>Because your upload includes a folder and not just files, you must use the <b>drag-and-drop</b> method rather than the file select method.</p>
-                </div>
-            </div>
+            <p>Your final task is to upload your two web pages to your account on GitHub.</p>
 
             <ol>
 
-                <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">github.com</a>. If you are not already signed in to your GitHub account, sign in now.
+                <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">GitHub.com</a>. If you are not already signed in to your GitHub account, sign in now.
                 <img src="assets/img/working-with-html/github-signin.png" alt="github-signin"></li>
 
                 <li>On your GitHub home page, click the name of the repository (‘repo’) that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
@@ -649,39 +541,6 @@ http://animista.net, t: @cssanimista
 
             </section>
 
-            <section class="resources-learning" id="resources">
-
-                <h2>More learning resources</h2>
-        
-                <div class="flex-container">
-                    <div class="text-container">
-                        <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
-                        <p><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/4" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
-        
-                    </div>
-            
-                    <div class="audio-container">
-                        <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
-        
-                        <audio controls>
-                            <source src="assets/audio/working-with-html.mp3" type="audio/mp3">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                </div>
-        
-            </section>
-
-
-            <section class="resources-learning" id="ai-prompts">
-          
-                <h2>Sample AI prompts</h2>
-            
-              
-                <div class="gpt"><button class="copy-gpt" id="btn-1">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-1">Create a basic web page with one h1 tag and three h2 tags. Add some sample content about the world's top three soccer players.</code></div>
-               
-              </section>
-
         </article>
     </main>
 
@@ -690,9 +549,23 @@ http://animista.net, t: @cssanimista
 
     </footer>
 
-  
-    <script>hljs.highlightAll();</script>
+    <!-- JavaScript for Cookie Consent Popup Message -->
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<script>
+	window.cookieconsent.initialise({
+	  	"palette": {
+			"popup": {
+				"background": "#000"
+			},
+			"button": {
+				"background": "#f1d600"
+			}
+		},
+	  	"content": {
+			"href": "https://www.munnelly.com/legal/index.html"
+		}
+	});
+    </script>
 
-    <script src="assets/js/utils.js"></script>
 </body>
 </html>
