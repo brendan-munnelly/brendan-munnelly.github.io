@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe Bloggs | Front-end Developer | JavaScript Data Tables Project </title>
+    <meta name="description" content="Uses the Fetch API to retrieve a searchable list of movie titles and images from the Internet Movie Database.">
+
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/lunadoge.min.css" />
+    <link rel="stylesheet" href="../assets/css/css-javascript.css" />
+
+    <style>
+
+        /* ============ Header Colours =============*/
+        header.hero-block-js { background-color: #f7df1e }
+        header.hero-block-js h1 { color: #222 }
+        header.hero-block-js h2 { color: var(--gray-700) }
+
+        /* Main Colours */
+        .theme-js {
+            background-image:#ff0000; background-image:
+            radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(355,85%,93%,1) 0, transparent 50%),
+            radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0, transparent 50%),
+            radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0, transparent 50%),
+            radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0, transparent 50%);
+        }
+
+        .theme-js .col-2 { background-color: var(--green-100) }
+        .theme-js h3 { color: #222 }
+        .theme-js p { color: #222 }
+
+        /* Button Colours: passive state */
+        .theme-js a.btn {
+            color: #fff; background-color: blue; transition: 0.2s;
+            border-radius: 6px
+        }
+
+        /* Button Colours: active state */
+        /* .theme-js a.btn:hover { background-color: darkblue }
+
+        .theme-js a.btn { background-image: linear-gradient(to right,#e052a0,#f15c41) }
+        .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) }  */
+
+        /* ========= ENDS CUSTOM CSS FOR WEB PAGE ======= */
+
+
+        .theme-js { text-align: center}
+        .container-table { margin: 0 auto;}
+
+        @media (min-width: 768px) {
+            .container-table {
+                padding-top: 4%;
+                padding-bottom: 4%
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container-table {
+                padding: 5% 10%
+            }
+        }
+
+        /* All tables */
+        .data-table {
+            border-collapse: collapse;
+            font-size: 18px;
+            width: 100%;
+            overflow: scroll;
+            margin-bottom: 56px;
+            border: solid 1px #888;
+            box-shadow: 8px 8px 8px #888;
+        }
+
+        .data-table td, .data-table th { padding: 8px 18px; text-align: left }
+
+        /* Tables with light theme */
+        .table-theme-light thead tr th { background-color: lightgray }
+        .table-theme-light tr:nth-child(odd)  { background-color: #fff }
+        .table-theme-light tr:nth-child(even) { background-color: #E1E4E7 }
+
+        /* Delete button */
+        .theme-js .table-theme-light td a.btn {
+            background-color: blue;
+            color:#fff;
+            padding: 4px 12px;
+            font-size: 90%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .theme-js .table-theme-light td a.btn:hover {
+            background-color: darkblue;
+        }
+
+        .table-theme-light td a.btn i { margin-right: 12px }
+
+        .table-theme-light td a.btn > * { pointer-events: none; }
+
+        button.add-row {
+            padding: 10px 22px;
+            background-color: red;
+            color:#fff;
+            font-size: 20px;
+            border-radius: 50px;
+            margin-bottom: 48px;
+        }
+
+        button.add-row i { margin-left: 8px }
+
+    </style>
+
+	<!-- Font Awesome 6.1 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<body>
+
+    <!-- navigation menu -->
+
+    <nav class="container-menu menu-desktop menu-sticky">
+        <a href="../../../index.html"><img src="../assets/img/website-logo-sample.png" alt="website logo"></a>
+        <ul class="">
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../portfolio/index.html">Portfolio</a></li>
+            <li><a href="../../../contact/index.html" id="btn-cta"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
+        </ul>
+        <div class="item-icon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
+
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1>Data Tables <span>JavaScript Project</span></h1>
+            <h2>Populates an HTML table with data stored in an array. Includes the option to remove data items. View my complete collection of <a href="../index.html">JavaScript projects</a>.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+
+        <section class="container-flex theme-js">
+
+            <div class="container-table">
+
+
+                <table class="data-table table-theme-light" id="myTable">
+                  <thead>
+                      <tr>
+                          <th>Student ID</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id= "studentData"></tbody>
+                </table>
+
+                <p><button class="add-row" id="btn_populate" onclick="populateTable()">Populate Table <i class="fa-solid fa-circle-plus"></i></button></p>
+
+              </div>
+
+        </section>
+
+    </main>
+
+    <script>
+    </script>
+
+
+    <!-- footer -->
+	<footer>
+
+		<h2>Joe Bloggs</h2>
+
+		<h3>Excellence in digital creation</h3>
+
+		<ul class="footer-links">
+			<li><a href="../../../index.html">Home</a></li>
+			<li><a href="../../../portfolio/index.html">Portfolio</a></li>
+			<li><a href="../../../contact/index.html">Contact</a></li>
+		</ul>
+
+		<ul class="footer-icons">
+			<li><a href="https://www.linkedin.com/nnnnnnnnnnn" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+			<li><a href="https://github.com/nnnnnnnnnn" target="_blank"><i class="fab fa-github-square"></i></a></li>
+		</ul>
+
+		<p class="index.html"> <a href="../../../privacy.html" style="color: #fff; background-color:transparent;">Privacy &amp; Legal</a> </p>
+
+    </footer>
+
+    <script src="../assets/js/menu.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
