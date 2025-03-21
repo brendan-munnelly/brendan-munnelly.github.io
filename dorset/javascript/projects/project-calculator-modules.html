@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	  <title>Calculator with Modules | JavaScript Project | Brendan Munnelly</title>
+    <meta name="description" content="A basic calculator that uses export/import statements to share code with a JavaScript module file.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>Calculator with Modules</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">JavaScript Home</a></p>
+				<p><i class="fas fa-list"></i> &nbsp;<a href="index.html">Projects List</a></p>
+
+			</aside>
+
+	<article>
+
+	<section id="learning-goals">
+      <h2>Project Description</h2>
+      <p>A basic calculator that uses export/import statements to share code with a JavaScript module file.</p>
+	</section>
+
+  <section>
+      <p>You can view a completed version of the project <a href="projects-final/calculator-modules/index.html" target="_blank">here</a>.</p>
+	</section>
+
+<section>
+
+  <h2>About modules in JavaScript</h2>
+	<p>Developers use modules for the same reason thry use functions: to transform one big thing into several smaller things:</p>
+
+	<ul>
+		<li><b>Functions:</b> A function is a block of code <i>within the programe file</i> that performs a particular task.</li>
+		<li><b>Modules:</b> A block of code <i>in a seperate file</i> that that performs a particular task.</li>
+	</ul>
+
+	<p>Both functions and modules help you better organise and structure your codebase by dividing large programs into smaller, more manageable, more independent and more resusable chunks of code.</p>
+
+	<p>In summary, a module in JavaScript is file containing code that can be imported into another JavaScript file.</p>
+
+	<p>JavaScript uses two keywords to share and receive code across different files.</p>
+
+	<ul>
+		<li><span class="syn-js">export</span>: This makes code - variables, functions, objects or classes - accessible to other JavaScript files.</li>
+		<li><span class="syn-js">import</span>: This is brings in code that is exported by a JavaScript module file.</li>
+	</ul>
+
+  <p>Let's create a simple calculator in JavaScript to provide an example of modules.</p>
+
+</section>
+
+<section id="tables-html">
+
+  <h2>Your project folder</h2>
+
+      <p>In your <b>portfolio/js</b> folder is a folder named <b>calculator-modules</b> that contains all the files you need for this JavaScript project.</p>
+      
+      <img src="assets/img/calculator-modules/folder-calculator-modules.png" alt="">
+
+    <p>In VS Code, open the project&#8217;s <b>index.html</b> web page and ensure the hyperlinks and personal details have been correctly updated.</p>
+
+</section>
+
+
+
+	<section>
+
+		<h2 id="tables-css">Adding some JavaScript code</h2>
+        <p>Now it's time to add the JavaScript code.</p>
+
+        <ol>
+            <li>Into your <b>app.js</b> file, copy-and-paste the JavaScript code below.
+
+<pre>const calculator = {
+  displayValue: '0',
+  firstOperand: null,
+  waitingForSecondOperand: false,
+  operator: null,
+};
+
+function inputDigit(digit) {
+  const { displayValue, waitingForSecondOperand } = calculator;
+
+  if (waitingForSecondOperand === true) {
+    calculator.displayValue = digit;
+    calculator.waitingForSecondOperand = false;
+  } else {
+    calculator.displayValue =
+      displayValue === '0' ? digit : displayValue + digit;
+  }
+}
+
+function inputDecimal(dot) {
+  if (calculator.waitingForSecondOperand === true) {
+    calculator.displayValue = '0.';
+    calculator.waitingForSecondOperand = false;
+    return;
+  }
+
+  if (!calculator.displayValue.includes(dot)) {
+    calculator.displayValue += dot;
+  }
+}
+
+function handleOperator(nextOperator) {
+  const { firstOperand, displayValue, operator } = calculator;
+  const inputValue = parseFloat(displayValue);
+
+  if (operator && calculator.waitingForSecondOperand) {
+    calculator.operator = nextOperator;
+    return;
+  }
+
+  if (firstOperand == null && !isNaN(inputValue)) {
+    calculator.firstOperand = inputValue;
+  } else if (operator) {
+    const currentValue = firstOperand || 0;
+    const result = calculate(currentValue, inputValue, operator);
+
+    calculator.displayValue = String(result);
+    calculator.firstOperand = result;
+  }
+
+  calculator.waitingForSecondOperand = true;
+  calculator.operator = nextOperator;
+}
+
+function calculate(firstOperand, secondOperand, operator) {
+  if (operator === '+') {
+    return firstOperand + secondOperand;
+  } else if (operator === '-') {
+    return firstOperand - secondOperand;
+  } else if (operator === '*') {
+    return firstOperand * secondOperand;
+  } else if (operator === '/') {
+    return firstOperand / secondOperand;
+  }
+
+  return secondOperand;
+}
+
+function resetCalculator() {
+  calculator.displayValue = '0';
+  calculator.firstOperand = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.operator = null;
+}
+
+function updateDisplay() {
+  const display = document.querySelector('.calculator-screen');
+  display.value = calculator.displayValue;
+}
+
+updateDisplay();
+
+const keys = document.querySelector('.calculator-keys');
+keys.addEventListener('click', event =&gt; {
+  const { target } = event;
+  if (!target.matches('button')) {
+    return;
+  }
+
+  if (target.classList.contains('operator')) {
+    handleOperator(target.value);
+    updateDisplay();
+    return;
+  }
+
+  if (target.classList.contains('decimal')) {
+    inputDecimal(target.value);
+    updateDisplay();
+    return;
+  }
+
+  if (target.classList.contains('all-clear')) {
+    resetCalculator();
+    updateDisplay();
+    return;
+  }
+
+  inputDigit(target.value);
+  updateDisplay();
+});</pre></li>
+        <li>Finally, save the <b>app.js</b> and <b>index.html</b> files.</li>
+        </ol>
+
+		<p>Open your <b>portfolio/js/calculator-modules/index.html</b> file in a web browser and verify it works correctly.</p>
+
+    </section>
+
+
+<section>
+    <h2>Dividing the JavaScript code into files</h2>
+
+    <p>Your task now is to remove some code from the <b>apps.js</b> file and place it in a separate file that will become a module.</p>
+
+    <ol>
+        <li>In VSCode, create a new empty file in your <b>portfolio/js/calculator-modules</b> folder and name it as follows:
+            <span class="inside-ol">&nbsp;</span>
+            <b>perform-calculations.js</b></li>
+        <li>Into this new <b>perform-calculations.js</b> file, cut-and-paste the <span class="syn-js">calculate(firstOperand, secondOperand, operator)</span> function from the <b>app.js</b> file.</li>
+        <li>Save all your files. </li>
+    </ol>
+    <p>If you test the calculator in your web browser, you can see it no longer works correctly.</p>
+
+</section>
+
+
+<section>
+    <h2>Adding the import and export keywords</h2>
+    <p>You will now add the <span class="syn-js">export</span> and <span class="syn-js">import</span> keywords to enable code to be shared between the files.</p>
+
+    <ol>
+        <li>In your <b>perform-calculations.js</b> file, add the <span class="syn-js">export</span> keyword before the function as follows:
+<pre>export function calculate(firstOperand, secondOperand, operator) {</pre></li>
+        <li>In the <b>app.js</b> file, <i>at the very top of the file</i>, add the following <span class="syn-js">import</span> statement:
+<pre>import { calculate } from './perform-calculations.js'</pre>
+    Note that the <span class="syn-js">import</span> statement(s) must always be at the top of the file before any other code, are enclosed within braces <span class="syn-js">{ }</span>.
+    <span class="inside-ol">&nbsp;</span>
+
+    If you were importing multiple items (variables, arrays, functions or whatever) from a module, you would separate the identifiers by commas. For example.
+<pre>import { sum, difference, product, quotient } from './some-file.js'</pre>
+<span class="inside-ol">&nbsp;</span>
+
+    It is also necessary to include the relative path. In this case, it is <span class="syn">./</span>.</li>
+
+        <li>At the bottom of your <b>index.html</b> web page, update the JavaScript links as follows.
+<pre>&lt;script type="module" src="app.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="perform-calculations.js"&lt;/script&gt;</pre>
+
+The <span class="syn">type="module"</span> attribute ensures the code is loaded as a module and not a regular script.</li>
+
+        <li>Save your files.</li>
+    </ol>
+
+    <p>Modules must be loaded in a web server environment. They will not work if loaded from the regular file system.</p>
+
+    <p>Upload the <b>calculator-modules</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+<section>
+
+    <h2>Adding the Live Server extension to VSCode</h2>
+
+    <p>A quick and simple way to display web pages on your computer in a web server environment is to install the Live Server extension to VSCode. Here are the steps:</p>
+
+    <ol>
+      <li>In VSCode, click the Extensions icon in the Toolbar at the left of the screen.</li>
+      <li>Search for and then install the <b>Live Server</b> extension.</li>
+    </ol>
+
+    <p>After installing the extension, you should see a link to it at the bottom-right of the VSCode window.</p>
+
+    <img src="assets/img/calculator-modules/live-server-1.png" alt="Live Server" style="max-width:600px">
+
+    <h3>Working with Live Server</h3>
+
+    <p>To turn on Live Server, click the link at the bottom-right of the screen. You should see a message similar to the following.</p>
+
+    <img src="live-server-2.png" alt="Live Server" style="max-width:600px">
+
+    <p>Also, the currently open web page in VSCode will open in your default web browser in a web server environment.</p>
+
+    <p>To display another web page in a server environment, right-click on the file in the VSCode Explorer panel and choose <b>Open with Live Server</b>.</p>
+
+    <img src="live-server-3.png" alt="Live Server">
+
+    <p>To turn off Live Server, click its link at the bottom-right of the screen.</p>
+
+    <p>Display your Calculator project with Live Server and verify the program logic works correctly.</p>
+
+    <p>Unfortunately, the links from the web page to any external CSS or JS files will not work. This is because Live Server accesses relative links relative to the VSCode workspace rather than to your regular file structure. The links will work, however, on other web server environments such as GitHub.</p>
+
+  </section>
+
+  <section>
+
+    <h2>Running the Nodejs web server</h2>
+
+    <p>Another option for running web pages on your computer in a server environment is to use the web-server app from Nodejs. Here are the steps.</p>
+
+    <ol>
+      <li>Install Nodejs <a href="https://www.munnelly.com/javascript/nodejs/index.html">following these instructions</a>.</li>
+      <li>Open a new command prompt and install the Nodejs web server by running this package manager command:
+<pre>npm install -g http-server</pre></li>
+      <li>Switch to the folder than contains your project's <b>index.html</b> web page. For exmple:
+<pre>c:\websites\portfolio\js\calculator-modules</pre></li>
+      <li>Start the server with the following command:
+<pre>http-server</pre> </li>
+      <li>Open your browser and go to the address http://localhost:8080 and you should see your local website.</li>
+    </ol>
+
+</section>
+
+
+<section>
+	<h2>Uploading your project to GitHub</h2>
+	<p>Upload the <b>calculator-modules</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail);
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail);
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>

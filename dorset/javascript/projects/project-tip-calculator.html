@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tip Calculator | JavaScript Project | Brendan Munnelly</title>
+	<meta name="description" content="Calculates the tip for a restaurant bill based on the level of service and the number of customers.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>Tip Calculator</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">JavaScript Home</a></p>
+				<p><i class="fas fa-list"></i> &nbsp;<a href="index.html">Projects List</a></p>
+
+			</aside>
+
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>Calculates the tip for a restaurant bill based on the level of service and the number of customers.</p>
+	</section>
+
+	<section>
+		<p>You can view a completed version of the project <a href="projects-final/tip-calculator/index.html" target="_blank">here</a>.</p>
+	</section>
+
+    <section id="tables-html">
+
+
+		<h2>Your project folder</h2>
+
+        <p>In your <b>portfolio/js</b> folder is a folder named <b>tip-calculator</b> that contains all the files you need for this JavaScript project.</p>
+
+		<img src="assets/img/tip-calculator/folder-tip-calculator.png" alt="">
+
+		<p>In VS Code, open the project&#8217;s <b>index.html</b> web page and ensure the hyperlinks and personal details have been correctly updated.</p>
+
+
+	</section>
+
+	<section>
+
+
+		<h2 id="tables-css">Adding the JavaScript code</h2>
+
+		<p>Follow the steps below to add the JavaScript code to the <b>index.html</b> file.</p>
+
+		<ol>
+			<li>Scroll down the web page until you see an empty pair of opening <span class="syn">&lt;script&gt;</span> and closing <span class="syn">&lt;/script&gt;</span> tags.</li>
+			<li>Click inside the empty pair of tags and paste the JavaScript code below.
+<pre><span class="comment">//Hide the tip amount on load</span>
+document.getElementById("tipDisplayBox").style.display = "none";
+document.getElementById("numOfPeople").value = 1;
+
+<span class="comment">// Calculate tip</span>
+function calculateTip() {
+   let billAmount = document.getElementById("billAmount").value;
+   let serviceQuality = document.getElementById("serviceQuality").value;
+   let numOfPeople = document.getElementById("numOfPeople").value;
+
+   <span class="comment">// Validate input</span>
+    if (billAmount === "" || serviceQuality == 0) {
+      alert("Please enter values");
+      return;
+   }
+
+   <span class="comment">// Calculate tip</span>
+   let tipTotal = (billAmount * serviceQuality);
+   <span class="comment">// round to two decimal places</span>
+   tipTotal = Math.round(tipTotal * 100) / 100;
+   <span class="comment">// next line allows us to always have two digits after decimal point</span>
+   tipTotal = tipTotal.toFixed(2);
+   <span class="comment">// Display the tip</span>
+   document.getElementById("tipDisplayBox").style.display = "block";
+   document.getElementById("tipTotal").innerHTML = tipTotal;
+   <span class="comment">// Check to see if this input is empty or less than or equal to 1</span>
+   if (numOfPeople === "" || parseInt(numOfPeople) &lt;= 1)  {
+      numOfPeople = 1;
+      document.getElementById("numOfPeople").value = 1;
+      tipEach = tipTotal;
+   }
+  document.getElementById("tipEach").innerHTML = (tipTotal / numOfPeople).toFixed(2);
+}
+
+<span class="comment">// click to call function</span>
+document.getElementById("calculate").onclick = () =&gt; calculateTip();</pre></li>
+<li>Save your <b>index.html</b> file.</li>
+<li>Display the file in a web browser and verify it works correctly.</li>
+</ol>
+
+<p>Save your file and verify it works correctly.</p>
+
+</section>
+
+
+<section>
+	<h2>Uploading your project to GitHub</h2>
+	<p>Upload the <b>tip-calculator</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail);
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail);
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>

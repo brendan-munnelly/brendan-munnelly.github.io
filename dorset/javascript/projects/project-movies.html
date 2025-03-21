@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Movies Listing | JavaScript Project | Brendan Munnelly</title>
+	<meta name="description" content="Uses the Fetch API to retrieve a randomly-choosen selection of ten inspiring quotations.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+	<style>
+		/* section.theme-dark { background-color: #1e293b } */
+	</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 5 icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+
+	<!-- Styles for Cookie Consent Popup Message  -->
+	<link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N54G36T');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>Movies Listing</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT COURSE</h3>
+
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">JavaScript Home</a></p>
+				<p><i class="fas fa-list"></i> &nbsp;<a href="index.html">Projects List</a></p>
+
+			</aside>
+
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>Uses the Fetch API to retrieve a searchable list of movie titles and images from the Internet Movie Database.</p>
+	</section>
+
+	<section>
+		<p>You can view a completed version of the project <a href="projects-final/movies/index.html" target="_blank">here</a>.</p>
+	</section>
+
+    <section id="tables-html">
+
+		<h2>Your project folder</h2>
+
+        <p>In your <b>portfolio/js</b> folder is a folder named <b>movies</b> that contains all the files you need for this JavaScript project.</p>
+		<img src="assets/img/movies/folder-movies.png" alt="">
+
+		<p>In VS Code, open the project&#8217;s <b>index.html</b> web page and ensure the hyperlinks and personal details have been correctly updated.</p>
+
+
+	</section>
+
+	<section>
+
+		<h2 id="tables-css">Adding the JavaScript code</h2>
+
+		<p>Follow the steps below to add the JavaScript code to the <b>index.html</b> file.</p>
+
+		<ol>
+			<li>Scroll down the web page until you see an empty pair of opening <span class="syn">&lt;script&gt;</span> and closing <span class="syn">&lt;/script&gt;</span> tags.</li>
+			<li>Click inside the empty pair of tags and paste the JavaScript code below.
+
+
+
+<pre><code>// Define the URL for fetching popular movies from the MovieDB API.
+const apiUrl = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1';
+// Base path for movie poster images from The Movie Database.
+const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+// Define the URL for searching movies by a query string.
+const SEARCHAPI =
+"https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+	
+// Get references to the main container and the form in the document.
+const main = document.getElementById("main");
+const form = document.getElementById("form");
+const search = document.getElementById("search");
+	
+// Call showMovies function initially with the popular movies URL.
+showMovies(apiUrl);
+	
+// Asynchronous function to fetch movies and display them on the page.
+async function showMovies(url) {
+	try {
+		// Fetch the movie data from the API URL.
+		const res = await fetch(url);
+		// Convert the response to JSON.
+		const data = await res.json();
+	
+		// For each movie in the results, create and append elements to display it.
+		data.results.forEach(element =&gt; {
+			const el = document.createElement('div'); // Container for each movie.
+			const image = document.createElement('img'); // To display the movie poster.
+			const text = document.createElement('h2'); // To display the movie title.
+	
+			// If the title is too long, truncate it.
+			text.innerHTML = truncateString(`${element.title}`, 20);
+			// Set the source of the image to the full path including the base IMGPATH.
+			image.src = IMGPATH + element.poster_path;
+	
+			// Append the image and text to the movie container.
+			el.appendChild(image);
+			el.appendChild(text);
+			// Finally, append the movie container to the main content area.
+			main.appendChild(el);
+		});
+	} catch (error) {
+		// If an error occurs during fetch or processing, log it to the console.
+		console.log('Error fetching movies:', error);
+	}
+}
+	
+// Add an event listener to the form to handle movie searches.
+form.addEventListener("submit", (e) =&gt; {
+	e.preventDefault(); // Prevent the form from submitting in the traditional way.
+	main.innerHTML = ''; // Clear the main content area before displaying new results.
+	const searchTerm = search.value; // Get the search term from the input field.
+	if (searchTerm) {
+		showMovies(SEARCHAPI + searchTerm); // Fetch and display movies based on the search term.
+		search.value = ""; // Clear the search input field.
+	}
+});
+	
+// Utility function to truncate a string to a specified length.
+function truncateString(str, num) {
+	if (str.length &gt; num) {
+		return str.slice(0, num) + '...'; // Truncate and add ellipsis.
+	}
+	return str; // Return the original string if it's shorter than the specified length.
+}</code></pre></li>
+
+<li>Save your <b>index.html</b> file.</li>
+<li>Display the file in a web browser and verify it works correctly.</li>
+</ol>
+
+</section>
+
+<section>
+	<h2>Uploading your project to GitHub</h2>
+	<p>Upload the <b>movies</b> folder as a sub-folder of the <b>portfolio/js</b> folder on your GitHub account.</p>
+</section>
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+<!-- JavaScript for Cookie Consent Popup Message -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	  "palette": {
+		"popup": {
+			"background": "#000"
+		},
+		"button": {
+			"background": "#f1d600"
+		}
+	},
+	  "content": {
+		"href": "https://www.munnelly.com/legal/index.html"
+	}
+});
+</script>
+
+<script>
+	document.querySelector("#myEmail").addEventListener("click", copyEmail);
+	document.querySelector("#myEmail").addEventListener("touchstart", copyEmail);
+
+	function copyEmail() {
+		document.execCommand("copy");
+		const email_id   = document.querySelector("#myEmail");
+		const email_text = document.querySelector("#myEmail").innerText;
+		email_id.classList.remove("emailAnimation");
+		void email_id.offsetWidth;
+		email_id.classList.add("emailAnimation");
+	}
+</script>
+
+</body>
+</html>
