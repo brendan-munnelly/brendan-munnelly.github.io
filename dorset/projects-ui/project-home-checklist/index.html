@@ -36,35 +36,56 @@
     
     pre code { color: #fff}
 
-</style>
+        pre { background-color: #282c34 }
+        .four-samples div > img { margin-bottom: 12px }
+        .four-samples div img {
+            margin-bottom: 12px;
+        }
 
+        .table-fonts {
+            margin-top: 12px;
+            border-collapse: collapse;
+            min-width: 72%;
+        }
 
-  	<!-- Styles for Cookie Consent Popup Message  -->
-    <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
+        .table-fonts th {
+            background-color: #230cea;
+            border: 1px solid #230cea;
+            padding: 8px;
+            text-align: left;
+            width: 50%;
+            color: #fff;
+            letter-spacing: 1px
+        }
+
+        .table-fonts td {
+            border-bottom: 2px solid #230cea;
+            padding: 8px 8px 8px 0;
+            text-align: left;
+            width: 50%
+        }
+    </style>
+
 
     <!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RQ1JXS4GKM');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RQ1JXS4GKM');
     </script>
-    </head>
+</head>
 
-    <body id="top">
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
+<body id="top">
 
 
         <header>
@@ -88,10 +109,42 @@
 
 		<aside>
             <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
+            
+            const testReferrer = getBasicReferrer();
+            
+            if (testReferrer.includes("ibat")) {
+                console.log("Referrer is IBAT");
+                returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+                console.log("Referrer is Dorset");
+                returnHome = "https://munnelly.com/dorset/index.html"
+            }
+            
+            else {
+                console.log("Referrer unknown");
+                returnHome = "../../index.html"
+            }
+            
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+            
+            // Call the function to log the referrer
+            logReferrer();</script>
 
-            <p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
-
-            <h3>THIS TUTORIAL</h3>
 			<p><a href="#introduction">Introduction</a></p>
             <p><a href="#rename-home-page">1: Rename your old index.html web page</a></p> 
             <p><a href="#download-images">2: Download images</a></p>
@@ -286,9 +339,10 @@
     
                     <h2>5: Download your Portfolio page</h2>
         
-                    <p>You should already have a  📁  <b>portfolio</b> folder in your 'main' websites folder. This should contain sub-folders for each of your portfolio projects as shown below.</p>
+                    <p>You should already have a  📁  <b>portfolio</b> folder in your 'main' websites folder.</p>
+                    <!-- This should contain sub-folders for each of your portfolio projects as shown below.</p> 
     
-                    <img src="assets/img/portfolio-folder.png" alt="" style="max-width:300px">
+                    <img src="assets/img/portfolio-folder.png" alt="" style="max-width:300px"> -->
         
                     <p>Download one of these two files to your  📁  <b>portfolio</b> folder.</p>
         
@@ -407,11 +461,44 @@
     
                 <p>Follow the instructions <a href="../project-fashion/index.html#google-fonts" target="_blank">here</a> to add a Google Font or Fonts.</p>
     
-                <p>Here are the more widely-used serif and sans-serif fonts in 2024.</p>
+                <p>Here are the more widely-used serif and sans-serif fonts at the moment.</p>
     
-                <img src="assets/img/fonts-popular.png" alt="" style="max-width: 600px">
+                <table class="table-fonts">
+                    <tbody><tr>
+                        <th>SERIF FONTS</th>
+                        <th style="padding-left:0">SANS SERIF FONTS</th>
+                    </tr>
+                    <tr>
+                        <td>Playfair Display (headings)</td>
+                        <td>Bebas Neue (headings)</td>
+                    </tr>
+                    <tr>
+                        <td>Prata (headings)</td>
+                        <td>Work Sans</td>
+                    </tr>
+                    <tr>
+                        <td>Abril Fatface (headings)</td>
+                        <td>Source Sans Pro</td>
+                    </tr>
+                    <tr>
+                        <td>PT Serif</td>
+                        <td>Rubik</td>
+                    </tr>
+                    <tr>
+                        <td>Domine</td>
+                        <td>Outfit</td>
+                    </tr>
+                    <tr>
+                        <td>Libre Baskerville</td>
+                        <td>Montserrat</td>
+                    </tr>
+                    <tr>
+                        <td>Roboto Slab</td>
+                        <td>Open Sans</td>
+                    </tr>
+                </tbody></table>
     
-                <p>See the websites below for font-pairing inspiration</p>
+                <p><br>See the websites below for font-pairing inspiration.</p>
                 <ul>
                     <li><a href="https://www.fontpair.co/all" target="_blank">Fontpair</a></li>
                     <li><a href="https://www.pagecloud.com/blog/best-google-fonts-pairings" target="_blank">Top 50 font pairings</a></li>
@@ -626,9 +713,19 @@
 
 <footer>
 
-  </footer>
+</footer>
 
+<div id="cookie-banner">
+    <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+    <div class="buttons">
+        <button id="accept-cookies">Got it</button>
+    </div>
+</div>
 
+<script>hljs.highlightAll();</script>
+
+<script src="../../lessons/assets/js/utils.js"></script>       
 
 </body>
 </html>
+
