@@ -61,8 +61,43 @@
         <aside>
             <h3>FRONT-END DEVELOPMENT</h3>
 
-            <p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
+            
+            const testReferrer = getBasicReferrer();
+            
+            if (testReferrer.includes("ibat")) {
+                console.log("Referrer is IBAT");
+                returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+                console.log("Referrer is Dorset");
+                returnHome = "https://munnelly.com/dorset/index.html"
+            }
+            
+            else {
+                console.log("Referrer unknown");
+                returnHome = "../../index.html"
+            }
+            
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+            
+            // Call the function to log the referrer
+            logReferrer();</script>
 
+    
             <h3>THIS TUTORIAL</h3>
 			<p><a href="#introduction">Introduction</a></p>
 			<p><a href="#project-folder-files">Project folders and files</a></p>
@@ -94,7 +129,7 @@
                     <p>Your first task is to create the folders you need for this project.</p>
                     <ol>
 
-                        <li>For your first project, the <a href="../project-fashion/index.html">Fashion</a> project, you created a new folder named  📁 <b>portfolio</b> inside your  ‘main’  📁 <b>websites</b> folder.
+                        <li>Inside your  ‘main’  📁 <b>websites</b> folder is a sub-folder named <b>portfolio</b> for holding your projects.
                         <img src="assets/img/file-explorer-1.png" alt="file-explorer-portfolio-folder" style="max-width: 700px">
                         Inside this &#128193; <b>portfolio</b> folder, create a sub-folder to hold the files for your <i>Crypto Wallet</i> project.
                         <img src="assets/img/file-explorer-2.png" alt="file-explorer-portfolio-folder" style="max-width: 700px">
@@ -310,7 +345,7 @@
 
         <img src="assets/img/crypto-6.png" class=" wider-115" alt="VS Code">
 
-        <p>For this project you will use the <b>Outfit</b> font from Google Fonts. Add the following code to just before the closing <span class="syn">&lt;/head&gt;</span> tag.</p>
+        <p>For this project you will use the <b>Outfit</b> font from Google Fonts. Add the following code to the <span class="syn">&lt;/head&gt;</span> tag.</p>
 <pre>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
 &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
 &lt;link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet"&gt;  </pre>
@@ -583,14 +618,11 @@
 
                     <img src="assets/img/github-repo-select.png" alt="github-signin"></li>
 
-                    <li>On the next GitHub screen displayed, click the <b>portfolio</b> folder.</li>
+                    <li>On the next GitHub screen displayed, click the 📁 <b>portfolio</b> folder.</li>
 
-                    <li>With your <b>portfolio</b> folder displayed on GitHub, click <b>Add file</b> button.
-                    <img src="assets/img/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+                    <li>With your 📁 <b>portfolio</b> folder displayed on GitHub, click <b>Add file</b> button.</li>
 
-                    <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
-
-                    <img src="assets/img/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+                    <li>From the dropdown list displayed, choose the option <b>Upload files</b>.</li>
 
                     <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your 📁 <b>crypto-wallet</b> folder to upload it to the <b>portfolio</b> folder within your repository on GitHub.
                     <img src="assets/img/github-upload-folder-files.png"  alt="Introduction to HTML">
