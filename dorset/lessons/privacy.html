@@ -8,10 +8,13 @@
     <meta name="description" content="Creating a ‘pop-up’ cookie consent message to include in your web pages that contain user-tracking cookies.">
 
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../assets/css/front-end-tutorials.css" />
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
 
-    <!-- Stylesheet-->
-    <link rel="stylesheet" href="../assets/css/dorset.css" />
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
     <style>
         pre {
@@ -28,14 +31,8 @@
         }
     </style>
 
-  	<!-- Styles for Cookie Consent Popup Message  -->
-	  <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
 
-    <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script defer src="../assets/js/cookie.js"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -46,6 +43,7 @@
       gtag('config', 'G-RQ1JXS4GKM');
     </script>
     </head>
+
 
     <body id="top">
 
@@ -76,8 +74,42 @@
 
         <aside>
             <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
+            
+            const testReferrer = getBasicReferrer();
+            
+            if (testReferrer.includes("ibat")) {
+                console.log("Referrer is IBAT");
+                returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+                console.log("Referrer is Dorset");
+                returnHome = "https://munnelly.com/dorset/index.html"
+            }
+            
+            else {
+                console.log("Referrer unknown");
+                returnHome = "../index.html"
+            }
+            
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+            
+            // Call the function to log the referrer
+            logReferrer();</script>
 
-            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
 
             <h3>THIS TUTORIAL</h3>
             <p><a href="#about">About cookie privacy &#8216;pop-up&#8217; messages</a></p>
@@ -144,7 +176,7 @@
             <h2>Add the privacy popup message</h2>
             <p>Your next action to add the CSS and JavaScript code that will display the 'popup' message on your web pages.</p>
     
-            <p>For this, you will use the online service from <a href="https://cookieconsent.insites.com/" target="_blank">Insites</a> to provide the code you need.</p>
+            <p>For this, you will use the online service from Insites to provide the code you need.</p>
             
             <p>Before you do, in VS Code open the web page into which you will paste the JavaScript code:</p>
     
@@ -221,8 +253,7 @@
         
             <img src="assets/img/privacy/github-repo-select.png" alt="github-signin"></li>
         
-            <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
-            <img src="assets/img/hero-block-text/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+            <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.</li>
         
             <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
         
@@ -252,41 +283,27 @@
         <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
     
     </section>
-    
-    </article>
-    </main>
-    
+
+</article>
+</main>
+
     <footer>
-    
-        <p>&nbsp;</p>  
-      </footer>
-    
-    
-    
-      <script>hljs.highlightAll();</script>
-    
-      <script src="assets/js/utils.js"></script>
-   
-      
-    <!-- JavaScript for Cookie Consent Popup Message -->
-	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-	<script>
-	window.cookieconsent.initialise({
-	  	"palette": {
-			"popup": {
-				"background": "#000"
-			},
-			"button": {
-				"background": "#f1d600"
-			}
-		},
-	  	"content": {
-			"href": "https://www.munnelly.com/legal/index.html"
-		}
-	});
-    </script>
 
 
-    </body>
-    </html>
-    
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>       
+
+
+</body>
+</html>
+
