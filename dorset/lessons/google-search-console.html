@@ -59,7 +59,41 @@
 	<aside>
 		<h3>FRONT END DEVELOPMENT</h3>
 
-		<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+        <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+            
+        <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
+
+            const testReferrer = getBasicReferrer();
+
+            if (testReferrer.includes("ibat")) {
+            console.log("Referrer is IBAT");
+            returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+            console.log("Referrer is Dorset");
+            returnHome = "https://munnelly.com/dorset/index.html"
+            }
+
+            else {
+            console.log("Referrer unknown");
+            returnHome = "../index.html"
+            }
+
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+
+            // Call the function to log the referrer
+            logReferrer();</script>
 
 		<h3>THIS TUTORIAL</h3>
 		<p><a href="#about">About Google Search Console (GSC)</a></p>
@@ -374,3 +408,6 @@
 <script>hljs.highlightAll();</script>
 
 <script src="assets/js/utils.js"></script>       
+
+</body>
+</html>
