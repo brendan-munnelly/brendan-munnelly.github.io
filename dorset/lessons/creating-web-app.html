@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Creating a web app with AI | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Creating a web app with AI and embedding it into a page on your website using an iframe.">
+
+    <meta name="author" content="Web Development Tutorials">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34 }
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+</head>
+
+<body id="top">
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Creating a web app with AI</h1>
+                <h2>Creating a web app with AI and embedding it into a page on your website using an iframe.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+        <aside>
+            <h3>FRONTEND DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <a href="../index.html">Home</a></p> 
+                
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning goals</a></p>
+            <p><a href="#web-apps">Building web apps</a></p>
+            <p><a href="#apis">Online data sources and APIs</a></p>
+            <p><a href="#creating-account-weather">Creating a free account with OpenWeatherMap</a></p>
+            <p><a href="#creating-account-vercel">Creating a free account with Vercel</a></p>
+            <p><a href="#designing-weather-app">Prompting the AI to build the weather app</a></p>
+            <p><a href="#customizing-app">Customising your weather app</a></p>
+            <p><a href="#creating-webpage">Creating a web page for your weather app</a></p>
+            <p><a href="#embedding-app">Embedding the weather app</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Create a free Vercel account to access v0.dev</li>
+                    <li>Design a weather app for a specific location using v0.dev's AI interface</li>
+                    <li>Customise the appearance and functionality of your weather app</li>
+                    <li>Create a basic HTML webpage to host your weather app</li>
+                    <li>Embed your weather app in a webpage using an iframe</li>
+                </ul>
+            </section>
+
+
+            <section id="web-apps">
+
+                <h2>Building web apps with AI</h2>
+                <p>A growing number of inline services offer the ability to build web apps without needing to write code (or only a minimal amount of code). Among them:</p>
+
+                <ul>
+                    <li><a href="https://replit.com/" target="_blank">Replit</a></li>
+                    <li><a href="https://lovable.dev/" target="_blank">Lovable</a></li>
+                    <li><a href="https://firebase.studio/" target="_blank">Google Firebase Studio</a></li>
+                </ul>
+
+                <p>In this Tutorial, you will use an AI app builder from Vercel called v0.dev.</p>
+            </section>
+
+
+            <section id="apis">
+                <h2>Online data sources and APIs</h2>
+                <p>APIs (Application Programming Interfaces) enable your web pages to communicate with online data sources, both free and commercial. They serve as bridges that let you request specific information from external services and incorporate it into your own projects.</p>
+
+                <p>An API is essentially a set of rules that allows different software applications to communicate with each other. When you use an API to access an online data source, you're making a request to their server, which then returns the data you asked for in a structured format. You can then display that data in your web pages.</p>
+
+                <p>Here are two popular free online data sources that offer APIs:</p>
+
+                <ul>
+                    <li><a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a></li>
+                    <li><a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></li>
+                </ul>
+
+                <p>Although these are free to use, they impose usage limits and require a user access key.</p>
+                <p>A commercial data source is <a href="https://developers.google.com/maps" target="_blank">Google Maps</a>.</p>
+
+                <p>In this Tutorial, you will use the free version of v0.dev to create a weather app for a specific location, then embed it in a webpage.</p>
+
+                <p>You can view a completed version of the project <a href="https://v0-dublin-weather-app-feuwj4.vercel.app/" target="_blank">here</a>.</p>
+
+            </section>
+
+
+            <section id="creating-account-weather">
+                <h2>Creating a free account with OpenWeatherMap</h2>
+                
+                <p>Follow these steps:</p>
+                
+                <ol>
+                    <li>Visit <a href="https://openweathermap.org/price" target="_blank">openweathermap.org/price</a></li>
+                    <li>Scroll down the screen and, in the <b>Free Access, Current weather and forecasts</b> click the <b>Get API key</b> button.
+                    <img src="assets/img/ai-app/api-key.png" alt="screenshot" style="max-width: 420px"></li>
+                    <li>Follow the prompts to complete the registration process.</li>
+                    <li>You can respond to the form as follows.
+                        <img src="assets/img/ai-app/weather-1.png" alt="screenshot" style="max-width: 420px">
+                    </li>
+                    <li>Respond to the confirmation email.
+                        <img src="assets/img/ai-app/weather-2.png" alt="screenshot" style="max-width: 520px">
+
+                    </li>
+                    <li>You will now receive a second email that contains your unique access key.
+                        <img src="assets/img/ai-app/weather-3.png" alt="screenshot" style="max-width: 520px">
+                    </li>
+
+                </ol>
+                
+
+            </section>
+
+
+            <section id="creating-account-vercel">
+                <h2>Creating a free account with Vercel</h2>
+                
+                <p>Follow these steps:</p>
+                
+                <ol>
+                    <li>Visit <a href="https://vercel.com/signup" target="_blank">vercel.com/signup</a></li>
+                    <li>Choose your preferred sign-up method. GitHub is recommended for easy integration.</li>
+                    <li>Follow the prompts to complete the registration process</li>
+                    <li>After creating your account, navigate to <a href="https://v0.dev" target="_blank">v0.dev</a></li>
+                </ol>
+                
+                <p>The free tier of v0.dev includes:</p>
+                <ul>
+                    
+                    <li>Access to core AI design capabilities</li>
+                    <li>Limited number of generations per day</li>
+                </ul>
+                
+                <p>✅ &nbsp;Once you have access to v0.dev, you're ready to create your weather app.</p>
+            </section>
+
+            <section id="designing-weather-app" class="wrapper-content bg-white">
+                <h2>Prompting the AI to build the weather app</h2>
+                
+                <p>Now it's time to design your weather app using v0.dev's AI interface:</p>
+                
+                <ol>
+                    <li>In the home page of v0, you'll see a prompt input field.
+                    <img src="assets/img/ai-app/v0-1.png" alt="screenshot">
+
+                    </li>
+                    <li>Enter the following detailed prompt for your weather app:
+                
+<div class="gpt"><button class="copy-gpt" id="btn-1">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-1">
+Generate a weather app for [location] that displays the following data: <br><br>
+* Location Name <br>
+* Summary <br>
+* Temperature <br>
+* Humidity <br>
+* Pressure<br><br>
+
+The app should use the OpenWeather API with the access key below:<br><br>
+    
+bc425ac2188d406c884f4fdd88b339f0<br><br>
+    
+The data should be displayed full-screen with a suitable image background. Use responsive CSS and appropriate color choices.<br><br>
+    
+Update the app to display one set of colours for daytime and a second colour palette for nightime.</code></div></li>
+</ol>
+
+
+                <p>After entering your prompt, click the <b>Generate</b> icon and wait for v0.dev to process your request. This usually takes 15-30 seconds.</p>
+                
+                <p>Once generated, you'll see a preview of your weather app at the right of the screen.</p>
+
+                <p>Finally, click the <b>Deploy</b> button at the top-right to publish your weather app online. This may take a few minutes.</p>
+
+                <p>When finished, click the <b>Visit</b> button to display the online web page.It will have a web address similar to the following:</p>
+
+                <p><b>https://v0-weather-app-requirements-virid.vercel.app/</b></p>
+
+            </section>
+
+            <section id="customizing-app">
+                <h2>Customising your weather app</h2>
+                
+                <p>If you're not completely satisfied with the initial design, you can customise it further by entering new prompts. For example:</p>
+                
+
+<div class="gpt"><button class="copy-gpt" id="btn-2">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-2">Include a weather-appropriate quote from a famous Irish author</code></div>
+                
+                <p>Continue refining your weather app until you're happy with the design. Remember that the free tier has daily limits on the number of generations, so use your prompts wisely.</p>
+            </section>
+
+ 
+            <section id="creating-webpage">
+                <h2>Creating a web page for your weather app</h2>
+                
+                <p>Now let's create a simple HTML webpage to host our weather app:</p>
+                
+                <ol>
+                    <li>In VS Code, create a new text file and save it as <b>weather.html</b> in your <b>portfolio/</b> folder.</li>
+                    <li>Add the following basic HTML structure:</li>
+                </ol>
+                
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Weather App&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #0070f3;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .app-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #666;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Weather Dashboard&lt;/h1&gt;
+    &lt;/header&gt;
+    
+    &lt;div class="container"&gt;
+        &lt;p&gt;Welcome to my weather dashboard. Below you'll find the current weather and forecast.&lt;/p&gt;
+        
+        &lt;div class="app-container"&gt;
+            &lt;!-- Weather app will be embedded here --&gt;
+        &lt;/div&gt;
+        
+        &lt;p&gt;This weather app was created using v0.dev from Vercel, a powerful AI tool for generating UI components.&lt;/p&gt;
+    &lt;/div&gt;
+    
+    &lt;footer&gt;
+        &lt;p&gt;Created with v0.dev by Vercel&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <p>This creates a simple webpage with a header, a container for our weather app, and a footer. The CSS provides basic styling to make the page look presentable.</p>
+                
+                <p>Save this file. In the next section, we'll add the iframe to embed our weather app.</p>
+            </section>
+
+            <section id="embedding-app" class="wrapper-content bg-white">
+                <h2>Embedding the weather app</h2>
+
+                <p>The <span class="syn">iframe</span> (inline frame) tag is an HTML element that allows you to embed another HTML document within the current webpage. It creates a rectangular area within your page that displays the content from another source, essentially creating a window to another webpage.</p>
+                
+                <p>Now we'll embed the weather app in our webpage using an <span class="syn">iframe</span>:</p>
+                
+                <ol>
+                    <li>Open the <b>weather.html</b> file you created in the previous step</li>
+                    <li>Locate the <span class="syn">div</span> with the class <b>app-container</b> where we left a comment for the weather app</li>
+                    <li>Replace the comment with an <span class="syn">iframe</span> element that points to your v0-created app.</li>
+                </ol>
+                
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">&lt;div class="app-container"&gt;
+    &lt;iframe 
+        src="[Your weather app web address]" 
+        width="100%" 
+        height="500" 
+        frameborder="0"
+        title="Weather App"
+        loading="lazy"
+        allowtransparency="true"
+    &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+
+                <p>Be sure to replace <b>[Your weather app web address]</b> with the actual web address of your published web app on the Vercel website.</p>
+                
+                <p>✅ &nbsp;You've successfully created and embedded a weather app in your webpage!</p>
+
+                <p>Save your updated HTML file after adding the iframe.</p>
+
+                <p>Upload your <b>weather.html</b> web page to your <b>portfolio</b> folder on GitHub.</p>
+            </section>
+
+        </article>
+
+    </main>
+
+                
+
+    <footer>
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="#">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+    <script>hljs.highlightAll();</script>
+    <script src="assets/js/utils.js"></script>
+</body>
+</html>
