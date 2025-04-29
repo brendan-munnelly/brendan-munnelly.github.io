@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with DevTools | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Using the web browser's Developer Tools to work with content, HTML tags and CSS styles in a web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Working with DevTools</h1>
+                <h2>Using the web browser's Developer Tools to work with text content, HTML tags and CSS styles in a web page.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+
+        <aside>
+            <h3>FRONTEND DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+                // Basic referrer detection
+                let returnHome;
+                function getBasicReferrer() {
+                  return document.referrer || "Direct visit (no referrer)";
+                }
+                
+                const testReferrer = getBasicReferrer();
+                
+                if (testReferrer.includes("ibat")) {
+                    console.log("Referrer is IBAT");
+                    returnHome = "https://munnelly.com/ibat/index.html"
+                }
+                else if (testReferrer.includes("dorset")) {
+                    console.log("Referrer is Dorset");
+                    returnHome = "https://munnelly.com/dorset/index.html"
+                }
+                
+                else {
+                    console.log("Referrer unknown");
+                    returnHome = "../index.html"
+                }
+                
+                // Set the href attribute of the link
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+                
+                // Log the referrer information
+                function logReferrer() {
+                  console.log("Basic Referrer:", getBasicReferrer());
+                }
+                
+                // Call the function to log the referrer
+                logReferrer();</script>
+
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#web-browsers-about">About Web Browsers</a></p>
+            <p class="toc-indent"><a href="#recommended">Recommended web browsers for developers</a></p>
+            <p><a href="#web-browsers-brave">Installing Brave</a></p>
+            <p><a href="#dev-tools">Working with DevTools</a></p>
+
+            <p class="toc-indent"><a href="#dev-tools-position">Changing the DevTools position</a></p>
+            <p class="toc-indent"><a href="#whats-new">Closing the What's New pane</a></p>
+            <p class="toc-indent"><a href="#dev-tools-font-size">Changing the DevTools font size</a></p>
+
+            <p><a href="#elements-tab">Working with the Elements tab</a></p>
+            <p><a href="#text-content">Edit text content in DevTools</a></p>
+
+            <p><a href="#which-styles">Identify which CSS styles affect an element</a></p>
+            <p><a href="#edit-styles">Edit CSS styles in DevTools</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Download and install two web browsers: Brave and Mozilla Firefox Developer Edition.</li>
+                    <li>Display the Menu Bar in Mozilla Firefox Developer Edition.</li>
+                    <li>View a web page&#8217;s HTML source code and linked CSS stylesheet files.</li>
+                </ul>
+            </section>
+
+            <section id="web-browsers-about">
+                <h2>About web browsers</h2>
+                <p>A web browser is an app that gives you access to Internet-based content and services.</p>
+
+                <h3 id="web-browsers-default">Default web browsers</h3>
+                <p>Your laptop, desktop, tablet and phone come with a default web browser pre-installed:</p>
+                <ul class="tighter">
+                    <li><b>Microsoft Edge</b>: This web browser is included with the Microsoft Windows operating system.</li>
+                    <li><b>Safari</b>: This web browser is included in the macOS and iOS operating systems used on Apple computers, tablets and mobile phones.</li>
+                </ul>
+
+                <p><br>Neither Microsoft Edge or Apple Safari are recommended for frontend development tasks.</p>
+                
+                <h3 id="recommended">Recommended web browsers for developers</h3>
+                
+                <p>Here are the two web browsers most commonly used by frontend designers and developers:</p>
+
+                <ul>
+                    <li><b>Google Chrome</b>: The most popular in the world, partly because it is pre-installed on Android phones.</li>
+                    <li><b>Brave</b>: A privacy-focused web browser developed by Brendan Eich, creator of the JavaScript programming language.</li>
+                </ul>
+
+            </section>
+
+
+            <section id="web-browsers-brave">
+                <h2>Installing Brave</h2>
+                <p>Both Brave and Google Chrome are based on the same open-source software code, so both work in a largely similar way and support almost all the same browser extensions.</p>
+
+                <p>But because Brave blocks ads and website trackers, it can run up to six times faster than Chrome. Follow these steps to download and install it.</p>
+                <ol>
+                    <li>Use your current web browser to go to this web address:<span class="inside-ol">&nbsp;</span>
+                    <a href="https://brave.com/" target="_blank" rel="noopener">https://brave.com</a></li>
+                    <li>Click the button named <b>Get Brave</b>
+                    <img src="assets/img/dev-tools/brave-download.png" alt="Tutorial Web Browsers: Brave Download">
+                    Brave will begin downloading the appropriate version for your computer and operating system. Follow the usual installation instructions.</li>
+                </ol>
+
+            </section>
+
+
+           
+            <section id="dev-tools">
+                <h2>Working with DevTools</h2>
+
+                <p>DevTools (the short name for Developer Tools) are built into every web browser. This feature enables you to view and experiment with the content and code of web pages.</p>
+
+                <p>To open DevTools in your Chrome or Brave web browser:</p>
+
+                <ul>
+                    <li><b>Windows</b>: Press <kbd class="tutorial-key">Ctrl</kbd> and <kbd class="tutorial-key">Shift</kbd> and <kbd class="tutorial-key">i</kbd></li>
+                    
+                    <li><b>Apple Mac</b>: Press Command <kbd class="tutorial-key">⌘</kbd> and Option <kbd class="tutorial-key">⌥</kbd> and <kbd class="tutorial-key">i</kbd>.</li>
+                </ul>
+
+                <p>Tip: Think letter <kbd class="tutorial-key">i</kbd> for inspect &#128065;</p>
+
+                <p>By default, the DevTools window will display at the left side of the web browser window. This is a good choice for working with JavaScript code.</p>
+                
+                <p>For working with HTML content and CSS styles, however, a better option is to position or <i>dock</i> the DevTools window at the bottom of the web browser window.</p>
+
+
+                <h3 id="dev-tools-position">Changing the DevTools position</h3>
+
+
+                <p>To position or <i>dock</i> the DevTools window:</p>
+                <ol>
+                    <li>Open the DevTools window.</li>
+                    <li>Near the top-right of the DevTools window, click the vertical ellipses (three dots) icon.
+                    <img src="assets/img/dev-tools/vertical-ellipses.png" alt="screenshot"></li>
+                    <li>Click the icon for your required docking position.
+                    <img src="assets/img/dev-tools/docking.png" alt="screenshot"></li>
+
+                    <li>By default, the <b>Elements</b> tab is displayed. If not, click on it.
+                    <img src="assets/img/dev-tools/elements-tab.png" alt="screenshot" class="wider-115"></li>
+                </ol>
+
+                <p>Now you can see the HTML code for the web page you are viewing. You can also see the CSS styles applied to each element in the page.</p>
+
+
+                <h3 id="whats-new">Closing the <i>What's New</i> pane</h3>
+                <p>If you are using Google Chrome, a pane called <b>What's New</b> may display across the bottom of the DevTools window.</p>
+                <img src="assets/img/dev-tools/whats-new.png" alt="screenshot">
+                <p>You can close this to free up space on your screen.</p>
+
+                <h3 id="dev-tools-font-size">Changing the DevTools font size</h3>
+                <p>To change the font size in the DevTools window:</p>
+                
+                <ol>
+                    <li>Click anywhere in the DevTools window.</li>
+                    <li>Press the <kbd class="tutorial-key">Ctrl</kbd> key and the plus <kbd class="tutorial-key">+</kbd> or dash <kbd class="tutorial-key">-</kbd> key.</li>
+                </ol>
+                
+                <p>To reset, press <kbd class="tutorial-key">Ctrl</kbd> and <kbd class="tutorial-key">0</kbd>.</p>
+                
+            </section>
+
+            <section id="elements-tab">
+
+                <h2>Working with the Elements tab</h2>
+                <p>The <b>Elements</b> tab of DevTools enables you to view and edit the text content, HTML tags and CSS styles of the web page you are viewing.</p>
+
+                <img src="assets/img/dev-tools/elements-tab-2.png" alt="screenshot" class="wider-115">
+                <p>You can drag the vertical divider between the two panes so that each fills about half of the DevTools window.</p>
+
+                <p>By default, the <b>Styles</b> tab is displayed in the right pane. If not, click on it.</p>
+                <p>Any changes you make are temporary and appear only in the current browser session.</p>
+                <p><i>The actual HTML and CSS files are unaffected.</i></p>
+
+                <p>You can use the <b>Elements</b> tab to:</p>
+
+                <ul>
+                    <li>Identify which CSS styles control or <i>target</i> particular HTML elements of your web page. You can then edit those styles in the CSS stylesheet file, or add new styles to achieve the visual effect you want.</li>
+                    <li>Experiment with variations to content, HTML tags and CSS styles. If you are happy with a particular change, you can then update the relevant HTML or CSS stylesheet file.</li>
+                </ul>
+
+            </section>
+          
+            <section id="text-content">
+
+                <h2>Edit text content in DevTools</h2>
+                <p>You can edit the content displayed on a web page without changing the source file.</p>
+
+                <ol>
+                    <li>Display a web page in Chrome/Brave. For example, your <b>page-4.html</b> (Vincent van Gogh) sample page in your  📁  <b>exercises</b> folder.</li>
+                    <li>Display the <b>Elements</b> tab of DevTools.</li>
+                    <li>Click the arrow icon at the top left of the DevTools window.
+                    <img src="assets/img/dev-tools/selection-arrow.png" alt="screenshot" class="wider-115"></li>
+                    <li>In the main web browser window, hover over the text you want to edit.</li>
+                    <li>In the <b>Elements</b> tab of DevTools, double-click the text you want to edit. (Do <i>not</i> edit the HTML tag.)
+                    <span class="inside-ol">&nbsp;</span>
+                    For a larger amount of text, you may need to click first on the expand arrow at the left of the HTML tag that surrounds the text.
+                        <img src="assets/img/dev-tools/h2-1.png" alt="screenshot" class="wider-115">
+                    </li>
+                    <li>Double-click directly on the text inside the <b>Elements</b> tab and edit it as required.</li>
+                    <li>When finished editing, press <kbd class="tutorial-key">Enter</kbd>. The web page now displays your text changes.
+                    <img src="assets/img/dev-tools/picasso.png" alt="screenshot"></li>
+
+                </ol>
+                <p>To no longer display the edited text, reload the web page in your browser.</p>
+
+            </section>
+
+            <section id="which-styles">
+                <h2>Identify which CSS styles affect an element</h2>
+                <p>Follow these steps to view which CSS styles control the appearance of a selected HTML element in a web page.</p>
+                <ol>
+                    <li>In the <b>Elements</b> tab, click on an HTML element. For example, <span class="syn">&lt;h1&gt;</span> or <span class="syn">&lt;h2&gt;</span>.</li>
+                    <li>In the <b>Styles</b> pane, you can see the list of relevant CSS rules for the selected HTML element.
+                    <img src="assets/img/dev-tools/edit-css.png" alt="screenshot"></li>
+                    <li>To view the line number location of the styles in the source CSS stylesheet file, click the file name at the right of the <b>Styles</b> pane.
+                    <img src="assets/img/dev-tools/sources.png" alt="screenshot" style="max-width: 600px">
+                    The <b>Sources</b> tab now replaces the <b>Elements</b> tab in the DevTools window.</li>
+
+                </ol>
+                
+            </section>
+
+            <section id="edit-styles">
+                <h2>Edit CSS styles in DevTools</h2>
+                
+                <p>To change CSS styles in DevTools, follow these steps.</p>
+                <ol>
+                    <li>In the <b>Elements</b> tab, click on an HTML element. For example, <span class="syn">&lt;h1&gt;</span> or <span class="syn">&lt;h2&gt;</span>.</li>
+                    <li>In the <b>Styles</b> pane, you can see the list of relevant CSS rules for the selected HTML element.
+                    <img src="assets/img/dev-tools/edit-css.png" alt="screenshot"></li>
+                    <li>Click the value of a CSS property and edit it. Do <i>not</i> edit the name of the CSS property itself. 
+                    <img src="assets/img/dev-tools/styles-edit.png" alt="screenshot" class="wider-115"></li>
+                    <li>When finished, press <kbd class="tutorial-key">Enter</kbd>.</li>
+
+                </ol>
+                <p>You can see that the HTML element as displayed in the browser changes instantly.</p>
+
+                <p>To add a new CSS style rule:</p>
+
+                <ol>
+                    <li>In the <b>Styles</b> pane, click on the same line as the closing  curly brace <kbd class="tutorial-key">}</kbd> for the relevant CSS declaration block.</li>
+                    <li>At the left of the colon <kbd class="tutorial-key">:</kbd>, type the CSS property name and press the <kbd class="tutorial-key">Tab</kbd> key.</li>
+                    <li>At the right of the colon <kbd class="tutorial-key">:</kbd> type the CSS property value and press <kbd class="tutorial-key">Enter</kbd>.
+                    <img src="assets/img/dev-tools/add-styles.png" alt="screenshot" class="wider-115"></li>
+                </ol>
+
+                <p>To restore the original CSS styles, reload the web page in your browser.</p>
+            </section>
+
+        </article>
+    </main>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>       
+
+</body>
+</html>
+
