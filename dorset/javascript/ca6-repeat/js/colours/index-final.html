@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Colour Generator</title>
+    <meta name="description" content="An increment and decrement counter that changes the colour of the number displayed on the web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/colours.css" />
+
+    <!-- Font Awesome 6.1 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+
+
+
+    </style>
+
+   <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    
+
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1>Random Colour Generator</h1>
+            <h2>Use an array of hexadecimal values to randomly generate a background colour for the web page.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+
+        <section class="container-flex theme-js" id="theme-js">
+
+            <h2>Background Colour: &nbsp;<span id="color-display">#dbf4e4</span></h2>
+            <p>&nbsp;</p>
+            <button class="btn" id="btn-color">
+                <i class="fa-solid fa-paint-roller"></i> Click me
+            </button>
+
+        </section>
+
+    </main>
+
+    <script>
+            const arrHex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+            const btnColor = document.getElementById("btn-color");
+            const strColorDisplay = document.getElementById("color-display");
+
+            btnColor.addEventListener("click", function () {
+            let strHexColor = "#";
+            for (let i = 0; i < 6; i++) {
+                strHexColor = strHexColor + arrHex[getRandomNumber()];
+            }
+            strColorDisplay.textContent = strHexColor;
+            document.getElementById("theme-js").style.backgroundColor = strHexColor;
+            });
+
+            // Generate random number in range 0 - 15
+            function getRandomNumber() {
+                return Math.floor(Math.random() * arrHex.length);
+            }
+
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+
+

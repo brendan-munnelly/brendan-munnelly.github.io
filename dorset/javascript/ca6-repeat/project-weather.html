@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Weather for Dublin city | JavaScript Project | Brendan Munnelly</title>
+	<meta name="description" content="Uses the Fetch API to retrieve current weather information for the city of Dublin, Ireland.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="assets/css/brendan-munnelly-javascript-tutorials.css" />
+
+   <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+
+	<body id="top">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div>
+
+					</div>
+				</div>
+
+				<div class="content">
+					<h1>Weather API Project</h1>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT PROJECTS</h3>
+				<p><i class="fas fa-list"></i> &nbsp;<a href="index.html">Projects List</a></p>
+			</aside>
+
+	<article>
+
+	<section id="learning-goals">
+		<h2>Project Description</h2>
+		<p>Use the Fetch API to retrieve current weather information for the city of Dublin, Ireland.</p>
+	</section>
+
+
+
+    <section id="tables-html">
+
+		<h2>Your project folder</h2>
+
+		<img src="assets/img/list-weather.png" alt="" style="max-width: 700px">
+
+
+        <p>In your 📁 <b>js</b> folder is a sub-folder named 📁 <b>weather</b> that contains these two files:</p>
+
+		<ul>
+			<li>An <b>index.html</b> file contains the HTML and CSS.</li>
+			<li>An <b>app.js</b> file is that is empty.</li>
+		</ul>
+	
+		<p>Open both the <b>index.html</b> and <b>app.js</b> files in VS Code.</p>
+			
+		<p>Open the <b>index.html</b> in a web browser.</p>
+		
+		<p><i>Do not use Apple Safari or Microsoft Edge.</i></p>
+
+
+
+	</section>
+
+	<section>
+
+		<h2 id="tables-css">Creating the table with JavaScript</h2>
+
+		<p>Follow these steps.</p>
+
+		<ol>
+			<li>In the <b>index.html</b> file, you can see an HTML table with a <span class="syn">&lt;tbody&gt;</span> element. But the <span class="syn">&lt;tbody&gt;</span> has no <span class="syn">&lt;tr&gt;</span> rows and <span class="syn">&lt;td&gt;</span> cells. 
+			<img src="js/weather/assets/img/weather-empty-table.png" alt="">
+			You will generate these rows and cells with JavaScript.
+			<span class="inside-ol">&nbsp;</span>
+			At the bottom of the <b>index.html</b> web page, add a link to the empty <b>app.js</b> file.
+			<span class="inside-ol">&nbsp;</span>
+			When you display the <b>index.html</b> web page in a browser, table element currently looks as shown below. 
+			<img src="js/weather/assets/img/weather-photo-empty.png" alt=""></li>
+			<li>In the <b>app.js</b> file, create a function named <b>populateTableRows()</b>.</li>
+			
+
+			<li>Inside this function, create a string variable named <b>strTableRows</b> and assign the content below to this variable.
+			
+<pre><button class="copy-code" id="btn-1">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-1">
+&lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Summary&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Temperature&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 2, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Humidity&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 3, Cell 2&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+        &lt;td&gt;&lt;span&gt;Pressure&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Row 4, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+</code></pre>
+
+</li>
+	
+			<li>On the last line of the <b>populateTableRows()</b> function, add a line that assigns the content of the <b>strTableRows</b> string to the table with an <b>id</b> of <b>table-weather-dublin</b> in the <b>index.html</b> file.</li>
+
+			<li>Transform your <span class="syn-js">populateTableRows()</span> function into an IIFE as shown below.
+
+		<img src="js/weather/assets/img/weather-4.png" alt="weather pic" style="max-width: 580px"></li>
+
+		<li>Save your <b>app.js</b> file and reload the <b>index.html</b> in your web browser. The code should now run and the table rows should be created. See below.</li>
+			
+		<img src="js/weather/assets/img/weather-photo-placeholders.png" alt="">
+			</ol>
+
+	</section>
+
+	<section>
+
+		<h2 id="tables-css-3">Exploring the Open Weather API</h2>
+
+		<p>You will use the free public API from <a href="https://openweathermap.org/" target="_blank">Open Weather</a> to obtain live weather data.</p>
+
+		<ol>
+			<li>Open a new tab in your web browser and enter the following web address with an API end-point.
+<pre>https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0 </pre>
+Your web browser should display a screen similar to the following.
+<img src="js/weather/assets/img/weather-api-raw.png" alt="">
+You can see that the link contains a city name <b>Paris</b> and a country code <b>fr</b>.</li>
+	
+		<li>The API provides a wide range of data items. In this project, we will use the following four.
+
+		<img src="js/weather/assets/img/weather-6.png" alt="weather pic" style="max-width: 500px"></li>
+
+		</ol>
+	</section>
+
+<section>
+
+	<h2>Using the Fetch API</h2>
+
+	<p>The JavaScript Fetch API has the following general syntax. In the example below, the feed data is provided in JSON format.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-2">async function myFunction() { 
+    await fetch('https://api.openweathermap.org/data/2.5/weather?q=dublin,ie&units=metric&APPID=bc425ac2188d406c884f4fdd88b339f0')
+
+      .then(response =&gt; {
+        if (response.status !== 200) {
+          console.log('Error Status Code: ' + response.status);
+          return;
+      }
+      response.json().then((data) =&gt; {	
+        // Test if data is being received
+        console.log(data);
+        // update web page here
+      });
+           
+    })
+    .catch(error =&gt; {
+        // handle any error
+    });
+}</code></pre>
+
+<ol>
+
+	<li>Add the Fetch API code above to the top of your <b>populateTableRows()</b> function.</li>
+
+	<li>Save your <b>app.js</b> script and view the web page in your browser. It should look as shown before.</li>
+
+	<li>Open your browser console and verify that the data is being obtained in JSON format from the weather feed.
+
+	<img src="js/weather/assets/img/weather-console.log.png" alt="" class="wider-115"></li>
+
+	<li>In the <b>populateTableRows()</b> function, update the four table rows as follows.
+
+<pre><button class="copy-code" id="btn-3">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Summary&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["weather"][0]["description"]}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-4">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Temperature&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["temp"] + "&degC"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-5">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Humidity&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["humidity"] + " %"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<pre><button class="copy-code" id="btn-6">Copy code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6">&lt;tr&gt;
+    &lt;td&gt;&lt;span&gt;Pressure&lt;/span&gt;&lt;/td&gt;
+    &lt;td&gt;${data["main"]["pressure"] + " Pa"}&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+		You can now remove the <span class="syn-js">console.log</span> statement.</li>
+
+	</ol>
+
+	<p>Save your <b>app.js</b> script, view the web page in your browser and verify the page works correctly.</p>
+
+	<img src="js/weather/assets/img/final-weather.png" alt="">
+
+</section>
+
+
+
+
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>

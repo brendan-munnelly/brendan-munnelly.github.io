@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totals Calculator Project</title>
+    <meta name="description" content="A Simple Total Calculator">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/bill.css" />
+
+
+     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+
+<body>
+
+
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1>A basic totals calculator</h1>
+            <h2>A basic script for calculating and displaying totals and sub-totals.</h2>
+        </div>
+    </header>
+
+    <main>
+
+    <section class="container-flex theme-js">
+
+        <div>
+            <label for="num1">First Number:</label>
+            <input type="number" id="num1">
+        </div>
+
+        <div>
+            <label for="num2">Second Number:</label>
+            <input type="number" id="num2">
+        </div>
+
+        <div>
+            <label for="percentage">Percentage (%):</label>
+            <input type="number" id="percentage">
+        </div>
+
+        <button id="calculate-btn" class="btn">Calculate Total</button>
+
+        <h3>Results:</h3>
+        <p>Subtotal: <span id="subtotal">0.00</span></p>
+        <p>Final Total: <span id="final-total">0.00</span></p>
+
+    </section>
+
+</main>
+<script>
+    const num1Input = document.getElementById("num1");
+    const num2Input = document.getElementById("num2");
+    const percentageInput = document.getElementById("percentage");
+
+    const subtotalDisplay = document.getElementById("subtotal");
+    const finalTotalDisplay = document.getElementById("final-total");
+
+    const calculateBtn = document.getElementById("calculate-btn");
+
+    function calculateTotal() {
+        const num1 = parseFloat(num1Input.value) || 0;
+        const num2 = parseFloat(num2Input.value) || 0;
+        const percentage = parseFloat(percentageInput.value) || 0;
+
+        const subtotal = num1 + num2;
+        const percentageAmount = (subtotal * percentage) / 100;
+        const finalTotal = subtotal + percentageAmount;
+
+        subtotalDisplay.textContent = subtotal.toFixed(2);
+        finalTotalDisplay.textContent = finalTotal.toFixed(2);
+    }
+
+    calculateBtn.addEventListener("click", calculateTotal);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Counter Project</title>
+    <meta name="description" content="An increment and decrement counter that changes the colour of the number displayed on the web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/counter.css" />
+
+
+    <style>
+
+
+
+    </style>
+
+   <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    
+
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1>Counter <span>JavaScript Project</span></h1>
+            <h2>An increment and decrement counter that changes the value of the number displayed on the web page.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+
+        <section class="container-flex theme-js">
+
+            <h2>counter</h2>
+            <span id="value">0</span>
+
+            <div class="button-container">
+                <button id = "btn-decrease" class="btn">decrease</button>
+                <button id = "btn-reset" class="btn">reset</button>
+                <button id = "btn-increase" class="btn">increase</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const valueDisplay = document.getElementById("value");
+        const btnDecrease = document.getElementById("btn-decrease");
+        const btnReset = document.getElementById("btn-reset");
+        const btnIncrease = document.getElementById("btn-increase");
+
+        let count = 0;
+
+        function increase() {
+    count++;
+    valueDisplay.textContent = count;
+        updateDisplay();
+
+}
+
+
+function decrease() {
+    count--;
+    valueDisplay.textContent = count;
+    updateDisplay();
+}
+
+
+function reset() {
+    count = 0;
+    valueDisplay.textContent = count;
+        updateDisplay();
+
+}
+
+
+btnIncrease.addEventListener("click", increase);
+btnDecrease.addEventListener("click", decrease);
+btnReset.addEventListener("click", reset);
+
+function updateDisplay() {
+    valueDisplay.textContent = count;
+
+    if (count > 0) {
+        valueDisplay.style.color = "green";
+    } else if (count < 0) {
+        valueDisplay.style.color = "red";
+    } else {
+        valueDisplay.style.color = "black";
+    }
+}
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
