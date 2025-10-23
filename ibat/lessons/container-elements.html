@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Container (Semantic) Elements | Front-end Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Organising your web page content into a logical structure with container (&#8216;semantic&#8217;) tags.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+
+            <div class="content">
+                <h1>Container (Semantic) Elements</h1>
+                <h2>Organising your web page content into a logical structure with container (&#8216;semantic&#8217;) tags.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+
+    <main>
+
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+                // Basic referrer detection
+                let returnHome;
+                function getBasicReferrer() {
+                  return document.referrer || "Direct visit (no referrer)";
+                }
+                
+                const testReferrer = getBasicReferrer();
+                
+                if (testReferrer.includes("ibat")) {
+                    console.log("Referrer is IBAT");
+                    returnHome = "https://munnelly.com/ibat/index.html"
+                }
+                else if (testReferrer.includes("dorset")) {
+                    console.log("Referrer is Dorset");
+                    returnHome = "https://munnelly.com/dorset/index.html"
+                }
+                
+                else {
+                    console.log("Referrer unknown");
+                    returnHome = "../index.html"
+                }
+                
+                // Set the href attribute of the link
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+                
+                // Log the referrer information
+                function logReferrer() {
+                  console.log("Basic Referrer:", getBasicReferrer());
+                }
+                
+                // Call the function to log the referrer
+                logReferrer();</script>
+                
+
+            <h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#semantic">Web page layout with container tags</a></p>
+            <p><a href="#main-section">About <code>&lt;section&gt;</code> tags and the <code>&lt;main&gt;</code> tag</a></p>
+            <p><a href="#third-web-page-creating">Creating your third sample web page</a></p>
+			<p><a href="#lorem-ipsum">Updating <code>page-3.html</code> with more <i>lorem ipsum</i> text</a></p>
+
+            <p><a href="#semantic-pages">Adding semantic tags to <code>index.html</code>, <code>page-1.html</code>, and <code>page-2.html</code></a></p>
+
+            <p><a href="#home-page">Adding a hyperlink to <code>page-3.html</code> in <code>index.html</code></a></p>
+            <p><a href="#github-upload">Uploading your work to GitHub</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+			<section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+					<li>List and describe the <i>container elements</i> in a web page used in modern web design.</li>
+                    <li>Sub-divide the <span class="syn">&lt;main&gt;</span> container in a web page into a number of smaller and different <span class="syn">&lt;section&gt;</span> containers.</li>
+                </ul>
+            </section>
+
+
+            <section id="semantic">
+
+                <h2>Web page layout with container tags</h2>
+
+                <p>In the <a href="working-with-html.html">Working with HTML</a> Tutorial, you learnt that the simplest possible HTML file has two main parts &#8211; the <span class="syn">&lt;head&gt;</span> and <span class="syn">&lt;body&gt;</span> &#8211; and looks as shown below.</p>
+
+                <img src="assets/img/working-with-html/html-file-structure.png" alt="screenshot">
+
+                <p>Modern web design (HTML5 and CSS3) uses a number of so-called <i>container</i> tags for the content within the <span class="syn">&lt;body&gt;</span> of a web page.</p>
+
+                <ul>
+                    <li>Unlike tags such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;p&gt;</span>, container tags have no default CSS styles. For example, they do not change the size, appearance or space around text or images.</li>
+                    <li>The purpose of container tags is not to style web page content but to structure or organise it into &#8216;blocks&#8217; or &#8216;chunks&#8217;.</li>
+                </ul>
+
+                <img src="assets/img/container-elements/storage.png" alt="storage">
+
+                <p>Container tags in a web page play the same role as containers or organisers for documents, food items, clothes, and other physical objects in the real world.</p>
+
+                <p>Moreover, container/semantic blocks of content are automatically recognised by screen readers, allowing users with visual impairments to navigate directly to important page sections.</p>
+
+                <p>The four major container tags are listed below.</p>
+
+                <ul>
+                    <li><span class="syn">&lt;nav&gt;</span></li>
+                    <li><span class="syn">&lt;header&gt;</span></li>
+                    <li><span class="syn">&lt;main&gt;</span></li>
+                    <li><span class="syn">&lt;footer&gt;</span></li>
+                </ul>
+
+                <p>All four tags are placed within the <span class="syn">&lt;body&gt;</span> ... <span class="syn">&lt;/body&gt;</span> of a web page.</p>
+
+                <img src="assets/img/container-elements/major-tags.png" alt="screenshot" style="max-width: 640px">
+
+                <p>You will sometimes see container tags in HTML referred to as <i>semantic</i> tags.</p>
+
+                <p>Let&#8217;s look at these four container tags in more detail.</p>
+
+                <h3>The <code>&lt;nav&gt;</code> tag</h3>
+                <p>This tag name is short for navigation. It is most commonly located at the top of a web page where it contains a menu of hyperlinks and the organisation&#8217;s logo.</p>
+                <img src="assets/img/container-elements/nav.png" alt="screenshot">
+
+                <p>Visual designers refer to this list of menu hyperlinks as the <i>navbar</i>.</p>
+
+
+                <h3>The <code>&lt;header&gt;</code> tag</h3>
+                <p>This is generally positioned under the <span class="syn">&lt;nav&gt;</span> element at the top of a web page, and usually contains the <span class="syn">&lt;h1&gt;</span> heading and some introductory text.</p>
+                <img src="assets/img/container-elements/header.jpg" alt="screenshot">
+
+                <p>Visual designers refer to this part of a web page as the <i>hero block</i>.</p>
+
+                <h3>The <code>&lt;main&gt;</code> tag</h3>
+                <p>As its name suggests, this holds the primary content of a web page. In simple terms, this means any content that should not be in the <span class="syn">&lt;nav&gt;</span>, <span class="syn">&lt;header&gt;</span> or <span class="syn">&lt;footer&gt;</span> containers.</p>
+
+                <h3>The <code>&lt;footer&gt;</code> tag</h3>
+                <p>Located at the bottom of a web page, this contains such content as the organisation&#8217;s details, links to related web pages, and legal and copyright information.</p>
+
+                <img src="assets/img/container-elements/footer.png" alt="screenshot">
+
+            </section>
+
+
+            <section id="main-section">
+
+                <h2>About <code>&lt;section&gt;</code> tags and the <code>&lt;main&gt;</code> tag</h2>
+                <p>In modern web pages, the <span class="syn">&lt;main&gt;</span> container is often sub-divided with a number of <span class="syn">&lt;section&gt;</span> container tags.</p>
+                    
+                <p>This makes it possible to apply different layouts and styles to different parts of the content inside the <span class="syn">&lt;main&gt;</span> container.</p>
+
+                <p>For example, different <span class="syn">&lt;section&gt;</span> containers may have different background colours and different numbers of columns.</p>
+
+                <p>In the web page outline <span class="syn">&lt;body&gt;</span> below, you can see that the <span class="syn">&lt;main&gt;</span> container is further subdivided into four smaller <span class="syn">&lt;section&gt;</span> containers.</p>
+
+                <img src="assets/img/container-elements/sections-1.png" alt="sections" style="max-width: 640px">
+
+                <p>Each of the four <span class="syn">&lt;section&gt;</span> containers can now have different <a href="working-with-css.html">CSS</a> styles applied to it. See the example below.</p>
+
+                <img src="assets/img/container-elements/sections.png" alt="screenshow">
+
+            </section>
+
+
+
+            <section id="third-web-page-creating" class="wrapper-content">
+
+            <h2>Creating your third sample web page</h2>
+            <p>You will now create a third web page. This will have one <span class="syn">&lt;main&gt;</span> tag and six <span class="syn">&lt;section&gt;</span> tags.</p>
+
+            <ol>
+                <li>In VS Code, choose the <b>File | New Text File</b> command.
+                <img src="assets/img/container-elements/file-new.png" alt="screenshot" style="max-width:700px"></li>
+
+                <li>Choose the <b>File | Save As...</b> command, and save your file in the  &#128193; <b>exercises</b> sub-folder of your  &#128193; <b>websites</b> folder with this name:
+                <span class="inside-ol">&nbsp;</span>
+               <b>page-3.html</b>
+               <span class="inside-ol">&nbsp;</span>
+
+               Your files and folder structure should now look as shown below.
+                <img src="assets/img/container-elements/folder-files.png" style="max-width: 500px" alt="screenshot"></li>
+
+                <li>In VS Code, click at the top of your empty <b>page-3.html </b> file and copy-and-paste in the following.
+
+
+
+<div class="gpt"><button class="copy-html" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9">
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="en"&gt;<br>
+
+&lt;head&gt;<br>
+&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+&nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;Between 50 and 60 characters (including spaces)&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;meta name="description" content="Between 150 and 160 characters (including spaces). Like the title, this is important for search engines."&gt;<br>
+
+&lt;/head&gt;<br><br>    
+    
+&lt;body&gt;<br><br>
+
+ &lt;!-- Navigation menu with logo --&gt;<br>
+  &lt;nav&gt;&lt;/nav&gt;<br><br>
+
+
+ &lt;!-- Hero block --&gt;<br>
+    &lt;header&gt;<br>
+        &lt;h1&gt;Big heading&lt;/h1&gt;<br>
+        &lt;h2&gt;Smaller sub-heading&lt;/h2&gt;<br>
+    &lt;/header&gt;<br><br>
+
+    &lt;!-- Main content of web page in sections --&gt;<br>
+    &lt;main&gt;<br><br>
+        &lt;section&gt;<br>
+            &lt;h2&gt;Smaller Heading&lt;/h2&gt;<br>
+            &lt;p&gt;Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima exercitationem, fuga doloribus sequi sint eveniet nobis nulla obcaecati quibusdam quae, quia aliquam mollitia ea vel ullam dolores natus in quisquam?&lt;/p&gt;<br>
+
+        &lt;/section&gt;<br><br>
+
+        &lt;section&gt;<br>
+            &lt;h2&gt;Smaller Heading&lt;/h2&gt;<br>
+            &lt;p&gt;Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima exercitationem, fuga doloribus sequi sint eveniet nobis nulla obcaecati quibusdam quae, quia aliquam mollitia ea vel ullam dolores natus in quisquam?&lt;/p&gt;<br>
+
+        &lt;/section&gt;<br><br>
+
+        &lt;section&gt;<br>
+            &lt;h2&gt;Smaller Heading&lt;/h2&gt;<br>
+            &lt;p&gt;Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima exercitationem, fuga doloribus sequi sint eveniet nobis nulla obcaecati quibusdam quae, quia aliquam mollitia ea vel ullam dolores natus in quisquam?&lt;/p&gt;<br>
+
+        &lt;/section&gt;<br><br>
+    
+    &lt;/main&gt;<br>
+    &lt;!-- main content ends here --&gt;<br><br>
+
+    &lt;!-- Links to related web pages, legal and copyright --&gt;<br>
+    &lt;footer&gt;&lt;/footer&gt;<br><br>
+
+    &lt;/body&gt;<br>
+    
+    &lt;/html&gt;
+    
+    
+</code></div></li>
+
+
+                <li>VS Code now fills your new file with the basic HTML5 structure and some sample text.
+                <img src="assets/img/container-elements/user-output.png" class="wider-110" alt="screenshot"></li>
+
+                <li>Save <b>page-3.html</b> and view it in a web browser. It should look as shown below.
+                
+                <img src="assets/img/container-elements/page-3-1.png" alt="screenshot"></li>
+                </ol>
+
+            </section>
+
+
+            <section id="lorem-ipsum">
+
+                <h2>Updating <code>page-3.html</code> with more <i>lorem ipsum</i> text</h2>
+
+                <p>Lorem ipsum text is a filler or placeholder text commonly used in design, publishing, and web development to fill a space and show the visual layout of a document or webpage. It mimics the natural flow and structure of real language without conveying meaning. It’s been a standard in the printing industry since the 1500s and remains widely used today.</p>
+
+                <p>Here are some websites that provide lorem ipsum or similar:</p>
+                <ul>
+                    <li><a href="https://loremipsum.io/" target="_blank">https://loremipsum.io</a></li>
+                    <li><a href="https://hipsum.co/" target="_blank">https://hipsum.co</a></li>
+                    <li><a href="https://www.corporate-ipsum.com" target="_blank">https://www.corporate-ipsum.com</a></li>
+                </ul>
+
+                <p>Follow the steps below to add some more filler text to <b>page-3.html</b> using the built-in lorem ipsum generator in VS Code:</p>
+
+                <ol>
+                    <li>Open <b>page-3.html</b> in VS Code</li>
+                    <li>In the first <span class="syn">&lt;section&gt;</span> block, click just after the closing <span class="syn">&lt;/p&gt;</span> tag.
+                    
+                    <img src="assets/img/container-elements/lorem-1.png" alt="screenshot" class="wider-115"></li>
+
+                    <li>Press the <kbd class="tutorial-key">Enter</kbd> key twice, and create an empty paragraph <span class="syn">&lt;p&gt;&lt;/p&gt;</span> tag pair.
+
+                    <img src="assets/img/container-elements/lorem-2.png" alt="screenshot" class="wider-115"></li>
+                    
+                    <li>Inside the empty <span class="syn">&lt;p&gt;&lt;/p&gt;</span> tag pair, type the letters <b>lo</b>.
+
+                    <img src="assets/img/container-elements/lorem-2-1.png" class="wider-115" alt="screenshot">
+                    When the Emmet Abbreviation menu appears after one or two seconds, click on it or press the  <kbd class="tutorial-key">Enter</kbd> key.
+                    <span class="inside-ol">&nbsp;</span>
+       
+                    VS Code now creates 30 words of Lorem ipsum filler text.
+                    <img src="assets/img/container-elements/lorem-3.png" alt="screenshot" class="wider-115">
+       
+                    <span class="inside-ol">&nbsp;</span>
+                    Note that you can change the number of words of lorem ipsum generated by typing a number after the word “lorem". For example:
+                    <span class="inside-ol">&nbsp;</span>
+                    <b>lorem40</b> or <b>lorem12</b></li>
+       
+                   <li>Repeat this step for the second and third <span class="syn">&lt;section&gt;</span> container blocks.</li>
+       
+                    <li>Copy the third <span class="syn">&lt;section&gt;</span> block and paste it three times into the web page. Your <b>page-3.html</b> file should now have six sections.</li>
+
+
+                    <li>Near the end of the web page, <i>inside</i> the final closing <span class="syn">&lt;/section&gt;</span>, copy-and-paste the following line.
+
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"../index.html"</span>&gt;<span class="white">Back to Home page</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;</code></pre>
+                                        
+                    The bottom of <b>page-3.html</b> should now look as shown below.
+                    <img src="assets/img/container-elements/backlinks-1.png" class="wider-115" alt="screenshot"></li>
+                       
+
+                <li>Update the <span class="syn">&lt;head&gt;</span> of your new web page by copying-and-pasting the following two lines.
+
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
+&lt;<span class="blue-dark">title</span>&gt;<span class="white">Web Page with Sections</span>&lt;/<span class="blue-dark">title</span>&gt;
+&lt;<span class="blue-dark">meta</span> <span class="blue-light">name</span>=<span class="brown">"description"</span> <span class="blue-light">content</span>=<span class="brown">"A sample web page with multiple sections."</span>&gt;
+</code></pre>
+                The <span class="syn">&lt;head&gt;</span> of your web page should now look as shown below.
+
+                <img src="assets/img/container-elements/meta-description.png" alt="screenshot"> </li>
+
+                <li>Finally, delete the <span class="syn">&lt;nav&gt;</span> and <span class="syn">&lt;footer&gt;</span> container blocks from the web page.
+                <img src="assets/img/container-elements/nav-footer.png" alt="screenshot">
+                </li>
+
+
+            </ol>
+
+            <p>When finished, save your <b>page-3.html</b> web page file. In your web browser, it should look similar to the following.
+            <img src="assets/img/container-elements/page-3-before.png" alt="screenshot"></p>
+                
+            </section>
+
+
+            <section id="semantic-pages">
+
+                <h2>Adding semantic tags to <code>index.html</code>, <code>page-1.html</code>, and <code>page-2.html</code></h2>
+
+                <p>Let's add semantic tags to structure the content of your home web page and your first two exercise web pages.</p>
+                
+                <p>Each web page will have only one <span class="syn">&lt;section&gt;</span> block in its <span class="syn">&lt;main&gt;</span> block of content. For simplicity, you can omit the <span class="syn">&lt;nav&gt;</span> and <span class="syn">&lt;footer&gt;</span> containers.</p>
+                
+                <p>In VS Code:</p>
+
+                <ol>
+                    <li>Open <b>page-1.html</b> and add <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;main&gt;</span> and <span class="syn">&lt;section&gt;</span> tags as shown below. Save your file when finished.
+                    <img src="assets/img/container-elements/semantic-page-1.png" alt="screenshot" class="wider-115">
+                    </li>
+
+                    <li>Open <b>page-2.html</b> and add <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;main&gt;</span> and <span class="syn">&lt;section&gt;</span> tags as shown below. Save your file when finished.
+                        <img src="assets/img/container-elements/semantic-page-2.png" alt="screenshot" class="wider-115">
+                    </li>
+
+                    <li>Open <b>index.html</b> and add <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;main&gt;</span> and <span class="syn">&lt;section&gt;</span> tags as shown below. Save your file when finished.
+                    <img src="assets/img/container-elements/semantic-index.png" alt="screenshot" class="wider-115">
+                    </li>
+                </ol>
+
+
+
+            </section>
+
+
+            <section id="home-page">
+                <h2>Adding a hyperlink to <code>page-3.html</code> in <code>index.html</code></h2>
+                <p>In VS Code, open your home <b>index.html</b> web page, copy-and-paste the following hyperlink after the current two, and save the file.</p>
+                
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">
+&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/page-3.html"</span>&gt;<span class="white">Web Page with Sections</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt;</code></pre>
+                
+               <p>Your updated home page should now look as follows in a web browser.</p>
+                
+                <img src="assets/img/container-elements/home-page-final.png" alt="screenshot">
+                    
+                  
+        <p>&#x2705; &nbsp;All done.</p>
+
+        </section>
+
+
+        <section id="github-upload">
+            <h2>Uploading your work to GitHub</h2>
+
+            <p>Your final task is to upload your work to your account on GitHub.</p>
+
+            <ol>
+
+                <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">github.com</a>. If you are not already signed in to your GitHub account, sign in now.
+                <img src="assets/img/container-elements/github-signin.png" alt="github-signin"></li>
+
+                <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+                <img src="assets/img/container-elements/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+
+                <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+
+                <img src="assets/img/container-elements/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+
+                <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your <b>index.html</b> file and your 📁 <b>exercises</b> sub-folder to upload them to your repository on GitHub.
+                <img src="assets/img/container-elements/github-upload-folder-files.png" alt="screenshot">
+                <b>Note: </b> Because your upload includes a folder and not just files, you must use the drag-and-drop method rather than the file select method.</li>
+
+                <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+
+                <li>Finally, click the green <b>Commit changes</b> button to upload your entire <b>exercises</b> sub-folder and all the files it contains.
+                <img src="assets/img/container-elements/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+            </ol>
+
+            <p>Your web pages are now published on GitHub at web addresses similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+            <p><b>https://username.github.io/index.html</b><br>
+            Or simply:<br>
+            <b>https://username.github.io</b></p>
+
+            <p>And:<br>
+            <b>https://username.github.io/exercises/page-1.html<br>
+            https://username.github.io/exercises/page-2.html<br>
+            https://username.github.io/exercises/page-3.html</b></p>
+
+            <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+        </section>
+
+        <section class="resources-learning" id="resources">
+
+            <h2>More learning resources</h2>
+    
+            <div class="flex-container">
+                <div class="text-container">
+                    <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                    <p><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/6" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+    
+                </div>
+        
+                <div class="audio-container">
+                    <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+    
+                    <audio controls>
+                        <source src="../../dorset/lessons/assets/audio/container-elements.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+    
+        </section>
+
+
+        <section class="resources-learning" id="ai-prompts">
+          
+            <h2>Sample AI prompts</h2>
+        
+            <p>For each one of the following prompts, copy the AI-generated HTML output, open VS Code, choose <b>File | New Text File</b>, and then paste in AI content into the new, empty file.</p>
+
+            <p>Choose <b>File | Save</b> to save the file in your 📁  <b>exercises</b> folder. Name your file <b>something.html</b>. (Replace 'something' with a suitable file name.) Do NOT use capital letters or empty spaces in the file name.</p>
+
+            <p>Finally, switch to File Explorer (Windows) or Finder (Apple Mac), display your 📁 <b>exercises</b> folder, and double-click on your new HTML file to display it a web browser.</p>
+              
+<div class="gpt"><button class="copy-gpt" id="btn-5">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-5">Create the HTML for a home web page of a women's hair dressing salon.<br><br>
+In the &lt;head&gt;, include the UTF-8 charset, a title, description and responsive viewport tags.<br><br>
+In the &lt;body&gt; tag, include semantic &lt;header&gt;, &lt;main&gt; and &lt;section&gt; tags.<br><br>
+You can omit the &lt;nav&gt; and &lt;footer&gt; tags.<br><br>
+In the &lt;header&gt; tag, include a &lt;h1&gt; tag and a sub-heading &lt;h2&gt; tag.<br><br>
+In the &lt;main&gt; tag, include three &lt;section&gt; tags. In each section, include a &lt;h2&gt; tag and two &lt;p&gt; tags in a single-column layout. Each of the three sections should focus on a service offered by the salon. Inside all these tags, include some sample text content.<br><br>
+To make your output easier to read, add an empty line after each closing HTML tag.</code></div>
+
+<div class="gpt"><button class="copy-gpt" id="btn-6">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-6">Create the HTML for a home web page for a maker of scented candles.<br><br>
+In the &lt;head&gt;, include the UTF-8 charset, a title, description and responsive viewport tags.<br><br>
+In the &lt;body&gt; tag, include semantic &lt;header&gt;, &lt;main&gt; and &lt;section&gt; tags. You can omit the &lt;nav&gt; and &lt;footer&gt; tags.<br><br>
+In the &lt;header&gt; tag, include a &lt;h1&gt; tag and a sub-heading &lt;h2&gt; tag.<br><br>
+In the &lt;main&gt; tag, include three &lt;section&gt; tags. In each section, include a &lt;h2&gt; tag and two &lt;p&gt; tags in a single-column layout. Each of the three sections should focus on a particular style of candle offered by the business. Inside all these tags, include some sample text content.<br><br>
+To make your output easier to read, add an empty line after each closing HTML tag.</code></div>
+         
+<div class="gpt"><button class="copy-gpt" id="btn-7">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-7">Create the HTML for a home web page for a Sligo-based local animal rescue charity.<br><br>
+In the &lt;head&gt;, include the UTF-8 charset, a title, description and responsive viewport tags.<br><br>
+In the &lt;body&gt; tag, include semantic &lt;header&gt;, &lt;main&gt; and &lt;section&gt; tags.<br><br>
+You can omit the &lt;nav&gt; and &lt;footer&gt; tags.<br><br>
+In the &lt;header&gt; tag, include a &lt;h1&gt; tag and a sub-heading &lt;h2&gt; tag.<br><br>
+In the &lt;main&gt; tag, include three &lt;section&gt; tags. In each section, include a &lt;h2&gt; tag and two &lt;p&gt; tags in a single-column layout. Each of the three sections should focus on a particular service offered by the charity. Inside all these tags, include some sample text content.<br><br>
+To make your output easier to read, add an empty line after each closing HTML tag.</code></div>
+           
+<div class="gpt"><button class="copy-gpt" id="btn-8">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-8">Create the HTML for a home web page promoting Hook Head Lighthouse in County Waterford, Ireland.<br><br>
+In the &lt;head&gt;, include the UTF-8 charset, a title, description and responsive viewport tags.<br><br>
+In the &lt;body&gt; tag, include semantic &lt;header&gt;, &lt;main&gt; and &lt;section&gt; tags.<br><br>
+You can omit the &lt;nav&gt; and &lt;footer&gt; tags.<br><br>
+In the &lt;header&gt; tag, include a &lt;h1&gt; tag and a sub-heading &lt;h2&gt; tag.<br><br>
+In the &lt;main&gt; tag, include three &lt;section&gt; tags. In each section, include a &lt;h2&gt; tag and two &lt;p&gt; tags in a single-column layout. Each of the three sections should focus on a particular visitor attraction offered by the location. Inside all these tags, include some sample text content.<br><br>
+To make your output easier to read, add an empty line after each closing HTML tag.</code></div>
+
+          </section>
+
+</article>
+</main>
+
+    <footer>
+
+
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
+
