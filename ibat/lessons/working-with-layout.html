@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with Layout | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Adding spacing to web pages with vertical margins around block elements and responsive padding inside container elements.">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+
+    <style>
+        pre { background-color: #282c34 }
+    </style>
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Working with Layout</h1>
+                <h2>Adding spacing to web pages with vertical margins around block elements and responsive padding inside container elements.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+// Basic referrer detection
+let returnHome;
+function getBasicReferrer() {
+  return document.referrer || "Direct visit (no referrer)";
+}
+
+const testReferrer = getBasicReferrer();
+
+if (testReferrer.includes("ibat")) {
+    console.log("Referrer is IBAT");
+    returnHome = "https://munnelly.com/ibat/index.html"
+}
+else if (testReferrer.includes("dorset")) {
+    console.log("Referrer is Dorset");
+    returnHome = "https://munnelly.com/dorset/index.html"
+}
+
+else {
+    console.log("Referrer unknown");
+    returnHome = "../index.html"
+}
+
+// Set the href attribute of the link
+document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+
+// Log the referrer information
+function logReferrer() {
+  console.log("Basic Referrer:", getBasicReferrer());
+}
+
+// Call the function to log the referrer
+logReferrer();</script>    
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#white-space">Layout and ‘negative space’</a></p>
+            <p><a href="#css-margins">Margins and layout</a></p>
+            <p><a href="#css-padding">Padding and layout</a></p>
+            <p><a href="#rwd-about">About Responsive Web Design (RWD)</a></p>
+            <p class="toc-indent"><a href="#breakpoints">About breakpoints</a></p>
+            <p><a href="#media-query-about">About media queries</a></p>
+            <p><a href="#css-shorthand">CSS shorthand and the TROUBLE mnemonic</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Understand the importance of adding <i>negative space</i> between elements in web design.</li>
+                    <li>Use the CSS <i>margin</i> property to apply spacing around HTML block-level text tags such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;h3&gt;</span>.</li>
+					<li>Use the CSS <i>padding</i> property to apply padding inside HTML container/semantic tags such as <span class="syn">&lt;header&gt;</span> and <span class="syn">section&gt;</span>.</li>
+                    <li>Use <i>media queries</i> to create responsive web page layouts for the 768px <i>breakpoint</i>.</li>
+                </ul>
+
+            </section>
+
+
+            <section id="white-space">
+
+                <h2>Layout and ‘negative space’</h2>
+
+                <p>The term <i>layout</i> describes the placement of content elements - such as text and images - on a printed page or electronic screen. An important part of layout is the spacing between different elements.</p>
+
+                <img src="assets/img/responsive-spacing/white-space-print.jpg" alt="screenshot">
+
+                <p>The term <i>white space</i> comes from the world of print design where content – text and images – are printed (mostly) on white-coloured paper. White space means space in a design layout that is empty. Although it contains nothing, white space is just as important as any of the content it surrounds for this reason: it makes text more inviting to read.</p>
+    
+                <p>Because electronic screens – and modern printing processes – can create almost any background colour, the original term of white space is increasingly known by the alternative term of <i>negative space</i>.</p>
+    
+                <p>Here are some examples of negative space in use in web design. </p>
+                    <img src="assets/img/responsive-spacing/white-space-web.jpg" alt="Introduction to HTML">
+    
+                <p>Below are links to a number of helpful resources about negative space in web design.</p>
+                <div class="box-toc">
+    
+                <p><a href="https://blog.teamtreehouse.com/white-space-in-web-design-what-it-is-and-why-you-should-use-it" target="_blank" rel="noopener"  class="further-title">Whitespace in Web Design: What It Is and Why You Should Use It</a>
+                <br>From Gisele Muller on <a href="https://blog.teamtreehouse.com/" target="_blank" rel="noopener" style="font-weight:normal">Treehouse</a>.</p>
+    
+                <p><a href="https://getflywheel.com/layout/effective-use-white-space-web-design/" target="_blank" rel="noopener"  class="further-title">A Guide to Effective Use of White Space in Web Design</a>
+                <br>From <a href="https://getflywheel.com/layout/author/joanneamos/" target="_blank" rel="noopener" style="font-weight:normal">Joanne Amos</a> on <a href="https://getflywheel.com" target="_blank" rel="noopener" style="font-weight:normal">Flywheel</a>.</p>
+    
+                <p><a href="https://www.justinmind.com/blog/white-space-design/" target="_blank" rel="noopener"  class="further-title">White Space Design: 20 Striking Examples and Best Practices</a>
+                <br>From <a href="https://www.justinmind.com/blog/author/joe-downs/" target="_blank" rel="noopener" style="font-weight:normal">Joseph Downes</a> on <a href="https://www.justinmind.com/" target="_blank" rel="noopener" style="font-weight:normal">Just in Mind</a>.</p>
+    
+                <p><a href="https://blog.hubspot.com/marketing/whitespace-web-design" target="_blank" rel="noopener"  class="further-title">What Is Whitespace? 9 Websites to Inspire Your Web Design</a>
+                <br>From <a href="https://blog.hubspot.com/marketing/author/karla-cook" target="_blank" rel="noopener" style="font-weight:normal">Karla Cook</a> on <a href="https://blog.hubspot.com/marketing/" target="_blank" rel="noopener" style="font-weight:normal">HubSpot Marketing Blog</a>.</p>
+    
+                <p><a href="https://www.crazyegg.com/blog/white-space-website-design/" target="_blank" rel="noopener"  class="further-title">White-Space at Work: Why Less is More in Your Website Design</a>
+                <br>From Sherice Jacob on <a href="https://www.crazyegg.com/blog/" target="_blank" rel="noopener" style="font-weight:normal">Crazyegg Blog</a>.</p>
+    
+                <p><a href="https://usabilitygeek.com/white-spaces-improving-usability-web-designs/" target="_blank" rel="noopener"  class="further-title">White Space - A Perfect Option For Improving Usability In Web Designs</a>
+                <br>From Isabella Morris on <a href="https://usabilitygeek.com/" target="_blank" rel="noopener" style="font-weight:normal">Usability Geek</a>.</p>
+            </div>
+    
+            <p>In web design, the two important CSS properties that control spacing are <i>margin</i> and <i>padding</i>. Let's look at each property in turn.</p>
+        </section>
+    
+            <section id="css-margins">
+                <h2>Margins and layout</h2>
+                <p>The <i>margin</i> property in CSS controls the space between different elements on a web page. It is most commonly used to create vertical (top and bottom) spacing between block-level content elements such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> <span class="syn">&lt;h3&gt;</span> and <span class="syn">&lt;p&gt;</span>.</p>
+
+                <img src="assets/img/responsive-spacing/inline-block-tags.png" alt="screenshot">
+
+                <p>The simplest way to set margin values is in pixels or <b>px</b> for short.</p>
+
+                <p>On the left below, you can see CSS margin rules for the <span class="csyn">h3</span> and <span class="csyn">p</span> selectors in your sample <b>style-1.css</b> stylesheet. And on the right, you can see how these margin rules control the display of the <span class="syn">&lt;h3&gt;</span> and <span class="syn">&lt;p&gt;</span> elements in the linked <b>page-1.html</b> web page.</p>
+                <img src="assets/img/responsive-spacing/margins-1.png" alt="screenshot" class="wider-115">
+
+                <p>A web page without vertical (top and bottom) margins around text elements would be very difficult to read.</p>
+                <img src="assets/img/responsive-spacing/margins-2.png" alt="screenshot">
+
+            </section>
+
+
+            <section id="css-padding">
+                <h2>Padding and layout</h2>
+                <p>The <i>padding</i> property sets the internal spacing within an HTML element. You will typically use padding for container/semantic elements such as <span class="syn">&lt;nav&gt;</span>, <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;section&gt;</span>, and <span class="syn">&lt;footer&gt;</span>.</p>
+
+                <p>Consider the web pages below from four websites, each of which contains a single column of text, as displayed on a laptop or desktop screen.</p>
+
+                <img src="assets/img/responsive-spacing/sample-page-widths.png" alt="screenshots">
+
+                <p>To achieve this effect in CSS, you could set padding values in percentages <b>%</b> for the <span class="syn">&lt;section&gt;</span> containers such as those shown below.</p>
+
+                <img src="assets/img/responsive-spacing/padding-1.png" alt="screenshots" style="max-width:740px">
+
+                <p>On laptop or desktop screens, the maximum line length for easy readability of text is around 65-75 characters. That is why you should add generous left and right <i>negative space</i> for this single-column layout.</p>
+
+
+
+            </section>
+
+        <section id="rwd-about">
+			<h2>About Responsive Web Design (RWD)</h2>
+			<p>As a web designer, you have no control over the size of the screen on which your web pages will be displayed.</p>
+
+            <img src="assets/img/responsive-spacing/rwd-1.png" style="max-width:600px" alt="Intoduction to Media Queries">
+
+			<p>The term <i>viewport</i> is used to describe that area of a web browser screen that displays a web page&#8217;s content. It excludes any menus, web address bars, bookmark bars, scroll bars or other similar elements.</p>
+
+            <img src="assets/img/responsive-spacing/viewports.png" alt="viewports" style="max-width: 600px">
+
+			<p>Creating web pages that respond or &#8216;scale&#8216; appropriately to the viewport size of a user&#8217;s device is called Responsive Web Design (RWD). Responsive web pages adjust the layout, placement, and size of their elements so that the page looks good no matter what screen it&#8217;s being viewed on.</p>
+
+			<h3 id="breakpoints">About breakpoints</h3>
+			<p>When designing for such a wide range of viewport sizes, web designers rely on what are called <i>breakpoints</i>. These are the viewport widths at which the page layout needs to change.</p>
+
+			<p>For example, a three-column layout may display nicely on larger screens &#8211; but on mobile devices it will necessary to transform the layout into just a single column.</p>
+            
+    		<p>For most designs, however, it is sufficient to use just one breakpoint: <b>768px</b>.</p>
+
+            <img src="assets/img/responsive-spacing/responsive-wireframes.png" alt="screenshots" style="max-width: 500px">
+
+			<p>This is the viewport width of an Apple iPad in portrait ('standing up') orientation. So:</p>
+
+			<ul>
+                <li style="margin-bottom:20px;line-height: 1"><b>Big viewports</b>: These are viewports that are 768 pixels wide or wider.
+                <span class="inside-ol">&nbsp;</span>
+                In other words, viewports with a <b>min-width</b> value of <b>768px</b>.</li>
+                <li style="line-height: 1"><b>Small viewports</b>: These are viewports that are 767 pixels wide or narrower.
+                <span class="inside-ol">&nbsp;</span>
+                In other words, viewports with a <b>max-width</b> value of <b>767px</b>.</li>
+            </ul>
+
+            <img src="assets/img/responsive-spacing/0_PtP6hZQ1AMsoCfbW.gif" alt="breakpoints" style="max-width: 500px">
+
+            <p>Another feature of a web page that needs to change with viewport width is the layout of the <span class="syn">&lt;nav&gt;</span> container element.</p>
+
+            <img src="assets/img/responsive-spacing/responsive-menus.png" alt="screenshot">
+
+		</section>
+
+
+
+		<section id="media-query-about">
+            <h2>About media queries</h2>
+
+            <p>Consider again the four sample web pages shown previously. The <i>responsive</i> padding effect you want to achieve looks as follows.</p>
+
+            <img src="assets/img/responsive-spacing/page-wrapper-mockup.png" style="max-width:700px" alt="Intoduction to Media Queries">
+
+
+            <ul>
+                <li>On &#8216;small screens&#8216; (up to <b>767px</b> width), you might want the web page content to fill 90% of the viewport width.</li>
+				<li>On &#8216;big screens&#8216; (<b>768px</b> or wider), however, you might want the web page content to fill only 60% of the viewport width.</li>
+
+			</ul>
+
+			<p>CSS offers so-called <i>media queries</i> that, when combined with breakpoints, enable you apply different CSS rules depending on the viewport width. See below.</p>
+
+            <img src="assets/img/responsive-spacing/breakpoint-768.png"  alt="Intoduction to Media Queries">
+
+            <p>If you open and display your <b>sample-1.css</b> stylesheet in VS Code, you will see the responsive padding values for the header and section containers shown below.</p>
+
+            <img src="assets/img/responsive-spacing/padding-2.png"  alt="Intoduction to Media Queries">
+
+</section>
+
+
+        <section id="css-shorthand">
+            <h2>CSS shorthand and the TROUBLE mnemonic</h2>
+            <p>CSS shorthand properties allow you to set multiple CSS properties on a single line.</p>
+
+            <p>So, instead of typing these four lines:</p>
+            <img src="assets/img/responsive-spacing/css-shorthand-1.png" alt="screenshot" style="width:600px">
+
+            <p>You could simply type the following one line:</p>
+            <img src="assets/img/responsive-spacing/css-shorthand-2.png" alt="screenshot" style="width:600px">
+
+            <p>But which one of these four values refers for the top edge of the element? Or  the left edge?</p>
+
+            <p>Web designers rely on a memory trick or mnemonic to help them remember which edges of an element are set by four padding values written on a single line.</p>
+	
+            <p>The mnemonic is the word TROUBLE.</p>
+
+            <p>Or:</p>
+	
+            <p><b>T</b>(op), <b>R</b>(ight), OU <b>B</b>(ottom) and <b>L</b>(eft) E.</p>
+
+            <p>If the left and right values are the same, you could write this:</p>
+
+            <img src="assets/img/responsive-spacing/css-shorthand-3.png" alt="screenshot" style="width:600px">
+
+            <p>And if all four values are the same, you could weite this:</p>
+
+            <img src="assets/img/responsive-spacing/css-shorthand-4.png" alt="screenshot" style="width:570px">
+
+            <p>As an exercise, open your <b>style-1.css</b> stylesheet in VS Code, and apply CSS shorthand to the padding style rules within the <span class="csyn">header</span> and <span class="csyn">section</span> declarations.</p>
+
+
+            <table>
+                <tr>
+                    <td style="padding-right:15px"><img src="assets/img/responsive-spacing/tables-margins.png" alt=""></td>
+                    <td style="padding-left:15px"><img src="assets/img/responsive-spacing/tables-padding.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td style="padding-right:15px"><p><b>MARGINS</b><br>
+                    These typically apply <i>outside</i> block-level elements (such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;p&gt;</span>) to push such elements above or below one another, so creating vertical spacing between them.</p></td>
+                    <td style="padding-left:15px"><p><b>PADDING</b><br>
+                    These apply <i>inside</i> container elements (such as <span class="syn">&lt;header&gt;</span> and <span class="syn">&lt;section&gt;</span>) to prevent their content from directly touching the inner edges of their containers.</p></td>
+                </tr>
+
+            </table>
+        </section>
+
+
+
+
+        <section class="resources-learning" id="resources">
+
+            <h2>More learning resources</h2>
+    
+            <div class="flex-container">
+                <div class="text-container">
+                    <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                    <p><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/8" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+    
+                </div>
+        
+                <div class="audio-container">
+                    <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+    
+                    <audio controls>
+                        <source src="../../dorset/lessons/assets/audio/working-with-layout.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+    
+        </section>
+
+        </article>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+	<script>hljs.highlightAll();</script>
+
+	<script src="assets/js/utils.js"></script>       
+
+</body>
+</html>
+
