@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with Favicons | Front-end Development Tutorials</title>
+    <meta name="description" content="About favicons, creating a favicon using an online service, and inserting favicon files into the head of a web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+   <!-- Stylesheet-->
+   <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+   <style>
+       pre { background-color: #282c34 }
+   </style>
+
+   <!-- Font Awesome 6 icons -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+   <script defer src="../assets/js/cookie.js"></script>
+   
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-RQ1JXS4GKM');
+   </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Working with Favicons</h1>
+                <h2>About favicons, creating a favicon using an online service, and inserting favicon files into the &lt;head&gt; of a web page.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+   
+    <main>
+
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+                // Basic referrer detection
+                let returnHome;
+                function getBasicReferrer() {
+                  return document.referrer || "Direct visit (no referrer)";
+                }
+                
+                const testReferrer = getBasicReferrer();
+                
+                if (testReferrer.includes("ibat")) {
+                    console.log("Referrer is IBAT");
+                    returnHome = "https://munnelly.com/ibat/index.html"
+                }
+                else if (testReferrer.includes("dorset")) {
+                    console.log("Referrer is Dorset");
+                    returnHome = "https://munnelly.com/dorset/index.html"
+                }
+                
+                else {
+                    console.log("Referrer unknown");
+                    returnHome = "../index.html"
+                }
+                
+                // Set the href attribute of the link
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+                
+                // Log the referrer information
+                function logReferrer() {
+                  console.log("Basic Referrer:", getBasicReferrer());
+                }
+                
+                // Call the function to log the referrer
+                logReferrer();</script>
+               
+    
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-favicons">About favicons</a></p>
+            <p class="toc-indent"><a href="#favicons-benefits">Benefits of using a favicon</a></p>
+            <p class="toc-indent"><a href="#favicons-different-versions">Need for different versions of a favicon</a></p>
+            <p><a href="#adding-a-favicon">Adding a favicon to your Home page</a></p>
+            <p><a href="#favicons-urls">Favicons and relative URLs</a></p>
+            <p><a href="#upload-github">Uploading your work to GitHub</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Creating a favicon using an online service.</li>
+                    <li>Inserting a favicon into the <span class="syn">&lt;head&gt;</span> of a web page.</li>
+                </ul>
+            </section>
+
+            <section>
+
+                <h2 id="about-favicons">About favicons</h2>
+
+                <p>A favicon is a small icon (really a set of icons for different screens) that is displayed in a browser's tab, address bar, bookmarks/favorites, and sometimes within search engine results. See the examples below.</p>
+
+                <img src="assets/img/working-with-favicons/favicon-3.png" alt="fa-icons-copy">
+
+                <p>Favicons help users quickly recognise and differentiate between websites.</p>
+
+                <h3 id="favicons-benefits">Benefits of using a favicon</h3>
+
+                <ul>
+                    <li><b>Brand Recognition</b>: A favicon reinforces brand identity by showing a small logo or recognisable image that aligns with the website’s branding.</li>
+                    <li><b>Improved User Experience</b>: Favicons make it easier for users to identify and switch between open tabs, especially when they have multiple tabs open.</li>
+                    <li><b>Professional Appearance</b>: A favicon gives a website a polished and complete look, adding to its overall credibility and professional feel.</li>
+                    <li><b>Increased visibility in bookmarks/favorites and search</b>: When users bookmark/favorite a website, the favicon appears alongside the site name, making it easier to locate. Some search engines also display favicons next to results, enhancing the website's presence.</li>
+
+                </ul>
+
+
+                <h3 id="favicons-different-versions">Need for different versions of a favicon</h3>
+
+                <p>A single favicon size may not suit all devices (desktops/laptops, tablets and mobiles) and operating systems (Windows, MacOS and Android). Therefore, multiple versions of a favicon image are necessary:</p>
+                
+                <ul>
+                   <li><b>Different sizes</b>: Standard favicon sizes include 16x16, 32x32, 48x48, and larger resolutions like 180x180 for high-resolution displays. A variety of sizes ensures that the icon looks sharp and correctly scaled on different devices.</li>
+                
+                   <li><b>Different formats</b>: Common formats include <b>.ico</b>, <b>.png</b>, and <b>.svg</b>. The .<b>ico</b> format is widely used for desktop browsers, while <b>.png</b> is often used for mobile and high-resolution screens. Apple devices typically require a 180x180 <b>.png</b> file.</li>
+                
+                   <li><b>Support for pinned and saved icons</b>: Apple and Android devices may display website icons in shortcuts or app-like tiles when users add a website to their home screens. These icons often require specific dimensions and formats to look appealing.</li>
+
+                </ul>
+                
+                <p>Including multiple versions of a favicon allows a website to adapt to different contexts, providing a consistent and high-quality visual experience across all devices and platforms.</p>
+
+            </section>  
+
+            <section>
+                <h2 id="adding-a-favicon">Adding a favicon to your Home page</h2>
+                <p>Follow the steps below to add a favicon to your <b>index.html</b> file:</p>
+                    <ol>
+
+                        <li>Create a square <b>.png</b> image of at least 260x260 pixels. For best results, use an image of 512x512 pixels. This ensures the image can downscale to other dimensions for different devices. 
+                        <span class="inside-ol">&nbsp;</span>
+                        If you want your favicon to have a transparent background, upload it to an online service such as <a href="https://removal.ai/" target="_blank">https://removal.ai</a>. For example:
+
+                        <img src="assets/img/working-with-favicons/pikachu-512x512.png" alt="favicon" style="max-width: 300px">
+
+                        </li>
+
+                        <li>Go to the free Favicon Generator website at the following web address:
+                        <span class="inside-ol">&nbsp;</span>
+                        <a href="https://favicon.io/" target="blank">https://favicon.io</a></li>
+
+                        <li>Choose the <b>PNG -&gt; ICO</b> option.
+                        <img src="assets/img/working-with-favicons/favicon-2.png" alt="fa-icons-copy"></li>
+
+                        <li>On the next screen, upload the image you want to use as your favicon.</li>
+                        
+                        <li>After a few moments, a <b>Download</b> button will appear. Click on it.</li>
+
+                        <li>Copy your downloaded ZIP to the <b>assets/img</b> sub-folder of your 'main' <b>websites</b> folder. The file should be named <b>favicon_io.zip</b>.</li>
+                        
+                        <li>Unzip the ZIP file to create a new sub-folder called 📁  <b>favicon_io</b>. You can now delete the downloaded <b>favicon_io.zip</b> file.
+                        <span class="inside-ol">&nbsp;</span>
+                        Your folder structure should now look as follows.
+                            
+                        <img src="assets/img/working-with-favicons/folders.png" alt="screenshot" style="max-width: 400px;"></li>
+
+                        <li>Inside the new 📁  <b>favicon_io</b> sub-folder you should see the following files.
+                        <ul>
+                            <li>android-chrome-192x192.png</li>
+                            <li>android-chrome-512x512.png</li>
+                            <li>apple-touch-icon.png</li>
+                            <li>favicon-16x16.png</li>
+                            <li>favicon-32x32.png</li>
+                            <li>favicon.ico</li>
+                            <li>site.webmanifest</li>
+                        </ul></li>
+
+                        <li>By convention, the standard name for the folder containing favicon files is 📁  <b>favicons</b>. So rename your 📁 <b>favicon_io</b> folder as shown below.
+
+                        <img src="assets/img/working-with-favicons/folders-rename.png" alt="screenshot" style="max-width: 400px;"></li>
+
+
+                        <li>Copy-and-paste the following code to your 'home page' <b>index.html</b> file to just before the closing <span class="syn">&lt;/head&gt;</span> tag.
+                        
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">
+&lt;link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png"&gt;    
+&lt;link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png"&gt;    
+&lt;link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png"&gt;    
+&lt;link rel="manifest" href="assets/img/favicons/site.webmanifest"&gt;
+</code></pre>See below.
+<img src="assets/img/working-with-favicons/head.png" alt="screenshot" class="wider-115">
+
+</li>
+            </ol>
+            
+
+        </section>
+
+        <section id="favicons-urls">
+            <h2>Favicons and relative URLs</h2>
+
+            <p>As you can see from the above, the various favicon files are linked to your <b>index.html</b> web page using a relative URL (web address). By 'relative' is meant 'in relation to'. See below.</p>
+
+<pre class="language-html">
+<span style="color:white">href="assets/img/favicons/apple-touch-icon.png"</span></pre>
+
+            <p>If you wanted to add your favicons to any of the web pages in your 📁 <b>exercises</b> folder, you would need to change the URLs as follows for all your favicon files:</p>
+
+<pre class="language-html">
+<span style="color:white">href="../assets/img/favicons/apple-touch-icon.png"</span></pre>
+
+            <p>Or simply copy-and-paste the following into <b>page-1.html</b> or other exercise files:</p>
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
+&lt;link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicons/apple-touch-icon.png"&gt;    
+&lt;link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicons/favicon-32x32.png"&gt;    
+&lt;link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicons/favicon-16x16.png"&gt;    
+&lt;link rel="manifest" href="../assets/img/favicons/site.webmanifest"&gt;
+</code></pre>
+
+        </section>
+            
+        <section id="upload-github" class="wrapper-content bg-white">
+                
+            <h2>Uploading your work to GitHub</h2>
+
+            <p>Your final task is to upload your work to your account on GitHub.</p>
+
+            <div class="box-warning">
+                <div>
+                    <img src="assets/img/working-with-html/warning-sign.png" alt="screenshot" style="max-width: 100px;">
+                </div>
+                <div>
+                    <p>Because your upload includes a folder and not just files, you must use the <b>drag-and-drop</b> method rather than the file select method.</p>
+                </div>
+            </div>
+
+            <ol>
+
+                <li>Open a new tab in your web browser and go to <a href="https://www.github.com" target="_blank">github.com</a>. If you are not already signed in to your GitHub account, sign in now.
+                <img src="assets/img/working-with-favicons/github-signin.png" alt="github-signin"></li>
+
+                <li>On your GitHub home page, click the name of the repository (‘repo’) that holds your web pages. Its name will look as follows, where <b>username</b> is your chosen username on GitHub.
+                <span class="inside-ol">&nbsp;</span>
+                <b>username.github.io</b>
+
+                <img src="assets/img/working-with-favicons/github-repo-select.png" alt="github-signin"></li>
+
+                <li>On the next GitHub screen displayed, near the right of the screen, you can see a button named <b>Add file</b>. Click on it.
+                <img src="assets/img/working-with-favicons/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+
+                <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+
+                <img src="assets/img/working-with-favicons/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
+
+                <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your  <b>index.html</b> file and your 📁 <b>assets</b> sub-folder to upload them to your repository on GitHub.
+                <img src="assets/img/working-with-favicons/github-upload-folder-files.png" alt="screenshot">
+                </li>
+
+                <li>Scroll down to the bottom of the GitHub screen, and accept or edit the short message (<span style="color:gray">Add files via upload</span>) in the <b>Commit changes</b> box.</li>
+
+                <li>Finally, click the green <b>Commit changes</b> button to upload your files.
+                    <img src="assets/img/working-with-favicons/github-upload-progress.png" alt="Project Animation Google Fonts"></li>
+            </ol>
+
+            <p>Your home page with a favicon is now published on GitHub at a web address similar to the following, where <b>username</b> is the username you have chosen for your GitHub account:</p>
+
+            <p><b>https://username.github.io/index.html</b><br>
+                Or simply:<br>
+            <b>https://username.github.io</b></p>
+
+            <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
+
+            </section>
+
+
+            <section class="resources-learning" id="resources">
+
+                <h2>More learning resources</h2>
+        
+                <div class="flex-container">
+                    <div class="text-container">
+                        <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                        <p><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/16" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+        
+                    </div>
+            
+                    <div class="audio-container">
+                        <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+        
+                        <audio controls>
+                            <source src="../../dorset/lessons/assets/audio/working-with-favicons.mp3" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+        
+            </section>
+
+        
+    </article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>       
+
+</body>
+</html>
