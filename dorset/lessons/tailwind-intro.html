@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to (Hosted) TailwindCSS | Front-end Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Learn how to add hosted TailwindCSS via CDN, configure it in the browser, and build responsive, accessible UI with utility classes.">
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet (course skin) -->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <!-- Small tweak so code blocks pop nicely like the sample -->
+    <style>
+        pre { background-color: #282c34 }
+        .gpt { position: relative }
+        .copy-html, .copy-gpt {
+            position: absolute; right: 0.75rem; top: -2.25rem;
+            background: #0ea5e9; color:#fff; border:none; padding: .35rem .6rem; cursor:pointer; border-radius:4px; font-size:.85rem
+        }
+        .wider-110 { max-width: 110% }
+        .wider-115 { max-width: 115% }
+        .inside-ol { display:block; height:.5rem }
+        kbd.tutorial-key { background:#222; color:#fff; border-radius:4px; padding:.1rem .35rem }
+        .syn { background:#222; color:#fff; padding:.05rem .25rem; border-radius:4px }
+        .blue-dark { color:#9cdcfe }
+        .blue-light { color:#4FC1FF }
+        .brown { color:#CE9178 }
+        .white { color:#fff }
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+
+            <div class="content">
+                <h1>Introduction to TailwindCSS</h1>
+                <h2>Add Tailwind via CDN, configure it in the browser, and build responsive UI elements with utility classes.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p>
+
+            <script>
+                // Basic referrer detection (mirrors your sample)
+                let returnHome;
+                function getBasicReferrer() { return document.referrer || "Direct visit (no referrer)"; }
+                const testReferrer = getBasicReferrer();
+
+                if (testReferrer.includes("ibat")) returnHome = "https://munnelly.com/ibat/index.html";
+                else if (testReferrer.includes("dorset")) returnHome = "https://munnelly.com/dorset/index.html";
+                else returnHome = "../index.html";
+
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            </script>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#what-is-tailwind">What is TailwindCSS (hosted) vs. build</a></p>
+            <p><a href="#add-cdn">Adding Tailwind via CDN</a></p>
+            <p><a href="#first-page">Creating your first Tailwind page</a></p>
+            <p><a href="#utilities">Utility-first fundamentals</a></p>
+            <p><a href="#hero">Building a simple hero section</a></p>
+            <p><a href="#responsive">Responsive grid and cards</a></p>
+            <p><a href="#dark-mode">Dark mode (class strategy)</a></p>
+            <p><a href="#browser-config">Browser configuration with <code>&lt;script&gt; tailwind.config</code></a></p>
+            <p><a href="#publish">Uploading your work to GitHub</a></p>
+            <p><a href="#resources">More learning resources</a></p>
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Explain the difference between hosted (CDN) Tailwind and a local build pipeline.</li>
+                    <li>Add Tailwind to any HTML page with a single <span class="syn">&lt;script&gt;</span> and use utility classes safely.</li>
+                    <li>Configure Tailwind in the browser for colours, fonts, and spacing scales.</li>
+                    <li>Build a responsive hero and card grid with dark mode support.</li>
+                </ul>
+            </section>
+
+            <section id="what-is-tailwind">
+                <h2>About TailwindCSS</h2>
+                <p><a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a> is a utility-first CSS framework. Instead of writing your own stylesheet file such as <b>mystyle.css</b>, you import utility classes directly in your HTML from the pre-built TailwindCSS stylesheet.</p>
+                
+                <p>You get consistency, speed, and responsive/dark mode variants out of the box.</p>
+
+                <p>You can use TailwindCSS in either of two ways:</p>
+
+                <ul>
+                    <li><b>Hosted (CDN)</b>: Add <span class="syn">&lt;script src="https://cdn.tailwindcss.com"&gt;</span> to your page; Tailwind is available immediately. Great for learning, prototypes, and simple static pages.</li>
+                    <li><b>Build pipeline</b> (Node/PostCSS): Scans your UI elements, tree-shakes unused classes, supports plugins, and produces tiny production CSS. Best for large projects.</li>
+                </ul>
+
+                <p>In this Tutorial, we will use the <i>hosted (CDN)</i> approach to get productive instantly — no tooling required.</p>
+            </section>
+
+
+            <section id="sample-file" class="wrapper-content">
+                <h2>Creating a workfile</h2>
+                <p>Begin by creating a sample HTML file to expermiment with.</p>
+
+               
+                <ol>
+                    <li>Create a new folder named <b>tw</b> in your <b>exercises</b> folder.</li>
+                    <li>In VS Code, create a new HTML file and save it as <b>tw-1.html</b>.</li>
+                    <li>In this file, add a <span class="syn">&lt;h2&gt;</span> heading and two paragraphs of lorem ipsum placeholder text.</li>
+                    <li>Wrap the content inside a <span class="syn">&lt;section&gt;</span> tag.</li>
+                    <li>Display your new HTML file in a web browser.</li>
+
+                    
+                </ol>
+                <p>Your web page should now look like this:</p>
+                <img src="assets/img/tailwind-intro/tw-1.png" alt="screenshot">
+            </section>
+
+
+            <section>
+
+                <h2>Working with layout in web design</h2>
+
+                <p>In web design, you control UI layout with margins and padding. See below.</p>
+
+            
+
+            <table>
+                <tbody><tr>
+                    <td style="padding-right:15px"><img src="assets/img/responsive-spacing/tables-margins.png" alt=""></td>
+                    <td style="padding-left:15px"><img src="assets/img/responsive-spacing/tables-padding.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td style="padding-right:15px"><p><b>MARGINS</b><br>
+                    These apply <i>outside</i> block-level elements (such as <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;p&gt;</span>) to push such elements away from one another, so creating vertical spacing between them.</p></td>
+                    <td style="padding-left:15px"><p><b>PADDING</b><br>
+                    These apply <i>inside</i> container elements (such as <span class="syn">&lt;header&gt;</span> and <span class="syn">&lt;section&gt;</span>) to prevent content from pushing up against the inner edges of their containers.</p></td>
+                </tr>
+
+            </tbody></table>
+
+            <p>In the <span class="syn">&lt;head&gt;</span> of your workfile, copy-and-paste the following:</p>
+
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;style&gt;
+/* Padding: inner space for the container */
+section { padding: 32px 20%; }         /* 32px top and bottom, 20% left and right */
+
+/* Margins: vertical gaps between siblings */
+section h2 { margin-bottom: 6px; }     /* 6px below the heading */
+section p  { margin-bottom: 16px; }    /* 16px below each paragraph */
+
+&lt;/style&gt;</code></pre>
+
+                <p>Your web page should now look like that below.</p>
+
+                <img src="assets/img/tailwind-intro/tw-2.png" alt="screenshot">
+
+
+            </section>
+
+
+
+            <section id="add-cdn" class="wrapper-content">
+                <h2>Adding Tailwind via CDN</h2>
+
+                <p>Now let's use TailwindCSS to add padding and margins.</p>
+
+                <ol>
+                    <li>Remove the above CSS style values from your <b>tw-1.html</b> workfile.</li>
+
+                    <li>Copy-and-paste your HTML workfile into an AI and ask:
+
+
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
+How do I add hosted TailwindCSS to this HTML file.
+Do not add any utility classes to this file.</code></pre></li>
+
+                    <li>Follow the AI instructions and replace everything in your HTML workfile with the AI response.</li>
+
+                </ol>
+
+                <p>When you save your workfile, it should look unstyled again.</p>
+
+                <img src="assets/img/tailwind-intro/tw-4.png" alt="screenshot">
+
+                <p>Note that:</p>
+
+                <ul>
+                    <li>Even the default web browser styles have been removed.</li>
+                    <li>The font now defaults to sans-serif instead of serif.</li>
+                </ul>
+
+                <p>In VS Code, you can see that the <span class="syn">&lt;head&gt;</span> of your workfile should now include the Tailwind CSS CDN link.</p>
+
+                <img src="assets/img/tailwind-intro/tw-3.png" alt="screenshot">
+
+                <p>Now, replace the <span class="syn">&lt;body&gt;</span> of your <b>tw-1.html</b> workfile with the following:</p>
+
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
+&lt;!-- Same structure, but spacing is expressed with utilities --&gt;
+&lt;section class="px-24 py-10"&gt;            &lt;!-- padding left/right: 24. padding top/bottom: 10 --&gt;
+&lt;h2 class="mb-4"&gt;Section Heading&lt;/h2&gt;    &lt;!-- margin-bottom: 16px --&gt;
+
+&lt;p class="mb-4"&gt;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nostrum odit obcaecati velit officia distinctio veniam dolores quaerat, non nihil, fugit ipsum dignissimos rerum quis laudantium. Provident fugiat quaerat voluptate.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nostrum odit obcaecati velit officia distinctio veniam dolores quaerat, non nihil, fugit ipsum dignissimos rerum quis laudantium. Provident fugiat quaerat voluptate.&lt;/p&gt;
+&lt;/section&gt;
+
+</code></pre>
+
+        <p>When you save your work file, it should look as shown below in a web browser.</p>
+
+        <img src="assets/img/tailwind-intro/tw-5.png" alt="screenshot">
+
+        <p>See the links below for the official docs from TailwindCSS:</p>
+
+        <ul>
+            <li><a href="https://tailwindcss.com/docs/padding" target="_blank">Padding</a></li>
+            <li><a href="https://tailwindcss.com/docs/margin" target="_blank">Margins</a></li>
+        </ul>
+
+</section>
+
+
+
+
+
+
+            <section class="resources-learning" id="ai-prompts">
+                <h2>Sample AI prompts</h2>
+
+                <p>For each prompt, copy the output HTML into a new file in your 📁 <b>exercises</b> folder, save, and open in your browser.</p>
+
+<div class="gpt"><button class="copy-gpt" id="btn-prompt-1">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-1">
+
+** Web Page Structure **<br><br>
+Create the HTML for a web page that is linked to the hosted CDN TailwindCSS stylesheet.<br><br>
+
+In the &lt;head&gt;, include the UTF-8 charset, a &lt;title&gt;, a meta description and the responsive viewport meta tag.<br><br>
+    
+For the &lt;title&gt;, add the words "Between 50 and 60 characters (including spaces)"<br><br>
+
+For the meta description, add the words "Between 150 and 160 characters (including spaces). Like the title, this is important for search engines"<br><br>
+
+Apply TailwindCSS markup to all elements as specified below.<br><br>
+
+** Web Page Content **<br><br>
+In the &lt;body&gt;, create [3] blocks of content. Each content block should be inside a &lt;section&gt; tag.<br><br>
+    
+Each block of content should contains one &lt;h2&gt; sub-heading tag and [2] paragraphs of text with the &lt;p&gt; tag. <br><br>
+
+Each &lt;h2&gt; sub-heading should the words "Section sub-heading" <br><br>
+
+Each &lt;p&gt; text paragraph should contain [60] words of placeholder lorem ipsum text. <br><br>
+
+Add a placeholder image under each &lt;h2&gt; tag from the https://placehold.co/ website.<br><br>
+
+Apply a different [light] background color for each section. The section's background color should fill the enture with of the viewport.<br><br>
+
+
+** Responsive Padding Spacing inside &lt;section&gt; content containers ***<br><br>
+For the &lt;section&gt; tag, the vertical padding should be:<br><br>
+
+* Default: 8 pt and 10 pb units<br><br>
+* Viewports =&gt; 768px: 10 pt units and 12 pb units<br><br>
+* Viewports =&gt; 1024px: 12 pt units and 14 pb units<br><br>
+* Viewports =&gt; 1280px: 14 pt units and 16 pb units<br><br>
+
+Also for the &lt;section&gt; tag, the horizontal padding should be:<br><br>
+
+* Default: 6 px units<br><br>
+* Viewports =&gt; 768px: 28 px units<br><br>
+* Viewports =&gt; 1024px: 48 px units<br><br>
+* Viewports =&gt; 1280px: 72 px units<br><br>
+
+** Responsive Margin Spacing under &lt;h2&gt; and &lt;p&gt; block-level tags ***<br><br>
+
+For the &lt;h2&gt; tag, the bottom margin should be:<br><br>
+
+* Default: 4 mb units<br><br>
+* Viewports =&gt; 1024px: 6 mb units<br><br>
+* Viewports =&gt; 1280px: 8 mb units<br><br>
+
+For the &lt;p&gt; tag, the bottom margin should be:<br><br>
+
+* Default: 6 mb units<br><br>
+* Viewports =&gt; 1024px: 8 mb units<br><br>
+
+Apply the same mb values under the &lt;img&gt; tag in each &lt;section&gt;.<br><br>
+
+For the final &lt;p&gt; tag in each &lt;section&gt;, set the bottom margin to zero.<br><br>
+
+** Typography: &lt;h2&gt; **<br><br>
+Apply a color of [black]<br><br>
+
+Apply a font-family of [font-sans]<br><br>
+
+Apply a font weight of [semibold]<br><br>
+
+Apply a tracking value of [tighter]<br><br>
+
+Apply these responsive text sizes:<br><br>
+* Default: text-4xl<br><br>
+* Viewports &gt;= 768px: text-5xl  <br><br>
+* Viewports &gt;= 1024px: text-6xl<br><br>
+* Viewports &gt;= 1280px: text-7xl<br><br>
+
+Apply these line-spacing values:<br><br>
+* Default: leading-tight<br><br>
+* Viewports &gt;= 768px: leading-snug<br><br>
+* Viewports &gt;= 1024px: leading-none<br><br>
+* Viewports &gt;= 1280px: leading-none<br><br>
+
+** Typography: &lt;p&gt; **<br><br>
+Apply a text color of [gray-800].<br><br>
+
+Apply a font-family of [font-serif].<br><br>
+
+Apply a font weight of [normal].<br><br>
+
+Apply a line-height of [leading-relaxed].<br><br>
+
+Apply these responsive text sizes:<br><br>
+
+* Default: text-lg<br><br>
+* Viewports &gt;= 1024px: text-2xl<br><br>
+
+Apply these responsive values for inter-line spacing:<br><br>
+
+Default: leading-relaxed<br><br>
+Viewport =&gt; 1024px: lg:leading-loose<br><br>
+Viewport =&gt; 1280px: xl:leading-10<br><br>
+
+
+** Hyperlinks **<br><br>
+Inside each &lt;p&gt; tag of every section, add a hyperlink with a destination of #.<br><br>
+    
+Style the hyperlink so that:<br><br>
+* The link text is not bold<br><br>
+* The link text is underlined<br><br>
+* The link text color is blue-600<br><br>
+* The link underline is blue-600<br><br>
+* The link underline thickness is decoration-2<br><br>
+* The link underline offset is underline-offset-4<br><br>
+* The link text becomes red-800 when hovered over <br><br>
+* The link text underline is removed when hovered over<br><br>
+
+Do not add any other TailwindCSS classes.<br><br>
+
+[Do include comments in the HTML code to indicate which TailwindCSS classes are being applied to each element.]<br><br>
+
+To make your output easier to read, add an empty line after each closing HTML tag.<br><br>
+
+</code></div>
+
+<div class="gpt"><button class="copy-gpt" id="btn-prompt-2">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-2">
+Create an event landing page for a tech meetup using Tailwind via CDN.<br><br>
+Include a sticky header nav, a hero with a CTA button, a schedule section (two-column on md+), and a speaker card grid. Add hover and focus states on links and buttons. Provide a simple footer with social links.
+</code></div>
+
+<div class="gpt"><button class="copy-gpt" id="btn-prompt-3">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-3">
+Build a documentation-style layout using Tailwind via CDN.<br><br>
+Left sidebar with section links on lg+ and a single-column stacked layout on mobile. Main content uses readable line-length (max-w-prose) and headings with spacing. Add a top “Edit on GitHub” button styled as a Tailwind utility-based component.
+</code></div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer></footer>
+
+    <!-- Cookie banner (same pattern as sample) -->
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+    <!-- highlight.js activation -->
+    <script>hljs.highlightAll();</script>
+
+    <!-- Simple copy-to-clipboard for the demo buttons -->
+    <script>
+        function attachCopy(id, targetId) {
+            const btn = document.getElementById(id);
+            const code = document.getElementById(targetId);
+            if (!btn || !code) return;
+            btn.addEventListener('click', async () => {
+                const text = code.innerText.replace(/\u00A0/g, ' ');
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.innerHTML = 'Copy <i class="fa-regular fa-copy"></i>', 1200);
+                } catch(e) {
+                    console.error(e);
+                }
+            });
+        }
+
+        [
+            ['btn-cdn-1','strCode-cdn-1'],
+            ['btn-starter-1','strCode-starter-1'],
+            ['btn-hero-1','strCode-hero-1'],
+            ['btn-grid-1','strCode-grid-1'],
+            ['btn-dark-1','strCode-dark-1'],
+            ['btn-config-1','strCode-config-1'],
+            ['btn-prompt-1','strCode-prompt-1'],
+            ['btn-prompt-2','strCode-prompt-2'],
+            ['btn-prompt-3','strCode-prompt-3']
+        ].forEach(([b, c]) => attachCopy(b, c));
+    </script>
+
+    <script src="assets/js/utils.js"></script>
+</body>
+</html>
