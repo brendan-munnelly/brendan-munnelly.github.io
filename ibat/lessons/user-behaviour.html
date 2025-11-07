@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Tracking user behaviour | Frontend Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Monitoring user behaviour and experiences on web pages with session recordings and heatmaps.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34 }
+
+		.sample-sites {
+		  display: flex;
+		  justify-content: space-between;
+		  flex-wrap: wrap;
+          margin-bottom: 20px
+		}
+  
+		.sample-sites div {
+		  width: 30%;
+		  padding: 8px 8px;
+		}
+  
+		.sample-sites div a {
+		  text-underline-offset: 5px;
+		  font-size: calc(15px + (19 - 15) * ((100vw - 320px) / (1600 - 320)));
+		}
+  
+
+
+
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+</head>
+
+<body id="top">
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Tracking user behaviour</h1>
+                <h2>Monitoring user behaviour and experiences on web pages with session recordings and heatmaps.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                    
+            <script>
+                // Basic referrer detection
+                let returnHome;
+                function getBasicReferrer() {
+                  return document.referrer || "Direct visit (no referrer)";
+                }
+                
+                const testReferrer = getBasicReferrer();
+                
+                if (testReferrer.includes("ibat")) {
+                    console.log("Referrer is IBAT");
+                    returnHome = "https://munnelly.com/ibat/index.html"
+                }
+                else if (testReferrer.includes("dorset")) {
+                    console.log("Referrer is Dorset");
+                    returnHome = "https://munnelly.com/dorset/index.html"
+                }
+                
+                else {
+                    console.log("Referrer unknown");
+                    returnHome = "../index.html"
+                }
+                
+                // Set the href attribute of the link
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+                
+                // Log the referrer information
+                function logReferrer() {
+                  console.log("Basic Referrer:", getBasicReferrer());
+                }
+                
+                // Call the function to log the referrer
+                logReferrer();</script>
+               
+    
+            <h3>THIS TUTORIAL</h3>
+                
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning goals</a></p>
+            <p><a href="#introduction">Introduction</a></p>
+            <p><a href="#creating-account">Creating a Free Account</a></p>
+            <p class="toc-indent"><a href="#installing-code">Installing the Tracking Code</a></p>
+            <p><a href="#dashboard">Working with the Inspectlet Dashboard</a></p>
+            <p class="toc-indent"><a href="#session-recordings">Working with session recordings</a></p>
+            <p class="toc-indent"><a href="#heatmaps">Working with heatmaps</a></p>
+            <p class="toc-indent"><a href="#form-analytics">Working with form analytics</a></p>
+            <p><a href="#best-practices">Best practices</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Create a free Inspectlet account to track user behaviour on your website</li>
+                    <li>Install the Inspectlet tracking code correctly on your web pages</li>
+                    <li>Access and interpret session recordings of real user interactions</li>
+                    <li>Generate and analyse heatmaps to understand user click patterns</li>
+                    <li>Track form usage to identify fields where users struggle</li>
+                    <li>Make data-driven decisions to improve your website's user experience</li>
+                </ul>
+            </section>
+
+            <section id="introduction" class="wrapper-content bg-white">
+                <h2>Introduction</h2>
+                
+                <p>A number of tools are available to help you understand how visitors interact with the pages of a website. Here are a few examples:</p> 
+        
+                  <div class="sample-sites" style="margin-bottom: 24px">
+                    <div style="padding-left: 0">
+                      <a href="https://hotjar.com/" target="_blank" rel="noopener">hotjar.com</a>
+                    </div>
+                    <div>
+                      <a href="https://crazyegg.com/" target="_blank" rel="noopener">crazyegg.com</a>
+                    </div>
+        
+                    <div>
+                      <a href="https://luckyorange.com" target="_blank" rel="noopener">luckyorange.com</a>
+                    </div>
+                  </div>
+        
+                  <div class="sample-sites">
+                    <div style="padding-left: 0">
+                      <a href="https://mouseflow.com/" target="_blank" rel="noopener">mouseflow.com</a>
+                    </div>
+                    <div>
+                      <a href="https://smartlook.com/" target="_blank" rel="noopener">smartlook.com</a>
+                    </div>
+                    <div>
+                      <a href="https://fullStory.com" target="_blank" rel="noopener">fullstory.com
+                        </a>
+                    </div>
+                  </div>
+        
+                <p>These tools provide visual insights into user behaviour through:</p>
+                
+                <ul>
+                    <li><b>Session recordings</b>: Videos of actual user sessions on a web page showing user actions - every mouse movement, scroll, click, and keypress.
+                    <img src="assets/img/user-behaviour/session-recordings.png" alt="screenshot" style="max-width: 420px">
+                    </li>
+                    <li><b>Heatmaps</b>: Aggregrations of user sessions to create a visual representation of where users click, move their mouse, and how far they scroll down a web page.
+                    <img src="assets/img/user-behaviour/heatmaps.png" alt="screenshot">
+                    </li>
+                    <li><b>Form analytics</b>: Data on how users interact with forms, where they hesitate, and which fields cause problems. This helps you gauge how effective a form is at converting inbound visitors into customers.</li>
+                </ul>
+
+
+                <p>This Tutorial will focus on <a href="https://www.inspectlet.com/" target="_blank">Inspectlet</a>, a powerful tool that provides session recordings, heatmaps, and form analytics.</p>
+
+            </section>
+
+            <section id="creating-account">
+                <h2>Creating a free account on Inspectlet</h2>
+                
+                <p>Follow these steps to create your free Inspectlet account:</p>
+                
+                <ol>
+                    <li>Visit the <a href="https://www.inspectlet.com/" target="_blank">Inspectlet</a>  website and click on the <b>Pricing</b> option on the navbar menu.
+                    <img src="assets/img/user-behaviour/inspectlet-1.png" alt="screenshot"></li>
+                    <li>On the Pricing screen, under the <b>Free</b> column, click the <b>Sign Up</b> button.</li>
+                    <li>Complete the registration form. Your website address will be in the format below: 
+                    <span class="inside-ol">&nbsp;</span>
+                    <b>username.github.io</b>
+                    <img src="assets/img/user-behaviour/registration.png" alt="screenshot" style="max-width:320px">
+                    </li>
+                </ol>
+
+                <h3 id="installing-code">Installing the tracking code</h3>
+
+                <p>Once you have registered, you are shown a screen similar to that below.</p>
+                <img src="assets/img/user-behaviour/code.png" alt="screenshot">
+
+                <ol>
+                    <li>Copy the Inspectlet tracking code.</li>
+                    <li>In VS Code, open your website home page <b>index.html</b> and paste in the tracking code just before the closing <span class="syn">&lt;/head&gt;</span> tag.</li>
+                    <li>Paste this code into as many pages of your website as you want to track.
+                    <img src="assets/img/user-behaviour/vscode-1.png" alt="screenshot" class="wider-115"></li>
+                    <li>When finished, upload your web page(s) with the Inspectlet tracking code to your account on GitHub.</li>
+                </ol>
+
+                <p>To verify the installation:</p>
+                
+                <ol>
+                    <li>Visit your website and perform some interactions.</li>
+                    <li>Return to Inspectlet and click on the <b>Done! Go to Dashboard</b> button.</li>
+                </ol>
+                
+
+            </section>
+
+            <section id="dashboard" class="wrapper-content bg-white">
+                <h2>Working with Inspectlet Dashboard</h2>
+                <p>The Inspectlet Dashboard provides an overview of your website's performance and user interactions. This is the first screen shown after you log in as a registered user.</p>
+                <img src="assets/img/user-behaviour/inspectlet-2.png" alt="screenshot">
+
+
+           
+                <h3 id="session-recordings">Working with session recordings</h3>
+                
+                <p>Session recordings are the heart of Inspectlet. They allow you to watch real users interact with your website, providing insights into their behaviour and experience.</p>
+
+                <p>To access and use session recordings:</p>
+                
+                <ol>
+                    <li>At the left of the Dashboard, click the <b>Session Recordings</b> option.</li>
+                    <li>At the right of this screen are a number of filtering options to narrow down the recordings you wish to view. You can see just a few of these below.
+                        <img src="assets/img/user-behaviour/inspectlet-3.png" alt="screenshot" style="max-width: 380px">
+
+
+                    </li>
+                    <li>Click on a recording on the sessions screen to watch the visitor's:
+                        <ul>
+                            <li>Mouse movements (shown as a trail)</li>
+                            <li>Clicks (highlighted with circles)</li>
+                            <li>Scrolling behaviour</li>
+                            <li>Form interactions</li>
+                            <li>Page navigation</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <p>When analysing session recordings, look for:</p>
+                
+                <ul>
+                    <li>Confusion points: Where users hesitate or move their mouse erratically</li>
+                    <li>Failed interactions: Attempts to click on non-clickable elements</li>
+                    <li>Form struggles: Fields that users spend a lot of time on or repeatedly edit</li>
+                    <li>Navigation patterns: How users move between pages</li>
+                    <li>Reading patterns: How users consume your content</li>
+                </ul>
+                
+                <p>Session recordings provide qualitative insights that numbers alone can't reveal, helping you understand the "why" behind user behaviour.</p>
+
+                <h3 id="heatmaps">Working with heatmaps</h3>
+                
+                <p>Heatmaps provide aggregated visual data of user behaviour across many sessions. They show where users focus their attention and interact with your pages.</p>
+                
+                
+                <p>To access and analyse heatmaps:</p>
+                
+                <ol>
+                    <li>Go to the <b>Heatmaps</b> section in your Inspectlet dashboard.</li>
+                    <li>Select the page you want to analyse.</li>
+                    <li>Choose between different heatmap types:
+                        <ul>
+                            <li>Click heatmaps: Show where users click on your page</li>
+                            <li>Scroll heatmaps: Show how far down users scroll on your page</li>
+                            <li>Mouse movement heatmaps: Show where users move their cursor</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <p>When interpreting heatmaps, look for:</p>
+                
+                <ul>
+                    <li>Hot spots: Areas with high concentration of clicks or mouse activity</li>
+                    <li>Dead zones: Areas with little to no interaction</li>
+                    <li>The scroll line: The point where most users stop scrolling</li>
+                    <li>Non-link clicks: Areas users try to click that aren't actually clickable</li>
+                    <li>Ignored CTAs: Call-to-action buttons that aren't getting attention</li>
+                </ul>
+                
+                <p>Use these insights to:</p>
+                
+                <ul>
+                    <li>Reposition important content above the scroll line</li>
+                    <li>Turn frequently-clicked non-links into actual links</li>
+                    <li>Redesign or move ignored call-to-action buttons</li>
+                    <li>Remove or redesign elements in dead zones</li>
+                </ul>
+            </section>
+
+            <section id="form-analytics">
+                <h2>Form Analytics</h2>
+                
+                <p>For websites with forms, Inspectlet's form analytics provide valuable insights into how users interact with your forms:</p>
+                
+
+                <p>To access and use form analytics:</p>
+                
+                <ol>
+                    <li>Navigate to the <b>Form Analytics</b> section in your Inspectlet dashboard.</li>
+                    <li>Select the form you want to analyse.</li>
+                    <li>Review metrics like:
+                        <ul>
+                            <li>Form completion rate: Percentage of users who complete the form</li>
+                            <li>Time spent on each field: How long users spend filling out each field</li>
+                            <li>Field abandonment rate: Fields where users give up</li>
+                            <li>Error rates: Fields that frequently trigger validation errors</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <p>Use form analytics to:</p>
+                
+                <ul>
+                    <li>Identify and fix problematic form fields</li>
+                    <li>Simplify or remove fields that cause high abandonment</li>
+                    <li>Improve field labels and instructions for confusing fields</li>
+                    <li>Add better error messages for fields with high error rates</li>
+                    <li>Determine the optimal form length for your audience</li>
+                </ul>
+                
+                <p>Even small improvements to your forms can significantly increase conversion rates and lead quality.</p>
+            </section>
+
+
+
+ 
+
+            <section id="best-practices" class="wrapper-content bg-white">
+                <h2>Best practices</h2>
+                
+                <p>Follow these best practices to get the most value from Inspectlet while respecting user privacy:</p>
+                
+                <ul>
+                    <li>Update your privacy policy to disclose that you use session recording technology</li>
+                    <li>Use Inspectlet alongside tools like Google Analytics</li>
+                    <li>Create a systematic process for reviewing and acting on insights</li>
+                    <li>Track changes in behaviour after website updates</li>
+                    <li>Prioritise changes that will have the biggest impact on user experience</li>
+                </ul>
+                
+            </section>
+
+            <section class="resources-learning" id="resources">
+                <h2>More learning resources</h2>
+                <div class="flex-container">
+                    <div class="audio-container" style="max-width:400px">
+                        <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+        
+                        <audio controls>
+                            <source src="../../dorset/lessons/assets/audio/user-behaviour.mp3" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </section>
+                  
+        </article>
+    </main>
+
+    <footer>
+    </footer>
+
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="#">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
