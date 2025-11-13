@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to (Hosted) TailwindCSS | Front-end Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Learn how to add hosted TailwindCSS via CDN, configure it in the browser, and build responsive, accessible UI with utility classes.">
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet (course skin) -->
+    <link rel="stylesheet" href="../assets/css/dorset-js.css" />
+
+    <!-- Small tweak so code blocks pop nicely like the sample -->
+    <style>
+        pre { background-color: #282c34 }
+        .gpt { position: relative }
+        .copy-html, .copy-gpt {
+            position: absolute; right: 0.75rem; top: -2.25rem;
+            background: #0ea5e9; color:#fff; border:none; padding: .35rem .6rem; cursor:pointer; border-radius:4px; font-size:.85rem
+        }
+        .wider-110 { max-width: 110% }
+        .wider-115 { max-width: 115% }
+        .inside-ol { display:block; height:.5rem }
+        kbd.tutorial-key { background:#222; color:#fff; border-radius:4px; padding:.1rem .35rem }
+        .syn { background:#222; color:#fff; padding:.05rem .25rem; border-radius:4px }
+        .blue-dark { color:#9cdcfe }
+        .blue-light { color:#4FC1FF }
+        .brown { color:#CE9178 }
+        .white { color:#fff }
+
+        .table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+    </style>
+
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../assets/js/cookie.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+
+            <div class="content">
+                <h1>Introduction to TailwindCSS</h1>
+                <h2>Add Tailwind via CDN, configure it in the browser, and build responsive UI elements with utility classes.</h2>
+            </div>
+        </div><!-- /wrapper -->
+    </header>
+
+    <main>
+        <aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p>
+
+            <script>
+                // Basic referrer detection (mirrors your sample)
+                let returnHome;
+                function getBasicReferrer() { return document.referrer || "Direct visit (no referrer)"; }
+                const testReferrer = getBasicReferrer();
+
+                if (testReferrer.includes("ibat")) returnHome = "https://munnelly.com/ibat/index.html";
+                else if (testReferrer.includes("dorset")) returnHome = "https://munnelly.com/dorset/index.html";
+                else returnHome = "../index.html";
+
+                document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            </script>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#what-is-tailwind">What is TailwindCSS (hosted) vs. build</a></p>
+            <p><a href="#add-cdn">Adding Tailwind via CDN</a></p>
+            <p><a href="#first-page">Creating your first Tailwind page</a></p>
+            <p><a href="#utilities">Utility-first fundamentals</a></p>
+            <p><a href="#hero">Building a simple hero section</a></p>
+            <p><a href="#responsive">Responsive grid and cards</a></p>
+            <p><a href="#dark-mode">Dark mode (class strategy)</a></p>
+            <p><a href="#browser-config">Browser configuration with <code>&lt;script&gt; tailwind.config</code></a></p>
+            <p><a href="#publish">Uploading your work to GitHub</a></p>
+            <p><a href="#resources">More learning resources</a></p>
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Explain the difference between hosted (CDN) Tailwind and a local build pipeline.</li>
+                    <li>Add Tailwind to any HTML page with a single <span class="syn">&lt;script&gt;</span> and use utility classes safely.</li>
+                    <li>Configure Tailwind in the browser for colours, fonts, and spacing scales.</li>
+                    <li>Build a responsive hero and card grid with dark mode support.</li>
+                </ul>
+            </section>
+
+            <section id="what-is-tailwind">
+                <h2>About TailwindCSS</h2>
+                <p><a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a> is a utility-first CSS framework. Instead of writing your own stylesheet file such as <b>mystyle.css</b>, you import utility classes directly in your HTML from the pre-built TailwindCSS stylesheet.</p>
+                
+                <p>You get consistency, speed, and responsive/dark mode variants out of the box.</p>
+
+                <p>You can use TailwindCSS in either of two ways:</p>
+
+                <ul>
+                    <li><b>Hosted (CDN)</b>: Add <span class="syn">&lt;script src="https://cdn.tailwindcss.com"&gt;</span> to your page; Tailwind is available immediately. Great for learning, prototypes, and simple static pages.</li>
+                    <li><b>Build pipeline</b> (Node/PostCSS): Scans your UI elements, tree-shakes unused classes, supports plugins, and produces tiny production CSS. Best for large projects.</li>
+                </ul>
+
+                <p>In this Tutorial, we will use the <i>hosted (CDN)</i> approach to get productive instantly — no tooling required.</p>
+            </section>
+
+
+            <section id="sample-file" class="wrapper-content">
+                <h2>Creating a workfile</h2>
+                <p>Begin by creating a sample HTML file to expermiment with:</p>
+               
+                <ol>
+                    <li>If a folder named <b>tw</b> does not exist in your <b>exercises</b> folder, create it now.</li>
+                    <li>In VS Code, create a new text file.
+                    <img src="assets/img/tailwind-headers/file-new.png" alt="screenshot">
+                    </li>
+                    
+                    <li>Save your new file as <b>tw-hero-solid.html</b>.</li>
+                    <li>In this file, copy-and-paste the following code, and save your file.</li>
+                   
+                </ol>
+
+<pre><button class="copy-html" id="btn-0">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-0" class="hljs language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TW Header with Solid Background Colour&lt;/title&gt;
+
+    &lt;!-- TailwindCSS via CDN --&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            </section>
+
+
+            <section>
+
+                <h2>About the <code>&lt;header&gt;</code> container</h2>
+
+                <p>In a web page, the <span class="syn">&lt;header&gt;</span> tag is generally positioned under the <span class="syn">&lt;nav&gt;</span> element at the top of a web page.</p>
+
+                <img src="assets/img/tailwind-headers/header.jpg" alt="screenshot">
+                    
+                <p>It usually contains the <span class="syn">&lt;h1&gt;</span> heading, the <span class="syn">&lt;h2&gt;</span> sub-heading and one or two buttons.</p>
+
+                <p>Visual designers refer to this part of a web page as the <i>hero block</i>.</p>
+
+            
+            </section>
+
+            <section>
+
+                <h2>Case 1: A solid background colour</h2>
+
+                <p>This is the simplest possible case. The background consists only of one <i>solid</i> (unchanging) colour.</p>
+
+            <p>In your workfile, copy-and-paste the output of the following AI prompt:</p>
+
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">
+Create a responsive hero section using only the &lt;header&gt; element with TailwindCSS classes.
+No full HTML document needed. 
+**Content:**
+- Main heading: "Building the Web of Tomorrow"
+- Subheading: "A clean, modern hero block built with Tailwind CSS."
+- Two CTA buttons: "Get Started" (primary) and "Learn More" (secondary)
+**Colours:**
+- **Background:** 'bg-blue-800'
+- **Text:** h1 'text-white' and h2 'text-slate-300' 
+- **Primary button:** 'bg-white' with 'text-slate-900', hover state 'hover:bg-slate-100'
+- **Secondary button:** 'text-white' with 'border-white/30' border, hover state 'hover:bg-white/10'
+**Responsive behavior:**
+- Minimum heights: 48vh (mobile), 32vh (sm), 60vh (md), 88vh (lg)
+- Text scales from 4xl to 7xl across breakpoints
+- Set max-width for headings and buttons to max-w-6xl
+- Buttons stack vertically on mobile, horizontal on larger screens
+- Include hover transitions on buttons
+- Use centered layout, rounded-2xl buttons, and appropriate spacing
+</code></pre>
+                
+    <p>When you save your file, your hero block should look like that below in a web browser.</p>
+
+    <img src="assets/img/tailwind-headers/tw-solid.png" alt="screenshot">
+
+<p>Experiment with different colours in your <b>tw-hero.html</b>workfile.</p>
+
+</section>
+
+<section>
+     <h2>Case 2: A linear gradient background colour</h2>
+
+        <p>In the first sample web page above you have applied what is called <i>solid</i> background colours to the <span class="syn">&lt;header&gt;</span> block.</p>
+
+    	<p>CSS also enables you to apply a <i>linear gradient</i> to a <span class="syn">&lt;header&gt;</span> block and other web page elements.</p>
+
+	<p>Linear-gradients are of two main types:</p>
+
+	<ul>
+		<li>Gradients of the <i>same</i> colour. For example, from a light blue to a dark blue.</li>
+		<li>Gradients of <i>different</i> colours. For example, from blue to green.</li>
+	</ul>
+
+	<p>Below is the TailwindCSS gradient syntax.</p>
+
+    <table class="table-js-arithmetic">
+        <tr>
+            <td>bg-gradient-to-{direction}<br>
+            <b>to-r</b><br>
+            <b>to-b</b><br>
+            <b>to-br</b>
+            </td>
+            <td>Sets gradient direction<br>
+            left to right<br>
+            top to bottom<br>
+            top-left to bottom-right</td>
+        </tr>
+        <tr>
+            <td><b>from-{color}</b></td>
+            <td>Starting color</td>
+        </tr>
+        <tr>
+            <td><b>via-{color}</b></td>
+            <td>Middle color (optional)</td>
+        </tr>
+        <tr>
+            <td><b>to-{color}</b></td>
+            <td>Ending color</td>
+        </tr>
+
+    </table>
+
+    <p>Here are some sample gradients that would work well:</p>
+    <table class="table-js-arithmetic">
+        <tr>
+            <td>bg-to-br from-blue-600 to-blue-900</td>
+        </tr>
+    <tr>
+            <td>bg-to-r from-blue-700 via-purple-700 to-indigo-800</td>
+        </tr>
+    <tr>
+            <td>bg-to-b from-blue-600 to-cyan-700</td>
+        </tr>
+    </table>
+
+
+    <p>Let's build an example with the following steps;</p>
+
+    <ol>
+        <li>In VS Code, create a new text file and save it as <b>tw-hero-gradient.html</b>.</li>
+        <li>In this file, copy-and-paste the following code, and save your file.</li>
+    </ol>
+
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TW Header with Linear Gradient Background Colour&lt;/title&gt;
+
+    &lt;!-- TailwindCSS via CDN --&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    <p>Next, in your new <b>tw-hero-gradient.html</b> workfile, copy-and-paste the output of the following AI prompt:</p>
+
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
+Create a responsive hero section using only the &lt;header&gt; element with TailwindCSS classes.
+No full HTML document needed. 
+**Content:**
+- Main heading: "Building the Web of Tomorrow"
+- Subheading: "A clean, modern hero block built with Tailwind CSS."
+- Two CTA buttons: "Get Started" (primary) and "Learn More" (secondary)
+**Colours:**
+- **Background Linear Gradient:** 'bg-to-r from-purple-500 to-purple-900'
+- **Text:** h1 'text-white' and h2 'text-slate-300' 
+- **Primary button:** 'bg-white' with 'text-slate-900', hover state 'hover:bg-slate-100'
+- **Secondary button:** 'text-white' with 'border-white/30' border, hover state 'hover:bg-white/10'
+**Responsive behavior:**
+- Minimum heights: 48vh (mobile), 32vh (sm), 60vh (md), 88vh (lg)
+- Text scales from 4xl to 7xl across breakpoints
+- Set max-width for headings and buttons to max-w-6xl
+- Buttons stack vertically on mobile, horizontal on larger screens
+- Include hover transitions on buttons
+- Use centered layout, rounded-2xl buttons, and appropriate spacing
+</code></pre>
+
+    <p>When you save your file, your hero block should look like that below in a web browser.</p>
+
+    <img src="assets/img/tailwind-headers/tw-gradient.png" alt="screenshot">
+
+</section>
+
+<section>
+     <h2>Case 3: A background image with tinted overlay</h2>
+
+    <p>Now let's use TailwindCSS to create a hero block with a background image and a tinted overlay.</p>
+
+ <ol>
+        <li>In VS Code, create a new text file and save it as <b>tw-hero-bg-image.html</b>.</li>
+        <li>In this file, copy-and-paste the following code, and save your file.</li>
+    </ol>
+
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TW Header with Background Image and Tinted Overlay&lt;/title&gt;
+
+    &lt;!-- TailwindCSS via CDN --&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    <p>Next, in your new <b>tw-hero-bg-image.html</b> workfile, copy-and-paste the output of the following AI prompt:</p>
+
+<pre><button class="copy-html" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-html">
+Create a fully responsive hero section using only a &lt;header&gt; element styled entirely with TailwindCSS classes.
+
+** Structure & Layering **
+- Use layered absolute positioning inside a relative &lt;header&gt;:
+- Background image layer (z-0): full-cover background (object-cover)
+- Tinted overlay layer (z-10): bg-black/30 covering entire header
+Text + buttons layer (z-20): centered content on top
+
+** Layout Requirements **
+Outer &lt;header&gt; must use:
+- relative positioning
+- flexbox centering: flex items-center justify-center
+- responsive height:
+    min-h-[48vh] (mobile)
+    sm:min-h-[32vh]
+    md:min-h-[60vh]
+    lg:min-h-[88vh]
+- responsive horizontal padding: px-4 sm:px-6 lg:px-8
+
+** Text Content **
+Include:
+- Main heading &lt;h1&gt;
+- Responsive font sizes: text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+- Bold, white text with text-shadow
+- Sub-heading &lt;h2&gt;
+- Slightly larger sizes: text-lg sm:text-xl md:text-2xl
+- Centered, with text-shadow
+- Spacing: mb-12
+
+** Buttons **
+Below the text, include two buttons:
+- Get started
+- Learn more
+Button requirements:
+- Stack vertically on mobile (flex-col), horizontally on larger screens (sm:flex-row)
+- Space between buttons: gap-4 sm:gap-5
+- Buttons should be content width on mobile
+- Use: self-center sm:self-auto
+- Buttons should include:
+    Rounded corners: rounded-2xl
+    Padding: px-7 py-3
+    Hover transitions: scale up, shadow increase
+    First button: bg-indigo-500 → hover bg-indigo-400
+    Second button: translucent: bg-white/10 with hover:bg-white/20 and a subtle white ring
+
+** Overall Design Requirements **
+- All text should be white with subtle text-shadow for readability.
+- Use a full-cover background image layered behind a black/30 overlay.
+- Wrap text & buttons in a centered container: max-w-6xl mx-auto.
+
+** Final Output **
+- Produce a complete &lt;header&gt; element containing:
+- Full layering
+- Responsive typography
+- Mobile-friendly button behavior
+
+All TailwindCSS classes applied directly in markup
+No additional containers outside the &lt;header&gt;</code></pre>
+
+<p>When you save your file, your hero block should look like that below in a web browser.</p>
+
+    <img src="assets/img/tailwind-headers/tw-image.png" alt="screenshot">
+
+</section>
+
+
+    <section>
+     <h2>Case 4: A background video, poster image and tinted overlay</h2>
+
+
+                <p>For each prompt, copy the output HTML into a new file in your 📁 <b>exercises</b> folder, save, and open in your browser.</p>
+
+<pre><button class="copy-html" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-html">
+
+Create a responsive hero section with a background video and gradient overlay using only the &lt;header&gt; element with TailwindCSS classes.
+Structure (using layered positioning):
+
+Outer container: relative positioning with flexbox centering
+Three layers (using z-index):
+
+Text content (z-index: 20) - main content on top
+Gradient overlay (z-index: 10) - colored transparent layer
+Background video (z-index: 0) - full-cover video at bottom
+
+Content:
+
+Main heading: "Education for Life"
+Subheading: "A brighter career and future"
+
+Video setup:
+
+Video file: assets/videos/hero-video.mp4
+Poster image: assets/videos/hero-still.jpg
+Video attributes: loop, playsinline, muted, autoplay, disablepictureinpicture, preload="auto"
+Use object-cover to fill the container
+
+Colors:
+
+Background video: Full-cover video using object-cover
+Gradient overlay: linear-gradient(rgba(29,38,113,0.7),rgba(195,55,100,0.3)) - blue to pink gradient with transparency
+Fallback background: bg-gray-500
+Text: text-white with text-shadow: 2px 2px #222 for readability
+
+Layout:
+
+Use relative on outer header with overflow-hidden
+Use absolute inset-0 on both the video container and overlay to fill the entire header
+Text container has relative positioning with higher z-index to appear on top
+Center text both vertically and horizontally
+Minimum height: 500px (mobile), 80vh (desktop)
+
+Responsive behavior:
+
+Height: min-h-[500px] on mobile, md:h-[80vh] on desktop
+Horizontal padding: px-[12%] with bottom padding pb-[4%]
+Large, bold heading with responsive text sizes (text-5xl → text-7xl → text-8xl)
+Uppercase subheading with responsive sizes (text-xl → text-3xl → text-5xl)
+
+Important: Include proper z-index layering (video z-0, overlay z-10, text z-20) and use inline style for the gradient overlay since Tailwind doesn't support custom rgba gradients.</code></pre>
+
+            </section>
+
+        </article>
+    </main>
+
+    <footer></footer>
+
+    <!-- Cookie banner (same pattern as sample) -->
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
+
+    <!-- highlight.js activation -->
+    <script>hljs.highlightAll();</script>
+
+    <!-- Simple copy-to-clipboard for the demo buttons -->
+    <script>
+        function attachCopy(id, targetId) {
+            const btn = document.getElementById(id);
+            const code = document.getElementById(targetId);
+            if (!btn || !code) return;
+            btn.addEventListener('click', async () => {
+                const text = code.innerText.replace(/\u00A0/g, ' ');
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.innerHTML = 'Copy <i class="fa-regular fa-copy"></i>', 1200);
+                } catch(e) {
+                    console.error(e);
+                }
+            });
+        }
+
+        [
+            ['btn-cdn-1','strCode-cdn-1'],
+            ['btn-starter-1','strCode-starter-1'],
+            ['btn-hero-1','strCode-hero-1'],
+            ['btn-grid-1','strCode-grid-1'],
+            ['btn-dark-1','strCode-dark-1'],
+            ['btn-config-1','strCode-config-1'],
+            ['btn-prompt-1','strCode-prompt-1'],
+            ['btn-prompt-2','strCode-prompt-2'],
+            ['btn-prompt-3','strCode-prompt-3']
+        ].forEach(([b, c]) => attachCopy(b, c));
+    </script>
+
+    <script src="assets/js/utils.js"></script>
+</body>
+</html>
