@@ -13,94 +13,54 @@
       content="A responsive single-page website for a fictitious fashion outlet"
     />
 
-    <meta name="author" content="Brendan Munnelly" />
+    <meta
+      name="description"
+      content="A responsive single-page website for a fictitious fashion outlet"
+    />
+
+    <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet-->
-    <link
-      rel="stylesheet"
-      href="../../exercises/assets/css/brendan-munnelly-web-design-tutorials.css"
-    />
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+    <style>
+
+      .four-samples div {
+        margin-bottom: 16px;
+      }
+    </style>
+  	<!-- Styles for Cookie Consent Popup Message  -->
+    <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
 
     <!-- Font Awesome 6 icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-    <!-- Styles for Cookie Consent Popup Message  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-N54G36T");
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
     </script>
-    <!-- End Google Tag Manager -->
-  </head>
+    </head>
 
-  <body id="top">
+    <body id="top">
+
     <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-N54G36T"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
 
     <header>
       <div class="wrapper">
         <div class="sidebar">
-          <a
-            href="https://www.ibat.ie/courses/web-design-diploma-course.html"
-            target="_blank"
-            rel="noopener"
-          >
-            <picture>
-              <source
-                media="(min-width: 768px)"
-                srcset="../../exercises/assets/img/global/ibat-logo-desktop.png"
-              />
-              <source
-                media="(max-width: 767px)"
-                srcset="../../exercises/assets/img/global/ibat-logo-mobile.png"
-              />
-              <img
-                src="../../exercises/assets/img/global/ibat-logo-desktop.png"
-                alt="IBAT College Diploma in Web Design, Brendan Munnelly"
-              />
-            </picture>
-          </a>
-
           <div>
-            <img
-              src="../../exercises/assets/img/global/Brendan-Munnelly-IBAT-College.jpg"
-              alt="Brendan Munnelly, IBAT Lecturer in Web Design"
-            />
-            <p id="myEmail">bmunnelly@ibat.ie</p>
+            <p>&nbsp;</p>
           </div>
         </div>
 
@@ -119,9 +79,42 @@
       <aside>
         <h3>WEB DESIGN DIPLOMA</h3>
 
-        <p>
-          <i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a>
-        </p>
+        <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+        <script>
+        // Basic referrer detection
+        let returnHome;
+        function getBasicReferrer() {
+        return document.referrer || "Direct visit (no referrer)";
+        }
+        
+        const testReferrer = getBasicReferrer();
+        
+        if (testReferrer.includes("ibat")) {
+            console.log("Referrer is IBAT");
+            returnHome = "https://munnelly.com/ibat/index.html"
+        }
+        else if (testReferrer.includes("dorset")) {
+            console.log("Referrer is Dorset");
+            returnHome = "https://munnelly.com/dorset/index.html"
+        }
+        
+        else {
+            console.log("Referrer unknown");
+            returnHome = "../../index.html"
+        }
+        
+        // Set the href attribute of the link
+        document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+        
+        // Log the referrer information
+        function logReferrer() {
+        console.log("Basic Referrer:", getBasicReferrer());
+        }
+        
+        // Call the function to log the referrer
+        logReferrer();</script>
+
 
         <h3>THIS TUTORIAL</h3>
         <p><a href="#introduction">Introduction</a></p>
@@ -132,13 +125,12 @@
         </p>
         <p><a href="#hero-block">Creating the hero block layout</a></p>
         <p><a href="#deckhead">Creating the deckhead layout</a></p>
-        <p><a href="#main">Creating the &lt;main&gt; content layout</a></p>
+        <p><a href="#main">Creating the four products content layout</a></p>
         <p>
           <a href="#happy-customers">Creating the 'happy customers' layout</a>
         </p>
         <p><a href="#internal-hyperlinks">Adding internal hyperlinks</a></p>
         <p><a href="#google-fonts">Adding a Google Font</a></p>
-        <p><a href="#final-touches">Adding the final touches</a></p>
         <p>
           <a href="#upload-github">Uploading your portfolio folder to GitHub</a>
         </p>
@@ -179,20 +171,15 @@
 
             <li>
               Two product types - hats and t-shirts - have a light-grey coloured
-              background (<span class="csyn">.section-selector-2</span>).
+              background.
             </li>
 
             <li>
-              And the other two have a white-coloured background (<span
-                class="csyn"
-                >.section-selector-3</span
-              >) background.
+              And the other two have a white-coloured background.
             </li>
 
             <li>
-              The first (<span class="csyn">.section-selector-1</span>) and last
-              (<span class="csyn">.section-selector-4</span>) of the six blocks
-              both contain white text against a dark green background.
+              The first and last of the six blocks both contain white text against a dark green background.
             </li>
 
             <li>
@@ -219,17 +206,9 @@
             Your first task is to create the folders you need for this project.
           </p>
           <ol>
-            <li>
-              If a sub-folder named 📁 <b>portfolio</b> does not already exist
-              inside your ‘main’ 📁 websites folder, create it now.
-              <img
-                src="assets/img/file-explorer-new.png"
-                alt="file-explorer-portfolio-folder"
-              />
-            </li>
 
             <li>
-              Inside this &#128193; <b>portfolio</b> folder, create a sub-folder
+              Inside your &#128193; <b>portfolio</b> folder, create a new sub-folder
               to hold the files for your <i>Fashion</i> project. Name the new
               sub-folder as &#128193; <b>fashion</b> (all small letters).
             </li>
@@ -238,7 +217,7 @@
               Inside this new folder, create an &#128193;
               <b>assets</b> sub-folder.
               <span class="inside-ol">&nbsp;</span>
-              And inside this, create a &#128193; <b>CSS</b> sub-folder, an
+              And inside this, create a &#128193; <b>css</b> sub-folder, an
               &#128193; <b>img</b> sub-folder, and a &#128193;
               <b>videos</b> sub-folder.
               <img
@@ -269,7 +248,7 @@
           </p>
 
           <p>
-            <a href="https://lunevedy.com/starter/index.html" target="_blank"
+            <a href="resources/index.html" target="_blank"
               >index.html</a
             >
           </p>
@@ -283,6 +262,8 @@
             src="assets/img/file-basic-save-as-html.png"
             alt="save as HTML"
           />
+
+          <p>On the Apple Mac, Choose <b>File | Save As</b>, and then <b>Format | Page Source</b>.</p>
 
           <h3>Stylesheet</h3>
 
@@ -521,55 +502,71 @@
 
           <h3>Working with the hero block in VS Code</h3>
 
-          <p>In VS Code, display the <b>index.html</b> web page.</p>
+                    <p>Switch to VS Code and display the <b>index.html</b> web page.</p>
 
-          <p>
-            Select the opening and closing
-            <span class="syn">&lt;nav&gt;</span> and
-            <span class="syn">&lt;header&gt;</span> tag pairs.
-          </p>
+                    <ol>
 
-          <img src="assets/img/vscode-12n.png" alt="VS Code" />
+                        <li>You can delete the <span class="syn">&lt;nav&gt;</span> block at the top of the web page.
+                    
+                        <img src="assets/img/delete-1.png" alt="screenshot" style="max-width: 780px"></li>
 
-          <p>Now, paste in the copied HTML from the Lunevedy app.</p>
+                        <li>Update the comment text as shown below.
+                        <img src="assets/img/delete-2.png" alt="screenshot" style="max-width: 780px"></li>
 
-          <p>Your VS Code screen should now look as shown below.</p>
+                        <li>Also delete the <span class="syn">&lt;footer&gt;</span> block and JavaScript <span class="syn">&lt;script&gt;</span> tag at the bottom. These are not used in this project.
+                        <img src="assets/img/delete-3.png" alt="screenshot" style="max-width: 780px"></li>
 
-          <img src="assets/img/vscode-13n.png" alt="files" class="wider-115" />
+                        <li>Select the opening and closing <span class="syn">&lt;header&gt;</span> tags as shown below.
+                       
+                        <img src="assets/img/select-1.png" alt="screenshot" style="max-width: 780px"></li>
 
-          <p>
+                        <li>Paste in the content you copied from the Lunevedy app. Your VS Code screen should now look as shown below.
+
+          <img src="assets/img/vscode-13n.png" alt="files" class="wider-115" /></li>
+
+          <li>
             Update the hero block with the image file <b>hero-still.jpg</b> and
             video file <b>hero-video.mp4</b> from the
             <b>assets/videos</b> sub-folder, and the words from the
             <a href="resources/text.html" target="_blank">text.html</a> file.
-          </p>
+          </li>
 
-          <p>Your VS Code screen should now look as shown below.</p>
+          <li>Your VS Code screen should now look as shown below.
 
-          <img src="assets/img/vscode-hero.png" alt="files" class="wider-115" />
+          <img src="assets/img/vscode-hero.png" alt="files" class="wider-115" /></li>
 
-          <p>
+          <li>
             Save your <b>index.html</b> file. Display it in your web browser. It
             should look as shown below.
-          </p>
+          
 
-          <img src="assets/img/lun-6-screen.jpg" alt="Hero block" />
+          <img src="assets/img/lun-6-screen.jpg" alt="Hero block" /></li>
 
-          <p>
-            To speed up the loading of the <b>hero-still.jpg</b> poster image
-            for the background video, copy-and-paste the following code just
-            after the "Preload large image" comment line in the
-            <span class="syn">&lt;head&gt;</span>.
-          </p>
 
-          <pre
-            class="language-html"
-          >&lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"preload"</span> <span class="blue-dark">href</span>=<span class="brown">"assets/videos/hero-still.jpg"</span> <span class="blue-dark">as</span>=<span class="brown">"image"</span>&gt;  </pre>
+        <li>To speed up the loading of the large <b>hero-still.jpg</b> poster image, copy-and-paste the following code just after the "Preload hero image" comment line in the <span class="syn">&lt;head&gt;</span>.
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html language-xml">
+&lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"preload"</span> <span class="blue-dark">href</span>=<span class="brown">"assets/videos/hero-still.jpg"</span> <span class="blue-dark">as</span>=<span class="brown">"image"</span>&gt; 
+</code></pre></li>
 
-          <p>The final code should look as shown below.</p>
 
-          <img src="assets/img/vscode-14n.png" alt="VS Code" />
+<li>Also in the <span class="syn">&lt;head&gt;</span> of your web page, update the title and description as follows.
 
+                    <ul>
+                        <li><b>Mary Smith | Portfolio Project | Snazzy Fashions</b></li>
+                        <li><b>Fashions you will love at prices you can afford. Look great. Feel fantastic.</b></li>
+                    </ul>
+                    <span class="inside-ol">&nbsp;</span>
+                    Replace "Mary Smith" with your own name.
+                    <img src="assets/img/head-1.png" class=" wider-115" alt="VS Code"></li>
+
+
+                  <li>You will not be using the Font Awesome icons for this Fashion project, so you can delete them.
+                    <img src="assets/img/head-2.png" class=" wider-115" alt="VS Code" style="padding-bottom:14px">
+                  Removing these unused links will help your web page load more quickly.
+                  </li>
+
+
+                  </ol>
           <p>
             &#x2705; &nbsp; Excellent. You have now completed the hero block of
             your <i>Fashion</i> web page.
@@ -721,7 +718,7 @@
 
           <p>
             Just after the opening <span class="syn">&lt;main&gt;</span> tag,
-            select the lines shown below.
+            select the line shown below.
           </p>
 
           <img src="assets/img/vscode-pre-paste-header.png" alt="files" />
@@ -802,7 +799,7 @@
         </section>
 
         <section id="main">
-          <h2>Creating the <code>&lt;main&gt;</code> content layout</h2>
+          <h2>Creating the four products content layout</h2>
 
           <p>
             Your next task is to create the four
@@ -956,7 +953,7 @@
 
           <p>
             Copy-and-paste this directly under the first
-            <span class="syn">section</span> as follows.
+            <span class="syn">&lt;section&gt;</span> as follows.
           </p>
 
           <img
@@ -966,7 +963,7 @@
           />
 
           <p>
-            You now have <i>two</i> <span class="syn">section</span> blocks of
+            You now have <i>two</i> <span class="syn">&lt;section&gt;</span> blocks of
             content in your web page, each with the same class name of
             <b>section-selector-2</b>.
           </p>
@@ -1166,7 +1163,7 @@
           <h2>Creating the 'happy customers' layout</h2>
           <p>
             Lastly, you will create a four-column 'customer satisfaction'
-            <span class="syn">section</span> block that will be positioned at
+            <span class="syn">&lt;section&gt;</span> block that will be positioned at
             the bottom of the web page.
           </p>
 
@@ -1289,11 +1286,6 @@
           <img src="assets/img/lun-8-screen.png" alt="files" />
 
           <p>
-            Update the 'customer satisfaction' block with the words from the
-            <a href="resources/text.html" target="_blank">text.html</a> file.
-          </p>
-
-          <p>
             Update the four icons from
             <a href="https://icons8.com/line-awesome" target="_blank"
               >Line Awesome</a
@@ -1307,6 +1299,13 @@
             <li><b>&lt;i class="las la-arrows-alt-h"&gt;&lt;/i&gt;</b></li>
             <li><b>&lt;i class="las la-comments"&gt;&lt;/i&gt;</b></li>
           </ul>
+
+          <img src="assets/img/four-icons.png" alt="screenshot">
+
+          <p>
+            Update the 'customer satisfaction' block with the words from the
+            <a href="resources/text.html" target="_blank">text.html</a> file.
+          </p>
 
           <p>
             You have now completed this final content block of your
@@ -1324,7 +1323,7 @@
 
           <ol>
             <li>
-              To each of the five sections of content, add a unique ID attribute
+              To each of the five sections of content after the deckhead, add a unique ID attribute
               to the <span class="syn">&lt;h2&gt;</span> tag as shown below.
               <img src="assets/img/hyperlink-1.png" alt="" />
             </li>
@@ -1338,120 +1337,69 @@
             <li>
               In the <b>custom.css</b> file, add the following style rules for
               the hyperlinks.
-              <pre>
+
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-css language-xml">
 .theme-dark.section-selector-1 a:link,
 .theme-dark.section-selector-1 a:visited { color: var(--green-200) }
 
 .theme-dark.section-selector-1 a:focus,
 .theme-dark.section-selector-1 a:hover,
-.theme-dark.section-selector-1 a:active { color: var(--white-000) }</pre
-              >
+.theme-dark.section-selector-1 a:active { color: var(--white-000) }  
+</code></pre>
+
             </li>
 
             <li>
-              Save your <b>index.html</b> and <b>custom.css</b> files, and in
-              your web browser, verify the links all work correctly.
+              Save your <b>index.html</b> and <b>custom.css</b> files.
             </li>
           </ol>
         </section>
 
         <section id="google-fonts">
-          <h2>Adding a Google Font</h2>
-          <p>
-            Your next task is to add a Google font to all the text in your
-            <i>Fashion</i> web page. Here are the steps:
-          </p>
 
-          <ol>
-            <li>
-              In a new browser tab, choose the
-              <a
-                href="https://fonts.google.com/specimen/Playfair+Display"
-                target="_blank"
-                >Playfair Display</a
-              >
-              font in Google Fonts.
-            </li>
 
-            <li>
-              At the right of the screen, click <b>Remove all</b> to remove any
-              previously selected fonts.
-            </li>
+                <h2>Adding a Google Font</h2>
+                <p>Your next task is to add a Google font to all the text in your <i>Smoothies</i> web page. Here are the steps:</p>
 
-            <li>
-              Scroll down the screen and click the
-              <b>Select Regular 400 </b> and <b>Select Bold 700 </b>options.
+                <ol>
+                    <li>In a new browser tab, choose the <a href="https://fonts.google.com/specimen/Playfair+Display"
+                target="_blank">Playfair Display</a> font in Google Fonts.</li>
 
-              <img src="assets/img/fonts-1.png" alt="" />
-            </li>
+                    <li>At the top-right of the screen, check to see if you have any fonts saved from a previous session.
 
-            <li>
-              Near the bottom right of the screen, click the <b>Copy</b> icon.
+                    <img src="assets/img/remove-font-1.png" alt="screenshot">
 
-              <img
-                src="assets/img/fonts-2.png"
-                alt=""
-                style="max-width: 500px"
-              />
-            </li>
+                    If saved fonts are present, click the icon, on the next screen click the <b>Remove all</b> option, and then return to the main font selection screen.
+                    <img src="assets/img/remove-font-2.png" alt="screenshot"></li>
 
-            <li>
-              Switch to the <b>index.html</b> file in VS Code, and paste the
-              font code in the <span class="syn">&lt;head&gt;</span> of the web
-              page.
-              <img src="assets/img/vscode-18n.png" alt="" class="wider-115" />
-            </li>
+                    <li>Scroll down the screen and click to select Playfair Display font. 
 
-            <li>
-              In the <b>custom.css</b> file, add the following style rule for
+                    <img src="assets/img/playfair-display-font.png" alt="screenshot"></li>
+
+                    <li>On the next screen, click the <b>Get font</b> button. And on the next screen, click the <b>Get embed code</b> button.</li>
+
+                    <li>Finally, click the first <b>Copy code</b> button.
+                    
+                    <img src="assets/img/playfair-display-font-1.png" alt="screenshot" class="wider-110"></li>
+
+                    <li>Switch to the <b>index.html</b> file in VS Code, and paste the font code in the <span class="syn">&lt;head&gt;</span> of the web page.
+                    <img src="assets/img/vscode-18n.png" alt="" class="wider-115" /></li>
+
+                    <li>Display the <b>custom.css</b> file and add the following style at
+                    the top of the file.<img src="assets/img/vscode-19n.png" alt="screenshot"                 class="wider-115"></li>
+
+                    <li>Also in the <b>custom.css</b> file, add the following style rule for
               the <b>font-size</b>.
-              <pre>header h1 { font-size: var(--font-size-xxxl) } </pre>
-            </li>
 
-            <li>
-              Display the <b>custom.css</b> file and add the following style at
-              the top of the file.<img
-                src="assets/img/vscode-19n.png"
-                alt=""
-                class="wider-115"
-              />
-            </li>
-          </ol>
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-css language-xml">              
+header h1 { font-size: var(--font-size-xxxl) } </code></pre></li>
 
-          <p>Save your <b>index.html</b> and <b>custom.css</b> files.</p>
-        </section>
+                <li>Finally, delete any empty <span class="syn">&lt;section&gt;</span> blocks in your
+                <b>index.html</b> file.</li>
 
-        <section id="final-touches">
-          <h2>Adding the final touches</h2>
-          <p>
-            In the <span class="syn">&lt;head&gt;</span> of your web page,
-            update the <span class="syn">title</span> and
-            <span class="syn">description</span> as follows:
-          </p>
+                  <li>Save your <b>index.html</b> and <b>custom.css</b> files.</li>
+                </ol>
 
-          <ul>
-            <li>Mary Smith | Portfolio Project | Snazzy Fashion</li>
-            <li>
-              Fashions you will love at prices you can afford. Look great. Feel
-              fantastic.
-            </li>
-          </ul>
-
-          <p>
-            You can delete the <span class="syn">&lt;footer&gt;</span> and
-            <span class="syn">&lt;script&gt;</span> elements at the bottom of
-            the web page. They are not required for this project.
-          </p>
-
-          <img src="assets/img/vscode-16n.png" alt="VS Code" />
-
-          <p>
-            Also delete any empty
-            <span class="syn">&lt;section&gt;</span> blocks in your
-            <b>index.html</b> file.
-          </p>
-
-          <p>Save your <b>index.html</b> and <b>custom.css</b> stylesheet.</p>
 
           <p>
             &#x2705; &nbsp; Excellent. You have now completed your
@@ -1506,16 +1454,11 @@
             <li>
               From the dropdown list displayed, choose the option
               <b>Upload files</b>.
-
-              <img
-                src="assets/img/github-btn-add-file-dropdown.png"
-                alt="Project Animation Google Fonts"
-              />
             </li>
 
             <li>
               In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop
-              your entire 📁 <b>portfolio</b> folder to upload it within your
+              your 📁 <b>fashion</b> project folder to upload it within the <b>portfolio</b> folder of your
               repository on GitHub.
               <img
                 src="assets/img/github-upload-folder-files.png"
@@ -1559,84 +1502,22 @@
       </article>
     </main>
 
-    <footer>
-      <div class="item-3">
-        <h4>Site Map</h4>
-        <p>
-          <i class="fas fa-home fa-fw"></i
-          ><a href="https://www.munnelly.com/ibat/">Home</a>
-        </p>
-        <p>
-          <i class="fas fa-lock fa-fw"></i
-          ><a href="https://www.munnelly.com/legal/">Privacy &amp; Legal</a>
-        </p>
-      </div>
-
-      <div class="item-3">
-        <h4>Professional Diploma in Web Design</h4>
-        <p>
-          A ten-week, part-time course that covers the fundamentals of modern
-          web design with HTML5 and CSS3. Developed and delivered by
-          <a href="https://www.munnelly.com" target="_blank"
-            >Brendan Munnelly</a
-          >
-          for <a href="https://www.ibat.ie" target="_blank">IBAT College</a>,
-          Dublin.
-        </p>
-      </div>
-
-      <div class="item-3">
-        <h4>Contact</h4>
-        <p>
-          <i class="fas fa-globe fa-fw"></i
-          ><a href="https://www.ibat.ie">www.ibat.ie</a>
-        </p>
-        <p>
-          <i class="fas fa-phone-square fa-fw"></i
-          ><a href="tel:018075055">01 807 5055</a>
-        </p>
-        <p>
-          <i class="fas fa-envelope fa-fw"></i
-          ><a href="mailto:enquiry@ibat.ie">enquiry@ibat.ie</a>
-        </p>
-      </div>
+	<footer>
     </footer>
 
-    <!-- JavaScript for Cookie Consent Popup Message -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-      data-cfasync="false"
-    ></script>
-    <script>
-      window.cookieconsent.initialise({
-        palette: {
-          popup: {
-            background: "#000",
-          },
-          button: {
-            background: "#f1d600",
-          },
-        },
-        content: {
-          href: "https://www.munnelly.com/legal/index.html",
-        },
-      });
-    </script>
 
-    <script>
-      document.querySelector("#myEmail").addEventListener("click", copyEmail);
-      document
-        .querySelector("#myEmail")
-        .addEventListener("touchstart", copyEmail);
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
 
-      function copyEmail() {
-        document.execCommand("copy");
-        const email_id = document.querySelector("#myEmail");
-        const email_text = document.querySelector("#myEmail").innerText;
-        email_id.classList.remove("emailAnimation");
-        void email_id.offsetWidth;
-        email_id.classList.add("emailAnimation");
-      }
-    </script>
-  </body>
+	<script>hljs.highlightAll();</script>
+
+    <script src="../../lessons/assets/js/utils.js"></script>       
+ 
+
+
+</body>
 </html>
