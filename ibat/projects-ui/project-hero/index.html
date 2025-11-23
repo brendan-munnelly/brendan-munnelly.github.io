@@ -10,39 +10,51 @@
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet-->
-    <link rel="stylesheet" href="../../exercises/assets/css/brendan-munnelly-web-design-tutorials.css" />
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  	<!-- Styles for Cookie Consent Popup Message  -->
+    <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet">
 
     <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
 
-</head>
-
-<body id="top">
 
     <header>
         <div class="wrapper">
             <div class="sidebar">
-                <a href="https://www.ibat.ie/courses/web-design-diploma-course.html" target="_blank" rel="noopener">
-                    <picture>
-                        <source media="(min-width: 768px)" srcset="../../exercises/assets/img/global/ibat-logo-desktop.png">
-                        <source media="(max-width: 767px)" srcset="../../exercises/assets/img/global/ibat-logo-mobile.png">
-                        <img src="../../exercises/assets/img/global/ibat-logo-desktop.png" alt="IBAT College Diploma in Web Design, Brendan Munnelly">
-                    </picture>
-                </a>
-
                 <div>
-                    <img src="../../exercises/assets/img/global/Brendan-Munnelly-IBAT-College.jpg" alt="Brendan Munnelly, IBAT Lecturer in Web Design">
-                    <p id="myEmail">bmunnelly@ibat.ie</p>
+                    <p>&nbsp;</p>
                 </div>
             </div>
 
             <div class="content">
-                <h1>Your <i>Hero Gallery</i> Portfolio Project</h1>
+               <h1>Your Hero Gallery Portfolio Project</h1>
                 <h2>A gallery of web page hero blocks</h2>
             </div>
         </div><!-- /wrapper -->
@@ -51,24 +63,57 @@
     <main>
 
         <aside>
-            <h3>WEB DESIGN COURSE</h3>
-
-            <p><i class="fas fa-home"></i> &nbsp;<a href="../../index.html">Home</a></p>
+            <h3>WEB DESIGN DIPLOMA</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
+            
+            const testReferrer = getBasicReferrer();
+            
+            if (testReferrer.includes("ibat")) {
+                console.log("Referrer is IBAT");
+                returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+                console.log("Referrer is Dorset");
+                returnHome = "https://munnelly.com/dorset/index.html"
+            }
+            
+            else {
+                console.log("Referrer unknown");
+                returnHome = "../../index.html"
+            }
+            
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+            
+            // Call the function to log the referrer
+            logReferrer();</script>
 
             <h3>THIS TUTORIAL</h3>
 			<p><a href="#introduction">Introduction</a></p>
-			<p><a href="#project-folder-files">Project folders and files</a></p>
+			<p><a href="#project-folder-files">Your project folder and files</a></p>
+            <p><a href="#project-resources">Project resources</a></p>
 			<p><a href="#h1">The hero-1 block</a></p>
             <p><a href="#h2">The hero-2 block</a></p>
 			<p><a href="#h3">The hero-3 block</a></p>
             <p><a href="#h4">The hero-4 block</a></p>
 			<p><a href="#h5">The hero-5 block</a></p>
-
+            <p><a href="#final-touches">Final touches</a></p>
             <p><a href="#github-upload">Uploading your project to GitHub</a></p>
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
         </aside>
-
 
         <article>
 
@@ -82,17 +127,44 @@
 
         </section>
 
-            <section id="project-folder-files">
+
+        <section id="project-folder-files">
+            <h2>Your project folder and files</h2>
+
+             <p>Your first task is to create the folders you need for this project.</p>
+            <ol>
+
+                <li>Inside your 📁  <b>portfolio</b> folder, create a sub-folder to hold the files for this project
+                <img src="assets/img/folder-portfolio.png" alt="file-explorer-portfolio-folder" style="max-width: 700px">
+                Name the new sub-folder &#128193; <b>project-hero</b> (all small letters, no spaces).
+                <img src="assets/img/project-hero-1.png" alt="file-explorer-portfolio-folder" style="max-width: 560px">
+                </li>
+                <li>Inside this new folder, create an &#128193; <b>assets</b> sub-folder.
+                <span class="inside-ol">&nbsp;</span>
+                And inside this, create a &#128193; <b>css</b> sub-folder and an &#128193; <b>img</b> sub-folder.
+                <img src="assets/img/project-hero-2.png" alt="file-explorer-portfolio-folder" style="max-width: 680px"></li>
+            </ol>
+
+             <p>&#x2705; &nbsp;All done. You now have created the folder with sub-folders for your <i>Projecy Hero</i> web page project.</p>
+
+        </section>
 
 
-                <h2>Project folders and files</h2>
-                    <p>Your first task is to download the ZIP file you need for this project.</p>
+        <section id="project-resources">
+
+
+                <h2>Project resources</h2>
+                    <p>Your task is to download the ZIP file you need for this project.</p>
                     <ol>
                         <li>Download the following ZIP file:
                         <span class="inside-ol">&nbsp;</span>
                         <a href="resources/project-hero.zip">project-hero.zip</a></li>
 
                         <li>Unzip this file into your <b>portfolio</b> folder, where it will create a new folder named <b>project-hero</b>.</li>
+
+                        <li>When finished, you can delete the <b>project-hero.zip</b> file.
+                        
+                        <img src="assets/img/file-explorer-new.png" alt="screenshot"></li>
                     </ol>
 
                     <p>All the text you need for this portfolio project is in the file below. Only <span class="syn">&lt;p&gt;</span> tags have been used for basic formatting.</p>
@@ -104,7 +176,7 @@
                 <img src="assets/img/new-1.png" alt="Lunevedy">
 
                 <h3>Google Fonts</h3>
-                <p>You will be using a number of Google Fonts for this project. Expect for the fifth and final sample herp block, the font links are already included in the <span class="syn">&lt;head&gt;</span> parts of the sample web pages.</p>
+                <p>You will be using a number of <a href="../../lessons/working-with-google-fonts.html" target="_blank">Google Fonts</a> for this project. Except for the fifth and final sample hero block, the font links are already included in the <span class="syn">&lt;head&gt;</span> parts of the sample web pages.</p>
 
                 <p>For these fonts to display correctly, you will also add them to your stylesheets files as you progress through this project.</p>
 
@@ -157,7 +229,7 @@
             <img src="assets/img/hero-1-pre.jpg" alt="">
 
             <h3>Adding a duotone effect to the hero image</h3>
-            <p>The duotone effect is the use of two (a duo) contrasting colors to create a dramatic and visually pleasing effect in graphic design. See the examples below.</p>
+            <p>The duotone effect is the use of two (a duo) contrasting colours to create a dramatic and visually pleasing effect in graphic design. See the examples below.</p>
 
             <img src="assets/img/duotone-effect.png" alt="" style="max-width: 500px">
 
@@ -177,16 +249,21 @@
 
             <p>See the example below.</p>
 
-            <img src="assets/img/hero-1-pre-2.jpg" alt="">
+            <img src="assets/img/hero-1-pre-2.jpg" alt="screenshot">
+
+
+            <p>Update the preload line of your <span class="syn">&lt;head&gt;</span> as shown below.</p>
+
+            <img src="assets/img/preload-hero-1.png" alt="screenshot"  style="max-width: 700px">
 
             <h3>Working with the <code>custom-1.css</code> file</h3>
 
             <p>Display the <b>custom-1.css</b> file and add the new style rules below.</p>
 
-<pre>header h1, header h2 { 
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-css">header h1, header h2 { 
     font-family: 'Abril Fatface', serif; 
     letter-spacing: 1px;
-}</pre>
+}</code></pre>
 
             <p>Save your <b>index-1.html</b> and <b>custom-1.css</b> files.</p>
 
@@ -246,7 +323,7 @@
                 <li>In VS Code, in the <b>custom-2.css</b> stylesheet, paste in the copied styles.
                 <img src="assets/img/new-hero-2-vscode-css.png" alt=""></li>
                 <li>Add the new style rules below.
-<pre>header h1 {
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-css">header h1 {
     font-family: 'Lato', sans-serif;
     font-weight: 900;
 }
@@ -255,7 +332,7 @@ header h2 {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     line-height: 1.4;
-}</pre></li>
+}</code></pre></li>
 
             </ol>
 
@@ -306,15 +383,17 @@ header h2 {
                 <li>Update the pasted content with the relevant words from the <a href="resources/text.html" target="_blank">text.html</a> file and the downloaded <b>fashion.jpg</b> image. See below.
 
                 <img src="assets/img/hero-4-html.png" alt="">
-                Note that the 'fade-in' effect is applied only to the second line of the <span class="syn">&lt;h1&gt;</span> main heading.
-<pre>&lt;h1&gt;Look great.&lt;br&gt;&lt;span class="reveal-fade-in-header"&gt;Feel fantastic.&lt;/span&gt;&lt;/h1&gt;  </pre></li>
+                Note that the 'fade-in' effect is applied only to the second line of the <span class="syn">&lt;h1&gt;</span> main heading.</li>
 
             </ol>
 
             <h3>Adding the Font Awesome icon</h3>
-            <p>Your next task is to add a icon to your hero block. Follow these steps:</p>
+            <p>Your next task is to add an icon to your hero block. Follow these steps:</p>
             <ol>
-                <li>In a new browser tab, go to the <a href="https://fontawesome.com" target="_blank">Font Awesome</a> website and click the <b>Icons</b> option at the top of the screen.</li>
+                <li>In a new browser tab, go to the <a href="https://fontawesome.com" target="_blank">Font Awesome</a> website and click the <b>Icons</b> option at the top of the screen.
+                <img src="assets/img/font-awesome-main.png" alt="screenshot">
+                
+                </li>
 
                 <li>In the Search box, enter the word 'chevron' (without the quotes) and click the <b>chevron-right</b> icon.
 
@@ -322,7 +401,7 @@ header h2 {
 
                 <li>In the dialog box now displayed, select the icon&#8217;s HTML code.
 
-                <img src="assets/img/hero-4-icon-code.png" alt="" style="max-width: 500px"></li>
+                <img src="assets/img/hero-4-icon-code.png" alt="" style="max-width: 580px"></li>
 
                 <li>In VS Code, in your <b>index-3.html</b> file, replace both button icons with the one you have copied from Font Awesome.
 
@@ -338,11 +417,12 @@ header h2 {
                 <li>In VS Code, in the <b>custom-3.css</b> stylesheet, paste in the copied styles.</li>
 
                 <li>Add the new style rules below.
-<pre>header h1 {
+
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-css">header h1 {
     font-family: 'Prata', serif;
     font-weight: 400;
     line-height: 1.2
-}</pre></li>
+}</code></pre></li>
             </ol>
     
             <p>Save your <b>index-3.html</b> and <b>custom-3.css</b> files.</p>
@@ -406,11 +486,11 @@ header h2 {
                 <li>Return to the Lunevedy app and click the <b>CSS</b> button at the bottom-right of the screen.</li>
                 <li>In VS Code, in the <b>custom-4.css</b> stylesheet, paste in the copied styles.</li>
                 <li>Add the following new style rules.
-<pre>header h1 {
+<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-css">header h1 {
     font-family: 'Playfair Display', serif;
     letter-spacing: -4px;
     font-weight: 400;
-}</pre></li>
+}</code></pre></li>
 
         </ol>
 
@@ -494,9 +574,10 @@ header h2 {
 
                  <h3 id="google-fonts">Adding the two Google Fonts</h3>
                  <p>The links for the two Google Fonts (Barlow Condensed and Zilla Slab) are not included in the <span class="syn">&lt;head&gt;</span> of the <b>index-5.html</b> web page. Copy and paste the links below.</p>
-<pre>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+<pre><button class="copy-html" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-html">
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
 &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Zilla+Slab&display=swap" rel="stylesheet"&gt;</pre>
+&lt;link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Zilla+Slab&display=swap" rel="stylesheet"&gt;</code></pre>
   
                 <p>The relevant part of the <span class="syn">&lt;head&gt;</span> in the <b>index-5.html</b> file should now look as shown below.</p>
 
@@ -512,7 +593,7 @@ header h2 {
 
                     <li>Add the new style rules below.
 
-<pre>header.theme-dark .badge {
+<pre><button class="copy-html" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-css">header.theme-dark .badge {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 7px;
@@ -532,7 +613,7 @@ header.theme-dark h1 {
 header.theme-dark h2 {
     font-family: 'Zilla Slab', serif;
     font-weight: 400;
-}</pre></li>
+}</code></pre></li>
             </ol>
     
             <p>Save your <b>index-5.html</b> and <b>custom-5.css</b> files.</p>
@@ -542,11 +623,21 @@ header.theme-dark h2 {
 
         </section>
 
+        <section>
+
+            <h2 id="final-touches">Final touches</h2>
+
+            <p>For each of your five web pages, replace the name "Mary Smith" in the <span class="syn">&lt;head&gt;</span> with your own name.</p>
+
+            <img src="assets/img/update-title.png" alt="screenshot" style="max-width:700px">
+
+        </section>
+
         <section id="github-upload">
 
         <h2>Uploading your project folder to GitHub</h2>
 
-        <p>After finishing your project, you are now ready to upload them to your account on GitHub.</p>
+        <p>You are now ready to upload your project to your account on GitHub.</p>
 
         <ol>
 
@@ -559,16 +650,14 @@ header.theme-dark h2 {
 
             <img src="assets/img/github-repo-select.png" alt="github-signin"></li>
 
-            <li>On the next GitHub screen displayed, click the <b>portfolio</b> folder.</li>
+            <li>On the next GitHub screen displayed, click the portfolio folder.</li>
 
-            <li>With your <b>portfolio</b> folder displayed on GitHub, click <b>Add file</b> button.
-            <img src="assets/img/github-btn-add-file.png" alt="github-upload-portfolio"></li>
+            <li>With your portfolio folder displayed on GitHub, click <b>Add file</b> button. 
+            <img src="assets/img/github-btn-add-file.png" alt="screenshot"></li>
 
-            <li>From the dropdown list displayed, choose the option <b>Upload files</b>.
+            <li>From the dropdown list displayed, choose the option <b>Upload files</b>.</li>
 
-            <img src="assets/img/github-btn-add-file-dropdown.png" alt="Project Animation Google Fonts"></li>
-
-            <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your 📁 <b>project-hero</b> folder to upload it to the <b>portfolio</b> folder within your repository on GitHub.
+            <li>In File Explorer (Windows) or Finder (Apple Mac), drag-and-drop your entire  📁 <b>portfolio</b> folder to upload it within your repository on GitHub.
             <img src="assets/img/github-upload-folder-files.png" alt="Introduction to HTML">
             </li>
 
@@ -581,7 +670,7 @@ header.theme-dark h2 {
         <p>Your portfolio project web page is now published on GitHub at a web address similar to the following:</p>
 
         <p><b>https://username.github.io/portfolio/project-hero/index.html</b><br><br>
-        or simply:<br><br>
+        Or simply:<br><br>
         <b>https://username.github.io/portfolio/project-hero</b></p>
 
         <p>It may take a few minutes for your uploaded files to appear on GitHub.</p>
@@ -591,28 +680,24 @@ header.theme-dark h2 {
         </article>
     </main>
 
-<footer>
 
-	<div class="item-3">
-		<h4>Site Map</h4>
-		<p><i class="fas fa-home fa-fw"></i><a href="https://www.munnelly.com/webdesign/">Home</a></p>
-		<p><i class="fas fa-lock fa-fw"></i><a href="https://www.munnelly.com/legal/">Privacy &amp; Legal</a></p>
 
-	</div>
+	<footer>
+    </footer>
 
-	<div class="item-3">
-		<h4>Web Design Course</h4>
-		<p>A ten-week part time course that covers the fundamentals of modern web design with HTML5 and CSS3. Developed and delivered by <a href="https://www.munnelly.com" target="_blank">Brendan Munnelly</a>.</p>
 
-	</div>
+    <div id="cookie-banner">
+        <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+        <div class="buttons">
+            <button id="accept-cookies">Got it</button>
+        </div>
+    </div>
 
-	<div class="item-3">
-		<h4>Contact</h4>
-		<p><i class="fas fa-globe fa-fw"></i><a href="https://www.munnelly.com">www.munnelly.com</a></p>
-		<p><i class="fas fa-envelope fa-fw"></i><a href="mailto:brendan@munnelly.com">brendan@munnelly.com</a></p>
-	</div>
+	<script>hljs.highlightAll();</script>
 
-</footer>
+    <script src="../../lessons/assets/js/utils.js"></script>       
+ 
+
 
 </body>
 </html>
