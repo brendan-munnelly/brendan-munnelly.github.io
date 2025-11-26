@@ -1,1022 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Personal Portfolio Website: 1 | Front-end Development Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Three web design projects for your portfolio websites">
 
-      <title>Frontend Development | HTML and CSS | Brendan Munnelly</title>
+    <meta name="author" content="Brendan Munnelly">
 
-      <meta name="description" content="Front End Development Tutorials" />
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
-      <!-- Styleheet -->
-      <link rel="stylesheet" href="assets/css/lunevedy.min.css" />
-      <link rel="stylesheet" href="assets/css/toc-blue.css" />
-      <link rel="stylesheet" href="assets/css/cookie.css">
+    <style>
 
-      <style>
-        .header-flex {
-            margin-top: 10px;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        header.theme-dark h1 { margin-bottom: 0 !important; }
-        header.theme-dark .header-flex h2 a {
-            color: var(--yellow-200) !important;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 8px !important;
-        }
+      .four-samples div {
+        margin-bottom: 16px;
+      }
 
-        header.theme-dark .header-flex h2 a:hover, 
-        header.theme-dark .header-flex h2 a:active {
-            color: var(--white);
-        }
+      .sample-sites {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    
+    .sample-sites div {
+        width: 30%;
+        padding: 8px 8px
+    }
 
-      </style>
+    .sample-sites div a {
+        text-underline-offset: 5px;
+        font-size: calc(15px + (19 - 15) * ((100vw - 320px)/(1600 - 320)));            
+    }
+    
+    pre code { color: #fff}
 
-      <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
-      <link rel="manifest" href="assets/img/favicon/site.webmanifest">
-
-      <script defer src="assets/js/cookie.js"></script>
-      
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
-      <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-RQ1JXS4GKM');
-      </script>
-
-      <style>
-
-                .header-flex {
-            margin-top: 10px;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        header.theme-dark h1 { margin-bottom: 0 !important; }
-        header.theme-dark .header-flex h2 a {
-            color: var(--yellow-200) !important;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 8px !important;
+        pre { background-color: #282c34 }
+        .four-samples div > img { margin-bottom: 12px }
+        .four-samples div img {
+            margin-bottom: 12px;
         }
 
-        header.theme-dark .header-flex h2 a:hover, 
-        header.theme-dark .header-flex h2 a:active {
-            color: var(--white);
+        .table-fonts {
+            margin-top: 12px;
+            border-collapse: collapse;
+            min-width: 72%;
         }
 
-        .wrapper { 
-            margin: 0 auto; padding: 0 16px; position: relative; 
-            display: flex; justify-content: space-between; flex-wrap: wrap;
-            padding: 9px 20px 15px 20px;
-            background-image: linear-gradient(#D6F3D6,#bfffbf);
+        .table-fonts th {
+            background-color: #230cea;
+            border: 1px solid #230cea;
+            padding: 8px;
+            text-align: left;
+            width: 50%;
+            color: #fff;
+            letter-spacing: 1px
         }
 
-        @media (max-width: 575px)                          { .wrapper { max-width: 90% } }
-        @media (min-width: 576px)  and (max-width: 767px)  { .wrapper { max-width: 90% } }
-        @media (min-width: 768px)  and (max-width: 1024px) { .wrapper { max-width: 92% } }
-        @media (min-width: 1025px) and (max-width: 1199px) { .wrapper { max-width: 88% } }
-        @media (min-width: 1200px) and (max-width: 1399px) { .wrapper { max-width: 83% } }
-        @media (min-width: 1400px)                         { .wrapper { max-width: 82% } }
-
-        .wrapper p { font-size: calc(var(--font-size-md) * 0.75 ); }
-
-
-        section.bg-dark {
-            background-color: #263238
+        .table-fonts td {
+            border-bottom: 2px solid #230cea;
+            padding: 8px 8px 8px 0;
+            text-align: left;
+            width: 50%
         }
+    </style>
 
-        section.bg-dark .col-3 h3 a:link,
-        section.bg-dark .col-3 h3 a:visited {
-            font-size: var(--fs-base);
-            margin-bottom: 20px;
-            color: rgb(20, 241, 149);
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 7px;
-            transition: 0.35s ease-in-out;
-            text-decoration-color: underline;
-        }
 
- 
-        section.bg-dark .col-3 h3 a:hover,
-        section.bg-dark .col-3 h3 a:focus,
-        section.bg-dark .col-3 h3 a:active {
-             text-decoration-color: red;
-        }
+    <!-- Font Awesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-      
-      </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-  </head>
+    <script defer src="../../assets/js/cookie.js"></script>
 
-  <body id="top">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+</head>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+<body id="top">
 
-    <!--navbar menu begins here-->
-    <nav class="theme-light">
-        <div class="container-menu">
-            <a href="#" class="brand"><b>munnelly.com</b>/dorset</a>
 
-        </div>
-    </nav>
+        <header>
+            <div class="wrapper">
+                <div class="sidebar">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
 
-    <!-- header starts here -->
-    <header class="theme-dark hero-bg text-center-mobile">
-        <div class="container-text">
-            <h1 class="text-shadow">Frontend Development</h1>
-            <div class="header-flex">
-                <h2 class="text-shadow">HTML and CSS</h2>
-                <h2 class="text-shadow">|&nbsp;&nbsp;  <a href="javascript/index.html">JavaScript</a></h2>
-                <h2 class="text-shadow">|&nbsp;&nbsp;  <a href="https://www.munnelly.com/javascript/projects/">JavaScript Projects</a></h2>
-            </div>
-                        
-        </div>
-    </header>
+                <div class="content">
+                    <h1>Your Personal Portfolio Website: 1</h1>
+                    <h2>Creating your personal portfolio website with four pages.</h2>
+                </div>
+            </div><!-- /wrapper -->
+        </header>
+
+
 
     <main>
-    <!-- section starts here -->
 
-
-    <section style="background-color: var(--gray-200); padding-top: 40px; padding-bottom: 40px">
-        <div class="wrapper">
-          <div class="item-4" style="width: 100%; margin-top: 30px">
-
-            <p style="margin-bottom: 20px">
-                Web Page Builder: <a href="https://lunevedy.com" target="_blank">Lunevedy</a>
-              </p>
-
-            <p style="margin-bottom: 20px">
-              Graphics:
-              <a href="https://www.munnelly.com/ibat/resources/"
-                >Free online services and resources</a
-              >
-            </p>
-
-            <p style="margin-bottom: 20px">
-              Slideshows:
-              <a href="https://2n2l.com/dm/index-web-3.html#/" target="_blank"
-                >Web page elements</a
-              >
-              and
-              <a href="https://2n2l.com/dm/index-web-4.html#/" target="_blank"
-                >Web page types</a
-              >
-            </p>
-
-
-
-          </div>
-        </div>
-      </section>
-
-
-
-    <section class="theme-light section-selector-1 w-1356px">
-        <div class="col-1 text-center w-820px">
-            <h2>Getting started with HTML</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-          <div class="col-4">
-            <figure class="photos-zoom photos-brightness">
-                <a href="lessons/folders-files.html">
-                    <img src="assets/img/toc-folders-files.png" alt="Folders and Files" width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/folders-files.html" class="col-4-h3">Folders and Files</a>
-            <p>Viewing the full names of files in Microsoft Windows and creating a logical folder structure for your files.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/folders-files.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/1" target="_blank" class="quiz_link">Take the quiz</a></p>
-               <a href="lessons/folders-files.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/web-hosting-on-github.html">
-                    <img src="assets/img/toc-github.webp" alt="Web Hosting on GitHub"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/web-hosting-on-github.html" class="col-4-h3">Web Hosting on Github</a>
-            <p>Creating a free Github account, choosing a username, and setting up a web hosting repository.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/github-web-hosting.mp3" type="audio/mp3">
-                </audio> 
-            </div>
+		<aside>
+            <h3>FRONT-END DEVELOPMENT</h3>
+            <p><i class="fas fa-home"></i> &nbsp; <span id="backlink"></span></p> 
+                
+            <script>
+            // Basic referrer detection
+            let returnHome;
+            function getBasicReferrer() {
+            return document.referrer || "Direct visit (no referrer)";
+            }
             
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/2" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="lessons/web-hosting-on-github.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/installing-visual-studio-code.html">
-                    <img src="assets/img/thumbnail-vscode.webp"
-                    alt="Working with Props" width="420px" height="250px" />
-                </a>
-            </figure>
+            const testReferrer = getBasicReferrer();
             
-            <a href="lessons/installing-visual-studio-code.html" class="col-4-h3">Installing VS Code</a><p >Installing and customising the free Microsoft VS Code app for creating web pages and stylesheets.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/vs-code.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/3" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-             <a href="lessons/installing-visual-studio-code.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-          </div>
-
-          <div class="col-4">
-              <figure class="photos-zoom">
-                  <a href="lessons/working-with-html.html">
-                      <img src="assets/img/thumbnail-html.jpg" alt="Working with HTML"  width="420px" height="250px" />
-                  </a>
-              </figure>
-
-              <a href="lessons/working-with-html.html" class="col-4-h3">Working with HTML</a>
-              <p>Understanding the basic structure of an HTML file and adding HTML text formatting tags.</p>
-
-             <div class="audio-container">
-                 <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-html.mp3" type="audio/mp3">
-                  </audio> 
-              </div>
-          
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/4" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="lessons/working-with-html.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-        </div>
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/debugging-html.html">
-                    <img src="assets/img/toc-debugging.png" alt="Debugging HTML"  width="420px" height="250px">
-                </a>
-            </figure>
+            if (testReferrer.includes("ibat")) {
+                console.log("Referrer is IBAT");
+                returnHome = "https://munnelly.com/ibat/index.html"
+            }
+            else if (testReferrer.includes("dorset")) {
+                console.log("Referrer is Dorset");
+                returnHome = "https://munnelly.com/dorset/index.html"
+            }
             
-            <a href="lessons/debugging-html.html" class="col-4-h3">Debugging HTML</a>
-            <p>Finding and fixing HTML errors in a web page using the HTMLHint extension in VS Code and AI.</p>
+            else {
+                console.log("Referrer unknown");
+                returnHome = "../../index.html"
+            }
+            
+            // Set the href attribute of the link
+            document.getElementById("backlink").innerHTML = "<a href="+returnHome+">Home</a>";
+            
+            // Log the referrer information
+            function logReferrer() {
+            console.log("Basic Referrer:", getBasicReferrer());
+            }
+            
+            // Call the function to log the referrer
+            logReferrer();</script>
 
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/debugging-html.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-        
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/5" target="_blank" class="quiz_link">Take the quiz</a></p>
+			<p><a href="#introduction">Introduction</a></p>
+            <p><a href="#rename-home-page">1: Rename your old index.html web page</a></p> 
+            <p><a href="#download-images">2: Download images</a></p>
+            <p><a href="#custom-css">3: Download your <code>custom.css</code> stylesheet file</a></p>
+            <p><a href="#home-page">4: Download your Home page</a></p>
+            <p><a href="#home-update">5: Update your Home page</a></p>
+            <p><a href="#portfolio-page">6: Download your Portfolio page</a></p>
+            <p><a href="#contact-page">7: Download your Contact page</a></p>
+            <p><a href="#privacy-page">8: Download your Privacy page</a></p>
+            <p><a href="#links-verify">9: Verify your hyperlinks</a></p>
+            <p><a href="#google-analytics">10: Add the Google Analytics code</a></p>
+            <p><a href="#meta-tags">11: Personalise your meta tags</a></p>
+            <p><a href="#footer-content">12: Update your <code>footer</code> content</a></p>
+            <p><a href="#privacy">13: Create and add your cookie privacy message</a></p>
+            <p><a href="#contact-form">14: Update the endpoint of your contact form</a></p>
+            <p><a href="#error-404">15: Download your <code>error-404.html</code> web page</a></p>
+            <p><a href="#upload-files">16: Upload your files to GitHub</a></p>
+            <p><a href="#broken-links">17: Check for broken links</a></p>
+            <p><a href="#sitemap">18: Create a sitemap</a></p>
 
-            <a href="lessons/debugging-html.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
-        </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </aside>
 
-        <div class="col-4">
-              <figure class="photos-zoom">
-              <a href="lessons/container-elements.html">
-                  <img src="assets/img/toc-containers.png" alt="Container Elements" width="420px" height="250px">
-              </a>
-          </figure>
-          
-          <a href="lessons/container-elements.html" class="col-4-h3">Container (Semantic) Elements</a>
-          <p>Organising your web page content into a logical structure with container (&#8216;semantic&#8217;) tags.</p>
-
-          <div class="audio-container">
-              <audio controls style="margin-bottom: 24px">
-                  <source src="lessons/assets/audio/container-elements.mp3" type="audio/mp3">
-              </audio> 
-          </div>
-      
-          <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/6" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-          <a href="lessons/container-elements.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-      </div>
-
-    </div>
+        <article>
 
 
-
-        <!-- End four-column flexbox grid -->
-      </section>
-
-      <section class="theme-light section-selector-1 w-1356px" style="background-color: var(--sky-100)">
-
-          <div class="col-1 text-center w-820px">
-            <h2>Fundamentals of CSS</h2>
-          </div>
-
-          <!-- Begin four-column flexbox grid -->
-          <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/working-with-css.html">
-                      <img src="assets/img/thumbnail-css.jpg" alt="Working with CSS" width="420px" height="250px">    
-                  </a>
-                </figure>
-                <a href="lessons/working-with-css.html" class="col-4-h3">Working with CSS</a><p>Linking a stylesheet to a web page, and updating the style rules to change the page's appearance.</p>
+            <section id="introduction">
     
-                <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/working-with-css.mp3" type="audio/mp3">
-                    </audio> 
-              </div>
-          
-              <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/7" target="_blank" class="quiz_link">Take the quiz</a></p>
+                <h2>Introduction</h2>
     
-              <a href="lessons/working-with-css.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
+                <p>Your personal portfolio website is based on the following four web pages:</p>
+                <ul>
+                    <li><b>Home page</b> &nbsp;(in main folder)</li>
+                    <li><b>Privacy page</b> &nbsp;(also in main folder)</li>
+                    <li><b>Portfolio page</b> &nbsp;(in 📁 <b>portfolio</b> sub-folder)</li>
+                    <li><b>Contact page</b> &nbsp;(in 📁 <b>contact</b> sub-folder)</li>
+                </ul>
     
-          </div>
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="../dorset/lessons/working-with-layout.html">
-                    <img src="assets/img/toc-media-queries.png" alt="Responsive Design" width="420px" height="250px">  
-                </a>
-            </figure>
-            
-            <a href="../dorset/lessons/working-with-layout.html" class="col-4-h3">Working with Layout</a>
-            <p>Adding vertical margins around block elements and responsive padding inside containers.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="../dorset/lessons/assets/audio/working-with-layout.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-        
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/8" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="../dorset/lessons/working-with-layout.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-        </div>
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/working-with-text.html">
-                    <img src="assets/img/toc-fluid-typography.png" alt="Custom Properties and Text" width="420px" height="250px">  
-                </a>
-            </figure>
-            
-            <a href="lessons/working-with-text.html" class="col-4-h3">Working with Text</a>
-            <p>Applying the most commonly used CSS text properties in web design and development.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-text.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-        
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/9" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="lessons/working-with-text.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-        </div>
+                <img src="assets/img/folder-file-1.png" alt="" style="max-width: 800px">
+    
+                <p>Your four pages will have the following web addresses.</p>
+    
+                <img src="assets/img/urls.png" alt="project images" style="max-width: 700px">
 
 
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/working-with-colours.html">
-                    <img src="assets/img/toc-colours-update.png" alt="Custom Properties and Text" width="420px" height="250px">  
-                </a>
-            </figure>
-            
-            <a href="lessons/working-with-colours.html" class="col-4-h3">Working with Colours</a>
-            <p>Applying text and background colour styles to your exercise web pages and your home page.</p>
+                <p>For your inspiration, here are some sample portfolio websites from web designers and developers.</p>
 
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-colours.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-        
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/10" target="_blank" class="quiz_link">Take the quiz</a></p>
+            </section>
 
-            <a href="lessons/working-with-colours.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
+                <section id="sample-portfolios">
+					<h2>Some sample developer portfolio websites</h2>
+		  
+					<p>
+					  For your inspiration, here are some sample portfolio websites from
+					  web designers and developers.
+					</p>
+		  
+					<div class="sample-sites" style="margin-bottom: 24px">
+					  <div style="padding-left:0">
+						<a href="https://ivanvotti.com/" target="_blank" rel="noopener">ivanvotti.com</a>
+					  </div>
+					  <div>
+						<a href="https://brittanychiang.com/" target="_blank" rel="noopener">brittanychiang.com</a>
+					  </div>
+		  
+					  <div>
+						<a href="https://opensource-portfolio.netlify.app/" target="_blank" rel="noopener">Syed Mohsin</a>
+					  </div>
+					</div>
+		  
+            </section>
+    
+            <section id="rename-home-page">
+    
+                <h2>1: Rename your old <code>index.html</code> web page</h2>
+    
+                <p>In your 'main' 📁 websites folder, you already have a file named <b>index.html</b>. Before continuing, rename this file to <b>exercises.html</b>.</p>
+    
+                <img src="assets/img/folder-file-2.png" alt="" style="max-width: 800px">
+    
+            </section>
+    
+    
+            <section id="download-images">
+    
+                <h2>2: Download images</h2>
+    
+                <p>Your next step is to download the following seven images to your 📁 <b>websites/assets/img</b> sub-folder.</p>
+    
+                <div class="four-samples">
+    
+                    <div style="margin-bottom: 24px;">
+    
+                        <a href="resources/pics/project-hero.png" target="_blank"><img src="resources/pics/project-hero.png" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-hero.png" class="link-exercise" target="_blank">project-hero.png</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/project-fashion.jpg" target="_blank"><img src="resources/pics/project-fashion.jpg" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-fashion.jpg" class="link-exercise" target="_blank">project-fashion.jpg</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/project-crypto-wallet.jpg" target="_blank"><img src="resources/pics/project-crypto-wallet.jpg" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-crypto-wallet.jpg" class="link-exercise"  target="_blank">project-crypto-wallet.jpg</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/project-multi-col.png" target="_blank"><img src="resources/pics/project-multi-col.png" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-multi-col.png" class="link-exercise"  target="_blank">project-multi-col.png</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/project-store.png" target="_blank"><img src="resources/pics/project-store.png" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-store.png" class="link-exercise"  target="_blank">project-store.png</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/project-smoothie.jpg" target="_blank"><img src="resources/pics/project-smoothie.jpg" alt="Sample image" style="max-width: 300px"></a>
+                        <a href="resources/pics/project-smoothie.jpg" class="link-exercise"  target="_blank">project-smoothie.jpg</a>
+                    </div>
+    
+                    <div style="margin-bottom: 24px;">
+                        <a href="resources/pics/website-logo-sample.png" target="_blank"><img src="resources/pics/website-logo-sample.png" alt="Sample image" style="max-width: 200px"></a>
+                        <a href="resources/pics/website-logo-sample.png" class="link-exercise" target="_blank">website-logo-sample.png</a>
+                    </div>
+    
+                </div>
+    
+            </section>
+    
+    
+            <section id="custom-css">
+    
+                <h2>3: Download your <code>custom.css</code> stylesheet file</h2>
+    
+                <p>Do you want a light-coloured (or mostly light-coloured) website?</p>
+    
+                <p>Or a dark-coloured (or mostly dark-coloured) website?</p>
+    
+                <img src="assets/img/light-dark.png" alt="screenshot">
+    
+                <p>Download <i>one</i> of these two files to the  📁  <b>assets/css</b> sub-folder of your 'main' websites folder.</p>
+    
+                <ul>
+                    <li><a href="resources/css-light/custom.css" target="_blank">custom.css</a> (light theme)</li>
+                    <li><a href="resources/css-dark/custom.css" target="_blank">custom.css</a> (dark theme)</li>
+                </ul>
+    
+                <!-- <p>If this file downloads to your 📁 <b>Downloads</b> folder, delete it from there after you copy it to your 📁  <b>websites/assets/css</b> folder.</p>
+     -->
+    
+            </section>
+    
+            <section>
+    
+                <h2 id="home-page">4: Download your Home page</h2>
+    
+                <p>Download <i>one</i> of these two files to your 'main' <b>websites</b> folder.</p>
+    
+                <ul>
+                    <li><a href="resources/w-light-home/index.html" target="_blank">index.html</a> (light theme)</li>
+                    <li><a href="resources/w-dark-home/index.html" target="_blank">index.html</a> (dark theme)</li>
+                </ul>
 
-        </div>
+                <p>Ensure the <b>Save as type:</b> dropdown list is set to <b>Webpage, HTML only (*.HTML, *.htm)</b>.</p>
+                <img src="assets/img/file-basic-save-as-html.png" alt="screenshot">
 
+                <p>On the Apple Mac, Choose <b>File | Save As</b>, and then <b>Format | Page Source</b>.</p>
 
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/colours-classes-custom-properties.html">
-                    <img src="assets/img/toc-colours-classes-properties.png" alt="Custom Properties and Text" width="420px" height="250px">  
-                </a>
-            </figure>
-            
-            <a href="lessons/colours-classes-custom-properties.html" class="col-4-h3">Classes and Custom Properties</a>
-            <p>Creating and using classes with colours and custom properties in HTML and CSS.</p>
+                <p>Save the file with the file name of <b>index.html</b>.</p>
 
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/classes-and-custom-colours.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-        
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/11" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="lessons/colours-classes-custom-properties.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-        </div>
-
-      </div>
-        <!-- End four-column flexbox grid -->
-      </section>
-
-
-
-      <section class="theme-light section-selector-1 w-1356px">
-        <div class="col-1 text-center w-820px">
-            <h2>Images, Videos, and Hyperlinks</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/working-with-images.html">
-                    <img src="assets/img/toc-images-working.png" alt="Working with Images and Videos" width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/working-with-images.html" class="col-4-h3">Adding Images and Videos</a>
-            <p>Inserting images in a web page, and styling images with drop shadow and rounded corner effects.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-images.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-            
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/12" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="lessons/working-with-images.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-          <div class="col-4">
-              <figure class="photos-zoom">
-                  <a href="lessons/working-with-favicons.html">
-                      <img src="assets/img/toc-favicon.png" alt="Working with Favicons"  width="420px" height="250px" />
-                  </a>
-              </figure>
-
-              <a href="lessons/working-with-favicons.html" class="col-4-h3">Working with Favicons</a>
-              <p>Creating a favicon using an online service, and inserting a favicon into the head of a web page.</p>
-
-             <div class="audio-container">
-                 <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-favicons.mp3" type="audio/mp3">
-                  </audio> 
-             </div>
-
-             <p>&nbsp;</p>
-             <!--
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/4" target="_blank" class="quiz_link">Take the quiz</a></p> 
-            -->
-            
-            <a href="lessons/working-with-favicons.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-        </div>
-
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/working-with-hyperlinks.html">
-                    <img src="assets/img/toc-hyperlinks-intro.png" alt="Working with Hyperlinks"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/working-with-hyperlinks.html" class="col-4-h3">Working with Hyperlinks</a>
-            <p>Understanding absolute and relative hyperlinks, and adding hyperlinks to sample web pages.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-hyperlinks.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-            
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/14" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="working-with-hyperlinks.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/styling-hyperlinks.html">
-                    <img src="assets/img/toc-hyperlinks-styles.png" alt="Styling Hyperlinks with CSS"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/styling-hyperlinks.html" class="col-4-h3">Styling Hyperlinks with CSS</a>
-            <p>Applying CSS style rules such as text colours, borders and transitions to hyperlink states.</p>
-
-            <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/styling-hyperlinks.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-            
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-            <a href="styling-hyperlinks.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
+                <!-- <ul>
+                    <li><a href="resources/w-light-home/index.html" download="index.html">index.html</a> (light theme)</li>
+                    <li><a href="resources/w-dark-home/index.html" download="index.html">index.html</a> (dark theme)</li>
+                </ul> -->
 
 
+   
+                <div class="box-warning">
+                    <div>
+                        <img src="assets/img/warning-sign.png" alt="Introduction to HTML">
+                    </div>
+                    <div>
+                        <p>If this <b>index.html</b> file downloads to your 📁  <b>Downloads</b> folder, delete it from there after you copy it to your 📁 <b>websites</b> folder.</p>
+    
+                        <p>Your 📁  <b>Downloads</b> folder can contain only <i>one</i> file named <b>index.html</b> at one time.</p>
+                        <p>If you try to download a second file named <b>index.html</b> to your 📁  <b>Downloads</b> folder, Windows will automatically rename this second file to <b>index(1).html</b> or <b>index(2).html</b> and so on.</p>
+                    </div>
+                </div>
 
-
-
-      </div>
-
-
-
-
-        <!-- End four-column flexbox grid -->
-      </section>
-
-
-      <section class="theme-light section-selector-1 w-1356px" style="background-color: var(--sky-100)">
-        <div class="col-1 text-center w-820px">
-            <h2>Hero Blocks and Google Fonts</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/hero-block-text.html">
-                    <img src="assets/img/toc-hero-one.png" alt="Hero Blocks with Text" width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/hero-block-text.html" class="col-4-h3">Hero Blocks with Text</a>
-            <p>Creating an above-the-fold hero block with animated text and a  background colour gradient.</p>
-
-            <!-- <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/intro-to-images.mp3" type="audio/mp3">
-                </audio> 
-            </div>
- 
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/12" target="_blank" class="quiz_link">Take the quiz</a></p>
-    -->        
-               <a href="lessons/hero-block-text.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
+    
+                <p>Open the following two files in VS Code.</p>
+    
+                <ul>
+                    <li>The <b>index.html</b> file in your 'main' <b>websites</b> folder.</li>
+                    <li>The <b>custom.css</b> file in your 'main' <b>assets/css</b> sub-folder.</li>
+                </ul>
+    
+                <img src="assets/img/file-explorer-2.png" alt="File Explorer" style="max-width: 700px; margin-bottom: 32px">
+    
+                <img src="assets/img/vscode-0.png" alt="VS Code">
+    
                
-          </div>
+            </section>
+
+            <section id="home-update">
+
+                <h2>5: Check your Home page</h2>
+                <p>In your Home page are <span class="syn">&lt;nav&gt;</span>, a <span class="syn">&lt;header&gt;</span>, one <span class="syn">&lt;section&gt;</span> and a <span class="syn">&lt;footer&gt;</span> content containers.</p>
+
+                <p>Inside the <span class="syn">&lt;section&gt;</span> are three <span class="syn">&lt;div class="col-3"&gt;</span> tags, each one displaying details of a single project.</p>
+
+                <img src="assets/img/replace-smoothie.png" alt="screenshot" class="wider-115">
+
+                <p>On your Home page, your three projects should look as follows. (The text and background colours may be different.)</p>
+                <img src="assets/img/home-after.png" alt="screenshot">
+            </section>
 
 
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/hero-block-image.html">
-                    <img src="assets/img/toc-hero-two.png" alt=">Hero Blocks with Videos"  width="420px" height="250px" />
-                </a>
-            </figure>
+            <section id="portfolio-page">
+    
+                    <h2>6: Download your Portfolio page</h2>
+        
+                    <p>You should already have a  📁  <b>portfolio</b> folder in your 'main' websites folder.</p>
+                    <!-- This should contain sub-folders for each of your portfolio projects as shown below.</p> 
+    
+                    <img src="assets/img/portfolio-folder.png" alt="" style="max-width:300px"> -->
+        
+                    <p>Download <i>one</i> of these two files to your  📁  <b>portfolio</b> folder.</p>
+        
+                    <ul>
+                        <li><a href="resources/w-light-portfolio/index.html" target="_blank">index.html</a> (light theme)</li>
+                        <li><a href="resources/w-dark-portfolio/index.html" target="_blank">index.html</a> (dark theme)</li>
+                    </ul>
+    
+                    <div class="box-warning">
+                        <div>
+                            <img src="assets/img/warning-sign.png" alt="Introduction to HTML">
+                        </div>
+                        <div>
+                            <p>If this <b>index.html</b> file downloads to your 📁  <b>Downloads</b> folder, delete it from there after you copy it to your 📁 <b>websites/portfolio</b> sub-folder.</p>
+                        </div>
+                    </div>
 
-            <a href="lessons/hero-block-image.html" class="col-4-h3">Hero Blocks with Images</a>
-            <p>Designing a hero block with various background image options including tinted overlays.</p>
+                    <p>Your six projects should look as shown below. (The text and background colours may be different.)</p>
 
-            <!-- <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-images.mp3" type="audio/mp3">
-                </audio> 
-            </div>
+                    <img src="assets/img/portfolio-after.png" alt="screenshot">
+
+                    <p>As part of the downloading process, your web browser may have changed the web address in the Privacy hyperlink near the bottom of the Portfolio web page. See below.</p>
+
+                    <img src="assets/img/error-portfolio.png" alt="screenshot" class="wider-115">
+
+                <p>If this has happened, update the Privacy hyperlink as shown below.</p>
+                    
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
+&lt;p class="privacy"&gt;&lt;a href="../privacy.html"&gt;Privacy &amp; Legal&lt;/a&gt;&lt;/p&gt;</code></pre>
+
+                </section>
+
+        
+                <section id="contact-page">
+    
+                    <h2>7: Download your Contact page</h2>
+        
+                    <p>Create a new folder in your 'main' websites folder named <b>contact</b>.</p>
+        
+                    <p>Download <i>one</i> of these two files to your new  📁 <b>contact</b> folder.</p>
+        
+                    <ul>
+                        <li><a href="resources/w-light-contact/index.html" target="_blank">index.html</a> (light theme)</li>
+                        <li><a href="resources/w-dark-contact/index.html" target="_blank">index.html</a> (dark theme)</li>
+                    </ul>
+    
+                    <div class="box-warning">
+                        <div>
+                            <img src="assets/img/warning-sign.png" alt="Introduction to HTML">
+                        </div>
+                        <div>
+                            <p>If this <b>index.html</b> file downloads to your 📁  <b>Downloads</b> folder, delete it from there after you copy it to your 📁 <b>websites/contact</b> sub-folder.</p>
+                        </div>
+                    </div>
+
+    
+                    <p>If this file downloads to your 📁 <b>Downloads</b> folder, delete it from there after you copy it to your 📁  <b>websites/contact</b> folder.</p>
+                    
+                    <p>As part of the downloading process, your web browser may have changed the web address in the Privacy hyperlink near the bottom of the Contact web page. See below.</p>
+
+                    <img src="assets/img/error-portfolio.png" alt="screenshot" class="wider-115">
+
+                    <p>If this has happened, update the Privacy hyperlink as shown below.</p>
+    
+<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
+&lt;p class="privacy"&gt;&lt;a href="../privacy.html"&gt;Privacy &amp; Legal&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+    
+                </section>
+    
+    
+                <section id="privacy-page">
+    
+                    <h2>8: Download your Privacy web page</h2>
+        
+                    <p>Download the file below to your 'main' website folder.</p>
+        
+                    <ul>
+                        <li><a href="resources/privacy.html" target="_blank">privacy.html</a></li>
+                    </ul>
+    
+                    <p>If this file downloads to your 📁 <b>Downloads</b> folder, delete it from there after you copy it to your 📁  <b>websites</b> folder.</p>
+        
+                    <p>Unless you want to include the <a href="../../lessons/user-behaviour.html#best-practices" target="_blank">Inspectlet</a> code in the head of your Home page or other pages, you do not need to update any details on this web page.</p>
+    
+                </section>
+    
+    
+                <section id="links-verify">
+    
+                    <h2>9: Verify your hyperlinks</h2>
+                    
+                    <p>Check your new folder structure and files look as shown below.</p>
+    
+                    <img src="assets/img/folder-file-1.png" alt="" style="max-width: 700px">
+    
+                    <p>Click on the hyperlinks on each page - in the navbar, the main text, and in the footer - to verify that all work correctly.</p>
+        
+                </section>
+        
+    
+                <section id="google-analytics">
+    
+                    <h2>10: Add the Google Analytics and Inspectet code</h2>
+    
+                    <p>In the <span class="syn">&lt;head&gt;</span> of your Home, Portfolio and Contact web pages, ensure you have added a link to your <a href="../../lessons/setting-up-google-analytics.html" target="_blank">Google Analytics</a> and <a href="../../lessons/user-behaviour.html" target="_blank">Inspectlet</a> accounts. They should look as shown below.</p> 
+    
+                    <img src="assets/img/ga-snippet.png" alt="screenshot">
+    
+    
+    
+                </section>
+    
+                <section id="meta-tags">
+    
+                    <h2>11: Personalise your meta tags</h2>
+                    <p>Each of your three sample web pages contains template text for the page's title and description tags. These two tags are examples of so-called <i>meta-tags</i>.</p>
             
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/13" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-            <a href="lessons/hero-block-image.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/hero-block-video.html">
-                    <img src="assets/img/toc-video.png" alt=">Hero Blocks with Videos"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/hero-block-video.html" class="col-4-h3">Hero Blocks with Videos</a>
-            <p>Designing a hero block with a background video that plays in a
-                continuous loop.</p>
-
-            <!-- <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/working-with-hyperlinks.mp3" type="audio/mp3">
-                </audio> 
-            </div>
+                    <p>Your first task in personalising the sample web pages is to update the content of the meta tags with text of your own choice. Follow the steps below.</p>
             
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/14" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-            <a href="lessons/hero-block-video.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-
-            <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="lessons/working-with-google-fonts.html">
-                    <img src="assets/img/toc-fonts.png" alt="Google Fonts"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="lessons/working-with-google-fonts.html" class="col-4-h3">Adding Google Fonts</a>
-            <p>Linking your web pages to Google Fonts and formatting text elements with font names CSS.</p>
-              <p><a href="https://brendan-munnelly.github.io/quiz-html-css/#/quiz-questions/13" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-              <audio controls style="margin-bottom: 24px">
-                <source src="lessons/assets/audio/working-with-google-fonts.mp3" type="audio/mp3">
-              </audio>               
-
-
-
-            <a href="lessons/working-with-google-fonts.html" class="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-          </div>
-
-
-
-      </div>
-
-
-
-
-        <!-- End four-column flexbox grid -->
-      </section>
-
-
-      <section class="theme-light section-selector-1 w-1356px">
-        <div class="col-1 text-center w-820px">
-            <h2>TailwindCSS</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/tailwind-intro.html">
-                        <img src="assets/img/toc-tailwind.png" alt="Project Hero"  width="420px" height="250px" />
-                    </a>
-                </figure>
-
-                <a href="lessons/tailwind-intro.html" class="col-4-h3">Introduction to Tailwind</a>
-                <p>Adding Tailwind via CDN, configuring it in the browser, and building responsive UI elements with utility classes.</p>
-
-                <a href="lessons/tailwind-intro.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-        </div>
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/tailwind-headers.html">
-                        <img src="assets/img/toc-tailwind.png" alt="Project Hero"  width="420px" height="250px" />
-                    </a>
-                </figure>
-
-                <a href="lessons/tailwind-headers.html" class="col-4-h3">Hero Blocks with Tailwind</a>
-                <p>Building a variety of hero blocks with TailwindCSS.</p>
-
-                <a href="lessons/tailwind-headers.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-
-        </div>
-
-
-     </div>
-
-
-
-
-        <!-- End four-column flexbox grid -->
-      </section>
-
-      <section class="theme-light section-selector-1 w-1356px" style="background-color: var(--sky-100)">
-        <div class="col-1 text-center w-820px">
-            <h2>Web Design Projects</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="projects-ui/project-smoothies/index.html">
-                    <img src="assets/img/project-smoothie.jpg" alt="Smooth Smoothies"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="projects-ui/project-smoothies/index.html" class="col-4-h3">Smooth Smoothies</a>
-            <p>A smoothies web page with a transparent background image.</p>
-
-            <a href="projects-ui/project-smoothies/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-
-          </div>
-
-          
-          <div class="col-4">
-              <figure class="photos-zoom">
-                  <a href="projects-ui/project-crypto-wallet/index.html">
-                      <img src="assets/img/thumbnail-crypto-wallet.jpg" alt="Crypto Wallet"  width="420px" height="250px" />
-                  </a>
-              </figure>
-
-              <a href="projects-ui/project-crypto-wallet/index.html" class="col-4-h3">Crypto Wallet</a>
-              <p>A dark-themed crypto web page with an embedded YouTube video.</p>
-
-            <a href="projects-ui/project-crypto-wallet/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-        </div>
-
-          <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="projects-ui/project-fashion/index.html">
-                    <img src="assets/img/toc-fashion.jpg" alt="Snazzy Fashion" width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="projects-ui/project-fashion/index.html" class="col-4-h3">Snazzy Fashion</a>
-            <p>A web page for a fashion retailer with a background video.</p>
-
-            <a href="projects-ui/project-fashion/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-
-          </div>
-
-          
-
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="projects-ui/project-store/index.html">
-                    <img src="assets/img/thumbnail-store.png" alt="Google Search Console" width="420px" height="250px" />
-                </a>
-            </figure>
-            <a href="projects-ui/project-store/index.html" class="col-4-h3">Book store</a>
-            <p>An online book store with affiliates link to Amazon.</p>
-
-            <!-- <div class="audio-container">
-                <audio controls style="margin-bottom: 24px">
-                    <source src="lessons/assets/audio/google analytics.mp3" type="audio/mp3">
-                </audio> 
-            </div>
-
-            <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-            <a href="projects-ui/project-store/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-        </div>
-
-
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="projects-ui/project-hero/index.html">
-                    <img src="assets/img/project-hero.png" alt="Project Hero"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="projects-ui/project-hero/index.html" class="col-4-h3">Hero Gallery</a>
-            <p>A collection of hero blocks created with the &lt;header&gt; tag.</p>
-
-            <a href="projects-ui/project-hero/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-
-        </div>
-
-        <div class="col-4">
-            <figure class="photos-zoom">
-                <a href="projects-ui/project-multi-col/index.html">
-                    <img src="assets/img/toc-flex-4-cols.png" alt="Project Multi-column"  width="420px" height="250px" />
-                </a>
-            </figure>
-
-            <a href="projects-ui/project-multi-col/index.html" class="col-4-h3">Multi-column Gallery</a>
-            <p>A collection of multi-column layout blocks created with the &lt;section&gt; tag.</p>
-
-            <a href="projects-ui/project-multi-col/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-
-        </div>
-
-
-
-      </div>
-
-       <!-- End four-column flexbox grid -->
-      </section>
-
-
-      <section class="theme-light section-selector-1 w-1356px">
-        <div class="col-1 text-center w-820px">
-            <h2>User Tracking</h2>
-        </div>
-
-        <!-- Begin four-column flexbox grid -->
-        <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/setting-up-google-analytics.html">
-                        <img src="assets/img/toc-ga.png" alt="Google Analytics" width="420px" height="250px" />
-                    </a>
-                </figure>
-
-                <a href="lessons/setting-up-google-analytics.html" class="col-4-h3">Setting Up Google Analytics</a>
-                <p>Monitoring your website visitors by adding a unique tracking code to your web pages.</p>
-
-                <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/google-analytics.mp3" type="audio/mp3">
-                    </audio> 
-                </div>
-
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/14" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-                <a href="lessons/setting-up-google-analytics.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-            </div>
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/google-search-console.html">
-                        <img src="assets/img/toc-gsc.png" alt="Google Search Console" width="420px" height="250px" />
-                    </a>
-                </figure>
-                <a href="lessons/google-search-console.html" class="col-4-h3">Google Search Console</a>
-                <p>Monitoring and maintaining your website’s presence in Google search results.</p>
-
-                <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/google-search-console.mp3" type="audio/mp3">
-                    </audio> 
-                </div>
-
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p>
-
-                <a href="lessons/google-search-console.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-            </div>
-
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/user-behaviour.html">
-                        <img src="assets/img/toc-user-behaviour.png" alt="User Behaviour" width="420px" height="250px" />
-                    </a>
-                </figure>
-                <a href="lessons/user-behaviour.html" class="col-4-h3">User Behaviour</a>
-                <p>Tracking user behaviour on web pages with session recordings and heatmaps.</p>
-
-                <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/user-behaviour.mp3" type="audio/mp3">
-                    </audio> 
-                </div>
-                <p>&nbsp;</p>
-                <!--
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-                <a href="lessons/user-behaviour.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-            </div>
-
-
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/privacy.html">
-                        <img src="assets/img/toc-media-queries.png" alt="Google Search Console" width="420px" height="250px" />
-                    </a>
-                </figure>
-                <a href="lessons/privacy.html" class="col-4-h3">Privacy messages</a>
-                <p>Creating a ‘pop-up’ cookie consent message to include in your web pages.</p>
-
-                <!-- <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/google analytics.mp3" type="audio/mp3">
-                    </audio> 
-                </div>
-
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-                <a href="lessons/privacy.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-            </div>
-
-            <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/forms-serverless.html">
-                        <img src="assets/img/toc-media-queries.png" alt="Google Search Console" width="420px" height="250px" />
-                    </a>
-                </figure>
-                <a href="lessons/forms-serverless.html" class="col-4-h3">Serverless forms</a>
-                <p>Using forms with GitHub Pages by registering for a third-party online form processing service such as Formspree.</p>
-
-                <!-- <div class="audio-container">
-                    <audio controls style="margin-bottom: 24px">
-                        <source src="lessons/assets/audio/google analytics.mp3" type="audio/mp3">
-                    </audio> 
-                </div>
-
-                <p class="quiz"><a href="https://brendan-munnelly.github.io/quiz-dorset/#/quiz-questions/15" target="_blank" class="quiz_link">Take the quiz</a></p> -->
-
-                <a href="lessons/forms-serverless.html" class ="btn btn-solid btn-small btn-soft"><span>View Tutorial</span> &nbsp;➜</a>
-            </div>
-
-
-        </div>
-
-    </section>
-
-        <section class="theme-light section-selector-1 w-1356px" style="background-color: var(--sky-100)">
-            <div class="col-1 text-center w-820px">
-                <h2>Personal Portfolio Website</h2>
-            </div>
+                    <ol>
+                        <li>In VS Code, open your web pages.
+                            <span class="inside-ol">&nbsp;</span>
+                            <b>index.html<br>
+                                📁 contact/index.html<br>
+                                📁 portfolio/index.html</b>
+                            </li>
+            
+                        <li>In the <span class="syn">&lt;head&gt;</span> of each web page, in the title and description tags, replace the sample text with your own details.</li>
+                        </ol>
+            
+                        <p>Here are a few examples.</p>
+                        <p><b>Home page:</b></p>
+                        <img src="assets/img/meta-sample-home-page.png" alt="project images">
+            
+                        <p><b>Portfolio page:</b></p>
+                        <img src="assets/img/meta-sample-portfolio-page.png" alt="project images">
+            
+                        <p><b>Contact page:</b></p>
+                        <img src="assets/img/meta-sample-contact-page.png" alt="project images">
+            
+            
+                    <p>See the helpful links below for guidance on using the title and description meta tags on your web pages.</p>
+            
+                    <div class="box-toc">
+                            <h2>Meta tags: Further resources</h2>
+                            <p><a href="https://moz.com/learn/seo/title-tag" target="_blank" rel="noopener" class="further-title">What is a title tag?</a>. From <a href="https://moz.com/" target="_blank" rel="noopener" style="font-weight:normal">moz.com</a>.</p>
+            
+                            <p><a href="https://moz.com/learn/seo/meta-description" target="_blank" rel="noopener" class="further-title">What is a meta description?</a>  From <a href="https://moz.com/" target="_blank" rel="noopener" style="font-weight:normal">moz.com</a></p>
+            
+                            <p><a href="https://neilpatel.com/blog/why-meta-tags-are-so-important/" target="_blank" rel="noopener" class="further-title">Meta Tags for SEO: Definition, Examples, &amp; Best Practices</a>. From
+                            <a href="https://neilpatel.com/" target="_blank" rel="noopener" style="font-weight:normal">Neil Patel</a></p>
+            
+                            <p><a href="https://backlinko.com/hub/seo/meta-descriptions" target="_blank" rel="noopener" class="further-title">Content Optimization Strategies: Meta Descriptions</a>. From
+                            <a href="https://backlinko.com/hub/" target="_blank" rel="noopener" style="font-weight:normal">Brian Dean</a></p>
+            
+                        </div>
+            
+                        <div class="box-warning">
+                            <div>
+                                <img src="assets/img/warning-sign.png" alt="Introduction to HTML">
+                            </div>
+                            <div>
+                                <p><span>DO NOT</span> use the same meta tags on different web pages of the same website.</p>
+            
+                                <p>This 'confuses' Google and other search engines.</p>
+                            </div>
+                        </div>
+            
+                        <p><i>"When two, or more, of your pages contain similar title tags, it falls upon the search engine to try to determine which page the user really wants to see in their results. What happens is that some of your pages will get preferred ranking status, while others get ignored completely. "</i> <a href="https://www.movingtrafficmedia.com/are-duplicate-title-tags-bad-for-seo/" target="_blank" rel="noopener" class="further-title">Source</a>.</p>
+            
+                </section>
+            
+                <section id="footer-content">
     
-            <!-- Begin four-column flexbox grid -->
-            <div class="flex-cols-4 mobile-col-2 cols-gap-4">
-    
-              <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="projects-ui/project-home-checklist/index.html">
-                        <img src="assets/img/project-home.png" alt="Portfolio website" width="420px" height="250px" />
-                    </a>
-                </figure>
-    
-                <a href="projects-ui/project-home-checklist/index.html" class="col-4-h3">Personal Website: 1</a>
-                <p>Creating your personal portfolio website with four pages.</p>
-    
-                <a href="projects-ui/project-home-checklist/index.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
-    
-              </div>
+                    <h2>12: Update your <code>footer</code> content</h2>
+        
+                    <p>In the <span class="syn">&lt;footer&gt;</span> block of your Home, Portfolio and Contact pages, update the footer content and the Linkedin and GitHub contact links.</p>
 
-               <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="projects-ui/project-home-checklist/index-2.html">
-                        <img src="assets/img/project-home.png" alt="Portfolio website" width="420px" height="250px" />
-                    </a>
-                </figure>
+                    <img src="assets/img/footer.png" alt="screenshot">
+        
+                </section>
+
     
-                <a href="projects-ui/project-home-checklist/index-2.html" class="col-4-h3">Personal Website: 2</a>
-                <p>Continuing your personal portfolio website with four pages.</p>
+                <section id="privacy">
     
-                <a href="projects-ui/project-home-checklist/index-2.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
+                    <h2>13: Create and add your cookie privacy message</h2>
+                    <p>Create a <a target="_blank" href="../../lessons/privacy.html">‘pop-up’ cookie consent message</a> and add it to your Home, Portfolio and Contact pages.</p>
     
-              </div>
+                    <p><i>This is required under EU law for any web page that uses Google Analytics.</i></p>
+    
+                </section>
+    
+            <section id="contact-form">
+                
+                <h2>14: Update the endpoint of your contact form</h2>
+                    
+                <p>You need update your <b>contact/index.html</b> web page with the endpoint code you received from the <a href="../../lessons/forms-serverless.html">Formspree</a> website.</p>
+    
+                <ol>
+                    <li>In VS Code, display the <b>contact/index.html</b> web page.</li>
+                    <li>Update the form's <b>action</b> value by copying-and-pasting the endpoint value from Formspree. See the example shown below.
+                    <img src="assets/img/endpoint.png" alt="github-signin" class="wider-110"></li>
+                    <li>Save your <b>contact/index.html</b> file.</li>
+                </ol>
+    
+                <p>You can check your form is working by entering some details and clicking the <b>Send</b> button.</p>
+    
+                <p>If no emails appear in your inbox, check </p>
+            </section>   
+    
+    
+            <section id="error-404">
+
+                <h2>15: Download your <code>error-404.html</code> web page</h2>
+
+                <p>A <b>404.html</b> web page is the standard file for displaying a  “Page Not Found” message. It shows up when a visitor tries to visit a page on your website that doesn’t exist — maybe because:</p>
+                    
+                <ul>
+                    <li>They typed the URL wrong,</li>
+                    <li>You deleted or moved a file</li>
+                    <li>A link was broken.</li>
+                </ul>
+    
+                <p>When you upload a <b>404.html</b> file to GitHub, GitHub will automatically display this web page when necessary. No further configuration is required.</p>
 
 
-              <div class="col-4">
-                <figure class="photos-zoom">
-                    <a href="lessons/dev-tools.html">
-                        <img src="assets/img/dev-tool.png" alt="Dev Tools" width="420px" height="250px" />
-                    </a>
-                </figure>
+                <p>Download <i>one</i> of these two files to your 'main' <b>websites</b> folder.</p>
     
-                <a href="lessons/dev-tools.html" class="col-4-h3">Working with DevTools</a>
-                <p>Using the web browser's Developer Tools to work with text content, HTML tags and CSS styles in a web page.</p>
+                <ul>
+                    <li><a href="resources/404-light/404.html" target="_blank">404.html</a> (light theme)</li>
+                    <li><a href="resources/404-dark/404.html" target="_blank">404.html</a> (dark theme)</li>
+                </ul>
     
-                <a href="lessons/dev-tools.html" class ="btn btn-solid btn-small btn-soft"><span>View Project</span> &nbsp;➜</a>
+                <p>✅ Instead of showing a confusing browser error, your site will show a friendly, helpful page.</p>
+
+            </section>
+            
+
+            <section id="upload-files">
+                <h2>16: Upload your files to GitHub</h2>
+
+                <p>From your 'main' folder on your computer, upload the following files and folders to your account on GitHub.</p>
+
+                <img src="assets/img/upload-1.png" alt="screenshot" style="max-width: 700px">
+
+                <p>From your  📁 <b>portfolio</b> folder on your computer, upload the <b>index.html</b> file to your <b>portfolio</b> folder on GitHub.</p>
+
+                <img src="assets/img/upload-2.png" alt="screenshot" style="max-width: 700px">
+
+            </section>
+
+
+            <section id ="broken-links">
+            
+                <h2>17: Check for broken links</h2>
+
+                <p>After you have uploaded your web pages to GitHub, run the <a target="_blank" href="https://www.deadlinkchecker.com/">Dead Link Checker</a> on your <b>https://username.github.io</b> website.</p>
+
+                <img src="assets/img/deadlinkchecker-1.png" alt="">
+
+                <p>You can ignore the following two apparent errors. This is a fault with the online link checker.</p>
+
+                <img src="assets/img/deadlinkchecker-2.png" alt="">
+
+                <p>Correct any broken hyperlinks and reupload the relevant web pages.</p>
+            </section>
+
+
+
+            <section id="sitemap">
+        
+                    <h2>18: Create and submit a sitemap</h2>
     
-              </div>
+                    <p>A <b>sitemap.xml</b> is a special file that lists all the pages on your website, written in a format that search engines like Google can read and understand.</p>
+
+                    <p>Think of it like a map for robots, not for people.</p>
+                        
+                    <ul>
+                        <li>It helps search engines find and index all your pages correctly.</li>
+                        
+                        <li>It's especially useful if your site has many pages, subfolders, or new pages that aren’t linked clearly yet.</li>
+
+                    </ul>                            
+
+                    <p>Use the website below to create a sitemap:</p>
+                    <p><a href="https://www.xml-sitemaps.com/" target="_blank">https://www.xml-sitemaps.com</a></p>
+
+                    <p>After you download your <b>sitemap.xml</b> file, you can edit it as appropriate. For example, you may not want to include the files in your  📁  <b>exercises</b> folder in the sitemap file.</p>
+                        
+                    <p>When finished, upload the <b>sitemap.xml</b> file to your top-level folder on GitHub.</p>
+        
+                    <p>Sign in to your account on <a href="../../lessons/google-search-console.html" target="_blank">Google Search Console</a> and submit your sitemap.</p>
     
-          </div>
+                    <img src="assets/img/sitemap.png" alt="screenshot">
+
+                    <p>See the <a href="index-2.html">next Tutorial</a> to continue building your personal portfolio website.</p>
+
+
+                </section>
     
-           <!-- End four-column flexbox grid -->
-          </section>
+    
+ 
+
+
     
 
-          
-
-
-
-
+        </article>
     </main>
-
-
-    <div id="cookie-banner">
+    
+    
+    <footer>
+    
+    </footer>
+    
+    <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent message" tabindex="-1">
         <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
         <div class="buttons">
             <button id="accept-cookies">Got it</button>
         </div>
     </div>
+    
+    <script>hljs.highlightAll();</script>
+    
+    <script src="../../lessons/assets/js/utils.js"></script>       
+    
+    </body>
 
-    <script src="https://lunevedy.com/assets/js/lunevedy.js"></script>
-
-  </body>
 </html>
+
