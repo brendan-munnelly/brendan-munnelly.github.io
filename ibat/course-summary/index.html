@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Development: Core Concepts Summary</title>
+    <style>
+
+        /*  ============= WEB BROWSER RESETS ============ */
+        * { margin: 0; padding: 0; border: none }
+        *, *::before, *::after { box-sizing: border-box }
+        html { height: 100%; font-size: 100%; font: inherit; vertical-align: baseline;
+        scroll-behavior: smooth; scroll-padding-top: 20px }
+        body { line-height: 1.5; min-height: 100vh }
+        img { width: 100%; height: auto; display: block }
+        input, button, textarea, select { font: inherit }
+        @media (max-width: 767px ) { body { text-rendering: optimizeSpeed } }
+        @media (min-width: 768px ) { body { text-rendering: optimizeLegibility } }
+
+
+        /* CSS Variables for consistent design */
+        :root {
+            --primary-blue: #2563eb;
+            --dark-text: #1f2937;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --accent-color: #d97706;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Typography */
+        h1 {
+            color: var(--primary-blue);
+            text-align: center;
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        strong {
+            color: #000;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .container { padding: 1.2rem; }
+            th, td { font-size: 0.9rem; }
+        }
+
+        /* Container to maintain 16:9 aspect ratio and responsiveness */
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Modern CSS way to handle aspect ratio */
+    background-color: #000; /* Black background while loading */
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+/* Make the video fill the container */
+.video-container video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* Ensures the video fills the area without distortion */
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Core Concepts for Modern Website Design and Development</h1>
+
+
+    <img src="infographic.png" alt="Infographic summarizing core concepts for modern frontend development">
+
+        <div class="video-container">
+    <video controls poster="video-placeholder.jpg">
+        <source src="Build_a_Website_From_Scratch.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    </div>
+
+    <section>
+        <a href="Building_Your_First_Live_Website.pdf">Building your First Live Website (PDF)</a>
+    </section>
+
+    <section id="section-1">
+        <h2>I. Foundation & Setup</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Core Concept</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Logical File Structure & Assets</strong></td>
+                    <td>Always begin with a consistent project folder containing an <strong>index.html</strong> file in the root. Use a dedicated <strong>assets</strong> sub-folder to logically group all non-HTML files into <strong>css</strong>, <strong>img</strong>, and <strong>videos</strong>. This organization prevents broken links and ensures smooth project sharing.</td>
+                </tr>
+                <tr>
+                    <td><strong>VS Code & Emmet for Productivity</strong></td>
+                    <td><strong>Visual Studio Code</strong> is the industry standard and should be customized with extensions like <strong>HTMLHint</strong> for error checking. Utilize <strong>Emmet</strong> abbreviations (e.g., typing <code>ul>li*3</code>) to expand into complex HTML structures instantly. This saves significant time by focusing on structure rather than repetitive typing.</td>
+                </tr>
+                <tr>
+                    <td><strong>Web Hosting with GitHub Pages</strong></td>
+                    <td>To make a site public, create a GitHub repository named exactly <strong>username.github.io</strong>. Upload your index.html and assets folder via drag-and-drop or Git to publish. The site will then be accessible to anyone at that specific URL.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="section-2">
+        <h2>II. HTML Structure & Semantics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Core Concept</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Basic Document Structure & Metadata</strong></td>
+                    <td>HTML pages require a <strong>&lt;head&gt;</strong> for technical data and a <strong>&lt;body&gt;</strong> for visible content. Use a descriptive <strong>&lt;title&gt;</strong> and <strong>&lt;meta name="description"&gt;</strong> to optimize for search engines (SEO). All visual elements must be nested correctly within the body tag using appropriate tags.</td>
+                </tr>
+                <tr>
+                    <td><strong>High-Leverage Semantic Tags</strong></td>
+                    <td>Use tags like <strong>&lt;header&gt;</strong>, <strong>&lt;nav&gt;</strong>, <strong>&lt;main&gt;</strong>, and <strong>&lt;footer&gt;</strong> to give meaning to your layout. The <strong>&lt;main&gt;</strong> tag holds the primary content, while <strong>&lt;section&gt;</strong> tags divide it into logical blocks. This is vital for accessibility as screen readers use these tags to navigate.</td>
+                </tr>
+                <tr>
+                    <td><strong>Responsive Image Insertion & Alt Text</strong></td>
+                    <td>Embed images using the <strong>&lt;img&gt;</strong> tag with a correct file path in the <strong>src</strong> attribute. The <strong>alt</strong> attribute is mandatory to describe the image for visually impaired users or if the file fails to load. Use JPG for photos and PNG for images requiring transparency.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="section-3">
+        <h2>III. Essential CSS & Responsiveness</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Core Concept</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>CSS Linking, Selectors, and Rules</strong></td>
+                    <td>Link CSS to HTML using the <strong>&lt;link&gt;</strong> tag in the head. Target elements with <strong>selectors</strong>, followed by rules containing a property (e.g., <code>color</code>) and a value (e.g., <code>blue</code>). Always end each rule with a semicolon to avoid rendering errors.</td>
+                </tr>
+                <tr>
+                    <td><strong>Classes & Custom Properties</strong></td>
+                    <td>Use <strong>CSS classes</strong> (target with a <code>.</code>) to apply styles to specific elements. Define <strong>Custom Properties</strong> (e.g., <code>--brand-color</code>) to store reusable values throughout your stylesheet. This allows you to change a site-wide color by updating just one line of code.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fluid Typography & Readability</strong></td>
+                    <td>Use the <strong>clamp()</strong> function to allow text to scale smoothly between a minimum and maximum size based on the screen width. Set a <strong>line-height</strong> between 1.5 and 1.7 to improve readability through vertical spacing. Always provide a fallback font like <code>sans-serif</code> for design resilience.</td>
+                </tr>
+                <tr>
+                    <td><strong>Z-Index & Stacking (Hero Blocks)</strong></td>
+                    <td>To layer text over images, use <strong>position: relative</strong> on the parent and <strong>position: absolute</strong> on the child. Use the <strong>z-index</strong> property to control the stacking order (higher numbers come forward). This is the foundation for creating modern "Hero" sections.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="section-4">
+        <h2>IV. Interactivity & Media</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Core Concept</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hyperlinks and State Styling</strong></td>
+                    <td>Use the <strong>&lt;a&gt;</strong> tag with the <strong>href</strong> attribute to link to other pages. Style interactive states like <strong>:hover</strong>, <strong>:focus</strong>, and <strong>:active</strong> to give users visual feedback. Applying a <strong>transition</strong> rule ensures these visual changes appear smooth rather than abrupt.</td>
+                </tr>
+                <tr>
+                    <td><strong>Accessibility & Color Contrast</strong></td>
+                    <td>Always check that your text and background colors have a <strong>contrast ratio of at least 4.5:1</strong>. This ensures your content is readable by everyone, including those with visual impairments. High contrast is a non-negotiable standard for professional web development.</td>
+                </tr>
+                <tr>
+                    <td><strong>Responsive Video Embedding</strong></td>
+                    <td>Wrap video <strong>&lt;iframe&gt;</strong> tags in a container div with <strong>position: relative</strong>. Apply a specific <strong>aspect-ratio</strong> (like 16/9) in CSS to ensure the video stays responsive across all devices. This prevents the video from being cut off or distorted on smaller mobile screens.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer style="text-align: center; margin-top: 3rem; color: #64748b; font-size: 0.8rem;">
+        <p>Prepared for Frontend Development Students &bull; 2024</p>
+    </footer>
+</div>
+
+</body>
+</html>
