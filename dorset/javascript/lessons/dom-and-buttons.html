@@ -24,7 +24,7 @@
 	<script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 	
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -117,14 +117,7 @@
 
 </section>
 
-<section>
-	
-	<div class="code-snippets" style="margin-bottom:32px">
-		<p>Download the new workfile on your computer and save it as <b>dom-buttons.html</b>.</p>
-		<p>📄 &nbsp;<a href="assets/workfiles/dom-buttons.html" target="_blank"><b>DOM and buttons</b> : Exercises</a></p>
-	</div>
 
-</section>
 
 
 <section>
@@ -302,7 +295,7 @@ function doParaText() {
 
 
             <li>Finally, add an <b>onclick</b> event handler with the <b>doParaText()</b> to the third button in the HTML of the web page.
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-html">
 &lt;button id="btn_3" onclick="doParaText()"&gt;Update para text&lt;/button&gt;</code></pre></li>
 
         </ol>
@@ -353,7 +346,7 @@ function restoreHeading() {
     bigHeading.innerText = 'Big heading here';
 }</code></pre></li>
             <li>In the HTML of the web page, add an <b>onclick</b> event handler with the <b>restoreHeading</b> function to the second button. 
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">
 &lt;button id="btn_2" onclick="restoreHeading()"&gt;Restore h1&lt;/button&gt;</code></pre></li>
         </ol>
 
@@ -464,6 +457,95 @@ function placeOrder() {
 
     </section>
 
+
+    <section>
+
+        <h2>Reading content from text input fields</h2>
+        <p>So far, you have modified content that was already on the page. However, in many web applications, you need to "grab" information that a user types into a form.</p>
+
+        <p>To do this, we use the .value property. While innerText is for labels, headings, and paragraphs, .value is specifically for form elements like &lt;input&gt;.</p>
+
+        <p>Here are the steps:</p>
+        <ol>
+            <li>Give your input field a unique <b>id</b> so you can access it with JavaScript.</li>
+            <li>Use <b>document.getElementById('yourInputId').value</b> to get the current value of the input field.</li>
+            <li>You can then use this value in your JavaScript code, such as displaying it on the page or processing it further.</li>
+        </ol>
+        <p>For example, consider the following HTML input field and button:</p>
+<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-html">&lt;input type="text" id="userName" placeholder="Enter your name"&gt;
+&lt;button onclick="showName()"&gt;Submit&lt;/button&gt;</code></pre>
+
+        <p>And the corresponding JavaScript function to read the input value:</p>           
+<pre><button class="copy-code" id="btn-16">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-16" class="hljs language-javascript">// Function to read input value and display it
+function showName() {
+    // Get the value from the input field
+    let name = document.getElementById('userName').value;
+    // Display the name
+    console.log(`Hello, ${name}!`);    
+}</code></pre>
+
+        <p>When the user types their name into the input field and clicks the "Submit" button, the showName() function retrieves the value and logs a greeting to the console.</p>
+    <p>Note the value is captured at the moment the function runs. If the user changes the text after clicking the button, you must click the button again to "re-read" the value.</p>
+
+
+    <h3>Working with text inputs</h3>
+    <p>When capturing user data, you can't always trust that the user will type exactly what you expect. They might leave a field blank or accidentally hit the spacebar a few times.</p>
+
+    <p>The <b>.trim()</b> method removes whitespace from both ends of a string. It does not affect spaces between words.</p>
+
+    <p>To properly check if a user has provided meaningful text, you should combine the <b>.trim()</b> with the <b>length</b> property.</p>
+<pre><button class="copy-code" id="btn-17">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-17" class="hljs language-javascript">// Function to read trimmed input value and display it
+    function showName() {
+
+    // Get and trim the value from the input field
+    let name = document.getElementById('userName').value.trim();
+
+    // Check that the trimmed value is not empty
+    if (name.length &gt; 0) {
+        console.log(`Hello, ${name}!`);
+    }
+    else {
+        console.log("Please enter your name.");
+    }
+}</code></pre>
+
+
+
+    <p>Here’s a simple way to turn the input red if the user leaves it empty (or only types spaces).</p>
+
+    <p>Add this CSS inside the &lt;/head&gt;</p>
+
+<pre><button class="copy-code" id="btn-18">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-18" class="hljs language-css">.input-error {
+    border: 2px solid red;
+}</code></pre>
+
+<p>Update your JavaScript function to add or remove this class based on the input validation.</p>
+
+<pre><button class="copy-code" id="btn-19">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-18" class="hljs language-javascript">function showName() {
+
+    const input = document.getElementById('userName');
+    const name = input.value.trim();
+
+    if (name.length === 0) {
+        // Empty input → turn box red
+        input.classList.add('input-error');
+        console.log("Please enter your name.");
+    } else {
+        // Valid input → remove red border
+        input.classList.remove('input-error');
+        console.log(`Hello, ${name}!`);
+    }
+}</code></pre>    
+
+        <p>When asking users for a number, it's important to provide clear feedback if they leave a field empty or enter invalid data.</p>
+
+<pre><button class="copy-code" id="btn-20">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-18" class="hljs language-javascript">function showNumber() {
+    const value = document.getElementById('userNumber').value.trim();
+    if (value !== '' && !isNaN(value)) {
+        console.log(`You entered the number ${Number(value)}`);
+    }
+}</code></pre>
+</section>
 
     <section class="resources-learning" id="try-it">
 
