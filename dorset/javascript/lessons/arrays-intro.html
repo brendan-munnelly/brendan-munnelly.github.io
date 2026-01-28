@@ -107,9 +107,6 @@
 				<p><a href="#arrays-creating">Creating an array with [] notation</a></p>
 				<p><a href="#arrays-index">Arrays and index values</a></p>
 				<p class="toc-indent"><a href="#arrays-length">The .length property of an array</a></p>
-				<p class="toc-indent"><a href="#arrays-typeof">Arrays and the typeof operator</a></p>
-				<p class="toc-indent"><a href="#arrays-isarray">Testing with the Array.IsArray method</a></p>
-
 
 				<p><a href="#arrays-loops">Looping through an array</a></p>
 				<p><a href="#arrays-empty">Creating an empty array</a></p>
@@ -143,7 +140,6 @@
 				<li>Create and populate an array with square brackets <span class="syn-js">[]</span> notation.</li>
 				<li>Use the <span class="syn-js">.length</span> property to find the number of items in an array.</li>
 				<li>Use array indexes to access individual items in an array.</li>
-				<li>Test for an array with the <span class="syn-js">Array.IsArray()</span> method.</li>
 				<li>Loop through the items in an array with the <span class="syn-js">.forEach()</span> method.</li>
 				<li>Destructure individual items of an array to variables.</li>
 			</ul>
@@ -161,11 +157,11 @@
 
 		<img src="assets/img/arrays-intro/spreadsheet-1.png" alt="screenshot" style="max-width:700px">
 
-		<p>But what about all the rows of a spreadsheet? How can they be stored in JavaScript? The answer is: in an <i>array</i>.</p>
+		<p><i>But what about all the rows of a spreadsheet?</i> How can they be stored in JavaScript? The answer is: in an <i>array</i>.</p>
 
 		<p>You can think of an array as a <i>list of things</i>. The things (usually called <i>items</i> or <i>elements</i>) in an array could be objects. But they can also be simple variables such as strings or numbers.</p>
 
-		<p>In an array, the order in which the items are stored is important. For this reason, an array is more propertly defined as an <i>ordered list of items</i>.</p>
+		<p>In an array, the order in which the items are stored is important. For this reason, an array is more properly defined as an <i>ordered list of items</i>.</p>
 
 		<img src="assets/img/arrays-intro/array-order.png" alt="screenshot" style="max-width: 600px">
 
@@ -200,7 +196,7 @@ const arrUserFirstNames = [
    "Romy",
 ];</code></pre>
 
-	<p>As you can see above, there is a <span class="syn-js">,</span> character after each item. Also, a &#8216;trailing comma&#8217; is added after the final item <b>"Romy"</b>. Developers sometimes add an optional trailing comma to make it easier to insert/remove items later.</p>
+	<p>As you can see above, there is a <span class="syn-js">,</span> character after each item. Also, an optional <i>trailing comma</i> is added after the final item <b>"Romy"</b>. Developers sometimes add this to make it easier to insert or remove items later.</p>
 
 	<p>You can see some further examples of arrays below.</p>
 
@@ -218,7 +214,7 @@ const arrPrices = [11.99, 24.50, 34.25, 49.99];
 		
 <p>Strings are typically wrapped with double <span class="syn-js">""</span> rather than single quotes <span class="syn-js">''</span>.</p>
 
-<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This does <i>not</i> prevent your code from modifying items in an array later as needed. But it does prevent the array from being accidentally overwritten by another another array (or variable) with the same name that might exist elsewhere in the same scope.</p>
+<p>It is better to use <span class="syn-js">const</span> rather than <span class="syn-js">let</span> when creating arrays. This does <i>not</i> prevent your code from modifying items in an array later as needed. But it does prevent the array from being accidentally overwritten by another array (or variable or object) with the same name that might exist elsewhere in the same scope.</p>
 
 
 		<p>Here is the general form of an array of numbers.</p>
@@ -277,48 +273,7 @@ console.log(`Last item of arrCars array: ${arrCars[arrCars.length-1]}`);
 console.log(`Last item of arrStudentIDs array: ${arrUserIDs[arrUserIDs.length-1]}`);
 // 6317</code></pre>
 
-        <h3 id="arrays-typeof">Arrays and the <code>typeof</code> operator</h3>
-
-		<p>Arrays in JavaScript are a special type of object. The <span class="syn-js">typeof</span> operator when applied an array will return <i>object</i>.</p>
-
-        <p>This is same value that is returned when <span class="syn-js">typeof</span> is applied to a <span class="syn-js">null</span> variable. See below.</p>
-
-        <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// === Using typeof with a null variable and arrays ===
-let someVar = null;
-console.log(`Type of someVar: ${typeof someVar}`);
-// Outputs object
-
-console.log(`Type of arrUserFirstNames: ${typeof arrUserFirstNames}`);
-// Also outputs object
-console.log(`Type of arrPrices: ${typeof arrPrices}`);
-// Also outputs object</code></pre>
-
-        <h3 id="arrays-isarray">Testing with the <code>Array.IsArray</code> method</h3>
-
-            <p>To check that some item in your code is actually an array, you can use the <span class="syn-js">Array.isArray()</span> method. You pass the item name to the method as an argument.</p>
-                
-            <p>This returns a boolean <span class="syn-js">true</span> if the item is an array and <span class="syn-js">false</span> otherwise.</p>
-
-            <p>Test the code below runs correctly.</p>
-
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// === Testing for an array ===
-
-// Check if arrCars is an array
-if (Array.isArray(arrCars)) {
-    console.log("arrCars is an array.");
-} else {
-    console.log("arrCars is not an array.");
-}    
-
-// Check if someVar is an array
-if (Array.isArray(someVar)) {
-    console.log("someVar is an array.");
-} else {
-    console.log("someVar is not an array.");
-}</code></pre>
-
 </section>
-
    
 
 
@@ -328,7 +283,7 @@ if (Array.isArray(someVar)) {
 
 		<p>Often, you will want to perform the same operation on all the items in an array - such as displaying their values.</p>
 
-		<p>In modern JavaScript, the preferred way of looping through an array is to use the <span class="syn-js">forEach()</span> method. See the example below.</p>
+		<p>In modern JavaScript, the preferred way of looping through an array is to use the <span class="syn-js">.forEach()</span> method. See the example below.</p>
 
 <pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// === Looping through array values ===
 
@@ -364,80 +319,81 @@ arrPrices.forEach(price =&gt; {
 });
 </code></pre>
 
-		<p>And for an array of strings, you could change all the characters in each item to lower case letters.</p>
+		<p>And for an array of strings, you could change all the characters in each item to lowercase letters.</p>
 
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Changing case of text characters in loop
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Changing case of text characters in a loop
 arrUserFirstNames.forEach(userFirstName =&gt; {
     console.log(`Original name: ${userFirstName}`);
     console.log(`Lower case name: ${userFirstName.toLowerCase()}`);
 });</code></pre>
 
 
-		<p>Note that the <span class="syn-js">.forEach()</span> loop does <i>not</i> change the items in the array. It instead creates of a copy of the original array.</p>
+		<p>Note that the <span class="syn-js">.forEach()</span> loop does not change the items in the array. It simply runs some code (like displaying output) for each item. No new data is created or stored in the array itself. No new data is created or stored in the array itself.</p>
 	</section>
 
 
+<section id="arrays-empty">
+        <h2>Creating an empty array</h2>
 
-    
-	<section id="arrays-empty">
-		<h2>Creating an empty array</h2>
+        <p>Sometimes you need to start with an empty list and fill it with data later (for example, a shopping cart before you start shopping).</p>
 
-		<p>There is one situation where you might use <span class="syn-js">let</span> rather <span class="syn-js">const</span> when declaring an array. That is when you do not yet know what values will be stored in the array.</p>
+        <p>To do this, you declare the array with an empty pair of square brackets <span class="syn-js">[]</span>.</p>
 
-		<p>When you need to first create an empty array and populate it later with values, you could do the following:</p>
+        <p>In modern JavaScript, it is best practice to use <span class="syn-js">const</span> even for empty arrays, and then use the <span class="syn-js">.push()</span> method to add items to it.</p>
 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// === Creating an empty array to populate later ===
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// === Creating an empty array and adding items ===
 
-// Create array without items
-let arrLastNames = [];
+// 1. Create an empty array
+const arrSongs = [];
 
-// Populate empty array
-arrLastNames = ["Bloggs", "Smith", "Murphy", "Higgins"];
-console.log(`Array items: ${arrLastNames}`);
+// 2. Add items to the end of the array using .push()
+arrSongs.push("Yesterday");
+arrSongs.push("Wonderwall");
+arrSongs.push("Stairway to Heaven");
+
+console.log(arrSongs); // Output: ["Yesterday", "Wonderwall", "Stairway to Heaven"]
 </code></pre>
-	</section>
+
+		<p>The <span class="syn-js">.push()</span> method will be explored in later Tutorials.</p>
+
+        <h3>Why use <code>const</code> if the array is changing?</h3>
+        <p>You might wonder why we use <code>const</code> if we are adding items to the array. </p>
+        
+        <p>In JavaScript, <code>const</code> prevents you from completely <i>replacing</i> the array with a new one. However, it allows you to <i>modify</i> the contents inside the array.</p>
+
+    </section>
+    
+	
 
 	<section id="arrays-strings">
 
 		<h2>Array destructuring</h2>
-		<p>Array destructuring allows you to extract items from an array and assign them to variables.</p>
+		<p>In a similar way to <a href="objects-intro.html#object-destructuring" target="_blank">destructuring objects</a>, you can also destructure arrays. In a single line of code, you can extract or <i>unpack</i> items from an array and assign them to variables.</p>
 
-		<p>You could do this:</p>
+		<p>For example:</p>
 
-<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// Create and populate new array
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// Create and populate a new array
 const arrFruits = ["Apple", "Banana", "Orange", "Pear"];
-	
-// Assign array items to variables without destructuring
-let fruit1 = arrFruits[0];
-let fruit2 = arrFruits[1];
-let fruit3 = arrFruits[2];
-let fruit4 = arrFruits[3];
-console.log(`Fruit 1: ${fruit1}`);
-console.log(`Fruit 2: ${fruit2}`);
-console.log(`Fruit 3: ${fruit3}`);
-console.log(`Fruit 4: ${fruit4}`);</code></pre>
 
-		<p>A more modern option is to use <i>array destructuring</i>. This enables array items to be &#8216;unpacked&#8217; in a single line of code.</p>
-
-<p>With array destructuring, your code can be simplified to:</p>
-
-<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// Assign array items to variables with destructuring
+// Assign array items to variables with destructuring
 let [fruitOne, fruitTwo, fruitThree, fruitFour] = arrFruits;
-console.log(`Fruit 1: ${fruitOne}`);
-console.log(`Fruit 2: ${fruitTwo}`);
-console.log(`Fruit 3: ${fruitThree}`);
-console.log(`Fruit 4: ${fruitFour}`);</code></pre>
+console.log(`Fruit at position [0]: ${fruitOne}`);
+console.log(`Fruit at position [1]: ${fruitTwo}`);
+console.log(`Fruit at position [2]: ${fruitThree}`);
+console.log(`Fruit at position [3]: ${fruitFour}`);</code></pre>
 
 
 		<p>You can skip items in the array as follows:</p>
 
-<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// Create and populate new array
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// Create and populate a new array
 const arrCities = ["Dublin", "Cork", "Belfast", "Derry"];
 	
 // Skipping an array item while destructuring
 let [firstCity, , thirdCity] = arrCities;
 console.log(`Array item at position [0]: ${firstCity}`);
 console.log(`Array item at position [2]: ${thirdCity}`);</code></pre>
+
+		<p>NOTE: <i>One Comma = One Skip</i>: If you want to skip two items, you need two empty commas. For example, [a, , , d].</p>
 
 	</section>
 
@@ -501,7 +457,7 @@ console.log(`Array item at position [2]: ${thirdCity}`);</code></pre>
            
 			  
 			  <div class="gpt"><button class="copy-gpt" id="btn-16">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-16">
-			  Write a step-by-step guide explaining how <code>forEach</code> works with simple arrays of strings and numbers. Explain how <code>forEach</code> accesses each item in the array.</code></div>
+			  Write a step-by-step guide explaining how <code>.forEach()</code> works with simple arrays of strings and numbers. Explain how <code>.forEach()</code> accesses each item in the array.</code></div>
 
 			  <div class="gpt"><button class="copy-gpt" id="btn-17">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-17">
 			Explain array destructuring using a real-world analogy, like unpacking a box of items. Show how destructuring compares to traditional array access methods, demonstrate skipping elements, and explain practical use cases where destructuring makes code more readable and efficient.</code></div>
