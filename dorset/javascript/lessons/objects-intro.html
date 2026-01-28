@@ -77,6 +77,9 @@
             <p><a href="#object-empty">Creating an empty object</a></p>
             <p><a href="#object-destructuring">Object destructuring</a></p>
 
+            <p class="toc-indent"><a href="#reuse-var">Destructuring: reusing property keys as variable names</a></p>
+            <p class="toc-indent"><a href="#different-var">Destructuring: using different variable names</a></p>
+
             <p><a href="#try-it">Try it yourself</a></p>
 
             <p><a href="#resources">More learning resources</a></p>
@@ -98,7 +101,6 @@
                         <li>Create an object with a name and curly braces <span class="syn-js">{}</span>.</li>
                         <li>Add, modify and delete properties within an object.</li>
                         <li>Access object properties using dot <span class="syn-js">.</span> notation.</li>
-                        <li>Test for object type with the <span class="syn-js">typeof</span> operator.</li>
                         <li>Destructure properties from an object to variables.</li>
                     </ul>
                 </div>
@@ -117,12 +119,12 @@
 
                 <img src="assets/img/objects/object-properties.png" alt="screennshot" style="max-width: 500px">
 
-                <p>In the above example, the object has four properties, each one with a property name (such as <b>Age</b>) and a property value (such as <b>23</b>).</p>
+                <p>In the above example, the object has four properties, each one with a property key (such as <b>Age</b>) and a property value (such as <b>23</b>).</p>
                 <h3 id="objects-naming">Naming your objects</h3>
-                <p>Object names follow the usual JavaScript rules: they are case-sensitive and cannot contain spaces or the dash (<b>-</b>) character. Here are two tips:</p>
+                <p>Object keys follow the usual JavaScript rules for names: they are case-sensitive and cannot contain spaces or the dash (<b>-</b>) character. To helo you learn, we will:</p>
 
                 <ul>
-                    <li>Begin your object names with <b>obj</b>, such as <b>objUser</b> and <b>objProduct</b>.</li>
+                    <li>Begin sample object names with <b>obj</b>, such as <b>objUser</b> and <b>objProduct</b>.</li>
                     <li>Use singular nouns for object names, such as <b>objProduct</b> rather than <b>objProducts</b>.</li>
                 </ul>
             </section>
@@ -145,7 +147,7 @@ const objUser = {
 console.log(objUser);
 </code></pre>
 
-<p>As you can see, the colon <b>:</b> character separates a key from its value. And the comma <b>,</b> character signals the end of each key-value pair.</p>
+<p>As you can see, the colon <span class="syn-js">:</span> character separates a key from its value. And the comma <span class="syn-js">,</span> character signals the end of each key-value pair.</p>
 
                 <img src="assets/img/objects/object-image.png" alt="screenshot" style="max-width: 720px">
 
@@ -153,7 +155,7 @@ console.log(objUser);
 
                 <img src="assets/img/objects/console-log-1.png" alt="screenshot">
 
-                <p>To prevent your objects from being accidentally overwritten, declare them with <span class="syn-js">const</span> rather than <span class="syn-js">let</span>. You can still modify individual properties later if needed.</p>
+                <p>To prevent your objects from being accidentally overwritten, declare them with <span class="syn-js">const</span> rather than <span class="syn-js">let</span>. You can still modify/delete individual properties later if needed.</p>
             </section>
 
 
@@ -162,7 +164,6 @@ console.log(objUser);
                 <p>You can use the key of a property to display its value.</p>
 
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// === Displaying a property inside an object by its key ===
-
 console.log(`User's first name: ${objUser.firstName}`);
 console.log(`User's last name:  ${objUser.lastName}`);
 console.log(`User's age: ${objUser.age}`);
@@ -182,7 +183,7 @@ console.log(`User active?: ${objUser.isActive}`);</code></pre>
     
 <pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// === Working with the properties of an object ===
 
-// Declaring and populating new object
+// Declaring and populating a new object
 const objCar = {
     make: "Toyota",
     model: "Camry",
@@ -213,107 +214,9 @@ console.log(objCar);</code></pre>
             <img src="assets/img/objects/console-log-4.png" alt="screenshot">
 
 
-            <!-- <h3 id="testing-for-property">Testing an object for a property</h3>
-            <p>Does an object contain a particular property? You can use the <span class="syn-js">in</span> operator with the relevant key to find out.</p>
-
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// === Testing that a property exists within an object ===
-console.log("make" in objCar); // true
-console.log("owner" in objCar); // false
-
-// General test function to check if an object contains a property
-function hasProperty(obj, prop) {
-    return prop in obj;
-}
-
-console.log(hasProperty(objCar, "model")); // true</code></pre> -->
-
 
 </section>
     
-<!--     
-            <section id="objects-arrays">
-                <h2>From objects to arrays</h2>
-
-                <p>JavaScript offers three methods for extracting object properties to arrays.</p>
-
-
-<table class="table-js-methods">
- <tbody>
-  <tr>
-   <td style="min-width:36%"><p><span class="syn-js">Object.keys(objName)</span></p></td>
-   <td><p>Outputs all the keys in an object to an array.</p></td>
-  </tr>
-  <tr>
-    <td style="min-width:36%"><p><span class="syn-js">Object.values(objName)</span></p></td>
-    <td><p>Outputs all the values in an object to an array.</p></td>
-   </tr>
-   <tr>
-    <td style="min-width:36%"><p><span class="syn-js">Object.entries(objName)</span></p></td>
-    <td><p>Outputs each the key-value pair in an object as array. The result is a array of arrays.</p></td>
-   </tr>
- </tbody>
-</table>
-
-
-            <p>Here's two practical examples of outputting an object's keys to an array of arrays.</p>
-
-<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// === Outputting an object's keys to an array ===
-// === Outputting an object's keys to an array ===
-const arrUserKeys = Object.keys(objUser);
-console.log(`Keys in objUser: ${arrUserKeys}`);
-// Outputs: Keys in objUser: firstName,lastName,age,isActive
-    
-const arrCarKeys = Object.keys(objCar);
-console.log(`Keys in objCars: ${arrCarKeys}`);
-// Outputs: Keys in objUser: make,model,year,color</code></pre>            
-            
-            <p>The outputs <b>arrUserKeys</b> and <b>arrCarKeys</b> are real arrays that you can access and work with elsewher ein the program as needed.</p>
-            
-            <p>Next, here's two examples of outputting an object's values to an array.</p>
-
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// === Outputting an object's values to an array ===
-const arrUserValues = Object.values(objUser);
-console.log(`Values in objUser: ${arrUserValues}`);
-// Outputs: Values in objUser: Luis,Martinez,32,true
-        
-const arrCarValues = Object.values(objCar);
-console.log(`Values in objCars: ${arrCarValues}`);
-// Outputs: Values in objUser: Toyota,Camry,2012,Red</code></pre>
-            
-            <p>Again, <b>arrUserValues</b> and <b>arrCarValues</b> are real arrays you can work with.</p>
-            
-            <p>Finally, here's an example of outputting an object's key-value pairs to an array.</p>
-            
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">
-// === Outputting an object's key-value pairs to an array of arrays ===
-    
-// Create and populate an object
-const objProduct = {
-    name: "Laptop",
-    price: 999.99,
-    inStock: true,
-    category: "Electronics"
-};
-
-// Get array of key-value pairs
-const arrProductProps = Object.entries(objProduct);
-console.log(arrProductProps);
-// Outputs:
-// [
-//   ["name", "Laptop"],
-//   ["price", 999.99],
-//   ["inStock", true],
-//   ["category", "Electronics"]
-// ]</code></pre>
-
-        <p>Your web browser console should look similar to the following.</p>
-
-        <img src="assets/img/objects/console-log-5.png" alt="screenshot" style="max-width: 640px">
-
-        <p>You can work with <b>arrProductProps</b> as you would any other array.</p>
-
-
-        </section> -->
 
         <section id="object-empty">
             <h2>Creating an empty object</h2>
@@ -324,59 +227,14 @@ console.log(arrProductProps);
 
 // Create empty object
 const objPerson = {};
-console.log(objPerson.length === 0); // true
                 
-// Add keys and values to empty object
+// Add keys and values to an empty object
 objPerson.firstName = "Emma";
 objPerson.lastName = "Smith";
-console.log(objPerson.length === 0); // false
 
-console.log(objPerson);
-// {firstName: "Emma", lastName: "Smith"}</code></pre>
+console.log(objPerson); // {firstName: "Emma", lastName: "Smith"}</code></pre>
 
-        <!-- <h3 id="counting-properties">Counting the properties in an object</h3>
-
-        <p>With strings and arrays, you can use their <span class="syn-js">.length</span> property to count the number of characters and elements they contain.</p>
-
-        <p>With objects, however, you need to create a function such as the following to find how many properties are contained inside it.</p>
-
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// === Finding the length (number of properties) in an object ===
-
-function countProperties(obj) {
-    return Object.keys(obj).length;
-}
-    
-// Example usage:
-const obj1 = { name: "Alice", age: 25, city: "New York" };
-const obj2 = {};
-    
-console.log(countProperties(obj1)); // Outputs: 3
-console.log(countProperties(obj2)); // Outputs: 0</code></pre> -->
-
-        <!-- </section> -->
-
-
-        <!-- <section id="nested-objects">
-
-            <h2>Working with nested objects</h2>
-
-            <p>Objects can contain other objects or arrays as properties, enabling the creation of complex data structures.</p>
-
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// === Working with nested objects ===
-
-const person = {
-    name: "John",
-    age: 30,
-    address: {
-        city: "New York",
-        zip: 10001
-    },
-    hobbies: ["reading", "cycling"]
-};
-
-console.log(person.address.city); // Outputs: New York
-console.log(person.hobbies[1]); // Outputs: cycling</code></pre>
- -->
+        
 
         </section>
 
@@ -385,62 +243,54 @@ console.log(person.hobbies[1]); // Outputs: cycling</code></pre>
 
         <section id="object-destructuring">
           <h2>Object destructuring</h2>
-          <p>Object destructuring allows you to extract properties from objects and assign them to variables.</p>
 
-<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-javascript">// === Object destructuring ===
+          <p>Up to now, we have accessed a property value in an object by its key (name). For example:</p>
 
-// Without destructuring
-const userFirstName = objUser.firstName;
-const userLastName = objUser.lastName;
+<pre><code class="hljs language-javascript">// === Accessing an object property by its key ===
+console.log(`User's first name: ${objUser.firstName}`);</code></pre>
 
-// With destructuring
-const { firstName, lastName } = objUser;
-console.log(`User name: ${firstName} ${lastName}`);
+            <p>We can also use this method to assign a property value from an object to a single variable we can use in our code.</p>
+<pre><code class="hljs language-javascript">// === Assigning object value by its to a variable ===
+const varFirstName = objUser.firstName;
+console.log(`The first name of the user is: ${varFirstName}`);
+</code></pre>
 
+        <p>When working with objects containing lots of properties (key-value) pairs, this method can become very repetitive. A newer and shorter method is called <i>destructuring</i>.</p>
+
+        <p>Object destructuring allows you, with just a single line of code, to:</p>
+          
+        <ul>
+            <li>Extract several properties from an object.</li>
+            <li>Assign the extracted properties to variables.</li>
+        </ul>
+          
+        <h3 id="reuse-var">Destructuring: reusing property keys as variable names</h3>
+        <p>In the simplest case, you can reuse the object keys (names) as variable names in your code. For example:</p>
+
+<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-javascript">// === Destructuring by reusing property keys ===
+const { firstName, lastName, age, isActive } = objUser;
+
+// Object's properties are now inside variables
+console.log(`User's first name: ${firstName}`);
+console.log(`User's last name:  ${lastName}`);
+console.log(`User's age: ${age}`);
+console.log(`User active?: ${isActive}`);</code></pre>
+
+        <p>As you can see, the property values of the object <b>objUser</b> are now available as individual variable values in your code.</p>
+
+        <h3 id="different-var">Destructuring: using different variable names</h3>
+        <p>Sometimes, you may want to use different variable names than the property keys in the object. You can do this by using a colon <span class="syn-js">:</span> followed by the new variable name. For example:</p>
+
+
+<pre><button class="copy-code" id="btn-16">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-16" class="hljs language-javascript">
 // Destructuring with different variable names
-const { price: productPrice, name: productName } = objProduct;
-console.log(`${productName} costs ${productPrice}`);</code></pre>
+const { firstName: customerFirstName, lastName: customerLastName } = objUser;
+console.log(`New variable names: ${customerFirstName} ${customerLastName}`);</code></pre>
             </section>
 
 
 
 
-            <!-- <section>
-                <h2>Copying an object</h2>
-
-                <p>Copying an object is not as simple as it seems. The following code creates a new object, <b>objPerson2</b>, and assigns it the same properties as <b>objPerson</b>.</p>
-            <section id="objects-typeof">
-                <h2>Objects and the <code>typeof</code> operator</h2>
-                <p>Objects in JavaScript return "object" when using the <span class="syn-js">typeof</span> operator.</p>
-
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// === Using typeof with objects ===
-
-console.log(`Type of objUser: ${typeof objUser}`);
-// Outputs: object
-console.log(`Type of objProduct: ${typeof objProduct}`);
-// Outputs: object
-
-let someVar = null;
-console.log(`Type of null: ${typeof someVar}`);
-// Also outputs: object (this is a known quirk in JavaScript)</code></pre>
-            </section>     
-            
-            
-            <section>
-
-                <h2>Testing for equality between objects</h2>
-
-                <p>Two objects are not equal even if they have the same properties and values because they are compared by reference, not value.</p>
-
-<pre><code>
-const obj1 = { name: "Alice" };
-const obj2 = { name: "Alice" };
-
-console.log(obj1 === obj2); // Outputs: false
-</code></pre>                
-
-            </section>
- -->
 
  <section class="resources-learning" id="try-it">
 
@@ -457,18 +307,18 @@ console.log(obj1 === obj2); // Outputs: false
     &nbsp;isAvailable (boolean)</code><br></p>
 
     <p>---</p>
-    <p>Create an object called <code>objComputer</code> with properties for brand, model, and price. Then:</p>
-    <p>- Add a new property called inStock</p>
-    <p>- Update the price</p>
-    <p>- Delete the model property</p>
+    <p>Create an object called <code>objComputer</code> with properties for <code>brand</code>, <code>model</code>, and <code>price</code>. Then:</p>
+    <p>- Add a new property called <code>inStock</code> and set its value to <code>true</code></p>
+    <p>- Update the <code>price</code></p>
+    <p>- Delete the <code>model</code> property</p>
     <p>- Output the object to the console after each change</p>
 
     <p>---</p>
 
-    <p>Create an object called <code>objProduct</code> with properties for name, price, and category. Use object destructuring to:</p>
+    <p>Create an object called <code>objProduct</code> with properties for <code>name</code>, <code>price</code>, and <code>category</code>. Use object destructuring to:</p>
     <p>- Extract all properties to individual variables</p>
-    <p>- Extract only name and price, with price renamed to productPrice</p>
-    <p>- Output the extracted values</p>
+    <p>- Extract only <code>name</code> and <code>price</code>, with <code>price</code> renamed to <code>productPrice</code></p>
+    <p>- Output the extracted values to the console.</p>
 
   </section>
 
@@ -502,14 +352,12 @@ console.log(obj1 === obj2); // Outputs: false
       
           <h2>Sample AI prompts</h2>
 
-          <div class="gpt"><button class="copy-gpt" id="btn-16">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-16">Write a series of code examples that show different ways to manipulate object properties - adding, updating, and deleting properties. Include error cases that might occur when working with const objects and explain why they happen.</code></div>
+          <div class="gpt"><button class="copy-gpt" id="btn-17">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-17">Write a series of code examples that show different ways to manipulate object properties - adding, updating, and deleting properties. Include error cases that might occur when working with objects and explain why they happen.</code></div>
           
-          <div class="gpt"><button class="copy-gpt" id="btn-17">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-17">
+          <div class="gpt"><button class="copy-gpt" id="btn-18">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-18">
         Create a step-by-step explanation of how object destructuring works in JavaScript, with examples comparing traditional property access versus destructuring. Include cases where you rename variables during destructuring.</code></div>
           
        
-            
-              
         </section>
 
 
@@ -533,21 +381,6 @@ console.log(obj1 === obj2); // Outputs: false
 <script src="assets/js/utils.js"></script>
 
 
-<!-- Try it yourself 
-Create an object representing a book with properties like title, author, and yearPublished.
-Add a new property for the book’s genre.
-Modify the yearPublished to a different year.
-Write a function that takes an object and a key, and returns the value associated with that key.
-Create a nested object representing a school, with properties for name, location, and an array of students.
-
-
-            <p>The square bracket notation <span class="syn-js">[ ]</span> is useful if the key is stored in a variable. In this case, you omit the surrounding quotes. See the code below.</p>
-
-<pre><code>const key = "year";
-console.log(car[key]); // Outputs: 2021</code></pre>
-
-
--->
 
 
 </body>
