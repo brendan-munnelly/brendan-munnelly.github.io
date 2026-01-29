@@ -153,6 +153,17 @@
 	</section>
 
 
+	<section>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+			<p>For this Tutorial, you can reuse the <b>workfile-1.html</b> exercise file you created in the previous <a href="adding-js-to-web-pages.html"> 
+Adding JavaScript to a web page</a> Tutorial.</p>
+
+			<img src="assets/img/adding-js-to-web-pages/folders-files.png" alt="screenshot" style="max-width: 640px">
+		</div>
+	
+
+	</section>
 
 
 <section id="js-variables">
@@ -230,40 +241,41 @@ let taxRate;       // Declares a variable named taxRate</code></pre>
 
 
 	<h3 id="assign-values">Assigning values to variables</h3>
-	<p>When you declare a variable, you will often want to <i>assign</i> a value to it. Copy the examples below.</p>
+
+	<p>With the <span class="syn-js">let</span> keyword, yopu can <i>declare</i> (create and name) an empty variable in one statement and then <i>initialise</i> (assign a first value to it) in another. See below.</p>
 
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Declaring variables and then assigning values to them
 let userName; // Declare a variable
 userName = "Sheila Murphy"; // Assign value to the variable
 console.log(userName); // Outputs: Sheila Murphy
+</code></pre>
 
-let userCountry; // Declare a variable
-userCountry = "Ireland"; // Assign value to the variable
+	<p>Alternatively with <span class="syn-js">let</span>, you can declare and initialise a variable in the <i>same</i> statement.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">
+let userCountry = "Ireland"; // declare AND initialise variable
 console.log(userCountry); // Outputs: Ireland</code></pre>
 
+	<p>With the <span class="syn-js">const</span> keyword, you must assign a value when you declare the variable.</p>
 
-	<p>You can declare a variable and assign a value to it in the same statement on the same line. Here&#8217;s two examples.</p>
+	<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">
+const userID = 1234; // declare AND initialise variable
+console.log(userID); // Outputs: 1234</code></pre>
 
-<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Declaring and assigning values to variables on single line
-let userEmail = "abcd@email.com";
-console.log(userEmail); // Outputs: abcd@email.com
-let userPassword = "banana42%";
-console.log(userPassword); // Outputs: banana42%
-// Do NOT put quotes around a variable name in console.log()
-console.log("userPassword"); // Outputs: userPassword</code></pre>
+		<p>Attempting to reassign a variable created with <span class="syn-js">const</span> throws an error in the Console as shown below.</p>
 
-
+		<img src="assets/img/variables-literals/constant-reassign-error.png" alt="screenshot" style="max-width:700px">
 	
 	<h3 id="string-variables">About string variables</h3>
 
-	<p>The variables you have worked with so far have all been of one type: the <i>string variable</i>. This variable type holds letters, numbers, blank spaces or punctuation symbols. </p>
+	<p>A <i>string variable</i> holds letters, numbers, blank spaces or punctuation symbols. </p>
 
-	<p>When you enclose the value in single quotes (<span class="syn-js">''</span>) or double quotes (<span class="syn-js">""</span>), JavaScript assumes that you want to create a string variable. For example:</p>
+	<p>When you enclose the value in single quotes (<span class="syn-js">''</span>), double quotes (<span class="syn-js">""</span>) or backticks (<span class="syn-js">``</span>), JavaScript assumes that you want to create a string variable. For example:</p>
 
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Working with string variables
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Working with string variables
 const firstName = "Peter";
 let lastName = 'Smith';
-let streetAddress = "42 Green Avenue";
+let streetAddress = `42 Green Avenue`;
 console.log(firstName); // Outputs: Peter
 console.log(lastName); // Outputs: Smith
 console.log(streetAddress); // Outputs: 42 Green Avenue
@@ -274,9 +286,6 @@ console.log(firstName, lastName, streetAddress);
 
 	<p>When you use the comma <span class="syn-js">,</span> character in a <span class="syn-js">console.log()</span> statement as above, each variable is displayed separately with a space automatically inserted between them.</p>
 
-	<p>You will learn more about string variables in the <a href="working-with-strings.html">Working with strings</a> Tutorial.</p>
-
-
 
 	<h3 id="numeric-variables">About numeric variables</h3>
 
@@ -284,7 +293,7 @@ console.log(firstName, lastName, streetAddress);
 
 	<p>When you omit the quotes around the value, JavaScript makes the variable a numeric variable. For example.</p>
 
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Working with numeric variables	
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Working with numeric variables	
 let orderQty = 42;
 let productPrice = 9.99;</code></pre>
 
@@ -295,7 +304,6 @@ let productPrice = 9.99;</code></pre>
 			<li>When you omit the quotes, JavaScript gives the variable a data type of <i>number</i>.</li>
 		</ul>
 
-	<p>You will learn more about numeric variables in the <a href="working-with-numbers.html">Working with numbers</a> Tutorial.</p>
 
 	<h3 id="boolean-variables">About boolean variables</h3>
 
@@ -316,8 +324,6 @@ let productPrice = 9.99;</code></pre>
     <p>Boolean variables typically have names that begin with <b>is</b> or similar words that suggest their two allowed values.</p>
 	
 	<p>Boolean variables are often used to store the results of comparisons or logical operations.</p>
-
-	<p>You will learn more about boolean variables in the <a href="making-decisions.html">Making decisions with <i>if</i></a> and <a href="testing-weird-values.html">Testing for weird values</a> Tutorials.</p>
 
 
 	<h3 id="null-values">About <code>null</code> values</h3>
@@ -343,7 +349,7 @@ let productPrice = 9.99;</code></pre>
 		</tbody>
 	</table>
 
-	<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Setting a null value
+	<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Setting a null value
 let testScore = null; // Assign null without quotes. Not "null" (a string).</code></pre>
 		
 </section>
@@ -354,7 +360,7 @@ let testScore = null; // Assign null without quotes. Not "null" (a string).</cod
 		
 			<p>Putting a value into a variable is known as assignment, and is achieved through the use of the <i>assignment operator</i> (<span class="syn-js">=</span>). For example:</p>
 	
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// About variable assignment
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// About variable assignment
 let salePrice = 100;</code></pre>
 		
 		<p>This places the value of <b>100</b> inside the variable named <b>salePrice</b>.</p>
@@ -367,7 +373,7 @@ let salePrice = 100;</code></pre>
 		
 		<p>Sometimes, you may want to change a variable's value by a fixed amount. The following would make no sense if it were arithmetic.</p>
 
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Update variable value
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Update variable value
 salePrice = salePrice + 25;
 console.log(salePrice); // Outputs: 125</code></pre>
 					
@@ -400,7 +406,7 @@ console.log(salePrice); // Outputs: 125</code></pre>
 		
 		<p>Copy the example below into your <b>variables-literals.html</b> workfile.</p>
 
-<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Mixing literals and variables
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Mixing literals and variables
 const customerFirstName = "Marie";
 const accBalance = 10;
 		
@@ -445,7 +451,7 @@ console.log(`Hi ${customerFirstName}. Your balance is €${accBalance}.`);
 
 		<p>If you are unsure about a variable&#8217;s <i>data type</i>, you can use the <span class="syn-js">typeof</span> operator on the variable as shown below.</p>
 
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Checking the data type of a variable
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Checking the data type of a variable
 let someVar = ""; // declare empty variable 
 
 someVar = "12"; // assign string to variable
@@ -485,7 +491,7 @@ console.log(`Data type of someVar: ${typeof someVar}`); // Outputs: number - aga
 
 		<p>In contrast, many other programming languages (like Java, C++, or C#) are <i>strongly-typed.</i> You must declare what type of value a variable will hold. And trying to put a different type of value in the variable will cause an error.</p>
 
-		<p>JavaScript&#8217;s loosely-typed nature makes it more flexible. But it can make it harder to find errors - and can create unexpected behaviours! See the <a href="testing-weird-values.html">Testing for weird values</a> Tutorial.</p>
+		<p>JavaScript&#8217;s loosely-typed nature makes it more flexible. But it can make it harder to find errors - and can create unexpected behaviours!</p>
 
 		<p>Because of these challenges, Microsoft created TypeScript, a programming language that adds data type checking to JavaScript. You can think of TypeScript as <i>JavaScript+</i>. It is increasingly popular for large-scale applications.</p>
 	</section>
@@ -526,22 +532,22 @@ console.log(`Data type of someVar: ${typeof someVar}`); // Outputs: number - aga
 
 		<h2>Sample AI prompts</h2>
 
-		<div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">
+		<div class="gpt"><button class="copy-gpt" id="btn-12">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-12">
 		What are some common mistakes developers make when naming variables? Can you show examples of good and bad practices?</code></div>
 
-		<div class="gpt"><button class="copy-gpt" id="btn-12">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-12">
+		<div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">
 		Please provide a short and simple explanation of these four variable types in JavaScript and show some everyday examples of each:<br>
 		- string<br>
 		- numeric<br>
 		- boolean<br>
 		- null</code></div>
 
-		<div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">I'm confused about when to use <code>const</code> versus <code>let</code>. Can you give me some real-world examples that make the difference clear? Limit your responses variables only. Do not include arrays or objects.</code></div>
+		<div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">I'm confused about when to use <code>const</code> versus <code>let</code>. Can you give me some real-world examples that make the difference clear? Limit your responses variables only. Do not include arrays or objects.</code></div>
 
-		<div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">
+		<div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">
 		What would happen if I tried to change a value stored in a <code>const</code> variable? Can you show me with examples?</code></div>
 		
-		<div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">
+		<div class="gpt"><button class="copy-gpt" id="btn-16">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-16">
 		What is meant by saying that JavaScript is a loosely-typed programming language?
 		</code></div>
 
