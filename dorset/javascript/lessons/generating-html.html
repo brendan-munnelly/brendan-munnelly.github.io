@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Generating HTML | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Using JavaScript to create new HTML elements, add content and attributes to them, and append them to a web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Generating HTML with JavaScript</h1>
+                <h2>Using JavaScript to create new HTML elements, add content and attributes to them, and append them to a web page.</h2>
+            </div>
+        </div></header>
+
+    <main>
+
+        <aside>
+            <h3>JAVASCRIPT TUTORIALS</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#about-the-DOM">About the Document Object Model (DOM)</a></p>
+            <p><a href="#create-append">The three-step process: create, content, append</a></p>
+            <p class="toc-indent"><a href="#add-heading">Adding a main heading</a></p>
+            <p class="toc-indent"><a href="#add-para">Adding a text paragraph</a></p>
+
+            <p><a href="#add-subheading">Adding a sub-heading</a></p>
+
+            <p><a href="#nesting">Nesting elements inside containers</a></p>
+
+            <p class="toc-indent"><a href="#nesting-with-ids">Nesting elements inside containers with IDs</a></p>
+
+
+            <p><a href="#inner-html">Adding formatted content with .innerHTML</a></p>
+            <p><a href="#images">Adding images to a web page</a></p>
+
+            <p><a href="#try-it">Try it yourself</a></p>
+
+            <p><a href="#resources">More learning resources</a></p>
+      
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+            <p>&nbsp;</p>
+
+        </aside>
+
+
+<article>
+
+<section id="learning-goals">
+    <h2>Learning Goals</h2>
+    <p>At the end of this Tutorial, you will be able to:</p>
+    <div class="box-goals">
+        <ul>
+            <li>Create new HTML elements using <span class="syn-js">document.createElement()</span>.</li>
+            <li>Add text content to elements using <span class="syn-js">.innerText</span>.</li>
+            <li>Add formatted HTML using the  <span class="syn-js">.innerHTML</span> tag.</li>
+            <li>Add elements to the web page using <span class="syn-js">.appendChild()</span>.</li>
+            <li>Nest elements inside specific containers (parents) rather than the page body.</li>
+            <li>Set attributes for elements, such as the <span class="syn-js">src</span> and <span class="syn-js">alt</span> for images.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, you will start with an <i>empty</i> HTML file.</p>
+			<p>In your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-5.html</b>.</p>
+   			<p>Create a new empty text file named <b>script-5.js</b> and save it in this same folder.</p>
+            <p>Add a link to <code>script-5.js</code> in your <code>workfile-5.html</code> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
+
+
+			<img src="assets/img/generating-html/workfile-5.png" alt="screenshot">
+		</div>
+</section>
+
+<section>
+
+    <h2 id="about-the-DOM">About the Document Object Model (DOM)</h2>
+    <p>When a web browser accesses a web page &#8211; also known as an <i>HTML document</i> &#8211; it performs two operations. It:</p>
+
+    <ul>
+        <li>Displays (<i>renders</i>) the web page in the browser, using any links in the page to CSS, image, video, font, and other files.</li>
+        <li>Creates a Document Object Model (DOM) of the web page that enables the page's content to be accessed and modified by JavaScript code.
+        <span class="inside-ul">&nbsp;</span>
+        In effect, the DOM is an <i>interface</i> between and JavaScript.</li>
+    </ul>
+
+    <img src="assets/img/generating-html/11-1.png" alt="JavaScript">
+
+</section>   
+
+
+
+<section id="create-append">
+
+    <h2>The three-step process: create, content, append</h2>
+    <p>Adding a new element to a web page with JavaScript always involves the same three steps:</p>
+
+    <ol>
+        <li><i>Create</i> the element in JavaScript code.</li>
+        <li><i>Add Content</i> to the element (usually text, but also CSS classes, or IDs).</li>
+        <li><i>Append</i> (attach) the element to the web page so it becomes visible.</li>
+    </ol>
+
+    <h3 id="add-heading">Adding a main heading</h3>
+    <p>Let's add a <span class="syn">&lt;h1&gt;</span> heading to your empty web page.</p>
+    <p>Copy the following code into your <b>script-5.js</b> script file.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// 1. Create the element
+const mainHeading = document.createElement("h1");
+
+// 2. Add content
+mainHeading.innerText = "Welcome to JavaScript";
+
+// 3. Append to the web page (document.body)
+document.body.appendChild(mainHeading);</code></pre>
+
+    <p>Save the file and open <b>workfile-5.html</b> in your browser. You should see your new heading.</p>
+
+   <h3 id="add-para">Adding a text paragraph</h3>
+    <p>Now let's add a paragraph of text. </p>
+    
+    <p>When you use <span class="syn-js">appendChild()</span>, JavaScript adds the new element <i>underneath</i> whatever is already there. It's like stacking bricks: each new one goes on top of the stack (or in web terms, at the bottom of the page).</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// 1. Create the element
+const introPara = document.createElement("p");
+
+// 2. Add content
+introPara.innerText = "This entire page was generated using JavaScript code. No HTML tags were written in the body.";
+
+// 3. Append to the web page
+// This will appear UNDER the heading we added previously
+document.body.appendChild(introPara);</code></pre>
+
+</section>        
+
+<section id="add-subheading">
+
+    <h2>Adding a sub-heading</h2>
+    <p>Let's practice again by adding a sub-heading <span class="syn">&lt;h2&gt;</span> with some text.</p>
+    
+    <p>Add this code to your script file.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// 1. Create
+const subHeading = document.createElement("h2");
+
+// 2. Add Content
+subHeading.innerText = "About the DOM";
+
+// 3. Append
+document.body.appendChild(subHeading);</code></pre>
+
+    <p>Notice that JavaScript adds each new element to the <i>bottom</i> of the page, in the order your code runs.</p>
+
+</section>
+
+<section id="nesting">
+
+    <h2>Nesting elements inside containers</h2>
+    <p>So far, we have attached everything directly to the <span class="syn">&lt;body&gt;</span> of the web page.</p>
+    
+    <p>However, usually you will want to put elements <i>inside</i> other elements (containers), such as a <span class="syn">&lt;section&gt;</span> or a <span class="syn">&lt;div&gt;</span>. This is called <i>nesting</i>.</p>
+
+    <p>To do this, you simply append the child element to the <i>container</i> instead of the body.</p>
+
+    
+    <p>Copy the code below to your script file. It performs the following actions:</p>
+    <ul>
+        <li>Creates a container <span class="syn">&lt;section&gt;</span> and gives it a CSS class.</li>
+        <li>Creates a <span class="syn">&lt;p&gt;</span> paragraph with text.</li>
+        <li>Puts the paragraph <i>inside</i> the <span class="syn">&lt;section&gt;</span> container tag.</li>
+        <li>Puts the section <i>inside</i> the <span class="syn">&lt;body&gt;</span> of the web page.</li>
+    </ul>
+
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// === NESTING ELEMENTS ===
+
+// A. Create the container (section)
+const heroSection = document.createElement("section");
+
+// B. Create the content (paragraph)
+const heroText = document.createElement("p");
+heroText.innerText = "This paragraph is nested inside a section.";
+
+// C. Append the paragraph TO THE SECTION
+heroSection.appendChild(heroText);
+
+// D. Append the section TO THE BODY
+document.body.appendChild(heroSection);</code></pre>
+
+    <p>Refresh your browser. If you inspect your web page (Right-click -&gt; Inspect), you should see the new text inside a <span class="syn">&lt;section&gt;</span> container.</p>
+
+    <h3 id="nesting-with-ids">Nesting elements inside containers with IDs</h3>
+
+        <p>Often your web pages will have multiple container tags of the same type, so you might want to give them unique IDs to identify them.</p>
+
+        <p>In the code below, we create a new <span class="syn">&lt;section&gt;</span> with an ID of <b>important-note</b>, and then add a paragraph inside it.</p>
+
+
+<pre><button class="copy-code" id="btn-5c">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5c" class="hljs language-javascript">// === NESTING ELEMENTS ===
+
+// A. Create the container (section)
+const anotherSection = document.createElement("section");
+anotherSection.id = "important-note"; // Give it a unique ID
+
+// B. Create the content (paragraph)
+const someMessage = document.createElement("p");
+someMessage.innerText = "This text message is nested inside a section with a unique ID of important-note.";
+
+// C. Append the paragraph TO THE SECTION
+// (We add the child to the specific parent, not the body)
+anotherSection.appendChild(someMessage);
+
+// D. Append the section TO THE BODY
+// (Now we add the parent (and its children) to the page)
+document.body.appendChild(anotherSection);</code></pre>
+
+    <p>If you inspect your web page (Right-click -&gt; Inspect), you will see the updated HTML structure.</p>
+
+
+
+        
+</section>
+
+
+<section id="inner-html">
+    <h2>Adding formatted content with <code>.innerHTML</code></h2>
+    <p>Sometimes you want to add text that includes bolding, italics, or line breaks inside a container. You can do this with the <span class="syn-js">.innerHTML</span> method.</p>
+
+<pre><button class="copy-code" id="btn-inner">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-inner" class="hljs language-javascript">// 1. Create a container
+const note = document.createElement("div");
+
+// 2. Add content INCLUDING HTML tags
+// The browser will render the &lt;b&gt; and &lt;br&gt; tags correctly
+note.innerHTML = "&lt;b&gt;Note:&lt;/b&gt; Access is granted.&lt;br&gt;Please proceed to the &lt;i&gt;Lobby&lt;/i&gt;.";
+
+// 3. Append to body
+document.body.appendChild(note);</code></pre>
+
+    
+
+    <p>Note: If you used <code>.innerText</code> in the example above, the tags <code>&lt;b&gt;</code> and <code>&lt;br&gt;</code> would be displayed on screen as plain text rather than being processed as HTML.</p>
+
+</section>
+
+
+<section id="images">
+
+    <h2>Adding images to a web page</h2>
+
+    <p>Adding an image follows the same process, but instead of setting <code>.innerText</code>, we need to set the image source (<code>src</code>) and description (<code>alt</code>).</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// === ADDING AN IMAGE ===
+
+// 1. Create the image element
+const myImage = document.createElement("img");
+
+// 2. Set the attributes (Source and Alt text)
+myImage.src = "https://placedog.net/500/280";
+myImage.alt = "A cute puppy";
+
+// 3. Append to the web page
+document.body.appendChild(myImage);</code></pre>
+
+</section>
+
+    <section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your workfile...</p>
+
+        <p>---</p>
+
+        <p>Create a new <b>&lt;h3&gt;</b> heading with the text "My Favorite Links". Append it to the body.</p>
+
+        <p>---</p>
+
+        <p>Create a <b>&lt;footer&gt;</b> element. Add some copyright text to it. Append it to the bottom of the web page.</p>
+    
+      </section>
+    
+
+
+      <section class="resources-learning" id="resources">
+
+        <h2>More learning resources</h2>
+    
+        <div class="flex-container">
+          <div class="text-container">
+            <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+            <p><a href="#" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+    
+          </div>
+      
+          <div class="audio-container">
+            <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+    
+            <audio controls>
+              <source src="#" type="audio/mp3">
+              Your browser does not support the audio element.
+            </audio>
+    
+          </div>
+        </div>
+    
+      </section>
+      
+
+
+
+    <section class="resources-learning" id="ai-prompts">
+          
+        <h2>Sample AI prompts</h2>
+    
+     
+        <div class="gpt"><button class="copy-gpt" id="btn-9">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-9">
+        Explain the concept of the "DOM Tree" to a beginner. How does creating an element like a &lt;div&gt; and then adding a &lt;p&gt; inside it relate to a parent-child relationship?</code></div>
+    
+      </section>
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
