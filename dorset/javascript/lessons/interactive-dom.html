@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Interacting with the DOM | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Handling user events with onclick, reading values from form inputs, and validating user data.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Interacting with the DOM</h1>
+                <h2>Handling user events with buttons, reading data from form inputs, and validating user data.</h2>
+            </div>
+        </div></header>
+
+    <main>
+
+        <aside>
+            <h3>JAVASCRIPT TUTORIALS</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#setup">Setting up your workfiles</a></p>
+            <p><a href="#event-handlers">Working with event handlers (Buttons)</a></p>
+            <p><a href="#reading-input">Reading text from input fields</a></p>
+            
+            <p><a href="#validation">Validating user input</a></p>
+            <p class="toc-indent"><a href="#trim">Cleaning whitespace with .trim()</a></p>
+            <p class="toc-indent"><a href="#visual-feedback">Providing visual feedback</a></p>
+
+            <p><a href="#numbers">Working with numeric input</a></p>
+
+            <p><a href="#try-it">Try it yourself</a></p>
+
+            <p><a href="#resources">More learning resources</a></p>
+      
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+            <p>&nbsp;</p>
+
+        </aside>
+
+
+<article>
+
+<section id="learning-goals">
+    <h2>Learning Goals</h2>
+    <p>At the end of this Tutorial, you will be able to:</p>
+    <div class="box-goals">
+        <ul>
+            <li>Trigger JavaScript functions using the <span class="syn-js">onclick</span> event handler.</li>
+            <li>Read data from HTML form fields using the <span class="syn-js">.value</span> property.</li>
+            <li>Clean up user input using the <span class="syn-js">.trim()</span> method.</li>
+            <li>Validate input to ensure it is not empty or invalid.</li>
+            <li>Provide visual feedback (like red borders) when input errors occur.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="setup">
+    <h2>Setting up your workfiles</h2>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, we need some interactive elements (buttons and inputs) to work with.</p>
+			<p>In your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-7.html</b> and copy the code below.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Interactivity&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; margin: 40px; line-height: 1.6; }
+        section { margin-bottom: 40px; padding: 20px; background: #f9f9f9; border-radius: 8px;}
+        input { padding: 8px; font-size: 16px; }
+        button { padding: 8px 16px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;}
+        button:hover { background: #0056b3; }
+        
+        /* Error class for validation */
+        .input-error { border: 2px solid red; background-color: #ffe6e6; }
+    &lt;/style&gt;
+    &lt;script defer src="script-7.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;Interactivity and Input&lt;/h1&gt;
+
+    &lt;!-- SECTION 1: Simple Button --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;1. Event Handlers&lt;/h2&gt;
+        &lt;p id="status-text"&gt;Waiting for user...&lt;/p&gt;
+        &lt;button onclick="updateStatus()"&gt;Click Me&lt;/button&gt;
+    &lt;/section&gt;
+
+    &lt;!-- SECTION 2: Text Input --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;2. Text Input&lt;/h2&gt;
+        &lt;input type="text" id="user-name" placeholder="Enter your name"&gt;
+        &lt;button onclick="greetUser()"&gt;Say Hello&lt;/button&gt;
+        &lt;p id="greeting-msg"&gt;&lt;/p&gt;
+    &lt;/section&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+   			<p>Create a new empty text file named <b>script-7.js</b> and save it in this same folder.</p>
+		</div>
+</section>
+
+<section id="event-handlers">
+
+    <h2>Working with event handlers (Buttons)</h2>
+    <p>A JavaScript function usually sits passively in your code, doing nothing until it is told to run.</p>
+    
+    <p>To run a function when a user clicks a button, we use the <span class="syn-js">onclick</span> attribute in our HTML. This connects the visual button to the logic in your script file.</p>
+
+    <p>Copy this function into your <b>script-7.js</b> file.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Function to update the status text
+function updateStatus() {
+    // 1. Select the paragraph
+    const statusPara = document.getElementById("status-text");
+
+    // 2. Change the text
+    statusPara.innerText = "Button has been clicked!";
+    statusPara.style.color = "green";
+}</code></pre>
+
+    <p>Save and test your workfile. When you click the "Click Me" button, the text above it should change.</p>
+
+</section>   
+
+<section id="reading-input">
+
+    <h2>Reading text from input fields</h2>
+    <p>In dynamic web applications, we often need to capture what a user types into a form.</p>
+
+    <p>To do this, we select the input element and read its <span class="syn-js">.value</span> property.</p>
+
+    <p><b>Important:</b> 
+    <ul>
+        <li>Use <code>.innerText</code> for elements like paragraphs, headings, and divs.</li>
+        <li>Use <code>.value</code> for form elements like inputs, textareas, and dropdowns.</li>
+    </ul>
+    </p>
+
+    <p>Add this code to your script file to handle the second section of your HTML.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Function to read input and display a greeting
+function greetUser() {
+    // 1. Get the INPUT element
+    const inputField = document.getElementById("user-name");
+
+    // 2. Get the VALUE typed inside it
+    const name = inputField.value;
+
+    // 3. Display it in the paragraph
+    const msgPara = document.getElementById("greeting-msg");
+    msgPara.innerText = "Hello, " + name + "!";
+}</code></pre>
+
+    <p>Test it by typing a name and clicking "Say Hello".</p>
+
+</section>        
+
+<section id="validation">
+
+    <h2>Validating user input</h2>
+    <p>Users often make mistakes. They might leave a box empty or accidentally type just spaces.</p>
+
+    <h3 id="trim">Cleaning whitespace with <code>.trim()</code></h3>
+    <p>If a user types <code>"   John   "</code>, you usually only want <code>"John"</code>. The <span class="syn-js">.trim()</span> method removes any whitespace from the start and end of a string.</p>
+
+    <h3 id="visual-feedback">Providing visual feedback</h3>
+    <p>If the input is invalid (empty), we should alert the user. In the <b>Setup</b> step, we added a CSS class called <code>.input-error</code> that turns the border red.</p>
+
+    <p>Let's update our <code>greetUser</code> function to be smarter.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">function greetUser() {
+    const inputField = document.getElementById("user-name");
+    const msgPara = document.getElementById("greeting-msg");
+
+    // Get value and TRIM extra spaces
+    const name = inputField.value.trim();
+
+    // Check if the name is empty
+    if (name === "") {
+        // Error: Make border red and show message
+        inputField.classList.add("input-error");
+        msgPara.innerText = "Please enter your name.";
+        msgPara.style.color = "red";
+    } else {
+        // Success: Remove red border and show greeting
+        inputField.classList.remove("input-error");
+        msgPara.innerText = "Hello, " + name + "!";
+        msgPara.style.color = "black";
+    }
+}</code></pre>
+
+    <p>Now, if you leave the box empty and click the button, the input field turns red. If you type a name, it goes back to normal.</p>
+
+</section>
+
+<section id="numbers">
+
+    <h2>Working with numeric input</h2>
+    <p>By default, <b>all</b> values retrieved from an HTML input are Strings (text). Even if the user types <code>25</code>, JavaScript sees it as <code>"25"</code>.</p>
+    
+    <p>If you want to do math with the input, you must convert it to a Number first.</p>
+
+    <p>Add this HTML to the bottom of your <b>workfile-7.html</b> body:</p>
+
+<pre><button class="copy-code" id="btn-5a">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5a" class="hljs language-html">&lt;!-- SECTION 3: Number Input --&gt;
+&lt;section&gt;
+    &lt;h2&gt;3. Age Checker&lt;/h2&gt;
+    &lt;input type="number" id="user-age" placeholder="Enter age"&gt;
+    &lt;button onclick="checkAge()"&gt;Check Age&lt;/button&gt;
+    &lt;p id="age-msg"&gt;&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+    <p>Now add the JavaScript logic:</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">function checkAge() {
+    const ageInput = document.getElementById("user-age");
+    const ageMsg = document.getElementById("age-msg");
+
+    // Convert the string value to a Number
+    const age = Number(ageInput.value);
+
+    // Check if it is a valid number
+    if (age >= 18) {
+        ageMsg.innerText = "Access Granted.";
+        ageMsg.style.color = "green";
+    } else {
+        ageMsg.innerText = "You are too young.";
+        ageMsg.style.color = "red";
+    }
+}</code></pre>
+
+</section>
+
+
+    <section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your workfile...</p>
+
+        <p>---</p>
+
+        <p><b>Tip Calculator:</b> Create an input for "Bill Amount" and a button "Calculate Tip".<br>When clicked, calculate 15% of the bill and display the result in a paragraph.</p>
+
+        <p>---</p>
+
+        <p><b>Dark Mode Toggle:</b> Create a button labeled "Toggle Dark Mode".<br>When clicked, check if the document body has a specific class (e.g., "dark-theme"). If it does, remove it. If not, add it.</p>
+    
+      </section>
+    
+
+
+      <section class="resources-learning" id="resources">
+
+        <h2>More learning resources</h2>
+    
+        <div class="flex-container">
+          <div class="text-container">
+            <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+            <p><a href="#" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+    
+          </div>
+      
+          <div class="audio-container">
+            <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+    
+            <audio controls>
+              <source src="#" type="audio/mp3">
+              Your browser does not support the audio element.
+            </audio>
+    
+          </div>
+        </div>
+    
+      </section>
+      
+
+
+
+    <section class="resources-learning" id="ai-prompts">
+          
+        <h2>Sample AI prompts</h2>
+    
+     
+        <div class="gpt"><button class="copy-gpt" id="btn-9">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-9">
+        I want to create a "Show Password" checkbox. Show me how to use JavaScript to toggle an input field's type between "password" and "text" when a user clicks a checkbox.</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">
+        Explain how to listen for the "Enter" key being pressed in an input field, so the user can submit the form without clicking the button.</code></div>
+    
+      </section>
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
