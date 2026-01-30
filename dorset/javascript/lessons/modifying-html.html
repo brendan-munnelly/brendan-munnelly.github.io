@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Accessing and Modifying the DOM | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Using JavaScript to select existing HTML elements and modify their content, styles, and CSS classes.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p>
+                </div>
+            </div>
+    
+            <div class="content">
+                <h1>Accessing and Modifying the DOM</h1>
+                <h2>Using JavaScript to select existing HTML elements and modify their content, styles, and CSS classes.</h2>
+            </div>
+        </div></header>
+
+    <main>
+
+        <aside>
+            <h3>JAVASCRIPT TUTORIALS</h3>
+
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#setup">Setting up your workfiles</a></p>
+            <p><a href="#element-id">Accessing HTML elements by their ID</a></p>
+            <p><a href="#content-modify">Modifying element content</a></p>
+            <p class="toc-indent"><a href="#inner-text">Using .innerText</a></p>
+            <p class="toc-indent"><a href="#inner-html">Using .innerHTML</a></p>
+
+            <p><a href="#style-modify">Modifying element styles</a></p>
+            
+            <p><a href="#class-modify">Adding and removing CSS classes</a></p>
+
+            <p><a href="#try-it">Try it yourself</a></p>
+
+            <p><a href="#resources">More learning resources</a></p>
+      
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+            <p>&nbsp;</p>
+
+        </aside>
+
+
+<article>
+
+<section id="learning-goals">
+    <h2>Learning Goals</h2>
+    <p>At the end of this Tutorial, you will be able to:</p>
+    <div class="box-goals">
+        <ul>
+            <li>Select a specific element on the page using <span class="syn-js">document.getElementById()</span>.</li>
+            <li>Modify the text inside an element using <span class="syn-js">.innerText</span>.</li>
+            <li>Modify the HTML inside an element using <span class="syn-js">.innerHTML</span>.</li>
+            <li>Change the visual appearance of an element using the <span class="syn-js">.style</span> property.</li>
+            <li>Add and remove CSS classes using <span class="syn-js">.classList</span>.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="setup">
+    <h2>Setting up your workfiles</h2>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, you will work with a file that already has some HTML content.</p>
+			<p>In your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-6.html</b> and copy the code below.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Accessing the DOM&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; margin: 40px; line-height: 1.6; }
+        .highlight-box { 
+            background-color: #e0f7fa; 
+            border: 2px solid #00acc1; 
+            padding: 20px; 
+            border-radius: 8px; 
+            color: #006064;
+        }
+    &lt;/style&gt;
+    &lt;script defer src="script-6.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1 id="mainHeading"&gt;Old Heading Text&lt;/h1&gt;
+
+    &lt;p id="introPara"&gt;This is the original paragraph text.&lt;/p&gt;
+
+    &lt;div id="infoBox"&gt;
+        I am a plain div.
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+   			<p>Create a new empty text file named <b>script-6.js</b> and save it in this same folder.</p>
+		</div>
+</section>
+
+<section id="element-id">
+
+    <h2>Accessing HTML elements by their ID</h2>
+    <p>The simplest way for JavaScript to find a specific element on your page is by looking for its unique <b>id</b>.</p>
+    
+    <p>You use the <span class="syn-js">document.getElementById()</span> method to do this.</p>
+
+    <p>Copy the code below into your <b>script-6.js</b> file.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// 1. Select the element by its ID
+const myHeading = document.getElementById("mainHeading");
+
+// 2. Check the console to see what we grabbed
+console.log(myHeading);</code></pre>
+
+    <p>Save the file and open <b>workfile-6.html</b> in your web browser. Open the Console (F12) and you will see that JavaScript has successfully "grabbed" the entire <span class="syn">&lt;h1&gt;</span> element.</p>
+
+    <p>Note: The ID inside the parentheses must match the HTML ID exactly (it is case-sensitive).</p>
+
+</section>   
+
+
+
+<section id="content-modify">
+
+    <h2>Modifying element content</h2>
+    <p>Once you have accessed an element, you can change what is inside it.</p>
+
+    <h3 id="inner-text">Using <code>.innerText</code></h3>
+    <p>If you want to replace the text inside an element, use the <span class="syn-js">.innerText</span> property.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Select the paragraph
+const myPara = document.getElementById("introPara");
+
+// Change the text content
+myPara.innerText = "JavaScript has updated this text!";</code></pre>
+
+    <h3 id="inner-html">Using <code>.innerHTML</code></h3>
+    <p>If you want to include HTML tags (like bold or italics) inside the new content, you must use <span class="syn-js">.innerHTML</span>.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Select the div
+const myBox = document.getElementById("infoBox");
+
+// Change the content AND the HTML structure
+myBox.innerHTML = "&lt;p&gt;I now contain a &lt;b&gt;bold&lt;/b&gt; word.&lt;/p&gt;";</code></pre>
+
+    <p>Refresh your browser to see the changes.</p>
+
+</section>        
+
+<section id="style-modify">
+
+    <h2>Modifying element styles</h2>
+    <p>You can change the visual appearance of any element using JavaScript's <span class="syn-js">.style</span> property.</p>
+    
+    <p>Note that CSS properties with dashes (like <code>background-color</code>) must be written in <b>camelCase</b> in JavaScript (like <code>backgroundColor</code>).</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Access the main heading again
+// (We already created the 'myHeading' variable earlier)
+
+myHeading.style.color = "red";
+myHeading.style.backgroundColor = "yellow";
+myHeading.style.padding = "20px";
+myHeading.style.borderRadius = "10px";</code></pre>
+
+    <p>This method adds an inline style to the HTML element, overriding any styles set in your CSS file.</p>
+
+</section>
+
+<section id="class-modify">
+
+    <h2>Adding and removing CSS classes</h2>
+    <p>Changing styles one by one using <code>.style</code> can get messy. A cleaner way is to add or remove a pre-defined CSS class.</p>
+    
+    <p>In the HTML setup code, we included a CSS class named <code>.highlight-box</code> inside the <span class="syn">&lt;style&gt;</span> block. Let's apply that class to our div.</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Select the div
+const box = document.getElementById("infoBox");
+
+// Add a CSS class
+box.classList.add("highlight-box");</code></pre>
+
+    <p>When you refresh the page, the div should turn light blue with a border.</p>
+
+    <p>You can also remove a class just as easily:</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Remove a CSS class
+// box.classList.remove("highlight-box");</code></pre>
+
+</section>
+
+
+    <section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your workfile...</p>
+
+        <p>---</p>
+
+        <p>In the HTML file, add a new <span class="syn">&lt;h2&gt;</span> with an ID of "sub-heading".<br>Use JavaScript to change its text to "Updated via JS" and change its color to blue.</p>
+
+        <p>---</p>
+
+        <p>In the HTML file, add an image tag with an ID of "main-image".<br>Use JavaScript to change its <code>src</code> attribute to a valid image URL.</p>
+    
+      </section>
+    
+
+
+      <section class="resources-learning" id="resources">
+
+        <h2>More learning resources</h2>
+    
+        <div class="flex-container">
+          <div class="text-container">
+            <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+            <p><a href="#" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+    
+          </div>
+      
+          <div class="audio-container">
+            <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+    
+            <audio controls>
+              <source src="#" type="audio/mp3">
+              Your browser does not support the audio element.
+            </audio>
+    
+          </div>
+        </div>
+    
+      </section>
+      
+
+
+
+    <section class="resources-learning" id="ai-prompts">
+          
+        <h2>Sample AI prompts</h2>
+    
+     
+        <div class="gpt"><button class="copy-gpt" id="btn-9">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-9">
+        What is the difference between <code>document.getElementById()</code> and <code>document.querySelector()</code>? Show me examples of how to select an element by ID using both methods.</code></div>
+        
+
+    
+      </section>
+
+
+
+</article>
+</main>
+
+<footer>    
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
