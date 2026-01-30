@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Variable operations | JavaScript Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Performing basic operations on variables in JavaScript, including string manipulation and arithmetic.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+    <style>
+        pre { background-color: #282c34;}
+    </style>
+
+    <!-- Syntax Highlighter -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+
+</head>
+
+<body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+ <header>
+   <div class="wrapper">
+    <div class="sidebar">
+     <div>
+      <p>&nbsp;</p>
+     </div>
+    </div>
+  
+    <div class="content">
+     <h1>Variable operations</h1>
+     <h2>Performing basic operations on variables in JavaScript, including string manipulation and arithmetic.</h2>
+    </div>
+   </div><!-- /wrapper -->
+  </header>
+
+  <main>
+
+   <aside>
+      <h3>JAVASCRIPT TUTORIALS</h3>
+      <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+  
+      <h3>THIS TUTORIAL</h3>
+      <p><a href="#learning-goals">Learning Goals</a></p>
+      <p><a href="#strings-introduction">Working with string variables</a></p>
+
+      <p><a href="#strings-length">Finding the length of a string</a></p>
+
+      <p><a href="#strings-methods">Working with string methods</a></p>
+      <p class="toc-indent"><a href="#method-chaining">Chaining string methods</a></p>
+      <p class="toc-indent"><a href="#methods-no-change">String methods do not change string values</a></p>
+
+      <p><a href="#strings-joining">Concatenating (joining) strings together</a></p>
+
+      <p><a href="#compound-assignment">Using the <code>+=</code> operator with strings</a></p>
+
+
+		<p><a href="#numbers-introduction">Working with numeric variables</a></p>
+		<p class="toc-indent"><a href="#numbers-assign">Assigning numbers to variables</a></p>
+		<p><a href="#number-arithmetic">Arithmetic operations</a></p>
+		<p class="toc-indent"><a href="#operator-precedence">Operator precedence</a></p>
+		<p><a href="#increment-decrement">Increment and decrement operators</a></p>
+				
+		<p><a href="#compound-assignment-numbers">Using the <code>+=</code> operator with numbers</a></p>
+
+
+
+
+      
+      <p><a href="#try-it">Try it yourself</a></p>
+
+      <p><a href="#resources">More learning resources</a></p>
+
+      <p><a href="#ai-prompts">Sample AI prompts</a></p>
+
+      <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+      <p>&nbsp;</p>
+   </aside>
+ 
+ <article>
+
+ <section id="learning-goals">
+  <h2>Learning Goals</h2>
+  <p>At the end of this Tutorial, you will be able to:</p>
+
+  <ul>
+      <li>Perform basic string manipulation.</li>
+      <li>Perform addition, subtraction, multiplication, and division on numeric variables.</li>
+      <li>Use correct operator precedence in arithmetic.</li>   
+      <li>Use increment and decrement operators on numbers.</li>
+      <li>Use the compound assignment <span class="syn-js">+=</span> operator with strings and numbers.</li>
+  </ul>
+
+ </section>
+
+<section>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+			<p>In your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-2.html</b>.</p>
+			<p>Add some sample text with a &lt;h1&gt; heading a &lt;p&gt; text paragraph such as the following:
+				<img src="assets/img/adding-js-to-web-pages/workfile-1.png" alt="screenshot">
+			</p>
+   			<p>Create a new empty text file named <b>script-2.js</b> and save it in this same folder.</p>
+            <p>Add a link to <code>script-2.js</code> in your <code>workfile-2.html</code> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
+
+
+			<img src="assets/img/variable-operations/workfile-2.png" alt="screenshot">
+		</div>
+	
+
+	</section>
+
+
+
+<section>
+ <h2 id="strings-introduction">Working with string variables</h2>
+
+ <p>JavaScript assigns an index number to each character in a string, starting with <b>0</b>. This is called <i>zero-based indexing</i>. Each character in a string can be accessed by its position-based index number within square brackets <span class="syn-js">[n]</span>. See below.</p>
+
+ <img src="assets/img/working-with-strings/hello-world.png" alt="Sample string in JavaScript" style="max-width: 600px">
+
+
+    <table class="table-js-methods">
+    <tbody>
+      <tr>
+      <td><p><span class="syn-js">myStr[0]</span></p></td>
+      <td><p>Outputs the first character in the string</p></td>
+      </tr>
+      <tr>
+      <td><p><span class="syn-js">myStr[5]</span></p></td>
+      <td><p>Outputs the sixth character in the string</p></td>
+      </tr>
+      <tr>
+      <td><p><span class="syn-js">myStr[12]</span></p></td>
+      <td><p>Outputs the last character in the string</p></td>
+      </tr>
+    </tbody>
+    </table>
+
+
+
+    <p>Copy the sample code below into your <b>script-2.js</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">
+// Using [] notation to access position of characters within string
+let myStr = "Hello, World!";
+console.log(`Position [0]: ${myStr[0]};`)   // H
+console.log(`Position [5]: ${myStr[5]};`)   // ,
+console.log(`Position [6]: ${myStr[6]};`)   // whitespace
+console.log(`Position [7]: ${myStr[7]};`)   // W
+console.log(`Position [12]: ${myStr[12]};`) // !</code></pre>
+
+   <p>The first character in the string is <b>H</b> corresponds to index position <b>0</b>. The last character is <b>!</b>, which corresponds to index position <b>12</b>.</p>
+   
+   <p>Note that the whitespace character, entered with the <kbd>Spacebar</kbd> also has an index value, at <b>6</b>.</p>
+
+   <p>Being able to access every character in a string with the square bracket <span class="syn-js"><b>[]</b></span> notation makes it easy to access and manipulate strings.</p>  
+
+</section>
+
+<section>
+  <h2 id="strings-length">Finding the length of a string</h2>
+ 
+
+ <p>Every string has a <span class="syn-js">.length</span> property that reveals the number of characters in the string. The syntax is as follows.</p>
+
+ <img src="assets/img/working-with-strings/string-length.png" alt="screenshot" style="max-width: 700px">
+ <p>Copy the following example to your  workfile. It should output a string length of <b>13</b> to the console.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// String length  
+console.log(`Length of string: ${myStr.length}`); // 13</code></pre>
+
+ <p>Note: the length of a string is always <i>one number greater</i> than the string&#8217;s highest index number.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Last character in string
+console.log(`Last character: ${myStr[myStr.length - 1]}`); // !</code></pre>
+
+
+
+
+</section>
+
+<section id="strings-methods">
+    <h2>Working with string methods</h2>
+
+    <p>In JavaScript, the word <i>method</i> describes some action you can perform on a item of code such as a variable. Note that:</p>
+
+    <ul>
+      <li>A method ends with a parenthesis <span class="syn-js"><b>()</b></span>.</li>
+      <li>Some methods take arguments (values) inside the parenthesis.</li>
+    </ul>
+
+    <p>Below is a table of some common string methods.</p>
+
+    <table class="table-js-methods">
+      <tbody>
+        <tr>
+          <td><p>&nbsp;<b>Method</b></p></td>
+          <td><p><b>Description</b></p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.trim()</span></p></td>
+          <td><p>Removes whitespace from both ends of a string.</p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.toLowerCase()</span></p></td>
+          <td><p>Converts all characters in a string to lowercase.</p></td>
+        </tr>
+        <tr>
+          <td><p>&nbsp;<span class="syn-js">.toUpperCase()</span></p></td>
+          <td><p>Converts all characters in a string to uppercase.</p></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+<p>Copy the following examples to your <b>script-2.js</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// ======== MANIPULATNG STRING CONTENT ========
+let strUserName = "  John Smith  ";
+  
+// Remove whitespace
+console.log(strUserName.trim());           // "John Smith" (without quotes)
+
+// Change case
+console.log(strUserName.toLowerCase());    // "  john smith  " (without quotes)
+console.log(strUserName.toUpperCase());    // "  JOHN SMITH  " (without quotes)</code></pre>
+
+ <p>These methods are useful for cleaning up user input to forms or for formatting text for display.</p>
+
+ <p>In addition to removing whitespaces, <span class="syn-js">.trim()</span> also removes tab, no-break space and line terminator characters.</p>
+
+
+ <h3 id="method-chaining">Chaining string methods</h3>
+
+ <p>You can <i>chain</i> (combine) string methods together in a single expression. See below.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Chaining methods
+console.log(strUserName.trim().toLowerCase());</code></pre>
+ 
+        <h3 id="methods-no-change">String methods do <i>not</i> change string values</h3>      
+
+        <p><b>Important</b>: string methods do <i>not</i> change the original string value. Instead, a string method will <i>create a new string with the changes applied</i>.</p>
+        
+        <p>To demonstrate this fact, copy the examples below to your workfile. In every case, you can see that the original string is unchanged.</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// === STRING METHODS DO NOT CHANGE ORIGINAL STRING VALUES ===
+  
+// Original string
+let strMessage = "Hello from JavaScript string variable";
+console.log(strMessage); // Original: Hello from JavaScript string variable
+  
+// This does NOT change the original string
+strMessage.toUpperCase();
+console.log(strMessage); // Unchanged: Hello from JavaScript string variable</code></pre>
+
+<p>Typically, the reason you apply a string method is that you <i>want</i> to change the original value. To do this, you need to reassign the transformed value back to the original string. See below.</p>
+       
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">
+// To actually change the value, you need to assign the result back
+strMessage = strMessage.toUpperCase();
+console.log(strMessage); // HELLO WORLD</code></pre>
+
+
+
+      <p>In summary, if you want to modify a string value, you need to:</p>
+
+      <ul>
+        <li>Use a string method to create the new string</li>
+        <li>Assign that new string back to a variable (either the original variable or a new one)</li>
+      </ul>
+
+
+      </section>
+
+       <section id="strings-joining">
+        <h2>Concatenating (joining) strings together</h2>
+       
+        <p>Joining two or more string variables is known as <i>concatenation</i>. You can achieve this using template literals. Copy the example below.</p>
+       
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// ======== CONCATENATING STRINGS ========
+       
+// Joining strings with template literals
+let txtFirstName = "John";
+let txtLastName = "Lennon";
+let txtFullName = `${txtFirstName} ${txtLastName}`; 
+console.log(`Full name: ${txtFullName}`);  // John Lennon</code></pre>
+
+    <p>A second and older option for joining strings is to use the <span class="syn-js">+</span> operator.</p>
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Joining strings with the + operator
+txtFullName = txtFirstName+ " " +txtLastName; 
+console.log(`Full name: ${txtFullName}`);  // John Lennon</code></pre>
+
+        <p>Both methods will output the same result.</p>
+        
+        
+        <h3 id="compound-assignment">Using the <code>+=</code> operator with strings</h3>
+        <p>JavaScript offers a <i>compound assignment</i> <span class="syn-js">+=</span> that combines two operations:</p>
+
+        <ul>
+          <li>It adds the value on the right to the variable on the left</li>
+          <li>It assigns the result back to the variable on the left</li>
+        </ul>
+
+      <p>Here are two examples:</p>  
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Compound assignment operator +=
+let greeting = "Hello";
+greeting += " there";  // Hello there
+greeting += "!";       // Hello there!
+console.log(greeting);
+        
+let story = "Once upon a time";
+story += " there was a developer";
+story += " who loved to code";
+story += " and debug all day long.";
+console.log(story)</code></pre>        
+        
+        
+</section>
+
+
+<section id="numbers-introduction">
+
+        <h2 id="introduction">Working with numeric variables</h2>
+        <p>A numeric variable is a variable that stores a number. A numeric variable can store:</p>
+		
+		<ul>
+			<li><b>Integers</b>: The are whole numbers that may be positive or negative, such as <b>25</b> or <b>-10</b>.</li>
+			<li><b>Floating point numbers</b>: Also called <i>floats</i> for short, these are numbers with a decimal point, such as <b>9.99</b> or <b>-100</b>.</li>
+		</ul>
+
+		<h3 id="numbers-assign">Assigning numbers to variables</h3>
+		<p>To assign a number to a variable, do not wrap the value in single or double quotes, or backticks.</p>
+
+		<p>Copy the following code to your <b>script-2.js</b> workfile.</p>
+
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// ======== ASSIGN NUMBERS TO VARIABLES ========
+const myVar1 =  1234;    // JavaScript treats myVar1 as a number
+const myVar2 = "1234";  // JavaScript treats myVar2 as a string
+const myVar3 = '1234';   // JavaScript treats myVar3 as a string
+const myVar4 = `1234`;   // JavaScript treats myVar4 as a string
+console.log(`${myVar1} ${myVar2} ${myVar3} ${myVar4}`); // 1234 1234 1234 1234</code></pre>
+
+		<p>Here are two values that JavaScript will accept as valid numbers.</p>
+
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// Valid numbers 
+let Temperature = -6.3456 // Valid number
+let errorRate = .2727     // Valid number</code></pre>
+
+<p>And here are two values that are not valid numbers in JavaScript.</p>
+
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// Not valid numbers - or valid strings either!
+let userIncome = 34,000; // Error. Contains a comma 
+let productID = 645w29;  // Error. Contains a letter character</code></pre>
+	
+<p>In fact, they are not even valid variable assignments. This is because JavaScript cannot understand what type of data type you want to create. Each line will throw an error.</p>
+
+<p>Delete the above two lines that generate errors from your <b>script-2.js</b> workfile before continuing.</p>
+
+
+</section>
+
+	<section id="number-arithmetic">
+		<h2>Arithmetic operations</h2>
+		<p>You can perform arithmetic with numeric variables by using the operators set out in the table below.</p>
+
+		<table class="table-js-arithmetic">
+			<thead>
+			<tr>
+				<td><p><b>Operator</b></p></td>
+				<td><p><b>Operator Key Used</b></p></td>
+				<td><p><b>Description</b></p></td>
+			</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p><b>x + y</b></p></td>
+					<td><p>The plus key</p></td>
+					<td><p>Adds the value of <b>x</b> and the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x - y</b></p></td>
+					<td><p>The dash key</p></td>
+					<td><p>Subtracts the value of <b>y</b> from the value of <b>x</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x * y</b></p></td>
+					<td><p>The asterisk key</p></td>
+					<td><p>Multiplies the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+				<tr>
+					<td><p><b>x / y</b></p></td>
+					<td><p>The forward slash key</p></td>
+					<td><p>Divides the value of <b>x</b> by the value of <b>y</b>.</p></td>
+				</tr>
+			</tbody>
+			</table>		
+		
+	<p>See the simple examples below.</p>
+
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// Arithmetic with JavaScript
+const firstNum = 12;
+const secondNum = 8;
+console.log(`Addition (12+8): ${firstNum + secondNum}`);       // 20
+console.log(`Subtraction (12-8): ${firstNum - secondNum}`);    // 4
+console.log(`Multiplication (12*8): ${firstNum * secondNum}`); // 96
+console.log(`Division (12/8): ${firstNum / secondNum}`);       // 1.5</code></pre>
+
+		<h3 id="operator-precedence">Operator precedence</h3>
+
+		<p>JavaScript follows the rules of arithmetic when working with numeric variables and numbers:</p>
+		<ul>
+			<li>Division first, followed by multiplication, then addition and finally subtraction.</li>
+		</ul>
+			
+		<p>For example, the following series of statements gives a result of <b>11</b> because JavaScript first multiplies <b>2</b> by <b>3</b> (resulting in <b>6</b>) and then adds <b>5</b>.</p>
+
+<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-javascript">// Operator precedence
+console.log(`5 + 2 * 3: ${5 + 2 * 3}`); // returns 11 </code></pre>
+
+		<p>You can force JavaScript to perform calculations in a particular order by using parentheses <span class="syn-js"><b>()</b></span>.</p>
+
+		<p>For example, the following calculation gives a result of <b>21</b>. JavaScript first adds <b>5</b> and <b>2</b>, because they are within <span class="syn-js">()</span>. And only then multiplies that result by <b>3</b> to give <b>21</b>.</p>
+
+<pre><button class="copy-code" id="btn-16">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-16" class="hljs language-javascript">// Operator precedence with parentheses
+console.log(`(5 + 2) * 3: ${(5 + 2) * 3}`); // 21</code></pre>
+
+	</section>
+
+
+<section id="increment-decrement">
+
+	<h2>Increment and decrement operators</h2>
+	<p>JavaScript supports increment <span class="syn-js">++</span> and decrement <span class="syn-js">--</span> prefix operators that increase or reduce the value of a numeric variable by one.</p>
+	
+	<p>See the sample code below.</p>
+	<pre><button class="copy-code" id="btn-17">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-17" class="hljs language-javascript">// Increment and decrement operators
+let myNum1 = 7;
+let myNum2 = 24; 	
+console.log(`myNum1 is 7`); 
+console.log(`Increment operator (++myNum1) is ${++myNum1}`); // 8
+console.log(`myNum2 is 24`); 
+console.log(`Decrement operator (--myNum2) is ${--myNum2}`); // 23</code></pre>
+
+</section>
+
+<section id="compound-assignment-numbers">
+
+	<h2>Using the <code>+=</code> operator with numbers</h2>
+
+	<p>You have already learnt how to use compound assignment <span class="syn-js">+=</span> operator to work with text. You can also use this operator to work with numeric values.</p>
+
+	<p>The <span class="syn-js">+=</span> operator:</p>
+	<ul>
+  		<li>Adds the value on the right to the variable on the left</li>
+  		<li>Assigns the result back to the variable on the left</li>
+	</ul>
+
+<p>Here are two examples:</p>  
+<pre><button class="copy-code" id="btn-18">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-18" class="hljs language-javascript">// === Compound assignment operator += with numbers ===
+let count = 5;
+console.log(count); // 5
+count += 3;   // count is now 8
+count += 2;   // count is now 10
+
+// Keeping score in a computer game
+let playerScore = 100;
+playerScore += 50;   // Player hits target
+playerScore += 25;   // Player collects coin
+playerScore += 75;   // Player completes level
+console.log(playerScore);  // 250
+
+// Calculating compound interest
+let balance = 1000;
+let interest = balance * 0.05;  // 5% interest
+balance += interest;
+console.log(balance);  // 1050</code></pre>        
+
+
+<p>&nbsp;</p>
+
+<div class="box-warning" >
+	<div>
+		<img src="assets/img/working-with-numbers/warning-sign.png" alt="warning sign">
+	</div>
+	<div>
+		<p>JavaScript has some <b>VERY WEIRD</b> behaviours when dealing with numbers. For this reason, it is recommended to test every variable to ensure it really is a numeric variable before using it in a calculation. Also, JavaScript in some circumstances will convert a string to a number and vice versa.</p>
+	</div>
+</div>
+
+</section>
+
+<section class="resources-learning" id="try-it">
+
+    <h2>Try it yourself</h2>
+    <p>In your workfile...</p>
+
+    <p>---</p>
+
+    <p><b>1. String Cleaning</b></p>
+    <p>Create a variable called <code>cityInput</code> with the value <code>"  londON  "</code> (note the spaces and mixed case).</p>
+    <p>- Output the length of the string.</p>
+    <p>- Use a method to remove the extra spaces.</p>
+    <p>- Chain methods to remove the spaces AND convert the text to all capital letters ("LONDON").</p>
+
+    <p>---</p>
+
+    <p><b>2. The Bill Calculator</b></p>
+    <p>Create three variables: <code>itemPrice</code> (set to 5), <code>quantity</code> (set to 3), and <code>tax</code> (set to 4).</p>
+    <p>- Use <code>console.log()</code> to calculate the total bill. Use parentheses <code>()</code> to ensure the tax is added <i>after</i> the items are multiplied.</p>
+    <p>---</p>
+
+    <p><b>3. The Temperature Converter</b></p>
+
+    <p>Create a temperature converter that takes a Celsius temperature of 25 and converts it to Fahrenheit using this formula: (C × 9/5) + 32.</p>
+    <p>---</p>
+
+    <p><b>4. The Scoreboard</b></p>
+    <p>Create a variable called <code>score</code> and set it to <b>0</b>.</p>
+    <p>- The player hits a target: use <code>+=</code> to increase the score by 10.</p>
+    <p>- The player hits a bonus: use <code>+=</code> to multiply the score by 2.</p>
+    <p>- The player collects a life: use the increment operator <code>++</code> to add 1 to the score.</p>
+    <p>- Output the final score to the console.</p>
+
+</section>
+
+       <section class="resources-learning" id="resources">
+
+              <h2>More learning resources</h2>
+          
+              <div class="flex-container">
+                <div class="text-container">
+                  <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/3" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+          
+                </div>
+            
+                <div class="audio-container">
+                  <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+          
+                  <audio controls>
+                    <source src="assets/audio/working-with-strings.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+          
+                </div>
+              </div>
+          
+            </section>
+            
+            <section class="resources-learning" id="ai-prompts">
+          
+              <h2>Sample AI prompts</h2>
+          
+              <div class="gpt"><button class="copy-gpt" id="btn-19">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-19">
+              I am learning about JavaScript string methods. Can you explain why the following code does not change the value of the variable?
+        <br><br>
+        let city = "paris";<br>
+        city.toUpperCase();<br>
+        console.log(city); // Still outputs "paris"
+        <br><br>
+        Explain the concept of "immutability" in simple terms using this example.</code></div>
+              
+              <div class="gpt"><button class="copy-gpt" id="btn-20">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-20">Create a set of 3 multiple-choice quiz questions to test my understanding of "Operator Precedence" in JavaScript. Include trick questions that use parentheses to change the order of calculation.</code></div>
+           
+                <div class="gpt"><button class="copy-gpt" id="btn-21">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-21">
+                  Write a code snippet that takes a messy input string like "  jAvAScrIPt  ", trims the spaces, converts it to all lowercase, and then capitalizes just the first letter (to make it "Javascript"). Explain each step.</code></div>
+                  
+            </section>
+
+
+</article>
+</main>
+
+<footer></footer>
+
+<div id="cookie-banner">
+ <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+ <div class="buttons">
+  <button id="accept-cookies">Got it</button>
+ </div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
+
+
