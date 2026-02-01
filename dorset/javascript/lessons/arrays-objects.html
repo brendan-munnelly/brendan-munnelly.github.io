@@ -301,13 +301,20 @@ arrUsers.forEach(user =&gt; {
  console.log(`Name: ${product.name.trim().toUpperCase()}`); </code></pre>        
 
     <h3>Outputting numeric values</h3>
-    <p>To display a discounted price along with the price retrieved from the array, you could do the following.</p>
+    <p>To display a discounted price along with the price retrieved from the array, you could add a <a href="function-declarations.html#utility-functions" target="_blank">helper function</a> to your code such as the following.</p>
+
+<pre><code class="hljs language-javascript">// Helper function to round to 2 decimal places
+function roundMoney(amount) {
+   return Math.round(amount * 100) / 100;
+}</code></pre>
+
+<p>You can then call this helper function inside the loop as follows.</p>
 
 <pre><code class="hljs language-javascript">// Calculating and displaying a discounted price
-const discountedPrice = (product.price * 0.9).toFixed(2);
+const discountedPrice = roundMoney(product.price * 0.9);
 console.log(`Price: €${product.price}, Discounted Price: €${discountedPrice}`);</code></pre>
 
-    <p>To format numeric values such as prices, you could use the <span class="syn-js">.toFixed(n)</span> method to specify the number of decimal places to display.</p>
+    <p>Note: Using the <span class="syn-js">.toFixed(n)</span> method for calculations is dangerous because it converts your number into a string (text), which breaks any future math you might want to do with that variable.</p>
 
 <h3>Outputting boolean values</h3>
 
