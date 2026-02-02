@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Working with Structured Data | JavaScript Tutorials</title>
+    <title>Arrays of objects | JavaScript Tutorials</title>
 
-    <meta name="description" content="Understanding and working with arrays of objects, JSON data, and data display.">
+    <meta name="description" content="Working with arrays of objects, and outputting structured data in the browser console.">
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet -->
@@ -38,9 +38,30 @@
     <!-- Syntax Highlighter -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-</head>
 
-<body id="top">
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+      
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    
+</head>
+  
+    <body id="top">
+  
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
     <header>
         <div class="wrapper">
             <div class="sidebar">
@@ -48,15 +69,38 @@
             </div>
     
             <div class="content">
-                <h1>Working with Structured Data</h1>
-                <h2>Understanding and Working with Arrays of Objects, JSON Data, and Data Display</h2>
+                <h1>Arrays of objects</h1>
+                <h2>Working with arrays of objects, and outputting structured data in the console.</h2>
             </div>
         </div>
     </header>
 
     <main>
         <aside>
-            <h3>JAVASCRIPT</h3>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#review">Introduction</a></p>
+				<p><a href="#arrays-of-objects">Working with arrays of objects</a></p>
+				<p><a href="#data-display">Displaying data from an array of objects</a></p>
+				<p><a href="#data-loop">Looping through arrays of objects</a></p>
+
+				<p><a href="#data-reformat">Reformatting the output from an array of objects</a></p>
+
+				<p><a href="#try-it">Try it yourself</a></p>
+
+				<p><a href="#resources">More learning resources</a></p>
+		  
+				<p><a href="#ai-prompts">Sample AI prompts</a></p>
+	
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
         </aside>
 
         <article>
@@ -66,60 +110,65 @@
                 <div class="box-goals">
                     <ul>
                         <li>Understand how spreadsheet data maps to arrays of objects</li>
-                        <li>Convert between spreadsheet data and JSON format</li>
-                        <li>Read and parse JSON files in JavaScript</li>
-                        <li>Display structured data in the console and as HTML tables</li>
-                        <li>Work with arrays of objects using JavaScript methods</li>
+                        <li>Display structured data in the browser console</li>
                     </ul>
                 </div>
             </section>
 
-            <section>
-                <div class="code-snippets" style="margin-bottom:32px">
-                    <p>Download the exercise files on your computer as described at the links below.</p>
-                    <p>📄 &nbsp;<a href="assets/workfiles/structured-data.html" target="_blank"><b>Working with Structured Data</b>: Exercises</a></p>
-                    <p>📄 &nbsp;<a href="assets/workfiles/products.json" target="_blank"><b>Sample Product Data</b>: JSON File</a></p>
-                </div>
+
+            <section id="review">
+
+                    <h2>Arrays of objects</h2>
+                    <p>Arrays of objects are a very common data structure in JavaScript. They are typically used to work with collections of related data such as lists of:</p>
+                    <ul>
+                        <li>users</li>
+                        <li>products</li>
+                        <li>social media posts</li>
+                        <li>transaction records</li>
+                    </ul>
+                        
+                    <p>Each item in the array is an object that follows the usual key-value property structure.</p>
+                        
+                    
+                <p>Consider the stylesheet-style table of three products below.</p>
+        
+                <img src="assets/img/arrays-objects/data-table.png" alt="screenshot">
+
+                <p>In JavaScript, you can represent this entire dataset as an array (with square brackets <span class="syn-js">[]</span>).</p>
+                
+                <p>Each record row is an object (with curly braces <span class="syn-js">{}</span>).</p>
+                
+                <p>Each object has the same keys (matching the spreadsheet columns).</p>
+
+                <p>As in regular arrays, the items (objects) are separated by commas <span class="syn-js">,</span>.</p>
+
+                <h3>Objects and arrays: a review</h3>
+
+                <p>In the previous <a href="objects-intro.html">Introduction to objects</a> and <a href="arrays-intro.html">Introduction to arrays</a> Tutorials, you learnt the following:</p>
+
+                <ul>
+                    <li><b>Object</b> (Lots of data about one thing): A collection of properties with two parts: a key (such as <b>firstName</b>) and a value (such as <b>Luis</b>). 
+                    <span class="inside-ul">&nbsp;</span>
+                    Each property value can be accessed with the object name, a dot <span class="syn-js">.</span>, and the key name (such as <b>objUser.firstName</b>).
+                    <img src="assets/img/arrays-objects/object-image.png" alt="screenshot">
+                </li>
+                    <li><b>Array</b> (Lots of things): An ordered list of items of the same data type, such as strings or numbers. A comma <span class="syn-js">,</span> character separates the items in the list.
+                    <span class="inside-ul">&nbsp;</span>    
+                    Each array item can be accessed by its index position inside square brackets <span class="syn-js">[n]</span>, beginning at zero. For example, <b>arrEmployeeIDs[3]</b> would be the fourth item in the array, <b>1237</b>.
+                    <img src="assets/img/arrays-objects/array-image.png" alt="screenshot" style="max-width: 600px">
+                
+                </li>
+                </ul>
+
             </section>
 
-            <section id="spreadsheet-to-code">
-                <h2>From Spreadsheet to Code</h2>
-                <p>In the real world, data often comes in tabular format, like a spreadsheet:</p>
+            <section id="arrays-of-objects">
+                <h2>Working with arrays of objects</h2>
 
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>productID</th>
-                            <th>name</th>
-                            <th>price</th>
-                            <th>inStock</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1001</td>
-                            <td>Laptop</td>
-                            <td>999.99</td>
-                            <td>true</td>
-                        </tr>
-                        <tr>
-                            <td>1002</td>
-                            <td>Mouse</td>
-                            <td>24.99</td>
-                            <td>true</td>
-                        </tr>
-                        <tr>
-                            <td>1003</td>
-                            <td>Keyboard</td>
-                            <td>59.99</td>
-                            <td>false</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p>In JavaScript, we can represent this data as an array where each row becomes an object:</p>
-
-<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">const products = [
+                <p>Copy this code to your workfile:</p>
+        
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Creating an array of objects
+const arrProducts = [
     {
         productID: 1001,
         name: "Laptop",
@@ -138,160 +187,278 @@
         price: 59.99,
         inStock: false
     }
-];</code></pre>
+];
+console.log(arrProducts);
+</code></pre>
 
-                <p>Notice how:</p>
-                <ul>
-                    <li>The entire dataset is an array (with square brackets <span class="syn-js">[]</span>)</li>
-                    <li>Each record is an object (with curly braces <span class="syn-js">{}</span>)</li>
-                    <li>Each object has the same properties (matching the spreadsheet columns)</li>
-                </ul>
+        <p></p>
+                
+           <p>Each item in the array is an object that follows the same property structure, making it easy to organise and process data.</p>
+             
+
+                <p>The general form of an array of objects is below.</p>
+
+                <img src="assets/img/arrays-objects/array-of-objects.png" alt="screenshot" style="max-width: 600px">
+
+
+                <p>For convenience, the objects in an array are often typed on a single line. Copy the example below.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Creating an array with objects on a single line
+const arrUsers = [
+    { firstName: "Alice", age: 25, city: "New York", isActive: true },
+    { firstName: "Bob", age: 30, city: "Los Angeles", isActive: false },
+    { firstName: "Charlie", age: 35, city: "Chicago", isActive: true }
+];
+console.log(arrUsers);
+</code></pre>
+
+
             </section>
 
-            <section id="json-data">
-                <h2>Working with JSON Data</h2>
-                <p>JSON (JavaScript Object Notation) is a text-based format for representing structured data. Our products data in JSON format looks almost identical to our JavaScript array of objects:</p>
+            <section id="data-display">
 
-<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-json">{
-    "products": [
-        {
-            "productID": 1001,
-            "name": "Laptop",
-            "price": 999.99,
-            "inStock": true
-        },
-        {
-            "productID": 1002,
-            "name": "Mouse",
-            "price": 24.99,
-            "inStock": true
-        },
-        {
-            "productID": 1003,
-            "name": "Keyboard",
-            "price": 59.99,
-            "inStock": false
-        }
-    ]
+                <h2>Displaying data from an array of objects</h2>
+                <p>An important difference between a single object and objects in an array is that objects in an array <i>do not have a name</i>.</p>
+
+                <p>For an individual object, you access a property value by entering the object name (such as <b>objLaptop</b>) and the property key (such as <b>price</b>). See below.</p>
+
+                <img src="assets/img/arrays-objects/object-name-property-key.png" alt="screenshot" style="max-width: 460px">
+
+
+                <p>However, for objects in an array, you instead access data from a particular object by its <i>index position</i> and its property key.</p>
+                
+                <p>Copy the code below that displays selected property values from your two arrays of objects.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">
+// Displaying some data from the arrProducts array of objects
+console.log(`ID of product 0: ${arrProducts[0].productID}`); // 1001
+console.log(`Name of product 1: ${arrProducts[1].name}`); // Mouse
+console.log(`Price of product 2: ${arrProducts[2].price}`); // 59.99
+
+// Accessing the first user's first name property
+console.log(`First user: ${arrUsers[0].firstName}`);
+
+// Accessing the second user's age property
+console.log(`Second user's age: ${arrUsers[1].age}`);
+
+// Checking if the third user is active
+console.log(`Is the third user active? ${arrUsers[2].isActive}`);</code></pre>
+
+
+            </section>
+
+            <section id="data-loop">
+                <h2>Looping through arrays of objects</h2>
+                <p>Arrays may have many hundreds of objects, each with lots of properties. So it is impractical to enter a line of code to display each property value of every object.</p>
+
+                <p>The solution is to use a <span class="syn-js">.forEach()</span> loop on each object in the array. </p>
+
+                <p>The general syntax for this loop is as shown below.</p>
+
+                <img src="assets/img/arrays-objects/forEach-image.png" alt="screenshot">
+                    
+<p>Copy the code below.</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// Loop through arrProducts
+arrProducts.forEach(product =&gt; {
+    console.log("Product Details:");
+    console.log(`ID: ${product.productID}`);
+    console.log(`Name: ${product.name}`);
+    console.log(`Price: €${product.price}`);
+    console.log(`In Stock: ${product.inStock}`);
+    console.log("---------------"); // Separator between products
+});</code></pre>
+
+                <p>Copy this code to output data from the <b>arrUsers</b> array of objects.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Loop through arrUsers
+arrUsers.forEach(user =&gt; {
+    console.log("User Details:");
+    console.log(`First Name: ${user.firstName}`);
+    console.log(`Age: ${user.age}`);
+    console.log(`City: ${user.city}`);
+    console.log(`Active?: ${user.isActive}`);
+    console.log("**************"); // Separator between users
+});</code></pre>
+
+</section>
+
+<section id="data-reformat">
+    <h2>Reformatting the output from an array of objects</h2>
+
+    <p>With a <span class="syn-js">.forEach()</span> loop, you can perform any valid operation on the items in an array. For example, you can format the output in a more readable way. You can also display new outputs based on operations on the retrieved data.</p>
+
+    <h3>Outputting string values</h3>
+    <p>Sometimes, string values in the array of objects may contain extra spaces before or after the actual text. You could use the <span class="syn-js">.trim()</span> method to remove these extra spaces from the output of the <b>arrProducts</b> array.</p>
+
+<pre><code class="hljs language-javascript">// Removes extra spaces before/after name
+ console.log(`Name: ${product.name.trim()}`); 
+</code></pre>
+
+        <p>You could use the <span class="syn-js">.toUpperCase()</span> method to display a product's name in capital letters.</p>
+
+<pre><code class="hljs language-javascript">// Remove extra spaces before/after name
+ console.log(`Name: ${product.name.trim().toUpperCase()}`); </code></pre>        
+
+    <h3>Outputting numeric values</h3>
+    <p>To display a discounted price along with the price retrieved from the array, you could add a <a href="function-declarations.html#utility-functions" target="_blank">helper function</a> to your code such as the following.</p>
+
+<pre><code class="hljs language-javascript">// Helper function to round to 2 decimal places
+function roundMoney(amount) {
+   return Math.round(amount * 100) / 100;
 }</code></pre>
 
-                <p>Key differences in JSON format:</p>
-                <ul>
-                    <li>Property names must be in double quotes</li>
-                    <li>String values must be in double quotes</li>
-                    <li>The file typically has one root object containing arrays/objects</li>
-                </ul>
-            </section>
+<p>You can then call this helper function inside the loop as follows.</p>
 
-            <section id="reading-json">
-                <h2>Reading JSON Files</h2>
-                <p>To read a JSON file in JavaScript, we use the <span class="syn-js">fetch</span> API. Here's how to load and display JSON data in the console:</p>
+<pre><code class="hljs language-javascript">// Calculating and displaying a discounted price
+const discountedPrice = roundMoney(product.price * 0.9);
+console.log(`Price: €${product.price}, Discounted Price: €${discountedPrice}`);</code></pre>
 
-<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">// Function to fetch and display JSON data
-async function loadProductData() {
-    try {
-        // Fetch the JSON file
-        const response = await fetch('data/products.json');
-        
-        // Convert the response to JSON
-        const data = await response.json();
-        
-        // Display in console
-        console.log('Products loaded:', data.products);
-        
-        return data.products;
-    } catch (error) {
-        console.error('Error loading products:', error);
-        return [];
-    }
+    <p>Note: Using the <span class="syn-js">.toFixed(n)</span> method for calculations is dangerous because it converts your number into a string (text), which breaks any future math you might want to do with that variable.</p>
+
+
+    <h3>Generating cumulative numeric totals</h3>
+
+    <p>When dealing with numbers, you may want to display cumulative or 'running' totals as you loop through an array. This can be useful for calculating sums, averages, or other aggregate values.</p>
+
+    <p>Imagine your <b>arrProducts</b> array has a <b>quantitySold</b> property for each product. You can use the <a href="variable-operations.html#compound-assignment-numbers" target="_blank">compound assignment</a> operator to calculate the total quantity sold across all products as follows:</p>
+
+<pre><code class="hljs language-javascript">// Initialise a variable to hold the cumulative total
+let totalQuantitySold = 0;
+// Loop through arrProducts
+arrProducts.forEach(product =&gt; {
+    // Add the quantitySold of the current product to the total
+    totalQuantitySold += product.quantitySold;
+});
+// Outside the loop, display the total quantity sold
+console.log(`Total quantity sold: ${totalQuantitySold}`);
+</code></pre>
+
+        <p>Imagine your <b>arrUsers</b> array has an <b>Age</b> property for each user. You can calculate the average age of all users as follows:</p>
+<pre><code class="hljs language-javascript">// Initialise a variable to hold the cumulative total age
+let totalAge = 0;
+// Loop through arrUsers
+arrUsers.forEach(user =&gt; {
+    // Add the age of the current user to the total
+    totalAge += user.age;
+});
+// Outside the loop, calculate and display the average age
+const averageAge = totalAge / arrUsers.length;
+console.log(`Average age: ${averageAge}`);</code></pre>
+
+<h3>Outputting boolean values</h3>
+
+
+    <p>To display a more user-friendly message based on a boolean property value (<code>true</code> or <code>false</code>), you could use an <span class="syn-js">if...else</span> statement to set a variable to a specific string based on the boolean value.</p>
+
+<pre><code class="hljs language-javascript">// *** Alternative to true/false output ***
+let stockStatus; // Variable to hold stock status
+if (product.inStock) { // tests stock status
+    stockStatus = '✅ Currently Available'; // if test returns true
+} else {
+    stockStatus = '❌ Out of Stock'; // if test returns false
 }
 
-// Call the function
-loadProductData();</code></pre>
-            </section>
+console.log(`In Stock? ${stockStatus}`); // Outputs result
+</code></pre>
 
-            <section id="displaying-data">
-                <h2>Displaying Data in an HTML Table</h2>
-                <p>Once we have our data, we can display it as an HTML table:</p>
+        <p>In modern JavaScript, a more common approach would be to use the <a href="making-decisions.html#ternary-operator" target="_blank">ternary operator</a>.</p>
+   
+<pre><code class="hljs language-javascript">// *** Alternative to true/false output (ternary version) ***
+const stockStatus = product.inStock
+    ? '✅ Currently Available'
+    : '❌ Out of Stock';
 
-<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">async function displayProductTable() {
-    // Get the products data
-    const products = await loadProductData();
+console.log(`In Stock? ${stockStatus}`);
+</code></pre>
+
+
+</section>
+
+
+
+
+            <section class="resources-learning" id="try-it">
+
+                <h2>Try it yourself</h2>
+                <p>In your workfile...</p>
+        
+                <p>---</p>
+        
+                <p>Create an array called <code>arrBooks</code> with at least four book objects. Each book object should have these properties:<br>
+                - title (string)<br>
+                - author (string)<br>
+                - year (number)<br>
+                - isRead (boolean)</p>
+                
+                <p>You can use AI to generate the details.</p>
+                <p>Using a <code>.forEach()</code> loop, display each book's information in the console.</p>
+        
+              </section>
+            
+        
+        
+               <section class="resources-learning" id="resources">
+        
+                      <h2>More learning resources</h2>
+                  
+                      <div class="flex-container">
+                        <div class="text-container">
+                          <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                          <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/12" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+                  
+                        </div>
+                    
+                        <div class="audio-container">
+                          <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+                  
+                          <audio controls>
+                            <source src="assets/audio/arrays-objects.mp3" type="audio/mp3">
+                            Your browser does not support the audio element.
+                          </audio>
+                  
+                        </div>
+                      </div>
+                  
+                    </section>
+                    
+                    <section class="resources-learning" id="ai-prompts">
+                  
+                      <h2>Sample AI prompts</h2>
+                  
+                    
+                      <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">I'm learning about arrays of objects in JavaScript. Could you help me understand them better by:<br>
+                      - Creating an example array of objects representing a playlist of songs<br>
+                      - Explaining how each part of the syntax works (brackets, braces, commas, etc.)<br>
+                      - Showing me how to access specific properties like the title of the second song<br>
+                      - Demonstrating how to loop through the array with .forEach() and display the data<br>
+                      - Please explain each step as if you're teaching a beginner.</code></div>
+                   
     
-    // Create table HTML
-    let tableHTML = `
-        &lt;table class="data-table"
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th&gt;Product ID&lt;/th&gt;
-                    &lt;th&gt;Name&lt;/th&gt;
-                    &lt;th&gt;Price&lt;/th&gt;
-                    &lt;th&gt;In Stock&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-    `;
-    
-    // Add each product as a row
-    products.forEach(product =&gt; {
-        tableHTML += `
-            &lt;tr&gt;
-            &lt;td&gt;${product.productID}&lt;/td&gt;
-            &lt;td&gt;${product.name}&lt;/td&gt;
-            &lt;td&gt;$${product.price.toFixed(2)}&lt;/td&gt;
-            &lt;td&gt;${product.inStock ? 'Yes' : 'No'}&lt;/td&gt;
-            &lt;/tr&gt;
-        `;
-    });
-    
-    // Close the table
-    tableHTML += `
-    &lt;/tbody&gt;
-    &lt;/table&gt;
-    `;
-    
-    // Add to the page
-    document.getElementById('product-table').innerHTML = tableHTML;
-}
-
-// Call the function when page loads
-document.addEventListener('DOMContentLoaded', displayProductTable);</code></pre>
-            </section>
-
-            <section id="working-with-data">
-                <h2>Working with Arrays of Objects</h2>
-                <p>Once you have an array of objects, you can use JavaScript array methods to work with the data:</p>
-
-<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">// Filter products in stock
-const inStockProducts = products.filter(product =&gt; product.inStock);
-
-// Find expensive products (over $500)
-const expensiveProducts = products.filter(product =&gt; product.price > 500);
-
-// Calculate total value of all products
-const totalValue = products.reduce((sum, product) =&gt; sum + product.price, 0);
-
-// Find a specific product
-const laptop = products.find(product =&gt; product.name === "Laptop");
-
-// Sort products by price
-const sortedByPrice = [...products].sort((a, b) =&gt; a.price - b.price);</code></pre>
-            </section>
-
-            <section id="exercises">
-                <h2>Further Learning</h2>
-                <p>Try these exercises to enhance your understanding:</p>
-                <ul>
-                    <li>Try adding new products to the JSON file</li>
-                    <li>Add more columns to the table</li>
-                    <li>Implement sorting when clicking column headers</li>
-                    <li>Add a search function to filter products</li>
-                    <li>Create a form to add new products</li>
-                </ul>
-            </section>
+        
+                    </section>
+        
+        
+        
         </article>
-    </main>
-
-    <script>hljs.highlightAll();</script>
-</body>
-</html>
+        </main>
+        
+        <footer>
+        
+        </footer>
+        
+        <div id="cookie-banner">
+            <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+            <div class="buttons">
+                <button id="accept-cookies">Got it</button>
+            </div>
+        </div>
+        
+        
+        <script>hljs.highlightAll();</script>
+        
+        <script src="assets/js/utils.js"></script>
+        
+        
+        </body>
+        </html>
