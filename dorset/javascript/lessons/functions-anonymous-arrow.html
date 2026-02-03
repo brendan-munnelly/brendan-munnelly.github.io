@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Anonymous and arrow functions | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Creating a function whose output is stored in a variable, passing arguments and returning values, and invoking it immediately.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Anonymous and arrow functions</h1>
+					<h2>Creating a function whose output is stored in a variable, passing arguments and returning values, and invoking it immediately.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#anonymous-functions">About anonymous functions</a></p>
+				<p><a href="#parameters-arguments-returns">Parameters, arguments, and return values</a></p>
+
+				<p><a href="#function-arrow">About arrow functions</a></p>
+				<p><a href="#parameters-arguments">Parameters, arguments, and return values</a></p>
+				<p><a href="#single-parameters">Single-statement, single-parameter arrow functions</a></p>
+				<p class="toc-indent"><a href="#explicit-implicit">Implicit and explicit returns from arrow functions</a></p>
+				<p><a href="#multiple-parameters">Single-statement, multiple-parameter arrow functions</a></p>
+
+				<p><a href="#functions-not-hoisted">Anonymous and arrow functions are not hoisted</a></p>
+				<p><a href="#functions-immediate">Immediately-invoked anonymous and arrow functions</a></p>
+
+				<p><a href="#try-it">Try it yourself</a></p>
+
+				<p><a href="#resources">More learning resources</a></p>
+		  
+				<p><a href="#ai-prompts">Sample AI prompts</a></p>
+	
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+				<p>&nbsp;</p>				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+
+
+			</aside>
+	
+	<article>
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+			<li>Create an <i>anonymous function</i> expression whose value is stored in a variable.</li>
+			<li>Work with parameters, arguments and return values in anonymous functions.</li>
+			<li>Add default input values to anonymous functions.</li>
+			<li>Recognise that anonymous functions are <i>not</i> hoisted.</li>
+            <li>Create and call an <i>arrow function</i>.</li>
+			<li>Use the shorthand syntax for arrow functions with only a single statement.</li>
+			<li>Pass single or multiple arguments to an arrow function.</li>
+			<li>Pass arrow function output back to the calling program with implicit or explicit returns.</li>
+			<li>Immediately invoke an anonymous or arrow function without calling it.</li>
+		</ul>
+	
+	</section>
+
+	<section>
+
+ <div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-9.html</b>.</p>
+   			<p>Create a new empty text file named <b>script-9.js</b> and save it in this same folder.</p>
+            <p>Add a link to <b>script-9.js</b> in your <b>workfile-9.html</b> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
+
+
+			<img src="assets/img/functions-anonymous-arrow/workfile-9.png" alt="screenshot">
+		</div>
+
+
+		
+	</section>
+
+	<section id="anonymous-functions">
+
+		<h2>About anonymous functions</h2>
+		<p>Unlike a <a href="function-declarations.html">function declaration</a>, an anonymous function is a function without a name.</p>
+
+		<img src="assets/img/functions-anonymous-arrow/function-no-name.png" alt="screenshot" style="max-width: 600px">
+		<p>But if it has no name, how can an anonymous function be called in a program?</p>
+
+		<p>One option is to assign the anonymous function to a variable declared with the <span class="syn-js">const</span> keyword.</p> 
+
+		<img src="assets/img/functions-anonymous-arrow/function-no-name-1.png" alt="screenshot" style="max-width: 660px">
+
+		<p>You can then call the anonymous function in a similar way to how you call a function declaration. See below.</p>
+
+		<img src="assets/img/functions-anonymous-arrow/function-no-name-3.png" alt="screenshot" style="max-width: 680px">
+
+		<p>Using the <span class="syn-js">const</span> variable type ensures the function is not accidentally changed or overwritten elsewhere in the program.</p>   
+
+		<p>(Strictly speaking, an anonymous function is not stored inside a JavaScript variable. Only the output that the function returns is stored in the variable.)</p>
+
+		<p>Anonymous functions are also called <i>function expressions</i>.</p>
+
+		<p>Copy the following sample anonymous function to your <b>script-9.js</b> file and verify it runs correctly.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// ======== ANONYMOUS FUNCTIONS ========
+
+// Anonymous function	
+const showGreeting = function () {
+   console.log('Hello from anonymous function');
+};
+
+showGreeting(); // Hello from anonymous function
+</code></pre>
+
+	</section>
+
+
+	<section id="parameters-arguments-returns">
+
+		<h2>Parameters, arguments, and return values</h2>
+
+		<p>As with function declarations, an anonymous function can contain parameters to which you can pass values as arguments. And an anonymous function can return a value back to the program that called it.</p>
+
+		<p>Copy these two anonymous functions to your <b>script-9.js</b> file and verify they run correctly.</p>
+
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+// Anonymous function with two parameters that returns a value
+const sumNumbers = function(a, b) {
+    return a + b;
+};
+
+// Call the function with two arguments
+let resultSum = sumNumbers(5, 3); 
+// Outputs result to console
+console.log(`Returned result: ${resultSum}`);
+
+
+// Anonymous function with two parameters that returns a value
+const multiplyNumbers = function(x, y) {
+    return x * y;
+};
+
+// Call the function with two arguments
+let resultMultiply = multiplyNumbers(5, 3);
+// Outputs result to console
+console.log(`Returned result: ${resultMultiply}`);</code></pre>
+
+
+      <p>Anonymous functions are particularly useful when:</p>
+            <ul>
+                <li>You need to pass a function as an argument to another function</li>
+                <li>You want to create a function that won't be used elsewhere in your code</li>
+                <li>You're working with <a href="events.html" target="_blank">events</a> or <a href="functions-callback.html#callbacks-anonymous" target="_blank">callbacks</a></li>
+                <li>You want to ensure the function name won't conflict with other functions</li>
+            </ul>
+
+	</section>
+
+
+	
+
+
+	
+
+
+    <section id="function-arrow">
+
+        <h2>About arrow functions</h2>
+        <p>A so-called <i>arrow function</i> is a shorthand or quick way of typing an anonymous function expression. As with regular anonymous functions, you must assign an arrow function to a variable if you want to call it from elsewhere in the program. Arrow functions are not hoisted. You must create them before you call them in your program.</p>
+		
+		<p>You can convert a regular anonymous function to an arrow function as follows:</p>
+
+		<ul>
+			<li>Remove the <span class="syn-js">function</span> keyword. But leave the parentheses <span class="syn-js">()</span>.
+			<img src="assets/img/functions-anonymous-arrow/functions-arrow-1.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+			<li>After the <span class="syn-js">()</span> and before the opening code block <span class="syn-js">{</span>, type an equals sign and a right angle bracket character <span class="syn-js">=&gt;</span>. This is called the &#8216;fat arrow&#8216; symbol.
+			<img src="assets/img/functions-anonymous-arrow/functions-arrow-2.png" alt="JavaScript arrow function" style="max-width: 600px"></li>
+		</ul>
+
+		<p>That's it. You have now created an arrow function.</p>
+
+		<p>Copy the sample arrow function below into your <b>script-9.js</b> file and verify it runs correctly.</p>
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">// ======== ARROW FUNCTIONS ========
+
+// Arrow function
+const helloFromArrow = () =&gt; {
+    console.log('Hello from arrow function');
+};
+
+// Call the arrow function using the variable name
+helloFromArrow();</code></pre>
+
+
+	</section>
+
+
+		<section id="parameters-arguments">
+
+			<h2>Parameters, arguments, and return values</h2>
+		
+			<p>As with regular anonymous functions, an arrow function can contain parameters that you can pass values to as arguments. And an arrow function can return a value back to the program that called it.</p>
+		
+			
+
+			<p>Arrow functions are best used when:</p>
+
+			<ul>
+				<li>There is only <i>one statement</i> in the function body.</li>
+				<li>There is <i>no or only one parameter</i> expected by the function.</li>
+			</ul>
+
+		</section>
+
+
+		<section id="single-parameters">
+			<h2>Single-statement, single-parameter arrow functions</h2>
+			<p>When an arrow function contains just one input parameter, you can omit the usual parentheses <span class="syn-js"><b>()</b></span> around that parameter.</p>
+
+			<p>Copy the following two arrow functions to your <b>script-9.js</b> file.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Arrow function without parentheses around single parameter
+const greetNoParen = name =&gt; {
+    return `Hello, ${name}!`;
+};
+
+const greetingNoParen = greetNoParen("Mary");
+console.log(greetingNoParen); // Hello, Mary!</code></pre>
+
+<h3 id="explicit-implicit">Implicit and explicit returns from arrow functions</h3>
+	<p>But you can make this code even more concise! When an arrow function contains only one statement, you can:</p>
+	
+	<ul>
+		<li>Write the arrow function on one line.</li>
+		<li>Omit the <span class="syn-js"><b>{&nbsp;}</b></span> around the code block.</li>
+		<li>Omit the <span class="syn-js"><b>return</b></span> keyword.</li>
+	</ul>
+
+		<p>In <b>script-9.js</b>, update your arrow function as shown below and verify it still works.</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">// Arrow function without parentheses
+const greetNoParen = name =&gt; `Hello, ${name}!`;</code></pre>
+
+			<p>No <span class="syn-js"><b>{&nbsp;}</b></span> and no <span class="syn-js"><b>return</b></span> keyword needed!</p>
+
+			<p>When an arrow function contains only a single statement, omitting the <span class="syn-js"><b>return</b></span> keyword creates an <i>implicit return</i>. See the illustration below.</p>
+
+			<img src="assets/img/functions-anonymous-arrow/dense-syntax.png" style="max-width:600px" alt="screenshot">
+
+			<p>Copy the following arrow functions with implicit returns to your <b>script-9.js</b> file.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// Single-statement arrow functions with implicit returns
+
+const shortGreet = () =&gt; 'Hello with no parameter!';	
+console.log(shortGreet()); // Hello with no parameter!
+
+const double = x =&gt; x * 2;
+console.log(double(10)); // 20
+
+const halfNum = num =&gt; (num / 2);
+console.log(halfNum(200)); // 100
+
+const add15ToPrice = num =&gt; (num + 15);
+console.log(add15ToPrice(100)); // 115
+
+const increasePriceby5Percent = num =&gt; (num + (num * .05));
+console.log(increasePriceby5Percent(200)); // 210
+
+const isPositive = num =&gt; num &gt; 0;
+console.log(isPositive(5)); // true
+
+const uppercase = str =&gt; str.toUpperCase()
+console.log(uppercase("hello")); // HELLO</code></pre>
+
+			<p>Verify the above functions all run without error.</p>
+
+</section>			
+			
+		<section id="multiple-parameters">
+			<h2>Single-statement, multiple-parameter arrow functions</h2>
+
+			<p>Here are some examples of single-statement arrow functions with implicit returns that accept multiple parameters.</p>
+
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Arrow functions with multiple parameters and implicit returns 
+					   
+// Add three numbers
+const addNums = (x, y, z) =&gt; x + y + z;
+console.log(addNums(4, 8, 16)); // 28
+					
+// Divide one number by another
+const divideNum = (num1, num2) =&gt; num1 / num2;
+console.log(divideNum(16, 8)); // 2
+					
+// Calculate product price after 20% tax
+const finalPrice = (price, tax) =&gt; (price + (price * tax));
+console.log(finalPrice(50, .20)); // 60</code></pre>
+			
+		<p>Copy the above functions to your <b>script-9.js</b> file and verify they run without error.</p>
+
+        <p>Note: It is <i>not recommended</i> to use arrow functions when you have multiple statements in the function body. You will not shorten the function syntax significantly and increase the likelihood of errors.</p>
+
+		<p>Arrow functions are best suited for:</p>
+            <ul>
+                <li>Short, single-purpose operations, especially inside conditionals and loops such as with <span class="syn-js">.forEach()</span>.</li>
+				 <li>You're working with <a href="events.html" target="_blank">events</a> or <a href="functions-callback.html##callbacks-arrow" target="_blank">callbacks</a></li>
+            </ul>
+
+</section>
+
+		
+				
+	<section id="functions-not-hoisted">
+
+		<h2>Anonymous and arrow functions are <i>not</i> hoisted</h2>
+
+		<p>One important difference between a function declaration and an anonymous or arrow function is that the first is <i>hoisted</i> while the other two are not.</p>
+
+		<p>As a result, you can call an anonymous or arrow function only <i>after</i> you have created it &#8211; and never before.</p>
+
+		<img src="assets/img/functions-anonymous-arrow/function-not-hoisted.png" alt="JavaScript function expression not hoisted">
+
+
+	</section>
+
+		<!-- <p>Arrow functions are most commonly used in <a href="callback-functions.html">callbacks</a>, where they are passed as arguments to another function.</p>
+
+		<p>You can also use arrow functions as <i>methods</i> in <a href="working-with-arrays.html">arrays</a>, <a href="working-with-objects.html">objects</a> and <a href="event-handlers.html">event-handlers</a>.</p> -->
+
+
+
+<section id="functions-immediate">
+
+		<h2>Immediately-invoked anonymous and arrow functions</h2>
+		<p>You can amend the syntax of an anonymous or arrow function so that it is run without being called from elsewhere in the program. Such a function is said to be <i>immediately-invoked</i>. This pattern is known as an Immediately-Invoked Function Expression (IIFE).</p>
+
+		<p>Note that function declarations cannot be immediately-invoked. Only anonymous and arrow functions can.</p>
+
+		<p>To invoke an anonymous function immediately, wrap the function inside a parenthesis <span class="syn-js">()</span> and add another parenthesis <span class="syn-js">()</span> after it.</p>
+
+		<p>Copy this anonymous function to your <b>script-9.js</b> file and verify it runs without being called.</p>
+
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Immediately-invoked anonymous function
+(function() {
+    console.log("Hello from immediately-invoked anonymous function");
+})();</code></pre>
+
+	<p>Because such a function is not called but runs immediately, it does not need a name. Accordingly, you do not need to assign it to a variable.</p>
+
+    <p>To invoke an arrow function immediately, wrap the function inside a parenthesis <span class="syn-js">()</span> and add another parenthesis <span class="syn-js">()</span> after it.</p>
+
+		<p>Copy the arrow function below to your <b>script-9.js</b> file and verify it runs without being called.</p>
+
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">// Immediately invoked arrow functions
+(() =&gt; {
+    console.log("Hello from arrow function");
+})();
+
+// With parameters
+((name, age) =&gt; {
+    console.log(`Processing ${name}, age ${age}`);
+    return `Processed ${name}`;
+})('John', 30);</code></pre>
+
+
+	</section>
+
+
+
+
+
+
+	<section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your script file...</p>
+
+        <p>---</p>
+
+        <p>Create an anonymous function that takes two parameters: <code>firstName</code> and <code>lastName</code>. The function should output a full name with the last name in uppercase. Store it in a variable called <code>formatName</code>.</p>
+
+        <p>---</p>
+
+        <p>Create an anonymous function that takes three numbers as parameters and outputs their average. Store the output it in a variable called <code>calculateAverage</code>.</p>
+
+        <p>---</p>
+
+        <p>Create an immediately-invoked anonymous function that calculates and displays the area of a rectangle with width of 10 and height of 5.</p>
+
+        <p>---</p>
+
+        <p>Create these arrow functions that work with multiple parameters:<br>
+		- Create <code>combineWords</code> that takes two strings and joins them with a space<br>
+		- Create <code>calculateArea</code> that computes the area of a rectangle (width × height)<br>
+		- Create <code>calculateVolume</code> that computes the volume of a box (width × height × depth)</p>
+
+        <p>---</p>
+
+        <p>Convert these anonymous functions to arrow functions:</p>
+
+		<p><code>// Simple greeting<br>
+		const sayHelloUser = function() {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return "Hello!";<br>
+		};</code></p>
+		<p><code>// Square a number<br>
+		const squareNum = function(x) {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return x * x;<br>
+		};</code></p>
+
+		<p><code>// Check if string is empty<br>
+		const isEmptyStr = function(str) {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return str.length === 0;<br>
+		};</code></p>
+
+
+        <p>---</p>
+    
+      </section>
+    
+
+	<section class="resources-learning" id="resources">
+
+		<h2>More learning resources</h2>
+	
+		<div class="flex-container">
+		  <div class="text-container">
+			<h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+			<p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/14" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+	
+		  </div>
+	  
+		  <div class="audio-container">
+			<h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+	
+			<audio controls>
+			  <source src="assets/audio/functions-anonymous.mp3" type="audio/mp3">
+			  Your browser does not support the audio element.
+			</audio>
+	
+		  </div>
+		</div>
+	
+	  </section>
+
+
+
+	  <section class="resources-learning" id="ai-prompts">
+          
+        <h2>Sample AI prompts</h2>
+    
+        <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">
+		I'm learning about anonymous functions in JavaScript. Could you create a comparison table showing the key differences between regular function declarations and anonymous functions?</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-12">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-12">I understand how to create basic anonymous functions, but I'm struggling to understand hoisting with anonymous functions versus regular functions. Could you show me some examples that illustrate why anonymous functions can't be called before they're defined, while regular functions can?</code></div>
+     
+        <div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">
+		Could you show me some common mistakes programmers make when working with anonymous functions and how to fix them? Please include examples of scope issues, incorrect syntax, and any other pitfalls I should watch out for.</code></div>
+
+        <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">I'm learning about arrow functions in JavaScript. Could you compare them with regular anonymous functions, focusing specifically on syntax differences and use cases? Please provide practical examples showing when arrow functions would be the better choice and when they wouldn't be ideal.</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">I understand the basic syntax of arrow functions with implicit returns, but I'm confused about when I can and can't use them. Could you create a guide showing different scenarios where implicit returns work and don't work, with examples of common mistakes to avoid?</code></div>
+    
+      </section>
+
+</article>
+</main>
+
+<footer>
+
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+
+</body>
+</html>
