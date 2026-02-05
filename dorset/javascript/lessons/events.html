@@ -180,9 +180,10 @@ document.getElementById("myButton").addEventListener('click', () =&gt; {
 myButton.addEventListener('click', (event) =&gt; {
     // Access properties of the event object
     console.log(event.target.id);        // ID of clicked element
-    console.log(event.target.className); // Classes of clicked element
+    console.log(event.target.classList); // CSS class(es) of clicked element
 });</code></pre>
 
+    <p>The <span class="syn-js">.classList</span> property returns a type of array (a live DOMTokenList) of the CSS class(es) of the element.</p>
 
         <p>In modern JavaScript, the event object is usually represented by the single letter <span class="syn-js">e</span>. And because <span class="syn-js">e</span> is the only parameter of the arrow function, you need not type the parenthesis <span class="syn-js">()</span>.</p>
         
@@ -191,11 +192,10 @@ myButton.addEventListener('click', (event) =&gt; {
 <pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">myButton.addEventListener('click', e =&gt; {
     // Access properties of the event object
     console.log(e.target.id);        // ID of clicked element
-    console.log(e.target.className); // Classes of clicked element
+    console.log(e.target.classList); // CSS class(es) of clicked element
 });</code></pre>
 
         <p>The <span class="syn-js">e.target</span> property refers to the element that triggered the event.</p>
-
 
     </section>
 
@@ -206,7 +206,7 @@ myButton.addEventListener('click', (event) =&gt; {
         <p>Before continuing, add a <span class="syn">&lt;style&gt;</span> tag to the <span class="syn">&lt;head&gt;</span> of your <b>workfile-11.html</b> and paste in the following CSS rules.</p>
 
 
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-css">.btn-blue, .btn-green, .btn-red, .btn-purple {
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-css">.btn {
    font-size: 16px; margin: 5px; border-radius: 5px; padding: 10px 20px;
    cursor: pointer; border: none; color: white
 }
@@ -219,9 +219,9 @@ myButton.addEventListener('click', (event) =&gt; {
     <p>Next, add the following <span class="syn">&lt;div&gt;</span> container with a <span class="syn">&lt;h2&gt;</span> subheading and three buttons to your <b>workfile-11.html</b> file.</p>
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-html">&lt;div id="buttonContainer"&gt;
     &lt;h2&gt;Button container&lt;/h2&gt;
-    &lt;button id="btn-1" class="btn-green"&gt;Button 1&lt;/button&gt;
-    &lt;button id="btn-2" class="btn-red"&gt;Button 2&lt;/button&gt;
-    &lt;button id="btn-3" class="btn-blue"&gt;Button 3&lt;/button&gt;
+    &lt;button id="btn-1" class="btn btn-green"&gt;Button 1&lt;/button&gt;
+    &lt;button id="btn-2" class="btn btn-red"&gt;Button 2&lt;/button&gt;
+    &lt;button id="btn-3" class="btn btn-blue"&gt;Button 3&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 
        <p>Finally, add this code to your script file.</p>
@@ -233,15 +233,13 @@ const container = document.getElementById('buttonContainer');
 
 // Add single event listener to container
 container.addEventListener('click', e =&gt; {
-   console.log(`You clicked ${e.target.id}`);
-   console.log(`You clicked ${e.target.className}`);
+   console.log(`You clicked button with this ID: ${e.target.id}`);
+   console.log(`You clicked button with these CSS class(es): ${e.target.classList}`);
    // Add new CSS class to targetted HTML element
    e.target.classList.add('btn-purple');
 });</code></pre>
 
         <p>When you click any of the buttons inside the container, the event listener on the container element handles the click event. This is event delegation in action.</p>
-
-        <p>The <span class="syn-js">.includes()</span> method determines whether a string contains a specified substring and returns true or false accordingly.</p>
 
         <p><i>Unfortunately, clicking on the container itself or other non-button elements such as the &lt;h2&gt; subheading inside it might also trigger the event listener!</i></p>
 
@@ -250,24 +248,27 @@ container.addEventListener('click', e =&gt; {
 
 <pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Add single event listener to container
 container.addEventListener('click', e =&gt; {
-    // Check if clicked element is a button
-    if (e.target.className.includes('btn')) {
-        console.log(`You clicked ${e.target.id}`);
-        console.log(`You clicked ${e.target.className}`);
+    // Check if clicked element is a button (has CSS class of 'btn')
+    if (e.target.classList.contains("btn")) {
+        console.log(`You clicked button with this ID: ${e.target.id}`);
+        console.log(`You clicked button with these CSS class(es): ${e.target.classList}`);
         // Add new CSS class to targetted button
         e.target.classList.add('btn-purple');
     }
 });</code></pre>
 
+        <p>The <span class="syn-js">.contains()</span> method determines whether the CSS classes of the target element include a specified class (e.g., 'btn') and returns true or false accordingly.</p>
+
+
     <p>Verify that only clicking a button, not anything else, triggers the event listener.</p>
 
-    <p>An as alternative to testing the CSS class name, you could also have checked the ID of the clicked element.</p>
+    <p>Instead of testing the CSS class name(s), you could also have checked the ID of the clicked element.</p>
 
 <pre><code class="hljs language-javascript">if (e.target.id.includes('btn')) {
     ...
 }</code></pre>
 
-        <p>Your example is not yet complete: you need to deal with <i>event propagation</i>.</p>
+        <p>The <span class="syn-js">.includes()</span> method determines whether a string contains a specified substring and returns true or false accordingly.</p>
 
     </section>
 
@@ -402,3 +403,5 @@ document.getElementById('myNewButton').addEventListener('click', e =&gt; {
 
 </body>
 </html>
+
+
