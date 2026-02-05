@@ -19,6 +19,7 @@
 
 	<style>
 		pre { background-color: #282c34;}
+        .table-js-methods td:nth-child(1) { min-width: 20%; }
 	</style>
     <!-- Syntax Highlighter -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
@@ -27,7 +28,7 @@
 	<script defer src="../../assets/js/cookie.js"></script>
 
     <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 	
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
@@ -71,12 +72,12 @@
 	
 				<h3>THIS TUTORIAL</h3>
                 <p><a href="#learning-goals">Learning Goals</a></p>
-                <p><a href="#objects-methods">Objects and Methods</a></p>
-                <p><a href="#event-object">The Event Object</a></p>
-                <p><a href="#event-listeners">Working with Event Listeners</a></p>
-                <p><a href="#event-properties">Accessing Event Properties</a></p>
-                <p><a href="#event-delegation">Event Delegation</a></p>
-                <p><a href="#event-bubbling">Event Bubbling</a></p>
+                <p><a href="#event-object">About the event (e) object</a></p>
+                <p><a href="#event-properties">Accessing event properties</a></p>
+                <p><a href="#event-delegation">Event delegation</a></p>
+                <p><a href="#event-bubbling">About event propagation: <i>capture</i> and <i>bubbling</i></a></p>
+                <p class="toc-indent"><a href="#prevent">Preventing event bubbling</a></p>
+
                 <p><a href="#try-it">Try it yourself</a></p>
                 <p><a href="#resources">More learning resources</a></p>
                 <p><a href="#ai-prompts">Sample AI prompts</a></p>
@@ -92,220 +93,269 @@
 		<p>At the end of this Tutorial, you will be able to:</p>
 
 		<ul>
-            <li>Understand how functions can be attached to objects as methods</li>
-            <li>Work with the built-in Event object and its methods</li>
-            <li>Use the <span class="syn-js">addEventListener()</span> method to handle user interactions</li>
-            <li>Access properties of event objects</li>
+            <li>Work with the built-in event object and its methods</li>
+            <li>Use the <span class="syn-js">.addEventListener()</span> method to handle user interactions</li>
+            <li>Access the <span class="syn-js">.target.id</span> and <span class="syn-js">.target.classname</span> properties of event objects</li>
             <li>Implement event delegation for efficient event handling</li>
-            <li>Understand event bubbling and how to control it</li>
+            <li>Understand event bubbling and how to control it with the <span class="syn-js">.stopPropagation()</span> method.</li>
 		</ul>
 
 	</section>
 
 
-    <section>
-        <div class="code-snippets" style="margin-bottom:32px">
-            <p>Download a new workfile on your computer as described at the link below.</p>
-            <p>📄 &nbsp;<a href="assets/workfiles/events.html" target="_blank"><b>JavaScript events</b>: Exercises</a></p>
-        </div>
-    </section>
+<section>
+
+ <div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new HTML file named <b>workfile-11.html</b>.</p>
+   			<p>Create a new empty text file named <b>script-11.js</b> and save it in this same folder.</p>
+            <p>Add a link to <b>script-11.js</b> in your <b>workfile-11.html</b> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
 
 
-    <section id="objects-methods">
-        <h2>Objects and methods</h2>
-        <p>In a previous <a href="objects-intro.html">Introduction to objects</a> Tutorial, you learned that an object is JavaScript is a named container for key-value pairs, with each pair known as a property.</p>
+			<img src="assets/img/events/workfile-11.png" alt="screenshot">
+		</div>
 
-        <img src="assets/img/events/object-properties.png" alt="screenshot" style="max-width: 500px">
-        <p>In the above example, the object has four properties, each one with a property key (such as <b>Age</b>) and a property value (such as <b>23</b>).</p>
-        
-        <p>In addition to properties, an object can also have functions attached to it. These functions are called <i>methods</i>.</p>
 
-        <p>Here's a simple example:</p>
+		
+	</section>
 
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// Object with both properties and a method
-const car = {
-    // Properties
-    make: "Toyota",
-    model: "Corolla",
-    year: 2024,
-
-    // Method
-    start: function() { 
-        console.log("The car is starting");
-    }
-};
-
-// Calling the method
-car.start(); // The car is starting</code></pre>
-
-        <p>In the example above, <span class="syn-js">start</span> is a method of the <span class="syn-js">car</span> object.</p>
-
-        <p>Note that the function in the object is an example of an <a href="functions-anonymous.html">Anonymous function</a> because it is defined without a name. </p>
-
-        <p>This syntax can be shortened to the following:</p>
-        <img src="assets/img/events/syntax.png" alt="screenshot">
-
-    </section>
 
 
     <section id="event-object">
-        <h2>The event object</h2>
+        <h2>About the <code>event(e)</code> object</h2>
         <p>JavaScript includes several built-in objects. One of these is the <span class="syn-js">event</span> object, which represents something that happens in a web browser, such as:</p>
         
         <ul>
             <li>A user clicking a button</li>
-            <li>A web page finishing loading</li>
+            <li>A web page finished loading</li>
             <li>A form being submitted</li>
             <li>A key being pressed on the keyboard</li>
         </ul>
 
-        <p>In a previous <a href="dom-and-buttons.html">Working with the DOM</a> Tutorial, you learned how to use event handlers like <span class="syn-js">onclick</span> to respond to user actions:</p>
+        <p>In a previous <a href="interactive-dom.html" target="_blank">Interacting with the DOM</a> Tutorial, you learned how to use event handlers like <span class="syn-js">onclick</span> to respond to user actions:</p>
 
         <img src="assets/img/events/event-handler.png" alt="screenshot" style="max-width: 580px">
 
-        <p>The Event object provides a more flexible way to handle events using the <span class="syn-js">addEventListener()</span> method. This method takes two arguments:</p>
+        <p>The event object provides a more flexible way to handle events using the <span class="syn-js">.addEventListener()</span> method. This method takes two arguments:</p>
         
         <ul>
-            <li>The type of event to listen for (such as 'click', 'mouseover', etc.)</li>
+            <li>The type of event to listen for (such as <span class="syn-js">click</span>, <span class="syn-js">mouseover</span>, etc.)</li>
             <li>The function to call when the event occurs</li>
         </ul>
 
-        <p>Here's how to rewrite the previous example using <span class="syn-js">addEventListener()</span>:</p>
+        <p>Here's how to rewrite the previous example using <span class="syn-js">.addEventListener()</span>:</p>
 
-        <p>First, add this to the HTML part of your <b>events.html</b> workfile.</p>
+        <p>First, add this to the <span class="syn">&lt;body&gt;</span> of your <b>workfile-11.html</b> file.</p>
 
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">
 &lt;button id="myButton" class="btn-blue"&gt;Click me&lt;/button&gt;
 </code></pre>
 
-        <p>Next add the following JavScript code.</p>
-<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Get the button element
-const button = document.getElementById('myButton');
+        <p>Next, add the following JavaScript code to your <b>script-11.js</b> file.</p>
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Get the button element
+const myButton = document.getElementById("myButton");
 
-// Add event listener
-button.addEventListener('click', function(event) {
+// Add event listener to button
+myButton.addEventListener('click', () =&gt; {
     console.log("Button was clicked");
 });</code></pre>
 
-        <p>Using <span class="syn-js">addEventListener()</span> has several advantages:</p>
-        <ul>
-            <li>You can add multiple event listeners to the same element</li>
-            <li>You can easily remove event listeners when needed</li>
-            <li>You keep your JavaScript code separate from your HTML</li>
-        </ul>
+        <p>In modern JavaScript, event listeners are typically written using arrow function syntax.</p>
+
+        <p>As an alternative to the above, you could omit the <b>myButton</b> intermediate variable and write the event listener as shown below.</p>
+<pre><code class="hljs language-javascript">// Add event listener without intermediate variable
+document.getElementById("myButton").addEventListener('click', () =&gt; {
+    console.log("Button was clicked");
+});</code></pre>
+
+
     </section>
 
     <section id="event-properties">
         <h2>Accessing event properties</h2>
-        <p>When an event occurs, JavaScript creates an event object containing information about the event. You can access this information by adding a parameter to your event handler function:</p>
+        <p>When an event occurs, JavaScript stores details about the event in the object. To access these details, you need to add the <span class="syn-js">event</span> parameter to your event listener function.</p>
 
-<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// Accessing event properties
-button.addEventListener('click', function(event) {
+        <p>Update your event listener function to include the event parameter as shown below.</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Add event listener to button
+myButton.addEventListener('click', (event) =&gt; {
     // Access properties of the event object
     console.log(event.target.id);        // ID of clicked element
     console.log(event.target.className); // Classes of clicked element
-    console.log(event.type);             // Type of event ('click')
 });</code></pre>
 
-        <p>The <span class="syn-js">event.target</span> property refers to the element that triggered the event.</p>
 
-        <p>In modern JavaScript the event object is usually represented by the single letter <span class="syn-js">e</span> and an arrow function. See below.</p>
+        <p>In modern JavaScript, the event object is usually represented by the single letter <span class="syn-js">e</span>. And because <span class="syn-js">e</span> is the only parameter of the arrow function, you need not type the parenthesis <span class="syn-js">()</span>.</p>
+        
+        <p>Update your code as shown below.</p>
 
-<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">button.addEventListener('click', (e) =&gt; {
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">myButton.addEventListener('click', e =&gt; {
     // Access properties of the event object
-    console.log(event.target.id);        // ID of clicked element
-    console.log(event.target.className); // Classes of clicked element
-    console.log(event.type);             // Type of event ('click')
+    console.log(e.target.id);        // ID of clicked element
+    console.log(e.target.className); // Classes of clicked element
 });</code></pre>
 
-        <p>And finally, because <span class="syn-js">e</span>e is the only parameter of the arrow function, you need not type the parenthesis ().</p>
-
-<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">button.addEventListener('click', e =&gt; {
-    // Access properties of the event object
-    console.log(event.target.id);        // ID of clicked element
-    console.log(event.target.className); // Classes of clicked element
-    console.log(event.type);             // Type of event ('click')
-});</code></pre>
+        <p>The <span class="syn-js">e.target</span> property refers to the element that triggered the event.</p>
 
 
     </section>
 
     <section id="event-delegation">
         <h2>Event delegation</h2>
-        <p>Event delegation is a technique where instead of adding event listeners to individual elements, you add a single event listener to a parent element. This is particularly useful when you have multiple similar elements that need the same event handling.</p>
+        <p>Event delegation is a technique in which you add a single event listener to a parent element instead of adding event listeners to individual elements. This is particularly useful when you have multiple similar elements that need the same event handling.</p>
 
-        <p>Here's an example:</p>
+        <p>Before continuing, add a <span class="syn">&lt;style&gt;</span> tag to the <span class="syn">&lt;head&gt;</span> of your <b>workfile-11.html</b> and paste in the following CSS rules.</p>
 
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-html">&lt;div id="buttonContainer"&gt;
-    &lt;button class="btn" data-color="red"&gt;Red&lt;/button&gt;
-    &lt;button class="btn" data-color="green"&gt;Green&lt;/button&gt;
-    &lt;button class="btn" data-color="blue"&gt;Blue&lt;/button&gt;
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-css">.btn-blue, .btn-green, .btn-red, .btn-purple {
+   font-size: 16px; margin: 5px; border-radius: 5px; padding: 10px 20px;
+   cursor: pointer; border: none; color: white
+}
+
+.btn-blue { background-color: #007BFF; }
+.btn-green { background-color: #28a745; }
+.btn-red { background-color: #dc3545; }
+.btn-purple { background-color: #6f42c1; }</code></pre>    
+    
+    <p>Next, add the following <span class="syn">&lt;div&gt;</span> container with a <span class="syn">&lt;h2&gt;</span> subheading and three buttons to your <b>workfile-11.html</b> file.</p>
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-html">&lt;div id="buttonContainer"&gt;
+    &lt;h2&gt;Button container&lt;/h2&gt;
+    &lt;button id="btn-1" class="btn-green"&gt;Button 1&lt;/button&gt;
+    &lt;button id="btn-2" class="btn-red"&gt;Button 2&lt;/button&gt;
+    &lt;button id="btn-3" class="btn-blue"&gt;Button 3&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 
-<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Event delegation
+       <p>Finally, add this code to your script file.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-javascript">// **** EVENT DELEGATION ****
+
 // Get the container element
 const container = document.getElementById('buttonContainer');
 
 // Add single event listener to container
-container.addEventListener('click', function(event) {
+container.addEventListener('click', e =&gt; {
+   console.log(`You clicked ${e.target.id}`);
+   console.log(`You clicked ${e.target.className}`);
+   // Add new CSS class to targetted HTML element
+   e.target.classList.add('btn-purple');
+});</code></pre>
+
+        <p>When you click any of the buttons inside the container, the event listener on the container element handles the click event. This is event delegation in action.</p>
+
+        <p>The <span class="syn-js">.includes()</span> method determines whether a string contains a specified substring and returns true or false accordingly.</p>
+
+        <p><i>Unfortunately, clicking on the container itself or other non-button elements such as the &lt;h2&gt; subheading inside it might also trigger the event listener!</i></p>
+
+        <p>To prevent this, you can check the event target to ensure it is one of the buttons before applying any changes. Update your event listener code as follows:</p>
+
+
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Add single event listener to container
+container.addEventListener('click', e =&gt; {
     // Check if clicked element is a button
-    if (event.target.classList.contains('btn')) {
-        const color = event.target.dataset.color;
-        console.log(`Selected color: ${color}`);
+    if (e.target.className.includes('btn')) {
+        console.log(`You clicked ${e.target.id}`);
+        console.log(`You clicked ${e.target.className}`);
+        // Add new CSS class to targetted button
+        e.target.classList.add('btn-purple');
     }
 });</code></pre>
 
-        <p>The <b>data-color</b> is an example of a data attribute. These are attributes in HTML that allow you to store extra information on any HTML element. They always start with <b>data-</b> followed by whatever name you choose. They are accesse din JavaScript with the <b>dataset</b> property.</p>
+    <p>Verify that only clicking a button, not anything else, triggers the event listener.</p>
 
+    <p>An as alternative to testing the CSS class name, you could also have checked the ID of the clicked element.</p>
 
-        <p>Benefits of event delegation:</p>
-        <ul>
-            <li>Reduces the number of event listeners needed</li>
-            <li>Works for dynamically added elements</li>
-            <li>Uses less memory</li>
-        </ul>
+<pre><code class="hljs language-javascript">if (e.target.id.includes('btn')) {
+    ...
+}</code></pre>
+
+        <p>Your example is not yet complete: you need to deal with <i>event propagation</i>.</p>
+
     </section>
 
     <section id="event-bubbling">
-        <h2>Preventing event bubbling</h2>
+        <h2>About event propagation: <i>capture</i> and <i>bubbling</i></h2>
         <p>When an event occurs on an element, it first runs handlers on that element, then on its parent, then all the way up to other ancestors. This process is called event bubbling.</p>
 
-        <p>Here's an example to demonstrate bubbling:</p>
 
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">&lt;div id="outer"&gt;
+    <table class="table-js-methods">
+    <tbody>
+      <tr>
+      <td><p>&nbsp;<b>Capture</b></p></td>
+      <td><p>The event starts at the very top of the window and travels down the DOM tree branch, passing through every parent element until it reaches the target element.</p></td>
+      </tr>
+      <tr>
+      <td><p>&nbsp;<b>Target</b></p></td>
+      <td><p>The event has arrived at the button or other specific element you clicked.</p></td>
+      </tr>
+      <tr>
+      <td><p>&nbsp;<b>Bubbling</b></p></td>
+      <td><p>After reaching the target, the event bubbles up from the target element, triggering event listeners on the parent, then the grandparent, and so on, all the way back to the root.</p></td>
+      </tr>
+    </tbody>
+    </table>        
+
+    <p>In short, events don't just &#8216;happen&#8217; on the button. They start at the root, travel down (Capture), hit the target, and then travel back up (Bubble).</p>
+
+    <img src="assets/img/events/event-prop.png" alt="screenshot">
+        <p>Here's an example to demonstrate event bubbling. Add these three HTML elements to <b>workfile-11.html</b>:</p>
+
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-html">&lt;div id="outer"&gt;
     &lt;div id="inner"&gt;
-        &lt;button id="myButton"&gt;Click me&lt;/button&gt;
+        &lt;button id="myNewButton"&gt;Click me&lt;/button&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">
-document.getElementById('myButton').addEventListener('click', function(event) {
+        <p>Next, add this code to your <b>script-11.js</b> file.</p>
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-javascript">
+document.getElementById('myNewButton').addEventListener('click', () =&gt; {
     console.log('Button clicked');
 });
 
-document.getElementById('inner').addEventListener('click', function(event) {
+document.getElementById('inner').addEventListener('click', () =&gt; {
     console.log('Inner div clicked');
 });
 
-document.getElementById('outer').addEventListener('click', function(event) {
+document.getElementById('outer').addEventListener('click', () =&gt; {
     console.log('Outer div clicked');
 });</code></pre>
 
-        <p>When you click the button, you'll see all three messages because the event bubbles up through the DOM tree.</p>
+        <p>When you click the button, you'll see <i>all three messages</i> because the event bubbles up through the DOM tree.</p>
 
-        <p>You can stop event bubbling using <span class="syn-js">event.stopPropagation()</span>:</p>
+        <p>The <span class="syn-js">.addEventListener()</span> method only listens to the Bubbling phase (Phase 3). This is why event delegation works - you catch the event on its way back up.</p>
 
-<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">
-document.getElementById('myButton').addEventListener('click', function(event) {
-    console.log('Button clicked');
-    event.stopPropagation(); // Stops the event from bubbling up
+        <h3 id="prevent">Preventing event bubbling</h3>
+
+        <p>Typically, you will <i>not</i> want the clicking on a button or other event to trigger events on any parent elements higher up the DOM tree. </p>
+        <p>You can stop event bubbling using <span class="syn-js">.stopPropagation()</span> method. Update your code as shown below.</p>
+
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">// **** EVENT BUBBLING AND STOPPING PROPAGATION ****
+
+document.getElementById('myNewButton').addEventListener('click', e =&gt; {
+    console.log('Button clicked - no parent event triggered');
+    e.stopPropagation(); // Stops the event from bubbling up
 });</code></pre>
+
+     <p>Using the <span class="syn-js">.addEventListener()</span> method has several advantages:</p>
+        <ul>
+            <li>Reduces the number of event listeners needed</li>
+            <li>You can easily add and remove event listeners as required</li>
+            <li>Works for dynamically added elements</li>
+            <li>You keep your JavaScript code separate from your HTML.</li>
+        </ul>
     </section>
 
     <section class="resources-learning" id="try-it">
         <h2>Try it yourself</h2>
-        <p>In your workfile...</p>
+        <p>---</p>
 
+        <p>Create three nested &lt;div&gt; elements with different background colours.<br>
+        Add click event listeners to each div.<br>
+        Experiment with event bubbling and the .stopPropagation() method.</p>
+
+        <p>---</p>
+
+        <p>Create a button that changes its text when clicked.<br>
+        Add both a click and mouseover event listener to the same button.<br>
+        The mouseover should change the button's background colour.</p>
         <p>---</p>
 
         <p>Create a list of items (&lt;ul&gt; with several &lt;li&gt; elements).<br>
@@ -314,26 +364,17 @@ document.getElementById('myButton').addEventListener('click', function(event) {
 
         <p>---</p>
 
-        <p>Create three nested &lt;div&gt; elements with different background colors.<br>
-        Add click event listeners to each div.<br>
-        Experiment with event bubbling and stopPropagation().</p>
-
-        <p>---</p>
-
-        <p>Create a button that changes its text when clicked.<br>
-        Add both a click and mouseover event listener to the same button.<br>
-        The mouseover should change the button's background color.</p>
     </section>
 
 
     <section class="resources-learning" id="ai-prompts">
         <h2>Sample AI prompts</h2>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-11">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-11">Explain the difference between event bubbling and event capturing in JavaScript. When would you use one over the other?</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">Explain the difference between event bubbling and event capturing in JavaScript.</code></div>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-12">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-12">Compare and contrast using inline event handlers (onclick="") versus addEventListener(). What are the pros and cons of each approach?</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">Compare and contrast using inline event handlers (onclick="") versus the .addEventListener() method. What are the pros and cons of each approach?</code></div>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">Show me how to implement event delegation for a dynamic list where items can be added or removed. What are the benefits of this approach?</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Show me how to implement event delegation for a dynamic list that allows items to be added or removed.</code></div>
     </section>
 	
 
