@@ -1,0 +1,457 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Listing records | JavaScript Tutorials</title>
+
+    <meta name="description" content="Outputting structured data to a web page, and writing AI prompts to output data in listview and gridview formats with TailwindCSS.">
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34;}
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .data-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+    <!-- Syntax Highlighter -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+      
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    
+</head>
+  
+    <body id="top">
+  
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div><p>&nbsp;</p></div>
+            </div>
+    
+            <div class="content">
+                <h1>Listing records</h1>
+                <h2>Outputting structured data to a web page, and writing AI prompts to output data in listview and gridview formats with TailwindCSS.</h2>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+	
+				<p><i class="fa-solid fa-house"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#review">Outputting structured data to HTML</a></p>
+				<p><a href="#building-script">Building your script</a></p>
+				<p class="toc-indent"><a href="#data-display">Adding CSS and improving the output</a></p>
+
+                <p><a href="#listview">Building a listview output with Tailwind CSS</a></p>
+                <p><a href="#gridview">Building a gridview output with Tailwind CSS</a></p>
+
+				<p><a href="#resources">More learning resources</a></p>
+		  
+				<p><a href="#ai-prompts">Sample AI prompts</a></p>
+	
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+	
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+        </aside>
+
+        <article>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <div class="box-goals">
+                    <ul>
+                        <li>Write JavaScript to output structured data to a web page using a <span class="sys-js">forEach()</span> loop.</li>
+                        <li>Write AI prompts to output structured data in listview and gridview formats with Tailwind CSS.</li>
+                    </ul>
+                </div>
+            </section>
+
+<section>
+				
+		<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, you will start with an <i>empty</i> HTML file.</p>
+			<p>In your <b>javascript/exercises</b> folder, create a new HTML file named <b>list-records-basic.html</b>.</p>
+   			<p>Create a new empty text file named <b>list-records-basic.js</b> and save it in this same folder.</p>
+            <p>Add a link to <b>list-records-basic.js</b> in your <b>list-records-basic.html</b> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
+
+
+			<img src="assets/img/list-records/workfile.png" alt="screenshot">
+		</div>
+</section>
+
+
+            <section id="review">
+
+                    <h2>Outputting structured data to HTML</h2>
+                    <p>In the previous <a href="arrays-objects.html" target="_blank">Arrays of objects</a> tutorial, you output a spreadsheet-style structured dataset such as the one below to the console.</p>
+        
+                <img src="assets/img/list-records/data-table.png" alt="screenshot">
+
+                    <p>The dataset is an array of objects, where each object follows the usual key-value property structure. The objects could be products, users, locations or whatever.</p>
+                        
+                    <p>In this tutorial, you will learn how to output this kind of structured data to a web page instead of the console. You will also learn how to format the output in a more readable way.</p>
+
+                    <p>As with outputting data to the console, you will use the <span class="syn-js">.forEach()</span> loop to iterate through the array and display the data in a web page.</p>
+
+
+                <img src="assets/img/list-records/forEach-image.png" alt="screenshot" style="max-width: 500px">
+            </section>
+
+            <section id="building-script">
+                <h2>Building your script</h2>
+
+                <p>Follow these steps:</p>
+
+                <ol>
+                    <li>In your <b>list-records-basic.js</b> file, paste in the the sample dataset below.
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">// // Creating array of sample user data
+const arrUsers = [
+    { id: 1001, firstName: "Alice", lastName: "Smith", age: 25, city: "New York", isActive: true },
+    { id: 1002, firstName: "Bob", lastName: "Jones", age: 30, city: "Los Angeles", isActive: false },
+    { id: 1003, firstName: "Charlie", lastName: "Murphy", age: 35, city: "Chicago", isActive: true },
+    { id: 1004, firstName: "Diana", lastName: "Wilson", age: 28, city: "Houston", isActive: true },
+    { id: 1005, firstName: "Ethan", lastName: "Brown", age: 42, city: "Phoenix", isActive: false },
+    { id: 1006, firstName: "Fiona", lastName: "Davis", age: 31, city: "Philadelphia", isActive: true },
+    { id: 1007, firstName: "George", lastName: "Miller", age: 27, city: "San Antonio", isActive: true },
+    { id: 1008, firstName: "Hannah", lastName: "Garcia", age: 38, city: "San Diego", isActive: false },
+    { id: 1009, firstName: "Ian", lastName: "Rodriguez", age: 29, city: "Dallas", isActive: true },
+    { id: 1010, firstName: "Julia", lastName: "Martinez", age: 33, city: "San Jose", isActive: false }
+];
+console.log(arrUsers);</code></pre>
+            <span style="padding-top: 6px">Check your browser console to ensure the sample data is displaying correctly.</span></li>
+
+                    <li>Use JavaScript to add a main heading to your linked web page.
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Add main heading container
+const mainHeadingContainer = document.createElement("header");
+// Create h1 heading with text
+const mainHeading = document.createElement("h1");
+mainHeading.innerText = "List of users";
+// Inject h1 in heading container
+mainHeadingContainer.appendChild(mainHeading);
+// Inject heading container at top of web page
+document.body.appendChild(mainHeadingContainer);</code></pre>
+ <span style="padding-top: 6px">Check your browser window to check the heading is displayed without error.</span></li>
+
+                    <li>Create and append a <span class="syn">&lt;div&gt;</span> element with an ID of <b>display-output</b> in HTML to hold the output from the dataset.
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Add container to hold data
+const displayOutput = document.createElement("div");
+// Inject data container to web page under header
+document.body.appendChild(displayOutput);</code></pre></li>
+                    <li>Copy this code to output data from the <b>arrUsers</b> array of objects.
+                    
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">
+// Build HTML output with compound assignment and forEach() loop
+let htmlOutput = ''; // initial value is an empty string ""
+
+arrUsers.forEach(user =&gt; {
+     htmlOutput += `&lt;div&gt;&lt;p&gt;${user.firstName} ${user.lastName} (ID: ${user.id}) Age: ${user.age} from ${user.city} - Active? ${user.isActive}
+     &lt;/p&gt;&lt;/div&gt;`;
+});
+
+// Inject the HTML output into the data container
+displayOutputDIV.innerHTML = htmlOutput;
+</code></pre></li>
+                    <li>In your web browser you should see something like that below.</li>
+                </ol>
+
+                    <img src="assets/img/list-records/output-1-no-css.png" alt="screenshot" style="max-width: 600px;border: solid 1px grey">
+
+
+                <h3 id="data-display">Adding CSS and improving the output</h3>
+
+                <p>To make the output more readable, download the following CSS file to your <b>javascript/exercises</b> for folder and link your <b>list-records-basic.html</b> workfile to it.</p>
+
+                <p><a href="assets/workfiles/list-records-basic.css" target="_blank">list-records-basic.css</a></p>
+
+                <p>Next, update your entire <b>list-records-basic.js</b> script with the code below.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">// // Creating array of sample user data
+const arrUsers = [
+    { id: 1001, firstName: "Alice", lastName: "Smith", age: 25, city: "New York", isActive: true },
+    { id: 1002, firstName: "Bob", lastName: "Jones", age: 30, city: "Los Angeles", isActive: false },
+    { id: 1003, firstName: "Charlie", lastName: "Murphy", age: 35, city: "Chicago", isActive: true },
+    { id: 1004, firstName: "Diana", lastName: "Wilson", age: 28, city: "Houston", isActive: true },
+    { id: 1005, firstName: "Ethan", lastName: "Brown", age: 42, city: "Phoenix", isActive: false },
+    { id: 1006, firstName: "Fiona", lastName: "Davis", age: 31, city: "Philadelphia", isActive: true },
+    { id: 1007, firstName: "George", lastName: "Miller", age: 27, city: "San Antonio", isActive: true },
+    { id: 1008, firstName: "Hannah", lastName: "Garcia", age: 38, city: "San Diego", isActive: false },
+    { id: 1009, firstName: "Ian", lastName: "Rodriguez", age: 29, city: "Dallas", isActive: true },
+    { id: 1010, firstName: "Julia", lastName: "Martinez", age: 33, city: "San Jose", isActive: false }
+];
+console.log(arrUsers);
+
+// Add main heading container
+const mainHeadingContainer = document.createElement("header");
+// Create h1 heading with text
+const mainHeading = document.createElement("h1");
+mainHeading.innerText = "List of users";
+// Inject h1 in heading container
+mainHeadingContainer.appendChild(mainHeading);
+// Inject heading container at top of web page
+document.body.appendChild(mainHeadingContainer);
+
+// Add DIV container to hold data
+const displayOutputDIV = document.createElement("div");
+// Add CSS class to data container for styling
+displayOutputDIV.classList.add("data-output");
+// Inject data container to web page under header
+document.body.appendChild(displayOutputDIV);
+
+// Build HTML output with compound assignment and forEach() loop;
+let htmlOutput = ''; // initial value is an empty string ""
+let userStatus; // variable to display user active or inactive
+let totalUsers = arrUsers.length; // variable to hold total number of users for later display
+let totalAge = 0; // variable to hold total age of all users for later display
+
+arrUsers.forEach(user =&gt; {
+    // Check status of user and assign text to userStatus variable with CSS classes for styling
+    userStatus = user.isActive ? "&lt;span class='active-user'&gt;ACTIVE&lt;/span&gt;" : "&lt;span class='inactive-user'&gt;INACTIVE&lt;/span&gt;";
+    htmlOutput += `&lt;div&gt;&lt;p&gt;
+    &lt;b&gt;${user.lastName.toUpperCase()}&lt;/b&gt; ${user.firstName} (ID: ${user.id}) &lt;i&gt;Age&lt;/i&gt;: ${user.age} from ${user.city} ${userStatus}
+    &lt;/p&gt;&lt;/div&gt;`;
+    // Add this user's age to totalAge
+    totalAge += user.age;
+});
+
+// Inject the HTML output into the data container
+displayOutputDIV.innerHTML = htmlOutput;
+
+// Append the data container to the body
+document.body.appendChild(displayOutputDIV);
+
+// Outside the loop, display the total numbers of users and their average age
+const averageAge = totalAge / totalUsers;
+
+// Create a new DIV to hold the totals output
+const totalsOutputDiv = document.createElement("div");
+// Add CSS class to totals output DIV for styling
+totalsOutputDiv.classList.add("totals-output");
+
+// Create a new paragraph element to display the totals and average age
+const totalsOutput = document.createElement("p");
+// Set the innerHTML of the totals output paragraph with total users and average age, using toFixed(2) to limit average age to 2 decimal places
+totalsOutput.innerHTML = `&lt;p&gt;&lt;b&gt;Total Users:&lt;/b&gt; ${totalUsers} &lt;b&gt;Average Age:&lt;/b&gt; ${averageAge.toFixed(2)}&lt;/p&gt;`;
+// Append the totals output paragraph to the totals output DIV
+totalsOutputDiv.appendChild(totalsOutput);
+// Append the totals output DIV to the body of the web page, under previous content
+document.body.appendChild(totalsOutputDiv);</code></pre>
+
+            <p>Unfortunately, the HTML output still does not look very professional.</p>
+
+            <img src="assets/img/list-records/output-2-css.png" alt="screenshot" style="max-width: 600px">
+            </section>
+
+            <section>
+                <h2>Listview and gridview</h2>
+                <p>JavaScript frontends often use <i>listview</i> and <i>gridview</i> components to display structured data in an organised and visually appealing way.</p>
+
+                <ul>
+                    <li><b>Listview</b>: Displays data in a vertical list, with each record on a separate line. This is ideal for displaying simple lists of items, such as names, contact lists and message threads.
+                    <span class="inside-ol">&nbsp;</span>
+                    On wider viewports, a listview typically displays column labels in the first row. On mobile screens, these column labels are usually hidden or displayed differently to save space.
+                
+                        <img src="assets/img/list-records/listview.png" alt="screenshot">
+                    </li>
+                    <li><b>Gridview</b>: Displays data in a responsive, multi-column grid format. This is useful for displaying more complex data with multiple attributes, such as products, photo galleries, or data tables. </li>  
+                </ul>
+
+                <p>Both listview and <i>gridview</i> allow for sorting, filtering, and pagination.</p>
+
+                <p><a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> is often used to style these components for a modern and responsive design.</p>
+            </section>
+
+            <section id="listview">
+                <h2>Building a listview output with Tailwind CSS</h2>
+                <p>Copy and run the following AI prompt. </p>
+
+    <div class="gpt"><button class="copy-gpt" id="btn-7">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-7">
+        I want to generate a simple listview component using Tailwind CSS to display a list of products. The listview should be responsive and look good on both desktop and mobile devices. Please provide the HTML structure and the necessary Tailwind CSS classes to achieve this design.<br><br>
+
+        ***  FILE STRUCTURE ***<br>
+        Create two files: <b>list-listview.html</b> and <b>list-listview.js</b>. The HTML file should include the necessary Tailwind CSS CDN link and a container for the listview. The JavaScript file should contain code to generate sample product data and dynamically create the listview items based on that data.<br><br>
+
+        ***  SAMPLE DATA ***<br>
+        Generate a sample dataset of 10 products with the following properties:<br>
+        - name (string)<br>
+        - price (number)<br>
+        - availability (boolean)<br><br>
+
+        ***  UI ***<br>
+        On wider viewports, the listview should display column labels for each property. <br>On mobile screens, these column labels should be hidden to save space, and the product name should be displayed prominently with the price and availability information below it.<br><br>
+        Use a modern, dark and clean design with Tailwind CSS, ensuring that the listview is visually appealing and easy to read on all devices.<br><br> 
+        Use blue as the accent colour for product names, and green for available products and red for unavailable products. <br><br>
+        Centre the listview on the page with a maximum width (e.g., max-w-4xl).<br><br>
+        Please provide the complete code for both the HTML and JavaScript files.
+
+    </code></div>
+
+     <p>Your listview output should look like this:</p>
+
+     <img src="assets/img/list-records/list-listview.png" alt="screenshot">
+            </section>
+
+               <section id="gridview">
+                <h2>Building a gridview output with Tailwind CSS</h2>
+                    <p>Copy and run the following AI prompt. </p>
+
+    <div class="gpt"><button class="copy-gpt" id="btn-8">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-8">
+        I want to generate a simple datagrid component using Tailwind CSS to display a list of products. The gridview should be responsive and look good on both desktop and mobile devices. Please provide the HTML structure and the necessary Tailwind CSS classes to achieve this design.<br><br>
+
+        ***  FILE STRUCTURE ***<br>
+        Create two files: <b>list-gridview.html</b> and <b>list-gridview.js</b>. The HTML file should include the necessary Tailwind CSS CDN link and a container for the gridview. The JavaScript file should contain code to generate sample product data and dynamically create the gridview items based on that data.<br><br>
+
+        ***  SAMPLE DATA ***<br>
+        Generate a sample dataset of 10 products with the following properties:<br>
+        - name (string)<br>
+        - price (number)<br>
+        - availability (boolean)<br><br>
+
+        ***  UI ***<br>
+        On wider viewports, the gridview should display multiple columns. <br>On mobile screens, display only a single column.<br><br>
+        Use a modern, dark and clean design with Tailwind CSS, ensuring that the gridview is visually appealing and easy to read on all devices.<br><br> 
+        Use blue as the accent colour for product names, and green for available products and red for unavailable products. <br><br>
+        Please provide the complete code for both the HTML and JavaScript files.
+    </code></div>
+
+            <p>Your gridview output should look like this:</p>
+            <img src="assets/img/list-records/list-gridview.png" alt="screenshot">
+
+            </section>
+
+            <section class="resources-learning" id="try-it">
+
+                <h2>Try it yourself</h2>
+                <p>In your workfile...</p>
+        
+                <p>---</p>
+        
+                <p>Create an array called <code>arrBooks</code> with at least four book objects. Each book object should have these properties:<br>
+                - title (string)<br>
+                - author (string)<br>
+                - year (number)<br>
+                - isRead (boolean)</p>
+                
+                <p>You can use AI to generate the details.</p>
+                <p>Using a <code>.forEach()</code> loop, display each book's information in the browser.</p>
+
+                <p>Using Tailwind CSS, display your arrBooks data in a simple listview.</p>
+
+<p>On desktop screens:<br>
+Show column labels (Title, Author, Year, Status).<br>
+On mobile screens:<br>
+Hide column labels and stack the information vertically.</p>
+              </section>
+            
+        
+        
+               <section class="resources-learning" id="resources">
+        
+                      <h2>More learning resources</h2>
+                  
+                      <div class="flex-container">
+                        <div class="text-container">
+                          <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                          <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/12" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+                  
+                        </div>
+                    
+                        <div class="audio-container">
+                          <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+                  
+                          <audio controls>
+                            <source src="assets/audio/arrays-objects.mp3" type="audio/mp3">
+                            Your browser does not support the audio element.
+                          </audio>
+                  
+                        </div>
+                      </div>
+                  
+                    </section>
+                    
+                    <section class="resources-learning" id="ai-prompts">
+                  
+                      <h2>Sample AI prompts</h2>
+                  
+                    
+                      <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">I'm learning about arrays of objects in JavaScript. Could you help me understand them better by:<br>
+                      - Creating an example array of objects representing a playlist of songs<br>
+                      - Explaining how each part of the syntax works (brackets, braces, commas, etc.)<br>
+                      - Showing me how to access specific properties like the title of the second song<br>
+                      - Demonstrating how to loop through the array with .forEach() and display the data<br>
+                      - Please explain each step as if you're teaching a beginner.</code></div>
+                   
+    
+        
+                    </section>
+        
+        
+        
+        </article>
+        </main>
+        
+        <footer>
+        
+        </footer>
+        
+        <div id="cookie-banner">
+            <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+            <div class="buttons">
+                <button id="accept-cookies">Got it</button>
+            </div>
+        </div>
+        
+        
+        <script>hljs.highlightAll();</script>
+        
+        <script src="assets/js/utils.js"></script>
+        
+        
+        </body>
+        </html>
