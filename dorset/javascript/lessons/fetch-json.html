@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      The Fetch API and JSON | Full-stack Development Tutorials | Brendan Munnelly
+    </title>
+    <meta
+      name="description"
+      content="Learn how to create JSON files, use the Fetch API to retrieve them, and add error-checking to your code."
+    />
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+        .table-js-methods td:nth-child(1) { min-width: 20%; }
+	</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+
+    <body id="top">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+    <header>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div></div>
+        </div>
+
+        <div class="content">
+          <h1>The Fetch API and JSON</h1>
+          <h2>
+            Using the Promise and Response objects of the Fetch API to access files with JSON-formatted data.
+          </h2>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+        <h3>THIS TUTORIAL</h3>
+        <p><a href="#learning-goals">Learning Goals</a></p>
+        <p><a href="#intro">Introduction</a></p>
+        <p><a href="#json-intro">Working with JSON-format data</a></p>
+        <p class="toc-indent"><a href="#sample-json-files">Creating two sample JSON files</a></p>
+        <p class="toc-indent"><a href="#basic-example">A very basic example</a></p>
+        <p><a href="#cors-file-protocol">CORS and the file:// protocol</a></p>
+        <p><a href="#fetch-async-api">The Fetch API is asynchronous</a></p>
+        <p><a href="#promise-response">Working with the Promise and Response objects</a></p>
+         <p class="toc-indent"><a href="#json-text">The <code>.json()</code> and <code>.text()</code> methods</a></p>
+
+        <p><a href="#error-checking">Adding error-checking</a></p>
+        <p><a href="#try-catch">Checking for errors with try...catch</a></p>
+      </aside>
+
+      <article>
+
+        <section id="learning-goals">
+          <h2>Learning Goals</h2>
+          <p>At the end of this Tutorial, you will be able to:</p>
+
+          <ul>
+            <li>Create text files in JSON-format.</li>
+            <li>Use the asynchronous Fetch API to retrieve files from a remote server.</li>
+            <li>
+              Understand the roles of the Promise and Response objects.
+            </li>
+            <li>Check for network errors with the <span class="syn-js">try...catch (error)</span> syntax.</li>
+          </ul>
+        </section>
+
+
+        <section>
+<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, in your <b>javascript/exercises</b> folder, create two new HTML files named <b>list-products.html</b> and <b>list-users.html</b>.</p>
+   			<p>Create two new empty text files named <b>list-products.js</b> and <b>list-users.js</b> and save them in this same folder.</p>
+            <p>Add links to <b>list-products.js</b> and <b>list-users.js</b> in your <b>list-products.html</b> and <b>list-users.html</b> files using <code>&lt;script&gt;</code> tags with the <code>defer</code> attribute.</p>
+            <p>Make a sub-folder named <b>data</b> and in it, create two empty text files named <b>products.json</b> and <b>users.json</b>.</p>
+
+		</div>      </section>
+
+
+      <section id="intro">
+        <h2>Introduction</h2>
+        <p>Up until now, all data (variables, arrays, and objects) has been hard-coded inside the <b>.js</b> file. In the real world, data lives outside the code - in files or databases on the same or different servers.</p>
+
+        <p>To retrieve data from such sources, you need to learn about:</p>
+        
+        <ul>
+          <li><b>JSON-format</b>: This is the typical format for working with external data.</li>
+          <li><b>Fetch API</b>: Makes it possible to retrieve external data without the web page re-loading.</li>
+            <li><b>Live server</b>: For security reasons, the Fetch API runs only on a webserver.</li>
+          </ul>
+
+      </section>
+
+
+<section id="json-intro">
+                <h2>What is JSON?</h2>
+
+        <p>In the <a href="arrays-objects.html" target="_blank">Arrays of objects</a> tutorial, you learnt that spreadsheet-style structured data tables in rows and columns can be represented in JavaScript by an array of objects.</p>
+
+        <img src="assets/img/fetch-json/data-table.png" alt="screenshot">
+
+        <ul>
+
+                <li>Each record row is an object (with curly braces <span class="syn-js">{}</span>).</li>
+                
+                <li>Each object has the same keys (matching the spreadsheet columns).</li>
+
+                <li>The items (objects) are separated by commas <span class="syn-js">,</span>.</li>
+
+                    <li>The entire dataset is an array (with square brackets <span class="syn-js">[]</span>).</li>
+
+        </ul>
+                
+        <h3>Working with JSON-format data</h3>
+
+                <p><b>JSON</b> stands for <i>JavaScript Object Notation</i>. It is a common format for storing and moving data between files and web pages.</p>
+
+            <p>JSON data looks similar to JavaScript objects but has some key differences:</p>
+            <ul>
+                <li>Keys (property names) must be in double quotes. For example, <b>"price"</b> and <b>"age"</b>.</li>
+                <li>String values must be in double quotes. For example, <b>"laptop"</b> and <b>"Smith"</b>.</li>
+                <li>No trailing commas <span class="syn-js">,</span> after the last value in objects.</li>
+            </ul>
+
+            <h3 id="sample-json-files">Creating two sample JSON files</h3>
+            <p>Below are two examples of files with JSON-format data.</p>
+            
+            <p>Copy the data below to your <b>products.json</b> file in your <b>/data</b> subfolder.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-json">[
+  { "productID": 1001, "name": "Laptop", "price": 999.99, "inStock": true },
+  { "productID": 1002, "name": "Wireless Mouse", "price": 24.99, "inStock": true },
+  { "productID": 1003, "name": "Mechanical Keyboard", "price": 59.99, "inStock": false },
+  { "productID": 1004, "name": "HD Monitor 24-inch", "price": 149.99, "inStock": true },
+  { "productID": 1005, "name": "USB-C Hub", "price": 34.99, "inStock": true },
+  { "productID": 1006, "name": "External Hard Drive 1TB", "price": 79.99, "inStock": true },
+  { "productID": 1007, "name": "Noise Cancelling Headphones", "price": 199.99, "inStock": false },
+  { "productID": 1008, "name": "Webcam 1080p", "price": 49.99, "inStock": true },
+  { "productID": 1009, "name": "HDMI Cable 2m", "price": 12.50, "inStock": true },
+  { "productID": 1010, "name": "Graphics Tablet", "price": 129.99, "inStock": false }
+]</code></pre>
+
+
+  <p>And copy this data to your <b>users.json</b> file in your <b>/data</b> subfolder.</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-json">[
+  { "firstName": "Luis", "lastName": "Martinez", "age": 32, "isActive": true },
+  { "firstName": "Emma", "lastName": "Smith", "age": 28, "isActive": false },
+  { "firstName": "Tom", "lastName": "Murphy", "age": 21, "isActive": true },
+  { "firstName": "Sophia", "lastName": "Brown", "age": 45, "isActive": true },
+  { "firstName": "James", "lastName": "Wilson", "age": 35, "isActive": false },
+  { "firstName": "Olivia", "lastName": "Miller", "age": 29, "isActive": true },
+  { "firstName": "Daniel", "lastName": "Taylor", "age": 52, "isActive": true },
+  { "firstName": "Ava", "lastName": "Anderson", "age": 24, "isActive": false },
+  { "firstName": "Lucas", "lastName": "Thomas", "age": 39, "isActive": true },
+  { "firstName": "Mia", "lastName": "Jackson", "age": 31, "isActive": true }
+]</code></pre>
+
+</section>
+
+  <section id="basic-example">
+          <h2>A very basic example</h2>
+          <p>
+            The Fetch API is a method of JavaScript's global Window object and enables you to send HTTP requests to web servers and handle the responses.</p>
+
+          <p>You need to supply only a single argument to the
+            <span class="syn-js">fetch()</span> method: the URL of the data that
+            you want to fetch. This URL is known as an <i>endpoint</i>. See
+            below.
+          </p>
+
+          <pre><code class="hljs language-js language-javascript"><span class="hljs-keyword">const</span> response = await <span class="hljs-title function_">fetch</span>("url");</code></pre>
+
+          <p>The <b>response</b> variable holds a reference to the Response object returned by the Fetch API, which lets you read properties like <span class="syn-js">response.ok</span> and call methods like <span class="syn-js">response.json()</span> to parse the content.</p>
+
+          <p>Below is a very basic example if the Fetch API in action without error handling. Copy this to your <b>list-products.js</b> file:</p>
+
+<pre><button class="copy-code" id="btn-3">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-3" class="hljs language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchProductData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// Create a response object to hold the remote data</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">"data/products.json"</span>);
+    <span class="hljs-comment">// Convert the response object to a parsed JavaScript object</span>
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-comment">// Verify the code is working by logging the data to the console</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+}
+
+<span class="hljs-comment">// Call the function to execute the fetch request</span>
+<span class="hljs-title function_">fetchProductData</span>();</code></pre>
+
+    <p>Next, copy this to your <b>list-users.js</b> file:</p>
+
+<pre><button class="copy-code" id="btn-4">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-4" class="hljs language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchUserData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// Create a response object to hold the remote data</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">"data/users.json"</span>);
+    <span class="hljs-comment">// Convert the response object to a parsed JavaScript object</span>
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-comment">// Verify the code is working by logging the data to the console</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+}
+
+<span class="hljs-comment">// Call the function to execute the fetch request</span>
+<span class="hljs-title function_">fetchUserData</span>();</code></pre>
+
+</section>
+
+  <section id="cors-file-protocol">
+
+  <h2>CORS and the <code>file://</code> protocol</h2>
+  <p>Cross-origin resource sharing (CORS) is a browser mechanism which controls access to resources located outside of a given domain. For security reasons, CORS blocks JavaScript Fetch API requests when running directly from the file system. Web pages opened as <b>file://</b> have an opaque origin (often treated as null).</p>
+  
+  <img src="assets/img/fetch-json/protocols.png" alt="screenshot" style="max-width:600px" >
+  <p>For your <b>list-products.html</b> and <b>list-users.html</b> pages and their scripts to work correctly, you must run them through a local web server, such as the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">VS Code Live Server</a> extension.</p>
+
+  <p>Ensure that you have the Live Server extension installed and running, and that your two HTML files are in your currently-selected folder.</p>
+
+  <img src="assets/img/fetch-json/vscode-live-server-explorer-menu-demo-1.gif" alt="screenshot" class="wider-115"/>
+
+  <img src="assets/img/fetch-json/vscode-live-server-editor-menu-3.jpg" alt="screenshot" style="max-width: 600px"/>
+
+
+  <p>Finally, open the Console for your two HTML files to see the fetched data.</p>
+
+  <img src="assets/img/fetch-json/consloe-output.png" alt="screenshot" style="max-width: 700px">
+
+</section>
+
+<section id="fetch-async-api">
+
+    <h2>The Fetch API is asynchronous</h2>
+
+    <p>The Fetch API provides an <span class="syn-js">async/await</span> syntax for writing asynchronous code.</p>
+
+<pre><code class="hljs language-javascript">async function getSomeData() {
+    const response = await fetch("path/to/file.json");
+    // More code to process the response
+}</code></pre>
+
+  <p>This means:</p>
+
+    <ul>
+      <li>The <span class="syn-js">await</span> keyword inside the <span class="syn-js">getSomeData()</span> function <i>pauses</i> the code until a response arrives from the server, which may take a number of seconds. It says: <i>"Stop executing on this line. Don't move to the next line until a response comes back."</i></li>
+
+      <li>Any delay by the fetch API in retrieving the remote data does not block the main thread of your code, From a user's perspective, the web page remains responsive and does not 'freeze.'</li>
+    </ul>
+  
+          
+</section>
+
+<section id="promise-response">
+
+    <h2>Working with the <code>Promise</code> and <code>Response</code> objects</h2>
+    <p>The Fetch API uses two built-in JavaScript objects: the <b>Promise</b> and the <b>Response</b> objects. The <span class="syn-js">async</span> keyword before the function declaration makes the function first return a Promise.</p>
+
+<p>This Promise object can have one of three possible statuses:</p>
+
+  <table class="table-js-methods">
+    <tbody>
+      <tr>
+        <td style="min-width: 26%">
+          <p><span class="syn-js">pending</span></p>
+        </td>
+        <td><p>The request's initial state.</p></td>
+      </tr>
+      <tr>
+        <td style="min-width: 26%">
+          <p><span class="syn-js">fulfilled</span></p>
+        </td>
+        <td>
+          <p>
+            The request has completed successfully and a value is
+            returned.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="min-width: 26%">
+          <p><span class="syn-js">rejected</span></p>
+        </td>
+        <td>
+          <p>
+            The request has failed and a reason (error) is returned.
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <p>A <span class="syn-js">Promise</span> is said to be
+    <i>settled</i> or <i>resolved</i> if it is either fulfilled or
+    rejected, but not pending.</p>
+
+  <p>When the request completes successfully, the Promise resolves with a Response object.</p>
+
+  <p>You can think of the Response object as a 'package' that contains the headers, status code, security details and data returned from the server. It also contains built-in methods (see below) for working with the data.</p>
+
+    <h3 id="json-text">The <code>.json()</code> and <code>.text()</code> methods</h3>
+
+    <p>The data from the server is not directly accessible from the
+  Response object. A Response is metadata <i>plus</i> a body stream. So you need to parse the data using one of two methods:</p>
+
+<table class="table-js-methods">
+  <tbody>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">.text()</span></p>
+      </td>
+      <td>
+        <p>
+          Use this when the
+          <span class="syn-js">Response</span> object contains 'raw'
+          or 'plain' text, or HTML-formatted text.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">.json()</span></p>
+      </td>
+      <td>
+        <p>
+          Use this when the
+          <span class="syn-js">Response</span> object contains only
+          data in JSON format.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+ 
+
+<section id="error-checking">
+  
+  <h2>Adding error-checking</h2>
+  <p>Because a Fetch API request may be unsuccessful, it is important to add error-checking to your code. Update your <b>list-products.js</b> and <b>list-users.js</b> scripts with <span class="syn-js">if/else</span> branches as shown below. Note the 'bad' branch comes first.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-5" class="hljs language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchProductData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// Create a response object to hold the remote data</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">"data/products.json"</span>);
+    if (!response.ok) {
+       // If response has an error status code, log a message
+       // This handles cases like 404 (not found), 500 (server error), etc.
+       console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+       return; // Stop executing the function if there was an error
+    }
+    else {
+      <span class="hljs-comment">// Convert the response object to a parsed JavaScript object</span>
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+      <span class="hljs-comment">// Verify the code is working by logging the data to the console</span>
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+  }
+}</code></pre>
+
+<p>&nbsp;</p>
+
+<pre><button class="copy-code" id="btn-6">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-6" class="hljs language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchUserData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// Create a response object to hold the remote data</span>
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">"data/users.json"</span>);
+    if (!response.ok) {
+       // If response has an error status code, log a message
+       // This handles cases like 404 (not found), 500 (server error), etc.
+       console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+       return; // Stop executing the function if there was an error
+    }
+    else {
+      <span class="hljs-comment">// Convert the response object to a parsed JavaScript object</span>
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+      <span class="hljs-comment">// Verify the code is working by logging the data to the console</span>
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+  }
+}</code></pre>
+
+<p>This will show both the numeric status code (like 404, 500, etc.) and the associated status text (like "Not Found" or "Internal Server Error"). So you will have detailed information about what went wrong with the request.</p>
+
+<table class="table-js-methods">
+  <tbody>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">100-199</span></p>
+      </td>
+      <td><p> Informational responses</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">200-299</span></p>
+      </td>
+      <td>
+        <p>Success responses
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">300-399</span></p>
+      </td>
+      <td>
+        <p>
+          Redirection messages
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">400-499</span></p>
+      </td>
+      <td>
+        <p>
+          Client error responses
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="min-width: 20%">
+        <p><span class="syn-js">500-599</span></p>
+      </td>
+      <td>
+        <p>
+          Server error responses
+        </p>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+</section>
+
+<section id="try-catch">
+
+    <h2>Checking for errors with <code>try...catch (error)</code></h2>
+  <p>The <span class="syn-js">if(!response.ok)</span> condition handles situations where the server responded properly - even if the response was an error code such as 404 (Not Found) or 500 (Internal Server Error).</p>
+
+  <p>Wrapping all the code inside your function with a <span class="syn-js">try-catch (error)</span> clause provides wider protection against other types of errors.</p>
+
+
+  <h3>About the <code>try-catch (error)</code> syntax</h3>
+
+  <p>The <span class="syn-js">try-catch</span> statement allows you to test a block of code for errors and handle any exceptions that occur. The basic syntax is as follows.</p>
+
+<pre><code class="hljs language-javascript">try {
+    // Code that might cause an error
+} catch (error) {
+    // Code to handle the error
+}</code></pre>
+    
+<p>Here is how it works:</p>
+<ul>
+    <li>The <span class="syn-js">try</span> block contains the code that might throw an error.</li>
+    <li>If an error occurs, execution of that block stops immediately.</li>
+    <li>Control transfers to the <span class="syn-js">catch</span> block.</li>
+    <li>The catch parameter (commonly named <span class="syn-js">error</span> or <span class="syn-js">err</span>) contains information about the error.</li>
+    <li>After the <span class="syn-js">catch (error)</span> block executes, the program continues running after the <span class="syn-js">try...catch</span> statement.</li>
+</ul>
+
+
+  <p>In summary:</p>
+
+<table class="table-js-methods">
+  <tbody>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js"> if (!response.ok) {}</span></p>
+      </td>
+      <td><p>This handles HTTP errors. The Fetch() API considers a "404 Not Found" or a "500 Server Error" to be a successful network connection. The server has successfully answered, <i>"I don't have this file!"</i></p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 30%">
+        <p><span class="syn-js">try...catch (error)</span></p>
+      </td>
+      <td>
+        <p>This handles network and code failures. It triggers if the user loses their internet connection, if the DNS fails, or if the .json() method crashes because the file is corrupted.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  <p>Let's do a final update on your two scripts. Here is <b>list-products.js</b>.</p>
+
+<pre><button class="copy-code" id="btn-7">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-7" class="hljs language-javascript">async function fetchProductData() {
+   try {
+       // The 'await' keyword pauses execution until the fetch Promise resolves
+       const response = await fetch("data/products.json");
+       if (!response.ok) {
+          // If response has an error status code, log a message
+          // This handles cases like 404 (not found), 500 (server error), etc.
+          console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+          return; // Stop executing the function if there was an error
+        }
+        else {
+          // For successful responses, convert the response object to a parsed JavaScript object
+          const data = await response.json();
+          // Output the parsed user data object to the console
+          console.log(data);
+        }
+    } // End try block
+    catch (error) {
+        // Catch network errors, JSON parsing errors, or any other exceptions
+        console.error(`Error fetching product data: ${error}`);
+    }
+}
+
+fetchProductData();</code></pre>
+
+
+  <p>And here is the final version of <b>list-users.js</b>.</p>
+
+
+<pre><button class="copy-code" id="btn-8">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-8" class="hljs language-javascript">async function fetchUserData() {
+   try {
+       // The 'await' keyword pauses execution until the fetch Promise resolves
+       const response = await fetch("data/users.json");
+       if (!response.ok) {
+          // If response has an error status code, log a message
+          // This handles cases like 404 (not found), 500 (server error), etc.
+          console.log(`Network response was not ok - Status: ${response.status} ${response.statusText}`);
+          return; // Stop executing the function if there was an error
+        }
+        else {
+          // For successful responses, convert the response object to a parsed JavaScript object
+          const data = await response.json();
+          // Output the parsed user data object to the console
+          console.log(data);
+        }
+    } // End try block
+    catch (error) {
+        // Catch network errors, JSON parsing errors, or any other exceptions
+        console.error(`Error fetching user data: ${error}`);
+    }
+}
+
+fetchUserData();</code></pre>
+
+
+        </section>
+
+        <section id="data-output">
+          
+          <h2>Outputting data to the web page</h2>
+        <p>Now that you have successfully fetched and parsed the JSON data, let's display it on the web page. We will use the <span class="syn-js">.forEach()</span> method to loop through the array and dynamically generate HTML for each item.</p>
+
+        <p>Let's begin by adding an empty <span class="syn">&lt;div&gt;</span> element with an ID of <b>products-container</b> to the <b>list-products.html</b> file. This is where JavaScript will insert the generated content.</p>
+
+<pre><button class="copy-code" id="btn-9">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-9" class="hljs language-html">&lt;div id="products-container"&gt;&lt;/div&gt;</code></pre>
+
+  <p>Now, add the following function call at the end of the 'success path' <span class="syn-js">try</span> block in your <span class="syn-js">fetchProductData()</span> function in your <b>list-products.js</b> script file:</p>
+<pre><button class="copy-code" id="btn-10">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-10" class="hljs language-js">displayProducts(data);</code></pre>
+
+<p>Next, add this new function at the bottom of your <b>list-products.js</b> file:</p>
+
+<pre><button class="copy-code" id="btn-11">Copy Code <i class="fa-brands fa-square-js"></i></button><code id="strCode-11" class="hljs language-js">// Function to handle the DOM output
+function displayProducts(productsArray) {
+    const container = document.getElementById("products-container");
+    let htmlOutput = "";
+
+    // Loop through each product in the array
+    productsArray.forEach(product =&gt; {
+        // Build the HTML string using compound assignment operator and template literals
+        htmlOutput += `
+            &lt;p&gt;&lt;b&gt;${product.name}&lt;/b&gt;  Price: $${product.price}  In Available?: ${product.inStock}&lt;/p&gt;
+        `;
+    });
+
+    // Output the final HTML to the page
+    container.innerHTML = htmlOutput;
+}</code></pre>
+
+  <p>Repeat the above steps for your <b>list-users.html</b> and <b>list-users.js</b> files.</p>
+</section>
+
+	<section class="resources-learning" id="try-it">
+
+        <h2>Try it yourself</h2>
+        <p>In your script file...</p>
+
+        <p>---</p>
+
+        <p>Change the fetch URL in one of your JavaScript sample files to the name of a file that does not exist - for example, <b>data/wrong-file.json</b>. Open your browser console and observe how your <span class="syn-js">if (!response.ok) { }</span> block catches the 404 error and logs the status.</p>
+
+   
+      </section>
+    
+
+
+       <section class="resources-learning" id="resources">
+
+              <h2>More learning resources</h2>
+          
+              <div class="flex-container">
+                <div class="text-container">
+                  <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
+                  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/11" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+          
+                </div>
+            
+                <div class="audio-container">
+                  <h3><span><i class="fa-solid fa-microphone"></i> Tutorial Podcast</span></h3>
+          
+                  <audio controls>
+                    <source src="assets/audio/arrays.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+          
+                </div>
+              </div>
+          
+            </section>
+            
+            <section class="resources-learning" id="ai-prompts">
+          
+              <h2>Sample AI prompts</h2>
+          
+            
+              <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Explain the JavaScript fetch API and the concepts of async and await using a real-world analogy, like ordering food at a restaurant.</code></div>
+           
+			  
+			  <div class="gpt"><button class="copy-gpt" id="btn-16">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-16">
+			  What is a CORS error in JavaScript? Explain it simply and tell me the most common ways developers fix or bypass it during local development.</code></div>
+
+
+            </section>
+
+
+      </article>
+    </main>
+
+    <footer></footer>
+    <div id="cookie-banner">
+      <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+      <div class="buttons">
+          <button id="accept-cookies">Got it</button>
+      </div>
+  </div>
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
+
