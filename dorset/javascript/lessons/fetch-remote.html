@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Accessing Remote APIs | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Using the Fetch API to access remote public APIs, handle JSON responses, and display dynamic text and images on a web page.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+        .table-js-methods td:nth-child(1) { min-width: 20%; }
+	</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Accessing Remote APIs</h1>
+					<h2>Using the Fetch API to retrieve live data and images from external public servers.</h2>
+				</div>
+			</div></header>
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT</h3>
+	
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+                <p><a href="#learning-goals">Learning Goals</a></p>
+                <p><a href="#introduction">Introduction to remote APIs</a></p>
+                <p><a href="#fetching-images">Understanding image URLs in JSON</a></p>
+                <p><a href="#dog-api">Example 1: The Dog API (Single Object)</a></p>
+                <p><a href="#random-user-api">Example 2: Random User API (Array of Objects)</a></p>
+                <p><a href="#register-keys">Registering for API keys</a></p>
+                <p class="toc-indent"><a href="#headers">About HTML Headers</a></p>
+                <p><a href="#try-it">Try it yourself</a></p>
+                <p><a href="#ai-prompts">Sample AI prompts</a></p>
+                <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+           
+				<p>&nbsp;</p>
+			  
+			</aside>
+	
+	<article>
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+		<p>At the end of this Tutorial, you will be able to:</p>
+
+		<ul>
+            <li>Connect to public, third-party APIs using the <span class="syn-js">fetch()</span> method.</li>
+            <li>Understand how APIs provide image data as URL strings.</li>
+            <li>Extract nested data from complex JSON objects.</li>
+            <li>Dynamically output mixed text and image data to the DOM.</li>
+		</ul>
+
+	</section>
+
+
+ <section>
+<div class="code-snippets" style="margin-bottom:32px">
+            <p>For this Tutorial, in your <b>javascript/exercises</b> folder, create a new HTML file named <b>list-remote.html</b>.</p>
+   			<p>Create a new empty text file named <b>list-remote.js</b> and save it in this same folder.</p>
+            <p>Add a link to <b>list-remote.js</b> in your <b>list-remote.html</b> file using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
+		</div>      </section>
+
+
+
+    <section id="introduction">
+        <h2>Introduction to remote APIs</h2>
+        <p>In the <a href="fetch-json.html" target="_blank">previous tutorial</a>, you successfully used the Fetch API to load data from a local JSON file (<code>data/users.json</code>). That is a great start, but the real power of JavaScript is its ability to communicate with live servers across the internet.</p>
+        
+        <p>A web API (Application Programming Interface) is essentially a URL that, instead of returning an HTML web page meant for humans, returns raw data (usually in JSON format) meant for computer programs.</p>
+
+        <p>For these exercises, we will use free, public APIs that require no registration or "API keys". All the asynchronous `fetch` logic and `try...catch` error handling you just learned will work exactly the same way—we are simply changing the URL string from a local file path to a remote web address.</p>
+    </section>
+
+    <section id="fetching-images">
+        <h2>Understanding image URLs in JSON</h2>
+        <p>A common point of confusion for beginners is how to "download" an image from an API. It is important to understand that <i>APIs do not send actual image files (like .jpg or .png files) in their JSON responses</i>.</p>
+
+        <p>Instead, the JSON data simply contains a <i>URL string</i> pointing to where the image lives on the internet.</p>
+        
+        
+
+        <p>To display the image, you fetch the JSON, extract the URL string, and then inject that string into the <span class="syn">src</span> attribute of an standard HTML <span class="syn">&lt;img&gt;</span> tag using a template literal.</p>
+    </section>
+
+    <section id="dog-api">
+        <h2>Example 1: The Dog API (Single Object)</h2>
+        <p>Let's start with the simplest possible example: fetching a single random image of a dog.</p>
+        <p>If you open this endpoint URL in your browser: <a href="https://dog.ceo/api/breeds/image/random" target="_blank">https://dog.ceo/api/breeds/image/random</a>, you will see a tiny JSON response that looks like this:</p>
+
+<pre><code class="hljs language-json">{
+  "message": "https://images.dog.ceo/breeds/retriever-golden/n02099601_3004.jpg",
+  "status": "success"
+}</code></pre>
+
+        <p>The image URL is stored inside the <code>message</code> property.</p>
+
+        <p>In your HTML file, add an empty image tag and a button:</p>
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;button id="btn-dog"&gt;Get Random Dog&lt;/button&gt;
+&lt;div id="dog-container"&gt;
+    &lt;img id="dog-image" src="" alt="A random dog" width="300"&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>In your JavaScript file, add the following code:</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">async function fetchDog() {
+    try {
+        // 1. Fetch from the live remote URL
+        const response = await fetch("https://dog.ceo/api/breeds/image/random");
+        
+        if (!response.ok) {
+            console.log(`Error: ${response.status}`);
+        } else {
+            // 2. Parse the JSON
+            const data = await response.json();
+            
+            // 3. Update the DOM by targeting the image's src attribute
+            document.getElementById("dog-image").src = data.message;
+        }
+    } catch (error) {
+        console.error(`Fetch error: ${error}`);
+    }
+}
+
+// Add event listener to the button
+document.getElementById("btn-dog").addEventListener("click", fetchDog);
+</code></pre>
+    </section>
+
+    <section id="random-user-api">
+        <h2>Example 2: Random User API (Array of Objects)</h2>
+        <p>Now let's look at something more realistic. The <i>Random User Generator</i> creates fake user profiles. This is exactly like the local <code>users.json</code> file you worked with previously, but it includes nested objects and profile pictures.</p>
+
+        <p>The endpoint <a href="https://randomuser.me/api/?results=10" target="_blank">https://randomuser.me/api/?results=10</a> returns an object containing a <code>results</code> array with 10 users. Here is a simplified look at one user in that array:</p>
+
+<pre><code class="hljs language-json">{
+  "results": [
+    {
+      "name": {
+        "first": "Brad",
+        "last": "Gibson"
+      },
+      "email": "brad.gibson@example.com",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/75.jpg"
+      }
+    }
+  ]
+}</code></pre>
+
+        <p>Because the data is <i>nested</i>, to get Brad's first name, you don't type <code>user.first</code>. You must follow the path down the tree: <code>user.name.first</code>. To get the image, you use <code>user.picture.large</code>.</p>
+
+        <p>First, add an empty container to your HTML:</p>
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">&lt;div id="users-grid" style="display: flex; flex-wrap: wrap; gap: 20px;"&gt;&lt;/div&gt;</code></pre>
+
+        <p>Then, write the fetch logic and the DOM output logic in your JS file:</p>
+
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">async function fetchRemoteUsers() {
+    try {
+        const response = await fetch("https://randomuser.me/api/?results=10");
+        
+        if (!response.ok) {
+            console.log(`Error: ${response.status}`);
+        } else {
+            const data = await response.json();
+            
+            // Notice we pass data.results, because the array is inside the 'results' property
+            displayUsers(data.results);
+        }
+    } catch (error) {
+        console.error(`Fetch error: ${error}`);
+    }
+}
+
+function displayUsers(usersArray) {
+    const container = document.getElementById("users-grid");
+    let htmlOutput = "";
+
+    // Loop through the array of users
+    usersArray.forEach(user =&gt; {
+        // Build HTML, carefully extracting nested data and using the image URL
+        htmlOutput += `
+            &lt;div style="border: 1px solid #ccc; padding: 15px; text-align: center;"&gt;
+                &lt;img src="${user.picture.large}" alt="Profile picture" style="border-radius: 50%;"&gt;
+                &lt;h3&gt;${user.name.first} ${user.name.last}&lt;/h3&gt;
+                &lt;p&gt;${user.email}&lt;/p&gt;
+            &lt;/div&gt;
+        `;
+    });
+
+    container.innerHTML = htmlOutput;
+}
+
+// Fetch the users immediately when the page loads
+fetchRemoteUsers();
+</code></pre>
+    </section>
+
+
+    <section id="register-keys">
+        <h2>Registering for API keys</h2>
+
+        <p>There are a few services that, after signing up for a single free account, grant you access to thousands of remote data sources. Two of the most popular are:</p>
+        
+        <ul>
+            <li><a href="https://api-ninjas.com/" target="_blank">API Ninjas</a>: A fun place to start with 100+ APIs covering pets, cars, celebrity net worth, quotes, historical events, weather, and jokes. The free tier allows 10,000 to 50,000 API calls per month.</li>
+            <li><a href="https://rapidapi.com/" target="_blank">RapidAPI</a>: The world's largest API website. It hosts tens of thousands of APIs from both independent developers and large organisations. But because the APIs are made by different people, the JSON data structures may be completely different from one API to the next.</li>
+        </ul>
+        <p>Each of the above will provide you with an <i>API key</i> to include in your network request. An API key tells the server exactly who is making the request so it can track your usage and apply rate limits.</p>
+
+        <h3 id="headers">About HTTP headers</h3>
+        <p>When a browser sends a request to a server, it doesn't just send the URL. It also sends hidden metadata called <i>headers</i> that provide additional information about the request.</p>
+
+        <p>When using an API Key, you must <i>attach</i> that key to your request using a specific header, typically named <i>X-Api-Key</i> (or similar, depending on the service).</p>
+
+        <p>Up until now, you have passed just a simple URL string to <span class="syn-js">fetch()</span>. To use an API key, you must pass a second argument — a <i>configuration object</i> that includes your personal API key in the headers. This is typically managed using the <b>options</b> variable.</p>
+
+        <p>Using API Ninjas as an example, here is what that code looks like:</p>
+
+
+<pre><code class="hljs language-javascript">const url = "https://api.api-ninjas.com/v1/facts?limit=1";
+
+const options = {
+    headers: {
+        'X-Api-Key': 'YOUR_API_KEY_GOES_HERE'
+    }
+};
+
+// Pass both arguments to fetch
+const response = await fetch(url, options);</code></pre>
+
+    <p>As practise, sign up for the above two services, obtain a personal API key, select some data sources you find interesting, and create code to retrieve and display the data.</p>
+
+    </section>
+
+    <section class="resources-learning" id="try-it">
+        <h2>Try it yourself</h2>
+        <p>---</p>
+
+        <p><b>Task: The Rick and Morty Character Grid</b></p>
+        <p>Use the public Rick and Morty API to build a character grid on your webpage.</p>
+        <ol>
+            <li>Create an HTML file with an empty container `&lt;div id="character-grid"&gt;`.</li>
+            <li>In your JS file, write a `fetch` function to get data from this endpoint: <br><code>https://rickandmortyapi.com/api/character</code></li>
+            <li>Log the data to the console first. Notice that the array of characters is located inside <code>data.results</code>.</li>
+            <li>Pass the array to a display function. Use <code>.forEach()</code> to output a card for each character.</li>
+            <li>Include the character's <b>name</b> (<code>character.name</code>), their <b>status</b> (<code>character.status</code>), and display their <b>image</b> using an `&lt;img&gt;` tag (<code>character.image</code>).</li>
+        </ol>
+
+        <p>---</p>
+
+    </section>
+
+    <section class="resources-learning" id="ai-prompts">
+        <h2>Sample AI prompts</h2>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">Explain how to read complex JSON structures from an API. How do I know if the data I want is an Object or an Array, and how do I navigate "nested" data paths using dot notation?</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">What does "Rate Limiting" mean when working with public APIs? Give me an example of what HTTP status code a server sends if I hit the rate limit.</code></div>
+        
+        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Can you suggest 3 fun, free public APIs that do not require an API key, similar to the Dog API or Pokemon API, that I can use to practice fetching data?</code></div>
+    </section>
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+<script>hljs.highlightAll();</script>
+<script src="../../assets/js/utils.js"></script>
+
+</body>
+</html>
