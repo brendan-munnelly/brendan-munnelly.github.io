@@ -180,7 +180,7 @@ fetchCountriesData();</code></pre>
 
         </ol>
 
-            <p>Not that some of the response properties are simpler to parse tha others.</p>
+            <p>Not that some of the response properties are simpler to parse than others.</p>
 
             <ul>
                 <li>The <b>region</b> property key is just that - region. You can access it simply by typing the loop variable and the property name: <b>country.region</b>.
@@ -197,8 +197,6 @@ fetchCountriesData();</code></pre>
             </ul>
 
 
-        <p><img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"></p>
-
         <h3 id="fetching-images">Understanding image URLs in JSON</h3>
         <p>APIs often provide URLs for images. That is, the JSON data contains a <i>URL string</i> pointing to where the image lives on the internet.</p>
         <p>Note that an API does <i>not</i> send actual image files (like .jpg or .png files) in their JSON responses.</p>
@@ -211,6 +209,8 @@ fetchCountriesData();</code></pre>
         <p>This code injects the URL string of each image into the <span class="syn">src</span> attribute of a standard HTML <span class="syn">&lt;img&gt;</span> tag. Your browser output should look similar to that below.</p>
 
         <img src="assets/img/fetch-remote/display-countries-flags.png" alt="screenshot">
+
+        <p><strong>♿ Accessibility Tip:</strong> Note we're using dynamic <span class="syn">alt</span> text. This makes the page usable for screen reader users.</p>
     </section>
 
     <section id="attach-button">
@@ -256,6 +256,8 @@ async function fetchCountriesData() {
         const data = await response.json();
         displayCountriesData(data);
     } catch (error) {
+        const container = document.getElementById("remote-data-container");
+        container.innerHTML = '&lt;p class="error"&gt;⚠️ Failed to load data. Please try again later.&lt;/p&gt;';   
         console.error(`Error fetching data: ${error}`);
     }
 }
@@ -340,14 +342,14 @@ document.getElementById("button-container").addEventListener("click", function(e
         </ol>
         
         <h3 id="user-data-structure">Structure of the returned user data</h3>
-        <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array.</p>
+                    <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array.</p>
+                    <p>If you add a <b>console.log(data);</b> statement to your <b>fetchUsersData()</b> function, you'll see the entire response structure in the console.</p>
 
         <img src="assets/img/fetch-remote/users-console.png" alt="screenshot">
 
-        <p>This means data after parsing is not the array itself — it's the wrapper object. So before you can loop, you need to drill into it:</p>
+        <p>This means data after parsing is not the array itself — it's the wrapper object. So before you access individual values in your <b>usersArray</b> loop, you need to drill down past this outer <b>results</b> array:</p>
 
-<pre><code class="hljs language-javascript">        
-const data = await response.json();
+<pre><code class="hljs language-javascript">const data = await response.json();
 displayUsers(data.results); // not data directly</code></pre>
 
     <p>Then inside your display function, the loop variable gives you access to each user, with several nested properties to navigate.</p>
@@ -370,7 +372,7 @@ displayUsers(data.results); // not data directly</code></pre>
 
 <pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">countriesArray.forEach(country =&gt; {
    htmlOutput += `
-      &lt;div style="flex: 1 1 200px; border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;
+      &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;
          &lt;p&gt;
             &lt;b&gt;${country.name.common}&lt;/b&gt;&lt;br&gt;
             Capital: ${country.capital[0]}&lt;br&gt;
@@ -385,8 +387,8 @@ displayUsers(data.results); // not data directly</code></pre>
 
 <pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">usersArray.forEach(user =&gt; {
         htmlOutput += `
-        &lt;div style="flex: 1 1 200px; border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
-        &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;&lt;/p&gt;
+        &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
+        &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;
             &lt;p&gt;
             &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
             Email: ${user.email}&lt;br&gt;
@@ -411,6 +413,8 @@ displayUsers(data.results); // not data directly</code></pre>
             <li><a href="https://rapidapi.com/" target="_blank">RapidAPI</a>: The world's largest API website. It hosts tens of thousands of APIs from both independent developers and large organisations.</li>
         </ul>
         <p>Each of the above will provide you with an <i>API key</i> to include in your network request. An API key tells the server exactly who is making the request so it can track your usage and apply rate limits.</p>
+ 
+        <p class="warning" style="background-color: lightyellow;padding: 10px 10px; border: solid 1px #ccc;"><strong>⚠️ IMPORTANT:</strong> API keys in frontend JavaScript are visible to anyone who views your page source. For production apps, sensitive API calls should be routed through a backend server. For example, for Node.js projects, you would typically store keys in <b>.env</b> files.</p>
 
         <h3 id="headers">About HTTP headers</h3>
         <p>When a browser sends a request to a server, it doesn't just send the URL. It also sends hidden metadata called <i>headers</i> that provide additional information about the request.</p>
