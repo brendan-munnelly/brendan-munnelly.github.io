@@ -63,9 +63,18 @@
 				<h3>THIS TUTORIAL</h3>
                 <p><a href="#learning-goals">Learning Goals</a></p>
                 <p><a href="#introduction">Introduction to remote APIs</a></p>
-                <p><a href="#fetching-images">Understanding image URLs in JSON</a></p>
-                <p><a href="#dog-api">Example 1: The Dog API (Single Object)</a></p>
-                <p><a href="#random-user-api">Example 2: Random User API (Array of Objects)</a></p>
+                <p><a href="#rest-countries">Working with the REST Countries API</a></p>
+        <p class="toc-indent"><a href="#parse-display-response">Parsing and displaying the response</a></p>
+        <p class="toc-indent"><a href="#fetching-images">Understanding image URLs in JSON</a></p>
+
+                <p><a href="#attach-button">Attaching the HTML output to a button</a></p>
+
+
+                <p><a href="#random-user-api">Working with the Random Users API</a></p>
+                            <p class="toc-indent"><a href="#user-data-structure">Structure of the returned user data</a></p>
+
+                    <p><a href="#adding-grid">Adding a grid layout</a></p>
+
                 <p><a href="#register-keys">Registering for API keys</a></p>
                 <p class="toc-indent"><a href="#headers">About HTML Headers</a></p>
                 <p><a href="#try-it">Try it yourself</a></p>
@@ -102,136 +111,294 @@
 
     <section id="introduction">
         <h2>Introduction to remote APIs</h2>
-        <p>In the <a href="fetch-json.html" target="_blank">previous tutorial</a>, you successfully used the Fetch API to load data from a local JSON file (<code>data/users.json</code>). That is a great start, but the real power of JavaScript is its ability to communicate with live servers across the internet.</p>
+        <p>In the <a href="fetch-json.html" target="_blank">previous tutorial</a>, you successfully used the Fetch API to load data from a local JSON file such as <b>data/products.json</b>. That is a great start, but the real power of JavaScript is its ability to communicate with live servers across the Internet.</p>
         
-        <p>A web API (Application Programming Interface) is essentially a URL that, instead of returning an HTML web page meant for humans, returns raw data (usually in JSON format) meant for computer programs.</p>
+        <p>A web API (Application Programming Interface) is essentially a URL that, instead of returning an HTML web page meant for humans, returns raw data (usually in JSON format) to be parsed by JavaScript or other code.</p>
 
-        <p>For these exercises, we will use free, public APIs that require no registration or "API keys". All the asynchronous `fetch` logic and `try...catch` error handling you just learned will work exactly the same way—we are simply changing the URL string from a local file path to a remote web address.</p>
+<pre><code class="hljs language-javascript"> const response = await fetch("REMOTE_URL_ENDPOINT_GOES_HERE"); </code></pre>
+
+        <p>The error-handling techniques you learned in the previous tutorial will still work exactly the same way — you are simply changing the URL string from a local file path to a remote web address.</p>
+
+        <p>In your own JSON files, you had control the structure. However, remote APIs may contain nested objects and arrays within objects that require more careful parsing.</p>
+
+
     </section>
 
-    <section id="fetching-images">
-        <h2>Understanding image URLs in JSON</h2>
-        <p>A common point of confusion for beginners is how to "download" an image from an API. It is important to understand that <i>APIs do not send actual image files (like .jpg or .png files) in their JSON responses</i>.</p>
 
-        <p>Instead, the JSON data simply contains a <i>URL string</i> pointing to where the image lives on the internet.</p>
-        
-        
+    <section id="rest-countries">
+        <h2>Working with the REST Countries API</h2>
+        <p>Let's begin with a simple example that uses the REST Countries API with a remote URL of <b>https://restcountries.com/v3.1/all</b>. Follow these steps:</p>
 
-        <p>To display the image, you fetch the JSON, extract the URL string, and then inject that string into the <span class="syn">src</span> attribute of an standard HTML <span class="syn">&lt;img&gt;</span> tag using a template literal.</p>
-    </section>
-
-    <section id="dog-api">
-        <h2>Example 1: The Dog API (Single Object)</h2>
-        <p>Let's start with the simplest possible example: fetching a single random image of a dog.</p>
-        <p>If you open this endpoint URL in your browser: <a href="https://dog.ceo/api/breeds/image/random" target="_blank">https://dog.ceo/api/breeds/image/random</a>, you will see a tiny JSON response that looks like this:</p>
-
-<pre><code class="hljs language-json">{
-  "message": "https://images.dog.ceo/breeds/retriever-golden/n02099601_3004.jpg",
-  "status": "success"
-}</code></pre>
-
-        <p>The image URL is stored inside the <code>message</code> property.</p>
-
-        <p>In your HTML file, add an empty image tag and a button:</p>
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;button id="btn-dog"&gt;Get Random Dog&lt;/button&gt;
-&lt;div id="dog-container"&gt;
-    &lt;img id="dog-image" src="" alt="A random dog" width="300"&gt;
-&lt;/div&gt;</code></pre>
-
-        <p>In your JavaScript file, add the following code:</p>
-
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">async function fetchDog() {
-    try {
-        // 1. Fetch from the live remote URL
-        const response = await fetch("https://dog.ceo/api/breeds/image/random");
-        
-        if (!response.ok) {
-            console.log(`Error: ${response.status}`);
-        } else {
-            // 2. Parse the JSON
-            const data = await response.json();
-            
-            // 3. Update the DOM by targeting the image's src attribute
-            document.getElementById("dog-image").src = data.message;
-        }
-    } catch (error) {
-        console.error(`Fetch error: ${error}`);
-    }
+        <ol>
+            <li>Copy the most basic form of a Fetch API function below to your <b>list-remote.js</b> script file.
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">
+async function fetchCountriesData() {
+    // Fetch the resource and get a Response (status, headers, body stream)
+    const response = await fetch("https://restcountries.com/v3.1/all");
+    // Parse the response object to JSON
+    const data = await response.json();
+    // Verify the code is working by logging the data to the console
+    console.log(data);
 }
 
-// Add event listener to the button
-document.getElementById("btn-dog").addEventListener("click", fetchDog);
-</code></pre>
-    </section>
+// Fetch the countries immediately when the page loads
+fetchCountriesData();</code></pre>
+            </li>
+        <li>
+        Run the <b>list-remote.html</b> web page from a local server. In your browser console, you can see that the response is complex in structure and detailed in content.
 
-    <section id="random-user-api">
-        <h2>Example 2: Random User API (Array of Objects)</h2>
-        <p>Now let's look at something more realistic. The <i>Random User Generator</i> creates fake user profiles. This is exactly like the local <code>users.json</code> file you worked with previously, but it includes nested objects and profile pictures.</p>
+        <img src="assets/img/fetch-remote/console-countries.png" alt="screenshot"></li>
+        </ol>
 
-        <p>The endpoint <a href="https://randomuser.me/api/?results=10" target="_blank">https://randomuser.me/api/?results=10</a> returns an object containing a <code>results</code> array with 10 users. Here is a simplified look at one user in that array:</p>
 
-<pre><code class="hljs language-json">{
-  "results": [
-    {
-      "name": {
-        "first": "Brad",
-        "last": "Gibson"
-      },
-      "email": "brad.gibson@example.com",
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/75.jpg"
-      }
-    }
-  ]
-}</code></pre>
+        <h3 id="parse-display-response">Parsing and displaying the response</h3>
+        <p>Next, let's output some of the data to a web page. (You don't need to 'consume' all the data in a Fetch API response.)</p>
 
-        <p>Because the data is <i>nested</i>, to get Brad's first name, you don't type <code>user.first</code>. You must follow the path down the tree: <code>user.name.first</code>. To get the image, you use <code>user.picture.large</code>.</p>
-
-        <p>First, add an empty container to your HTML:</p>
-<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">&lt;div id="users-grid" style="display: flex; flex-wrap: wrap; gap: 20px;"&gt;&lt;/div&gt;</code></pre>
-
-        <p>Then, write the fetch logic and the DOM output logic in your JS file:</p>
-
-<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-javascript">async function fetchRemoteUsers() {
-    try {
-        const response = await fetch("https://randomuser.me/api/?results=10");
-        
-        if (!response.ok) {
-            console.log(`Error: ${response.status}`);
-        } else {
-            const data = await response.json();
-            
-            // Notice we pass data.results, because the array is inside the 'results' property
-            displayUsers(data.results);
-        }
-    } catch (error) {
-        console.error(`Fetch error: ${error}`);
-    }
-}
-
-function displayUsers(usersArray) {
-    const container = document.getElementById("users-grid");
+        <ol>
+            <li>In your <b>list-remote.html</b> web page, add a <span class="syn">&lt;div&gt;</span> tag with an id of <b>remote-data-container</b>.</li>
+            <li>In your <b>list-remote.js</b> script, add the following function.
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">function displayCountriesData(countriesArray) {
+    const container = document.getElementById("remote-data-container");
     let htmlOutput = "";
 
-    // Loop through the array of users
-    usersArray.forEach(user =&gt; {
-        // Build HTML, carefully extracting nested data and using the image URL
+    countriesArray.forEach(country =&gt; {
         htmlOutput += `
-            &lt;div style="border: 1px solid #ccc; padding: 15px; text-align: center;"&gt;
-                &lt;img src="${user.picture.large}" alt="Profile picture" style="border-radius: 50%;"&gt;
-                &lt;h3&gt;${user.name.first} ${user.name.last}&lt;/h3&gt;
-                &lt;p&gt;${user.email}&lt;/p&gt;
-            &lt;/div&gt;
+            &lt;p&gt;
+            &lt;b&gt;${country.name.common}&lt;/b&gt;&lt;br&gt;
+            Capital: ${country.capital[0]}&lt;br&gt;
+            Population: ${country.population.toLocaleString()}&lt;br&gt;
+            Region: ${country.region}
+            &lt;/p&gt;
+            &lt;p&gt;------------------&lt;/p&gt;
+        `;
+    });
+    container.innerHTML = htmlOutput;
+}</code></pre></li>
+        <li>Call this display function from inside your <b>fetchCountriesData()</b> function.</li>
+        <li>You browser should show something like the following:
+        <img src="assets/img/fetch-remote/display-countries.png" alt="screenshot" style="max-width: 600px"></li>
+
+        </ol>
+
+            <p>Not that some of the response properties are simpler to parse tha others.</p>
+
+            <ul>
+                <li>The <b>region</b> property key is just that - region. You can access it simply by typing the loop variable and the property name: <b>country.region</b>.
+                    <img src="assets/img/fetch-remote/prop-region.png" alt="screenshot">
+                
+                The same is true for <b>population</b>. You can make this property more readable by adding a <b>.toLocaleString()</b> method.</li>
+
+                <li>However, the <b>name</b> is a nested object instead of a simple string. So to access it you need to write <b>country.name.common</b> rather than just <b>country.name</b>.
+                <img src="assets/img/fetch-remote/prop-name.png" alt="screenshot">
+                
+                </li>
+                <li>The <b>capital</b> is not a string but an array. So you would write <b>country.capital[0]</b> to get the first (usually only) value.
+                <img src="assets/img/fetch-remote/prop-capital.png" alt="screenshot"></li>
+            </ul>
+
+
+        <p><img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"></p>
+
+        <h3 id="fetching-images">Understanding image URLs in JSON</h3>
+        <p>APIs often provide URLs for images. That is, the JSON data contains a <i>URL string</i> pointing to where the image lives on the internet.</p>
+        <p>Note that an API does <i>not</i> send actual image files (like .jpg or .png files) in their JSON responses.</p>
+
+        <p>In your <span class="syn-js">.forEach()</span> loop above, add this new line to display the flag of the various countries:</p>
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">
+&lt;p&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;&lt;/p&gt;    
+</code></pre>        
+        
+        <p>This code injects the URL string of each image into the <span class="syn">src</span> attribute of a standard HTML <span class="syn">&lt;img&gt;</span> tag. Your browser output should look similar to that below.</p>
+
+        <img src="assets/img/fetch-remote/display-countries-flags.png" alt="screenshot">
+    </section>
+
+    <section id="attach-button">
+        <h2>Attaching the HTML output to a button</h2>
+        <p>In the above sample, the remote data is displayed on the loading of the <b>list-remote.html</b> web page. Let's instead attach the <b>displayCountriesData(countriesArray)</b> function to a button.</p>
+
+        <p>Start by adding some CSS styles to the <span class="syn">&gt;head&gt;</span> of your web page.</p>
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">&lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 0 auto; }
+        h1 { color: #333; text-align:center }
+        p { margin: 10px 0; font-size: 18px }
+        #remote-data-container { max-width: 80%; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px }
+        #button-container { text-align: center; margin-bottom: 20px }
+        .btn {
+            display: inline-block; padding: 10px 20px; font-weight: bold;
+            color: #fff; background-color: #007BFF;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 18px; transition: background-color 0.3s ease;
+        }
+        .btn:hover { background-color: #0056b3; }
+        img { display: block; margin: 10px 0; }
+&lt;/style&gt;</code></pre>
+
+        <p>Next, add an <span class="syn">&lt;h1&gt;</span> element and a button container <span class="syn">&lt;div&gt;</span> to your web page (so we can use <a href="events.html#event-delegation" target="_blank">event delegation</a>). Insert a single button to call the display countries function.</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-html">&lt;h1&gt;Display remote data&lt;/h1&gt;
+    &lt;div id="button-container"&gt;
+        &lt;button class="btn" id="btn-countries"&gt;Load Countries&lt;/button&gt;
+    &lt;/div&gt;</code></pre>
+
+
+    <p>Replace everything in your <b>list-remote.js</b> script with the following</p>
+
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">
+// Fetch function
+async function fetchCountriesData() {
+    try {
+        const response = await fetch("https://restcountries.com/v3.1/region/europe");
+        if (!response.ok) {
+            console.log(`Network response was not ok - Status: ${response.status}`);
+            return;
+        }
+        const data = await response.json();
+        displayCountriesData(data);
+    } catch (error) {
+        console.error(`Error fetching data: ${error}`);
+    }
+}
+
+// Display function
+function displayCountriesData(countriesArray) {
+    const container = document.getElementById("remote-data-container");
+    let htmlOutput = "";
+
+    countriesArray.forEach(country =&gt; {
+        htmlOutput += `
+        &lt;p&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;&lt;/p&gt;
+            &lt;p&gt;
+            &lt;b&gt;${country.name.common}&lt;/b&gt;&lt;br&gt;
+            Capital: ${country.capital[0]}&lt;br&gt;
+            Population: ${country.population.toLocaleString()}&lt;br&gt;    
+            Region: ${country.region}
+            &lt;/p&gt;
+            &lt;p&gt;------------------&lt;/p&gt;
         `;
     });
 
     container.innerHTML = htmlOutput;
 }
 
-// Fetch the users immediately when the page loads
-fetchRemoteUsers();
-</code></pre>
+// Event listener on the parent container
+document.getElementById("button-container").addEventListener("click", function(e) {
+    if (e.target.id === "btn-countries") {
+        fetchCountriesData();
+    }
+});</code></pre>
+
+
     </section>
+
+    <section id="random-user-api">
+        <h2>Working with the Random Users API</h2>
+        
+        <p>Now add a second Fetch API snippet to our web page and script files. The endpoint <b>https://randomuser.me/api/?results=10</b> returns an object containing an array named <b>results</b> with 10 users. </p>
+            
+            <p>Follow these steps:</p>
+        
+        <ol>
+            <li>Update your <b>list-remote.html</b> web page with a second button.
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-html">&lt;button class="btn" id="btn-users"&gt;Load Users&lt;/button&gt;</code></pre></li>
+            <li>In your <b>list-remote.js</b> file, update your event delegation function.
+            
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">
+// Event listener on the parent container
+document.getElementById("button-container").addEventListener("click", function(e) {
+    if (e.target.id === "btn-countries") {
+        fetchCountriesData();
+    } else if (e.target.id === "btn-users") {
+        fetchUsersData();   
+    }
+}); </code></pre></li>
+            <li>In the same script file, copy and paste the fetch countries function, and update it as shown below.
+                <img src="assets/img/fetch-remote/users-fetch.png" alt="screenshot" class="wider-115"></li>
+            <li>Add the code below to display the fetched user data.
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">function displayUsersData(usersArray) {
+    const container = document.getElementById("remote-data-container");
+    let htmlOutput = "";
+
+    usersArray.forEach(user =&gt; {
+        htmlOutput += `
+        &lt;p&gt;&lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;&lt;/p&gt;
+            &lt;p&gt;
+            &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
+            Email: ${user.email}&lt;br&gt;              
+            Location: ${user.location.city}, ${user.location.country}
+            &lt;/p&gt;
+        `;
+    });
+    container.innerHTML = htmlOutput;
+}</code></pre>
+
+            </li>
+            <li>Your user data output should look like that below.
+<img src="assets/img/fetch-remote/display-users.png" alt="screenshot"></li>
+
+
+        </ol>
+        
+        <h3 id="user-data-structure">Structure of the returned user data</h3>
+        <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array.</p>
+
+        <img src="assets/img/fetch-remote/users-console.png" alt="screenshot">
+
+        <p>This means data after parsing is not the array itself — it's the wrapper object. So before you can loop, you need to drill into it:</p>
+
+<pre><code class="hljs language-javascript">        
+const data = await response.json();
+displayUsers(data.results); // not data directly</code></pre>
+
+    <p>Then inside your display function, the loop variable gives you access to each user, with several nested properties to navigate.</p>
+
+    <p>For example, because <b>name</b> is a nested object, you need to type <b>user.name.first</b> and <b>user.name.last</b>.</p>
+    
+    <p>Other nested properties include <b>user.dob.age</b> (date of birth), and <b>user.location.city</b> and <b>user.location.country</b> (location).</p>
+
+    </section>
+
+    <section id="adding-grid">
+        <h2>Adding a grid layout</h2>
+        <p>To make the returned country and user cards look more organised, you can use a CSS grid layout. This allows you to display each data item in a responsive grid that adjusts based on the screen size.</p>
+
+        <p>Begin in your <b>list-remote.html</b> web page by updating the container for displaying the remote data.</p>
+
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">&lt;div id="remote-data-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;"&gt;&lt;/div&gt;</code></pre>
+
+        <p>Next, in your <b>list-remote.js</b> file, update the HTML output for the country display function to wrap each country and user card in a styled <span class="syn">&lt;div&gt;</span> element.</p>
+
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">countriesArray.forEach(country =&gt; {
+   htmlOutput += `
+      &lt;div style="flex: 1 1 200px; border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;
+         &lt;p&gt;
+            &lt;b&gt;${country.name.common}&lt;/b&gt;&lt;br&gt;
+            Capital: ${country.capital[0]}&lt;br&gt;
+            Population: ${country.population.toLocaleString()}&lt;br&gt;            
+            Region: ${country.region}
+         &lt;/p&gt;
+      &lt;/div&gt;
+        `;
+});</code></pre>
+
+        <p>Update the user display function in a similar way.</p>
+
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">usersArray.forEach(user =&gt; {
+        htmlOutput += `
+        &lt;div style="flex: 1 1 200px; border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
+        &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;&lt;/p&gt;
+            &lt;p&gt;
+            &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
+            Email: ${user.email}&lt;br&gt;
+            Location: ${user.location.city}, ${user.location.country}
+            &lt;/p&gt;
+            &lt;/div&gt;
+        `;
+    });</code></pre>
+
+    <p>In your web browser, confirm that the country and user cards are displayed in a grid layout.</p>
+    </section>
+
 
 
     <section id="register-keys">
@@ -241,7 +408,7 @@ fetchRemoteUsers();
         
         <ul>
             <li><a href="https://api-ninjas.com/" target="_blank">API Ninjas</a>: A fun place to start with 100+ APIs covering pets, cars, celebrity net worth, quotes, historical events, weather, and jokes. The free tier allows 10,000 to 50,000 API calls per month.</li>
-            <li><a href="https://rapidapi.com/" target="_blank">RapidAPI</a>: The world's largest API website. It hosts tens of thousands of APIs from both independent developers and large organisations. But because the APIs are made by different people, the JSON data structures may be completely different from one API to the next.</li>
+            <li><a href="https://rapidapi.com/" target="_blank">RapidAPI</a>: The world's largest API website. It hosts tens of thousands of APIs from both independent developers and large organisations.</li>
         </ul>
         <p>Each of the above will provide you with an <i>API key</i> to include in your network request. An API key tells the server exactly who is making the request so it can track your usage and apply rate limits.</p>
 
@@ -325,7 +492,7 @@ const response = await fetch(url, options);</code></pre>
         
         <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">What does "Rate Limiting" mean when working with public APIs? Give me an example of what HTTP status code a server sends if I hit the rate limit.</code></div>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Can you suggest 3 fun, free public APIs that do not require an API key, similar to the Dog API or Pokemon API, that I can use to practice fetching data?</code></div>
+        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Can you suggest 3 fun, free public APIs that do not require an API key, similar to the Pokemon API, that I can use to practice fetching data?</code></div>
     </section>
 
 </article>
