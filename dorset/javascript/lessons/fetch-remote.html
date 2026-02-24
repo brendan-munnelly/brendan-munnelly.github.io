@@ -127,14 +127,14 @@
 
     <section id="rest-countries">
         <h2>Working with the REST Countries API</h2>
-        <p>Let's begin with a simple example that uses the REST Countries API with a remote URL of <b>https://restcountries.com/v3.1/all</b>. Follow these steps:</p>
+        <p>Let's begin with a simple example that uses the REST Countries API with a remote URL of <b>https://restcountries.com/v3.1/region/europe</b>. Follow these steps:</p>
 
         <ol>
             <li>Copy the most basic form of a Fetch API function below to your <b>list-remote.js</b> script file.
 <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-javascript">
 async function fetchCountriesData() {
     // Fetch the resource and get a Response (status, headers, body stream)
-    const response = await fetch("https://restcountries.com/v3.1/all");
+    const response = await fetch("https://restcountries.com/v3.1/region/europe");
     // Parse the response object to JSON
     const data = await response.json();
     // Verify the code is working by logging the data to the console
@@ -446,16 +446,16 @@ const response = await fetch(url, options);</code></pre>
         <p>---</p>
 
         <p><b>Task: The Rick and Morty Character Grid</b></p>
-        <p>Use the public Rick and Morty API to build a character grid on your webpage.</p>
+        <p>Use the public Rick and Morty API to build a character grid on your <b>list-remote.html</b> webpage.</p>
         <ol>
-            <li>Create an HTML file with an empty container `&lt;div id="character-grid"&gt;`.</li>
-            <li>In your JS file, write a `fetch` function to get data from this endpoint: <br><code>https://rickandmortyapi.com/api/character</code></li>
-            <li>Log the data to the console first. Notice that the array of characters is located inside <code>data.results</code>.</li>
-            <li>Pass the array to a display function. Use <code>.forEach()</code> to output a card for each character.</li>
-            <li>Include the character's <b>name</b> (<code>character.name</code>), their <b>status</b> (<code>character.status</code>), and display their <b>image</b> using an `&lt;img&gt;` tag (<code>character.image</code>).</li>
+            <li>In the <code>&lt;div id="button-container"&gt;</code> element of <b>list-remote.html</b>, add a third button with a unique <code>id</code> to call the display function for Rick & Morty data. Add the text <b>Load Rick & Morty</b> to the button.</li>
+            <li>In <b>list-remote.js</b>, make a copy of the <code>fetchUsersData()</code> display function, rename it, and update its endpoint to:<br><code>https://rickandmortyapi.com/api/character</code></li>
+            <li>Log the data to the console first. Notice that the array of characters is located inside <code>data.results</code>. Call your Rick & Morty display function (see below) from you fetch function.</li>
+            <li>Make a copy of the <code>displayUsersData()</code> display function, rename it, and pass the argument <code>rmArray</code> to it. Rename the <code>.forEach()</code> loop variable to <code>character.</code>.</li>
+            <li>Inside the loop, access the character's <b>image</b> (<code>character.image</code>), <b>name</b> (<code>character.name</code>), and their <b>status</b> (<code>character.status</code>).</li>
         </ol>
 
-        <p>---</p>
+        <p>In your browser, click the <b>Load Rick & Morty</b> button and verify the data displays correctly.</p>
 
     </section>
 
