@@ -66,17 +66,12 @@
                 <p><a href="#rest-countries">Working with the REST Countries API</a></p>
         <p class="toc-indent"><a href="#parse-display-response">Parsing and displaying the response</a></p>
         <p class="toc-indent"><a href="#fetching-images">Understanding image URLs in JSON</a></p>
-
                 <p><a href="#attach-button">Attaching the HTML output to a button</a></p>
-
-
                 <p><a href="#random-user-api">Working with the Random Users API</a></p>
                             <p class="toc-indent"><a href="#user-data-structure">Structure of the returned user data</a></p>
 
-                    <p><a href="#adding-grid">Adding a grid layout</a></p>
+                <p><a href="#adding-grid">Adding a grid layout</a></p>
 
-                <p><a href="#register-keys">Registering for API keys</a></p>
-                <p class="toc-indent"><a href="#headers">About HTML Headers</a></p>
                 <p><a href="#try-it">Try it yourself</a></p>
                 <p><a href="#ai-prompts">Sample AI prompts</a></p>
                 <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
@@ -180,7 +175,7 @@ fetchCountriesData();</code></pre>
 
         </ol>
 
-            <p>Not that some of the response properties are simpler to parse than others.</p>
+            <p>Note that some of the response properties are simpler to parse than others.</p>
 
             <ul>
                 <li>The <b>region</b> property key is just that - region. You can access it simply by typing the loop variable and the property name: <b>country.region</b>.
@@ -254,6 +249,10 @@ async function fetchCountriesData() {
             return;
         }
         const data = await response.json();
+        console.log(data);
+        // Verify the code is working by logging the data to the console
+        console.log(data);
+        // Call the display function
         displayCountriesData(data);
     } catch (error) {
         const container = document.getElementById("remote-data-container");
@@ -314,7 +313,7 @@ document.getElementById("button-container").addEventListener("click", function(e
         fetchUsersData();   
     }
 }); </code></pre></li>
-            <li>In the same script file, copy and paste the fetch countries function, and update it as shown below.
+            <li>In the same script file, copy and paste the <b>fetchCountriesData()</b> function, and update it as shown below.
                 <img src="assets/img/fetch-remote/users-fetch.png" alt="screenshot" class="wider-115"></li>
             <li>Add the code below to display the fetched user data.
 <pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">function displayUsersData(usersArray) {
@@ -342,17 +341,20 @@ document.getElementById("button-container").addEventListener("click", function(e
         </ol>
         
         <h3 id="user-data-structure">Structure of the returned user data</h3>
-                    <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array.</p>
-                    <p>If you add a <b>console.log(data);</b> statement to your <b>fetchUsersData()</b> function, you'll see the entire response structure in the console.</p>
+                    <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array. See below.</p>
 
         <img src="assets/img/fetch-remote/users-console.png" alt="screenshot">
 
-        <p>This means data after parsing is not the array itself — it's the wrapper object. So before you access individual values in your <b>usersArray</b> loop, you need to drill down past this outer <b>results</b> array:</p>
 
-<pre><code class="hljs language-javascript">const data = await response.json();
-displayUsers(data.results); // not data directly</code></pre>
+        <p>Consider the following line:</p>
 
-    <p>Then inside your display function, the loop variable gives you access to each user, with several nested properties to navigate.</p>
+<pre><code class="hljs language-javascript">const data = await response.json()</code></pre>
+            
+        <p>Your <b>data</b> variable is referencing the outer 'wrapper' object around the <b>results</b> array, not the array itself. The <b>results</b> array is a property of this outer object. So, before passing the actual values you want to your display function, you need to access the <b>results</b> array inside this object.</p>
+
+<pre><code class="hljs language-javascript">displayUsersData(data.results);</code></pre>
+
+    <p>The <b>results</b> contains many nested properties to navigate.</p>
 
     <p>For example, because <b>name</b> is a nested object, you need to type <b>user.name.first</b> and <b>user.name.last</b>.</p>
     
@@ -362,96 +364,54 @@ displayUsers(data.results); // not data directly</code></pre>
 
     <section id="adding-grid">
         <h2>Adding a grid layout</h2>
-        <p>To make the returned country and user cards look more organised, you can use a CSS grid layout. This allows you to display each data item in a responsive grid that adjusts based on the screen size.</p>
+        <p>To make the returned country and user data look more organised, you can use a CSS grid layout. This allows you to display each data item in a responsive grid that adjusts based on the screen size.</p>
 
         <p>Begin in your <b>list-remote.html</b> web page by updating the container for displaying the remote data.</p>
 
-<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">&lt;div id="remote-data-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;"&gt;&lt;/div&gt;</code></pre>
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">
+&lt;div id="remote-data-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;"&gt;&lt;/div&gt;</code></pre>
 
         <p>Next, in your <b>list-remote.js</b> file, update the HTML output for the country display function to wrap each country and user card in a styled <span class="syn">&lt;div&gt;</span> element.</p>
 
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">countriesArray.forEach(country =&gt; {
-   htmlOutput += `
-      &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="50"&gt;
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">htmlOutput += `
+    &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;&lt;img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="100"&gt;
          &lt;p&gt;
             &lt;b&gt;${country.name.common}&lt;/b&gt;&lt;br&gt;
             Capital: ${country.capital[0]}&lt;br&gt;
             Population: ${country.population.toLocaleString()}&lt;br&gt;            
             Region: ${country.region}
          &lt;/p&gt;
-      &lt;/div&gt;
-        `;
-});</code></pre>
+    &lt;/div&gt;
+`;</code></pre>
 
         <p>Update the user display function in a similar way.</p>
 
-<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">usersArray.forEach(user =&gt; {
-        htmlOutput += `
-        &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
-        &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;
-            &lt;p&gt;
-            &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
-            Email: ${user.email}&lt;br&gt;
-            Location: ${user.location.city}, ${user.location.country}
-            &lt;/p&gt;
-            &lt;/div&gt;
-        `;
-    });</code></pre>
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">htmlOutput += `
+    &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
+    &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="100"&gt;
+        &lt;p&gt;
+        &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
+        Email: ${user.email}&lt;br&gt;
+        Location: ${user.location.city}, ${user.location.country}
+        &lt;/p&gt;
+    &lt;/div&gt;
+`;
+</code></pre>
 
-    <p>In your web browser, confirm that the country and user cards are displayed in a grid layout.</p>
+    <p>In your web browser, confirm that the country and user data are displayed in a grid layout.</p>
     </section>
 
-
-
-    <section id="register-keys">
-        <h2>Registering for API keys</h2>
-
-        <p>There are a few services that, after signing up for a single free account, grant you access to thousands of remote data sources. Two of the most popular are:</p>
-        
-        <ul>
-            <li><a href="https://api-ninjas.com/" target="_blank">API Ninjas</a>: A fun place to start with 100+ APIs covering pets, cars, celebrity net worth, quotes, historical events, weather, and jokes. The free tier allows 10,000 to 50,000 API calls per month.</li>
-            <li><a href="https://rapidapi.com/" target="_blank">RapidAPI</a>: The world's largest API website. It hosts tens of thousands of APIs from both independent developers and large organisations.</li>
-        </ul>
-        <p>Each of the above will provide you with an <i>API key</i> to include in your network request. An API key tells the server exactly who is making the request so it can track your usage and apply rate limits.</p>
- 
-        <p class="warning" style="background-color: lightyellow;padding: 10px 10px; border: solid 1px #ccc;"><strong>⚠️ IMPORTANT:</strong> API keys in frontend JavaScript are visible to anyone who views your page source. For production apps, sensitive API calls should be routed through a backend server. For example, for Node.js projects, you would typically store keys in <b>.env</b> files.</p>
-
-        <h3 id="headers">About HTTP headers</h3>
-        <p>When a browser sends a request to a server, it doesn't just send the URL. It also sends hidden metadata called <i>headers</i> that provide additional information about the request.</p>
-
-        <p>When using an API Key, you must <i>attach</i> that key to your request using a specific header, typically named <i>X-Api-Key</i> (or similar, depending on the service).</p>
-
-        <p>Up until now, you have passed just a simple URL string to <span class="syn-js">fetch()</span>. To use an API key, you must pass a second argument — a <i>configuration object</i> that includes your personal API key in the headers. This is typically managed using the <b>options</b> variable.</p>
-
-        <p>Using API Ninjas as an example, here is what that code looks like:</p>
-
-
-<pre><code class="hljs language-javascript">const url = "https://api.api-ninjas.com/v1/facts?limit=1";
-
-const options = {
-    headers: {
-        'X-Api-Key': 'YOUR_API_KEY_GOES_HERE'
-    }
-};
-
-// Pass both arguments to fetch
-const response = await fetch(url, options);</code></pre>
-
-    <p>As practise, sign up for the above two services, obtain a personal API key, select some data sources you find interesting, and create code to retrieve and display the data.</p>
-
-    </section>
 
     <section class="resources-learning" id="try-it">
         <h2>Try it yourself</h2>
-        <p>---</p>
-
-        <p><b>Task: The Rick and Morty Character Grid</b></p>
-        <p>Use the public Rick and Morty API to build a character grid on your <b>list-remote.html</b> webpage.</p>
+       
+        <p><b>Task: Accessing the Rick and Morty character API</b></p>
+        <p>Use the public Rick and Morty API to add an option to display character data from this show on your <b>list-remote.html</b> web page.</p>
         <ol>
             <li>In the <code>&lt;div id="button-container"&gt;</code> element of <b>list-remote.html</b>, add a third button with a unique <code>id</code> to call the display function for Rick & Morty data. Add the text <b>Load Rick & Morty</b> to the button.</li>
             <li>In <b>list-remote.js</b>, make a copy of the <code>fetchUsersData()</code> display function, rename it, and update its endpoint to:<br><code>https://rickandmortyapi.com/api/character</code></li>
-            <li>Log the data to the console first. Notice that the array of characters is located inside <code>data.results</code>. Call your Rick & Morty display function (see below) from you fetch function.</li>
-            <li>Make a copy of the <code>displayUsersData()</code> display function, rename it, and pass the argument <code>rmArray</code> to it. Rename the <code>.forEach()</code> loop variable to <code>character.</code>.</li>
+            <li>Log the data to the console first. Notice that the array of characters is located inside <code>data.results</code>. Call your Rick & Morty display function (see below) from your fetch function.</li>
+            <li>Make a copy of the <code>displayUsersData()</code> display function, rename it, and pass the argument <code>rmArray</code> to it. Rename the <code>.forEach()</code> loop variable to <code>character</code>.</li>
             <li>Inside the loop, access the character's <b>image</b> (<code>character.image</code>), <b>name</b> (<code>character.name</code>), and their <b>status</b> (<code>character.status</code>).</li>
         </ol>
 
@@ -494,9 +454,7 @@ const response = await fetch(url, options);</code></pre>
         
         <div class="gpt"><button class="copy-gpt" id="btn-13">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-13">Explain how to read complex JSON structures from an API. How do I know if the data I want is an Object or an Array, and how do I navigate "nested" data paths using dot notation?</code></div>
         
-        <div class="gpt"><button class="copy-gpt" id="btn-14">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-14">What does "Rate Limiting" mean when working with public APIs? Give me an example of what HTTP status code a server sends if I hit the rate limit.</code></div>
-        
-        <div class="gpt"><button class="copy-gpt" id="btn-15">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-15">Can you suggest 3 fun, free public APIs that do not require an API key, similar to the Pokemon API, that I can use to practice fetching data?</code></div>
+
     </section>
 
 </article>
@@ -517,3 +475,11 @@ const response = await fetch(url, options);</code></pre>
 <script src="assets/js/utils.js"></script>
 </body>
 </html>
+
+<!-- 
+Here are some great options that require no API key, all with similar structures to Rick & Morty that your students will already be familiar with:
+PokéAPI (https://pokeapi.co/api/v2/pokemon?limit=20) is probably the strongest choice. It's extremely well-documented, very actively maintained, and almost universally recognised by students. Interestingly, it shares the same results wrapper pattern as Rick & Morty, so it connects nicely to what students are already learning about accessing nested data. You can also fetch individual Pokémon by name or ID, e.g. https://pokeapi.co/api/v2/pokemon/pikachu, which opens up nice exercises around dynamic fetch calls.
+The Disney API (https://api.disneyapi.dev/character) covers a huge range of characters across all Disney franchises and returns clean, well-structured JSON with no authentication required. It would appeal to a wide range of students.
+The Simpsons API (https://thesimpsonsapi.com) is a newer option that returns character data including name, age, occupation, phrases, and portrait images — no key needed. There's also the older Simpsons Quote API at https://thesimpsonsquoteapi.glitch.me/quotes which is simpler and returns quotes with character images, good for a quick introductory example.
+A practical note worth bearing in mind: community-built APIs like the Simpsons ones can occasionally have reliability issues or go offline, whereas PokéAPI and the Disney API are well-established and consistently available. For tutorial content where you want stability, PokéAPI would be my top recommendation — it's been around for years and is widely used in exactly this kind of educational context.
+-->
