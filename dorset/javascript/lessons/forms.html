@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Working with Forms (Text Inputs) | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Handling form submissions, preventing default behavior, extracting values, and providing real-time validation feedback.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+        .table-js-methods td:nth-child(1) { min-width: 20%; }
+        /* Simple form styling for demonstration */
+        .form-group { margin-bottom: 15px; }
+        .label-above label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .error-text { color: #dc3545; font-size: 0.9em; display: none; }
+	</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body id="top">
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar"><div><p>&nbsp;</p></div></div>
+            <div class="content">
+                <h1>Working with Forms</h1>
+                <h2>Handling form submissions, extracting text input, and providing real-time validation.</h2>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+            <h3>JAVASCRIPT</h3>
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#form-layout">Form layout and HTML5 inputs</a></p>
+            <p><a href="#submit-event">The submit event & default behavior</a></p>
+            <p><a href="#validation">Extracting values and validation</a></p>
+            <p><a href="#real-time">Real-time feedback: blur & input</a></p>
+            <p><a href="#keyboard">Keyboard events: keydown</a></p>
+            <p><a href="#try-it">Try it yourself</a></p>
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+        </aside>
+
+        <article>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Understand common form layouts and HTML5 input types.</li>
+                    <li>Intercept form submissions using <code>e.preventDefault()</code>.</li>
+                    <li>Extract and clean user data using <code>.value</code> and <code>.trim()</code>.</li>
+                    <li>Provide real-time validation using <code>blur</code> and <code>input</code> events.</li>
+                    <li>Use the <code>keydown</code> event to trigger keyboard shortcuts.</li>
+                </ul>
+            </section>
+
+            <section id="form-layout">
+                <h2>Form layout and HTML5 inputs</h2>
+                <p>Forms are the primary way web applications collect data from users. Before writing JavaScript, it is important to understand how to structure your HTML.</p>
+
+                <h3>Layout Conventions</h3>
+                <p>There are two main conventions for placing text labels next to input fields:</p>
+                <ul>
+                    <li><b>Labels to the Left:</b> Often used on wide desktop screens.</li>
+                    <li><b>Labels Above:</b> The modern standard for mobile responsiveness, as it prevents horizontal scrolling on small screens. You can easily achieve this by setting your <code>&lt;label&gt;</code> to <code>display: block;</code> in CSS.</li>
+                </ul>
+                
+                
+
+                <h3>HTML5 Input Types: text vs email</h3>
+                <p>Notice the difference between the two inputs below. One is <code>type="text"</code> and the other is <code>type="email"</code>.</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-html">&lt;form id="registerForm" class="label-above"&gt;
+    &lt;!-- Standard Text Input --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="userName"&gt;Full Name:&lt;/label&gt;
+        &lt;input type="text" id="userName" name="userName" required&gt;
+        &lt;span id="nameError" class="error-text"&gt;Name is required.&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Email Input --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="userEmail"&gt;Email Address:&lt;/label&gt;
+        &lt;input type="email" id="userEmail" name="userEmail" required&gt;
+        &lt;span id="emailError" class="error-text"&gt;Please enter a valid email.&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;button type="submit"&gt;Register&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <p>Using <code>type="email"</code> provides two massive "free" benefits before you even write any JavaScript:</p>
+                <ol>
+                    <li><b>Mobile UX:</b> On smartphones, it automatically opens an email-optimized keyboard showing the <code>@</code> and <code>.com</code> keys.</li>
+                    <li><b>Built-in Validation:</b> The browser will automatically pause the form submission and warn the user if they forget the <code>@</code> symbol!</li>
+                </ol>
+            </section>
+
+            <section id="submit-event">
+                <h2>The submit event & default behavior</h2>
+                <p>By default, when a user clicks a Submit button, the browser attempts to send the data to a server and <b>refreshes the page</b>. In modern JavaScript applications, we usually want to stop this page refresh so we can validate and handle the data ourselves.</p>
+                
+                <p>We do this using the event object's <code>.preventDefault()</code> method.</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">const myForm = document.getElementById("registerForm");
+
+myForm.addEventListener("submit", e =&gt; {
+    // 1. Stop the page from refreshing!
+    e.preventDefault(); 
+    
+    console.log("Form submitted successfully!");
+});</code></pre>
+
+                <p><b>The "Enter" Key Freebie:</b> Because you attached the listener to the <code>submit</code> event of the form (rather than just the <code>click</code> event of the button), HTML automatically handles keyboard accessibility. If the user presses the "Enter" key while typing in any text box, it will trigger this exact same event!</p>
+            </section>
+
+            <section id="validation">
+                <h2>Extracting values and validation</h2>
+                <p>To get the text a user typed into an input, we read its <code>.value</code> property. We also use the <code>.trim()</code> string method to remove any accidental blank spaces at the start or end of their text.</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">myForm.addEventListener("submit", e =&gt; {
+    e.preventDefault(); 
+    
+    const nameInput = document.getElementById("userName");
+    
+    // Extract the value and remove accidental spaces
+    const cleanName = nameInput.value.trim();
+
+    // Basic Validation: Is it empty?
+    if (cleanName === "") {
+        document.getElementById("nameError").style.display = "block";
+    } else {
+        document.getElementById("nameError").style.display = "none";
+        console.log(`Welcome, ${cleanName}!`);
+        myForm.reset(); // Clears all fields
+    }
+});</code></pre>
+            </section>
+
+            <section id="real-time">
+                <h2>Real-time feedback: blur & input</h2>
+                <p>Waiting until the user clicks "Submit" to show them an error can be frustrating. Modern websites provide immediate feedback as you navigate the form using two key events:</p>
+                
+                
+
+                <ul>
+                    <li><b>The <code>blur</code> event:</b> Fires the exact moment the user clicks or tabs <i>away</i> from an input field.</li>
+                    <li><b>The <code>input</code> event:</b> Fires instantly on <i>every single keystroke</i>.</li>
+                </ul>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">const emailInput = document.getElementById("userEmail");
+
+// BLUR: Check if they left the email field blank after clicking away
+emailInput.addEventListener("blur", () =&gt; {
+    if (emailInput.value.trim() === "") {
+        emailInput.style.border = "2px solid red";
+    } else {
+        emailInput.style.border = "2px solid green";
+    }
+});
+
+// INPUT: Provide instant feedback as they type (e.g., character count)
+const nameInput = document.getElementById("userName");
+
+nameInput.addEventListener("input", () =&gt; {
+    console.log(`You have typed ${nameInput.value.length} characters.`);
+});</code></pre>
+            </section>
+
+            <section id="keyboard">
+                <h2>Keyboard events: keydown</h2>
+                <p>While the "Enter" key is handled automatically by the form submit, you can use the <code>keydown</code> event to listen for other specific keys to improve the user experience. For example, allowing the user to clear the form by pressing the "Escape" key.</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-javascript">// Listen for keystrokes anywhere on the page
+document.addEventListener("keydown", e =&gt; {
+    // Check which key was pressed
+    if (e.key === "Escape") {
+        myForm.reset();
+        console.log("Form cleared via Escape key.");
+    }
+});</code></pre>
+            </section>
+
+            <section class="resources-learning" id="try-it">
+                <h2>Try it yourself</h2>
+                <p>---</p>
+                <p><b>Task 1: The Newsletter Form</b><br>
+                Create a form with an Email input and a Submit button. Add a <code>submit</code> event listener that prevents the default page reload and logs the trimmed email value to the console.</p>
+                <p>---</p>
+                <p><b>Task 2: The Password Length Checker</b><br>
+                Add a Password input (<code>type="password"</code>) to your form. Attach an <code>input</code> event listener to it. As the user types, check the length of <code>.value</code>. If it is less than 8 characters, make the input border red. If it is 8 or more, make the border green.</p>
+                <p>---</p>
+                <p><b>Task 3: The Username Warning</b><br>
+                Add a Username field. Attach a <code>blur</code> event listener. When the user clicks away from the field, check if it is empty. If it is empty, display a red warning message in a `&lt;span&gt;` below the input.</p>
+                <p>---</p>
+            </section>
+
+            <section class="resources-learning" id="ai-prompts">
+                <h2>Sample AI prompts</h2>
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Explain the difference between the 'keypress', 'keydown', and 'keyup' events in JavaScript. Why is 'keypress' considered deprecated?</code></div>
+                
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is "Regular Expression" (Regex) in JavaScript, and how can I use it to build a highly secure password validation function?</code></div>
+                
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Show me how to make a form more accessible for screen readers using ARIA labels and roles.</code></div>
+            </section>
+        </article>
+    </main>
+
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
