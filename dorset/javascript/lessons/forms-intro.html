@@ -1,230 +1,532 @@
-<!doctype HTML>
-<html lang="en_GB">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Introduction to forms | JavaScript Tutorials | Brendan Munnelly</title>
-
-	<meta name="description" content="Working with HTML forms using JavaScript, handling form submissions, validating user input, and accessing form data.">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Introduction to Forms | JavaScript Tutorials | Brendan Munnelly</title>
+	<meta name="description" content="Handling form submissions, preventing default behavior, extracting values, and providing real-time validation feedback.">
 
     <meta name="author" content="Brendan Munnelly">
 
-    <!-- Stylesheet-->
     <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
 	<style>
-		pre { background-color: #282c34;}
-		.table-js-arithmetic { 
-			background-color: #f0f5f4 !important;
-			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
-			border-top: solid 2px #044d6c;
-		}
-
-		.table-js-arithmetic tr,
-		.table-js-arithmetic td {
-			background-color: #f0f5f4 !important;
-		}
-
-		.table-js-arithmetic td p {
-			font-size: calc(var(--font-size-base) * 0.85);
-		}
-		table.table-gray { padding: 10px 20px 10px 20px !important;}
-
-		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
-
-		.four-samples { margin-top: 24px; margin-bottom: 20px }
-
-		.four-samples div {
-			background-image: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
-		  	padding:  6px 0 6px 0;
-		}
-
-		.four-samples div td,
-		.four-samples div > p {
-			font-size: calc(var(--font-size-base) * 0.85);
-			line-height: 1.5;
-		}
-  
-
-
+        pre { background-color: #282c34;}
+        div.gpt { background-color: #282c34;}
+        .table-js-methods td:nth-child(1) { min-width: 20%; }
+        /* Simple form styling for demonstration */
+        .form-group { margin-bottom: 15px; }
+        .label-above label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .error-text { color: #dc3545; font-size: 0.9em; display: none; }
 	</style>
-
-    <!-- Syntax Highlighter -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
 
-	<script defer src="../../assets/js/cookie.js"></script>
+<body id="top">
 
-    <!-- Font Awesome 6 icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RQ1JXS4GKM');
-    </script>
-    </head>
+    <header>
+        <div class="wrapper">
+            <div class="sidebar"><div><p>&nbsp;</p></div></div>
+            <div class="content">
+                <h1>Working with forms</h1>
+                <h2>Handling form submissions, extracting text input, and providing real-time validation.</h2>
+            </div>
+        </div>
+    </header>
 
-    <body id="top">
+    <main>
+        <aside>
+            <h3>JAVASCRIPT</h3>
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#introduction">Introduction to forms</a></p>
+            <p class="toc-indent"><a href="#form-layout">Layout conventions</a></p>
+            <p><a href="#simple-form">Building a simple form</a></p>
+            <p class="toc-indent"><a href="#placeholder-required">The placeholder and required input field attributes</a></p>
+            <p  class="toc-indent"><a href="#submit-event">The <code>submit</code> event and default behaviour</a></p>
+            <p><a href="#validation">Extracting values and validation</a></p>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+            <p><a href="#email-field">Adding a type="email" field</a></p>
+            <p class="toc-indent"><a href="#email-validation">Email validation</a></p>
+            <p><a href="#password-field">Adding a type="password" field</a></p>
+            <p class="toc-indent"><a href="#password-validation">Password validation</a></p>
+            <p><a href="#number-field">Adding a type="number" field</a></p>
+            <p class="toc-indent"><a href="#numeric-validation">Numeric validation</a></p>
 
+            <p><a href="#real-time">Real-time feedback: blur and input</a></p>
+            <p class="toc-indent"><a href="#blur">Use blur on the email field</a></p>
+            <p class="toc-indent"><a href="#input">Use input on the Student ID field</a></p>
+            <p><a href="#keyboard-events-and-shortcuts">Keyboard events and shortcuts</a></p>
+            <p><a href="#try-it">Try it yourself</a></p>
+            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
 
-		<header>
-			<div class="wrapper">
-				<div class="sidebar">
-					<div><p>&nbsp;</p>
-					</div>
-				</div>
-		
-				<div class="content">
-					<h1>Introduction to forms</h1>
-					<h2>Working with HTML forms using JavaScript, handling form submissions, validating user input, and accessing form data.</h2>
-				</div>
-			</div><!-- /wrapper -->
-		</header>
-	
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </aside>
 
-		<main>
+        <article>
 
-			<aside>
-				<h3>JAVASCRIPT TUTORIALS</h3>
-					
-				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
-	
-				<h3>THIS TUTORIAL</h3>
-				<p><a href="#learning-goals">Learning Goals</a></p>
-                <p><a href="#forms-about">About HTML Forms</a></p>
-                <p><a href="#accessing-forms">Accessing forms data with JavaScript</a></p>
-                <p><a href="#form-validation">Form validation</a></p>
-                <p><a href="#resources">More learning resources</a></p>
-                <p><a href="#ai-prompts">Sample AI prompts</a></p>
-            
-				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
-			  
-				<p>&nbsp;</p>
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Build modern forms with different input types (text, email, password, number).</li>
+                    <li>Understand the special properties and behaviours of each input type.</li>
+                    <li>Intercept form submissions using <span class="syn-js">e.preventDefault()</span>.</li>
+                    <li>Extract and validate user data using <span class="syn-js">.value</span> and <span class="syn-js">.trim()</span>.</li>
+                    <li>Provide real-time validation using <span class="syn-js">blur</span> and <span class="syn-js">input</span> events.</li>
+                    <li>Create field-specific validation rules for different input types.</li>
+                </ul>
+            </section>
 
-	
-			</aside> 
-	
-	
-	<article>
-	
+            <section>
 
-	<section id="learning-goals">
-		<h2>Learning Goals</h2>
+            <div class="code-snippets" style="margin-bottom:32px">
+                <p>For this Tutorial, in your <b>exercises</b> folder, create a new web page named <b>forms-intro.html</b>.
+                <p>Create a new empty text file named <b>forms-intro.js</b> and save it in this same folder.</p>
+            <p>Add a link to <b>forms-intro.js</b> in the <code>&lt;head&gt;</code> of your <b>forms-intro.html</b> web page using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p></p>
+            </div>
 
-		<p>At the end of this Tutorial, you will be able to:</p>
-		<div class="box-goals">
-
-			<ul>
-                <li>Access and manipulate HTML forms using JavaScript</li>
-                <li>Handle form submission events and prevent default behavior</li>
-                <li>Validate user input before form submission</li>
-                <li>Extract and process form data</li>
-            </ul>
-		</div>
-
-	</section>
-	
-	<section>
-		<div class="code-snippets" style="margin-bottom:32px">
-			<p>Download a new workfile on your computer as described at the link below.</p>
-			<p>📄 &nbsp;<a href="assets/workfiles/forms.html" target="_blank"><b>JavaScript forms</b>: Exercises</a></p>
-		</div>
-	
-	</section>
+            </section>
 
 
-    <section id="forms-about">
-        <h2>About HTML forms</h2>
-        <p>Forms are an essential part of web applications, allowing users to input data that can be processed by JavaScript and stored in a database.</p>
+        <section id="introduction">
+                <h2>Introduction to forms</h2>
+                <p>Forms are the primary way web applications collect data from users. Before writing JavaScript, it is important to understand how to structure your HTML.</p>
 
-        <p>Copy the following basic form structure into the HTML part of your <b>forms.html</b> workfile:</p>
+                <h3 id="form-layout">Layout conventions</h3>
+                <p>There are two main conventions for placing text labels next to input fields:</p>
 
-<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;!-- Email and password form --&gt;
-&lt;h2&gt;A basic form&lt;/h2&gt;
-&lt;form id="userForm" onsubmit="processForm(event)"&gt;
-    &lt;label for="userName"&gt;Name:&lt;/label&gt;
-    &lt;input type="text" id="userName" name="userName"&gt;&lt;br&gt;&lt;br&gt;
-                
-    &lt;label for="userEmail"&gt;Email:&lt;/label&gt;
-    &lt;input type="email" id="userEmail" name="userEmail"&gt;&lt;br&gt;&lt;br&gt;
-                
-    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                <table>
+                    <tr>
+                        <td width="45%" valign="top"><img src="assets/img/forms/layout-left.png" alt="screenshot">
+                        <b>Labels to the Left:</b> Often used on wide desktop screens.</td>
+                        <td width="45%" valign="top">
+                            <img src="assets/img/forms/layout-top.png" alt="screenshot">
+                        <b>Labels Above:</b> The modern standard for mobile responsiveness, as it prevents horizontal scrolling on small screens.</td>
+                    </tr>
+                </table>
+
+                <p style="margin-top: 28px">In your <b>forms-intro.html</b>, add the following CSS styles in the <span class="syn">&lt;head&gt;</span> of the file.</p>
+
+<pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-css">&lt;style&gt;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    color: #333;
+}
+
+/* Form container */
+.label-above {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 32px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Each label/input pair */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* Labels above their fields */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Input fields */
+.form-group input {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #007BFF;
+}
+
+/* Error messages — hidden by default */
+.error-text {
+    margin-top: 6px;
+    font-size: 0.875rem;
+    color: #dc3545;
+    display: none;
+}
+
+/* Submit button */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+&lt;/style&gt;</code></pre>
+
+                <p>This CSS will give you a clean, modern form layout with labels above the input fields, clear error messages (not displayed by default), and a styled <b>Submit</b> button. You can customise the colours and spacing as needed.</p>
+
+            </section>
+
+
+            <section id="simple-form">
+                <h2>Building a simple form</h2>
+                <p>Let's start with the most basic form imaginable: collecting a person's first and last name. This introduces the fundamental pattern you'll use for all forms.</p>
+
+                <p>Add the HTML for this form to the <span class="syn">&lt;body&gt;</span> of your <b>forms-intro.html</b> web page:</p>
+
+<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">&lt;h1&gt;Student Sign-in Form&lt;/h1&gt;
+&lt;form id="myBigForm" class="label-above"&gt;
+   &lt;div class="form-group"&gt;
+      &lt;label for="firstName"&gt;First Name:&lt;/label&gt;
+      &lt;input type="text" id="firstName" name="firstName" placeholder="e.g., John" required&gt;
+      &lt;span id="firstNameError" class="error-text"&gt;First name is required.&lt;/span&gt;
+   &lt;/div&gt;
+
+   &lt;div class="form-group"&gt;
+      &lt;label for="lastName"&gt;Last Name:&lt;/label&gt;
+      &lt;input type="text" id="lastName" name="lastName" placeholder="e.g., Smith" required&gt;
+      &lt;span id="lastNameError" class="error-text"&gt;Last name is required.&lt;/span&gt;
+   &lt;/div&gt;
+
+   &lt;button type="submit"&gt;Submit&lt;/button&gt;
 &lt;/form&gt;</code></pre>
 
-    <img src="assets/img/forms/form-basic.png" alt="screenshot" style="max-width: 360px;margin-bottom: 12px">
+<p>In your web browser, your form should look like that below.</p>
 
-        <p>When working with forms in JavaScript, you will typically want to:</p>
+        <img src="assets/img/forms/form-1.png" alt="screenshot" style="max-width: 560px">
+
+
+
+        <p>Note the following points about your basic form:</p>
+        
         <ul>
-            <li>Capture the form submission event (user clicking the <b>Submit</b> button)</li>
-            <li>Validate user input</li>
-            <li>Process form data</li>
-            <li>Provide feedback to users</li>
+            <li>The entire form, including the <b>Submit</b> button, is wrapped inside the <span class="syn">&lt;form&gt;</span> element, which has a unique <b>id</b>. This makes it easier for JavaScript to handle the form submission.</li>
+            <li>All three elements associated with each form field - the label, the input, and the error message - are wrapped together inside a <span class="syn">&lt;div class="form-group"&gt;</span> tag. This simplifies styling and layout.</li>
+            <li>The <b>for</b> attribute on a <span class="syn">&lt;label&gt;</span> must exactly match the <b>id</b> of its associated input field. This is a significant usability feature, as clicking anywhere on the label text moves focus directly to the associated input field.</li>
+            <li>Each field has both an <b>id</b> and a <b>name</b> attribute. The <b>id</b> is used by HTML and JavaScript on the client side. The <b>name</b> is used by the server when the form data is submitted.</li>
+            <li>The <span class="syn">&lt;input type="text"&gt;</span> field is the simplest form field.
+                <span class="ol-inline">&nbsp;</span>
+                It is used for single-line text input. Anything you enter into this field - including numbers - is treated as plain-text.</li>
         </ul>
-    </section>
+        
+        <p>If you click the <b>Submit</b> button now, the web page will reload from cache.</p>
 
-    <section id="accessing-forms">
-        <h2>Accessing form data with JavaScript</h2>
+        <h3 id="placeholder-required">The <code>placeholder</code> and <code>required</code> input field attributes</h3>
+        <p>You can add two further attributes to each of the input text fields.</p>
 
-        <p>The simplest way to access the details entered in HTML forms with JavaScript is with code such as that below. Copy this code to the JavaScript part of your <b>forms.html</b> workfile.</p>
+        <ul>
+            <li><b>placeholder</b>: This lets you insert some sample text inside the input field, which disappears when the user starts typing.</li>
+            <li><b>required</b>: This makes the field mandatory. The web browser will prevent form submission if the field is empty.</li>
+        </ul>
 
-<pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-javascript">// Function to process the form
-function processForm(event) {
-    event.preventDefault(); // prevents the web page reloadiing
-    // Get values entered by the user
-    const userNameInput = document.getElementById('userName').value;
-    const userEmailInput = document.getElementById('userEmail').value;
-    // Output the values to the console
-    console.log(`Name entered by user: ${userNameInput}`);
-    console.log(`Email entered by user: ${userEmailInput}`);
+        <p>Update the two input fields as shown below, and test the form again. </p>
+
+        <img src="assets/img/forms/form-2.png" alt="screenshot">        
+            
+            
+            <p>You should see the placeholder text inside each field, and if you try to submit the form with either field empty, the browser will show a warning and prevent submission.</p>
+
+
+             <img src="assets/img/forms/form-3.png" alt="screenshot" style="max-width: 580px">     
+
+                <h3 id="submit-event">The <code>submit</code> event and default behaviour</h3>
+                <p>By default, when a user clicks a <b>Submit</b> button, the browser attempts to:</p>
+                <ul>
+                    <li>Send the data to a server, and</li>
+                    <li>Reload the web page.</li>
+                </ul>
+                    
+                <p>In modern JavaScript applications, we usually want to first validate form input on the client side. We do this using the event object's <span class="syn-js">.preventDefault()</span> method.</p>
+
+                <p>Paste the following JavaScript into your <b>forms-intro.js</b> file:</p>
+
+<pre><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-javascript">// Get the form from the HTML using its unique ID
+const formStudentReg = document.getElementById("myBigForm");
+
+// Handle the submit event of the form
+formStudentReg.addEventListener("submit", e =&gt; {   
+    
+    // Prevent data from being sent to a server and page from reloading
+    e.preventDefault(); 
+    
+    // Get the input values after 'cleaning' them 
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    
+    // Set up Boolean for simple validation
+    let isValid = true;
+    
+    // Test input values and show/hide error messages
+    if (firstName === "") {
+        document.getElementById("firstNameError").style.display = "block";
+        isValid = false;
+    } else {
+        document.getElementById("firstNameError").style.display = "none";
+    }
+    
+    if (lastName === "") {
+        document.getElementById("lastNameError").style.display = "block";
+        isValid = false;
+    } else {
+        document.getElementById("lastNameError").style.display = "none";
+    }
+    
+    // If valid, process the data
+    if (isValid) {
+        console.log(`Welcome, ${firstName} ${lastName}!`);
+        formStudentReg.reset(); // Clears all fields
+    }
+});</code></pre>
+
+                <p>Note: You must declare the form variable (<b>formStudentReg</b>) before attaching the event listener. Because you can't attach an event listener to a variable that doesn't exist yet.</p>
+
+                <h3 id="validation">Extracting values and validation</h3>
+                <p>To get the text a user typed into an input, JavaScript reads its <span class="syn-js">.value</span> property. We also use the <span class="syn-js">.trim()</span> string method to remove any accidental blank spaces at the start or end of their text.</p>
+
+                <p>Because you attached the listener to the <code>submit</code> event of the form (rather than just the <code>click</code> event of the button), HTML automatically handles keyboard accessibility. If the user presses the <kbd class="tutorial-key">Enter</kbd> key while typing in any text box, it will trigger this exact same event!</p>
+
+
+           <p>Enter some text in the two text fields, press <b>Submit</b>, and verify the form works correctly.</p>
+
+
+        </section>
+
+        <section id="email-field">
+                <h2>Adding a <code>type="email"</code> field</h2>
+                <p>Now, let's enhance our form by adding an email field. Paste this HTML into your form after the first two fields.</p>
+                    
+<pre><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-html">&lt;div class="form-group"&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" placeholder="e.g., <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2154524453614459404c514d440f424e4c">[email&#160;protected]</a>" required&gt;
+    &lt;span id="emailError" class="error-text"&gt;Please enter a valid email address.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+                    <p>Setting an input field type to <span class="syn">email</span> rather than <span class="syn">text</span> provides two benefits:</p>
+
+                <ul>
+                    <li><b>Mobile UX:</b> On smartphones, it automatically opens an email-optimised keyboard showing the <code>@</code> and <code>.com</code> keys.</li>
+                    <li><b>Built-in validation:</b> The browser will automatically pause the form submission and warn the user if they forget the <code>@</code> symbol!</li>
+                </ul>
+
+                <h3 id="email-validation">Email validation</h3>
+                <p>The browser's built-in <span class="syn">email</span> check catches missing <code>@</code> symbols, but it won't catch things like <code>user@</code> or <code>@domain.com</code>. A simple regex covers the common cases without getting overly complex:</p>
+
+<pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
 }</code></pre>
 
-    <p>Enter some details in the form, click <b>Submit</b>, and verify your form runs correctly.</p>
+                <p>To use this function, simply call it with the trimmed email value from your form. It will return <code>true</code> if the email is valid and <code>false</code> if it is not.</p>  
 
-    <img src="assets/img/forms/form-basic-2.png" alt="screenshot" style="max-width: 440px;margin-bottom: 12px"> 
+<pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-javascript">
+if (!validateEmail(document.getElementById("email").value.trim())) {
+    document.getElementById("emailError").style.display = "block";
+    isValid = false;
+} else {
+    document.getElementById("emailError").style.display = "none";
+}</code></pre>
 
-    <h3>About <code>event.preventDefault()</code></h3>
-    <p>By default, clicking the form <b>Submit</b> button will trigger two actions:</p>
-    <ul>
-        <li>The data in the form will be submitted.</li>
-        <li>The web page will reload.</li>
-    </ul>
-
-    <p>Typically, you will want to validate the entered data before the form is submitted. Also, you will not want the web page to reload in the browser. </p>
-       
-    </section>
-
-    
-
-    <section id="form-validation">
-        <h2>Form validation</h2>
-
-        <p>Validation ensures that user input meets your requirements before processing. JavaScript can perform validation when the form is submitted.</p>
+                <p>Now, if you try to submit the form with an invalid email format, you'll see your custom error message instead of the browser's default warning.</p>                  
+                
+                
+        </section>
 
 
-        <p>The <b>type="email"</b> form input field has built-in web browser validation that checks for a correct email address format.</p>
+        <section id="password-field">
+            <h2>Adding a <code>type="password"</code> field</h2>
+            <p>Input fields with <span class="syn">type="password"</span> hide the user's input with dots or asterisks. They also disable browser autofill suggestions for security.</p>
+
+            <p>Paste the following password field into your form:</p>
+
+<pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-html">&lt;div class="form-group"&gt;
+    &lt;label for="password"&gt;Password:&lt;/label&gt;
+    &lt;input type="password" id="password" name="password" placeholder="Enter your password" required&gt;
+    &lt;span id="passwordError" class="error-text"&gt;Password must be at least 8 characters.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3 id="password-validation">Password validation</h3>
+            <p>Add a simple password validation function that checks only that the entered and trimmed password has a minimum length.</p>
+
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">function validatePassword(password) {
+    return password.length &gt;= 8;
+}</code></pre>
+
+    <p>Update your submit event listener with the following:</p>
+
+<pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">// Validate password meets minimum requirements
+if (!validatePassword(document.getElementById("password").value.trim())) {
+    document.getElementById("passwordError").style.display = "block";
+    isValid = false;
+} else {
+    document.getElementById("passwordError").style.display = "none";
+}</code></pre>
+
+
+</section>
+
+        <section id="number-field">
+
+                <h2>Adding a <code>type="number"</code> field</h2>
+
+                <p>For fields that require numbers (like Student ID, age, or quantity), use <span class="syn">type="number"</span>. Paste the HTML below into <b>forms-intro.html</b>.</p>
+
+
+<pre><button class="copy-code" id="btn-10">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-10" class="hljs language-html">&lt;div class="form-group"&gt;
+    &lt;label for="studentId"&gt;Student ID:&lt;/label&gt;
+    &lt;input type="number" id="studentId" name="studentId" placeholder="5-digit ID (10000-99999)" required&gt;
+    &lt;span id="studentIdError" class="error-text"&gt;ID must be in range 10000-99999&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+            <p>The <span class="syn">type="number"</span> input provides special attributes and behaviour:</p>
+                <ul>
+                    <li><b>Automatic validation:</b> Non-numeric characters display an error</li>
+                    <li><b>Browser controls:</b> Shows up/down arrows for incrementing</li>
+                </ul>
+
+
+                <h3 id="numeric-validation">Numeric validation</h3>
+
+                <p>Paste the following code inside your submit event listener, after the password validation block.</p>
+
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">
+const studentId = document.getElementById("studentId").value.trim();    
+if (studentId &lt; 10000 || studentId &gt; 99999) {
+    document.getElementById("studentIdError").style.display = "block";
+    isValid = false;
+} else {
+    document.getElementById("studentIdError").style.display = "none";
+}</code></pre>
+
+                <p>Experiment by entering various inputs to your form and verify it works correctly.</p>
+</section>
+
+            <section id="real-time">
+                <h2>Real-time feedback: <code>blur</code> and <code>input</code></h2>
+                <p>Waiting until the user clicks <b>Submit</b> to show them an error can be frustrating. Modern websites provide immediate feedback as you navigate the form using key events:</p>
+                
+                <ul>
+                    <li><span class="syn-js">blur</span>: This event fires the exact moment the user clicks or tabs <i>away</i> from an input field.</li>
+                    <li><span class="syn-js">input</span>: This event fires instantly on <i>every</i> keystroke.</li>
+                </ul>
+
+                <h3 id="blur">Use <code>blur</code> on the email field</h3>
+                <p>The email field is the best choice because format validation only makes sense once the user has finished typing an address. Checking on every keystroke would flag the input as invalid before they've even had a chance to finish it!</p>
+                <p>Paste in this new event listener into <b>forms-intro.js</b></p>
+<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">/* BLUR: Listener to check email format after user clicks away */
+
+document.getElementById("email").addEventListener("blur", () =&gt; {
+    if (!validateEmail(document.getElementById("email").value.trim())) {
+        document.getElementById("emailError").style.display = "block";
+    } else {
+        document.getElementById("emailError").style.display = "none";
+    }
+});</code></pre>
+
+    <h3 id="input">Use <code>input</code> on the Student ID field</h3>
+    <p>The number field is ideal for the <span class="syn-js">input</span> event because the range check is instant and unambiguous — as soon as the number is outside 10000-99999, you know. It also gives you a satisfying, visible demonstration of live feedback.</p>
+
+    <p>Paste in this new event listener into <b>forms-intro.js</b>.</p>
+
+    <pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// INPUT: Checks user's input on every keystroke and provides instant feedback
+document.getElementById("studentId").addEventListener("input", () =&gt; {
+    const studentId = document.getElementById("studentId").value.trim();
+    if (studentId &lt; 10000 || studentId &gt; 99999) {
+        document.getElementById("studentIdError").style.display = "block";
+    } else {
+        document.getElementById("studentIdError").style.display = "none";
+    }
+});</code></pre>
+
+    <p>Note that the <span class="syn-js">blur</span> and <span class="syn-js">input</span> real-time listeners work alongside the <span class="syn-js">submit</span> listener — they're not a replacement. They are purely a UX improvement.</p>
+
+    <p>The <span class="syn-js">submit</span> listener remains the definitive gatekeeper for form validation.</p>
+
+    <p>All inputs should then be validated after form submission on the server side. This ensures that even if JavaScript is disabled or bypassed/hacked, your system's data integrity is maintained.</p>
+
+            </section>
+
+
         
-        <img src="assets/img/forms/form-basic-3.png" alt="screenshot" style="max-width: 500px;margin-bottom: 12px">
-        <p>You can add validation to other input fields JavaScript. For example, add the code below to your <b>processForm()</b> function.</p>
 
-        <img src="assets/img/forms/form-basic-4.png" alt="screenshot" style="max-width: 700px;margin-bottom: 12px">
 
-        <p>After form has been successfully submitted, you can use the <span class="syn-js">reset()</span> method to clear the form.</p>
+            <section id="keyboard-events-and-shortcuts">
+                <h2>Keyboard events and shortcuts</h2>
+                <p>While the <b>Enter</b> key is handled automatically by the form <span class="syn-js">submit</span> event listener, you can use the <span class="syn-js">keydown</span> event to listen for other specific keys to improve the user experience.</p>
 
-        <img src="assets/img/forms/form-basic-5.png" alt="screenshot" style="max-width: 700px;margin-bottom: 12px">
-    </section>
+                <p>For example, you can allow the user to clear the form by pressing the <b>Escape</b> key or submit the form with <b>Ctrl+Enter</b> (or <b>Cmd+Enter</b> on Mac).</p>
 
+<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-javascript">// Listen for keystrokes anywhere on the page
+document.addEventListener("keydown", e =&gt; {
+    // Check which key was pressed and if Ctrl/Cmd is held
+    if (e.key === "Escape") {
+        // Clear all forms on Escape
+        document.querySelectorAll("form").forEach(form =&gt; form.reset());
+        console.log("All fields cleared via Escape key.");
+    }
+    
+    // Ctrl+Enter to submit (useful for long forms)
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+        const activeForm = document.querySelector("form:focus-within");
+        if (activeForm) {
+            activeForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+        }
+    }
+});</code></pre>
+            </section>
+
+
+            <section class="resources-learning" id="try-it">
+                <h2>Try it yourself</h2>
+                <p>---</p>
+
+<p><b>Extend the form</b></p>
+<p>Add a "Confirm Password" field and write a validation check that compares it to the password field. If the two values don't match, display an error message. This reinforces reading .value from multiple fields and is a very common real-world pattern students will recognise.</p>
+             <p>---</p>
+<p><b>Add a phone number field</b></p>
+<p>Add a type="tel" input with a validation function that checks the number is exactly 10 digits. This introduces a new input type and gives them another chance to write their own regex — simpler than the email one, so it's a good confidence builder.</p>
+             <p>---</p>
+<p><b>Real-time character counter</b></p>
+<p>Add a "Bio" or "Comments" &lt;textarea&gt; field with a maximum of 150 characters, and use the input event to display a live character count beneath it (e.g. "42 / 150"). This extends the input event concept to a new element type and produces very satisfying visual feedback.</p>
+                 <p>---</p>
+<p><b>Style the error states</b></p>
+<p>Rather than just showing the error message span, also add a CSS class (e.g. input-error) to the input field itself when validation fails, turning its border red. Remove the class when it passes. This bridges JavaScript and CSS in a way that mirrors professional practice.</p>
+             <p>---</p>
+<p><b>A challenge task</b></p>
+<p>Disable the Submit button on page load, and only enable it once all fields pass validation. This requires them to think about combining everything they've learned and introduces button.disabled as a concept.</p>
+
+            </section>
 
        <section class="resources-learning" id="resources">
 
@@ -233,7 +535,7 @@ function processForm(event) {
               <div class="flex-container">
                 <div class="text-container">
                   <h3><span><i class="fa-solid fa-circle-question"></i> Tutorial Quiz</span></h3>
-                  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/16" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
+                  <p><a href="https://brendan-munnelly.github.io/quiz-dorset-javascript/#/quiz-questions/19" target="_blank"><i class="fa-solid fa-circle-arrow-right"></i> &nbsp;&nbsp;Take the test</a></p>
           
                 </div>
             
@@ -249,54 +551,31 @@ function processForm(event) {
               </div>
           
             </section>
-            
-        <section class="resources-learning" id="ai-prompts">
-          
-           <h2>Sample AI prompts</h2>
-          
-            
-            <div class="gpt"><button class="copy-gpt" id="btn-10">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-10">In an HTML file, create a simple registration form with the following fields:<br>
-            - Username (text input)<br>
-            - Email (email input)<br>
-            - Password (password input)<br>
-            - Confirm Password (password input)<br><br>
 
-            In the same file, create a plain JavaScript code:<br>
-            - Validate that all fields are filled out<br>
-            - Check that passwords match<br>
-            - Output the form data to the console<br>
-            - Use an event handler instead of an event listener<br>
-            - user innerText instead of textContent<br><br>
 
-            In the &lt;head&gt; of the HTML file, add two CSS classes to style a DIV tag with an id of "message" depending on whether the form passes validation or not.<br><br>
-            After the form is submitted, use JavaScript to create the "message" DIV tag, assign the appropriate CSS class to it with classList.add(), and append it to the form.<br>
-            Finally, reset the form.</code></div>
-        
-          
+
+            <section class="resources-learning" id="ai-prompts">
+                <h2>Sample AI prompts</h2>
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Explain the difference between the 'keydown' and 'keyup' events in JavaScript, and when you would use each one.</code></div>
+                
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is "Regular Expression" (Regex) in JavaScript, and how can I use it to build a highly secure password validation function?</code></div>
+                
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Show me how to make a form more accessible for screen readers using ARIA labels and roles.</code></div>
+
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is the difference between the blur and focusout events in JavaScript?</code></div>
+
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What are the advantages and disadvantages of client-side form validation compared to server-side validation?</code></div>
+
+                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Explain how e.preventDefault() works in JavaScript. What other situations is it useful beyond form submission?</code></div>
 
 
             </section>
+        </article>
+    </main>
 
-
-
-</article>
-</main>
-
-<footer>
-
-</footer>
-
-<div id="cookie-banner">
-    <p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
-    <div class="buttons">
-        <button id="accept-cookies">Got it</button>
-    </div>
-</div>
-
-
-<script>hljs.highlightAll();</script>
-
-<script src="assets/js/utils.js"></script>
+    
+    <script>hljs.highlightAll();</script>
+    <script src="assets/js/utils.js"></script>
 
 
 </body>
