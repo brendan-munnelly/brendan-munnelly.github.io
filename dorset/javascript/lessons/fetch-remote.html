@@ -64,14 +64,11 @@
                 <p><a href="#learning-goals">Learning Goals</a></p>
                 <p><a href="#introduction">Introduction to remote APIs</a></p>
                 <p><a href="#rest-countries">Working with the REST Countries API</a></p>
-        <p class="toc-indent"><a href="#parse-display-response">Parsing and displaying the response</a></p>
-        <p class="toc-indent"><a href="#fetching-images">Understanding image URLs in JSON</a></p>
+                <p class="toc-indent"><a href="#parse-display-response">Parsing and displaying the response</a></p>
+                <p class="toc-indent"><a href="#fetching-images">Understanding image URLs in JSON</a></p>
                 <p><a href="#attach-button">Attaching the HTML output to a button</a></p>
-                <p><a href="#random-user-api">Working with the Random Users API</a></p>
-                            <p class="toc-indent"><a href="#user-data-structure">Structure of the returned user data</a></p>
-
+                <p><a href="#json-placeholder-api">Working with the JSON Placeholder API</a></p>
                 <p><a href="#adding-grid">Adding a grid layout</a></p>
-
                 <p><a href="#try-it">Try it yourself</a></p>
                 <p><a href="#ai-prompts">Sample AI prompts</a></p>
                 <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
@@ -292,10 +289,10 @@ document.getElementById("button-container").addEventListener("click", function(e
 
     </section>
 
-    <section id="random-user-api">
-        <h2>Working with the Random Users API</h2>
+    <section id="json-placeholder-api">
+        <h2>Working with the JSON Placeholder API</h2>
         
-        <p>Now add a second Fetch API snippet to our web page and script files. The endpoint <b>https://randomuser.me/api/?results=10</b> returns an object containing an array named <b>results</b> with 10 users. </p>
+        <p>Now add a second Fetch API snippet to our web page and script files. The endpoint <b>https://jsonplaceholder.typicode.com/users</b> returns 10 random and fausers. </p>
             
             <p>Follow these steps:</p>
         
@@ -304,8 +301,7 @@ document.getElementById("button-container").addEventListener("click", function(e
 <pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-html">&lt;button class="btn" id="btn-users"&gt;Load Users&lt;/button&gt;</code></pre></li>
             <li>In your <b>list-remote.js</b> file, update your event delegation function.
             
-<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">
-// Event listener on the parent container
+<pre><button class="copy-code" id="btn-8">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-8" class="hljs language-javascript">// Event listener on the parent container
 document.getElementById("button-container").addEventListener("click", function(e) {
     if (e.target.id === "btn-countries") {
         fetchCountriesData();
@@ -319,47 +315,24 @@ document.getElementById("button-container").addEventListener("click", function(e
 <pre><button class="copy-code" id="btn-9">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-9" class="hljs language-javascript">function displayUsersData(usersArray) {
     const container = document.getElementById("remote-data-container");
     let htmlOutput = "";
-
     usersArray.forEach(user =&gt; {
         htmlOutput += `
-        &lt;p&gt;&lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="50"&gt;&lt;/p&gt;
             &lt;p&gt;
-            &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
-            Email: ${user.email}&lt;br&gt;              
-            Location: ${user.location.city}, ${user.location.country}
+            &lt;b&gt;${user.name} ${user.username}&lt;/b&gt;&lt;br&gt;
+            Email: &lt;a href="mailto:${user.email}"&gt;${user.email}&lt;/a&gt;&lt;br&gt;
+            Website: &lt;a href="http://${user.website}" target="_blank"&gt;${user.website}&lt;/a&gt;&lt;br&gt;
+            Location: ${user.address.street}, ${user.address.city}
             &lt;/p&gt;
         `;
     });
     container.innerHTML = htmlOutput;
-}</code></pre>
+} </code></pre>
 
             </li>
-            <li>Your user data output should look like that below.
-<img src="assets/img/fetch-remote/display-users.png" alt="screenshot"></li>
-
-
         </ol>
-        
-        <h3 id="user-data-structure">Structure of the returned user data</h3>
-                    <p>Unlike the REST Countries API which returned a plain array at the top level, the Random User API returns a wrapper object with a <b>results</b> key that contains the array. See below.</p>
 
-        <img src="assets/img/fetch-remote/users-console.png" alt="screenshot">
-
-
-        <p>Consider the following line:</p>
-
-<pre><code class="hljs language-javascript">const data = await response.json()</code></pre>
-            
-        <p>Your <b>data</b> variable is referencing the outer 'wrapper' object around the <b>results</b> array, not the array itself. The <b>results</b> array is a property of this outer object. So, before passing the actual values you want to your display function, you need to access the <b>results</b> array inside this object.</p>
-
-<pre><code class="hljs language-javascript">displayUsersData(data.results);</code></pre>
-
-    <p>The <b>results</b> contains many nested properties to navigate.</p>
-
-    <p>For example, because <b>name</b> is a nested object, you need to type <b>user.name.first</b> and <b>user.name.last</b>.</p>
-    
-    <p>Other nested properties include <b>user.dob.age</b> (date of birth), and <b>user.location.city</b> and <b>user.location.country</b> (location).</p>
-
+    <p>You should now see a list of random users when you click the <b>Load Users</b> button.</p>
+   
     </section>
 
     <section id="adding-grid">
@@ -388,15 +361,19 @@ document.getElementById("button-container").addEventListener("click", function(e
 
 <pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-javascript">htmlOutput += `
     &lt;div style="border: 1px solid #ccc; padding: 12px; border-radius: 6px;"&gt;
-    &lt;img src="${user.picture.thumbnail}" alt="Picture of ${user.name.first} ${user.name.last}" width="100"&gt;
-        &lt;p&gt;
-        &lt;b&gt;${user.name.first} ${user.name.last}&lt;/b&gt;&lt;br&gt;
-        Email: ${user.email}&lt;br&gt;
-        Location: ${user.location.city}, ${user.location.country}
-        &lt;/p&gt;
+       &lt;p&gt;
+       &lt;b&gt;${user.name} ${user.username}&lt;/b&gt;&lt;br&gt;
+        Email: &lt;a href="mailto:${user.email}"&gt;${user.email}&lt;/a&gt;&lt;br&gt;
+        Website: &lt;a href="http://${user.website}" target="_blank"&gt;${user.website}&lt;/a&gt;&lt;br&gt;
+        Location: ${user.address.street}, ${user.address.city}
+       &lt;/p&gt;
     &lt;/div&gt;
-`;
-</code></pre>
+`;</code></pre>
+
+    <p>Finally, add this new CSS style to the <span class="syn">&lt;head&gt;</span> of your HTML file:</p>
+
+<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-css">#remote-data-container p { line-height: 1.5 }</code></pre>
+
 
     <p>In your web browser, confirm that the country and user data are displayed in a grid layout.</p>
     </section>
