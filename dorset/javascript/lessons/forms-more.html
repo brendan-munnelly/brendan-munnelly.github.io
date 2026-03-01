@@ -5,15 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Advanced forms | JavaScript Tutorials | Brendan Munnelly</title>
-    <meta name="description" content="Using dropdown lists, toggle switches, and range inputs to create dynamic, interactive web pages.">
+    <meta name="description" content="Using form text inputs and dropdown lists with 'real-time' event listeners to build dynamic, interactive web pages.">
 
     <meta name="author" content="Brendan Munnelly">
 
     <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
 
     <style>
-        pre { background-color: #282c34; }
-        .table-js-methods td:nth-child(1) { min-width: 20%; }
+        pre { background-color: #282c34;}
+        .table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+		table.table-gray { padding: 10px 20px 10px 20px !important;}
+
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
+
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
@@ -27,7 +46,7 @@
             <div class="sidebar"><div><p>&nbsp;</p></div></div>
             <div class="content">
                 <h1>Advanced forms</h1>
-                <h2>Using dropdown lists, toggle switches, and range inputs to build dynamic, interactive web pages.</h2>
+                <h2>Using form text inputs and dropdown lists with 'real-time' event listeners to build dynamic, interactive web pages.</h2>
             </div>
         </div>
     </header>
@@ -42,19 +61,21 @@
             <p><a href="#text-filter">Filtering with a text input</a></p>
             <p class="toc-indent"><a href="#rick-morty-api">The Rick &amp; Morty API</a></p>
             <p class="toc-indent"><a href="#filter-logic">Adding the filter logic</a></p>
-            <p><a href="#dropdown-api">Dropdown lists and remote APIs</a></p>
-            <p class="toc-indent"><a href="#select-element">The <code>&lt;select&gt;</code> element</a></p>
-            <p class="toc-indent"><a href="#change-event">The <code>change</code> event</a></p>
-            <p class="toc-indent"><a href="#regions-endpoint">Using the regions endpoint</a></p>
-            <p><a href="#toggle-switch">Toggle switches</a></p>
-            <p class="toc-indent"><a href="#toggle-html">HTML and CSS for the toggle</a></p>
-            <p class="toc-indent"><a href="#toggle-js">JavaScript for the toggle</a></p>
-            <p><a href="#range-input">The range input</a></p>
-            <p class="toc-indent"><a href="#range-html">HTML for the range input</a></p>
-            <p class="toc-indent"><a href="#range-js">Updating the page in real time</a></p>
-            <p><a href="#try-it">Try it yourself</a></p>
-            <p><a href="#ai-prompts">Sample AI prompts</a></p>
-            <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+            <p><a href="#dropdown-select">Dropdown lists and the <code>select</code> element</a></p>
+
+            <p class="toc-indent"><a href="#dropdown-defaults">Dropdown lists and default values</a></p>
+
+            <p><a href="#dropdown-api">The <code>select</code> element and the Countries API</a></p>
+
+            <p class="toc-indent"><a href="#regions-endpoint">Using the regions endpoint and the <code>change</code> event</a></p>
+
+                <p><a href="#try-it">Try it yourself</a></p>
+                <p><a href="#ai-prompts">Sample AI prompts</a></p>
+                <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+           
+				<p>&nbsp;</p>
+
+
             <p>&nbsp;</p>
             <p>&nbsp;</p>
         </aside>
@@ -67,16 +88,12 @@
                 <ul>
                     <li>Use a text input with the <span class="syn-js">input</span> event to filter live API data as the user types.</li>
                     <li>Build a <span class="syn">&lt;select&gt;</span> dropdown that triggers a Fetch API call when the user makes a selection.</li>
-                    <li>Create a styled CSS toggle switch that applies a light/dark theme to a web page.</li>
-                    <li>Use <span class="syn">&lt;input type="range"&gt;</span> to let users adjust a visual property on screen in real time.</li>
                 </ul>
             </section>
 
             <section>
                 <div class="code-snippets" style="margin-bottom:32px">
                     <p>For this Tutorial, in your <b>exercises</b> folder, create a new web page named <b>forms-2.html</b>.</p>
-                    <p>Create a new empty text file named <b>forms-2.js</b> and save it in this same folder.</p>
-                    <p>Add a link to <b>forms-2.js</b> in the <code>&lt;head&gt;</code> of your <b>forms-2.html</b> web page using a <code>&lt;script&gt;</code> tag with the <code>defer</code> attribute.</p>
                     <p>You will also expand on the <b>list-remote.html</b> and <b>list-remote.js</b> files used in the <a href="fetch-remote.html">Accessing remote APIs Tutorial</a>.</p>
                 </div>
             </section>
@@ -84,12 +101,10 @@
 
             <section id="introduction">
                 <h2>Introduction</h2>
-                <p>In the <a href="forms-intro.html" target="_blank">Introduction to forms</a> Tutorial, you worked with text, email, password, and number fields, and learned how to validate them on submission and in real time. In this tutorial, you'll explore four more interactive form elements that are fundamental to modern web applications:</p>
+                <p>In the <a href="forms-intro.html" target="_blank">Introduction to forms</a> Tutorial, you worked with text, email, password, and number fields, and learned how to validate them on submission and in real time. In this tutorial, you'll explore two more interactive form elements that are fundamental to modern web applications:</p>
                 <ul>
                     <li>A <b>text input</b> that filters live API results on every keystroke.</li>
                     <li>A <b>dropdown list</b> that triggers a Fetch API call when the user selects an option.</li>
-                    <li>A <b>toggle switch</b> that applies a light or dark theme to the page.</li>
-                    <li>A <b>range slider</b> that adjusts a visual property in real time.</li>
                 </ul>
                 <p>Each of these connects a form element to a JavaScript event listener — the same fundamental pattern you have already practised.</p>
             </section>
@@ -98,10 +113,10 @@
             <!-- ============================================================ -->
             <section id="text-filter">
                 <h2>Filtering with a text input</h2>
-                <p>You have already used the <span class="syn-js">input</span> event to provide real-time validation feedback. Here, you will use the same event to do something more powerful: fire a Fetch API request on every keystroke and display matching results dynamically.</p>
+                <p>You have already used the <span class="syn-js">input</span> event to provide real-time validation feedback. This event 'fires' on every keystroke in an input field. Now, you will use this <span class="syn-js">input</span> event to fire a Fetch API request on every keystroke and display matching results dynamically.</p>
 
                 <h3 id="rick-morty-api">The Rick &amp; Morty API</h3>
-                <p>Display the <b>list-remote.html</b> file from the <a href="fetch-remote.html" target="_blank">Fetch remote APIs</a> Tutorial and click the <b>Load Rick & Morty</b> button. You should see a list of characters appear, each with their name, status, and image.</p>
+                <p>Display the <b>list-remote.html</b> file from the <a href="fetch-remote.html" target="_blank">Accessing remote APIs</a> Tutorial and click the <b>Load Rick & Morty</b> button. You should see a list of characters appear, each with their name, status, and image.</p>
 
                 <img src="assets/img/forms/list-rm-1.png" alt="screenshot">
                 <p>The endpoint used by the API is as follows:</p>
@@ -109,22 +124,26 @@
 <pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character</code></pre>
 
 
-                <p>The Rick &amp; Morty API supports searching by character name via a query string parameter. For example, the URL below returns all characters whose name contains "rick":</p>
+                <p>The Rick &amp; Morty API supports searching by character via a <b>name</b> query string parameter. For example, the URL below returns all characters whose name contains "rick":</p>
 
 <pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character/?name=rick</code></pre>
 
-                <p>In the address bar of your browser and test the following two URLs to see the difference in the responses in the console:</p>
+                <p>In the address bar of your browser, test the following two URLs to see the results:</p>
 <pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character/?name=rick</code></pre>
 
-<p>The above returns matching characters. Now try the URL below:</p>
-                    <pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character/?name=zzz</code></pre>
+<pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character/?name=morty</code></pre>
+
+<p>The above URLs return matching characters. Now try the URL below:</p>
+
+<pre><code class="hljs language-javascript">https://rickandmortyapi.com/api/character/?name=zzz</code></pre>
                 
                 <p>The above returns an error object because no characters match "zzz".</p>
+
+<pre><button class="copy-code">Copy <i class="fa-regular fa-copy"></i></button><code class="hljs language-json">{"error":"There is nothing here"}</code></pre>             
                 
                 <p>Your code needs to check for this and handle it gracefully, rather than crashing when it tries to loop through results that don't exist.</p>
 
-                <p>Now, let's add a text input that lets the user search for any character by name.</p>
-                
+               
                 <p>First, add this CSS to the <span class="syn">&lt;head&gt;</span> of your <b>list-remote.html</b> file:</p>
 <pre><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-css">section#filter-rm {
     max-width: 500px;
@@ -170,8 +189,10 @@
 
         <p>This hides the Rick & Morty filter by default.</p>
 
+        <p>Now, let's add a text input that lets the user search for any character by name.</p>
 
-                <p>In your <b>list-remote.html</b> file, add the following HTML under the <span class="syn">&lt;h1&gt;</span> heading:</p>
+
+        <p>In your <b>list-remote.html</b> file, add the following HTML under the <span class="syn">&lt;h1&gt;</span> heading:</p>
 
 <pre><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">&lt;section id="filter-rm"&gt;
     &lt;h2&gt;Filter Rick &amp; Morty characters&lt;/h2&gt;
@@ -211,7 +232,7 @@ document.getElementById("button-container").addEventListener("click", function(e
         <p>Your JavaScript file already has two functions to process the Rick & Morty data. </p>
         
         <ul>
-            <li><b>Fetch function</b>: This named <span class="syn-js">fetchRMData()</span> or similar.</li>
+            <li><b>Fetch function</b>: This is named <span class="syn-js">fetchRMData()</span> or similar.</li>
             <li><b>Display function</b>: This is named <span class="syn-js">displayRMData()</span> or similar.</li>
         </ul>
         
@@ -235,12 +256,14 @@ characterSearch.addEventListener("input", () =&gt; {
     fetchRMData(searchTerm);
 });</code></pre>
 
-<p>Replace the your current fetch function with the following:</p>
+<p>Replace your current fetch function with the following:</p>
 
 <pre><button class="copy-code" id="btn-5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5" class="hljs language-javascript">async function fetchRMData(name = "") {
     try {
         const url = name
+            // name not an empty string (user entered name in search box)
             ? `https://rickandmortyapi.com/api/character/?name=${name}`
+            // name is an empty string (no name entered in search box)
             : `https://rickandmortyapi.com/api/character`;
         const response = await fetch(url);
         const data = await response.json();
@@ -258,26 +281,152 @@ characterSearch.addEventListener("input", () =&gt; {
     }
 }</code></pre>
 
-                <p>Save your files and test the search box. As you type, matching characters should appear immediately. Note the following:</p>
+                <p>Save your files and test the search box. As you type, matching characters should appear immediately. </p>
+                
+                
+                <p>Note the following:</p>
                 <ul>
-                    <li>The fetch fires on every keystroke, but only if the field is not empty.</li>
-                    <li>The <span class="syn-js">data.error</span> check handles the case where no characters match — without this, the code would crash trying to call <span class="syn-js">.forEach()</span> on undefined.</li>
+                    <li>Because you are using the <span class="syn-js">input</span> event, the Fetch API fires on every keystroke, but only if the field is not empty.</li>
+
+                    <li>Your <span class="syn-js">fetchRMData()</span> function now includes a default <b>name</b> parameter, which will have a default value of an empty string. This means your fetch function can handle both cases: fetching all characters or fetching characters by name.</li>
+                    <li>If <b>name</b> is not an empty string, the fetch request URL ends with <b>?name=...</b>. Otherwise, the fetch URL returns the default character list.</li>
+
+                    <li>The <span class="syn-js">data.error</span> check handles the case where no characters match — without this, the code would crash trying to call <span class="syn-js">.forEach()</span> on <span class="syn-js">undefined</span>.</li>
 
                 </ul>
 
+                <p>Let's add one more feature that deals with situations where users enter disallowed characters in the search field. Update the ternary operator in your <span class="syn-js">fetchRMData()</span> function as follows:</p>
+
+<pre><button class="copy-code" id="btn-5a">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-5a" class="hljs language-javascript">const url = name
+// name not an empty string (user entered name in search box)
+? `https://rickandmortyapi.com/api/character/?name=${encodeURIComponent(name)}`
+// name is an empty string (no name entered in search box)
+: `https://rickandmortyapi.com/api/character`;</code></pre>
+
+    <p>A user typing "Rick & Morty" would break the URL if we didn't use <code>encodeURIComponent()</code>. Use this anytime you want a user input to become part of a URL.</p>
             </section>
 
 
             <!-- ============================================================ -->
-            <section id="dropdown-api">
-                <h2>Dropdown lists and remote APIs</h2>
-                <p>A dropdown list — created with the <span class="syn">&lt;select&gt;</span> element — is ideal when you want to offer the user a fixed set of choices. When those choices map directly onto API endpoint parameters, you can trigger a Fetch call the moment the user makes a selection.</p>
-
-                <h3 id="select-element">The <code>&lt;select&gt;</code> element</h3>
-                <p>A <span class="syn">&lt;select&gt;</span> element contains a list of <span class="syn">&lt;option&gt;</span> elements. Each <span class="syn">&lt;option&gt;</span> has a <b>value</b> attribute (what JavaScript reads) and display text (what the user sees).</p>
+            <section id="dropdown-select">
+                <h2>Dropdown lists and the <code>select</code> element</h2>
 
 
-                <p>As a first step, add the following CSS to the <span class="syn">&lt;head&gt;</span> of <b>list-remote.html</b>:</p>
+                <p>A dropdown list — created with the <span class="syn">&lt;select&gt;</span> element — is ideal when you want to offer the user a fixed set of choices.</p>
+
+                <p>Add the following HTML to your <b>forms-2.html</b> web page:</p>
+
+<pre><button class="copy-code" id="btn-dd1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-dd1" class="hljs language-html">&lt;h1&gt;Contact Form&lt;/h1&gt;
+
+&lt;form id="contactForm" class="label-above"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="fullName"&gt;Full name&lt;/label&gt;
+        &lt;input type="text" id="fullName" name="fullName" placeholder="e.g. Alex Murphy" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="reason"&gt;Reason for contacting&lt;/label&gt;
+        &lt;select id="reason" name="reason" required&gt;
+            &lt;option value=""&gt;-- Choose one --&lt;/option&gt;
+            &lt;option value="support"&gt;Support&lt;/option&gt;
+            &lt;option value="sales"&gt;Sales&lt;/option&gt;
+            &lt;option value="feedback"&gt;Feedback&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;p id="output"&gt;&lt;/p&gt;</code></pre>
+
+            <p>Note the following points:</p>
+            
+            
+            <ul>
+                <li>The first option in the dropdown list has an empty value of <span class="syn">""</span>. This acts as a prompt, telling the user to make a choice.
+                    <span class="inside-ol">&nbsp;</span>
+                    If you add a <span class="syn">required</span> attribute to the <span class="syn">&lt;select&gt;</span> element, the web browser will check for this empty value and display a message if no selection is made.
+                <img src="assets/img/forms/dd-1.png" alt="screenshot" style="max-width: 500px;">
+                </li>
+                <li>JavaScript captures the dropdown selection using the <span class="syn-js">.value</span> property, similar to how it works on an <span class="syn">&lt;input&gt;</span> element.</li>
+            </ul>
+
+            <p>Now, at the bottom of <b>forms-2.html</b>, inside a <span class="syn">&lt;script&gt;</span> tag, add the following JavaScript:</p>
+<pre><button class="copy-code" id="btn-dd2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-dd2" class="hljs language-javascript">const contactForm = document.getElementById("contactForm");
+const output = document.getElementById("output");
+
+contactForm.addEventListener("submit", e =&gt; {
+// prevents the default form submission behaviour (page reload)
+e.preventDefault();
+    // Gets the values from the form 
+    const fullName = document.getElementById("fullName").value.trim();
+    const reason = document.getElementById("reason").value;
+    // Unhides the output element and displays the message
+    output.style.display = "block";
+    output.innerText = `Thanks, ${fullName}. Your reason: ${reason}.`;
+});</code></pre>
+
+
+                <p>After you submit the form, the output message will be displayed below the form.</p>
+
+                <img src="assets/img/forms/dd-2.png" alt="screenshot" style="max-width: 500px;">
+
+                <p>To avoid the result of users pressing <b>Submit</b> multiple times with the same data, you could hide the form after submission. Add this new line at the end of the <span class="syn-js">submit</span> event listener.</p>
+
+                <pre><code>contactForm.style.display = "none";</code></pre>
+
+                <p>Test the form again and verify that, after submission, you see only a message.</p>
+
+                <img src="assets/img/forms/dd-3.png" alt="screenshot" style="max-width: 500px;">
+
+                <p>However, when you reload the page, you can see that your previous input and selection is still there. To correct this, add a new event listener for the web page <span class="syn-js">load</span> event.</p>
+
+<pre><button class="copy-code" id="btn-dd3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-dd3" class="hljs language-javascript">// ✅ Reset the form every time the page loads/reloads
+window.addEventListener("load", () =&gt; {
+    contactForm.reset();
+    output.style.display = "none";
+    output.innerText = "";
+});</code></pre>
+
+                <h3 id="dropdown-defaults">Dropdown lists and default values</h3>
+                <p>For dropdown lists, it’s common to start with a prompt option that isn’t a real choice:</p>
+
+<pre><button class="copy-code" id="btn-dd4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-dd4" class="hljs language-html">&lt;option value=""&gt;-- Please select one --&lt;/option&gt;</code></pre>
+
+                <p>Combined with <span class="syn">required</span>, the browser will block submission if they leave it on the empty option. This forces the user to actively choose.</p>
+
+                <p>If you do want a real default (pre-selected), just make the first real option selected by default or use the <span class="syn">selected</span> attribute:</p>
+
+<pre><button class="copy-code" id="btn-dd5">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-dd5" class="hljs language-html">&lt;option value="support" selected&gt;Support&lt;/option&gt;</code></pre>
+
+</section>
+
+<section id="dropdown-api">
+        <h2>The <code>select</code> element and the Countries API</h2>
+
+        <p>In this next example we will use the <span class="syn">&lt;select&gt;</span> form element along with a new 'real-time' event handler called <span class="syn-js">change</span> to fire a Fetch API call whenever a user selects from a dropdown list.</p>                
+
+        <p>Here is a quick summary of the most common 'real-time' form events:</p>
+        <table class="table-js-arithmetic">
+		<tbody>
+			<tr>
+				<td style="min-width: 30%"><p><b>blur</b><br><i>Fires when the <br>user leaves the field.</i></p></td>
+				<td style="min-width: 65%"><p>Good for 'validate on exit' checks: tidying up formatting (trim spaces), and showing error messages only after the user is done with the field.</p></td>
+			</tr>
+			<tr>
+				<td style="min-width: 30%"><p><b>input</b><br><i>Fires when the <br>value changes as the user types/edits. </i></p></td>
+				<td style="min-width: 65%"><p>Commonly used for live validation, character counts, and search-as-you-type. Doesn’t wait for the user to 'finish.'</p></td>
+			</tr>
+			<tr>
+				<td style="min-width: 30%"><p><b>change</b><br><i>Fires differently for <br>text input and droplist list elements.</i></p></td>
+				<td style="min-width: 65%"><p>For a text input, this fires when the user commits a change. For the select element, it fires when a new option is selected. Good for 'validate on change' checks.</p></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+        <p>Open your <b>list-remote.html</b> web page from the <a href="fetch-remote.html">Accessing remote APIs</a> Tutorial.</p>
+        <p>As a first step, add the following CSS to the <span class="syn">&lt;head&gt;</span> of <b>list-remote.html</b>:</p>
 
 <pre><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-css">section#section-countries {
     max-width: 500px;
@@ -304,24 +453,23 @@ characterSearch.addEventListener("input", () =&gt; {
 }</code></pre>
 
 
-                <p>Add the following HTML to your <b>list-remote.html</b>, above the Rick & Morty section.</p>
+        <p>Add the following HTML to your <b>list-remote.html</b>, above the Rick & Morty search section.</p>
 
 <pre><button class="copy-code" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-html">&lt;section id="section-countries"&gt;
     &lt;h2&gt;Countries by region&lt;/h2&gt;
     &lt;div class="form-group"&gt;
         &lt;label for="regionSelect"&gt;Select a region:&lt;/label&gt;
         &lt;select id="regionSelect"&gt;
-            &lt;option value=""&gt;-- Choose a region --&lt;/option&gt;
             &lt;option value="africa"&gt;Africa&lt;/option&gt;
             &lt;option value="americas"&gt;Americas&lt;/option&gt;
             &lt;option value="asia"&gt;Asia&lt;/option&gt;
-            &lt;option value="europe"&gt;Europe&lt;/option&gt;
+            &lt;option value="europe" selected&gt;Europe&lt;/option&gt;
             &lt;option value="oceania"&gt;Oceania&lt;/option&gt;
         &lt;/select&gt;
     &lt;/div&gt;
 &lt;/section&gt;</code></pre>
 
-                <p>Note the first option has an empty <b>value</b>. This acts as a prompt, telling the user to make a choice. Your JavaScript will check for this empty value and do nothing if it is selected.</p>
+                <p>Note that the <b>europe</b> option is selected by default. The Countries API demands that one <b>region</b> must be selected.</p>
 
                 <p>In <b>list-remote.js</b>, update your event listeners as follows.</p>
 
@@ -350,16 +498,17 @@ document.getElementById("button-container").addEventListener("click", function(e
     }   
 });</code></pre>
 
-                <h3 id="change-event">The <code>change</code> event</h3>
-                <p>Unlike the <span class="syn-js">input</span> event (which fires on every keystroke), the <span class="syn-js">change</span> event fires only once — when the user finishes making a selection and moves away from the element, or when they choose a new option from a dropdown. For a <span class="syn">&lt;select&gt;</span> element, it fires the moment a new option is chosen, making it the right event to use here.</p>
+        <p>This will hide the countries dropdown list section - except when the <b>Load countries</b> button is clicked.</p>
 
-                <h3 id="regions-endpoint">Using the regions endpoint</h3>
-                <p>The REST Countries API supports a <b>/region/</b> endpoint that accepts any of the five region names as a URL parameter:</p>
+                <h3 id="regions-endpoint">Using the regions endpoint and the <code>change</code> event</h3>
+                <p>The REST Countries API supports a <b>/region/</b> endpoint that accepts any of the five region names as a URL parameter. Here are two examples:</p>
 
 <pre><code class="hljs language-javascript">https://restcountries.com/v3.1/region/europe
 https://restcountries.com/v3.1/region/africa</code></pre>
 
                 <p>Because the <span class="syn">&lt;option&gt;</span> values in your HTML exactly match the region names the API expects, you can build the full URL simply by appending the selected value to the base endpoint.</p>
+
+        <p>We will use the <span class="syn-js">change</span> event because it fires immediately when a new option is selected from a <span class="syn">&lt;select&gt;</span> dropdown list.</p>
 
                 <p>Add this new event listener to your <b>list-remote.js</b> file:</p>
 
@@ -371,13 +520,6 @@ const regionSelect = document.getElementById("regionSelect");
 
 regionSelect.addEventListener("change", () =&gt; {
     const selectedRegion = regionSelect.value;
-
-    // Do nothing if the prompt option is selected
-    if (selectedRegion === "") {
-        const container = document.getElementById("remote-data-container");
-        container.innerHTML = "";
-        return;
-    }
     fetchCountriesData(selectedRegion);
 });</code></pre>
 
@@ -399,272 +541,54 @@ regionSelect.addEventListener("change", () =&gt; {
     }
 }</code></pre>
 
-                <p>Save and test. Selecting a region should load and display its countries in a grid. A few things worth noting:</p>
-                <ul>
-                    <li>A "Loading..." message is shown immediately when a region is selected, before the data arrives. This gives the user immediate feedback that something is happening.</li>
-                    <li>The countries are sorted alphabetically using <span class="syn-js">.sort()</span> with <span class="syn-js">localeCompare()</span>, which correctly handles accented characters in country names.</li>
-                    <li>Some territories in the API have no capital city, so <span class="syn-js">country.capital ? country.capital[0] : "N/A"</span> uses a ternary operator to handle that gracefully rather than crashing.</li>
-                </ul>
+    <p>Note that a <i>"Loading..."</i> message is shown immediately when a <b>region</b> is selected, before the data arrives. This gives the user immediate feedback that something is happening.</p>
 
-            </section>
+    <p>Make these two updates to your display countries function:</p>
 
+    <ul>
+        <li>For the Population data, update the line as shown below to make the output more readable.
+<pre><code class="hljs language-javascript">  Population: ${country.population.toLocaleString()}</code></pre></li>
+        <li>For the Capital city, update the line as shown below to handle cases where there is no capital. This ternary operator will handle such data issues gracefully rather than crashing the code.
+<pre><code class="hljs language-javascript">  Capital: ${country.capital ? country.capital[0] : "N/A"}</code></pre></li>
+    </ul>
 
-            <!-- ============================================================ -->
-            <section id="toggle-switch">
-                <h2>Toggle switches</h2>
-                <p>A toggle switch is a common UI pattern for binary choices — on/off, yes/no, light/dark. In HTML it is built from a standard <span class="syn">&lt;input type="checkbox"&gt;</span>, styled with CSS to look like a physical switch. JavaScript then responds to its <span class="syn-js">change</span> event.</p>
+    <p>Add this page <span class="syn-js">load</span> event to reset the dropdown list to its default selection of <b>Europe</b> when the page loads.</p>
 
-                <p>You will use a toggle to switch the page between a light theme (the default) and a dark theme.</p>
-
-                <h3 id="toggle-html">HTML and CSS for the toggle</h3>
-                <p>Add the following HTML to your <b>forms-2.html</b> web page:</p>
-
-<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-html">&lt;section id="section-toggle"&gt;
-    &lt;h2&gt;Light / Dark mode&lt;/h2&gt;
-    &lt;div class="toggle-row"&gt;
-        &lt;span&gt;Light&lt;/span&gt;
-        &lt;label class="toggle-switch"&gt;
-            &lt;input type="checkbox" id="darkModeToggle"&gt;
-            &lt;span class="slider"&gt;&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;span&gt;Dark&lt;/span&gt;
-    &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-
-                <p>The <span class="syn">&lt;input type="checkbox"&gt;</span> provides the underlying on/off state. The <span class="syn">&lt;span class="slider"&gt;</span> is purely visual — CSS will transform it into the rounded switch you see on modern interfaces.</p>
-
-                <p>Add the following CSS rules to a <b>&lt;style&gt;</b> block in your web page:</p>
-
-<pre><button class="copy-code" id="btn-12">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-12" class="hljs language-css"> body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-    h1 { text-align: center; color: #333; }
-    h2 { color: #333; }
-
-    section {
-        max-width: 860px;
-        margin: 40px auto;
-        padding: 32px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-
-    /* Toggle row layout */
-.toggle-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: bold;
-}
-
-/* Hide the real checkbox */
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-/* The visible track */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 52px;
-    height: 28px;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    border-radius: 28px;
-    transition: background-color 0.3s ease;
-}
-
-/* The moving circle */
-.slider::before {
-    content: "";
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-/* When the checkbox is checked, slide the circle right and change colour */
-.toggle-switch input:checked + .slider {
-    background-color: #007BFF;
-}
-
-.toggle-switch input:checked + .slider::before {
-    transform: translateX(24px);
-}
-
-/* Dark theme styles applied to the whole page */
-body.dark-mode {
-    background-color: #1a1a2e;
-    color: #e0e0e0;
-}
-
-body.dark-mode section {
-    background-color: #16213e;
-    border-color: #0f3460;
-}
-
-body.dark-mode h1,
-body.dark-mode h2 {
-    color: #e0e0e0;
-}
-
-body.dark-mode .form-group label {
-    color: #e0e0e0;
-}
-
-body.dark-mode .card {
-    background-color: #0f3460;
-    border-color: #1a1a2e;
-    color: #e0e0e0;
-}</code></pre>
-
-                <p>The key technique here is the <b>adjacent sibling combinator</b> (<code>+</code>) in CSS. The rule <code>.toggle-switch input:checked + .slider</code> targets the <code>.slider</code> span only when the preceding checkbox is checked. This lets CSS respond to the checkbox state without any JavaScript at all.</p>
-
-                <p>The dark theme itself is applied by adding a single <code>dark-mode</code> class to <code>&lt;body&gt;</code>. All the dark colours are defined under the <code>body.dark-mode</code> selector, so adding or removing that one class switches the entire page theme.</p>
-
-                <h3 id="toggle-js">JavaScript for the toggle</h3>
-                <p>Add the following to your <b>forms-2.js</b> file:</p>
-
-<pre><button class="copy-code" id="btn-13">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-13" class="hljs language-javascript">// -------------------------------------------------------
-// Light / Dark mode toggle
-// -------------------------------------------------------
-
-const darkModeToggle = document.getElementById("darkModeToggle");
-
-darkModeToggle.addEventListener("change", () =&gt; {
-    // Toggle the dark-mode class on the body element
-    document.body.classList.toggle("dark-mode");
+<pre><button class="copy-code" id="btn-11">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-11" class="hljs language-javascript">// Load default region on page load
+window.addEventListener("load", () =&gt; {
+  // Force default selection on reload
+  regionSelect.value = "europe";
 });</code></pre>
 
-                <p><span class="syn-js">.classList.toggle()</span> is the key method here. It adds the class if it is absent, and removes it if it is present — a single line that replaces what would otherwise be an <span class="syn-js">if/else</span> block.</p>
-                
-                <p>Test the toggle and confirm the page switches cleanly between light and dark.</p>
+        <p>Finally, add this same reset line to the relevant button <span class="syn-js">click</span> listener.</p>
 
-            </section>
+    <img src="assets/img/forms/dd-4.png" alt="screenshot">
 
 
-           
-            <section id="range-input">
-                <h2>The range input</h2>
-                <p>The <span class="syn">&lt;input type="range"&gt;</span> element renders as a horizontal slider. The user drags it between a minimum and maximum value, and JavaScript reads the current value in real time using the <span class="syn-js">input</span> event. It is ideal for any setting that exists on a continuous scale — volume, brightness, zoom, or font size.</p>
+    <p>Test your dropdown list and verify it works correctly for all regions.</p>
+</section>
 
-                <h3 id="range-html">HTML for the range input</h3>
-                <p>Add the following HTML to your <b>forms-toggle-range.html</b> file. The range slider will control the font size of a sample paragraph of text:</p>
-
-<pre><button class="copy-code" id="btn-14">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-14" class="hljs language-html">&lt;section id="section-range"&gt;
-    &lt;h2&gt;Text size&lt;/h2&gt;
-
-    &lt;div class="form-group"&gt;
-        &lt;label for="fontSizeRange"&gt;
-            Font size: &lt;span id="fontSizeValue"&gt;16&lt;/span&gt;px
-        &lt;/label&gt;
-        &lt;input type="range" id="fontSizeRange" 
-               min="10" max="48" step="1" value="16"&gt;
-    &lt;/div&gt;
-
-    &lt;p id="sampleText"&gt;
-        The quick brown fox jumps over the lazy dog. 
-        Adjust the slider above to change my font size.
-    &lt;/p&gt;
-&lt;/section&gt;</code></pre>
-
-                <p>The four key attributes on a range input are:</p>
-                <ul>
-                    <li><b>min</b>: The minimum value the slider can reach.</li>
-                    <li><b>max</b>: The maximum value.</li>
-                    <li><b>step</b>: The increment between values (1 for whole numbers, 0.1 for one decimal place, and so on).</li>
-                    <li><b>value</b>: The initial starting position of the slider.</li>
-                </ul>
-
-                <p>Notice that the <code>&lt;span id="fontSizeValue"&gt;</code> inside the label shows the current numeric value. You will update this with JavaScript every time the slider moves, so the user always knows the exact value.</p>
-
-                <p>Add the following CSS to your <b>&lt;style&gt;</b> block to style the slider and sample text:</p>
-
-<pre><button class="copy-code" id="btn-15">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-15" class="hljs language-css">/* Range slider */
-input[type="range"] {
-    width: 100%;
-    max-width: 320px;
-    accent-color: #007BFF;
-    cursor: pointer;
-}
-
-/* Sample text preview */
-#sampleText {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    line-height: 1.6;
-    transition: font-size 0.1s ease;
-}</code></pre>
-
-                <p>The <span class="syn-js">accent-color</span> CSS property colours the slider thumb and track to match your brand colour with a single line — no custom pseudo-element styling needed.</p>
-
-                <h3 id="range-js">Updating the page in real time</h3>
-                <p>Add the following to your <b>forms-toggle-range.js</b> file:</p>
-
-<pre><button class="copy-code" id="btn-16">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-16" class="hljs language-javascript">// -------------------------------------------------------
-// Font size range slider
-// -------------------------------------------------------
-
-const fontSizeRange  = document.getElementById("fontSizeRange");
-const fontSizeValue  = document.getElementById("fontSizeValue");
-const sampleText     = document.getElementById("sampleText");
-
-fontSizeRange.addEventListener("input", () =&gt; {
-    const size = fontSizeRange.value;
-
-    // Update the live numeric display in the label
-    fontSizeValue.textContent = size;
-
-    // Apply the new font size to the sample paragraph
-    sampleText.style.fontSize = `${size}px`;
-});</code></pre>
-
-                <p>Save and test. As you drag the slider, the number in the label and the font size of the paragraph should update simultaneously and smoothly. Note the following:</p>
-                <ul>
-                    <li><span class="syn-js">fontSizeRange.value</span> always returns a <b>string</b>, not a number. For setting <span class="syn-js">style.fontSize</span> this doesn't matter because you are building a string like <code>"24px"</code> anyway. However, if you needed to do arithmetic with the value (such as converting pixels to ems), you would first wrap it with <span class="syn-js">parseInt()</span> or <span class="syn-js">Number()</span>.</li>
-                    <li>The <span class="syn-js">input</span> event fires continuously as the slider is dragged, not just when the user releases it. This is what creates the smooth, real-time feel.</li>
-                </ul>
-
-            </section>
 
 
             <!-- ============================================================ -->
             <section class="resources-learning" id="try-it">
                 <h2>Try it yourself</h2>
 
-                <p><b>Exercise 1 — Add a debounce to the character search</b></p>
-                <p>Currently, the Rick &amp; Morty search fires a Fetch request on every single keystroke. This means a user typing "rick" triggers four separate API calls. A <b>debounce</b> delays the fetch until the user has stopped typing for a short period (typically 300–500ms). Research <span class="syn-js">setTimeout</span> and <span class="syn-js">clearTimeout</span>, and add a 400ms debounce to the <span class="syn-js">input</span> event listener.</p>
 
-                <p><b>Exercise 2 — Add a results count</b></p>
-                <p>After the countries grid renders, display a short summary line above it such as "Showing 47 countries in Europe." Use the <span class="syn-js">.length</span> property of the countries array and a template literal to build the message.</p>
+<p><b>The Live Character Count</b><br>
+Add a <code>&lt;span id="charCount"&gt;&lt;/span&gt;</code> under the Rick & Morty search box. Use the <code>input</code> input event to update this span element with the number of characters currently typed (e.g., "Characters: 5").</p>
 
-                <p><b>Exercise 3 — Remember the dark mode preference</b></p>
-                <p>When the user refreshes the page, the dark mode toggle resets to light. Use <span class="syn-js">localStorage.setItem()</span> to save the user's preference when they toggle, and <span class="syn-js">localStorage.getItem()</span> on page load to restore it. Hint: you will also need to set the checkbox's <span class="syn-js">.checked</span> property to match the saved preference.</p>
+<p><b>The Status Filter</b><br>
+The Rick & Morty API also supports filtering by status: <br>https://rickandmortyapi.com/api/character/?status=alive.</p>
 
-                <p><b>Exercise 4 — Add an image size slider</b></p>
-                <p>Add a second <span class="syn">&lt;input type="range"&gt;</span> that controls the <span class="syn-js">width</span> of a flag image displayed beneath it. Set a range of 50px to 400px. Display the current width value in the label as you did for the font size slider.</p>
+<p>Add a <code>&lt;select&gt;</code> dropdown next to the search box with options: All, Alive, Dead, Unknown.</p>
 
+    <p>When the user changes the dropdown, fetch and display only characters matching that status.</p>
+
+<p><b>The "Debounce" Feature</b><br>
+Right now, if a user types "Morty" quickly, the code fires 5 separate API requests in under a second.</p>
+
+    <p>Use a <code>setTimeout</code> to ensure the API call only fires if the user stops typing for 500ms.</p>
             </section>
 
        <section class="resources-learning" id="resources">
@@ -694,13 +618,14 @@ fontSizeRange.addEventListener("input", () =&gt; {
             <section class="resources-learning" id="ai-prompts">
                 <h2>Sample AI prompts</h2>
 
-                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is debouncing in JavaScript, and how do I use setTimeout and clearTimeout to debounce an input event listener?</code></div>
+                <div class="gpt"><button class="copy-gpt" id="btn-20">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs" id="strCode-20">What is the difference between the <code>input</code>, <code>blur</code> and <code>change</code> events in JavaScript? When would I use each one?</code></div>
 
-                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">Explain how localStorage works in JavaScript. How do I use it to save and restore a user's preferences between page visits?</code></div>
 
-                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is the CSS accent-color property and which form elements does it affect?</code></div>
+                <div class="gpt"><button class="copy-gpt" id="btn-21">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs" id="strCode-21">What does <code>encodeURIComponent()</code> do in JavaScript, and what problems can occur if I include raw user input directly in a URL?"</code></div>
 
-                <div class="gpt"><button class="copy-gpt">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs">What is the difference between the change and input events in JavaScript? When would I use each one?</code></div>
+                                <div class="gpt"><button class="copy-gpt" id="btn-22">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs" id="strCode-22">What is the CSS <code>accent-color</code> property and which form elements does it affect?</code></div>
+
+                <div class="gpt"><button class="copy-gpt" id="btn-23">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs" id="strCode-23">What is debouncing in JavaScript, and how do I use <code>setTimeout</code> and <code>clearTimeout</code> to debounce an <code>input</code> event listener?</code></div>
 
             </section>
 
