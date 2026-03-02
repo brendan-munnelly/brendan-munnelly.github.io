@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projects Setup | JavaScript Tutorials | Brendan Munnelly</title>
+    <meta name="description" content="Moving from manual file uploads to continuous deployment with Git version control and Vercel for hosting.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+    <style>
+        pre { background-color: #282c34;}
+        .table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+		table.table-gray { padding: 10px 20px 10px 20px !important;}
+
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body id="top">
+
+    <header>
+        <div class="wrapper">
+            <div class="sidebar"><div><p>&nbsp;</p></div></div>
+            <div class="content">
+                <h1>Projects setup</h1>
+                <h2>Moving from manual file uploads to continuous deployment with Git version control and Vercel for hosting.</h2>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+            <h3>JAVASCRIPT</h3>
+            <p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+            <h3>THIS TUTORIAL</h3>
+            <p><a href="#learning-goals">Learning Goals</a></p>
+            <p><a href="#introduction">Introduction</a></p>
+            <p><a href="#convert">Converting your HTML/CSS website to a Git repository</a></p>
+            <p class="toc-indent"><a href="#create-link">Creating and linking to your remote GitHub repository</a></p>
+
+            <p><a href="#vercel-subdomain">Choosing your Vercel subdomain</a></p>
+            <p><a href="#vercel-register">Registering with Vercel</a></p>
+
+            
+            <p class="toc-indent"><a href="#vercel-access">Granting Vercel access to your repository</a></p>
+
+
+           
+				<p>&nbsp;</p>
+
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </aside>
+
+        <article>
+
+            <section id="learning-goals">
+                <h2>Learning Goals</h2>
+                <p>At the end of this Tutorial, you will be able to:</p>
+                <ul>
+                    <li>Set up a free hosting account on Vercel and link a Git repository to it, to support a continuous deployment workflow for your web and JavaScript projects.</li>
+                </ul>
+            </section>
+
+
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>In Semester 1, you have been building HTML/CSS projects and manually uploading them to GitHub to share them with the world. Now you will use a more powerful workflow called <i>Continuous Deployment</i>.</p>
+
+                <p>You will learn how to use Git to track your code changes. And you will also move your hosting to Vercel, a platform that automatically updates your live website every time you save and <i>push</i> your code.</p>
+            </section>
+
+
+            <!-- ============================================================ -->
+            <section id="convert">
+                <h2>Converting your HTML/CSS website to a Git repository</h2>
+
+                <p>Your first step is convert the folders and files you worked with in Semester 1 into a Git repository. Here are the steps to follow:</p>
+
+                <ol>
+                    <li>Open your <b>websites</b> folder (or whatever name you gave to the folder that stores your HTML/CSS projects) in VS Code.
+                <span class="inside-ol">&nbsp;</span>               
+                    If you need to 'tidy up' your folders and files, now is a good time to do so.</li>
+                        
+                        
+                     <li>Open a terminal in VS Code and check you are <i>INSIDE</i> your <b>websites</b> folder. When you type <code>dir</code> (Windows) or <code>ls</code> (Mac/Linux), you should see a list similar to that below.
+                        
+            <img src="assets/img/projects-setup/list-dir.png" alt="screenshot" style="padding-bottom: 14px">            
+                        If you don't see the above, navigate to the correct folder.</li>
+                     <li>When you are 100% sure you are in the correct folder, run these commands.
+                        <pre style="margin-bottom: 14px"><button class="copy-code" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-bash">git init
+git add .
+git commit -m "Convert to Git repository"</code></pre>
+
+This will initialise a new Git repository <i>inside</i> your <b>websites</b> folder (not the folder itself), add all your project files to the staging area, and commit your changes with a message.</li>
+                </ol>
+
+                <p>The <code>git init</code> command creates a hidden folder named <b>.git</b>. This folder is the repository. It must live inside the same folder as the main or root <b>index.html</b> page of your website.</p>
+
+            <h3 id="create-link">Creating and linking to your remote GitHub repository</h3>
+
+<p>Follow these steps:</p>
+
+<ol>
+    <li>Log in to your <a href="https://github.com" target="_blank">GitHub</a> account and create a new repository named <b>frontend</b> or similar.</li>
+    <li>Keep your new repository <b>Public</b>.</li>
+    <li>Do <i>not</i> initialise the repository with a README, .gitignore, or license.
+    
+    <span class="inside-ol">&nbsp;</span> 
+    You want an entirely empty repository because you already have your files locally.</li>
+    <li>Click <b>Create repository</b>.</li>
+</ol>
+
+        <p>On your repository page, GitHub will now show you several commands. You only need the three commands under the heading <i>"…or push an existing repository from the command line"</i>.</p>
+
+        <p>In your VS Code terminal, copy and paste these three lines one-by-one (replace <b>username</b> and <b>repo-name</b> with your actual details):</p>
+
+         <pre style="margin-bottom: 24px"><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-bash">git remote add origin https://github.com/username/repo-name.git</code></pre>
+
+<pre style="margin-bottom: 24px"><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-bash">git branch -M main</code></pre>
+
+<pre style="margin-bottom: 24px"><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-bash">git push -u origin main</code></pre>
+
+        <p>By running these commands one-by-one, you will be able to respond better to any configuration or authorisation issues.</p>
+
+                <p>You have now successfully pushed your local repository to GitHub. Refresh your GitHub repository page. You should no longer see instructions; instead, you should see your files and your commit message: <i>"Convert to Git repository."</i></p>
+
+            <p>Before moving on to Vercel, let's make sure your "old" site is still standing. Even though you just <i>overwrote</i> the history of your repository with Git, your live URL should remain unaffected.</p>
+
+            <p>Open your browser and go to <b>https://username.github.io</b> to verify your website still displays and works as before.</p>
+    
+            </section>
+
+
+            <!-- ============================================================ -->
+            <section id="vercel-subdomain">
+                <h2>Choosing your Vercel subdomain</h2>
+
+                <p>When you register with Vercel, you are assigned a default URL in the format below, where you can choose the subdomain.</p>
+
+                <p><b>https://<i>username</i>.vercel.app</b></p>
+
+                <p>As a developer, you want a URL that looks good on a resume or a LinkedIn profile.</p>
+
+                <p>Here are some guidelines to follow:</p>
+
+                <ul>
+                    <li><b>Keep it Short</b>: Ideally, it should be your name or a variation of it.</li>
+
+<li><b>Lowercase Only</b>: While URLs aren't always case-sensitive, lowercase is the web standard for subdomains.</li>
+
+<li><b>Use Hyphens, Not Underscores</b>: Use <i>mary-smith</i>, not <i>mary_smith</i>. Search engines and browser address bars prefer hyphens.</li>
+
+<li><b>Avoid "Student" Labels</b>: Don't use <i>mary-assignment-1</i>. Use <i>mary-smith</i> or <i>smith-dev</i>.</li>
+                </ul>
+                
+                <p>You could use an AI service to guide you.</p>
+
+
+<div class="gpt"><button class="copy-gpt" id="btn-20">Copy <i class="fa-regular fa-lightbulb"></i></button><code class="hljs" id="strCode-20">My name is [full name]. I am registering an account with Vercel to showcase a collection of my portfolio projects. Suggest some subdomain choices that will look professional on my resume and Linkedin.</code></div>
+
+            </section>
+
+            <section id="vercel-register">
+
+                <h2>Registering with Vercel</h2>
+                <p>Now that your code is managed by Git and hosted on GitHub, you are ready to use Vercel. This service will host your website for free and—more importantly—it will update your site automatically every time you push new code.</p>
+
+                    <p>Here are the steps:</p>
+
+<ol>
+    <li>Go to <a href="https://vercel.com" target="_blank">https://vercel.com</a> and click <b>Sign Up</b>.</li>
+    <li>Choose <b>Hobby</b> (the Free Tier).</li>
+    <li>Enter your name and click <b>Continue</b>.</li>
+    <li>Select <b>Continue with GitHub</b>.</li>
+    <li>Use your GitHub login.</li>
+    <li>You may be asked to verify your account via a code sent to your email or a phone number. Follow those steps to reach the Vercel Dashboard.</li>
+</ol>
+
+    <h3 id="vercel-access">Granting Vercel access to your repository</h3>
+
+    <p>Once you are logged into your dashboard, you need to tell Vercel which "frontend" project to put online.</p>
+
+    <ol>
+        <li>Click the <b>"Add New..."</b> button and select <b>Project</b>.</li>
+
+        <li>You will see a list of your GitHub repositories. Select the GitHub repository that contains your <b>frontend</b> project (or whatever you have called it).
+        <span class="inside-ol">&nbsp;</span>
+If you don't see your repo, click the dropdown menu that shows your GitHub username and select <b>Adjust GitHub App Permissions.</b> This allows you to give Vercel permission to see your specific <b>frontend</b> repository.</li>
+
+    <li>Before you click the big <b>Deploy</b> button, look at the <b>Project Name</b> field. Check that you are happy with your subdomain choice.</li>
+
+    <li>Click <b>Deploy</b>. </li>
+
+    <li>You will see a screen showing "Building" with a status bar. Vercel is currently copying your code from GitHub, setting up a server, and making it live.</li>
+
+    <li>Confetti! Once finished, Vercel will show a preview of your site. Click the image to visit your new live URL.</li>
+    </ol>
+
+
+    <p>Now, run this check to verify everything is working correctly.</p>
+
+    <ol>
+       <li> Go back to VS Code and change a small piece of text (like your footer or a heading), and save the file.</li>
+       <li>Then, in your terminal, run the following:
+        <pre style="margin-bottom: 14px"><button class="copy-code" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-bash">git add .
+git commit -m "Test Vercel"
+git push</code></pre></li>
+       <li>Go to your Vercel URL and refresh the page. You should see your changes live on the Internet.</li>
+
+    </ol>
+
+    <p>If you don't see the change immediately, wait about 10 seconds. Vercel needs a moment to 'rebuild' the site after it receives your code!</p>
+            </section>
+
+        </article>
+    </main>
+
+    <footer></footer>
+
+    <script>hljs.highlightAll();</script>
+    <script src="assets/js/utils.js"></script>
+</body>
+</html>
