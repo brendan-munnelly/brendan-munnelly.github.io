@@ -177,7 +177,6 @@
                 <img src="assets/img/projects-setup/vscode-websites-folder.png" alt="screenshot" class="wider-115" style="padding: 14px">
                 If you need to 'tidy up' your folders and files, now is a good time to do so.</li>
                         
-                       
             <li>Open a terminal in VS Code and check you are <i>INSIDE</i> your <b>websites</b> folder. When you type <code>dir</code> (Windows) or <code>ls</code> (Mac/Linux), you should see a list similar to that below.
                         
             <img src="assets/img/projects-setup/list-dir.png" alt="screenshot" style="padding-bottom: 14px">            
@@ -206,7 +205,9 @@ git commit -m "Convert to Git repository"</code></pre></li>
     <span class="inside-ol">&nbsp;</span> 
     Do <i>not</i> initialise the repository with a README, .gitignore, or license.
     <span class="inside-ol">&nbsp;</span> 
-    You want an entirely empty repository because you already have your files locally.</li>
+    You want an entirely empty repository because you already have your files locally.
+   <span class="inside-ol">&nbsp;</span> 
+    By leaving the new remote repository completely empty, you avoid any merge conflict clashes. Your local commits will push cleanly because there is nothing on GitHub to conflict with them.</li>
     <li>Click <b>Create repository</b>.</li>
 </ol>
 
@@ -219,13 +220,13 @@ git commit -m "Convert to Git repository"</code></pre></li>
          <pre style="margin-bottom: 8px;"><button class="copy-code" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-bash">git remote add origin https://github.com/username/repo-name.git</code></pre>
 
          <p style="margin-bottom: 8px">In the above command, you can omit the final <b>.git</b>. If you already have an origin remote set, update it with this command:
-<pre style="margin-bottom: 8px;"><button class="copy-code" id="btn-2a">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2a" class="hljs language-bash">git remote set-url origin git@github.com:username/repo-name.git</code></pre>
+<pre style="margin-bottom: 8px;"><button class="copy-code" id="btn-2a">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2a" class="hljs language-bash">git remote set-url origin https://github.com/username/repo-name.git</code></pre>
         </p>
 
-        <p style="margin-top: 34px; margin-bottom: 0px">Now, run this command:</p>
+        <p style="margin-top: 34px; margin-bottom: 8px">Now, run this command:</p>
 <pre style="margin-top: 10px;margin-bottom: 8px"><button class="copy-code" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-bash">git branch -M main</code></pre>
 
-<p style="margin-bottom: 24px">After running the above command, you should see a message like <i> 10 files changed</i> or <i>Nothing to commit</i>.</p>
+<p style="margin-top: 34px; margin-bottom: 8px">And, now, this command:</p>
 
 <pre style="margin-bottom: 8px"><button class="copy-code" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-bash">git push -u origin main</code></pre>
 
@@ -359,7 +360,7 @@ git push</code></pre></li>
         If Vercel is listed, click <b>Configure</b> to authorise Vercel to access one or all of your repos, and click <b>Save</b>.</li>
         <li>Another possibility is that you have multiple GitHub accounts and Vercel is connected to a different account than the one that contains the repo you want to import. 
 <span class="inside-ol">&nbsp;</span>  
-Click your profile icon at the top-right of a Vercel screen and choose <b>Settings &gt; Authentication &gt; Connections</b>, disconnect the GitHub integration, and reconnect it while logged into the GitHub account you intend to use.</li>
+Click the three dots <b>...</b> next to your profile name at the bottom-left of a Vercel screen and then click your name at the top of the menu shown. Next, choose <b>Settings &gt; Authentication</b> or <b>Login Connections</b>. You will see a <b>GitHub</b> connection. Click the three dots beside it, choose <b>Disconnect</b> and then <b>Reconnect</b> while logged into the GitHub account you intend to use.</li>
     </ul>
     <p>Note that there may be a delay in syncing your GitHub repositories with Vercel.</p>
             </section>
@@ -388,7 +389,7 @@ git push -u origin main</code></pre></li>
                     <li>Accept or edit the <b>Project Name</b>.</li>
                     <li>For JavaScript projects, accept the default values.</li>
                     <li>Click <b>Import</b> to import your new repo.</li>
-                    <li>Click <b>Deploy</b> to publish your on Vercel.</li>
+                    <li>Click <b>Deploy</b> to publish your project on Vercel.</li>
                 </ol>
 
                 <p> Vercel will give your project a unique URL, like <i>mary-weather-app.vercel.app</i>.</p>
@@ -405,9 +406,3 @@ git push -u origin main</code></pre></li>
 </body>
 </html>
 
-<!-- I have two GitHub accounts. I use the credentials of one GitHub account to register with Vercel. But I now want to import a repo from a second GitHub account. "Under Import Git Repository", I choose "+Add GitHub account", and then authorize Vercel to access that all repositories in that second GitHub account. However, when finished, repos on that second GitHub account are not visible and I cannot import them. is this a restriction of the hobby free tier.
- 
-When I registered with Vercel, I used this GitHub account: https://github.com/brendan-munnelly/ Since then, I created this second GitHub account: https://github.com/brenvercel
-
-Now, in Vercel, I want to import a repo named "frontend" that exists in the "https://github.com/brenvercel" Under "Import Git Repository", Vercel shows my "" GitHub account, and the option to "+Add GitHub Account". When I chose this add option, a new window open showing my "brenvrcel" GitHub Settings. I authorize Vercel to access all repos in this GitHub account and click Save. The window closes. When I view Settings in my "brenvercel" GitHub account, I can see that Vercel has access to all repos. I am redirected back to Vercel. I choose to start a new project, but the dropdown menu doe snot show the second "brenvercel" GitHub account. Please advise.
--->
