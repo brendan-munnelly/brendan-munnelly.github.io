@@ -1,0 +1,369 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Google Stitch 2.0: UI and Feature Guide | Design Tutorials | Brendan Munnelly</title>
+
+	<meta name="description" content="A comprehensive guide to Google Stitch 2.0, covering the design-to-code workflow, infinite canvas, design systems, variant generation, live mode, and code export.">
+
+	<meta name="author" content="Brendan Munnelly">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+
+	<style>
+		pre { background-color: #282c34; }
+
+		.table-stitch {
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4, #f0f5f4);
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-stitch tr,
+		.table-stitch td {
+			background-color: #f0f5f4 !important;
+		}
+
+		.table-stitch td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+
+		table.table-gray { padding: 10px 20px 10px 20px !important; }
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85); }
+	</style>
+
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+	<!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body id="top">
+
+	<header>
+		<div class="wrapper">
+			<div class="sidebar">
+				<div><p>&nbsp;</p></div>
+			</div>
+
+			<div class="content">
+				<h1>Google Stitch 2.0: Comprehensive UI and Feature Guide</h1>
+				<h2>A browser-based, Gemini-powered design environment for building high-fidelity UI/UX mockups without the "AI slop."</h2>
+			</div>
+		</div><!-- /wrapper -->
+	</header>
+
+
+	<main>
+
+		<aside>
+			<h3>DESIGN TUTORIALS</h3>
+
+			<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+
+			<h3>THIS TUTORIAL</h3>
+			<p><a href="#learning-goals">Learning Goals</a></p>
+			<p><a href="#intro">Introduction to Stitch 2.0</a></p>
+			<p class="toc-indent"><a href="#workflow">The Design-to-Code Workflow</a></p>
+			<p><a href="#project-setup">Conversational Initialisation and Project Setup</a></p>
+			<p class="toc-indent"><a href="#project-config">Project Configuration</a></p>
+			<p class="toc-indent"><a href="#inspiration">The Inspiration Input Engine</a></p>
+			<p><a href="#canvas">The Infinite Canvas Layout</a></p>
+			<p><a href="#design-system">The Design System Panel: Obsidian Ember</a></p>
+			<p class="toc-indent"><a href="#design-md">The design.md File</a></p>
+			<p><a href="#variants">Variant Generation and Iteration Tools</a></p>
+			<p class="toc-indent"><a href="#reference-docking">Reference Docking</a></p>
+			<p><a href="#live-mode">Live Mode: Screen-Aware Interaction</a></p>
+			<p><a href="#export">Code Export and Developer Handoff</a></p>
+
+			<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+
+			<p>&nbsp;</p>
+		</aside>
+
+
+		<article>
+
+
+		<section id="learning-goals">
+			<h2>Learning Goals</h2>
+
+			<p>At the end of this Tutorial, you will be able to:</p>
+			<div class="box-goals">
+				<ul>
+					<li>Describe the purpose of Google Stitch 2.0 and its role in a professional design-to-code pipeline.</li>
+					<li>Configure a new Stitch project using the Natural Language UI and select the appropriate model engine.</li>
+					<li>Use the Infinite Canvas to view and compare multiple design iterations simultaneously.</li>
+					<li>Understand how the Obsidian Ember design system and the <b>design.md</b> file establish visual consistency.</li>
+					<li>Generate design variants and use Reference Docking to guide future refinements.</li>
+					<li>Activate Live Mode for real-time, voice-activated design collaboration.</li>
+					<li>Export finished designs to Claude Code, Figma, or other developer tools.</li>
+				</ul>
+			</div>
+		</section>
+
+
+		<section id="intro">
+
+			<h2>Introduction to Stitch 2.0</h2>
+
+			<p>Google Stitch 2.0 is a sophisticated, browser-based design environment powered by Gemini models. It is specifically engineered to eliminate the visual inconsistency often referred to as <i>&#8220;AI slop&#8221;</i>. By providing an aesthetic guardrail for front-end development, Stitch 2.0 allows designers and developers to generate high-fidelity UI/UX mockups that surpass the default output of standard coding agents.</p>
+
+			<h3 id="workflow">The Design-to-Code Workflow</h3>
+
+			<p>Stitch 2.0 does not replace agentic coding tools like Claude Code. Rather, it serves as the essential visual foundation in a professional pipeline. The recommended workflow follows a three-stage progression:</p>
+
+			<ul>
+				<li><b>Inspiration:</b> Sourcing visual references from the web.</li>
+				<li><b>Stitch 2.0:</b> Synthesising these references into an &#8220;80&ndash;90% solution&#8221; for the front-end design.</li>
+			</ul>
+
+			<p>By resolving the visual layer within Stitch first, developers significantly reduce token expenditure in subsequent steps. Coding agents no longer need to perform expensive, iterative CSS &#8220;guesswork&#8221; to achieve a professional look.</p>
+
+			<h3 id="ai-slop">Addressing the "AI Slop" Problem</h3>
+			<p>A recurring issue with fully automated coding agents is the production of uninspired, "samey" user interfaces. Stitch 2.0 mitigates this by:</p>
+			<ul>
+				<li><b>Decoupling Design from Logic:</b> Allowing developers to iterate on aesthetics in a dedicated visual environment before committing to code.</li>
+				<li><b>Leveraging Visual Inspiration:</b> Using screenshots and URLs to guide the AI toward specific, high-quality aesthetic styles.</li>
+				<li><b>Providing a Comprehensive Design System:</b> Automatically generating a "creative Northstar" that defines colors, typography, and component rules to ensure consistency.</li>
+			</ul>
+
+
+
+<video width="640" height="360" controls>
+  <source src="assets/stitch/img/The_Hybrid_Web_Stack.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>   
+
+
+		</section>
+
+
+<section>
+
+	<h2>The Optimized Web Design Workflow</h2>
+	<p>Here is a high-efficiency workflow for modern web development that combines the strengths of visual AI and agentic coding agents.</p>
+
+	<ol>
+
+	<li><b>Inspiration Phase:</b> Identify a high-quality design on Pinterest or similar platforms and take a screenshot.</li>
+	<li><b>Design Phase (Stitch 2.0):</b></li>
+	<ul>
+		<li>Upload the screenshot to Stitch.</li>
+		<li>Provide a prompt specifying the desired style and layout (e.g., "Create a landing page in the style of the screenshot").</li>	
+		<li>Stitch uses a background process (noted as "Nano Banana") to mimic the screenshot’s visual language.</li>
+		<li><b>Refinement Phase:</b> Use the "Variants" and "Explore" tools to iterate on the layout. Utilize "Live Mode" for specific adjustments like background motion.</li></ul>
+		<li><b>Export Phase:</b> Access the "More" menu and use "Export to Clipboard" to grab the generated front-end code.</li>
+		<li><b>Implementation Phase (Claude Code):</b> Open Claude Code. Provide the exported code as a reference. Instruction: "Create a landing page for [Project Name], here is the front-end code: [Paste Code]."</li>
+<li><b>Polishing Phase:</b> Once the foundation is set in Claude Code, use tools like 21st.dev to refine UI components like buttons and advanced animations.</li>
+
+	</ol>
+</section>
+
+
+		<section id="project-setup">
+
+			<h2>Conversational Initialisation and Project Setup</h2>
+
+			<p>Project creation begins via a <i>Natural Language UI (NLUI)</i> entry point. This conversational initialisation allows users to define the project scope through simple descriptive prompts.</p>
+
+			<h3 id="project-config">Project Configuration</h3>
+
+			<p>Users must select their project target and the underlying model engine:</p>
+
+			<ul>
+				<li><b>Project Type Selection:</b> Choose between <b>App</b> (mobile-first, native-style interfaces) or <b>Web App</b> (responsive desktop and browser-focused layouts).</li>
+				<li><b>Model Engine Selection:</b> Stitch leverages Google&#8217;s frontier models to drive the design logic.</li>
+			</ul>
+
+			<table class="table-stitch">
+				<thead>
+					<tr>
+						<th style="width:24%" valign="top"><p>Model</p></th>
+						<th valign="top"><p>Performance Characteristics</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><p><b>Gemini 3.1 Pro</b></p></td>
+						<td><p>The frontier model. Provides superior design depth and handles complex layouts. Slightly higher latency.</p></td>
+					</tr>
+					<tr>
+						<td><p><b>Gemini 3.0 Flash</b></p></td>
+						<td><p>Optimised for speed and rapid prototyping. Ideal for quick iterations where extreme design nuance is secondary.</p></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3 id="inspiration">The Inspiration Input Engine</h3>
+
+			<p>Stitch 2.0 uses <b>Nano Banana</b> (and Nano Banana Pro) as its backend image processing engine to interpret visual references. Users can provide context through:</p>
+
+			<ul>
+				<li><b>File Uploads:</b> Uploading screenshots for the model to analyse and mimic.</li>
+				<li><b>Direct URLs:</b> Providing live website addresses for the model to crawl.</li>
+			</ul>
+
+				<h3>Recommended Sources:</h3>
+				<p>For optimal landing page design, the following platforms are recommended:</p>
+					<ul>
+						<li><a href="https://dribbble.com/" target="_blank">Dribbble</a> &mdash; for high-concept UI trends.</li>
+						<li><a href="https://www.godly.com/" target="_blank">Godly</a> &mdash; for curated, high-end web aesthetics.</li>
+						<li><a href="https://www.pinterest.com/" target="_blank">Pinterest</a> &mdash; particularly effective for landing page layouts. Once a preferred style is identified, Pinterest&#8217;s recommendation engine is excellent for sourcing additional, similar references.</li>
+					</ul>
+	
+
+		</section>
+
+
+		<section id="canvas">
+
+			<h2>The Infinite Canvas Layout</h2>
+
+			<p>The core workspace is an <i>Infinite Canvas</i>: a spatial environment where multiple design iterations can be viewed and compared simultaneously, without the constraints of a traditional paginated interface.</p>
+
+			<ul>
+				<li><b>Agent Log:</b> Located in the bottom-left corner, the Agent Log provides a transparent view of the model&#8217;s &#8220;thinking&#8221; process and command history. It displays how the AI interprets prompts and translates them into design instructions.</li>
+				<li><b>Edit Mode:</b> Selecting the Edit (pencil icon) button enables direct manipulation of individual UI components or global layout adjustments.</li>
+				<li><b>Preview Mode:</b> This mode renders the design in a new browser tab, allowing for a full-scale interactive assessment of the prototype&#8217;s responsiveness and flow.</li>
+			</ul>
+
+		</section>
+
+
+		<section id="design-system">
+
+			<h2>The Design System Panel: Obsidian Ember</h2>
+
+			<p>Stitch 2.0 generates a centralised design system for every project &mdash; often titled <b>Obsidian Ember</b> by default &mdash; which acts as the visual bedrock for all generated components.</p>
+
+			<p>The Design System panel allows for granular control over the following configurable visual parameters:</p>
+
+			<ul>
+				<li><b>Seed Colors:</b> Definition of Primary, Secondary, Tertiary, and Neutral palettes.</li>
+				<li><b>Typography:</b> Centralised font selection and hierarchy settings.</li>
+				<li><b>Corner Radius:</b> Global control over UI &#8220;roundness,&#8221; from sharp professional edges to modern, pill-shaped components.</li>
+			</ul>
+
+			<h3 id="design-md">The <code>design.md</code> File: The Creative Northstar</h3>
+
+			<p>The <b>design.md</b> file is a synthesised markdown document that serves as the project&#8217;s strategic blueprint. It is the primary mechanism for avoiding &#8220;AI slop.&#8221; Even when provided with a vague prompt, Stitch 2.0 uses this file to establish:</p>
+
+			<ul>
+				<li><b>Overview &amp; Creative Northstar:</b> The high-level aesthetic intent.</li>
+				<li><b>Colour &amp; Typography Strategy:</b> Logic-based rules for why specific visual choices were made.</li>
+				<li><b>Template Divergence:</b> Explicit instructions for the model to break away from generic, &#8220;standard&#8221; AI templates and create a unique, brand-aligned identity.</li>
+			</ul>
+
+		</section>
+
+
+		<section id="variants">
+
+			<h2>Variant Generation and Iteration Tools</h2>
+
+			<p>Stitch provides a robust suite for creative exploration, allowing users to rapidly pivot designs without restarting the project.</p>
+
+			<p>The iteration workflow operates as follows:</p>
+
+			<ul>
+				<li><b>Right-Click Interaction:</b> Right-clicking any layout or component opens a context menu with <b>Regenerate</b> (a total redo of the element) and <b>Variants</b>.</li>
+				<li><b>Granular Variants:</b> Users can choose to vary specific dimensions &mdash; such as Layout, Colour Scheme, or Images &mdash; while keeping the rest of the design intact.</li>
+				<li><b>Custom Exploration:</b> The &#8220;Explore&#8221; feature includes a <b>Creative Range</b> slider (reminiscent of Midjourney&#8217;s &#8216;stylize&#8217; parameters). Users can request multiple options (e.g. three versions) and determine how far the model should deviate from the original reference.</li>
+			</ul>
+
+			<h3 id="reference-docking">Reference Docking</h3>
+
+			<p>When the model generates multiple variations, clicking a version adds it to a <i>reference dock</i> at the bottom of the canvas. This signals to the model that future refinements should prioritise the characteristics of those specific selected references.</p>
+
+		</section>
+
+
+		<section id="live-mode">
+
+			<h2>Live Mode: Screen-Aware Interaction</h2>
+
+			<p>Live Mode transforms the design process into a real-time, voice-activated collaboration. When activated, the model &#8220;looks&#8221; at the user&#8217;s active screen, providing immediate context for voice commands.</p>
+
+			<p>Users can request complex, dynamic modifications through natural conversation. For example, a user can say: <i>&#8220;Add some dynamic motion graphics and subtle cursor effects.&#8221;</i> Stitch 2.0 can implement sophisticated features such as dynamic background dots that move away from the user&#8217;s mouse cursor in real-time.</p>
+
+		</section>
+
+
+		<section id="export">
+
+			<h2>Code Export and Developer Handoff</h2>
+
+			<p>Once a design reaches the &#8220;80&ndash;90% solution&#8221; stage &mdash; where the visual identity is locked and the layout is professional &mdash; it is ready for handoff to a development environment.</p>
+
+			<p>The handoff workflow is as follows:</p>
+
+			<ol>
+				<li>Select the desired page or component on the Infinite Canvas.</li>
+				<li>Navigate to the <b>More</b> menu in the top navigation bar.</li>
+				<li>Select <b>Export</b>.</li>
+				<li>Choose the export target:</li>
+			</ol>
+
+			<table class="table-stitch">
+				<thead>
+					<tr>
+						<th style="width:24%" valign="top"><p>Export Target</p></th>
+						<th valign="top"><p>Best Used For</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><p><b>Code to Clipboard</b></p></td>
+						<td><p>Recommended for immediate use in coding agents such as Claude Code.</p></td>
+					</tr>
+					<tr>
+						<td><p><b>Figma</b></p></td>
+						<td><p>For further high-fidelity design manual adjustment.</p></td>
+					</tr>
+					<tr>
+						<td><p><b>Jules / AI Studio</b></p></td>
+						<td><p>For specialised model tuning and developer workflows.</p></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p>By pasting the high-fidelity code from Stitch 2.0 into an agent like Claude Code, the agent begins with a superior visual foundation. This prevents the agent from wasting tokens on iterative CSS styling and layout fixes, allowing it to focus entirely on functional logic, API integrations, and deployment.</p>
+
+		</section>
+
+
+		</article>
+	</main>
+
+	<footer>
+	</footer>
+
+	<div id="cookie-banner">
+		<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+		<div class="buttons">
+			<button id="accept-cookies">Got it</button>
+		</div>
+	</div>
+
+	<script>hljs.highlightAll();</script>
+	<script src="assets/js/utils.js"></script>
+
+</body>
+</html>
