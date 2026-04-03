@@ -1,0 +1,322 @@
+<!doctype HTML>
+<html lang="en_GB">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Creating your JavaScript presentation | JavaScript Tutorials | Brendan Munnelly</title>
+
+	<meta name="description" content="Creating and populating arrays, counting array items, testing for arrays, and extracting array items to variables.">
+
+    <meta name="author" content="Brendan Munnelly">
+
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="../../assets/css/dorset-js.css" />
+
+	<style>
+		pre { background-color: #282c34;}
+		.table-js-arithmetic { 
+			background-color: #f0f5f4 !important;
+			background: linear-gradient(90deg, #f0f5f4 ,#f0f5f4 );
+			border-top: solid 2px #044d6c;
+		}
+
+		.table-js-arithmetic tr,
+		.table-js-arithmetic td {
+			background-color: #f0f5f4 !important;
+		}
+
+		.table-js-arithmetic td p {
+			font-size: calc(var(--font-size-base) * 0.85);
+		}
+		table.table-gray { padding: 10px 20px 10px 20px !important;}
+
+		table.table-gray p { font-size: calc(var(--font-size-base) * 0.85) }
+
+		.four-samples { margin-top: 24px; margin-bottom: 20px }
+
+		.four-samples div {
+			background-image: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
+		  	padding:  6px 0 6px 0;
+		}
+
+		.four-samples div td,
+		.four-samples div > p {
+			font-size: calc(var(--font-size-base) * 0.85);
+			line-height: 1.5;
+		}
+  
+
+
+	</style>
+
+    <!-- Syntax Highlighter -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+	<script defer src="../../assets/js/cookie.js"></script>
+
+    <!-- Font Awesome 6 icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ1JXS4GKM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RQ1JXS4GKM');
+    </script>
+    </head>
+
+    <body id="top">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGBDMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+		<header>
+			<div class="wrapper">
+				<div class="sidebar">
+					<div><p>&nbsp;</p>
+					</div>
+				</div>
+		
+				<div class="content">
+					<h1>Creating your JavaScript presentation</h1>
+					<h2>Using AI services to create a digital presentation about the JavaScript language.</h2>
+				</div>
+			</div><!-- /wrapper -->
+		</header>
+	
+
+		<main>
+
+			<aside>
+				<h3>JAVASCRIPT TUTORIALS</h3>
+					
+				<p><i class="fas fa-home"></i> &nbsp;<a href="../index.html">Home</a></p>
+	
+				<h3>THIS TUTORIAL</h3>
+				<p><a href="#learning-goals">Learning Goals</a></p>
+				<p><a href="#notebook">Creating your Google Notebook</a></p>
+				<p><a href="#slidedeck">Creating your slide deck</a></p>
+				<p><a href="#narration-text">Generating the script text for the audio narration</a></p>
+
+				<p><a href="#audio-file">Converting the narration text to audio</a></p>
+		  
+				<p><a href="#lipsync-avatar">Adding a lip-syncing avatar</a></p>
+				<p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
+			  
+				<p>&nbsp;</p>
+
+	
+			</aside> 
+	
+	
+	<article>
+	
+
+	<section id="learning-goals">
+		<h2>Learning Goals</h2>
+
+		<p>At the end of this Tutorial, you will be able to:</p>
+		<div class="box-goals">
+
+			<ul>
+				<li>Create and populate an array with square brackets <span class="syn-js">[]</span> notation.</li>
+				<li>Use the <span class="syn-js">.length</span> property to find the number of items in an array.</li>
+				<li>Use array indexes to access individual items in an array.</li>
+				<li>Loop through the items in an array with the <span class="syn-js">.forEach()</span> method.</li>
+				<li>Destructure individual items of an array to variables.</li>
+			</ul>
+		</div>
+
+	</section>
+	
+
+
+    <section id="notebook">
+
+		<h2>Creating your Google Notebook</h2>
+
+		<p>Follow the steps below:</p>
+
+		<ol>
+			<li>Go to <a href="https://notebooklm.google.com" target="_blank">notebooklm.google.com</a> and create a new Notebook.</li>
+			<li>In the search box on the left, enter “JavaScript” and click the <b>Arrow</b> button. NotebookLM should find about 10 sources.
+				<img src="assets/img/javascript-presentation/1.png" alt="screenshot" style="max-width: 330px">
+			</li>
+			<li>Click the <b>Import +</b> button to add these sources to your Notebook.
+				<img src="assets/img/javascript-presentation/3.png" alt="screenshot" style="max-width: 420px">
+
+			</li>
+			<li>At the top-left of the screen, give your Notebook a name.
+			<img src="assets/img/javascript-presentation/2.png" alt="screenshot" style="max-width: 410px"></li>
+
+			<li>Near the top-left of the screen, click <b>+ Add</b> sources.
+			<img src="assets/img/javascript-presentation/4.png" alt="screenshot" style="max-width: 400px">
+			<li>A new input area opens up at the bottom centre of the screen. Choose <b>Websites</b>
+			<img src="assets/img/javascript-presentation/6.png" alt="screenshot" style="max-width: 680px">
+			</li>
+			<li>Paste in the following list of URLs and click <b>Insert</b>.
+
+   <div class="gpt"><button class="copy-gpt" id="btn-1">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-1">
+https://www.munnelly.com/dorset/javascript/lessons/testing-weird-values<br>
+https://www.munnelly.com/dorset/javascript/lessons/generating-html<br>
+https://www.munnelly.com/dorset/javascript/lessons/modifying-html<br>
+https://www.munnelly.com/dorset/javascript/lessons/interactive-dom<br>
+https://www.munnelly.com/dorset/javascript/lessons/events<br>
+https://www.munnelly.com/dorset/javascript/lessons/fetch-json<br>
+https://www.munnelly.com/dorset/javascript/lessons/fetch-remote
+
+
+</code></div>
+</li>
+
+
+			<p>After a short delay, these extra sources should appear in the list of sources on the left of the screen.</p>
+
+		</section>
+
+		<section id="slidedeck">
+
+			<h2>Creating your slide deck</h2>
+			<p>In the Studio area at the right of the screen, choose <b>Slide deck</b> and then select the <b>Detailed deck</b> option.
+			<img src="assets/img/javascript-presentation/6.png" alt="screenshot"></p>
+			<p>Enter the following text in the dialog box and click <b>Generate</b>.</p>
+
+
+              <div class="gpt"><button class="copy-gpt" id="btn-2">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-2">
+			Using the data sources provided, create an educational slide deck that introduces the JavaScript language to computer science students.<br>
+			The presentation should be about 20 slides in length and cover the following topics:<br>
+
+			* The origin story of JavaScript and how the language got its name.<br>
+			* The further evolution of JavaScript, particularly the introduction of ES5 and ES6 features, and its impact on web development.<br>
+			* How JavaScript is typically added to webpages and the role of the "defer" attribute.<br>
+			* The four main variable types in JavaScript.<br>
+			* Function declarations and function expressions, and the arrow function syntax.<br>
+			* Conditional logic and truthy and falsy values in JavaScript.<br>
+			* An overview of objects in JavaScript.<br>
+			* An overview of arrays in JavaScript.<br>
+			* JavaScript and the DOM: creating and manipulating HTML elements.<br>
+			* Event handling in JavaScript, including adding event listeners and handling user interactions.<br>
+			* JavaScript and JSON-format files<br>
+			* Using the Fetch API with the async/await syntax to retrieve data from external sources.
+		<br>Do not include NodeJS or anything about WebAssembly. Just focus on the evolution of JavaScript, uts syntax and features.</code></div>
+
+			<p>This may take a while to complete.</p>
+				<p>When the process is finished, follow these steps:</p>
+				
+				<ol>
+					<li>Click the vertical ellipsis (three dots) in the top-right corner of the generated slide deck.</li>
+					<li>Choose <b>Download Powerpoint (.pptx)</b> and save the file to your computer.
+					<img src="assets/img/javascript-presentation/10.png" alt="screenshot" style="width: 320px">
+					</li>
+					<li>Go to <a href="https://drive.google.com" target="_blank">Google Drive</a>, and upload or drag and drop the PowerPoint file into your Drive.</li>
+					<li>Open the slide desk in Google Slides and , on the first slide, add your name and student ID.</li>
+					<li>Make such changes/additions to your slide deck as you think necessary. The better and nicer your slides, the more marks you will get.</li>
+					<li>When you are happy with your slide deck, at the right of the screen, click the <b>Convert to video</b> icon.
+					<img src="assets/img/javascript-presentation/convert-to-video.png" alt="screenshot"></li>
+					<li>In the dialog box displayed, accept the default option of <b>Include voiceover, script and background music.</b> and click <b>Import</b>.
+					<img src="assets/img/javascript-presentation/slidedeck-import.png" alt="screenshot">
+					</li>
+					<li>When the video is generated, download it to your computer as an MP4 file.</li>
+				</ol>
+				
+
+			  </section>
+<!--
+
+			  <section id="narration-text">
+				<h2>Generating the script text for the audio narration</h2>
+
+				<p>Follow these steps:</p>
+
+				<ol>
+					<li>Go to <a href="https://gemini.google.com" target="_blank">Google Gemini</a>.</li>
+					<li>In the Studio area at the right of the screen, choose <b>Audio narration</b>.</li>
+					<li>Below the prompt box, click the <b>+</b> icon and add the Google Slides file.</li>
+					<li>In the prompt box, enter the following text and click the <b>Generate</b> button.</li>
+				</ol>
+
+				<div class="gpt"><button class="copy-gpt" id="btn-3">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-3">Based on the attached Google Slides deck about JavaScript, generate a text narration script. For each slide, provide a narration that is approximately 60 words long (about 30 seconds of speaking time at a moderate pace). Clearly label each section by slide number and title."
+
+</code></div>
+
+
+            </section>
+
+
+			<section id="audio-file">
+				<h2>Converting the narration text to audio</h2>
+
+				<p>Follow these steps:</p>
+
+				<ol>
+					<li>Go to <a href="https://aistudio.google.com" target="_blank">AI Studio</a>.</li>
+					<li>In the scrolling list of options under the prompt box, choose <b>Convert Text to Speech</b>.
+					<img src="assets/img/javascript-presentation/9.png" alt="screenshot" style="width:700px"></li>
+					<li>Click the plus + under the chat box, upload your slide narration script, and press ENTER.</li>
+					<li>Choose a voice (like "Narrator") and click <b>Generate</b>.</li>
+					<li>Download the result as an MP3 file.</li>
+				</ol>
+
+
+			</section>
+
+
+			<section>
+				<h2>Creating your video presentation</h2>
+				<p>Use a video editing tool to combine the slide deck and the audio narration into a single presentation video. You can use free tools like <a href="https://obsproject.com/" target="_blank">OBS Studio</a> <a href="https://www.shotcut.org" target="_blank">Shotcut</a> or <a href="https://lwks.com" target="_blank">Lightworks</a>.</p>
+
+
+			</section>
+		-->
+			<section id="lipsync-avatar">
+				<h2>Adding a lip-syncing avatar</h2>
+
+				<p>Follow the steps below:</p>
+
+				<ol>	
+					<li>Use Gemini (or other platform) with a prompt such as the following:
+						
+<div class="gpt"><button class="copy-gpt" id="btn-4">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-4">Create a lip-syncing avatar for an educational video that provides an introduction to JavaScript. The avatar should be a friendly and approachable character that appeals to computer science students. It should have a clear and expressive face that can effectively lip-sync to the audio narration. The avatar should be designed in a style that is visually engaging and suitable for an educational context, with a focus on clarity and relatability. Please provide the avatar in a format that can be easily integrated into video editing software for use in the final presentation video. Ensure the character is facing forward with a closed mouth, ready to lip-sync to the provided audio narration. The avatar should have a solid white or green background to enable the use of a Chroma Key filter to make the background transparent.</code></div></li>
+
+					<li>Use a service such as <a href="https://www.visionstory.ai/" target="_blank">LipSync Studio</a> or <a href="https://toki.ai/" target="_blank">Toki AI</a> that offers free daily credits. Upload the slide deck and the audio file.</li>
+					
+					<li>In OBS Studio, right-click the source &gt; <b>Filters</b> &gt; + &gt; <b>Chroma Key</b>. Shrink the avatar and place it in the bottom corner, just like a "Facecam" on a Twitch stream.</li>
+						
+						
+						
+				</ol>
+
+		</section>
+
+
+</article>
+</main>
+
+<footer>
+
+</footer>
+
+<div id="cookie-banner">
+	<p>This website uses cookies to ensure you get the best user experience. <a href="https://munnelly.com/privacy.html">Learn more</a>.</p>
+	<div class="buttons">
+		<button id="accept-cookies">Got it</button>
+	</div>
+</div>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="assets/js/utils.js"></script>
+
+
+</body>
+</html>
+
