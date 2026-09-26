@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introduction to (Hosted) TailwindCSS | Front-end Development Tutorials | Brendan Munnelly</title>
-    <meta name="description" content="Learn how to add hosted TailwindCSS via CDN, configure it in the browser, and build responsive, accessible UI with utility classes.">
+    <meta name="description" content="Learn how to add hosted TailwindCSS via a CDN, and use it to set padding and margins for responsive UIs.">
     <meta name="author" content="Brendan Munnelly">
 
     <!-- Stylesheet (course skin) -->
@@ -87,17 +87,16 @@
 
             <h3>THIS TUTORIAL</h3>
             <p><a href="#learning-goals">Learning Goals</a></p>
-            <p><a href="#what-is-tailwind">What is TailwindCSS (hosted) vs. build</a></p>
-            <p><a href="#add-cdn">Adding Tailwind via CDN</a></p>
-            <p><a href="#first-page">Creating your first Tailwind page</a></p>
-            <p><a href="#utilities">Utility-first fundamentals</a></p>
-            <p><a href="#hero">Building a simple hero section</a></p>
-            <p><a href="#responsive">Responsive grid and cards</a></p>
-            <p><a href="#dark-mode">Dark mode (class strategy)</a></p>
-            <p><a href="#browser-config">Browser configuration with <code>&lt;script&gt; tailwind.config</code></a></p>
-            <p><a href="#publish">Uploading your work to GitHub</a></p>
-            <p><a href="#resources">More learning resources</a></p>
-            <p><a href="#ai-prompts">Sample AI prompts</a></p>
+            <p><a href="#tailwind-about">About TailwindCSS</a></p>
+            <p><a href="#tailwind-cdn">Adding a link to the TailwindCSS CDN</a></p>
+            <p><a href="#white-space">Layout and ‘negative space’</a></p>
+            <p><a href="#css-padding">Padding and layout</a></p>
+            <p class="toc-indent"><a href="#viewport">About the viewport</a></p>            
+            <p class="toc-indent"><a href="#rwd">About Responsive Web Design (RWD)</a></p>
+            <p class="toc-indent"><a href="#breakpoints">About breakpoints</a></p>
+            <p><a href="#css-margins">Margins and layout</a></p>
+            <p><a href="#summary">Padding and margins: summary</a></p>
+
             <p><i class="fas fa-arrow-circle-up"></i> &nbsp;<a href="#top">Back to Top</a></p>
         </aside>
 
@@ -107,295 +106,303 @@
                 <h2>Learning Goals</h2>
                 <p>At the end of this Tutorial, you will be able to:</p>
                 <ul>
-                    <li>Explain the difference between hosted (CDN) Tailwind and a local build pipeline.</li>
-                    <li>Add Tailwind to any HTML page with a single <span class="syn">&lt;script&gt;</span> and use utility classes safely.</li>
-                    <li>Configure Tailwind in the browser for colours, fonts, and spacing scales.</li>
-                    <li>Build a responsive hero and card grid with dark mode support.</li>
+                    <li>Add a link to the TailwindCSS CDN with a <span class="syn">&lt;script&gt;</span> tag in the <span class="syn">&lt;head&gt;</span> of the web page.</li>
+<li>Understand the importance of adding <i>negative space</i> between elements in web design.</li>
+					<li>Use the CSS <i>padding</i> property to apply internal spacing inside HTML container/semantic tags such as <span class="syn">&lt;header&gt;</span> and <span class="syn">&lt;section&gt;</span>.</li>
+
+                    <li>Use the CSS <i>margin</i> property to apply spacing around HTML block-level text tags such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;h3&gt;</span>.</li>
+                    <li>Apply different padding and margin values for different <i>viewport</i> widths based on the 768px <i>breakpoint</i>.</li>
                 </ul>
             </section>
 
-            <section id="what-is-tailwind">
+            <section id="tailwind-about">
                 <h2>About TailwindCSS</h2>
-                <p><a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a> is a utility-first CSS framework. Instead of writing your own stylesheet file such as <b>mystyle.css</b>, you import utility classes directly in your HTML from the pre-built TailwindCSS stylesheet.</p>
-                
-                <p>You get consistency, speed, and responsive/dark mode variants out of the box.</p>
+                <p><a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a> is a Cascading Style Sheets (CSS) framework provides simplified syntax for styling HTML elements and creating responsive layouts.</p>
 
                 <p>You can use TailwindCSS in either of two ways:</p>
 
                 <ul>
-                    <li><b>Hosted (CDN)</b>: Add <span class="syn">&lt;script src="https://cdn.tailwindcss.com"&gt;</span> to your page; Tailwind is available immediately. Great for learning, prototypes, and simple static pages.</li>
-                    <li><b>Build pipeline</b> (Node/PostCSS): Scans your UI elements, tree-shakes unused classes, supports plugins, and produces tiny production CSS. Best for large projects.</li>
+                    <li><b>Hosted (CDN)</b>: Add the relevant <span class="syn">&lt;script&gt;</span> tag to the <span class="syn">&lt;head&gt;</span> of your page. Good for simple, single-page projects.</li>
+                    <li><b>Build pipeline</b> (Node/PostCSS): A better choice for multiple pages and complex projects.</li>
                 </ul>
 
-                <p>In this Tutorial, we will use the <i>hosted (CDN)</i> approach to get productive instantly — no tooling required.</p>
+                <p>In this Tutorial, we will use the <i>hosted (CDN)</i> approach.</p>
             </section>
 
 
-            <section id="sample-file" class="wrapper-content">
-                <h2>Creating a workfile</h2>
-                <p>Begin by creating a sample HTML file to expermiment with.</p>
-
-               
+            <section id="tailwind-cdn" class="wrapper-content">
+                <h2>Adding a link to the TailwindCSS CDN</h2>
+                <p>Follow the steps below.</p>
+                
                 <ol>
-                    <li>Create a new folder named <b>tw</b> in your <b>exercises</b> folder.</li>
-                    <li>In VS Code, create a new HTML file and save it as <b>tw-1.html</b>.</li>
-                    <li>In this file, add a <span class="syn">&lt;h2&gt;</span> heading and two paragraphs of lorem ipsum placeholder text.</li>
-                    <li>Wrap the content inside a <span class="syn">&lt;section&gt;</span> tag.</li>
-                    <li>Display your new HTML file in a web browser.</li>
+                
+                <li>Open your <b>index.html</b> web page and your three sample exercises pages: <b>page-1.html</b>, <b>page-2.html</b>, and <b>page-3.html</b>.</li>
+                <li>In the <span class="syn">&lt;head&gt;</span> of each HTML file, add the following lines:
 
-                    
-                </ol>
-                <p>Your web page should now look like this:</p>
-                <img src="assets/img/tailwind-intro/tw-1.png" alt="screenshot">
-            </section>
+<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"&gt;&lt;/script&gt;
+    &lt;style type="text/tailwindcss"&gt;
 
+    &lt;/style&gt;
+</code></pre>
+                </li>
+            </ol>
 
-            <section>
+            <p>Save your web pages and view them in a web browser. You should now see the <i>default styles</i> of the TailwindCSS applied.</p>
 
-                <h2>Working with layout in web design</h2>
+            <p>You can add your own custom <i>CSS style rules</i> within the <span class="syn">&lt;style&gt;</span> tags.</p>
 
-                <p>In web design, you control UI layout with margins and padding. See below.</p>
-
+            <p>Next, we will explore the concept of <i>negative space</i> in web design. </p>
             
 
+                
+            </section>
+
+             <section id="white-space">
+
+                <h2>Layout and ‘negative space’</h2>
+
+                <p>The term <i>layout</i> describes the placement of content elements - such as text and images - on a printed page or electronic screen. An important part of layout is the spacing between different elements.</p>
+
+                <img src="assets/img/responsive-spacing/white-space-print.jpg" alt="screenshot">
+
+                <p>The term <i>white space</i> comes from the world of print design where content – text and images – are printed (mostly) on white-coloured paper. White space means space in a design layout that is empty. Although it contains nothing, white space is just as important as any of the content it surrounds for this reason: <i>it makes the content more inviting to read.</i></p>
+    
+                <p>Because electronic screens – and modern printing processes – can create almost any background colour, the original term of white space is increasingly known by the alternative term of <i>negative space</i>.</p>
+    
+                <p>Here are some examples of negative space in use in web design. </p>
+                    <img src="assets/img/responsive-spacing/white-space-web.jpg" alt="Introduction to HTML">
+    
+                <p>Below are links to a number of helpful resources about negative space in web design.</p>
+                <div class="box-toc">
+    
+                <p><a href="https://blog.teamtreehouse.com/white-space-in-web-design-what-it-is-and-why-you-should-use-it" target="_blank" rel="noopener"  class="further-title">Whitespace in Web Design: What It Is and Why You Should Use It</a>
+                <br>From Gisele Muller on <a href="https://blog.teamtreehouse.com/" target="_blank" rel="noopener" style="font-weight:normal">Treehouse</a>.</p>
+    
+                <p><a href="https://getflywheel.com/layout/effective-use-white-space-web-design/" target="_blank" rel="noopener"  class="further-title">A Guide to Effective Use of White Space in Web Design</a>
+                <br>From <a href="https://getflywheel.com/layout/author/joanneamos/" target="_blank" rel="noopener" style="font-weight:normal">Joanne Amos</a> on <a href="https://getflywheel.com" target="_blank" rel="noopener" style="font-weight:normal">Flywheel</a>.</p>
+    
+                <p><a href="https://www.justinmind.com/blog/white-space-design/" target="_blank" rel="noopener"  class="further-title">White Space Design: 20 Striking Examples and Best Practices</a>
+                <br>From <a href="https://www.justinmind.com/blog/author/joe-downs/" target="_blank" rel="noopener" style="font-weight:normal">Joseph Downes</a> on <a href="https://www.justinmind.com/" target="_blank" rel="noopener" style="font-weight:normal">Just in Mind</a>.</p>
+    
+                <p><a href="https://blog.hubspot.com/marketing/whitespace-web-design" target="_blank" rel="noopener"  class="further-title">What Is Whitespace? 9 Websites to Inspire Your Web Design</a>
+                <br>From <a href="https://blog.hubspot.com/marketing/author/karla-cook" target="_blank" rel="noopener" style="font-weight:normal">Karla Cook</a> on <a href="https://blog.hubspot.com/marketing/" target="_blank" rel="noopener" style="font-weight:normal">HubSpot Marketing Blog</a>.</p>
+    
+                <p><a href="https://www.crazyegg.com/blog/white-space-website-design/" target="_blank" rel="noopener"  class="further-title">White-Space at Work: Why Less is More in Your Website Design</a>
+                <br>From Sherice Jacob on <a href="https://www.crazyegg.com/blog/" target="_blank" rel="noopener" style="font-weight:normal">Crazyegg Blog</a>.</p>
+    
+                <p><a href="https://usabilitygeek.com/white-spaces-improving-usability-web-designs/" target="_blank" rel="noopener"  class="further-title">White Space - A Perfect Option For Improving Usability In Web Designs</a>
+                <br>From Isabella Morris on <a href="https://usabilitygeek.com/" target="_blank" rel="noopener" style="font-weight:normal">Usability Geek</a>.</p>
+            </div>
+    
+            <p>In web design, the two important CSS properties that control spacing are <i>padding</i> and <i>margin</i>. Let's look at each property in turn. We will also see how we can use TailwindCSS for setting these properties in UI layouts.</p>
+        </section>
+
+            <section id="css-padding">
+                <h2>Padding and layout</h2>
+                <p>You typically use the <i>padding</i> property to set the internal spacing for container/semantic elements such as <span class="syn">&lt;nav&gt;</span>, <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;section&gt;</span>, and <span class="syn">&lt;footer&gt;</span>.</p>
+
+                <p>Consider the pages below from four websites, each of which contains <i>a single column of text</i>, as displayed on a laptop or desktop screen.</p>
+
+                <img src="assets/img/responsive-spacing/sample-page-widths.png" alt="screenshots">
+
+                <p>To achieve this effect in CSS, you could set padding left and right values (x-axis) to about <b>20%</b> for the container.</p>
+
+                <img src="assets/img/responsive-spacing/padding-1-new.png" alt="screenshots" style="max-width:600px">
+
+                <p>On laptop or desktop screens, the maximum line length for easy readability of text is around 65-75 characters. That is why you should add generous left and right <i>negative space</i> for this single-column layout.</p>
+
+                <p>For smaller, mobile screens, however, you typically want to set smaller left and right padding values, perhaps about <b>5%</b> on each side.</p>
+
+                <h3 id="viewport">About the viewport</h3>
+                
+
+			<p>The term <i>viewport</i> is used to describe that area of a web browser screen that displays a web page&#8217;s content. It excludes any menus, web address bars, bookmark bars, scroll bars or other similar elements.</p>
+
+            <img src="assets/img/responsive-spacing/viewports.png" alt="viewports" style="max-width: 600px">
+
+           <p> Here are typical viewport widths for different devices:</p>
+            <ul>
+                <li><b>Mobile phones</b>: 390px - 480px</li>
+                <li><b>Large phones/Small tablets</b>: 480px - 768px</li>
+                <li><b>Tablets (like iPads)</b>: 768px - 1024px</li>
+                <li><b>Laptops/desktops: 1024px</b> - 1920px</li>
+                <li><b>Large screens</b>: 1920px and above</li>
+            </ul>
+
+
+			<h3 id="rwd">About Responsive Web Design (RWD)</h3>
+			<p>As a web designer, you have no control over the size of the screen on which your web pages will be displayed.</p>
+
+            <img src="assets/img/responsive-spacing/rwd-1.png" style="max-width:600px" alt="Introduction to Media Queries">
+
+
+			<p>Creating web pages that respond or &#8216;scale&#8216; appropriately to the viewport size of a user&#8217;s device is called <i>Responsive Web Design (RWD)</i>. Responsive web pages adjust the layout, placement, and size of their elements so that the page looks good no matter what screen it&#8217;s being viewed on.</p>
+
+			<h3 id="breakpoints">About breakpoints</h3>
+			<p>When designing for such a wide range of viewport sizes, web designers rely on what are called <i>breakpoints</i>. These are the viewport widths at which the page layout needs to change.</p>
+
+			<p>For example, a three-column layout may display nicely on larger screens &#8211; but on mobile devices it will be necessary to transform the layout into just a single column.</p>
+
+            <img src="assets/img/responsive-spacing/responsive-wireframes.png" alt="screenshots" style="max-width: 500px">
+
+            <img src="assets/img/responsive-spacing/0_PtP6hZQ1AMsoCfbW.gif" alt="breakpoints" style="max-width: 500px">
+            
+            <p>For the simple single-column web pages, we will begin with just one breakpoint: <b>768px</b>. This is the viewport width of an Apple iPad in portrait ('standing up') orientation. So:</p>
+
+			<ul>
+                <li><b>Big viewports</b>: These are viewports that are 768 pixels wide or wider.</li>
+                <li><b>Small viewports</b>: These are viewports that are 767 pixels wide or narrower.</li>
+            </ul>
+
+          
+
+            <p>Another feature of a web page that needs to change with viewport width is the layout of the <span class="syn">&lt;nav&gt;</span> container element.</p>
+
+            <img src="assets/img/responsive-spacing/responsive-menus.png" alt="screenshot">
+
+		
+            <p>Consider again the four sample web pages shown previously. The <i>responsive</i> padding effect you want to achieve looks as follows.</p>
+
+            <img src="assets/img/responsive-spacing/page-wrapper-mockup.png" style="max-width:700px" alt="Intoduction to Media Queries">
+
+
+            <ul>
+                <li>On &#8216;small screens&#8216; (up to <b>767px</b> width), you might want the web page content to fill 82% of the viewport width.</li>
+				<li>On &#8216;big screens&#8216; (<b>768px</b> or wider), however, you might want the web page content to fill only 60% of the viewport width.</li>
+
+			</ul>
+
+			<p>To apply this responsive design feature with TailwindCSS, paste the following CSS style rules inside the <span class="syn">&lt;style&gt;</span> tags of your <b>index.html</b>, <b> page-1.html</b>, <b>page-2.html</b>, and <b>page-3.html</b> web pages.</p>
+
+
+<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-css">header {
+    @apply pt-8 px-[9%] pb-[42px] md:py-[3%] md:px-[20%];
+}
+
+section {   
+    @apply pt-8 px-[9%] pb-[42px] md:py-[3%] md:px-[20%];
+}</code></pre>
+
+            <p><span class="syn">@apply</span>lets you use Tailwind syntax inside a standard CSS style rule.</p>
+    
+            <p>Save your changes and view your four web pages at different viewport widths.</p>
+
+
+	<table class="table-js-arithmetic">
+    <thead>
+        <tr>
+            <th style="text-align: left; padding-left: 10px">TailwindCSS</th>
+            <th style="text-align: left; width: 50%">Meaning</th>
+        </tr>
+    </thead>
+
+
+<tbody>
+    <tr>
+        <td><b>pt-8</b></td>
+        <td>Adds padding to the top of the element using Tailwind's spacing value 8.</td>
+       
+    </tr>
+
+    <tr>
+        <td><b>px-[9%]</b></td>
+        <td>Adds 9% padding to the left and right sides of the element.</td>
+      
+    </tr>
+
+    <tr>
+        <td><b>pb-[42px]</b></td>
+        <td>Adds 42px padding to the bottom of the element.</td>
+        
+    </tr>
+
+    <tr>
+        <td><b>md:py-[3%]</b></td>
+        <td>On viewports 768px wide and above, adds 3% padding to the top and bottom.</td>
+        
+    </tr>
+
+    <tr>
+        <td><b>md:px-[20%]</b></td>
+        <td>On viewports 768px wide and above, adds 20% padding to the left and right.</td>
+    </tr>
+</tbody>
+
+
+</table>
+
+            <p>You can read the TailwindCSS docs on padding at the URL below:</p>
+            <p><a href="https://tailwindcss.com/docs/padding" target="_blank">https://tailwindcss.com/docs/padding</a></p>
+</section>
+
+<section id="css-margins">
+                <h2>Margins and layout</h2>
+                <p>The <i>margin</i> property in CSS is most commonly used to create vertical (y-axis) spacing between block-level content elements such as <span class="syn">&lt;h1&gt;</span>, <span class="syn">&lt;h2&gt;</span> <span class="syn">&lt;h3&gt;</span> and <span class="syn">&lt;p&gt;</span>.</p>
+
+
+                <img src="assets/img/responsive-spacing/inline-block-tags.png" alt="screenshot">
+
+<p>A web page without vertical (top and bottom) margins around text elements would be very difficult to read.</p>
+                <img src="assets/img/responsive-spacing/margins-2.png" alt="screenshot">
+
+
+
+                <p>With TailwindCSS, you can set margins with the <b>mt</b> and <b>mb</b> properties.</p>
+                <img src="assets/img/responsive-spacing/margins-1-new.png" alt="screenshot" style="max-width: 540px">
+
+                
+                <p>To apply vertical margins to the block-level elements in your web pages, paste the following CSS style rules inside the <span class="syn">&lt;style&gt;</span> tags.</p>
+
+                <pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-css">section h2 {   
+    @apply mt-8;
+}
+
+section h3 {   
+    @apply mt-6;
+}
+
+section p {   
+    @apply mb-4;
+}</code></pre>
+
+<p>Save your four web pages and verify that the vertical margins have been added.</p>
+
+<p>You can read the TailwindCSS docs on margins at the URL below:</p>
+            <p><a href="https://tailwindcss.com/docs/margin" target="_blank">https://tailwindcss.com/docs/margin</a></p>
+            </section>
+
+            <section id="summary">
+
+                <h2>Padding and margins: summary</h2>
+
+               
             <table>
-                <tbody><tr>
-                    <td style="padding-right:15px"><img src="assets/img/responsive-spacing/tables-margins.png" alt=""></td>
-                    <td style="padding-left:15px"><img src="assets/img/responsive-spacing/tables-padding.png" alt=""></td>
+                <tbody>
+                    <tr>
+                    
+                    <td style="padding-right:15px"><img src="assets/img/responsive-spacing/tables-padding.png" alt=""></td>
+                    <td style="padding-left:15px"><img src="assets/img/responsive-spacing/tables-margins.png" alt=""></td>
                 </tr>
                 <tr>
-                    <td style="padding-right:15px"><p><b>MARGINS</b><br>
+                    
+                    <td style="padding-right:15px"><p><b>PADDING</b><br>
+                    These apply <i>inside</i> container elements (such as <span class="syn">&lt;header&gt;</span> and <span class="syn">&lt;section&gt;</span>) to prevent content from pushing directly against the inner edges of their containers.</p></td>
+                    <td style="padding-left:15px"><p><b>MARGINS</b><br>
                     These apply <i>outside</i> block-level elements (such as <span class="syn">&lt;h2&gt;</span> and <span class="syn">&lt;p&gt;</span>) to push such elements away from one another, so creating vertical spacing between them.</p></td>
-                    <td style="padding-left:15px"><p><b>PADDING</b><br>
-                    These apply <i>inside</i> container elements (such as <span class="syn">&lt;header&gt;</span> and <span class="syn">&lt;section&gt;</span>) to prevent content from pushing up against the inner edges of their containers.</p></td>
                 </tr>
 
             </tbody></table>
 
-            <p>In the <span class="syn">&lt;head&gt;</span> of your workfile, copy-and-paste the following:</p>
-
-<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-html">&lt;style&gt;
-/* Padding: inner space for the container */
-section { padding: 32px 20%; }         /* 32px top and bottom, 20% left and right */
-
-/* Margins: vertical gaps between siblings */
-section h2 { margin-bottom: 6px; }     /* 6px below the heading */
-section p  { margin-bottom: 16px; }    /* 16px below each paragraph */
-
-&lt;/style&gt;</code></pre>
-
-                <p>Your web page should now look like that below.</p>
-
-                <img src="assets/img/tailwind-intro/tw-2.png" alt="screenshot">
-
 
             </section>
 
 
 
-            <section id="add-cdn" class="wrapper-content">
-                <h2>Adding Tailwind via CDN</h2>
 
-                <p>Now let's use TailwindCSS to add padding and margins.</p>
 
-                <ol>
-                    <li>Remove the above CSS style values from your <b>tw-1.html</b> workfile.</li>
 
-                    <li>Copy-and-paste your HTML workfile into an AI and ask:
 
-
-<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-html">
-How do I add hosted TailwindCSS to this HTML file.
-Do not add any utility classes to this file.</code></pre></li>
-
-                    <li>Follow the AI instructions and replace everything in your HTML workfile with the AI response.</li>
-
-                </ol>
-
-                <p>When you save your workfile, it should look unstyled again.</p>
-
-                <img src="assets/img/tailwind-intro/tw-4.png" alt="screenshot">
-
-                <p>Note that:</p>
-
-                <ul>
-                    <li>Even the default web browser styles have been removed.</li>
-                    <li>The font now defaults to sans-serif instead of serif.</li>
-                </ul>
-
-                <p>In VS Code, you can see that the <span class="syn">&lt;head&gt;</span> of your workfile should now include the Tailwind CSS CDN link.</p>
-
-                <img src="assets/img/tailwind-intro/tw-3.png" alt="screenshot">
-
-                <p>Now, replace the <span class="syn">&lt;body&gt;</span> of your <b>tw-1.html</b> workfile with the following:</p>
-
-<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-html">
-&lt;!-- Same structure, but spacing is expressed with utilities --&gt;
-&lt;section class="px-24 py-10"&gt;            &lt;!-- padding left/right: 24. padding top/bottom: 10 --&gt;
-&lt;h2 class="mb-4"&gt;Section Heading&lt;/h2&gt;    &lt;!-- margin-bottom: 16px --&gt;
-
-&lt;p class="mb-4"&gt;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nostrum odit obcaecati velit officia distinctio veniam dolores quaerat, non nihil, fugit ipsum dignissimos rerum quis laudantium. Provident fugiat quaerat voluptate.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nostrum odit obcaecati velit officia distinctio veniam dolores quaerat, non nihil, fugit ipsum dignissimos rerum quis laudantium. Provident fugiat quaerat voluptate.&lt;/p&gt;
-&lt;/section&gt;
-
-</code></pre>
-
-        <p>When you save your work file, it should look as shown below in a web browser.</p>
-
-        <img src="assets/img/tailwind-intro/tw-5.png" alt="screenshot">
-
-        <p>See the links below for the official docs from TailwindCSS:</p>
-
-        <ul>
-            <li><a href="https://tailwindcss.com/docs/padding" target="_blank">Padding</a></li>
-            <li><a href="https://tailwindcss.com/docs/margin" target="_blank">Margins</a></li>
-        </ul>
-
-</section>
-
-
-
-
-
-
-            <section class="resources-learning" id="ai-prompts">
-                <h2>Sample AI prompts</h2>
-
-                <p>For each prompt, copy the output HTML into a new file in your 📁 <b>exercises</b> folder, save, and open in your browser.</p>
-
-<div class="gpt"><button class="copy-gpt" id="btn-prompt-1">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-1">
-
-** Web Page Structure **<br><br>
-Create the HTML for a web page that is linked to the hosted CDN TailwindCSS stylesheet.<br><br>
-
-In the &lt;head&gt;, include the UTF-8 charset, a &lt;title&gt;, a meta description and the responsive viewport meta tag.<br><br>
-    
-For the &lt;title&gt;, add the words "Between 50 and 60 characters (including spaces)"<br><br>
-
-For the meta description, add the words "Between 150 and 160 characters (including spaces). Like the title, this is important for search engines"<br><br>
-
-Apply TailwindCSS markup to all elements as specified below.<br><br>
-
-** Web Page Content **<br><br>
-In the &lt;body&gt;, create [3] blocks of content. Each content block should be inside a &lt;section&gt; tag.<br><br>
-    
-Each block of content should contains one &lt;h2&gt; sub-heading tag and [2] paragraphs of text with the &lt;p&gt; tag. <br><br>
-
-Each &lt;h2&gt; sub-heading should the words "Section sub-heading" <br><br>
-
-Each &lt;p&gt; text paragraph should contain [60] words of placeholder lorem ipsum text. <br><br>
-
-Add a placeholder image under each &lt;h2&gt; tag from the https://placehold.co/ website.<br><br>
-
-Apply a different [light] background color for each section. The section's background color should fill the enture with of the viewport.<br><br>
-
-
-** Responsive Padding Spacing inside &lt;section&gt; content containers ***<br><br>
-For the &lt;section&gt; tag, the vertical padding should be:<br><br>
-
-* Default: 8 pt and 10 pb units<br><br>
-* Viewports =&gt; 768px: 10 pt units and 12 pb units<br><br>
-* Viewports =&gt; 1024px: 12 pt units and 14 pb units<br><br>
-* Viewports =&gt; 1280px: 14 pt units and 16 pb units<br><br>
-
-Also for the &lt;section&gt; tag, the horizontal padding should be:<br><br>
-
-* Default: 6 px units<br><br>
-* Viewports =&gt; 768px: 28 px units<br><br>
-* Viewports =&gt; 1024px: 48 px units<br><br>
-* Viewports =&gt; 1280px: 72 px units<br><br>
-
-** Responsive Margin Spacing under &lt;h2&gt; and &lt;p&gt; block-level tags ***<br><br>
-
-For the &lt;h2&gt; tag, the bottom margin should be:<br><br>
-
-* Default: 4 mb units<br><br>
-* Viewports =&gt; 1024px: 6 mb units<br><br>
-* Viewports =&gt; 1280px: 8 mb units<br><br>
-
-For the &lt;p&gt; tag, the bottom margin should be:<br><br>
-
-* Default: 6 mb units<br><br>
-* Viewports =&gt; 1024px: 8 mb units<br><br>
-
-Apply the same mb values under the &lt;img&gt; tag in each &lt;section&gt;.<br><br>
-
-For the final &lt;p&gt; tag in each &lt;section&gt;, set the bottom margin to zero.<br><br>
-
-** Typography: &lt;h2&gt; **<br><br>
-Apply a color of [black]<br><br>
-
-Apply a font-family of [font-sans]<br><br>
-
-Apply a font weight of [semibold]<br><br>
-
-Apply a tracking value of [tighter]<br><br>
-
-Apply these responsive text sizes:<br><br>
-* Default: text-4xl<br><br>
-* Viewports &gt;= 768px: text-5xl  <br><br>
-* Viewports &gt;= 1024px: text-6xl<br><br>
-* Viewports &gt;= 1280px: text-7xl<br><br>
-
-Apply these line-spacing values:<br><br>
-* Default: leading-tight<br><br>
-* Viewports &gt;= 768px: leading-snug<br><br>
-* Viewports &gt;= 1024px: leading-none<br><br>
-* Viewports &gt;= 1280px: leading-none<br><br>
-
-** Typography: &lt;p&gt; **<br><br>
-Apply a text color of [gray-800].<br><br>
-
-Apply a font-family of [font-serif].<br><br>
-
-Apply a font weight of [normal].<br><br>
-
-Apply a line-height of [leading-relaxed].<br><br>
-
-Apply these responsive text sizes:<br><br>
-
-* Default: text-lg<br><br>
-* Viewports &gt;= 1024px: text-2xl<br><br>
-
-Apply these responsive values for inter-line spacing:<br><br>
-
-Default: leading-relaxed<br><br>
-Viewport =&gt; 1024px: lg:leading-loose<br><br>
-Viewport =&gt; 1280px: xl:leading-10<br><br>
-
-
-** Hyperlinks **<br><br>
-Inside each &lt;p&gt; tag of every section, add a hyperlink with a destination of #.<br><br>
-    
-Style the hyperlink so that:<br><br>
-* The link text is not bold<br><br>
-* The link text is underlined<br><br>
-* The link text color is blue-600<br><br>
-* The link underline is blue-600<br><br>
-* The link underline thickness is decoration-2<br><br>
-* The link underline offset is underline-offset-4<br><br>
-* The link text becomes red-800 when hovered over <br><br>
-* The link text underline is removed when hovered over<br><br>
-
-Do not add any other TailwindCSS classes.<br><br>
-
-[Do include comments in the HTML code to indicate which TailwindCSS classes are being applied to each element.]<br><br>
-
-To make your output easier to read, add an empty line after each closing HTML tag.<br><br>
-
-</code></div>
-
-<div class="gpt"><button class="copy-gpt" id="btn-prompt-2">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-2">
-Create an event landing page for a tech meetup using Tailwind via CDN.<br><br>
-Include a sticky header nav, a hero with a CTA button, a schedule section (two-column on md+), and a speaker card grid. Add hover and focus states on links and buttons. Provide a simple footer with social links.
-</code></div>
-
-<div class="gpt"><button class="copy-gpt" id="btn-prompt-3">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-prompt-3">
-Build a documentation-style layout using Tailwind via CDN.<br><br>
-Left sidebar with section links on lg+ and a single-column stacked layout on mobile. Main content uses readable line-length (max-w-prose) and headings with spacing. Add a top “Edit on GitHub” button styled as a Tailwind utility-based component.
-</code></div>
-            </section>
+            
 
         </article>
     </main>
@@ -447,3 +454,4 @@ Left sidebar with section links on lg+ and a single-column stacked layout on mob
     <script src="assets/js/utils.js"></script>
 </body>
 </html>
+Denise Cristiane Pinheiro Martins
