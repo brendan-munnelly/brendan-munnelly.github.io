@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Adding Images and Videos | Front-end Development Tutorials</title>
+    <title>Adding Images | Front-end Development Tutorials</title>
     <meta name="description" content="Inserting images in a web page, styling images with drop shadow and rounded corner effects, removing image backgrounds, and adding YouTube videos.">
 
     <meta name="author" content="Brendan Munnelly">
@@ -55,8 +55,8 @@
             </div>
     
             <div class="content">
-                <h1>Adding Images and Videos </h1>
-                <h2>Inserting images in a web page, styling images with drop shadow and rounded corner effects, removing image backgrounds, and adding YouTube videos.</h2>
+                <h1>Adding Images</h1>
+                <h2>Inserting images in a web page, styling images with drop shadow and rounded corner effects, and removing image backgrounds.</h2>
             </div>
         </div><!-- /wrapper -->
     </header>
@@ -118,10 +118,6 @@ logReferrer();</script>
             <p class="toc-indent"><a href="#highlight-text">Highlighting text elements</a></p>
 
             <p><a href="#responsive-width-height">About responsive width and height for images</a></p>
-
-            <p><a href="#embed-video">Embedding a YouTube Video</a></p>
-
-            <p class="toc-indent"><a href="#video-responsive">Making the video responsive</a></p>
 
             <p><a href="#update-home-page">Updating your website home page</a></p>
             <p><a href="#upload-GitHub">Uploading your files to GitHub</a></p>
@@ -304,15 +300,14 @@ logReferrer();</script>
                     <img src="assets/img/working-with-images/extract-files.png" alt="screenshot"></li>
                     <li>The files will unzip into a new sub folder in your <b>websites</b> folder named <b>lesson-images</b>.
                     <img src="assets/img/working-with-images/unzip-main.png" alt="screenshot" style="max-width: 700px">
-                    Inside this new sub-folder you should see 13 files: two HTML files, two CSS files and a group of image files.
+                    Inside this new sub-folder you should see 11 files: two HTML files and a group of image files.
                     <img src="assets/img/working-with-images/lesson-3-files.png" alt="screenshot" style="max-width: 700px;margin-bottom:12px !important">
                     Next, you will copy these unzipped files to their appropriate sub folders.</li>
 
                     <li>From the <b>websites/lesson-images</b> sub-folder, copy the two HTML files to your <b>websites/exercises</b> sub-folder.
                     <img src="assets/img/working-with-images/unzip-html-files.png" alt="screenshot" style="max-width: 700px"></li>
-                   
-                    <li>From the <b>websites/lesson-images</b> sub-folder, copy the two CSS files to your <b>websites/exercises/assets/css</b> sub-folder.
-                    <img src="assets/img/working-with-images/unzip-css-files.png" alt="screenshot" style="max-width: 700px"></li>
+
+                    <li>Display your <b>websites/exercises</b> sub-folder, and inside it create a new sub-folder named <b>assets</b>.</li>
 
                     <li>Display your <b>websites/exercises/assets</b> sub-folder, and inside it create a new sub-folder named <b>img</b>.
                     <img src="assets/img/working-with-images/unzip-img.png" alt="screenshot"></li>
@@ -339,12 +334,49 @@ logReferrer();</script>
             <section id="sample-van-gogh" class="wrapper-content bg-white">
             
                 <h2>Working with the <i>van Gogh</i> web page</h2>
-                <p>First you will work with the sample <b>page-4.html</b> web page, the sample <b>style-4.css</b> stylesheet and four images.</p>
+                <p>First you will work with the sample <b>page-4.html</b> web page.</p>
                 <ol>
-                    <li>In Visual Studio Code, open the following two files: 
+                    <li>In Visual Studio Code, open the following file: 
                     <span class="inside-ol">&nbsp;</span>
-                    <b>page-4.html</b><br>
-                    <b>style-4.css</b></li>
+                    <b>page-4.html</b></li>
+
+                    <li>In the <span class="syn">&lt;head&gt;</span> of the <b>page-4.html</b> file, add the following to apply TailwindCSS styles.
+                    
+<pre><button class="copy-html" id="btn-20">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-20" class="hljs language-js">
+&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4">&lt;/script>
+&lt;style type="text/tailwindcss"&gt;
+header {
+        @apply flex flex-col justify-around items-center w-full mx-auto
+            bg-blue-800
+            px-12 lg:px-60 py-8 lg:py-14;
+  
+    }
+    header h1 {
+        @apply text-6xl md:text-8xl text-white tracking-tighter text-center
+            mb-8 lg:mb-12;
+    }
+
+    header h2 {
+        @apply text-2xl md:text-3xl/12 text-yellow-100 text-center;
+    }
+
+    section {
+        @apply bg-yellow-200
+            px-12 lg:px-60 
+            pt-4 pb-12 lg:pt-8 lg:pb-18;
+    }
+
+    h3 { @apply text-3xl tracking-tight mt-10 lg:mt-12; }
+
+    p { @apply text-lg md:text-xl/8 mb-5; }
+
+    header *:last-child { @apply mb-0! }
+    section *:last-child { @apply mb-0! }
+
+    &lt;/style&gt;</code></pre>
+                    
+</li>
+                
             
                     <li>After the paragraph under the heading &#8220;The Arles Years&#8221;, type the following code:
             
@@ -383,11 +415,8 @@ logReferrer();</script>
                     <li>When finished, save your <b>page-4.html</b> file and view it in your web browser.</li>
 
                     <li>You can see that some vertical space is need under your images.
-                        <img src="assets/img/working-with-images/margin-bottom-images.png" alt="screenshot">
-
-                    </li>
-                    <li>In your <b>style-4.css</b> stylesheet, at the bottom of the file, add a new declaration for <span call="csyn">img</span> and inside a single style rule for <b>margin-top:</b> as shown below, and save your stylesheet.
-                    <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 580px"></li>
+                        <img src="assets/img/working-with-images/margin-bottom-images.png" alt="screenshot">Add the following new style rule for the margin bottom under images.
+                    <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 680px"></li>
 
                     <li>In your browser, note the effect of adding this spacing under the images.</li>
                 </ol>
@@ -401,12 +430,50 @@ logReferrer();</script>
             <section id="sample-tourism" class="wrapper-content bg-white">
             
                 <h2>Working with the <i>Tourism</i> web page</h2>
-                <p>Next you will work with the sample <b>page-5.html</b> web page, the sample <b>style-5.css</b> stylesheet and five images.</p>
+                <p>Next you will work with the sample <b>page-5.html</b> web page and five images.</p>
                 <ol>
-                    <li>In Visual Studio Code, open the following two files: 
+                    <li>In Visual Studio Code, open the following file: 
                     <span class="inside-ol">&nbsp;</span>
-                    <b>page-5.html</b><br>
-                    <b>style-5.css</b></li>
+                    <b>page-5.html</b></li>
+
+                    <li>In the <span class="syn">&lt;head&gt;</span> of the <b>page-5.html</b> file, add the following to apply TailwindCSS styles.
+                    <pre><button class="copy-html" id="btn-21">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-21" class="hljs language-js">
+&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4">&lt;/script>
+&lt;style type="text/tailwindcss"&gt;
+header {
+        @apply flex flex-col justify-around items-center w-full mx-auto
+            bg-green-300
+            px-12 lg:px-60 py-8 lg:py-14;
+  
+    }
+    header h1 {
+        @apply text-6xl md:text-7xl tracking-tight text-center
+            mb-8 lg:mb-12;
+    }
+
+    h1, h2 { @apply text-green-700 font-bold }
+
+    header p {
+        @apply text-green-900 text-2xl md:text-3xl/12 text-center font-normal;
+    }
+
+    section {
+        @apply bg-green-200
+            px-12 lg:px-68 
+            pt-4 pb-12 lg:pt-8 lg:pb-18;
+    }
+
+    section h2 {
+        @apply text-4xl lg:text-5xl tracking-tight mt-10 lg:mt-14 lg:mb-2;
+    }
+
+    section p {
+        @apply text-lg md:text-xl/8 mb-5;
+    }
+
+    header *:last-child { @apply mb-0! }
+    section *:last-child { @apply mb-0! }
+    &lt;/style&gt;</code></pre></li>
             
                     <li>Directly under the sub-heading &#8220;Guinness Storehouse, Dublin&#8221;, type the following code:
             
@@ -430,11 +497,10 @@ logReferrer();</script>
             
                     <li>When finished, save your <b>page-5.html</b> file.</li>
 
-                    <li>In your <b>style-5.css</b> stylesheet, at the bottom of the file, add a new declaration for <span call="csyn">img</span> and inside a single style rule for <b>margin-top:</b> as shown below, and save your stylesheet.
-                        <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 600px"></li>
+                     <li>You can see that some vertical space is need under your images. Add the following new style rule for the margin bottom under images.
+                    <img src="assets/img/working-with-images/von-gogh-margin-bottom.png" alt="screenshot" style="max-width: 680px"></li>
 
-                    <li>Also in the stylesheet file, update the <b>margin-bottom:</b> style rule for the <span class="csyn">h2</span> declaration as shown below.
-                        <img src="assets/img/working-with-images/tourism-margin-bottom.png" alt="screenshot" style="max-width: 540px"></li>
+                    <li>In your browser, note the effect of adding this spacing under the images.</li>
                 </ol>
             
                 <p>✅ &nbsp;Task complete.</p>
@@ -446,9 +512,9 @@ logReferrer();</script>
                 <p>Next you will add some visual effects to the design of your two sample web pages.</p>
 
                 <h3 id="drop-shadow">Adding a drop-shadow effect to images</h3>
-                <p>In VS Code, open <b>style-4.css</b>, update the <span class="csyn">img</span> declaration as shown below, save your stylesheet, and view the effect on your web page in a browser.
+                <p>In VS Code, open <b>page-4.htmls</b>, update the <span class="csyn">img</span> declaration as shown below, save your web page, and view the effect in a browser.
 
-                <img src="assets/img/working-with-images/box-shadow.png" alt="screenshot" style="max-width: 560px"></p>
+                <img src="assets/img/working-with-images/box-shadow.png" alt="screenshot" style="max-width: 700px"></p>
 
                 <p>Drop-shadow also known as box-shadow, is a visual effect that adds a shadow-like border around an element, making it appear as if it's floating above the surface behind it.</p>
 
@@ -458,9 +524,9 @@ logReferrer();</script>
 
 
                 <h3 id="rounded-corner">Adding a rounded corner effect to images</h3>
-                <p>In VS Code, open <b>style-5.css</b>, update the <span class="csyn">img</span> declaration as shown below, save your stylesheet, and view the effect on your web page in a browser.</p>
+                <p>In VS Code, open <b>page-5.html</b>, update the <span class="csyn">img</span> declaration as shown below, save your web page, and view the effect in a browser.</p>
 
-                <img src="assets/img/working-with-images/border-radius-tourism.png" alt="screenshot" style="max-width: 620px">
+                <img src="assets/img/working-with-images/border-radius-tourism.png" alt="screenshot" style="max-width: 720px">
 
                 <p>Your images now have smooth, rounded corners on all four sides.</p>
 
@@ -507,18 +573,18 @@ logReferrer();</script>
 
                     <img src="assets/img/working-with-images/para-highlight-2.png" alt="screenshot" style="max-width: 750px"></li>
 
-                    <li>In your <b>style-5.css</b> stylesheet, add a new <span class="csyn">.highlight-text</span> class declaration with three style rules as shown below.
+                    <li>In your <b>page-5.html</b>, add a new <span class="csyn">.highlight-text</span> class declaration as shown below.
                     
-                    <img src="assets/img/working-with-images/para-highlight-3.png" alt="screenshot" style="max-width: 460px"></li>
+                    <img src="assets/img/working-with-images/para-highlight-3.png" alt="screenshot" style="max-width: 660px"></li>
 
                     <li>Save your web page and stylesheet and view the effect on your web page in a browser.
-                    <img src="assets/img/working-with-images/para-highlight-4.png" alt="screenshot" style="max-width: 750px">
-                    As you can see, the highlighted text extends across the full width of the screen. This is because the <span class="syn">&lt;img&gt;</span> tag is treated as a block-level element, like <span class="syn">&lt;h1&gt;</span> and <span class="syn">&lt;p&gt;</span>.</li>
+                    <img src="assets/img/working-with-images/para-highlight-4.png" alt="screenshot" style="max-width: 750px;padding-bottom:12px">
+                    As you can see, the highlighted text extends across the full width of the screen.</li>
 
                     <li>To make the background colour effect only extend behind the actual content, and not the full screen width, add one further style rule as shown below.
-                        <img src="assets/img/working-with-images/para-highlight-5.png" alt="screenshot" style="max-width: 500px"></li>
+                        <img src="assets/img/working-with-images/para-highlight-5.png" alt="screenshot" style="max-width: 620px"></li>
 
-                    <li>Save your <b>style-5.css</b>. In a browser, the highlighter text  should now look similar to that below.
+                    <li>In a browser, the highlighted text should now look similar to that below.
                     <img src="assets/img/working-with-images/para-highlight-6.png" alt="screenshot" style="max-width: 750px"></li>
                 </ol>
 
@@ -531,9 +597,7 @@ logReferrer();</script>
 
                 <p>All images have an inherent width and height. For example, the <b>backpackers.png</b> image added to the <b>page-5.html</b> web page has a width of 612 pixels and a height of 408 pixels.</p>
 
-               <p>However, web designers typically add a style rule to the 'RESETS' block of CSS files that force images to resize responsively, regardless of their actual dimensions.</p>
-
-                <img src="assets/img/working-with-images/width-height-1.png" alt="screenshot" style="max-width: 700px">
+               <p>However, TailwindCSS applies a CSS rule that forces images to resize responsively, regardless of their actual dimensions.</p>
 
                 <p>This has the following effects:</p>
 
@@ -570,98 +634,10 @@ logReferrer();</script>
 
             </section>
             
-            <section id="embed-video">
+            
 
-                <h2>Embedding a YouTube Video</h2>
-                <p>Your next task is to embed a video from YouTube into your <b>page-4.html</b> web page.</p>
-            
-                <ol>
-            
-                    <li>In the <b>page-4.html</b> file, scroll down to just after the <span class="syn">&lt;h1&gt;</span> heading and press the <kbd class="tutorial-key">Enter</kbd> key a few times to open up some blank lines.
-                    
-                    <img src="assets/img/working-with-images/vscode-1.png" alt="screenshot"></li>
-            
-                    <li>Next, click the link below to open a new web browser tab that displays a video on the YouTube website.
-                    <span class="inside-ol">&nbsp;</span>
-                    <a href="https://www.youtube.com/watch?v=wI2i5ca1RT4" target="_blank">Vincent van Gogh: The Humble Genius</a></li>
-            
-                    <li>Under the video, click the option named <b>Share</b>.
-                    
-                    <img src="assets/img/working-with-images/van-gogh-embed-1.png" alt="screenshot"></li>
-            
-                    <li>From the choices now displayed, choose <b>Embed</b>.
-                    <img src="assets/img/working-with-images/van-gogh-embed-2.png" alt="screenshot"></li>
-                    
-                    
-                    <li>From the pop-up box, click the <b>Copy</b> button.
-                    
-                    <img src="assets/img/working-with-images/vg-copy.png" alt="screenshot" style="padding-bottom: 14px;">
-                    You can now close the YouTube web browser tab.</li>
-            
-                    <li>Return to VS Code and the <b>page-4.html</b> file.</li>
-            
-                    <li>Paste the copied YouTube embed code into your web page.
-                    <img src="assets/img/working-with-images/vscode-2.png" alt="screenshot"></li>
-            
-                    <li>In your web browser, reload and view your <b>page-4.html</b> web page.
-                    <span class="inside-ol">&nbsp;</span>
-                    It may take a few seconds for the embedded video to load, depending on the speed of your Internet connection.
+
                 
-                </li>
-            
-                </ol>
-
-
-
-                <h3 id="video-responsive">Making the video responsive</h3>
-            
-                <p>The problem with embedding YouTube videos directly is that they are positioned in an <span class="syn">&lt;iframe&gt;</span> container. You cannot make an iframe responsive. A fixed width and height need to be set for it.</p>
-                
-                <p>Follow these steps to make the embedded video scale according to the width of the user’s viewport.</p>
-                
-                <ol>
-
-                    <li>In your <b>page-4.html</b> file, select <span class="syn">&lt;iframe&gt;</span> container you copied from YouTube.</li>
-
-                    <li>Copy the code below and paste it over the YouTube <span class="syn">&lt;iframe&gt;</span> container to replace it.
-                    
-<pre><button class="copy-html" id="btn-6">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-6" class="hljs language-html">
-&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"video-container"</span>&gt;
-   &lt;<span class="blue-dark">iframe</span> <span class="blue-light">src</span>=<span class="brown">"https://www.youtube.com/embed/wI2i5ca1RT4"</span> <span class="blue-light">frameborder</span>="0" <span class="blue-light">allow=</span><span class="brown">"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"</span> <span class="blue-light">allowfullscreen</span>&gt;&lt;/<span class="blue-dark">iframe</span>&gt;  
-&lt;/<span class="blue-dark">div</span>&gt;
-</code></pre>
-            This ‘wraps’ the YouTube video code in a new <span class="syn">&lt;div&gt;</span> container
-
-</li>
-            
-                <li>In VS Code, switch to the <b>style-4.css</b> stylesheet.</li>
-            
-                <li>At the bottom of the stylesheet, copy-and-paste the following, and save the file.
-            
-
-<pre><button class="copy-html" id="btn-7">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-7" class="hljs language-css"><span class="token comment">/* ===== VIDEO ===== */</span>
-<span class="token class">.video-container</span> {
-    <span class="token property">position</span>: <span class="token value-text">relative</span>;
-    <span class="token property">width</span>: <span class="token number">100%</span>;
-    <span class="token property">aspect-ratio</span>: <span class="token number">16 / 9</span>;
-    <span class="token property">margin-bottom</span>: <span class="token number">32px</span>;
-}
-                      
-<span class="token class">.video-container iframe</span> {
-    <span class="token property">position</span>: <span class="token value-text">absolute</span>;
-    <span class="token property">width</span>: <span class="token number">100%</span>;
-    <span class="token property">height</span>: <span class="token number">100%</span>;
-}</code></pre>
-</li>
-            
-                <li>In your web browser, reload and view your <b>page-4.html</b> web page on desktop/laptop and mobile screens.</li>
-            
-            
-                </ol>
-
-                <p>✅ &nbsp;Done.</p>
-
-            </section>
 
 
             
@@ -695,28 +671,17 @@ logReferrer();</script>
 
                 <p>For Microsoft Windows users, here are the steps:</p>
                 <ol>
-                    <li>Open <b>File Explorer</b> and display your 📁 <b>websites/assets</b> sub-folder.</li>
+                    <li>Open <b>File Explorer</b> and display your 📁 <b>websites</b> folder.</li>
                     <li>In the blank space at the right side, right-click and choose <b>New | New folder</b> from the context menu.</li>
-                    
-                    <li>Give your new sub-folder the name <b>img</b>.
-                    <img src="assets/img/working-with-images/folder-files-3.png" alt="screenshot" style="max-width: 680px">
-                    <div class="box-warning">
-                        <div>
-                            <img src="assets/img/working-with-images/warning-sign.png" alt="screenshot">
-                        </div>
-                        <div>
-                            <p><span>DO NOT</span> type upper-case letters. Type <b>img</b>.</p>
-                            <p><span>DO NOT</span> type 'Img' or 'IMG'.</p>
-                        </div>  
-                    </div>
-                    </li>
+
+                    <li>Give your new sub-folder the name <b>assets</b>.</li>
+
+                    <li>Inside your newly created <b>assets</b> folder, create another sub-folder named <b>img</b>.</li>
                 </ol>
 
                 <p>✅ &nbsp;That’s it.</p>
                 
                 <img src="assets/img/working-with-images/file-explorer-home-img.png" alt="screenshot" style="max-width: 680px">
-                <p>The <b>assets</b> sub-folder of your 'main' <b>websites</b> folder now has two sub-folders: one for stylesheets and one for images.</p>
-
                 <p>Now, you can add one or more images to the home page of your website.</p>
                 <ol>
                     <li>In VS Code, open your home page <b>index.html</b> file.</li>
@@ -825,12 +790,12 @@ logReferrer();</script>
 
                 <p>Choose <b>File | Save</b> to save your file in your 📁  <b>exercises</b> folder. Name your file <b>something.html</b>. (Replace 'something' with a suitable file name.) Do NOT use capital letters or empty spaces in the file name.</p>
 
-                <p>Link the new HTML file to your <b>style-5.css</b> stylesheet.</p>
+                <p>In the <b>&lt;head&gt;</b> of your new HTML file, copy-and-paste the TailwindCSS styles from your <b>page-5.html</b> file.</p>
         
                 <p>Finally, display your file in a web browser.</p>
                     
 <div class="gpt"><button class="copy-gpt" id="btn-9">Copy <i class="fa-regular fa-lightbulb"></i></button><code id="strCode-9">Build an HTML travel blog page about the city of Venice. Include a main heading and three sections with at least two paragraphs of text about some feature of the city.<br><br>
-Add an &lt;img&gt; tag inside each section with placeholder images of dimensions 1200 x 742 from the picsum.photos website. Ensure each image has appropriate alt, width, and height attributes. You can omit the footer.</code></div>
+Add an &lt;img&gt; tag inside each section with placeholder images of dimensions 1200 x 742 from the picsum.photos website. Ensure each image has appropriate alt, width, and height attributes. You can omit the nav and footer container elements.</code></div>
               </section>
 
         </article>
