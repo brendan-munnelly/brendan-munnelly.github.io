@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Styling Hyperlinks | Frontend Development Tutorials | Brendan Munnelly</title>
-    <meta name="description" content="Understanding the different states of hyperlinks and how to customise their appearance using CSS.">
+    <meta name="description" content="Using TailwindCSS to customise hyperlink colours, interactive states and underlines.">
 
     <meta name="author" content="Brendan Munnelly">
 
@@ -33,6 +33,38 @@
       gtag('js', new Date());
       gtag('config', 'G-RQ1JXS4GKM');
     </script>
+
+    <style>
+
+  .table-js-methods {
+            margin: 24px 0 24px 0;
+            border-top: solid 2px #044d6c;
+            background: linear-gradient(90deg, var(--yellow-050), var(--yellow-200));
+            min-width: 96%;
+
+        }
+
+        .table-js-methods td {
+            border-bottom: solid 1px #044d6c;
+            padding: 6px 0 8px
+        }
+
+        .table-js-methods td:nth-child(1) {
+            min-width: 20%;
+            vertical-align: top;
+            padding-left: 8px
+        }
+
+        .table-js-methods td p span {
+            font-weight: 500;
+        }
+
+        .table-js-methods td p  {
+            margin-bottom: 6px;
+            line-height: 1.4;
+            padding-right: 6px;
+        }        
+    </style>
     </head>
 
     <body id="top">
@@ -114,16 +146,19 @@ logReferrer();</script>
                 <h2>Learning Goals</h2>
                 <p>At the end of this Tutorial, you will be able to:</p>
                 <ul>
-                    <li>Understand the different states of hyperlinks</li>
-                    <li>Know how to target specific hyperlink states using CSS pseudo-classes</li>
-                    <li>Change the colour and underline properties of hyperlinks</li>
+                   <li>Understand that hyperlinks can have different interactive states.</li>
+    <li>Use TailwindCSS to change the colour of hyperlinks.</li>
+    <li>Use the TailwindCSS <b>hover:</b> and <b>focus:</b> prefixes to style hyperlinks when users interact with them.</li>
+    <li>Change the colour, thickness and position of hyperlink underlines.</li>
                 </ul>
+
+
             </section>
 
 
 <section>
 			
-                <p>In this Tutorial you will style the hyperlinks in the van Gogh and Irish tourism web pages.</p>
+             <p>In this Tutorial you will style the hyperlinks in your van Gogh and Irish tourism web pages.</p>
 
                 <div class="four-samples">
                     <div>
@@ -140,151 +175,297 @@ logReferrer();</script>
 
 			</section>
 
-            <section id="styling-with-css" class="wrapper-content bg-white">
+       <section id="styling-hyperlinks">
 
-                <h2>Styling hyperlinks with CSS</h2>
-            
+<h2>Styling hyperlinks with TailwindCSS</h2>
 
-                <p>The simplest way to style a hyperlink in a web page is to add a style rule for <b>color</b> in the linked stylesheet file as follows.</p>
+<p>The simplest way to style hyperlinks is to change their text colour.</p>
 
-                <img src="assets/img/styling-hyperlinks/hyperlinks-1.png" alt="screenshot" style="max-width: 660px">
+<p>For example, the TailwindCSS class below displays hyperlink text in blue:</p>
 
-                <p>However, unlike other inline elements such as <span class="syn">&lt;b&gt;</span> or <span class="syn">&lt;i&gt;</span>, hyperlinks are <i>interactive</i> elements. Users expect links to display differently depending on their interaction with them.</p>
-            
-                <p>Hyperlinks have five dynamic states. In CSS, you can target these different states using <i>pseudo-classes</i>. See below.</p>
+<pre><code class="language-css">a { @apply text-blue-700; }</code></pre>
 
-                <img src="assets/img/styling-hyperlinks/hyperlinks-2.png" alt="screenshot" style="max-width: 720px">
-                
-                <p>Note the colon character <span class="csyn">:</span> between the <span class="csyn">a</span> selector and the pseudo-class name, such as <span class="csyn">link</span> and <span class="csyn">active</span>.</p>
-            
-                <p>For simplicity, these five states can be grouped into two categories: passive and interactive.</p>
+<p>The <b>text-blue-700</b> class sets the colour of the hyperlink text.</p>
 
-                <img src="assets/img/styling-hyperlinks/hyperlinks-3.png" alt="screenshot" style="max-width: 732px">
+<p>However, hyperlinks are different from ordinary text elements such as <span class="syn">&lt;b&gt;</span> and <span class="syn">&lt;i&gt;</span>. Hyperlinks are <i>interactive</i> elements. Users can move a mouse pointer over them, select them with a keyboard, and click or tap them.</p>
 
-                <p>In the example above, the link colour changes from blue to dark blue when the user interacts with it.</p>
+<h3>Hyperlink states</h3>
 
-                <p>Typically, you will add smooth transition effect between states to create a more polished experience. See below.</p>
-                
-                <img src="assets/img/styling-hyperlinks/hyperlinks-4.png" alt="screenshot" style="max-width: 732px">
+<p>With TailwindCSS, you can change the appearance of a hyperlink when the user interacts with it.</p>
 
-    
-            </section>
+<p>Two important TailwindCSS prefixes for hyperlinks are:</p>
 
+<ul>
+    <li><b>hover:</b> &mdash; applies a style when the mouse pointer is positioned over the hyperlink.</li>
+    <li><b>focus:</b> &mdash; applies a style when the hyperlink receives keyboard or other input focus.</li>
+</ul>
 
-            <section id ="update-sample-pages">
-                <h2>Updating your <i>van Gogh</i> and <i>Tourism</i> hyperlinks</h2>
+<p>For example:</p>
 
-                <p>Now you will update the hyperlinks in two of your sample exercise files. Follow these steps:</p>
+<pre><code class="language-css">a {
+@apply text-blue-700
+       hover:text-red-700
+       focus:text-red-700;
+}</code></pre>
 
+<p>In this example:</p>
 
-                <ol>
-                    <li>In VS Code, open the <b>style-4.css</b> stylesheet.</li>
-                    <li>Add the following at the end of the file.
+<ul>
+    <li><b>text-blue-700</b> sets the normal hyperlink colour.</li>
+    <li><b>hover:text-red-700</b> changes the hyperlink to red when the mouse pointer moves over it.</li>
+    <li><b>focus:text-red-700</b> changes the hyperlink to red when it receives keyboard focus.</li>
+</ul>
 
-<pre><button class="copy-html" id="btn-1">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-1" class="hljs language-css">/* ======== HYPERLINKS ======== */
-a:link, a:visited {
-    color: #000; 
-    transition: all 0.3s ease;
-}
+<p>The colon character <b>:</b> separates the interactive state from the TailwindCSS utility that should be applied.</p>
 
-a:hover, a:focus, a:active {
-    color: var(--yellow-700)
-}</code></pre></li>
-                    <li>Save the stylesheet and, in your browser, note the effect on your web page.</li>
+<p>So you can read:</p>
 
-                    <li>In VS Code, open the <b>style-5.css</b> stylesheet.</li>
-                    <li>Add the following at the end of the file.
-<pre><button class="copy-html" id="btn-2">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-2" class="hljs language-css">/* ======== HYPERLINKS ======== */
-a:link, a:visited {
-    color: var(--green-800); 
-    transition: all 0.3s ease;
-}
+<pre><code>hover:text-red-700</code></pre>
 
-a:hover, a:focus, a:active {
-    color: var(--green-600)
-}</code></pre>  </li>
-                    <li>Save the stylesheet and, in your browser, note the effect on your web page.</li>
-                </ol>
+<p>as:</p>
 
-                <p>✅ &nbsp;Done.</p>
+<p><i>When the hyperlink is hovered over, change its text colour to red.</i></p>
 
-            </section>
-           
+</section>
 
-            
-            
-            <section id="css-underlines" class="wrapper-content bg-white">
-            
-                <h2>Underlines and the <code>text-decoration</code> property</h2>
-            
-                <p>Changing their colour according to state is the most basic way to style hyperlinks to provide clear visual feedback to users.</p>
+<section id="transitions">
 
-                <p>Another option is to change the underline properties.</p>
+<h2>Adding a smooth colour transition</h2>
 
-                <p>By default, browsers display hyperlinks with an underline. This helps users identify clickable text, especially when links are embedded within paragraphs.</p>
+<p>When a hyperlink changes colour, you can add a short transition so that the change appears smoother.</p>
 
-                <img src="assets/img/styling-hyperlinks/hyperlinsk-underlines.png" alt="screenshot" style="max-width: 620px">
-                
-                <p>You can control the presence of underlines using the <b>text-decoration</b> property. For example, to remove the underline from active hyperlink states, you would do the following:</p>
-                
-                <img src="assets/img/styling-hyperlinks/hyperlinks-5.png" alt="screenshot" style="max-width: 640px">
+<p>TailwindCSS provides the following utilities:</p>
 
-                <p>Typically, you would remove underlines from hyperlinks in navigation menus and footers.</p>
+<ul>
+    <li><b>transition-colors</b> &mdash; adds a transition when a colour changes.</li>
+    <li><b>duration-300</b> &mdash; sets the duration of the transition to 300 milliseconds.</li>
+</ul>
 
-                <img src="assets/img/styling-hyperlinks/hyperlinks-no-underline.png" alt="screenshot">
+<p>For example:</p>
 
-                <p>Three commonly used <b>text-decoration</b>-related properties for hyperlinks are the following:</p>
+<pre><code class="language-css">a {
+@apply text-blue-700
+       hover:text-red-700
+       focus:text-red-700
+       transition-colors duration-300;
+}</code></pre>
 
-                <ul>
-                    <li><b>text-decoration-color</b>: Sets the colour of the line (can be different from the text colour)</li>
-                    <li><b>text-decoration-thickness</b>: Sets the thickness of the line</li>
-                    <li><b>text-underline-offset</b>: Sets the distance between the text and the underline</li>
-                </ul>
-                
-                <p>Let's apply these to your two sample web pages.</p>
-                
-                <ol>
-                    <li>In VS Code, for <b>style-4.css</b>, update your hyperlink style rules as follows.
-<pre><button class="copy-html" id="btn-3">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-3" class="hljs language-css">a:link, a:visited {
-    color: #000; 
-    transition: all 0.3s ease;
-    text-decoration-thickness: 2px;
-    text-decoration-color: #000;
-    text-underline-offset: 7px;
-}
+</section>
 
-a:hover, a:focus, a:active {
-    color: var(--yellow-700);
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--blue-600);
-    text-underline-offset: 7px;
-}</code></pre></li>
-                    <li>In VS Code, for <b>style-5.css</b>, update your hyperlink style rules as follows.
-<pre><button class="copy-html" id="btn-4">Copy <i class="fa-regular fa-copy"></i></button><code id="strCode-4" class="hljs language-css">/* ======== HYPERLINKS ======== */
-a:link, a:visited {
-    color: var(--green-800); 
-    transition: all 0.3s ease;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--green-800);
-    text-underline-offset: 6px;
-}
+<section id="update-pages">
 
-a:hover, a:focus, a:active {
-    color: var(--rose-600);
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--rose-600);
-    text-underline-offset: 6px;
-}</code></pre>                        
-                    
-                    
-                    </li>
-                    <li>Save both stylesheets and view the effect on your web pages.</li>
+<h2>Updating your van Gogh and Tourism hyperlinks</h2>
 
-                </ol>
-            
-                <p>✅ &nbsp;All done.</p>
+<p>Now you will update the hyperlinks in two of your sample exercise files.</p>
 
-            </section>
+<h3>Van Gogh web page</h3>
+
+<ol>
+    <li>In VS Code, open your van Gogh HTML file.</li>
+
+    <li>Find the <span class="syn">&lt;style type="text/tailwindcss"&gt;</span> block in the <span class="syn">&lt;head&gt;</span> of the page.</li>
+
+    <li>Add the following style rule:</li>
+</ol>
+
+<pre><code class="language-css">a {
+@apply text-blue-700
+       hover:text-yellow-700
+       focus:text-yellow-700
+       transition-colors duration-300;
+}</code></pre>
+
+<p>Save the file and view the page in your browser.</p>
+
+<p>Move your mouse pointer over a hyperlink and note how its colour changes.</p>
+
+<h3>Irish tourism web page</h3>
+
+<p>For your Irish tourism page, you can use a different colour combination:</p>
+
+<pre><code class="language-css">a {
+@apply text-green-800
+       hover:text-green-600
+       focus:text-green-600
+       transition-colors duration-300;
+}</code></pre>
+
+<p>Save your changes and view the page in your browser.</p>
+
+</section>
+
+<section id="underlines">
+
+<h2>Styling hyperlink underlines</h2>
+
+<p>By default, hyperlinks are usually displayed with an underline. This helps users recognise that the text can be clicked.</p>
+
+<p>TailwindCSS provides several utilities for controlling hyperlink underlines.</p>
+
+<table class="table-js-methods">
+    <thead>
+        <tr>
+            <th style="width:28%">TailwindCSS</th>
+            <th>Meaning</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td style="width:28%"><b>underline</b></td>
+            <td>Displays an underline below the hyperlink text.</td>
+        </tr>
+
+        <tr>
+            <td><b>no-underline</b></td>
+            <td>Removes the underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>decoration-2</b></td>
+            <td>Sets the thickness of the underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>decoration-blue-700</b></td>
+            <td>Sets the colour of the underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>underline-offset-4</b></td>
+            <td>Creates additional space between the text and its underline.</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+
+<section id="underline-example">
+
+<h2>Adding styled underlines</h2>
+
+<p>You can combine the hyperlink colour and underline utilities in one style rule.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-css">a {
+@apply text-blue-700
+       underline
+       decoration-2
+       decoration-blue-700
+       underline-offset-4
+       hover:text-red-700
+       hover:decoration-red-700
+       focus:text-red-700
+       focus:decoration-red-700
+       transition-colors duration-300;
+}</code></pre>
+
+<p>This rule:</p>
+
+<ul>
+    <li>displays the hyperlink text in blue;</li>
+    <li>adds an underline;</li>
+    <li>makes the underline slightly thicker;</li>
+    <li>sets the underline colour to blue;</li>
+    <li>adds space between the text and its underline;</li>
+    <li>changes both the text and underline to red when the hyperlink is hovered over or receives focus.</li>
+</ul>
+
+</section>
+
+<section id="removing-underlines">
+
+<h2>Removing underlines on hover</h2>
+
+<p>You can also remove the underline when the user interacts with a hyperlink.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-css">a {
+@apply text-blue-700
+       underline
+       decoration-2
+       underline-offset-4
+       hover:text-red-700
+       hover:no-underline
+       focus:text-red-700
+       focus:no-underline
+       transition-colors duration-300;
+}</code></pre>
+
+<p>The <b>hover:no-underline</b> utility removes the underline when the mouse pointer is positioned over the hyperlink.</p>
+
+<p>The <b>focus:no-underline</b> utility does the same when the hyperlink receives focus.</p>
+
+</section>
+
+<section id="summary">
+
+<h2>Styling hyperlinks: summary</h2>
+
+<table class="table-js-methods">
+    <thead>
+        <tr>
+            <th style="width:28%">TailwindCSS</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td style="width:28%"><b>text-blue-700</b></td>
+            <td>Sets the normal text colour.</td>
+        </tr>
+
+        <tr>
+            <td><b>hover:text-red-700</b></td>
+            <td>Changes the text colour when the mouse pointer is over the hyperlink.</td>
+        </tr>
+
+        <tr>
+            <td><b>focus:text-red-700</b></td>
+            <td>Changes the text colour when the hyperlink receives focus.</td>
+        </tr>
+
+        <tr>
+            <td><b>underline</b></td>
+            <td>Adds an underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>no-underline</b></td>
+            <td>Removes an underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>decoration-2</b></td>
+            <td>Controls underline thickness.</td>
+        </tr>
+
+        <tr>
+            <td><b>decoration-blue-700</b></td>
+            <td>Controls underline colour.</td>
+        </tr>
+
+        <tr>
+            <td><b>underline-offset-4</b></td>
+            <td>Controls the space between the text and underline.</td>
+        </tr>
+
+        <tr>
+            <td><b>transition-colors</b></td>
+            <td>Adds a smooth transition between colour changes.</td>
+        </tr>
+
+        <tr>
+            <td><b>duration-300</b></td>
+            <td>Sets the transition duration to 300 milliseconds.</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
 
     <section id="upload-github">
         <h2>Uploading your files to GitHub</h2>
