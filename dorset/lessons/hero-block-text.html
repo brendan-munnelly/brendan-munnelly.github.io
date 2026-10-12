@@ -120,8 +120,12 @@ logReferrer();</script>
             <h2>Learning Goals</h2>
 
                 <ul>
-                    <li>Style the layout and appearance of a text-only hero block in a sample web page.</li>
-                    <li>Animate text headlines so that they slide in from the top or left of a sample web page.</li>
+                    <li>Use TailwindCSS to create a text-only hero block with the semantic <span class="syn">&lt;header&gt;</span> tag.</li>
+                    <li>Set the minimum height and internal spacing of a hero block.</li>
+                    <li>Use Flexbox utilities to position hero text vertically.</li>
+                    <li>Style large responsive headings with TailwindCSS.</li>
+                    <li>Add a colour gradient to the background of a hero block.</li>
+                    <li>Add simple entrance animations to hero text.</li>
                 </ul>
 
             </section>
@@ -152,17 +156,25 @@ logReferrer();</script>
             
                 <img src="assets/img/hero-block-text/samples-hero-blocks-basic.png" alt="Working with Internal Hyperlinks">
 
-                <p>In this Tutorial, you will create an above-the-fold hero block with animated text and a coloured background gradient.</p>
+                <p>In this Tutorial, you will create a text-only hero block with:</p>
+
+                <ul>
+                    <li>a large <span class="syn">&lt;h1&gt;</span> main heading;</li>
+                    <li>an <span class="syn">&lt;h2&gt;</span> sub-heading;</li>
+                    <li>a coloured background gradient;</li>
+                    <li>responsive spacing and typography; and</li>
+                    <li>simple text animations.</li>
+                </ul>
 
                 <img src="assets/img/hero-block-text/example-one-browser.jpg" style="max-width: 600px" alt="Hero block">
 
             </section>
             
 
-            <section id="sample-files" class="wrapper-content bg-white">
+<section id="sample-files" class="wrapper-content bg-white">
 
-                <h2>Downloading your sample files</h2>
-                <p>In this Tutorial, you will work with the following two files: a web page and a stylesheet:</p>
+                <h2>Downloading your sample file</h2>
+                <p>In this Tutorial, you will work with a single web page:</p>
                 
                 <ol>
                     <li><b><a href="assets/downloads/hero-text.html" target="_blank">hero-text.html</a></b>: Click this link to open the web page in a new tab of your web browser. 
@@ -173,79 +185,144 @@ logReferrer();</script>
                   <img src="assets/img/hero-block-text/hero-save-as.png" alt="Hero Blocks">
                   </li>
             
-                    <li><b><a href="assets/downloads/hero-text.css" target="_blank">hero-text.css</a></b>: Click this link to open the stylesheet file in a new tab of your web browser.
-                    <span class="inside-ol">&nbsp;</span>
-                    Right-click anywhere in the browser window, and from the context menu, choose <b>Save as...</b> (Brave or Chrome) or <b>Save Page As...</b> (Firefox).
-                    <span class="inside-ol">&nbsp;</span>
-                    Save the <b>hero-text.css</b> stylesheet file to your <b>websites/exercises/assets/css</b> folder.</li>
 
                 </ol>
             
-                <p>You have now saved the two files you need for this Tutorial.</p>
-            
-            </section>
-            
-            
-            <section id="inspect-html-css" class="wrapper-content bg-white">
-            
-                <h2>Inspecting the hero content and styles</h2>
+               <p>You can see that the web page contains a <span class="syn">&lt;header&gt;</span>.</p> 
 
-                <p>In VS Code, open the <b>hero-text.html</b> web page and <b>hero-text.css</b> stylesheet.</p>
-                 
-                <p>You can see that the web page contains a <span class="syn">&lt;header&gt;</span>.</p> 
-                  
-                <p>Inside this is a <span class="syn">&lt;div&gt;</span> child element with a class of <span class="csyn">.hero-text-container</span>. </p>
-                    
                 <p>And this contains a <span class="syn">&lt;h1&gt;</span> main heading  and an <span class="syn">&lt;h2&gt;</span> sub-heading</p>
             
-                <img src="assets/img/hero-block-text/hero-block-outline.png" alt="Project Hero Blocks" style="max-width: 700px">
+            </section>
 
-                <p>In your web browser, view the <b>hero-text.html</b> web page at different screen sizes.</p>
+            
 
-                <img src="assets/img/hero-block-text/desktop-mobile-screen-1.png" alt="Project Hero Blocks">
+        <section id="hero-height">
+
+            <h2>Setting the mimimum height of the hero block</h2>
+
+            <p>A hero block typically fills a large part of the browser viewport.</p>
+
+            <p>You can use the CSS <b>vh</b> unit to set a height relative to the viewport.</p>
+
+            <p>For example:</p>
+
+<pre><code class="language-css">header { @apply min-h-[70vh]; }</code></pre>
+
+            <p>The value <b>70vh</b> means that the hero block has a minimum height equal to 70% of the viewport height.</p>
+
+            <p>You can also use different values at different viewport widths.</p>
+
+<pre><code class="language-css">header { 
+    @apply min-h-[60vh] md:min-h-[80vh]
+    bg-gray-600; 
+}</code></pre>
+
+            <p>Add the above responsive minimum heights inside the <span class="syn">&lt;style&gt;</span> tag in the <span class="syn">&lt;head&gt;</span> to your web page.</p>
 
 
-                <h3>Hero block width and height</h3>
-                <p>By default, both the <span class="syn">&lt;header&gt;</span> and the child <span class="syn">&lt;div&gt;</span> are 100% wide, so they fill the full width of the viewport.</p>
-                <p>You can see that <i>most</i> but not all of the viewport height is filled by the hero block.</p>
+        <p>In this example:</p>
 
-                <p>Here are the typical <i>minimum</i> height values you will want for your hero block:</p>
+            <ul>
+                    
+                <li><b>min-h-[60vh]</b> sets a minimum height of 60% of the viewport on small screens.</li>
+                <li><b>md:min-h-[80vh]</b> increases the minimum height to 80% of the viewport at 768px and above.</li>
+            </ul>      
 
-                <img src="assets/img/hero-block-text/typical-hero-heights.png" alt="hero block" style="max-width: 580px">
+                <p>In your web browser, view your <b>hero-text.html</b> web page.</p>
 
-                <h3>Spacing around <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> headings</h3>
-
-              <p>The horizontal (left and right) spacing around the <span class="syn">&lt;h1&gt;</span> and <span class="syn">&lt;h2&gt;</span> text is set by <span class="csyn">padding</span> values on the <span class="syn">&lt;header&gt;</span> parent container. See the areas in red below.</p>
-
-              <img src="assets/img/hero-block-text/desktop-mobile-screen-2.png" alt="Project Hero Blocks">
-
-              <p>Typically, the following padding values work equally well for viewports of all sizes.</p>
-
-              <img src="assets/img/hero-block-text/hero-padding.png" alt="Project Hero Blocks" style="max-width: 640px">
-              
-              <p>The bottom padding value of <b>4%</b> is added to balance the vertical space filled by the extra large <span class="syn">h1</span> heading.</p>
+                <img src="assets/img/hero-block-text/h1.png" alt="Hero Text Example">
+                
+        </section>
 
 
+<section id="hero-flexbox">
+
+    <h2>Centering the hero text vertically</h2>
+
+    <p>TailwindCSS provides css flexbox utilities for positioning elements inside a container.</p>
+
+    <p>For this hero block, add the following utilities:</p>
+
+<pre><code class="language-css">header {
+    @apply min-h-[60vh] md:min-h-[80vh]
+    bg-gray-600
+    flex flex-col justify-center;
+}</code></pre>
+
+    <p>As you can see below, the hero text is centered vertically within the hero block.</p>
+    <img src="assets/img/hero-block-text/h2.png" alt="Hero Text Centered Example">
+    
+</section>
+<section>
+
+    <h2>Add horizontal spacing around the hero text</h2>
+    <p>Let's add some horizontal spacing around the hero text.</p>
+
+<pre><code class="language-css">header {
+    @apply min-h-[60vh] md:min-h-[80vh]
+    bg-gray-600
+    flex flex-col justify-center;
+    px-8 lg:px-60 py-12;
+}</code></pre>
+
+<p>Here:</p>
+
+<ul>
+    <li><b>px-12</b> adds horizontal padding on small and medium-sized viewports.</li>
+    <li><b>lg:px-60</b> increases the horizontal padding on viewports 1024px wide and above.</li>
+    <li><b>py-12</b> adds padding above and below the hero content.</li>
+</ul>
+
+<p>Here is how the hero block looks with the added horizontal spacing:</p>
+
+<img src="assets/img/hero-block-text/h3.png" alt="Hero Text with Horizontal Spacing Example">
+    
               <h3>Alignment of <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> headings</h3>
-              <p>Text within a hero block is most commonly centre-aligned. You achieve this by adding a <span class="csyn">text-align: center</span> style rule to the <span class="syn">header</span> container.</p>
+              <p>Text within a hero block is most commonly centre-aligned. You achieve this by adding a <span class="csyn">text-center</span> style rule to the <span class="syn">header</span> container.</p>
 
-              <p>To align the hero block text at the left, simply remove this style rule.</p>
+<pre><code class="language-css">header {
+@apply min-h-[60vh] md:min-h-[80vh]
+    bg-gray-600
+    flex flex-col justify-center
+    px-8 lg:px-60 py-12
+    text-center;
+}</code></pre>
 
-              <img src="assets/img/hero-block-text/desktop-mobile-screen-3.png" alt="Project Hero Blocks">
+<p>The <b>text-center</b> utility is inherited by the <span class="syn">&lt;h1&gt;</span> and <span class="syn">&lt;h2&gt;</span> elements inside the header.</p>
 
+<img src="assets/img/hero-block-text/h4.png" alt="Hero Text Centered Example">
+
+
+<p>If you prefer a left-aligned hero block, simply remove <b>text-center</b>.</p>
+
+
+             
               <p>Below are some examples of hero blocks with centre and left-aligned text.</p>
 
               <img src="assets/img/hero-block-text/hero-alignments.png" alt="Project Hero Blocks">
 
-              <h3>Vertical spacing between <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> headings</h3>
 
-              <p>In the <b>hero-text.css</b> stylesheet, you can see that only the <span class="syn">h1</span> class has any spacing assigned to it: a <span class="csyn">margin-bottom</span> of <span class="csyn">24px</span>. </p>
+<section id="hero-heading-spacing">
 
-              <img src="assets/img/hero-block-text/hero-h1-margin.png" alt="Project Hero Blocks">
+<h2>Vertical spacing between <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> headings</h2>
+
+<p>The <span class="syn">&lt;h1&gt;</span> and <span class="syn">&lt;h2&gt;</span> need some vertical space between them.</p>
+
+<p>You can create this space by adding a bottom margin to the <span class="syn">&lt;h1&gt;</span>.</p>
+
+<pre><code class="language-css">header h1 {
+    @apply text-7xl md:text-8xl
+        text-white font-bold
+        tracking-tight
+        mb-6;
+}</code></pre>
+
+<p>The <b>mb-6</b> utility adds margin below the main heading and pushes the <span class="syn">&lt;h2&gt;</span> farther down.</p>
+
 
               <p>This &#8216;pushes down&#8217; the <span class="syn">h2</span> sub-heading from under the <span class="syn">h1</span> main heading.</p>
 
-              <img src="assets/img/hero-block-text/hero-h1-margin-2.png" alt="Project Hero Blocks">
+ <img src="assets/img/hero-block-text/h5.png" alt="Project Hero Blocks">             
 
               <p>A value of <span class="csyn">24px</span> or similar should work well for all viewport sizes.</p>
 
@@ -253,24 +330,24 @@ logReferrer();</script>
 
               <img src="assets/img/hero-block-text/flexbox-spacing.png" alt="Project Hero Blocks">
 
-              <h3>Creating an extra large <code>&lt;h1&gt;</code> heading</h3>
-             <p>To make the <span class="syn">&lt;h1&gt;</span> text bigger than is possible with the <a href="../lessons/working-with-text.html#css-font-size">fluid font size scale</a> in the CSS custom properties, use the CSS <span class="csyn">calc()</span> function with a multiplier value such as <b>1.5</b>.</p>
-
-             <h3>Updating the hero background with a linear gradient</h3>
-             <p>Currently, the <span class="syn">&lt;header&gt;</span> has a style rule in the CSS of <span class="csyn">background-color: gray</span>.</p>
               
-             <p>Replace this with a linear gradient of two colours. You need to use the CSS <span class="csyn">background-image</span> property instead of the <span class="csyn">background-color</span> property.</p> 
+</section>
 
-             <p>For example:</p>
+<section>
+             <h2>Updating the hero background with a linear gradient</h2>
 
-<pre class="language-css"><span class="token comment">/* Purple to orange */  </span>
-<span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#ff00cc</span>,<span class="token value-text">#333399</span>);
-</pre>
-           
-      
-<pre class="language-css"><span class="token comment">/* Dark blue */ </span>
-<span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">90deg</span>,<span class="token value-text">#07092f</span>,<span class="token value-text">#165cc0)</span>;
-</pre>
+<p>Instead of using a single background colour, you can create a gradient between two colours.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-css">header { 
+@apply min-h-[60vh] md:min-h-[80vh]
+    bg-linear-to-b from-purple-600 to-purple-900 
+    flex flex-col justify-center
+    px-8 lg:px-60 py-12
+    text-center;
+}</code></pre>
+
 
 
         </section>
@@ -507,7 +584,7 @@ logReferrer();</script>
 		<li>In your <b>hero-text.html</b> file, add the <b>slide-in-top</b> class to your <span class="syn">&lt;h1&gt;</span> heading as shown below.</li>
 
 		<li>Add the <b>slide-in-left</b> class to your <span class="syn">&lt;h2&gt;</span> sub-heading as shown below.
-		<img src="assets/img/hero-block-text/vscode-add-classes.png" alt="Project Hero Blocks"></li>
+		<img src="assets/img/hero-block-text/h7.png" alt="Project Hero Blocks"></li>
 
 	</ol>
 
