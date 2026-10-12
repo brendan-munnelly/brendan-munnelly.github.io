@@ -108,6 +108,10 @@
 
     <p>The image fills the background of the hero block while headings and other content appear in front of it.</p>
 
+
+                <img src="assets/img/hero-block-image/hero-examples.jpg" alt="Project Hero Blocks">
+                
+
     <p>In this Tutorial, you will update the hero block created in the previous Tutorial so that it contains:</p>
 
     <ul>
@@ -116,6 +120,8 @@
         <li>a text-shadow effect; and</li>
         <li>a semi-transparent dark overlay between the image and the text.</li>
     </ul>
+
+     <img src="assets/img/hero-block-image/example-one-browser.jpg" style="max-width: 600px; margin-bottom:0" alt="Hero block">
 
 </section>
 
@@ -131,20 +137,19 @@
 
         <li>Save a copy with the new filename <b>hero-image.html</b>.</li>
 
-        <li>In the new file, change the page title and description to the following:</li>
-    </ol>
+        <li>In the new file, change the page title and description to the following:
 
-    <pre><code class="language-html">&lt;title&gt;Hero Block with Image&lt;/title&gt;
-
+<pre><code class="language-html">&lt;title&gt;Hero Block with Image&lt;/title&gt;
 &lt;meta name="description"
-content="A hero block with a background image and a tinted overlay."&gt;</code></pre>
+content="A hero block with a background image and a tinted overlay."&gt;</code></pre> </li>
 
-    <p>Next, save the sample image named <b>business.jpg</b> to your:</p>
+<li>Finally, save the following image to your <b>websites/exercises/assets/img</b> sub-folder: 
+                    <a href="final-hero-image/after/assets/img/business.jpg" target="_blank"><img src="final-hero-image/after/assets/img/business.jpg" alt="Sample image" style="max-width: 500px"></a>
+                    <a href="final-hero-image/after/assets/img/business.jpg" target="_blank" class="link-exercise" style="color: #fff">business.jpg</a></li>
 
-    <p><b>assets/img</b></p>
-
-    <p>sub-folder.</p>
-
+                </ol>
+            
+                <p>You have now have the two files you need for this Tutorial.</p>
 </section>
 
 
@@ -156,9 +161,7 @@ content="A hero block with a background image and a tinted overlay."&gt;</code><
 
     <p>Add the following line inside the <span class="syn">&lt;head&gt;</span>, before the TailwindCSS script:</p>
 
-    <pre><code class="language-html">&lt;link rel="preload"
-href="assets/img/business.jpg"
-as="image"&gt;</code></pre>
+    <pre><code class="language-html">&lt;link rel="preload" href="assets/img/business.jpg" as="image"&gt;</code></pre>
 
 </section>
 
@@ -175,16 +178,18 @@ as="image"&gt;</code></pre>
 
     <pre><code class="language-css">header {
     @apply min-h-[60vh] md:min-h-[80vh]
-           bg-[url('assets/img/business.jpg')]
-           bg-cover bg-center
-           flex flex-col justify-center
-           px-8 lg:px-60 py-12
-           text-center;
+        bg-[url('assets/img/business.jpg')]
+        bg-cover bg-center
+        flex flex-col justify-center
+        px-8 lg:px-60 py-12
+        text-center;
 }</code></pre>
+
+<img src="assets/img/hero-block-image/h-img-1.png" alt="Sample image">
 
     <p>The new TailwindCSS utilities are:</p>
 
-    <table>
+    <table class="table-js-arithmetic">
         <thead>
             <tr>
                 <th>TailwindCSS</th>
@@ -262,15 +267,18 @@ as="image"&gt;</code></pre>
 
     <p>Add <b>relative</b> to your header rule:</p>
 
-    <pre><code class="language-css">header {
-    @apply relative
-           min-h-[60vh] md:min-h-[80vh]
-           bg-[url('assets/img/business.jpg')]
-           bg-cover bg-center
-           flex flex-col justify-center
-           px-8 lg:px-60 py-12
-           text-center;
+<pre><code class="language-css">header {
+@apply relative
+    min-h-[60vh] md:min-h-[80vh]
+    bg-[url('assets/img/business.jpg')] bg-cover bg-center
+    flex flex-col justify-center
+    px-8 lg:px-60 py-12
+    text-center;
 }</code></pre>
+
+    <p>Your web page should now look as follows:</p>
+
+    <img src="assets/img/hero-block-image/h-img-2.png" alt="Sample image">
 
 </section>
 
@@ -292,7 +300,9 @@ as="image"&gt;</code></pre>
 
     <p>This creates a new invisible layer that fills the entire hero block.</p>
 
-    <table>
+    <img src="assets/img/hero-block-image/h-img-3.png" alt="Sample image">
+
+    <table class="table-js-arithmetic">
         <thead>
             <tr>
                 <th>TailwindCSS</th>
@@ -333,7 +343,7 @@ as="image"&gt;</code></pre>
 </section>
 
 
-<section id="z-index">
+<!-- <section id="z-index">
 
     <h2>Positioning the text above the overlay</h2>
 
@@ -356,7 +366,7 @@ header h2 {
         <li>Hero text</li>
     </ol>
 
-</section>
+</section>  -->
 
 
 <section id="text-shadow">
@@ -369,87 +379,23 @@ header h2 {
 
     <p>Add <b>text-shadow-lg</b> to both headings:</p>
 
-    <pre><code class="language-css">header h1,
-header h2 {
-    @apply relative z-10 text-shadow-lg;
-}</code></pre>
+<pre><code class="language-css">header h1,
+header h2 { @apply text-shadow-lg/30; }</code></pre>
 
     <p>You can also increase the strength of the shadow by changing its opacity.</p>
 
-    <p>For example:</p>
-
-    <pre><code class="language-css">header h1,
-header h2 {
-    @apply relative z-10 text-shadow-lg/50;
-}</code></pre>
+    
 
 </section>
 
 
-<section id="complete-css">
-
-    <h2>Complete TailwindCSS styles</h2>
-
-    <p>Your complete hero styles can now be written as follows:</p>
-
-    <pre><code class="language-css">header {
-    @apply relative
-           min-h-[60vh] md:min-h-[80vh]
-           bg-[url('assets/img/business.jpg')]
-           bg-cover bg-center
-           flex flex-col justify-center
-           px-8 lg:px-60 py-12
-           text-center;
-}
-
-header::before {
-    content: "";
-    @apply absolute inset-0 bg-black/40;
-}
-
-header h1 {
-    @apply relative z-10
-           text-7xl md:text-8xl
-           text-white font-bold
-           tracking-tight
-           text-shadow-lg/50
-           mb-6;
-}
-
-header h2 {
-    @apply relative z-10
-           text-4xl md:text-5xl
-           text-white
-           text-shadow-lg/50;
-}</code></pre>
-
-</section>
-
-
-<section id="complete-html">
-
-    <h2>Complete hero block HTML</h2>
-
-    <p>Notice that the HTML itself remains very simple.</p>
-
-    <pre><code class="language-html">&lt;header&gt;
-
-    &lt;h1&gt;Albert Camus&lt;/h1&gt;
-
-    &lt;h2&gt;Creative Web Developer&lt;/h2&gt;
-
-&lt;/header&gt;</code></pre>
-
-    <p>No extra <span class="syn">&lt;div&gt;</span> elements are required for the background image or overlay.</p>
-
-</section>
 
 
 <section id="summary">
 
     <h2>Hero blocks with images: summary</h2>
 
-    <table>
+    <table class="table-js-arithmetic">
         <thead>
             <tr>
                 <th>TailwindCSS</th>
