@@ -83,258 +83,442 @@
 
         <article>
 
-			<section id="learning-goals">
-                <h2>Learning Goals</h2>
+<section id="learning-goals">
 
-                <p>At the end of this Tutorial, you will be able to:</p>
-                <ul>
-                    <li>Add a background image to a hero block.</li>
-                    <li>Add a shadow effect to the hero text.</li>
-                    <li>Add a tinted overlay behind the hero text and in front of the background image.</li>
-                </ul>
+    <h2>Learning Goals</h2>
 
-            </section>
+    <p>At the end of this Tutorial, you will be able to:</p>
 
-			<section>
+    <ul>
+        <li>Add a background image to a hero block with TailwindCSS.</li>
+        <li>Resize and position a background image so that it fills the hero block.</li>
+        <li>Use TailwindCSS positioning utilities to stack elements on top of one another.</li>
+        <li>Add a text shadow to make hero text easier to read.</li>
+        <li>Add a semi-transparent tinted overlay between the background image and the hero text.</li>
+    </ul>
 
-                <h2>About full-width hero backgrounds</h2>
-
-                <p>Hero blocks with full-width background images are a common design choice of web developers. See the examples below.</p>
-                <img src="assets/img/hero-block-image/hero-examples.jpg" alt="Project Hero Blocks">
-                <p>In this Tutorial you will create a hero block with a background image and a tinted overlay. See below.</p>
-            
-                <img src="assets/img/hero-block-image/example-one-browser.jpg" style="max-width: 600px; margin-bottom:0" alt="Hero block">
-
-			</section>
-
-            <section>
-
-                <h2>Stacking layers in HTML/CSS</h2>
-
-                <p>You can create a 3D effect in a web page where one item overlaps another with the <span class="csyn">z-index</span> and <span class="csyn">position</span> CSS properties.</p>
-
-                <ul>
-                    <li><b>z-index</b>: HTML elements with higher <span class="csyn">z-index</span> values will display in front of elements with lower <span class="csyn">z-index</span> values. By default, elements have a <span class="csyn">z-index</span> of 0.</li>
-                    <li><b>position</b>: The <span class="csyn">z-index</span> property does not work with HTML elements that have the default <span class="csyn">position</span> property of <span class="csyn">static</span>.</li>
-                </ul>
-
-                <p>Here are the typical steps for creating a 3D layering effect:</p>
-
-                <ul>
-                    <li>Create a parent container such as a <span class="syn">&lt;header&gt;</span>, <span class="syn">&lt;section&gt;</span> or a <span class="syn">&lt;div&gt;</span> to contain the overlapping elements.  In your CSS file, give this parent container a <span class="csyn">position: relative</span> style.</li>
-                    <li>Inside this parent container, add a number of child <span class="syn">&lt;div&gt;</span> elements that will overlap one another. In your CSS file, give each child element a <span class="csyn">position: absolute</span> style and a <span class="csyn">z-index</span> value to set the stacking order. Typically, you will want to set the overlapping child elements to fill the full space of their parent container. So, also add this style rule for each stacked child element:
-                    
-<pre class="language-html">
-    <span class="white">top: 0; right: 0; bottom: 0; left: 0;</span>
-</pre>                    
-                    
-                    </li>
-                </ul>
-
-            </section>
-            
-
-            <section id="sample-files" class="wrapper-content bg-white">
-
-                <h2>Working with your sample files</h2>
-                <p>In this Tutorial, you will update a copy of the sample web page and stylesheet you worked with in the previous <a href="hero-block-text.html">Hero Blocks with Text</a> Tutorial.</p>
-            
-                <ol>
-                    <li>In VS Code, open the <b>hero-text.html</b> web page and save it with the new name of <b>hero-image.html</b>.</li>
-
-                    <li>Open the <b>hero-text.css</b> stylesheet and save it with the new name of <b>hero-image.css</b>.</li>
-
-                    <li>In the new <b>hero-image.html</b> file, edit the name of the linked stylesheet from <b>hero-text.css</b> to <b>hero-image.css</b>, and save the web page.</li>
-
-                    <li>Replace the current title and description details with the following:
-<pre class="language-html">
-&lt;<span class="blue-dark">title</span>&gt;<span class="white">Hero Block with Image</span>&lt;/<span class="blue-dark">title</span>&gt;
-&lt;<span class="blue-dark">meta</span> <span class="brown">name</span><span class="white">=</span><span class="brown">"description"</span> <span class="blue-dark">content</span><span class="white">=</span><span class="brown">"A hero block with a background image and a tinted overlay."</span>&gt;   
-</pre>
-    <img src="assets/img/hero-block-image/css-link.png" alt="screenshot" class="wider-115">
-
-</li>
-
-                    <li>Finally, save the following image to your <b>websites/exercises/assets/img</b> sub-folder: 
-                    <a href="final-hero-image/after/assets/img/business.jpg" target="_blank"><img src="final-hero-image/after/assets/img/business.jpg" alt="Sample image" style="max-width: 500px"></a>
-                    <a href="final-hero-image/after/assets/img/business.jpg" target="_blank" class="link-exercise" style="color: #fff">business.jpg</a></li>
-
-                </ol>
-            
-                <p>You have now saved the files you need for this Tutorial.</p>
-            
-            </section>
-            
-            
-            <section id="adding-bg-image" class="wrapper-content bg-white">
-            
-                <h2>Adding the background image</h2>
-                <p>Let's begin by adding the sample background image named <b>business.jpg</b> to the web page. Here are the steps.</p>
-
-                <ol>
-                    <li>Copy-and-paste the following lines to your <b>hero-image.html</b> web page, to just under the <span class="syn">.hero-text-container</span> block.
-
-<pre class="language-html">
-&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="token brown">"hero-bg-media"</span>&gt;
-    &lt;<span class="blue-dark">img</span> <span class="blue-light">src</span>=<span class="token brown">"assets/img/business.jpg"</span> <span class="blue-light">alt</span>=<span class="token brown">"sample background image"</span>&gt;   
-&lt;/<span class="blue-dark">div</span>&gt;
-</pre>
-                As you can see, the image is a child of a parent container named  <span class="syn">hero-bg-media</span>.
-                    Your web page should now look as shown below in VS Code.
-                
-                    <img src="assets/img/hero-block-image/vscode-1.png" alt="Project Hero Blocks">
-                </li>
-                    <li>Save your web page.</li>
-                </ol>
-
-                <p>In your browser, your web page will look as shown below.</p>
-
-                <img src="assets/img/hero-block-image/hero-before.png" alt="screenshot">
-            </section>
-
-                <section>
-
-                <h2 id="update-css">Updating the CSS to support stacking</h2>
-                
-                <p>Let's update the stylesheet so that the text 'stacks' in front of the image.</p>
-                <ol>
-
-                  <li>In the <b>hero-image.css</b> stylesheet, add this new style rule to the <span class="csyn">header { }</span> declaration.
-
-                <img src="assets/img/hero-block-image/vs-code-header.png" alt="screenshot"></li>
-                <li>At the end of the CSS file, add these three new declaration blocks.
-
-<pre class="language-css">
-<span class="token class">.hero-text-container</span> {
-    <span class="token property">position</span>: <span class="token value-text">relative</span>; 
-    <span class="token property">z-index</span>: <span class="token number">1</span>;
-}    
-    
-<span class="token class">.hero-bg-media</span> {
-    <span class="token property">position</span>: <span class="token value-text">absolute</span>; 
-    <span class="token property">top</span>: <span class="token number">0</span>; <span class="token property">right</span>: <span class="token number">0</span>; <span class="token property">bottom</span>: <span class="token number">0</span>; <span class="token property">left</span>: <span class="token number">0</span>; 
-    <span class="token property">z-index</span>: <span class="token number">0</span>;
-}
-                    
-<span class="token class">.hero-bg-media img</span> {
-    <span class="token property">object-fit</span>: <span class="token value-text">cover</span>; <span class="token property">width</span>: <span class="token number">100%</span>; <span class="token property">height</span>: <span class="token number">100%</span>;
-}</pre>
-
-        The <span class="csyn">object-fit: cover</span> style rule tells the image to fill its <span class="csyn">.hero-bg-media</span> container while keeping its aspect ratio. Some parts of the image might be cropped if its proportions don’t match the container’s proportions.</li>
-
-                <li>Save the <b>hero-image.css</b> stylesheet.</li>
-
-                <li>Finally, switch to the <b>hero-image.html</b> web page, and add the following new line to the <span class="syn">&lt;head&gt;</span>, to just before the stylesheet link.
-<pre class="language-html">
-&lt;<span class="blue-dark">link</span> <span class="blue-light">rel</span>=<span class="brown">"preload"</span> <span class="blue-light">href</span>=<span class="brown">"assets/img/business.jpg"</span> <span class="blue-light">as</span>=<span class="brown">"image"</span>&gt;
-</pre>
-            This directs the web browser to give priority to the <b>business.jpg</b> hero image when loading the various components of the web page.</li>       
-
-            <li>Save the <b>hero-image.html</b> file.</li>
-        </ol>
-
-                <p>In your web browser, the web page should now look as shown below.</p>
-
-                <img src="assets/img/hero-block-image/hero-image-no-shadow.jpg" alt="Project Hero Blocks">
-
-        <h3>About the <code>position: relative</code> CSS property</h3>
-        <p>The <span class="csyn">position: relative</span> property establishes a new positioning context for a parent element that has inside it child elements with a <span class="csyn">position: absolute</span> property.</p>
-
-        <p>Without <span class="csyn">position: relative</span>, the absolutely positioned child elements would be positioned relative to the entire document (<span class="syn">&lt;html&gt;</span> or <span class="syn">&lt;body&gt;</span>), not within the parent itself.</p>
-
-        <p>In summary, by adding <span class="csyn">position: relative</span> to the parent, the child elements are positioned relative to the parent container.</p>
 </section>
 
 
+<section id="hero-backgrounds">
+
+    <h2>About full-width hero backgrounds</h2>
+
+    <p>Hero blocks with full-width background images are a common feature of modern websites.</p>
+
+    <p>The image fills the background of the hero block while headings and other content appear in front of it.</p>
+
+    <p>In this Tutorial, you will update the hero block created in the previous Tutorial so that it contains:</p>
+
+    <ul>
+        <li>a full-width background image;</li>
+        <li>large text positioned in front of the image;</li>
+        <li>a text-shadow effect; and</li>
+        <li>a semi-transparent dark overlay between the image and the text.</li>
+    </ul>
+
+</section>
 
 
+<section id="sample-files">
+
+    <h2>Working with your sample file</h2>
+
+    <p>In this Tutorial, you will create a copy of the web page you completed in the previous <b>Hero Blocks with Text</b> Tutorial.</p>
+
+    <ol>
+        <li>In VS Code, open your <b>hero-text.html</b> file.</li>
+
+        <li>Save a copy with the new filename <b>hero-image.html</b>.</li>
+
+        <li>In the new file, change the page title and description to the following:</li>
+    </ol>
+
+    <pre><code class="language-html">&lt;title&gt;Hero Block with Image&lt;/title&gt;
+
+&lt;meta name="description"
+content="A hero block with a background image and a tinted overlay."&gt;</code></pre>
+
+    <p>Next, save the sample image named <b>business.jpg</b> to your:</p>
+
+    <p><b>assets/img</b></p>
+
+    <p>sub-folder.</p>
+
+</section>
 
 
+<section id="preload-image">
+
+    <h2>Preloading the hero image</h2>
+
+    <p>Because the hero image is one of the first large items displayed on the page, you can tell the browser to give it priority when loading the page.</p>
+
+    <p>Add the following line inside the <span class="syn">&lt;head&gt;</span>, before the TailwindCSS script:</p>
+
+    <pre><code class="language-html">&lt;link rel="preload"
+href="assets/img/business.jpg"
+as="image"&gt;</code></pre>
+
+</section>
 
 
+<section id="background-image">
+
+    <h2>Adding the background image</h2>
+
+    <p>You do not need to add an <span class="syn">&lt;img&gt;</span> element to the hero block.</p>
+
+    <p>Instead, the image can be applied directly to the <span class="syn">&lt;header&gt;</span> as a CSS background image.</p>
+
+    <p>Update your existing <span class="syn">header</span> style rule as follows:</p>
+
+    <pre><code class="language-css">header {
+    @apply min-h-[60vh] md:min-h-[80vh]
+           bg-[url('assets/img/business.jpg')]
+           bg-cover bg-center
+           flex flex-col justify-center
+           px-8 lg:px-60 py-12
+           text-center;
+}</code></pre>
+
+    <p>The new TailwindCSS utilities are:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>TailwindCSS</th>
+                <th>Meaning</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><b>bg-[url('assets/img/business.jpg')]</b></td>
+                <td>Adds the image as the background of the hero block.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-cover</b></td>
+                <td>Resizes the image so that it completely fills the hero block while keeping its proportions.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-center</b></td>
+                <td>Positions the centre of the image at the centre of the hero block.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>The <b>bg-cover</b> utility may crop some parts of the image if the proportions of the image and hero block are different.</p>
+
+</section>
 
 
+<section id="background-position">
 
-<section>
-                <h2  id="add-shadow">Adding a text shadow</h2>
+    <h2>Changing the position of the background image</h2>
 
-                <p>To ensure the text in front of the image is easy to read, let's add a drop shadow effect to the <span class="syn">&lt;h1&gt;</span> main heading and <span class="syn">&lt;h2&gt;</span> sub-heading.</p>
+    <p>The most important part of an image is not always at its centre.</p>
 
-                <p>Here are the steps.</p>
- 
-                <ol>
-                    <li>In the stylesheet, add the following new style to the combined <span class="csyn">.hero-text-container h1, .hero-text-container h2</span> selector.
-<img src="assets/img/hero-block-image/vscode-shadow.png"  style="max-width: 600px" alt="screenshot">
+    <p>TailwindCSS provides several utilities for changing the position of a background image.</p>
 
-                    </li>
-                               
-                    <li>Save the stylesheet and view the web page in your browser. It should now look as shown below.</li>
-                </ol>
+    <p>For example:</p>
 
-            
-                <img src="assets/img/hero-block-image/hero-image-shadow.jpg" alt="Project Hero Blocks">
+    <ul>
+        <li><b>bg-center</b></li>
+        <li><b>bg-top</b></li>
+        <li><b>bg-bottom</b></li>
+        <li><b>bg-left</b></li>
+        <li><b>bg-right</b></li>
+    </ul>
 
-                <p>Note how the text is now easier to read against the background image.</p>
+    <p>You can also change the image position at different viewport widths.</p>
 
-            </section>
+    <p>For example:</p>
 
-                <section>
+    <pre><code class="language-css">header {
+    @apply bg-center md:bg-top;
+}</code></pre>
 
-                <h2 id="add-overlay">Adding a semi-opaque overlay</h2>
+    <p>This displays the image centred by default and moves its position towards the top at viewport widths of 768px and above.</p>
 
-                <p>To make the text even easier to read against the background image, let's add a semi-opaque overlay. This will be positioned <i>in front</i> of the image and <i>behind</i> the heading and sub-heading. Follow these steps.</p>
-
-                <ol>
-                    <li>Copy-and-paste the following new element to the <b>hero-image.html</b> file, to just under the <span class="hero-bg-media">element</span>.
-<pre class="language-html">&lt;<span class="blue-dark">div</span> <span class="blue-light">class</span>=<span class="brown">"bg-overlay"</span>&gt;&lt;/<span class="blue-dark">div</span>&gt;
-</pre>
-                Your complete hero-block container will now look as follows.
-<img src="assets/img/hero-block-image/vscode-overlay.png" alt="Project Hero Blocks" class="wider-115"></li>
-                    
-                <li>In the stylesheet, copy-and-paste the following at the end.
-<pre class="language-css">
-<span class="token class">.bg-overlay</span> {
-   <span class="token property">position</span>: <span class="token value-text">absolute</span>; 
-   <span class="token property">top</span>: <span class="token number">0</span>; <span class="token property">right</span>: <span class="token number">0</span>; <span class="token property">bottom</span>: <span class="token number">0</span>; <span class="token property">left</span>: <span class="token number">0</span>;  
-   <span class="token property">z-index</span>: <span class="token number">1</span>;
-   <span class="token property">background-image</span>: <span class="token yellow">linear-gradient</span>(<span class="token number">rgba(0,0,0,0.3)</span>,<span class="token number">rgba(0,0,0,0.3)</span>);   
-}</pre></li>
-                    <li>In the <span class="csyn">.hero-text-container</span> selector, update the <span class="csyn">z-index</span> value from <b>1</b> to <b>2</b>.
-                    <img src="assets/img/hero-block-image/vscode-index-new.png" style="max-width: 700px" alt="screenshot">
-                    </li>
-
-                    <li>Save the <b>hero-image.css</b>  stylesheet.</li>
-
-                    <li>In your web browser, the web page should now look as shown below.
-                        <img src="assets/img/hero-block-image/hero-image-overlay.jpg" alt="Project Hero Blocks">
-                    </li>
-
-                </ol>
-    
-                <p>All done.</p>
-                
-
-              </section>
+</section>
 
 
-<section id="update-home-page-content" class="wrapper-content bg-white">
-	<h2>Updating your website home page</h2>
+<section id="stacking">
 
-	<p>You are now ready to upload your work to your accont on Github. Follow the steps below:</p>
-	<ol>
-		<li>In VS Code, open this HTML file in your ‘main’ <b>websites</b> folder:
-		<span class="inside-ol">&nbsp;</span>
-		<b>index.html</b></li>
+    <h2>Stacking content in front of the background</h2>
 
-		<li>Copy-and-paste the following new line to your web page at end of current list of web pages.
-<pre class="language-html">&lt;<span class="blue-dark">p</span>&gt;&lt;<span class="blue-dark">a</span> <span class="blue-light">href</span>=<span class="brown">"exercises/hero-image.html"</span>&gt;<span class="white">Hero block with background image</span>&lt;/<span class="blue-dark">a</span>&gt;&lt;/<span class="blue-dark">p</span>&gt; 
-</pre></li>
+    <p>The next step is to place a semi-transparent colour layer between the background image and the hero text.</p>
 
-	</ol>
+    <p>This requires the use of CSS <i>positioning</i> and <i>stacking</i>.</p>
 
-	<p>Save your <b>index.html</b> web page and view the result in your browser.</p>
+    <p>The parent <span class="syn">&lt;header&gt;</span> element will use:</p>
 
-    <p>✅ That’s it. You have now successfully completed this Tutorial.</p>
+    <pre><code>relative</code></pre>
+
+    <p>This establishes the header as the positioning area for any absolutely-positioned content inside it.</p>
+
+    <p>Add <b>relative</b> to your header rule:</p>
+
+    <pre><code class="language-css">header {
+    @apply relative
+           min-h-[60vh] md:min-h-[80vh]
+           bg-[url('assets/img/business.jpg')]
+           bg-cover bg-center
+           flex flex-col justify-center
+           px-8 lg:px-60 py-12
+           text-center;
+}</code></pre>
+
+</section>
+
+
+<section id="overlay">
+
+    <h2>Adding a semi-transparent overlay</h2>
+
+    <p>A dark transparent overlay can make white text easier to read against a detailed background image.</p>
+
+    <p>Rather than adding another <span class="syn">&lt;div&gt;</span> element to the HTML, you can use the CSS <b>::before</b> pseudo-element.</p>
+
+    <p>Add the following style rule:</p>
+
+    <pre><code class="language-css">header::before {
+    content: "";
+    @apply absolute inset-0 bg-black/40;
+}</code></pre>
+
+    <p>This creates a new invisible layer that fills the entire hero block.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>TailwindCSS</th>
+                <th>Meaning</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><b>absolute</b></td>
+                <td>Positions the overlay independently inside the header.</td>
+            </tr>
+
+            <tr>
+                <td><b>inset-0</b></td>
+                <td>Sets the top, right, bottom and left positions to zero so the overlay fills the header.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-black/40</b></td>
+                <td>Adds a black background with 40% opacity.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>You can experiment with the opacity value.</p>
+
+    <p>For example:</p>
+
+    <pre><code>bg-black/20</code></pre>
+
+    <p>creates a lighter overlay, while:</p>
+
+    <pre><code>bg-black/60</code></pre>
+
+    <p>creates a darker overlay.</p>
+
+</section>
+
+
+<section id="z-index">
+
+    <h2>Positioning the text above the overlay</h2>
+
+    <p>The overlay now sits in front of the background image. The headings need to be placed in front of the overlay.</p>
+
+    <p>Add the following utilities to the hero headings:</p>
+
+    <pre><code class="language-css">header h1,
+header h2 {
+    @apply relative z-10;
+}</code></pre>
+
+    <p>The <b>z-10</b> utility gives the headings a higher stacking level than the overlay.</p>
+
+    <p>The layers now work as follows:</p>
+
+    <ol>
+        <li>Background image</li>
+        <li>Dark transparent overlay</li>
+        <li>Hero text</li>
+    </ol>
+
+</section>
+
+
+<section id="text-shadow">
+
+    <h2>Adding a text shadow</h2>
+
+    <p>You can make the hero text even easier to read by adding a shadow behind the letters.</p>
+
+    <p>TailwindCSS provides ready-made text-shadow utilities.</p>
+
+    <p>Add <b>text-shadow-lg</b> to both headings:</p>
+
+    <pre><code class="language-css">header h1,
+header h2 {
+    @apply relative z-10 text-shadow-lg;
+}</code></pre>
+
+    <p>You can also increase the strength of the shadow by changing its opacity.</p>
+
+    <p>For example:</p>
+
+    <pre><code class="language-css">header h1,
+header h2 {
+    @apply relative z-10 text-shadow-lg/50;
+}</code></pre>
+
+</section>
+
+
+<section id="complete-css">
+
+    <h2>Complete TailwindCSS styles</h2>
+
+    <p>Your complete hero styles can now be written as follows:</p>
+
+    <pre><code class="language-css">header {
+    @apply relative
+           min-h-[60vh] md:min-h-[80vh]
+           bg-[url('assets/img/business.jpg')]
+           bg-cover bg-center
+           flex flex-col justify-center
+           px-8 lg:px-60 py-12
+           text-center;
+}
+
+header::before {
+    content: "";
+    @apply absolute inset-0 bg-black/40;
+}
+
+header h1 {
+    @apply relative z-10
+           text-7xl md:text-8xl
+           text-white font-bold
+           tracking-tight
+           text-shadow-lg/50
+           mb-6;
+}
+
+header h2 {
+    @apply relative z-10
+           text-4xl md:text-5xl
+           text-white
+           text-shadow-lg/50;
+}</code></pre>
+
+</section>
+
+
+<section id="complete-html">
+
+    <h2>Complete hero block HTML</h2>
+
+    <p>Notice that the HTML itself remains very simple.</p>
+
+    <pre><code class="language-html">&lt;header&gt;
+
+    &lt;h1&gt;Albert Camus&lt;/h1&gt;
+
+    &lt;h2&gt;Creative Web Developer&lt;/h2&gt;
+
+&lt;/header&gt;</code></pre>
+
+    <p>No extra <span class="syn">&lt;div&gt;</span> elements are required for the background image or overlay.</p>
+
+</section>
+
+
+<section id="summary">
+
+    <h2>Hero blocks with images: summary</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>TailwindCSS</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><b>bg-[url(...)]</b></td>
+                <td>Adds a background image.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-cover</b></td>
+                <td>Scales the image to fill the hero block.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-center</b></td>
+                <td>Positions the background image in the centre.</td>
+            </tr>
+
+            <tr>
+                <td><b>relative</b></td>
+                <td>Creates a positioning context for an absolutely-positioned child or pseudo-element.</td>
+            </tr>
+
+            <tr>
+                <td><b>absolute</b></td>
+                <td>Positions an element independently inside its positioned parent.</td>
+            </tr>
+
+            <tr>
+                <td><b>inset-0</b></td>
+                <td>Sets top, right, bottom and left to zero.</td>
+            </tr>
+
+            <tr>
+                <td><b>bg-black/40</b></td>
+                <td>Creates a black background at 40% opacity.</td>
+            </tr>
+
+            <tr>
+                <td><b>z-10</b></td>
+                <td>Places an element above elements with a lower stacking level.</td>
+            </tr>
+
+            <tr>
+                <td><b>text-shadow-lg</b></td>
+                <td>Adds a text shadow.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+
+
+<section id="update-home">
+
+    <h2>Updating your website home page</h2>
+
+    <p>Now add a hyperlink to your new hero-image page from the home page of your website.</p>
+
+    <p>Open your <b>index.html</b> file and add:</p>
+
+    <pre><code class="language-html">&lt;p&gt;&lt;a href="exercises/hero-image.html"&gt;Hero block with background image&lt;/a&gt;&lt;/p&gt;</code></pre>
+
+    <p>Save the page and view the result in your browser.</p>
 
 </section>
 
