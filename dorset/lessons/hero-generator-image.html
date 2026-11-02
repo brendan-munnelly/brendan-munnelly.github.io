@@ -2141,23 +2141,27 @@ a:focus-visible { outline: 3px solid #d69e2e; outline-offset: 4px; }
 <section id="learning-goals">
 <h2>Learning Goals</h2>
 <p>In this Tutorial, you will adapt your completed colour-background Hero Generator into a new app named <strong>app-hero-image-v1.html</strong>. One update is all that is required.</p>
-<ul>
+<ul style="margin-bottom: 16px;">
 <li>Use an existing app and an update prompt as your starting point.</li>
 <li>Combine a background image, a tinted overlay and heading content.</li>
 <li>Experiment with solid and gradient overlays.</li>
 <li>Export a complete HTML page and check its relative image paths.</li>
 </ul>
-<p>The focus is the <strong>HTML and CSS</strong> produced by the app. You do not need to understand every line of its JavaScript.</p>
+<p>The focus is the HTML and CSS produced by the app. You do not need to understand every line of its JavaScript.</p>
 </section>
 <section id="folders">
 <h2>1. Prepare your files</h2>
 <ol>
 <li>Open your <strong>websites</strong> folder in VS Code and locate <strong>apps/hero</strong>.</li>
 <li>Check that your completed <strong>app-hero-text-v4.html</strong> file is saved directly in the hero folder. Keep this file unchanged.</li>
-<li>Inside hero, create <strong>outputs</strong>. Inside outputs, create <strong>assets</strong>, then create <strong>img</strong> inside assets.</li>
-<li>Place a landscape JPEG image in img and name it <strong>hero-image.jpg</strong>. Use an image you have permission to use. Renaming another image format to .jpg does not convert it.</li>
+<li>Inside <b>hero/outputs</b>, create <strong>assets</strong>, then create <strong>img</strong> inside it.</li>
+
+<li>Download the image file below to this new subfolder.
+
+	<img src="assets/img/hero-generator-image/hero-image.jpg" alt="Hero Image">
+</li>
 </ol>
-<p><strong>Folder name:</strong> this exercise uses <strong>outputs</strong>, with a final “s”. If your earlier exercise used output, create the outputs folder for this app.</p>
+
 <div class="table-scroll"><table>
 <thead><tr><th>File</th><th>Location within the hero folder</th></tr></thead>
 <tbody>
@@ -2170,13 +2174,222 @@ a:focus-visible { outline: 3px solid #d69e2e; outline-offset: 4px; }
 <section id="prompt">
 <h2>2. Run the update prompt</h2>
 <ol>
-<li>Copy the image-background update prompt supplied with this lesson into ChatGPT.</li>
+<li>Use the following NEW FEATURE instructions in your AI prompt:
+<pre><code class="language-text">
+INSTRUCTIONS
+
+Let's adapt our existing Hero Block Generator to create hero blocks with an image background and a tinted overlay.
+
+The current working app file is app-hero-text-v4.html. Create the new app, named app-hero-image-v1.html.
+
+Use the current code supplied below as your starting point.
+
+Preserve existing working features except those explicitly replaced below. Extend the existing settings object and named functions where appropriate. Avoid unrelated redesigns or refactoring.
+
+NEW FEATURES AND CHANGES
+
+IMAGE BACKGROUND
+
+Replace the solid and gradient background options with a fixed image background.
+
+Assume this folder structure:
+
+- The app file is saved directly in the hero folder.
+- The placeholder image is saved at outputs/assets/img/hero-image.jpg.
+- Generated HTML pages will be saved directly in the outputs folder.
+
+Use these exact relative paths:
+
+- App preview: outputs/assets/img/hero-image.jpg
+- Exported page: assets/img/hero-image.jpg
+
+Do not add an image URL input or upload control in this version.
+
+Make the image cover the entire hero without stretching, centred horizontally and vertically. Allow cropping as the viewport changes.
+
+In the head of the app, include:
+
+&lt;link rel="preload" as="image" href="outputs/assets/img/hero-image.jpg"&gt;
+
+In the head of the exported page, include:
+
+&lt;link rel="preload" as="image" href="assets/img/hero-image.jpg"&gt;
+
+For each page, ensure its preload link and background-image rule reference exactly the same path.
+
+Define the exported image path once in JavaScript:
+
+const exportedImagePath = "assets/img/hero-image.jpg";
+
+Use this constant when generating both the exported preload link and the exported background-image rule.
+
+TINTED OVERLAY
+
+Place a separate overlay layer between the image and the heading content.
+
+Defaults:
+
+- Solid black overlay.
+- Opacity: 0.4.
+- Gradient overlay: off.
+
+Add a native range slider labelled “Overlay opacity”:
+
+- Minimum: 0.1.
+- Maximum: 0.9.
+- Step: 0.05.
+- Default: 0.4.
+- Display the current numeric value beside the slider.
+- Update the preview immediately as the slider moves.
+
+Apply opacity only to the overlay layer. The image and heading content must remain fully opaque.
+
+Ensure the overlay does not intercept pointer events or prevent users from editing the headings.
+
+OVERLAY COLOURS
+
+Reuse the existing Tailwind colour palette.
+
+In solid-overlay mode, provide these palette targets:
+
+- Overlay colour.
+- H1.
+- H2.
+
+Select Overlay colour initially.
+
+Add a “Gradient overlay” checkbox, unchecked by default.
+
+When checked:
+
+- Replace Overlay colour with Start colour and End colour targets.
+- Keep H1 and H2 targets available.
+- Show a Direction dropdown with:
+  - Left to right: to right — default.
+  - Right to left: to left.
+  - Top to bottom: to bottom.
+  - Bottom to top: to top.
+
+On first enabling the gradient, use the current solid overlay colour as the start colour and blue-500 as the end colour.
+
+Apply the opacity slider value to the entire gradient overlay. Do not apply opacity separately to its individual colour stops.
+
+Preserve solid and gradient colour choices, gradient direction and opacity when switching modes.
+
+When returning to solid-overlay mode, remove the gradient background image from the overlay layer and restore the saved solid overlay colour. Keep the hero image visible underneath.
+
+Keep the active palette target visible and enabled. If a mode change hides the active target, select Start colour in gradient mode or Overlay colour in solid mode.
+
+Preserve the palette's existing colour families, shades, black and white options, accessible names, keyboard support, selected states and responsive scrolling.
+
+TEXT AND EXISTING CONTROLS
+
+Remove the “Dark appearance preset” checkbox and its associated preset-reset behaviour.
+
+Default both H1 and H2 to white. Retain their independent colour choices through the palette.
+
+Apply a fixed Tailwind text-shadow-lg/30 effect to both headings through @apply in the shared hero stylesheet. This is a text shadow, not a box shadow. Do not add a shadow control.
+
+Preserve:
+
+- Direct plain-text editing of H1 and H2.
+- The optional H2 and its Show subheading checkbox.
+- Independent font-family choices.
+- Independent letter-spacing sliders.
+- Left or centre alignment.
+- The minimum-height checkbox and existing responsive heights.
+- Existing responsive spacing and typography.
+- Preservation of edited text and settings when controls change.
+
+Disable H2 controls and its palette target while the subheading is hidden. Preserve its settings when it is restored. If H2 was the active palette target, select Start colour in gradient mode or Overlay colour in solid mode.
+
+HTML AND CSS
+
+Keep the semantic header element for the hero.
+
+Use clearly named classes for the image background, overlay and content layers. Establish their stacking order explicitly so the headings remain above the overlay.
+
+Mark decorative image and overlay elements with aria-hidden="true".
+
+Keep all styling in style elements in the head, using named classes, Tailwind @apply and ordinary CSS where appropriate. Do not use inline style attributes.
+
+Retain the hosted Tailwind script:
+
+&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"&gt;&lt;/script&gt;
+
+Place styles containing @apply in style elements with type="text/tailwindcss".
+
+Use Tailwind palette variables for overlay and heading colours. Ensure the required variables are available in both the app and the exported page.
+
+Use CSS linear-gradient() for gradient overlays.
+
+Keep the styles shared between preview and export wherever possible. Handle the different image paths explicitly so each page loads the image from its correct location.
+
+COPY HTML
+
+Preserve the fixed Copy HTML button, accessible status message and manual-copy fallback.
+
+Export a complete standalone HTML document containing:
+
+- HTML5 doctype and lang="en".
+- Charset, responsive viewport and title.
+- The existing meta description:
+  “Short, unique description of web page. Often used as the snippet shown in search results. About 120 characters is ideal.”
+- The hosted Tailwind script.
+- The image preload link.
+- All required hero, image, overlay and text styles in the head.
+- The semantic hero markup with the current heading text and selected settings.
+- H2 only when Show subheading is checked.
+
+Use assets/img/hero-image.jpg for both the preload and background image in the exported page.
+
+Do not include outputs/assets/img/hero-image.jpg in the exported page.
+
+Exclude editor controls, editing attributes, editing outlines, editor-only CSS and generator JavaScript.
+
+Continue escaping edited text correctly and keep any visible manual-copy output up to date.
+
+Use the Clipboard API and handle failure gracefully. Only display a copying-success message after copying succeeds.
+
+Ensure any closing script tag inside a JavaScript string is escaped correctly so it does not prematurely end the generator's script.
+
+DELIVERY
+
+Return the complete app-hero-image-v1.html code in one HTML code block, without omissions. Include all required JavaScript.
+
+After the code, briefly explain where to save:
+
+- The app: hero/app-hero-image-v1.html
+- The image: hero/outputs/assets/img/hero-image.jpg
+- A generated page, for example: hero/outputs/hero-image.html
+
+Explain that the generated page must be saved directly in outputs for its relative image path to work.
+
+Include a short manual checklist covering:
+
+- Image loading in both the app and exported page.
+- Matching exported preload and background-image paths.
+- Solid and gradient overlay colours.
+- All four gradient directions.
+- Opacity changes without fading the headings.
+- Preservation of settings when switching overlay modes.
+- Existing text controls and H2 visibility.
+- Copy HTML, its manual fallback and the exported result.
+
+Clearly state whether the app has actually been browser-tested.
+
+
+CURRENT CODE
+
+[Paste the complete current app-hero-text-v4.html file here.]
+</code></pre>
+</li>
 <li>In VS Code, open <strong>app-hero-text-v4.html</strong> and copy its complete code.</li>
 <li>Paste that code beneath <strong>CURRENT CODE</strong> in the prompt, replacing the placeholder instruction. Submit the prompt.</li>
 <li>Copy the complete returned HTML into a new VS Code file. Save it as <strong>app-hero-image-v1.html</strong> directly in the hero folder.</li>
 <li>Save a copy of your prompt in the existing prompts folder, named <strong>hero-prompt-image.txt</strong>.</li>
 </ol>
-<p>Supply the <strong>app-building file</strong>, including its controls and JavaScript. A page previously created with Copy HTML does not contain the generator code.</p>
+
 <p>The update replaces the background-colour controls with a fixed image and overlay. It retains heading editing, font choices, letter spacing, alignment, minimum height and optional H2.</p>
 </section>
 <section id="test">

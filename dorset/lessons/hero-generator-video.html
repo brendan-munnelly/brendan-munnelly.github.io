@@ -2144,7 +2144,7 @@ a:focus-visible { outline: 3px solid #d69e2e; outline-offset: 4px; }
 <li>Retain the existing overlay and text controls.</li>
 <li>Export a complete web page with the correct relative asset paths.</li>
 </ul>
-<p>The focus remains on <strong>HTML and CSS</strong>. JavaScript powers the generator and handles video playback, but you do not need to understand every line to complete the exercise.</p>
+
 </section>
 <section id="assets">
 <h2>1. Prepare your assets</h2>
@@ -2152,9 +2152,14 @@ a:focus-visible { outline: 3px solid #d69e2e; outline-offset: 4px; }
 <li>Open your <strong>websites</strong> folder in VS Code and locate <strong>apps/hero</strong>.</li>
 <li>Keep your working <strong>app-hero-image-v1.html</strong> file unchanged.</li>
 <li>Inside <strong>outputs/assets</strong>, create a new folder named <strong>videos</strong>.</li>
-<li>Place the supplied <strong>hero-video.mp4</strong> and <strong>hero-poster.jpg</strong> files in this folder.</li>
+<li>Into this new folder, download the <b>hero-image.jpg</b> image file below.
+	<img src="assets/img/hero-generator-video/hero-poster.jpg" alt="image file for poster">
+</li>
+<li>Also into this new folder, download the video file below.<br><br>
+<a href="assets/img/hero-generator-video/hero-video.mp4" target="_blank">hero-video.mpg</a>
+</li>
 </ol>
-<p>Use an MP4 video encoded with H.264. If your original file is an MPG video, convert it first: changing its filename extension does not convert the video. Choose a poster that represents the video and assets you have permission to use.</p>
+
 <div class="table-scroll"><table>
 <thead><tr><th>File</th><th>Location within the hero folder</th></tr></thead>
 <tbody>
@@ -2164,18 +2169,281 @@ a:focus-visible { outline: 3px solid #d69e2e; outline-offset: 4px; }
 <tr><td>Poster</td><td><code>outputs/assets/videos/hero-poster.jpg</code></td></tr>
 <tr><td>Generated page</td><td><code>outputs/hero-video.html</code></td></tr>
 </tbody></table></div>
-<p>Use <strong>outputs</strong>, with a final “s”, consistently.</p>
 </section>
 <section id="prompt">
 <h2>2. Run the update prompt</h2>
 <ol>
-<li>Copy the video-background update prompt supplied with this lesson into ChatGPT.</li>
+<li>Copy the video-background update prompt supplied with this lesson into your AI.</li>
+
+	<li>Use the following NEW FEATURE instructions in your AI prompt:
+<pre><code class="language-text">
+INSTRUCTIONS
+
+Let's adapt our existing Image Hero Block Generator to create hero blocks with a decorative video background.
+
+The current working app file is app-hero-image-v1.html. Create the new app, named app-hero-video-v1.html.
+
+Use the current code supplied below as your starting point.
+
+Preserve existing working features except those explicitly replaced below. Extend the existing settings object and named functions where appropriate. Avoid unrelated redesigns or refactoring.
+
+VIDEO BACKGROUND
+
+Replace the existing image background layer with a decorative video background.
+
+Assume this folder structure:
+
+- The app file is saved directly in the hero folder.
+- The video and poster image are saved in outputs/assets/videos.
+- Generated HTML pages will be saved directly in outputs.
+
+The supplied assets are:
+
+- hero-video.mp4: an MP4 video encoded with H.264.
+- hero-poster.jpg: a JPEG poster image.
+
+Use these exact relative paths in the app preview:
+
+- Video: outputs/assets/videos/hero-video.mp4
+- Poster: outputs/assets/videos/hero-poster.jpg
+
+Use these exact relative paths in the exported page:
+
+- Video: assets/videos/hero-video.mp4
+- Poster: assets/videos/hero-poster.jpg
+
+Define the exported paths once in JavaScript:
+
+const exportedVideoPath = "assets/videos/hero-video.mp4";
+const exportedPosterPath = "assets/videos/hero-poster.jpg";
+
+Use these constants when generating the exported video markup, poster fallback styling and poster preload link.
+
+Remove references to the previous hero-image.jpg asset.
+
+Do not add file uploads, asset selectors or URL inputs.
+
+VIDEO MARKUP AND LAYOUT
+
+Use a video element with:
+
+- muted
+- loop
+- playsinline
+- preload="metadata"
+- The appropriate poster attribute.
+- A source element with the appropriate video path and type="video/mp4".
+
+Treat the video as decorative:
+
+- Use aria-hidden="true".
+- Prevent keyboard focus.
+- Do not include native video controls.
+- Do not add a pause/play button.
+- Prevent the video layer from intercepting pointer events.
+
+Make the video fill the entire hero:
+
+- Position it absolutely within the hero.
+- Set its width and height to 100%.
+- Use object-fit: cover.
+- Use object-position: center.
+- Allow cropping without stretching.
+
+Preserve the semantic header element, responsive minimum heights and existing content spacing.
+
+Keep the video element in place when settings change. Editing text or changing colours, opacity, alignment or typography must not recreate the video or restart playback.
+
+POSTER AND PRELOAD
+
+Replace the previous image preload with a poster-image preload.
+
+In the head of the app, include:
+
+&lt;link rel="preload" as="image" href="outputs/assets/videos/hero-poster.jpg"&gt;
+
+In the head of the exported page, include:
+
+&lt;link rel="preload" as="image" href="assets/videos/hero-poster.jpg"&gt;
+
+Within each page, the preload, video poster attribute and poster fallback must reference exactly the same image path.
+
+Keep a poster fallback beneath the video. It should fill the hero using cover sizing and centred positioning.
+
+Show the poster until the video is actually playing. If the video cannot load or autoplay is blocked, leave the poster visible.
+
+Do not preload the video through a link element.
+
+PLAYBACK AND REDUCED MOTION
+
+Attempt muted autoplay when the page opens, unless the visitor prefers reduced motion.
+
+Use a small named playback-initialisation function:
+
+- Check prefers-reduced-motion before requesting playback.
+- Set the video’s muted property to true.
+- Call play() only when reduced motion is not requested.
+- Handle a rejected play() promise without an uncaught error.
+- Reveal the video after playback begins.
+- Keep the poster visible if playback fails.
+
+To avoid playback starting before the reduced-motion check, omit the autoplay attribute and initiate playback through this function.
+
+When reduced motion is requested, display the poster without starting the video.
+
+Listen for changes to the reduced-motion preference:
+
+- If reduced motion becomes enabled, pause and hide the video, revealing the poster.
+- If reduced motion becomes disabled, attempt muted playback again.
+
+Do not repeatedly retry blocked autoplay.
+
+Use the same playback behaviour in the app preview and exported page. Keep playback logic separate from the generator's editing and settings functions.
+
+OVERLAY AND EXISTING FEATURES
+
+Preserve the existing tinted overlay above the video and below the heading content.
+
+Defaults:
+
+- Solid black overlay.
+- Opacity: 0.4.
+- Gradient overlay: off.
+- H1 and H2 text: white.
+
+Preserve:
+
+- Overlay opacity slider from 0.1 to 0.9, step 0.05.
+- Solid overlay colour selection.
+- Gradient overlay checkbox.
+- Independent gradient start and end colours.
+- All four gradient directions.
+- Saved colour, direction and opacity settings when switching modes.
+- Tailwind colour palette and its active-target behaviour.
+- Independent H1 and H2 colours.
+- Direct plain-text heading editing.
+- Optional H2 and its Show subheading checkbox.
+- Independent font-family choices.
+- Independent letter-spacing sliders.
+- Left or centre alignment.
+- Minimum-height checkbox and existing responsive heights.
+- Fixed text-shadow-lg/30 effect on both headings.
+- Accessible labels, keyboard operation and visible focus.
+
+Apply opacity only to the overlay. Do not fade the video or heading content.
+
+Disable H2 controls and its palette target while H2 is hidden. Preserve its text and settings when restored.
+
+If H2 was the active palette target when hidden, select Start colour in gradient mode or Overlay colour in solid mode.
+
+HTML AND CSS
+
+Keep all styling in style elements in the head.
+
+Use named classes, Tailwind @apply and ordinary CSS where appropriate. Do not use inline style attributes.
+
+Retain:
+
+&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"&gt;&lt;/script&gt;
+
+Place styles containing @apply in style elements with type="text/tailwindcss".
+
+Use clearly named classes for:
+
+- Poster fallback.
+- Video.
+- Overlay.
+- Heading content.
+
+Establish their stacking order explicitly:
+
+1. Poster fallback.
+2. Video.
+3. Tinted overlay.
+4. Heading content.
+
+Keep the hero styles shared between preview and export wherever possible. Handle their different asset paths explicitly.
+
+Preserve Tailwind palette variables and CSS linear-gradient() for overlay colours. Ensure all required styling is included in the exported page.
+
+COPY HTML
+
+Preserve the fixed Copy HTML button, accessible status message and manual-copy fallback.
+
+Export a complete standalone HTML document containing:
+
+- HTML5 doctype and lang="en".
+- Charset, responsive viewport and title.
+- The existing meta description:
+  “Short, unique description of web page. Often used as the snippet shown in search results. About 120 characters is ideal.”
+- The hosted Tailwind script.
+- The poster-image preload.
+- All required hero, poster, video, overlay and heading styles in the head.
+- The semantic hero markup with the current heading text and selected settings.
+- H2 only when Show subheading is checked.
+- The small playback script required for autoplay, poster fallback and reduced-motion behaviour.
+
+The playback script is an explicit exception to the previous rule excluding JavaScript from exported pages.
+
+Exclude:
+
+- Generator controls and settings-management code.
+- Editing attributes and editing outlines.
+- Editor-only CSS.
+- Copy HTML button and copying code.
+- Manual-copy interface.
+
+Use only assets/videos paths in the exported page. Do not include outputs/assets/videos paths or references to the old image asset.
+
+Continue escaping edited text correctly. Keep any visible manual-copy output up to date.
+
+Only display a copying-success message after copying succeeds.
+
+Ensure closing script tags inside JavaScript strings are escaped correctly so they do not prematurely end the generator's script.
+
+SCOPE
+
+Do not add playback buttons, native video controls, uploads, asset selectors, URL inputs or unrelated features.
+
+Preserve the existing interface layout wherever possible.
+
+DELIVERY
+
+Return the complete app-hero-video-v1.html code in one HTML code block, without omissions. Include all required JavaScript.
+
+After the code, briefly explain where to save:
+
+- App: hero/app-hero-video-v1.html
+- Video: hero/outputs/assets/videos/hero-video.mp4
+- Poster: hero/outputs/assets/videos/hero-poster.jpg
+- Generated page, for example: hero/outputs/hero-video.html
+
+Explain that generated pages must be saved directly in outputs for their relative asset paths to work.
+
+Include a short manual checklist covering:
+
+- Video and poster loading in both the app and exported page.
+- Matching poster preload, poster attribute and fallback paths.
+- Muted, looping playback when autoplay is permitted.
+- Poster fallback when playback is blocked or the video is unavailable.
+- Poster-only display when reduced motion is enabled.
+- Responsive cropping without stretching.
+- Solid and gradient overlays, all four directions and opacity.
+- Heading editing without restarting playback.
+- Existing text controls and H2 visibility.
+- Copy HTML, manual-copy fallback and the exported result.
+
+Clearly state whether the app has actually been browser-tested.
+
+CURRENT CODE
+
+[Paste the complete current app-hero-image-v1.html file here.]
+</code></pre></li>
 <li>Open <strong>app-hero-image-v1.html</strong> in VS Code and copy its complete code.</li>
 <li>Paste the code beneath <strong>CURRENT CODE</strong>, replacing the placeholder instruction. Submit the prompt.</li>
 <li>Copy the returned HTML into a new file and save it as <strong>app-hero-video-v1.html</strong> directly inside hero.</li>
 <li>Save your prompt in the prompts folder as <strong>hero-prompt-video.txt</strong>.</li>
 </ol>
-<p>Supply the complete <strong>app-building file</strong>, including its controls and JavaScript. Do not supply a finished page previously created with Copy HTML.</p>
 <p>The update replaces the image layer with a video and poster fallback. It preserves solid and gradient overlays, opacity, editable headings, fonts, letter spacing, colours, alignment and minimum height. This version has no playback buttons or native video controls.</p>
 </section>
 <section id="test">
